@@ -16,6 +16,10 @@ final class StorageServiceTests: XCTestCase {
         let defaults = UserDefaults.standard
         defaults.removeObject(forKey: "evforme.lastUserInput")
         defaults.removeObject(forKey: "evforme.hasSeenOnboarding")
+        defaults.removeObject(forKey: "evforme.autocosts.lastFuelPrice")
+        defaults.removeObject(forKey: "evforme.autocosts.lastElectricityPrice")
+        defaults.removeObject(forKey: "evforme.autocosts.userCustomizedFuelPrice")
+        defaults.removeObject(forKey: "evforme.autocosts.userCustomizedElectricityPrice")
     }
 
     override func tearDown() {
@@ -23,6 +27,10 @@ final class StorageServiceTests: XCTestCase {
         let defaults = UserDefaults.standard
         defaults.removeObject(forKey: "evforme.lastUserInput")
         defaults.removeObject(forKey: "evforme.hasSeenOnboarding")
+        defaults.removeObject(forKey: "evforme.autocosts.lastFuelPrice")
+        defaults.removeObject(forKey: "evforme.autocosts.lastElectricityPrice")
+        defaults.removeObject(forKey: "evforme.autocosts.userCustomizedFuelPrice")
+        defaults.removeObject(forKey: "evforme.autocosts.userCustomizedElectricityPrice")
         super.tearDown()
     }
 

@@ -1,56 +1,47 @@
 # TestFlight / App Store Connect — preflight
 
-## Status (repo)
+## Phase status
 
-| Blocker | Status |
-|--------|--------|
-| Privacy policy HTML | Ready: `docs/privacy/index.html` |
-| `EVFORME_PRIVACY_URL` | **Needs live HTTPS URL** then paste into Info.plist + ASC |
-| `.gitignore` | Added |
-| Image license risk | Script: `scripts/strip_unlicensed_images.py` (strip Edidomus / Wikimedia / catbox images) |
-| Catalog CDN catbox | Cleared for TF offline-first (`EVFORME_CATALOG_URL` empty) |
-| Git commit of product | Do after strip + green tests |
-| Git remote | Needs your GitHub/Cursor remote |
-| Floor iOS 26.2 | Keep for now if building with Xcode 26/27 beta; lowering is a separate product decision |
-| Full test suite | Run before archive |
+| Phase | Item | Status |
+|------|------|--------|
+| 1 | Strip immagini a rischio | **Done** — `vehicles.seed.quality.json` has 0 remote `imageURL` (`seedVersion = 23`) |
+| 2 | Commit snapshot | **Done** — product on `main` |
+| 3 | Remote + push | **Done** — https://github.com/AncyBasket/EVforME |
+| 3 | Privacy HTTPS | **Done** — https://ancybasket.github.io/EVforME/privacy/ |
+| 3 | `EVFORME_PRIVACY_URL` | **Done** — same URL in `EVforME?/Info.plist` |
+| 4 | Full unit tests (`EVforME?Tests`) | **Done** — green on Xcode beta / iPhone 17 Pro / iOS 27.0 |
+| 4 | ASC listing pack | **Ready** — see `ASC_STORE_LISTING.md` |
+| 4 | UITests | Optional next (not blocking internal TF) |
+| 4 | Archive → Upload → TestFlight | **Next** |
 
-## This week — ship checklist
+## Archive Xcode choice
 
-1. **Host privacy**  
-   Upload `docs/privacy/index.html` to any static HTTPS host (GitHub Pages, Netlify, your domain).  
-   Example after Pages: `https://<user>.github.io/EVforME/privacy/`
+- Project floor: **iOS 26.2** (`IPHONEOS_DEPLOYMENT_TARGET`) — do not lower
+- Unit suite verified with: `DEVELOPER_DIR=/Users/andrea/Downloads/Xcode-beta.app/Contents/Developer`
+- Prefer the **same** Xcode for archive that you used for the green unit run
+- Version: **1.0 (1)** — Free
 
-2. **Wire URL**
-   - Info.plist `EVFORME_PRIVACY_URL` = that URL  
-   - App Store Connect → App Privacy / Privacy Policy URL = same URL
+## Unit test command (green)
 
-3. **Images for TF**
-   ```bash
-   python3 scripts/strip_unlicensed_images.py
-   ```
-   Bump `seedVersion` in `VehicleCatalogService` so devices drop old cached images.
+```bash
+export DEVELOPER_DIR=/Users/andrea/Downloads/Xcode-beta.app/Contents/Developer
 
-4. **Git**
-   ```bash
-   git add -A && git commit  # product snapshot
-   git remote add origin <your-repo>
-   git push -u origin main
-   ```
+xcodebuild test \
+  -project "EVforME?.xcodeproj" \
+  -scheme "EVforME?" \
+  -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=27.0' \
+  -only-testing:"EVforME?Tests"
+```
 
-5. **Tests**
-   ```bash
-   DEVELOPER_DIR=… xcodebuild test -scheme "EVforME?" -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=27.0'
-   ```
+## ASC (must match)
 
-6. **ASC package** (from `MARKETING_GTM.md`)
-   - Subtitle: personalised EV vs ICE costs in minutes  
-   - Keywords: auto elettrica, costi, TCO, ricarica, PHEV, Italia…  
-   - Screenshots IT + EN  
-   - Version `1.0` build `1`, price Free
+- Privacy Policy URL: `https://ancybasket.github.io/EVforME/privacy/`
+- Copy / keywords / screenshots: `ASC_STORE_LISTING.md`
 
-## Do not submit until
+## Do not App Store submit until
 
-- [ ] Privacy URL live on HTTPS  
-- [ ] Product committed (and ideally pushed)  
-- [ ] Risky image hosts stripped (or properly licensed)  
-- [ ] Full unit tests green on the Xcode you archive with  
+- [x] Privacy URL live on HTTPS
+- [x] Product committed + pushed
+- [x] Risky image hosts stripped
+- [x] Full unit tests green on archive Xcode toolchain
+- [ ] Internal TestFlight build installed on a real device

@@ -84,7 +84,9 @@ final class ErrorHandler {
             return ErrorStatistics(
                 totalErrors: total,
                 errorsByType: byType.mapValues { $0.count },
-                errorsByContext: Dictionary(uniqueKeysWithValues: byContext.map { ($0.key.rawValue, $0.value.count) }),
+                errorsByContext: Dictionary(uniqueKeysWithValues: byContext.map {
+                    (String(describing: $0.key), $0.value.count)
+                }),
                 lastError: recentErrors.first
             )
         }
@@ -106,14 +108,17 @@ final class ErrorHandler {
     }
     
     private func storeError(_ error: AppError, context: ErrorContext) {
+        // Case name (e.g. "networkUnavailable"), not the type name "AppError".
+        let typeKey = String(describing: error).split(separator: "(").first.map(String.init)
+            ?? String(describing: error)
         let log = ErrorLog(
             error: error,
-            errorType: String(describing: type(of: error)),
+            errorType: typeKey,
             context: context,
             timestamp: Date(),
             recoverable: error.isRecoverable
         )
-        
+
         recentErrors.insert(log, at: 0)
         if recentErrors.count > maxRecentErrors {
             recentErrors.removeLast()

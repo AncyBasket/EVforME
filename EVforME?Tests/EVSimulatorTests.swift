@@ -32,7 +32,7 @@ final class EVSimulatorTests: XCTestCase {
     }
 
     func testSimulate_YesVerdict_LowWeeklyKm() {
-        // Given — km annui validi (≥ 1000); risparmio realistico sopra le soglie di `VerdictEngine`.
+        // Given — km alti + premium di listino contenuto così opex + payback entro l'orizzonte → `.yes`.
         let input = UserInput(
             dailyKm: 25_000,
             hasHomeCharging: true,
@@ -42,7 +42,10 @@ final class EVSimulatorTests: XCTestCase {
             electricityPricePerKWh: 0.25,
             sourceVehicleId: testSourceVehicleId,
             targetVehicleId: testTargetVehicleId,
-            scenario: .realistic
+            scenario: .realistic,
+            sourcePurchasePrice: 18_000,
+            targetPurchasePrice: 22_000,
+            includeIncentives: true
         )
         
         // When
