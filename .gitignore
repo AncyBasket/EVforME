@@ -53,3 +53,6 @@ api/**/__pycache__/
 # Cursor / agent
 .cursor/
 agent-transcripts/
+
+# Local sim smoke screenshots (not for repo)
+docs/smoke-shots/
