@@ -1,0 +1,456 @@
+/* App */
+"app_title" = "EV for ME?";
+"input_section_1_title" = "Driving & costs";
+"input_section_1_subtitle" = "Yearly distance, fuel and electricity prices, ownership length.";
+"input_section_2_title" = "Context";
+"input_section_2_subtitle" = "Where you drive most: affects consumption estimates.";
+"input_section_3_title" = "Compare cars";
+"input_section_3_subtitle" = "Pick your current car and the EV you want to compare.";
+"input_quick_vehicles_subtitle" = "Change the cars if you want, then tap the button below. Everything else is optional.";
+"input_advanced_details_title" = "Adjust km, prices, and scenario";
+"input_section_4_title" = "Charging & scenario";
+"input_section_4_subtitle" = "Home charging and how conservative the estimates are.";
+
+/* Input */
+"daily_km_question" = "How many km do you drive per year?";
+"fuel_price_label" = "Fuel price (€/L)";
+"electricity_price_label" = "Electricity price (€/kWh)";
+"ownership_years_label" = "Years of ownership";
+"year_singular" = "year";
+"year_plural" = "years";
+"area_type_label" = "Driving type";
+"area_type_urban" = "Urban";
+"area_type_mixed" = "Mixed";
+"area_type_urban_description" = "Mainly city driving";
+"area_type_mixed_description" = "City and highway";
+"source_vehicle_label" = "Current vehicle";
+"target_vehicle_label" = "Electrified vehicle";
+"source_vehicle_description" = "Choose your current vehicle";
+"target_vehicle_description" = "Choose an EV or plug-in hybrid to compare";
+"powertrain_ice" = "ICE";
+"powertrain_ev" = "EV";
+"powertrain_phev" = "PHEV";
+"current_vehicle_short" = "Current";
+"electrified_vehicle_short" = "Electrified";
+"comparison_card_title" = "Vehicle comparison (dimensions, consumption, cost/km)";
+"vehicle_search_placeholder" = "Search make or model…";
+"vehicle_picker_button" = "Choose from catalog…";
+"vehicle_picker_search_title" = "Search the catalog";
+"vehicle_picker_min_chars_hint" = "Type a make or model (e.g. Golf, Tesla, 500). Results are grouped by model.";
+"vehicle_picker_popular_brands" = "Popular brands";
+"vehicle_picker_choose_year" = "Pick a year";
+"vehicle_picker_results_capped" = "Results capped — add another word to narrow the list.";
+"vehicle_pair_section_title" = "Your vehicles";
+"vehicle_pair_tap_to_choose" = "Change car";
+"vehicle_picker_tab_browse" = "Brands";
+"vehicle_picker_tab_search" = "Search";
+"vehicle_picker_browse_subtitle" = "Tap a brand to see models.";
+"vehicle_picker_back_brands" = "Back";
+"vehicle_picker_brand_models_subtitle" = "Pick a model.";
+"vehicle_picker_filter_brands_placeholder" = "Filter brands…";
+"vehicle_picker_no_results" = "No vehicles found";
+"vehicle_picker_try_different" = "Try “Golf”, “Model 3”, “500e”, “Fiat”…";
+"vehicle_picker_close" = "Close";
+"vehicle_picker_clear" = "Clear selection";
+"vehicle_ice_compact" = "Compact gas car";
+"vehicle_ice_suv" = "Gas SUV";
+"vehicle_ev_compact" = "Compact EV";
+"vehicle_ev_suv" = "Electric SUV";
+"vehicle_not_selected" = "Select";
+"vehicle_dimensions_label" = "Dimensions";
+"vehicle_dimensions_format" = "L %.2fm · W %.2fm · H %.2fm";
+"vehicle_dimensions_not_selected" = "Select a vehicle to see dimensions";
+"vehicle_comparison_dimensions" = "Dimensions: %@ vs %@";
+"external_dimensions_link_title" = "Compare dimensions and photos on the web";
+"external_dimensions_link_subtitle" = "Opens automobiledimension.com in your browser (external site, not affiliated).";
+"home_charging_toggle" = "I can charge at home";
+"tell_me_the_truth" = "Tell me the truth";
+"simulate_cta_a11y_hint" = "Runs the comparison and opens your readout when the inputs are valid. If something is missing, a list of errors appears above the button.";
+
+/* Verdict */
+"modify_input" = "Change inputs";
+"modify_input_a11y_hint" = "Closes this readout and returns to the bench so you can change kilometers, prices, or vehicles.";
+"share_result" = "Share";
+"export_pdf_report" = "Export PDF report";
+"share_pdf_report" = "Share PDF";
+"get_free_report" = "Export PDF report";
+"talk_to_advisor" = "Talk to an advisor";
+"lead_sheet_title" = "Free EV consultation";
+"lead_sheet_subtitle" = "Leave your name, email and city — we’ll follow up for a free EV consultation.";
+"lead_name_placeholder" = "Name";
+"lead_email_placeholder" = "Email";
+"lead_city_placeholder" = "City";
+"lead_consent_text" = "I agree to be contacted for EV consultation.";
+"lead_send" = "Send request";
+"free_report_title" = "Decision report";
+"free_report_subtitle" = "5-year scenario with assumptions and action checklist.";
+"free_report_badge" = "Included in the app";
+"report_included_1" = "Cost sensitivity table (fuel/electricity).";
+"report_included_2" = "Charging feasibility summary for your profile.";
+"report_included_3" = "Shareable PDF with recommendation.";
+"verdict_yes" = "Yes, EV works for you.";
+"verdict_maybe" = "Yes, but with compromises.";
+"verdict_not_yet" = "Not ideal yet.";
+"verdict_yes_title" = "Yes, it's for you";
+"verdict_maybe_title" = "It depends";
+"verdict_not_yet_title" = "Not yet";
+"verdict_yes_description" = "In your case, an electric car makes sense already today.";
+"verdict_maybe_description" = "It could make sense, but it depends on some conditions.";
+"verdict_not_yet_description" = "With these assumptions, maybe it's better to wait.";
+"verdict_subtitle_yes" = "You can switch today without changing your habits.";
+"verdict_subtitle_maybe" = "It's doable, but you'll need to be a bit intentional.";
+"verdict_subtitle_not_yet" = "Today it would feel limiting — but you're closer than you think.";
+"why" = "Why";
+"what_this_means" = "What this means";
+"impact_save_between" = "• You could save between €%d and €%d per year.";
+"impact_charge_per_week" = "• You'd charge about %d times per week.";
+"impact_gas_cost_more" = "• Sticking with gas will likely cost more over time.";
+"share_subject" = "My EV Simulation";
+"share_message" = "Check out my EVforME? result";
+
+/* Onboarding */
+"get_started" = "Get Started";
+"onboarding_title" = "EV for ME?";
+"onboarding_subtitle" = "Find out if an electric car fits your lifestyle. Enter your driving habits and get a personalized verdict in seconds.";
+"onboarding_row_km" = "Set your daily km and charging options";
+"onboarding_row_chart" = "See 5-year cost comparison";
+"onboarding_row_fear" = "Get fear vs reality tailored to you";
+
+/* Education */
+"fear_vs_reality" = "Fear vs Reality";
+"common_fears" = "Common Fears";
+"common_fears_badge" = "Common Fears (%d)";
+
+/* Comparison */
+"comparison_5_year" = "5-Year Cost Comparison";
+"year_format" = "Year %d";
+"deep_dive_costs" = "Deep Dive: Costs";
+"deep_dive_costs_closed" = "EV vs Gas: how much you really spend";
+"deep_dive_costs_explanation" = "The comparison shows how much you would save each year by choosing an electric car over a gas one.";
+"deep_dive_costs_takeaway" = "Each year that passes, the EV becomes more convenient";
+"calculation_explanation" = "How we calculate";
+"calculation_gas_title" = "Gas car cost:";
+"calculation_gas_formula" = "%d km/year × %.3f L/km × €%.2f/L → energy €%.0f; opex €%.0f/year";
+"calculation_gas_total" = "× %d years = €%d total";
+"calculation_gas_breakdown" = "(Fuel: €%.0f + Maintenance: €600 + Taxes: €200 = €%.0f/year)";
+"calculation_ev_title" = "EV cost:";
+"calculation_ev_formula" = "%d km/year × %.3f kWh/km × ~€%.2f/kWh home → energy €%.0f; opex €%.0f/year";
+"calculation_ev_total" = "× %d years = €%d total";
+"calculation_ev_breakdown" = "(Energy: €%.0f + Maintenance: €250 + Taxes: €0 = €%.0f/year)";
+"calculation_savings" = "Total savings over %d years: €%d";
+"savings" = "Savings";
+"gas_label" = "Current";
+"ev_label" = "Electrified";
+
+/* Scenarios */
+"scenario_title" = "Cost Scenario";
+"scenario_description" = "Estimates change based on conservative or optimistic assumptions";
+"scenario_pessimistic" = "Pessimistic";
+"scenario_realistic" = "Realistic";
+"scenario_optimistic" = "Optimistic";
+"scenario_description_pessimistic" = "Conservative assumptions: expensive energy and less favorable EV maintenance.";
+"scenario_description_realistic" = "Average conditions based on current costs.";
+"scenario_description_optimistic" = "Favorable scenario: efficient EV and contained energy costs.";
+
+/* Timeline Text */
+"timeline_pessimistic_1" = "Costs are similar at the start";
+"timeline_pessimistic_2" = "Savings grow slowly";
+"timeline_pessimistic_3" = "It takes time to see the advantage";
+"timeline_realistic_1" = "Slight differences at the start";
+"timeline_realistic_2" = "From year 3, EV weighs less";
+"timeline_realistic_3" = "Savings become evident";
+"timeline_optimistic_1" = "EV competitive right away";
+"timeline_optimistic_2" = "Stable costs over time";
+"timeline_optimistic_3" = "Clear advantage already at mid-period";
+"how_it_changes_over_time" = "How It Changes Over Time";
+"costs_over_time" = "Costs Over Time";
+"costs_over_time_intro" = "Here’s how costs add up year by year: gas vs EV (same scenario selected above).";
+"input_hero_subtitle" = "Pick the two cars. Everything else is fine-tuning.";
+"input_hero_badge" = "Cost check";
+"costs_chart_title" = "Cumulative cost by year";
+"chart_axis_ownership_year" = "Year";
+"chart_axis_cumulative_cost" = "Cost (€)";
+"costs_chart_footnote" = "Values are cumulative from the start of ownership through each year-end.";
+"time_year1" = "Year 1 → similar to before";
+"time_year3" = "Year 3 → lower maintenance";
+"time_year5" = "Year 5 → evident savings";
+"time_message" = "The correct comparison is not today, it's over time";
+
+/* Deep dive (Approfondimenti) */
+"deep_dive_section_title" = "Deep dive";
+"deep_dive_section_closed" = "Numbers, environment, battery and incentives";
+"subsection_where_numbers_title" = "Where the numbers come from";
+"subsection_where_numbers_body" = "Gas consumption: 6.5 L/100 km (average compact/SUV). EV consumption: 17 kWh/100 km (average current models). Maintenance: €600/year for gas, €250/year for EV (industry estimates). Taxes: average road tax €200 for gas; many EVs are exempt in Italy. Scenario multipliers (pessimistic/realistic/optimistic) only affect fuel and maintenance, not taxes.";
+"subsection_environment_title" = "Environmental impact";
+"subsection_environment_body" = "A gas car emits about 120 g CO₂/km. An EV on the Italian grid emits indirectly about 40–50 g CO₂/km (well-to-wheel). Switching to electric can cut emissions by several tonnes of CO₂ over a few years, depending on how much you drive and the energy mix.";
+"subsection_battery_title" = "Battery and lifespan";
+"subsection_battery_body" = "EV batteries typically have an 8-year or 160,000 km warranty. Average degradation is about 2–3% per year; after 10 years many packs still retain around 80% capacity. Replacement costs are falling; this simulation does not include possible battery replacement.";
+"subsection_incentives_title" = "Incentives";
+"subsection_incentives_body" = "In Italy, ecobonus and other schemes can lower purchase price. Home charging points may qualify for tax deductions.";
+"incentives_link_title" = "Find out about incentives and ecobonus";
+
+/* Assumptions & Transparency */
+"assumptions_transparency" = "Assumptions & Transparency";
+"assumption_calculations_estimates" = "Calculations are estimates";
+"assumption_no_data_sent" = "No data sent online";
+"assumption_average_prices" = "Average prices, not promises";
+"assumption_consumption_gas" = "Gas consumption: 6.5 L/100 km (average)";
+"assumption_consumption_ev" = "EV consumption: 17 kWh/100 km (average)";
+"assumption_maintenance" = "Maintenance: industry estimates (gas €600, EV €250/year)";
+"assumption_taxes" = "Taxes: average road tax; EVs often exempt in Italy";
+"assumption_electricity" = "Electricity: average domestic €0.25/kWh (public charging may cost more)";
+
+/* Loading */
+"calculating" = "Calculating...";
+
+/* Validation */
+"validation_min_km" = "Minimum 1,000 km per year";
+"validation_max_km" = "Maximum 120,000 km per year";
+"validation_source_vehicle_required" = "Select your current vehicle";
+"validation_target_vehicle_required" = "Select the electrified vehicle to compare";
+"validation_fuel_positive" = "Fuel price must be greater than 0";
+"validation_fuel_high" = "Fuel price seems unusually high";
+"validation_electricity_positive" = "Electricity price must be greater than 0";
+"validation_electricity_high" = "Electricity price exceeds the maximum allowed (€2/kWh)";
+"validation_min_years" = "Minimum 1 year";
+"validation_max_years" = "Maximum 20 years";
+"check_input_values" = "Please check your input values";
+
+/* Simulator */
+"charge_per_week" = "You would charge about %d times per week";
+"save_up_to_per_year" = "You could save up to €%d per year";
+"switching_from_to" = "Comparison: from %@ to %@";
+"home_charging_easier" = "Home charging makes EVs much easier";
+"public_charging_manageable" = "Public charging would be manageable";
+"fear_run_out_battery" = "I'll run out of battery.";
+"reality_charging_few_times" = "Even with your usage, charging only a few times a week is enough.";
+"fear_charging_complicated" = "Charging will be complicated.";
+"reality_public_charging" = "Public charging is accessible and predictable.";
+"fear_evs_unreliable" = "EVs aren't reliable.";
+"reality_fewer_parts" = "Electric cars have fewer moving parts, meaning less maintenance over time.";
+"fear_costs_too_much" = "It costs too much.";
+"reality_save_per_year" = "You could save €%d–€%d per year compared to a gas car.";
+
+/* Share */
+"share_title" = "EVforME? – My EV Simulation";
+"share_verdict_yes" = "Verdict: Yes, EV works for you!";
+"share_verdict_maybe" = "Verdict: Yes, but with compromises.";
+"share_verdict_not_yet" = "Verdict: Not ideal yet.";
+"share_weekly_charges" = "Weekly charges: %d times";
+"share_yearly_savings" = "Yearly savings: €%d–€%d";
+"share_key_reasons" = "Key reasons:";
+"share_signature" = "— EVforME?";
+
+/* Shell & guides */
+"shell_edition_mark" = "Lab ’26";
+"shell_tagline_workshop" = "Build your comparison: km, prices, two cars, one blunt readout.";
+"shell_tagline_guides" = "Short reads: range, charging, battery, total cost of ownership.";
+"shell_tab_workshop" = "Bench";
+"shell_tab_guides" = "Reads";
+"verdict_modal_title" = "Readout";
+"verdict_modal_subtitle" = "Close to return to the bench.";
+"verdict_modal_close_a11y" = "Close result";
+"verdict_header_a11y" = "Verdict: %@";
+"guides_hub_title" = "Field notes";
+"guides_hub_intro" = "Straight answers, no pitch: how range, charging habits, and how long you keep the car move the bottom line when you switch.";
+"guides_card_tap_hint" = "Open";
+"shell_tab_workshop_a11y_hint" = "Shows the simulation bench where you enter kilometers, prices, and the two vehicles to compare.";
+"shell_tab_guides_a11y_hint" = "Shows short reads on range, charging, battery health, and total cost of ownership.";
+"guides_card_a11y_hint" = "Opens this article in a sheet.";
+
+/* Accessibility — UI chrome */
+"expandable_a11y_hint" = "Expands or collapses this section.";
+"expandable_a11y_expanded" = "Expanded";
+"expandable_a11y_collapsed" = "Collapsed";
+"validation_a11y_title" = "Issues to fix";
+"vehicle_picker_tabs_a11y_hint" = "Switches between browsing brands and searching by text.";
+"vehicle_picker_brand_a11y_hint" = "Shows models for this brand.";
+"vehicle_picker_select_a11y_hint" = "Selects this vehicle and closes the picker.";
+"share_link_a11y_hint" = "Opens the system share sheet with a text summary of your readout.";
+"fear_vs_reality_a11y_fear_prefix" = "Concern";
+"fear_vs_reality_a11y_reality_prefix" = "Reality";
+"costs_chart_a11y_summary" = "Grouped bar chart: cumulative estimated cost by ownership year. Orange bars: gasoline car. Teal bars: electric car.";
+"costs_chart_a11y_hint" = "Explore the chart with VoiceOver rotor for data series details.";
+"scenario_chip_a11y_hint" = "Recalculates the readout using this optimism level for costs.";
+"guides_sheet_close" = "Done";
+"guide_topic_range_title" = "Real-world range";
+"guide_topic_range_body" = "WLTP figures are a standardized lab loop. Cold weather, highway speed, heater use, and headwinds all pull range down; gentle urban driving can look better than the label. Treat WLTP as an anchor, then adjust mentally for your climate and driving style.";
+"guide_topic_charging_title" = "Home vs public charging";
+"guide_topic_charging_body" = "Charging at home overnight is usually the cheapest kWh you will ever buy for a car. Public AC is slower but predictable; DC fast charging is convenient on trips but often priced like fuel stops, not like domestic electricity. Your mix of home vs away charging changes the monthly bill more than small differences in car efficiency.";
+"guide_topic_battery_title" = "Battery longevity";
+"guide_topic_battery_body" = "Modern packs are managed by software that avoids the worst stress zones most of the time. Degradation is not linear: early years see a small capacity fade, then the curve tends to flatten. Warranty floors exist for a reason, but everyday driving rarely pushes you there if thermal management and charging habits are sane.";
+"guide_topic_total_cost_title" = "Total cost picture";
+"guide_topic_total_cost_body" = "Sticker price is one line in a ledger that also includes energy, maintenance, insurance, depreciation, and taxes where they apply. EVs often win on energy and moving parts, while tires and insurance can surprise in either direction. The honest question is which lines dominate for your annual km and how long you keep the car.";
+"external_dimensions_link_a11y_hint" = "Opens the Automobile.it size comparison in your browser.";
+"incentives_link_a11y_hint" = "Opens the Italian government ecobonus information page in your browser.";
+"vehicle_picker_back_a11y_hint" = "Returns to the list of brands.";
+
+/* AI + input a11y */
+"verdict_ai_section_title" = "In plain words";
+"verdict_ai_fallback_yes" = "With about %d km/year, the numbers lean electric: roughly €%d–€%d saved per year and about %d charges per week. Home charging and your chosen pair make that path realistic.";
+"verdict_ai_fallback_maybe" = "At about %d km/year the gap is modest (about €%d–€%d/year). An EV can work, but small changes in electricity price or kilometers can flip the picture.";
+"verdict_ai_fallback_not_yet" = "At about %d km/year with these prices, electricity does not beat fuel yet. Expect about %d charges per week — wait for cheaper power, more home charging, or a thriftier EV before switching.";
+"yearly_km_slider_a11y" = "Yearly kilometers slider";
+"fuel_price_slider_a11y" = "Fuel price per liter";
+"electricity_price_slider_a11y" = "Electricity price per kWh";
+"area_type_picker_a11y" = "Driving area type selection";
+"home_charging_a11y" = "Home charging availability";
+"break_even_months_reason" = "About %d months of operating savings to offset the extra purchase cost (electrified − current − incentives).";
+"break_even_not_reached_reason" = "With these prices, operating costs alone do not pay back the extra purchase cost.";
+"break_even_months_badge" = "Break-even ~%d months";
+"open_last_verdict_dialog" = "Opening your last EV readout.";
+"trip_profile_label" = "Typical trips";
+"trip_profile_custom" = "Custom";
+"trip_profile_commuter" = "Daily commute";
+"trip_profile_weekend" = "Weekend highway";
+"trip_profile_custom_subtitle" = "You set urban/mixed yourself.";
+"trip_profile_commuter_subtitle" = "~18,000 km/year, mostly urban stop-and-go.";
+"trip_profile_weekend_subtitle" = "~14,000 km/year with longer highway legs.";
+"purchase_prices_title" = "Purchase prices";
+"source_purchase_price_label" = "Current car (€)";
+"target_purchase_price_label" = "EV target (€)";
+"include_incentives_toggle" = "Include IT incentive estimate";
+"include_incentives_hint" = "Adds a rough purchase bonus (not legal advice). EV tax in catalog is often already low/zero.";
+"incentives_included_reason" = "Includes ~€%d purchase-incentive estimate.";
+"incentives_transparency_note" = "Incentives are simplified IT estimates; check official rules for your region and income band.";
+"sources_section_title" = "Where numbers come from";
+"source_catalog_note" = "Vehicle figures: quality catalog downloaded from the internet on every open (bundled seed fallback). Prices: MIMIT + Eurostat.";
+"source_prices_note" = "Energy prices: refreshed on each app open from MIMIT (fuel) and Eurostat (electricity); cached if offline. You can still override sliders.";
+"history_section_title" = "Saved readouts";
+"history_empty" = "No saved scenarios yet. Run a simulation to pin one here.";
+"history_closed_hint" = "Compare past yes/maybe/not-yet runs.";
+"sticker_scan_title" = "Scan consumption sticker";
+"sticker_scan_button" = "Choose photo";
+"sticker_scan_hint" = "On-device OCR looks for L/100 km or kWh/100 km and applies it to the sim (you can clear it).";
+"sticker_scan_found_fuel" = "Detected ~%.1f L/100 km";
+"sticker_scan_found_energy" = "Detected ~%.1f kWh/100 km";
+"sticker_scan_nothing" = "No clear consumption figure found. Try a sharper photo.";
+"quick_start_title" = "Three questions";
+"quick_start_subtitle" = "Km, home charging, trip type — then refine prices on the bench.";
+"quick_start_continue" = "Open the bench";
+"quick_start_skip_full" = "Skip intro";
+"widget_bump_fuel_title" = "Fuel +€0.10";
+"sticker_override_applied_reason" = "Uses sticker OCR consumption instead of catalog averages where provided.";
+"sticker_clear_override" = "Clear sticker override";
+"history_restore_hint" = "Tap to restore and re-run this readout.";
+"validation_purchase_too_low" = "%@ looks too low (min €1,000).";
+"validation_purchase_too_high" = "%@ looks too high (max €150,000).";
+"validation_sticker_fuel_range" = "Sticker fuel figure should be between 2 and 25 L/100 km.";
+"validation_sticker_energy_range" = "Sticker energy figure should be between 8 and 40 kWh/100 km.";
+"yearly_km_value" = "%d km/year";
+"phev_blend_reason" = "PHEV modeled as a mix of electric + fuel km (higher electric share with home charging).";
+"insurance_included_reason" = "Yearly costs include a simplified insurance estimate from list price and km.";
+"lead_saved_locally" = "Request saved on this device. We’ll follow up once advisor contact is available.";
+"lead_sent_remote" = "Request sent. An advisor will contact you.";
+"lead_send_failed" = "Couldn’t send. Please try again shortly.";
+"tco_extras_title" = "Insurance & residual value";
+"tco_extras_closed" = "Simplified estimates beyond fuel and maintenance.";
+"tco_extras_intro" = "These are rough proxies — not insurer quotes or dealer buy-back offers.";
+"tco_insurance_row" = "Insurance / year (est.): ICE €%d · electrified €%d";
+"tco_residual_row" = "Residual after %d years (est.): ICE €%d · EV €%d";
+"tco_residual_note" = "Residual is shown for transparency; break-even uses extra purchase cost, not residual.";
+"prices_fresh_just_now" = "Energy prices refreshed just now (MIMIT / Eurostat).";
+"prices_fresh_minutes_ago" = "Energy prices refreshed %d min ago.";
+"prices_fresh_cached" = "Using last cached energy prices (offline or source busy).";
+"prices_fresh_bundled" = "Using bundled energy prices until a live fetch succeeds.";
+"live_activity_clear" = "Clear Lock Screen Live Activity";
+
+/* Error Handling */
+"error_network_unavailable" = "Internet connection not available";
+"error_network_timeout" = "Connection timeout";
+"error_invalid_url" = "Invalid URL: %@";
+"error_server_error" = "Server error: %d";
+"error_no_data_received" = "No data received from server";
+"error_data_corrupted" = "Data corrupted";
+"error_data_not_found" = "Data not found";
+"error_invalid_data_format" = "Invalid data format";
+"error_parsing" = "Processing error: %@";
+"error_catalog_load_failed" = "Failed to load vehicle catalog";
+"error_catalog_parse_failed" = "Failed to parse vehicle catalog";
+"error_vehicle_not_found" = "Vehicle not found: %@";
+"error_catalog_out_of_date" = "Vehicle catalog is out of date";
+"error_storage_read_failed" = "Failed to read saved data";
+"error_storage_write_failed" = "Failed to save data";
+"error_storage_corrupted" = "Saved data corrupted";
+"error_service_unavailable" = "Service unavailable: %@";
+"error_configuration" = "Configuration error: %@";
+"error_fuel_price_fetch_failed" = "Failed to fetch fuel price";
+"error_electricity_price_fetch_failed" = "Failed to fetch electricity price";
+"error_cost_service_unavailable" = "Cost service unavailable";
+
+/* Error Recovery Suggestions */
+"suggestion_check_connection" = "Check your internet connection and try again";
+"suggestion_retry_later" = "Try again later";
+"suggestion_select_another_vehicle" = "Select another vehicle";
+"suggestion_reinstall_app" = "Reinstall the application";
+"suggestion_contact_support" = "Contact support if the problem persists";
+
+/* Error Alert UI */
+"error_unknown" = "An unknown error occurred";
+"error_title_general" = "Error";
+"error_title_network" = "Connection Error";
+"error_title_data" = "Data Error";
+"error_title_catalog" = "Catalog Error";
+"error_title_validation" = "Validation Error";
+"retry" = "Retry";
+"dismiss" = "Dismiss";
+
+/* Charging Types */
+"charging_type_home" = "Home charging";
+"charging_type_home_description" = "Wallbox or home outlet (typical 7.4 kW)";
+"charging_type_public_slow" = "Public slow charging";
+"charging_type_public_slow_description" = "Public AC charging (typical 22 kW)";
+"charging_type_public_fast" = "Fast charging";
+"charging_type_public_fast_description" = "DC Fast charging (typical 50 kW)";
+"charging_type_public_ultra_fast" = "Ultra-fast charging";
+"charging_type_public_ultra_fast_description" = "Ultra-fast charging (150+ kW)";
+
+/* App Intents */
+"intent_simulate_title" = "Simulate EV suitability";
+"intent_simulate_description" = "Runs an EV vs ICE cost readout with yearly kilometers and optional home charging.";
+"intent_param_yearly_km_title" = "Yearly kilometers";
+"intent_param_yearly_km_description" = "Kilometers driven per year";
+"intent_param_home_charging_title" = "Home charging";
+"intent_open_verdict_title" = "Open last EV verdict";
+"intent_open_verdict_description" = "Opens EVforME? on the last simulation readout.";
+"intent_shortcut_simulate_short" = "Simulate EV";
+"intent_shortcut_open_short" = "Last verdict";
+
+/* Privacy */
+"privacy_policy_title" = "Privacy";
+"privacy_policy_updated" = "Updated: 9 September 2026";
+"privacy_policy_body" = "EVforME? estimates on-device whether an electric or plug-in hybrid car may fit you.\n\nKept on your phone: km, prices, chosen vehicles, scenario history, widget/Live Activity snapshots.\n\nSticker photos: used on-device only to read consumption figures; not uploaded for that feature.\n\nNetwork (optional): vehicle catalog, public energy prices, analytics or lead webhook only if configured. In a typical build, analytics/leads stay local when those URLs are empty.\n\nWe do not sell data and do not use advertising trackers.\n\nAdvisor form: name/email/city only if you submit them with consent.\n\nYou can revoke photo access in iOS Settings, skip the lead form, or delete the app to remove local data.\n\nApp Store Connect also needs a public HTTPS URL with the full policy (see PRIVACY_POLICY.md in the repo).";
+"privacy_policy_open_web" = "Open policy on the web";
+
+/* Polish extras */
+"export_pdf_a11y_hint" = "Opens the PDF report to export or share.";
+"talk_to_advisor_a11y_hint" = "Opens the form to request an advisory contact.";
+"onboarding_skip_a11y_hint" = "Skips intro and opens the bench with starter values.";
+"guide_open_a11y_hint" = "Opens this guide.";
+"privacy_open_a11y_hint" = "Opens the privacy notice.";
+"fear_eyebrow" = "Fear";
+"reality_eyebrow" = "Reality";
+"picker_year_one" = "1 year";
+"picker_year_many" = "%d years";
+"chart_series" = "Series";
+
+/* Reference quality */
+"verdict_compare_line" = "From %@ to %@";
+"verdict_proof_savings_value" = "€%d–%d";
+"verdict_proof_savings_label" = "Savings / year";
+"verdict_proof_charges_label" = "Charges / week";
+"verdict_proof_breakeven_value" = "~%d mo";
+"verdict_proof_breakeven_label" = "Break-even";
+"verdict_trust_strip" = "On-device math · official price sources";
+"share_card_eyebrow" = "Your readout";
+"share_card_week_short" = "wk";
+"calculating_subtitle" = "Weighing costs, charging, and payback.";
+
+/* Correctness validation */
+"validation_missing_fuel_consumption" = "Fuel consumption is missing for the selected vehicle.";
+"validation_missing_energy_consumption" = "Electric consumption is missing for the selected vehicle.";
+"validation_unknown_source_vehicle" = "Current vehicle not found in the catalog.";
+"validation_unknown_target_vehicle" = "Electrified vehicle not found in the catalog.";
+
+"calculation_opex_breakdown" = "Energy €%.0f + Maintenance €%.0f + Tax €%.0f + Insurance €%.0f = €%.0f/year";
+"calculation_charging_note" = "Estimated charges: %d× / week (home/public mix in energy total).";

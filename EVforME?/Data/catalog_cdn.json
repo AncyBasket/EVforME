@@ -1,0 +1,10 @@
+{
+  "url": "",
+  "rows": 8478,
+  "bytes": 0,
+  "source": "vehicles.seed.quality.json",
+  "host": "bundled-offline-first",
+  "updatedAt": "2026-09-10T08:50:00+00:00",
+  "policy": "offline-first",
+  "note": "TestFlight: remote CDN disabled. App uses bundled vehicles.seed.quality.json only. Re-enable a stable HTTPS host later via EVFORME_CATALOG_URL / publish_catalog_cdn.py."
+}

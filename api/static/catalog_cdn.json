@@ -1,0 +1,10 @@
+{
+  "url": "https://files.catbox.moe/b42p73.json",
+  "rows": 8209,
+  "bytes": 3649510,
+  "source": "vehicles.seed.quality.json",
+  "host": "catbox.moe",
+  "updatedAt": "2026-09-08T10:58:52.738180+00:00",
+  "policy": "best-effort",
+  "note": "Temporary CDN. App is offline-first on bundled vehicles.seed.quality.json. Auto-updated by scripts/publish_catalog_cdn.py."
+}

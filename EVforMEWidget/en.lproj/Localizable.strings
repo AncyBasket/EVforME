@@ -1,0 +1,22 @@
+/* Widget */
+"widget_brand_title" = "EV for ME?";
+"widget_empty_prompt" = "Run a simulation to pin your verdict here.";
+"widget_bump_fuel_title" = "Fuel +€0.10";
+"widget_bump_fuel_description" = "Raises the fuel price by €0.10 and refreshes the Home Screen verdict estimate.";
+"widget_fuel_bumped_title" = "Fuel bumped";
+"widget_fuel_price_per_liter" = "€%.2f / L";
+"widget_placeholder_title" = "Yes";
+"widget_placeholder_subtitle" = "EV looks like a fit";
+"widget_config_display_name" = "Last EV verdict";
+"widget_config_description" = "Shows your latest EVforME? readout on the Home Screen.";
+"widget_savings_charges_line" = "€%d–€%d/yr · %d×/wk";
+"widget_fuel_km_line" = "€%.2f/L · %d km/yr";
+
+/* Live Activity */
+"live_activity_brand_short" = "EV?";
+"live_activity_brand" = "EVforME?";
+"live_activity_charges_per_week" = "%d×/wk";
+"live_activity_km_per_year" = "%d km/yr";
+"live_activity_km_per_year_label" = "km/yr";
+"live_activity_break_even_months" = "BE ~%d mo";
+"live_activity_fuel_price" = "€%.2f/L";

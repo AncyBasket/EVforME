@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "target_model": "VehicleCatalogItem",
+  "fields_required": [
+    "id",
+    "brand",
+    "model",
+    "year",
+    "powertrain",
+    "lengthM",
+    "widthM",
+    "heightM",
+    "fuelConsumptionLPerKm",
+    "energyConsumptionKWhPerKm",
+    "maintenancePerYear",
+    "taxesPerYear",
+    "imageURL"
+  ],
+  "providers": [
+    {
+      "name": "core_catalog",
+      "options": ["car2db", "auto_data_api"],
+      "extract": [
+        "brand",
+        "model",
+        "year",
+        "trim",
+        "powertrain",
+        "lengthM",
+        "widthM",
+        "heightM",
+        "fuelConsumptionLPerKm",
+        "energyConsumptionKWhPerKm"
+      ]
+    },
+    {
+      "name": "ev_enrichment",
+      "options": ["ev_database_data_services"],
+      "extract": [
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh",
+        "market_price"
+      ]
+    },
+    {
+      "name": "official_validation",
+      "options": ["eea_co2_dataset", "vca_fuel_data", "cap_hpi_wltp"],
+      "extract": [
+        "co2gKm",
+        "wltpConsumptionKWh100km",
+        "wltpFuelConsumptionL100km"
+      ]
+    },
+    {
+      "name": "images",
+      "options": ["evox", "vehicleimagery", "fuel_api"],
+      "extract": ["imageURL", "image_license_id"]
+    },
+    {
+      "name": "normalization",
+      "options": ["nhtsa_vpic"],
+      "extract": ["brand_canonical", "model_canonical", "year", "vin_meta"]
+    }
+  ],
+  "priority_rules": {
+    "brand_model_year": ["core_catalog", "normalization"],
+    "dimensions": ["core_catalog", "official_validation"],
+    "ice_consumption": ["core_catalog", "official_validation"],
+    "ev_consumption": ["ev_enrichment", "core_catalog", "official_validation"],
+    "images": ["images"],
+    "maintenance_taxes": ["internal_rules"]
+  },
+  "conflict_policy": {
+    "strategy": "priority_then_keep_provenance",
+    "keep_fields": ["sourceName", "sourceUpdatedAt", "confidenceScore"]
+  },
+  "update_schedule": {
+    "default": "weekly",
+    "ev_updates": "daily"
+  }
+}

@@ -1,0 +1,4 @@
+/* App Shortcuts phrases (chiave = frase EN del provider) */
+"Simulate EV with \(.applicationName)" = "Simula elettrico con \(.applicationName)";
+"Is an electric car for me in \(.applicationName)" = "Un’auto elettrica fa per me in \(.applicationName)";
+"Open last EV verdict in \(.applicationName)" = "Apri ultimo verdetto in \(.applicationName)";

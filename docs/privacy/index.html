@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy Policy — EVforME?</title>
+  <meta name="description" content="Privacy Policy for the EVforME? iOS app." />
+  <style>
+    :root {
+      --stone: #eceee8;
+      --ink: #121412;
+      --muted: #5a5f57;
+      --volt: #b8eb2e;
+      --max: 42rem;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      background: var(--stone);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+    .mark {
+      display: inline-block;
+      width: 2.75rem;
+      height: 0.28rem;
+      background: var(--volt);
+      margin-bottom: 1.25rem;
+    }
+    h1 {
+      font-size: clamp(1.85rem, 4vw, 2.4rem);
+      letter-spacing: -0.02em;
+      margin: 0 0 0.35rem;
+    }
+    .meta { color: var(--muted); font-size: 0.95rem; margin-bottom: 2rem; }
+    h2 {
+      font-size: 1.15rem;
+      margin: 2rem 0 0.65rem;
+      letter-spacing: -0.01em;
+    }
+    h3 { font-size: 1rem; margin: 1.25rem 0 0.4rem; }
+    p, li { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 0.98rem; }
+    ul { padding-left: 1.2rem; }
+    a { color: var(--ink); }
+    footer {
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(18,20,18,0.12);
+      color: var(--muted);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="mark" aria-hidden="true"></div>
+    <h1>Privacy Policy — EVforME?</h1>
+    <p class="meta">Last updated: 9 September 2026 · App: EVforME? (iOS)</p>
+
+    <p>This policy describes how the EVforME? app handles information. It is written for App Store review and for people using the app in Italy and the EU.</p>
+
+    <h2>Who we are</h2>
+    <p>EVforME? is a decision tool that estimates whether switching from a combustion car to an electric or plug-in hybrid car may make sense for your driving profile. It is provided by the app developer listed on the App Store product page (“we”, “us”).</p>
+
+    <h2>What the app does with data</h2>
+    <h3>On your device (default)</h3>
+    <p>Most processing stays on your iPhone:</p>
+    <ul>
+      <li>Driving and cost inputs you enter (km/year, fuel and electricity prices, charging preferences, selected vehicles)</li>
+      <li>Simulation results and scenario history stored locally</li>
+      <li>Optional lead form fields you type (name, email, city) until/unless you send them</li>
+      <li>Widget / Live Activity snapshots shared only via the app’s App Group on the same device</li>
+    </ul>
+    <p>We do <strong>not</strong> sell personal data. We do <strong>not</strong> use advertising trackers in the current build (<code>NSPrivacyTracking</code> = false).</p>
+
+    <h3>Photos</h3>
+    <p>If you use sticker scanning, photos are used <strong>on-device</strong> to read consumption figures (L/100 km or kWh/100 km). Photos are not uploaded for that feature.</p>
+
+    <h3>Optional network features</h3>
+    <p>When configured by the developer, the app may contact:</p>
+    <ul>
+      <li>A <strong>vehicle catalog</strong> HTTPS endpoint (public JSON) to refresh model data</li>
+      <li><strong>Public energy price sources</strong> (e.g. official fuel/electricity statistics)</li>
+      <li>An optional <strong>analytics</strong> ingest URL (product events such as “verdict shown”)</li>
+      <li>An optional <strong>lead webhook</strong> if you submit the advisor contact form with consent</li>
+    </ul>
+    <p>If those URLs are empty (typical production default for analytics/leads), related data stays on device or is not sent.</p>
+
+    <h2>Data we may collect (App Privacy labels)</h2>
+    <ul>
+      <li><strong>Name</strong> and <strong>email</strong> — only if you fill the voluntary advisor form; purpose: app functionality / follow-up you request</li>
+      <li><strong>Product interaction</strong> — anonymous/local analytics events for improving the product (and optional remote ingest if configured)</li>
+    </ul>
+
+    <h2>Legal bases (EU/UK GDPR style)</h2>
+    <ul>
+      <li><strong>Contract / service delivery:</strong> running the simulation you request</li>
+      <li><strong>Consent:</strong> advisor lead form and any optional remote analytics where consent is required</li>
+      <li><strong>Legitimate interest:</strong> securing the app, preventing abuse, and basic product metrics without advertising profiling</li>
+    </ul>
+
+    <h2>Retention</h2>
+    <ul>
+      <li>Local inputs and history remain until you delete the app or clear app data</li>
+      <li>Lead/analytics payloads retained by any configured webhook/ingest follow that service’s retention; if none is configured, nothing is sent</li>
+    </ul>
+
+    <h2>Your choices</h2>
+    <ul>
+      <li>Do not fill the lead form if you do not want to share contact details</li>
+      <li>Revoke photo access in iOS Settings → EVforME?</li>
+      <li>Delete the app to remove local storage on device</li>
+      <li>Contact us via the App Store support URL to request assistance with remotely stored leads (only if you previously submitted them to a configured webhook)</li>
+    </ul>
+
+    <h2>Children</h2>
+    <p>EVforME? is not directed at children under 13 (or the minimum age required in your country). Do not submit personal data about children through the lead form.</p>
+
+    <h2>International transfers</h2>
+    <p>If you enable optional remote endpoints hosted outside your country, data you send may be processed in those regions under the provider’s terms.</p>
+
+    <h2>Changes</h2>
+    <p>We may update this policy when the app’s data practices change. The “Last updated” date will change accordingly. Material changes that require consent will be surfaced in the app when feasible.</p>
+
+    <h2>Contact</h2>
+    <p>Use the support contact shown on the App Store listing for EVforME?.</p>
+
+    <footer>
+      Host this page on public HTTPS, then set the same URL in App Store Connect and in <code>EVFORME_PRIVACY_URL</code> (Info.plist).
+    </footer>
+  </main>
+</body>
+</html>

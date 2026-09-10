@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "events": [
+    {
+      "name": "onboarding_completed",
+      "description": "User finishes onboarding flow.",
+      "params": {}
+    },
+    {
+      "name": "simulation_started",
+      "description": "User starts simulation with valid input.",
+      "params": {
+        "scenario": "String",
+        "hasHomeCharging": "0|1",
+        "ownershipYears": "String(Int)"
+      }
+    },
+    {
+      "name": "verdict_shown",
+      "description": "Verdict screen is displayed.",
+      "params": {
+        "verdict": "String",
+        "scenario": "String"
+      }
+    },
+    {
+      "name": "report_requested",
+      "description": "User requests premium report offer.",
+      "params": {
+        "priceVariant": "4.99|9.99"
+      }
+    },
+    {
+      "name": "lead_submitted",
+      "description": "User submits advisor lead form.",
+      "params": {
+        "cityFilled": "0|1",
+        "emailFilled": "0|1",
+        "consent": "0|1"
+      }
+    }
+  ],
+  "naming": {
+    "events": "snake_case, past tense for completed actions",
+    "params": "camelCase",
+    "boolEncoding": "0|1 string"
+  }
+}

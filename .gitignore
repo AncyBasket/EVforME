@@ -1,0 +1,55 @@
+# Xcode / macOS
+.DS_Store
+**/xcuserdata/
+*.xcuserstate
+*.xccheckout
+*.xcscmblueprint
+DerivedData/
+build/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Packages/
+Package.resolved
+
+# CocoaPods / Carthage (if ever added)
+Pods/
+Carthage/Build/
+
+# Secrets / local env
+.env
+.env.*
+!.env.example
+*.pem
+AuthKey_*.p8
+GoogleService-Info.plist
+
+# Python / catalog pipeline locals
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Large / regenerable fetch dumps (keep curated seeds in git)
+EVforME?/Data/external/
+api/vehicle_catalog.db
+api/**/__pycache__/
+
+# IDE / OS
+.idea/
+*.swp
+*~
+
+# Cursor / agent
+.cursor/
+agent-transcripts/
