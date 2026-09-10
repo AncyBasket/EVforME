@@ -1,0 +1,74 @@
+{
+  "id": "skoda-fabia-2026",
+  "brand": "Skoda",
+  "model": "Fabia",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 240,
+  "approved": false,
+  "generated_at": "2026-09-10T11:31:03.393809+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4688/25398082668_da5f078d92_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/25398082668",
+      "title": "Skoda Fabia WRC",
+      "query": "Skoda Fabia car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4726/39236159662_8324ab8e51_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/39236159662",
+      "title": "Skoda Fabia WRC",
+      "query": "Skoda Fabia car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4634/27489087969_6778b23854_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/27489087969",
+      "title": "Skoda Fabia R5",
+      "query": "Skoda Fabia car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4643/39236120802_f495e3719c_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/39236120802",
+      "title": "Skoda Fabia R2",
+      "query": "Skoda Fabia car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4644/39236119772_707a2b2954_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/39236119772",
+      "title": "Skoda Fabia R2",
+      "query": "Skoda Fabia car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

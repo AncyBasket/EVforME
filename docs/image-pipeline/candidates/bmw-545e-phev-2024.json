@@ -1,0 +1,13 @@
+{
+  "id": "bmw-545e-phev-2024",
+  "brand": "BMW",
+  "model": "545e",
+  "year": 2024,
+  "powertrain": "phev",
+  "priority": 205,
+  "approved": false,
+  "generated_at": "2026-09-10T11:24:24.656597+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "renault-megane-e-tech-2026",
+  "brand": "Renault",
+  "model": "Megane E-Tech",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 105,
+  "approved": false,
+  "generated_at": "2026-09-10T11:21:32.010281+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

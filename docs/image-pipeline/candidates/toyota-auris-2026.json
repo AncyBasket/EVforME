@@ -1,0 +1,13 @@
+{
+  "id": "toyota-auris-2026",
+  "brand": "Toyota",
+  "model": "Auris",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 85,
+  "approved": false,
+  "generated_at": "2026-09-10T11:20:55.216892+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

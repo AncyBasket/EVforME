@@ -1,0 +1,52 @@
+{
+  "id": "volkswagen-id-buzz-2026",
+  "brand": "Volkswagen",
+  "model": "ID. Buzz",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 37,
+  "approved": true,
+  "generated_at": "2026-09-10T11:19:39.751679+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/53983382876_f1883e923f_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Juhele_CZ",
+      "source_page": "https://www.flickr.com/photos/96541566@N06/53983382876",
+      "title": "vehicle_car_Volkswagen_ID._Buzz_004",
+      "query": "Volkswagen ID. Buzz car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/53983780555_631e1c6353_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Juhele_CZ",
+      "source_page": "https://www.flickr.com/photos/96541566@N06/53983780555",
+      "title": "vehicle_car_Volkswagen_ID._Buzz_001",
+      "query": "Volkswagen ID. Buzz car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Vehicle_car_Volkswagen_ID._Buzz_004_%2853983382876%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Jan Helebrant",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=154977354",
+      "title": "Vehicle car Volkswagen ID. Buzz 004 (53983382876)",
+      "query": "Volkswagen ID. Buzz car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Vehicle_car_Volkswagen_ID._Buzz_004_%2853983382876%29.jpg",
+  "approval_note": "Manual batch: title evidences brand/model (Vehicle car Volkswagen ID. Buzz 004 (53983382876))"
+}

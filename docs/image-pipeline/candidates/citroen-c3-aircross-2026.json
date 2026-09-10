@@ -1,0 +1,13 @@
+{
+  "id": "citroen-c3-aircross-2026",
+  "brand": "Citroen",
+  "model": "C3 Aircross",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 189,
+  "approved": false,
+  "generated_at": "2026-09-10T11:29:07.493914+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

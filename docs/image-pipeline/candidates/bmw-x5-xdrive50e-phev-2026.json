@@ -1,0 +1,13 @@
+{
+  "id": "bmw-x5-xdrive50e-phev-2026",
+  "brand": "BMW",
+  "model": "X5 PHEV",
+  "year": 2026,
+  "powertrain": "phev",
+  "priority": 199,
+  "approved": false,
+  "generated_at": "2026-09-10T11:24:16.627513+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

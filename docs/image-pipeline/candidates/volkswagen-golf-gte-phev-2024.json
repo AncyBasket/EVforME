@@ -1,0 +1,38 @@
+{
+  "id": "volkswagen-golf-gte-phev-2024",
+  "brand": "Volkswagen",
+  "model": "Golf GTE",
+  "year": 2024,
+  "powertrain": "phev",
+  "priority": 44,
+  "approved": false,
+  "generated_at": "2026-09-10T11:19:51.163428+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49661266868_e43211e9f2_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49661266868",
+      "title": "Volkswagen Golf 8 GTI 2020",
+      "query": "Volkswagen Golf GTE car",
+      "match_score": 0.78,
+      "year_hint": 2024
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49662087517_8d63808da9_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49662087517",
+      "title": "Volkswagen Golf 8 GTI 2020",
+      "query": "Volkswagen Golf GTE car",
+      "match_score": 0.78,
+      "year_hint": 2024
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

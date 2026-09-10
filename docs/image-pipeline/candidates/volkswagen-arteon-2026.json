@@ -1,0 +1,13 @@
+{
+  "id": "volkswagen-arteon-2026",
+  "brand": "Volkswagen",
+  "model": "Arteon",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 49,
+  "approved": false,
+  "generated_at": "2026-09-10T11:19:58.934102+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

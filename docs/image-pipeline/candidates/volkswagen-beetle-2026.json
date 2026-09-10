@@ -1,0 +1,74 @@
+{
+  "id": "volkswagen-beetle-2026",
+  "brand": "Volkswagen",
+  "model": "Beetle",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 52,
+  "approved": false,
+  "generated_at": "2026-09-10T11:20:05.189190+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/83/Volkswagen_Beetle_car.svg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "spadassin",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=89064724",
+      "title": "Volkswagen Beetle car",
+      "query": "Volkswagen Beetle car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9zdGF0aWMvaW1hZ2Uvd2Vic2l0ZS8yMDIyLTA0L2xyL3B4NTg3MDA5LWltYWdlLWt6MmVhNzFhLmpwZw.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": null,
+      "source_page": "https://www.rawpixel.com/image/6113700/photo-image-public-domain-leaf-blue",
+      "title": "Volkswagen beetle car. Location Unknown",
+      "query": "Volkswagen Beetle car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9zdGF0aWMvaW1hZ2Uvd2Vic2l0ZS8yMDIyLTA0L2xyL3B4MTM2NzI5NS1pbWFnZS1rejJlYWJjZS5qcGc.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": null,
+      "source_page": "https://www.rawpixel.com/image/6113406/photo-image-public-domain-vintage-black",
+      "title": "Volkswagen beetle car. Location Unknown",
+      "query": "Volkswagen Beetle car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9zdGF0aWMvaW1hZ2Uvd2Vic2l0ZS8yMDIyLTA0L2xyL3B4ODUzMjAzLWltYWdlLWt6MmVhdm45LmpwZw.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": null,
+      "source_page": "https://www.rawpixel.com/image/6113585/photo-image-public-domain-vintage-shape",
+      "title": "Volkswagen beetle car. Location Unknown",
+      "query": "Volkswagen Beetle car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9zdGF0aWMvaW1hZ2Uvd2Vic2l0ZS8yMDIyLTA0L2xyL3B4ODEyMTg3LWltYWdlLWt6MmU5N2FoLmpwZw.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": null,
+      "source_page": "https://www.rawpixel.com/image/6113329/photo-image-public-domain-vintage-shape",
+      "title": "Volkswagen beetle car. Location Unknown",
+      "query": "Volkswagen Beetle car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

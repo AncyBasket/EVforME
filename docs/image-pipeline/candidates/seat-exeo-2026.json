@@ -1,0 +1,26 @@
+{
+  "id": "seat-exeo-2026",
+  "brand": "SEAT",
+  "model": "Exeo",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 255,
+  "approved": false,
+  "generated_at": "2026-09-10T11:31:46.529825+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1915/45733898962_a6b9ec44a7.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/45733898962",
+      "title": "Seat Exeo Switzerland Diplomatic plate (Spain)",
+      "query": "SEAT Exeo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

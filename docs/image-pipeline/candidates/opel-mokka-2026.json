@@ -1,0 +1,13 @@
+{
+  "id": "opel-mokka-2026",
+  "brand": "Opel",
+  "model": "Mokka",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 179,
+  "approved": false,
+  "generated_at": "2026-09-10T11:28:49.208829+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

@@ -1,0 +1,28 @@
+{
+  "id": "alfa-romeo-147-2026",
+  "brand": "Alfa Romeo",
+  "model": "147",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 29,
+  "approved": true,
+  "generated_at": "2026-09-10T11:19:27.259552+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/926/43294483201_170802429a_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/43294483201",
+      "title": "Alfa Romeo 147 Swiss diplomatic plate",
+      "query": "Alfa Romeo 147 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/926/43294483201_170802429a_b.jpg",
+  "approval_note": "Manual batch: title evidences brand/model (Alfa Romeo 147 Swiss diplomatic plate)"
+}

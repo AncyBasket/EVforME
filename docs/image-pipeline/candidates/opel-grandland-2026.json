@@ -1,0 +1,26 @@
+{
+  "id": "opel-grandland-2026",
+  "brand": "Opel",
+  "model": "Grandland",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 176,
+  "approved": false,
+  "generated_at": "2026-09-10T11:28:44.643873+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Moscow%2C_1st-gen_Opel_Grandland%2C_April_2025_01.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Retired electrician",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=164261009",
+      "title": "Moscow, 1st-gen Opel Grandland, April 2025 01",
+      "query": "Opel Grandland car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

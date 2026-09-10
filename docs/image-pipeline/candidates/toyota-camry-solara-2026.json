@@ -1,0 +1,13 @@
+{
+  "id": "toyota-camry-solara-2026",
+  "brand": "Toyota",
+  "model": "Camry Solara",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 91,
+  "approved": false,
+  "generated_at": "2026-09-10T11:21:04.599329+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

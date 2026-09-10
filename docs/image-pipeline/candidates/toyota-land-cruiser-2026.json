@@ -1,0 +1,74 @@
+{
+  "id": "toyota-land-cruiser-2026",
+  "brand": "Toyota",
+  "model": "Land Cruiser",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 99,
+  "approved": false,
+  "generated_at": "2026-09-10T11:21:19.097721+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7921/46303697365_dc9bee4f33_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46303697365",
+      "title": "Technamm Masstech T4 (Toyota Land Cruiser) Military French army",
+      "query": "Toyota Land Cruiser car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7815/46303697295_832d0b87e2_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46303697295",
+      "title": "Technamm Masstech T4 (Toyota Land Cruiser) Military French army",
+      "query": "Toyota Land Cruiser car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7815/47116617162_48303d3652_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/47116617162",
+      "title": "Toyota Land Cruiser & Peugeot 405",
+      "query": "Toyota Land Cruiser car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/40670952822_2848383155_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/40670952822",
+      "title": "Toyota Land Cruiser",
+      "query": "Toyota Land Cruiser car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/5716/23070471483_52f9355730_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "nicifor28",
+      "source_page": "https://www.flickr.com/photos/133136615@N03/23070471483",
+      "title": "Toyota Land Cruiser FJ40 (1960-1985)",
+      "query": "Toyota Land Cruiser car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

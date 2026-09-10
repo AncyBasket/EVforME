@@ -1,0 +1,13 @@
+{
+  "id": "toyota-prius-phev-phev-2025",
+  "brand": "Toyota",
+  "model": "Prius PHEV",
+  "year": 2025,
+  "powertrain": "phev",
+  "priority": 74,
+  "approved": false,
+  "generated_at": "2026-09-10T11:20:38.023048+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

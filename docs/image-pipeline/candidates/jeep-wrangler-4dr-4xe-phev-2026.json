@@ -1,0 +1,52 @@
+{
+  "id": "jeep-wrangler-4dr-4xe-phev-2026",
+  "brand": "Jeep",
+  "model": "Wrangler PHEV",
+  "year": 2026,
+  "powertrain": "phev",
+  "priority": 16,
+  "approved": true,
+  "generated_at": "2026-09-10T11:19:07.076644+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49659454556_a9d375957d_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49659454556",
+      "title": "Jeep Wrangler PHEV 2020",
+      "query": "Jeep Wrangler PHEV car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49659454376_82bfe1c95a_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49659454376",
+      "title": "Jeep Wrangler PHEV 2020",
+      "query": "Jeep Wrangler PHEV car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49658913303_82ea233f93_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49658913303",
+      "title": "Jeep Wrangler PHEV 2020",
+      "query": "Jeep Wrangler PHEV car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/65535/49659454556_a9d375957d_b.jpg",
+  "approval_note": "Manual batch: title evidences brand/model (Jeep Wrangler PHEV 2020)"
+}

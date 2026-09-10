@@ -1,0 +1,38 @@
+{
+  "id": "citroen-c8-2026",
+  "brand": "Citroen",
+  "model": "C8",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 194,
+  "approved": false,
+  "generated_at": "2026-09-10T11:29:21.713530+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/39377362602_67455f10a6_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/39377362602",
+      "title": "Citroen C8 French Police",
+      "query": "Citroen C8 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/27630066189_ecfc2ce32d_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/27630066189",
+      "title": "Citroen C8 French Police",
+      "query": "Citroen C8 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

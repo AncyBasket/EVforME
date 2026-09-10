@@ -1,0 +1,13 @@
+{
+  "id": "bmw-x2-xdrive25e-phev-2024",
+  "brand": "BMW",
+  "model": "X2 xDrive25e",
+  "year": 2024,
+  "powertrain": "phev",
+  "priority": 208,
+  "approved": false,
+  "generated_at": "2026-09-10T11:24:28.640388+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

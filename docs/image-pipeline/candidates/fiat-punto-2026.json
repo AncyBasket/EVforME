@@ -1,0 +1,26 @@
+{
+  "id": "fiat-punto-2026",
+  "brand": "Fiat",
+  "model": "Punto",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 9,
+  "approved": false,
+  "generated_at": "2026-09-10T11:18:55.615962+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/869/40987038855_8f93a23bd8_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/40987038855",
+      "title": "Fiat Ducato & Fiat Punto",
+      "query": "Fiat Punto car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

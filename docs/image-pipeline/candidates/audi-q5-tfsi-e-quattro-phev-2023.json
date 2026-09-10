@@ -1,0 +1,13 @@
+{
+  "id": "audi-q5-tfsi-e-quattro-phev-2023",
+  "brand": "Audi",
+  "model": "Q5 PHEV",
+  "year": 2023,
+  "powertrain": "phev",
+  "priority": 162,
+  "approved": false,
+  "generated_at": "2026-09-10T11:28:21.043149+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

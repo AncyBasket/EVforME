@@ -1,0 +1,13 @@
+{
+  "id": "volkswagen-passat-gte-phev-2024",
+  "brand": "Volkswagen",
+  "model": "Passat GTE",
+  "year": 2024,
+  "powertrain": "phev",
+  "priority": 46,
+  "approved": false,
+  "generated_at": "2026-09-10T11:19:54.010484+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

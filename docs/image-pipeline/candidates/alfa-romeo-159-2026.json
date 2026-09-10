@@ -1,0 +1,39 @@
+{
+  "id": "alfa-romeo-159-2026",
+  "brand": "Alfa Romeo",
+  "model": "159",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 30,
+  "approved": false,
+  "generated_at": "2026-09-10T11:19:28.363651+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/1a_Alfa_Romeo_159_%28gruppo_ottico_anteriore%29.JPG",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Pava",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=17008889",
+      "title": "File:1a Alfa Romeo 159 (gruppo ottico anteriore).JPG",
+      "query": "Alfa Romeo 159 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/717/22012915541_3d87e67be1_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "nicifor28",
+      "source_page": "https://www.flickr.com/photos/133136615@N03/22012915541",
+      "title": "Alfa Romeo 159 (939A) Guardia Civil (2005-2008)",
+      "query": "Alfa Romeo 159 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "approval_note": "Rejected: crop/detail shot, not full vehicle"
+}

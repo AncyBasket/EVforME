@@ -1,0 +1,13 @@
+{
+  "id": "ford-affordable-aluminum-2026",
+  "brand": "Ford",
+  "model": "Affordable Aluminum",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 164,
+  "approved": false,
+  "generated_at": "2026-09-10T11:23:11.528470+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

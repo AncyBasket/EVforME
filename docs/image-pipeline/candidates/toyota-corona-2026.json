@@ -1,0 +1,74 @@
+{
+  "id": "toyota-corona-2026",
+  "brand": "Toyota",
+  "model": "Corona",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 96,
+  "approved": false,
+  "generated_at": "2026-09-10T11:21:13.993941+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Toyota_C-MX35_Corona_Mark_II_Wagon_L_%2823052109495%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "先従隗始",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=148031529",
+      "title": "Toyota C-MX35 Corona Mark II Wagon L (23052109495)",
+      "query": "Toyota Corona car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/75/Toyota_C-MX35_Corona_Mark_%E2%85%A1_Wagon_L_%2823052109492%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "先従隗始",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=148031532",
+      "title": "Toyota C-MX35 Corona Mark Ⅱ Wagon L (23052109492)",
+      "query": "Toyota Corona car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Toyota_E-MX40_Corona_Mark_%E2%85%A1_HARDTOP_LG-EXTRA_%28No.4%29_%2823101511383%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "先従隗始",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=165594874",
+      "title": "Toyota E-MX40 Corona Mark Ⅱ HARDTOP LG-EXTRA (No.4) (23101511383)",
+      "query": "Toyota Corona car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Toyota_E-AT141_Corona_4door_SEDAN_1600GT_-_Toyota_E-GZ10_Soarer_2.0GT_%2823101513133%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "先従隗始",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=167784635",
+      "title": "Toyota E-AT141 Corona 4door SEDAN 1600GT - Toyota E-GZ10 Soarer 2.0GT (23101513133)",
+      "query": "Toyota Corona car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Toyota_E-AT141_Corona_4door_SEDAN_1600GT_%2823101510251%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "先従隗始",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=163783192",
+      "title": "Toyota E-AT141 Corona 4door SEDAN 1600GT (23101510251)",
+      "query": "Toyota Corona car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

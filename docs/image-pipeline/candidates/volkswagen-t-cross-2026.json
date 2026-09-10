@@ -1,0 +1,28 @@
+{
+  "id": "volkswagen-t-cross-2026",
+  "brand": "Volkswagen",
+  "model": "T-Cross",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 65,
+  "approved": true,
+  "generated_at": "2026-09-10T11:20:24.587434+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1485/25388443921_28efb76fe8_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/25388443921",
+      "title": "Volkswagen T-Cross Breeze",
+      "query": "Volkswagen T-Cross car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/1485/25388443921_28efb76fe8_b.jpg",
+  "approval_note": "Manual batch: title evidences brand/model (Volkswagen T-Cross Breeze)"
+}

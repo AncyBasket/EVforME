@@ -1,0 +1,50 @@
+{
+  "id": "bmw-330e-phev-2024",
+  "brand": "BMW",
+  "model": "330e",
+  "year": 2024,
+  "powertrain": "phev",
+  "priority": 203,
+  "approved": false,
+  "generated_at": "2026-09-10T11:24:22.033969+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49658721078_d38ba6e744_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49658721078",
+      "title": "BMW 330e Touring 2020",
+      "query": "BMW 330e car",
+      "match_score": 1.0,
+      "year_hint": 2024
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49658721283_a390825e85_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49658721283",
+      "title": "BMW 330e Touring 2020",
+      "query": "BMW 330e car",
+      "match_score": 1.0,
+      "year_hint": 2024
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a6/BMW_330e_BTCC_Car.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Calreyn88",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=146955840",
+      "title": "BMW 330e BTCC Car",
+      "query": "BMW 330e car",
+      "match_score": 1.0,
+      "year_hint": 2024
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

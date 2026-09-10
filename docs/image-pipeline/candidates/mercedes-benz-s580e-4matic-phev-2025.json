@@ -1,0 +1,13 @@
+{
+  "id": "mercedes-benz-s580e-4matic-phev-2025",
+  "brand": "Mercedes-Benz",
+  "model": "S-Class PHEV",
+  "year": 2025,
+  "powertrain": "phev",
+  "priority": 143,
+  "approved": false,
+  "generated_at": "2026-09-10T11:27:52.055054+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

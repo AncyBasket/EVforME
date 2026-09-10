@@ -1,0 +1,13 @@
+{
+  "id": "bmw-i3s-with-range-extender-phev-2021",
+  "brand": "BMW",
+  "model": "i3 PHEV",
+  "year": 2021,
+  "powertrain": "phev",
+  "priority": 212,
+  "approved": false,
+  "generated_at": "2026-09-10T11:24:35.827778+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

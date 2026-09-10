@@ -1,0 +1,13 @@
+{
+  "id": "kia-niro-phev-2026",
+  "brand": "Kia",
+  "model": "Niro PHEV",
+  "year": 2026,
+  "powertrain": "phev",
+  "priority": 219,
+  "approved": false,
+  "generated_at": "2026-09-10T11:30:08.084799+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

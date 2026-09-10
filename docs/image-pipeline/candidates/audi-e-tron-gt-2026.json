@@ -1,0 +1,13 @@
+{
+  "id": "audi-e-tron-gt-2026",
+  "brand": "Audi",
+  "model": "e-tron GT",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 152,
+  "approved": false,
+  "generated_at": "2026-09-10T11:28:06.509030+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "renault-alliance-2026",
+  "brand": "Renault",
+  "model": "Alliance",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 111,
+  "approved": false,
+  "generated_at": "2026-09-10T11:21:41.637279+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

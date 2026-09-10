@@ -1,0 +1,26 @@
+{
+  "id": "bmw-1-series-2026",
+  "brand": "BMW",
+  "model": "1 Series",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 213,
+  "approved": false,
+  "generated_at": "2026-09-10T11:24:40.128248+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/50387432277_bfc03c2e25_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/50387432277",
+      "title": "BMW 1-series German forces in France",
+      "query": "BMW 1 Series car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

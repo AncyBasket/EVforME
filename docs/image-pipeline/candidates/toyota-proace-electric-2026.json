@@ -1,0 +1,13 @@
+{
+  "id": "toyota-proace-electric-2026",
+  "brand": "Toyota",
+  "model": "Proace Electric",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 72,
+  "approved": false,
+  "generated_at": "2026-09-10T11:20:33.878496+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

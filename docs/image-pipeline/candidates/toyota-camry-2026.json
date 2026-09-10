@@ -1,0 +1,76 @@
+{
+  "id": "toyota-camry-2026",
+  "brand": "Toyota",
+  "model": "Camry",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 90,
+  "approved": true,
+  "generated_at": "2026-09-10T11:21:03.371144+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1891/42809717680_0336fac089_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/42809717680",
+      "title": "Toyota Camry Netherlands diplomatic plate (Armenia)",
+      "query": "Toyota Camry car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1897/43710653005_57f5c07a68_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/43710653005",
+      "title": "Toyota Camry Netherlands diplomatic plate (Armenia)",
+      "query": "Toyota Camry car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/27425087009_83159176ac_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/27425087009",
+      "title": "Toyota Camry",
+      "query": "Toyota Camry car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/813/40701649914_2418af2f06_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/40701649914",
+      "title": "Tomica CN-02 Toyota Camry Chinese taxi",
+      "query": "Toyota Camry car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d8/A_Toyota_Camry.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "BloodbornMe",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=160330440",
+      "title": "A Toyota Camry",
+      "query": "Toyota Camry car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/1891/42809717680_0336fac089_b.jpg",
+  "approval_note": "Manual batch: title evidences brand/model (Toyota Camry Netherlands diplomatic plate (Armenia))"
+}

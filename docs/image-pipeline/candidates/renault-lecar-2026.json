@@ -1,0 +1,13 @@
+{
+  "id": "renault-lecar-2026",
+  "brand": "Renault",
+  "model": "LeCar",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 121,
+  "approved": false,
+  "generated_at": "2026-09-10T11:21:59.131236+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

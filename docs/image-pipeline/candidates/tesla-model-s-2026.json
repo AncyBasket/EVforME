@@ -1,0 +1,74 @@
+{
+  "id": "tesla-model-s-2026",
+  "brand": "Tesla",
+  "model": "Model S",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 229,
+  "approved": false,
+  "generated_at": "2026-09-10T11:30:39.428791+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/33916874198_43c36c2566_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/33916874198",
+      "title": "Tesla Model S Police Luxembourg",
+      "query": "Tesla Model S car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7804/33543867308_ca25b01f2d_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/33543867308",
+      "title": "Tesla Model S",
+      "query": "Tesla Model S car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/33972535608_dc888245ea_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/33972535608",
+      "title": "Tesla Model S Police Luxembourg",
+      "query": "Tesla Model S car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1558/24854452783_95c6cefac0_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/24854452783",
+      "title": "Tesla Model X",
+      "query": "Tesla Model S car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1512/25362729312_2b8a1bee38_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/25362729312",
+      "title": "Tesla Model X",
+      "query": "Tesla Model S car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

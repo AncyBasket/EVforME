@@ -1,0 +1,13 @@
+{
+  "id": "volkswagen-e-up!-2026",
+  "brand": "Volkswagen",
+  "model": "e-up!",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 43,
+  "approved": false,
+  "generated_at": "2026-09-10T11:19:49.637303+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

@@ -1,0 +1,74 @@
+{
+  "id": "ford-fiesta-2026",
+  "brand": "Ford",
+  "model": "Fiesta",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 175,
+  "approved": false,
+  "generated_at": "2026-09-10T11:23:35.973365+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/47787439272_03041dbc87_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/47787439272",
+      "title": "Ford Fiesta",
+      "query": "Ford Fiesta car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4687/38557231214_fc4dc7e029_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/38557231214",
+      "title": "Ford Fiesta WRC",
+      "query": "Ford Fiesta car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4732/25398083458_a5f3343ccc_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/25398083458",
+      "title": "Ford Fiesta WRC",
+      "query": "Ford Fiesta car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4735/24402334067_636f5f2857_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/24402334067",
+      "title": "Ford Fiesta R5",
+      "query": "Ford Fiesta car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4598/24402332907_b59379d43e_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/24402332907",
+      "title": "Ford Fiesta R5",
+      "query": "Ford Fiesta car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

@@ -1,0 +1,64 @@
+{
+  "id": "fiat-tipo-2026",
+  "brand": "Fiat",
+  "model": "Tipo",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 11,
+  "approved": true,
+  "generated_at": "2026-09-10T11:18:58.622890+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/47778029361_6f961ece64_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/47778029361",
+      "title": "Fiat Tipo",
+      "query": "Fiat Tipo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/47873604751_b42aa5cd22_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/47873604751",
+      "title": "Fiat Tipo",
+      "query": "Fiat Tipo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/46953398714_3b7630bb25_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46953398714",
+      "title": "Fiat Tipo",
+      "query": "Fiat Tipo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/32799318957_59740f7556_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/32799318957",
+      "title": "Fiat Tipo",
+      "query": "Fiat Tipo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/65535/47778029361_6f961ece64_b.jpg",
+  "approval_note": "Manual batch: title evidences brand/model (Fiat Tipo)"
+}

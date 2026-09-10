@@ -1,0 +1,52 @@
+{
+  "id": "toyota-prius-2026",
+  "brand": "Toyota",
+  "model": "Prius",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 100,
+  "approved": true,
+  "generated_at": "2026-09-10T11:21:21.249576+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/46898814794_a4359cde12_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46898814794",
+      "title": "Toyota Prius+ Taxi GE - 91",
+      "query": "Toyota Prius car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Moscow%2C_Yandex_self-driving_Toyota_Prius%2C_Oct_2025_01.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Retired electrician",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=176041488",
+      "title": "Moscow, Yandex self-driving Toyota Prius, Oct 2025 01",
+      "query": "Toyota Prius car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Toyota_Prius_c_as_TVBS_News_Report_Car_20161205.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "玄史生",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=56368799",
+      "title": "Toyota Prius c as TVBS News Report Car 20161205",
+      "query": "Toyota Prius car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/65535/46898814794_a4359cde12_b.jpg",
+  "approval_note": "Manual batch: title evidences brand/model (Toyota Prius+ Taxi GE - 91)"
+}

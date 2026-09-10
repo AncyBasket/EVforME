@@ -1,0 +1,13 @@
+{
+  "id": "toyota-corolla-matrix-2026",
+  "brand": "Toyota",
+  "model": "Corolla Matrix",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 95,
+  "approved": false,
+  "generated_at": "2026-09-10T11:21:11.587730+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

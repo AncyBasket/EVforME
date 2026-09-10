@@ -1,0 +1,13 @@
+{
+  "id": "bmw-228i-2026",
+  "brand": "BMW",
+  "model": "228i",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 219,
+  "approved": false,
+  "generated_at": "2026-09-10T11:24:56.504912+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

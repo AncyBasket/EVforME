@@ -1,0 +1,13 @@
+{
+  "id": "hyundai-kona-electric-2026",
+  "brand": "Hyundai",
+  "model": "Kona Electric",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 201,
+  "approved": false,
+  "generated_at": "2026-09-10T11:29:34.961923+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

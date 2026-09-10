@@ -1,0 +1,74 @@
+{
+  "id": "toyota-yaris-2026",
+  "brand": "Toyota",
+  "model": "Yaris",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 103,
+  "approved": false,
+  "generated_at": "2026-09-10T11:21:28.714318+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/32895552897_cb79a5b75d_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/32895552897",
+      "title": "Toyota Yaris TS",
+      "query": "Toyota Yaris car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/33962111828_592d11458c_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/33962111828",
+      "title": "Toyota Yaris TS",
+      "query": "Toyota Yaris car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/591/23075023944_f265687e08_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "nicifor28",
+      "source_page": "https://www.flickr.com/photos/133136615@N03/23075023944",
+      "title": "Toyota Yaris 5-door (XP90) 2005-2009",
+      "query": "Toyota Yaris car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49662053572_3b5f8c364b_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49662053572",
+      "title": "Toyota Yaris III 2020",
+      "query": "Toyota Yaris car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49661232528_c8661d780f_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49661232528",
+      "title": "Toyota Yaris III 2020",
+      "query": "Toyota Yaris car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

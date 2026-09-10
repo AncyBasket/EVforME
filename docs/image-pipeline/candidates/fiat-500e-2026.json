@@ -1,0 +1,28 @@
+{
+  "id": "fiat-500e-2026",
+  "brand": "Fiat",
+  "model": "500e",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 1,
+  "approved": true,
+  "generated_at": "2026-09-10T11:18:43.658189+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49659663392_5f467f18d3_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49659663392",
+      "title": "FIAT 500E ELECTRIC 2020",
+      "query": "Fiat 500e car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/65535/49659663392_5f467f18d3_b.jpg",
+  "approval_note": "Manual batch: title evidences brand/model (FIAT 500E ELECTRIC 2020)"
+}

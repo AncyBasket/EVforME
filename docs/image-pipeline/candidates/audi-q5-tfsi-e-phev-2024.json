@@ -1,0 +1,13 @@
+{
+  "id": "audi-q5-tfsi-e-phev-2024",
+  "brand": "Audi",
+  "model": "Q5 TFSI e",
+  "year": 2024,
+  "powertrain": "phev",
+  "priority": 159,
+  "approved": false,
+  "generated_at": "2026-09-10T11:28:16.047308+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

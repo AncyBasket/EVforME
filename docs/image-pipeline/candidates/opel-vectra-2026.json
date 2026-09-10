@@ -1,0 +1,62 @@
+{
+  "id": "opel-vectra-2026",
+  "brand": "Opel",
+  "model": "Vectra",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 180,
+  "approved": false,
+  "generated_at": "2026-09-10T11:28:52.577692+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/32807900957_12b36a15d8_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/32807900957",
+      "title": "Opel Vectra",
+      "query": "Opel Vectra car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/39713431702_ee9aff82b2_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/39713431702",
+      "title": "Renault Master 1 & Opel Vectra",
+      "query": "Opel Vectra car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Opel_Vectra_B._German_police_car._Spielvogel.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Spielvogel For a gallery of some more of my uploaded pictures see: here.",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=24730072",
+      "title": "Opel Vectra B. German police car. Spielvogel",
+      "query": "Opel Vectra car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/40/Moscow%2C_Opel_Vectra_C_blue_sedan%2C_Sept_2025_02.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Retired electrician",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=175012135",
+      "title": "Moscow, Opel Vectra C blue sedan, Sept 2025 02",
+      "query": "Opel Vectra car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

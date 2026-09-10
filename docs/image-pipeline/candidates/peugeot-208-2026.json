@@ -1,0 +1,74 @@
+{
+  "id": "peugeot-208-2026",
+  "brand": "Peugeot",
+  "model": "208",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 139,
+  "approved": false,
+  "generated_at": "2026-09-10T11:22:32.151564+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4642/27439906679_4a6e7395d7_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/27439906679",
+      "title": "Peugeot 208 T16 Pikes Peak",
+      "query": "Peugeot 208 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4685/38557198114_624963578b_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/38557198114",
+      "title": "Peugeot 208 R2",
+      "query": "Peugeot 208 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4587/39236122072_96dd3d2b21_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/39236122072",
+      "title": "Peugeot 208 R2",
+      "query": "Peugeot 208 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/54723344465_374f907462_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/54723344465",
+      "title": "Peugeot 208 Rallye",
+      "query": "Peugeot 208 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/54723344455_1297231975_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/54723344455",
+      "title": "Peugeot 208 Rallye",
+      "query": "Peugeot 208 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

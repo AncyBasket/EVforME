@@ -1,0 +1,74 @@
+{
+  "id": "fiat-500-2026",
+  "brand": "Fiat",
+  "model": "500",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 3,
+  "approved": false,
+  "generated_at": "2026-09-10T11:18:47.084497+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/08/Armand_Vetulani_with_his_Fiat-500_car%2C_ca_1960_-1965.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Jedrzej1224",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=146771985",
+      "title": "Armand Vetulani with his Fiat-500 car, ca 1960 -1965",
+      "query": "Fiat 500 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/3703/33222999550_0ca5f89e2c_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Mustang Joe",
+      "source_page": "https://www.flickr.com/photos/63234672@N04/33222999550",
+      "title": "1965 Fiat 500",
+      "query": "Fiat 500 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1893/43562280925_b3de333e92_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/43562280925",
+      "title": "Fiat 500 Netherlands diplomatic plate (Switzerland)",
+      "query": "Fiat 500 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1865/42662956900_479eb3cac4_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/42662956900",
+      "title": "Fiat 500 Netherlands diplomatic plate (Switzerland)",
+      "query": "Fiat 500 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/948/27280488987_471fe67da4_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/27280488987",
+      "title": "Fiat 500 BL-76",
+      "query": "Fiat 500 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

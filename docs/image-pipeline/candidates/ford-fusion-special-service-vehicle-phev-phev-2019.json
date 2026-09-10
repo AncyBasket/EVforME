@@ -1,0 +1,13 @@
+{
+  "id": "ford-fusion-special-service-vehicle-phev-phev-2019",
+  "brand": "Ford",
+  "model": "Fusion Special Service Vehicle PHEV",
+  "year": 2019,
+  "powertrain": "phev",
+  "priority": 188,
+  "approved": false,
+  "generated_at": "2026-09-10T11:23:58.446580+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

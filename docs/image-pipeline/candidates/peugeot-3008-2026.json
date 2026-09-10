@@ -1,0 +1,50 @@
+{
+  "id": "peugeot-3008-2026",
+  "brand": "Peugeot",
+  "model": "3008",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 140,
+  "approved": false,
+  "generated_at": "2026-09-10T11:22:33.861075+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4684/27534094109_d52c0087d5_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/27534094109",
+      "title": "Peugeot 3008 Quick Step Tour de France 2017 Nuits-Saint-Georges",
+      "query": "Peugeot 3008 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4587/39311439921_3a11481fe6_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/39311439921",
+      "title": "Peugeot 3008 Gendarmerie Caravane du Tour de France 2017 Nuits-Saint-Georges",
+      "query": "Peugeot 3008 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4597/25442996128_772f717a6f_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/25442996128",
+      "title": "Peugeot 3008 Grand Est Caravane du Tour de France 2017 Nuits-Saint-Georges",
+      "query": "Peugeot 3008 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "hyundai-santa-fe-plug-in-phev-2024",
+  "brand": "Hyundai",
+  "model": "Santa Fe Plug-in",
+  "year": 2024,
+  "powertrain": "phev",
+  "priority": 205,
+  "approved": false,
+  "generated_at": "2026-09-10T11:29:44.674416+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

@@ -1,0 +1,74 @@
+{
+  "id": "renault-clio-2026",
+  "brand": "Renault",
+  "model": "Clio",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 115,
+  "approved": false,
+  "generated_at": "2026-09-10T11:21:49.060707+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7852/32297481237_4058f8fc0f_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/32297481237",
+      "title": "Renault Clio",
+      "query": "Renault Clio car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7895/47187528462_14f311e1b9_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/47187528462",
+      "title": "Renault Clio",
+      "query": "Renault Clio car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/39744928201_5d041fb2ce_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/39744928201",
+      "title": "Renault Clio Williams",
+      "query": "Renault Clio car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4877/46219966881_51902cba2a_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46219966881",
+      "title": "Forza Horizon 4 Renault Clio Williams Switzerland Diplomatic plate",
+      "query": "Renault Clio car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7896/46532173584_b5dba65660_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46532173584",
+      "title": "Renault Clio RS Renault F1 Team",
+      "query": "Renault Clio car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

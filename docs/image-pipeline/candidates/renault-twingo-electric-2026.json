@@ -1,0 +1,13 @@
+{
+  "id": "renault-twingo-electric-2026",
+  "brand": "Renault",
+  "model": "Twingo Electric",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 107,
+  "approved": false,
+  "generated_at": "2026-09-10T11:21:34.861433+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

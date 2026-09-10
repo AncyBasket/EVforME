@@ -1,0 +1,74 @@
+{
+  "id": "volkswagen-cabrio-2026",
+  "brand": "Volkswagen",
+  "model": "Cabrio",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 54,
+  "approved": false,
+  "generated_at": "2026-09-10T11:20:08.061948+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1611/26004446784_2a6028c2a0_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "nicifor28",
+      "source_page": "https://www.flickr.com/photos/133136615@N03/26004446784",
+      "title": "Volkswagen Golf Cabrio (Typ 1J) (1998-2002)",
+      "query": "Volkswagen Cabrio car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1568/26006942383_ba0263eebc_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "nicifor28",
+      "source_page": "https://www.flickr.com/photos/133136615@N03/26006942383",
+      "title": "Volkswagen Golf Cabrio (Typ 1J) (1998-2002)",
+      "query": "Volkswagen Cabrio car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1513/26004450894_fa7defe586_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "nicifor28",
+      "source_page": "https://www.flickr.com/photos/133136615@N03/26004450894",
+      "title": "Volkswagen Golf Cabrio (Typ 1J) (1998-2002)",
+      "query": "Volkswagen Cabrio car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1703/26006943023_5f254d5c35_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "nicifor28",
+      "source_page": "https://www.flickr.com/photos/133136615@N03/26006943023",
+      "title": "Volkswagen Golf Cabrio (Typ 1J) (1998-2002)",
+      "query": "Volkswagen Cabrio car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1474/26004449494_06a30a47c3_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "nicifor28",
+      "source_page": "https://www.flickr.com/photos/133136615@N03/26004449494",
+      "title": "Volkswagen Golf Cabrio (Typ 1J) (1998-2002)",
+      "query": "Volkswagen Cabrio car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

@@ -1,0 +1,38 @@
+{
+  "id": "ford-puma-2026",
+  "brand": "Ford",
+  "model": "Puma",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 182,
+  "approved": false,
+  "generated_at": "2026-09-10T11:23:50.060618+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/47698083242_9e40676688_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/47698083242",
+      "title": "Ford Puma",
+      "query": "Ford Puma car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/32807294647_c6aff484f5_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/32807294647",
+      "title": "Ford Puma",
+      "query": "Ford Puma car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

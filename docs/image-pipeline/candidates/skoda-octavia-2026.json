@@ -1,0 +1,74 @@
+{
+  "id": "skoda-octavia-2026",
+  "brand": "Skoda",
+  "model": "Octavia",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 244,
+  "approved": false,
+  "generated_at": "2026-09-10T11:31:13.727865+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/48996034806_385f09d994_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/48996034806",
+      "title": "Skoda Octavia Police Luxembourg",
+      "query": "Skoda Octavia car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/33764618788_e8ea355fb3_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/33764618788",
+      "title": "Skoda Octavia Combi Switzerland Police Genève",
+      "query": "Skoda Octavia car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/48995466528_faf2a1189a_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/48995466528",
+      "title": "Skoda Octavia Police Luxembourg",
+      "query": "Skoda Octavia car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1923/31432981098_4eba9d0f13_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/31432981098",
+      "title": "Skoda Octavia Police",
+      "query": "Skoda Octavia car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/48659287993_464064b85e_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/48659287993",
+      "title": "Skoda Octavia Polizei Austria",
+      "query": "Skoda Octavia car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

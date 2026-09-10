@@ -1,0 +1,26 @@
+{
+  "id": "renault-megane-2026",
+  "brand": "Renault",
+  "model": "Megane",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 122,
+  "approved": false,
+  "generated_at": "2026-09-10T11:22:02.754050+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4725/27534092629_9be960cf7a_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/27534092629",
+      "title": "Renault Megane Scott-Orica Tour de France 2017 Nuits-Saint-Georges",
+      "query": "Renault Megane car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

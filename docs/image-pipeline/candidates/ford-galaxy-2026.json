@@ -1,0 +1,50 @@
+{
+  "id": "ford-galaxy-2026",
+  "brand": "Ford",
+  "model": "Galaxy",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 177,
+  "approved": false,
+  "generated_at": "2026-09-10T11:23:40.622533+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/48853247378_ae34bca242_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/48853247378",
+      "title": "Ford Galaxy Police Tour de France",
+      "query": "Ford Galaxy car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/48853247338_caee416776_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/48853247338",
+      "title": "Ford Galaxy Police Tour de France",
+      "query": "Ford Galaxy car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Ford_Galaxy_Police_Tour_de_France.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=109524448",
+      "title": "Ford Galaxy Police Tour de France",
+      "query": "Ford Galaxy car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

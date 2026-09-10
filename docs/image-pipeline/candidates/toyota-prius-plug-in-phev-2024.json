@@ -1,0 +1,13 @@
+{
+  "id": "toyota-prius-plug-in-phev-2024",
+  "brand": "Toyota",
+  "model": "Prius Plug-in",
+  "year": 2024,
+  "powertrain": "phev",
+  "priority": 78,
+  "approved": false,
+  "generated_at": "2026-09-10T11:20:43.606605+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

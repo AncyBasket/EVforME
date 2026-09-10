@@ -1,0 +1,13 @@
+{
+  "id": "hyundai-ioniq-electric-2026",
+  "brand": "Hyundai",
+  "model": "Ioniq Electric",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 200,
+  "approved": false,
+  "generated_at": "2026-09-10T11:29:33.283886+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

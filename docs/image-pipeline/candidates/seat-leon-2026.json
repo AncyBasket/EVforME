@@ -1,0 +1,50 @@
+{
+  "id": "seat-leon-2026",
+  "brand": "SEAT",
+  "model": "Leon",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 257,
+  "approved": false,
+  "generated_at": "2026-09-10T11:31:55.296824+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49661908262_abee6fdaa3_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49661908262",
+      "title": "Seat Leon IV 2020",
+      "query": "SEAT Leon car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/6c/SEAT_Leon_Pachura_front_Poznan_2011.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Peżot",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=14862173",
+      "title": "SEAT Leon Pachura front Poznan 2011",
+      "query": "SEAT Leon car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Moscow%2C_Seat_Leon%2C_Sept_2025_01.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Retired electrician",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=174743934",
+      "title": "Moscow, Seat Leon, Sept 2025 01",
+      "query": "SEAT Leon car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

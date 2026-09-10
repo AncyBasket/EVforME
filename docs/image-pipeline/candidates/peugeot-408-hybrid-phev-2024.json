@@ -1,0 +1,26 @@
+{
+  "id": "peugeot-408-hybrid-phev-2024",
+  "brand": "Peugeot",
+  "model": "408 Hybrid",
+  "year": 2024,
+  "powertrain": "phev",
+  "priority": 132,
+  "approved": false,
+  "generated_at": "2026-09-10T11:22:20.187585+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/49/2023_Peugeot_408_GT_PureTech_e-Hybrid_%28Front%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "MoCars",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=143015445",
+      "title": "2023 Peugeot 408 GT PureTech e-Hybrid (Front)",
+      "query": "Peugeot 408 Hybrid car",
+      "match_score": 1.0,
+      "year_hint": 2024
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

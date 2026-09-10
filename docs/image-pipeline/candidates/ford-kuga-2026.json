@@ -1,0 +1,26 @@
+{
+  "id": "ford-kuga-2026",
+  "brand": "Ford",
+  "model": "Kuga",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 179,
+  "approved": false,
+  "generated_at": "2026-09-10T11:23:43.923230+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Moscow%2C_Ford_Kuga%2C_Sept_2025_01.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Retired electrician",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=175012080",
+      "title": "Moscow, Ford Kuga, Sept 2025 01",
+      "query": "Ford Kuga car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

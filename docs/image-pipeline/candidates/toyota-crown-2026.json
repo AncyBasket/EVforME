@@ -1,0 +1,74 @@
+{
+  "id": "toyota-crown-2026",
+  "brand": "Toyota",
+  "model": "Crown",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 98,
+  "approved": false,
+  "generated_at": "2026-09-10T11:21:17.163731+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4764/40421862781_d75d364a8f_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/40421862781",
+      "title": "Tomica 110 Toyota Crown Police",
+      "query": "Toyota Crown car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Tokyo_Metropolitan_Police_Department_Toyota_Crown_Patrol_Car_GRS214.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Ypy31",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=65641178",
+      "title": "Tokyo Metropolitan Police Department Toyota Crown Patrol Car GRS214",
+      "query": "Toyota Crown car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4704/38611212860_13e8fc2e27_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/38611212860",
+      "title": "Tomica Toyota Crown Police",
+      "query": "Toyota Crown car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4753/38611138520_ca46bb0af1_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/38611138520",
+      "title": "Tomica Toyota Crown Majesta Police",
+      "query": "Toyota Crown car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4749/38611212960_eba1b23d00_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/38611212960",
+      "title": "Tomica Toyota Crown Police",
+      "query": "Toyota Crown car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

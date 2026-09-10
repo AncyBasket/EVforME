@@ -1,0 +1,13 @@
+{
+  "id": "mercedes-benz-amg-sl63-s-e-performance-phev-2025",
+  "brand": "Mercedes-Benz",
+  "model": "SL-Class PHEV",
+  "year": 2025,
+  "powertrain": "phev",
+  "priority": 144,
+  "approved": false,
+  "generated_at": "2026-09-10T11:27:53.445977+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

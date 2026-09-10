@@ -1,0 +1,13 @@
+{
+  "id": "ford-fusion-energi-plug-in-hybrid-phev-2020",
+  "brand": "Ford",
+  "model": "Fusion Energi Plug-in Hybrid",
+  "year": 2020,
+  "powertrain": "phev",
+  "priority": 186,
+  "approved": false,
+  "generated_at": "2026-09-10T11:23:55.300593+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

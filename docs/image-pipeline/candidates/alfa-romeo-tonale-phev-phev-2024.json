@@ -1,0 +1,13 @@
+{
+  "id": "alfa-romeo-tonale-phev-phev-2024",
+  "brand": "Alfa Romeo",
+  "model": "Tonale PHEV",
+  "year": 2024,
+  "powertrain": "phev",
+  "priority": 28,
+  "approved": false,
+  "generated_at": "2026-09-10T11:19:25.350877+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

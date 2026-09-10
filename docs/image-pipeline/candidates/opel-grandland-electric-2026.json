@@ -1,0 +1,13 @@
+{
+  "id": "opel-grandland-electric-2026",
+  "brand": "Opel",
+  "model": "Grandland Electric",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 168,
+  "approved": false,
+  "generated_at": "2026-09-10T11:28:28.805417+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

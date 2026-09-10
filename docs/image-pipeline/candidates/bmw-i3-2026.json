@@ -1,0 +1,62 @@
+{
+  "id": "bmw-i3-2026",
+  "brand": "BMW",
+  "model": "i3",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 189,
+  "approved": false,
+  "generated_at": "2026-09-10T11:24:00.213235+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/6b/BMW_i3_Electric_Car_%28resized%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Wikideo010",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=181479645",
+      "title": "BMW i3 Electric Car (resized)",
+      "query": "BMW i3 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/24/2019_Warszawa_BMW_i3_innogy_Go.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Cybularny",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=78494574",
+      "title": "File:2019 Warszawa BMW i3 innogy Go.jpg",
+      "query": "BMW i3 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/49/BMW_i3_Electric_Car.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Wikideo010",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=180333358",
+      "title": "BMW i3 Electric Car",
+      "query": "BMW i3 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/7d/BMW_i3_-_6_October_2025.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Aethonatic",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=176297105",
+      "title": "BMW i3 - 6 October 2025",
+      "query": "BMW i3 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

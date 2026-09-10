@@ -1,0 +1,40 @@
+{
+  "id": "jeep-renegade-2026",
+  "brand": "Jeep",
+  "model": "Renegade",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 25,
+  "approved": true,
+  "generated_at": "2026-09-10T11:19:20.491626+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49659454496_0e8923eba4_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49659454496",
+      "title": "Jeep Renegade 2020",
+      "query": "Jeep Renegade car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49659454466_57c798fbd7_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49659454466",
+      "title": "Jeep Renegade 2020",
+      "query": "Jeep Renegade car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/65535/49659454496_0e8923eba4_b.jpg",
+  "approval_note": "Manual batch: title evidences brand/model (Jeep Renegade 2020)"
+}

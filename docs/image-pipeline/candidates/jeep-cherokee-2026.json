@@ -1,0 +1,62 @@
+{
+  "id": "jeep-cherokee-2026",
+  "brand": "Jeep",
+  "model": "Cherokee",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 22,
+  "approved": false,
+  "generated_at": "2026-09-10T11:19:16.265192+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7861/46616015332_29deedbdf7_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46616015332",
+      "title": "Forza Horizon 4 Jeep Grand Cherokee SAMU 58 Decize",
+      "query": "Jeep Cherokee car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcHUyMzQ5NzI4LWltYWdlLWt6MmR5azZoLmpwZw.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": null,
+      "source_page": "https://www.rawpixel.com/image/6111658/photo-image-public-domain-white-free",
+      "title": "Jeep Grand Cherokee. Location Unknown",
+      "query": "Jeep Cherokee car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/26/1993_Jeep_Grand_Cherokee_Laredo_-_Blackberry_with_Crimson_interior_19.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "CZmarlin — Christopher Ziemnowicz, releases all rights but a photo credit would be appreciated if this image is used anywhere other than Wikipedia. Please leave a note at Wikipedia here. Thank you!",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=23390965",
+      "title": "1993 Jeep Grand Cherokee Laredo - Blackberry with Crimson interior 19",
+      "query": "Jeep Cherokee car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Moscow%2C_Jeep_Cherokee_olive%2C_Sept_2025_01.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Retired electrician",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=175012095",
+      "title": "Moscow, Jeep Cherokee olive, Sept 2025 01",
+      "query": "Jeep Cherokee car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

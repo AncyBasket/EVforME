@@ -1,0 +1,64 @@
+{
+  "id": "alfa-romeo-mito-2026",
+  "brand": "Alfa Romeo",
+  "model": "MiTo",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 34,
+  "approved": true,
+  "generated_at": "2026-09-10T11:19:34.862545+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/5617/22003171155_e4b03f8cfb_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "nicifor28",
+      "source_page": "https://www.flickr.com/photos/133136615@N03/22003171155",
+      "title": "Alfa Romeo MiTo (955) (2008-)",
+      "query": "Alfa Romeo MiTo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Alfa_Romeo_ABA-955142_Mito_Competizione_%2823101510374%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "先従隗始",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=164203282",
+      "title": "Alfa Romeo ABA-955142 Mito Competizione (23101510374)",
+      "query": "Alfa Romeo MiTo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Mitsuoka_6BA-MXAA54_Buddy_-_Alfa_Romeo_ABA-955142_Mito_Competizione_-_Mitsubishi_E-E39A_Galant_2.0_DOHC_TURBO_VR-4_%2823101510320%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "先従隗始",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=164201706",
+      "title": "Mitsuoka 6BA-MXAA54 Buddy - Alfa Romeo ABA-955142 Mito Competizione - Mitsubishi E-E39A Galant 2.0 DOHC TURBO VR-4 (23101510320)",
+      "query": "Alfa Romeo MiTo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Moscow%2C_old_VW_Transporter%2C_Alfa_Romeo_MiTo_2022-06-17.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Retired electrician",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=173743265",
+      "title": "Moscow, old VW Transporter, Alfa Romeo MiTo 2022-06-17",
+      "query": "Alfa Romeo MiTo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/5617/22003171155_e4b03f8cfb_b.jpg",
+  "approval_note": "Manual batch: title evidences brand/model (Alfa Romeo MiTo (955) (2008-))"
+}

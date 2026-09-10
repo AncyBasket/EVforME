@@ -1,0 +1,13 @@
+{
+  "id": "skoda-superb-iv-phev-2024",
+  "brand": "Skoda",
+  "model": "Superb iV",
+  "year": 2024,
+  "powertrain": "phev",
+  "priority": 238,
+  "approved": false,
+  "generated_at": "2026-09-10T11:30:59.547885+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

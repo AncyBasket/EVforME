@@ -1,0 +1,13 @@
+{
+  "id": "hyundai-tucson-plug-in-phev-2024",
+  "brand": "Hyundai",
+  "model": "Tucson Plug-in",
+  "year": 2024,
+  "powertrain": "phev",
+  "priority": 204,
+  "approved": false,
+  "generated_at": "2026-09-10T11:29:42.815210+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

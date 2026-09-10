@@ -1,0 +1,13 @@
+{
+  "id": "mercedes-benz-eqa-2026",
+  "brand": "Mercedes-Benz",
+  "model": "EQA",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 133,
+  "approved": false,
+  "generated_at": "2026-09-10T11:27:33.610226+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

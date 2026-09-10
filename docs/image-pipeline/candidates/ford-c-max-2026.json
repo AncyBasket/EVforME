@@ -1,0 +1,26 @@
+{
+  "id": "ford-c-max-2026",
+  "brand": "Ford",
+  "model": "C-Max",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 172,
+  "approved": false,
+  "generated_at": "2026-09-10T11:23:26.274436+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/46912829434_744e480fd1_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46912829434",
+      "title": "Ford C-Max Switzerland Diplomatic plate (UN)",
+      "query": "Ford C-Max car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

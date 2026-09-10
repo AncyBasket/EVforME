@@ -1,0 +1,74 @@
+{
+  "id": "toyota-rav4-2026",
+  "brand": "Toyota",
+  "model": "RAV4",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 102,
+  "approved": false,
+  "generated_at": "2026-09-10T11:21:26.824129+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7806/47335082881_0b6c124bfe_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/47335082881",
+      "title": "New Toyota RAV4",
+      "query": "Toyota RAV4 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7898/47282478242_2d0eee183b_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/47282478242",
+      "title": "New Toyota RAV4",
+      "query": "Toyota RAV4 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/40691707473_02f294d442_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/40691707473",
+      "title": "Toyota RAV4 Switzerland Diplomatic plate (Ireland)",
+      "query": "Toyota RAV4 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/5703/23615676221_784af878c8_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "nicifor28",
+      "source_page": "https://www.flickr.com/photos/133136615@N03/23615676221",
+      "title": "Toyota RAV4 3-door (2000-03)",
+      "query": "Toyota RAV4 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Moscow%2C_Toyota_RAV4%2C_Mitsubishi_ASX_2022-05-11.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Retired electrician",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=173743299",
+      "title": "Moscow, Toyota RAV4, Mitsubishi ASX 2022-05-11",
+      "query": "Toyota RAV4 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

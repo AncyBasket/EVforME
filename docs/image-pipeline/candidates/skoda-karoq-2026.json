@@ -1,0 +1,26 @@
+{
+  "id": "skoda-karoq-2026",
+  "brand": "Skoda",
+  "model": "Karoq",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 242,
+  "approved": false,
+  "generated_at": "2026-09-10T11:31:07.235938+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/48478721577_79561c023d_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/48478721577",
+      "title": "Skoda Karoq Safety vehicule Tour de France Caravane",
+      "query": "Skoda Karoq car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

@@ -1,0 +1,74 @@
+{
+  "id": "alfa-romeo-giulietta-2026",
+  "brand": "Alfa Romeo",
+  "model": "Giulietta",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 33,
+  "approved": false,
+  "generated_at": "2026-09-10T11:19:33.224849+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/40828841343_7923ee9003_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/40828841343",
+      "title": "Alfa Romeo Giulietta Carabinieri",
+      "query": "Alfa Romeo Giulietta car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1942/45230287811_956a436881_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/45230287811",
+      "title": "Alfa Romeo Giulietta Belgium Diplomatic plate",
+      "query": "Alfa Romeo Giulietta car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1915/45230287761_7466d1ca4a_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/45230287761",
+      "title": "Alfa Romeo Giulietta Belgium Diplomatic plate",
+      "query": "Alfa Romeo Giulietta car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7546/28117649596_7927d007f1_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Serjio Zenkov",
+      "source_page": "https://www.flickr.com/photos/143014812@N05/28117649596",
+      "title": "1969 Alfa Romeo Giulietta TI - Marco Cajani & Alessandro Morteo",
+      "query": "Alfa Romeo Giulietta car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7452/28073716421_5ff8af8ec9_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Serjio Zenkov",
+      "source_page": "https://www.flickr.com/photos/143014812@N05/28073716421",
+      "title": "1969 Alfa Romeo Giulietta TI - Marco Cajani & Alessandro Morteo",
+      "query": "Alfa Romeo Giulietta car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

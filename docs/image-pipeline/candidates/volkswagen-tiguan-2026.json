@@ -1,0 +1,40 @@
+{
+  "id": "volkswagen-tiguan-2026",
+  "brand": "Volkswagen",
+  "model": "Tiguan",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 68,
+  "approved": true,
+  "generated_at": "2026-09-10T11:20:28.113326+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/34775930103_db25cb3677_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Jusotil_1943",
+      "source_page": "https://www.flickr.com/photos/46322086@N04/34775930103",
+      "title": "Volkswagen Tiguan",
+      "query": "Volkswagen Tiguan car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Moscow%2C_Volkswagen_Tiguan%2C_Aug_2025_02.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Retired electrician",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=173920467",
+      "title": "Moscow, Volkswagen Tiguan, Aug 2025 02",
+      "query": "Volkswagen Tiguan car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/65535/34775930103_db25cb3677_b.jpg",
+  "approval_note": "Manual batch: title evidences brand/model (Volkswagen Tiguan)"
+}

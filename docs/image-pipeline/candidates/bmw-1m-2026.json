@@ -1,0 +1,13 @@
+{
+  "id": "bmw-1m-2026",
+  "brand": "BMW",
+  "model": "1M",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 216,
+  "approved": false,
+  "generated_at": "2026-09-10T11:24:49.187654+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

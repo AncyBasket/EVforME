@@ -1,0 +1,50 @@
+{
+  "id": "fiat-doblo-2026",
+  "brand": "Fiat",
+  "model": "Doblo",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 7,
+  "approved": false,
+  "generated_at": "2026-09-10T11:18:52.453554+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4683/25338407148_92ca1c986e_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/25338407148",
+      "title": "Iveco Daily & Fiat Doblo Luxembourg diplomatic plate (European Parliament)",
+      "query": "Fiat Doblo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49628355922_7644185cbf_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/49628355922",
+      "title": "Fiat Doblo Service car",
+      "query": "Fiat Doblo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/ef/Fiat_Doblo_Service_car_%2849628355922%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=110482855",
+      "title": "Fiat Doblo Service car (49628355922)",
+      "query": "Fiat Doblo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

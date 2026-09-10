@@ -1,0 +1,13 @@
+{
+  "id": "opel-astra-hybrid-phev-2024",
+  "brand": "Opel",
+  "model": "Astra Hybrid",
+  "year": 2024,
+  "powertrain": "phev",
+  "priority": 170,
+  "approved": false,
+  "generated_at": "2026-09-10T11:28:32.050143+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

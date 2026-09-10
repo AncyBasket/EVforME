@@ -1,0 +1,50 @@
+{
+  "id": "bmw-i4-2026",
+  "brand": "BMW",
+  "model": "i4",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 190,
+  "approved": false,
+  "generated_at": "2026-09-10T11:24:02.806140+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49658721043_91dd240986_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49658721043",
+      "title": "BMW Concept i4 2020",
+      "query": "BMW i4 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49659263086_b5a1d0b026_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49659263086",
+      "title": "BMW Concept i4 2020",
+      "query": "BMW i4 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49658721103_f0a4e63b72_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49658721103",
+      "title": "BMW Concept i4 2020",
+      "query": "BMW i4 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

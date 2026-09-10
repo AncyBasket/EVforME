@@ -1,0 +1,38 @@
+{
+  "id": "peugeot-5008-2026",
+  "brand": "Peugeot",
+  "model": "5008",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 145,
+  "approved": false,
+  "generated_at": "2026-09-10T11:22:42.607084+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/2b/The_frontview_of_Peugeot_5008_as_a_promotion_car_for_studying_in_France.JPG",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Tokumeigakarinoaoshima",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=36373724",
+      "title": "File:The frontview of Peugeot 5008 as a promotion car for studying in France.JPG",
+      "query": "Peugeot 5008 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/69/The_rearview_of_Peugeot_5008_as_a_promotion_car_for_studying_in_France.JPG",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Tokumeigakarinoaoshima",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=36373726",
+      "title": "File:The rearview of Peugeot 5008 as a promotion car for studying in France.JPG",
+      "query": "Peugeot 5008 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

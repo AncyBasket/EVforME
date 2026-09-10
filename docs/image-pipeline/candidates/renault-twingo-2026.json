@@ -1,0 +1,74 @@
+{
+  "id": "renault-twingo-2026",
+  "brand": "Renault",
+  "model": "Twingo",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 124,
+  "approved": false,
+  "generated_at": "2026-09-10T11:22:06.702157+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/46901672205_40d84166fb_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46901672205",
+      "title": "Renault Twingo",
+      "query": "Renault Twingo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7828/33390289818_7d5e6636d7_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/33390289818",
+      "title": "Renault Twingo x2",
+      "query": "Renault Twingo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1603/25481127985_441550bed9_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/25481127985",
+      "title": "Renault Twingo Gt 2016",
+      "query": "Renault Twingo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1583/25454999986_738bfb92cf_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/25454999986",
+      "title": "Renault Twingo Gt 2016",
+      "query": "Renault Twingo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/46901672255_d819933f38_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46901672255",
+      "title": "Renault Twingo",
+      "query": "Renault Twingo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

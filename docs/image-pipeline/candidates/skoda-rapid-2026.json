@@ -1,0 +1,26 @@
+{
+  "id": "skoda-rapid-2026",
+  "brand": "Skoda",
+  "model": "Rapid",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 245,
+  "approved": false,
+  "generated_at": "2026-09-10T11:31:17.226215+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Moscow%2C_Kia_Rio%2C_Skoda_Rapid_taxis%2C_2022-07-24.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Retired electrician",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=173743254",
+      "title": "Moscow, Kia Rio, Skoda Rapid taxis, 2022-07-24",
+      "query": "Skoda Rapid car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

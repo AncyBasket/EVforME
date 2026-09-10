@@ -1,0 +1,74 @@
+{
+  "id": "skoda-kodiaq-2026",
+  "brand": "Skoda",
+  "model": "Kodiaq",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 243,
+  "approved": false,
+  "generated_at": "2026-09-10T11:31:09.831989+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/33824725318_2b8c2e8324_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/33824725318",
+      "title": "Skoda Kodiaq Switzerland Diplomatic plate (Ireland)",
+      "query": "Skoda Kodiaq car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49817665003_57723b8be8_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/49817665003",
+      "title": "Skoda Kodiaq Switzerland Police",
+      "query": "Skoda Kodiaq car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvZmw0ODAyMzU5NDczMS1pbWFnZS1reWNpeW02eC5qcGc.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": null,
+      "source_page": "https://www.rawpixel.com/image/6076585/new-skoda-kodiaq",
+      "title": "New Skoda Kodiaq",
+      "query": "Skoda Kodiaq car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Skoda_Kodiaq_by_Chinese_car_builders_in_Balashikha_car_dealer_2.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Svetlov Artem",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=139334242",
+      "title": "Skoda Kodiaq by Chinese car builders in Balashikha car dealer 2",
+      "query": "Skoda Kodiaq car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Skoda_Kodiaq_by_Chinese_car_builders_in_Balashikha_car_dealer.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Svetlov Artem",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=139334230",
+      "title": "Skoda Kodiaq by Chinese car builders in Balashikha car dealer",
+      "query": "Skoda Kodiaq car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

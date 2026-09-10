@@ -1,0 +1,13 @@
+{
+  "id": "ford-kuga-phev-phev-2024",
+  "brand": "Ford",
+  "model": "Kuga PHEV",
+  "year": 2024,
+  "powertrain": "phev",
+  "priority": 160,
+  "approved": false,
+  "generated_at": "2026-09-10T11:23:05.815925+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

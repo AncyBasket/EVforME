@@ -1,0 +1,74 @@
+{
+  "id": "toyota-corolla-2026",
+  "brand": "Toyota",
+  "model": "Corolla",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 93,
+  "approved": false,
+  "generated_at": "2026-09-10T11:21:08.612771+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/48161078296_b16bbdff86_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/48161078296",
+      "title": "Toyota Corolla Trueno AE86 Initial D *Eurobeat intensifies*",
+      "query": "Toyota Corolla car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/47980918016_012389af13_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/47980918016",
+      "title": "Toyota Corolla",
+      "query": "Toyota Corolla car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/48161078266_38bda9a01c_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/48161078266",
+      "title": "Toyota Corolla Trueno AE86 Initial D *Eurobeat intensifies*",
+      "query": "Toyota Corolla car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/48197991462_ef47beff3f_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/48197991462",
+      "title": "Toyota Corolla GT-i 16",
+      "query": "Toyota Corolla car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/32708780687_0d4156b8e5_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/32708780687",
+      "title": "Toyota Corolla",
+      "query": "Toyota Corolla car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

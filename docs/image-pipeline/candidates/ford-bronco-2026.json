@@ -1,0 +1,38 @@
+{
+  "id": "ford-bronco-2026",
+  "brand": "Ford",
+  "model": "Bronco",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 169,
+  "approved": false,
+  "generated_at": "2026-09-10T11:23:20.461296+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/3890/15025703535_059cd962aa_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "tapztapz",
+      "source_page": "https://www.flickr.com/photos/95319912@N03/15025703535",
+      "title": "Ford Bronco (1st gen.) soft top",
+      "query": "Ford Bronco car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/53933420059_cd12b61f77_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Mustang Joe",
+      "source_page": "https://www.flickr.com/photos/63234672@N04/53933420059",
+      "title": "1967 Ford Bronco",
+      "query": "Ford Bronco car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

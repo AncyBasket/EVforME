@@ -1,0 +1,13 @@
+{
+  "id": "ford-aerostar-2026",
+  "brand": "Ford",
+  "model": "Aerostar",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 163,
+  "approved": false,
+  "generated_at": "2026-09-10T11:23:10.066327+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

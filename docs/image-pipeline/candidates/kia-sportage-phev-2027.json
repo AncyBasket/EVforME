@@ -1,0 +1,13 @@
+{
+  "id": "kia-sportage-phev-2027",
+  "brand": "Kia",
+  "model": "Sportage PHEV",
+  "year": 2027,
+  "powertrain": "phev",
+  "priority": 217,
+  "approved": false,
+  "generated_at": "2026-09-10T11:30:04.832763+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

@@ -1,0 +1,38 @@
+{
+  "id": "jeep-renegade-4xe-phev-2024",
+  "brand": "Jeep",
+  "model": "Renegade 4xe",
+  "year": 2024,
+  "powertrain": "phev",
+  "priority": 18,
+  "approved": false,
+  "generated_at": "2026-09-10T11:19:10.800174+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49659454496_0e8923eba4_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49659454496",
+      "title": "Jeep Renegade 2020",
+      "query": "Jeep Renegade 4xe car",
+      "match_score": 0.78,
+      "year_hint": 2024
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49659454466_57c798fbd7_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49659454466",
+      "title": "Jeep Renegade 2020",
+      "query": "Jeep Renegade 4xe car",
+      "match_score": 0.78,
+      "year_hint": 2024
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

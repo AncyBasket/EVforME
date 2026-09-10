@@ -1,0 +1,13 @@
+{
+  "id": "peugeot-508-hybrid-phev-2024",
+  "brand": "Peugeot",
+  "model": "508 Hybrid",
+  "year": 2024,
+  "powertrain": "phev",
+  "priority": 133,
+  "approved": false,
+  "generated_at": "2026-09-10T11:22:21.754842+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

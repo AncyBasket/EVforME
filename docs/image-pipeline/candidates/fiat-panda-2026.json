@@ -1,0 +1,52 @@
+{
+  "id": "fiat-panda-2026",
+  "brand": "Fiat",
+  "model": "Panda",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 8,
+  "approved": true,
+  "generated_at": "2026-09-10T11:18:53.932912+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4120/4890103721_8b9948d389_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "DennisM2",
+      "source_page": "https://www.flickr.com/photos/14674348@N04/4890103721",
+      "title": "Win me! (Fiat Panda)",
+      "query": "Fiat Panda car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/46888810804_2c80d8677f_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46888810804",
+      "title": "Fiat Panda 100 hp",
+      "query": "Fiat Panda car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7845/46896050512_e51c06a087_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46896050512",
+      "title": "Fiat Panda",
+      "query": "Fiat Panda car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/4120/4890103721_8b9948d389_b.jpg",
+  "approval_note": "Manual batch: title evidences brand/model (Win me! (Fiat Panda))"
+}

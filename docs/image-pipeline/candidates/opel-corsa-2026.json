@@ -1,0 +1,50 @@
+{
+  "id": "opel-corsa-2026",
+  "brand": "Opel",
+  "model": "Corsa",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 174,
+  "approved": false,
+  "generated_at": "2026-09-10T11:28:40.729241+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/33880176888_ef10d593cc_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/33880176888",
+      "title": "Opel Corsa",
+      "query": "Opel Corsa car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/33880176868_303ace2c38_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/33880176868",
+      "title": "Opel Corsa",
+      "query": "Opel Corsa car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Moscow%2C_Kremlevskaya_Embankment%2C_Opel_Corsa_white%2C_Sept_2025_01.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Retired electrician",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=174744484",
+      "title": "Moscow, Kremlevskaya Embankment, Opel Corsa white, Sept 2025 01",
+      "query": "Opel Corsa car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

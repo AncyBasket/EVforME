@@ -1,0 +1,74 @@
+{
+  "id": "peugeot-307-2026",
+  "brand": "Peugeot",
+  "model": "307",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 141,
+  "approved": false,
+  "generated_at": "2026-09-10T11:22:35.102237+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1840/28928114267_97c9b061a1_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/28928114267",
+      "title": "Peugeot 307 French diplomatic plate (Tunisia)",
+      "query": "Peugeot 307 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4595/39236155922_02ff18d4bb_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/39236155922",
+      "title": "Peugeot 307 CC WRC",
+      "query": "Peugeot 307 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1974/45131291172_f5d904d68d_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/45131291172",
+      "title": "Peugeot 307 CC France Diplomatic plate (Belgium)",
+      "query": "Peugeot 307 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4645/39236155042_8c61f2bb1e_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/39236155042",
+      "title": "Peugeot 307 CC WRC",
+      "query": "Peugeot 307 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1941/44269440225_e4977aae53_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/44269440225",
+      "title": "Peugeot 307 CC France Diplomatic plate (Belgium)",
+      "query": "Peugeot 307 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

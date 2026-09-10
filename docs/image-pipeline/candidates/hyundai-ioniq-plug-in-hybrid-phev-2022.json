@@ -1,0 +1,13 @@
+{
+  "id": "hyundai-ioniq-plug-in-hybrid-phev-2022",
+  "brand": "Hyundai",
+  "model": "Ioniq Plug-in Hybrid",
+  "year": 2022,
+  "powertrain": "phev",
+  "priority": 209,
+  "approved": false,
+  "generated_at": "2026-09-10T11:29:52.772036+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

@@ -1,0 +1,38 @@
+{
+  "id": "ford-ka-2026",
+  "brand": "Ford",
+  "model": "Ka",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 178,
+  "approved": false,
+  "generated_at": "2026-09-10T11:23:42.336804+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/627/22624822902_8ecde5cc1b_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "StockyPics",
+      "source_page": "https://www.flickr.com/photos/135371437@N04/22624822902",
+      "title": "Ford ka driving",
+      "query": "Ford Ka car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/46787224695_236f1f3518_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46787224695",
+      "title": "The Dodge Caravan, a diplomatic Ford Ka and a bus sponsored by Honda",
+      "query": "Ford Ka car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

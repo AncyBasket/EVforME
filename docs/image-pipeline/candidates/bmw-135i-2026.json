@@ -1,0 +1,26 @@
+{
+  "id": "bmw-135i-2026",
+  "brand": "BMW",
+  "model": "135i",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 215,
+  "approved": false,
+  "generated_at": "2026-09-10T11:24:46.670294+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/18/Bmw_135i_%28261912695%29.jpeg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Parsons",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=71262452",
+      "title": "<div class='fn'> Bmw 135i</div>",
+      "query": "BMW 135i car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

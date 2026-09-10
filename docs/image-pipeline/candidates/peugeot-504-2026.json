@@ -1,0 +1,74 @@
+{
+  "id": "peugeot-504-2026",
+  "brand": "Peugeot",
+  "model": "504",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 146,
+  "approved": false,
+  "generated_at": "2026-09-10T11:22:45.336567+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/40909149223_c1ee53c7ce_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/40909149223",
+      "title": "Peugeot 504 Cabriolet",
+      "query": "Peugeot 504 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7815/46253026235_85c33d6b32_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46253026235",
+      "title": "Peugeot 504 Pick Up",
+      "query": "Peugeot 504 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4689/25502252678_0a7d1a6b17_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/25502252678",
+      "title": "Peugeot 504 Coupe",
+      "query": "Peugeot 504 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4727/25480791058_2237a7659a_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/25480791058",
+      "title": "Peugeot 504 Coupe",
+      "query": "Peugeot 504 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/33998349548_17b12afbdf_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/33998349548",
+      "title": "Peugeot 504 Cabriolet",
+      "query": "Peugeot 504 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

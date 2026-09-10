@@ -1,0 +1,74 @@
+{
+  "id": "ford-mondeo-2026",
+  "brand": "Ford",
+  "model": "Mondeo",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 180,
+  "approved": false,
+  "generated_at": "2026-09-10T11:23:46.426164+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7811/47226610422_c38fca637c_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/47226610422",
+      "title": "Ford Mondeo",
+      "query": "Ford Mondeo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7812/47226610392_8b99726335_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/47226610392",
+      "title": "Ford Mondeo",
+      "query": "Ford Mondeo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/48994950018_9feb16339f_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/48994950018",
+      "title": "Ford Mondeo Police Luxembourg",
+      "query": "Ford Mondeo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7920/32267004157_b4831c0bb1_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/32267004157",
+      "title": "Ford Mondeo ST220",
+      "query": "Ford Mondeo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/48995492556_c2fa60a2be_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/48995492556",
+      "title": "Ford Mondeo Police Luxembourg",
+      "query": "Ford Mondeo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

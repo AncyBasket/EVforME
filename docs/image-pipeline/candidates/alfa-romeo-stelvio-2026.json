@@ -1,0 +1,13 @@
+{
+  "id": "alfa-romeo-stelvio-2026",
+  "brand": "Alfa Romeo",
+  "model": "Stelvio",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 35,
+  "approved": false,
+  "generated_at": "2026-09-10T11:19:36.368189+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

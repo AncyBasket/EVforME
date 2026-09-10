@@ -1,0 +1,26 @@
+{
+  "id": "opel-insignia-2026",
+  "brand": "Opel",
+  "model": "Insignia",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 177,
+  "approved": false,
+  "generated_at": "2026-09-10T11:28:46.728212+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/47977943927_0f1be4135a_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/47977943927",
+      "title": "Opel Insignia Tourer Gendarmerie Canton de Vaud",
+      "query": "Opel Insignia car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

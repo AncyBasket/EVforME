@@ -1,0 +1,13 @@
+{
+  "id": "ford-s-max-2026",
+  "brand": "Ford",
+  "model": "S-Max",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 183,
+  "approved": false,
+  "generated_at": "2026-09-10T11:23:51.320217+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "bmw-x3-xdrive30e-phev-2021",
+  "brand": "BMW",
+  "model": "X3 PHEV",
+  "year": 2021,
+  "powertrain": "phev",
+  "priority": 211,
+  "approved": false,
+  "generated_at": "2026-09-10T11:24:34.369931+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

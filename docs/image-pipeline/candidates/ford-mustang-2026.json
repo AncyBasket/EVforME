@@ -1,0 +1,74 @@
+{
+  "id": "ford-mustang-2026",
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 181,
+  "approved": false,
+  "generated_at": "2026-09-10T11:23:48.820703+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9zdGF0aWMvaW1hZ2Uvd2Vic2l0ZS8yMDIyLTA0L2xyL3B4MTEwNzM4Mi1pbWFnZS1rejJlYXZ2cS5qcGc.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": null,
+      "source_page": "https://www.rawpixel.com/image/6113738/ford-mustang-car-location-unknown-date-unknown",
+      "title": "Ford Mustang car. Location Unknown",
+      "query": "Ford Mustang car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7046/6988182967_fe6519212b_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Mustang Joe",
+      "source_page": "https://www.flickr.com/photos/63234672@N04/6988182967",
+      "title": "1969 Ford Mustang Boss 429",
+      "query": "Ford Mustang car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7646/16860676276_9e6f75a05f_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Mustang Joe",
+      "source_page": "https://www.flickr.com/photos/63234672@N04/16860676276",
+      "title": "1972 Ford Mustang - 'Stiletto'",
+      "query": "Ford Mustang car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/3862/14835773649_c574bf51cb_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Mustang Joe",
+      "source_page": "https://www.flickr.com/photos/63234672@N04/14835773649",
+      "title": "2015 Ford Mustang GT",
+      "query": "Ford Mustang car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7858/32611655817_ab831da170_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/32611655817",
+      "title": "Alfa Romeo Giulia Quadrifoglio Carabinieri & Lamborghini Huracan Polizia & Ford Mustang Polizei",
+      "query": "Ford Mustang car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

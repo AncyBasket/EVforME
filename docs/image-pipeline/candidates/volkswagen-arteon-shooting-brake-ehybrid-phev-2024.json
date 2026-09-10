@@ -1,0 +1,13 @@
+{
+  "id": "volkswagen-arteon-shooting-brake-ehybrid-phev-2024",
+  "brand": "Volkswagen",
+  "model": "Arteon Shooting Brake eHybrid",
+  "year": 2024,
+  "powertrain": "phev",
+  "priority": 47,
+  "approved": false,
+  "generated_at": "2026-09-10T11:19:55.751011+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

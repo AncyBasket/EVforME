@@ -1,0 +1,13 @@
+{
+  "id": "mercedes-benz-eqb-2026",
+  "brand": "Mercedes-Benz",
+  "model": "EQB",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 134,
+  "approved": false,
+  "generated_at": "2026-09-10T11:27:36.499535+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

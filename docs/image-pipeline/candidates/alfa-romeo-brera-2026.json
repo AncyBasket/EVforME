@@ -1,0 +1,76 @@
+{
+  "id": "alfa-romeo-brera-2026",
+  "brand": "Alfa Romeo",
+  "model": "Brera",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 31,
+  "approved": true,
+  "generated_at": "2026-09-10T11:19:29.544110+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/644/21376124263_87f6cca5c8_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "nicifor28",
+      "source_page": "https://www.flickr.com/photos/133136615@N03/21376124263",
+      "title": "Alfa Romeo Brera (939D) (2005-2010)",
+      "query": "Alfa Romeo Brera car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/568/21810364859_64430d481e_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "nicifor28",
+      "source_page": "https://www.flickr.com/photos/133136615@N03/21810364859",
+      "title": "Alfa Romeo Brera (939D) (2005-2010)",
+      "query": "Alfa Romeo Brera car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/5693/21376126803_a7dd750063_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "nicifor28",
+      "source_page": "https://www.flickr.com/photos/133136615@N03/21376126803",
+      "title": "Alfa Romeo Brera (939D) (2005-2010)",
+      "query": "Alfa Romeo Brera car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/600/21376127483_7e3b39556e_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "nicifor28",
+      "source_page": "https://www.flickr.com/photos/133136615@N03/21376127483",
+      "title": "Alfa Romeo Brera (939D) (2005-2010)",
+      "query": "Alfa Romeo Brera car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/5638/21376125673_9f3539a017_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "nicifor28",
+      "source_page": "https://www.flickr.com/photos/133136615@N03/21376125673",
+      "title": "Alfa Romeo Brera (939D) (2005-2010)",
+      "query": "Alfa Romeo Brera car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/644/21376124263_87f6cca5c8_b.jpg",
+  "approval_note": "Manual batch: title evidences brand/model (Alfa Romeo Brera (939D) (2005-2010))"
+}

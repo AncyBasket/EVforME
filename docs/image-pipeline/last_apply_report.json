@@ -1,0 +1,222 @@
+{
+  "generated_at": "2026-09-10T11:26:24.622873+00:00",
+  "dry_run": false,
+  "approved_files": 19,
+  "picked": 19,
+  "written_or_would_write": 19,
+  "skipped_approved_without_candidate": 0,
+  "missing_ids_in_seed": 0,
+  "seed_imageURL_nonnull_after": 19,
+  "changes": [
+    {
+      "id": "alfa-romeo-147-2026",
+      "brand": "Alfa Romeo",
+      "model": "147",
+      "year": 2026,
+      "url": "https://live.staticflickr.com/926/43294483201_170802429a_b.jpg",
+      "license": "cc0",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/43294483201",
+      "author": "crash71100",
+      "previous": null
+    },
+    {
+      "id": "alfa-romeo-brera-2026",
+      "brand": "Alfa Romeo",
+      "model": "Brera",
+      "year": 2026,
+      "url": "https://live.staticflickr.com/644/21376124263_87f6cca5c8_b.jpg",
+      "license": "cc0",
+      "source_page": "https://www.flickr.com/photos/133136615@N03/21376124263",
+      "author": "nicifor28",
+      "previous": null
+    },
+    {
+      "id": "alfa-romeo-mito-2026",
+      "brand": "Alfa Romeo",
+      "model": "MiTo",
+      "year": 2026,
+      "url": "https://live.staticflickr.com/5617/22003171155_e4b03f8cfb_b.jpg",
+      "license": "cc0",
+      "source_page": "https://www.flickr.com/photos/133136615@N03/22003171155",
+      "author": "nicifor28",
+      "previous": null
+    },
+    {
+      "id": "fiat-500e-2026",
+      "brand": "Fiat",
+      "model": "500e",
+      "year": 2026,
+      "url": "https://live.staticflickr.com/65535/49659663392_5f467f18d3_b.jpg",
+      "license": "cc0",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49659663392",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "previous": null
+    },
+    {
+      "id": "fiat-panda-2026",
+      "brand": "Fiat",
+      "model": "Panda",
+      "year": 2026,
+      "url": "https://live.staticflickr.com/4120/4890103721_8b9948d389_b.jpg",
+      "license": "cc0",
+      "source_page": "https://www.flickr.com/photos/14674348@N04/4890103721",
+      "author": "DennisM2",
+      "previous": null
+    },
+    {
+      "id": "fiat-tipo-2026",
+      "brand": "Fiat",
+      "model": "Tipo",
+      "year": 2026,
+      "url": "https://live.staticflickr.com/65535/47778029361_6f961ece64_b.jpg",
+      "license": "cc0",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/47778029361",
+      "author": "crash71100",
+      "previous": null
+    },
+    {
+      "id": "jeep-compass-2026",
+      "brand": "Jeep",
+      "model": "Compass",
+      "year": 2026,
+      "url": "https://live.staticflickr.com/65535/49659732477_e2d52d960b_b.jpg",
+      "license": "cc0",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49659732477",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "previous": null
+    },
+    {
+      "id": "jeep-compass-4xe-phev-2024",
+      "brand": "Jeep",
+      "model": "Compass 4xe",
+      "year": 2024,
+      "url": "https://live.staticflickr.com/65535/49659732477_e2d52d960b_b.jpg",
+      "license": "cc0",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49659732477",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "previous": null
+    },
+    {
+      "id": "jeep-renegade-2026",
+      "brand": "Jeep",
+      "model": "Renegade",
+      "year": 2026,
+      "url": "https://live.staticflickr.com/65535/49659454496_0e8923eba4_b.jpg",
+      "license": "cc0",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49659454496",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "previous": null
+    },
+    {
+      "id": "jeep-wrangler-4dr-4xe-phev-2026",
+      "brand": "Jeep",
+      "model": "Wrangler PHEV",
+      "year": 2026,
+      "url": "https://live.staticflickr.com/65535/49659454556_a9d375957d_b.jpg",
+      "license": "cc0",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49659454556",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "previous": null
+    },
+    {
+      "id": "toyota-c-hr-2026",
+      "brand": "Toyota",
+      "model": "C-HR",
+      "year": 2026,
+      "url": "https://live.staticflickr.com/1497/25185700110_d1f3d3ed54_b.jpg",
+      "license": "cc0",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/25185700110",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "previous": null
+    },
+    {
+      "id": "toyota-camry-2026",
+      "brand": "Toyota",
+      "model": "Camry",
+      "year": 2026,
+      "url": "https://live.staticflickr.com/1891/42809717680_0336fac089_b.jpg",
+      "license": "cc0",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/42809717680",
+      "author": "crash71100",
+      "previous": null
+    },
+    {
+      "id": "toyota-prius-2026",
+      "brand": "Toyota",
+      "model": "Prius",
+      "year": 2026,
+      "url": "https://live.staticflickr.com/65535/46898814794_a4359cde12_b.jpg",
+      "license": "cc0",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46898814794",
+      "author": "crash71100",
+      "previous": null
+    },
+    {
+      "id": "volkswagen-golf-gti-2026",
+      "brand": "Volkswagen",
+      "model": "Golf GTI",
+      "year": 2026,
+      "url": "https://live.staticflickr.com/65535/49661266868_e43211e9f2_b.jpg",
+      "license": "cc0",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49661266868",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "previous": null
+    },
+    {
+      "id": "volkswagen-id-buzz-2026",
+      "brand": "Volkswagen",
+      "model": "ID. Buzz",
+      "year": 2026,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Vehicle_car_Volkswagen_ID._Buzz_004_%2853983382876%29.jpg",
+      "license": "cc0",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=154977354",
+      "author": "Jan Helebrant",
+      "previous": null
+    },
+    {
+      "id": "volkswagen-id4-2026",
+      "brand": "Volkswagen",
+      "model": "ID.4",
+      "year": 2026,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/92/Moscow%2C_Volkswagen_VW_ID.4_prime%2C_Aug_2025_01.jpg",
+      "license": "cc0",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=173920473",
+      "author": "Retired electrician",
+      "previous": null
+    },
+    {
+      "id": "volkswagen-t-cross-2026",
+      "brand": "Volkswagen",
+      "model": "T-Cross",
+      "year": 2026,
+      "url": "https://live.staticflickr.com/1485/25388443921_28efb76fe8_b.jpg",
+      "license": "cc0",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/25388443921",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "previous": null
+    },
+    {
+      "id": "volkswagen-tiguan-2026",
+      "brand": "Volkswagen",
+      "model": "Tiguan",
+      "year": 2026,
+      "url": "https://live.staticflickr.com/65535/34775930103_db25cb3677_b.jpg",
+      "license": "cc0",
+      "source_page": "https://www.flickr.com/photos/46322086@N04/34775930103",
+      "author": "Jusotil_1943",
+      "previous": null
+    },
+    {
+      "id": "volkswagen-touareg-2026",
+      "brand": "Volkswagen",
+      "model": "Touareg",
+      "year": 2026,
+      "url": "https://live.staticflickr.com/65535/49661266993_221eb2ded8_b.jpg",
+      "license": "cc0",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49661266993",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "previous": null
+    }
+  ],
+  "seedVersion": 24
+}

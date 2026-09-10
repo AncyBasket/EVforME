@@ -1,0 +1,74 @@
+{
+  "id": "tesla-model-x-2026",
+  "brand": "Tesla",
+  "model": "Model X",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 230,
+  "approved": false,
+  "generated_at": "2026-09-10T11:30:44.394138+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1558/24854452783_95c6cefac0_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/24854452783",
+      "title": "Tesla Model X",
+      "query": "Tesla Model X car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1512/25362729312_2b8a1bee38_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/25362729312",
+      "title": "Tesla Model X",
+      "query": "Tesla Model X car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1685/24850614184_134121103a_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/24850614184",
+      "title": "Tesla Model X",
+      "query": "Tesla Model X car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://cdn.thingiverse.com/renders/e7/7d/f6/c2/32/188e43890f9c6eda5b52e0dd851626f1_display_large.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Michael Hevery",
+      "source_page": "https://www.thingiverse.com/thing:3385667",
+      "title": "Tesla Model X J1772 Adapter Holder",
+      "query": "Tesla Model X car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Moscow%2C_Tesla_Model_X%2C_Aug_2025_01.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Retired electrician",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=171907785",
+      "title": "Moscow, Tesla Model X, Aug 2025 01",
+      "query": "Tesla Model X car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "mercedes-benz-b-250-e-phev-2024",
+  "brand": "Mercedes-Benz",
+  "model": "B 250 e",
+  "year": 2024,
+  "powertrain": "phev",
+  "priority": 147,
+  "approved": false,
+  "generated_at": "2026-09-10T11:27:58.571696+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

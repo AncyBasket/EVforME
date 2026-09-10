@@ -1,0 +1,13 @@
+{
+  "id": "kia-e-niro-2026",
+  "brand": "Kia",
+  "model": "e-Niro",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 216,
+  "approved": false,
+  "generated_at": "2026-09-10T11:30:03.264954+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

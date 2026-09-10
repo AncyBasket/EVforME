@@ -1,0 +1,13 @@
+{
+  "id": "opel-agila-2026",
+  "brand": "Opel",
+  "model": "Agila",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 172,
+  "approved": false,
+  "generated_at": "2026-09-10T11:28:35.375154+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

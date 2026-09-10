@@ -1,0 +1,74 @@
+{
+  "id": "citroen-c3-2026",
+  "brand": "Citroen",
+  "model": "C3",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 188,
+  "approved": false,
+  "generated_at": "2026-09-10T11:29:05.865523+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4589/38604288784_e119b896ba_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/38604288784",
+      "title": "Citroen C3 pluriel XTRA Caravane du Tour de France 2017 Nuits-Saint-Georges",
+      "query": "Citroen C3 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4731/27534672029_6dbbf0a580_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/27534672029",
+      "title": "Citroen C3 pluriel FDJ Caravane du Tour de France 2017 Nuits-Saint-Georges",
+      "query": "Citroen C3 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4730/39282999882_0bfd788dfc_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/39282999882",
+      "title": "Citroen C3 pluriel Bic Caravane du Tour de France 2017 Nuits-Saint-Georges",
+      "query": "Citroen C3 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4726/39311387891_f7b760b9d2_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/39311387891",
+      "title": "Citroen C3 pluriel FDJ Caravane du Tour de France 2017 Nuits-Saint-Georges",
+      "query": "Citroen C3 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4690/39311398251_41832f0591_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/39311398251",
+      "title": "Citroen C3 pluriel Bic Caravane du Tour de France 2017 Nuits-Saint-Georges",
+      "query": "Citroen C3 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

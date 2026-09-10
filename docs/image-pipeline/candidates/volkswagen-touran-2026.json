@@ -1,0 +1,26 @@
+{
+  "id": "volkswagen-touran-2026",
+  "brand": "Volkswagen",
+  "model": "Touran",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 70,
+  "approved": false,
+  "generated_at": "2026-09-10T11:20:31.025183+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Police_car_Vienna_Volkswagen_Touran.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Jebulon",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=18506046",
+      "title": "File:Police car Vienna Volkswagen Touran.jpg",
+      "query": "Volkswagen Touran car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

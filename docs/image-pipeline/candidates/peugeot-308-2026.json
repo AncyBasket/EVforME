@@ -1,0 +1,62 @@
+{
+  "id": "peugeot-308-2026",
+  "brand": "Peugeot",
+  "model": "308",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 142,
+  "approved": false,
+  "generated_at": "2026-09-10T11:22:36.674683+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4897/46196430052_a243b38c0c_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46196430052",
+      "title": "Peugeot 308 SW Switzerland Diplomatic plate (Bosnia and Herzegovina)",
+      "query": "Peugeot 308 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4857/32374903748_822a7dee30_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/32374903748",
+      "title": "Peugeot 308 SW Switzerland Diplomatic plate (Bosnia and Herzegovina)",
+      "query": "Peugeot 308 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/914/41524421271_dd4af46173_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/41524421271",
+      "title": "Norev Peugeot 308 I Police",
+      "query": "Peugeot 308 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/ab/Peugeot_308_SW_I_rear_glass_hatch_feature.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "MoCars",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=160271072",
+      "title": "Peugeot 308 SW I rear glass hatch feature",
+      "query": "Peugeot 308 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

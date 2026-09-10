@@ -1,0 +1,13 @@
+{
+  "id": "hyundai-santa-fe-phev-2023",
+  "brand": "Hyundai",
+  "model": "Santa Fe PHEV",
+  "year": 2023,
+  "powertrain": "phev",
+  "priority": 206,
+  "approved": false,
+  "generated_at": "2026-09-10T11:29:46.877577+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

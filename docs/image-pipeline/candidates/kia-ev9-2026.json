@@ -1,0 +1,13 @@
+{
+  "id": "kia-ev9-2026",
+  "brand": "Kia",
+  "model": "EV9",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 214,
+  "approved": false,
+  "generated_at": "2026-09-10T11:29:59.910504+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

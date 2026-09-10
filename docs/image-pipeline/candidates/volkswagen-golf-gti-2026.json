@@ -1,0 +1,76 @@
+{
+  "id": "volkswagen-golf-gti-2026",
+  "brand": "Volkswagen",
+  "model": "Golf GTI",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 62,
+  "approved": true,
+  "generated_at": "2026-09-10T11:20:20.088826+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49661266868_e43211e9f2_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49661266868",
+      "title": "Volkswagen Golf 8 GTI 2020",
+      "query": "Volkswagen Golf GTI car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49662087517_8d63808da9_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/49662087517",
+      "title": "Volkswagen Golf 8 GTI 2020",
+      "query": "Volkswagen Golf GTI car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1626/26544197201_7d38e11148_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "nicifor28",
+      "source_page": "https://www.flickr.com/photos/133136615@N03/26544197201",
+      "title": "Volkswagen Golf GTI 5-door (Typ 1J) (2001-2003)",
+      "query": "Volkswagen Golf GTI car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1509/26336831850_8bdf94c147_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "nicifor28",
+      "source_page": "https://www.flickr.com/photos/133136615@N03/26336831850",
+      "title": "Volkswagen Golf GTI 5-door (Typ 1K) (2004-2008)",
+      "query": "Volkswagen Golf GTI car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Volkswagen_ABA-1KAXX_Golf_GTI_%28No.269%29_-_Toyota_A-TE31_Corolla_1600_Hi-Deluxe_4door_%28%28No.270%29_%2824042811184%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "先従隗始",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=186215545",
+      "title": "Volkswagen ABA-1KAXX Golf GTI (No.269) - Toyota A-TE31 Corolla 1600 Hi-Deluxe 4door ((No.270) (24042811184)",
+      "query": "Volkswagen Golf GTI car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/65535/49661266868_e43211e9f2_b.jpg",
+  "approval_note": "Manual batch: title evidences brand/model (Volkswagen Golf 8 GTI 2020)"
+}

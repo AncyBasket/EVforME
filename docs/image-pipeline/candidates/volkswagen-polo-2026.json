@@ -1,0 +1,13 @@
+{
+  "id": "volkswagen-polo-2026",
+  "brand": "Volkswagen",
+  "model": "Polo",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 64,
+  "approved": false,
+  "generated_at": "2026-09-10T11:20:23.307121+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

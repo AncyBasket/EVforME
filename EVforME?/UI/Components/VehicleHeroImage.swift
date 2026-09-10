@@ -254,8 +254,9 @@ struct VehicleHeroImage: View {
             return
         }
         // Block known non-licensed / unstable hosts even if a URL sneaks in.
+        // Wikimedia Commons / upload.wikimedia.org allowed only for pipeline-applied CC0/PD URLs.
         let host = url.host?.lowercased() ?? ""
-        let blocked = ["edidomus", "quattroruote", "wikimedia", "wikipedia", "unsplash", "catbox"]
+        let blocked = ["edidomus", "quattroruote", "source.unsplash.com", "images.unsplash.com", "catbox"]
         if blocked.contains(where: { host.contains($0) }) {
             isLoading = false
             return

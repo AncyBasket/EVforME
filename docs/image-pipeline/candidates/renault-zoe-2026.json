@@ -1,0 +1,13 @@
+{
+  "id": "renault-zoe-2026",
+  "brand": "Renault",
+  "model": "Zoe",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 108,
+  "approved": false,
+  "generated_at": "2026-09-10T11:21:36.629503+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

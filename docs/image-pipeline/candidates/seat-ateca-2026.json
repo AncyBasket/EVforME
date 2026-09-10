@@ -1,0 +1,26 @@
+{
+  "id": "seat-ateca-2026",
+  "brand": "SEAT",
+  "model": "Ateca",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 253,
+  "approved": false,
+  "generated_at": "2026-09-10T11:31:42.057184+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/905/27103748757_50c5edbe9f_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Jusotil_1943",
+      "source_page": "https://www.flickr.com/photos/46322086@N04/27103748757",
+      "title": "Seat Ateca",
+      "query": "SEAT Ateca car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

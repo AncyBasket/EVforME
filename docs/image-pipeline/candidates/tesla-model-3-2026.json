@@ -1,0 +1,50 @@
+{
+  "id": "tesla-model-3-2026",
+  "brand": "Tesla",
+  "model": "Model 3",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 228,
+  "approved": false,
+  "generated_at": "2026-09-10T11:30:34.874330+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c2/2022.07.19_Fully_electric_car_Tesla_Model_3_Dual_motor_in_Tomasz%C3%B3w_Mazowiecki%2C_Poland.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "WrS.tm.pl",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=120787524",
+      "title": "2022.07.19 Fully electric car Tesla Model 3 Dual motor in Tomaszów Mazowiecki, Poland",
+      "query": "Tesla Model 3 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://cdn.thingiverse.com/renders/f0/8e/a5/48/82/611f8c5b229545dc58b1476a08d90d79_display_large.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "ply2",
+      "source_page": "https://www.thingiverse.com/thing:3596463",
+      "title": "energy drink can holder for tesla model 3",
+      "query": "Tesla Model 3 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a8/2022.07.19_Fully_electric_car_Tesla_Model_3_Dual_motor_in_Tomasz%C3%B3w_Mazowiecki%2C_Poland_%281%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "WrS.tm.pl",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=120787432",
+      "title": "2022.07.19 Fully electric car Tesla Model 3 Dual motor in Tomaszów Mazowiecki, Poland (1)",
+      "query": "Tesla Model 3 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

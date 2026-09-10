@@ -1,0 +1,13 @@
+{
+  "id": "skoda-citigo-e-iv-2026",
+  "brand": "Skoda",
+  "model": "Citigo-e iV",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 234,
+  "approved": false,
+  "generated_at": "2026-09-10T11:30:53.051367+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

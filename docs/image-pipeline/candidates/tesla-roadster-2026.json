@@ -1,0 +1,26 @@
+{
+  "id": "tesla-roadster-2026",
+  "brand": "Tesla",
+  "model": "Roadster",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 232,
+  "approved": false,
+  "generated_at": "2026-09-10T11:30:49.539135+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/17/Elon_Musk%27s_Tesla_Roadster_%2840110298232%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "SpaceX",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=66235870",
+      "title": "File:Elon Musk's Tesla Roadster (40110298232).jpg",
+      "query": "Tesla Roadster car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

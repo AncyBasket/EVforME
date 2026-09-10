@@ -1,0 +1,74 @@
+{
+  "id": "peugeot-508-2026",
+  "brand": "Peugeot",
+  "model": "508",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 148,
+  "approved": false,
+  "generated_at": "2026-09-10T11:22:48.511148+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7898/45834176554_150eff9af3_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/45834176554",
+      "title": "Peugeot 508 II",
+      "query": "Peugeot 508 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7868/46621452391_421f168903_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46621452391",
+      "title": "Peugeot 508",
+      "query": "Peugeot 508 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7809/32747297448_14c9cb33b1_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/32747297448",
+      "title": "Peugeot 508",
+      "query": "Peugeot 508 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7861/46246964085_39e9ee5740_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46246964085",
+      "title": "508 Peugeot Sport Engineered",
+      "query": "Peugeot 508 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7813/45834176524_6a9bc2b4b9_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/45834176524",
+      "title": "Peugeot 508 II",
+      "query": "Peugeot 508 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

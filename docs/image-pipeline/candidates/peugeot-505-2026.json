@@ -1,0 +1,50 @@
+{
+  "id": "peugeot-505-2026",
+  "brand": "Peugeot",
+  "model": "505",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 147,
+  "approved": false,
+  "generated_at": "2026-09-10T11:22:47.006368+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7920/46637052174_a782939f6c_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46637052174",
+      "title": "Peugeot 505 GTD",
+      "query": "Peugeot 505 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7868/32418149537_b168459bd3_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/32418149537",
+      "title": "Peugeot 505 GTD",
+      "query": "Peugeot 505 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/33887453868_75c2754d24_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/33887453868",
+      "title": "Peugeot 505 Break",
+      "query": "Peugeot 505 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

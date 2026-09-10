@@ -1,0 +1,13 @@
+{
+  "id": "hyundai-santa-fe-plug-in-hybrid-phev-2023",
+  "brand": "Hyundai",
+  "model": "Santa Fe Plug-in Hybrid",
+  "year": 2023,
+  "powertrain": "phev",
+  "priority": 207,
+  "approved": false,
+  "generated_at": "2026-09-10T11:29:49.384553+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

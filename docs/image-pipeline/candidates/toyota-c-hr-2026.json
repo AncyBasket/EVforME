@@ -1,0 +1,76 @@
+{
+  "id": "toyota-c-hr-2026",
+  "brand": "Toyota",
+  "model": "C-HR",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 88,
+  "approved": true,
+  "generated_at": "2026-09-10T11:20:59.405819+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1497/25185700110_d1f3d3ed54_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/25185700110",
+      "title": "Toyota C-HR crossover hybride",
+      "query": "Toyota C-HR car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1516/25455155566_c064b6af0f_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/25455155566",
+      "title": "Toyota C-HR crossover hybride",
+      "query": "Toyota C-HR car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1625/25185696560_1b77530b3e_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/25185696560",
+      "title": "Toyota C-HR crossover hybride",
+      "query": "Toyota C-HR car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1684/24850723754_e73a046f66_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/24850723754",
+      "title": "Toyota C-HR crossover hybride intérieur",
+      "query": "Toyota C-HR car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/74/Toyota_C-HR_G_%2717_%282%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Oq10pass",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=161038322",
+      "title": "Toyota C-HR G '17 (2)",
+      "query": "Toyota C-HR car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/1497/25185700110_d1f3d3ed54_b.jpg",
+  "approval_note": "Manual batch: title evidences brand/model (Toyota C-HR crossover hybride)"
+}

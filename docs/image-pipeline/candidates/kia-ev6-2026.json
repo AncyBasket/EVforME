@@ -1,0 +1,74 @@
+{
+  "id": "kia-ev6-2026",
+  "brand": "Kia",
+  "model": "EV6",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 213,
+  "approved": false,
+  "generated_at": "2026-09-10T11:29:58.341676+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Korean_car_EVs_Kia_EV6_mini_car_04.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "LandAndTree",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=145342123",
+      "title": "Korean car EVs Kia EV6 mini car 04",
+      "query": "Kia EV6 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Korean_car_EVs_Kia_EV6_mini_car_01.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "LandAndTree",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=145342112",
+      "title": "Korean car EVs Kia EV6 mini car 01",
+      "query": "Kia EV6 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c5/Korean_car_EVs_Kia_EV6_mini_car_05.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "LandAndTree",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=145342120",
+      "title": "Korean car EVs Kia EV6 mini car 05",
+      "query": "Kia EV6 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a4/Korean_car_EVs_Kia_EV6_mini_car_03.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "LandAndTree",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=145342117",
+      "title": "Korean car EVs Kia EV6 mini car 03",
+      "query": "Kia EV6 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Korean_car_EVs_Kia_EV6_mini_car_02.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "LandAndTree",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=145342113",
+      "title": "Korean car EVs Kia EV6 mini car 02",
+      "query": "Kia EV6 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

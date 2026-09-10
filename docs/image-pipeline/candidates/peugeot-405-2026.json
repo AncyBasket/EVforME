@@ -1,0 +1,74 @@
+{
+  "id": "peugeot-405-2026",
+  "brand": "Peugeot",
+  "model": "405",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 143,
+  "approved": false,
+  "generated_at": "2026-09-10T11:22:38.831220+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7874/32118442377_f5869b9c70_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/32118442377",
+      "title": "Peugeot 405",
+      "query": "Peugeot 405 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7879/46305764225_fac18b0987_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46305764225",
+      "title": "Peugeot 405 Mi 16",
+      "query": "Peugeot 405 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7835/46496702374_ea6ef46102_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46496702374",
+      "title": "Peugeot 405 Mi 16",
+      "query": "Peugeot 405 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7805/33205115928_4fcc4ff460_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/33205115928",
+      "title": "Peugeot 405",
+      "query": "Peugeot 405 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7907/33176565668_f58b0c3a28_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/33176565668",
+      "title": "Peugeot 405 Mi16",
+      "query": "Peugeot 405 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

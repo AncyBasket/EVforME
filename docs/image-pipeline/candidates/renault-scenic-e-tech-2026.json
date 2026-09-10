@@ -1,0 +1,13 @@
+{
+  "id": "renault-scenic-e-tech-2026",
+  "brand": "Renault",
+  "model": "Scenic E-Tech",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 106,
+  "approved": false,
+  "generated_at": "2026-09-10T11:21:33.587661+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

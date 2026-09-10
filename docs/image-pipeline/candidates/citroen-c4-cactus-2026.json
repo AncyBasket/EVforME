@@ -1,0 +1,13 @@
+{
+  "id": "citroen-c4-cactus-2026",
+  "brand": "Citroen",
+  "model": "C4 Cactus",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 191,
+  "approved": false,
+  "generated_at": "2026-09-10T11:29:11.255347+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

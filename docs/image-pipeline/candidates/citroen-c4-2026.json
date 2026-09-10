@@ -1,0 +1,74 @@
+{
+  "id": "citroen-c4-2026",
+  "brand": "Citroen",
+  "model": "C4",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 190,
+  "approved": false,
+  "generated_at": "2026-09-10T11:29:09.191639+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4683/25335368558_e389c27b44_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/25335368558",
+      "title": "Citroen C4 Sedan",
+      "query": "Citroen C4 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4686/39200638801_8354ae679f_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/39200638801",
+      "title": "Citroen C4 Sedan",
+      "query": "Citroen C4 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/32662613437_8209aaec40_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/32662613437",
+      "title": "Citroen C4 Switzerland Diplomatic plate (Vietnam)",
+      "query": "Citroen C4 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/53789452064_d224ca463a.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "China Car Spotting",
+      "source_page": "https://www.flickr.com/photos/192880873@N02/53789452064",
+      "title": "Citroen C4",
+      "query": "Citroen C4 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9zdGF0aWMvaW1hZ2Uvd2Vic2l0ZS8yMDIyLTA0L2xyL2ZycGljYXNzb19jaXRyb2VuX3NpZ25hdHVyZV9jYXItaW1hZ2Uta3oyZTZzY24uanBn.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": null,
+      "source_page": "https://www.rawpixel.com/image/6113159/photo-image-public-domain-logo-free",
+      "title": "Citroen C4 Picasso car, location",
+      "query": "Citroen C4 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

@@ -1,0 +1,28 @@
+{
+  "id": "volkswagen-id4-2026",
+  "brand": "Volkswagen",
+  "model": "ID.4",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 39,
+  "approved": true,
+  "generated_at": "2026-09-10T11:19:44.256242+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/92/Moscow%2C_Volkswagen_VW_ID.4_prime%2C_Aug_2025_01.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Retired electrician",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=173920473",
+      "title": "Moscow, Volkswagen VW ID.4 prime, Aug 2025 01",
+      "query": "Volkswagen ID.4 car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://upload.wikimedia.org/wikipedia/commons/9/92/Moscow%2C_Volkswagen_VW_ID.4_prime%2C_Aug_2025_01.jpg",
+  "approval_note": "Manual batch: title evidences brand/model (Moscow, Volkswagen VW ID.4 prime, Aug 2025 01)"
+}

@@ -1,0 +1,74 @@
+{
+  "id": "renault-scenic-2026",
+  "brand": "Renault",
+  "model": "Scenic",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 123,
+  "approved": false,
+  "generated_at": "2026-09-10T11:22:05.228380+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7891/32549659827_711909bb04_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/32549659827",
+      "title": "Renault Scenic Croix Rouge Française",
+      "query": "Renault Scenic car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/47635349971_5619700b15_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/47635349971",
+      "title": "Renault Scenic Switzerland Diplomatic plate (UN)",
+      "query": "Renault Scenic car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7885/47438731982_33be533601_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/47438731982",
+      "title": "Renault Scenic Croix Rouge Française",
+      "query": "Renault Scenic car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/733/21360375700_0d9b599168_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "nicifor28",
+      "source_page": "https://www.flickr.com/photos/133136615@N03/21360375700",
+      "title": "Renault Scenic RX4 (2000-2002)",
+      "query": "Renault Scenic car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/5734/20927297263_3177cee5af_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "nicifor28",
+      "source_page": "https://www.flickr.com/photos/133136615@N03/20927297263",
+      "title": "Renault Scenic RX4 (2000-2002)",
+      "query": "Renault Scenic car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

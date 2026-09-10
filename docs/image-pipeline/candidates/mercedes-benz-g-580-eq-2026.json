@@ -1,0 +1,13 @@
+{
+  "id": "mercedes-benz-g-580-eq-2026",
+  "brand": "Mercedes-Benz",
+  "model": "G 580 EQ",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 138,
+  "approved": false,
+  "generated_at": "2026-09-10T11:27:44.048608+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

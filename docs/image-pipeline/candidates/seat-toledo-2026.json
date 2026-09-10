@@ -1,0 +1,38 @@
+{
+  "id": "seat-toledo-2026",
+  "brand": "SEAT",
+  "model": "Toledo",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 260,
+  "approved": false,
+  "generated_at": "2026-09-10T11:32:01.073713+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7835/33421736688_bce97f07e2_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/33421736688",
+      "title": "Seat Toledo",
+      "query": "SEAT Toledo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7868/47297434601_863f80c997_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/47297434601",
+      "title": "Seat Toledo",
+      "query": "SEAT Toledo car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

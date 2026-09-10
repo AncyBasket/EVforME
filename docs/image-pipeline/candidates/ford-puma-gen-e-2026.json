@@ -1,0 +1,13 @@
+{
+  "id": "ford-puma-gen-e-2026",
+  "brand": "Ford",
+  "model": "Puma Gen-E",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 157,
+  "approved": false,
+  "generated_at": "2026-09-10T11:23:01.436074+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

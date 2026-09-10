@@ -1,0 +1,13 @@
+{
+  "id": "mercedes-benz-amg-e53-hybrid-4matic-plus-station-wagon-phev-2026",
+  "brand": "Mercedes-Benz",
+  "model": "AMG E53 Hybrid 4matic Plus (station wagon)",
+  "year": 2026,
+  "powertrain": "phev",
+  "priority": 141,
+  "approved": false,
+  "generated_at": "2026-09-10T11:27:49.148230+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

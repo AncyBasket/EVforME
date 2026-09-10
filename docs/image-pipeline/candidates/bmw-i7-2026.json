@@ -1,0 +1,13 @@
+{
+  "id": "bmw-i7-2026",
+  "brand": "BMW",
+  "model": "i7",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 192,
+  "approved": false,
+  "generated_at": "2026-09-10T11:24:06.694230+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

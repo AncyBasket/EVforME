@@ -1,0 +1,13 @@
+{
+  "id": "skoda-elroq-2026",
+  "brand": "Skoda",
+  "model": "Elroq",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 235,
+  "approved": false,
+  "generated_at": "2026-09-10T11:30:54.906622+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

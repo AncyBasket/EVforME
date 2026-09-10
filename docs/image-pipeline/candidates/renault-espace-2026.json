@@ -1,0 +1,74 @@
+{
+  "id": "renault-espace-2026",
+  "brand": "Renault",
+  "model": "Espace",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 117,
+  "approved": false,
+  "generated_at": "2026-09-10T11:21:52.855674+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7813/46344993415_45dbe2b73d_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46344993415",
+      "title": "Renault Espace II",
+      "query": "Renault Espace car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/48031050827_e73a0fdd7c_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/48031050827",
+      "title": "Renault Espace Initiale",
+      "query": "Renault Espace car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7855/47294158002_ef4b1300c6_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/47294158002",
+      "title": "Renault Espace",
+      "query": "Renault Espace car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/32680207367_0223973abc_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/32680207367",
+      "title": "Renault Espace Slovenia plate",
+      "query": "Renault Espace car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7866/46344993395_e900368dde_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46344993395",
+      "title": "Renault Espace II",
+      "query": "Renault Espace car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

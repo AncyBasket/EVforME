@@ -1,0 +1,13 @@
+{
+  "id": "volkswagen-corrado-2026",
+  "brand": "Volkswagen",
+  "model": "Corrado",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 55,
+  "approved": false,
+  "generated_at": "2026-09-10T11:20:09.564345+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

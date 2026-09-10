@@ -1,0 +1,13 @@
+{
+  "id": "peugeot-e-308-2026",
+  "brand": "Peugeot",
+  "model": "e-308",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 128,
+  "approved": false,
+  "generated_at": "2026-09-10T11:22:13.619175+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

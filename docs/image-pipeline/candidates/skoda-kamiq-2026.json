@@ -1,0 +1,13 @@
+{
+  "id": "skoda-kamiq-2026",
+  "brand": "Skoda",
+  "model": "Kamiq",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 241,
+  "approved": false,
+  "generated_at": "2026-09-10T11:31:05.018023+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

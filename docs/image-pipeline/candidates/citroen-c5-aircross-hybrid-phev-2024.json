@@ -1,0 +1,13 @@
+{
+  "id": "citroen-c5-aircross-hybrid-phev-2024",
+  "brand": "Citroen",
+  "model": "C5 Aircross Hybrid",
+  "year": 2024,
+  "powertrain": "phev",
+  "priority": 184,
+  "approved": false,
+  "generated_at": "2026-09-10T11:28:58.618427+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

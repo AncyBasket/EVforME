@@ -1,0 +1,13 @@
+{
+  "id": "fiat-bravo-2026",
+  "brand": "Fiat",
+  "model": "Bravo",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 6,
+  "approved": false,
+  "generated_at": "2026-09-10T11:18:51.074613+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

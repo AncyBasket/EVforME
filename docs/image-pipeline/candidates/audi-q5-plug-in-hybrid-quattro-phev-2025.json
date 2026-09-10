@@ -1,0 +1,13 @@
+{
+  "id": "audi-q5-plug-in-hybrid-quattro-phev-2025",
+  "brand": "Audi",
+  "model": "Q5 Plug-In Hybrid quattro",
+  "year": 2025,
+  "powertrain": "phev",
+  "priority": 153,
+  "approved": false,
+  "generated_at": "2026-09-10T11:28:08.103605+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

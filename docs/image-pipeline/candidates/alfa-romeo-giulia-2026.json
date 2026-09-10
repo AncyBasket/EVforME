@@ -1,0 +1,74 @@
+{
+  "id": "alfa-romeo-giulia-2026",
+  "brand": "Alfa Romeo",
+  "model": "Giulia",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 32,
+  "approved": false,
+  "generated_at": "2026-09-10T11:19:30.878978+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7858/32611655817_ab831da170_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/32611655817",
+      "title": "Alfa Romeo Giulia Quadrifoglio Carabinieri & Lamborghini Huracan Polizia & Ford Mustang Polizei",
+      "query": "Alfa Romeo Giulia car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4680/25518608548_91aa634372_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/25518608548",
+      "title": "Alfa Romeo Giulia 1600 TZ",
+      "query": "Alfa Romeo Giulia car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4916/32955859618_25c05db416_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/32955859618",
+      "title": "Forza Horizon 4 Alfa Romeo Giulia Carabinieri",
+      "query": "Alfa Romeo Giulia car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/46871920395_b7643230f1_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46871920395",
+      "title": "Alfa Romeo Giulia Quadrifoglio Carabinieri",
+      "query": "Alfa Romeo Giulia car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4689/24523127877_4bc768d123_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/24523127877",
+      "title": "Alfa Romeo Giulia 1600 TZ",
+      "query": "Alfa Romeo Giulia car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

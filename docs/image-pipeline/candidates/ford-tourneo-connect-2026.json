@@ -1,0 +1,13 @@
+{
+  "id": "ford-tourneo-connect-2026",
+  "brand": "Ford",
+  "model": "Tourneo Connect",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 184,
+  "approved": false,
+  "generated_at": "2026-09-10T11:23:52.559841+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

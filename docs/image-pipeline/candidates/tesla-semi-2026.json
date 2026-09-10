@@ -1,0 +1,13 @@
+{
+  "id": "tesla-semi-2026",
+  "brand": "Tesla",
+  "model": "Semi",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 233,
+  "approved": false,
+  "generated_at": "2026-09-10T11:30:51.194838+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

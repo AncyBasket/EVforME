@@ -1,0 +1,13 @@
+{
+  "id": "peugeot-108-2026",
+  "brand": "Peugeot",
+  "model": "108",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 136,
+  "approved": false,
+  "generated_at": "2026-09-10T11:22:26.714151+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

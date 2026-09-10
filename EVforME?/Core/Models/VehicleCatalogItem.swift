@@ -81,7 +81,7 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         return parts.isEmpty ? nil : parts.joined(separator: " · ")
     }
 
-    /// URL per l’immagine in UI: solo HTTPS affidabili (Wikimedia). Scarta Unsplash morto.
+    /// URL per l’immagine in UI (HTTPS). Scarta Unsplash source morto; host rischiosi filtrati in `VehicleHeroImage`.
     var heroImageURL: URL? {
         guard let raw = imageURL?.trimmingCharacters(in: .whitespacesAndNewlines), !raw.isEmpty,
               let u = URL(string: raw), u.scheme == "http" || u.scheme == "https" else {

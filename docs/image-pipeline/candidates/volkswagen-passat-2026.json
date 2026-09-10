@@ -1,0 +1,62 @@
+{
+  "id": "volkswagen-passat-2026",
+  "brand": "Volkswagen",
+  "model": "Passat",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 63,
+  "approved": false,
+  "generated_at": "2026-09-10T11:20:21.604197+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1480/24854408903_1809606cfd_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/24854408903",
+      "title": "Volkswagen Passat R-Line 2016",
+      "query": "Volkswagen Passat car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/ab/20200603_Volkswagen_Passat.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Kahvilokki",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=90942452",
+      "title": "20200603 Volkswagen Passat",
+      "query": "Volkswagen Passat car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1569/26130765113_b37e04954a_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "nicifor28",
+      "source_page": "https://www.flickr.com/photos/133136615@N03/26130765113",
+      "title": "Volkswagen Passat Variant (B5) (1997-2000)",
+      "query": "Volkswagen Passat car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Swiss_police_Volkswagen_Passat_in_Geneva.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Ypsilon from Finland",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=114581313",
+      "title": "Swiss police Volkswagen Passat in Geneva",
+      "query": "Volkswagen Passat car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

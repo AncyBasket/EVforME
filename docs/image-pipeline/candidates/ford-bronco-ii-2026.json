@@ -1,0 +1,13 @@
+{
+  "id": "ford-bronco-ii-2026",
+  "brand": "Ford",
+  "model": "Bronco II",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 170,
+  "approved": false,
+  "generated_at": "2026-09-10T11:23:22.138587+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

@@ -1,0 +1,62 @@
+{
+  "id": "opel-astra-2026",
+  "brand": "Opel",
+  "model": "Astra",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 173,
+  "approved": false,
+  "generated_at": "2026-09-10T11:28:37.406612+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/3945/32773307453_7a06053c60_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "www.wbayer.com - www.facebook.com/wbayercom",
+      "source_page": "https://www.flickr.com/photos/76319087@N08/32773307453",
+      "title": "opel astra",
+      "query": "Opel Astra car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/33995831368_7a0afab11b_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/33995831368",
+      "title": "Opel Astra",
+      "query": "Opel Astra car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/33995831418_1d4891057c_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/33995831418",
+      "title": "Opel Astra",
+      "query": "Opel Astra car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Policija_Crne_gore_Opel_Astra.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Upwinxp",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=73845156",
+      "title": "File:Policija Crne gore Opel Astra.jpg",
+      "query": "Opel Astra car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

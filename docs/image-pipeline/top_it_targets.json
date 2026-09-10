@@ -1,0 +1,2089 @@
+{
+  "generated_at": "2026-09-10T11:27:30.104508+00:00",
+  "source_seed": "EVforME?/Data/vehicles.seed.quality.json",
+  "min_year": 2018,
+  "selection": "Italy-friendly brands × recent years; one id per brand+model+powertrain (newest year); ranked by brand priority then year; EV/PHEV slight boost; max 16 models per brand.",
+  "count": 260,
+  "targets": [
+    {
+      "id": "fiat-500e-2026",
+      "brand": "Fiat",
+      "model": "500e",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 1
+    },
+    {
+      "id": "fiat-600e-2026",
+      "brand": "Fiat",
+      "model": "600e",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 2
+    },
+    {
+      "id": "fiat-500-2026",
+      "brand": "Fiat",
+      "model": "500",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 3
+    },
+    {
+      "id": "fiat-500l-2026",
+      "brand": "Fiat",
+      "model": "500L",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 4
+    },
+    {
+      "id": "fiat-500x-2026",
+      "brand": "Fiat",
+      "model": "500X",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 5
+    },
+    {
+      "id": "fiat-bravo-2026",
+      "brand": "Fiat",
+      "model": "Bravo",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 6
+    },
+    {
+      "id": "fiat-doblo-2026",
+      "brand": "Fiat",
+      "model": "Doblo",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 7
+    },
+    {
+      "id": "fiat-panda-2026",
+      "brand": "Fiat",
+      "model": "Panda",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 8
+    },
+    {
+      "id": "fiat-punto-2026",
+      "brand": "Fiat",
+      "model": "Punto",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 9
+    },
+    {
+      "id": "fiat-qubo-2026",
+      "brand": "Fiat",
+      "model": "Qubo",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 10
+    },
+    {
+      "id": "fiat-tipo-2026",
+      "brand": "Fiat",
+      "model": "Tipo",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 11
+    },
+    {
+      "id": "fiat-tipo-cross-2026",
+      "brand": "Fiat",
+      "model": "Tipo Cross",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 12
+    },
+    {
+      "id": "jeep-avenger-electric-2026",
+      "brand": "Jeep",
+      "model": "Avenger Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 13
+    },
+    {
+      "id": "jeep-wagoneer-s-2026",
+      "brand": "Jeep",
+      "model": "Wagoneer S",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 14
+    },
+    {
+      "id": "jeep-grand-cherokee-4xe-phev-2026",
+      "brand": "Jeep",
+      "model": "Grand Cherokee PHEV",
+      "year": 2026,
+      "powertrain": "phev",
+      "priority": 15
+    },
+    {
+      "id": "jeep-wrangler-4dr-4xe-phev-2026",
+      "brand": "Jeep",
+      "model": "Wrangler PHEV",
+      "year": 2026,
+      "powertrain": "phev",
+      "priority": 16
+    },
+    {
+      "id": "jeep-compass-4xe-phev-2024",
+      "brand": "Jeep",
+      "model": "Compass 4xe",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 17
+    },
+    {
+      "id": "jeep-renegade-4xe-phev-2024",
+      "brand": "Jeep",
+      "model": "Renegade 4xe",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 18
+    },
+    {
+      "id": "jeep-grand-cherokee-4xe-phev-2024",
+      "brand": "Jeep",
+      "model": "Grand Cherokee 4xe",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 19
+    },
+    {
+      "id": "jeep-wrangler-4xe-phev-2024",
+      "brand": "Jeep",
+      "model": "Wrangler 4xe",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 20
+    },
+    {
+      "id": "jeep-avenger-2026",
+      "brand": "Jeep",
+      "model": "Avenger",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 21
+    },
+    {
+      "id": "jeep-cherokee-2026",
+      "brand": "Jeep",
+      "model": "Cherokee",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 22
+    },
+    {
+      "id": "jeep-compass-2026",
+      "brand": "Jeep",
+      "model": "Compass",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 23
+    },
+    {
+      "id": "jeep-grand-cherokee-2026",
+      "brand": "Jeep",
+      "model": "Grand Cherokee",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 24
+    },
+    {
+      "id": "jeep-renegade-2026",
+      "brand": "Jeep",
+      "model": "Renegade",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 25
+    },
+    {
+      "id": "jeep-wrangler-2026",
+      "brand": "Jeep",
+      "model": "Wrangler",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 26
+    },
+    {
+      "id": "alfa-romeo-tonale-eawd-phev-2025",
+      "brand": "Alfa Romeo",
+      "model": "Tonale eAWD PHEV",
+      "year": 2025,
+      "powertrain": "phev",
+      "priority": 27
+    },
+    {
+      "id": "alfa-romeo-tonale-phev-phev-2024",
+      "brand": "Alfa Romeo",
+      "model": "Tonale PHEV",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 28
+    },
+    {
+      "id": "alfa-romeo-147-2026",
+      "brand": "Alfa Romeo",
+      "model": "147",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 29
+    },
+    {
+      "id": "alfa-romeo-159-2026",
+      "brand": "Alfa Romeo",
+      "model": "159",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 30
+    },
+    {
+      "id": "alfa-romeo-brera-2026",
+      "brand": "Alfa Romeo",
+      "model": "Brera",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 31
+    },
+    {
+      "id": "alfa-romeo-giulia-2026",
+      "brand": "Alfa Romeo",
+      "model": "Giulia",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 32
+    },
+    {
+      "id": "alfa-romeo-giulietta-2026",
+      "brand": "Alfa Romeo",
+      "model": "Giulietta",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 33
+    },
+    {
+      "id": "alfa-romeo-mito-2026",
+      "brand": "Alfa Romeo",
+      "model": "MiTo",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 34
+    },
+    {
+      "id": "alfa-romeo-stelvio-2026",
+      "brand": "Alfa Romeo",
+      "model": "Stelvio",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 35
+    },
+    {
+      "id": "alfa-romeo-tonale-2026",
+      "brand": "Alfa Romeo",
+      "model": "Tonale",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 36
+    },
+    {
+      "id": "volkswagen-id-buzz-2026",
+      "brand": "Volkswagen",
+      "model": "ID. Buzz",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 37
+    },
+    {
+      "id": "volkswagen-id3-2026",
+      "brand": "Volkswagen",
+      "model": "ID.3",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 38
+    },
+    {
+      "id": "volkswagen-id4-2026",
+      "brand": "Volkswagen",
+      "model": "ID.4",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 39
+    },
+    {
+      "id": "volkswagen-id5-2026",
+      "brand": "Volkswagen",
+      "model": "ID.5",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 40
+    },
+    {
+      "id": "volkswagen-id7-2026",
+      "brand": "Volkswagen",
+      "model": "ID.7",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 41
+    },
+    {
+      "id": "volkswagen-e-golf-2026",
+      "brand": "Volkswagen",
+      "model": "e-Golf",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 42
+    },
+    {
+      "id": "volkswagen-e-up!-2026",
+      "brand": "Volkswagen",
+      "model": "e-up!",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 43
+    },
+    {
+      "id": "volkswagen-golf-gte-phev-2024",
+      "brand": "Volkswagen",
+      "model": "Golf GTE",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 44
+    },
+    {
+      "id": "volkswagen-tiguan-ehybrid-phev-2024",
+      "brand": "Volkswagen",
+      "model": "Tiguan eHybrid",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 45
+    },
+    {
+      "id": "volkswagen-passat-gte-phev-2024",
+      "brand": "Volkswagen",
+      "model": "Passat GTE",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 46
+    },
+    {
+      "id": "volkswagen-arteon-shooting-brake-ehybrid-phev-2024",
+      "brand": "Volkswagen",
+      "model": "Arteon Shooting Brake eHybrid",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 47
+    },
+    {
+      "id": "volkswagen-touareg-r-ehybrid-phev-2024",
+      "brand": "Volkswagen",
+      "model": "Touareg R eHybrid",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 48
+    },
+    {
+      "id": "volkswagen-arteon-2026",
+      "brand": "Volkswagen",
+      "model": "Arteon",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 49
+    },
+    {
+      "id": "volkswagen-atlas-2026",
+      "brand": "Volkswagen",
+      "model": "Atlas",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 50
+    },
+    {
+      "id": "volkswagen-atlas-cross-sport-2026",
+      "brand": "Volkswagen",
+      "model": "Atlas Cross Sport",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 51
+    },
+    {
+      "id": "volkswagen-beetle-2026",
+      "brand": "Volkswagen",
+      "model": "Beetle",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 52
+    },
+    {
+      "id": "toyota-proace-electric-2026",
+      "brand": "Toyota",
+      "model": "Proace Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 53
+    },
+    {
+      "id": "toyota-bz4x-2026",
+      "brand": "Toyota",
+      "model": "bZ4X",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 54
+    },
+    {
+      "id": "toyota-prius-phev-phev-2025",
+      "brand": "Toyota",
+      "model": "Prius PHEV",
+      "year": 2025,
+      "powertrain": "phev",
+      "priority": 55
+    },
+    {
+      "id": "toyota-rav4-phev-2025",
+      "brand": "Toyota",
+      "model": "RAV4 PHEV",
+      "year": 2025,
+      "powertrain": "phev",
+      "priority": 56
+    },
+    {
+      "id": "toyota-prius-phev-se-phev-2025",
+      "brand": "Toyota",
+      "model": "Prius PHEV SE",
+      "year": 2025,
+      "powertrain": "phev",
+      "priority": 57
+    },
+    {
+      "id": "toyota-rav4-phev-awd-phev-2025",
+      "brand": "Toyota",
+      "model": "RAV4 PHEV AWD",
+      "year": 2025,
+      "powertrain": "phev",
+      "priority": 58
+    },
+    {
+      "id": "toyota-prius-plug-in-phev-2024",
+      "brand": "Toyota",
+      "model": "Prius Plug-in",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 59
+    },
+    {
+      "id": "toyota-rav4-plug-in-phev-2024",
+      "brand": "Toyota",
+      "model": "RAV4 Plug-in",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 60
+    },
+    {
+      "id": "toyota-prius-prime-se-phev-2024",
+      "brand": "Toyota",
+      "model": "Prius Prime PHEV",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 61
+    },
+    {
+      "id": "toyota-rav4-prime-4wd-phev-2024",
+      "brand": "Toyota",
+      "model": "RAV4 Prime PHEV",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 62
+    },
+    {
+      "id": "toyota-c-hr-plug-in-phev-2024",
+      "brand": "Toyota",
+      "model": "C-HR Plug-in",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 63
+    },
+    {
+      "id": "toyota-4runner-2026",
+      "brand": "Toyota",
+      "model": "4Runner",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 64
+    },
+    {
+      "id": "toyota-86-2026",
+      "brand": "Toyota",
+      "model": "86",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 65
+    },
+    {
+      "id": "toyota-auris-2026",
+      "brand": "Toyota",
+      "model": "Auris",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 66
+    },
+    {
+      "id": "toyota-avalon-2026",
+      "brand": "Toyota",
+      "model": "Avalon",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 67
+    },
+    {
+      "id": "toyota-aygo-2026",
+      "brand": "Toyota",
+      "model": "Aygo",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 68
+    },
+    {
+      "id": "renault-5-e-tech-2026",
+      "brand": "Renault",
+      "model": "5 E-Tech",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 69
+    },
+    {
+      "id": "renault-megane-e-tech-2026",
+      "brand": "Renault",
+      "model": "Megane E-Tech",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 70
+    },
+    {
+      "id": "renault-scenic-e-tech-2026",
+      "brand": "Renault",
+      "model": "Scenic E-Tech",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 71
+    },
+    {
+      "id": "renault-twingo-electric-2026",
+      "brand": "Renault",
+      "model": "Twingo Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 72
+    },
+    {
+      "id": "renault-zoe-2026",
+      "brand": "Renault",
+      "model": "Zoe",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 73
+    },
+    {
+      "id": "renault-rafale-e-tech-phev-2024",
+      "brand": "Renault",
+      "model": "Rafale E-Tech",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 74
+    },
+    {
+      "id": "renault-18i-2026",
+      "brand": "Renault",
+      "model": "18i",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 75
+    },
+    {
+      "id": "renault-alliance-2026",
+      "brand": "Renault",
+      "model": "Alliance",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 76
+    },
+    {
+      "id": "renault-arkana-2026",
+      "brand": "Renault",
+      "model": "Arkana",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 77
+    },
+    {
+      "id": "renault-austral-2026",
+      "brand": "Renault",
+      "model": "Austral",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 78
+    },
+    {
+      "id": "renault-captur-2026",
+      "brand": "Renault",
+      "model": "Captur",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 79
+    },
+    {
+      "id": "renault-clio-2026",
+      "brand": "Renault",
+      "model": "Clio",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 80
+    },
+    {
+      "id": "renault-encore-2026",
+      "brand": "Renault",
+      "model": "Encore",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 81
+    },
+    {
+      "id": "renault-espace-2026",
+      "brand": "Renault",
+      "model": "Espace",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 82
+    },
+    {
+      "id": "renault-fuego-2026",
+      "brand": "Renault",
+      "model": "Fuego",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 83
+    },
+    {
+      "id": "renault-kadjar-2026",
+      "brand": "Renault",
+      "model": "Kadjar",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 84
+    },
+    {
+      "id": "peugeot-e-2008-2026",
+      "brand": "Peugeot",
+      "model": "e-2008",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 85
+    },
+    {
+      "id": "peugeot-e-208-2026",
+      "brand": "Peugeot",
+      "model": "e-208",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 86
+    },
+    {
+      "id": "peugeot-e-3008-2026",
+      "brand": "Peugeot",
+      "model": "e-3008",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 87
+    },
+    {
+      "id": "peugeot-e-308-2026",
+      "brand": "Peugeot",
+      "model": "e-308",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 88
+    },
+    {
+      "id": "peugeot-e-5008-2026",
+      "brand": "Peugeot",
+      "model": "e-5008",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 89
+    },
+    {
+      "id": "peugeot-3008-hybrid-phev-2024",
+      "brand": "Peugeot",
+      "model": "3008 Hybrid",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 90
+    },
+    {
+      "id": "peugeot-308-hybrid-phev-2024",
+      "brand": "Peugeot",
+      "model": "308 Hybrid",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 91
+    },
+    {
+      "id": "peugeot-408-hybrid-phev-2024",
+      "brand": "Peugeot",
+      "model": "408 Hybrid",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 92
+    },
+    {
+      "id": "peugeot-508-hybrid-phev-2024",
+      "brand": "Peugeot",
+      "model": "508 Hybrid",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 93
+    },
+    {
+      "id": "peugeot-5008-hybrid-phev-2024",
+      "brand": "Peugeot",
+      "model": "5008 Hybrid",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 94
+    },
+    {
+      "id": "peugeot-107-2026",
+      "brand": "Peugeot",
+      "model": "107",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 95
+    },
+    {
+      "id": "peugeot-108-2026",
+      "brand": "Peugeot",
+      "model": "108",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 96
+    },
+    {
+      "id": "peugeot-2008-2026",
+      "brand": "Peugeot",
+      "model": "2008",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 97
+    },
+    {
+      "id": "peugeot-207-2026",
+      "brand": "Peugeot",
+      "model": "207",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 98
+    },
+    {
+      "id": "peugeot-208-2026",
+      "brand": "Peugeot",
+      "model": "208",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 99
+    },
+    {
+      "id": "peugeot-3008-2026",
+      "brand": "Peugeot",
+      "model": "3008",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 100
+    },
+    {
+      "id": "ford-capri-ev-2026",
+      "brand": "Ford",
+      "model": "Capri EV",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 101
+    },
+    {
+      "id": "ford-explorer-ev-2026",
+      "brand": "Ford",
+      "model": "Explorer EV",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 102
+    },
+    {
+      "id": "ford-mustang-mach-e-2026",
+      "brand": "Ford",
+      "model": "Mustang Mach-E",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 103
+    },
+    {
+      "id": "ford-puma-gen-e-2026",
+      "brand": "Ford",
+      "model": "Puma Gen-E",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 104
+    },
+    {
+      "id": "ford-escape-phev-2026",
+      "brand": "Ford",
+      "model": "Escape PHEV",
+      "year": 2026,
+      "powertrain": "phev",
+      "priority": 105
+    },
+    {
+      "id": "ford-escape-fwd-phev-phev-2026",
+      "brand": "Ford",
+      "model": "Escape FWD PHEV",
+      "year": 2026,
+      "powertrain": "phev",
+      "priority": 106
+    },
+    {
+      "id": "ford-kuga-phev-phev-2024",
+      "brand": "Ford",
+      "model": "Kuga PHEV",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 107
+    },
+    {
+      "id": "ford-explorer-phev-phev-2024",
+      "brand": "Ford",
+      "model": "Explorer PHEV",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 108
+    },
+    {
+      "id": "ford-transit-custom-phev-phev-2024",
+      "brand": "Ford",
+      "model": "Transit Custom PHEV",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 109
+    },
+    {
+      "id": "ford-aerostar-2026",
+      "brand": "Ford",
+      "model": "Aerostar",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 110
+    },
+    {
+      "id": "ford-affordable-aluminum-2026",
+      "brand": "Ford",
+      "model": "Affordable Aluminum",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 111
+    },
+    {
+      "id": "ford-aspire-2026",
+      "brand": "Ford",
+      "model": "Aspire",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 112
+    },
+    {
+      "id": "ford-b-750-2026",
+      "brand": "Ford",
+      "model": "B-750",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 113
+    },
+    {
+      "id": "ford-bradford-1-2026",
+      "brand": "Ford",
+      "model": "Bradford #1",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 114
+    },
+    {
+      "id": "ford-bradford-built-2026",
+      "brand": "Ford",
+      "model": "Bradford Built",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 115
+    },
+    {
+      "id": "ford-bronco-2026",
+      "brand": "Ford",
+      "model": "Bronco",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 116
+    },
+    {
+      "id": "bmw-i3-2026",
+      "brand": "BMW",
+      "model": "i3",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 117
+    },
+    {
+      "id": "bmw-i4-2026",
+      "brand": "BMW",
+      "model": "i4",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 118
+    },
+    {
+      "id": "bmw-i5-2026",
+      "brand": "BMW",
+      "model": "i5",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 119
+    },
+    {
+      "id": "bmw-i7-2026",
+      "brand": "BMW",
+      "model": "i7",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 120
+    },
+    {
+      "id": "bmw-ix-2026",
+      "brand": "BMW",
+      "model": "iX",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 121
+    },
+    {
+      "id": "bmw-ix1-2026",
+      "brand": "BMW",
+      "model": "iX1",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 122
+    },
+    {
+      "id": "bmw-ix3-2026",
+      "brand": "BMW",
+      "model": "iX3",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 123
+    },
+    {
+      "id": "bmw-550e-xdrive-sedan-phev-2027",
+      "brand": "BMW",
+      "model": "5 Series PHEV",
+      "year": 2027,
+      "powertrain": "phev",
+      "priority": 124
+    },
+    {
+      "id": "bmw-m5-touring-phev-2027",
+      "brand": "BMW",
+      "model": "M PHEV",
+      "year": 2027,
+      "powertrain": "phev",
+      "priority": 125
+    },
+    {
+      "id": "bmw-750e-xdrive-sedan-phev-2026",
+      "brand": "BMW",
+      "model": "7 Series PHEV",
+      "year": 2026,
+      "powertrain": "phev",
+      "priority": 126
+    },
+    {
+      "id": "bmw-x5-xdrive50e-phev-2026",
+      "brand": "BMW",
+      "model": "X5 PHEV",
+      "year": 2026,
+      "powertrain": "phev",
+      "priority": 127
+    },
+    {
+      "id": "bmw-xm-label-phev-2026",
+      "brand": "BMW",
+      "model": "XM PHEV",
+      "year": 2026,
+      "powertrain": "phev",
+      "priority": 128
+    },
+    {
+      "id": "bmw-330e-xdrive-sedan-phev-2024",
+      "brand": "BMW",
+      "model": "3 Series PHEV",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 129
+    },
+    {
+      "id": "bmw-225xe-active-tourer-phev-2024",
+      "brand": "BMW",
+      "model": "225xe Active Tourer",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 130
+    },
+    {
+      "id": "bmw-330e-phev-2024",
+      "brand": "BMW",
+      "model": "330e",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 131
+    },
+    {
+      "id": "bmw-530e-phev-2024",
+      "brand": "BMW",
+      "model": "530e",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 132
+    },
+    {
+      "id": "mercedes-benz-eqa-2026",
+      "brand": "Mercedes-Benz",
+      "model": "EQA",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 133
+    },
+    {
+      "id": "mercedes-benz-eqb-2026",
+      "brand": "Mercedes-Benz",
+      "model": "EQB",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 134
+    },
+    {
+      "id": "mercedes-benz-eqe-2026",
+      "brand": "Mercedes-Benz",
+      "model": "EQE",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 135
+    },
+    {
+      "id": "mercedes-benz-eqs-2026",
+      "brand": "Mercedes-Benz",
+      "model": "EQS",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 136
+    },
+    {
+      "id": "mercedes-benz-eqv-2026",
+      "brand": "Mercedes-Benz",
+      "model": "EQV",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 137
+    },
+    {
+      "id": "mercedes-benz-g-580-eq-2026",
+      "brand": "Mercedes-Benz",
+      "model": "G 580 EQ",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 138
+    },
+    {
+      "id": "mercedes-benz-e-class-phev-2026",
+      "brand": "Mercedes-Benz",
+      "model": "E-Class PHEV",
+      "year": 2026,
+      "powertrain": "phev",
+      "priority": 139
+    },
+    {
+      "id": "mercedes-benz-amg-e53-hybrid-4matic-plus-phev-2026",
+      "brand": "Mercedes-Benz",
+      "model": "AMG E53 Hybrid 4matic Plus",
+      "year": 2026,
+      "powertrain": "phev",
+      "priority": 140
+    },
+    {
+      "id": "mercedes-benz-amg-e53-hybrid-4matic-plus-station-wagon-phev-2026",
+      "brand": "Mercedes-Benz",
+      "model": "AMG E53 Hybrid 4matic Plus (station wagon)",
+      "year": 2026,
+      "powertrain": "phev",
+      "priority": 141
+    },
+    {
+      "id": "mercedes-benz-amg-gt-63-s-e-performance-coupe-phev-2025",
+      "brand": "Mercedes-Benz",
+      "model": "AMG GT PHEV",
+      "year": 2025,
+      "powertrain": "phev",
+      "priority": 142
+    },
+    {
+      "id": "mercedes-benz-s580e-4matic-phev-2025",
+      "brand": "Mercedes-Benz",
+      "model": "S-Class PHEV",
+      "year": 2025,
+      "powertrain": "phev",
+      "priority": 143
+    },
+    {
+      "id": "mercedes-benz-amg-sl63-s-e-performance-phev-2025",
+      "brand": "Mercedes-Benz",
+      "model": "SL-Class PHEV",
+      "year": 2025,
+      "powertrain": "phev",
+      "priority": 144
+    },
+    {
+      "id": "mercedes-benz-glc350e-4matic-with-eq-hybrid-tech-phev-2025",
+      "brand": "Mercedes-Benz",
+      "model": "GLC350e 4matic with EQ Hybrid Tech",
+      "year": 2025,
+      "powertrain": "phev",
+      "priority": 145
+    },
+    {
+      "id": "mercedes-benz-a-250-e-phev-2024",
+      "brand": "Mercedes-Benz",
+      "model": "A 250 e",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 146
+    },
+    {
+      "id": "mercedes-benz-b-250-e-phev-2024",
+      "brand": "Mercedes-Benz",
+      "model": "B 250 e",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 147
+    },
+    {
+      "id": "mercedes-benz-c-300-e-phev-2024",
+      "brand": "Mercedes-Benz",
+      "model": "C 300 e",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 148
+    },
+    {
+      "id": "audi-q4-e-tron-2026",
+      "brand": "Audi",
+      "model": "Q4 e-tron",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 149
+    },
+    {
+      "id": "audi-q6-e-tron-2026",
+      "brand": "Audi",
+      "model": "Q6 e-tron",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 150
+    },
+    {
+      "id": "audi-q8-e-tron-2026",
+      "brand": "Audi",
+      "model": "Q8 e-tron",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 151
+    },
+    {
+      "id": "audi-e-tron-gt-2026",
+      "brand": "Audi",
+      "model": "e-tron GT",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 152
+    },
+    {
+      "id": "audi-q5-plug-in-hybrid-quattro-phev-2025",
+      "brand": "Audi",
+      "model": "Q5 Plug-In Hybrid quattro",
+      "year": 2025,
+      "powertrain": "phev",
+      "priority": 153
+    },
+    {
+      "id": "audi-a3-tfsi-e-phev-2024",
+      "brand": "Audi",
+      "model": "A3 TFSI e",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 154
+    },
+    {
+      "id": "audi-a6-tfsi-e-phev-2024",
+      "brand": "Audi",
+      "model": "A6 TFSI e",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 155
+    },
+    {
+      "id": "audi-a7-tfsi-e-phev-2024",
+      "brand": "Audi",
+      "model": "A7 TFSI e",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 156
+    },
+    {
+      "id": "audi-a8-tfsi-e-phev-2024",
+      "brand": "Audi",
+      "model": "A8 TFSI e",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 157
+    },
+    {
+      "id": "audi-q3-tfsi-e-phev-2024",
+      "brand": "Audi",
+      "model": "Q3 TFSI e",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 158
+    },
+    {
+      "id": "audi-q5-tfsi-e-phev-2024",
+      "brand": "Audi",
+      "model": "Q5 TFSI e",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 159
+    },
+    {
+      "id": "audi-q7-tfsi-e-phev-2024",
+      "brand": "Audi",
+      "model": "Q7 TFSI e",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 160
+    },
+    {
+      "id": "audi-q8-tfsi-e-phev-2024",
+      "brand": "Audi",
+      "model": "Q8 TFSI e",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 161
+    },
+    {
+      "id": "audi-q5-tfsi-e-quattro-phev-2023",
+      "brand": "Audi",
+      "model": "Q5 PHEV",
+      "year": 2023,
+      "powertrain": "phev",
+      "priority": 162
+    },
+    {
+      "id": "audi-a7-quattro-phev-2021",
+      "brand": "Audi",
+      "model": "A7 PHEV",
+      "year": 2021,
+      "powertrain": "phev",
+      "priority": 163
+    },
+    {
+      "id": "audi-a8-l-phev-2021",
+      "brand": "Audi",
+      "model": "A8 PHEV",
+      "year": 2021,
+      "powertrain": "phev",
+      "priority": 164
+    },
+    {
+      "id": "opel-astra-electric-2026",
+      "brand": "Opel",
+      "model": "Astra Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 165
+    },
+    {
+      "id": "opel-corsa-electric-2026",
+      "brand": "Opel",
+      "model": "Corsa Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 166
+    },
+    {
+      "id": "opel-frontera-electric-2026",
+      "brand": "Opel",
+      "model": "Frontera Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 167
+    },
+    {
+      "id": "opel-grandland-electric-2026",
+      "brand": "Opel",
+      "model": "Grandland Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 168
+    },
+    {
+      "id": "opel-mokka-electric-2026",
+      "brand": "Opel",
+      "model": "Mokka Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 169
+    },
+    {
+      "id": "opel-astra-hybrid-phev-2024",
+      "brand": "Opel",
+      "model": "Astra Hybrid",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 170
+    },
+    {
+      "id": "opel-grandland-hybrid-phev-2024",
+      "brand": "Opel",
+      "model": "Grandland Hybrid",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 171
+    },
+    {
+      "id": "opel-agila-2026",
+      "brand": "Opel",
+      "model": "Agila",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 172
+    },
+    {
+      "id": "opel-astra-2026",
+      "brand": "Opel",
+      "model": "Astra",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 173
+    },
+    {
+      "id": "opel-corsa-2026",
+      "brand": "Opel",
+      "model": "Corsa",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 174
+    },
+    {
+      "id": "opel-crossland-2026",
+      "brand": "Opel",
+      "model": "Crossland",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 175
+    },
+    {
+      "id": "opel-grandland-2026",
+      "brand": "Opel",
+      "model": "Grandland",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 176
+    },
+    {
+      "id": "opel-insignia-2026",
+      "brand": "Opel",
+      "model": "Insignia",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 177
+    },
+    {
+      "id": "opel-meriva-2026",
+      "brand": "Opel",
+      "model": "Meriva",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 178
+    },
+    {
+      "id": "opel-mokka-2026",
+      "brand": "Opel",
+      "model": "Mokka",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 179
+    },
+    {
+      "id": "opel-vectra-2026",
+      "brand": "Opel",
+      "model": "Vectra",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 180
+    },
+    {
+      "id": "citroen-e-berlingo-2026",
+      "brand": "Citroen",
+      "model": "e-Berlingo",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 181
+    },
+    {
+      "id": "citroen-e-c3-2026",
+      "brand": "Citroen",
+      "model": "e-C3",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 182
+    },
+    {
+      "id": "citroen-e-c4-2026",
+      "brand": "Citroen",
+      "model": "e-C4",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 183
+    },
+    {
+      "id": "citroen-c5-aircross-hybrid-phev-2024",
+      "brand": "Citroen",
+      "model": "C5 Aircross Hybrid",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 184
+    },
+    {
+      "id": "citroen-berlingo-2026",
+      "brand": "Citroen",
+      "model": "Berlingo",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 185
+    },
+    {
+      "id": "citroen-c-elysee-2026",
+      "brand": "Citroen",
+      "model": "C-Elysee",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 186
+    },
+    {
+      "id": "citroen-c1-2026",
+      "brand": "Citroen",
+      "model": "C1",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 187
+    },
+    {
+      "id": "citroen-c3-2026",
+      "brand": "Citroen",
+      "model": "C3",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 188
+    },
+    {
+      "id": "citroen-c3-aircross-2026",
+      "brand": "Citroen",
+      "model": "C3 Aircross",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 189
+    },
+    {
+      "id": "citroen-c4-2026",
+      "brand": "Citroen",
+      "model": "C4",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 190
+    },
+    {
+      "id": "citroen-c4-cactus-2026",
+      "brand": "Citroen",
+      "model": "C4 Cactus",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 191
+    },
+    {
+      "id": "citroen-c5-2026",
+      "brand": "Citroen",
+      "model": "C5",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 192
+    },
+    {
+      "id": "citroen-c5-aircross-2026",
+      "brand": "Citroen",
+      "model": "C5 Aircross",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 193
+    },
+    {
+      "id": "citroen-c8-2026",
+      "brand": "Citroen",
+      "model": "C8",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 194
+    },
+    {
+      "id": "hyundai-equus-2026",
+      "brand": "Hyundai",
+      "model": "Equus",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 195
+    },
+    {
+      "id": "hyundai-inster-2026",
+      "brand": "Hyundai",
+      "model": "Inster",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 196
+    },
+    {
+      "id": "hyundai-ioniq-5-2026",
+      "brand": "Hyundai",
+      "model": "Ioniq 5",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 197
+    },
+    {
+      "id": "hyundai-ioniq-5-n-2026",
+      "brand": "Hyundai",
+      "model": "Ioniq 5 N",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 198
+    },
+    {
+      "id": "hyundai-ioniq-6-2026",
+      "brand": "Hyundai",
+      "model": "Ioniq 6",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 199
+    },
+    {
+      "id": "hyundai-ioniq-electric-2026",
+      "brand": "Hyundai",
+      "model": "Ioniq Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 200
+    },
+    {
+      "id": "hyundai-kona-electric-2026",
+      "brand": "Hyundai",
+      "model": "Kona Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 201
+    },
+    {
+      "id": "hyundai-tucson-phev-2026",
+      "brand": "Hyundai",
+      "model": "Tucson PHEV",
+      "year": 2026,
+      "powertrain": "phev",
+      "priority": 202
+    },
+    {
+      "id": "hyundai-tucson-plug-in-hybrid-phev-2026",
+      "brand": "Hyundai",
+      "model": "Tucson Plug-in Hybrid",
+      "year": 2026,
+      "powertrain": "phev",
+      "priority": 203
+    },
+    {
+      "id": "hyundai-tucson-plug-in-phev-2024",
+      "brand": "Hyundai",
+      "model": "Tucson Plug-in",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 204
+    },
+    {
+      "id": "hyundai-santa-fe-plug-in-phev-2024",
+      "brand": "Hyundai",
+      "model": "Santa Fe Plug-in",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 205
+    },
+    {
+      "id": "hyundai-santa-fe-phev-2023",
+      "brand": "Hyundai",
+      "model": "Santa Fe PHEV",
+      "year": 2023,
+      "powertrain": "phev",
+      "priority": 206
+    },
+    {
+      "id": "hyundai-santa-fe-plug-in-hybrid-phev-2023",
+      "brand": "Hyundai",
+      "model": "Santa Fe Plug-in Hybrid",
+      "year": 2023,
+      "powertrain": "phev",
+      "priority": 207
+    },
+    {
+      "id": "hyundai-ioniq-phev-2022",
+      "brand": "Hyundai",
+      "model": "Ioniq PHEV",
+      "year": 2022,
+      "powertrain": "phev",
+      "priority": 208
+    },
+    {
+      "id": "hyundai-ioniq-plug-in-hybrid-phev-2022",
+      "brand": "Hyundai",
+      "model": "Ioniq Plug-in Hybrid",
+      "year": 2022,
+      "powertrain": "phev",
+      "priority": 209
+    },
+    {
+      "id": "hyundai-accent-2026",
+      "brand": "Hyundai",
+      "model": "Accent",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 210
+    },
+    {
+      "id": "kia-ev3-2026",
+      "brand": "Kia",
+      "model": "EV3",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 211
+    },
+    {
+      "id": "kia-ev4-2026",
+      "brand": "Kia",
+      "model": "EV4",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 212
+    },
+    {
+      "id": "kia-ev6-2026",
+      "brand": "Kia",
+      "model": "EV6",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 213
+    },
+    {
+      "id": "kia-ev9-2026",
+      "brand": "Kia",
+      "model": "EV9",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 214
+    },
+    {
+      "id": "kia-soul-ev-2026",
+      "brand": "Kia",
+      "model": "Soul EV",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 215
+    },
+    {
+      "id": "kia-e-niro-2026",
+      "brand": "Kia",
+      "model": "e-Niro",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 216
+    },
+    {
+      "id": "kia-sportage-phev-2027",
+      "brand": "Kia",
+      "model": "Sportage PHEV",
+      "year": 2027,
+      "powertrain": "phev",
+      "priority": 217
+    },
+    {
+      "id": "kia-sportage-plug-in-hybrid-phev-2027",
+      "brand": "Kia",
+      "model": "Sportage Plug-in Hybrid",
+      "year": 2027,
+      "powertrain": "phev",
+      "priority": 218
+    },
+    {
+      "id": "kia-niro-phev-2026",
+      "brand": "Kia",
+      "model": "Niro PHEV",
+      "year": 2026,
+      "powertrain": "phev",
+      "priority": 219
+    },
+    {
+      "id": "kia-sorento-phev-2026",
+      "brand": "Kia",
+      "model": "Sorento PHEV",
+      "year": 2026,
+      "powertrain": "phev",
+      "priority": 220
+    },
+    {
+      "id": "kia-niro-plug-in-hybrid-phev-2026",
+      "brand": "Kia",
+      "model": "Niro Plug-in Hybrid",
+      "year": 2026,
+      "powertrain": "phev",
+      "priority": 221
+    },
+    {
+      "id": "kia-sorento-plug-in-hybrid-phev-2026",
+      "brand": "Kia",
+      "model": "Sorento Plug-in Hybrid",
+      "year": 2026,
+      "powertrain": "phev",
+      "priority": 222
+    },
+    {
+      "id": "kia-sportage-plug-in-phev-2024",
+      "brand": "Kia",
+      "model": "Sportage Plug-in",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 223
+    },
+    {
+      "id": "kia-niro-plug-in-phev-2024",
+      "brand": "Kia",
+      "model": "Niro Plug-in",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 224
+    },
+    {
+      "id": "kia-sorento-plug-in-phev-2024",
+      "brand": "Kia",
+      "model": "Sorento Plug-in",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 225
+    },
+    {
+      "id": "kia-carnival-plug-in-phev-2024",
+      "brand": "Kia",
+      "model": "Carnival Plug-in",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 226
+    },
+    {
+      "id": "tesla-cybertruck-2026",
+      "brand": "Tesla",
+      "model": "Cybertruck",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 227
+    },
+    {
+      "id": "tesla-model-3-2026",
+      "brand": "Tesla",
+      "model": "Model 3",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 228
+    },
+    {
+      "id": "tesla-model-s-2026",
+      "brand": "Tesla",
+      "model": "Model S",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 229
+    },
+    {
+      "id": "tesla-model-x-2026",
+      "brand": "Tesla",
+      "model": "Model X",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 230
+    },
+    {
+      "id": "tesla-model-y-2026",
+      "brand": "Tesla",
+      "model": "Model Y",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 231
+    },
+    {
+      "id": "tesla-roadster-2026",
+      "brand": "Tesla",
+      "model": "Roadster",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 232
+    },
+    {
+      "id": "tesla-semi-2026",
+      "brand": "Tesla",
+      "model": "Semi",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 233
+    },
+    {
+      "id": "skoda-citigo-e-iv-2026",
+      "brand": "Skoda",
+      "model": "Citigo-e iV",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 234
+    },
+    {
+      "id": "skoda-elroq-2026",
+      "brand": "Skoda",
+      "model": "Elroq",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 235
+    },
+    {
+      "id": "skoda-enyaq-2026",
+      "brand": "Skoda",
+      "model": "Enyaq",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 236
+    },
+    {
+      "id": "skoda-octavia-iv-phev-2024",
+      "brand": "Skoda",
+      "model": "Octavia iV",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 237
+    },
+    {
+      "id": "skoda-superb-iv-phev-2024",
+      "brand": "Skoda",
+      "model": "Superb iV",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 238
+    },
+    {
+      "id": "skoda-citigo-2026",
+      "brand": "Skoda",
+      "model": "Citigo",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 239
+    },
+    {
+      "id": "skoda-fabia-2026",
+      "brand": "Skoda",
+      "model": "Fabia",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 240
+    },
+    {
+      "id": "skoda-kamiq-2026",
+      "brand": "Skoda",
+      "model": "Kamiq",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 241
+    },
+    {
+      "id": "skoda-karoq-2026",
+      "brand": "Skoda",
+      "model": "Karoq",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 242
+    },
+    {
+      "id": "skoda-kodiaq-2026",
+      "brand": "Skoda",
+      "model": "Kodiaq",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 243
+    },
+    {
+      "id": "skoda-octavia-2026",
+      "brand": "Skoda",
+      "model": "Octavia",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 244
+    },
+    {
+      "id": "skoda-rapid-2026",
+      "brand": "Skoda",
+      "model": "Rapid",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 245
+    },
+    {
+      "id": "skoda-scala-2026",
+      "brand": "Skoda",
+      "model": "Scala",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 246
+    },
+    {
+      "id": "skoda-superb-2026",
+      "brand": "Skoda",
+      "model": "Superb",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 247
+    },
+    {
+      "id": "skoda-yeti-2026",
+      "brand": "Skoda",
+      "model": "Yeti",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 248
+    },
+    {
+      "id": "seat-mii-electric-2026",
+      "brand": "SEAT",
+      "model": "Mii electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "priority": 249
+    },
+    {
+      "id": "seat-leon-e-hybrid-phev-2024",
+      "brand": "SEAT",
+      "model": "Leon e-Hybrid",
+      "year": 2024,
+      "powertrain": "phev",
+      "priority": 250
+    },
+    {
+      "id": "seat-altea-2026",
+      "brand": "SEAT",
+      "model": "Altea",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 251
+    },
+    {
+      "id": "seat-arona-2026",
+      "brand": "SEAT",
+      "model": "Arona",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 252
+    },
+    {
+      "id": "seat-ateca-2026",
+      "brand": "SEAT",
+      "model": "Ateca",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 253
+    },
+    {
+      "id": "seat-cordoba-2026",
+      "brand": "SEAT",
+      "model": "Cordoba",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 254
+    },
+    {
+      "id": "seat-exeo-2026",
+      "brand": "SEAT",
+      "model": "Exeo",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 255
+    },
+    {
+      "id": "seat-ibiza-2026",
+      "brand": "SEAT",
+      "model": "Ibiza",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 256
+    },
+    {
+      "id": "seat-leon-2026",
+      "brand": "SEAT",
+      "model": "Leon",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 257
+    },
+    {
+      "id": "seat-mii-2026",
+      "brand": "SEAT",
+      "model": "Mii",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 258
+    },
+    {
+      "id": "seat-tarraco-2026",
+      "brand": "SEAT",
+      "model": "Tarraco",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 259
+    },
+    {
+      "id": "seat-toledo-2026",
+      "brand": "SEAT",
+      "model": "Toledo",
+      "year": 2026,
+      "powertrain": "ice",
+      "priority": 260
+    }
+  ]
+}

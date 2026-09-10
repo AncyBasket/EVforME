@@ -1,0 +1,74 @@
+{
+  "id": "skoda-superb-2026",
+  "brand": "Skoda",
+  "model": "Superb",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 247,
+  "approved": false,
+  "generated_at": "2026-09-10T11:31:25.065839+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/48267249646_44758c3805_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/48267249646",
+      "title": "Skoda Superb Tour de France Race control (the left one is the car of Christian Prudhomme, the race director)",
+      "query": "Skoda Superb car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4599/39310748401_e74759939b_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/39310748401",
+      "title": "Skoda Superb Race control Tour de France 2017 Nuits-Saint-Georges",
+      "query": "Skoda Superb car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4635/39310737801_bb54ffe5c6_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/39310737801",
+      "title": "Skoda Superb Lotto Jumbo Tour de France 2017 Nuits-Saint-Georges",
+      "query": "Skoda Superb car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4642/39310714141_0ab14e56bc_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/39310714141",
+      "title": "Skoda Superb Race control Tour de France 2017 Nuits-Saint-Georges",
+      "query": "Skoda Superb car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4736/38603607624_2c9d86a09c_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/38603607624",
+      "title": "Skoda Superb Cofidis Tour de France 2017 Nuits-Saint-Georges",
+      "query": "Skoda Superb car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

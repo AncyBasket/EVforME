@@ -1,0 +1,38 @@
+{
+  "id": "mercedes-benz-a-250-e-phev-2024",
+  "brand": "Mercedes-Benz",
+  "model": "A 250 e",
+  "year": 2024,
+  "powertrain": "phev",
+  "priority": 146,
+  "approved": false,
+  "generated_at": "2026-09-10T11:27:57.496966+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/79/Mercedes-Benz_RBA-207436_E_250_Cabriolet_AMG_Package_%2823052110426%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "先従隗始",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=148727759",
+      "title": "Mercedes-Benz RBA-207436 E 250 Cabriolet AMG Package (23052110426)",
+      "query": "Mercedes-Benz A 250 e car",
+      "match_score": 1.0,
+      "year_hint": 2024
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Mercedes-Benz_RBA-207436_E_250_Cabriolet_AMG_Package_%2823052110425%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "先従隗始",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=148727760",
+      "title": "Mercedes-Benz RBA-207436 E 250 Cabriolet AMG Package (23052110425)",
+      "query": "Mercedes-Benz A 250 e car",
+      "match_score": 1.0,
+      "year_hint": 2024
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

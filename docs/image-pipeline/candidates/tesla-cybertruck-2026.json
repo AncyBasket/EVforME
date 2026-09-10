@@ -1,0 +1,26 @@
+{
+  "id": "tesla-cybertruck-2026",
+  "brand": "Tesla",
+  "model": "Cybertruck",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 227,
+  "approved": false,
+  "generated_at": "2026-09-10T11:30:30.618826+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Cybertruck_%26_other_Tesla_cars_at_Stockholm%2C_Sweden_2024.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Editorq35",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=156122169",
+      "title": "Cybertruck & other Tesla cars at Stockholm, Sweden 2024",
+      "query": "Tesla Cybertruck car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

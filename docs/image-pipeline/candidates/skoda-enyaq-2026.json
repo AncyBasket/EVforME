@@ -1,0 +1,13 @@
+{
+  "id": "skoda-enyaq-2026",
+  "brand": "Skoda",
+  "model": "Enyaq",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 236,
+  "approved": false,
+  "generated_at": "2026-09-10T11:30:56.619515+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

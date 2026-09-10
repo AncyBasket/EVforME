@@ -1,0 +1,74 @@
+{
+  "id": "toyota-celica-2026",
+  "brand": "Toyota",
+  "model": "Celica",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 92,
+  "approved": false,
+  "generated_at": "2026-09-10T11:21:06.361350+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/48187631922_664731767c_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/48187631922",
+      "title": "Toyota Celica",
+      "query": "Toyota Celica car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/48203351876_aca65786cd_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/48203351876",
+      "title": "Toyota Celica",
+      "query": "Toyota Celica car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4635/25397998088_62d82e2c42_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/25397998088",
+      "title": "Toyota Celica",
+      "query": "Toyota Celica car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4725/38557126794_d7372a1c3c_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/38557126794",
+      "title": "Toyota Celica",
+      "query": "Toyota Celica car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/47941184302_2c1d6ee413_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/47941184302",
+      "title": "Toyota Celica GT Four",
+      "query": "Toyota Celica car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

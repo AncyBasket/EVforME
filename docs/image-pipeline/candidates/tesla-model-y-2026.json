@@ -1,0 +1,13 @@
+{
+  "id": "tesla-model-y-2026",
+  "brand": "Tesla",
+  "model": "Model Y",
+  "year": 2026,
+  "powertrain": "ev",
+  "priority": 231,
+  "approved": false,
+  "generated_at": "2026-09-10T11:30:46.495354+00:00",
+  "candidates": [],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

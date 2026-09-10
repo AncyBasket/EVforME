@@ -1,0 +1,74 @@
+{
+  "id": "ford-focus-2026",
+  "brand": "Ford",
+  "model": "Focus",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 176,
+  "approved": false,
+  "generated_at": "2026-09-10T11:23:38.890049+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9zdGF0aWMvaW1hZ2Uvd2Vic2l0ZS8yMDIyLTA0L2xyL2ZyY2FyX2ZvcmRfYXV0b21vYmlsZV90cmFuc3BvcnRhdGlvbl8wLWltYWdlLWt6MmU1MHdhLmpwZw.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": null,
+      "source_page": "https://www.rawpixel.com/image/6112508/ford-focus-car-location-unknown-date-unknown",
+      "title": "Ford Focus car. Location Unknown",
+      "query": "Ford Focus car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/25335681078_f8f97907b1_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/25335681078",
+      "title": "Ford Focus RS",
+      "query": "Ford Focus car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/4818/46853471802_41632ba452_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46853471802",
+      "title": "New Ford Focus",
+      "query": "Ford Focus car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/48744744146_8b943e20d9_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/48744744146",
+      "title": "Ford Focus Sedan",
+      "query": "Ford Focus car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/24340053697_5dbe472187_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/24340053697",
+      "title": "Ford Focus RS",
+      "query": "Ford Focus car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

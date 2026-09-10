@@ -1,0 +1,38 @@
+{
+  "id": "citroen-c5-aircross-2026",
+  "brand": "Citroen",
+  "model": "C5 Aircross",
+  "year": 2026,
+  "powertrain": "ice",
+  "priority": 193,
+  "approved": false,
+  "generated_at": "2026-09-10T11:29:16.928661+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7875/46203302384_cbe81ca430_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46203302384",
+      "title": "Citroen C5 Aircross",
+      "query": "Citroen C5 Aircross car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7883/46203302404_9e5dbd1cb4_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/46203302404",
+      "title": "Citroen C5 Aircross",
+      "query": "Citroen C5 Aircross car",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+}

@@ -12,12 +12,14 @@ import json
 from pathlib import Path
 from urllib.parse import urlparse
 
+# Risky / unlicensed hotlinks. Do NOT blanket-strip Wikimedia/Flickr:
+# CC0/PD URLs may be applied via docs/image-pipeline (see apply_free_vehicle_images.py).
 BLOCKED_HOST_PARTS = (
     "edidomus.it",
     "quattroruote",
-    "wikimedia.org",
-    "wikipedia.org",
     "catbox.moe",
+    "source.unsplash.com",
+    "images.unsplash.com",
 )
 
 
