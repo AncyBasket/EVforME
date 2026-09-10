@@ -64,6 +64,7 @@ final class VehicleCatalogService {
                 }
                 self.vehicles = catalog
                 self.invalidateCaches()
+                NotificationCenter.default.post(name: .evVehicleCatalogDidUpdate, object: nil)
             }
         }
     }

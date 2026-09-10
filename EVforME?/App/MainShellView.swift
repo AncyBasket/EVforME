@@ -87,12 +87,8 @@ struct MainShellView: View {
         .tint(Color.accentDark)
         .onAppear {
             guard ProcessInfo.processInfo.environment["UITEST_PRESET_VEHICLES"] == "1" else { return }
-            if userInput.sourceVehicleId.isEmpty {
-                userInput.sourceVehicleId = "alfa-romeo-147-2005"
-            }
-            if userInput.targetVehicleId.isEmpty {
-                userInput.targetVehicleId = "audi-q4-e-tron-2017"
-            }
+            userInput.sourceVehicleId = Defaults.starterSourceVehicleId
+            userInput.targetVehicleId = Defaults.starterTargetVehicleId
         }
         .task { await catalogSetup() }
         .fullScreenCover(isPresented: $showOnboarding) {

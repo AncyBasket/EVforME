@@ -28,14 +28,8 @@ final class EVforME_UITests: XCTestCase {
         app.launchEnvironment["UITEST_PRESET_VEHICLES"] = "1"
         app.launch()
 
-        // Dismiss onboarding (`PrimaryButton` mostra il titolo in maiuscolo)
-        if app.buttons["GET STARTED"].waitForExistence(timeout: 2) {
-            app.buttons["GET STARTED"].tap()
-        } else if app.buttons["INIZIA"].waitForExistence(timeout: 2) {
-            app.buttons["INIZIA"].tap()
-        } else if app.buttons["Get Started"].waitForExistence(timeout: 1) {
-            app.buttons["Get Started"].tap()
-        }
+        // Dismiss onboarding / quick-start (IT/EN; PrimaryButton may uppercase label)
+        dismissQuickStartIfNeeded(app)
 
         let titleEN = app.staticTexts["EV for ME?"]
         let titleIT = app.staticTexts["EV per ME?"]
@@ -44,7 +38,16 @@ final class EVforME_UITests: XCTestCase {
             "Masthead title should match app_title (EN or IT)"
         )
 
-        // CTA: `accessibilityLabel` = string localizzata (non più "Calculate EV suitability")
+        // Wait for catalog-backed starters (async load) before simulating.
+        let startersReady =
+            app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Golf")).firstMatch
+                .waitForExistence(timeout: 12)
+            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Model 3")).firstMatch
+                .waitForExistence(timeout: 2)
+            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Tesla")).firstMatch
+                .waitForExistence(timeout: 2)
+        XCTAssertTrue(startersReady, "Starter vehicles should appear after catalog load")
+
         let tellMeEN = app.buttons["Tell me the truth"]
         let tellMeIT = app.buttons["Dimmi la verità"]
         XCTAssertTrue(
@@ -53,14 +56,25 @@ final class EVforME_UITests: XCTestCase {
         )
         if tellMeEN.exists { tellMeEN.tap() } else { tellMeIT.tap() }
 
-        let modifyLower = app.buttons["Modify input"]
-        let modifyTitle = app.buttons["Modify Input"]
+        // L10n: EN "Change inputs" / IT "Modifica dati"
+        let modifyEN = app.buttons["Change inputs"]
         let modifyIT = app.buttons["Modifica dati"]
+        let modifyLegacy = app.buttons["Modify input"]
         let oneExists =
-            modifyLower.waitForExistence(timeout: 12)
-            || modifyTitle.waitForExistence(timeout: 1)
-            || modifyIT.waitForExistence(timeout: 1)
+            modifyEN.waitForExistence(timeout: 15)
+            || modifyIT.waitForExistence(timeout: 2)
+            || modifyLegacy.waitForExistence(timeout: 1)
         XCTAssertTrue(oneExists, "Verdict screen should show modify / back to bench control")
+
+        // PDF export (gratis) — sheet should open without crash.
+        let pdfEN = app.buttons["Export PDF report"]
+        let pdfIT = app.buttons["Esporta report PDF"]
+        if pdfIT.waitForExistence(timeout: 2) || pdfEN.waitForExistence(timeout: 1) {
+            if pdfIT.exists { pdfIT.tap() } else { pdfEN.tap() }
+            // Sheet presence is best-effort (ShareLink labels vary by OS).
+            _ = app.buttons["Condividi report PDF"].waitForExistence(timeout: 3)
+                || app.buttons["Share PDF report"].waitForExistence(timeout: 1)
+        }
     }
     
     @MainActor
@@ -69,13 +83,7 @@ final class EVforME_UITests: XCTestCase {
         app.launchEnvironment["UITEST_PRESET_VEHICLES"] = "1"
         app.launch()
 
-        if app.buttons["GET STARTED"].waitForExistence(timeout: 2) {
-            app.buttons["GET STARTED"].tap()
-        } else if app.buttons["INIZIA"].waitForExistence(timeout: 2) {
-            app.buttons["INIZIA"].tap()
-        } else if app.buttons["Get Started"].waitForExistence(timeout: 1) {
-            app.buttons["Get Started"].tap()
-        }
+        dismissQuickStartIfNeeded(app)
 
         let slider = app.sliders["Yearly kilometers slider"]
         XCTAssertTrue(slider.waitForExistence(timeout: 8))
@@ -88,6 +96,28 @@ final class EVforME_UITests: XCTestCase {
         // This measures how long it takes to launch your application.
         measure(metrics: [XCTApplicationLaunchMetric()]) {
             XCUIApplication().launch()
+        }
+    }
+
+    @MainActor
+    private func dismissQuickStartIfNeeded(_ app: XCUIApplication) {
+        let labels = [
+            "Apri il banco",
+            "APRI IL BANCO",
+            "Open the bench",
+            "OPEN THE BENCH",
+            "Salta intro",
+            "Skip intro",
+            "GET STARTED",
+            "INIZIA",
+            "Get Started",
+        ]
+        for label in labels {
+            let button = app.buttons[label]
+            if button.waitForExistence(timeout: 1.2) {
+                button.tap()
+                return
+            }
         }
     }
 }

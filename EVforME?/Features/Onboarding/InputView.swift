@@ -636,6 +636,9 @@ struct InputView: View {
         sourceVehicles = VehicleCatalogService.shared.sourceVehicles()
         targetVehicles = VehicleCatalogService.shared.targetEVVehicles()
 
+        // Catalogo ancora in load async: non azzerare gli starter ID (altrimenti CTA → fail-closed).
+        guard !sourceVehicles.isEmpty, !targetVehicles.isEmpty else { return }
+
         if userInput.sourceVehicleId.isEmpty
             || !sourceVehicles.contains(where: { $0.id == userInput.sourceVehicleId }) {
             userInput.sourceVehicleId = preferredId(
