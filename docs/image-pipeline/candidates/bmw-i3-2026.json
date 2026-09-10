@@ -5,7 +5,7 @@
   "year": 2026,
   "powertrain": "ev",
   "priority": 189,
-  "approved": false,
+  "approved": true,
   "generated_at": "2026-09-10T11:24:00.213235+00:00",
   "candidates": [
     {
@@ -58,5 +58,7 @@
     }
   ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://upload.wikimedia.org/wikipedia/commons/2/24/2019_Warszawa_BMW_i3_innogy_Go.jpg",
+  "approval_note": "Batch2: evident brand+model; unique URL"
 }

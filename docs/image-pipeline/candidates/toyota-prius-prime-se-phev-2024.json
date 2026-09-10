@@ -4,9 +4,9 @@
   "model": "Prius Prime PHEV",
   "year": 2024,
   "powertrain": "phev",
-  "priority": 80,
+  "priority": 61,
   "approved": false,
-  "generated_at": "2026-09-10T11:20:47.944157+00:00",
+  "generated_at": "2026-09-10T11:48:08.315383+00:00",
   "candidates": [],
   "search_errors": [],
   "notes": "approved defaults to false; set approved:true only when brand+model are obvious."

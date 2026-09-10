@@ -4,9 +4,9 @@
   "model": "Twingo Electric",
   "year": 2026,
   "powertrain": "ev",
-  "priority": 107,
+  "priority": 72,
   "approved": false,
-  "generated_at": "2026-09-10T11:21:34.861433+00:00",
+  "generated_at": "2026-09-10T11:48:14.027274+00:00",
   "candidates": [],
   "search_errors": [],
   "notes": "approved defaults to false; set approved:true only when brand+model are obvious."

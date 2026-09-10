@@ -5,9 +5,72 @@
   "year": 2026,
   "powertrain": "ice",
   "priority": 21,
-  "approved": false,
-  "generated_at": "2026-09-10T11:19:14.868936+00:00",
-  "candidates": [],
+  "approved": true,
+  "generated_at": "2026-09-10T11:49:45.467239+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/83/2024_Jeep_Avenger_in_Granite%2C_front_left%2C_06-10-2025.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Cutlass",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=171565956",
+      "title": "2024 Jeep Avenger in Granite, front left, 06-10-2025",
+      "query": "Jeep Avenger",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/21/Jeep_Avenger_4xe_Hybrid_eAWD_%282025%29_%2854732689195%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Charles from Port Chester, New York",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=179292148",
+      "title": "Jeep Avenger 4xe Hybrid eAWD (2025) (54732689195)",
+      "query": "Jeep Avenger",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Jeep_Avenger_182742.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Trop86",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=163447151",
+      "title": "Jeep Avenger 182742",
+      "query": "Jeep Avenger",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/48/Jeep_Avenger_162427.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Trop86",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=155101809",
+      "title": "Jeep Avenger 162427",
+      "query": "Jeep Avenger",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/94/Jeep_Avenger_4xe_Hybrid_eAWD_%282024%29_%2854726516662%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Charles from Port Chester, New York",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=179292151",
+      "title": "Jeep Avenger 4xe Hybrid eAWD (2024) (54726516662)",
+      "query": "Jeep Avenger",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://upload.wikimedia.org/wikipedia/commons/8/83/2024_Jeep_Avenger_in_Granite%2C_front_left%2C_06-10-2025.jpg",
+  "approval_note": "Batch2b: 2024 Jeep Avenger in Granite, front left, 06-10-2025"
 }

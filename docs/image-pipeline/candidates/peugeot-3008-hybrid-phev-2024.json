@@ -4,10 +4,73 @@
   "model": "3008 Hybrid",
   "year": 2024,
   "powertrain": "phev",
-  "priority": 130,
-  "approved": false,
-  "generated_at": "2026-09-10T11:22:16.759780+00:00",
-  "candidates": [],
+  "priority": 90,
+  "approved": true,
+  "generated_at": "2026-09-10T11:50:29.191311+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Peugeot_3008_Hybrid_136_%282025%29_%2854725767003%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Charles from Port Chester, New York",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=179341796",
+      "title": "Peugeot 3008 Hybrid 136 (2025) (54725767003)",
+      "query": "Peugeot 3008 Hybrid",
+      "match_score": 1.0,
+      "year_hint": 2024
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Peugeot_3008_Hybrid_136_%282025%29_%2855076822475%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Charles from Port Chester, New York",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=183725518",
+      "title": "Peugeot 3008 Hybrid 136 (2025) (55076822475)",
+      "query": "Peugeot 3008 Hybrid",
+      "match_score": 1.0,
+      "year_hint": 2024
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Peugeot_3008_Hybrid_145_e-DSC6_%282025%29_%2854817362517%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Charles from Port Chester, New York",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=179341814",
+      "title": "Peugeot 3008 Hybrid 145 e-DSC6 (2025) (54817362517)",
+      "query": "Peugeot 3008 Hybrid",
+      "match_score": 1.0,
+      "year_hint": 2024
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/ac/Peugeot_3008_Hybrid_145_e-DSC6_%282025%29_%2854817362492%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Charles from Port Chester, New York",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=179341813",
+      "title": "Peugeot 3008 Hybrid 145 e-DSC6 (2025) (54817362492)",
+      "query": "Peugeot 3008 Hybrid",
+      "match_score": 1.0,
+      "year_hint": 2024
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Peugeot_3008_Hybrid_136_e-DSC6_%282025%29_%2854726516592%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Charles from Port Chester, New York",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=179341811",
+      "title": "Peugeot 3008 Hybrid 136 e-DSC6 (2025) (54726516592)",
+      "query": "Peugeot 3008 Hybrid",
+      "match_score": 1.0,
+      "year_hint": 2024
+    }
+  ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Peugeot_3008_Hybrid_136_%282025%29_%2854725767003%29.jpg",
+  "approval_note": "Batch2b: Peugeot 3008 Hybrid 136 (2025) (54725767003)"
 }

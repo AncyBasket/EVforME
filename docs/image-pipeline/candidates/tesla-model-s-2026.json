@@ -5,7 +5,7 @@
   "year": 2026,
   "powertrain": "ev",
   "priority": 229,
-  "approved": false,
+  "approved": true,
   "generated_at": "2026-09-10T11:30:39.428791+00:00",
   "candidates": [
     {
@@ -70,5 +70,7 @@
     }
   ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/65535/33916874198_43c36c2566_b.jpg",
+  "approval_note": "Batch2: evident brand+model; unique URL"
 }

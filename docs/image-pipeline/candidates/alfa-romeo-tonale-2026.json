@@ -5,9 +5,72 @@
   "year": 2026,
   "powertrain": "ice",
   "priority": 36,
-  "approved": false,
-  "generated_at": "2026-09-10T11:19:37.933989+00:00",
-  "candidates": [],
+  "approved": true,
+  "generated_at": "2026-09-10T11:49:55.235121+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/df/Alfa_Romeo_Tonale_Plug-in_Hybrid_engine.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "TTTNIS",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=141375336",
+      "title": "Alfa Romeo Tonale Plug-in Hybrid engine",
+      "query": "Alfa Romeo Tonale",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Alfa_Romeo_Tonale_1.5_VGT_%282024%29_%2854716811998%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Charles from Port Chester, New York",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=179197942",
+      "title": "Alfa Romeo Tonale 1.5 VGT (2024) (54716811998)",
+      "query": "Alfa Romeo Tonale",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/39/Alfa_Romeo_Tonale_Veloce_%282023%29_%2854729846483%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Charles from Port Chester, New York",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=179197964",
+      "title": "Alfa Romeo Tonale Veloce (2023) (54729846483)",
+      "query": "Alfa Romeo Tonale",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/86/2023_Alfa_Romeo_Tonale_Tributo_Italiano_TB_DCT.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Calreyn88",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=151048676",
+      "title": "2023 Alfa Romeo Tonale Tributo Italiano TB DCT",
+      "query": "Alfa Romeo Tonale",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/33/Alfa_Romeo_Tonale_104402.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Trop86",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=147944549",
+      "title": "Alfa Romeo Tonale 104402",
+      "query": "Alfa Romeo Tonale",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Alfa_Romeo_Tonale_1.5_VGT_%282024%29_%2854716811998%29.jpg",
+  "approval_note": "Batch2b: Alfa Romeo Tonale 1.5 VGT (2024) (54716811998)"
 }

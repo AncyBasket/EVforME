@@ -4,10 +4,73 @@
   "model": "Mustang Mach-E",
   "year": 2026,
   "powertrain": "ev",
-  "priority": 156,
-  "approved": false,
-  "generated_at": "2026-09-10T11:23:00.261288+00:00",
-  "candidates": [],
+  "priority": 103,
+  "approved": true,
+  "generated_at": "2026-09-10T11:50:42.015824+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/2023_Ford_Mustang_Mach-E_GT_Front_Compartment.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "MoCars",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=143925213",
+      "title": "2023 Ford Mustang Mach-E GT Front Compartment",
+      "query": "Ford Mustang Mach-E",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/54378366798_8d1ae32a6c_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/54378366798",
+      "title": "Ford Mustang Mach-E",
+      "query": "Ford Mustang Mach-E",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/54378127786_b4b40f8e82_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/54378127786",
+      "title": "Ford Mustang Mach-E",
+      "query": "Ford Mustang Mach-E",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/67/Ford_Mustang_Mach-E_140510.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Trop86",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=168276926",
+      "title": "Ford Mustang Mach-E 140510",
+      "query": "Ford Mustang Mach-E",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/96/2023_Ford_Mustang_Mach_E.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Calreyn88",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=147122668",
+      "title": "2023 Ford Mustang Mach E",
+      "query": "Ford Mustang Mach-E",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/65535/54378366798_8d1ae32a6c_b.jpg",
+  "approval_note": "Batch2b: Ford Mustang Mach-E"
 }

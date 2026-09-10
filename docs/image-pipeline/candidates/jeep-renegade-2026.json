@@ -36,5 +36,5 @@
   "search_errors": [],
   "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
   "preferred_url": "https://live.staticflickr.com/65535/49659454496_0e8923eba4_b.jpg",
-  "approval_note": "Manual batch: title evidences brand/model (Jeep Renegade 2020)"
+  "approval_note": "Batch2: evident brand+model; unique URL"
 }

@@ -4,9 +4,9 @@
   "model": "i4",
   "year": 2026,
   "powertrain": "ev",
-  "priority": 190,
-  "approved": false,
-  "generated_at": "2026-09-10T11:24:02.806140+00:00",
+  "priority": 118,
+  "approved": true,
+  "generated_at": "2026-09-10T11:50:46.165821+00:00",
   "candidates": [
     {
       "source": "openverse",
@@ -43,8 +43,34 @@
       "query": "BMW i4 car",
       "match_score": 1.0,
       "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/BMW_i4_2022_of_Kyrgyz_MVD.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "HOMIEZAVR",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=147077377",
+      "title": "BMW i4 2022 of Kyrgyz MVD",
+      "query": "BMW i4",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/54763453299_a1e3d10d4f_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/54763453299",
+      "title": "BMW i4",
+      "query": "BMW i4",
+      "match_score": 1.0,
+      "year_hint": 2026
     }
   ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/BMW_i4_2022_of_Kyrgyz_MVD.jpg",
+  "approval_note": "Batch2b: BMW i4 2022 of Kyrgyz MVD"
 }

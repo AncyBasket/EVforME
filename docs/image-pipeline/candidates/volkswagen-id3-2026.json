@@ -5,9 +5,72 @@
   "year": 2026,
   "powertrain": "ev",
   "priority": 38,
-  "approved": false,
-  "generated_at": "2026-09-10T11:19:41.754308+00:00",
-  "candidates": [],
+  "approved": true,
+  "generated_at": "2026-09-10T11:50:01.141964+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Volkswagen_ID.3_%282023%29_%2854730211522%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Charles from Port Chester, New York",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=179350981",
+      "title": "Volkswagen ID.3 (2023) (54730211522)",
+      "query": "Volkswagen ID.3",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Volkswagen_ID.3_%282025%29_%2854720523157%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Charles from Port Chester, New York",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=179350978",
+      "title": "Volkswagen ID.3 (2025) (54720523157)",
+      "query": "Volkswagen ID.3",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Moscow%2C_Volkswagen_ID.3_%28SAIC_Volkswagen%29_Mar_2026_05.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Retired electrician",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=187047534",
+      "title": "Moscow, Volkswagen ID.3 (SAIC Volkswagen) Mar 2026 05",
+      "query": "Volkswagen ID.3",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Moscow%2C_Volkswagen_ID.3%2C_Aug_2025_01.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Retired electrician",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=173325111",
+      "title": "Moscow, Volkswagen ID.3, Aug 2025 01",
+      "query": "Volkswagen ID.3",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/be/Moscow%2C_Volkswagen_ID.3_%28SAIC_Volkswagen%29_Mar_2026_04.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Retired electrician",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=187047533",
+      "title": "Moscow, Volkswagen ID.3 (SAIC Volkswagen) Mar 2026 04",
+      "query": "Volkswagen ID.3",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Volkswagen_ID.3_%282023%29_%2854730211522%29.jpg",
+  "approval_note": "Batch2b: Volkswagen ID.3 (2023) (54730211522)"
 }

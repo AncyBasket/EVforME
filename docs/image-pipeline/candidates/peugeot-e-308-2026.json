@@ -4,9 +4,9 @@
   "model": "e-308",
   "year": 2026,
   "powertrain": "ev",
-  "priority": 128,
+  "priority": 88,
   "approved": false,
-  "generated_at": "2026-09-10T11:22:13.619175+00:00",
+  "generated_at": "2026-09-10T11:48:18.710371+00:00",
   "candidates": [],
   "search_errors": [],
   "notes": "approved defaults to false; set approved:true only when brand+model are obvious."

@@ -4,10 +4,73 @@
   "model": "2008",
   "year": 2026,
   "powertrain": "ice",
-  "priority": 137,
-  "approved": false,
-  "generated_at": "2026-09-10T11:22:28.460783+00:00",
-  "candidates": [],
+  "priority": 97,
+  "approved": true,
+  "generated_at": "2026-09-10T11:50:35.611972+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/930/42971063674_f01fa0d6d0_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/42971063674",
+      "title": "Peugeot 2008 Danemark plate",
+      "query": "Peugeot 2008",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/2015_Peugeot_2008_in_Bianca_White%2C_front_right%2C_06-08-2025.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Cutlass",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=183943740",
+      "title": "2015 Peugeot 2008 in Bianca White, front right, 06-08-2025",
+      "query": "Peugeot 2008",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/2019_Peugeot_2008_Active_in_Cumulus_Grey%2C_front_right%2C_06-05-2025.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Cutlass",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=167813598",
+      "title": "2019 Peugeot 2008 Active in Cumulus Grey, front right, 06-05-2025",
+      "query": "Peugeot 2008",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Peugeot_2008_II_1.2_PureTech_155_%282024%29_%2854720744342%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Charles from Port Chester, New York",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=179341762",
+      "title": "Peugeot 2008 II 1.2 PureTech 155 (2024) (54720744342)",
+      "query": "Peugeot 2008",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/aa/2020_Peugeot_2008_1.2_PureTech_GT_Front.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Mocarey15",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=142969998",
+      "title": "2020 Peugeot 2008 1.2 PureTech GT Front",
+      "query": "Peugeot 2008",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/930/42971063674_f01fa0d6d0_b.jpg",
+  "approval_note": "Batch2b: Peugeot 2008 Danemark plate"
 }

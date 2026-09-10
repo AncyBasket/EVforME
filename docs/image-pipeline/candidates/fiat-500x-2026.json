@@ -5,9 +5,72 @@
   "year": 2026,
   "powertrain": "ice",
   "priority": 5,
-  "approved": false,
-  "generated_at": "2026-09-10T11:18:49.759471+00:00",
-  "candidates": [],
+  "approved": true,
+  "generated_at": "2026-09-10T11:49:41.208776+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/51804255351_3c2670f457_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "insta.soloautoita",
+      "source_page": "https://www.flickr.com/photos/192478118@N05/51804255351",
+      "title": "Fiat 500X Sport",
+      "query": "Fiat 500X",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/95/Fiat_500X_1.6_MultiJet_%282022%29_%2854718334246%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Charles from Port Chester, New York",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=179285853",
+      "title": "Fiat 500X 1.6 MultiJet (2022) (54718334246)",
+      "query": "Fiat 500X",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/ad/2014_Fiat_500X_rear.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Carluver23",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=47191490",
+      "title": "File:2014 Fiat 500X rear.jpg",
+      "query": "Fiat 500X",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/cf/2021_FIAT_500X_Hey_Google_-_999cc_1.0_%28120PS%29_Petrol_-_Silver_-_02-2025%2C_Front.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Harvey Bold",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=160170662",
+      "title": "2021 FIAT 500X Hey Google - 999cc 1.0 (120PS) Petrol - Silver - 02-2025, Front",
+      "query": "Fiat 500X",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/18_Fiat_500X_Pop.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "HJUdall",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=154610507",
+      "title": "18 Fiat 500X Pop",
+      "query": "Fiat 500X",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/65535/51804255351_3c2670f457_b.jpg",
+  "approval_note": "Batch2b: Fiat 500X Sport"
 }

@@ -4,10 +4,73 @@
   "model": "Zoe",
   "year": 2026,
   "powertrain": "ev",
-  "priority": 108,
-  "approved": false,
-  "generated_at": "2026-09-10T11:21:36.629503+00:00",
-  "candidates": [],
+  "priority": 73,
+  "approved": true,
+  "generated_at": "2026-09-10T11:50:14.561961+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://cdn.thingiverse.com/renders/29/5c/d5/7f/5e/12862f082d44848185100a418e922088_display_large.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Martin Jørgensen",
+      "source_page": "https://www.thingiverse.com/thing:3535915",
+      "title": "Renault Zoe Cable Hook",
+      "query": "Renault Zoe",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Renault_Zoe_142726.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Trop86",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=177609241",
+      "title": "Renault Zoe 142726",
+      "query": "Renault Zoe",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Renault_Zoe_091328.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Trop86",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=184616076",
+      "title": "Renault Zoe 091328",
+      "query": "Renault Zoe",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/10/Renault_Zoe_193728.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Trop86",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=151426443",
+      "title": "Renault Zoe 193728",
+      "query": "Renault Zoe",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Renault_Zoe_165113.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Trop86",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=158347577",
+      "title": "Renault Zoe 165113",
+      "query": "Renault Zoe",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Renault_Zoe_142726.jpg",
+  "approval_note": "Batch2b: Renault Zoe 142726"
 }

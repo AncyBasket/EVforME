@@ -4,9 +4,9 @@
   "model": "C-HR Plug-in",
   "year": 2024,
   "powertrain": "phev",
-  "priority": 82,
+  "priority": 63,
   "approved": false,
-  "generated_at": "2026-09-10T11:20:50.600702+00:00",
+  "generated_at": "2026-09-10T11:50:09.327910+00:00",
   "candidates": [],
   "search_errors": [],
   "notes": "approved defaults to false; set approved:true only when brand+model are obvious."

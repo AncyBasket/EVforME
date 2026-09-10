@@ -5,7 +5,7 @@
   "year": 2024,
   "powertrain": "phev",
   "priority": 18,
-  "approved": false,
+  "approved": true,
   "generated_at": "2026-09-10T11:19:10.800174+00:00",
   "candidates": [
     {
@@ -34,5 +34,7 @@
     }
   ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/65535/49659454466_57c798fbd7_b.jpg",
+  "approval_note": "Batch2: unique Renegade URL for 4xe variant"
 }

@@ -4,9 +4,9 @@
   "model": "iX1",
   "year": 2026,
   "powertrain": "ev",
-  "priority": 194,
+  "priority": 122,
   "approved": false,
-  "generated_at": "2026-09-10T11:24:09.505472+00:00",
+  "generated_at": "2026-09-10T11:48:25.343054+00:00",
   "candidates": [],
   "search_errors": [],
   "notes": "approved defaults to false; set approved:true only when brand+model are obvious."

@@ -5,7 +5,7 @@
   "year": 2026,
   "powertrain": "ice",
   "priority": 232,
-  "approved": false,
+  "approved": true,
   "generated_at": "2026-09-10T11:30:49.539135+00:00",
   "candidates": [
     {
@@ -22,5 +22,7 @@
     }
   ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://upload.wikimedia.org/wikipedia/commons/1/17/Elon_Musk%27s_Tesla_Roadster_%2840110298232%29.jpg",
+  "approval_note": "Batch2: evident brand+model; unique URL"
 }

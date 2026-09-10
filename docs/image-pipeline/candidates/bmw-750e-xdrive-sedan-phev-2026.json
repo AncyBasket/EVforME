@@ -4,9 +4,9 @@
   "model": "7 Series PHEV",
   "year": 2026,
   "powertrain": "phev",
-  "priority": 198,
+  "priority": 126,
   "approved": false,
-  "generated_at": "2026-09-10T11:24:15.040650+00:00",
+  "generated_at": "2026-09-10T11:48:28.148100+00:00",
   "candidates": [],
   "search_errors": [],
   "notes": "approved defaults to false; set approved:true only when brand+model are obvious."

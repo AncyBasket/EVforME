@@ -5,9 +5,72 @@
   "year": 2026,
   "powertrain": "ev",
   "priority": 201,
-  "approved": false,
-  "generated_at": "2026-09-10T11:29:34.961923+00:00",
-  "candidates": [],
+  "approved": true,
+  "generated_at": "2026-09-10T11:51:02.250824+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/7825/46871760034_7bcf20ea79.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Dennis S. Hurd",
+      "source_page": "https://www.flickr.com/photos/43296902@N00/46871760034",
+      "title": "My 2019 Hyundai KONA Electric",
+      "query": "Hyundai Kona Electric",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/48164905841_3db4959d6f_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Dennis S. Hurd",
+      "source_page": "https://www.flickr.com/photos/43296902@N00/48164905841",
+      "title": "I like a vehicle which generates a lot of stats. It's 25C today, so my total possible range would take a 19KM hit due to air conditioning in my Hyundai KONA Electric..",
+      "query": "Hyundai Kona Electric",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1882/30712768228_0cc4abab6c_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Dennis S. Hurd",
+      "source_page": "https://www.flickr.com/photos/43296902@N00/30712768228",
+      "title": "2019 Hyundai KONA Electric",
+      "query": "Hyundai Kona Electric",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/1863/43467897965_334d0e4ab2_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Dennis S. Hurd",
+      "source_page": "https://www.flickr.com/photos/43296902@N00/43467897965",
+      "title": "2019-hyundai-kona-electric",
+      "query": "Hyundai Kona Electric",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/bb/24_Hyundai_Kona_Electric_Limited.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "HJUdall",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=147575744",
+      "title": "24 Hyundai Kona Electric Limited",
+      "query": "Hyundai Kona Electric",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/7825/46871760034_7bcf20ea79.jpg",
+  "approval_note": "Batch2b: My 2019 Hyundai KONA Electric"
 }

@@ -5,9 +5,36 @@
   "year": 2026,
   "powertrain": "ev",
   "priority": 214,
-  "approved": false,
-  "generated_at": "2026-09-10T11:29:59.910504+00:00",
-  "candidates": [],
+  "approved": true,
+  "generated_at": "2026-09-10T11:51:10.445748+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/06/KIA_EV9.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "KIA Motors Czech",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=139881123",
+      "title": "KIA EV9",
+      "query": "Kia EV9",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Kia_EV9_153946.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Trop86",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=155853613",
+      "title": "Kia EV9 153946",
+      "query": "Kia EV9",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://upload.wikimedia.org/wikipedia/commons/0/06/KIA_EV9.jpg",
+  "approval_note": "Batch2b: KIA EV9"
 }

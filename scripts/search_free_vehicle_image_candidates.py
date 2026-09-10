@@ -90,47 +90,67 @@ def license_ok(raw: str | None) -> bool:
 
 
 def search_openverse(brand: str, model: str, year: int, sleep_s: float) -> list[dict]:
-    query = f"{brand} {model} car"
-    params = {
-        "q": query,
-        "license": "cc0",
-        "page_size": "12",
-        "mature": "false",
-    }
-    url = "https://api.openverse.org/v1/images/?" + urllib.parse.urlencode(params)
-    time.sleep(sleep_s)
-    try:
-        data = http_get_json(url)
-    except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
-        return [{"error": f"openverse: {exc}", "query": query}]
+    queries = [
+        f"{brand} {model} car",
+        f"{brand} {model}",
+        f"{brand} {model} automobile",
+    ]
+    # Deduplicate while preserving order.
+    seen_q: set[str] = set()
+    uniq_queries: list[str] = []
+    for q in queries:
+        if q not in seen_q:
+            seen_q.add(q)
+            uniq_queries.append(q)
 
     out: list[dict] = []
-    for r in data.get("results") or []:
-        title = r.get("title") or ""
-        foreign = r.get("foreign_landing_url") or ""
-        creator = r.get("creator") or ""
-        license_raw = (r.get("license") or "").strip()
-        img = r.get("url") or r.get("thumbnail") or ""
-        hay = " ".join([title, r.get("id") or "", foreign, creator, img])
-        score = match_score(brand, model, hay)
-        if score < 0.6 or not license_ok(license_raw):
+    seen_urls: set[str] = set()
+    for query in uniq_queries:
+        params = {
+            "q": query,
+            "license": "cc0",
+            "page_size": "12",
+            "mature": "false",
+        }
+        url = "https://api.openverse.org/v1/images/?" + urllib.parse.urlencode(params)
+        time.sleep(sleep_s)
+        try:
+            data = http_get_json(url)
+        except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
+            out.append({"error": f"openverse: {exc}", "query": query})
             continue
-        if not img.startswith("http"):
-            continue
-        out.append(
-            {
-                "source": "openverse",
-                "url": img,
-                "license": "cc0",
-                "license_raw": license_raw,
-                "author": creator or None,
-                "source_page": foreign or r.get("detail_url"),
-                "title": title,
-                "query": query,
-                "match_score": score,
-                "year_hint": year,
-            }
-        )
+
+        for r in data.get("results") or []:
+            title = r.get("title") or ""
+            foreign = r.get("foreign_landing_url") or ""
+            creator = r.get("creator") or ""
+            license_raw = (r.get("license") or "").strip()
+            img = r.get("url") or r.get("thumbnail") or ""
+            hay = " ".join([title, r.get("id") or "", foreign, creator, img])
+            score = match_score(brand, model, hay)
+            if score < 0.6 or not license_ok(license_raw):
+                continue
+            if not img.startswith("http") or img in seen_urls:
+                continue
+            if img.casefold().endswith(".svg"):
+                continue
+            seen_urls.add(img)
+            out.append(
+                {
+                    "source": "openverse",
+                    "url": img,
+                    "license": "cc0",
+                    "license_raw": license_raw,
+                    "author": creator or None,
+                    "source_page": foreign or r.get("detail_url"),
+                    "title": title,
+                    "query": query,
+                    "match_score": score,
+                    "year_hint": year,
+                }
+            )
+        if len(out) >= 5:
+            break
     return out
 
 
@@ -253,10 +273,28 @@ def main() -> None:
     parser.add_argument("--sleep", type=float, default=0.85)
     parser.add_argument("--force", action="store_true")
     parser.add_argument("--openverse-only", action="store_true")
+    parser.add_argument(
+        "--ids-file",
+        type=Path,
+        default=None,
+        help="Optional text file with one vehicle id per line (subset of targets)",
+    )
+    parser.add_argument(
+        "--only-empty",
+        action="store_true",
+        help="Re-search existing candidate files that have zero candidates (implies force for those)",
+    )
     args = parser.parse_args()
 
     payload = json.loads(args.targets.read_text(encoding="utf-8"))
     targets = payload["targets"]
+    if args.ids_file:
+        wanted = {
+            line.strip()
+            for line in args.ids_file.read_text(encoding="utf-8").splitlines()
+            if line.strip() and not line.strip().startswith("#")
+        }
+        targets = [t for t in targets if t["id"] in wanted]
     if args.limit > 0:
         targets = targets[: args.limit]
 
@@ -268,8 +306,14 @@ def main() -> None:
     for t in targets:
         out_path = args.out_dir / f"{t['id']}.json"
         if out_path.exists() and not args.force:
-            skipped += 1
-            continue
+            if args.only_empty:
+                existing = json.loads(out_path.read_text(encoding="utf-8"))
+                if existing.get("candidates"):
+                    skipped += 1
+                    continue
+            else:
+                skipped += 1
+                continue
         cands: list[dict] = []
         cands.extend(search_openverse(t["brand"], t["model"], t["year"], args.sleep))
         if not args.openverse_only:

@@ -6,7 +6,7 @@
   "powertrain": "ev",
   "priority": 42,
   "approved": false,
-  "generated_at": "2026-09-10T11:19:48.182705+00:00",
+  "generated_at": "2026-09-10T11:47:55.115272+00:00",
   "candidates": [],
   "search_errors": [],
   "notes": "approved defaults to false; set approved:true only when brand+model are obvious."

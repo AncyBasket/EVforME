@@ -4,9 +4,9 @@
   "model": "Prius Plug-in",
   "year": 2024,
   "powertrain": "phev",
-  "priority": 78,
+  "priority": 59,
   "approved": false,
-  "generated_at": "2026-09-10T11:20:43.606605+00:00",
+  "generated_at": "2026-09-10T11:48:06.381520+00:00",
   "candidates": [],
   "search_errors": [],
   "notes": "approved defaults to false; set approved:true only when brand+model are obvious."

@@ -4,9 +4,9 @@
   "model": "RAV4 PHEV",
   "year": 2025,
   "powertrain": "phev",
-  "priority": 75,
+  "priority": 56,
   "approved": false,
-  "generated_at": "2026-09-10T11:20:39.423118+00:00",
+  "generated_at": "2026-09-10T11:48:03.554268+00:00",
   "candidates": [],
   "search_errors": [],
   "notes": "approved defaults to false; set approved:true only when brand+model are obvious."

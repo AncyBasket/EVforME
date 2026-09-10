@@ -5,7 +5,7 @@
   "year": 2026,
   "powertrain": "ice",
   "priority": 26,
-  "approved": false,
+  "approved": true,
   "generated_at": "2026-09-10T11:19:22.535646+00:00",
   "candidates": [
     {
@@ -70,5 +70,7 @@
     }
   ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/65535/54283227377_2e4018a25a_b.jpg",
+  "approval_note": "Batch2: evident brand+model; unique URL"
 }

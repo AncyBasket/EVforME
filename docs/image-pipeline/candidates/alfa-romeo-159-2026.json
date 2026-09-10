@@ -5,7 +5,7 @@
   "year": 2026,
   "powertrain": "ice",
   "priority": 30,
-  "approved": false,
+  "approved": true,
   "generated_at": "2026-09-10T11:19:28.363651+00:00",
   "candidates": [
     {
@@ -35,5 +35,6 @@
   ],
   "search_errors": [],
   "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
-  "approval_note": "Rejected: crop/detail shot, not full vehicle"
+  "approval_note": "Batch2: evident brand+model; unique URL",
+  "preferred_url": "https://live.staticflickr.com/717/22012915541_3d87e67be1_b.jpg"
 }

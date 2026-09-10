@@ -4,9 +4,9 @@
   "model": "3 Series PHEV",
   "year": 2024,
   "powertrain": "phev",
-  "priority": 201,
+  "priority": 129,
   "approved": false,
-  "generated_at": "2026-09-10T11:24:19.095143+00:00",
+  "generated_at": "2026-09-10T11:48:29.155289+00:00",
   "candidates": [],
   "search_errors": [],
   "notes": "approved defaults to false; set approved:true only when brand+model are obvious."

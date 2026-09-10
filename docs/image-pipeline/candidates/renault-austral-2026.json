@@ -4,10 +4,73 @@
   "model": "Austral",
   "year": 2026,
   "powertrain": "ice",
-  "priority": 113,
-  "approved": false,
-  "generated_at": "2026-09-10T11:21:45.016180+00:00",
-  "candidates": [],
+  "priority": 78,
+  "approved": true,
+  "generated_at": "2026-09-10T11:50:18.350204+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/80/Renault_Austral_facelift_Wit_Bochane.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Mark Neobach",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=157372483",
+      "title": "Renault Austral facelift Wit Bochane",
+      "query": "Renault Austral",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Renault_Austral_E-Tech_Full_Hybrid_200_Esprit_Alpine_%282024%29_%2854734005188%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Charles from Port Chester, New York",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=179344043",
+      "title": "Renault Austral E-Tech Full Hybrid 200 Esprit Alpine (2024) (54734005188)",
+      "query": "Renault Austral",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Red_Renault_Austral_Esprit_Alpine.png",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Babounet",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=150933887",
+      "title": "Red Renault Austral Esprit Alpine",
+      "query": "Renault Austral",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/62/Renault_Austral_191137.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Trop86",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=164654101",
+      "title": "Renault Austral 191137",
+      "query": "Renault Austral",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Renault_Austral_E-Tech_Full_Hybrid_200_%282025%29_%2854722767315%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Charles from Port Chester, New York",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=179344041",
+      "title": "Renault Austral E-Tech Full Hybrid 200 (2025) (54722767315)",
+      "query": "Renault Austral",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://upload.wikimedia.org/wikipedia/commons/8/80/Renault_Austral_facelift_Wit_Bochane.jpg",
+  "approval_note": "Batch2b: Renault Austral facelift Wit Bochane"
 }

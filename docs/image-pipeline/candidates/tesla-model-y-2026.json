@@ -5,9 +5,72 @@
   "year": 2026,
   "powertrain": "ev",
   "priority": 231,
-  "approved": false,
-  "generated_at": "2026-09-10T11:30:46.495354+00:00",
-  "candidates": [],
+  "approved": true,
+  "generated_at": "2026-09-10T11:51:15.504280+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Tesla_Model_Y_L_MY2025_IMG03.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Poprace",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=175220374",
+      "title": "Tesla Model Y L MY2025 IMG03",
+      "query": "Tesla Model Y",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Hinomaru_Kotsu_7404_Uber_Premier_EV_TESLA_Model_Y.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Comyu",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=147348539",
+      "title": "Hinomaru Kotsu 7404 Uber Premier EV TESLA Model Y",
+      "query": "Tesla Model Y",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/63/Tesla_Model_Y_L_003.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "JustAnotherCarDesigner",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=180685137",
+      "title": "Tesla Model Y L 003",
+      "query": "Tesla Model Y",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Medway_Council_Hackney_Carriage_%28Licence_H252%29_-_White_Tesla_Model_Y_on_Slickets_Hill_at_Intersection_in_Chatham%2C_Medway.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Sunolafjagtenben-hur",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=163305971",
+      "title": "Medway Council Hackney Carriage (Licence H252) - White Tesla Model Y on Slickets Hill at Intersection in Chatham, Medway",
+      "query": "Tesla Model Y",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Tesla_Model_Y_144840.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Trop86",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=151153331",
+      "title": "Tesla Model Y 144840",
+      "query": "Tesla Model Y",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Tesla_Model_Y_L_MY2025_IMG03.jpg",
+  "approval_note": "Batch2b: Tesla Model Y L MY2025 IMG03"
 }

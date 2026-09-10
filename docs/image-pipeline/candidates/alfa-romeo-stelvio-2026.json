@@ -5,9 +5,72 @@
   "year": 2026,
   "powertrain": "ice",
   "priority": 35,
-  "approved": false,
-  "generated_at": "2026-09-10T11:19:36.368189+00:00",
-  "candidates": [],
+  "approved": true,
+  "generated_at": "2026-09-10T11:49:50.503909+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/51810955783_d9d10076a1_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/51810955783",
+      "title": "Alfa Romeo Stelvio",
+      "query": "Alfa Romeo Stelvio",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Alfa_Romeo_Stelvio_Polstrada.webp",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Gianlub9898",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=178344583",
+      "title": "Alfa Romeo Stelvio Polstrada",
+      "query": "Alfa Romeo Stelvio",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/54135812418_f9b4ff85ac_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/54135812418",
+      "title": "Alfa Romeo Stelvio Q4 France Diplomatic Plate (European Consil)",
+      "query": "Alfa Romeo Stelvio",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Alfa_Romeo_Stelvio_2.2_D_%282024%29_%2854722972575%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Charles from Port Chester, New York",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=179197899",
+      "title": "Alfa Romeo Stelvio 2.2 D (2024) (54722972575)",
+      "query": "Alfa Romeo Stelvio",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/90/Alfa_Romeo_Stelvio_154026.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Trop86",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=189768754",
+      "title": "Alfa Romeo Stelvio 154026",
+      "query": "Alfa Romeo Stelvio",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/65535/51810955783_d9d10076a1_b.jpg",
+  "approval_note": "Batch2b: Alfa Romeo Stelvio"
 }

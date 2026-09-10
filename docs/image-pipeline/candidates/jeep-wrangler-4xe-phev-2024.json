@@ -6,7 +6,7 @@
   "powertrain": "phev",
   "priority": 20,
   "approved": false,
-  "generated_at": "2026-09-10T11:19:13.712036+00:00",
+  "generated_at": "2026-09-10T11:47:46.483457+00:00",
   "candidates": [],
   "search_errors": [],
   "notes": "approved defaults to false; set approved:true only when brand+model are obvious."

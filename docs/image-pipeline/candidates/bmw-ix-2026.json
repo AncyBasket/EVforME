@@ -4,10 +4,78 @@
   "model": "iX",
   "year": 2026,
   "powertrain": "ev",
-  "priority": 193,
-  "approved": false,
-  "generated_at": "2026-09-10T11:24:08.058058+00:00",
-  "candidates": [],
-  "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "priority": 121,
+  "approved": true,
+  "generated_at": "2026-09-10T11:50:52.978566+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/bd/2023_BMW_IX.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Calreyn88",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=146954600",
+      "title": "2023 BMW IX",
+      "query": "BMW iX",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/02/22_BMW_iX_xDrive50.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "HJUdall",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=148664297",
+      "title": "22 BMW iX xDrive50",
+      "query": "BMW iX",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Moscow%2C_BMW_iX%2C_Aug_2025_03.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Retired electrician",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=173325061",
+      "title": "Moscow, BMW iX, Aug 2025 03",
+      "query": "BMW iX",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Moscow%2C_BMW_iX%2C_Aug_2025_01.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Retired electrician",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=172788787",
+      "title": "Moscow, BMW iX, Aug 2025 01",
+      "query": "BMW iX",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Moscow%2C_Fiat_500%2C_BMW_IX%2C_Apr_2026_01.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Retired electrician",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=187755691",
+      "title": "Moscow, Fiat 500, BMW IX, Apr 2026 01",
+      "query": "BMW iX",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [
+    {
+      "error": "wikimedia: HTTP Error 429: Too Many Requests",
+      "query": "BMW iX"
+    }
+  ],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://upload.wikimedia.org/wikipedia/commons/b/bd/2023_BMW_IX.jpg",
+  "approval_note": "Batch2b: 2023 BMW IX"
 }

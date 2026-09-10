@@ -4,9 +4,9 @@
   "model": "308 Hybrid",
   "year": 2024,
   "powertrain": "phev",
-  "priority": 131,
+  "priority": 91,
   "approved": false,
-  "generated_at": "2026-09-10T11:22:18.329311+00:00",
+  "generated_at": "2026-09-10T11:48:19.716493+00:00",
   "candidates": [],
   "search_errors": [],
   "notes": "approved defaults to false; set approved:true only when brand+model are obvious."

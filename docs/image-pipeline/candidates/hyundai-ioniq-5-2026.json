@@ -5,9 +5,77 @@
   "year": 2026,
   "powertrain": "ev",
   "priority": 197,
-  "approved": false,
-  "generated_at": "2026-09-10T11:29:28.154974+00:00",
-  "candidates": [],
-  "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "approved": true,
+  "generated_at": "2026-09-10T11:50:57.712207+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/76/2021_Hyundai_Ioniq_5_%28France%29_rear_view.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=107306945",
+      "title": "2021 Hyundai Ioniq 5 (France) rear view",
+      "query": "Hyundai Ioniq 5",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/98/2021_Hyundai_Ioniq_5_%28France%29_front_view.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=107306946",
+      "title": "2021 Hyundai Ioniq 5 (France) front view",
+      "query": "Hyundai Ioniq 5",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/18/25_Hyundai_Ioniq_5_XRT.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "HJUdall",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=163156603",
+      "title": "25 Hyundai Ioniq 5 XRT",
+      "query": "Hyundai Ioniq 5",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Hyundai_Ioniq_5.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "TTTNIS",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=124693695",
+      "title": "Hyundai Ioniq 5",
+      "query": "Hyundai Ioniq 5",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Hyundai_Ioniq_5_rear.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "TTTNIS",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=124693694",
+      "title": "Hyundai Ioniq 5 rear",
+      "query": "Hyundai Ioniq 5",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
+  "search_errors": [
+    {
+      "error": "wikimedia: HTTP Error 429: Too Many Requests",
+      "query": "Hyundai Ioniq 5"
+    }
+  ],
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://upload.wikimedia.org/wikipedia/commons/7/76/2021_Hyundai_Ioniq_5_%28France%29_rear_view.jpg",
+  "approval_note": "Batch2b: 2021 Hyundai Ioniq 5 (France) rear view"
 }

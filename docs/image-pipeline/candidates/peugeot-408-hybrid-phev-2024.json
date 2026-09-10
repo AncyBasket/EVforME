@@ -5,7 +5,7 @@
   "year": 2024,
   "powertrain": "phev",
   "priority": 132,
-  "approved": false,
+  "approved": true,
   "generated_at": "2026-09-10T11:22:20.187585+00:00",
   "candidates": [
     {
@@ -22,5 +22,7 @@
     }
   ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://upload.wikimedia.org/wikipedia/commons/4/49/2023_Peugeot_408_GT_PureTech_e-Hybrid_%28Front%29.jpg",
+  "approval_note": "Batch2: evident brand+model; unique URL"
 }

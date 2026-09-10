@@ -5,7 +5,7 @@
   "year": 2026,
   "powertrain": "ice",
   "priority": 22,
-  "approved": false,
+  "approved": true,
   "generated_at": "2026-09-10T11:19:16.265192+00:00",
   "candidates": [
     {
@@ -58,5 +58,7 @@
     }
   ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Moscow%2C_Jeep_Cherokee_olive%2C_Sept_2025_01.jpg",
+  "approval_note": "Batch2: evident brand+model; unique URL"
 }

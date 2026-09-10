@@ -5,9 +5,72 @@
   "year": 2026,
   "powertrain": "ice",
   "priority": 4,
-  "approved": false,
-  "generated_at": "2026-09-10T11:18:48.435447+00:00",
-  "candidates": [],
+  "approved": true,
+  "generated_at": "2026-09-10T11:49:36.390399+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Fiat-Jeep_B-SUV_prototype_test_based_Fiat_500L_IV.JPG",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Corvettec6r",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=34215041",
+      "title": "File:Fiat-Jeep B-SUV prototype test based Fiat 500L IV.JPG",
+      "query": "Fiat 500L",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1f/2014_Fiat_500L_1.3_Multijet_Pop_rear.JPG",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Corvettec6r",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=32761928",
+      "title": "2014 Fiat 500L 1.3 Multijet Pop rear",
+      "query": "Fiat 500L",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/47/2014_Fiat_500L_1.3_Multijet_Pop_front.JPG",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Corvettec6r",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=32761926",
+      "title": "2014 Fiat 500L 1.3 Multijet Pop front",
+      "query": "Fiat 500L",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/02/1968-1972_Fiat_500L.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "TTTNIS",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=36551270",
+      "title": "1968-1972 Fiat 500L",
+      "query": "Fiat 500L",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Fiat_500L_prototype_test_in_Avellino.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Corvettec6r",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=19461614",
+      "title": "Fiat 500L prototype test in Avellino",
+      "query": "Fiat 500L",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://upload.wikimedia.org/wikipedia/commons/1/1f/2014_Fiat_500L_1.3_Multijet_Pop_rear.JPG",
+  "approval_note": "Batch2b: 2014 Fiat 500L 1.3 Multijet Pop rear"
 }

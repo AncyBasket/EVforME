@@ -4,9 +4,9 @@
   "model": "5 Series PHEV",
   "year": 2027,
   "powertrain": "phev",
-  "priority": 196,
+  "priority": 124,
   "approved": false,
-  "generated_at": "2026-09-10T11:24:12.310359+00:00",
+  "generated_at": "2026-09-10T11:48:27.152861+00:00",
   "candidates": [],
   "search_errors": [],
   "notes": "approved defaults to false; set approved:true only when brand+model are obvious."

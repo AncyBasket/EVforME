@@ -4,10 +4,73 @@
   "model": "Captur",
   "year": 2026,
   "powertrain": "ice",
-  "priority": 114,
-  "approved": false,
-  "generated_at": "2026-09-10T11:21:47.251190+00:00",
-  "candidates": [],
+  "priority": 79,
+  "approved": true,
+  "generated_at": "2026-09-10T11:50:23.246729+00:00",
+  "candidates": [
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49259172017_508e91c802_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/49259172017",
+      "title": "Renault Captur 2",
+      "query": "Renault Captur",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/49259171987_e62fa90246_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/49259171987",
+      "title": "Renault Captur 2",
+      "query": "Renault Captur",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/48675971108_17c729581d_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "crash71100",
+      "source_page": "https://www.flickr.com/photos/152930510@N02/48675971108",
+      "title": "Renault Captur Bosnia plate",
+      "query": "Renault Captur",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Renault_Captur_II_%28rear%29.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Guillaume Vachey",
+      "source_page": "https://commons.wikimedia.org/w/index.php?curid=89972493",
+      "title": "Renault Captur II (rear)",
+      "query": "Renault Captur",
+      "match_score": 1.0,
+      "year_hint": 2026
+    },
+    {
+      "source": "openverse",
+      "url": "https://live.staticflickr.com/65535/51938260751_4961a65f75_b.jpg",
+      "license": "cc0",
+      "license_raw": "cc0",
+      "author": "Txemai Argazki",
+      "source_page": "https://www.flickr.com/photos/59170444@N05/51938260751",
+      "title": "Volvo FM/420 & Renault Captur.",
+      "query": "Renault Captur",
+      "match_score": 1.0,
+      "year_hint": 2026
+    }
+  ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://live.staticflickr.com/65535/49259172017_508e91c802_b.jpg",
+  "approval_note": "Batch2b: Renault Captur 2"
 }

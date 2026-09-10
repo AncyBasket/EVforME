@@ -5,7 +5,7 @@
   "year": 2026,
   "powertrain": "ice",
   "priority": 24,
-  "approved": false,
+  "approved": true,
   "generated_at": "2026-09-10T11:19:19.061409+00:00",
   "candidates": [
     {
@@ -46,5 +46,7 @@
     }
   ],
   "search_errors": [],
-  "notes": "approved defaults to false; set approved:true only when brand+model are obvious."
+  "notes": "approved defaults to false; set approved:true only when brand+model are obvious.",
+  "preferred_url": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcHUyMzQ5NzI4LWltYWdlLWt6MmR5azZoLmpwZw.jpg",
+  "approval_note": "Batch2: evident brand+model; unique URL"
 }
