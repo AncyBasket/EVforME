@@ -18,9 +18,7 @@ struct VehicleSearchIndex {
         var id: String { "\(brand)|\(model)".lowercased() }
 
         var representative: VehicleCatalogItem {
-            variants.first(where: { $0.heroImageURL != nil })
-                ?? variants.max(by: { $0.year < $1.year })
-                ?? variants[0]
+            variants.max(by: { $0.year < $1.year }) ?? variants[0]
         }
     }
 
@@ -146,11 +144,6 @@ struct VehicleSearchIndex {
         if group.modelNorm == joined { score += 500 }
         else if group.modelNorm.hasPrefix(joined) { score += 220 }
         if group.brandNorm == joined { score += 180 }
-
-        // Preferisci modelli con foto (UX).
-        if group.variants.contains(where: { $0.heroImageURL != nil }) {
-            score += 8
-        }
 
         return score
     }

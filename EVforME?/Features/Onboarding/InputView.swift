@@ -641,8 +641,7 @@ struct InputView: View {
             userInput.sourceVehicleId = preferredId(
                 Defaults.starterSourceVehicleId,
                 in: sourceVehicles
-            ) ?? sourceVehicles.first(where: { $0.heroImageURL != nil })?.id
-                ?? sourceVehicles.first?.id
+            ) ?? sourceVehicles.first?.id
                 ?? ""
         }
         if userInput.targetVehicleId.isEmpty
@@ -650,8 +649,7 @@ struct InputView: View {
             userInput.targetVehicleId = preferredId(
                 Defaults.starterTargetVehicleId,
                 in: targetVehicles
-            ) ?? targetVehicles.first(where: { $0.heroImageURL != nil })?.id
-                ?? targetVehicles.first?.id
+            ) ?? targetVehicles.first?.id
                 ?? ""
         }
     }

@@ -20,9 +20,7 @@ struct VehicleCatalogPickerSheet: View {
         var id: String { "\(brand)|\(model)".lowercased() }
 
         var representative: VehicleCatalogItem {
-            variants.first(where: { $0.heroImageURL != nil })
-                ?? variants.max(by: { $0.year < $1.year })
-                ?? variants[0]
+            variants.max(by: { $0.year < $1.year }) ?? variants[0]
         }
 
         var yearLabel: String {
