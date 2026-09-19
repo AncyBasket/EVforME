@@ -19,8 +19,30 @@ enum L10n {
         NSLocalizedString(key, tableName: nil, bundle: bundle, value: key, comment: "")
     }
 
-    static func format(_ key: String, _ arguments: CVarArg...) -> String {
-        String(format: string(key), arguments: arguments)
+    /// Bridge args explicitly. Passing Swift `String` through `CVarArg...` into
+    /// `String(format:locale:arguments:)` can malloc-abrt on iOS 18.x Simulator.
+    static func format(_ key: String, _ arguments: Any...) -> String {
+        let bridged: [any CVarArg] = arguments.map { arg in
+            switch arg {
+            case let value as String:
+                return value as NSString
+            case let value as Int:
+                return value
+            case let value as Int64:
+                return value
+            case let value as Double:
+                return value
+            case let value as Float:
+                return value
+            case let value as NSNumber:
+                return value
+            case let value as CVarArg:
+                return value
+            default:
+                return String(describing: arg) as NSString
+            }
+        }
+        return String(format: string(key), locale: nil, arguments: bridged)
     }
     
     // MARK: - App

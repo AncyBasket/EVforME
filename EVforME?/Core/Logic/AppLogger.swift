@@ -15,7 +15,7 @@ enum LogLevel: String, CaseIterable {
     case warning = "WARNING"
     case error = "ERROR"
     case critical = "CRITICAL"
-    
+
     var osLogType: OSLogType {
         switch self {
         case .debug: return .debug
@@ -25,7 +25,7 @@ enum LogLevel: String, CaseIterable {
         case .critical: return .fault
         }
     }
-    
+
     var emoji: String {
         switch self {
         case .debug: return "🔍"
@@ -50,29 +50,26 @@ enum LogCategory: String {
     case analytics = "Analytics"
 }
 
-/// Logger strutturato principale
-final class AppLogger {
+/// Logger strutturato principale.
+/// Uses `os_log` (not `Logger` string interpolation) — `Logger.log("\(msg)")` malloc-abrts
+/// on some iOS 18.x Simulator runtimes when the message is freed.
+nonisolated final class AppLogger: @unchecked Sendable {
     static let shared = AppLogger()
-    
+
     private let subsystem = "com.evforme.app"
-    private var loggers: [LogCategory: Logger] = [:]
-    private let logQueue = DispatchQueue(label: "com.evforme.logger", qos: .utility)
-    
-    // Log storage for in-memory buffering
+    private var logs: [LogCategory: OSLog] = [:]
+    private let lock = NSLock()
+
     private var logBuffer: [LogEntry] = []
     private let maxBufferSize = 500
     private var isBufferingEnabled = false
-    
+
     private init() {
-        // Initialize loggers for each category
         for category in LogCategory.allCases {
-            loggers[category] = Logger(subsystem: subsystem, category: category.rawValue)
+            logs[category] = OSLog(subsystem: subsystem, category: category.rawValue)
         }
     }
-    
-    // MARK: - Public Logging Methods
-    
-    /// Log generico con livello personalizzato
+
     func log(
         _ level: LogLevel,
         category: LogCategory = .general,
@@ -81,24 +78,30 @@ final class AppLogger {
         file: String = #file,
         line: Int = #line
     ) {
-        let logger = loggers[category] ?? loggers[.general]!
+        lock.lock()
+        defer { lock.unlock() }
+
+        let osLog = logs[category] ?? logs[.general]!
         let logMessage = formatMessage(level: level, message: message, function: function, file: file, line: line)
-        
-        // Send to OSLog
-        logger.log(level: level.osLogType, "\(logMessage)")
-        
-        // Buffer if enabled
+
+        os_log("%{public}@", log: osLog, type: level.osLogType, logMessage)
+
         if isBufferingEnabled {
-            addToBuffer(level: level, category: category, message: message, function: function, file: file, line: line)
+            addToBufferUnlocked(
+                level: level,
+                category: category,
+                message: message,
+                function: function,
+                file: file,
+                line: line
+            )
         }
-        
-        // Print to console in debug mode
+
         #if DEBUG
         printConsole(level: level, category: category, message: logMessage)
         #endif
     }
-    
-    /// Log di debug
+
     func debug(
         _ message: String,
         category: LogCategory = .general,
@@ -108,8 +111,7 @@ final class AppLogger {
     ) {
         log(.debug, category: category, message: message, function: function, file: file, line: line)
     }
-    
-    /// Log informativo
+
     func info(
         _ message: String,
         category: LogCategory = .general,
@@ -119,8 +121,7 @@ final class AppLogger {
     ) {
         log(.info, category: category, message: message, function: function, file: file, line: line)
     }
-    
-    /// Log di warning
+
     func warning(
         _ message: String,
         category: LogCategory = .general,
@@ -130,8 +131,7 @@ final class AppLogger {
     ) {
         log(.warning, category: category, message: message, function: function, file: file, line: line)
     }
-    
-    /// Log di errore
+
     func error(
         _ message: String,
         category: LogCategory = .general,
@@ -141,13 +141,12 @@ final class AppLogger {
         line: Int = #line
     ) {
         var fullMessage = message
-        if let error = error {
+        if let error {
             fullMessage += " | Error: \(error.localizedDescription)"
         }
         log(.error, category: category, message: fullMessage, function: function, file: file, line: line)
     }
-    
-    /// Log critico
+
     func critical(
         _ message: String,
         category: LogCategory = .general,
@@ -157,77 +156,60 @@ final class AppLogger {
         line: Int = #line
     ) {
         var fullMessage = message
-        if let error = error {
+        if let error {
             fullMessage += " | Error: \(error.localizedDescription)"
         }
         log(.critical, category: category, message: fullMessage, function: function, file: file, line: line)
     }
-    
-    // MARK: - Performance Logging
-    
-    /// Misura e logga il tempo di esecuzione di un'operazione
+
     func measure<T>(
         _ label: String,
         category: LogCategory = .performance,
-        work: () -> T
-    ) -> T {
+        operation: () throws -> T
+    ) rethrows -> T {
         let startTime = CFAbsoluteTimeGetCurrent()
-        let result = work()
-        let endTime = CFAbsoluteTimeGetCurrent()
-        let duration = (endTime - startTime) * 1000 // Convert to milliseconds
-        
+        let result = try operation()
+        let duration = (CFAbsoluteTimeGetCurrent() - startTime) * 1000
         info("\(label) completed in \(String(format: "%.2f", duration))ms", category: category)
-        
         return result
     }
-    
-    /// Misura e logga il tempo di esecuzione di un'operazione async
+
     func measureAsync<T>(
         _ label: String,
         category: LogCategory = .performance,
-        work: () async throws -> T
+        operation: () async throws -> T
     ) async rethrows -> T {
         let startTime = CFAbsoluteTimeGetCurrent()
-        let result = try await work()
-        let endTime = CFAbsoluteTimeGetCurrent()
-        let duration = (endTime - startTime) * 1000 // Convert to milliseconds
-        
+        let result = try await operation()
+        let duration = (CFAbsoluteTimeGetCurrent() - startTime) * 1000
         info("\(label) completed in \(String(format: "%.2f", duration))ms", category: category)
-        
         return result
     }
-    
-    // MARK: - Buffer Management
-    
-    /// Abilita il buffering dei log in memoria
+
     func enableBuffering() {
-        logQueue.sync {
-            isBufferingEnabled = true
-        }
+        lock.lock()
+        isBufferingEnabled = true
+        lock.unlock()
     }
-    
-    /// Disabilita il buffering dei log
+
     func disableBuffering() {
-        logQueue.sync {
-            isBufferingEnabled = false
-        }
+        lock.lock()
+        isBufferingEnabled = false
+        lock.unlock()
     }
-    
-    /// Ottieni i log buffered
+
     func getBufferedLogs(limit: Int = 100) -> [LogEntry] {
-        return logQueue.sync {
-            Array(logBuffer.prefix(limit))
-        }
+        lock.lock()
+        defer { lock.unlock() }
+        return Array(logBuffer.prefix(limit))
     }
-    
-    /// Svuota il buffer dei log
+
     func clearBuffer() {
-        logQueue.sync {
-            logBuffer.removeAll()
-        }
+        lock.lock()
+        logBuffer.removeAll()
+        lock.unlock()
     }
-    
-    /// Esporta i log buffered come stringa formattata
+
     func exportBufferedLogs() -> String {
         let logs = getBufferedLogs()
         return logs.map { entry in
@@ -235,21 +217,17 @@ final class AppLogger {
             return "[\(timestamp)] [\(entry.level.rawValue)] [\(entry.category.rawValue)] \(entry.message)"
         }.joined(separator: "\n")
     }
-    
-    // MARK: - Private Methods
-    
+
     private func formatMessage(level: LogLevel, message: String, function: String, file: String, line: Int) -> String {
         let filename = (file as NSString).lastPathComponent
         return "\(level.emoji) [\(filename):\(line)] \(function) - \(message)"
     }
-    
+
     private func printConsole(level: LogLevel, category: LogCategory, message: String) {
-        let emoji = level.emoji
-        let categoryTag = "[\(category.rawValue)]"
-        print("\(emoji) \(categoryTag) \(message)")
+        print("\(level.emoji) [\(category.rawValue)] \(message)")
     }
-    
-    private func addToBuffer(
+
+    private func addToBufferUnlocked(
         level: LogLevel,
         category: LogCategory,
         message: String,
@@ -266,15 +244,12 @@ final class AppLogger {
             line: line,
             timestamp: Date()
         )
-        
         logBuffer.insert(entry, at: 0)
         if logBuffer.count > maxBufferSize {
             logBuffer.removeLast()
         }
     }
 }
-
-// MARK: - Supporting Types
 
 struct LogEntry {
     let level: LogLevel
@@ -286,38 +261,11 @@ struct LogEntry {
     let timestamp: Date
 }
 
-// MARK: - Convenience Extensions
-
 extension LogCategory {
     static var allCases: [LogCategory] {
-        return [
+        [
             .general, .network, .catalog, .storage,
             .validation, .simulation, .ui, .performance, .analytics
         ]
     }
 }
-
-// MARK: - Usage Examples
-
-/*
- // Basic logging
- AppLogger.shared.info("User started simulation", category: .simulation)
- AppLogger.shared.error("Failed to load catalog", category: .catalog, error: error)
- 
- // Performance measurement
- let result = AppLogger.shared.measure("Database query") {
-     // Expensive operation
-     return performQuery()
- }
- 
- // Async performance measurement
- let result = try await AppLogger.shared.measureAsync("API call") {
-     return try await fetchData()
- }
- 
- // Enable buffering for debugging
- AppLogger.shared.enableBuffering()
- // ... perform operations ...
- let logs = AppLogger.shared.exportBufferedLogs()
- AppLogger.shared.disableBuffering()
- */

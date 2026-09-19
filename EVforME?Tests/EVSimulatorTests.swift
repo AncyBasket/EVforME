@@ -24,11 +24,59 @@ final class EVSimulatorTests: XCTestCase {
 
     @discardableResult
     private func requireSimulate(input: UserInput, scenario: Scenario? = nil, file: StaticString = #filePath, line: UInt = #line) -> SimulationResult {
-        guard let result = EVSimulator.simulate(input: input, scenario: scenario) else {
-            XCTFail("Simulation must succeed for valid fixture input", file: file, line: line)
-            preconditionFailure("unreachable")
+        if let result = EVSimulator.simulate(input: input, scenario: scenario) {
+            return result
         }
-        return result
+
+        let validation = InputValidator.validate(input)
+        let source = VehicleCatalogService.shared.vehicle(by: input.sourceVehicleId)
+        let target = VehicleCatalogService.shared.vehicle(by: input.targetVehicleId)
+        var details: [String] = []
+        if !validation.isEmpty {
+            details.append("validation: \(validation.joined(separator: " | "))")
+        }
+        if source == nil { details.append("missing source id=\(input.sourceVehicleId)") }
+        if target == nil { details.append("missing target id=\(input.targetVehicleId)") }
+        if let source, !EVSimulatorTests.hasUsableConsumptionForTests(source, isSource: true) {
+            details.append("source consumption unusable")
+        }
+        if let target, !EVSimulatorTests.hasUsableConsumptionForTests(target, isSource: false) {
+            details.append("target consumption unusable")
+        }
+        if details.isEmpty { details.append("unknown nil path") }
+
+        XCTFail(
+            "Simulation must succeed for valid fixture input — \(details.joined(separator: "; "))",
+            file: file,
+            line: line
+        )
+        // Safe placeholder so callers can return without crashing the test runner (abrt).
+        let emptyBreakdown = OperatingCostBreakdown(
+            energy: 0,
+            maintenance: 0,
+            taxes: 0,
+            insurance: 0
+        )
+        return SimulationResult(
+            verdict: .notYet,
+            weeklyCharges: 0,
+            yearlySavingsRange: 0...0,
+            breakEvenMonths: nil,
+            keyReasons: ["test-placeholder"],
+            fearReality: [],
+            yearlyComparison: [],
+            sourceYearlyBreakdown: emptyBreakdown,
+            targetYearlyBreakdown: emptyBreakdown
+        )
+    }
+
+    private static func hasUsableConsumptionForTests(_ vehicle: VehicleCatalogItem, isSource: Bool) -> Bool {
+        if isSource {
+            return (vehicle.fuelConsumptionLPerKm ?? 0) > 0
+                || vehicle.powertrain == .phev && (vehicle.energyConsumptionKWhPerKm ?? 0) > 0
+        }
+        return (vehicle.energyConsumptionKWhPerKm ?? 0) > 0
+            || vehicle.powertrain == .phev && (vehicle.fuelConsumptionLPerKm ?? 0) > 0
     }
 
     func testSimulate_YesVerdict_LowWeeklyKm() {

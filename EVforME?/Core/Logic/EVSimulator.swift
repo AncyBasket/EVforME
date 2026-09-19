@@ -402,9 +402,12 @@ final class EVSimulator {
             netPurchasePremiumEUR: purchasePremium,
             ownershipYears: input.ownershipYears
         )
-        
-        AppLogger.shared.info("Simulation complete: verdict=\(verdict.rawValue), savings=\(String(format: "%.2f", yearlySavings))€/year", category: .simulation)
-        
+
+        AppLogger.shared.info(
+            "Simulation complete: verdict=\(verdict.rawValue), savings=\(String(format: "%.2f", yearlySavings))€/year",
+            category: .simulation
+        )
+
         var reasons = [
             L10n.switchingFromTo(sourceVehicle.displayName, targetVehicle.displayName),
             L10n.chargePerWeek(weeklyCharges),
@@ -428,7 +431,7 @@ final class EVSimulator {
         } else {
             reasons.append(L10n.breakEvenNotReachedReason)
         }
-        
+
         var fears: [FearRealityItem] = []
         if weeklyCharges > 2 {
             fears.append(FearRealityItem(
@@ -450,7 +453,7 @@ final class EVSimulator {
             fear: L10n.fearCostsTooMuch,
             reality: L10n.realitySavePerYear(savingsRangeLower, savingsRangeUpper)
         ))
-        
+
         let horizonYears = max(1, input.ownershipYears)
         var yearlyComparison: [YearlyComparison] = []
         for year in 1...horizonYears {
@@ -458,7 +461,7 @@ final class EVSimulator {
             let evCost = result.yearlyEvCost * Double(year)
             yearlyComparison.append(YearlyComparison(year: year, gasCost: iceCost, evCost: evCost))
         }
-        
+
         return SimulationResult(
             verdict: verdict,
             weeklyCharges: weeklyCharges,

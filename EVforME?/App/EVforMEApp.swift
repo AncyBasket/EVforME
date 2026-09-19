@@ -41,12 +41,15 @@ struct EVforMEApp: App {
                 showOnboarding: $showOnboarding,
                 onSimulate: simulateWithLoading,
                 catalogSetup: {
+                    guard !Self.isRunningUnderXCTest else { return }
                     await refreshLiveData(applyCosts: true)
                 }
             )
             .task {
                 syncFuelFromWidgetIfNeeded()
-                await refreshLiveData(applyCosts: true)
+                if !Self.isRunningUnderXCTest {
+                    await refreshLiveData(applyCosts: true)
+                }
                 if AppDeepLink.consumeOpenLastVerdictRequest() {
                     openLastVerdict()
                 }
@@ -54,6 +57,7 @@ struct EVforMEApp: App {
             .onChange(of: scenePhase) { _, phase in
                 guard phase == .active else { return }
                 syncFuelFromWidgetIfNeeded(reopenVerdictIfNeeded: simulationResult != nil)
+                guard !Self.isRunningUnderXCTest else { return }
                 Task { await refreshLiveData(applyCosts: true) }
             }
             .onOpenURL { url in
@@ -61,6 +65,11 @@ struct EVforMEApp: App {
                 openLastVerdict()
             }
         }
+    }
+
+    /// Unit-test host also launches the app; skip live refresh to avoid racing the suite.
+    private static var isRunningUnderXCTest: Bool {
+        ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
     }
 
     /// Catalogo + prezzi energia + incentivi IT a ogni cold start / foreground.
