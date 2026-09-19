@@ -1,7 +1,17 @@
 # Free vehicle image pipeline (CC0 / Public Domain)
 
+**Status (1.0):** **paused / optional.** App Store / TestFlight **1.0 ships with editorial
+placeholders only** (`VehicleHeroImage` — monogram, ICE/EV/PHEV badge, silhouette).
+All remote `imageURL` values were cleared from the quality seed (`seedVersion = 26`).
+Do not re-fetch Openverse/Commons for the 1.0 cut unless product explicitly re-opens photos.
+
+The scripts and `candidates/` below remain for a **future** opt-in batch if licensing
+and product want free CC0 photos again.
+
+---
+
 Zero-budget, commercial-safe photos for a **shortlist** of Italy-relevant vehicles.
-The rest of the catalog keeps editorial placeholders (`VehicleHeroImage`).
+When paused, the full catalog uses editorial placeholders (`VehicleHeroImage`).
 
 ## Non‑negotiable rules
 

@@ -13,20 +13,16 @@
 			</array>
 		</dict>
 	</array>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>EVforME? uses photos only on-device to read consumption stickers (L/100 km or kWh/100 km).</string>
+	<key>EVFORME_ANALYTICS_URL</key>
+	<string></string>
 	<key>EVFORME_CATALOG_URL</key>
 	<string></string>
 	<key>EVFORME_ENERGY_URL</key>
-	<string></string>
-	<key>EVFORME_ANALYTICS_URL</key>
 	<string></string>
 	<key>EVFORME_LEAD_WEBHOOK_URL</key>
 	<string></string>
 	<key>EVFORME_PRIVACY_URL</key>
 	<string>https://ancybasket.github.io/EVforME/privacy/</string>
-	<key>NSSupportsLiveActivities</key>
-	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsLocalNetworking</key>

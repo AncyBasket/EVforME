@@ -4,13 +4,13 @@
 
 | Phase | Item | Status |
 |------|------|--------|
-| 1 | Strip immagini non licenziate | **Done** — risky hosts cleared; `seedVersion = 24` |
+| 1 | Strip immagini non licenziate | **Done** — `imageURL = 0` on quality seed; `seedVersion = 26` |
 | 2 | Commit snapshot | **Done** — product on `main` |
 | 3 | Remote + push | **Done** — https://github.com/AncyBasket/EVforME |
 | 3 | Privacy HTTPS | **Done** — https://ancybasket.github.io/EVforME/privacy/ |
 | 3 | `EVFORME_PRIVACY_URL` | **Done** — same URL in `EVforME?/Info.plist` |
 | 4 | Full unit tests (`EVforME?Tests`) | **Done** — green on Xcode beta / iPhone 17 Pro / iOS 27.0 |
-| 4 | Free CC0 image pipeline | **In progress** — commit `1bdba23`: ~260 IT targets, 19 seed `imageURL` (CC0/Flickr+Wikimedia); see `docs/image-pipeline/` |
+| 4 | Vehicle photos (1.0) | **Done** — **no remote vehicle photos in 1.0**; editorial placeholders only (`VehicleHeroImage`). CC0 pipeline paused (optional later). |
 | 4 | ASC listing pack | **Ready** — see `ASC_STORE_LISTING.md` |
 | 4 | UITests | **Done** — `testInputToVerdictFlow` green (`e3d5801`) |
 | 4 | Archive (local `.xcarchive`) | **Done** — `/tmp/EVforME.xcarchive` · **1.0 (1)** · arm64 · Xcode 27 beta |
