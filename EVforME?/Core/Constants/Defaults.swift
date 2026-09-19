@@ -73,6 +73,11 @@ enum Defaults {
         plistOrEnv("EVFORME_ENERGY_URL")
     }
 
+    /// Override opzionale schedule incentivi IT (JSON). Vuoto = bundle `italian_incentives.json` + cache.
+    static var italianIncentivesRemoteURL: String {
+        plistOrEnv("EVFORME_INCENTIVES_URL")
+    }
+
     /// Analytics ingest (POST). Vuoto = solo log locale.
     static var analyticsIngestURL: String {
         let configured = plistOrEnv("EVFORME_ANALYTICS_URL")

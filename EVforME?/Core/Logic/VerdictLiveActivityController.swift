@@ -2,6 +2,8 @@
 //  VerdictLiveActivityController.swift
 //  EVforME?
 //
+//  ActivityKit is available from iOS 16.1 — safe with deployment target iOS 17.
+//
 
 import ActivityKit
 import Foundation

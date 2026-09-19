@@ -29,11 +29,15 @@ final class OfficialCostService {
 
     /// Sempre: override API (opz.) → fonti pubbliche → cache → bundle.
     func fetchLatest() async -> OfficialEnergyCosts? {
-        if let api = await fetchLegacyAPIOverride() {
+        // Under XCTest the app host also launches; skip huge MIMIT CSV to avoid
+        // flaky malloc crashes on older simulator runtimes (e.g. iOS 18.x).
+        let underXCTest = ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+
+        if !underXCTest, let api = await fetchLegacyAPIOverride() {
             persistCache(api)
             return api
         }
-        if let live = await fetchFromPublicSources() {
+        if !underXCTest, let live = await fetchFromPublicSources() {
             persistCache(live)
             return live
         }

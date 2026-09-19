@@ -3,7 +3,7 @@
 //  EVforME?
 //
 //  Liquid Glass (iOS 26+) con fallback e rispetto di Reduce Transparency.
-//  Su iOS 27 il materiale di sistema migliora leggibilità / slider utente automaticamente.
+//  Su iOS 17–25 usa surfaceElevated; su 26+ glass di sistema se consentito.
 //
 
 import SwiftUI
@@ -29,9 +29,13 @@ private struct EVGlassChromeModifier<S: Shape>: ViewModifier {
             content
                 .background(fallback)
                 .clipShape(shape)
-        } else {
+        } else if #available(iOS 26, *) {
             content
                 .glassEffect(.regular, in: shape)
+        } else {
+            content
+                .background(fallback)
+                .clipShape(shape)
         }
     }
 }

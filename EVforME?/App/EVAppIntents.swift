@@ -2,7 +2,7 @@
 //  EVAppIntents.swift
 //  EVforME?
 //
-//  App Intents per Shortcuts / Siri (iOS 26–27).
+//  App Intents per Shortcuts / Siri (iOS 17+).
 //
 
 import AppIntents

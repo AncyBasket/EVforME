@@ -63,13 +63,37 @@ struct EVforMEApp: App {
         }
     }
 
-    /// Catalogo remoto (CDN pubblico) + prezzi MIMIT/Eurostat a ogni apertura / foreground.
+    /// Catalogo + prezzi energia + incentivi IT a ogni cold start / foreground.
+    /// Best-effort rete; offline → cache/bundle. Non sovrascrive prezzi customizzati a mano.
     private func refreshLiveData(applyCosts: Bool) async {
-        VehicleCatalogService.shared.setRemoteCatalogURL(Defaults.vehicleCatalogRemoteURL)
-        await VehicleCatalogService.shared.refreshFromRemoteIfPossible()
+        AppLogger.shared.info("Live data refresh starting (applyCosts=\(applyCosts))", category: .network)
 
-        guard applyCosts,
-              let costs = await OfficialCostService.shared.fetchLatest() else { return }
+        VehicleCatalogService.shared.setRemoteCatalogURL(Defaults.vehicleCatalogRemoteURL)
+        async let catalogRefresh: Void = VehicleCatalogService.shared.refreshFromRemoteIfPossible()
+        async let incentives = ItalianIncentivesService.shared.refresh()
+        async let costs = OfficialCostService.shared.fetchLatest()
+
+        _ = await catalogRefresh
+        let schedule = await incentives
+        AppLogger.shared.info(
+            "Incentives ready (updatedAt=\(schedule.updatedAt ?? "n/a"), lastFetch=\(ItalianIncentivesService.shared.lastSuccessfulFetchDate?.description ?? "none"))",
+            category: .network
+        )
+
+        guard applyCosts else {
+            AppLogger.shared.info("Live data refresh done (costs skipped)", category: .network)
+            return
+        }
+
+        guard let costs = await costs else {
+            AppLogger.shared.warning("Official energy costs unavailable — keeping last values", category: .network)
+            return
+        }
+        AppLogger.shared.info(
+            "Official costs ready fuel=\(costs.fuelPricePerLiter) elec=\(costs.electricityPricePerKWh) updatedAt=\(costs.updatedAt ?? "n/a")",
+            category: .network
+        )
+
         var updated = userInput
         if StorageService.shared.applyOfficialCostsIfNeeded(costs, to: &updated) {
             userInput = updated
@@ -77,7 +101,11 @@ struct EVforMEApp: App {
             if let result = EVSimulator.simulate(input: updated) {
                 WidgetSnapshotStore.save(from: result, input: updated)
             }
+            AppLogger.shared.info("Applied official costs to user input", category: .network)
+        } else {
+            AppLogger.shared.info("Official costs unchanged or user-customized — no overwrite", category: .network)
         }
+        AppLogger.shared.info("Live data refresh done", category: .network)
     }
 
     private func syncFuelFromWidgetIfNeeded(reopenVerdictIfNeeded: Bool = false) {

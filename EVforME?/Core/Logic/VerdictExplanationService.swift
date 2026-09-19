@@ -2,17 +2,24 @@
 //  VerdictExplanationService.swift
 //  EVforME?
 //
-//  Spiegazione on-device del verdetto via Foundation Models (Apple Intelligence).
+//  Spiegazione on-device del verdetto via Foundation Models (Apple Intelligence)
+//  quando disponibili (iOS 26+). Sotto: solo fallback L10n — zero crash.
 //
 
 import Foundation
+#if canImport(FoundationModels)
 import FoundationModels
+#endif
 
 enum VerdictExplanationService {
     static var isModelAvailable: Bool {
-        if case .available = SystemLanguageModel.default.availability {
-            return true
+        #if canImport(FoundationModels)
+        if #available(iOS 26, *) {
+            if case .available = SystemLanguageModel.default.availability {
+                return true
+            }
         }
+        #endif
         return false
     }
 
@@ -21,6 +28,21 @@ enum VerdictExplanationService {
         let fallback = fallbackExplanation(result: result, input: input)
         guard isModelAvailable else { return fallback }
 
+        #if canImport(FoundationModels)
+        if #available(iOS 26, *) {
+            return await explainWithFoundationModels(result: result, input: input, fallback: fallback)
+        }
+        #endif
+        return fallback
+    }
+
+    #if canImport(FoundationModels)
+    @available(iOS 26, *)
+    private static func explainWithFoundationModels(
+        result: SimulationResult,
+        input: UserInput,
+        fallback: String
+    ) async -> String {
         let session = LanguageModelSession(
             instructions: """
             Sei un consulente auto elettriche chiaro e onesto. Rispondi nella stessa lingua \
@@ -49,6 +71,7 @@ enum VerdictExplanationService {
             return fallback
         }
     }
+    #endif
 
     private static func fallbackExplanation(result: SimulationResult, input: UserInput) -> String {
         let savings = result.yearlySavingsRange

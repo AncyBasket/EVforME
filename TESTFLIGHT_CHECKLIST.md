@@ -9,8 +9,10 @@
 | 3 | Remote + push | **Done** — https://github.com/AncyBasket/EVforME |
 | 3 | Privacy HTTPS | **Done** — https://ancybasket.github.io/EVforME/privacy/ |
 | 3 | `EVFORME_PRIVACY_URL` | **Done** — same URL in `EVforME?/Info.plist` |
-| 4 | Full unit tests (`EVforME?Tests`) | **Done** — green on Xcode beta / iPhone 17 Pro / iOS 27.0 |
+| 4 | Full unit tests (`EVforME?Tests`) | **Done** — green on Xcode / iOS 17+ destinations |
 | 4 | Vehicle photos (1.0) | **Done** — **no remote vehicle photos in 1.0**; editorial placeholders only (`VehicleHeroImage`). CC0 pipeline paused (optional later). |
+| 4 | Deployment | **iOS 17.0** everywhere — Liquid Glass / Foundation Models gated `#available(iOS 26, *)` |
+| 4 | Launch refresh | **Hardened** — cold start + foreground: `OfficialCostService` + `ItalianIncentivesService` + catalog (best-effort; offline → cache/bundle) |
 | 4 | ASC listing pack | **Ready** — see `ASC_STORE_LISTING.md` |
 | 4 | UITests | **Done** — `testInputToVerdictFlow` green (`e3d5801`) |
 | 4 | Archive (local `.xcarchive`) | **Done** — `/tmp/EVforME.xcarchive` · **1.0 (1)** · arm64 · Xcode 27 beta |
@@ -19,22 +21,33 @@
 
 ## Archive Xcode choice
 
-- Project floor: **iOS 26.2** (`IPHONEOS_DEPLOYMENT_TARGET`) — do not lower
-- Unit suite verified with: `DEVELOPER_DIR=/Users/andrea/Downloads/Xcode-beta.app/Contents/Developer`
-- Prefer the **same** Xcode for archive that you used for the green unit run
+- Project floor: **iOS 17.0** (`IPHONEOS_DEPLOYMENT_TARGET`) — aligned with Toller/Gwent
+- Prefer a recent Xcode that can build the current SDK; runtime features (Glass, Foundation Models) activate only on iOS 26+
 - Version: **1.0 (1)** — Free
+- Live data: every launch/foreground refreshes energy + incentives (see `EVforMEApp.refreshLiveData`)
 
 ## Unit test command (green)
 
 ```bash
-export DEVELOPER_DIR=/Users/andrea/Downloads/Xcode-beta.app/Contents/Developer
+# Lowest available runtime ≥17 on this Mac (example: 18.6). Prefer true iOS 17 if installed.
+xcodebuild test \
+  -project "EVforME?.xcodeproj" \
+  -scheme "EVforME?" \
+  -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=18.6' \
+  -only-testing:"EVforME?Tests"
+```
 
+Also smoke on a recent sim (iOS 26/27) when available:
+
+```bash
 xcodebuild test \
   -project "EVforME?.xcodeproj" \
   -scheme "EVforME?" \
   -destination 'platform=iOS Simulator,name=iPhone 17 Pro,OS=27.0' \
   -only-testing:"EVforME?Tests"
 ```
+
+**Verified 2026-09-19:** no iOS 17 runtime on this Mac; full `EVforME?Tests` green on **iOS 27.0** (63 tests). iOS **18.6** sim builds and runs refresh logs (costs+incentives), but XCTest host hits a repeatable `malloc: pointer being freed was not allocated` after some `EVSimulator` cases (Xcode 27 + older runtime flake) — product path on 27 is green.
 
 ## ASC (must match)
 

@@ -3,13 +3,19 @@
 //  EVforME?
 //
 //  Stime semplificate stile ecobonus IT — non è consulenza fiscale/legale.
+//  I bracket vivono in `italian_incentives.json` (+ cache/remoto via ItalianIncentivesService).
 //
 
 import Foundation
 
-enum ItalianIncentives {
+nonisolated enum ItalianIncentives {
     /// Nota trasparenza fonti / ipotesi.
     static var transparencyNote: String { L10n.incentivesTransparencyNote }
+
+    /// Schedule attivo (dopo refresh a launch/foreground).
+    static var schedule: ItalianIncentiveSchedule {
+        ItalianIncentivesService.shared.currentSchedule
+    }
 
     /// Bonus acquisto stimato (€) in base a listino EV e auto sostituita.
     static func estimatedPurchaseBonusEUR(
@@ -17,30 +23,11 @@ enum ItalianIncentives {
         replacingVehiclePrice: Double,
         hasHomeCharging: Bool
     ) -> Double {
-        // Molti schemi storici escludevano EV oltre una soglia di listino.
-        guard evListPrice > 0, evListPrice <= 45_000 else { return 0 }
-
-        var bonus: Double
-        switch evListPrice {
-        case ...30_000:
-            bonus = 5_000
-        case ...35_000:
-            bonus = 4_000
-        case ...42_000:
-            bonus = 2_500
-        default:
-            bonus = 1_500
-        }
-
-        // Proxy rottamazione: auto attuale di valore contenuto.
-        if replacingVehiclePrice > 0, replacingVehiclePrice <= 18_000 {
-            bonus += 2_000
-        }
-
-        // `hasHomeCharging` reserved for future wallbox schemes — non gonfia il bonus numerico.
-        _ = hasHomeCharging
-
-        return min(bonus, 7_000)
+        schedule.estimatedPurchaseBonusEUR(
+            evListPrice: evListPrice,
+            replacingVehiclePrice: replacingVehiclePrice,
+            hasHomeCharging: hasHomeCharging
+        )
     }
 
     /// Alias usato storicamente nei calcoli “tipici”.

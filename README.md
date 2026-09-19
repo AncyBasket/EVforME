@@ -26,16 +26,19 @@ EVforMEWidget/           # WidgetKit extension
 
 ## Requirements
 
-- Xcode 26.2+ (Xcode 27 recommended for iOS 27 SDK / Liquid Glass refinements)
-- Deployment target **iOS 26.2**
+- Xcode recente (Xcode 16+; Xcode 26/27 ok per SDK Liquid Glass / Foundation Models)
+- Deployment target **iOS 17.0** (app, widget, tests)
 - Optional local API on `127.0.0.1:8787` in **Debug** only (`Defaults.swift`); Release uses bundled seed + costs
+- **Free** — no IAP / paywall
+- Live refresh on every cold start and foreground: energy costs (MIMIT/Eurostat) + IT incentives (bundle / optional `EVFORME_INCENTIVES_URL`) + catalog (optional CDN)
 
 ## Tests
 
 ```bash
-DEVELOPER_DIR=/Users/andrea/Downloads/Xcode-beta.app/Contents/Developer \
+# Prefer iOS 17 sim if installed; otherwise any ≥17 (e.g. 18.6)
 xcodebuild test -scheme 'EVforME?' \
-  -destination 'platform=iOS Simulator,name=iPhone 17 Pro' \
+  -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=18.6' \
+  -only-testing:'EVforME?Tests' \
   -parallel-testing-enabled NO
 ```
 
@@ -44,3 +47,5 @@ xcodebuild test -scheme 'EVforME?' \
 - Input field `dailyKm` is **kilometers per year** (historical name).
 - `areaType` adjusts ICE/EV consumption multipliers and charge frequency.
 - Catalog expansion to 4000+ synthetic rows runs only in **DEBUG**.
+- Liquid Glass / on-device AI explanation require iOS 26+; on iOS 17–25 the app uses elevated surfaces and L10n fallback explanations.
+- 1.0 ships **placeholder** vehicle heroes only (no remote photos).
