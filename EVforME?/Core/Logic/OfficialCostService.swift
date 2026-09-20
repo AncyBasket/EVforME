@@ -52,6 +52,11 @@ final class OfficialCostService {
         return Date(timeIntervalSince1970: t)
     }
 
+    /// Cache → bundle (no network). Per UI delta / reminder offline-first.
+    func cachedOrBundledCosts() -> OfficialEnergyCosts? {
+        loadCache() ?? loadBundled()
+    }
+
     private func fetchLegacyAPIOverride() async -> OfficialEnergyCosts? {
         guard !Defaults.officialEnergyCostsRemoteURL.isEmpty,
               let url = URL(string: Defaults.officialEnergyCostsRemoteURL) else {

@@ -454,3 +454,15 @@
 
 "calculation_opex_breakdown" = "Energy €%.0f + Maintenance €%.0f + Tax €%.0f + Insurance €%.0f = €%.0f/year";
 "calculation_charging_note" = "Estimated charges: %d× / week (home/public mix in energy total).";
+
+/* Retention 1.1 */
+"last_comparison_title" = "Last comparison";
+"last_comparison_reopen" = "Reopen verdict";
+"last_comparison_recalculate" = "Recalculate with today’s data";
+"last_comparison_restore_form" = "Restore in form";
+"last_comparison_data_unchanged" = "Data refreshed — same picture.";
+"last_comparison_data_changed" = "Data changed — estimated savings now €%d–€%d/year.";
+"retention_notif_title" = "Your EV comparison";
+"retention_notif_body" = "Still holds? Check energy prices and incentives on your last comparison.";
+"data_updated_badge_bundled" = "Using bundled data (offline).";
+"data_updated_badge_at" = "Data updated %@.";

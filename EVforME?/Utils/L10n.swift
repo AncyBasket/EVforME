@@ -462,6 +462,21 @@ enum L10n {
     static var stickerOverrideAppliedReason: String { string("sticker_override_applied_reason") }
     static var stickerClearOverride: String { string("sticker_clear_override") }
     static var historyRestoreHint: String { string("history_restore_hint") }
+
+    // MARK: - Retention 1.1 — ultimo confronto
+    static var lastComparisonTitle: String { string("last_comparison_title") }
+    static var lastComparisonReopen: String { string("last_comparison_reopen") }
+    static var lastComparisonRecalculate: String { string("last_comparison_recalculate") }
+    static var lastComparisonRestoreForm: String { string("last_comparison_restore_form") }
+    static var lastComparisonDataUnchanged: String { string("last_comparison_data_unchanged") }
+    static func lastComparisonDataChanged(_ min: Int, _ max: Int) -> String {
+        format("last_comparison_data_changed", min, max)
+    }
+    static var retentionNotifTitle: String { string("retention_notif_title") }
+    static var retentionNotifBody: String { string("retention_notif_body") }
+    static var dataUpdatedBadgeBundled: String { string("data_updated_badge_bundled") }
+    static func dataUpdatedBadgeAt(_ when: String) -> String { format("data_updated_badge_at", when) }
+
     static var validationPurchaseTooLow: String { string("validation_purchase_too_low") }
     static var validationPurchaseTooHigh: String { string("validation_purchase_too_high") }
     static var validationStickerFuelRange: String { string("validation_sticker_fuel_range") }

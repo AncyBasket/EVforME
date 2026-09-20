@@ -43,14 +43,22 @@ struct EVforMEApp: App {
                 catalogSetup: {
                     guard !Self.isRunningUnderXCTest else { return }
                     await refreshLiveData(applyCosts: true)
+                },
+                onReopenLastComparison: reopenLastComparison,
+                onRecalculateLastComparison: {
+                    Task { await recalculateLastComparison() }
                 }
             )
             .task {
+                _ = RetentionReminderService.shared
                 syncFuelFromWidgetIfNeeded()
                 if !Self.isRunningUnderXCTest {
                     await refreshLiveData(applyCosts: true)
+                    RetentionReminderService.shared.reconcileOnForeground()
                 }
-                if AppDeepLink.consumeOpenLastVerdictRequest() {
+                if AppDeepLink.consumeRecalculateLastRequest() {
+                    await recalculateLastComparison()
+                } else if AppDeepLink.consumeOpenLastVerdictRequest() {
                     openLastVerdict()
                 }
             }
@@ -58,11 +66,23 @@ struct EVforMEApp: App {
                 guard phase == .active else { return }
                 syncFuelFromWidgetIfNeeded(reopenVerdictIfNeeded: simulationResult != nil)
                 guard !Self.isRunningUnderXCTest else { return }
-                Task { await refreshLiveData(applyCosts: true) }
+                Task {
+                    await refreshLiveData(applyCosts: true)
+                    RetentionReminderService.shared.reconcileOnForeground()
+                    if AppDeepLink.consumeRecalculateLastRequest() {
+                        await recalculateLastComparison()
+                    } else if AppDeepLink.consumeOpenLastVerdictRequest() {
+                        openLastVerdict()
+                    }
+                }
             }
             .onOpenURL { url in
                 guard AppDeepLink.matches(url) else { return }
-                openLastVerdict()
+                if AppDeepLink.isRecalculate(url) {
+                    Task { await recalculateLastComparison() }
+                } else {
+                    openLastVerdict()
+                }
             }
         }
     }
@@ -155,8 +175,53 @@ struct EVforMEApp: App {
         }
     }
 
+    private func reopenLastComparison() {
+        showOnboarding = false
+        guard let snap = ScenarioHistoryStore.latest() else {
+            openLastVerdict()
+            return
+        }
+        let input = snap.restoredUserInput()
+        userInput = input
+        StorageService.shared.saveUserInput(input)
+        guard let result = EVSimulator.simulate(input: input) else { return }
+        simulationResult = result
+        WidgetSnapshotStore.save(from: result, input: input)
+        VerdictLiveActivityController.publish(from: result, input: input)
+    }
+
+    private func recalculateLastComparison() async {
+        showOnboarding = false
+        guard let snap = ScenarioHistoryStore.latest() else {
+            openLastVerdict()
+            return
+        }
+        await refreshLiveData(applyCosts: false)
+        _ = await ItalianIncentivesService.shared.refresh()
+        let costs = await OfficialCostService.shared.fetchLatest()
+
+        var input = snap.restoredUserInput()
+        if let costs {
+            input.fuelPrice = costs.fuelPricePerLiter
+            input.electricityPricePerKWh = costs.electricityPricePerKWh
+        }
+        input.chargingConfiguration = input.resolvedChargingConfiguration()
+        userInput = input
+        StorageService.shared.saveUserInput(input)
+
+        guard let result = EVSimulator.simulate(input: input) else { return }
+        simulationResult = result
+        WidgetSnapshotStore.save(from: result, input: input)
+        VerdictLiveActivityController.publish(from: result, input: input)
+        // Non salvare un nuovo snapshot a ogni ricalcolo — la card resta ancorata all’ultimo verdetto esplicito.
+    }
+
     private func openLastVerdict() {
         showOnboarding = false
+        if let snap = ScenarioHistoryStore.latest() {
+            reopenLastComparison()
+            return
+        }
         if userInput.sourceVehicleId.isEmpty {
             userInput.sourceVehicleId = VehicleCatalogService.shared.sourceVehicles().first?.id
                 ?? "alfa-romeo-147-2005"

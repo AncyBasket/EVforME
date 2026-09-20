@@ -452,3 +452,15 @@
 
 "calculation_opex_breakdown" = "Energia €%.0f + Manutenzione €%.0f + Bollo €%.0f + Assicurazione €%.0f = €%.0f/anno";
 "calculation_charging_note" = "Ricariche stimate: %d× / settimana (mix casa/pubblico nel totale energia).";
+
+/* Retention 1.1 */
+"last_comparison_title" = "Ultimo confronto";
+"last_comparison_reopen" = "Riapri verdetto";
+"last_comparison_recalculate" = "Ricalcola con dati di oggi";
+"last_comparison_restore_form" = "Ripristina nel form";
+"last_comparison_data_unchanged" = "Dati aggiornati, stesso quadro.";
+"last_comparison_data_changed" = "I dati sono cambiati — risparmio stimato ora €%d–€%d/anno.";
+"retention_notif_title" = "Il tuo confronto EV";
+"retention_notif_body" = "Vale ancora? Controlla prezzi energia e incentivi sul tuo ultimo confronto.";
+"data_updated_badge_bundled" = "Dati da bundle (offline).";
+"data_updated_badge_at" = "Dati aggiornati il %@.";

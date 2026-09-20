@@ -80,11 +80,30 @@ struct SavedScenarioSnapshot: Codable, Identifiable, Equatable {
     /// Presente dagli snapshot “v2”; se manca, il ripristino usa solo i campi legacy.
     let persistedInput: PersistedScenarioInput?
 
+    // Retention 1.1 — opzionali per compatibilità con history già salvata.
+    let sourceDisplayName: String?
+    let targetDisplayName: String?
+    let fuelPriceAtSave: Double?
+    let electricityPriceAtSave: Double?
+    let incentiveEURAtSave: Double?
+    let energyUpdatedAtAtSave: String?
+    let incentivesUpdatedAtAtSave: String?
+
     var verdictTitle: String {
         (EVVerdict(rawValue: verdictRaw) ?? .maybe).title
     }
 
     var createdDate: Date { Date(timeIntervalSince1970: createdAt) }
+
+    var pairLabel: String {
+        let from = sourceDisplayName
+            ?? VehicleCatalogService.shared.vehicle(by: sourceVehicleId)?.displayName
+            ?? sourceVehicleId
+        let to = targetDisplayName
+            ?? VehicleCatalogService.shared.vehicle(by: targetVehicleId)?.displayName
+            ?? targetVehicleId
+        return "\(from) → \(to)"
+    }
 
     /// Ricostruisce l’input da ripristinare (full payload o fallback legacy).
     func restoredUserInput() -> UserInput {
@@ -97,8 +116,9 @@ struct SavedScenarioSnapshot: Codable, Identifiable, Equatable {
             dailyKm: yearlyKm,
             hasHomeCharging: hasHomeCharging,
             areaType: trip.suggestedAreaType,
-            fuelPrice: 1.7,
+            fuelPrice: fuelPriceAtSave ?? 1.7,
             ownershipYears: 5,
+            electricityPricePerKWh: electricityPriceAtSave ?? 0.25,
             sourceVehicleId: sourceVehicleId,
             targetVehicleId: targetVehicleId,
             scenario: scenario,
@@ -121,8 +141,15 @@ enum ScenarioHistoryStore {
         return decoded.sorted { $0.createdAt > $1.createdAt }
     }
 
+    static func latest() -> SavedScenarioSnapshot? {
+        all().first
+    }
+
     static func save(result: SimulationResult, input: UserInput) {
         var items = all()
+        let sourceName = VehicleCatalogService.shared.vehicle(by: input.sourceVehicleId)?.displayName
+        let targetName = VehicleCatalogService.shared.vehicle(by: input.targetVehicleId)?.displayName
+        let costs = OfficialCostService.shared.cachedOrBundledCosts()
         let snap = SavedScenarioSnapshot(
             id: UUID(),
             createdAt: Date().timeIntervalSince1970,
@@ -136,7 +163,14 @@ enum ScenarioHistoryStore {
             scenarioRaw: input.scenario.rawValue,
             sourceVehicleId: input.sourceVehicleId,
             targetVehicleId: input.targetVehicleId,
-            persistedInput: PersistedScenarioInput(from: input)
+            persistedInput: PersistedScenarioInput(from: input),
+            sourceDisplayName: sourceName,
+            targetDisplayName: targetName,
+            fuelPriceAtSave: input.fuelPrice,
+            electricityPriceAtSave: input.electricityPricePerKWh,
+            incentiveEURAtSave: input.estimatedPurchaseIncentiveEUR,
+            energyUpdatedAtAtSave: costs?.updatedAt,
+            incentivesUpdatedAtAtSave: ItalianIncentivesService.shared.currentSchedule.updatedAt
         )
         items.insert(snap, at: 0)
         if items.count > maxItems {
@@ -145,6 +179,7 @@ enum ScenarioHistoryStore {
         if let data = try? JSONEncoder().encode(items) {
             defaults.set(data, forKey: key)
         }
+        RetentionReminderService.shared.armAfterVerdictSaved()
     }
 
     static func clear() {

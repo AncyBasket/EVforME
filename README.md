@@ -4,6 +4,7 @@ iOS app that helps decide whether switching to an EV fits your yearly kilometers
 
 ## Features
 
+- **1.1 retention loop**: card “Ultimo confronto”, ricalcolo con dati live + delta prezzi/incentivi, reminder locali soft a 30/90 giorni (permesso solo dopo il primo verdetto)
 - **Workshop bench**: yearly km, fuel/electricity prices, ownership years, urban vs mixed driving, home charging, ICE → EV pair from a large catalog
 - **Verdict**: `yes` / `maybe` / `notYet` with cost reasons, 5-year chart, fear vs reality, scenario chips
 - **On-device AI explanation** (Foundation Models / Apple Intelligence when available)

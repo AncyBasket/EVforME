@@ -22,6 +22,8 @@ struct MainShellView: View {
 
     var onSimulate: (Scenario) -> Void
     var catalogSetup: () async -> Void
+    var onReopenLastComparison: () -> Void = {}
+    var onRecalculateLastComparison: () -> Void = {}
 
     @State private var selectedTab: AppShellTab = .workshop
     @State private var showGrowthDebug = false
@@ -44,7 +46,9 @@ struct MainShellView: View {
                             userInput: $userInput,
                             useNavigationChrome: false,
                             showsTopHero: true,
-                            onSimulate: onSimulate
+                            onSimulate: onSimulate,
+                            onReopenLastComparison: onReopenLastComparison,
+                            onRecalculateLastComparison: onRecalculateLastComparison
                         )
                         .transition(tabEnter(.leading, exit: .trailing))
                     }

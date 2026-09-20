@@ -16,6 +16,9 @@ struct InputView: View {
     /// Se `false`, non mostrare il poster in cima (evita duplicare il titolo con il masthead).
     var showsTopHero: Bool = true
     var onSimulate: (Scenario) -> Void
+    /// Retention 1.1 — azioni sulla card “Ultimo confronto”.
+    var onReopenLastComparison: (() -> Void)? = nil
+    var onRecalculateLastComparison: (() -> Void)? = nil
     @State private var validationErrors: [String] = []
     @State private var showErrors: Bool = false
     @State private var selectedScenario: Scenario = .realistic
@@ -29,12 +32,26 @@ struct InputView: View {
     @State private var stickerBusy = false
     @State private var history: [SavedScenarioSnapshot] = ScenarioHistoryStore.all()
     @State private var showAdvancedDetails = false
+    @State private var lastSnapshot: SavedScenarioSnapshot? = ScenarioHistoryStore.latest()
+    @State private var deltaBadgeText: String? = nil
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 22) {
                 if showsTopHero {
                     InputScreenHero(appearAnimation: appearAnimation)
+                }
+
+                if let snap = lastSnapshot {
+                    LastComparisonCard(
+                        snapshot: snap,
+                        deltaBadge: deltaBadgeText,
+                        dataFreshness: dataUpdatedBadgeLabel,
+                        onReopen: { onReopenLastComparison?() ?? restoreHistory(snap) },
+                        onRecalculate: { onRecalculateLastComparison?() ?? restoreHistory(snap) },
+                        onRestoreForm: { restoreFormOnly(snap) }
+                    )
+                    .padding(.horizontal, 20)
                 }
 
                 VStack(alignment: .leading, spacing: 16) {
@@ -366,7 +383,7 @@ struct InputView: View {
         .modifier(InputNavigationChromeModifier(enabled: useNavigationChrome))
         .onAppear {
             selectedScenario = userInput.scenario
-            history = ScenarioHistoryStore.all()
+            refreshHistoryState()
             loadCatalog()
             if accessibilityReduceMotion {
                 appearAnimation = true
@@ -419,6 +436,57 @@ struct InputView: View {
             return L10n.pricesFreshMinutesAgo(minutes)
         }
         return L10n.pricesFreshCached
+    }
+
+    private var dataUpdatedBadgeLabel: String {
+        let energyDate = OfficialCostService.shared.lastSuccessfulFetchDate
+        let incentivesDate = ItalianIncentivesService.shared.lastSuccessfulFetchDate
+        let best = [energyDate, incentivesDate].compactMap { $0 }.max()
+        guard let best else {
+            return L10n.dataUpdatedBadgeBundled
+        }
+        let formatter = DateFormatter()
+        formatter.locale = .current
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return L10n.dataUpdatedBadgeAt(formatter.string(from: best))
+    }
+
+    private func refreshHistoryState() {
+        history = ScenarioHistoryStore.all()
+        lastSnapshot = ScenarioHistoryStore.latest()
+        deltaBadgeText = makeDeltaBadge(for: lastSnapshot)
+    }
+
+    private func makeDeltaBadge(for snapshot: SavedScenarioSnapshot?) -> String? {
+        guard let snapshot else { return nil }
+        var input = snapshot.restoredUserInput()
+        let liveFuel = ScenarioLiveDelta.liveFuelPrice(fallback: input.fuelPrice)
+        let liveElec = ScenarioLiveDelta.liveElectricityPrice(fallback: input.electricityPricePerKWh)
+        input.fuelPrice = liveFuel
+        input.electricityPricePerKWh = liveElec
+        let liveResult = EVSimulator.simulate(input: input)
+        let report = ScenarioLiveDelta.evaluate(
+            snapshot: snapshot,
+            liveFuel: liveFuel,
+            liveElectricity: liveElec,
+            liveIncentiveEUR: input.estimatedPurchaseIncentiveEUR,
+            liveResult: liveResult
+        )
+        if report.isMaterial, let min = report.currentSavingsMin, let max = report.currentSavingsMax {
+            return L10n.lastComparisonDataChanged(min, max)
+        }
+        if snapshot.fuelPriceAtSave != nil || snapshot.electricityPriceAtSave != nil {
+            return L10n.lastComparisonDataUnchanged
+        }
+        return nil
+    }
+
+    private func restoreFormOnly(_ item: SavedScenarioSnapshot) {
+        let restored = item.restoredUserInput()
+        userInput = restored
+        selectedScenario = restored.scenario
+        UISelectionFeedbackGenerator().selectionChanged()
     }
 
     private func runStickerOCR(_ item: PhotosPickerItem?) async {

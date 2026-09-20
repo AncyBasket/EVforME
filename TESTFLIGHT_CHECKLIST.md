@@ -84,3 +84,11 @@ xcodebuild test \
 - [x] Local archive 1.0 (1) produced
 - [ ] ASC app record created + build uploaded
 - [ ] Internal TestFlight build installed on a real device
+
+## Product 1.1 — retention loop
+
+- Card **Ultimo confronto** on workshop after first saved verdict (reopen / recalculate / restore form)
+- Delta badge when fuel ≥ €0.05/L or electricity ≥ €0.02/kWh (or incentive moved) vs snapshot
+- Soft local notifications at 30d + 90d after first verdict (permission then); tap → last compare / live recalc if data moved
+- Free: no IAP / paywall / account
+
