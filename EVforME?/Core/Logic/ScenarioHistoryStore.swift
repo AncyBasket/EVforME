@@ -88,6 +88,7 @@ struct SavedScenarioSnapshot: Codable, Identifiable, Equatable {
     let incentiveEURAtSave: Double?
     let energyUpdatedAtAtSave: String?
     let incentivesUpdatedAtAtSave: String?
+    let incentivesValidUntilAtSave: String?
 
     var verdictTitle: String {
         (EVVerdict(rawValue: verdictRaw) ?? .maybe).title
@@ -170,7 +171,8 @@ enum ScenarioHistoryStore {
             electricityPriceAtSave: input.electricityPricePerKWh,
             incentiveEURAtSave: input.estimatedPurchaseIncentiveEUR,
             energyUpdatedAtAtSave: costs?.updatedAt,
-            incentivesUpdatedAtAtSave: ItalianIncentivesService.shared.currentSchedule.updatedAt
+            incentivesUpdatedAtAtSave: ItalianIncentivesService.shared.currentSchedule.updatedAt,
+            incentivesValidUntilAtSave: ItalianIncentivesService.shared.currentSchedule.validUntil
         )
         items.insert(snap, at: 0)
         if items.count > maxItems {

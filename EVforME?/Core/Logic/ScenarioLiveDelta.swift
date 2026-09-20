@@ -2,7 +2,7 @@
 //  ScenarioLiveDelta.swift
 //  EVforME?
 //
-//  Confronta prezzi/incentivi allo snapshot vs dati live (soglie retention 1.1).
+//  Confronta prezzi/incentivi allo snapshot vs dati live (soglie retention 1.1 / kit 1.2).
 //
 
 import Foundation
@@ -16,6 +16,8 @@ enum ScenarioLiveDelta {
         let fuelDelta: Double?
         let electricityDelta: Double?
         let incentiveDelta: Double?
+        let incentiveWindowChanged: Bool
+        let incentiveWindowExpiredNow: Bool
         let previousSavingsMin: Int
         let previousSavingsMax: Int
         let currentSavingsMin: Int?
@@ -34,7 +36,7 @@ enum ScenarioLiveDelta {
         }
 
         var isMaterial: Bool {
-            fuelMoved || electricityMoved || incentiveMoved
+            fuelMoved || electricityMoved || incentiveMoved || incentiveWindowChanged || incentiveWindowExpiredNow
         }
 
         var savingsChanged: Bool {
@@ -48,15 +50,29 @@ enum ScenarioLiveDelta {
         liveFuel: Double,
         liveElectricity: Double,
         liveIncentiveEUR: Double,
-        liveResult: SimulationResult?
+        liveResult: SimulationResult?,
+        liveValidUntil: String? = ItalianIncentives.schedule.validUntil
     ) -> Report {
         let fuelDelta = snapshot.fuelPriceAtSave.map { liveFuel - $0 }
         let elecDelta = snapshot.electricityPriceAtSave.map { liveElectricity - $0 }
         let incentiveDelta = snapshot.incentiveEURAtSave.map { liveIncentiveEUR - $0 }
+        let savedUntil = snapshot.incentivesValidUntilAtSave
+        // Only flag a window change when the snapshot already had a date (avoid 1.1→1.2 noise).
+        let windowChanged: Bool = {
+            guard let savedUntil else { return false }
+            return savedUntil != (liveValidUntil ?? "")
+        }()
+        let expiredNow: Bool = {
+            guard savedUntil != nil else { return false }
+            if case .expired = ItalianIncentives.schedule.windowStatus() { return true }
+            return false
+        }()
         return Report(
             fuelDelta: fuelDelta,
             electricityDelta: elecDelta,
             incentiveDelta: incentiveDelta,
+            incentiveWindowChanged: windowChanged,
+            incentiveWindowExpiredNow: expiredNow,
             previousSavingsMin: snapshot.savingsMin,
             previousSavingsMax: snapshot.savingsMax,
             currentSavingsMin: liveResult.map { $0.yearlySavingsRange.lowerBound },

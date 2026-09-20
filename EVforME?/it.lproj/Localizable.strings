@@ -464,3 +464,19 @@
 "retention_notif_body" = "Vale ancora? Controlla prezzi energia e incentivi sul tuo ultimo confronto.";
 "data_updated_badge_bundled" = "Dati da bundle (offline).";
 "data_updated_badge_at" = "Dati aggiornati il %@.";
+
+/* Kit Italia 1.2 */
+"italy_kit_costs_title" = "Bollo, assicurazione, manutenzione (stima)";
+"italy_kit_disclaimer" = "Stime semplificate per orientarti — non sono consulenza fiscale, ACI ufficiale né preventivi assicurativi.";
+"italy_kit_bollo_row" = "Bollo (stima): attuale ~€%d/anno · elettrificata ~€%d/anno";
+"italy_kit_insurance_row" = "Assicurazione (stima): attuale ~€%d/anno · elettrificata ~€%d/anno";
+"italy_kit_maintenance_row" = "Manutenzione (stima): attuale ~€%d/anno · elettrificata ~€%d/anno";
+"incentive_window_section_title" = "Finestra incentivo";
+"incentive_window_verify_official" = "Finestra incentivo: verifica aggiornamento sul sito ufficiale.";
+"incentive_window_buy_by" = "Se compro entro %@";
+"incentive_window_open_no_end" = "Finestra incentivo aperta (senza data di fine nel schedule).";
+"incentive_window_possibly_stale" = "Schedule incentivo potrebbe non essere attuale.";
+"incentive_window_possibly_stale_detail" = "La data di fine nel bundle è passata: i numeri restano solo una stima. Controlla il sito ufficiale prima di decidere.";
+"incentive_window_starts" = "Finestra incentivo prevista dal %@";
+"guide_topic_road_tax_title" = "Bollo ed esenzioni EV (orientativo)";
+"guide_topic_road_tax_body" = "In Italia molte BEV hanno avuto esenzione dal bollo per i primi anni dall’immatricolazione, poi regole regionali. Qui mostriamo solo una stima grezza basata sul catalogo e su un’ipotesi tipica di esenzione iniziale — non sostituisce ACI, regione o CAF. Controlla sempre la tua provincia e l’anno di immatricolazione sul canale ufficiale.";

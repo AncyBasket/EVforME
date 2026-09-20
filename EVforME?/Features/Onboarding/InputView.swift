@@ -474,7 +474,13 @@ struct InputView: View {
             liveResult: liveResult
         )
         if report.isMaterial, let min = report.currentSavingsMin, let max = report.currentSavingsMax {
+            if report.incentiveWindowChanged || report.incentiveWindowExpiredNow {
+                return L10n.lastComparisonDataChanged(min, max) + " · " + ItalianIncentives.windowBadgeText
+            }
             return L10n.lastComparisonDataChanged(min, max)
+        }
+        if report.incentiveWindowChanged || report.incentiveWindowExpiredNow {
+            return ItalianIncentives.windowBadgeText
         }
         if snapshot.fuelPriceAtSave != nil || snapshot.electricityPriceAtSave != nil {
             return L10n.lastComparisonDataUnchanged

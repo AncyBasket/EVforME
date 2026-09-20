@@ -68,6 +68,8 @@ struct VerdictView: View {
                 closedDescription: L10n.deepDiveCostsClosed
             ) {
                 VStack(alignment: .leading, spacing: 24) {
+                    incentiveWindowSection
+                    italyPracticalCostsSection(result: currentResult)
                     costsDetailSection(result: currentResult)
                     CostSectionView(result: currentResult, scenario: selectedScenario)
                     TimeEvolutionView(scenario: selectedScenario)
@@ -530,6 +532,46 @@ struct VerdictView: View {
             assumptionRow(text: L10n.assumptionTaxes)
             assumptionRow(text: L10n.assumptionElectricity)
             assumptionRow(text: L10n.incentivesTransparencyNote)
+            assumptionRow(text: L10n.italyKitDisclaimer)
+        }
+    }
+
+    private var incentiveWindowSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(L10n.incentiveWindowSectionTitle)
+                .font(Typography.readingCardTitle)
+                .foregroundColor(.primaryText)
+            Text(ItalianIncentives.windowBadgeText)
+                .font(Typography.readingCaption)
+                .foregroundColor(.ink)
+                .fixedSize(horizontal: false, vertical: true)
+            if ItalianIncentives.schedule.isSchedulePossiblyStale {
+                Text(L10n.incentiveWindowPossiblyStaleDetail)
+                    .font(Typography.readingCaption)
+                    .foregroundColor(.secondaryText)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Text(L10n.incentivesTransparencyNote)
+                .font(Typography.readingCaption)
+                .foregroundColor(.secondaryText)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+
+    private func italyPracticalCostsSection(result: SimulationResult) -> some View {
+        let src = result.sourceYearlyBreakdown
+        let tgt = result.targetYearlyBreakdown
+        return VStack(alignment: .leading, spacing: 10) {
+            Text(L10n.italyKitCostsTitle)
+                .font(Typography.readingCardTitle)
+                .foregroundColor(.primaryText)
+            Text(L10n.italyKitDisclaimer)
+                .font(Typography.readingCaption)
+                .foregroundColor(.secondaryText)
+                .fixedSize(horizontal: false, vertical: true)
+            assumptionRow(text: L10n.italyKitBolloRow(Int(src.taxes), Int(tgt.taxes)))
+            assumptionRow(text: L10n.italyKitInsuranceRow(Int(src.insurance), Int(tgt.insurance)))
+            assumptionRow(text: L10n.italyKitMaintenanceRow(Int(src.maintenance), Int(tgt.maintenance)))
         }
     }
 

@@ -1,7 +1,9 @@
 {
   "country": "IT",
   "currency": "EUR",
-  "updatedAt": "2026-09-19T00:00:00Z",
+  "updatedAt": "2026-09-20T00:00:00Z",
+  "validFrom": "2026-01-01",
+  "validUntil": "2026-12-31",
   "maxListPriceEUR": 45000,
   "maxBonusEUR": 7000,
   "scrappageExtraEUR": 2000,
@@ -12,5 +14,5 @@
     { "maxPriceEUR": 42000, "bonusEUR": 2500 },
     { "maxPriceEUR": 45000, "bonusEUR": 1500 }
   ],
-  "sourceNote": "Stima semplificata stile ecobonus IT — non consulenza fiscale/legale. Aggiornabile via EVFORME_INCENTIVES_URL o bundle."
+  "sourceNote": "Stima semplificata stile ecobonus IT — non consulenza fiscale/legale. Verifica sempre sul sito ufficiale del Ministero / regioni. Aggiornabile via EVFORME_INCENTIVES_URL o bundle."
 }

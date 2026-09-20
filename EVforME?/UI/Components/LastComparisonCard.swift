@@ -48,6 +48,11 @@ struct LastComparisonCard: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
 
+            Text(ItalianIncentives.windowBadgeText)
+                .font(Typography.readingCaption)
+                .foregroundStyle(Color.secondaryText)
+                .fixedSize(horizontal: false, vertical: true)
+
             Text(dataFreshness)
                 .font(Typography.readingCaption)
                 .foregroundStyle(Color.secondaryText)

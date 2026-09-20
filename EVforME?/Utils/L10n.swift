@@ -497,6 +497,23 @@ enum L10n {
     static func pricesFreshMinutesAgo(_ minutes: Int) -> String { format("prices_fresh_minutes_ago", minutes) }
     static var pricesFreshCached: String { string("prices_fresh_cached") }
     static var pricesFreshBundled: String { string("prices_fresh_bundled") }
+
+    // MARK: - Kit Italia 1.2
+    static var italyKitCostsTitle: String { string("italy_kit_costs_title") }
+    static var italyKitDisclaimer: String { string("italy_kit_disclaimer") }
+    static func italyKitBolloRow(_ ice: Int, _ ev: Int) -> String { format("italy_kit_bollo_row", ice, ev) }
+    static func italyKitInsuranceRow(_ ice: Int, _ ev: Int) -> String { format("italy_kit_insurance_row", ice, ev) }
+    static func italyKitMaintenanceRow(_ ice: Int, _ ev: Int) -> String { format("italy_kit_maintenance_row", ice, ev) }
+    static var incentiveWindowSectionTitle: String { string("incentive_window_section_title") }
+    static var incentiveWindowVerifyOfficial: String { string("incentive_window_verify_official") }
+    static func incentiveWindowBuyBy(_ date: String) -> String { format("incentive_window_buy_by", date) }
+    static var incentiveWindowOpenNoEnd: String { string("incentive_window_open_no_end") }
+    static var incentiveWindowPossiblyStale: String { string("incentive_window_possibly_stale") }
+    static var incentiveWindowPossiblyStaleDetail: String { string("incentive_window_possibly_stale_detail") }
+    static func incentiveWindowStarts(_ date: String) -> String { format("incentive_window_starts", date) }
+    static var guideTopicRoadTaxTitle: String { string("guide_topic_road_tax_title") }
+    static var guideTopicRoadTaxBody: String { string("guide_topic_road_tax_body") }
+
     static var liveActivityClear: String { string("live_activity_clear") }
 
     // MARK: - App Intents

@@ -92,3 +92,9 @@ xcodebuild test \
 - Soft local notifications at 30d + 90d after first verdict (permission then); tap → last compare / live recalc if data moved
 - Free: no IAP / paywall / account
 
+## Product 1.2 — Kit Italia
+
+- Incentive schedule: optional `validFrom` / `validUntil`; UI “Se compro entro …” / stale badge
+- Verdict costs: bollo / assicurazione / manutenzione ICE vs EV (stime + disclaimer)
+- Guides: “Bollo ed esenzioni EV (orientativo)”
+

@@ -33,7 +33,68 @@ final class ScenarioLiveDeltaTests: XCTestCase {
         XCTAssertFalse(report.isMaterial)
     }
 
-    private func makeSnapshot(fuel: Double, elec: Double, incentive: Double) -> SavedScenarioSnapshot {
+    func testIncentiveWindowChangeIsMaterial() {
+        let snap = makeSnapshot(fuel: 1.70, elec: 0.30, incentive: 5000, validUntil: "2026-06-30")
+        let report = ScenarioLiveDelta.evaluate(
+            snapshot: snap,
+            liveFuel: 1.70,
+            liveElectricity: 0.30,
+            liveIncentiveEUR: 5000,
+            liveResult: nil,
+            liveValidUntil: "2026-12-31"
+        )
+        XCTAssertTrue(report.incentiveWindowChanged)
+        XCTAssertTrue(report.isMaterial)
+    }
+
+    func testSameIncentiveWindowNotMaterial() {
+        let snap = makeSnapshot(fuel: 1.70, elec: 0.30, incentive: 5000, validUntil: "2026-12-31")
+        let report = ScenarioLiveDelta.evaluate(
+            snapshot: snap,
+            liveFuel: 1.70,
+            liveElectricity: 0.30,
+            liveIncentiveEUR: 5000,
+            liveResult: nil,
+            liveValidUntil: "2026-12-31"
+        )
+        XCTAssertFalse(report.incentiveWindowChanged)
+        XCTAssertFalse(report.isMaterial)
+    }
+
+    func testIncentiveWindowAppearingOnOldSnapshotIsNotMaterial() {
+        let snap = makeSnapshot(fuel: 1.70, elec: 0.30, incentive: 5000, validUntil: nil)
+        let report = ScenarioLiveDelta.evaluate(
+            snapshot: snap,
+            liveFuel: 1.70,
+            liveElectricity: 0.30,
+            liveIncentiveEUR: 5000,
+            liveResult: nil,
+            liveValidUntil: "2026-12-31"
+        )
+        XCTAssertFalse(report.incentiveWindowChanged)
+        XCTAssertFalse(report.isMaterial)
+    }
+
+    func testIncentiveWindowClearedIsMaterial() {
+        let snap = makeSnapshot(fuel: 1.70, elec: 0.30, incentive: 5000, validUntil: "2026-12-31")
+        let report = ScenarioLiveDelta.evaluate(
+            snapshot: snap,
+            liveFuel: 1.70,
+            liveElectricity: 0.30,
+            liveIncentiveEUR: 5000,
+            liveResult: nil,
+            liveValidUntil: nil
+        )
+        XCTAssertTrue(report.incentiveWindowChanged)
+        XCTAssertTrue(report.isMaterial)
+    }
+
+    private func makeSnapshot(
+        fuel: Double,
+        elec: Double,
+        incentive: Double,
+        validUntil: String? = nil
+    ) -> SavedScenarioSnapshot {
         SavedScenarioSnapshot(
             id: UUID(),
             createdAt: Date().timeIntervalSince1970,
@@ -54,7 +115,8 @@ final class ScenarioLiveDeltaTests: XCTestCase {
             electricityPriceAtSave: elec,
             incentiveEURAtSave: incentive,
             energyUpdatedAtAtSave: nil,
-            incentivesUpdatedAtAtSave: nil
+            incentivesUpdatedAtAtSave: nil,
+            incentivesValidUntilAtSave: validUntil
         )
     }
 }

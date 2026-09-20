@@ -466,3 +466,19 @@
 "retention_notif_body" = "Still holds? Check energy prices and incentives on your last comparison.";
 "data_updated_badge_bundled" = "Using bundled data (offline).";
 "data_updated_badge_at" = "Data updated %@.";
+
+/* Kit Italia 1.2 */
+"italy_kit_costs_title" = "Road tax, insurance, maintenance (estimate)";
+"italy_kit_disclaimer" = "Simplified estimates to orient you — not tax advice, official ACI figures, or insurance quotes.";
+"italy_kit_bollo_row" = "Road tax (est.): current ~€%d/yr · electrified ~€%d/yr";
+"italy_kit_insurance_row" = "Insurance (est.): current ~€%d/yr · electrified ~€%d/yr";
+"italy_kit_maintenance_row" = "Maintenance (est.): current ~€%d/yr · electrified ~€%d/yr";
+"incentive_window_section_title" = "Incentive window";
+"incentive_window_verify_official" = "Incentive window: check the official site for updates.";
+"incentive_window_buy_by" = "If I buy by %@";
+"incentive_window_open_no_end" = "Incentive window open (no end date in schedule).";
+"incentive_window_possibly_stale" = "Incentive schedule may be out of date.";
+"incentive_window_possibly_stale_detail" = "The bundled end date has passed: figures remain an estimate only. Check the official site before deciding.";
+"incentive_window_starts" = "Incentive window expected from %@";
+"guide_topic_road_tax_title" = "Road tax & EV exemptions (indicative)";
+"guide_topic_road_tax_body" = "In Italy many BEVs have had road-tax exemption for the first years after registration, then regional rules. We show only a rough estimate from the catalog plus a typical early-exemption hypothesis — not a substitute for ACI, your region, or a tax advisor. Always check your province and registration year on official channels.";

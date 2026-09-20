@@ -91,6 +91,30 @@ enum OwnershipCostEstimates {
         return max(minimumBase, (fromPrice * 0.70 + fromKm) * premiumFactor)
     }
 
+    /// Bollo / tassa di possesso — stima semplificata (non ACI ufficiale).
+    /// EV: esenzione tipica nei primi 5 anni dall’immatricolazione; poi catalogo o proxy.
+    static func bolloPerYearEstimate(
+        catalogTaxesPerYear: Double,
+        powertrain: Powertrain,
+        vehicleYear: Int,
+        referenceYear: Int = Calendar.current.component(.year, from: Date())
+    ) -> Double {
+        let age = max(0, referenceYear - vehicleYear)
+        switch powertrain {
+        case .ev:
+            if age < 5 { return 0 }
+            return catalogTaxesPerYear > 0 ? catalogTaxesPerYear : 140
+        case .phev:
+            if age < 5 {
+                let base = catalogTaxesPerYear > 0 ? catalogTaxesPerYear : 180
+                return (base * 0.5).rounded()
+            }
+            return catalogTaxesPerYear > 0 ? catalogTaxesPerYear : 180
+        case .ice:
+            return catalogTaxesPerYear > 0 ? catalogTaxesPerYear : 220
+        }
+    }
+
     /// Residuo stimato migliorato con deprezzamento non lineare
     static func residualValue(purchasePrice: Double, years: Int, electrified: Bool) -> Double {
         // Tassi di deprezzamento annuali più realistici
@@ -210,13 +234,23 @@ final class EVSimulator {
         let sourceBreakdown = OperatingCostBreakdown(
             energy: sourceEnergy,
             maintenance: sourceMaintenance,
-            taxes: sourceVehicle.taxesPerYear,
+            taxes: OwnershipCostEstimates.bolloPerYearEstimate(
+                catalogTaxesPerYear: sourceVehicle.taxesPerYear,
+                powertrain: sourceVehicle.powertrain,
+                vehicleYear: sourceVehicle.year,
+                referenceYear: currentYear
+            ),
             insurance: sourceInsurance
         )
         let targetBreakdown = OperatingCostBreakdown(
             energy: targetEnergy,
             maintenance: targetMaintenance,
-            taxes: targetVehicle.taxesPerYear,
+            taxes: OwnershipCostEstimates.bolloPerYearEstimate(
+                catalogTaxesPerYear: targetVehicle.taxesPerYear,
+                powertrain: targetVehicle.powertrain,
+                vehicleYear: targetVehicle.year,
+                referenceYear: currentYear
+            ),
             insurance: targetInsurance
         )
 

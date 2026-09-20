@@ -10,6 +10,7 @@ private enum GuideTopic: Int, Identifiable, CaseIterable {
     case charging
     case battery
     case totalCost
+    case roadTax
 
     var id: Int { rawValue }
 
@@ -19,6 +20,7 @@ private enum GuideTopic: Int, Identifiable, CaseIterable {
         case .charging: return L10n.guideTopicChargingTitle
         case .battery: return L10n.guideTopicBatteryTitle
         case .totalCost: return L10n.guideTopicTotalCostTitle
+        case .roadTax: return L10n.guideTopicRoadTaxTitle
         }
     }
 
@@ -28,6 +30,7 @@ private enum GuideTopic: Int, Identifiable, CaseIterable {
         case .charging: return L10n.guideTopicChargingBody
         case .battery: return L10n.guideTopicBatteryBody
         case .totalCost: return L10n.guideTopicTotalCostBody
+        case .roadTax: return L10n.guideTopicRoadTaxBody
         }
     }
 }

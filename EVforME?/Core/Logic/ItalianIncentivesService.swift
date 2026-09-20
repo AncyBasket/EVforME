@@ -59,21 +59,35 @@ nonisolated final class ItalianIncentivesService: @unchecked Sendable {
             )
             return remote
         }
-        if let cached = loadCache() {
+        // Prefer bundled schedule when it is newer or adds a validity window the cache lacks.
+        let cached = loadCache()
+        let bundled = loadBundled()
+        if let bundled {
+            let shouldReplaceCache: Bool = {
+                guard let cached else { return true }
+                if cached.updatedAt != bundled.updatedAt { return true }
+                if cached.validUntil == nil, bundled.validUntil != nil { return true }
+                return false
+            }()
+            if shouldReplaceCache {
+                if let data = try? JSONEncoder().encode(bundled) {
+                    defaults.set(data, forKey: Keys.cached)
+                }
+                apply(bundled)
+                AppLogger.shared.info(
+                    "Italian incentives using bundle (updatedAt=\(bundled.updatedAt ?? "n/a"))",
+                    category: .network
+                )
+                return bundled
+            }
+        }
+        if let cached {
             apply(cached)
             AppLogger.shared.info(
                 "Italian incentives using cache (updatedAt=\(cached.updatedAt ?? "n/a"))",
                 category: .network
             )
             return cached
-        }
-        if let bundled = loadBundled() {
-            apply(bundled)
-            AppLogger.shared.info(
-                "Italian incentives using bundle (updatedAt=\(bundled.updatedAt ?? "n/a"))",
-                category: .network
-            )
-            return bundled
         }
         apply(.bundledFallback)
         AppLogger.shared.warning("Italian incentives fallback hardcoded schedule", category: .network)
