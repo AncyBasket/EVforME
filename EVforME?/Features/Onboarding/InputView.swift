@@ -396,6 +396,9 @@ struct InputView: View {
         .onReceive(NotificationCenter.default.publisher(for: .evVehicleCatalogDidUpdate)) { _ in
             loadCatalog()
         }
+        .onReceive(NotificationCenter.default.publisher(for: .evScenarioHistoryDidChange)) { _ in
+            refreshHistoryState()
+        }
         .task {
             await VehicleCatalogService.shared.refreshFromRemoteIfPossible()
             loadCatalog()

@@ -182,9 +182,15 @@ enum ScenarioHistoryStore {
             defaults.set(data, forKey: key)
         }
         RetentionReminderService.shared.armAfterVerdictSaved()
+        NotificationCenter.default.post(name: .evScenarioHistoryDidChange, object: nil)
     }
 
     static func clear() {
         defaults.removeObject(forKey: key)
+        NotificationCenter.default.post(name: .evScenarioHistoryDidChange, object: nil)
     }
+}
+
+extension Notification.Name {
+    static let evScenarioHistoryDidChange = Notification.Name("evforme.scenarioHistory.didChange")
 }

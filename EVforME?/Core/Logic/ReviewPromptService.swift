@@ -20,6 +20,9 @@ enum ReviewPromptService {
 
     @MainActor
     static func maybeRequestReview(_ requestReview: RequestReviewAction) {
+        if ProcessInfo.processInfo.environment["UITEST_PRESET_VEHICLES"] == "1" {
+            return
+        }
         let defaults = UserDefaults.standard
         let count = defaults.integer(forKey: verdictCountKey)
         guard count >= minVerdicts else { return }
