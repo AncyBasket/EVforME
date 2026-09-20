@@ -514,6 +514,31 @@ enum L10n {
     static var guideTopicRoadTaxTitle: String { string("guide_topic_road_tax_title") }
     static var guideTopicRoadTaxBody: String { string("guide_topic_road_tax_body") }
 
+    // MARK: - Colonnine 1.3
+    static var chargingMapEntryTitle: String { string("charging_map_entry_title") }
+    static var chargingMapEntrySubtitle: String { string("charging_map_entry_subtitle") }
+    static var chargingMapEntryA11yHint: String { string("charging_map_entry_a11y_hint") }
+    static var chargingMapTitle: String { string("charging_map_title") }
+    static var chargingMapDisclaimer: String { string("charging_map_disclaimer") }
+    static var chargingMapModeLabel: String { string("charging_map_mode_label") }
+    static var chargingMapModeLocation: String { string("charging_map_mode_location") }
+    static var chargingMapModeCity: String { string("charging_map_mode_city") }
+    static var chargingMapCityPlaceholder: String { string("charging_map_city_placeholder") }
+    static var chargingMapSearch: String { string("charging_map_search") }
+    static var chargingMapOpenInMaps: String { string("charging_map_open_in_maps") }
+    static var chargingMapDirections: String { string("charging_map_directions") }
+    static var chargingMapSearchCenter: String { string("charging_map_search_center") }
+    static var chargingMapUnnamedStation: String { string("charging_map_unnamed_station") }
+    static func chargingMapDistance(_ value: String) -> String { format("charging_map_distance", value) }
+    static var chargingMapNoResults: String { string("charging_map_no_results") }
+    static var chargingMapSearchFailed: String { string("charging_map_search_failed") }
+    static var chargingMapLocationDenied: String { string("charging_map_location_denied") }
+    static var chargingMapLocationUnavailable: String { string("charging_map_location_unavailable") }
+    static var chargingMapUsingFallbackCity: String { string("charging_map_using_fallback_city") }
+    static var chargingMapCityNotFound: String { string("charging_map_city_not_found") }
+    static var chargingMapVerdictNudgeTitle: String { string("charging_map_verdict_nudge_title") }
+    static var chargingMapVerdictNudgeBody: String { string("charging_map_verdict_nudge_body") }
+
     static var liveActivityClear: String { string("live_activity_clear") }
 
     // MARK: - App Intents

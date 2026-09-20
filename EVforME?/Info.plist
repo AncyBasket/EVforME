@@ -23,6 +23,8 @@
 	<string></string>
 	<key>EVFORME_PRIVACY_URL</key>
 	<string>https://ancybasket.github.io/EVforME/privacy/</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>EVforME? uses your location only while you view Nearby chargers, to search for public charging points around you. Location is not sent to an EVforME server.</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsLocalNetworking</key>

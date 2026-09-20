@@ -418,8 +418,8 @@
 
 /* Privacy */
 "privacy_policy_title" = "Privacy";
-"privacy_policy_updated" = "Updated: 9 September 2026";
-"privacy_policy_body" = "EVforME? estimates on-device whether an electric or plug-in hybrid car may fit you.\n\nKept on your phone: km, prices, chosen vehicles, scenario history, widget/Live Activity snapshots.\n\nSticker photos: used on-device only to read consumption figures; not uploaded for that feature.\n\nNetwork (optional): vehicle catalog, public energy prices, analytics or lead webhook only if configured. In a typical build, analytics/leads stay local when those URLs are empty.\n\nWe do not sell data and do not use advertising trackers.\n\nAdvisor form: name/email/city only if you submit them with consent.\n\nYou can revoke photo access in iOS Settings, skip the lead form, or delete the app to remove local data.\n\nApp Store Connect also needs a public HTTPS URL with the full policy (see PRIVACY_POLICY.md in the repo).";
+"privacy_policy_updated" = "Updated: 20 September 2026";
+"privacy_policy_body" = "EVforME? estimates on-device whether an electric or plug-in hybrid car may fit you.\n\nKept on your phone: km, prices, chosen vehicles, scenario history, widget/Live Activity snapshots.\n\nSticker photos: used on-device only to read consumption figures; not uploaded for that feature.\n\nLocation (optional): only when you open Nearby chargers, and only While Using the App, to center a MapKit search. Location is not sent to an EVforME backend and is not tracked in the background.\n\nNetwork (optional): vehicle catalog, public energy prices, Apple Maps search results, analytics or lead webhook only if configured. In a typical build, analytics/leads stay local when those URLs are empty.\n\nWe do not sell data and do not use advertising trackers.\n\nAdvisor form: name/email/city only if you submit them with consent.\n\nYou can revoke photo/location access in iOS Settings, skip the lead form, or delete the app to remove local data.\n\nApp Store Connect also needs a public HTTPS URL with the full policy (see PRIVACY_POLICY.md in the repo).";
 "privacy_policy_open_web" = "Open policy on the web";
 
 /* Polish extras */
@@ -482,3 +482,27 @@
 "incentive_window_starts" = "Incentive window expected from %@";
 "guide_topic_road_tax_title" = "Road tax & EV exemptions (indicative)";
 "guide_topic_road_tax_body" = "In Italy many BEVs have had road-tax exemption for the first years after registration, then regional rules. We show only a rough estimate from the catalog plus a typical early-exemption hypothesis — not a substitute for ACI, your region, or a tax advisor. Always check your province and registration year on official channels.";
+
+"charging_map_entry_title" = "Chargers near you";
+"charging_map_entry_subtitle" = "Indicative MapKit search — open the map when you need it.";
+"charging_map_entry_a11y_hint" = "Opens a map of nearby public chargers";
+"charging_map_title" = "Nearby chargers";
+"charging_map_disclaimer" = "Indicative list from Maps search — check power, connectors, and availability on site.";
+"charging_map_mode_label" = "Search mode";
+"charging_map_mode_location" = "Use location";
+"charging_map_mode_city" = "Search by city";
+"charging_map_city_placeholder" = "City (e.g. Milano)";
+"charging_map_search" = "Search";
+"charging_map_open_in_maps" = "Open in Maps";
+"charging_map_directions" = "Directions";
+"charging_map_search_center" = "Search area";
+"charging_map_unnamed_station" = "Charging point";
+"charging_map_distance" = "About %@ away";
+"charging_map_no_results" = "No chargers found nearby. Try another city or open Apple Maps.";
+"charging_map_search_failed" = "Search unavailable (offline or Maps error). Open Apple Maps instead.";
+"charging_map_location_denied" = "Location off — showing a city fallback. Enable location or search by city.";
+"charging_map_location_unavailable" = "Couldn’t get a fix — using a city fallback. Or open Apple Maps.";
+"charging_map_using_fallback_city" = "Using a city fallback for Italy. Refine with your city name.";
+"charging_map_city_not_found" = "City not found. Check the spelling or open Apple Maps.";
+"charging_map_verdict_nudge_title" = "No wallbox? Check public chargers near you";
+"charging_map_verdict_nudge_body" = "Indicative map search — not a guarantee of plugs where you park.";

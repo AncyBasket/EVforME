@@ -4,6 +4,7 @@ iOS app that helps decide whether switching to an EV fits your yearly kilometers
 
 ## Features
 
+- **1.3 Colonnine vicine**: MapKit / MKLocalSearch, location When In Use solo on-demand, fallback città + Apri in Mappe
 - **1.2 Kit Italia**: bollo/assic/manutenzione stimate + finestra incentivo (`validUntil`) con disclaimer
 - **1.1 retention loop**: card “Ultimo confronto”, ricalcolo con dati live + delta prezzi/incentivi, reminder locali soft a 30/90 giorni (permesso solo dopo il primo verdetto)
 - **Workshop bench**: yearly km, fuel/electricity prices, ownership years, urban vs mixed driving, home charging, ICE → EV pair from a large catalog

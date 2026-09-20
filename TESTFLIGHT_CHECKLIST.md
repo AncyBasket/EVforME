@@ -98,3 +98,9 @@ xcodebuild test \
 - Verdict costs: bollo / assicurazione / manutenzione ICE vs EV (stime + disclaimer)
 - Guides: “Bollo ed esenzioni EV (orientativo)”
 
+## Product 1.3 — Colonnine vicine
+
+- Guides / Verdict entry → `ChargingMapView` (MapKit + MKLocalSearch, no paid API)
+- Location When In Use only when opening the map; city fallback + “Open in Maps”
+- Privacy: in-session map use only, not sent to EVforME backend; no background tracking
+

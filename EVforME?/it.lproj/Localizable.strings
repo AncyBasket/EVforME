@@ -428,8 +428,8 @@
 
 /* Privacy */
 "privacy_policy_title" = "Privacy";
-"privacy_policy_updated" = "Aggiornata: 9 settembre 2026";
-"privacy_policy_body" = "EVforME? calcola sul dispositivo se un’auto elettrica o plug-in può avere senso per te.\n\nCosa resta sul telefono: km, prezzi, veicoli scelti, storico scenari, snapshot widget/Live Activity.\n\nFoto sticker: usate solo on-device per leggere consumi; non vengono caricate per quella funzione.\n\nRete (opzionale): catalogo veicoli, fonti prezzi pubbliche, analytics o webhook lead solo se configurati. Nella build tipica analytics/lead restano locali se gli URL sono vuoti.\n\nNon vendiamo dati e non usiamo tracker pubblicitari.\n\nModulo consulente: nome/email/città solo se li invii con consenso.\n\nPuoi revocare l’accesso alle foto in Impostazioni iOS, evitare il form lead, o cancellare l’app per rimuovere i dati locali.\n\nPer App Store Connect serve anche un URL HTTPS pubblico con la policy completa (vedi PRIVACY_POLICY.md nel repo).";
+"privacy_policy_updated" = "Aggiornata: 20 settembre 2026";
+"privacy_policy_body" = "EVforME? calcola sul dispositivo se un’auto elettrica o plug-in può avere senso per te.\n\nCosa resta sul telefono: km, prezzi, veicoli scelti, storico scenari, snapshot widget/Live Activity.\n\nFoto sticker: usate solo on-device per leggere consumi; non vengono caricate per quella funzione.\n\nPosizione (opzionale): solo quando apri Colonnine vicine, e solo Durante l’uso dell’app, per centrare una ricerca MapKit. La posizione non viene inviata a un backend EVforME e non c’è tracking in background.\n\nRete (opzionale): catalogo veicoli, fonti prezzi pubbliche, risultati ricerca Apple Mappe, analytics o webhook lead solo se configurati. Nella build tipica analytics/lead restano locali se gli URL sono vuoti.\n\nNon vendiamo dati e non usiamo tracker pubblicitari.\n\nModulo consulente: nome/email/città solo se li invii con consenso.\n\nPuoi revocare foto/posizione in Impostazioni iOS, evitare il form lead, o cancellare l’app per rimuovere i dati locali.\n\nPer App Store Connect serve anche un URL HTTPS pubblico con la policy completa (vedi PRIVACY_POLICY.md nel repo).";
 "privacy_policy_open_web" = "Apri policy sul web";
 
 /* Reference quality */
@@ -480,3 +480,27 @@
 "incentive_window_starts" = "Finestra incentivo prevista dal %@";
 "guide_topic_road_tax_title" = "Bollo ed esenzioni EV (orientativo)";
 "guide_topic_road_tax_body" = "In Italia molte BEV hanno avuto esenzione dal bollo per i primi anni dall’immatricolazione, poi regole regionali. Qui mostriamo solo una stima grezza basata sul catalogo e su un’ipotesi tipica di esenzione iniziale — non sostituisce ACI, regione o CAF. Controlla sempre la tua provincia e l’anno di immatricolazione sul canale ufficiale.";
+
+"charging_map_entry_title" = "Colonnine vicino a te";
+"charging_map_entry_subtitle" = "Ricerca orientativa via Mappe — si apre solo quando la chiedi.";
+"charging_map_entry_a11y_hint" = "Apre la mappa delle colonnine pubbliche vicine";
+"charging_map_title" = "Colonnine vicine";
+"charging_map_disclaimer" = "Elenco orientativo da ricerca Mappe — verifica potenza, connettori e disponibilità sul posto.";
+"charging_map_mode_label" = "Modalità ricerca";
+"charging_map_mode_location" = "Usa posizione";
+"charging_map_mode_city" = "Cerca per città";
+"charging_map_city_placeholder" = "Città (es. Milano)";
+"charging_map_search" = "Cerca";
+"charging_map_open_in_maps" = "Apri in Mappe";
+"charging_map_directions" = "Indicazioni";
+"charging_map_search_center" = "Area di ricerca";
+"charging_map_unnamed_station" = "Punto di ricarica";
+"charging_map_distance" = "A circa %@";
+"charging_map_no_results" = "Nessuna colonnina trovata qui intorno. Prova un’altra città o apri Mappe.";
+"charging_map_search_failed" = "Ricerca non disponibile (offline o errore Mappe). Apri Mappe Apple.";
+"charging_map_location_denied" = "Posizione disattivata — mostriamo un fallback città. Attiva la posizione o cerca per città.";
+"charging_map_location_unavailable" = "Posizione non disponibile — usiamo un fallback città. Oppure apri Mappe.";
+"charging_map_using_fallback_city" = "Usiamo un fallback città IT. Affina con il nome della tua città.";
+"charging_map_city_not_found" = "Città non trovata. Controlla il nome o apri Mappe.";
+"charging_map_verdict_nudge_title" = "Senza wallbox, valuta colonnine pubbliche vicino a te";
+"charging_map_verdict_nudge_body" = "Mappa orientativa — non garantisce prese dove parcheggi.";

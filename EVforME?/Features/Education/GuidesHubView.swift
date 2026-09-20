@@ -38,6 +38,7 @@ private enum GuideTopic: Int, Identifiable, CaseIterable {
 struct GuidesHubView: View {
     @State private var selectedTopic: GuideTopic?
     @State private var showPrivacy = false
+    @State private var showChargingMap = false
     @State private var appeared = false
     @Environment(\.accessibilityReduceMotion) private var accessibilityReduceMotion
 
@@ -53,6 +54,32 @@ struct GuidesHubView: View {
                     .font(Typography.readingIntro)
                     .foregroundStyle(Color.secondaryText)
                     .fixedSize(horizontal: false, vertical: true)
+
+                Button {
+                    showChargingMap = true
+                } label: {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(L10n.chargingMapEntryTitle)
+                            .font(Typography.title2)
+                            .foregroundStyle(Color.ink)
+                            .multilineTextAlignment(.leading)
+                        Text(L10n.chargingMapEntrySubtitle)
+                            .font(Typography.readingCaption)
+                            .foregroundStyle(Color.secondaryText)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.vertical, 16)
+                    .padding(.horizontal, 14)
+                    .background(Color.surfaceElevated)
+                    .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 4, style: .continuous)
+                            .stroke(Color.hairlineBorder, lineWidth: 1)
+                    )
+                }
+                .buttonStyle(.plain)
+                .accessibilityHint(L10n.chargingMapEntryA11yHint)
 
                 VStack(alignment: .leading, spacing: 0) {
                     ForEach(GuideTopic.allCases) { topic in
@@ -143,6 +170,10 @@ struct GuidesHubView: View {
         .sheet(isPresented: $showPrivacy) {
             PrivacyPolicyView()
                 .presentationDetents([.medium, .large])
+        }
+        .sheet(isPresented: $showChargingMap) {
+            ChargingMapView(areaType: StorageService.shared.loadLastUserInput()?.areaType ?? .mixed)
+                .presentationDetents([.large])
         }
     }
 }

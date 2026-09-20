@@ -62,7 +62,7 @@
   <main>
     <div class="mark" aria-hidden="true"></div>
     <h1>Privacy Policy — EVforME?</h1>
-    <p class="meta">Last updated: 9 September 2026 · App: EVforME? (iOS)</p>
+    <p class="meta">Last updated: 20 September 2026 · App: EVforME? (iOS)</p>
 
     <p>This policy describes how the EVforME? app handles information. It is written for App Store review and for people using the app in Italy and the EU.</p>
 
@@ -83,11 +83,15 @@
     <h3>Photos</h3>
     <p>If you use sticker scanning, photos are used <strong>on-device</strong> to read consumption figures (L/100 km or kWh/100 km). Photos are not uploaded for that feature.</p>
 
+    <h3>Location (Nearby chargers)</h3>
+    <p>When you open <strong>Nearby chargers</strong>, the app may request <strong>Location When In Use</strong> to center an Apple MapKit / Maps search for public charging points. Location is used <strong>only in that session</strong>, is <strong>not</strong> sent to an EVforME backend, and is <strong>not</strong> tracked continuously or in the background. You can deny permission and still search by city or open Apple Maps.</p>
+
     <h3>Optional network features</h3>
     <p>When configured by the developer, the app may contact:</p>
     <ul>
       <li>A <strong>vehicle catalog</strong> HTTPS endpoint (public JSON) to refresh model data</li>
       <li><strong>Public energy price sources</strong> (e.g. official fuel/electricity statistics)</li>
+      <li><strong>Apple Maps / MapKit</strong> for charging-point search results (Apple’s services; not an EVforME server)</li>
       <li>An optional <strong>analytics</strong> ingest URL (product events such as “verdict shown”)</li>
       <li>An optional <strong>lead webhook</strong> if you submit the advisor contact form with consent</li>
     </ul>
@@ -96,26 +100,28 @@
     <h2>Data we may collect (App Privacy labels)</h2>
     <ul>
       <li><strong>Name</strong> and <strong>email</strong> — only if you fill the voluntary advisor form; purpose: app functionality / follow-up you request</li>
+      <li><strong>Precise location</strong> — only if you allow it for Nearby chargers; purpose: app functionality (map search). Not used for tracking</li>
       <li><strong>Product interaction</strong> — anonymous/local analytics events for improving the product (and optional remote ingest if configured)</li>
     </ul>
 
     <h2>Legal bases (EU/UK GDPR style)</h2>
     <ul>
       <li><strong>Contract / service delivery:</strong> running the simulation you request</li>
-      <li><strong>Consent:</strong> advisor lead form and any optional remote analytics where consent is required</li>
+      <li><strong>Consent:</strong> advisor lead form, location for Nearby chargers, and any optional remote analytics where consent is required</li>
       <li><strong>Legitimate interest:</strong> securing the app, preventing abuse, and basic product metrics without advertising profiling</li>
     </ul>
 
     <h2>Retention</h2>
     <ul>
       <li>Local inputs and history remain until you delete the app or clear app data</li>
+      <li>Location is not retained by EVforME beyond the map session</li>
       <li>Lead/analytics payloads retained by any configured webhook/ingest follow that service’s retention; if none is configured, nothing is sent</li>
     </ul>
 
     <h2>Your choices</h2>
     <ul>
       <li>Do not fill the lead form if you do not want to share contact details</li>
-      <li>Revoke photo access in iOS Settings → EVforME?</li>
+      <li>Revoke photo or location access in iOS Settings → EVforME?</li>
       <li>Delete the app to remove local storage on device</li>
       <li>Contact us via the App Store support URL to request assistance with remotely stored leads (only if you previously submitted them to a configured webhook)</li>
     </ul>

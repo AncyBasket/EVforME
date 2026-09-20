@@ -1,2 +1,3 @@
 /* Info.plist localizations */
 "NSPhotoLibraryUsageDescription" = "EVforME? usa le foto solo sul dispositivo per leggere gli sticker di consumo (L/100 km o kWh/100 km).";
+"NSLocationWhenInUseUsageDescription" = "EVforME? usa la posizione solo mentre consulti Colonnine vicine, per cercare punti di ricarica pubblici intorno a te. La posizione non viene inviata a un server EVforME.";

@@ -29,6 +29,7 @@ struct VerdictView: View {
     @State private var aiExplanation: String?
     @State private var aiLoading = false
     @State private var shareCard: ShareableVerdictCard?
+    @State private var showChargingMap = false
     @Environment(\.dismiss) private var dismiss
     @Environment(\.accessibilityReduceMotion) private var accessibilityReduceMotion
     @Environment(\.requestReview) private var requestReview
@@ -57,6 +58,10 @@ struct VerdictView: View {
                 .offset(y: accessibilityReduceMotion ? 0 : scrollOffset * 0.04)
 
             reasonsSection(result: currentResult)
+
+            if !userInput.hasHomeCharging {
+                publicChargingNudge
+            }
 
             aiExplanationSection
 
@@ -221,6 +226,37 @@ struct VerdictView: View {
                 userInput: userInput
             )
         }
+        .sheet(isPresented: $showChargingMap) {
+            ChargingMapView(areaType: userInput.areaType)
+                .presentationDetents([.large])
+        }
+    }
+
+    private var publicChargingNudge: some View {
+        Button {
+            showChargingMap = true
+        } label: {
+            VStack(alignment: .leading, spacing: 6) {
+                Text(L10n.chargingMapVerdictNudgeTitle)
+                    .font(Typography.readingCardTitle)
+                    .foregroundStyle(Color.ink)
+                    .multilineTextAlignment(.leading)
+                Text(L10n.chargingMapVerdictNudgeBody)
+                    .font(Typography.readingCaption)
+                    .foregroundStyle(Color.secondaryText)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(14)
+            .background(Color.surfaceElevated)
+            .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 4, style: .continuous)
+                    .stroke(Color.hairlineBorder, lineWidth: 1)
+            )
+        }
+        .buttonStyle(.plain)
+        .accessibilityHint(L10n.chargingMapEntryA11yHint)
     }
 
     private func loadAIExplanation() async {
