@@ -13,7 +13,7 @@
 | 4 | Vehicle photos (1.0) | **Done** — **no remote vehicle photos in 1.0**; editorial placeholders only (`VehicleHeroImage`). CC0 pipeline paused (optional later). |
 | 4 | Deployment | **iOS 17.0** everywhere — Liquid Glass / Foundation Models gated `#available(iOS 26, *)` |
 | 4 | Launch refresh | **Hardened** — cold start + foreground: `OfficialCostService` + `ItalianIncentivesService` + catalog (best-effort; offline → cache/bundle) |
-| 4 | ASC listing pack | **Ready** — see `ASC_STORE_LISTING.md` |
+| 4 | ASC listing pack | **Ready** — [`docs/asc/ASC_STORE_LISTING.md`](docs/asc/ASC_STORE_LISTING.md) + [`docs/asc/screenshots/6.7/`](docs/asc/screenshots/6.7/) · **listing ready, upload pending Dev** |
 | 4 | UITests | **Done** — `testInputToVerdictFlow` green (`e3d5801`) |
 | 4 | Archive (local `.xcarchive`) | **Done** — `/tmp/EVforME.xcarchive` · **1.0 (1)** · arm64 · Xcode 27 beta |
 | 4 | Upload → App Store Connect | **Blocked** — no ASC app record for `Gancione.EVforME-` |
@@ -52,7 +52,7 @@ xcodebuild test \
 ## ASC (must match)
 
 - Privacy Policy URL: `https://ancybasket.github.io/EVforME/privacy/`
-- Copy / keywords / screenshots: `ASC_STORE_LISTING.md`
+- Copy / keywords / screenshots: [`docs/asc/ASC_STORE_LISTING.md`](docs/asc/ASC_STORE_LISTING.md)
 
 ## Archive / Upload notes (2026-09-10)
 
@@ -69,7 +69,7 @@ xcodebuild test \
 1. [App Store Connect](https://appstoreconnect.apple.com) → My Apps → **+** → iOS app  
    - Bundle ID: `Gancione.EVforME-`  
    - Privacy Policy URL: `https://ancybasket.github.io/EVforME/privacy/`  
-   - Price: Free · copy from `ASC_STORE_LISTING.md`
+   - Price: Free · copy from [`docs/asc/ASC_STORE_LISTING.md`](docs/asc/ASC_STORE_LISTING.md)
 2. Xcode beta → **Window → Organizer** → select `EVforME?` archive → **Distribute App** → App Store Connect → Upload  
    (or re-run `xcodebuild -exportArchive` with the same ExportOptions after the record exists)
 3. Wait for processing → TestFlight → Internal Testing → add Andrea/team → enable build  
@@ -109,4 +109,11 @@ xcodebuild test \
 - **2026-09-20** — iPhone 17 Pro / **iOS 27.0** (`docs/smoke/SMOKE_1_1_1_3.md` + `docs/smoke/shots/`)
 - UITests: `SmokeProductUITests` (retention + map city); units `EVforME?Tests` 84 green
 - No Archive / TestFlight / ASC in this pass
+
+## App Store listing (offline pack)
+
+- **Ready to paste:** [`docs/asc/ASC_STORE_LISTING.md`](docs/asc/ASC_STORE_LISTING.md)
+- Screenshots 6.7" (1290×2796): [`docs/asc/screenshots/6.7/`](docs/asc/screenshots/6.7/)
+- **Listing ready, upload pending Dev** (no ASC app record / Developer gate)
+- Pointer: root `ASC_STORE_LISTING.md` → docs pack
 
