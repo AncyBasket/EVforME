@@ -14,7 +14,9 @@ final class ScenarioLiveDeltaTests: XCTestCase {
             liveFuel: 1.80,
             liveElectricity: 0.30,
             liveIncentiveEUR: 5000,
-            liveResult: nil
+            liveResult: nil,
+            liveValidUntil: nil,
+            asOf: date("2026-09-20")
         )
         XCTAssertTrue(report.fuelMoved)
         XCTAssertFalse(report.electricityMoved)
@@ -28,8 +30,15 @@ final class ScenarioLiveDeltaTests: XCTestCase {
             liveFuel: 1.73,
             liveElectricity: 0.31,
             liveIncentiveEUR: 5050,
-            liveResult: nil
+            liveResult: nil,
+            liveValidUntil: "2026-12-31",
+            asOf: date("2026-09-20")
         )
+        XCTAssertFalse(report.fuelMoved)
+        XCTAssertFalse(report.electricityMoved)
+        XCTAssertFalse(report.incentiveMoved)
+        XCTAssertFalse(report.incentiveWindowChanged)
+        XCTAssertFalse(report.incentiveWindowExpiredNow)
         XCTAssertFalse(report.isMaterial)
     }
 
@@ -41,9 +50,11 @@ final class ScenarioLiveDeltaTests: XCTestCase {
             liveElectricity: 0.30,
             liveIncentiveEUR: 5000,
             liveResult: nil,
-            liveValidUntil: "2026-12-31"
+            liveValidUntil: "2026-12-31",
+            asOf: date("2026-09-20")
         )
         XCTAssertTrue(report.incentiveWindowChanged)
+        XCTAssertFalse(report.incentiveWindowExpiredNow)
         XCTAssertTrue(report.isMaterial)
     }
 
@@ -55,9 +66,11 @@ final class ScenarioLiveDeltaTests: XCTestCase {
             liveElectricity: 0.30,
             liveIncentiveEUR: 5000,
             liveResult: nil,
-            liveValidUntil: "2026-12-31"
+            liveValidUntil: "2026-12-31",
+            asOf: date("2026-09-20")
         )
         XCTAssertFalse(report.incentiveWindowChanged)
+        XCTAssertFalse(report.incentiveWindowExpiredNow)
         XCTAssertFalse(report.isMaterial)
     }
 
@@ -69,9 +82,11 @@ final class ScenarioLiveDeltaTests: XCTestCase {
             liveElectricity: 0.30,
             liveIncentiveEUR: 5000,
             liveResult: nil,
-            liveValidUntil: "2026-12-31"
+            liveValidUntil: "2026-12-31",
+            asOf: date("2026-09-20")
         )
         XCTAssertFalse(report.incentiveWindowChanged)
+        XCTAssertFalse(report.incentiveWindowExpiredNow)
         XCTAssertFalse(report.isMaterial)
     }
 
@@ -83,9 +98,27 @@ final class ScenarioLiveDeltaTests: XCTestCase {
             liveElectricity: 0.30,
             liveIncentiveEUR: 5000,
             liveResult: nil,
-            liveValidUntil: nil
+            liveValidUntil: nil,
+            asOf: date("2026-09-20")
         )
         XCTAssertTrue(report.incentiveWindowChanged)
+        XCTAssertFalse(report.incentiveWindowExpiredNow)
+        XCTAssertTrue(report.isMaterial)
+    }
+
+    func testIncentiveWindowExpiredNowIsMaterial() {
+        let snap = makeSnapshot(fuel: 1.70, elec: 0.30, incentive: 5000, validUntil: "2020-01-01")
+        let report = ScenarioLiveDelta.evaluate(
+            snapshot: snap,
+            liveFuel: 1.70,
+            liveElectricity: 0.30,
+            liveIncentiveEUR: 5000,
+            liveResult: nil,
+            liveValidUntil: "2020-01-01",
+            asOf: date("2026-09-20")
+        )
+        XCTAssertFalse(report.incentiveWindowChanged)
+        XCTAssertTrue(report.incentiveWindowExpiredNow)
         XCTAssertTrue(report.isMaterial)
     }
 
@@ -118,5 +151,9 @@ final class ScenarioLiveDeltaTests: XCTestCase {
             incentivesUpdatedAtAtSave: nil,
             incentivesValidUntilAtSave: validUntil
         )
+    }
+
+    private func date(_ isoDay: String) -> Date {
+        ItalianIncentiveSchedule.parseFlexibleDate(isoDay)!
     }
 }

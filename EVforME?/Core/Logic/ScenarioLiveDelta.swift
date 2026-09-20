@@ -51,7 +51,8 @@ enum ScenarioLiveDelta {
         liveElectricity: Double,
         liveIncentiveEUR: Double,
         liveResult: SimulationResult?,
-        liveValidUntil: String? = ItalianIncentives.schedule.validUntil
+        liveValidUntil: String? = ItalianIncentives.schedule.validUntil,
+        asOf: Date = Date()
     ) -> Report {
         let fuelDelta = snapshot.fuelPriceAtSave.map { liveFuel - $0 }
         let elecDelta = snapshot.electricityPriceAtSave.map { liveElectricity - $0 }
@@ -62,11 +63,8 @@ enum ScenarioLiveDelta {
             guard let savedUntil else { return false }
             return savedUntil != (liveValidUntil ?? "")
         }()
-        let expiredNow: Bool = {
-            guard savedUntil != nil else { return false }
-            if case .expired = ItalianIncentives.schedule.windowStatus() { return true }
-            return false
-        }()
+        // Derive expiry from the live date string + asOf — no singleton side-effects in tests.
+        let expiredNow = savedUntil != nil && isValidUntilExpired(liveValidUntil, asOf: asOf)
         return Report(
             fuelDelta: fuelDelta,
             electricityDelta: elecDelta,
@@ -78,6 +76,17 @@ enum ScenarioLiveDelta {
             currentSavingsMin: liveResult.map { $0.yearlySavingsRange.lowerBound },
             currentSavingsMax: liveResult.map { $0.yearlySavingsRange.upperBound }
         )
+    }
+
+    /// Same day-boundary rule as `ItalianIncentiveSchedule.windowStatus` for `validUntil`.
+    static func isValidUntilExpired(_ validUntil: String?, asOf: Date) -> Bool {
+        guard let until = ItalianIncentiveSchedule.parseFlexibleDate(validUntil) else { return false }
+        let calendar = Calendar.current
+        let startOfUntil = calendar.startOfDay(for: until)
+        guard let dayAfterUntil = calendar.date(byAdding: .day, value: 1, to: startOfUntil) else {
+            return false
+        }
+        return asOf >= dayAfterUntil
     }
 
     /// True se i prezzi live si sono mossi oltre soglia rispetto allo snapshot (per reminder).
