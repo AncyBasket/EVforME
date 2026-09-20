@@ -104,3 +104,9 @@ xcodebuild test \
 - Location When In Use only when opening the map; city fallback + “Open in Maps”
 - Privacy: in-session map use only, not sent to EVforME backend; no background tracking
 
+## Smoke 1.1–1.3 (Simulator)
+
+- **2026-09-20** — iPhone 17 Pro / **iOS 27.0** (`docs/smoke/SMOKE_1_1_1_3.md` + `docs/smoke/shots/`)
+- UITests: `SmokeProductUITests` (retention + map city); units `EVforME?Tests` 84 green
+- No Archive / TestFlight / ASC in this pass
+
