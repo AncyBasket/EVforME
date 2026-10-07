@@ -126,4 +126,47 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             }
         }
     }
+
+    func testModel3_RangeNotPlaceholder350() {
+        let m3 = VehicleCatalogService.shared.vehicle(by: "tesla-model-3-2023")
+            ?? VehicleCatalogService.shared.vehicle(by: "tesla-model-3-2024")
+        XCTAssertNotNil(m3)
+        XCTAssertNotEqual(m3?.wltpRangeKm, 350)
+        XCTAssertGreaterThanOrEqual(m3?.wltpRangeKm ?? 0, 450)
+        XCTAssertLessThanOrEqual(m3?.wltpRangeKm ?? 0, 580)
+    }
+
+    func testQ4Etron_RangeNotPlaceholder350() {
+        let q4 = VehicleCatalogService.shared.vehicle(by: "audi-q4-e-tron-2021")
+        XCTAssertNotNil(q4)
+        XCTAssertNotEqual(q4?.wltpRangeKm, 350)
+        XCTAssertGreaterThanOrEqual(q4?.wltpRangeKm ?? 0, 380)
+        XCTAssertLessThanOrEqual(q4?.wltpRangeKm ?? 0, 520)
+    }
+
+    func testEQV_RangeMayStayNearVanBand() {
+        let eqv = VehicleCatalogService.shared.vehicle(by: "mercedes-benz-eqv-2020")
+            ?? VehicleCatalogService.shared.sourceVehicles().first {
+                $0.brand.localizedCaseInsensitiveContains("Mercedes") && $0.model.localizedCaseInsensitiveContains("EQV")
+            }
+        XCTAssertNotNil(eqv)
+        let range = eqv?.wltpRangeKm ?? 0
+        XCTAssertGreaterThanOrEqual(range, 250)
+        XCTAssertLessThanOrEqual(range, 360)
+    }
+
+    func testCatalog_PassengerEVsNotMajorityPlaceholder350() {
+        let evs = VehicleCatalogService.shared.vehicles.filter { $0.powertrain == .ev }
+        XCTAssertFalse(evs.isEmpty)
+        let vanNeedles = ["eqv", "e-transit", "e-crafter", "e-berlingo", "e-partner", "e-vivaro", "id. buzz", "id buzz", "transporter", "vito"]
+        let passenger = evs.filter { ev in
+            let blob = "\(ev.brand) \(ev.model) \(ev.trim ?? "")".lowercased()
+            return !vanNeedles.contains { blob.contains($0) }
+        }
+        XCTAssertFalse(passenger.isEmpty)
+        let n350 = passenger.filter { $0.wltpRangeKm == 350 }.count
+        XCTAssertEqual(n350, 0, "Passenger EVs must not keep flat placeholder wltpRangeKm=350 (got \(n350)/\(passenger.count))")
+        let fraction = Double(n350) / Double(passenger.count)
+        XCTAssertLessThan(fraction, 0.05)
+    }
 }

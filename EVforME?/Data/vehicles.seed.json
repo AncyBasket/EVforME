@@ -3165,7 +3165,9 @@
     "maintenancePerYear": 352,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.6
+    "wltpConsumptionKWh100km": 17.6,
+    "wltpRangeKm": 456,
+    "batteryKWh": 80.3
   },
   {
     "id": "audi-q4-e-tron-2022",
@@ -3181,7 +3183,9 @@
     "maintenancePerYear": 353,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.5
+    "wltpConsumptionKWh100km": 17.5,
+    "wltpRangeKm": 462,
+    "batteryKWh": 80.9
   },
   {
     "id": "audi-q4-e-tron-2023",
@@ -3197,7 +3201,9 @@
     "maintenancePerYear": 354,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.4
+    "wltpConsumptionKWh100km": 17.4,
+    "wltpRangeKm": 468,
+    "batteryKWh": 81.7
   },
   {
     "id": "audi-q4-e-tron-2024",
@@ -3213,7 +3219,9 @@
     "maintenancePerYear": 356,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.4
+    "wltpConsumptionKWh100km": 17.4,
+    "wltpRangeKm": 474,
+    "batteryKWh": 82.3
   },
   {
     "id": "audi-q4-e-tron-2025",
@@ -3229,7 +3237,9 @@
     "maintenancePerYear": 357,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.3
+    "wltpConsumptionKWh100km": 17.3,
+    "wltpRangeKm": 480,
+    "batteryKWh": 83.0
   },
   {
     "id": "audi-q4-e-tron-2026",
@@ -3245,7 +3255,9 @@
     "maintenancePerYear": 359,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 486,
+    "batteryKWh": 83.7
   },
   {
     "id": "audi-q5-2008",
@@ -3565,7 +3577,9 @@
     "maintenancePerYear": 387,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.4
+    "wltpConsumptionKWh100km": 19.4,
+    "wltpRangeKm": 464,
+    "batteryKWh": 90.2
   },
   {
     "id": "audi-q6-e-tron-2025",
@@ -3581,7 +3595,9 @@
     "maintenancePerYear": 388,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.4
+    "wltpConsumptionKWh100km": 19.4,
+    "wltpRangeKm": 470,
+    "batteryKWh": 91.1
   },
   {
     "id": "audi-q6-e-tron-2026",
@@ -3597,7 +3613,9 @@
     "maintenancePerYear": 390,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.3
+    "wltpConsumptionKWh100km": 19.3,
+    "wltpRangeKm": 476,
+    "batteryKWh": 91.9
   },
   {
     "id": "audi-q7-2005",
@@ -3965,7 +3983,9 @@
     "maintenancePerYear": 397,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.9
+    "wltpConsumptionKWh100km": 19.9,
+    "wltpRangeKm": 428,
+    "batteryKWh": 85.3
   },
   {
     "id": "audi-q8-e-tron-2019",
@@ -3981,7 +4001,9 @@
     "maintenancePerYear": 398,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.9
+    "wltpConsumptionKWh100km": 19.9,
+    "wltpRangeKm": 434,
+    "batteryKWh": 86.1
   },
   {
     "id": "audi-q8-e-tron-2020",
@@ -3997,7 +4019,9 @@
     "maintenancePerYear": 400,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.8
+    "wltpConsumptionKWh100km": 19.8,
+    "wltpRangeKm": 440,
+    "batteryKWh": 87.0
   },
   {
     "id": "audi-q8-e-tron-2021",
@@ -4013,7 +4037,9 @@
     "maintenancePerYear": 401,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.7
+    "wltpConsumptionKWh100km": 19.7,
+    "wltpRangeKm": 446,
+    "batteryKWh": 87.9
   },
   {
     "id": "audi-q8-e-tron-2022",
@@ -4029,7 +4055,9 @@
     "maintenancePerYear": 403,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.6
+    "wltpConsumptionKWh100km": 19.6,
+    "wltpRangeKm": 452,
+    "batteryKWh": 88.7
   },
   {
     "id": "audi-q8-e-tron-2023",
@@ -4045,7 +4073,9 @@
     "maintenancePerYear": 404,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.6
+    "wltpConsumptionKWh100km": 19.6,
+    "wltpRangeKm": 458,
+    "batteryKWh": 89.5
   },
   {
     "id": "audi-q8-e-tron-2024",
@@ -4061,7 +4091,9 @@
     "maintenancePerYear": 405,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.5
+    "wltpConsumptionKWh100km": 19.5,
+    "wltpRangeKm": 464,
+    "batteryKWh": 90.4
   },
   {
     "id": "audi-q8-e-tron-2025",
@@ -4077,7 +4109,9 @@
     "maintenancePerYear": 407,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.4
+    "wltpConsumptionKWh100km": 19.4,
+    "wltpRangeKm": 470,
+    "batteryKWh": 91.2
   },
   {
     "id": "audi-q8-e-tron-2026",
@@ -4093,7 +4127,9 @@
     "maintenancePerYear": 408,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.3
+    "wltpConsumptionKWh100km": 19.3,
+    "wltpRangeKm": 476,
+    "batteryKWh": 92.0
   },
   {
     "id": "audi-tt-2005",
@@ -4413,7 +4449,9 @@
     "maintenancePerYear": 386,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 446,
+    "batteryKWh": 84.5
   },
   {
     "id": "audi-e-tron-gt-2022",
@@ -4429,7 +4467,9 @@
     "maintenancePerYear": 387,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 452,
+    "batteryKWh": 85.3
   },
   {
     "id": "audi-e-tron-gt-2023",
@@ -4445,7 +4485,9 @@
     "maintenancePerYear": 389,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.8
+    "wltpConsumptionKWh100km": 18.8,
+    "wltpRangeKm": 458,
+    "batteryKWh": 86.1
   },
   {
     "id": "audi-e-tron-gt-2024",
@@ -4461,7 +4503,9 @@
     "maintenancePerYear": 390,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.7
+    "wltpConsumptionKWh100km": 18.7,
+    "wltpRangeKm": 464,
+    "batteryKWh": 86.9
   },
   {
     "id": "audi-e-tron-gt-2025",
@@ -4477,7 +4521,9 @@
     "maintenancePerYear": 392,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 470,
+    "batteryKWh": 87.7
   },
   {
     "id": "audi-e-tron-gt-2026",
@@ -4493,7 +4539,9 @@
     "maintenancePerYear": 393,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 476,
+    "batteryKWh": 88.4
   },
   {
     "id": "bmw-1-series-2005",
@@ -7517,7 +7565,9 @@
     "maintenancePerYear": 286,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.4
+    "wltpConsumptionKWh100km": 17.4,
+    "wltpRangeKm": 476,
+    "batteryKWh": 82.8
   },
   {
     "id": "bmw-i3-2017",
@@ -7533,7 +7583,9 @@
     "maintenancePerYear": 287,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.3
+    "wltpConsumptionKWh100km": 17.3,
+    "wltpRangeKm": 482,
+    "batteryKWh": 83.5
   },
   {
     "id": "bmw-i3-2018",
@@ -7549,7 +7601,9 @@
     "maintenancePerYear": 289,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 488,
+    "batteryKWh": 84.2
   },
   {
     "id": "bmw-i3-2019",
@@ -7565,7 +7619,9 @@
     "maintenancePerYear": 290,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 494,
+    "batteryKWh": 84.9
   },
   {
     "id": "bmw-i3-2020",
@@ -7581,7 +7637,9 @@
     "maintenancePerYear": 292,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.1
+    "wltpConsumptionKWh100km": 17.1,
+    "wltpRangeKm": 500,
+    "batteryKWh": 85.5
   },
   {
     "id": "bmw-i3-2021",
@@ -7597,7 +7655,9 @@
     "maintenancePerYear": 293,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.0
+    "wltpConsumptionKWh100km": 17.0,
+    "wltpRangeKm": 506,
+    "batteryKWh": 86.2
   },
   {
     "id": "bmw-i3-2022",
@@ -7613,7 +7673,9 @@
     "maintenancePerYear": 294,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.0
+    "wltpConsumptionKWh100km": 17.0,
+    "wltpRangeKm": 512,
+    "batteryKWh": 86.8
   },
   {
     "id": "bmw-i4-2021",
@@ -7629,7 +7691,9 @@
     "maintenancePerYear": 399,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.8
+    "wltpConsumptionKWh100km": 18.8,
+    "wltpRangeKm": 446,
+    "batteryKWh": 83.8
   },
   {
     "id": "bmw-i4-2022",
@@ -7645,7 +7709,9 @@
     "maintenancePerYear": 401,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.7
+    "wltpConsumptionKWh100km": 18.7,
+    "wltpRangeKm": 452,
+    "batteryKWh": 84.5
   },
   {
     "id": "bmw-i4-2023",
@@ -7661,7 +7727,9 @@
     "maintenancePerYear": 402,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 458,
+    "batteryKWh": 85.3
   },
   {
     "id": "bmw-i4-2024",
@@ -7677,7 +7745,9 @@
     "maintenancePerYear": 404,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 464,
+    "batteryKWh": 86.1
   },
   {
     "id": "bmw-i4-2025",
@@ -7693,7 +7763,9 @@
     "maintenancePerYear": 405,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.5
+    "wltpConsumptionKWh100km": 18.5,
+    "wltpRangeKm": 470,
+    "batteryKWh": 86.8
   },
   {
     "id": "bmw-i4-2026",
@@ -7709,7 +7781,9 @@
     "maintenancePerYear": 406,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.4
+    "wltpConsumptionKWh100km": 18.4,
+    "wltpRangeKm": 476,
+    "batteryKWh": 87.6
   },
   {
     "id": "bmw-i5-2023",
@@ -7725,7 +7799,9 @@
     "maintenancePerYear": 422,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.6
+    "wltpConsumptionKWh100km": 19.6,
+    "wltpRangeKm": 458,
+    "batteryKWh": 89.5
   },
   {
     "id": "bmw-i5-2024",
@@ -7741,7 +7817,9 @@
     "maintenancePerYear": 423,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.5
+    "wltpConsumptionKWh100km": 19.5,
+    "wltpRangeKm": 464,
+    "batteryKWh": 90.4
   },
   {
     "id": "bmw-i5-2025",
@@ -7757,7 +7835,9 @@
     "maintenancePerYear": 425,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.4
+    "wltpConsumptionKWh100km": 19.4,
+    "wltpRangeKm": 470,
+    "batteryKWh": 91.2
   },
   {
     "id": "bmw-i5-2026",
@@ -7773,7 +7853,9 @@
     "maintenancePerYear": 426,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.3
+    "wltpConsumptionKWh100km": 19.3,
+    "wltpRangeKm": 476,
+    "batteryKWh": 92.0
   },
   {
     "id": "bmw-i7-2022",
@@ -7789,7 +7871,9 @@
     "maintenancePerYear": 381,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.5
+    "wltpConsumptionKWh100km": 18.5,
+    "wltpRangeKm": 452,
+    "batteryKWh": 83.5
   },
   {
     "id": "bmw-i7-2023",
@@ -7805,7 +7889,9 @@
     "maintenancePerYear": 383,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.4
+    "wltpConsumptionKWh100km": 18.4,
+    "wltpRangeKm": 458,
+    "batteryKWh": 84.3
   },
   {
     "id": "bmw-i7-2024",
@@ -7821,7 +7907,9 @@
     "maintenancePerYear": 384,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.3
+    "wltpConsumptionKWh100km": 18.3,
+    "wltpRangeKm": 464,
+    "batteryKWh": 85.0
   },
   {
     "id": "bmw-i7-2025",
@@ -7837,7 +7925,9 @@
     "maintenancePerYear": 386,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.2
+    "wltpConsumptionKWh100km": 18.2,
+    "wltpRangeKm": 470,
+    "batteryKWh": 85.8
   },
   {
     "id": "bmw-i7-2026",
@@ -7853,7 +7943,9 @@
     "maintenancePerYear": 387,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.2
+    "wltpConsumptionKWh100km": 18.2,
+    "wltpRangeKm": 476,
+    "batteryKWh": 86.5
   },
   {
     "id": "bmw-ix-2021",
@@ -7869,7 +7961,9 @@
     "maintenancePerYear": 411,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.4
+    "wltpConsumptionKWh100km": 18.4,
+    "wltpRangeKm": 446,
+    "batteryKWh": 81.9
   },
   {
     "id": "bmw-ix-2022",
@@ -7885,7 +7979,9 @@
     "maintenancePerYear": 413,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.3
+    "wltpConsumptionKWh100km": 18.3,
+    "wltpRangeKm": 452,
+    "batteryKWh": 82.7
   },
   {
     "id": "bmw-ix-2023",
@@ -7901,7 +7997,9 @@
     "maintenancePerYear": 414,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.2
+    "wltpConsumptionKWh100km": 18.2,
+    "wltpRangeKm": 458,
+    "batteryKWh": 83.4
   },
   {
     "id": "bmw-ix-2024",
@@ -7917,7 +8015,9 @@
     "maintenancePerYear": 416,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.1
+    "wltpConsumptionKWh100km": 18.1,
+    "wltpRangeKm": 464,
+    "batteryKWh": 84.2
   },
   {
     "id": "bmw-ix-2025",
@@ -7933,7 +8033,9 @@
     "maintenancePerYear": 417,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.1
+    "wltpConsumptionKWh100km": 18.1,
+    "wltpRangeKm": 470,
+    "batteryKWh": 84.9
   },
   {
     "id": "bmw-ix-2026",
@@ -7949,7 +8051,9 @@
     "maintenancePerYear": 418,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.0
+    "wltpConsumptionKWh100km": 18.0,
+    "wltpRangeKm": 476,
+    "batteryKWh": 85.7
   },
   {
     "id": "bmw-ix1-2022",
@@ -7965,7 +8069,9 @@
     "maintenancePerYear": 375,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.5
+    "wltpConsumptionKWh100km": 17.5,
+    "wltpRangeKm": 472,
+    "batteryKWh": 82.6
   },
   {
     "id": "bmw-ix1-2023",
@@ -7981,7 +8087,9 @@
     "maintenancePerYear": 376,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.4
+    "wltpConsumptionKWh100km": 17.4,
+    "wltpRangeKm": 478,
+    "batteryKWh": 83.3
   },
   {
     "id": "bmw-ix1-2024",
@@ -7997,7 +8105,9 @@
     "maintenancePerYear": 378,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.3
+    "wltpConsumptionKWh100km": 17.3,
+    "wltpRangeKm": 484,
+    "batteryKWh": 84.0
   },
   {
     "id": "bmw-ix1-2025",
@@ -8013,7 +8123,9 @@
     "maintenancePerYear": 379,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.3
+    "wltpConsumptionKWh100km": 17.3,
+    "wltpRangeKm": 490,
+    "batteryKWh": 84.6
   },
   {
     "id": "bmw-ix1-2026",
@@ -8029,7 +8141,9 @@
     "maintenancePerYear": 380,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 496,
+    "batteryKWh": 85.3
   },
   {
     "id": "bmw-ix3-2020",
@@ -8045,7 +8159,9 @@
     "maintenancePerYear": 398,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 440,
+    "batteryKWh": 82.9
   },
   {
     "id": "bmw-ix3-2021",
@@ -8061,7 +8177,9 @@
     "maintenancePerYear": 399,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.8
+    "wltpConsumptionKWh100km": 18.8,
+    "wltpRangeKm": 446,
+    "batteryKWh": 83.8
   },
   {
     "id": "bmw-ix3-2022",
@@ -8077,7 +8195,9 @@
     "maintenancePerYear": 401,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.7
+    "wltpConsumptionKWh100km": 18.7,
+    "wltpRangeKm": 452,
+    "batteryKWh": 84.5
   },
   {
     "id": "bmw-ix3-2023",
@@ -8093,7 +8213,9 @@
     "maintenancePerYear": 402,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 458,
+    "batteryKWh": 85.3
   },
   {
     "id": "bmw-ix3-2024",
@@ -8109,7 +8231,9 @@
     "maintenancePerYear": 404,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 464,
+    "batteryKWh": 86.1
   },
   {
     "id": "bmw-ix3-2025",
@@ -8125,7 +8249,9 @@
     "maintenancePerYear": 405,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.5
+    "wltpConsumptionKWh100km": 18.5,
+    "wltpRangeKm": 470,
+    "batteryKWh": 86.8
   },
   {
     "id": "bmw-ix3-2026",
@@ -8141,7 +8267,9 @@
     "maintenancePerYear": 406,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.4
+    "wltpConsumptionKWh100km": 18.4,
+    "wltpRangeKm": 476,
+    "batteryKWh": 87.6
   },
   {
     "id": "byd-atto-3-2022",
@@ -8157,7 +8285,9 @@
     "maintenancePerYear": 375,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.5
+    "wltpConsumptionKWh100km": 17.5,
+    "wltpRangeKm": 472,
+    "batteryKWh": 82.6
   },
   {
     "id": "byd-atto-3-2023",
@@ -8173,7 +8303,9 @@
     "maintenancePerYear": 376,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.4
+    "wltpConsumptionKWh100km": 17.4,
+    "wltpRangeKm": 478,
+    "batteryKWh": 83.3
   },
   {
     "id": "byd-atto-3-2024",
@@ -8189,7 +8321,9 @@
     "maintenancePerYear": 378,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.3
+    "wltpConsumptionKWh100km": 17.3,
+    "wltpRangeKm": 484,
+    "batteryKWh": 84.0
   },
   {
     "id": "byd-atto-3-2025",
@@ -8205,7 +8339,9 @@
     "maintenancePerYear": 379,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.3
+    "wltpConsumptionKWh100km": 17.3,
+    "wltpRangeKm": 490,
+    "batteryKWh": 84.6
   },
   {
     "id": "byd-atto-3-2026",
@@ -8221,7 +8357,9 @@
     "maintenancePerYear": 380,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 496,
+    "batteryKWh": 85.3
   },
   {
     "id": "byd-dolphin-2023",
@@ -8237,7 +8375,9 @@
     "maintenancePerYear": 370,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.0
+    "wltpConsumptionKWh100km": 17.0,
+    "wltpRangeKm": 518,
+    "batteryKWh": 88.2
   },
   {
     "id": "byd-dolphin-2024",
@@ -8253,7 +8393,9 @@
     "maintenancePerYear": 372,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.0
+    "wltpConsumptionKWh100km": 17.0,
+    "wltpRangeKm": 524,
+    "batteryKWh": 88.8
   },
   {
     "id": "byd-dolphin-2025",
@@ -8269,7 +8411,9 @@
     "maintenancePerYear": 373,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.9
+    "wltpConsumptionKWh100km": 16.9,
+    "wltpRangeKm": 530,
+    "batteryKWh": 89.4
   },
   {
     "id": "byd-dolphin-2026",
@@ -8285,7 +8429,9 @@
     "maintenancePerYear": 374,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.8
+    "wltpConsumptionKWh100km": 16.8,
+    "wltpRangeKm": 536,
+    "batteryKWh": 90.0
   },
   {
     "id": "byd-han-2021",
@@ -8301,7 +8447,9 @@
     "maintenancePerYear": 403,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.4
+    "wltpConsumptionKWh100km": 19.4,
+    "wltpRangeKm": 446,
+    "batteryKWh": 86.7
   },
   {
     "id": "byd-han-2022",
@@ -8317,7 +8465,9 @@
     "maintenancePerYear": 404,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.4
+    "wltpConsumptionKWh100km": 19.4,
+    "wltpRangeKm": 452,
+    "batteryKWh": 87.5
   },
   {
     "id": "byd-han-2023",
@@ -8333,7 +8483,9 @@
     "maintenancePerYear": 406,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.3
+    "wltpConsumptionKWh100km": 19.3,
+    "wltpRangeKm": 458,
+    "batteryKWh": 88.3
   },
   {
     "id": "byd-han-2024",
@@ -8349,7 +8501,9 @@
     "maintenancePerYear": 407,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.2
+    "wltpConsumptionKWh100km": 19.2,
+    "wltpRangeKm": 464,
+    "batteryKWh": 89.1
   },
   {
     "id": "byd-han-2025",
@@ -8365,7 +8519,9 @@
     "maintenancePerYear": 409,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 470,
+    "batteryKWh": 89.9
   },
   {
     "id": "byd-han-2026",
@@ -8381,7 +8537,9 @@
     "maintenancePerYear": 410,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 476,
+    "batteryKWh": 90.7
   },
   {
     "id": "byd-seal-2023",
@@ -8397,7 +8555,9 @@
     "maintenancePerYear": 378,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.2
+    "wltpConsumptionKWh100km": 18.2,
+    "wltpRangeKm": 458,
+    "batteryKWh": 83.4
   },
   {
     "id": "byd-seal-2024",
@@ -8413,7 +8573,9 @@
     "maintenancePerYear": 380,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.1
+    "wltpConsumptionKWh100km": 18.1,
+    "wltpRangeKm": 464,
+    "batteryKWh": 84.2
   },
   {
     "id": "byd-seal-2025",
@@ -8429,7 +8591,9 @@
     "maintenancePerYear": 381,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.1
+    "wltpConsumptionKWh100km": 18.1,
+    "wltpRangeKm": 470,
+    "batteryKWh": 84.9
   },
   {
     "id": "byd-seal-2026",
@@ -8445,7 +8609,9 @@
     "maintenancePerYear": 382,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.0
+    "wltpConsumptionKWh100km": 18.0,
+    "wltpRangeKm": 476,
+    "batteryKWh": 85.7
   },
   {
     "id": "byd-seal-u-2024",
@@ -8461,7 +8627,9 @@
     "maintenancePerYear": 407,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.2
+    "wltpConsumptionKWh100km": 19.2,
+    "wltpRangeKm": 464,
+    "batteryKWh": 89.1
   },
   {
     "id": "byd-seal-u-2025",
@@ -8477,7 +8645,9 @@
     "maintenancePerYear": 409,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 470,
+    "batteryKWh": 89.9
   },
   {
     "id": "byd-seal-u-2026",
@@ -8493,7 +8663,9 @@
     "maintenancePerYear": 410,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 476,
+    "batteryKWh": 90.7
   },
   {
     "id": "byd-tang-2021",
@@ -8509,7 +8681,9 @@
     "maintenancePerYear": 403,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.7
+    "wltpConsumptionKWh100km": 18.7,
+    "wltpRangeKm": 446,
+    "batteryKWh": 83.5
   },
   {
     "id": "byd-tang-2022",
@@ -8525,7 +8699,9 @@
     "maintenancePerYear": 404,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 452,
+    "batteryKWh": 84.3
   },
   {
     "id": "byd-tang-2023",
@@ -8541,7 +8717,9 @@
     "maintenancePerYear": 405,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 458,
+    "batteryKWh": 85.1
   },
   {
     "id": "byd-tang-2024",
@@ -8557,7 +8735,9 @@
     "maintenancePerYear": 407,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.5
+    "wltpConsumptionKWh100km": 18.5,
+    "wltpRangeKm": 464,
+    "batteryKWh": 85.8
   },
   {
     "id": "byd-tang-2025",
@@ -8573,7 +8753,9 @@
     "maintenancePerYear": 408,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.4
+    "wltpConsumptionKWh100km": 18.4,
+    "wltpRangeKm": 470,
+    "batteryKWh": 86.6
   },
   {
     "id": "byd-tang-2026",
@@ -8589,7 +8771,9 @@
     "maintenancePerYear": 410,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.4
+    "wltpConsumptionKWh100km": 18.4,
+    "wltpRangeKm": 476,
+    "batteryKWh": 87.3
   },
   {
     "id": "chevrolet-aveo-2005",
@@ -8861,7 +9045,9 @@
     "maintenancePerYear": 322,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.7
+    "wltpConsumptionKWh100km": 17.7,
+    "wltpRangeKm": 506,
+    "batteryKWh": 89.6
   },
   {
     "id": "chevrolet-bolt-euv-2022",
@@ -8877,7 +9063,9 @@
     "maintenancePerYear": 323,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.6
+    "wltpConsumptionKWh100km": 17.6,
+    "wltpRangeKm": 512,
+    "batteryKWh": 90.2
   },
   {
     "id": "chevrolet-bolt-euv-2023",
@@ -8893,7 +9081,9 @@
     "maintenancePerYear": 324,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.5
+    "wltpConsumptionKWh100km": 17.5,
+    "wltpRangeKm": 518,
+    "batteryKWh": 90.9
   },
   {
     "id": "chevrolet-bolt-ev-2017",
@@ -8909,7 +9099,9 @@
     "maintenancePerYear": 280,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.0
+    "wltpConsumptionKWh100km": 17.0,
+    "wltpRangeKm": 482,
+    "batteryKWh": 81.9
   },
   {
     "id": "chevrolet-bolt-ev-2018",
@@ -8925,7 +9117,9 @@
     "maintenancePerYear": 281,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.9
+    "wltpConsumptionKWh100km": 16.9,
+    "wltpRangeKm": 488,
+    "batteryKWh": 82.6
   },
   {
     "id": "chevrolet-bolt-ev-2019",
@@ -8941,7 +9135,9 @@
     "maintenancePerYear": 283,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.9
+    "wltpConsumptionKWh100km": 16.9,
+    "wltpRangeKm": 494,
+    "batteryKWh": 83.2
   },
   {
     "id": "chevrolet-bolt-ev-2020",
@@ -8957,7 +9153,9 @@
     "maintenancePerYear": 284,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.8
+    "wltpConsumptionKWh100km": 16.8,
+    "wltpRangeKm": 500,
+    "batteryKWh": 83.9
   },
   {
     "id": "chevrolet-bolt-ev-2021",
@@ -8973,7 +9171,9 @@
     "maintenancePerYear": 286,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.7
+    "wltpConsumptionKWh100km": 16.7,
+    "wltpRangeKm": 506,
+    "batteryKWh": 84.5
   },
   {
     "id": "chevrolet-bolt-ev-2022",
@@ -8989,7 +9189,9 @@
     "maintenancePerYear": 287,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.6
+    "wltpConsumptionKWh100km": 16.6,
+    "wltpRangeKm": 512,
+    "batteryKWh": 85.1
   },
   {
     "id": "chevrolet-bolt-ev-2023",
@@ -9005,7 +9207,9 @@
     "maintenancePerYear": 288,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.6
+    "wltpConsumptionKWh100km": 16.6,
+    "wltpRangeKm": 518,
+    "batteryKWh": 85.7
   },
   {
     "id": "chevrolet-camaro-2009",
@@ -9821,7 +10025,9 @@
     "maintenancePerYear": 397,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.0
+    "wltpConsumptionKWh100km": 20.0,
+    "wltpRangeKm": 458,
+    "batteryKWh": 91.7
   },
   {
     "id": "chevrolet-equinox-ev-2024",
@@ -9837,7 +10043,9 @@
     "maintenancePerYear": 399,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.0
+    "wltpConsumptionKWh100km": 20.0,
+    "wltpRangeKm": 464,
+    "batteryKWh": 92.6
   },
   {
     "id": "chevrolet-equinox-ev-2025",
@@ -9853,7 +10061,9 @@
     "maintenancePerYear": 400,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.9
+    "wltpConsumptionKWh100km": 19.9,
+    "wltpRangeKm": 470,
+    "batteryKWh": 93.4
   },
   {
     "id": "chevrolet-equinox-ev-2026",
@@ -9869,7 +10079,9 @@
     "maintenancePerYear": 402,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.8
+    "wltpConsumptionKWh100km": 19.8,
+    "wltpRangeKm": 476,
+    "batteryKWh": 94.2
   },
   {
     "id": "chevrolet-orlando-2010",
@@ -12909,7 +13121,9 @@
     "maintenancePerYear": 340,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.0
+    "wltpConsumptionKWh100km": 18.0,
+    "wltpRangeKm": 302,
+    "batteryKWh": 54.4
   },
   {
     "id": "citroen-e-berlingo-2022",
@@ -13015,7 +13229,9 @@
     "maintenancePerYear": 311,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 15.7
+    "wltpConsumptionKWh100km": 15.7,
+    "wltpRangeKm": 518,
+    "batteryKWh": 81.5
   },
   {
     "id": "citroen-e-c3-2024",
@@ -13031,7 +13247,9 @@
     "maintenancePerYear": 312,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 15.7
+    "wltpConsumptionKWh100km": 15.7,
+    "wltpRangeKm": 524,
+    "batteryKWh": 82.0
   },
   {
     "id": "citroen-e-c3-2025",
@@ -13047,7 +13265,9 @@
     "maintenancePerYear": 313,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 15.6
+    "wltpConsumptionKWh100km": 15.6,
+    "wltpRangeKm": 530,
+    "batteryKWh": 82.5
   },
   {
     "id": "citroen-e-c3-2026",
@@ -13063,7 +13283,9 @@
     "maintenancePerYear": 315,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 15.5
+    "wltpConsumptionKWh100km": 15.5,
+    "wltpRangeKm": 536,
+    "batteryKWh": 83.1
   },
   {
     "id": "citroen-e-c4-2020",
@@ -13079,7 +13301,9 @@
     "maintenancePerYear": 324,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.9
+    "wltpConsumptionKWh100km": 16.9,
+    "wltpRangeKm": 460,
+    "batteryKWh": 77.5
   },
   {
     "id": "citroen-e-c4-2021",
@@ -13095,7 +13319,9 @@
     "maintenancePerYear": 325,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.8
+    "wltpConsumptionKWh100km": 16.8,
+    "wltpRangeKm": 466,
+    "batteryKWh": 78.1
   },
   {
     "id": "citroen-e-c4-2022",
@@ -13111,7 +13337,9 @@
     "maintenancePerYear": 327,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.7
+    "wltpConsumptionKWh100km": 16.7,
+    "wltpRangeKm": 472,
+    "batteryKWh": 78.8
   },
   {
     "id": "citroen-e-c4-2023",
@@ -13127,7 +13355,9 @@
     "maintenancePerYear": 328,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.6
+    "wltpConsumptionKWh100km": 16.6,
+    "wltpRangeKm": 478,
+    "batteryKWh": 79.4
   },
   {
     "id": "citroen-e-c4-2024",
@@ -13143,7 +13373,9 @@
     "maintenancePerYear": 330,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.6
+    "wltpConsumptionKWh100km": 16.6,
+    "wltpRangeKm": 484,
+    "batteryKWh": 80.1
   },
   {
     "id": "citroen-e-c4-2025",
@@ -13159,7 +13391,9 @@
     "maintenancePerYear": 331,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.5
+    "wltpConsumptionKWh100km": 16.5,
+    "wltpRangeKm": 490,
+    "batteryKWh": 80.7
   },
   {
     "id": "citroen-e-c4-2026",
@@ -13175,7 +13409,9 @@
     "maintenancePerYear": 332,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.4
+    "wltpConsumptionKWh100km": 16.4,
+    "wltpRangeKm": 496,
+    "batteryKWh": 81.3
   },
   {
     "id": "cupra-ateca-2018",
@@ -13655,7 +13891,9 @@
     "maintenancePerYear": 354,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.6
+    "wltpConsumptionKWh100km": 17.6,
+    "wltpRangeKm": 484,
+    "batteryKWh": 85.4
   },
   {
     "id": "cupra-tavascan-2025",
@@ -13671,7 +13909,9 @@
     "maintenancePerYear": 355,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.6
+    "wltpConsumptionKWh100km": 17.6,
+    "wltpRangeKm": 490,
+    "batteryKWh": 86.1
   },
   {
     "id": "cupra-tavascan-2026",
@@ -13687,7 +13927,9 @@
     "maintenancePerYear": 357,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.5
+    "wltpConsumptionKWh100km": 17.5,
+    "wltpRangeKm": 496,
+    "batteryKWh": 86.8
   },
   {
     "id": "ds-ds-3-2009",
@@ -15879,7 +16121,9 @@
     "maintenancePerYear": 260,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 14.5
+    "wltpConsumptionKWh100km": 14.5,
+    "wltpRangeKm": 336,
+    "batteryKWh": 48.6
   },
   {
     "id": "dacia-spring-2022",
@@ -15895,7 +16139,9 @@
     "maintenancePerYear": 261,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 14.4
+    "wltpConsumptionKWh100km": 14.4,
+    "wltpRangeKm": 342,
+    "batteryKWh": 49.2
   },
   {
     "id": "dacia-spring-2023",
@@ -15911,7 +16157,9 @@
     "maintenancePerYear": 263,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 14.3
+    "wltpConsumptionKWh100km": 14.3,
+    "wltpRangeKm": 348,
+    "batteryKWh": 49.8
   },
   {
     "id": "dacia-spring-2024",
@@ -15927,7 +16175,9 @@
     "maintenancePerYear": 264,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 14.2
+    "wltpConsumptionKWh100km": 14.2,
+    "wltpRangeKm": 354,
+    "batteryKWh": 50.4
   },
   {
     "id": "dacia-spring-2025",
@@ -15943,7 +16193,9 @@
     "maintenancePerYear": 265,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 14.2
+    "wltpConsumptionKWh100km": 14.2,
+    "wltpRangeKm": 360,
+    "batteryKWh": 51.0
   },
   {
     "id": "dacia-spring-2026",
@@ -15959,7 +16211,9 @@
     "maintenancePerYear": 267,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 14.1
+    "wltpConsumptionKWh100km": 14.1,
+    "wltpRangeKm": 366,
+    "batteryKWh": 51.6
   },
   {
     "id": "fiat-500-2007",
@@ -16679,7 +16933,9 @@
     "maintenancePerYear": 238,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 14.1
+    "wltpConsumptionKWh100km": 14.1,
+    "wltpRangeKm": 300,
+    "batteryKWh": 42.3
   },
   {
     "id": "fiat-500e-2021",
@@ -16695,7 +16951,9 @@
     "maintenancePerYear": 239,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 14.0
+    "wltpConsumptionKWh100km": 14.0,
+    "wltpRangeKm": 306,
+    "batteryKWh": 42.9
   },
   {
     "id": "fiat-500e-2022",
@@ -16711,7 +16969,9 @@
     "maintenancePerYear": 240,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 14.0
+    "wltpConsumptionKWh100km": 14.0,
+    "wltpRangeKm": 312,
+    "batteryKWh": 43.5
   },
   {
     "id": "fiat-500e-2023",
@@ -16727,7 +16987,9 @@
     "maintenancePerYear": 242,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 13.9
+    "wltpConsumptionKWh100km": 13.9,
+    "wltpRangeKm": 318,
+    "batteryKWh": 44.1
   },
   {
     "id": "fiat-500e-2024",
@@ -16743,7 +17005,9 @@
     "maintenancePerYear": 243,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 13.8
+    "wltpConsumptionKWh100km": 13.8,
+    "wltpRangeKm": 324,
+    "batteryKWh": 44.7
   },
   {
     "id": "fiat-500e-2025",
@@ -16759,7 +17023,9 @@
     "maintenancePerYear": 245,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 13.7
+    "wltpConsumptionKWh100km": 13.7,
+    "wltpRangeKm": 330,
+    "batteryKWh": 45.3
   },
   {
     "id": "fiat-500e-2026",
@@ -16775,7 +17041,9 @@
     "maintenancePerYear": 246,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 13.7
+    "wltpConsumptionKWh100km": 13.7,
+    "wltpRangeKm": 336,
+    "batteryKWh": 45.9
   },
   {
     "id": "fiat-600e-2023",
@@ -16791,7 +17059,9 @@
     "maintenancePerYear": 314,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.9
+    "wltpConsumptionKWh100km": 16.9,
+    "wltpRangeKm": 518,
+    "batteryKWh": 87.4
   },
   {
     "id": "fiat-600e-2024",
@@ -16807,7 +17077,9 @@
     "maintenancePerYear": 315,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.8
+    "wltpConsumptionKWh100km": 16.8,
+    "wltpRangeKm": 524,
+    "batteryKWh": 88.0
   },
   {
     "id": "fiat-600e-2025",
@@ -16823,7 +17095,9 @@
     "maintenancePerYear": 317,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.7
+    "wltpConsumptionKWh100km": 16.7,
+    "wltpRangeKm": 530,
+    "batteryKWh": 88.7
   },
   {
     "id": "fiat-600e-2026",
@@ -16839,7 +17113,9 @@
     "maintenancePerYear": 318,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.7
+    "wltpConsumptionKWh100km": 16.7,
+    "wltpRangeKm": 536,
+    "batteryKWh": 89.2
   },
   {
     "id": "fiat-bravo-2007",
@@ -18407,7 +18683,9 @@
     "maintenancePerYear": 349,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.1
+    "wltpConsumptionKWh100km": 18.1,
+    "wltpRangeKm": 484,
+    "batteryKWh": 87.4
   },
   {
     "id": "ford-capri-ev-2025",
@@ -18423,7 +18701,9 @@
     "maintenancePerYear": 350,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.0
+    "wltpConsumptionKWh100km": 18.0,
+    "wltpRangeKm": 490,
+    "batteryKWh": 88.1
   },
   {
     "id": "ford-capri-ev-2026",
@@ -18439,7 +18719,9 @@
     "maintenancePerYear": 352,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.9
+    "wltpConsumptionKWh100km": 17.9,
+    "wltpRangeKm": 496,
+    "batteryKWh": 88.8
   },
   {
     "id": "ford-explorer-ev-2024",
@@ -18455,7 +18737,9 @@
     "maintenancePerYear": 405,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 464,
+    "batteryKWh": 88.9
   },
   {
     "id": "ford-explorer-ev-2025",
@@ -18471,7 +18755,9 @@
     "maintenancePerYear": 406,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 470,
+    "batteryKWh": 89.7
   },
   {
     "id": "ford-explorer-ev-2026",
@@ -18487,7 +18773,9 @@
     "maintenancePerYear": 408,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.0
+    "wltpConsumptionKWh100km": 19.0,
+    "wltpRangeKm": 476,
+    "batteryKWh": 90.4
   },
   {
     "id": "ford-fiesta-2005",
@@ -20519,7 +20807,9 @@
     "maintenancePerYear": 394,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.4
+    "wltpConsumptionKWh100km": 19.4,
+    "wltpRangeKm": 450,
+    "batteryKWh": 87.2
   },
   {
     "id": "ford-mustang-mach-e-2021",
@@ -20535,7 +20825,9 @@
     "maintenancePerYear": 395,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.3
+    "wltpConsumptionKWh100km": 19.3,
+    "wltpRangeKm": 456,
+    "batteryKWh": 88.0
   },
   {
     "id": "ford-mustang-mach-e-2022",
@@ -20551,7 +20843,9 @@
     "maintenancePerYear": 397,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.2
+    "wltpConsumptionKWh100km": 19.2,
+    "wltpRangeKm": 462,
+    "batteryKWh": 88.8
   },
   {
     "id": "ford-mustang-mach-e-2023",
@@ -20567,7 +20861,9 @@
     "maintenancePerYear": 398,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 468,
+    "batteryKWh": 89.6
   },
   {
     "id": "ford-mustang-mach-e-2024",
@@ -20583,7 +20879,9 @@
     "maintenancePerYear": 399,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 474,
+    "batteryKWh": 90.4
   },
   {
     "id": "ford-mustang-mach-e-2025",
@@ -20599,7 +20897,9 @@
     "maintenancePerYear": 401,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.0
+    "wltpConsumptionKWh100km": 19.0,
+    "wltpRangeKm": 480,
+    "batteryKWh": 91.2
   },
   {
     "id": "ford-mustang-mach-e-2026",
@@ -20615,7 +20915,9 @@
     "maintenancePerYear": 402,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 486,
+    "batteryKWh": 92.0
   },
   {
     "id": "ford-puma-2019",
@@ -20759,7 +21061,9 @@
     "maintenancePerYear": 313,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.4
+    "wltpConsumptionKWh100km": 18.4,
+    "wltpRangeKm": 524,
+    "batteryKWh": 96.2
   },
   {
     "id": "ford-puma-gen-e-2025",
@@ -20775,7 +21079,9 @@
     "maintenancePerYear": 314,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.3
+    "wltpConsumptionKWh100km": 18.3,
+    "wltpRangeKm": 530,
+    "batteryKWh": 96.8
   },
   {
     "id": "ford-puma-gen-e-2026",
@@ -20791,7 +21097,9 @@
     "maintenancePerYear": 316,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.2
+    "wltpConsumptionKWh100km": 18.2,
+    "wltpRangeKm": 536,
+    "batteryKWh": 97.6
   },
   {
     "id": "ford-s-max-2006",
@@ -21447,7 +21755,9 @@
     "maintenancePerYear": 423,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.2
+    "wltpConsumptionKWh100km": 19.2,
+    "wltpRangeKm": 446,
+    "batteryKWh": 85.5
   },
   {
     "id": "genesis-electrified-g80-2022",
@@ -21463,7 +21773,9 @@
     "maintenancePerYear": 425,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 452,
+    "batteryKWh": 86.3
   },
   {
     "id": "genesis-electrified-g80-2023",
@@ -21479,7 +21791,9 @@
     "maintenancePerYear": 426,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.0
+    "wltpConsumptionKWh100km": 19.0,
+    "wltpRangeKm": 458,
+    "batteryKWh": 87.2
   },
   {
     "id": "genesis-electrified-g80-2024",
@@ -21495,7 +21809,9 @@
     "maintenancePerYear": 428,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 464,
+    "batteryKWh": 87.9
   },
   {
     "id": "genesis-electrified-g80-2025",
@@ -21511,7 +21827,9 @@
     "maintenancePerYear": 429,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 470,
+    "batteryKWh": 88.7
   },
   {
     "id": "genesis-electrified-g80-2026",
@@ -21527,7 +21845,9 @@
     "maintenancePerYear": 430,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.8
+    "wltpConsumptionKWh100km": 18.8,
+    "wltpRangeKm": 476,
+    "batteryKWh": 89.5
   },
   {
     "id": "genesis-electrified-gv70-2021",
@@ -21543,7 +21863,9 @@
     "maintenancePerYear": 418,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.5
+    "wltpConsumptionKWh100km": 19.5,
+    "wltpRangeKm": 446,
+    "batteryKWh": 86.9
   },
   {
     "id": "genesis-electrified-gv70-2022",
@@ -21559,7 +21881,9 @@
     "maintenancePerYear": 419,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.4
+    "wltpConsumptionKWh100km": 19.4,
+    "wltpRangeKm": 452,
+    "batteryKWh": 87.7
   },
   {
     "id": "genesis-electrified-gv70-2023",
@@ -21575,7 +21899,9 @@
     "maintenancePerYear": 421,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.3
+    "wltpConsumptionKWh100km": 19.3,
+    "wltpRangeKm": 458,
+    "batteryKWh": 88.5
   },
   {
     "id": "genesis-electrified-gv70-2024",
@@ -21591,7 +21917,9 @@
     "maintenancePerYear": 422,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.2
+    "wltpConsumptionKWh100km": 19.2,
+    "wltpRangeKm": 464,
+    "batteryKWh": 89.3
   },
   {
     "id": "genesis-electrified-gv70-2025",
@@ -21607,7 +21935,9 @@
     "maintenancePerYear": 423,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.2
+    "wltpConsumptionKWh100km": 19.2,
+    "wltpRangeKm": 470,
+    "batteryKWh": 90.1
   },
   {
     "id": "genesis-electrified-gv70-2026",
@@ -21623,7 +21953,9 @@
     "maintenancePerYear": 425,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 476,
+    "batteryKWh": 90.9
   },
   {
     "id": "genesis-g70-2018",
@@ -21959,7 +22291,9 @@
     "maintenancePerYear": 323,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.2
+    "wltpConsumptionKWh100km": 18.2,
+    "wltpRangeKm": 466,
+    "batteryKWh": 84.9
   },
   {
     "id": "genesis-gv60-2022",
@@ -21975,7 +22309,9 @@
     "maintenancePerYear": 324,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.1
+    "wltpConsumptionKWh100km": 18.1,
+    "wltpRangeKm": 472,
+    "batteryKWh": 85.7
   },
   {
     "id": "genesis-gv60-2023",
@@ -21991,7 +22327,9 @@
     "maintenancePerYear": 326,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.1
+    "wltpConsumptionKWh100km": 18.1,
+    "wltpRangeKm": 478,
+    "batteryKWh": 86.4
   },
   {
     "id": "genesis-gv60-2024",
@@ -22007,7 +22345,9 @@
     "maintenancePerYear": 327,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.0
+    "wltpConsumptionKWh100km": 18.0,
+    "wltpRangeKm": 484,
+    "batteryKWh": 87.1
   },
   {
     "id": "genesis-gv60-2025",
@@ -22023,7 +22363,9 @@
     "maintenancePerYear": 329,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.9
+    "wltpConsumptionKWh100km": 17.9,
+    "wltpRangeKm": 490,
+    "batteryKWh": 87.8
   },
   {
     "id": "genesis-gv60-2026",
@@ -22039,7 +22381,9 @@
     "maintenancePerYear": 330,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 496,
+    "batteryKWh": 88.5
   },
   {
     "id": "genesis-gv70-2020",
@@ -23703,7 +24047,9 @@
     "maintenancePerYear": 309,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.7
+    "wltpConsumptionKWh100km": 16.7,
+    "wltpRangeKm": 324,
+    "batteryKWh": 54.1
   },
   {
     "id": "honda-e-2020",
@@ -23719,7 +24065,9 @@
     "maintenancePerYear": 311,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.6
+    "wltpConsumptionKWh100km": 16.6,
+    "wltpRangeKm": 330,
+    "batteryKWh": 54.9
   },
   {
     "id": "honda-e-2021",
@@ -23735,7 +24083,9 @@
     "maintenancePerYear": 312,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.6
+    "wltpConsumptionKWh100km": 16.6,
+    "wltpRangeKm": 336,
+    "batteryKWh": 55.6
   },
   {
     "id": "honda-e-2022",
@@ -23751,7 +24101,9 @@
     "maintenancePerYear": 313,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.5
+    "wltpConsumptionKWh100km": 16.5,
+    "wltpRangeKm": 342,
+    "batteryKWh": 56.4
   },
   {
     "id": "honda-e-2023",
@@ -23767,7 +24119,9 @@
     "maintenancePerYear": 315,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.4
+    "wltpConsumptionKWh100km": 16.4,
+    "wltpRangeKm": 348,
+    "batteryKWh": 57.1
   },
   {
     "id": "honda-eny1-2023",
@@ -23783,7 +24137,9 @@
     "maintenancePerYear": 323,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.9
+    "wltpConsumptionKWh100km": 16.9,
+    "wltpRangeKm": 478,
+    "batteryKWh": 80.9
   },
   {
     "id": "honda-eny1-2024",
@@ -23799,7 +24155,9 @@
     "maintenancePerYear": 324,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.9
+    "wltpConsumptionKWh100km": 16.9,
+    "wltpRangeKm": 484,
+    "batteryKWh": 81.6
   },
   {
     "id": "honda-eny1-2025",
@@ -23815,7 +24173,9 @@
     "maintenancePerYear": 325,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.8
+    "wltpConsumptionKWh100km": 16.8,
+    "wltpRangeKm": 490,
+    "batteryKWh": 82.2
   },
   {
     "id": "honda-eny1-2026",
@@ -23831,7 +24191,9 @@
     "maintenancePerYear": 327,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.7
+    "wltpConsumptionKWh100km": 16.7,
+    "wltpRangeKm": 496,
+    "batteryKWh": 82.8
   },
   {
     "id": "hyundai-bayon-2021",
@@ -23943,7 +24305,9 @@
     "maintenancePerYear": 289,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 354,
+    "batteryKWh": 61.1
   },
   {
     "id": "hyundai-inster-2025",
@@ -23959,7 +24323,9 @@
     "maintenancePerYear": 290,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 360,
+    "batteryKWh": 61.8
   },
   {
     "id": "hyundai-inster-2026",
@@ -23975,7 +24341,9 @@
     "maintenancePerYear": 292,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.1
+    "wltpConsumptionKWh100km": 17.1,
+    "wltpRangeKm": 366,
+    "batteryKWh": 62.6
   },
   {
     "id": "hyundai-ioniq-2016",
@@ -24103,7 +24471,9 @@
     "maintenancePerYear": 361,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.8
+    "wltpConsumptionKWh100km": 16.8,
+    "wltpRangeKm": 466,
+    "batteryKWh": 78.1
   },
   {
     "id": "hyundai-ioniq-5-2022",
@@ -24119,7 +24489,9 @@
     "maintenancePerYear": 363,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.7
+    "wltpConsumptionKWh100km": 16.7,
+    "wltpRangeKm": 472,
+    "batteryKWh": 78.8
   },
   {
     "id": "hyundai-ioniq-5-2023",
@@ -24135,7 +24507,9 @@
     "maintenancePerYear": 364,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.6
+    "wltpConsumptionKWh100km": 16.6,
+    "wltpRangeKm": 478,
+    "batteryKWh": 79.4
   },
   {
     "id": "hyundai-ioniq-5-2024",
@@ -24151,7 +24525,9 @@
     "maintenancePerYear": 366,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.6
+    "wltpConsumptionKWh100km": 16.6,
+    "wltpRangeKm": 484,
+    "batteryKWh": 80.1
   },
   {
     "id": "hyundai-ioniq-5-2025",
@@ -24167,7 +24543,9 @@
     "maintenancePerYear": 367,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.5
+    "wltpConsumptionKWh100km": 16.5,
+    "wltpRangeKm": 490,
+    "batteryKWh": 80.7
   },
   {
     "id": "hyundai-ioniq-5-2026",
@@ -24183,7 +24561,9 @@
     "maintenancePerYear": 368,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.4
+    "wltpConsumptionKWh100km": 16.4,
+    "wltpRangeKm": 496,
+    "batteryKWh": 81.3
   },
   {
     "id": "hyundai-ioniq-6-2022",
@@ -24199,7 +24579,9 @@
     "maintenancePerYear": 419,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.7
+    "wltpConsumptionKWh100km": 18.7,
+    "wltpRangeKm": 532,
+    "batteryKWh": 99.5
   },
   {
     "id": "hyundai-ioniq-6-2023",
@@ -24215,7 +24597,9 @@
     "maintenancePerYear": 420,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 538,
+    "batteryKWh": 100.0
   },
   {
     "id": "hyundai-ioniq-6-2024",
@@ -24231,7 +24615,9 @@
     "maintenancePerYear": 422,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 544,
+    "batteryKWh": 100.0
   },
   {
     "id": "hyundai-ioniq-6-2025",
@@ -24247,7 +24633,9 @@
     "maintenancePerYear": 423,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.5
+    "wltpConsumptionKWh100km": 18.5,
+    "wltpRangeKm": 550,
+    "batteryKWh": 100.0
   },
   {
     "id": "hyundai-ioniq-6-2026",
@@ -24263,7 +24651,9 @@
     "maintenancePerYear": 424,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.4
+    "wltpConsumptionKWh100km": 18.4,
+    "wltpRangeKm": 556,
+    "batteryKWh": 100.0
   },
   {
     "id": "hyundai-ioniq-electric-2016",
@@ -24279,7 +24669,9 @@
     "maintenancePerYear": 341,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.0
+    "wltpConsumptionKWh100km": 18.0,
+    "wltpRangeKm": 436,
+    "batteryKWh": 78.6
   },
   {
     "id": "hyundai-ioniq-electric-2017",
@@ -24295,7 +24687,9 @@
     "maintenancePerYear": 343,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.9
+    "wltpConsumptionKWh100km": 17.9,
+    "wltpRangeKm": 442,
+    "batteryKWh": 79.3
   },
   {
     "id": "hyundai-ioniq-electric-2018",
@@ -24311,7 +24705,9 @@
     "maintenancePerYear": 344,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.9
+    "wltpConsumptionKWh100km": 17.9,
+    "wltpRangeKm": 448,
+    "batteryKWh": 80.1
   },
   {
     "id": "hyundai-ioniq-electric-2019",
@@ -24327,7 +24723,9 @@
     "maintenancePerYear": 346,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 454,
+    "batteryKWh": 80.8
   },
   {
     "id": "hyundai-ioniq-electric-2020",
@@ -24343,7 +24741,9 @@
     "maintenancePerYear": 347,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.7
+    "wltpConsumptionKWh100km": 17.7,
+    "wltpRangeKm": 460,
+    "batteryKWh": 81.5
   },
   {
     "id": "hyundai-ioniq-electric-2021",
@@ -24359,7 +24759,9 @@
     "maintenancePerYear": 348,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.6
+    "wltpConsumptionKWh100km": 17.6,
+    "wltpRangeKm": 466,
+    "batteryKWh": 82.2
   },
   {
     "id": "hyundai-ioniq-electric-2022",
@@ -24375,7 +24777,9 @@
     "maintenancePerYear": 350,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.6
+    "wltpConsumptionKWh100km": 17.6,
+    "wltpRangeKm": 472,
+    "batteryKWh": 82.9
   },
   {
     "id": "hyundai-kona-2017",
@@ -24551,7 +24955,9 @@
     "maintenancePerYear": 331,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.4
+    "wltpConsumptionKWh100km": 16.4,
+    "wltpRangeKm": 488,
+    "batteryKWh": 80.3
   },
   {
     "id": "hyundai-kona-electric-2019",
@@ -24567,7 +24973,9 @@
     "maintenancePerYear": 332,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.4
+    "wltpConsumptionKWh100km": 16.4,
+    "wltpRangeKm": 494,
+    "batteryKWh": 80.9
   },
   {
     "id": "hyundai-kona-electric-2020",
@@ -24583,7 +24991,9 @@
     "maintenancePerYear": 334,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.3
+    "wltpConsumptionKWh100km": 16.3,
+    "wltpRangeKm": 500,
+    "batteryKWh": 81.5
   },
   {
     "id": "hyundai-kona-electric-2021",
@@ -24599,7 +25009,9 @@
     "maintenancePerYear": 335,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.2
+    "wltpConsumptionKWh100km": 16.2,
+    "wltpRangeKm": 506,
+    "batteryKWh": 82.1
   },
   {
     "id": "hyundai-kona-electric-2022",
@@ -24615,7 +25027,9 @@
     "maintenancePerYear": 336,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.2
+    "wltpConsumptionKWh100km": 16.2,
+    "wltpRangeKm": 512,
+    "batteryKWh": 82.7
   },
   {
     "id": "hyundai-kona-electric-2023",
@@ -24631,7 +25045,9 @@
     "maintenancePerYear": 338,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.1
+    "wltpConsumptionKWh100km": 16.1,
+    "wltpRangeKm": 518,
+    "batteryKWh": 83.3
   },
   {
     "id": "hyundai-kona-electric-2024",
@@ -24647,7 +25063,9 @@
     "maintenancePerYear": 339,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.0
+    "wltpConsumptionKWh100km": 16.0,
+    "wltpRangeKm": 524,
+    "batteryKWh": 83.8
   },
   {
     "id": "hyundai-kona-electric-2025",
@@ -24663,7 +25081,9 @@
     "maintenancePerYear": 341,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 15.9
+    "wltpConsumptionKWh100km": 15.9,
+    "wltpRangeKm": 530,
+    "batteryKWh": 84.4
   },
   {
     "id": "hyundai-kona-electric-2026",
@@ -24679,7 +25099,9 @@
     "maintenancePerYear": 342,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 15.8
+    "wltpConsumptionKWh100km": 15.8,
+    "wltpRangeKm": 536,
+    "batteryKWh": 85.0
   },
   {
     "id": "hyundai-nexo-2018",
@@ -26951,7 +27373,9 @@
     "maintenancePerYear": 400,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.2
+    "wltpConsumptionKWh100km": 19.2,
+    "wltpRangeKm": 448,
+    "batteryKWh": 85.9
   },
   {
     "id": "jaguar-i-pace-2019",
@@ -26967,7 +27391,9 @@
     "maintenancePerYear": 401,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 454,
+    "batteryKWh": 86.7
   },
   {
     "id": "jaguar-i-pace-2020",
@@ -26983,7 +27409,9 @@
     "maintenancePerYear": 403,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.0
+    "wltpConsumptionKWh100km": 19.0,
+    "wltpRangeKm": 460,
+    "batteryKWh": 87.5
   },
   {
     "id": "jaguar-i-pace-2021",
@@ -26999,7 +27427,9 @@
     "maintenancePerYear": 404,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 466,
+    "batteryKWh": 88.3
   },
   {
     "id": "jaguar-i-pace-2022",
@@ -27015,7 +27445,9 @@
     "maintenancePerYear": 405,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 472,
+    "batteryKWh": 89.1
   },
   {
     "id": "jaguar-i-pace-2023",
@@ -27031,7 +27463,9 @@
     "maintenancePerYear": 407,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.8
+    "wltpConsumptionKWh100km": 18.8,
+    "wltpRangeKm": 478,
+    "batteryKWh": 89.9
   },
   {
     "id": "jaguar-i-pace-2024",
@@ -27047,7 +27481,9 @@
     "maintenancePerYear": 408,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.7
+    "wltpConsumptionKWh100km": 18.7,
+    "wltpRangeKm": 484,
+    "batteryKWh": 90.6
   },
   {
     "id": "jaguar-i-pace-2025",
@@ -27063,7 +27499,9 @@
     "maintenancePerYear": 410,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 490,
+    "batteryKWh": 91.4
   },
   {
     "id": "jaguar-i-pace-2026",
@@ -27079,7 +27517,9 @@
     "maintenancePerYear": 411,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 496,
+    "batteryKWh": 92.1
   },
   {
     "id": "jaguar-xe-2014",
@@ -27863,7 +28303,9 @@
     "maintenancePerYear": 310,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.2
+    "wltpConsumptionKWh100km": 16.2,
+    "wltpRangeKm": 518,
+    "batteryKWh": 84.1
   },
   {
     "id": "jeep-avenger-electric-2024",
@@ -27879,7 +28321,9 @@
     "maintenancePerYear": 312,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.2
+    "wltpConsumptionKWh100km": 16.2,
+    "wltpRangeKm": 524,
+    "batteryKWh": 84.6
   },
   {
     "id": "jeep-avenger-electric-2025",
@@ -27895,7 +28339,9 @@
     "maintenancePerYear": 313,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.1
+    "wltpConsumptionKWh100km": 16.1,
+    "wltpRangeKm": 530,
+    "batteryKWh": 85.2
   },
   {
     "id": "jeep-avenger-electric-2026",
@@ -27911,7 +28357,9 @@
     "maintenancePerYear": 314,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.0
+    "wltpConsumptionKWh100km": 16.0,
+    "wltpRangeKm": 536,
+    "batteryKWh": 85.8
   },
   {
     "id": "jeep-cherokee-2005",
@@ -29127,7 +29575,9 @@
     "maintenancePerYear": 411,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.6
+    "wltpConsumptionKWh100km": 19.6,
+    "wltpRangeKm": 464,
+    "batteryKWh": 90.7
   },
   {
     "id": "jeep-wagoneer-s-2025",
@@ -29143,7 +29593,9 @@
     "maintenancePerYear": 412,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.5
+    "wltpConsumptionKWh100km": 19.5,
+    "wltpRangeKm": 470,
+    "batteryKWh": 91.6
   },
   {
     "id": "jeep-wagoneer-s-2026",
@@ -29159,7 +29611,9 @@
     "maintenancePerYear": 414,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.4
+    "wltpConsumptionKWh100km": 19.4,
+    "wltpRangeKm": 476,
+    "batteryKWh": 92.3
   },
   {
     "id": "jeep-wrangler-2005",
@@ -30103,7 +30557,9 @@
     "maintenancePerYear": 313,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.1
+    "wltpConsumptionKWh100km": 18.1,
+    "wltpRangeKm": 524,
+    "batteryKWh": 94.6
   },
   {
     "id": "kia-ev3-2025",
@@ -30119,7 +30575,9 @@
     "maintenancePerYear": 314,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.0
+    "wltpConsumptionKWh100km": 18.0,
+    "wltpRangeKm": 530,
+    "batteryKWh": 95.2
   },
   {
     "id": "kia-ev3-2026",
@@ -30135,7 +30593,9 @@
     "maintenancePerYear": 316,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.9
+    "wltpConsumptionKWh100km": 17.9,
+    "wltpRangeKm": 536,
+    "batteryKWh": 95.9
   },
   {
     "id": "kia-ev4-2025",
@@ -30151,7 +30611,9 @@
     "maintenancePerYear": 320,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 490,
+    "batteryKWh": 87.1
   },
   {
     "id": "kia-ev4-2026",
@@ -30167,7 +30629,9 @@
     "maintenancePerYear": 322,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.7
+    "wltpConsumptionKWh100km": 17.7,
+    "wltpRangeKm": 496,
+    "batteryKWh": 87.8
   },
   {
     "id": "kia-ev6-2021",
@@ -30183,7 +30647,9 @@
     "maintenancePerYear": 395,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.3
+    "wltpConsumptionKWh100km": 19.3,
+    "wltpRangeKm": 466,
+    "batteryKWh": 89.9
   },
   {
     "id": "kia-ev6-2022",
@@ -30199,7 +30665,9 @@
     "maintenancePerYear": 397,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.2
+    "wltpConsumptionKWh100km": 19.2,
+    "wltpRangeKm": 472,
+    "batteryKWh": 90.8
   },
   {
     "id": "kia-ev6-2023",
@@ -30215,7 +30683,9 @@
     "maintenancePerYear": 398,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 478,
+    "batteryKWh": 91.5
   },
   {
     "id": "kia-ev6-2024",
@@ -30231,7 +30701,9 @@
     "maintenancePerYear": 399,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 484,
+    "batteryKWh": 92.3
   },
   {
     "id": "kia-ev6-2025",
@@ -30247,7 +30719,9 @@
     "maintenancePerYear": 401,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.0
+    "wltpConsumptionKWh100km": 19.0,
+    "wltpRangeKm": 470,
+    "batteryKWh": 89.3
   },
   {
     "id": "kia-ev6-2026",
@@ -30263,7 +30737,9 @@
     "maintenancePerYear": 402,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 476,
+    "batteryKWh": 90.1
   },
   {
     "id": "kia-ev9-2023",
@@ -30279,7 +30755,9 @@
     "maintenancePerYear": 414,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.2
+    "wltpConsumptionKWh100km": 18.2,
+    "wltpRangeKm": 458,
+    "batteryKWh": 83.4
   },
   {
     "id": "kia-ev9-2024",
@@ -30295,7 +30773,9 @@
     "maintenancePerYear": 416,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.1
+    "wltpConsumptionKWh100km": 18.1,
+    "wltpRangeKm": 464,
+    "batteryKWh": 84.2
   },
   {
     "id": "kia-ev9-2025",
@@ -30311,7 +30791,9 @@
     "maintenancePerYear": 417,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.1
+    "wltpConsumptionKWh100km": 18.1,
+    "wltpRangeKm": 470,
+    "batteryKWh": 84.9
   },
   {
     "id": "kia-ev9-2026",
@@ -30327,7 +30809,9 @@
     "maintenancePerYear": 418,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.0
+    "wltpConsumptionKWh100km": 18.0,
+    "wltpRangeKm": 476,
+    "batteryKWh": 85.7
   },
   {
     "id": "kia-niro-2016",
@@ -31975,7 +32459,9 @@
     "maintenancePerYear": 298,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.7
+    "wltpConsumptionKWh100km": 16.7,
+    "wltpRangeKm": 482,
+    "batteryKWh": 80.5
   },
   {
     "id": "kia-soul-ev-2018",
@@ -31991,7 +32477,9 @@
     "maintenancePerYear": 299,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.6
+    "wltpConsumptionKWh100km": 16.6,
+    "wltpRangeKm": 488,
+    "batteryKWh": 81.2
   },
   {
     "id": "kia-soul-ev-2019",
@@ -32007,7 +32495,9 @@
     "maintenancePerYear": 301,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.6
+    "wltpConsumptionKWh100km": 16.6,
+    "wltpRangeKm": 494,
+    "batteryKWh": 81.8
   },
   {
     "id": "kia-soul-ev-2020",
@@ -32023,7 +32513,9 @@
     "maintenancePerYear": 302,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.5
+    "wltpConsumptionKWh100km": 16.5,
+    "wltpRangeKm": 500,
+    "batteryKWh": 82.4
   },
   {
     "id": "kia-soul-ev-2021",
@@ -32039,7 +32531,9 @@
     "maintenancePerYear": 304,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.4
+    "wltpConsumptionKWh100km": 16.4,
+    "wltpRangeKm": 506,
+    "batteryKWh": 83.0
   },
   {
     "id": "kia-soul-ev-2022",
@@ -32055,7 +32549,9 @@
     "maintenancePerYear": 305,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.3
+    "wltpConsumptionKWh100km": 16.3,
+    "wltpRangeKm": 512,
+    "batteryKWh": 83.6
   },
   {
     "id": "kia-soul-ev-2023",
@@ -32071,7 +32567,9 @@
     "maintenancePerYear": 306,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.2
+    "wltpConsumptionKWh100km": 16.2,
+    "wltpRangeKm": 518,
+    "batteryKWh": 84.2
   },
   {
     "id": "kia-soul-ev-2024",
@@ -32087,7 +32585,9 @@
     "maintenancePerYear": 308,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.2
+    "wltpConsumptionKWh100km": 16.2,
+    "wltpRangeKm": 524,
+    "batteryKWh": 84.8
   },
   {
     "id": "kia-soul-ev-2025",
@@ -32103,7 +32603,9 @@
     "maintenancePerYear": 309,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.1
+    "wltpConsumptionKWh100km": 16.1,
+    "wltpRangeKm": 530,
+    "batteryKWh": 85.3
   },
   {
     "id": "kia-soul-ev-2026",
@@ -32119,7 +32621,9 @@
     "maintenancePerYear": 311,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.0
+    "wltpConsumptionKWh100km": 16.0,
+    "wltpRangeKm": 536,
+    "batteryKWh": 85.9
   },
   {
     "id": "kia-sportage-2005",
@@ -32647,7 +33151,9 @@
     "maintenancePerYear": 318,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 448,
+    "batteryKWh": 79.5
   },
   {
     "id": "kia-e-niro-2019",
@@ -32663,7 +33169,9 @@
     "maintenancePerYear": 320,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.7
+    "wltpConsumptionKWh100km": 17.7,
+    "wltpRangeKm": 454,
+    "batteryKWh": 80.2
   },
   {
     "id": "kia-e-niro-2020",
@@ -32679,7 +33187,9 @@
     "maintenancePerYear": 321,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.6
+    "wltpConsumptionKWh100km": 17.6,
+    "wltpRangeKm": 460,
+    "batteryKWh": 81.0
   },
   {
     "id": "kia-e-niro-2021",
@@ -32695,7 +33205,9 @@
     "maintenancePerYear": 323,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.5
+    "wltpConsumptionKWh100km": 17.5,
+    "wltpRangeKm": 466,
+    "batteryKWh": 81.6
   },
   {
     "id": "kia-e-niro-2022",
@@ -32711,7 +33223,9 @@
     "maintenancePerYear": 324,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.4
+    "wltpConsumptionKWh100km": 17.4,
+    "wltpRangeKm": 472,
+    "batteryKWh": 82.4
   },
   {
     "id": "land-rover-defender-2019",
@@ -36055,7 +36569,9 @@
     "maintenancePerYear": 379,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.9
+    "wltpConsumptionKWh100km": 19.9,
+    "wltpRangeKm": 452,
+    "batteryKWh": 90.1
   },
   {
     "id": "lexus-rz-2023",
@@ -36071,7 +36587,9 @@
     "maintenancePerYear": 380,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.9
+    "wltpConsumptionKWh100km": 19.9,
+    "wltpRangeKm": 458,
+    "batteryKWh": 90.9
   },
   {
     "id": "lexus-rz-2024",
@@ -36087,7 +36605,9 @@
     "maintenancePerYear": 382,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.8
+    "wltpConsumptionKWh100km": 19.8,
+    "wltpRangeKm": 464,
+    "batteryKWh": 91.8
   },
   {
     "id": "lexus-rz-2025",
@@ -36103,7 +36623,9 @@
     "maintenancePerYear": 383,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.7
+    "wltpConsumptionKWh100km": 19.7,
+    "wltpRangeKm": 470,
+    "batteryKWh": 92.6
   },
   {
     "id": "lexus-rz-2026",
@@ -36119,7 +36641,9 @@
     "maintenancePerYear": 385,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.6
+    "wltpConsumptionKWh100km": 19.6,
+    "wltpRangeKm": 476,
+    "batteryKWh": 93.4
   },
   {
     "id": "lexus-ux-2018",
@@ -36279,7 +36803,9 @@
     "maintenancePerYear": 320,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.1
+    "wltpConsumptionKWh100km": 18.1,
+    "wltpRangeKm": 460,
+    "batteryKWh": 83.1
   },
   {
     "id": "lexus-ux-300e-2021",
@@ -36295,7 +36821,9 @@
     "maintenancePerYear": 322,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.0
+    "wltpConsumptionKWh100km": 18.0,
+    "wltpRangeKm": 466,
+    "batteryKWh": 83.9
   },
   {
     "id": "lexus-ux-300e-2022",
@@ -36311,7 +36839,9 @@
     "maintenancePerYear": 323,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.9
+    "wltpConsumptionKWh100km": 17.9,
+    "wltpRangeKm": 472,
+    "batteryKWh": 84.6
   },
   {
     "id": "lexus-ux-300e-2023",
@@ -36327,7 +36857,9 @@
     "maintenancePerYear": 324,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 478,
+    "batteryKWh": 85.3
   },
   {
     "id": "lexus-ux-300e-2024",
@@ -36343,7 +36875,9 @@
     "maintenancePerYear": 326,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 484,
+    "batteryKWh": 86.0
   },
   {
     "id": "lexus-ux-300e-2025",
@@ -36359,7 +36893,9 @@
     "maintenancePerYear": 327,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.7
+    "wltpConsumptionKWh100km": 17.7,
+    "wltpRangeKm": 490,
+    "batteryKWh": 86.7
   },
   {
     "id": "lexus-ux-300e-2026",
@@ -36375,7 +36911,9 @@
     "maintenancePerYear": 329,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.6
+    "wltpConsumptionKWh100km": 17.6,
+    "wltpRangeKm": 496,
+    "batteryKWh": 87.4
   },
   {
     "id": "lucid-air-2022",
@@ -36391,7 +36929,9 @@
     "maintenancePerYear": 378,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.2
+    "wltpConsumptionKWh100km": 19.2,
+    "wltpRangeKm": 452,
+    "batteryKWh": 86.8
   },
   {
     "id": "lucid-air-2023",
@@ -36407,7 +36947,9 @@
     "maintenancePerYear": 379,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 458,
+    "batteryKWh": 87.6
   },
   {
     "id": "lucid-air-2024",
@@ -36423,7 +36965,9 @@
     "maintenancePerYear": 381,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 464,
+    "batteryKWh": 88.4
   },
   {
     "id": "lucid-air-2025",
@@ -36439,7 +36983,9 @@
     "maintenancePerYear": 382,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.0
+    "wltpConsumptionKWh100km": 19.0,
+    "wltpRangeKm": 470,
+    "batteryKWh": 89.2
   },
   {
     "id": "lucid-air-2026",
@@ -36455,7 +37001,9 @@
     "maintenancePerYear": 384,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 476,
+    "batteryKWh": 90.0
   },
   {
     "id": "lucid-gravity-2022",
@@ -36471,7 +37019,9 @@
     "maintenancePerYear": 372,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.0
+    "wltpConsumptionKWh100km": 20.0,
+    "wltpRangeKm": 452,
+    "batteryKWh": 90.4
   },
   {
     "id": "lucid-gravity-2023",
@@ -36487,7 +37037,9 @@
     "maintenancePerYear": 373,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.9
+    "wltpConsumptionKWh100km": 19.9,
+    "wltpRangeKm": 458,
+    "batteryKWh": 91.3
   },
   {
     "id": "lucid-gravity-2024",
@@ -36503,7 +37055,9 @@
     "maintenancePerYear": 375,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.9
+    "wltpConsumptionKWh100km": 19.9,
+    "wltpRangeKm": 464,
+    "batteryKWh": 92.1
   },
   {
     "id": "lucid-gravity-2025",
@@ -36519,7 +37073,9 @@
     "maintenancePerYear": 376,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.8
+    "wltpConsumptionKWh100km": 19.8,
+    "wltpRangeKm": 470,
+    "batteryKWh": 93.0
   },
   {
     "id": "lucid-gravity-2026",
@@ -36535,7 +37091,9 @@
     "maintenancePerYear": 378,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.7
+    "wltpConsumptionKWh100km": 19.7,
+    "wltpRangeKm": 476,
+    "batteryKWh": 93.8
   },
   {
     "id": "mg-gs-2015",
@@ -36759,7 +37317,9 @@
     "maintenancePerYear": 340,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.4
+    "wltpConsumptionKWh100km": 17.4,
+    "wltpRangeKm": 494,
+    "batteryKWh": 86.0
   },
   {
     "id": "mg-mg-zs-ev-2020",
@@ -36775,7 +37335,9 @@
     "maintenancePerYear": 341,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.3
+    "wltpConsumptionKWh100km": 17.3,
+    "wltpRangeKm": 500,
+    "batteryKWh": 86.6
   },
   {
     "id": "mg-mg-zs-ev-2021",
@@ -36791,7 +37353,9 @@
     "maintenancePerYear": 342,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 506,
+    "batteryKWh": 87.3
   },
   {
     "id": "mg-mg-zs-ev-2022",
@@ -36807,7 +37371,9 @@
     "maintenancePerYear": 344,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 512,
+    "batteryKWh": 87.9
   },
   {
     "id": "mg-mg-zs-ev-2023",
@@ -36823,7 +37389,9 @@
     "maintenancePerYear": 345,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.1
+    "wltpConsumptionKWh100km": 17.1,
+    "wltpRangeKm": 518,
+    "batteryKWh": 88.6
   },
   {
     "id": "mg-mg-zs-ev-2024",
@@ -36839,7 +37407,9 @@
     "maintenancePerYear": 347,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.0
+    "wltpConsumptionKWh100km": 17.0,
+    "wltpRangeKm": 524,
+    "batteryKWh": 89.2
   },
   {
     "id": "mg-mg-zs-ev-2025",
@@ -36855,7 +37425,9 @@
     "maintenancePerYear": 348,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.0
+    "wltpConsumptionKWh100km": 17.0,
+    "wltpRangeKm": 530,
+    "batteryKWh": 89.8
   },
   {
     "id": "mg-mg-zs-ev-2026",
@@ -36871,7 +37443,9 @@
     "maintenancePerYear": 349,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.9
+    "wltpConsumptionKWh100km": 16.9,
+    "wltpRangeKm": 536,
+    "batteryKWh": 90.4
   },
   {
     "id": "mg-mg3-2011",
@@ -37143,7 +37717,9 @@
     "maintenancePerYear": 320,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.0
+    "wltpConsumptionKWh100km": 18.0,
+    "wltpRangeKm": 512,
+    "batteryKWh": 92.0
   },
   {
     "id": "mg-mg4-2023",
@@ -37159,7 +37735,9 @@
     "maintenancePerYear": 321,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.9
+    "wltpConsumptionKWh100km": 17.9,
+    "wltpRangeKm": 518,
+    "batteryKWh": 92.7
   },
   {
     "id": "mg-mg4-2024",
@@ -37175,7 +37753,9 @@
     "maintenancePerYear": 323,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 524,
+    "batteryKWh": 93.4
   },
   {
     "id": "mg-mg4-2025",
@@ -37191,7 +37771,9 @@
     "maintenancePerYear": 324,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 530,
+    "batteryKWh": 94.1
   },
   {
     "id": "mg-mg4-2026",
@@ -37207,7 +37789,9 @@
     "maintenancePerYear": 325,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.7
+    "wltpConsumptionKWh100km": 17.7,
+    "wltpRangeKm": 536,
+    "batteryKWh": 94.7
   },
   {
     "id": "mg-mg5-2020",
@@ -37223,7 +37807,9 @@
     "maintenancePerYear": 368,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.2
+    "wltpConsumptionKWh100km": 18.2,
+    "wltpRangeKm": 460,
+    "batteryKWh": 83.6
   },
   {
     "id": "mg-mg5-2021",
@@ -37239,7 +37825,9 @@
     "maintenancePerYear": 369,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.1
+    "wltpConsumptionKWh100km": 18.1,
+    "wltpRangeKm": 466,
+    "batteryKWh": 84.3
   },
   {
     "id": "mg-mg5-2022",
@@ -37255,7 +37843,9 @@
     "maintenancePerYear": 371,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.0
+    "wltpConsumptionKWh100km": 18.0,
+    "wltpRangeKm": 472,
+    "batteryKWh": 85.1
   },
   {
     "id": "mg-mg5-2023",
@@ -37271,7 +37861,9 @@
     "maintenancePerYear": 372,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.9
+    "wltpConsumptionKWh100km": 17.9,
+    "wltpRangeKm": 478,
+    "batteryKWh": 85.8
   },
   {
     "id": "mg-mg5-2024",
@@ -37287,7 +37879,9 @@
     "maintenancePerYear": 373,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.9
+    "wltpConsumptionKWh100km": 17.9,
+    "wltpRangeKm": 484,
+    "batteryKWh": 86.5
   },
   {
     "id": "mg-mg5-2025",
@@ -37303,7 +37897,9 @@
     "maintenancePerYear": 375,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 490,
+    "batteryKWh": 87.2
   },
   {
     "id": "mg-mg5-2026",
@@ -37319,7 +37915,9 @@
     "maintenancePerYear": 376,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.7
+    "wltpConsumptionKWh100km": 17.7,
+    "wltpRangeKm": 496,
+    "batteryKWh": 87.9
   },
   {
     "id": "mg-marvel-r-2022",
@@ -37335,7 +37933,9 @@
     "maintenancePerYear": 372,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.7
+    "wltpConsumptionKWh100km": 19.7,
+    "wltpRangeKm": 472,
+    "batteryKWh": 93.0
   },
   {
     "id": "mg-marvel-r-2023",
@@ -37351,7 +37951,9 @@
     "maintenancePerYear": 373,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.6
+    "wltpConsumptionKWh100km": 19.6,
+    "wltpRangeKm": 478,
+    "batteryKWh": 93.8
   },
   {
     "id": "mg-marvel-r-2024",
@@ -37367,7 +37969,9 @@
     "maintenancePerYear": 375,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.6
+    "wltpConsumptionKWh100km": 19.6,
+    "wltpRangeKm": 484,
+    "batteryKWh": 94.6
   },
   {
     "id": "mg-marvel-r-2025",
@@ -37383,7 +37987,9 @@
     "maintenancePerYear": 376,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.5
+    "wltpConsumptionKWh100km": 19.5,
+    "wltpRangeKm": 490,
+    "batteryKWh": 95.5
   },
   {
     "id": "mg-marvel-r-2026",
@@ -37399,7 +38005,9 @@
     "maintenancePerYear": 378,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.4
+    "wltpConsumptionKWh100km": 19.4,
+    "wltpRangeKm": 496,
+    "batteryKWh": 96.2
   },
   {
     "id": "mg-zs-2017",
@@ -38599,7 +39207,9 @@
     "maintenancePerYear": 306,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.2
+    "wltpConsumptionKWh100km": 16.2,
+    "wltpRangeKm": 324,
+    "batteryKWh": 52.6
   },
   {
     "id": "mini-electric-hatch-2020",
@@ -38615,7 +39225,9 @@
     "maintenancePerYear": 308,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.2
+    "wltpConsumptionKWh100km": 16.2,
+    "wltpRangeKm": 330,
+    "batteryKWh": 53.4
   },
   {
     "id": "mini-electric-hatch-2021",
@@ -38631,7 +39243,9 @@
     "maintenancePerYear": 309,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.1
+    "wltpConsumptionKWh100km": 16.1,
+    "wltpRangeKm": 336,
+    "batteryKWh": 54.1
   },
   {
     "id": "mini-electric-hatch-2022",
@@ -38647,7 +39261,9 @@
     "maintenancePerYear": 311,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.0
+    "wltpConsumptionKWh100km": 16.0,
+    "wltpRangeKm": 342,
+    "batteryKWh": 54.8
   },
   {
     "id": "mini-electric-hatch-2023",
@@ -38663,7 +39279,9 @@
     "maintenancePerYear": 312,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.0
+    "wltpConsumptionKWh100km": 16.0,
+    "wltpRangeKm": 348,
+    "batteryKWh": 55.5
   },
   {
     "id": "mini-electric-hatch-2024",
@@ -38679,7 +39297,9 @@
     "maintenancePerYear": 313,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 15.9
+    "wltpConsumptionKWh100km": 15.9,
+    "wltpRangeKm": 354,
+    "batteryKWh": 56.2
   },
   {
     "id": "mini-electric-hatch-2025",
@@ -38695,7 +39315,9 @@
     "maintenancePerYear": 315,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 15.8
+    "wltpConsumptionKWh100km": 15.8,
+    "wltpRangeKm": 360,
+    "batteryKWh": 56.9
   },
   {
     "id": "mini-electric-hatch-2026",
@@ -38711,7 +39333,9 @@
     "maintenancePerYear": 316,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 15.7
+    "wltpConsumptionKWh100km": 15.7,
+    "wltpRangeKm": 366,
+    "batteryKWh": 57.6
   },
   {
     "id": "mini-hatch-2005",
@@ -39159,7 +39783,9 @@
     "maintenancePerYear": 375,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.9
+    "wltpConsumptionKWh100km": 19.9,
+    "wltpRangeKm": 464,
+    "batteryKWh": 92.1
   },
   {
     "id": "mazda-6e-2025",
@@ -39175,7 +39801,9 @@
     "maintenancePerYear": 376,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.8
+    "wltpConsumptionKWh100km": 19.8,
+    "wltpRangeKm": 470,
+    "batteryKWh": 93.0
   },
   {
     "id": "mazda-6e-2026",
@@ -39191,7 +39819,9 @@
     "maintenancePerYear": 378,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.7
+    "wltpConsumptionKWh100km": 19.7,
+    "wltpRangeKm": 476,
+    "batteryKWh": 93.8
   },
   {
     "id": "mazda-cx-3-2015",
@@ -39767,7 +40397,9 @@
     "maintenancePerYear": 322,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.3
+    "wltpConsumptionKWh100km": 18.3,
+    "wltpRangeKm": 460,
+    "batteryKWh": 84.2
   },
   {
     "id": "mazda-mx-30-2021",
@@ -39783,7 +40415,9 @@
     "maintenancePerYear": 323,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.2
+    "wltpConsumptionKWh100km": 18.2,
+    "wltpRangeKm": 466,
+    "batteryKWh": 84.9
   },
   {
     "id": "mazda-mx-30-2022",
@@ -39799,7 +40433,9 @@
     "maintenancePerYear": 324,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.1
+    "wltpConsumptionKWh100km": 18.1,
+    "wltpRangeKm": 472,
+    "batteryKWh": 85.7
   },
   {
     "id": "mazda-mx-30-2023",
@@ -39815,7 +40451,9 @@
     "maintenancePerYear": 326,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.1
+    "wltpConsumptionKWh100km": 18.1,
+    "wltpRangeKm": 478,
+    "batteryKWh": 86.4
   },
   {
     "id": "mazda-mx-30-2024",
@@ -39831,7 +40469,9 @@
     "maintenancePerYear": 327,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.0
+    "wltpConsumptionKWh100km": 18.0,
+    "wltpRangeKm": 484,
+    "batteryKWh": 87.1
   },
   {
     "id": "mazda-mx-30-2025",
@@ -39847,7 +40487,9 @@
     "maintenancePerYear": 329,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.9
+    "wltpConsumptionKWh100km": 17.9,
+    "wltpRangeKm": 490,
+    "batteryKWh": 87.8
   },
   {
     "id": "mazda-mx-30-2026",
@@ -39863,7 +40505,9 @@
     "maintenancePerYear": 330,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 496,
+    "batteryKWh": 88.5
   },
   {
     "id": "mazda-mx-5-2005",
@@ -42919,7 +43563,9 @@
     "maintenancePerYear": 350,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.9
+    "wltpConsumptionKWh100km": 17.9,
+    "wltpRangeKm": 466,
+    "batteryKWh": 83.3
   },
   {
     "id": "mercedes-benz-eqa-2022",
@@ -42935,7 +43581,9 @@
     "maintenancePerYear": 351,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 472,
+    "batteryKWh": 84.0
   },
   {
     "id": "mercedes-benz-eqa-2023",
@@ -42951,7 +43599,9 @@
     "maintenancePerYear": 353,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.7
+    "wltpConsumptionKWh100km": 17.7,
+    "wltpRangeKm": 478,
+    "batteryKWh": 84.7
   },
   {
     "id": "mercedes-benz-eqa-2024",
@@ -42967,7 +43617,9 @@
     "maintenancePerYear": 354,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.6
+    "wltpConsumptionKWh100km": 17.6,
+    "wltpRangeKm": 484,
+    "batteryKWh": 85.4
   },
   {
     "id": "mercedes-benz-eqa-2025",
@@ -42983,7 +43635,9 @@
     "maintenancePerYear": 355,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.6
+    "wltpConsumptionKWh100km": 17.6,
+    "wltpRangeKm": 490,
+    "batteryKWh": 86.1
   },
   {
     "id": "mercedes-benz-eqa-2026",
@@ -42999,7 +43653,9 @@
     "maintenancePerYear": 357,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.5
+    "wltpConsumptionKWh100km": 17.5,
+    "wltpRangeKm": 496,
+    "batteryKWh": 86.8
   },
   {
     "id": "mercedes-benz-eqb-2021",
@@ -43015,7 +43671,9 @@
     "maintenancePerYear": 391,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 466,
+    "batteryKWh": 89.1
   },
   {
     "id": "mercedes-benz-eqb-2022",
@@ -43031,7 +43689,9 @@
     "maintenancePerYear": 392,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 472,
+    "batteryKWh": 89.9
   },
   {
     "id": "mercedes-benz-eqb-2023",
@@ -43047,7 +43707,9 @@
     "maintenancePerYear": 393,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.0
+    "wltpConsumptionKWh100km": 19.0,
+    "wltpRangeKm": 478,
+    "batteryKWh": 90.7
   },
   {
     "id": "mercedes-benz-eqb-2024",
@@ -43063,7 +43725,9 @@
     "maintenancePerYear": 395,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 484,
+    "batteryKWh": 91.5
   },
   {
     "id": "mercedes-benz-eqb-2025",
@@ -43079,7 +43743,9 @@
     "maintenancePerYear": 396,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.8
+    "wltpConsumptionKWh100km": 18.8,
+    "wltpRangeKm": 490,
+    "batteryKWh": 92.3
   },
   {
     "id": "mercedes-benz-eqb-2026",
@@ -43095,7 +43761,9 @@
     "maintenancePerYear": 398,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.8
+    "wltpConsumptionKWh100km": 18.8,
+    "wltpRangeKm": 496,
+    "batteryKWh": 93.0
   },
   {
     "id": "mercedes-benz-eqe-2022",
@@ -43111,7 +43779,9 @@
     "maintenancePerYear": 391,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.8
+    "wltpConsumptionKWh100km": 18.8,
+    "wltpRangeKm": 452,
+    "batteryKWh": 85.1
   },
   {
     "id": "mercedes-benz-eqe-2023",
@@ -43127,7 +43797,9 @@
     "maintenancePerYear": 392,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.8
+    "wltpConsumptionKWh100km": 18.8,
+    "wltpRangeKm": 458,
+    "batteryKWh": 85.9
   },
   {
     "id": "mercedes-benz-eqe-2024",
@@ -43143,7 +43815,9 @@
     "maintenancePerYear": 393,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.7
+    "wltpConsumptionKWh100km": 18.7,
+    "wltpRangeKm": 464,
+    "batteryKWh": 86.6
   },
   {
     "id": "mercedes-benz-eqe-2025",
@@ -43159,7 +43833,9 @@
     "maintenancePerYear": 395,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 470,
+    "batteryKWh": 87.4
   },
   {
     "id": "mercedes-benz-eqe-2026",
@@ -43175,7 +43851,9 @@
     "maintenancePerYear": 396,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.5
+    "wltpConsumptionKWh100km": 18.5,
+    "wltpRangeKm": 476,
+    "batteryKWh": 88.2
   },
   {
     "id": "mercedes-benz-eqs-2021",
@@ -43191,7 +43869,9 @@
     "maintenancePerYear": 398,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.2
+    "wltpConsumptionKWh100km": 19.2,
+    "wltpRangeKm": 446,
+    "batteryKWh": 85.9
   },
   {
     "id": "mercedes-benz-eqs-2022",
@@ -43207,7 +43887,9 @@
     "maintenancePerYear": 400,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.2
+    "wltpConsumptionKWh100km": 19.2,
+    "wltpRangeKm": 452,
+    "batteryKWh": 86.7
   },
   {
     "id": "mercedes-benz-eqs-2023",
@@ -43223,7 +43905,9 @@
     "maintenancePerYear": 401,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 458,
+    "batteryKWh": 87.5
   },
   {
     "id": "mercedes-benz-eqs-2024",
@@ -43239,7 +43923,9 @@
     "maintenancePerYear": 403,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.0
+    "wltpConsumptionKWh100km": 19.0,
+    "wltpRangeKm": 464,
+    "batteryKWh": 88.3
   },
   {
     "id": "mercedes-benz-eqs-2025",
@@ -43255,7 +43941,9 @@
     "maintenancePerYear": 404,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 470,
+    "batteryKWh": 89.1
   },
   {
     "id": "mercedes-benz-eqs-2026",
@@ -43271,7 +43959,9 @@
     "maintenancePerYear": 405,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 476,
+    "batteryKWh": 89.9
   },
   {
     "id": "mercedes-benz-eqv-2020",
@@ -43287,7 +43977,9 @@
     "maintenancePerYear": 401,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.8
+    "wltpConsumptionKWh100km": 18.8,
+    "wltpRangeKm": 300,
+    "batteryKWh": 56.4
   },
   {
     "id": "mercedes-benz-eqv-2021",
@@ -43303,7 +43995,9 @@
     "maintenancePerYear": 403,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.7
+    "wltpConsumptionKWh100km": 18.7,
+    "wltpRangeKm": 302,
+    "batteryKWh": 56.5
   },
   {
     "id": "mercedes-benz-eqv-2022",
@@ -43319,7 +44013,9 @@
     "maintenancePerYear": 404,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 304,
+    "batteryKWh": 56.7
   },
   {
     "id": "mercedes-benz-eqv-2023",
@@ -43335,7 +44031,9 @@
     "maintenancePerYear": 405,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 306,
+    "batteryKWh": 56.8
   },
   {
     "id": "mercedes-benz-eqv-2024",
@@ -43351,7 +44049,9 @@
     "maintenancePerYear": 407,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.5
+    "wltpConsumptionKWh100km": 18.5,
+    "wltpRangeKm": 308,
+    "batteryKWh": 57.0
   },
   {
     "id": "mercedes-benz-eqv-2025",
@@ -43367,7 +44067,9 @@
     "maintenancePerYear": 408,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.4
+    "wltpConsumptionKWh100km": 18.4,
+    "wltpRangeKm": 310,
+    "batteryKWh": 57.1
   },
   {
     "id": "mercedes-benz-eqv-2026",
@@ -43383,7 +44085,9 @@
     "maintenancePerYear": 410,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.4
+    "wltpConsumptionKWh100km": 18.4,
+    "wltpRangeKm": 312,
+    "batteryKWh": 57.3
   },
   {
     "id": "mercedes-benz-g-580-eq-2024",
@@ -43399,7 +44103,9 @@
     "maintenancePerYear": 410,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.4
+    "wltpConsumptionKWh100km": 18.4,
+    "wltpRangeKm": 464,
+    "batteryKWh": 85.6
   },
   {
     "id": "mercedes-benz-g-580-eq-2025",
@@ -43415,7 +44121,9 @@
     "maintenancePerYear": 411,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.4
+    "wltpConsumptionKWh100km": 18.4,
+    "wltpRangeKm": 470,
+    "batteryKWh": 86.3
   },
   {
     "id": "mercedes-benz-g-580-eq-2026",
@@ -43431,7 +44139,9 @@
     "maintenancePerYear": 413,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.3
+    "wltpConsumptionKWh100km": 18.3,
+    "wltpRangeKm": 476,
+    "batteryKWh": 87.1
   },
   {
     "id": "mercedes-benz-gla-2013",
@@ -45895,7 +46605,9 @@
     "maintenancePerYear": 396,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.1
+    "wltpConsumptionKWh100km": 20.1,
+    "wltpRangeKm": 446,
+    "batteryKWh": 89.6
   },
   {
     "id": "nio-el6-2022",
@@ -45911,7 +46623,9 @@
     "maintenancePerYear": 397,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.0
+    "wltpConsumptionKWh100km": 20.0,
+    "wltpRangeKm": 452,
+    "batteryKWh": 90.5
   },
   {
     "id": "nio-el6-2023",
@@ -45927,7 +46641,9 @@
     "maintenancePerYear": 399,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.0
+    "wltpConsumptionKWh100km": 20.0,
+    "wltpRangeKm": 458,
+    "batteryKWh": 91.4
   },
   {
     "id": "nio-el6-2024",
@@ -45943,7 +46659,9 @@
     "maintenancePerYear": 400,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.9
+    "wltpConsumptionKWh100km": 19.9,
+    "wltpRangeKm": 464,
+    "batteryKWh": 92.2
   },
   {
     "id": "nio-el6-2025",
@@ -45959,7 +46677,9 @@
     "maintenancePerYear": 402,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.8
+    "wltpConsumptionKWh100km": 19.8,
+    "wltpRangeKm": 470,
+    "batteryKWh": 93.1
   },
   {
     "id": "nio-el6-2026",
@@ -45975,7 +46695,9 @@
     "maintenancePerYear": 403,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.7
+    "wltpConsumptionKWh100km": 19.7,
+    "wltpRangeKm": 476,
+    "batteryKWh": 93.9
   },
   {
     "id": "nio-el8-2021",
@@ -45991,7 +46713,9 @@
     "maintenancePerYear": 396,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.2
+    "wltpConsumptionKWh100km": 19.2,
+    "wltpRangeKm": 446,
+    "batteryKWh": 85.6
   },
   {
     "id": "nio-el8-2022",
@@ -46007,7 +46731,9 @@
     "maintenancePerYear": 397,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 452,
+    "batteryKWh": 86.5
   },
   {
     "id": "nio-el8-2023",
@@ -46023,7 +46749,9 @@
     "maintenancePerYear": 399,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 458,
+    "batteryKWh": 87.2
   },
   {
     "id": "nio-el8-2024",
@@ -46039,7 +46767,9 @@
     "maintenancePerYear": 400,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.0
+    "wltpConsumptionKWh100km": 19.0,
+    "wltpRangeKm": 464,
+    "batteryKWh": 88.1
   },
   {
     "id": "nio-el8-2025",
@@ -46055,7 +46785,9 @@
     "maintenancePerYear": 402,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 470,
+    "batteryKWh": 88.8
   },
   {
     "id": "nio-el8-2026",
@@ -46071,7 +46803,9 @@
     "maintenancePerYear": 403,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.8
+    "wltpConsumptionKWh100km": 18.8,
+    "wltpRangeKm": 476,
+    "batteryKWh": 89.6
   },
   {
     "id": "nio-et5-2021",
@@ -46087,7 +46821,9 @@
     "maintenancePerYear": 366,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.6
+    "wltpConsumptionKWh100km": 19.6,
+    "wltpRangeKm": 446,
+    "batteryKWh": 87.4
   },
   {
     "id": "nio-et5-2022",
@@ -46103,7 +46839,9 @@
     "maintenancePerYear": 367,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.5
+    "wltpConsumptionKWh100km": 19.5,
+    "wltpRangeKm": 452,
+    "batteryKWh": 88.3
   },
   {
     "id": "nio-et5-2023",
@@ -46119,7 +46857,9 @@
     "maintenancePerYear": 369,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.4
+    "wltpConsumptionKWh100km": 19.4,
+    "wltpRangeKm": 458,
+    "batteryKWh": 89.1
   },
   {
     "id": "nio-et5-2024",
@@ -46135,7 +46875,9 @@
     "maintenancePerYear": 370,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.4
+    "wltpConsumptionKWh100km": 19.4,
+    "wltpRangeKm": 464,
+    "batteryKWh": 89.9
   },
   {
     "id": "nio-et5-2025",
@@ -46151,7 +46893,9 @@
     "maintenancePerYear": 372,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.3
+    "wltpConsumptionKWh100km": 19.3,
+    "wltpRangeKm": 470,
+    "batteryKWh": 90.7
   },
   {
     "id": "nio-et5-2026",
@@ -46167,7 +46911,9 @@
     "maintenancePerYear": 373,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.2
+    "wltpConsumptionKWh100km": 19.2,
+    "wltpRangeKm": 476,
+    "batteryKWh": 91.5
   },
   {
     "id": "nio-et5-touring-2021",
@@ -46183,7 +46929,9 @@
     "maintenancePerYear": 396,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.1
+    "wltpConsumptionKWh100km": 20.1,
+    "wltpRangeKm": 446,
+    "batteryKWh": 89.6
   },
   {
     "id": "nio-et5-touring-2022",
@@ -46199,7 +46947,9 @@
     "maintenancePerYear": 397,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.0
+    "wltpConsumptionKWh100km": 20.0,
+    "wltpRangeKm": 452,
+    "batteryKWh": 90.5
   },
   {
     "id": "nio-et5-touring-2023",
@@ -46215,7 +46965,9 @@
     "maintenancePerYear": 399,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.0
+    "wltpConsumptionKWh100km": 20.0,
+    "wltpRangeKm": 458,
+    "batteryKWh": 91.4
   },
   {
     "id": "nio-et5-touring-2024",
@@ -46231,7 +46983,9 @@
     "maintenancePerYear": 400,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.9
+    "wltpConsumptionKWh100km": 19.9,
+    "wltpRangeKm": 464,
+    "batteryKWh": 92.2
   },
   {
     "id": "nio-et5-touring-2025",
@@ -46247,7 +47001,9 @@
     "maintenancePerYear": 402,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.8
+    "wltpConsumptionKWh100km": 19.8,
+    "wltpRangeKm": 470,
+    "batteryKWh": 93.1
   },
   {
     "id": "nio-et5-touring-2026",
@@ -46263,7 +47019,9 @@
     "maintenancePerYear": 403,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.7
+    "wltpConsumptionKWh100km": 19.7,
+    "wltpRangeKm": 476,
+    "batteryKWh": 93.9
   },
   {
     "id": "nio-et7-2021",
@@ -46279,7 +47037,9 @@
     "maintenancePerYear": 408,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.3
+    "wltpConsumptionKWh100km": 20.3,
+    "wltpRangeKm": 446,
+    "batteryKWh": 90.5
   },
   {
     "id": "nio-et7-2022",
@@ -46295,7 +47055,9 @@
     "maintenancePerYear": 409,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.2
+    "wltpConsumptionKWh100km": 20.2,
+    "wltpRangeKm": 452,
+    "batteryKWh": 91.4
   },
   {
     "id": "nio-et7-2023",
@@ -46311,7 +47073,9 @@
     "maintenancePerYear": 411,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.2
+    "wltpConsumptionKWh100km": 20.2,
+    "wltpRangeKm": 458,
+    "batteryKWh": 92.3
   },
   {
     "id": "nio-et7-2024",
@@ -46327,7 +47091,9 @@
     "maintenancePerYear": 412,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.1
+    "wltpConsumptionKWh100km": 20.1,
+    "wltpRangeKm": 464,
+    "batteryKWh": 93.2
   },
   {
     "id": "nio-et7-2025",
@@ -46343,7 +47109,9 @@
     "maintenancePerYear": 414,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.0
+    "wltpConsumptionKWh100km": 20.0,
+    "wltpRangeKm": 470,
+    "batteryKWh": 94.0
   },
   {
     "id": "nio-et7-2026",
@@ -46359,7 +47127,9 @@
     "maintenancePerYear": 415,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.9
+    "wltpConsumptionKWh100km": 19.9,
+    "wltpRangeKm": 476,
+    "batteryKWh": 94.9
   },
   {
     "id": "nissan-ariya-2021",
@@ -46375,7 +47145,9 @@
     "maintenancePerYear": 350,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.9
+    "wltpConsumptionKWh100km": 17.9,
+    "wltpRangeKm": 466,
+    "batteryKWh": 83.3
   },
   {
     "id": "nissan-ariya-2022",
@@ -46391,7 +47163,9 @@
     "maintenancePerYear": 351,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 472,
+    "batteryKWh": 84.0
   },
   {
     "id": "nissan-ariya-2023",
@@ -46407,7 +47181,9 @@
     "maintenancePerYear": 353,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.7
+    "wltpConsumptionKWh100km": 17.7,
+    "wltpRangeKm": 478,
+    "batteryKWh": 84.7
   },
   {
     "id": "nissan-ariya-2024",
@@ -46423,7 +47199,9 @@
     "maintenancePerYear": 354,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.6
+    "wltpConsumptionKWh100km": 17.6,
+    "wltpRangeKm": 484,
+    "batteryKWh": 85.4
   },
   {
     "id": "nissan-ariya-2025",
@@ -46439,7 +47217,9 @@
     "maintenancePerYear": 355,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.6
+    "wltpConsumptionKWh100km": 17.6,
+    "wltpRangeKm": 490,
+    "batteryKWh": 86.1
   },
   {
     "id": "nissan-ariya-2026",
@@ -46455,7 +47235,9 @@
     "maintenancePerYear": 357,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.5
+    "wltpConsumptionKWh100km": 17.5,
+    "wltpRangeKm": 496,
+    "batteryKWh": 86.8
   },
   {
     "id": "nissan-juke-2010",
@@ -46743,7 +47525,9 @@
     "maintenancePerYear": 328,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.6
+    "wltpConsumptionKWh100km": 17.6,
+    "wltpRangeKm": 296,
+    "batteryKWh": 52.1
   },
   {
     "id": "nissan-leaf-2011",
@@ -46759,7 +47543,9 @@
     "maintenancePerYear": 329,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.5
+    "wltpConsumptionKWh100km": 17.5,
+    "wltpRangeKm": 296,
+    "batteryKWh": 51.9
   },
   {
     "id": "nissan-leaf-2012",
@@ -46775,7 +47561,9 @@
     "maintenancePerYear": 331,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.4
+    "wltpConsumptionKWh100km": 17.4,
+    "wltpRangeKm": 296,
+    "batteryKWh": 51.7
   },
   {
     "id": "nissan-leaf-2013",
@@ -46791,7 +47579,9 @@
     "maintenancePerYear": 332,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.4
+    "wltpConsumptionKWh100km": 17.4,
+    "wltpRangeKm": 296,
+    "batteryKWh": 51.4
   },
   {
     "id": "nissan-leaf-2014",
@@ -46807,7 +47597,9 @@
     "maintenancePerYear": 334,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.3
+    "wltpConsumptionKWh100km": 17.3,
+    "wltpRangeKm": 296,
+    "batteryKWh": 51.2
   },
   {
     "id": "nissan-leaf-2015",
@@ -46823,7 +47615,9 @@
     "maintenancePerYear": 335,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 296,
+    "batteryKWh": 51.0
   },
   {
     "id": "nissan-leaf-2016",
@@ -46839,7 +47633,9 @@
     "maintenancePerYear": 336,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 296,
+    "batteryKWh": 50.8
   },
   {
     "id": "nissan-leaf-2017",
@@ -46855,7 +47651,9 @@
     "maintenancePerYear": 338,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.1
+    "wltpConsumptionKWh100km": 17.1,
+    "wltpRangeKm": 302,
+    "batteryKWh": 51.6
   },
   {
     "id": "nissan-leaf-2018",
@@ -46871,7 +47669,9 @@
     "maintenancePerYear": 339,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.0
+    "wltpConsumptionKWh100km": 17.0,
+    "wltpRangeKm": 308,
+    "batteryKWh": 52.4
   },
   {
     "id": "nissan-leaf-2019",
@@ -46887,7 +47687,9 @@
     "maintenancePerYear": 341,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.9
+    "wltpConsumptionKWh100km": 16.9,
+    "wltpRangeKm": 314,
+    "batteryKWh": 53.1
   },
   {
     "id": "nissan-leaf-2020",
@@ -46903,7 +47705,9 @@
     "maintenancePerYear": 342,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.9
+    "wltpConsumptionKWh100km": 16.9,
+    "wltpRangeKm": 320,
+    "batteryKWh": 53.9
   },
   {
     "id": "nissan-leaf-2021",
@@ -46919,7 +47723,9 @@
     "maintenancePerYear": 343,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.8
+    "wltpConsumptionKWh100km": 16.8,
+    "wltpRangeKm": 326,
+    "batteryKWh": 54.7
   },
   {
     "id": "nissan-leaf-2022",
@@ -46935,7 +47741,9 @@
     "maintenancePerYear": 345,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.7
+    "wltpConsumptionKWh100km": 16.7,
+    "wltpRangeKm": 332,
+    "batteryKWh": 55.4
   },
   {
     "id": "nissan-leaf-2023",
@@ -46951,7 +47759,9 @@
     "maintenancePerYear": 346,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.6
+    "wltpConsumptionKWh100km": 16.6,
+    "wltpRangeKm": 338,
+    "batteryKWh": 56.2
   },
   {
     "id": "nissan-leaf-2024",
@@ -46967,7 +47777,9 @@
     "maintenancePerYear": 348,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.6
+    "wltpConsumptionKWh100km": 16.6,
+    "wltpRangeKm": 344,
+    "batteryKWh": 56.9
   },
   {
     "id": "nissan-leaf-2025",
@@ -46983,7 +47795,9 @@
     "maintenancePerYear": 349,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.5
+    "wltpConsumptionKWh100km": 16.5,
+    "wltpRangeKm": 345,
+    "batteryKWh": 56.8
   },
   {
     "id": "nissan-leaf-2026",
@@ -46999,7 +47813,9 @@
     "maintenancePerYear": 350,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.4
+    "wltpConsumptionKWh100km": 16.4,
+    "wltpRangeKm": 356,
+    "batteryKWh": 58.4
   },
   {
     "id": "nissan-micra-2005",
@@ -49239,7 +50055,9 @@
     "maintenancePerYear": 353,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.7
+    "wltpConsumptionKWh100km": 17.7,
+    "wltpRangeKm": 478,
+    "batteryKWh": 84.7
   },
   {
     "id": "opel-astra-electric-2024",
@@ -49255,7 +50073,9 @@
     "maintenancePerYear": 354,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.6
+    "wltpConsumptionKWh100km": 17.6,
+    "wltpRangeKm": 484,
+    "batteryKWh": 85.4
   },
   {
     "id": "opel-astra-electric-2025",
@@ -49271,7 +50091,9 @@
     "maintenancePerYear": 355,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.6
+    "wltpConsumptionKWh100km": 17.6,
+    "wltpRangeKm": 490,
+    "batteryKWh": 86.1
   },
   {
     "id": "opel-astra-electric-2026",
@@ -49287,7 +50109,9 @@
     "maintenancePerYear": 357,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.5
+    "wltpConsumptionKWh100km": 17.5,
+    "wltpRangeKm": 496,
+    "batteryKWh": 86.8
   },
   {
     "id": "opel-corsa-2005",
@@ -49655,7 +50479,9 @@
     "maintenancePerYear": 300,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.1
+    "wltpConsumptionKWh100km": 17.1,
+    "wltpRangeKm": 494,
+    "batteryKWh": 84.2
   },
   {
     "id": "opel-corsa-electric-2020",
@@ -49671,7 +50497,9 @@
     "maintenancePerYear": 302,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.0
+    "wltpConsumptionKWh100km": 17.0,
+    "wltpRangeKm": 500,
+    "batteryKWh": 84.9
   },
   {
     "id": "opel-corsa-electric-2021",
@@ -49687,7 +50515,9 @@
     "maintenancePerYear": 303,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.9
+    "wltpConsumptionKWh100km": 16.9,
+    "wltpRangeKm": 506,
+    "batteryKWh": 85.5
   },
   {
     "id": "opel-corsa-electric-2022",
@@ -49703,7 +50533,9 @@
     "maintenancePerYear": 305,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.8
+    "wltpConsumptionKWh100km": 16.8,
+    "wltpRangeKm": 512,
+    "batteryKWh": 86.2
   },
   {
     "id": "opel-corsa-electric-2023",
@@ -49719,7 +50551,9 @@
     "maintenancePerYear": 306,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.8
+    "wltpConsumptionKWh100km": 16.8,
+    "wltpRangeKm": 518,
+    "batteryKWh": 86.8
   },
   {
     "id": "opel-corsa-electric-2024",
@@ -49735,7 +50569,9 @@
     "maintenancePerYear": 307,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.7
+    "wltpConsumptionKWh100km": 16.7,
+    "wltpRangeKm": 524,
+    "batteryKWh": 87.4
   },
   {
     "id": "opel-corsa-electric-2025",
@@ -49751,7 +50587,9 @@
     "maintenancePerYear": 309,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.6
+    "wltpConsumptionKWh100km": 16.6,
+    "wltpRangeKm": 530,
+    "batteryKWh": 88.0
   },
   {
     "id": "opel-corsa-electric-2026",
@@ -49767,7 +50605,9 @@
     "maintenancePerYear": 310,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.5
+    "wltpConsumptionKWh100km": 16.5,
+    "wltpRangeKm": 536,
+    "batteryKWh": 88.6
   },
   {
     "id": "opel-crossland-2017",
@@ -49943,7 +50783,9 @@
     "maintenancePerYear": 361,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.9
+    "wltpConsumptionKWh100km": 17.9,
+    "wltpRangeKm": 484,
+    "batteryKWh": 86.9
   },
   {
     "id": "opel-frontera-electric-2025",
@@ -49959,7 +50801,9 @@
     "maintenancePerYear": 362,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.9
+    "wltpConsumptionKWh100km": 17.9,
+    "wltpRangeKm": 490,
+    "batteryKWh": 87.6
   },
   {
     "id": "opel-frontera-electric-2026",
@@ -49975,7 +50819,9 @@
     "maintenancePerYear": 364,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 496,
+    "batteryKWh": 88.3
   },
   {
     "id": "opel-grandland-2017",
@@ -50151,7 +50997,9 @@
     "maintenancePerYear": 337,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 484,
+    "batteryKWh": 86.4
   },
   {
     "id": "opel-grandland-electric-2025",
@@ -50167,7 +51015,9 @@
     "maintenancePerYear": 338,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 490,
+    "batteryKWh": 87.1
   },
   {
     "id": "opel-grandland-electric-2026",
@@ -50183,7 +51033,9 @@
     "maintenancePerYear": 340,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.7
+    "wltpConsumptionKWh100km": 17.7,
+    "wltpRangeKm": 496,
+    "batteryKWh": 87.8
   },
   {
     "id": "opel-insignia-2008",
@@ -50887,7 +51739,9 @@
     "maintenancePerYear": 327,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.4
+    "wltpConsumptionKWh100km": 16.4,
+    "wltpRangeKm": 500,
+    "batteryKWh": 82.0
   },
   {
     "id": "opel-mokka-electric-2021",
@@ -50903,7 +51757,9 @@
     "maintenancePerYear": 329,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.3
+    "wltpConsumptionKWh100km": 16.3,
+    "wltpRangeKm": 506,
+    "batteryKWh": 82.6
   },
   {
     "id": "opel-mokka-electric-2022",
@@ -50919,7 +51775,9 @@
     "maintenancePerYear": 330,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.2
+    "wltpConsumptionKWh100km": 16.2,
+    "wltpRangeKm": 512,
+    "batteryKWh": 83.2
   },
   {
     "id": "opel-mokka-electric-2023",
@@ -50935,7 +51793,9 @@
     "maintenancePerYear": 331,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.2
+    "wltpConsumptionKWh100km": 16.2,
+    "wltpRangeKm": 518,
+    "batteryKWh": 83.8
   },
   {
     "id": "opel-mokka-electric-2024",
@@ -50951,7 +51811,9 @@
     "maintenancePerYear": 333,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.1
+    "wltpConsumptionKWh100km": 16.1,
+    "wltpRangeKm": 524,
+    "batteryKWh": 84.4
   },
   {
     "id": "opel-mokka-electric-2025",
@@ -50967,7 +51829,9 @@
     "maintenancePerYear": 334,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.0
+    "wltpConsumptionKWh100km": 16.0,
+    "wltpRangeKm": 530,
+    "batteryKWh": 85.0
   },
   {
     "id": "opel-mokka-electric-2026",
@@ -50983,7 +51847,9 @@
     "maintenancePerYear": 336,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.0
+    "wltpConsumptionKWh100km": 16.0,
+    "wltpRangeKm": 536,
+    "batteryKWh": 85.5
   },
   {
     "id": "opel-vectra-2005",
@@ -53527,7 +54393,9 @@
     "maintenancePerYear": 364,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 494,
+    "batteryKWh": 87.9
   },
   {
     "id": "peugeot-e-2008-2020",
@@ -53543,7 +54411,9 @@
     "maintenancePerYear": 365,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.7
+    "wltpConsumptionKWh100km": 17.7,
+    "wltpRangeKm": 500,
+    "batteryKWh": 88.6
   },
   {
     "id": "peugeot-e-2008-2021",
@@ -53559,7 +54429,9 @@
     "maintenancePerYear": 366,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.6
+    "wltpConsumptionKWh100km": 17.6,
+    "wltpRangeKm": 506,
+    "batteryKWh": 89.3
   },
   {
     "id": "peugeot-e-2008-2022",
@@ -53575,7 +54447,9 @@
     "maintenancePerYear": 368,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.6
+    "wltpConsumptionKWh100km": 17.6,
+    "wltpRangeKm": 512,
+    "batteryKWh": 90.0
   },
   {
     "id": "peugeot-e-2008-2023",
@@ -53591,7 +54465,9 @@
     "maintenancePerYear": 369,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.5
+    "wltpConsumptionKWh100km": 17.5,
+    "wltpRangeKm": 518,
+    "batteryKWh": 90.6
   },
   {
     "id": "peugeot-e-2008-2024",
@@ -53607,7 +54483,9 @@
     "maintenancePerYear": 371,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.4
+    "wltpConsumptionKWh100km": 17.4,
+    "wltpRangeKm": 524,
+    "batteryKWh": 91.3
   },
   {
     "id": "peugeot-e-2008-2025",
@@ -53623,7 +54501,9 @@
     "maintenancePerYear": 372,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.3
+    "wltpConsumptionKWh100km": 17.3,
+    "wltpRangeKm": 530,
+    "batteryKWh": 92.0
   },
   {
     "id": "peugeot-e-2008-2026",
@@ -53639,7 +54519,9 @@
     "maintenancePerYear": 373,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.3
+    "wltpConsumptionKWh100km": 17.3,
+    "wltpRangeKm": 536,
+    "batteryKWh": 92.6
   },
   {
     "id": "peugeot-e-208-2019",
@@ -53655,7 +54537,9 @@
     "maintenancePerYear": 296,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.4
+    "wltpConsumptionKWh100km": 16.4,
+    "wltpRangeKm": 494,
+    "batteryKWh": 80.9
   },
   {
     "id": "peugeot-e-208-2020",
@@ -53671,7 +54555,9 @@
     "maintenancePerYear": 298,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.3
+    "wltpConsumptionKWh100km": 16.3,
+    "wltpRangeKm": 500,
+    "batteryKWh": 81.5
   },
   {
     "id": "peugeot-e-208-2021",
@@ -53687,7 +54573,9 @@
     "maintenancePerYear": 299,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.2
+    "wltpConsumptionKWh100km": 16.2,
+    "wltpRangeKm": 506,
+    "batteryKWh": 82.1
   },
   {
     "id": "peugeot-e-208-2022",
@@ -53703,7 +54591,9 @@
     "maintenancePerYear": 300,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.2
+    "wltpConsumptionKWh100km": 16.2,
+    "wltpRangeKm": 512,
+    "batteryKWh": 82.7
   },
   {
     "id": "peugeot-e-208-2023",
@@ -53719,7 +54609,9 @@
     "maintenancePerYear": 302,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.1
+    "wltpConsumptionKWh100km": 16.1,
+    "wltpRangeKm": 518,
+    "batteryKWh": 83.3
   },
   {
     "id": "peugeot-e-208-2024",
@@ -53735,7 +54627,9 @@
     "maintenancePerYear": 303,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.0
+    "wltpConsumptionKWh100km": 16.0,
+    "wltpRangeKm": 524,
+    "batteryKWh": 83.8
   },
   {
     "id": "peugeot-e-208-2025",
@@ -53751,7 +54645,9 @@
     "maintenancePerYear": 305,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 15.9
+    "wltpConsumptionKWh100km": 15.9,
+    "wltpRangeKm": 530,
+    "batteryKWh": 84.4
   },
   {
     "id": "peugeot-e-208-2026",
@@ -53767,7 +54663,9 @@
     "maintenancePerYear": 306,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 15.8
+    "wltpConsumptionKWh100km": 15.8,
+    "wltpRangeKm": 536,
+    "batteryKWh": 85.0
   },
   {
     "id": "peugeot-e-3008-2023",
@@ -53783,7 +54681,9 @@
     "maintenancePerYear": 317,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.9
+    "wltpConsumptionKWh100km": 17.9,
+    "wltpRangeKm": 478,
+    "batteryKWh": 85.7
   },
   {
     "id": "peugeot-e-3008-2024",
@@ -53799,7 +54699,9 @@
     "maintenancePerYear": 319,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 484,
+    "batteryKWh": 86.4
   },
   {
     "id": "peugeot-e-3008-2025",
@@ -53815,7 +54717,9 @@
     "maintenancePerYear": 320,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 490,
+    "batteryKWh": 87.1
   },
   {
     "id": "peugeot-e-3008-2026",
@@ -53831,7 +54735,9 @@
     "maintenancePerYear": 322,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.7
+    "wltpConsumptionKWh100km": 17.7,
+    "wltpRangeKm": 496,
+    "batteryKWh": 87.8
   },
   {
     "id": "peugeot-e-308-2022",
@@ -53847,7 +54753,9 @@
     "maintenancePerYear": 323,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.9
+    "wltpConsumptionKWh100km": 17.9,
+    "wltpRangeKm": 472,
+    "batteryKWh": 84.6
   },
   {
     "id": "peugeot-e-308-2023",
@@ -53863,7 +54771,9 @@
     "maintenancePerYear": 324,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 478,
+    "batteryKWh": 85.3
   },
   {
     "id": "peugeot-e-308-2024",
@@ -53879,7 +54789,9 @@
     "maintenancePerYear": 326,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 484,
+    "batteryKWh": 86.0
   },
   {
     "id": "peugeot-e-308-2025",
@@ -53895,7 +54807,9 @@
     "maintenancePerYear": 327,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.7
+    "wltpConsumptionKWh100km": 17.7,
+    "wltpRangeKm": 490,
+    "batteryKWh": 86.7
   },
   {
     "id": "peugeot-e-308-2026",
@@ -53911,7 +54825,9 @@
     "maintenancePerYear": 329,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.6
+    "wltpConsumptionKWh100km": 17.6,
+    "wltpRangeKm": 496,
+    "batteryKWh": 87.4
   },
   {
     "id": "peugeot-e-5008-2024",
@@ -53927,7 +54843,9 @@
     "maintenancePerYear": 399,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.7
+    "wltpConsumptionKWh100km": 19.7,
+    "wltpRangeKm": 464,
+    "batteryKWh": 91.2
   },
   {
     "id": "peugeot-e-5008-2025",
@@ -53943,7 +54861,9 @@
     "maintenancePerYear": 400,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.6
+    "wltpConsumptionKWh100km": 19.6,
+    "wltpRangeKm": 470,
+    "batteryKWh": 92.0
   },
   {
     "id": "peugeot-e-5008-2026",
@@ -53959,7 +54879,9 @@
     "maintenancePerYear": 402,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.5
+    "wltpConsumptionKWh100km": 19.5,
+    "wltpRangeKm": 476,
+    "batteryKWh": 92.8
   },
   {
     "id": "polestar-2-2020",
@@ -53975,7 +54897,9 @@
     "maintenancePerYear": 339,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.6
+    "wltpConsumptionKWh100km": 17.6,
+    "wltpRangeKm": 480,
+    "batteryKWh": 84.5
   },
   {
     "id": "polestar-2-2021",
@@ -53991,7 +54915,9 @@
     "maintenancePerYear": 341,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.5
+    "wltpConsumptionKWh100km": 17.5,
+    "wltpRangeKm": 486,
+    "batteryKWh": 85.1
   },
   {
     "id": "polestar-2-2022",
@@ -54007,7 +54933,9 @@
     "maintenancePerYear": 342,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.4
+    "wltpConsumptionKWh100km": 17.4,
+    "wltpRangeKm": 492,
+    "batteryKWh": 85.9
   },
   {
     "id": "polestar-2-2023",
@@ -54023,7 +54951,9 @@
     "maintenancePerYear": 343,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.4
+    "wltpConsumptionKWh100km": 17.4,
+    "wltpRangeKm": 498,
+    "batteryKWh": 86.5
   },
   {
     "id": "polestar-2-2024",
@@ -54039,7 +54969,9 @@
     "maintenancePerYear": 345,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.3
+    "wltpConsumptionKWh100km": 17.3,
+    "wltpRangeKm": 504,
+    "batteryKWh": 87.2
   },
   {
     "id": "polestar-2-2025",
@@ -54055,7 +54987,9 @@
     "maintenancePerYear": 346,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 510,
+    "batteryKWh": 87.8
   },
   {
     "id": "polestar-2-2026",
@@ -54071,7 +55005,9 @@
     "maintenancePerYear": 348,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 516,
+    "batteryKWh": 88.5
   },
   {
     "id": "polestar-3-2023",
@@ -54087,7 +55023,9 @@
     "maintenancePerYear": 399,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.4
+    "wltpConsumptionKWh100km": 19.4,
+    "wltpRangeKm": 458,
+    "batteryKWh": 88.8
   },
   {
     "id": "polestar-3-2024",
@@ -54103,7 +55041,9 @@
     "maintenancePerYear": 401,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.3
+    "wltpConsumptionKWh100km": 19.3,
+    "wltpRangeKm": 464,
+    "batteryKWh": 89.6
   },
   {
     "id": "polestar-3-2025",
@@ -54119,7 +55059,9 @@
     "maintenancePerYear": 402,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.2
+    "wltpConsumptionKWh100km": 19.2,
+    "wltpRangeKm": 470,
+    "batteryKWh": 90.4
   },
   {
     "id": "polestar-3-2026",
@@ -54135,7 +55077,9 @@
     "maintenancePerYear": 404,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 476,
+    "batteryKWh": 91.2
   },
   {
     "id": "polestar-4-2023",
@@ -54151,7 +55095,9 @@
     "maintenancePerYear": 410,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.4
+    "wltpConsumptionKWh100km": 19.4,
+    "wltpRangeKm": 458,
+    "batteryKWh": 89.1
   },
   {
     "id": "polestar-4-2024",
@@ -54167,7 +55113,9 @@
     "maintenancePerYear": 412,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.4
+    "wltpConsumptionKWh100km": 19.4,
+    "wltpRangeKm": 464,
+    "batteryKWh": 89.9
   },
   {
     "id": "polestar-4-2025",
@@ -54183,7 +55131,9 @@
     "maintenancePerYear": 413,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.3
+    "wltpConsumptionKWh100km": 19.3,
+    "wltpRangeKm": 470,
+    "batteryKWh": 90.7
   },
   {
     "id": "polestar-4-2026",
@@ -54199,7 +55149,9 @@
     "maintenancePerYear": 415,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.2
+    "wltpConsumptionKWh100km": 19.2,
+    "wltpRangeKm": 476,
+    "batteryKWh": 91.5
   },
   {
     "id": "porsche-718-2016",
@@ -55303,7 +56255,9 @@
     "maintenancePerYear": 398,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 464,
+    "batteryKWh": 87.5
   },
   {
     "id": "porsche-macan-electric-2025",
@@ -55319,7 +56273,9 @@
     "maintenancePerYear": 399,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.8
+    "wltpConsumptionKWh100km": 18.8,
+    "wltpRangeKm": 470,
+    "batteryKWh": 88.3
   },
   {
     "id": "porsche-macan-electric-2026",
@@ -55335,7 +56291,9 @@
     "maintenancePerYear": 401,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.7
+    "wltpConsumptionKWh100km": 18.7,
+    "wltpRangeKm": 476,
+    "batteryKWh": 89.0
   },
   {
     "id": "porsche-panamera-2009",
@@ -55639,7 +56597,9 @@
     "maintenancePerYear": 397,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 434,
+    "batteryKWh": 82.2
   },
   {
     "id": "porsche-taycan-2020",
@@ -55655,7 +56615,9 @@
     "maintenancePerYear": 398,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 440,
+    "batteryKWh": 82.9
   },
   {
     "id": "porsche-taycan-2021",
@@ -55671,7 +56633,9 @@
     "maintenancePerYear": 399,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.8
+    "wltpConsumptionKWh100km": 18.8,
+    "wltpRangeKm": 446,
+    "batteryKWh": 83.8
   },
   {
     "id": "porsche-taycan-2022",
@@ -55687,7 +56651,9 @@
     "maintenancePerYear": 401,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.7
+    "wltpConsumptionKWh100km": 18.7,
+    "wltpRangeKm": 452,
+    "batteryKWh": 84.5
   },
   {
     "id": "porsche-taycan-2023",
@@ -55703,7 +56669,9 @@
     "maintenancePerYear": 402,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 458,
+    "batteryKWh": 85.3
   },
   {
     "id": "porsche-taycan-2024",
@@ -55719,7 +56687,9 @@
     "maintenancePerYear": 404,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 464,
+    "batteryKWh": 86.1
   },
   {
     "id": "porsche-taycan-2025",
@@ -55735,7 +56705,9 @@
     "maintenancePerYear": 405,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.5
+    "wltpConsumptionKWh100km": 18.5,
+    "wltpRangeKm": 470,
+    "batteryKWh": 86.8
   },
   {
     "id": "porsche-taycan-2026",
@@ -55751,7 +56723,9 @@
     "maintenancePerYear": 406,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.4
+    "wltpConsumptionKWh100km": 18.4,
+    "wltpRangeKm": 476,
+    "batteryKWh": 87.6
   },
   {
     "id": "renault-5-e-tech-2024",
@@ -55767,7 +56741,9 @@
     "maintenancePerYear": 325,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.4
+    "wltpConsumptionKWh100km": 16.4,
+    "wltpRangeKm": 354,
+    "batteryKWh": 57.9
   },
   {
     "id": "renault-5-e-tech-2025",
@@ -55783,7 +56759,9 @@
     "maintenancePerYear": 326,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.3
+    "wltpConsumptionKWh100km": 16.3,
+    "wltpRangeKm": 360,
+    "batteryKWh": 58.6
   },
   {
     "id": "renault-5-e-tech-2026",
@@ -55799,7 +56777,9 @@
     "maintenancePerYear": 328,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.2
+    "wltpConsumptionKWh100km": 16.2,
+    "wltpRangeKm": 366,
+    "batteryKWh": 59.3
   },
   {
     "id": "renault-arkana-2021",
@@ -57703,7 +58683,9 @@
     "maintenancePerYear": 305,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 15.9
+    "wltpConsumptionKWh100km": 15.9,
+    "wltpRangeKm": 506,
+    "batteryKWh": 80.6
   },
   {
     "id": "renault-megane-e-tech-2022",
@@ -57719,7 +58701,9 @@
     "maintenancePerYear": 306,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 15.8
+    "wltpConsumptionKWh100km": 15.8,
+    "wltpRangeKm": 512,
+    "batteryKWh": 81.2
   },
   {
     "id": "renault-megane-e-tech-2023",
@@ -57735,7 +58719,9 @@
     "maintenancePerYear": 307,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 15.8
+    "wltpConsumptionKWh100km": 15.8,
+    "wltpRangeKm": 518,
+    "batteryKWh": 81.7
   },
   {
     "id": "renault-megane-e-tech-2024",
@@ -57751,7 +58737,9 @@
     "maintenancePerYear": 309,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 15.7
+    "wltpConsumptionKWh100km": 15.7,
+    "wltpRangeKm": 524,
+    "batteryKWh": 82.3
   },
   {
     "id": "renault-megane-e-tech-2025",
@@ -57767,7 +58755,9 @@
     "maintenancePerYear": 310,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 15.6
+    "wltpConsumptionKWh100km": 15.6,
+    "wltpRangeKm": 530,
+    "batteryKWh": 82.8
   },
   {
     "id": "renault-megane-e-tech-2026",
@@ -57783,7 +58773,9 @@
     "maintenancePerYear": 312,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 15.6
+    "wltpConsumptionKWh100km": 15.6,
+    "wltpRangeKm": 536,
+    "batteryKWh": 83.3
   },
   {
     "id": "renault-scenic-2005",
@@ -58151,7 +59143,9 @@
     "maintenancePerYear": 323,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.9
+    "wltpConsumptionKWh100km": 16.9,
+    "wltpRangeKm": 478,
+    "batteryKWh": 80.9
   },
   {
     "id": "renault-scenic-e-tech-2024",
@@ -58167,7 +59161,9 @@
     "maintenancePerYear": 324,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.9
+    "wltpConsumptionKWh100km": 16.9,
+    "wltpRangeKm": 484,
+    "batteryKWh": 81.6
   },
   {
     "id": "renault-scenic-e-tech-2025",
@@ -58183,7 +59179,9 @@
     "maintenancePerYear": 325,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.8
+    "wltpConsumptionKWh100km": 16.8,
+    "wltpRangeKm": 490,
+    "batteryKWh": 82.2
   },
   {
     "id": "renault-scenic-e-tech-2026",
@@ -58199,7 +59197,9 @@
     "maintenancePerYear": 327,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.7
+    "wltpConsumptionKWh100km": 16.7,
+    "wltpRangeKm": 496,
+    "batteryKWh": 82.8
   },
   {
     "id": "renault-twingo-2005",
@@ -58567,7 +59567,9 @@
     "maintenancePerYear": 246,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 13.8
+    "wltpConsumptionKWh100km": 13.8,
+    "wltpRangeKm": 330,
+    "batteryKWh": 45.4
   },
   {
     "id": "renault-twingo-electric-2021",
@@ -58583,7 +59585,9 @@
     "maintenancePerYear": 248,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 13.7
+    "wltpConsumptionKWh100km": 13.7,
+    "wltpRangeKm": 336,
+    "batteryKWh": 45.9
   },
   {
     "id": "renault-twingo-electric-2022",
@@ -58599,7 +59603,9 @@
     "maintenancePerYear": 249,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 13.6
+    "wltpConsumptionKWh100km": 13.6,
+    "wltpRangeKm": 342,
+    "batteryKWh": 46.5
   },
   {
     "id": "renault-twingo-electric-2023",
@@ -58615,7 +59621,9 @@
     "maintenancePerYear": 251,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 13.5
+    "wltpConsumptionKWh100km": 13.5,
+    "wltpRangeKm": 348,
+    "batteryKWh": 47.0
   },
   {
     "id": "renault-twingo-electric-2024",
@@ -58631,7 +59639,9 @@
     "maintenancePerYear": 252,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 13.5
+    "wltpConsumptionKWh100km": 13.5,
+    "wltpRangeKm": 354,
+    "batteryKWh": 47.6
   },
   {
     "id": "renault-zoe-2015",
@@ -58647,7 +59657,9 @@
     "maintenancePerYear": 328,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.9
+    "wltpConsumptionKWh100km": 16.9,
+    "wltpRangeKm": 316,
+    "batteryKWh": 53.4
   },
   {
     "id": "renault-zoe-2016",
@@ -58663,7 +59675,9 @@
     "maintenancePerYear": 329,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.8
+    "wltpConsumptionKWh100km": 16.8,
+    "wltpRangeKm": 316,
+    "batteryKWh": 53.2
   },
   {
     "id": "renault-zoe-2017",
@@ -58679,7 +59693,9 @@
     "maintenancePerYear": 331,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.8
+    "wltpConsumptionKWh100km": 16.8,
+    "wltpRangeKm": 322,
+    "batteryKWh": 53.9
   },
   {
     "id": "renault-zoe-2018",
@@ -58695,7 +59711,9 @@
     "maintenancePerYear": 332,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.7
+    "wltpConsumptionKWh100km": 16.7,
+    "wltpRangeKm": 328,
+    "batteryKWh": 54.7
   },
   {
     "id": "renault-zoe-2019",
@@ -58711,7 +59729,9 @@
     "maintenancePerYear": 334,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.6
+    "wltpConsumptionKWh100km": 16.6,
+    "wltpRangeKm": 334,
+    "batteryKWh": 55.4
   },
   {
     "id": "renault-zoe-2020",
@@ -58727,7 +59747,9 @@
     "maintenancePerYear": 335,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.5
+    "wltpConsumptionKWh100km": 16.5,
+    "wltpRangeKm": 340,
+    "batteryKWh": 56.2
   },
   {
     "id": "renault-zoe-2021",
@@ -58743,7 +59765,9 @@
     "maintenancePerYear": 336,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.4
+    "wltpConsumptionKWh100km": 16.4,
+    "wltpRangeKm": 346,
+    "batteryKWh": 56.9
   },
   {
     "id": "renault-zoe-2022",
@@ -58759,7 +59783,9 @@
     "maintenancePerYear": 338,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.4
+    "wltpConsumptionKWh100km": 16.4,
+    "wltpRangeKm": 352,
+    "batteryKWh": 57.7
   },
   {
     "id": "renault-zoe-2023",
@@ -58775,7 +59801,9 @@
     "maintenancePerYear": 339,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.3
+    "wltpConsumptionKWh100km": 16.3,
+    "wltpRangeKm": 358,
+    "batteryKWh": 58.4
   },
   {
     "id": "renault-zoe-2024",
@@ -58791,7 +59819,9 @@
     "maintenancePerYear": 341,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.2
+    "wltpConsumptionKWh100km": 16.2,
+    "wltpRangeKm": 364,
+    "batteryKWh": 59.1
   },
   {
     "id": "rivian-r1s-2023",
@@ -58807,7 +59837,9 @@
     "maintenancePerYear": 402,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.9
+    "wltpConsumptionKWh100km": 19.9,
+    "wltpRangeKm": 458,
+    "batteryKWh": 91.1
   },
   {
     "id": "rivian-r1s-2024",
@@ -58823,7 +59855,9 @@
     "maintenancePerYear": 403,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.8
+    "wltpConsumptionKWh100km": 19.8,
+    "wltpRangeKm": 464,
+    "batteryKWh": 92.0
   },
   {
     "id": "rivian-r1s-2025",
@@ -58839,7 +59873,9 @@
     "maintenancePerYear": 405,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.8
+    "wltpConsumptionKWh100km": 19.8,
+    "wltpRangeKm": 470,
+    "batteryKWh": 92.8
   },
   {
     "id": "rivian-r1s-2026",
@@ -58855,7 +59891,9 @@
     "maintenancePerYear": 406,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.7
+    "wltpConsumptionKWh100km": 19.7,
+    "wltpRangeKm": 476,
+    "batteryKWh": 93.7
   },
   {
     "id": "rivian-r1t-2023",
@@ -58871,7 +59909,9 @@
     "maintenancePerYear": 390,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.0
+    "wltpConsumptionKWh100km": 20.0,
+    "wltpRangeKm": 458,
+    "batteryKWh": 91.6
   },
   {
     "id": "rivian-r1t-2024",
@@ -58887,7 +59927,9 @@
     "maintenancePerYear": 391,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.9
+    "wltpConsumptionKWh100km": 19.9,
+    "wltpRangeKm": 464,
+    "batteryKWh": 92.5
   },
   {
     "id": "rivian-r1t-2025",
@@ -58903,7 +59945,9 @@
     "maintenancePerYear": 393,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.9
+    "wltpConsumptionKWh100km": 19.9,
+    "wltpRangeKm": 470,
+    "batteryKWh": 93.3
   },
   {
     "id": "rivian-r1t-2026",
@@ -58919,7 +59963,9 @@
     "maintenancePerYear": 394,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.8
+    "wltpConsumptionKWh100km": 19.8,
+    "wltpRangeKm": 476,
+    "batteryKWh": 94.2
   },
   {
     "id": "seat-altea-2005",
@@ -60503,7 +61549,9 @@
     "maintenancePerYear": 257,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 13.9
+    "wltpConsumptionKWh100km": 13.9,
+    "wltpRangeKm": 324,
+    "batteryKWh": 45.1
   },
   {
     "id": "seat-mii-electric-2020",
@@ -60519,7 +61567,9 @@
     "maintenancePerYear": 258,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 13.9
+    "wltpConsumptionKWh100km": 13.9,
+    "wltpRangeKm": 330,
+    "batteryKWh": 45.7
   },
   {
     "id": "seat-mii-electric-2021",
@@ -60535,7 +61585,9 @@
     "maintenancePerYear": 259,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 13.8
+    "wltpConsumptionKWh100km": 13.8,
+    "wltpRangeKm": 336,
+    "batteryKWh": 46.3
   },
   {
     "id": "seat-tarraco-2018",
@@ -60983,7 +62035,9 @@
     "maintenancePerYear": 272,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 14.7
+    "wltpConsumptionKWh100km": 14.7,
+    "wltpRangeKm": 324,
+    "batteryKWh": 47.5
   },
   {
     "id": "skoda-citigo-e-iv-2020",
@@ -60999,7 +62053,9 @@
     "maintenancePerYear": 273,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 14.6
+    "wltpConsumptionKWh100km": 14.6,
+    "wltpRangeKm": 330,
+    "batteryKWh": 48.2
   },
   {
     "id": "skoda-citigo-e-iv-2021",
@@ -61015,7 +62071,9 @@
     "maintenancePerYear": 275,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 14.5
+    "wltpConsumptionKWh100km": 14.5,
+    "wltpRangeKm": 336,
+    "batteryKWh": 48.8
   },
   {
     "id": "skoda-elroq-2024",
@@ -61031,7 +62089,9 @@
     "maintenancePerYear": 349,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.1
+    "wltpConsumptionKWh100km": 18.1,
+    "wltpRangeKm": 484,
+    "batteryKWh": 87.4
   },
   {
     "id": "skoda-elroq-2025",
@@ -61047,7 +62107,9 @@
     "maintenancePerYear": 350,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.0
+    "wltpConsumptionKWh100km": 18.0,
+    "wltpRangeKm": 490,
+    "batteryKWh": 88.1
   },
   {
     "id": "skoda-elroq-2026",
@@ -61063,7 +62125,9 @@
     "maintenancePerYear": 352,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.9
+    "wltpConsumptionKWh100km": 17.9,
+    "wltpRangeKm": 496,
+    "batteryKWh": 88.8
   },
   {
     "id": "skoda-enyaq-2020",
@@ -61079,7 +62143,9 @@
     "maintenancePerYear": 410,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.4
+    "wltpConsumptionKWh100km": 18.4,
+    "wltpRangeKm": 450,
+    "batteryKWh": 83.0
   },
   {
     "id": "skoda-enyaq-2021",
@@ -61095,7 +62161,9 @@
     "maintenancePerYear": 411,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.4
+    "wltpConsumptionKWh100km": 18.4,
+    "wltpRangeKm": 456,
+    "batteryKWh": 83.8
   },
   {
     "id": "skoda-enyaq-2022",
@@ -61111,7 +62179,9 @@
     "maintenancePerYear": 413,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.3
+    "wltpConsumptionKWh100km": 18.3,
+    "wltpRangeKm": 462,
+    "batteryKWh": 84.5
   },
   {
     "id": "skoda-enyaq-2023",
@@ -61127,7 +62197,9 @@
     "maintenancePerYear": 414,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.2
+    "wltpConsumptionKWh100km": 18.2,
+    "wltpRangeKm": 468,
+    "batteryKWh": 85.3
   },
   {
     "id": "skoda-enyaq-2024",
@@ -61143,7 +62215,9 @@
     "maintenancePerYear": 416,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.1
+    "wltpConsumptionKWh100km": 18.1,
+    "wltpRangeKm": 474,
+    "batteryKWh": 86.0
   },
   {
     "id": "skoda-enyaq-2025",
@@ -61159,7 +62233,9 @@
     "maintenancePerYear": 417,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.1
+    "wltpConsumptionKWh100km": 18.1,
+    "wltpRangeKm": 480,
+    "batteryKWh": 86.7
   },
   {
     "id": "skoda-enyaq-2026",
@@ -61175,7 +62251,9 @@
     "maintenancePerYear": 418,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.0
+    "wltpConsumptionKWh100km": 18.0,
+    "wltpRangeKm": 486,
+    "batteryKWh": 87.5
   },
   {
     "id": "skoda-fabia-2005",
@@ -63111,7 +64189,9 @@
     "maintenancePerYear": 339,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.5
+    "wltpConsumptionKWh100km": 17.5,
+    "wltpRangeKm": 512,
+    "batteryKWh": 89.6
   },
   {
     "id": "smart-1-2023",
@@ -63127,7 +64207,9 @@
     "maintenancePerYear": 340,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.4
+    "wltpConsumptionKWh100km": 17.4,
+    "wltpRangeKm": 518,
+    "batteryKWh": 90.2
   },
   {
     "id": "smart-1-2024",
@@ -63143,7 +64225,9 @@
     "maintenancePerYear": 342,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.3
+    "wltpConsumptionKWh100km": 17.3,
+    "wltpRangeKm": 524,
+    "batteryKWh": 90.9
   },
   {
     "id": "smart-1-2025",
@@ -63159,7 +64243,9 @@
     "maintenancePerYear": 343,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.3
+    "wltpConsumptionKWh100km": 17.3,
+    "wltpRangeKm": 530,
+    "batteryKWh": 91.5
   },
   {
     "id": "smart-1-2026",
@@ -63175,7 +64261,9 @@
     "maintenancePerYear": 344,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 536,
+    "batteryKWh": 92.2
   },
   {
     "id": "smart-3-2023",
@@ -63191,7 +64279,9 @@
     "maintenancePerYear": 337,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.0
+    "wltpConsumptionKWh100km": 17.0,
+    "wltpRangeKm": 478,
+    "batteryKWh": 81.1
   },
   {
     "id": "smart-3-2024",
@@ -63207,7 +64297,9 @@
     "maintenancePerYear": 339,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.9
+    "wltpConsumptionKWh100km": 16.9,
+    "wltpRangeKm": 484,
+    "batteryKWh": 81.8
   },
   {
     "id": "smart-3-2025",
@@ -63223,7 +64315,9 @@
     "maintenancePerYear": 340,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.8
+    "wltpConsumptionKWh100km": 16.8,
+    "wltpRangeKm": 490,
+    "batteryKWh": 82.4
   },
   {
     "id": "smart-3-2026",
@@ -63239,7 +64333,9 @@
     "maintenancePerYear": 342,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.8
+    "wltpConsumptionKWh100km": 16.8,
+    "wltpRangeKm": 496,
+    "batteryKWh": 83.1
   },
   {
     "id": "smart-forfour-2014",
@@ -65287,7 +66383,9 @@
     "maintenancePerYear": 415,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.2
+    "wltpConsumptionKWh100km": 19.2,
+    "wltpRangeKm": 472,
+    "batteryKWh": 90.8
   },
   {
     "id": "subaru-solterra-2023",
@@ -65303,7 +66401,9 @@
     "maintenancePerYear": 416,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 478,
+    "batteryKWh": 91.5
   },
   {
     "id": "subaru-solterra-2024",
@@ -65319,7 +66419,9 @@
     "maintenancePerYear": 417,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 484,
+    "batteryKWh": 92.3
   },
   {
     "id": "subaru-solterra-2025",
@@ -65335,7 +66437,9 @@
     "maintenancePerYear": 419,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.0
+    "wltpConsumptionKWh100km": 19.0,
+    "wltpRangeKm": 470,
+    "batteryKWh": 89.3
   },
   {
     "id": "subaru-solterra-2026",
@@ -65351,7 +66455,9 @@
     "maintenancePerYear": 420,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 476,
+    "batteryKWh": 90.1
   },
   {
     "id": "subaru-xv-2011",
@@ -67431,7 +68537,9 @@
     "maintenancePerYear": 408,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.3
+    "wltpConsumptionKWh100km": 20.3,
+    "wltpRangeKm": 464,
+    "batteryKWh": 94.2
   },
   {
     "id": "tesla-cybertruck-2025",
@@ -67447,7 +68555,9 @@
     "maintenancePerYear": 409,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.2
+    "wltpConsumptionKWh100km": 20.2,
+    "wltpRangeKm": 470,
+    "batteryKWh": 95.1
   },
   {
     "id": "tesla-cybertruck-2026",
@@ -67463,7 +68573,9 @@
     "maintenancePerYear": 411,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.2
+    "wltpConsumptionKWh100km": 20.2,
+    "wltpRangeKm": 476,
+    "batteryKWh": 95.9
   },
   {
     "id": "tesla-model-3-2017",
@@ -67479,7 +68591,9 @@
     "maintenancePerYear": 391,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.3
+    "wltpConsumptionKWh100km": 19.3,
+    "wltpRangeKm": 502,
+    "batteryKWh": 97.0
   },
   {
     "id": "tesla-model-3-2018",
@@ -67495,7 +68609,9 @@
     "maintenancePerYear": 393,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.2
+    "wltpConsumptionKWh100km": 19.2,
+    "wltpRangeKm": 508,
+    "batteryKWh": 97.8
   },
   {
     "id": "tesla-model-3-2019",
@@ -67511,7 +68627,9 @@
     "maintenancePerYear": 394,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.2
+    "wltpConsumptionKWh100km": 19.2,
+    "wltpRangeKm": 514,
+    "batteryKWh": 98.6
   },
   {
     "id": "tesla-model-3-2020",
@@ -67527,7 +68645,9 @@
     "maintenancePerYear": 396,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 520,
+    "batteryKWh": 99.3
   },
   {
     "id": "tesla-model-3-2021",
@@ -67543,7 +68663,9 @@
     "maintenancePerYear": 397,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.0
+    "wltpConsumptionKWh100km": 19.0,
+    "wltpRangeKm": 526,
+    "batteryKWh": 100.0
   },
   {
     "id": "tesla-model-3-2022",
@@ -67559,7 +68681,9 @@
     "maintenancePerYear": 398,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 532,
+    "batteryKWh": 100.0
   },
   {
     "id": "tesla-model-3-2023",
@@ -67575,7 +68699,9 @@
     "maintenancePerYear": 400,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 538,
+    "batteryKWh": 100.0
   },
   {
     "id": "tesla-model-3-2024",
@@ -67591,7 +68717,9 @@
     "maintenancePerYear": 401,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.8
+    "wltpConsumptionKWh100km": 18.8,
+    "wltpRangeKm": 544,
+    "batteryKWh": 100.0
   },
   {
     "id": "tesla-model-3-2025",
@@ -67607,7 +68735,9 @@
     "maintenancePerYear": 403,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.7
+    "wltpConsumptionKWh100km": 18.7,
+    "wltpRangeKm": 550,
+    "batteryKWh": 100.0
   },
   {
     "id": "tesla-model-3-2026",
@@ -67623,7 +68753,9 @@
     "maintenancePerYear": 404,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 556,
+    "batteryKWh": 100.0
   },
   {
     "id": "tesla-model-s-2017",
@@ -67639,7 +68771,9 @@
     "maintenancePerYear": 402,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.9
+    "wltpConsumptionKWh100km": 19.9,
+    "wltpRangeKm": 542,
+    "batteryKWh": 100.0
   },
   {
     "id": "tesla-model-s-2018",
@@ -67655,7 +68789,9 @@
     "maintenancePerYear": 403,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.8
+    "wltpConsumptionKWh100km": 19.8,
+    "wltpRangeKm": 548,
+    "batteryKWh": 100.0
   },
   {
     "id": "tesla-model-s-2019",
@@ -67671,7 +68807,9 @@
     "maintenancePerYear": 405,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.8
+    "wltpConsumptionKWh100km": 19.8,
+    "wltpRangeKm": 554,
+    "batteryKWh": 100.0
   },
   {
     "id": "tesla-model-s-2020",
@@ -67687,7 +68825,9 @@
     "maintenancePerYear": 406,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.7
+    "wltpConsumptionKWh100km": 19.7,
+    "wltpRangeKm": 560,
+    "batteryKWh": 100.0
   },
   {
     "id": "tesla-model-s-2021",
@@ -67703,7 +68843,9 @@
     "maintenancePerYear": 408,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.6
+    "wltpConsumptionKWh100km": 19.6,
+    "wltpRangeKm": 566,
+    "batteryKWh": 100.0
   },
   {
     "id": "tesla-model-s-2022",
@@ -67719,7 +68861,9 @@
     "maintenancePerYear": 409,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.5
+    "wltpConsumptionKWh100km": 19.5,
+    "wltpRangeKm": 572,
+    "batteryKWh": 100.0
   },
   {
     "id": "tesla-model-s-2023",
@@ -67735,7 +68879,9 @@
     "maintenancePerYear": 410,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.4
+    "wltpConsumptionKWh100km": 19.4,
+    "wltpRangeKm": 578,
+    "batteryKWh": 100.0
   },
   {
     "id": "tesla-model-s-2024",
@@ -67751,7 +68897,9 @@
     "maintenancePerYear": 412,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.4
+    "wltpConsumptionKWh100km": 19.4,
+    "wltpRangeKm": 584,
+    "batteryKWh": 100.0
   },
   {
     "id": "tesla-model-s-2025",
@@ -67767,7 +68915,9 @@
     "maintenancePerYear": 413,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.3
+    "wltpConsumptionKWh100km": 19.3,
+    "wltpRangeKm": 590,
+    "batteryKWh": 100.0
   },
   {
     "id": "tesla-model-s-2026",
@@ -67783,7 +68933,9 @@
     "maintenancePerYear": 415,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.2
+    "wltpConsumptionKWh100km": 19.2,
+    "wltpRangeKm": 596,
+    "batteryKWh": 100.0
   },
   {
     "id": "tesla-model-x-2015",
@@ -67799,7 +68951,9 @@
     "maintenancePerYear": 388,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.4
+    "wltpConsumptionKWh100km": 19.4,
+    "wltpRangeKm": 456,
+    "batteryKWh": 88.4
   },
   {
     "id": "tesla-model-x-2016",
@@ -67815,7 +68969,9 @@
     "maintenancePerYear": 390,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.3
+    "wltpConsumptionKWh100km": 19.3,
+    "wltpRangeKm": 456,
+    "batteryKWh": 88.0
   },
   {
     "id": "tesla-model-x-2017",
@@ -67831,7 +68987,9 @@
     "maintenancePerYear": 391,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.2
+    "wltpConsumptionKWh100km": 19.2,
+    "wltpRangeKm": 462,
+    "batteryKWh": 88.8
   },
   {
     "id": "tesla-model-x-2018",
@@ -67847,7 +69005,9 @@
     "maintenancePerYear": 392,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 468,
+    "batteryKWh": 89.6
   },
   {
     "id": "tesla-model-x-2019",
@@ -67863,7 +69023,9 @@
     "maintenancePerYear": 394,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 474,
+    "batteryKWh": 90.4
   },
   {
     "id": "tesla-model-x-2020",
@@ -67879,7 +69041,9 @@
     "maintenancePerYear": 395,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.0
+    "wltpConsumptionKWh100km": 19.0,
+    "wltpRangeKm": 480,
+    "batteryKWh": 91.2
   },
   {
     "id": "tesla-model-x-2021",
@@ -67895,7 +69059,9 @@
     "maintenancePerYear": 397,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 486,
+    "batteryKWh": 92.0
   },
   {
     "id": "tesla-model-x-2022",
@@ -67911,7 +69077,9 @@
     "maintenancePerYear": 398,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 492,
+    "batteryKWh": 92.7
   },
   {
     "id": "tesla-model-x-2023",
@@ -67927,7 +69095,9 @@
     "maintenancePerYear": 399,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.8
+    "wltpConsumptionKWh100km": 18.8,
+    "wltpRangeKm": 498,
+    "batteryKWh": 93.5
   },
   {
     "id": "tesla-model-x-2024",
@@ -67943,7 +69113,9 @@
     "maintenancePerYear": 401,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.7
+    "wltpConsumptionKWh100km": 18.7,
+    "wltpRangeKm": 504,
+    "batteryKWh": 94.2
   },
   {
     "id": "tesla-model-x-2025",
@@ -67959,7 +69131,9 @@
     "maintenancePerYear": 402,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 510,
+    "batteryKWh": 95.0
   },
   {
     "id": "tesla-model-x-2026",
@@ -67975,7 +69149,9 @@
     "maintenancePerYear": 404,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 516,
+    "batteryKWh": 95.7
   },
   {
     "id": "tesla-model-y-2020",
@@ -67991,7 +69167,9 @@
     "maintenancePerYear": 383,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 500,
+    "batteryKWh": 95.5
   },
   {
     "id": "tesla-model-y-2021",
@@ -68007,7 +69185,9 @@
     "maintenancePerYear": 385,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.0
+    "wltpConsumptionKWh100km": 19.0,
+    "wltpRangeKm": 506,
+    "batteryKWh": 96.3
   },
   {
     "id": "tesla-model-y-2022",
@@ -68023,7 +69203,9 @@
     "maintenancePerYear": 386,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 512,
+    "batteryKWh": 97.0
   },
   {
     "id": "tesla-model-y-2023",
@@ -68039,7 +69221,9 @@
     "maintenancePerYear": 387,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 518,
+    "batteryKWh": 97.8
   },
   {
     "id": "tesla-model-y-2024",
@@ -68055,7 +69239,9 @@
     "maintenancePerYear": 389,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.8
+    "wltpConsumptionKWh100km": 18.8,
+    "wltpRangeKm": 524,
+    "batteryKWh": 98.5
   },
   {
     "id": "tesla-model-y-2025",
@@ -68071,7 +69257,9 @@
     "maintenancePerYear": 390,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.7
+    "wltpConsumptionKWh100km": 18.7,
+    "wltpRangeKm": 530,
+    "batteryKWh": 99.2
   },
   {
     "id": "tesla-model-y-2026",
@@ -68087,7 +69275,9 @@
     "maintenancePerYear": 392,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 536,
+    "batteryKWh": 100.0
   },
   {
     "id": "toyota-auris-2006",
@@ -69943,7 +71133,9 @@
     "maintenancePerYear": 392,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 440,
+    "batteryKWh": 84.3
   },
   {
     "id": "toyota-proace-electric-2021",
@@ -69959,7 +71151,9 @@
     "maintenancePerYear": 394,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 446,
+    "batteryKWh": 85.1
   },
   {
     "id": "toyota-proace-electric-2022",
@@ -69975,7 +71169,9 @@
     "maintenancePerYear": 395,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.0
+    "wltpConsumptionKWh100km": 19.0,
+    "wltpRangeKm": 452,
+    "batteryKWh": 85.9
   },
   {
     "id": "toyota-proace-electric-2023",
@@ -69991,7 +71187,9 @@
     "maintenancePerYear": 397,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 458,
+    "batteryKWh": 86.7
   },
   {
     "id": "toyota-proace-electric-2024",
@@ -70007,7 +71205,9 @@
     "maintenancePerYear": 398,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 464,
+    "batteryKWh": 87.5
   },
   {
     "id": "toyota-proace-electric-2025",
@@ -70023,7 +71223,9 @@
     "maintenancePerYear": 399,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.8
+    "wltpConsumptionKWh100km": 18.8,
+    "wltpRangeKm": 470,
+    "batteryKWh": 88.3
   },
   {
     "id": "toyota-proace-electric-2026",
@@ -70039,7 +71241,9 @@
     "maintenancePerYear": 401,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.7
+    "wltpConsumptionKWh100km": 18.7,
+    "wltpRangeKm": 476,
+    "batteryKWh": 89.0
   },
   {
     "id": "toyota-rav4-2005",
@@ -70759,7 +71963,9 @@
     "maintenancePerYear": 412,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.8
+    "wltpConsumptionKWh100km": 18.8,
+    "wltpRangeKm": 472,
+    "batteryKWh": 88.6
   },
   {
     "id": "toyota-bz4x-2023",
@@ -70775,7 +71981,9 @@
     "maintenancePerYear": 413,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.7
+    "wltpConsumptionKWh100km": 18.7,
+    "wltpRangeKm": 478,
+    "batteryKWh": 89.4
   },
   {
     "id": "toyota-bz4x-2024",
@@ -70791,7 +71999,9 @@
     "maintenancePerYear": 415,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 484,
+    "batteryKWh": 90.1
   },
   {
     "id": "toyota-bz4x-2025",
@@ -70807,7 +72017,9 @@
     "maintenancePerYear": 416,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 470,
+    "batteryKWh": 87.2
   },
   {
     "id": "toyota-bz4x-2026",
@@ -70823,7 +72035,9 @@
     "maintenancePerYear": 417,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.5
+    "wltpConsumptionKWh100km": 18.5,
+    "wltpRangeKm": 476,
+    "batteryKWh": 87.9
   },
   {
     "id": "volkswagen-arteon-2017",
@@ -71351,7 +72565,9 @@
     "maintenancePerYear": 405,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 304,
+    "batteryKWh": 57.4
   },
   {
     "id": "volkswagen-id-buzz-2023",
@@ -71367,7 +72583,9 @@
     "maintenancePerYear": 407,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.8
+    "wltpConsumptionKWh100km": 18.8,
+    "wltpRangeKm": 306,
+    "batteryKWh": 57.5
   },
   {
     "id": "volkswagen-id-buzz-2024",
@@ -71383,7 +72601,9 @@
     "maintenancePerYear": 408,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.7
+    "wltpConsumptionKWh100km": 18.7,
+    "wltpRangeKm": 308,
+    "batteryKWh": 57.7
   },
   {
     "id": "volkswagen-id-buzz-2025",
@@ -71399,7 +72619,9 @@
     "maintenancePerYear": 410,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 310,
+    "batteryKWh": 57.8
   },
   {
     "id": "volkswagen-id-buzz-2026",
@@ -71415,7 +72637,9 @@
     "maintenancePerYear": 411,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.6
+    "wltpConsumptionKWh100km": 18.6,
+    "wltpRangeKm": 312,
+    "batteryKWh": 57.9
   },
   {
     "id": "volkswagen-id3-2020",
@@ -71431,7 +72655,9 @@
     "maintenancePerYear": 322,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.3
+    "wltpConsumptionKWh100km": 18.3,
+    "wltpRangeKm": 420,
+    "batteryKWh": 76.9
   },
   {
     "id": "volkswagen-id3-2021",
@@ -71447,7 +72673,9 @@
     "maintenancePerYear": 323,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.2
+    "wltpConsumptionKWh100km": 18.2,
+    "wltpRangeKm": 426,
+    "batteryKWh": 77.6
   },
   {
     "id": "volkswagen-id3-2022",
@@ -71463,7 +72691,9 @@
     "maintenancePerYear": 324,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.1
+    "wltpConsumptionKWh100km": 18.1,
+    "wltpRangeKm": 432,
+    "batteryKWh": 78.4
   },
   {
     "id": "volkswagen-id3-2023",
@@ -71479,7 +72709,9 @@
     "maintenancePerYear": 326,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.1
+    "wltpConsumptionKWh100km": 18.1,
+    "wltpRangeKm": 438,
+    "batteryKWh": 79.1
   },
   {
     "id": "volkswagen-id3-2024",
@@ -71495,7 +72727,9 @@
     "maintenancePerYear": 327,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.0
+    "wltpConsumptionKWh100km": 18.0,
+    "wltpRangeKm": 444,
+    "batteryKWh": 79.9
   },
   {
     "id": "volkswagen-id3-2025",
@@ -71511,7 +72745,9 @@
     "maintenancePerYear": 329,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.9
+    "wltpConsumptionKWh100km": 17.9,
+    "wltpRangeKm": 450,
+    "batteryKWh": 80.6
   },
   {
     "id": "volkswagen-id3-2026",
@@ -71527,7 +72763,9 @@
     "maintenancePerYear": 330,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 456,
+    "batteryKWh": 81.4
   },
   {
     "id": "volkswagen-id4-2020",
@@ -71543,7 +72781,9 @@
     "maintenancePerYear": 317,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.1
+    "wltpConsumptionKWh100km": 18.1,
+    "wltpRangeKm": 450,
+    "batteryKWh": 81.5
   },
   {
     "id": "volkswagen-id4-2021",
@@ -71559,7 +72799,9 @@
     "maintenancePerYear": 318,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.1
+    "wltpConsumptionKWh100km": 18.1,
+    "wltpRangeKm": 456,
+    "batteryKWh": 82.3
   },
   {
     "id": "volkswagen-id4-2022",
@@ -71575,7 +72817,9 @@
     "maintenancePerYear": 320,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.0
+    "wltpConsumptionKWh100km": 18.0,
+    "wltpRangeKm": 462,
+    "batteryKWh": 83.0
   },
   {
     "id": "volkswagen-id4-2023",
@@ -71591,7 +72835,9 @@
     "maintenancePerYear": 321,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.9
+    "wltpConsumptionKWh100km": 17.9,
+    "wltpRangeKm": 468,
+    "batteryKWh": 83.8
   },
   {
     "id": "volkswagen-id4-2024",
@@ -71607,7 +72853,9 @@
     "maintenancePerYear": 323,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 474,
+    "batteryKWh": 84.5
   },
   {
     "id": "volkswagen-id4-2025",
@@ -71623,7 +72871,9 @@
     "maintenancePerYear": 324,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.8
+    "wltpConsumptionKWh100km": 17.8,
+    "wltpRangeKm": 480,
+    "batteryKWh": 85.2
   },
   {
     "id": "volkswagen-id4-2026",
@@ -71639,7 +72889,9 @@
     "maintenancePerYear": 325,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.7
+    "wltpConsumptionKWh100km": 17.7,
+    "wltpRangeKm": 486,
+    "batteryKWh": 85.9
   },
   {
     "id": "volkswagen-id5-2021",
@@ -71655,7 +72907,9 @@
     "maintenancePerYear": 339,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.3
+    "wltpConsumptionKWh100km": 17.3,
+    "wltpRangeKm": 466,
+    "batteryKWh": 80.6
   },
   {
     "id": "volkswagen-id5-2022",
@@ -71671,7 +72925,9 @@
     "maintenancePerYear": 341,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 472,
+    "batteryKWh": 81.3
   },
   {
     "id": "volkswagen-id5-2023",
@@ -71687,7 +72943,9 @@
     "maintenancePerYear": 342,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 478,
+    "batteryKWh": 82.0
   },
   {
     "id": "volkswagen-id5-2024",
@@ -71703,7 +72961,9 @@
     "maintenancePerYear": 343,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.1
+    "wltpConsumptionKWh100km": 17.1,
+    "wltpRangeKm": 484,
+    "batteryKWh": 82.6
   },
   {
     "id": "volkswagen-id5-2025",
@@ -71719,7 +72979,9 @@
     "maintenancePerYear": 345,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.0
+    "wltpConsumptionKWh100km": 17.0,
+    "wltpRangeKm": 490,
+    "batteryKWh": 83.3
   },
   {
     "id": "volkswagen-id5-2026",
@@ -71735,7 +72997,9 @@
     "maintenancePerYear": 346,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.9
+    "wltpConsumptionKWh100km": 16.9,
+    "wltpRangeKm": 496,
+    "batteryKWh": 83.9
   },
   {
     "id": "volkswagen-id7-2023",
@@ -71751,7 +73015,9 @@
     "maintenancePerYear": 416,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.9
+    "wltpConsumptionKWh100km": 19.9,
+    "wltpRangeKm": 458,
+    "batteryKWh": 90.9
   },
   {
     "id": "volkswagen-id7-2024",
@@ -71767,7 +73033,9 @@
     "maintenancePerYear": 418,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.8
+    "wltpConsumptionKWh100km": 19.8,
+    "wltpRangeKm": 464,
+    "batteryKWh": 91.8
   },
   {
     "id": "volkswagen-id7-2025",
@@ -71783,7 +73051,9 @@
     "maintenancePerYear": 419,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.7
+    "wltpConsumptionKWh100km": 19.7,
+    "wltpRangeKm": 470,
+    "batteryKWh": 92.6
   },
   {
     "id": "volkswagen-id7-2026",
@@ -71799,7 +73069,9 @@
     "maintenancePerYear": 421,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.6
+    "wltpConsumptionKWh100km": 19.6,
+    "wltpRangeKm": 476,
+    "batteryKWh": 93.4
   },
   {
     "id": "volkswagen-passat-2005",
@@ -73943,7 +75215,9 @@
     "maintenancePerYear": 346,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.6
+    "wltpConsumptionKWh100km": 17.6,
+    "wltpRangeKm": 476,
+    "batteryKWh": 83.8
   },
   {
     "id": "volkswagen-e-golf-2015",
@@ -73959,7 +75233,9 @@
     "maintenancePerYear": 347,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.5
+    "wltpConsumptionKWh100km": 17.5,
+    "wltpRangeKm": 476,
+    "batteryKWh": 83.4
   },
   {
     "id": "volkswagen-e-golf-2016",
@@ -73975,7 +75251,9 @@
     "maintenancePerYear": 349,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.4
+    "wltpConsumptionKWh100km": 17.4,
+    "wltpRangeKm": 476,
+    "batteryKWh": 83.1
   },
   {
     "id": "volkswagen-e-golf-2017",
@@ -73991,7 +75269,9 @@
     "maintenancePerYear": 350,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.4
+    "wltpConsumptionKWh100km": 17.4,
+    "wltpRangeKm": 482,
+    "batteryKWh": 83.7
   },
   {
     "id": "volkswagen-e-golf-2018",
@@ -74007,7 +75287,9 @@
     "maintenancePerYear": 352,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.3
+    "wltpConsumptionKWh100km": 17.3,
+    "wltpRangeKm": 488,
+    "batteryKWh": 84.4
   },
   {
     "id": "volkswagen-e-golf-2019",
@@ -74023,7 +75305,9 @@
     "maintenancePerYear": 353,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 494,
+    "batteryKWh": 85.1
   },
   {
     "id": "volkswagen-e-golf-2020",
@@ -74039,7 +75323,9 @@
     "maintenancePerYear": 354,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 500,
+    "batteryKWh": 85.8
   },
   {
     "id": "volkswagen-e-up!-2013",
@@ -74055,7 +75341,9 @@
     "maintenancePerYear": 235,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 14.5
+    "wltpConsumptionKWh100km": 14.5,
+    "wltpRangeKm": 250,
+    "batteryKWh": 36.4
   },
   {
     "id": "volkswagen-e-up!-2014",
@@ -74071,7 +75359,9 @@
     "maintenancePerYear": 236,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 14.5
+    "wltpConsumptionKWh100km": 14.5,
+    "wltpRangeKm": 250,
+    "batteryKWh": 36.2
   },
   {
     "id": "volkswagen-e-up!-2015",
@@ -74087,7 +75377,9 @@
     "maintenancePerYear": 238,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 14.4
+    "wltpConsumptionKWh100km": 14.4,
+    "wltpRangeKm": 250,
+    "batteryKWh": 36.0
   },
   {
     "id": "volkswagen-e-up!-2016",
@@ -74103,7 +75395,9 @@
     "maintenancePerYear": 239,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 14.3
+    "wltpConsumptionKWh100km": 14.3,
+    "wltpRangeKm": 250,
+    "batteryKWh": 35.8
   },
   {
     "id": "volkswagen-e-up!-2017",
@@ -74119,7 +75413,9 @@
     "maintenancePerYear": 240,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 14.2
+    "wltpConsumptionKWh100km": 14.2,
+    "wltpRangeKm": 250,
+    "batteryKWh": 35.6
   },
   {
     "id": "volkswagen-e-up!-2018",
@@ -74135,7 +75431,9 @@
     "maintenancePerYear": 242,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 14.2
+    "wltpConsumptionKWh100km": 14.2,
+    "wltpRangeKm": 250,
+    "batteryKWh": 35.4
   },
   {
     "id": "volkswagen-e-up!-2019",
@@ -74151,7 +75449,9 @@
     "maintenancePerYear": 243,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 14.1
+    "wltpConsumptionKWh100km": 14.1,
+    "wltpRangeKm": 254,
+    "batteryKWh": 35.8
   },
   {
     "id": "volkswagen-e-up!-2020",
@@ -74167,7 +75467,9 @@
     "maintenancePerYear": 245,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 14.0
+    "wltpConsumptionKWh100km": 14.0,
+    "wltpRangeKm": 260,
+    "batteryKWh": 36.5
   },
   {
     "id": "volkswagen-e-up!-2021",
@@ -74183,7 +75485,9 @@
     "maintenancePerYear": 246,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 14.0
+    "wltpConsumptionKWh100km": 14.0,
+    "wltpRangeKm": 266,
+    "batteryKWh": 37.1
   },
   {
     "id": "volkswagen-e-up!-2022",
@@ -74199,7 +75503,9 @@
     "maintenancePerYear": 247,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 13.9
+    "wltpConsumptionKWh100km": 13.9,
+    "wltpRangeKm": 272,
+    "batteryKWh": 37.7
   },
   {
     "id": "volkswagen-e-up!-2023",
@@ -74215,7 +75521,9 @@
     "maintenancePerYear": 249,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 13.8
+    "wltpConsumptionKWh100km": 13.8,
+    "wltpRangeKm": 278,
+    "batteryKWh": 38.4
   },
   {
     "id": "volkswagen-up!-2011",
@@ -74567,7 +75875,9 @@
     "maintenancePerYear": 367,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 466,
+    "batteryKWh": 80.0
   },
   {
     "id": "volvo-c40-recharge-2022",
@@ -74583,7 +75893,9 @@
     "maintenancePerYear": 369,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.1
+    "wltpConsumptionKWh100km": 17.1,
+    "wltpRangeKm": 472,
+    "batteryKWh": 80.7
   },
   {
     "id": "volvo-c40-recharge-2023",
@@ -74599,7 +75911,9 @@
     "maintenancePerYear": 370,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.0
+    "wltpConsumptionKWh100km": 17.0,
+    "wltpRangeKm": 478,
+    "batteryKWh": 81.4
   },
   {
     "id": "volvo-c40-recharge-2024",
@@ -74615,7 +75929,9 @@
     "maintenancePerYear": 372,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.0
+    "wltpConsumptionKWh100km": 17.0,
+    "wltpRangeKm": 484,
+    "batteryKWh": 82.0
   },
   {
     "id": "volvo-c40-recharge-2025",
@@ -74631,7 +75947,9 @@
     "maintenancePerYear": 373,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.9
+    "wltpConsumptionKWh100km": 16.9,
+    "wltpRangeKm": 490,
+    "batteryKWh": 82.7
   },
   {
     "id": "volvo-c40-recharge-2026",
@@ -74647,7 +75965,9 @@
     "maintenancePerYear": 374,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 16.8
+    "wltpConsumptionKWh100km": 16.8,
+    "wltpRangeKm": 496,
+    "batteryKWh": 83.3
   },
   {
     "id": "volvo-ec40-2022",
@@ -74663,7 +75983,9 @@
     "maintenancePerYear": 361,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.7
+    "wltpConsumptionKWh100km": 17.7,
+    "wltpRangeKm": 472,
+    "batteryKWh": 83.4
   },
   {
     "id": "volvo-ec40-2023",
@@ -74679,7 +76001,9 @@
     "maintenancePerYear": 363,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.6
+    "wltpConsumptionKWh100km": 17.6,
+    "wltpRangeKm": 478,
+    "batteryKWh": 84.1
   },
   {
     "id": "volvo-ec40-2024",
@@ -74695,7 +76019,9 @@
     "maintenancePerYear": 364,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.5
+    "wltpConsumptionKWh100km": 17.5,
+    "wltpRangeKm": 484,
+    "batteryKWh": 84.8
   },
   {
     "id": "volvo-ec40-2025",
@@ -74711,7 +76037,9 @@
     "maintenancePerYear": 366,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.4
+    "wltpConsumptionKWh100km": 17.4,
+    "wltpRangeKm": 490,
+    "batteryKWh": 85.5
   },
   {
     "id": "volvo-ec40-2026",
@@ -74727,7 +76055,9 @@
     "maintenancePerYear": 367,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.4
+    "wltpConsumptionKWh100km": 17.4,
+    "wltpRangeKm": 496,
+    "batteryKWh": 86.2
   },
   {
     "id": "volvo-ex30-2023",
@@ -74743,7 +76073,9 @@
     "maintenancePerYear": 318,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.4
+    "wltpConsumptionKWh100km": 17.4,
+    "wltpRangeKm": 518,
+    "batteryKWh": 90.4
   },
   {
     "id": "volvo-ex30-2024",
@@ -74759,7 +76091,9 @@
     "maintenancePerYear": 320,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.4
+    "wltpConsumptionKWh100km": 17.4,
+    "wltpRangeKm": 524,
+    "batteryKWh": 91.0
   },
   {
     "id": "volvo-ex30-2025",
@@ -74775,7 +76109,9 @@
     "maintenancePerYear": 321,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.3
+    "wltpConsumptionKWh100km": 17.3,
+    "wltpRangeKm": 530,
+    "batteryKWh": 91.7
   },
   {
     "id": "volvo-ex30-2026",
@@ -74791,7 +76127,9 @@
     "maintenancePerYear": 323,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 536,
+    "batteryKWh": 92.3
   },
   {
     "id": "volvo-ex40-2024",
@@ -74807,7 +76145,9 @@
     "maintenancePerYear": 330,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 484,
+    "batteryKWh": 83.5
   },
   {
     "id": "volvo-ex40-2025",
@@ -74823,7 +76163,9 @@
     "maintenancePerYear": 331,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 490,
+    "batteryKWh": 84.1
   },
   {
     "id": "volvo-ex40-2026",
@@ -74839,7 +76181,9 @@
     "maintenancePerYear": 333,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.1
+    "wltpConsumptionKWh100km": 17.1,
+    "wltpRangeKm": 496,
+    "batteryKWh": 84.8
   },
   {
     "id": "volvo-ex90-2024",
@@ -74855,7 +76199,9 @@
     "maintenancePerYear": 375,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.2
+    "wltpConsumptionKWh100km": 20.2,
+    "wltpRangeKm": 464,
+    "batteryKWh": 93.5
   },
   {
     "id": "volvo-ex90-2025",
@@ -74871,7 +76217,9 @@
     "maintenancePerYear": 376,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.1
+    "wltpConsumptionKWh100km": 20.1,
+    "wltpRangeKm": 470,
+    "batteryKWh": 94.4
   },
   {
     "id": "volvo-ex90-2026",
@@ -74887,7 +76235,9 @@
     "maintenancePerYear": 378,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.0
+    "wltpConsumptionKWh100km": 20.0,
+    "wltpRangeKm": 476,
+    "batteryKWh": 95.2
   },
   {
     "id": "volvo-s40-2005",
@@ -76311,7 +77661,9 @@
     "maintenancePerYear": 353,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.4
+    "wltpConsumptionKWh100km": 17.4,
+    "wltpRangeKm": 460,
+    "batteryKWh": 80.1
   },
   {
     "id": "volvo-xc40-recharge-2021",
@@ -76327,7 +77679,9 @@
     "maintenancePerYear": 354,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.3
+    "wltpConsumptionKWh100km": 17.3,
+    "wltpRangeKm": 466,
+    "batteryKWh": 80.9
   },
   {
     "id": "volvo-xc40-recharge-2022",
@@ -76343,7 +77697,9 @@
     "maintenancePerYear": 355,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.3
+    "wltpConsumptionKWh100km": 17.3,
+    "wltpRangeKm": 472,
+    "batteryKWh": 81.5
   },
   {
     "id": "volvo-xc40-recharge-2023",
@@ -76359,7 +77715,9 @@
     "maintenancePerYear": 357,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.2
+    "wltpConsumptionKWh100km": 17.2,
+    "wltpRangeKm": 478,
+    "batteryKWh": 82.2
   },
   {
     "id": "volvo-xc40-recharge-2024",
@@ -76375,7 +77733,9 @@
     "maintenancePerYear": 358,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.1
+    "wltpConsumptionKWh100km": 17.1,
+    "wltpRangeKm": 484,
+    "batteryKWh": 82.9
   },
   {
     "id": "volvo-xc40-recharge-2025",
@@ -76391,7 +77751,9 @@
     "maintenancePerYear": 360,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.1
+    "wltpConsumptionKWh100km": 17.1,
+    "wltpRangeKm": 490,
+    "batteryKWh": 83.5
   },
   {
     "id": "volvo-xc40-recharge-2026",
@@ -76407,7 +77769,9 @@
     "maintenancePerYear": 361,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 17.0
+    "wltpConsumptionKWh100km": 17.0,
+    "wltpRangeKm": 496,
+    "batteryKWh": 84.2
   },
   {
     "id": "volvo-xc60-2008",
@@ -77079,7 +78443,9 @@
     "maintenancePerYear": 366,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.3
+    "wltpConsumptionKWh100km": 19.3,
+    "wltpRangeKm": 446,
+    "batteryKWh": 86.1
   },
   {
     "id": "xpeng-g6-2022",
@@ -77095,7 +78461,9 @@
     "maintenancePerYear": 367,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.2
+    "wltpConsumptionKWh100km": 19.2,
+    "wltpRangeKm": 452,
+    "batteryKWh": 86.9
   },
   {
     "id": "xpeng-g6-2023",
@@ -77111,7 +78479,9 @@
     "maintenancePerYear": 369,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 458,
+    "batteryKWh": 87.7
   },
   {
     "id": "xpeng-g6-2024",
@@ -77127,7 +78497,9 @@
     "maintenancePerYear": 370,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.1
+    "wltpConsumptionKWh100km": 19.1,
+    "wltpRangeKm": 464,
+    "batteryKWh": 88.5
   },
   {
     "id": "xpeng-g6-2025",
@@ -77143,7 +78515,9 @@
     "maintenancePerYear": 372,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.0
+    "wltpConsumptionKWh100km": 19.0,
+    "wltpRangeKm": 470,
+    "batteryKWh": 89.3
   },
   {
     "id": "xpeng-g6-2026",
@@ -77159,7 +78533,9 @@
     "maintenancePerYear": 373,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 18.9
+    "wltpConsumptionKWh100km": 18.9,
+    "wltpRangeKm": 476,
+    "batteryKWh": 90.1
   },
   {
     "id": "xpeng-g9-2021",
@@ -77175,7 +78551,9 @@
     "maintenancePerYear": 390,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.3
+    "wltpConsumptionKWh100km": 20.3,
+    "wltpRangeKm": 446,
+    "batteryKWh": 90.5
   },
   {
     "id": "xpeng-g9-2022",
@@ -77191,7 +78569,9 @@
     "maintenancePerYear": 391,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.2
+    "wltpConsumptionKWh100km": 20.2,
+    "wltpRangeKm": 452,
+    "batteryKWh": 91.4
   },
   {
     "id": "xpeng-g9-2023",
@@ -77207,7 +78587,9 @@
     "maintenancePerYear": 393,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.2
+    "wltpConsumptionKWh100km": 20.2,
+    "wltpRangeKm": 458,
+    "batteryKWh": 92.3
   },
   {
     "id": "xpeng-g9-2024",
@@ -77223,7 +78605,9 @@
     "maintenancePerYear": 394,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.1
+    "wltpConsumptionKWh100km": 20.1,
+    "wltpRangeKm": 464,
+    "batteryKWh": 93.2
   },
   {
     "id": "xpeng-g9-2025",
@@ -77239,7 +78623,9 @@
     "maintenancePerYear": 396,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.0
+    "wltpConsumptionKWh100km": 20.0,
+    "wltpRangeKm": 470,
+    "batteryKWh": 94.0
   },
   {
     "id": "xpeng-g9-2026",
@@ -77255,7 +78641,9 @@
     "maintenancePerYear": 397,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.9
+    "wltpConsumptionKWh100km": 19.9,
+    "wltpRangeKm": 476,
+    "batteryKWh": 94.9
   },
   {
     "id": "xpeng-p7-2021",
@@ -77271,7 +78659,9 @@
     "maintenancePerYear": 360,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.1
+    "wltpConsumptionKWh100km": 20.1,
+    "wltpRangeKm": 446,
+    "batteryKWh": 89.6
   },
   {
     "id": "xpeng-p7-2022",
@@ -77287,7 +78677,9 @@
     "maintenancePerYear": 361,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.0
+    "wltpConsumptionKWh100km": 20.0,
+    "wltpRangeKm": 452,
+    "batteryKWh": 90.5
   },
   {
     "id": "xpeng-p7-2023",
@@ -77303,7 +78695,9 @@
     "maintenancePerYear": 363,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 20.0
+    "wltpConsumptionKWh100km": 20.0,
+    "wltpRangeKm": 458,
+    "batteryKWh": 91.4
   },
   {
     "id": "xpeng-p7-2024",
@@ -77319,7 +78713,9 @@
     "maintenancePerYear": 364,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.9
+    "wltpConsumptionKWh100km": 19.9,
+    "wltpRangeKm": 464,
+    "batteryKWh": 92.2
   },
   {
     "id": "xpeng-p7-2025",
@@ -77335,7 +78731,9 @@
     "maintenancePerYear": 366,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.8
+    "wltpConsumptionKWh100km": 19.8,
+    "wltpRangeKm": 470,
+    "batteryKWh": 93.1
   },
   {
     "id": "xpeng-p7-2026",
@@ -77351,6 +78749,8 @@
     "maintenancePerYear": 367,
     "taxesPerYear": 0,
     "imageURL": null,
-    "wltpConsumptionKWh100km": 19.7
+    "wltpConsumptionKWh100km": 19.7,
+    "wltpRangeKm": 476,
+    "batteryKWh": 93.9
   }
 ]

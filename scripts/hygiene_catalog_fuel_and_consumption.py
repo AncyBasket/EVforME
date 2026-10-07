@@ -3,8 +3,8 @@
 Igiene catalogo: fuelKind, consumi ICE/EV/PHEV realistici, drop junk NHTSA.
 
 - ICE: uplift WLTP→uso reale (idempotente se già in fascia)
-- EV/PHEV: clamp kWh/100 fuori fascia (batteria/range placeholder 350 corrompe i dati)
-- Sync energyConsumptionKWhPerKm ↔ wltpConsumptionKWh100km; ripara batteryKWh assurdi
+- EV/PHEV: clamp kWh/100 fuori fascia; BEV range: mai flat 350 passeggeri (pack÷energy o default segmento)
+- Sync energyConsumptionKWhPerKm ↔ wltpConsumptionKWh100km; ripara batteryKWh/range placeholder
 
 Uso:
   python3 scripts/hygiene_catalog_fuel_and_consumption.py
@@ -305,22 +305,212 @@ def realistic_phev_fuel(row: dict) -> float | None:
     return round(cons, 4)
 
 
-def sync_ev_energy_fields(row: dict, kwh_per_km: float) -> None:
+# BEV range defaults (km). Never invent flat 350 for passenger cars.
+# Vans may legitimately sit near 250–350.
+EV_DEFAULT_RANGE_KM = {"small": 330, "compact": 500, "medium": 460, "suv": 440}
+EV_RANGE_BAND_KM = {
+    "small": (280, 380),
+    "compact": (450, 580),
+    "medium": (380, 520),
+    "suv": (380, 520),
+}
+VAN_DEFAULT_RANGE_KM = 300
+VAN_RANGE_BAND_KM = (250, 360)
+PLACEHOLDER_RANGE_KM = {350, 351}
+USABLE_BATTERY_FRAC = 0.88  # usable ~0.85–0.92 of pack
+PHEV_DEFAULT_RANGE_KM = 55
+
+
+def is_placeholder_bev_range(rng: float | None, row: dict) -> bool:
+    """True when range is missing or the old flat-350 hygiene placeholder (passenger only)."""
+    if rng is None or rng <= 0:
+        return True
+    if is_van_like(row):
+        return False
+    return int(round(rng)) in PLACEHOLDER_RANGE_KM
+
+
+def battery_looks_derived_from_placeholder(row: dict, kwh_per_km: float) -> bool:
+    """True when batteryKWh ≈ energy × 350 (legacy hygiene artifact)."""
+    bat = _as_float(row.get("batteryKWh"))
+    if bat is None or kwh_per_km is None or kwh_per_km <= 0:
+        return True
+    for placeholder in PLACEHOLDER_RANGE_KM:
+        implied = kwh_per_km * float(placeholder)
+        if implied > 0 and abs(bat - implied) / implied < 0.08:
+            return True
+    rng = _as_float(row.get("wltpRangeKm"))
+    if rng is not None and int(round(rng)) in PLACEHOLDER_RANGE_KM:
+        implied = kwh_per_km * rng
+        if implied > 0 and abs(bat - implied) / implied < 0.08:
+            return True
+    return False
+
+
+def model_range_hint_km(row: dict) -> int | None:
+    """Known efficient / class anchors so Model 3 / Q4 land in sensible bands."""
+    model = (row.get("model") or "").lower()
+    brand = (row.get("brand") or "").lower()
+    blob = f"{brand} {model}"
+    if "model 3" in blob:
+        return 520
+    if "model y" in blob:
+        return 500
+    if "model s" in blob:
+        return 560
+    if "model x" in blob:
+        return 480
+    if "q4" in model and "tron" in model:
+        return 450
+    if "ioniq 6" in blob or model == "ioniq 6":
+        return 520
+    if "ioniq 5" in blob or model == "ioniq 5":
+        return 460
+    if "leaf" in model:
+        return 320
+    if "zoe" in model:
+        return 340
+    if "500e" in model or model in ("500e", "500 electric"):
+        return 300
+    if "e-up" in model or "e-up!" in model:
+        return 260
+    if "id.3" in model or model == "id.3":
+        return 420
+    if "id.4" in model or model == "id.4":
+        return 450
+    if "enyaq" in model:
+        return 450
+    if "polestar 2" in blob:
+        return 480
+    if "mach-e" in model or "mach e" in model:
+        return 450
+    return None
+
+
+def default_bev_range_km(row: dict) -> int:
+    year = int(row.get("year") or 2020)
+    # Mild year drift so the catalog is not another flat spike.
+    year_bump = max(-24, min(40, (year - 2020) * 6))
+    if is_van_like(row):
+        return int(VAN_DEFAULT_RANGE_KM + year_bump // 3)
+
+    hint = model_range_hint_km(row)
+    if hint is not None:
+        base = hint
+        # Keep model anchors inside their class band (city cars stay lower).
+        if hint <= 340:
+            lo, hi = 250, 380
+        elif hint >= 500:
+            lo, hi = 450, 620
+        else:
+            lo, hi = 380, 560
+    else:
+        seg = segment_from_length(row.get("lengthM"))
+        base = EV_DEFAULT_RANGE_KM[seg]
+        lo, hi = EV_RANGE_BAND_KM[seg]
+
+    value = int(min(max(base + year_bump, lo), hi))
+    # Never re-land passenger cars on the old flat placeholder spike.
+    if value in PLACEHOLDER_RANGE_KM:
+        value = 345 if value == 350 else 355
+        value = int(min(max(value, lo), hi))
+        if value in PLACEHOLDER_RANGE_KM:
+            value = lo + 5
+    return value
+
+
+def realistic_bev_range_km(row: dict, kwh_per_km: float) -> int:
+    """Passenger BEV range: replace placeholder 350; pack÷energy only when range missing."""
+    rng = _as_float(row.get("wltpRangeKm"))
+    bat = _as_float(row.get("batteryKWh"))
+
+    if is_van_like(row):
+        if rng is not None and VAN_RANGE_BAND_KM[0] <= rng <= VAN_RANGE_BAND_KM[1]:
+            return int(rng)
+        return default_bev_range_km(row)
+
+    # Keep non-placeholder ranges already in a sane band.
+    if not is_placeholder_bev_range(rng, row) and rng is not None and 200 <= rng <= 700:
+        return int(rng)
+
+    # Exact/clustered placeholder (350): prefer model/segment defaults.
+    # Pack values were often derived from earlier energy×350 and are not trustworthy.
+    if rng is not None and int(round(rng)) in PLACEHOLDER_RANGE_KM:
+        return default_bev_range_km(row)
+
+    # Missing range: try trustworthy pack, else defaults.
+    if (
+        bat is not None
+        and 20 <= bat <= 120
+        and not battery_looks_derived_from_placeholder(row, kwh_per_km)
+        and kwh_per_km > 0
+    ):
+        computed = (USABLE_BATTERY_FRAC * bat) / kwh_per_km
+        seg = segment_from_length(row.get("lengthM"))
+        lo, hi = EV_RANGE_BAND_KM.get(seg, (380, 520))
+        lo, hi = max(200, lo - 40), min(700, hi + 60)
+        value = int(round(min(max(computed, lo), hi)))
+        if value in PLACEHOLDER_RANGE_KM:
+            value = default_bev_range_km(row)
+        return value
+
+    return default_bev_range_km(row)
+
+
+def sync_ev_energy_fields(row: dict, kwh_per_km: float) -> bool:
+    """Sync energy twins + fix BEV placeholder range/battery. Returns True if range changed."""
     row["energyConsumptionKWhPerKm"] = round(kwh_per_km, 4)
     row["wltpConsumptionKWh100km"] = round(kwh_per_km * 100.0, 1)
 
-    rng = _as_float(row.get("wltpRangeKm"))
+    pt = (row.get("powertrain") or "").lower()
+    old_rng = _as_float(row.get("wltpRangeKm"))
     bat = _as_float(row.get("batteryKWh"))
-    # Range placeholder ~350 ovunque: ripara solo batterie assurde rispetto al consumo.
-    if rng is None or rng <= 0:
-        rng = 350.0
-        row["wltpRangeKm"] = int(rng)
+    range_changed = False
 
-    implied = kwh_per_km * rng
-    if bat is None or bat < 15 or bat > 120 or (implied > 0 and abs(bat - implied) / implied > 0.45):
-        # Pack realistici passeggeri ~20–100 kWh; van fino a 120.
+    if pt == "phev":
+        # PHEV electric-only range is short; never invent BEV 350/defaults.
+        if old_rng is None or old_rng <= 0:
+            row["wltpRangeKm"] = PHEV_DEFAULT_RANGE_KM
+            range_changed = True
+        rng = float(row["wltpRangeKm"])
+        implied = kwh_per_km * rng
+        if bat is None or bat < 5 or bat > 40 or (implied > 0 and abs(bat - implied) / implied > 0.55):
+            row["batteryKWh"] = round(min(max(implied, 8.0), 30.0), 1)
+        return range_changed
+
+    # BEV (and any other electrified row routed here). Snapshot before mutating range.
+    was_placeholder = is_placeholder_bev_range(old_rng, row)
+    derived_from_placeholder = battery_looks_derived_from_placeholder(row, kwh_per_km)
+
+    new_rng = realistic_bev_range_km(row, kwh_per_km)
+    if old_rng is None or int(old_rng) != int(new_rng):
+        range_changed = True
+    row["wltpRangeKm"] = int(new_rng)
+
+    implied = kwh_per_km * float(new_rng)
+    if is_van_like(row) and not range_changed:
+        # Vans may keep ~250–350; bat ≈ energy×range is consistent, not a bug.
+        needs_bat = (
+            bat is None
+            or bat < 15
+            or bat > 120
+            or (implied > 0 and abs(bat - implied) / implied > 0.45)
+        )
+    else:
+        # Leaving a placeholder range: always re-derive pack (stale bat often from older energy×350).
+        needs_bat = (
+            bat is None
+            or bat < 15
+            or bat > 120
+            or (was_placeholder and range_changed)
+            or derived_from_placeholder
+            or (implied > 0 and abs(bat - implied) / implied > 0.45)
+        )
+
+    if needs_bat:
         cap = 120.0 if is_van_like(row) else 100.0
         row["batteryKWh"] = round(min(max(implied, 20.0), cap), 1)
+    return range_changed
 
 
 def hygiene_rows(rows: list[dict]) -> tuple[list[dict], dict]:
@@ -331,6 +521,7 @@ def hygiene_rows(rows: list[dict]) -> tuple[list[dict], dict]:
         "fuel_kind_set": 0,
         "ice_consumption_fixed": 0,
         "ev_energy_fixed": 0,
+        "ev_range_fixed": 0,
         "phev_energy_fixed": 0,
         "phev_fuel_fixed": 0,
         "diesel": 0,
@@ -360,19 +551,20 @@ def hygiene_rows(rows: list[dict]) -> tuple[list[dict], dict]:
         elif pt == "ev":
             old = resolve_raw_ev_kwh_per_km(out)
             new_e = realistic_ev_energy(out)
-            if old is None or abs(old - new_e) >= 0.00005:
-                sync_ev_energy_fields(out, new_e)
+            energy_changed = old is None or abs(old - new_e) >= 0.00005
+            range_changed = sync_ev_energy_fields(out, new_e)
+            if energy_changed:
                 stats["ev_energy_fixed"] += 1
-            else:
-                # Allinea comunque i campi gemelli se manca wltpConsumption.
-                if out.get("wltpConsumptionKWh100km") is None:
-                    out["wltpConsumptionKWh100km"] = round(new_e * 100.0, 1)
+            if range_changed:
+                stats["ev_range_fixed"] += 1
 
         elif pt == "phev":
             old_e = resolve_raw_ev_kwh_per_km(out)
             new_e = realistic_ev_energy(out)
-            if old_e is None or abs(old_e - new_e) >= 0.00005:
-                sync_ev_energy_fields(out, new_e)
+            energy_changed = old_e is None or abs(old_e - new_e) >= 0.00005
+            # Always sync twins / missing PHEV range; never apply BEV 350 defaults.
+            sync_ev_energy_fields(out, new_e)
+            if energy_changed:
                 stats["phev_energy_fixed"] += 1
             new_f = realistic_phev_fuel(out)
             old_f = _as_float(out.get("fuelConsumptionLPerKm"))
@@ -424,6 +616,7 @@ def main() -> int:
             f"{stats['path']}: {stats['in']} → {stats['out']} "
             f"(junk -{stats['junk_dropped']}, fuelKind {stats['fuel_kind_set']}, "
             f"ice↑ {stats['ice_consumption_fixed']}, ev↑ {stats['ev_energy_fixed']}, "
+            f"evRange↑ {stats['ev_range_fixed']}, "
             f"phevE↑ {stats['phev_energy_fixed']}, phevF↑ {stats['phev_fuel_fixed']})"
         )
     return 0

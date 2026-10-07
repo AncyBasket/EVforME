@@ -20,7 +20,7 @@ final class VehicleCatalogService {
     }
 
     private let defaults = UserDefaults.standard
-    private let seedVersion = 30
+    private let seedVersion = 31
     private var remoteDisabledForTesting = false
     private let remoteSession: URLSession = {
         let config = URLSessionConfiguration.ephemeral
