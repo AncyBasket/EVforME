@@ -2,11 +2,11 @@
   "url": "",
   "publishedUrl": "https://files.catbox.moe/3i0nro.json",
   "rows": 5761,
-  "bytes": 2091318,
+  "bytes": 2091829,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-07T15:59:08.625815+00:00",
+  "updatedAt": "2026-10-07T16:17:31.433834+00:00",
   "policy": "offline-first",
-  "seedVersion": 30,
-  "note": "seedVersion 30: EV/PHEV energy bands + PHEV charge-sustaining fuel floor. url empty (offline-first)."
+  "seedVersion": 31,
+  "note": "seedVersion 31: no flat passenger wltpRangeKm=350; vans may stay ~250\u2013350. Offline-first."
 }
