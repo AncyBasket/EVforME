@@ -126,7 +126,7 @@ struct BumpFuelPriceIntent: AppIntent {
     static var description = IntentDescription(LocalizedStringResource("widget_bump_fuel_description"))
 
     func perform() async throws -> some IntentResult {
-        var snap = SnapshotLoader.load()
+        let snap = SnapshotLoader.load()
         let ice = snap?.iceLPer100Km
             ?? SnapshotLoader.loadMirror()?.iceLPer100Km
             ?? 7.0

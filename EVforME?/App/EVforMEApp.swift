@@ -218,7 +218,7 @@ struct EVforMEApp: App {
 
     private func openLastVerdict() {
         showOnboarding = false
-        if let snap = ScenarioHistoryStore.latest() {
+        if ScenarioHistoryStore.latest() != nil {
             reopenLastComparison()
             return
         }
