@@ -46,7 +46,7 @@ struct ContentView: View {
                 userInput.sourceVehicleId = "alfa-romeo-147-2005"
             }
             if userInput.targetVehicleId.isEmpty {
-                userInput.targetVehicleId = "audi-q4-e-tron-2017"
+                userInput.targetVehicleId = "audi-q4-e-tron-2021"
             }
         }
     }

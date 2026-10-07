@@ -45,8 +45,12 @@ struct OperatingCostBreakdown: Equatable {
 }
 
 enum OwnershipCostEstimates {
-    /// Valore di riferimento per assicurazione/manutenzione quando le auto sono già possedute:
-    /// usa un residuo stimato (non il listino nuovo), così un EV usato non gonfia l’RC.
+    /// Valore di riferimento per assicurazione/manutenzione.
+    ///
+    /// `Defaults.suggestedPurchasePrice` è già una stima **usato** (sconta l’età).
+    /// Se trattassimo quel prezzo come listino nuovo e lo svalutassimo di nuovo,
+    /// RC/manutenzione crollerebbero al floor (doppia svalutazione).
+    /// Haircut solo quando il prezzo sembra ancora un listino/nuovo per un’auto datata.
     static func operatingValueBasis(
         purchaseOrListPrice: Double,
         vehicleYear: Int,
@@ -57,13 +61,19 @@ enum OwnershipCostEstimates {
         if age <= 0 {
             return purchaseOrListPrice
         }
+        let floor: Double = electrified ? 8_000 : 3_500
+        // Stessa curva grezza di `Defaults.suggestedPurchasePrice` (±15% tolleranza).
+        let typicalUsed: Double = electrified
+            ? max(14_000, 38_000 - Double(age) * 1_300)
+            : max(3_500, 16_500 - Double(age) * 900)
+        if purchaseOrListPrice <= typicalUsed * 1.15 {
+            return max(floor, purchaseOrListPrice)
+        }
         let residual = residualValue(
             purchasePrice: purchaseOrListPrice,
             years: age,
             electrified: electrified
         )
-        // Floor sensato: non scendere sotto una franchigia minima di mercato usato.
-        let floor: Double = electrified ? 8_000 : 3_500
         return max(floor, min(purchaseOrListPrice, residual))
     }
 

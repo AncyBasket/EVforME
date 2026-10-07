@@ -614,24 +614,39 @@ struct VerdictView: View {
     private var tcoExtrasSection: some View {
         let years = max(1, userInput.ownershipYears)
         let km = Double(userInput.dailyKm)
-        let sourceElectrified = VehicleCatalogService.shared.vehicle(by: userInput.sourceVehicleId).map { $0.powertrain != .ice } ?? false
+        let source = VehicleCatalogService.shared.vehicle(by: userInput.sourceVehicleId)
+        let target = VehicleCatalogService.shared.vehicle(by: userInput.targetVehicleId)
+        let sourceElectrified = source.map { $0.powertrain != .ice } ?? false
+        let sourceYear = source?.year ?? Calendar.current.component(.year, from: Date())
+        let targetYear = target?.year ?? Calendar.current.component(.year, from: Date())
+        // Valore d’uso (residuo), non listino nuovo: altrimenti un EV nuovo gonfia l’RC vs un’usata.
+        let sourceBasis = OwnershipCostEstimates.operatingValueBasis(
+            purchaseOrListPrice: userInput.sourcePurchasePrice,
+            vehicleYear: sourceYear,
+            electrified: sourceElectrified
+        )
+        let targetBasis = OwnershipCostEstimates.operatingValueBasis(
+            purchaseOrListPrice: userInput.targetPurchasePrice,
+            vehicleYear: targetYear,
+            electrified: true
+        )
         let iceIns = OwnershipCostEstimates.insurancePerYear(
-            purchasePrice: userInput.sourcePurchasePrice,
+            purchasePrice: sourceBasis,
             yearlyKm: km,
             electrified: sourceElectrified
         )
         let evIns = OwnershipCostEstimates.insurancePerYear(
-            purchasePrice: userInput.targetPurchasePrice,
+            purchasePrice: targetBasis,
             yearlyKm: km,
             electrified: true
         )
         let iceRes = OwnershipCostEstimates.residualValue(
-            purchasePrice: userInput.sourcePurchasePrice,
+            purchasePrice: sourceBasis,
             years: years,
             electrified: sourceElectrified
         )
         let evRes = OwnershipCostEstimates.residualValue(
-            purchasePrice: userInput.targetPurchasePrice,
+            purchasePrice: targetBasis,
             years: years,
             electrified: true
         )

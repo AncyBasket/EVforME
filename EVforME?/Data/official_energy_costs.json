@@ -2,6 +2,7 @@
   "country": "IT",
   "currency": "EUR",
   "fuelPricePerLiter": 1.739,
+  "dieselPricePerLiter": 1.659,
   "electricityPricePerKWh": 0.333,
   "updatedAt": "2026-04-30T12:21:29.157392+00:00",
   "sources": {

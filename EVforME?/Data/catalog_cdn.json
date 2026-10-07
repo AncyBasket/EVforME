@@ -1,10 +1,12 @@
 {
   "url": "",
-  "rows": 8478,
-  "bytes": 0,
+  "publishedUrl": "https://files.catbox.moe/3i0nro.json",
+  "rows": 5761,
+  "bytes": 2091829,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-09-10T08:50:00+00:00",
+  "updatedAt": "2026-10-07T16:17:31.433834+00:00",
   "policy": "offline-first",
-  "note": "TestFlight: remote CDN disabled. App uses bundled vehicles.seed.quality.json only. Re-enable a stable HTTPS host later via EVFORME_CATALOG_URL / publish_catalog_cdn.py."
+  "seedVersion": 31,
+  "note": "seedVersion 31: no flat passenger wltpRangeKm=350; vans may stay ~250\u2013350. Offline-first."
 }

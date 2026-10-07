@@ -25,11 +25,25 @@ enum Powertrain: String, Codable {
         case .ice: return false
         }
     }
+}
 
-    /// Etichetta IT per picker (senza benzina/diesel nel seed → ICE generico).
-    var catalogFuelLabel: String {
+/// Carburante liquido (ICE/PHEV). Opzionale nel seed; altrimenti euristica IT.
+enum FuelKind: String, Codable {
+    case petrol
+    case diesel
+    case unknown
+}
+
+extension Powertrain {
+    /// Etichetta IT per picker (benzina/diesel se noti).
+    func catalogFuelLabel(fuelKind: FuelKind) -> String {
         switch self {
-        case .ice: return L10n.powertrainIceLabel
+        case .ice:
+            switch fuelKind {
+            case .diesel: return L10n.powertrainDieselLabel
+            case .petrol: return L10n.powertrainPetrolLabel
+            case .unknown: return L10n.powertrainIceLabel
+            }
         case .phev: return L10n.powertrainPhevLabel
         case .ev: return L10n.powertrainEvLabel
         }
@@ -61,6 +75,8 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
     let sourceName: String?
     let sourceUpdatedAt: String?
     let confidenceScore: Double?
+    /// `petrol` / `diesel` se noto; `nil` → `resolvedFuelKind` euristica.
+    let fuelKind: FuelKind?
 
     var displayName: String {
         if let trim, !trim.isEmpty {
@@ -115,6 +131,72 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         return hasHomeCharging ? 0.55 : 0.30
     }
 
+    /// Carburante effettivo per prezzi MIMIT e etichette picker.
+    var resolvedFuelKind: FuelKind {
+        if let fuelKind, fuelKind != .unknown { return fuelKind }
+        switch powertrain {
+        case .ev:
+            return .unknown
+        case .phev, .ice:
+            return Self.inferFuelKind(brand: brand, model: model, year: year, trim: trim)
+        }
+    }
+
+    var catalogFuelLabel: String {
+        powertrain.catalogFuelLabel(fuelKind: resolvedFuelKind)
+    }
+
+    /// Nomi NHTSA / spazzatura da non mostrare nel picker.
+    var isJunkCatalogEntry: Bool {
+        let blob = "\(brand) \(model)".lowercased()
+        let needles = [
+            "radiator", "trailer", "manufacturing", " llc", " inc", " ltd",
+            "company", "chassis", "incomplete", "motorhome", "cutaway",
+        ]
+        return needles.contains { blob.contains($0) }
+    }
+
+    private static let dieselLeanModels: Set<String> = [
+        "ateca", "tiguan", "touareg", "qashqai", "x-trail", "sportage", "sorento",
+        "tucson", "santa fe", "kuga", "mondeo", "passat", "superb", "octavia",
+        "3008", "5008", "508", "c5 aircross", "kadjar", "koleos", "outlander",
+        "asx", "rav4", "land cruiser", "discovery", "discovery sport",
+        "range rover evoque", "range rover sport", "defender", "glc", "gle",
+        "x3", "x5", "q5", "q7", "a4", "a6", "3 series", "5 series",
+        "c-class", "e-class", "vito", "transporter",
+    ]
+
+    private static let petrolLeanModels: Set<String> = [
+        "panda", "500", "500l", "500x", "punto", "twingo", "clio", "micra",
+        "aygo", "yaris", "i10", "i20", "picanto", "rio", "up!", "polo",
+        "corsa", "208", "108", "107", "c1", "c3", "ibiza", "fabia", "mii",
+    ]
+
+    private static func inferFuelKind(brand: String, model: String, year: Int, trim: String?) -> FuelKind {
+        let blob = "\(model) \(trim ?? "")".lowercased()
+        if blob.contains("diesel") || blob.contains("tdi") || blob.contains("tdci")
+            || blob.contains(" dci") || blob.contains("hdi") || blob.contains("jtd")
+            || blob.contains("crd") || blob.contains("skyactiv-d") || blob.contains("bluehdi") {
+            return .diesel
+        }
+        if blob.contains("benzina") || blob.contains("petrol") || blob.contains("tsi")
+            || blob.contains("tfsi") || blob.contains("tce") || blob.contains("mpi")
+            || blob.contains("gdi") || blob.contains("skyactiv-g") {
+            return .petrol
+        }
+        let key = model.lowercased()
+        if petrolLeanModels.contains(key) { return .petrol }
+        // SUV / family diesel-leaning in IT roughly 2010–2021.
+        if dieselLeanModels.contains(key), (2010...2021).contains(year) {
+            return .diesel
+        }
+        if dieselLeanModels.contains(key), year >= 2022 {
+            // Post-2022 mix più benzina/ibrido: default benzina se non specificato.
+            return .petrol
+        }
+        return .petrol
+    }
+
     init(
         id: String,
         brand: String,
@@ -137,7 +219,8 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         market: String? = "IT",
         sourceName: String? = nil,
         sourceUpdatedAt: String? = nil,
-        confidenceScore: Double? = nil
+        confidenceScore: Double? = nil,
+        fuelKind: FuelKind? = nil
     ) {
         self.id = id
         self.brand = brand
@@ -161,5 +244,6 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         self.sourceName = sourceName
         self.sourceUpdatedAt = sourceUpdatedAt
         self.confidenceScore = confidenceScore
+        self.fuelKind = fuelKind
     }
 }

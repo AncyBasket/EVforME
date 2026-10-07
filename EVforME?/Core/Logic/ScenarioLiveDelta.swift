@@ -91,9 +91,14 @@ enum ScenarioLiveDelta {
 
     /// True se i prezzi live si sono mossi oltre soglia rispetto allo snapshot (per reminder).
     static func liveDataMoved(versus snapshot: SavedScenarioSnapshot) -> Bool {
-        let liveFuel = liveFuelPrice(fallback: snapshot.fuelPriceAtSave ?? snapshot.restoredUserInput().fuelPrice)
+        let restored = snapshot.restoredUserInput()
+        let fuelKind = VehicleCatalogService.shared.vehicle(by: restored.sourceVehicleId)?.resolvedFuelKind ?? .petrol
+        let liveFuel = liveFuelPrice(
+            fallback: snapshot.fuelPriceAtSave ?? restored.fuelPrice,
+            fuelKind: fuelKind
+        )
         let liveElec = liveElectricityPrice(
-            fallback: snapshot.electricityPriceAtSave ?? snapshot.restoredUserInput().electricityPricePerKWh
+            fallback: snapshot.electricityPriceAtSave ?? restored.electricityPricePerKWh
         )
         let liveIncentive = snapshot.restoredUserInput().estimatedPurchaseIncentiveEUR
         let report = evaluate(
@@ -106,9 +111,9 @@ enum ScenarioLiveDelta {
         return report.isMaterial
     }
 
-    static func liveFuelPrice(fallback: Double) -> Double {
-        if let cached = OfficialCostService.shared.cachedOrBundledCosts()?.fuelPricePerLiter {
-            return cached
+    static func liveFuelPrice(fallback: Double, fuelKind: FuelKind = .petrol) -> Double {
+        if let cached = OfficialCostService.shared.cachedOrBundledCosts() {
+            return cached.pricePerLiter(for: fuelKind)
         }
         return fallback
     }

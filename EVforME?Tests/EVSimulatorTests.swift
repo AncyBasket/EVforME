@@ -14,7 +14,7 @@ final class EVSimulatorTests: XCTestCase {
 
     /// ID noti nel `vehicles.seed.json` (ICE + EV) per input valido in test.
     private let testSourceVehicleId = "alfa-romeo-147-2005"
-    private let testTargetVehicleId = "audi-q4-e-tron-2017"
+    private let testTargetVehicleId = "audi-q4-e-tron-2021"
 
     override func setUp() {
         super.setUp()
@@ -234,7 +234,7 @@ final class EVSimulatorTests: XCTestCase {
     func testScenarioOrderingOfSavings() {
         let catalog = VehicleCatalogService.shared
         guard let source = catalog.vehicle(by: "alfa-romeo-147-2005") ?? catalog.sourceVehicles().first,
-              let target = catalog.vehicle(by: "audi-q4-e-tron-2017") ?? catalog.targetEVVehicles().first
+              let target = catalog.vehicle(by: "audi-q4-e-tron-2021") ?? catalog.targetEVVehicles().first
         else {
             XCTFail("Catalog must expose at least one ICE and one EV for this test")
             return
@@ -284,7 +284,7 @@ final class EVSimulatorTests: XCTestCase {
     func testSavingsAreWithinReasonableRange() {
         let catalog = VehicleCatalogService.shared
         guard let source = catalog.vehicle(by: "alfa-romeo-147-2005") ?? catalog.sourceVehicles().first,
-              let target = catalog.vehicle(by: "audi-q4-e-tron-2017") ?? catalog.targetEVVehicles().first
+              let target = catalog.vehicle(by: "audi-q4-e-tron-2021") ?? catalog.targetEVVehicles().first
         else {
             XCTFail("Catalog must expose at least one ICE and one EV for this test")
             return
@@ -320,7 +320,7 @@ final class EVSimulatorTests: XCTestCase {
     func testYearlyCostsAreConsistent() {
         let catalog = VehicleCatalogService.shared
         guard let source = catalog.vehicle(by: "alfa-romeo-147-2005") ?? catalog.sourceVehicles().first,
-              let target = catalog.vehicle(by: "audi-q4-e-tron-2017") ?? catalog.targetEVVehicles().first
+              let target = catalog.vehicle(by: "audi-q4-e-tron-2021") ?? catalog.targetEVVehicles().first
         else {
             XCTFail("Catalog must expose at least one ICE and one EV for this test")
             return
