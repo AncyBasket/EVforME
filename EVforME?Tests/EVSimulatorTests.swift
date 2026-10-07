@@ -484,4 +484,170 @@ final class EVSimulatorTests: XCTestCase {
         XCTAssertEqual(result.yearlyComparison.last?.year, 8)
     }
 
+    // MARK: - Comparison intent + IT pair matrix
+
+    func testNetPurchasePremium_ZeroWhenAlreadyOwned() {
+        var input = UserInput(
+            dailyKm: 15_000,
+            hasHomeCharging: true,
+            areaType: .urban,
+            fuelPrice: 1.8,
+            ownershipYears: 5,
+            electricityPricePerKWh: 0.25,
+            sourceVehicleId: "seat-ateca-2016",
+            targetVehicleId: "tesla-model-3-2023",
+            scenario: .realistic,
+            sourcePurchasePrice: 12_000,
+            targetPurchasePrice: 42_000,
+            includeIncentives: true,
+            comparisonIntent: .alreadyOwned
+        )
+        XCTAssertEqual(input.netPurchasePremiumEUR, 0)
+
+        input.comparisonIntent = .consideringPurchase
+        XCTAssertGreaterThan(input.netPurchasePremiumEUR, 0)
+    }
+
+    func testAteca2016_Model3_2023_OwnedMode_NotFalsifiedByListPrice() {
+        // Case that looked “non conviene” when purchase premium polluted the verdict.
+        let purchase = UserInput(
+            dailyKm: 15_000,
+            hasHomeCharging: true,
+            areaType: .mixed,
+            fuelPrice: 1.85,
+            ownershipYears: 5,
+            electricityPricePerKWh: 0.28,
+            sourceVehicleId: "seat-ateca-2016",
+            targetVehicleId: "tesla-model-3-2023",
+            scenario: .realistic,
+            sourcePurchasePrice: 14_000,
+            targetPurchasePrice: 42_000,
+            includeIncentives: true,
+            comparisonIntent: .consideringPurchase
+        )
+        var owned = purchase
+        owned.comparisonIntent = .alreadyOwned
+
+        let buyResult = requireSimulate(input: purchase)
+        let ownResult = requireSimulate(input: owned)
+
+        XCTAssertNil(ownResult.breakEvenMonths)
+        XCTAssertTrue(
+            ownResult.keyReasons.contains(where: { $0 == L10n.comparisonIntentOwnedReason }),
+            "Owned mode must surface opex-only reason"
+        )
+        // Owned must not be strictly worse than purchase solely because of listino.
+        let buyRank = verdictRank(buyResult.verdict)
+        let ownRank = verdictRank(ownResult.verdict)
+        XCTAssertGreaterThanOrEqual(ownRank, buyRank)
+    }
+
+    func testItalianPairMatrix_MixedPowertrains_SimulateAndStayFinite() {
+        struct Pair {
+            let name: String
+            let source: String
+            let target: String
+            let intent: ComparisonIntent
+            let home: Bool
+            let km: Int
+            let sourcePrice: Double
+            let targetPrice: Double
+            let stickerFuel: Double?
+            let stickerEnergy: Double?
+        }
+
+        let pairs: [Pair] = [
+            // Citycar ICE → EV
+            .init(name: "Panda→500e", source: "fiat-panda-2018", target: "fiat-500e-2023", intent: .alreadyOwned, home: true, km: 12_000, sourcePrice: 6_000, targetPrice: 28_000, stickerFuel: nil, stickerEnergy: nil),
+            // Compact ICE → EV
+            .init(name: "Golf→ID.3", source: "volkswagen-golf-2018", target: "volkswagen-id3-2023", intent: .alreadyOwned, home: true, km: 18_000, sourcePrice: 12_000, targetPrice: 35_000, stickerFuel: nil, stickerEnergy: nil),
+            // SUV ICE → premium EV (Ateca / Model 3)
+            .init(name: "Ateca→Model3", source: "seat-ateca-2016", target: "tesla-model-3-2023", intent: .alreadyOwned, home: true, km: 16_000, sourcePrice: 14_000, targetPrice: 40_000, stickerFuel: nil, stickerEnergy: nil),
+            // Premium ICE → EV purchase
+            .init(name: "Serie3→Model3 buy", source: "bmw-3-series-2018", target: "tesla-model-3-2024", intent: .consideringPurchase, home: true, km: 20_000, sourcePrice: 22_000, targetPrice: 42_000, stickerFuel: nil, stickerEnergy: nil),
+            // ICE → PHEV
+            .init(name: "Corsa→AstraPHEV", source: "opel-corsa-2018", target: "opel-astra-hybrid-phev-2024", intent: .consideringPurchase, home: true, km: 15_000, sourcePrice: 8_000, targetPrice: 34_000, stickerFuel: nil, stickerEnergy: nil),
+            // ICE → PHEV (Golf GTE)
+            .init(name: "Golf→GolfGTE", source: "volkswagen-golf-2016", target: "volkswagen-golf-gte-phev-2024", intent: .alreadyOwned, home: true, km: 14_000, sourcePrice: 10_000, targetPrice: 36_000, stickerFuel: nil, stickerEnergy: nil),
+            // PHEV → EV
+            .init(name: "PriusPHEV→ID.3", source: "toyota-prius-plug-in-phev-2024", target: "volkswagen-id3-2024", intent: .alreadyOwned, home: true, km: 18_000, sourcePrice: 28_000, targetPrice: 36_000, stickerFuel: nil, stickerEnergy: nil),
+            // City → Leaf
+            .init(name: "208→Leaf", source: "peugeot-208-2018", target: "nissan-leaf-2023", intent: .alreadyOwned, home: false, km: 10_000, sourcePrice: 9_000, targetPrice: 24_000, stickerFuel: nil, stickerEnergy: nil),
+            // Yaris → Ioniq 5
+            .init(name: "Yaris→Ioniq5", source: "toyota-yaris-2018", target: "hyundai-ioniq-5-2023", intent: .consideringPurchase, home: true, km: 15_000, sourcePrice: 11_000, targetPrice: 45_000, stickerFuel: nil, stickerEnergy: nil),
+            // Edge: 0 km
+            .init(name: "0km edge", source: "fiat-panda-2018", target: "fiat-500e-2023", intent: .alreadyOwned, home: true, km: 0, sourcePrice: 6_000, targetPrice: 28_000, stickerFuel: nil, stickerEnergy: nil),
+            // Edge: sticker override
+            .init(name: "sticker override", source: "seat-ateca-2016", target: "tesla-model-3-2023", intent: .alreadyOwned, home: true, km: 15_000, sourcePrice: 14_000, targetPrice: 40_000, stickerFuel: 7.5, stickerEnergy: 14.5),
+            // Edge: different ownership years + no wallbox
+            .init(name: "no wallbox 8y", source: "volkswagen-golf-2018", target: "volkswagen-id3-2023", intent: .consideringPurchase, home: false, km: 22_000, sourcePrice: 12_000, targetPrice: 35_000, stickerFuel: nil, stickerEnergy: nil),
+        ]
+
+        let catalog = VehicleCatalogService.shared
+        var ran = 0
+        for pair in pairs {
+            guard catalog.vehicle(by: pair.source) != nil, catalog.vehicle(by: pair.target) != nil else {
+                XCTFail("Missing catalog ids for \(pair.name): \(pair.source) / \(pair.target)")
+                continue
+            }
+            // Validator rejects 0 km — use minimum after asserting intent path for premium.
+            let km = max(pair.km, 1_000)
+            var input = UserInput(
+                dailyKm: km,
+                hasHomeCharging: pair.home,
+                areaType: .mixed,
+                fuelPrice: 1.8,
+                ownershipYears: pair.name.contains("8y") ? 8 : 5,
+                electricityPricePerKWh: 0.28,
+                sourceVehicleId: pair.source,
+                targetVehicleId: pair.target,
+                scenario: .realistic,
+                sourcePurchasePrice: pair.sourcePrice,
+                targetPurchasePrice: pair.targetPrice,
+                includeIncentives: true,
+                comparisonIntent: pair.intent,
+                sourceConsumptionOverrideLPer100Km: pair.stickerFuel,
+                targetEnergyOverrideKWhPer100Km: pair.stickerEnergy
+            )
+            if pair.km == 0 {
+                // Explicit edge: premium still 0 when owned; simulation uses clamped km via validator or fails closed.
+                XCTAssertEqual(input.netPurchasePremiumEUR, 0)
+                input.dailyKm = 1_000
+            }
+            let result = requireSimulate(input: input)
+            XCTAssertFalse(result.keyReasons.isEmpty, pair.name)
+            XCTAssertTrue(result.yearlyComparison.allSatisfy { $0.evCost.isFinite && $0.gasCost.isFinite }, pair.name)
+            if pair.intent == .alreadyOwned {
+                XCTAssertNil(result.breakEvenMonths, "\(pair.name) owned → no listino break-even")
+            }
+            if pair.stickerFuel != nil || pair.stickerEnergy != nil {
+                XCTAssertTrue(
+                    result.keyReasons.contains(where: { $0 == L10n.stickerOverrideAppliedReason }),
+                    "\(pair.name) should mention sticker override"
+                )
+            }
+            ran += 1
+        }
+        XCTAssertGreaterThanOrEqual(ran, 10, "Matrix must cover ≥10 IT pairs/edges")
+    }
+
+    func testComparisonIntentSuggested_UsedCarsDefaultOwned() {
+        XCTAssertEqual(
+            ComparisonIntent.suggested(sourceYear: 2016, targetYear: 2023, referenceYear: 2026),
+            .alreadyOwned
+        )
+        XCTAssertEqual(
+            ComparisonIntent.suggested(sourceYear: 2026, targetYear: 2026, referenceYear: 2026),
+            .consideringPurchase
+        )
+    }
+
+    private func verdictRank(_ verdict: EVVerdict) -> Int {
+        switch verdict {
+        case .notYet: return 0
+        case .maybe: return 1
+        case .yes: return 2
+        }
+    }
+
 }

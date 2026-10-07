@@ -7,7 +7,9 @@ iOS app that helps decide whether switching to an EV fits your yearly kilometers
 - **1.3 Colonnine vicine**: MapKit / MKLocalSearch, location When In Use solo on-demand, fallback città + Apri in Mappe
 - **1.2 Kit Italia**: bollo/assic/manutenzione stimate + finestra incentivo (`validUntil`) con disclaimer
 - **1.1 retention loop**: card “Ultimo confronto”, ricalcolo con dati live + delta prezzi/incentivi, reminder locali soft a 30/90 giorni (permesso solo dopo il primo verdetto)
-- **Workshop bench**: yearly km, fuel/electricity prices, ownership years, urban vs mixed driving, home charging, ICE → EV pair from a large catalog
+- **Workshop bench**: yearly km, fuel/electricity prices, ownership years, urban vs mixed driving, home charging, ICE → EV/PHEV pair from a large catalog
+- **Buy vs already-owned**: “sto comprando” includes list-price premium + incentives in payback; “già mie” is opex-only (premium = 0) so a high EV list price cannot fake a “non conviene”
+- **Catalog browse (AutoScout-style)**: Marca → Modello → anno/trim/alimentazione; text search grouped by brand
 - **Verdict**: `yes` / `maybe` / `notYet` with cost reasons, 5-year chart, fear vs reality, scenario chips
 - **On-device AI explanation** (Foundation Models / Apple Intelligence when available)
 - **App Intents / Shortcuts**: simulate EV suitability; open last verdict

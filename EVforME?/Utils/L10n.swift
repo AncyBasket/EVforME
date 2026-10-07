@@ -79,6 +79,10 @@ enum L10n {
     static var powertrainICE: String { string("powertrain_ice") }
     static var powertrainEV: String { string("powertrain_ev") }
     static var powertrainPHEV: String { string("powertrain_phev") }
+    /// Catalog picker fuel labels (IT-first: Benzina/Diesel → ICE, Ibrida plug-in, Elettrica).
+    static var powertrainIceLabel: String { string("powertrain_ice_label") }
+    static var powertrainPhevLabel: String { string("powertrain_phev_label") }
+    static var powertrainEvLabel: String { string("powertrain_ev_label") }
     static var currentVehicleShort: String { string("current_vehicle_short") }
     static var electrifiedVehicleShort: String { string("electrified_vehicle_short") }
     static var comparisonCardTitle: String { string("comparison_card_title") }
@@ -440,6 +444,13 @@ enum L10n {
     static var targetPurchasePriceLabel: String { string("target_purchase_price_label") }
     static var includeIncentivesToggle: String { string("include_incentives_toggle") }
     static var includeIncentivesHint: String { string("include_incentives_hint") }
+    static var comparisonIntentSectionTitle: String { string("comparison_intent_section_title") }
+    static var comparisonIntentPurchaseTitle: String { string("comparison_intent_purchase_title") }
+    static var comparisonIntentPurchaseSubtitle: String { string("comparison_intent_purchase_subtitle") }
+    static var comparisonIntentOwnedTitle: String { string("comparison_intent_owned_title") }
+    static var comparisonIntentOwnedSubtitle: String { string("comparison_intent_owned_subtitle") }
+    static var comparisonIntentOwnedReason: String { string("comparison_intent_owned_reason") }
+    static func opexSavingsOnlyReason(_ euro: Int) -> String { format("opex_savings_only_reason", euro) }
     static func incentivesIncludedReason(_ euro: Int) -> String { format("incentives_included_reason", euro) }
     static var incentivesTransparencyNote: String { string("incentives_transparency_note") }
     static var sourcesSectionTitle: String { string("sources_section_title") }

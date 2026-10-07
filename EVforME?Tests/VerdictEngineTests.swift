@@ -43,16 +43,23 @@ final class VerdictEngineTests: XCTestCase {
     }
 
     func testOptimisticScenarioIsMorePermissive() {
+        // Mid-band savings: clears optimistic purchase thresholds, not pessimistic.
         let okResult = makeResult(iceTotal: 9000, evTotal: 5000, yearlyIce: 1800, yearlyEv: 1100)
 
         let verdictOptimistic = VerdictEngine.evaluate(
             result: okResult,
-            scenario: .optimistic
+            scenario: .optimistic,
+            netPurchasePremiumEUR: 2_000,
+            ownershipYears: 5,
+            comparisonIntent: .consideringPurchase
         )
 
         let verdictPessimistic = VerdictEngine.evaluate(
             result: okResult,
-            scenario: .pessimistic
+            scenario: .pessimistic,
+            netPurchasePremiumEUR: 2_000,
+            ownershipYears: 5,
+            comparisonIntent: .consideringPurchase
         )
 
         XCTAssertNotEqual(verdictOptimistic, verdictPessimistic)
@@ -82,5 +89,44 @@ final class VerdictEngineTests: XCTestCase {
             ownershipYears: 5
         )
         XCTAssertEqual(unlocked, .yes)
+    }
+
+    func testOpexOnly_IgnoresHugeListPricePremium() {
+        // Same strong opex as above; purchase mode blocks, owned mode can say yes.
+        let strongOpex = makeResult(
+            iceTotal: 40_000,
+            evTotal: 20_000,
+            yearlyIce: 8_000,
+            yearlyEv: 4_000
+        )
+        let purchase = VerdictEngine.evaluate(
+            result: strongOpex,
+            scenario: .realistic,
+            netPurchasePremiumEUR: 80_000,
+            ownershipYears: 5,
+            comparisonIntent: .consideringPurchase
+        )
+        XCTAssertNotEqual(purchase, .yes)
+
+        let owned = VerdictEngine.evaluate(
+            result: strongOpex,
+            scenario: .realistic,
+            netPurchasePremiumEUR: 0,
+            ownershipYears: 5,
+            comparisonIntent: .alreadyOwned
+        )
+        XCTAssertEqual(owned, .yes)
+    }
+
+    func testOpexOnly_ZeroYearlyDelta_IsNotYet() {
+        let flat = makeResult(iceTotal: 10_000, evTotal: 10_000, yearlyIce: 2_000, yearlyEv: 2_000)
+        let verdict = VerdictEngine.evaluate(
+            result: flat,
+            scenario: .realistic,
+            netPurchasePremiumEUR: 0,
+            ownershipYears: 5,
+            comparisonIntent: .alreadyOwned
+        )
+        XCTAssertEqual(verdict, .notYet)
     }
 }

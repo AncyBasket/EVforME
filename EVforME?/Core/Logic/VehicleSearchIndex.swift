@@ -37,27 +37,32 @@ struct VehicleSearchIndex {
     private let groups: [IndexedGroup]
 
     init(vehicles: [VehicleCatalogItem]) {
-        let bundled = Dictionary(grouping: vehicles, by: { "\($0.brand)|\($0.model)" })
+        // Raggruppa per marca + modello canonico (unifica spelling inconsistenti nel seed).
+        let bundled = Dictionary(grouping: vehicles) { item in
+            Self.canonicalGroupKey(brand: item.brand, model: item.model)
+        }
         groups = bundled.values.compactMap { items -> IndexedGroup? in
             guard let first = items.first else { return nil }
             let sorted = items.sorted { $0.year > $1.year }
+            let displayModel = Self.preferredDisplayModel(in: sorted)
             let brandNorm = Self.normalize(first.brand)
-            let modelNorm = Self.normalize(first.model)
-            let modelTokens = Self.tokenize(first.model)
+            let modelNorm = Self.normalize(displayModel)
+            let modelTokens = Self.tokenize(displayModel)
             var all = Set(modelTokens)
             all.formUnion(Self.tokenize(first.brand))
-            if let trim = first.trim {
-                all.formUnion(Self.tokenize(trim))
+            for item in sorted {
+                if let trim = item.trim {
+                    all.formUnion(Self.tokenize(trim))
+                }
             }
-            // Alias espliciti per questa marca/modello.
-            for alias in Self.aliases(forBrand: first.brand, model: first.model) {
+            for alias in Self.aliases(forBrand: first.brand, model: displayModel) {
                 all.formUnion(Self.tokenize(alias))
                 all.insert(Self.normalize(alias))
             }
             let blob = ([brandNorm, modelNorm] + Array(all)).joined(separator: " ")
             return IndexedGroup(
                 brand: first.brand,
-                model: first.model,
+                model: displayModel,
                 variants: sorted,
                 brandNorm: brandNorm,
                 modelNorm: modelNorm,
@@ -69,7 +74,41 @@ struct VehicleSearchIndex {
         }
     }
 
-    /// Cerca per nome (marca/modello/alias). Query vuota → lista A–Z (limitata dal caller).
+    /// Marche A–Z; opzionale: popolari in testa (dedup).
+    func allBrands(popularFirst: [String] = []) -> [String] {
+        let present = Set(groups.map(\.brand))
+        let az = present.sorted { $0.localizedCaseInsensitiveCompare($1) == .orderedAscending }
+        guard !popularFirst.isEmpty else { return az }
+        let popular = popularFirst.filter { present.contains($0) }
+        let rest = az.filter { !popular.contains($0) }
+        return popular + rest
+    }
+
+    /// Modelli di una sola marca (A–Z), senza mischiare altre marche.
+    func models(forBrand brand: String) -> [Hit] {
+        let bf = Self.normalize(brand)
+        return groups
+            .filter { $0.brandNorm == bf || $0.brand == brand }
+            .sorted { $0.model.localizedCaseInsensitiveCompare($1.model) == .orderedAscending }
+            .map { Hit(brand: $0.brand, model: $0.model, variants: $0.variants, score: 0) }
+    }
+
+    /// Cerca e restituisce hit raggruppati per marca (ordine score, poi A–Z modello).
+    func searchGrouped(query: String, brandFilter: String? = nil, limit: Int = 80) -> [(brand: String, models: [Hit])] {
+        let hits = search(query: query, brandFilter: brandFilter, limit: limit)
+        var order: [String] = []
+        var bucket: [String: [Hit]] = [:]
+        for hit in hits {
+            if bucket[hit.brand] == nil {
+                order.append(hit.brand)
+                bucket[hit.brand] = []
+            }
+            bucket[hit.brand, default: []].append(hit)
+        }
+        return order.map { brand in (brand, bucket[brand] ?? []) }
+    }
+
+    /// Cerca per nome (marca/modello/alias). Query vuota + brand → modelli della marca; senza brand → lista piatta limitata (preferisci `allBrands` / `models`).
     func search(query: String, brandFilter: String? = nil, limit: Int = 80) -> [Hit] {
         var pool = groups
         if let brandFilter {
@@ -81,7 +120,10 @@ struct VehicleSearchIndex {
         guard !raw.isEmpty else {
             return pool
                 .sorted {
-                    "\($0.brand) \($0.model)".localizedCaseInsensitiveCompare("\($1.brand) \($1.model)") == .orderedAscending
+                    if $0.brandNorm != $1.brandNorm {
+                        return $0.brand.localizedCaseInsensitiveCompare($1.brand) == .orderedAscending
+                    }
+                    return $0.model.localizedCaseInsensitiveCompare($1.model) == .orderedAscending
                 }
                 .prefix(limit)
                 .map { Hit(brand: $0.brand, model: $0.model, variants: $0.variants, score: 0) }
@@ -96,11 +138,58 @@ struct VehicleSearchIndex {
         return scored
             .sorted {
                 if $0.1 != $1.1 { return $0.1 > $1.1 }
-                return "\($0.0.brand) \($0.0.model)".localizedCaseInsensitiveCompare("\($1.0.brand) \($1.0.model)") == .orderedAscending
+                if $0.0.brandNorm != $1.0.brandNorm {
+                    return $0.0.brand.localizedCaseInsensitiveCompare($1.0.brand) == .orderedAscending
+                }
+                return $0.0.model.localizedCaseInsensitiveCompare($1.0.model) == .orderedAscending
             }
             .prefix(limit)
             .map { Hit(brand: $0.0.brand, model: $0.0.model, variants: $0.0.variants, score: $0.1) }
     }
+
+    /// Chiave stabile marca|modello dopo normalizzazione spelling.
+    static func canonicalGroupKey(brand: String, model: String) -> String {
+        let b = normalize(brand)
+        var m = normalize(model)
+        if let canon = modelSpellingAliases[m] {
+            m = canon
+        }
+        // Collassa spazi / trattini già fatti da normalize.
+        return "\(b)|\(m)"
+    }
+
+    private static func preferredDisplayModel(in variants: [VehicleCatalogItem]) -> String {
+        // Preferisci la forma più frequente; a parità la più recente.
+        let counts = Dictionary(grouping: variants, by: \.model).mapValues(\.count)
+        return variants
+            .max { a, b in
+                let ca = counts[a.model] ?? 0
+                let cb = counts[b.model] ?? 0
+                if ca != cb { return ca < cb }
+                return a.year < b.year
+            }?
+            .model ?? variants[0].model
+    }
+
+    /// Alias di spelling modello → forma canonica (normalize già lowercased senza accenti).
+    private static let modelSpellingAliases: [String: String] = [
+        "model 3": "model 3",
+        "model3": "model 3",
+        "model y": "model y",
+        "modely": "model y",
+        "id 3": "id.3",
+        "id3": "id.3",
+        "id 4": "id.4",
+        "id4": "id.4",
+        "id 5": "id.5",
+        "id5": "id.5",
+        "500 e": "500e",
+        "500e": "500e",
+        "3 series": "3 series",
+        "serie 3": "3 series",
+        "c class": "c class",
+        "classe c": "c class",
+    ]
 
     // MARK: - Scoring
 

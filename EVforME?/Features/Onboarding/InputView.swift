@@ -245,33 +245,50 @@ struct InputView: View {
                                 }
 
                             VStack(alignment: .leading, spacing: 10) {
-                                Text(L10n.purchasePricesTitle)
+                                Text(L10n.comparisonIntentSectionTitle)
                                     .font(Typography.readingCaption)
                                     .foregroundColor(.secondaryText)
-                                HStack {
-                                    Text(L10n.sourcePurchasePriceLabel)
-                                        .font(Typography.readingCaption)
-                                    Spacer()
-                                    TextField("12000", value: $userInput.sourcePurchasePrice, format: .number)
-                                        .keyboardType(.decimalPad)
-                                        .multilineTextAlignment(.trailing)
-                                        .frame(width: 100)
+                                Picker(L10n.comparisonIntentSectionTitle, selection: $userInput.comparisonIntent) {
+                                    ForEach(ComparisonIntent.allCases) { intent in
+                                        Text(intent.title).tag(intent)
+                                    }
                                 }
-                                HStack {
-                                    Text(L10n.targetPurchasePriceLabel)
-                                        .font(Typography.readingCaption)
-                                    Spacer()
-                                    TextField("32000", value: $userInput.targetPurchasePrice, format: .number)
-                                        .keyboardType(.decimalPad)
-                                        .multilineTextAlignment(.trailing)
-                                        .frame(width: 100)
-                                }
-                                Toggle(L10n.includeIncentivesToggle, isOn: $userInput.includeIncentives)
-                                    .font(Typography.readingBody)
-                                    .tint(.accent)
-                                Text(L10n.includeIncentivesHint)
+                                .pickerStyle(.segmented)
+                                Text(userInput.comparisonIntent.subtitle)
                                     .font(Typography.readingCaption)
                                     .foregroundColor(.secondaryText)
+                                    .fixedSize(horizontal: false, vertical: true)
+
+                                if userInput.comparisonIntent == .consideringPurchase {
+                                    Text(L10n.purchasePricesTitle)
+                                        .font(Typography.readingCaption)
+                                        .foregroundColor(.secondaryText)
+                                        .padding(.top, 4)
+                                    HStack {
+                                        Text(L10n.sourcePurchasePriceLabel)
+                                            .font(Typography.readingCaption)
+                                        Spacer()
+                                        TextField("12000", value: $userInput.sourcePurchasePrice, format: .number)
+                                            .keyboardType(.decimalPad)
+                                            .multilineTextAlignment(.trailing)
+                                            .frame(width: 100)
+                                    }
+                                    HStack {
+                                        Text(L10n.targetPurchasePriceLabel)
+                                            .font(Typography.readingCaption)
+                                        Spacer()
+                                        TextField("32000", value: $userInput.targetPurchasePrice, format: .number)
+                                            .keyboardType(.decimalPad)
+                                            .multilineTextAlignment(.trailing)
+                                            .frame(width: 100)
+                                    }
+                                    Toggle(L10n.includeIncentivesToggle, isOn: $userInput.includeIncentives)
+                                        .font(Typography.readingBody)
+                                        .tint(.accent)
+                                    Text(L10n.includeIncentivesHint)
+                                        .font(Typography.readingCaption)
+                                        .foregroundColor(.secondaryText)
+                                }
                             }
                             .padding(.top, 8)
 
@@ -420,11 +437,21 @@ struct InputView: View {
         .onChange(of: userInput.sourceVehicleId) { _, newId in
             guard let vehicle = sourceVehicles.first(where: { $0.id == newId }) else { return }
             userInput.sourcePurchasePrice = Defaults.suggestedPurchasePrice(for: vehicle)
+            applySuggestedComparisonIntent()
         }
         .onChange(of: userInput.targetVehicleId) { _, newId in
             guard let vehicle = targetVehicles.first(where: { $0.id == newId }) else { return }
             userInput.targetPurchasePrice = Defaults.suggestedPurchasePrice(for: vehicle)
+            applySuggestedComparisonIntent()
         }
+    }
+
+    private func applySuggestedComparisonIntent() {
+        guard let source = selectedSourceVehicle, let target = selectedTargetVehicle else { return }
+        userInput.comparisonIntent = ComparisonIntent.suggested(
+            sourceYear: source.year,
+            targetYear: target.year
+        )
     }
 
     private var pricesFreshnessLabel: String {

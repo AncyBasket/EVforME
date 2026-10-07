@@ -118,6 +118,38 @@ enum TripProfile: String, CaseIterable, Identifiable {
     }
 }
 
+/// Modalità di confronto: acquisto nuovo vs auto già possedute (solo opex).
+enum ComparisonIntent: String, CaseIterable, Identifiable {
+    /// Include premium di listino netto (EV − attuale − incentivi) nel sì/no e nel break-even.
+    case consideringPurchase
+    /// Solo costi di gestione: premium = 0 (sunk cost). Assicurazione/manutenzione su valore d’uso.
+    case alreadyOwned
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .consideringPurchase: return L10n.comparisonIntentPurchaseTitle
+        case .alreadyOwned: return L10n.comparisonIntentOwnedTitle
+        }
+    }
+
+    var subtitle: String {
+        switch self {
+        case .consideringPurchase: return L10n.comparisonIntentPurchaseSubtitle
+        case .alreadyOwned: return L10n.comparisonIntentOwnedSubtitle
+        }
+    }
+
+    /// Default: se entrambe le auto sono di anni già passati → già possedute.
+    static func suggested(sourceYear: Int, targetYear: Int, referenceYear: Int = Calendar.current.component(.year, from: Date())) -> ComparisonIntent {
+        if sourceYear < referenceYear, targetYear < referenceYear {
+            return .alreadyOwned
+        }
+        return .consideringPurchase
+    }
+}
+
 /// User input data for EV simulation
 struct UserInput {
     /// Kilometers per year (field name is historical).
@@ -137,6 +169,8 @@ struct UserInput {
     var targetPurchasePrice: Double
     /// Include stima incentivi IT (bonus acquisto + esenzione bollo già nei seed EV).
     var includeIncentives: Bool
+    /// Compra nuovo vs già possedute (opex only).
+    var comparisonIntent: ComparisonIntent
     /// Profilo tragitti tipici.
     var tripProfile: TripProfile
     /// Override consumi ICE da OCR sticker (L/100 km). `nil` = usa catalogo.
@@ -159,6 +193,7 @@ struct UserInput {
         sourcePurchasePrice: Double = 12_000,
         targetPurchasePrice: Double = 32_000,
         includeIncentives: Bool = true,
+        comparisonIntent: ComparisonIntent = .consideringPurchase,
         tripProfile: TripProfile = .custom,
         sourceConsumptionOverrideLPer100Km: Double? = nil,
         targetEnergyOverrideKWhPer100Km: Double? = nil,
@@ -176,15 +211,16 @@ struct UserInput {
         self.sourcePurchasePrice = sourcePurchasePrice
         self.targetPurchasePrice = targetPurchasePrice
         self.includeIncentives = includeIncentives
+        self.comparisonIntent = comparisonIntent
         self.tripProfile = tripProfile
         self.sourceConsumptionOverrideLPer100Km = sourceConsumptionOverrideLPer100Km
         self.targetEnergyOverrideKWhPer100Km = targetEnergyOverrideKWhPer100Km
         self.chargingConfiguration = chargingConfiguration
     }
 
-    /// Bonus acquisto stimato (IT, ordine di grandezza — non legale).
+    /// Bonus acquisto stimato (IT, ordine di grandezza — non legale). Solo in modalità acquisto.
     var estimatedPurchaseIncentiveEUR: Double {
-        guard includeIncentives else { return 0 }
+        guard comparisonIntent == .consideringPurchase, includeIncentives else { return 0 }
         return ItalianIncentives.estimatedPurchaseBonusEUR(
             evListPrice: targetPurchasePrice,
             replacingVehiclePrice: sourcePurchasePrice,
@@ -192,9 +228,10 @@ struct UserInput {
         )
     }
 
-    /// Delta di listino netto (EV − ICE − incentivi).
+    /// Delta di listino netto (EV − ICE − incentivi). Zero se già possedute (sunk cost).
     var netPurchasePremiumEUR: Double {
-        max(0, targetPurchasePrice - sourcePurchasePrice - estimatedPurchaseIncentiveEUR)
+        guard comparisonIntent == .consideringPurchase else { return 0 }
+        return max(0, targetPurchasePrice - sourcePurchasePrice - estimatedPurchaseIncentiveEUR)
     }
 
     /// Config ricarica allineata ai controlli UI (casa + €/kWh slider).

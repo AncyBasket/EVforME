@@ -2,10 +2,11 @@
 //  VehicleCatalogPickerSheet.swift
 //  EVforME?
 //
+//  Browse stile AutoScout: Marca → Modello → Anno/trim/alimentazione.
+//
 
 import SwiftUI
 
-/// Catalogo: ricerca unificata + marche popolari + modelli raggruppati (anno a parte).
 struct VehicleCatalogPickerSheet: View {
     let title: String
     let vehicles: [VehicleCatalogItem]
@@ -35,16 +36,21 @@ struct VehicleCatalogPickerSheet: View {
         }
     }
 
+    private enum BrowseLevel: Equatable {
+        case brands
+        case models(brand: String)
+        case variants(brand: String, model: String)
+    }
+
     @State private var searchText: String = ""
-    @State private var selectedBrand: String?
-    @State private var selectedGroup: ModelGroup?
+    @State private var level: BrowseLevel = .brands
     @FocusState private var searchFocused: Bool
     @Environment(\.accessibilityReduceMotion) private var accessibilityReduceMotion
 
-    private static let maxGroups = 80
+    private static let maxSearchHits = 80
     private static let popularBrands = [
         "Fiat", "Volkswagen", "Toyota", "Renault", "Ford", "Peugeot",
-        "BMW", "Audi", "Mercedes-Benz", "Tesla", "Hyundai", "Kia", "Nissan", "Opel",
+        "BMW", "Audi", "Mercedes-Benz", "Tesla", "Hyundai", "Kia", "Nissan", "Opel", "SEAT",
     ]
 
     private var catalogAnimation: Animation {
@@ -55,37 +61,26 @@ struct VehicleCatalogPickerSheet: View {
         searchText.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    private var availablePopularBrands: [String] {
-        let present = Set(vehicles.map(\.brand))
-        return Self.popularBrands.filter { present.contains($0) }
-    }
-
     private var searchIndex: VehicleSearchIndex {
         VehicleSearchIndex(vehicles: vehicles)
     }
 
-    private var visibleGroups: (rows: [ModelGroup], truncated: Bool) {
-        let hits = searchIndex.search(
-            query: searchText,
-            brandFilter: selectedBrand,
-            limit: Self.maxGroups + 1
-        )
-        let truncated = hits.count > Self.maxGroups
-        let rows = Array(hits.prefix(Self.maxGroups)).map { hit in
-            ModelGroup(brand: hit.brand, model: hit.model, variants: hit.variants)
-        }
-        return (rows, truncated)
-    }
+    private var isSearching: Bool { !query.isEmpty }
 
     var body: some View {
         NavigationStack {
             ZStack {
                 ImmersiveBackground()
+                VStack(alignment: .leading, spacing: 12) {
+                    searchField
+                        .padding(.horizontal, 20)
+                        .padding(.top, 8)
 
-                if let group = selectedGroup {
-                    yearPickerSurface(group)
-                } else {
-                    mainSurface
+                    if isSearching {
+                        searchResultsSurface
+                    } else {
+                        browseSurface
+                    }
                 }
             }
             .navigationTitle(title)
@@ -104,68 +99,16 @@ struct VehicleCatalogPickerSheet: View {
         .presentationDetents([.large])
         .presentationDragIndicator(.visible)
         .onAppear {
-            searchFocused = true
+            searchFocused = false
+        }
+        .onChange(of: searchText) { _, newValue in
+            if !newValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                // Ricerca libera: esci dal drill-down.
+            }
         }
     }
 
-    // MARK: - Main
-
-    private var mainSurface: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            searchField
-                .padding(.horizontal, 20)
-                .padding(.top, 8)
-
-            if query.isEmpty {
-                popularBrandsRail
-            }
-
-            if let selectedBrand {
-                HStack {
-                    Button {
-                        withAnimation(catalogAnimation) { self.selectedBrand = nil }
-                    } label: {
-                        Label(selectedBrand, systemImage: "xmark.circle.fill")
-                            .font(Typography.readingCardTitle)
-                            .foregroundColor(.accent)
-                    }
-                    .buttonStyle(.plain)
-                    Spacer()
-                }
-                .padding(.horizontal, 20)
-            }
-
-            let outcome = visibleGroups
-            if outcome.rows.isEmpty {
-                ContentUnavailableView(
-                    L10n.vehiclePickerNoResults,
-                    systemImage: "car.side",
-                    description: Text(L10n.vehiclePickerTryDifferent)
-                )
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else {
-                ScrollView {
-                    LazyVStack(spacing: 10) {
-                        ForEach(outcome.rows) { group in
-                            modelGroupRow(group)
-                        }
-                    }
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 28)
-
-                    if outcome.truncated {
-                        Text(L10n.vehiclePickerResultsCapped)
-                            .font(Typography.readingCaption)
-                            .foregroundColor(.secondaryText)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal, 20)
-                            .padding(.bottom, 20)
-                    }
-                }
-                .scrollDismissesKeyboard(.interactively)
-            }
-        }
-    }
+    // MARK: - Search field
 
     private var searchField: some View {
         HStack(spacing: 12) {
@@ -188,129 +131,154 @@ struct VehicleCatalogPickerSheet: View {
             }
         }
         .padding(16)
-        .background(
-            RoundedRectangle(cornerRadius: 2, style: .continuous)
-                .fill(Color.surfaceElevated.opacity(0.001))
-        )
         .overlay(
             RoundedRectangle(cornerRadius: 2, style: .continuous)
                 .stroke(searchFocused ? Color.ink : Color.hairlineBorder, lineWidth: searchFocused ? 1.5 : 1)
         )
     }
 
-    private var popularBrandsRail: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(L10n.vehiclePickerPopularBrands)
+    // MARK: - Browse hierarchy
+
+    @ViewBuilder
+    private var browseSurface: some View {
+        switch level {
+        case .brands:
+            brandListSurface
+        case .models(let brand):
+            modelListSurface(brand: brand)
+        case .variants(let brand, let model):
+            if let group = modelGroup(brand: brand, model: model) {
+                variantListSurface(group)
+            } else {
+                brandListSurface
+            }
+        }
+    }
+
+    private var brandListSurface: some View {
+        let brands = searchIndex.allBrands(popularFirst: Self.popularBrands)
+        return VStack(alignment: .leading, spacing: 8) {
+            Text(L10n.vehiclePickerBrowseSubtitle)
                 .font(Typography.readingCaption)
                 .foregroundColor(.secondaryText)
                 .padding(.horizontal, 20)
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
-                    ForEach(availablePopularBrands, id: \.self) { brand in
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 0) {
+                    ForEach(brands, id: \.self) { brand in
                         Button {
                             UISelectionFeedbackGenerator().selectionChanged()
                             withAnimation(catalogAnimation) {
-                                selectedBrand = brand
-                                searchText = ""
+                                level = .models(brand: brand)
                             }
                         } label: {
-                            Text(brand)
-                                .font(Typography.readingCaption.weight(.semibold))
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 9)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 2, style: .continuous)
-                                        .fill(selectedBrand == brand ? Color.ctaFill : Color.clear)
-                                )
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 2, style: .continuous)
-                                        .stroke(Color.ink.opacity(selectedBrand == brand ? 0 : 0.25), lineWidth: 1)
-                                )
-                                .foregroundColor(selectedBrand == brand ? Color.ctaLabel : Color.ink)
+                            HStack {
+                                Text(brand)
+                                    .font(Typography.title2)
+                                    .foregroundColor(.ink)
+                                Spacer()
+                                Text("→")
+                                    .font(.system(size: 16, weight: .medium, design: .serif))
+                                    .foregroundColor(.secondaryText)
+                            }
+                            .padding(.vertical, 14)
+                            .padding(.horizontal, 20)
+                            .contentShape(Rectangle())
                         }
                         .buttonStyle(.plain)
+                        .accessibilityHint(L10n.vehiclePickerBrandA11yHint)
+
+                        Rectangle()
+                            .fill(Color.hairlineBorder)
+                            .frame(height: 1)
+                            .padding(.horizontal, 20)
                     }
                 }
+                .padding(.bottom, 28)
+            }
+        }
+    }
+
+    private func modelListSurface(brand: String) -> some View {
+        let models = searchIndex.models(forBrand: brand)
+        return VStack(alignment: .leading, spacing: 0) {
+            backBar(title: L10n.vehiclePickerBackBrands) {
+                level = .brands
+            }
+
+            Text(brand)
+                .font(Typography.readingCardTitle)
+                .foregroundColor(.primaryText)
                 .padding(.horizontal, 20)
-            }
-        }
-    }
+                .padding(.bottom, 4)
 
-    private func modelGroupRow(_ group: ModelGroup) -> some View {
-        Button {
-            UISelectionFeedbackGenerator().selectionChanged()
-            if group.variants.count == 1 {
-                pick(group.variants[0])
-            } else {
-                withAnimation(catalogAnimation) {
-                    selectedGroup = group
-                }
-            }
-        } label: {
-            HStack(spacing: 14) {
-                VehicleHeroImage(
-                    vehicle: group.representative,
-                    height: 56,
-                    cornerRadius: 2,
-                    showsLabelsBelow: false,
-                    squareThumbnail: true
-                )
+            Text(L10n.vehiclePickerBrandModelsSubtitle)
+                .font(Typography.readingCaption)
+                .foregroundColor(.secondaryText)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 8)
 
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(group.brand)
-                        .font(Typography.readingCaption)
-                        .foregroundColor(.secondaryText)
-                    Text(group.model)
-                        .font(Typography.title2)
-                        .foregroundColor(.ink)
-                        .lineLimit(2)
-                        .multilineTextAlignment(.leading)
-                    Text("\(group.yearLabel) · \(group.countLabel)")
-                        .font(Typography.readingCaption)
-                        .foregroundColor(.secondaryText)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
+            ScrollView {
+                LazyVStack(spacing: 0) {
+                    ForEach(models) { hit in
+                        let group = ModelGroup(brand: hit.brand, model: hit.model, variants: hit.variants)
+                        Button {
+                            UISelectionFeedbackGenerator().selectionChanged()
+                            withAnimation(catalogAnimation) {
+                                level = .variants(brand: hit.brand, model: hit.model)
+                            }
+                        } label: {
+                            HStack(spacing: 14) {
+                                VehicleHeroImage(
+                                    vehicle: group.representative,
+                                    height: 52,
+                                    cornerRadius: 2,
+                                    showsLabelsBelow: false,
+                                    squareThumbnail: true
+                                )
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(group.model)
+                                        .font(Typography.title2)
+                                        .foregroundColor(.ink)
+                                        .lineLimit(2)
+                                    Text("\(group.yearLabel) · \(group.countLabel)")
+                                        .font(Typography.readingCaption)
+                                        .foregroundColor(.secondaryText)
+                                }
+                                Spacer()
+                                Text("→")
+                                    .foregroundColor(.secondaryText)
+                            }
+                            .padding(.vertical, 12)
+                            .padding(.horizontal, 20)
+                            .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel("\(group.brand) \(group.model), \(group.yearLabel)")
+                        .accessibilityHint(L10n.vehiclePickerSelectA11yHint)
 
-                Text(group.variants.count == 1 ? "✓" : "→")
-                    .font(.system(size: 16, weight: .medium, design: .serif))
-                    .foregroundColor(.secondaryText)
-            }
-            .padding(.vertical, 12)
-            .overlay(alignment: .bottom) {
-                Rectangle().fill(Color.hairlineBorder).frame(height: 1)
-            }
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel("\(group.brand) \(group.model), \(group.yearLabel)")
-        .accessibilityHint(L10n.vehiclePickerSelectA11yHint)
-    }
-
-    // MARK: - Year picker
-
-    private func yearPickerSurface(_ group: ModelGroup) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            VStack(alignment: .leading, spacing: 8) {
-                Button {
-                    withAnimation(catalogAnimation) { selectedGroup = nil }
-                } label: {
-                    HStack(spacing: 6) {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 14, weight: .semibold))
-                        Text(L10n.vehiclePickerBackBrands)
-                            .font(Typography.readingCardTitle)
+                        Rectangle()
+                            .fill(Color.hairlineBorder)
+                            .frame(height: 1)
+                            .padding(.horizontal, 20)
                     }
-                    .foregroundColor(.ink)
                 }
-                .buttonStyle(.plain)
-
-                Text("\(group.brand) \(group.model)")
-                    .font(Typography.readingCardTitle)
-                    .foregroundColor(.primaryText)
-                    .lineLimit(2)
+                .padding(.bottom, 28)
             }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 10)
+        }
+    }
+
+    private func variantListSurface(_ group: ModelGroup) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            backBar(title: L10n.vehiclePickerBackBrands) {
+                level = .models(brand: group.brand)
+            }
+
+            Text("\(group.brand) \(group.model)")
+                .font(Typography.readingCardTitle)
+                .foregroundColor(.primaryText)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 4)
 
             Text(L10n.vehiclePickerChooseYear)
                 .font(Typography.readingCaption)
@@ -319,38 +287,40 @@ struct VehicleCatalogPickerSheet: View {
                 .padding(.bottom, 8)
 
             ScrollView {
-                LazyVStack(spacing: 10) {
+                LazyVStack(spacing: 0) {
                     ForEach(group.variants) { vehicle in
-                        yearRow(vehicle)
+                        variantRow(vehicle)
                     }
                 }
-                .padding(.horizontal, 20)
                 .padding(.bottom, 28)
             }
         }
     }
 
-    private func yearRow(_ vehicle: VehicleCatalogItem) -> some View {
+    private func variantRow(_ vehicle: VehicleCatalogItem) -> some View {
         Button {
             pick(vehicle)
         } label: {
-            HStack(spacing: 14) {
+            HStack(alignment: .firstTextBaseline, spacing: 12) {
                 Text(String(vehicle.year))
                     .font(Typography.metric)
                     .foregroundColor(.ink)
                     .frame(width: 64, alignment: .leading)
 
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(vehicle.powertrain.catalogFuelLabel)
+                        .font(Typography.readingCardTitle)
+                        .foregroundColor(.ink)
+                    if let trim = vehicle.trim, !trim.isEmpty {
+                        Text(trim)
+                            .font(Typography.readingCaption)
+                            .foregroundColor(.secondaryText)
+                            .lineLimit(1)
+                    }
                     Text(vehicle.dimensionsText)
                         .font(Typography.readingCaption)
                         .foregroundColor(.secondaryText)
                         .lineLimit(1)
-                    if let quality = vehicle.qualitySubtitle {
-                        Text(quality)
-                            .font(Typography.readingCaption)
-                            .foregroundColor(.secondaryText.opacity(0.85))
-                            .lineLimit(1)
-                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -361,14 +331,108 @@ struct VehicleCatalogPickerSheet: View {
                 }
             }
             .padding(.vertical, 14)
+            .padding(.horizontal, 20)
             .overlay(alignment: .bottom) {
                 Rectangle()
                     .fill(selectedId == vehicle.id ? Color.accent : Color.hairlineBorder)
                     .frame(height: selectedId == vehicle.id ? 2 : 1)
+                    .padding(.horizontal, 20)
             }
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(vehicle.displayName)
+        .accessibilityLabel("\(vehicle.displayName), \(vehicle.powertrain.catalogFuelLabel)")
+    }
+
+    // MARK: - Text (grouped by brand)
+
+    private var searchResultsSurface: some View {
+        let grouped = searchIndex.searchGrouped(query: query, limit: Self.maxSearchHits)
+        return Group {
+            if grouped.isEmpty {
+                ContentUnavailableView(
+                    L10n.vehiclePickerNoResults,
+                    systemImage: "car.side",
+                    description: Text(L10n.vehiclePickerTryDifferent)
+                )
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: 18) {
+                        ForEach(grouped, id: \.brand) { section in
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text(section.brand)
+                                    .font(Typography.readingCaption.weight(.semibold))
+                                    .foregroundColor(.secondaryText)
+                                    .padding(.horizontal, 20)
+                                    .padding(.bottom, 6)
+
+                                ForEach(section.models) { hit in
+                                    let group = ModelGroup(brand: hit.brand, model: hit.model, variants: hit.variants)
+                                    Button {
+                                        UISelectionFeedbackGenerator().selectionChanged()
+                                        searchText = ""
+                                        withAnimation(catalogAnimation) {
+                                            level = .variants(brand: hit.brand, model: hit.model)
+                                        }
+                                    } label: {
+                                        HStack {
+                                            VStack(alignment: .leading, spacing: 2) {
+                                                Text(group.model)
+                                                    .font(Typography.title2)
+                                                    .foregroundColor(.ink)
+                                                Text("\(group.yearLabel) · \(group.countLabel)")
+                                                    .font(Typography.readingCaption)
+                                                    .foregroundColor(.secondaryText)
+                                            }
+                                            Spacer()
+                                            Text("→")
+                                                .foregroundColor(.secondaryText)
+                                        }
+                                        .padding(.vertical, 12)
+                                        .padding(.horizontal, 20)
+                                        .contentShape(Rectangle())
+                                    }
+                                    .buttonStyle(.plain)
+
+                                    Rectangle()
+                                        .fill(Color.hairlineBorder)
+                                        .frame(height: 1)
+                                        .padding(.horizontal, 20)
+                                }
+                            }
+                        }
+                    }
+                    .padding(.bottom, 28)
+                }
+                .scrollDismissesKeyboard(.interactively)
+            }
+        }
+    }
+
+    // MARK: - Helpers
+
+    private func backBar(title: String, action: @escaping () -> Void) -> some View {
+        Button {
+            withAnimation(catalogAnimation) { action() }
+        } label: {
+            HStack(spacing: 6) {
+                Image(systemName: "chevron.left")
+                    .font(.system(size: 14, weight: .semibold))
+                Text(title)
+                    .font(Typography.readingCardTitle)
+            }
+            .foregroundColor(.ink)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 10)
+        }
+        .buttonStyle(.plain)
+        .accessibilityHint(L10n.vehiclePickerBackA11yHint)
+    }
+
+    private func modelGroup(brand: String, model: String) -> ModelGroup? {
+        let hits = searchIndex.models(forBrand: brand)
+        guard let hit = hits.first(where: { $0.model == model }) else { return nil }
+        return ModelGroup(brand: hit.brand, model: hit.model, variants: hit.variants)
     }
 
     private func pick(_ vehicle: VehicleCatalogItem) {

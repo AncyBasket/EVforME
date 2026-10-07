@@ -30,6 +30,9 @@
 "powertrain_ice" = "ICE";
 "powertrain_ev" = "EV";
 "powertrain_phev" = "PHEV";
+"powertrain_ice_label" = "Petrol / diesel (ICE)";
+"powertrain_phev_label" = "Plug-in hybrid";
+"powertrain_ev_label" = "Electric";
 "current_vehicle_short" = "Current";
 "electrified_vehicle_short" = "Electrified";
 "comparison_card_title" = "Vehicle comparison (dimensions, consumption, cost/km)";
@@ -311,6 +314,13 @@
 "target_purchase_price_label" = "EV target (€)";
 "include_incentives_toggle" = "Include IT incentive estimate";
 "include_incentives_hint" = "Adds a rough purchase bonus (not legal advice). EV tax in catalog is often already low/zero.";
+"comparison_intent_section_title" = "What are you comparing?";
+"comparison_intent_purchase_title" = "I’m buying (list price + incentives)";
+"comparison_intent_purchase_subtitle" = "Payback includes the EV list-price premium minus incentives.";
+"comparison_intent_owned_title" = "Already mine (running costs only)";
+"comparison_intent_owned_subtitle" = "Ignores purchase premium — insurance/maintenance on residual value.";
+"comparison_intent_owned_reason" = "Opex-only mode: list-price premium is treated as sunk cost.";
+"opex_savings_only_reason" = "About €%d/year less to run — no purchase break-even in this mode.";
 "incentives_included_reason" = "Includes ~€%d purchase-incentive estimate.";
 "incentives_transparency_note" = "Incentives are simplified IT estimates; check official rules for your region and income band.";
 "sources_section_title" = "Where numbers come from";
