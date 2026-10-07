@@ -6,7 +6,7 @@
 import Foundation
 
 /// Input completo serializzato per ripristinare uno scenario dallo storico.
-struct PersistedScenarioInput: Codable, Equatable {
+struct PersistedScenarioInput: Equatable {
     var dailyKm: Int
     var hasHomeCharging: Bool
     var areaTypeRaw: Int
@@ -19,6 +19,7 @@ struct PersistedScenarioInput: Codable, Equatable {
     var sourcePurchasePrice: Double
     var targetPurchasePrice: Double
     var includeIncentives: Bool
+    var comparisonIntentRaw: String
     var tripProfileRaw: String
     var sourceConsumptionOverrideLPer100Km: Double?
     var targetEnergyOverrideKWhPer100Km: Double?
@@ -36,6 +37,7 @@ struct PersistedScenarioInput: Codable, Equatable {
         sourcePurchasePrice = input.sourcePurchasePrice
         targetPurchasePrice = input.targetPurchasePrice
         includeIncentives = input.includeIncentives
+        comparisonIntentRaw = input.comparisonIntent.rawValue
         tripProfileRaw = input.tripProfile.rawValue
         sourceConsumptionOverrideLPer100Km = input.sourceConsumptionOverrideLPer100Km
         targetEnergyOverrideKWhPer100Km = input.targetEnergyOverrideKWhPer100Km
@@ -44,6 +46,7 @@ struct PersistedScenarioInput: Codable, Equatable {
     func toUserInput() -> UserInput {
         let scenario = Scenario.allCases.first { $0.rawValue == scenarioRaw } ?? .realistic
         let trip = TripProfile(rawValue: tripProfileRaw) ?? .custom
+        let intent = ComparisonIntent(rawValue: comparisonIntentRaw) ?? .consideringPurchase
         return UserInput(
             dailyKm: dailyKm,
             hasHomeCharging: hasHomeCharging,
@@ -57,10 +60,62 @@ struct PersistedScenarioInput: Codable, Equatable {
             sourcePurchasePrice: sourcePurchasePrice,
             targetPurchasePrice: targetPurchasePrice,
             includeIncentives: includeIncentives,
+            comparisonIntent: intent,
             tripProfile: trip,
             sourceConsumptionOverrideLPer100Km: sourceConsumptionOverrideLPer100Km,
             targetEnergyOverrideKWhPer100Km: targetEnergyOverrideKWhPer100Km
         )
+    }
+}
+
+extension PersistedScenarioInput: Codable {
+    private enum CodingKeys: String, CodingKey {
+        case dailyKm, hasHomeCharging, areaTypeRaw, fuelPrice, ownershipYears
+        case electricityPricePerKWh, sourceVehicleId, targetVehicleId, scenarioRaw
+        case sourcePurchasePrice, targetPurchasePrice, includeIncentives
+        case comparisonIntentRaw, tripProfileRaw
+        case sourceConsumptionOverrideLPer100Km, targetEnergyOverrideKWhPer100Km
+    }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        dailyKm = try c.decode(Int.self, forKey: .dailyKm)
+        hasHomeCharging = try c.decode(Bool.self, forKey: .hasHomeCharging)
+        areaTypeRaw = try c.decode(Int.self, forKey: .areaTypeRaw)
+        fuelPrice = try c.decode(Double.self, forKey: .fuelPrice)
+        ownershipYears = try c.decode(Int.self, forKey: .ownershipYears)
+        electricityPricePerKWh = try c.decodeIfPresent(Double.self, forKey: .electricityPricePerKWh) ?? 0.25
+        sourceVehicleId = try c.decode(String.self, forKey: .sourceVehicleId)
+        targetVehicleId = try c.decode(String.self, forKey: .targetVehicleId)
+        scenarioRaw = try c.decode(Double.self, forKey: .scenarioRaw)
+        sourcePurchasePrice = try c.decodeIfPresent(Double.self, forKey: .sourcePurchasePrice) ?? 12_000
+        targetPurchasePrice = try c.decodeIfPresent(Double.self, forKey: .targetPurchasePrice) ?? 32_000
+        includeIncentives = try c.decodeIfPresent(Bool.self, forKey: .includeIncentives) ?? true
+        comparisonIntentRaw = try c.decodeIfPresent(String.self, forKey: .comparisonIntentRaw)
+            ?? ComparisonIntent.consideringPurchase.rawValue
+        tripProfileRaw = try c.decodeIfPresent(String.self, forKey: .tripProfileRaw) ?? TripProfile.custom.rawValue
+        sourceConsumptionOverrideLPer100Km = try c.decodeIfPresent(Double.self, forKey: .sourceConsumptionOverrideLPer100Km)
+        targetEnergyOverrideKWhPer100Km = try c.decodeIfPresent(Double.self, forKey: .targetEnergyOverrideKWhPer100Km)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var c = encoder.container(keyedBy: CodingKeys.self)
+        try c.encode(dailyKm, forKey: .dailyKm)
+        try c.encode(hasHomeCharging, forKey: .hasHomeCharging)
+        try c.encode(areaTypeRaw, forKey: .areaTypeRaw)
+        try c.encode(fuelPrice, forKey: .fuelPrice)
+        try c.encode(ownershipYears, forKey: .ownershipYears)
+        try c.encode(electricityPricePerKWh, forKey: .electricityPricePerKWh)
+        try c.encode(sourceVehicleId, forKey: .sourceVehicleId)
+        try c.encode(targetVehicleId, forKey: .targetVehicleId)
+        try c.encode(scenarioRaw, forKey: .scenarioRaw)
+        try c.encode(sourcePurchasePrice, forKey: .sourcePurchasePrice)
+        try c.encode(targetPurchasePrice, forKey: .targetPurchasePrice)
+        try c.encode(includeIncentives, forKey: .includeIncentives)
+        try c.encode(comparisonIntentRaw, forKey: .comparisonIntentRaw)
+        try c.encode(tripProfileRaw, forKey: .tripProfileRaw)
+        try c.encodeIfPresent(sourceConsumptionOverrideLPer100Km, forKey: .sourceConsumptionOverrideLPer100Km)
+        try c.encodeIfPresent(targetEnergyOverrideKWhPer100Km, forKey: .targetEnergyOverrideKWhPer100Km)
     }
 }
 

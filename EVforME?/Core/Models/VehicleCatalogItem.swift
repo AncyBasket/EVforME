@@ -25,6 +25,15 @@ enum Powertrain: String, Codable {
         case .ice: return false
         }
     }
+
+    /// Etichetta IT per picker (senza benzina/diesel nel seed → ICE generico).
+    var catalogFuelLabel: String {
+        switch self {
+        case .ice: return L10n.powertrainIceLabel
+        case .phev: return L10n.powertrainPhevLabel
+        case .ev: return L10n.powertrainEvLabel
+        }
+    }
 }
 
 struct VehicleCatalogItem: Codable, Identifiable, Equatable {

@@ -15,6 +15,7 @@ struct EVSimulationInput {
     var hasHomeCharging: Bool = true
     var sourcePurchasePrice: Double = 12_000
     var targetPurchasePrice: Double = 32_000
+    var comparisonIntent: ComparisonIntent = .consideringPurchase
     /// L/km override (già convertito da L/100 km).
     var iceFuelLPerKmOverride: Double? = nil
     /// kWh/km override (già convertito da kWh/100 km).
@@ -44,6 +45,28 @@ struct OperatingCostBreakdown: Equatable {
 }
 
 enum OwnershipCostEstimates {
+    /// Valore di riferimento per assicurazione/manutenzione quando le auto sono già possedute:
+    /// usa un residuo stimato (non il listino nuovo), così un EV usato non gonfia l’RC.
+    static func operatingValueBasis(
+        purchaseOrListPrice: Double,
+        vehicleYear: Int,
+        electrified: Bool,
+        referenceYear: Int = Calendar.current.component(.year, from: Date())
+    ) -> Double {
+        let age = max(0, referenceYear - vehicleYear)
+        if age <= 0 {
+            return purchaseOrListPrice
+        }
+        let residual = residualValue(
+            purchasePrice: purchaseOrListPrice,
+            years: age,
+            electrified: electrified
+        )
+        // Floor sensato: non scendere sotto una franchigia minima di mercato usato.
+        let floor: Double = electrified ? 8_000 : 3_500
+        return max(floor, min(purchaseOrListPrice, residual))
+    }
+
     /// Assicurazione annua migliorata con fascie di prezzo più granulari e fattori aggiuntivi
     static func insurancePerYear(purchasePrice: Double, yearlyKm: Double, electrified: Bool) -> Double {
         // Fascie di prezzo per tassi base più accurati
@@ -85,7 +108,7 @@ enum OwnershipCostEstimates {
         // Minimum base insurance (franchigia minima)
         let minimumBase: Double = electrified ? 380 : 320
         
-        // Fattore sicurezza extra per veicoli premium
+        // Fattore sicurezza extra per veicoli premium (solo su valori ancora alti)
         let premiumFactor = purchasePrice > 50_000 ? 1.15 : 1.0
         
         return max(minimumBase, (fromPrice * 0.70 + fromKm) * premiumFactor)
@@ -208,25 +231,44 @@ final class EVSimulator {
             asSource: false
         )
 
+        let sourceValueBasis: Double
+        let targetValueBasis: Double
+        switch input.comparisonIntent {
+        case .consideringPurchase:
+            sourceValueBasis = input.sourcePurchasePrice
+            targetValueBasis = input.targetPurchasePrice
+        case .alreadyOwned:
+            sourceValueBasis = OwnershipCostEstimates.operatingValueBasis(
+                purchaseOrListPrice: input.sourcePurchasePrice,
+                vehicleYear: sourceVehicle.year,
+                electrified: sourceVehicle.powertrain != .ice
+            )
+            targetValueBasis = OwnershipCostEstimates.operatingValueBasis(
+                purchaseOrListPrice: input.targetPurchasePrice,
+                vehicleYear: targetVehicle.year,
+                electrified: true
+            )
+        }
+
         let sourceInsurance = OwnershipCostEstimates.insurancePerYear(
-            purchasePrice: input.sourcePurchasePrice,
+            purchasePrice: sourceValueBasis,
             yearlyKm: yearlyKm,
             electrified: sourceVehicle.powertrain != .ice
         )
         let targetInsurance = OwnershipCostEstimates.insurancePerYear(
-            purchasePrice: input.targetPurchasePrice,
+            purchasePrice: targetValueBasis,
             yearlyKm: yearlyKm,
             electrified: true
         )
 
         let currentYear = Calendar.current.component(.year, from: Date())
         let sourceMaintenance = OwnershipCostEstimates.maintenancePerYear(
-            purchasePrice: input.sourcePurchasePrice,
+            purchasePrice: sourceValueBasis,
             vehicleAge: max(0, currentYear - sourceVehicle.year),
             electrified: sourceVehicle.powertrain != .ice
         ) * scenario.iceCostMultiplier
         let targetMaintenance = OwnershipCostEstimates.maintenancePerYear(
-            purchasePrice: input.targetPurchasePrice,
+            purchasePrice: targetValueBasis,
             vehicleAge: max(0, currentYear - targetVehicle.year),
             electrified: true
         ) * scenario.evCostMultiplier
@@ -385,6 +427,7 @@ final class EVSimulator {
             hasHomeCharging: input.hasHomeCharging,
             sourcePurchasePrice: input.sourcePurchasePrice,
             targetPurchasePrice: input.targetPurchasePrice,
+            comparisonIntent: input.comparisonIntent,
             iceFuelLPerKmOverride: iceOverride,
             evKWhPerKmOverride: evOverride,
             chargingConfiguration: input.resolvedChargingConfiguration()
@@ -422,7 +465,9 @@ final class EVSimulator {
 
         let purchasePremium = input.netPurchasePremiumEUR
         let breakEvenMonths: Int?
-        if yearlySavings > 50, purchasePremium > 0 {
+        if input.comparisonIntent == .alreadyOwned {
+            breakEvenMonths = nil
+        } else if yearlySavings > 50, purchasePremium > 0 {
             breakEvenMonths = max(1, Int(ceil(purchasePremium / yearlySavings * 12.0)))
         } else if yearlySavings > 50, purchasePremium <= 0 {
             breakEvenMonths = 1
@@ -434,7 +479,8 @@ final class EVSimulator {
             result: result,
             scenario: selectedScenario,
             netPurchasePremiumEUR: purchasePremium,
-            ownershipYears: input.ownershipYears
+            ownershipYears: input.ownershipYears,
+            comparisonIntent: input.comparisonIntent
         )
 
         AppLogger.shared.info(
@@ -454,13 +500,25 @@ final class EVSimulator {
             reasons.append(L10n.phevBlendReason)
         }
         reasons.append(L10n.insuranceIncludedReason)
-        if input.includeIncentives {
-            reasons.append(L10n.incentivesIncludedReason(Int(input.estimatedPurchaseIncentiveEUR)))
+        switch input.comparisonIntent {
+        case .alreadyOwned:
+            reasons.append(L10n.comparisonIntentOwnedReason)
+        case .consideringPurchase:
+            if input.includeIncentives {
+                reasons.append(L10n.incentivesIncludedReason(Int(input.estimatedPurchaseIncentiveEUR)))
+            }
         }
         if input.sourceConsumptionOverrideLPer100Km != nil || input.targetEnergyOverrideKWhPer100Km != nil {
             reasons.append(L10n.stickerOverrideAppliedReason)
         }
-        if let breakEvenMonths {
+        if input.comparisonIntent == .alreadyOwned {
+            // Break-even listino non ha senso su sunk cost: evidenzia solo opex.
+            if yearlySavings > 50 {
+                reasons.append(L10n.opexSavingsOnlyReason(Int(yearlySavings)))
+            } else {
+                reasons.append(L10n.breakEvenNotReachedReason)
+            }
+        } else if let breakEvenMonths {
             reasons.append(L10n.breakEvenMonthsReason(breakEvenMonths))
         } else {
             reasons.append(L10n.breakEvenNotReachedReason)

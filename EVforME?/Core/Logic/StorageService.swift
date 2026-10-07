@@ -322,6 +322,7 @@ private struct CodableUserInput: Codable {
     let sourcePurchasePrice: Double
     let targetPurchasePrice: Double
     let includeIncentives: Bool
+    let comparisonIntentRaw: String
     let tripProfileRaw: String
     let sourceConsumptionOverrideLPer100Km: Double?
     let targetEnergyOverrideKWhPer100Km: Double?
@@ -342,6 +343,7 @@ private struct CodableUserInput: Codable {
         case sourcePurchasePrice
         case targetPurchasePrice
         case includeIncentives
+        case comparisonIntentRaw
         case tripProfileRaw
         case sourceConsumptionOverrideLPer100Km
         case targetEnergyOverrideKWhPer100Km
@@ -371,6 +373,7 @@ private struct CodableUserInput: Codable {
         sourcePurchasePrice = input.sourcePurchasePrice
         targetPurchasePrice = input.targetPurchasePrice
         includeIncentives = input.includeIncentives
+        comparisonIntentRaw = input.comparisonIntent.rawValue
         tripProfileRaw = input.tripProfile.rawValue
         sourceConsumptionOverrideLPer100Km = input.sourceConsumptionOverrideLPer100Km
         targetEnergyOverrideKWhPer100Km = input.targetEnergyOverrideKWhPer100Km
@@ -406,6 +409,8 @@ private struct CodableUserInput: Codable {
         sourcePurchasePrice = try container.decodeIfPresent(Double.self, forKey: .sourcePurchasePrice) ?? 12_000
         targetPurchasePrice = try container.decodeIfPresent(Double.self, forKey: .targetPurchasePrice) ?? 32_000
         includeIncentives = try container.decodeIfPresent(Bool.self, forKey: .includeIncentives) ?? true
+        comparisonIntentRaw = try container.decodeIfPresent(String.self, forKey: .comparisonIntentRaw)
+            ?? ComparisonIntent.consideringPurchase.rawValue
         tripProfileRaw = try container.decodeIfPresent(String.self, forKey: .tripProfileRaw) ?? TripProfile.custom.rawValue
         sourceConsumptionOverrideLPer100Km = try container.decodeIfPresent(Double.self, forKey: .sourceConsumptionOverrideLPer100Km)
         targetEnergyOverrideKWhPer100Km = try container.decodeIfPresent(Double.self, forKey: .targetEnergyOverrideKWhPer100Km)
@@ -428,6 +433,7 @@ private struct CodableUserInput: Codable {
         try container.encode(sourcePurchasePrice, forKey: .sourcePurchasePrice)
         try container.encode(targetPurchasePrice, forKey: .targetPurchasePrice)
         try container.encode(includeIncentives, forKey: .includeIncentives)
+        try container.encode(comparisonIntentRaw, forKey: .comparisonIntentRaw)
         try container.encode(tripProfileRaw, forKey: .tripProfileRaw)
         try container.encodeIfPresent(sourceConsumptionOverrideLPer100Km, forKey: .sourceConsumptionOverrideLPer100Km)
         try container.encodeIfPresent(targetEnergyOverrideKWhPer100Km, forKey: .targetEnergyOverrideKWhPer100Km)
@@ -437,6 +443,7 @@ private struct CodableUserInput: Codable {
     func toUserInput() -> UserInput {
         let scenario = Scenario.allCases.first { $0.rawValue == scenarioRaw } ?? .realistic
         let trip = TripProfile(rawValue: tripProfileRaw) ?? .custom
+        let intent = ComparisonIntent(rawValue: comparisonIntentRaw) ?? .consideringPurchase
         
         // For backward compatibility, use suggested configuration if charging config data is missing
         let chargingConfig: ChargingConfiguration
@@ -470,6 +477,7 @@ private struct CodableUserInput: Codable {
             sourcePurchasePrice: sourcePurchasePrice,
             targetPurchasePrice: targetPurchasePrice,
             includeIncentives: includeIncentives,
+            comparisonIntent: intent,
             tripProfile: trip,
             sourceConsumptionOverrideLPer100Km: sourceConsumptionOverrideLPer100Km,
             targetEnergyOverrideKWhPer100Km: targetEnergyOverrideKWhPer100Km,
