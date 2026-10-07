@@ -58,7 +58,7 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertTrue(junk.isEmpty, "Junk entries should be filtered on load")
     }
 
-    func testOperatingValueBasis_UsedCarBelowList() {
+    func testOperatingValueBasis_ListPriceOnOldCar_IsHaircut() {
         let basis = OwnershipCostEstimates.operatingValueBasis(
             purchaseOrListPrice: 40_000,
             vehicleYear: 2016,
@@ -66,5 +66,17 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             referenceYear: 2026
         )
         XCTAssertLessThan(basis, 40_000)
+    }
+
+    func testOperatingValueBasis_AlreadyUsedEstimate_NotDoubleDepreciated() {
+        // Stessa curva di Defaults.suggestedPurchasePrice per ICE 2016 → ~7_500.
+        let suggestedUsed = 7_500.0
+        let basis = OwnershipCostEstimates.operatingValueBasis(
+            purchaseOrListPrice: suggestedUsed,
+            vehicleYear: 2016,
+            electrified: false,
+            referenceYear: 2026
+        )
+        XCTAssertEqual(basis, suggestedUsed, accuracy: 0.01)
     }
 }
