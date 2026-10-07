@@ -16,8 +16,13 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
     func testAteca2016_IsDieselForITHeuristic() {
         let ateca = VehicleCatalogService.shared.vehicle(by: "seat-ateca-2016")
         XCTAssertNotNil(ateca)
+        XCTAssertEqual(ateca?.fuelKind, .diesel)
         XCTAssertEqual(ateca?.resolvedFuelKind, .diesel)
         XCTAssertEqual(ateca?.catalogFuelLabel, L10n.powertrainDieselLabel)
+        // Uso reale ~7–8 L/100 (non WLTP ottimistico ~6.3).
+        let l100 = (ateca?.fuelConsumptionLPerKm ?? 0) * 100
+        XCTAssertGreaterThanOrEqual(l100, 7.0)
+        XCTAssertLessThanOrEqual(l100, 9.0)
     }
 
     func testPanda_IsPetrol() {

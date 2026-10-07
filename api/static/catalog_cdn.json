@@ -1,10 +1,12 @@
 {
-  "url": "https://files.catbox.moe/b42p73.json",
-  "rows": 8209,
-  "bytes": 3649510,
+  "url": "",
+  "publishedUrl": "https://files.catbox.moe/3i0nro.json",
+  "rows": 5761,
+  "bytes": 2089580,
   "source": "vehicles.seed.quality.json",
-  "host": "catbox.moe",
-  "updatedAt": "2026-09-08T10:58:52.738180+00:00",
-  "policy": "best-effort",
-  "note": "Temporary CDN. App is offline-first on bundled vehicles.seed.quality.json. Auto-updated by scripts/publish_catalog_cdn.py."
+  "host": "bundled-offline-first",
+  "updatedAt": "2026-10-07T15:20:41.973408+00:00",
+  "policy": "offline-first",
+  "seedVersion": 29,
+  "note": "Bundled seed is source of truth. publishedUrl is backup artifact only; url left empty (no catbox in TestFlight). Bump seedVersion invalidates cache."
 }

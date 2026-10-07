@@ -119,7 +119,8 @@ def stable_seed(s: str) -> int:
     return int(hashlib.md5(s.encode(), usedforsecurity=False).hexdigest()[:8], 16)
 
 
-ICE_CONS_L_PER_KM = {"small": 0.054, "compact": 0.061, "medium": 0.067, "suv": 0.074}
+# Uso reale orientativo (non solo WLTP di listino).
+ICE_CONS_L_PER_KM = {"small": 0.056, "compact": 0.063, "medium": 0.070, "suv": 0.078}
 ICE_MAINT = {"small": 500, "compact": 620, "medium": 690, "suv": 780}
 ICE_TAX = {"small": 140, "compact": 190, "medium": 220, "suv": 260}
 
@@ -187,6 +188,7 @@ def main() -> None:
                 cons = max(0.044, base_cons - age_step * 0.00032)
                 l, w, h = resolve_dims(brand, model, year)
                 image = wiki_style_img(brand, model) if (brand in POPULAR_EU and year >= 2015) else None
+                # fuelKind viene rifinito da hygiene_catalog_fuel_and_consumption.py
                 vehicles.append(
                     {
                         "id": vid,
@@ -202,6 +204,7 @@ def main() -> None:
                         "maintenancePerYear": round(maint + age_step * 2.0),
                         "taxesPerYear": round(taxes),
                         "imageURL": image,
+                        "fuelKind": "petrol",
                     }
                 )
 
