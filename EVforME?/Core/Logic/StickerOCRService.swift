@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-import Vision
+@preconcurrency import Vision
 
 struct StickerOCRResult {
     let rawText: String
