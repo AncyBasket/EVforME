@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """
-Igiene catalogo: fuelKind, consumi ICE realistici, drop junk NHTSA.
+Igiene catalogo: fuelKind, consumi ICE/EV/PHEV realistici, drop junk NHTSA.
 
-Allinea le euristiche a VehicleCatalogItem (Swift) e applica un uplift
-WLTP → uso reale (specie diesel SUV / auto più vecchie).
+- ICE: uplift WLTP→uso reale (idempotente se già in fascia)
+- EV/PHEV: clamp kWh/100 fuori fascia (batteria/range placeholder 350 corrompe i dati)
+- Sync energyConsumptionKWhPerKm ↔ wltpConsumptionKWh100km; ripara batteryKWh assurdi
 
 Uso:
   python3 scripts/hygiene_catalog_fuel_and_consumption.py
@@ -116,6 +117,28 @@ JUNK_NEEDLES = (
 FLOORS_PETROL = {"small": 0.052, "compact": 0.058, "medium": 0.062, "suv": 0.068}
 FLOORS_DIESEL = {"small": 0.048, "compact": 0.055, "medium": 0.068, "suv": 0.074}
 
+# EV / PHEV elettrico: kWh/km uso reale (efficienti ~0.12–0.22; SUV/van più alti).
+EV_DEFAULT_KWH_PER_KM = {"small": 0.145, "compact": 0.155, "medium": 0.168, "suv": 0.185}
+EV_MIN_KWH_PER_KM = {"small": 0.120, "compact": 0.120, "medium": 0.125, "suv": 0.140}
+EV_MAX_KWH_PER_KM = {"small": 0.200, "compact": 0.220, "medium": 0.245, "suv": 0.285}
+
+PHEV_FUEL_MIN_L_PER_KM = 0.025  # charge-sustaining floor (non WLTP blended ~1 L/100)
+PHEV_FUEL_MAX_L_PER_KM = 0.120
+PHEV_FUEL_DEFAULT = {"small": 0.045, "compact": 0.055, "medium": 0.065, "suv": 0.075}
+
+VAN_NEEDLES = (
+    "eqv",
+    "e-transit",
+    "e-crafter",
+    "e-berlingo",
+    "e-partner",
+    "e-vivaro",
+    "id. buzz",
+    "id buzz",
+    "transporter",
+    "vito",
+)
+
 DEFAULT_PATHS = [
     REPO / "EVforME?" / "Data" / "vehicles.seed.json",
     REPO / "EVforME?" / "Data" / "vehicles.seed.quality.json",
@@ -201,33 +224,103 @@ def infer_fuel_kind(row: dict) -> str | None:
     return "petrol"
 
 
-def realistic_ice_consumption(row: dict, fuel_kind: str) -> float | None:
-    raw = row.get("fuelConsumptionLPerKm")
-    if raw is None:
+def _as_float(value) -> float | None:
+    if value is None:
         return None
     try:
-        cons = float(raw)
+        return float(value)
     except (TypeError, ValueError):
         return None
-    if cons <= 0:
+
+
+def is_van_like(row: dict) -> bool:
+    blob = f"{row.get('brand', '')} {row.get('model', '')} {row.get('trim') or ''}".lower()
+    return any(n in blob for n in VAN_NEEDLES)
+
+
+def realistic_ice_consumption(row: dict, fuel_kind: str) -> float | None:
+    cons = _as_float(row.get("fuelConsumptionLPerKm"))
+    if cons is None or cons <= 0:
         return None
 
     year = int(row.get("year") or 2020)
     age = max(0, 2026 - year)
     seg = segment_from_length(row.get("lengthM"))
+    floor = FLOORS_DIESEL[seg] if fuel_kind == "diesel" else FLOORS_PETROL[seg]
 
-    # WLTP → real-world: diesel SUV/family spesso ~+12–18%; benzina ~+8–12%.
+    # Idempotente: già in fascia realistica → non ri-alzare.
+    if floor <= cons <= 0.14:
+        return round(cons, 4)
+
     if fuel_kind == "diesel":
-        uplift = 1.12 + min(age, 12) * 0.006  # usata diesel: più sete
-        floor = FLOORS_DIESEL[seg]
+        uplift = 1.12 + min(age, 12) * 0.006
     else:
         uplift = 1.08 + min(age, 12) * 0.004
-        floor = FLOORS_PETROL[seg]
 
     adjusted = max(cons * uplift, floor)
-    # Cap assurdo (non trasformare citycar in Hummer).
     adjusted = min(adjusted, 0.14)
     return round(adjusted, 4)
+
+
+def resolve_raw_ev_kwh_per_km(row: dict) -> float | None:
+    direct = _as_float(row.get("energyConsumptionKWhPerKm"))
+    if direct is not None and direct > 0:
+        return direct
+    wltp100 = _as_float(row.get("wltpConsumptionKWh100km"))
+    if wltp100 is not None and wltp100 > 0:
+        return wltp100 / 100.0
+    return None
+
+
+def realistic_ev_energy(row: dict) -> float:
+    """kWh/km in fascia realistica; fuori banda → default di segmento (non solo clamp al bordo)."""
+    seg = segment_from_length(row.get("lengthM"))
+    lo = EV_MIN_KWH_PER_KM[seg]
+    hi = EV_MAX_KWH_PER_KM[seg]
+    default = EV_DEFAULT_KWH_PER_KM[seg]
+    if is_van_like(row):
+        lo = max(lo, 0.180)
+        hi = max(hi, 0.300)
+        default = max(default, 0.220)
+
+    raw = resolve_raw_ev_kwh_per_km(row)
+    if raw is None or raw <= 0:
+        return default
+    if lo <= raw <= hi:
+        return round(raw, 4)
+    return default
+
+
+def realistic_phev_fuel(row: dict) -> float | None:
+    cons = _as_float(row.get("fuelConsumptionLPerKm"))
+    seg = segment_from_length(row.get("lengthM"))
+    default = PHEV_FUEL_DEFAULT[seg]
+    if cons is None or cons <= 0:
+        return default
+    if cons < PHEV_FUEL_MIN_L_PER_KM:
+        # WLTP blended troppo basso per la quota termica del simulatore.
+        return default
+    if cons > PHEV_FUEL_MAX_L_PER_KM:
+        return PHEV_FUEL_MAX_L_PER_KM
+    return round(cons, 4)
+
+
+def sync_ev_energy_fields(row: dict, kwh_per_km: float) -> None:
+    row["energyConsumptionKWhPerKm"] = round(kwh_per_km, 4)
+    row["wltpConsumptionKWh100km"] = round(kwh_per_km * 100.0, 1)
+
+    rng = _as_float(row.get("wltpRangeKm"))
+    bat = _as_float(row.get("batteryKWh"))
+    # Range placeholder ~350 ovunque: ripara solo batterie assurde rispetto al consumo.
+    if rng is None or rng <= 0:
+        rng = 350.0
+        row["wltpRangeKm"] = int(rng)
+
+    implied = kwh_per_km * rng
+    if bat is None or bat < 15 or bat > 120 or (implied > 0 and abs(bat - implied) / implied > 0.45):
+        # Pack realistici passeggeri ~20–100 kWh; van fino a 120.
+        cap = 120.0 if is_van_like(row) else 100.0
+        row["batteryKWh"] = round(min(max(implied, 20.0), cap), 1)
 
 
 def hygiene_rows(rows: list[dict]) -> tuple[list[dict], dict]:
@@ -236,7 +329,10 @@ def hygiene_rows(rows: list[dict]) -> tuple[list[dict], dict]:
         "in": len(rows),
         "junk_dropped": 0,
         "fuel_kind_set": 0,
-        "consumption_bumped": 0,
+        "ice_consumption_fixed": 0,
+        "ev_energy_fixed": 0,
+        "phev_energy_fixed": 0,
+        "phev_fuel_fixed": 0,
         "diesel": 0,
         "petrol": 0,
     }
@@ -245,6 +341,7 @@ def hygiene_rows(rows: list[dict]) -> tuple[list[dict], dict]:
             stats["junk_dropped"] += 1
             continue
         out = dict(row)
+        pt = (out.get("powertrain") or "").lower()
         fk = infer_fuel_kind(out)
         if fk:
             out["fuelKind"] = fk
@@ -253,12 +350,35 @@ def hygiene_rows(rows: list[dict]) -> tuple[list[dict], dict]:
         elif "fuelKind" in out:
             out.pop("fuelKind", None)
 
-        if (out.get("powertrain") or "").lower() == "ice" and fk:
+        if pt == "ice" and fk:
             new_cons = realistic_ice_consumption(out, fk)
-            old = out.get("fuelConsumptionLPerKm")
-            if new_cons is not None and (old is None or abs(float(old) - new_cons) >= 0.00005):
+            old = _as_float(out.get("fuelConsumptionLPerKm"))
+            if new_cons is not None and (old is None or abs(old - new_cons) >= 0.00005):
                 out["fuelConsumptionLPerKm"] = new_cons
-                stats["consumption_bumped"] += 1
+                stats["ice_consumption_fixed"] += 1
+
+        elif pt == "ev":
+            old = resolve_raw_ev_kwh_per_km(out)
+            new_e = realistic_ev_energy(out)
+            if old is None or abs(old - new_e) >= 0.00005:
+                sync_ev_energy_fields(out, new_e)
+                stats["ev_energy_fixed"] += 1
+            else:
+                # Allinea comunque i campi gemelli se manca wltpConsumption.
+                if out.get("wltpConsumptionKWh100km") is None:
+                    out["wltpConsumptionKWh100km"] = round(new_e * 100.0, 1)
+
+        elif pt == "phev":
+            old_e = resolve_raw_ev_kwh_per_km(out)
+            new_e = realistic_ev_energy(out)
+            if old_e is None or abs(old_e - new_e) >= 0.00005:
+                sync_ev_energy_fields(out, new_e)
+                stats["phev_energy_fixed"] += 1
+            new_f = realistic_phev_fuel(out)
+            old_f = _as_float(out.get("fuelConsumptionLPerKm"))
+            if new_f is not None and (old_f is None or abs(old_f - new_f) >= 0.00005):
+                out["fuelConsumptionLPerKm"] = new_f
+                stats["phev_fuel_fixed"] += 1
 
         kept.append(out)
     stats["out"] = len(kept)
@@ -303,8 +423,8 @@ def main() -> int:
         print(
             f"{stats['path']}: {stats['in']} → {stats['out']} "
             f"(junk -{stats['junk_dropped']}, fuelKind {stats['fuel_kind_set']}, "
-            f"cons↑ {stats['consumption_bumped']}, diesel {stats.get('diesel', 0)}, "
-            f"petrol {stats.get('petrol', 0)})"
+            f"ice↑ {stats['ice_consumption_fixed']}, ev↑ {stats['ev_energy_fixed']}, "
+            f"phevE↑ {stats['phev_energy_fixed']}, phevF↑ {stats['phev_fuel_fixed']})"
         )
     return 0
 

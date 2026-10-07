@@ -79,4 +79,51 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         )
         XCTAssertEqual(basis, suggestedUsed, accuracy: 0.01)
     }
+
+    func testModel3_EnergyInEfficientBand() {
+        let m3 = VehicleCatalogService.shared.vehicle(by: "tesla-model-3-2023")
+            ?? VehicleCatalogService.shared.vehicle(by: "tesla-model-3-2024")
+        XCTAssertNotNil(m3)
+        let k100 = (m3?.resolvedEnergyKWhPerKm ?? 0) * 100
+        XCTAssertGreaterThanOrEqual(k100, 12)
+        XCTAssertLessThanOrEqual(k100, 22)
+    }
+
+    func testQ4Etron_EnergyInSUVBand() {
+        let q4 = VehicleCatalogService.shared.vehicle(by: "audi-q4-e-tron-2021")
+        XCTAssertNotNil(q4)
+        let k100 = (q4?.resolvedEnergyKWhPerKm ?? 0) * 100
+        XCTAssertGreaterThanOrEqual(k100, 14)
+        XCTAssertLessThanOrEqual(k100, 24)
+    }
+
+    func testCatalog_NoAbsurdEVEnergyOutliers() {
+        let evs = VehicleCatalogService.shared.vehicles.filter { $0.powertrain == .ev }
+        XCTAssertFalse(evs.isEmpty)
+        for ev in evs {
+            guard let kWh = ev.resolvedEnergyKWhPerKm else {
+                XCTFail("EV \(ev.id) missing energy")
+                continue
+            }
+            let k100 = kWh * 100
+            XCTAssertGreaterThanOrEqual(k100, 12, "\(ev.id) too low (\(k100))")
+            XCTAssertLessThanOrEqual(k100, 30, "\(ev.id) too high (\(k100))")
+        }
+    }
+
+    func testCatalog_NoMissingICEFuelOrEVEnergy() {
+        for v in VehicleCatalogService.shared.vehicles {
+            switch v.powertrain {
+            case .ice:
+                XCTAssertNotNil(v.fuelConsumptionLPerKm, v.id)
+                XCTAssertGreaterThan(v.fuelConsumptionLPerKm ?? 0, 0, v.id)
+            case .ev:
+                XCTAssertNotNil(v.resolvedEnergyKWhPerKm, v.id)
+                XCTAssertGreaterThan(v.resolvedEnergyKWhPerKm ?? 0, 0, v.id)
+            case .phev:
+                XCTAssertNotNil(v.fuelConsumptionLPerKm, v.id)
+                XCTAssertNotNil(v.resolvedEnergyKWhPerKm, v.id)
+            }
+        }
+    }
 }
