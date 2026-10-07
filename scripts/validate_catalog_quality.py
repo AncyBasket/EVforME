@@ -11,6 +11,12 @@ import re
 import sys
 from pathlib import Path
 
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+
+from model_production_years import lookup_production_years, year_is_plausible
+
 
 def main() -> int:
     repo = Path(__file__).resolve().parents[1]
@@ -29,6 +35,7 @@ def main() -> int:
 
     seen_ids: set[str] = set()
     suspicious_terms = {"inc", "ltd", "llc", "company", "manufacturing", "radiator", "trailer"}
+    impossible_years = 0
 
     for i, r in enumerate(rows):
         rid = r.get("id")
@@ -58,6 +65,16 @@ def main() -> int:
         if year < 1980 or year > 2035:
             errors.append(f"{rid}: out-of-range year {year}")
 
+        # Anni pre-lancio / post-uscita: errore se abbiamo finestra esplicita, warning altrimenti.
+        pt = powertrain if isinstance(powertrain, str) else None
+        if not year_is_plausible(brand, model, year, pt):
+            if lookup_production_years(brand, model) is not None:
+                errors.append(f"{rid}: year {year} outside production window for {brand} {model}")
+                impossible_years += 1
+            else:
+                warnings.append(f"{rid}: year {year} may be outside production for {brand} {model}")
+                impossible_years += 1
+
         length = r.get("lengthM")
         width = r.get("widthM")
         height = r.get("heightM")
@@ -75,7 +92,10 @@ def main() -> int:
             warnings.append(f"{rid}: long model label '{model}'")
         # Alcuni modelli legittimi sono sigle (TT, X5, XC90, EQE, ecc.), quindi non flagghiamo di default.
 
-    print(f"validated_rows={len(rows)} errors={len(errors)} warnings={len(warnings)} file={path.name}")
+    print(
+        f"validated_rows={len(rows)} errors={len(errors)} warnings={len(warnings)} "
+        f"impossible_year_flags={impossible_years} file={path.name}"
+    )
     if warnings:
         print("sample_warnings:")
         for w in warnings[:20]:

@@ -21,6 +21,7 @@ if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
 from eu_vehicle_dimensions_data import MODEL_DIMS, length_segment_for_economics, resolve_dims
+from model_production_years import resolve_year_window
 
 # Marche / modelli tipici del mercato europeo (ICE)
 ICE_EU: dict[str, list[str]] = {
@@ -166,7 +167,7 @@ def main() -> None:
     vehicles: list[dict] = []
     seen: set[str] = set()
 
-    # ICE UE: 2005–2026
+    # ICE UE: solo anni in cui il modello esisteva davvero
     for brand, models in ICE_EU.items():
         for model in models:
             seed = stable_seed(f"EU-ICE-{brand}-{model}")
@@ -175,13 +176,14 @@ def main() -> None:
             base_cons = ICE_CONS_L_PER_KM[seg] + (seed % 10) / 1000
             maint = ICE_MAINT[seg] + int((seed % 9) * 7)
             taxes = ICE_TAX[seg] + int((seed % 8) * 6)
+            launch, end = resolve_year_window(brand, model, "ice")
 
-            for year in range(2005, 2027):
+            for year in range(launch, end + 1):
                 vid = f"{slug(brand)}-{slug(model)}-{year}".replace("--", "-")
                 if vid in seen:
                     continue
                 seen.add(vid)
-                age_step = year - 2005
+                age_step = year - launch
                 cons = max(0.044, base_cons - age_step * 0.00032)
                 l, w, h = resolve_dims(brand, model, year)
                 image = wiki_style_img(brand, model) if (brand in POPULAR_EU and year >= 2015) else None
@@ -203,7 +205,7 @@ def main() -> None:
                     }
                 )
 
-    # EV UE
+    # EV UE: anni da finestra produzione (non hash casuale)
     for brand, models in EV_EU.items():
         for model in models:
             seed = stable_seed(f"EU-EV-{brand}-{model}")
@@ -211,30 +213,9 @@ def main() -> None:
             seg = length_segment_for_economics(ref_l)
             base_cons = EV_KWH_PER_KM[seg] + (seed % 12) / 1000
             maint = EV_MAINT[seg] + int((seed % 9) * 6)
-            launch = 2010 + (seed % 8)
-            if any(
-                x in model
-                for x in [
-                    "EV3", "EV4", "Inster", "6e", "Puma Gen-E", "Capri EV", "Explorer EV",
-                    "Grandland Electric", "Frontera Electric", "Elroq", "e-3008", "e-5008", "5 E-Tech",
-                    "Q6 e-tron", "EX90", "Wagoneer S", "Marvel R", "Equinox EV", "Gravity",
-                ]
-            ):
-                launch = max(2022, launch)
-            if brand == "NIO" or brand == "XPeng":
-                launch = max(2021, launch)
-            if brand == "Lucid":
-                launch = max(2022, launch)
-            if brand == "Rivian":
-                launch = max(2023, launch)
-            if brand == "Chevrolet" and "Bolt" in model:
-                launch = max(2017, launch)
-            if brand == "Tesla":
-                launch = max(2012, launch)
-            if model == "Cybertruck":
-                launch = max(2024, launch)
+            launch, end = resolve_year_window(brand, model, "ev")
 
-            for year in range(launch, 2027):
+            for year in range(launch, end + 1):
                 vid = f"{slug(brand)}-{slug(model)}-{year}".replace("--", "-")
                 if vid in seen:
                     continue

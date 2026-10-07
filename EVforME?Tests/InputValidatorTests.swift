@@ -113,7 +113,7 @@ final class InputValidatorTests: XCTestCase {
             ownershipYears: 5,
             electricityPricePerKWh: 0.25,
             sourceVehicleId: "alfa-romeo-147-2005",
-            targetVehicleId: "audi-q4-e-tron-2017",
+            targetVehicleId: "audi-q4-e-tron-2021",
             scenario: .realistic
         )
         

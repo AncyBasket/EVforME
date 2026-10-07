@@ -91,24 +91,25 @@ final class OfficialCostService {
     // MARK: - Public sources (stessa logica di scripts/fetch_official_energy_costs.py)
 
     private func fetchFromPublicSources() async -> OfficialEnergyCosts? {
-        async let fuel = fetchMIMITBenzinaMedian()
+        async let fuels = fetchMIMITFuelMedians()
         async let elec = fetchEurostatElectricityIT()
-        let (fuelPrice, elecPrice) = await (fuel, elec)
-        guard let fuelPrice, let elecPrice else { return nil }
+        let (fuelMedians, elecPrice) = await (fuels, elec)
+        guard let petrol = fuelMedians.petrol, let elecPrice else { return nil }
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         return OfficialEnergyCosts(
             country: "IT",
             currency: "EUR",
-            fuelPricePerLiter: (fuelPrice * 1000).rounded() / 1000,
+            fuelPricePerLiter: (petrol * 1000).rounded() / 1000,
+            dieselPricePerLiter: fuelMedians.diesel.map { ($0 * 1000).rounded() / 1000 },
             electricityPricePerKWh: (elecPrice * 1000).rounded() / 1000,
             updatedAt: formatter.string(from: Date())
         )
     }
 
-    /// MIMIT prezzo_alle_8.csv — mediana benzina self-service.
-    private func fetchMIMITBenzinaMedian() async -> Double? {
-        guard let url = URL(string: Defaults.mimitFuelPricesCSVURL) else { return nil }
+    /// MIMIT prezzo_alle_8.csv — mediana benzina + gasolio self-service.
+    private func fetchMIMITFuelMedians() async -> (petrol: Double?, diesel: Double?) {
+        guard let url = URL(string: Defaults.mimitFuelPricesCSVURL) else { return (nil, nil) }
         do {
             let (data, response) = try await session.data(from: url)
             guard let http = response as? HTTPURLResponse, (200...299).contains(http.statusCode),
@@ -118,38 +119,43 @@ final class OfficialCostService {
                     .fuelPriceFetchFailed,
                     context: .network
                 )
-                return nil
+                return (nil, nil)
             }
 
-            var prices: [Double] = []
+            var petrol: [Double] = []
+            var diesel: [Double] = []
             let lines = text.split(whereSeparator: \.isNewline)
-            guard lines.count > 1 else { return nil }
-            // Riga 0 = estrazione; riga 1 = header; dati da riga 2
+            guard lines.count > 1 else { return (nil, nil) }
             for line in lines.dropFirst(2) {
                 let cols = line.split(separator: "|", omittingEmptySubsequences: false).map(Substring.init)
                 guard cols.count >= 4 else { continue }
                 let fuelName = cols[1].trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-                guard fuelName == "benzina" else { continue }
                 guard let parsed = parseMIMITRow(cols) else { continue }
-                if parsed.isSelf, parsed.price >= 0.8, parsed.price <= 3.5 {
-                    prices.append(parsed.price)
+                guard parsed.isSelf, parsed.price >= 0.8, parsed.price <= 3.5 else { continue }
+                if fuelName == "benzina" {
+                    petrol.append(parsed.price)
+                } else if fuelName == "gasolio" || fuelName.contains("gasolio") {
+                    diesel.append(parsed.price)
                 }
             }
-            guard !prices.isEmpty else { return nil }
-            prices.sort()
-            return prices[prices.count / 2]
+            func median(_ values: [Double]) -> Double? {
+                guard !values.isEmpty else { return nil }
+                let sorted = values.sorted()
+                return sorted[sorted.count / 2]
+            }
+            return (median(petrol), median(diesel))
         } catch let urlError as URLError {
             ErrorHandler.shared.handleAppError(
                 urlError.toAppError,
                 context: .network
             )
-            return nil
+            return (nil, nil)
         } catch {
             ErrorHandler.shared.handle(
                 error,
                 context: .network
             )
-            return nil
+            return (nil, nil)
         }
     }
 
@@ -280,6 +286,7 @@ final class OfficialCostService {
                 country: "IT",
                 currency: "EUR",
                 fuelPricePerLiter: 1.739,
+                dieselPricePerLiter: 1.659,
                 electricityPricePerKWh: 0.333,
                 updatedAt: nil
             )

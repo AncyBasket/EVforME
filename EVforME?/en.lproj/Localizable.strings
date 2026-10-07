@@ -31,11 +31,14 @@
 "powertrain_ev" = "EV";
 "powertrain_phev" = "PHEV";
 "powertrain_ice_label" = "Petrol / diesel (ICE)";
+"powertrain_petrol_label" = "Petrol";
+"powertrain_diesel_label" = "Diesel";
 "powertrain_phev_label" = "Plug-in hybrid";
 "powertrain_ev_label" = "Electric";
 "current_vehicle_short" = "Current";
 "electrified_vehicle_short" = "Electrified";
-"comparison_card_title" = "Vehicle comparison (dimensions, consumption, cost/km)";
+"comparison_card_title" = "Vehicle comparison (dimensions, running €/km)";
+"comparison_operating_per_km_caption" = "Running cost: energy + tax + maintenance (older cars cost more here). Purchase price of a new car is not in this €/km.";
 "vehicle_search_placeholder" = "Search make or model…";
 "vehicle_picker_button" = "Choose from catalog…";
 "vehicle_picker_search_title" = "Search the catalog";

@@ -20,7 +20,7 @@ final class VehicleCatalogService {
     }
 
     private let defaults = UserDefaults.standard
-    private let seedVersion = 26
+    private let seedVersion = 28
     private var remoteDisabledForTesting = false
     private let remoteSession: URLSession = {
         let config = URLSessionConfiguration.ephemeral
@@ -198,6 +198,7 @@ final class VehicleCatalogService {
             }
 
             let decoded = try JSONDecoder().decode([VehicleCatalogItem].self, from: data)
+                .filter { !$0.isJunkCatalogEntry }
             guard !decoded.isEmpty else {
                 AppLogger.shared.warning("Empty remote catalog — keeping offline catalog", category: .catalog)
                 return
@@ -258,7 +259,7 @@ final class VehicleCatalogService {
            let data = defaults.data(forKey: Keys.cachedCatalog),
            let cached = try? JSONDecoder().decode([VehicleCatalogItem].self, from: data),
            !cached.isEmpty {
-            return cached
+            return cached.filter { !$0.isJunkCatalogEntry }
         }
         if let bundled = loadBundledSeedCatalog(), !bundled.isEmpty {
             if let data = try? JSONEncoder().encode(bundled) {
@@ -287,7 +288,7 @@ final class VehicleCatalogService {
                   !decoded.isEmpty else {
                 continue
             }
-            return decoded
+            return decoded.filter { !$0.isJunkCatalogEntry }
         }
         return nil
     }
@@ -337,7 +338,8 @@ final class VehicleCatalogService {
                     market: item.market,
                     sourceName: item.sourceName,
                     sourceUpdatedAt: item.sourceUpdatedAt,
-                    confidenceScore: item.confidenceScore
+                    confidenceScore: item.confidenceScore,
+                    fuelKind: item.fuelKind
                 )
                 expanded.append(generated)
             }

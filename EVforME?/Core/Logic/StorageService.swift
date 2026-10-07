@@ -91,9 +91,11 @@ final class StorageService {
         let canAutoApplyFuel = !userCustomizedFuel && (
             prevAutoFuel == nil ? !hasStoredInput : fuelMatchesPreviousAuto
         )
+        let fuelKind = VehicleCatalogService.shared.vehicle(by: input.sourceVehicleId)?.resolvedFuelKind ?? .petrol
+        let officialFuel = costs.pricePerLiter(for: fuelKind)
         if canAutoApplyFuel {
-            if abs(input.fuelPrice - costs.fuelPricePerLiter) >= epsilon {
-                input.fuelPrice = costs.fuelPricePerLiter
+            if abs(input.fuelPrice - officialFuel) >= epsilon {
+                input.fuelPrice = officialFuel
                 changed = true
             }
         }
@@ -108,7 +110,7 @@ final class StorageService {
             }
         }
 
-        defaults.set(costs.fuelPricePerLiter, forKey: Keys.lastAutoFuelPrice)
+        defaults.set(officialFuel, forKey: Keys.lastAutoFuelPrice)
         defaults.set(costs.electricityPricePerKWh, forKey: Keys.lastAutoElectricityPrice)
         if canAutoApplyFuel {
             defaults.set(false, forKey: Keys.userCustomizedFuelPrice)
@@ -117,6 +119,23 @@ final class StorageService {
             defaults.set(false, forKey: Keys.userCustomizedElectricityPrice)
         }
         return changed
+    }
+
+    /// Aggiorna €/L quando cambia il veicolo attuale (benzina ↔ diesel), se non c’è override manuale.
+    @discardableResult
+    func syncFuelPriceForSourceVehicle(in input: inout UserInput) -> Bool {
+        guard !defaults.bool(forKey: Keys.userCustomizedFuelPrice) else { return false }
+        guard let costs = OfficialCostService.shared.cachedOrBundledCosts() else { return false }
+        let kind = VehicleCatalogService.shared.vehicle(by: input.sourceVehicleId)?.resolvedFuelKind ?? .petrol
+        let price = costs.pricePerLiter(for: kind)
+        let epsilon = 0.0001
+        guard abs(input.fuelPrice - price) >= epsilon else {
+            defaults.set(price, forKey: Keys.lastAutoFuelPrice)
+            return false
+        }
+        input.fuelPrice = price
+        defaults.set(price, forKey: Keys.lastAutoFuelPrice)
+        return true
     }
 
     private func updateCustomizationFlags(for input: UserInput) {

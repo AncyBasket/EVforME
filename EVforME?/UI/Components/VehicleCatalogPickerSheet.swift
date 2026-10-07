@@ -308,7 +308,7 @@ struct VehicleCatalogPickerSheet: View {
                     .frame(width: 64, alignment: .leading)
 
                 VStack(alignment: .leading, spacing: 3) {
-                    Text(vehicle.powertrain.catalogFuelLabel)
+                    Text(vehicle.catalogFuelLabel)
                         .font(Typography.readingCardTitle)
                         .foregroundColor(.ink)
                     if let trim = vehicle.trim, !trim.isEmpty {
@@ -340,7 +340,7 @@ struct VehicleCatalogPickerSheet: View {
             }
         }
         .buttonStyle(.plain)
-        .accessibilityLabel("\(vehicle.displayName), \(vehicle.powertrain.catalogFuelLabel)")
+        .accessibilityLabel("\(vehicle.displayName), \(vehicle.catalogFuelLabel)")
     }
 
     // MARK: - Text (grouped by brand)

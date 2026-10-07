@@ -228,7 +228,7 @@ struct EVforMEApp: App {
         }
         if userInput.targetVehicleId.isEmpty {
             userInput.targetVehicleId = VehicleCatalogService.shared.targetEVVehicles().first?.id
-                ?? "audi-q4-e-tron-2017"
+                ?? "audi-q4-e-tron-2021"
         }
         syncFuelFromWidgetIfNeeded()
         guard let result = EVSimulator.simulate(input: userInput) else { return }

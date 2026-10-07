@@ -81,11 +81,14 @@ enum L10n {
     static var powertrainPHEV: String { string("powertrain_phev") }
     /// Catalog picker fuel labels (IT-first: Benzina/Diesel → ICE, Ibrida plug-in, Elettrica).
     static var powertrainIceLabel: String { string("powertrain_ice_label") }
+    static var powertrainPetrolLabel: String { string("powertrain_petrol_label") }
+    static var powertrainDieselLabel: String { string("powertrain_diesel_label") }
     static var powertrainPhevLabel: String { string("powertrain_phev_label") }
     static var powertrainEvLabel: String { string("powertrain_ev_label") }
     static var currentVehicleShort: String { string("current_vehicle_short") }
     static var electrifiedVehicleShort: String { string("electrified_vehicle_short") }
     static var comparisonCardTitle: String { string("comparison_card_title") }
+    static var comparisonOperatingPerKmCaption: String { string("comparison_operating_per_km_caption") }
     static var vehicleSearchPlaceholder: String { string("vehicle_search_placeholder") }
     static var vehiclePickerButton: String { string("vehicle_picker_button") }
     static var vehiclePickerSearchTitle: String { string("vehicle_picker_search_title") }

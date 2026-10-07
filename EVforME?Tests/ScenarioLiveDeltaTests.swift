@@ -140,7 +140,7 @@ final class ScenarioLiveDeltaTests: XCTestCase {
             tripProfileRaw: TripProfile.custom.rawValue,
             scenarioRaw: Scenario.realistic.rawValue,
             sourceVehicleId: "alfa-romeo-147-2005",
-            targetVehicleId: "audi-q4-e-tron-2017",
+            targetVehicleId: "audi-q4-e-tron-2021",
             persistedInput: nil,
             sourceDisplayName: "ICE",
             targetDisplayName: "EV",
