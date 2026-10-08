@@ -1,18 +1,19 @@
 {
   "country": "IT",
   "currency": "EUR",
-  "updatedAt": "2026-09-20T00:00:00Z",
-  "validFrom": "2026-01-01",
+  "updatedAt": "2026-10-08T00:00:00Z",
+  "validFrom": "2025-08-08",
   "validUntil": "2026-12-31",
   "maxListPriceEUR": 45000,
-  "maxBonusEUR": 7000,
-  "scrappageExtraEUR": 2000,
-  "scrappageMaxReplacingPriceEUR": 18000,
+  "maxBonusEUR": 11000,
+  "scrappageExtraEUR": 0,
+  "scrappageMaxReplacingPriceEUR": 0,
   "brackets": [
-    { "maxPriceEUR": 30000, "bonusEUR": 5000 },
-    { "maxPriceEUR": 35000, "bonusEUR": 4000 },
-    { "maxPriceEUR": 42000, "bonusEUR": 2500 },
-    { "maxPriceEUR": 45000, "bonusEUR": 1500 }
+    { "maxPriceEUR": 45000, "bonusEUR": 9000 }
   ],
-  "sourceNote": "Stima semplificata stile ecobonus IT — non consulenza fiscale/legale. Verifica sempre sul sito ufficiale del Ministero / regioni. Aggiornabile via EVFORME_INCENTIVES_URL o bundle."
+  "requiresISEE": true,
+  "requiresScrappage": true,
+  "verifiedAgainstOfficialSchedule": false,
+  "officialInfoURL": "https://www.bonusveicolielettrici.mase.gov.it/index.html",
+  "sourceNote": "Schema 2025 MASE/PNRR (ISEE ≤40k, rottamazione, FUA) non modellabile in modo affidabile qui. Le cifre sono illustrative e NON vengono sommate al verdetto di default — attiva il toggle solo dopo aver verificato sul sito ufficiale."
 }

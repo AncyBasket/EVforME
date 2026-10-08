@@ -427,7 +427,7 @@ private struct CodableUserInput: Codable {
         scenarioRaw = try container.decode(Double.self, forKey: .scenarioRaw)
         sourcePurchasePrice = try container.decodeIfPresent(Double.self, forKey: .sourcePurchasePrice) ?? 12_000
         targetPurchasePrice = try container.decodeIfPresent(Double.self, forKey: .targetPurchasePrice) ?? 32_000
-        includeIncentives = try container.decodeIfPresent(Bool.self, forKey: .includeIncentives) ?? true
+        includeIncentives = try container.decodeIfPresent(Bool.self, forKey: .includeIncentives) ?? false
         comparisonIntentRaw = try container.decodeIfPresent(String.self, forKey: .comparisonIntentRaw)
             ?? ComparisonIntent.alreadyOwned.rawValue
         tripProfileRaw = try container.decodeIfPresent(String.self, forKey: .tripProfileRaw) ?? TripProfile.custom.rawValue

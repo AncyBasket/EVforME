@@ -192,7 +192,7 @@ struct UserInput {
         scenario: Scenario = .realistic,
         sourcePurchasePrice: Double = 12_000,
         targetPurchasePrice: Double = 32_000,
-        includeIncentives: Bool = true,
+        includeIncentives: Bool = false,
         comparisonIntent: ComparisonIntent = .alreadyOwned,
         tripProfile: TripProfile = .custom,
         sourceConsumptionOverrideLPer100Km: Double? = nil,

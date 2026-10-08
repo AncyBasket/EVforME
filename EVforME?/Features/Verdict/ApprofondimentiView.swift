@@ -13,7 +13,7 @@ struct ApprofondimentiView: View {
             subsection(title: L10n.subsectionBatteryTitle, body: L10n.subsectionBatteryBody)
             VStack(alignment: .leading, spacing: 10) {
                 subsection(title: L10n.subsectionIncentivesTitle, body: L10n.subsectionIncentivesBody)
-                Link(destination: URL(string: "https://www.mise.gov.it/index.php/it/energia/trasporti/ecobonus-autovetture")!) {
+                Link(destination: OfficialLinks.italianVehicleIncentives) {
                     HStack(spacing: 8) {
                         Text(L10n.incentivesLinkTitle)
                             .font(Typography.readingCardTitle)

@@ -502,6 +502,9 @@ enum L10n {
     static var leadSavedLocally: String { string("lead_saved_locally") }
     static var leadSentRemote: String { string("lead_sent_remote") }
     static var leadSendFailed: String { string("lead_send_failed") }
+    static var leadSendUnavailable: String { string("lead_send_unavailable") }
+    static var leadConsentRequired: String { string("lead_consent_required") }
+    static var verdictOpexOnlyUnderHeadline: String { string("verdict_opex_only_under_headline") }
     static var tcoExtrasTitle: String { string("tco_extras_title") }
     static var tcoExtrasClosed: String { string("tco_extras_closed") }
     static var tcoExtrasIntro: String { string("tco_extras_intro") }

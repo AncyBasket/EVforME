@@ -336,18 +336,20 @@ struct VerdictView: View {
             .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
             .accessibilityHint(L10n.exportPDFA11yHint)
 
-            Button(L10n.talkToAdvisor) {
-                showLeadSheet = true
+            if !Defaults.leadWebhookURL.isEmpty {
+                Button(L10n.talkToAdvisor) {
+                    showLeadSheet = true
+                }
+                .font(Typography.bodyBold)
+                .foregroundColor(.ink)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 15)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 4, style: .continuous)
+                        .stroke(Color.ink.opacity(0.3), lineWidth: 1.5)
+                )
+                .accessibilityHint(L10n.talkToAdvisorA11yHint)
             }
-            .font(Typography.bodyBold)
-            .foregroundColor(.ink)
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 15)
-            .overlay(
-                RoundedRectangle(cornerRadius: 4, style: .continuous)
-                    .stroke(Color.ink.opacity(0.3), lineWidth: 1.5)
-            )
-            .accessibilityHint(L10n.talkToAdvisorA11yHint)
 
             Button(L10n.modifyInput) {
                 closeVerdict()
@@ -400,6 +402,12 @@ struct VerdictView: View {
                 .multilineTextAlignment(.leading)
                 .fixedSize(horizontal: false, vertical: true)
                 .minimumScaleFactor(0.72)
+
+            Text(L10n.verdictOpexOnlyUnderHeadline)
+                .font(Typography.readingCaption.weight(.semibold))
+                .foregroundColor(.secondaryText)
+                .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
 
             Text(result.verdict.description)
                 .font(Typography.readingIntro)
@@ -803,7 +811,7 @@ private struct LeadCaptureSheet: View {
     @State private var name = ""
     @State private var email = ""
     @State private var city = ""
-    @State private var consent = true
+    @State private var consent = false
     @State private var isSending = false
     @State private var sendNote: String?
 
@@ -846,6 +854,14 @@ private struct LeadCaptureSheet: View {
     }
 
     private func submitLead() async {
+        guard consent, !email.isEmpty else {
+            sendNote = L10n.leadConsentRequired
+            return
+        }
+        guard !Defaults.leadWebhookURL.isEmpty else {
+            sendNote = L10n.leadSendUnavailable
+            return
+        }
         isSending = true
         defer { isSending = false }
         GrowthTracker.shared.track(.leadSubmitted, [
@@ -859,13 +875,11 @@ private struct LeadCaptureSheet: View {
             city: city,
             consent: consent
         )
-        if Defaults.leadWebhookURL.isEmpty {
-            sendNote = L10n.leadSavedLocally
-        } else {
-            sendNote = remoteOK ? L10n.leadSentRemote : L10n.leadSendFailed
+        sendNote = remoteOK ? L10n.leadSentRemote : L10n.leadSendFailed
+        if remoteOK {
+            try? await Task.sleep(nanoseconds: 450_000_000)
+            dismiss()
         }
-        try? await Task.sleep(nanoseconds: 450_000_000)
-        dismiss()
     }
 }
 

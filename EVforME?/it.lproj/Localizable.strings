@@ -82,7 +82,7 @@
 "get_free_report" = "Esporta report PDF";
 "talk_to_advisor" = "Parla con un consulente";
 "lead_sheet_title" = "Consulenza EV gratuita";
-"lead_sheet_subtitle" = "Lascia nome, email e città: ti ricontattiamo per una consulenza EV gratuita.";
+"lead_sheet_subtitle" = "Lascia nome, email e città se vuoi essere contattato. Inviamo i dati solo con il tuo consenso e dopo l’invio.";
 "lead_name_placeholder" = "Nome";
 "lead_email_placeholder" = "Email";
 "lead_city_placeholder" = "Citta";
@@ -101,7 +101,10 @@
 "picker_year_one" = "1 anno";
 "picker_year_many" = "%d anni";
 "chart_series" = "Serie";
-"lead_saved_locally" = "Richiesta salvata sul dispositivo. Ti ricontatteremo quando il canale advisor sarà attivo.";
+"lead_saved_locally" = "Richiesta tenuta solo sul dispositivo — non è stata inviata (nessun canale di contatto configurato).";
+"lead_send_unavailable" = "Il form di contatto non è disponibile in questo momento — non è stato inviato nulla.";
+"lead_consent_required" = "Attiva il consenso per inviare la richiesta.";
+"verdict_opex_only_under_headline" = "Il Sì/No riguarda solo i costi di gestione (energia, bollo, manutenzione, RC). Il prezzo d’acquisto è a parte.";
 "lead_sent_remote" = "Richiesta inviata. Un advisor ti ricontatterà.";
 "lead_send_failed" = "Invio non riuscito. Riprova tra poco.";
 "validation_target_vehicle_required" = "Seleziona il veicolo elettrificato di confronto";
@@ -330,8 +333,8 @@
 "purchase_prices_verdict_note" = "Non decide il sì/no: il verdetto resta su energia, bollo e tagliandi (l’usata pesa di più). Qui solo stima payback se stai comprando.";
 "source_purchase_price_label" = "Auto attuale (€)";
 "target_purchase_price_label" = "EV target (€)";
-"include_incentives_toggle" = "Includi stima incentivi IT";
-"include_incentives_hint" = "Aggiunge un bonus acquisto indicativo (non è consulenza). Il bollo EV nel catalogo è spesso già basso/zero.";
+"include_incentives_toggle" = "Includi stima incentivi IT (disattivata di default)";
+"include_incentives_hint" = "Disattivata di default: le regole 2025 MASE/PNRR (ISEE, rottamazione, FUA) non sono modellabili in modo affidabile qui. Verifica sul sito ufficiale prima di attivarla. Non è consulenza.";
 "comparison_intent_section_title" = "Cosa stai confrontando?";
 "comparison_intent_purchase_title" = "Sto comprando (listino + incentivi)";
 "comparison_intent_purchase_subtitle" = "Mostra una stima di payback sul listino; il verdetto resta solo sulla gestione (non sul prezzo iniziale).";
@@ -340,7 +343,7 @@
 "comparison_intent_owned_reason" = "Modalità solo opex: il premium di listino è costo già sostenuto.";
 "opex_savings_only_reason" = "Circa €%d/anno in meno di gestione — niente break-even di acquisto in questa modalità.";
 "incentives_included_reason" = "Include stima incentivi acquisto ~€%d.";
-"incentives_transparency_note" = "Gli incentivi sono stime IT semplificate; verifica le regole ufficiali per regione e fascia.";
+"incentives_transparency_note" = "Gli incentivi sono solo illustrativi — verifica sul sito ufficiale MASE/MIMIT (ISEE, rottamazione, fondi). Non entrano nel verdetto finché non attivi il toggle.";
 "sources_section_title" = "Da dove arrivano i numeri";
 "source_catalog_note" = "Consumi veicoli: catalogo quality scaricato da internet a ogni apertura (fallback seed in bundle). Prezzi: MIMIT + Eurostat.";
 "source_prices_note" = "Prezzi energia: aggiornati a ogni apertura da MIMIT (carburante) ed Eurostat (elettricità); in cache se offline. Puoi comunque sovrascrivere gli slider.";
@@ -442,8 +445,8 @@
 
 /* Privacy */
 "privacy_policy_title" = "Privacy";
-"privacy_policy_updated" = "Aggiornata: 20 settembre 2026";
-"privacy_policy_body" = "EVforME? calcola sul dispositivo se un’auto elettrica o plug-in può avere senso per te.\n\nCosa resta sul telefono: km, prezzi, veicoli scelti, storico scenari, snapshot widget/Live Activity.\n\nFoto sticker: usate solo on-device per leggere consumi; non vengono caricate per quella funzione.\n\nPosizione (opzionale): solo quando apri Colonnine vicine, e solo Durante l’uso dell’app, per centrare una ricerca MapKit. La posizione non viene inviata a un backend EVforME e non c’è tracking in background.\n\nRete (opzionale): catalogo veicoli, fonti prezzi pubbliche, risultati ricerca Apple Mappe, analytics o webhook lead solo se configurati. Nella build tipica analytics/lead restano locali se gli URL sono vuoti.\n\nNon vendiamo dati e non usiamo tracker pubblicitari.\n\nModulo consulente: nome/email/città solo se li invii con consenso.\n\nPuoi revocare foto/posizione in Impostazioni iOS, evitare il form lead, o cancellare l’app per rimuovere i dati locali.\n\nPer App Store Connect serve anche un URL HTTPS pubblico con la policy completa (vedi PRIVACY_POLICY.md nel repo).";
+"privacy_policy_updated" = "Aggiornata: 8 ottobre 2026";
+"privacy_policy_body" = "EVforME? calcola sul dispositivo se un’auto elettrica o plug-in può avere senso per te.\n\nCosa resta sul telefono: km, prezzi, veicoli scelti, storico scenari, snapshot widget/Live Activity.\n\nFoto sticker: usate solo on-device per leggere consumi; non vengono caricate per quella funzione.\n\nPosizione (opzionale): solo quando apri Colonnine vicine, e solo Durante l’uso dell’app, per centrare una ricerca MapKit. La posizione non viene inviata a un backend EVforME e non c’è tracking in background.\n\nRete (opzionale): catalogo veicoli, fonti prezzi pubbliche, risultati ricerca Apple Mappe, analytics o webhook lead solo se configurati. Nella build tipica analytics/lead restano locali se gli URL sono vuoti.\n\nNon vendiamo dati e non usiamo tracker pubblicitari.\n\nModulo consulente: nome/email/città solo se li invii con consenso.\n\nPuoi revocare foto/posizione in Impostazioni iOS, evitare il form lead, o cancellare l’app per rimuovere i dati locali.\n\nPer App Store Connect serve anche un URL HTTPS pubblico con la policy; aprilo dal pulsante sotto quando disponibile.";
 "privacy_policy_open_web" = "Apri policy sul web";
 
 /* Reference quality */
