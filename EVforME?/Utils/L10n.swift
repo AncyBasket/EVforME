@@ -443,6 +443,7 @@ enum L10n {
     static var tripProfileCommuterSubtitle: String { string("trip_profile_commuter_subtitle") }
     static var tripProfileWeekendSubtitle: String { string("trip_profile_weekend_subtitle") }
     static var purchasePricesTitle: String { string("purchase_prices_title") }
+    static var purchasePricesVerdictNote: String { string("purchase_prices_verdict_note") }
     static var sourcePurchasePriceLabel: String { string("source_purchase_price_label") }
     static var targetPurchasePriceLabel: String { string("target_purchase_price_label") }
     static var includeIncentivesToggle: String { string("include_incentives_toggle") }

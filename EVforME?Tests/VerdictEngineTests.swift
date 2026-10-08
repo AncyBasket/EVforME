@@ -43,13 +43,14 @@ final class VerdictEngineTests: XCTestCase {
     }
 
     func testOptimisticScenarioIsMorePermissive() {
-        // Mid-band savings: clears optimistic purchase thresholds, not pessimistic.
-        let okResult = makeResult(iceTotal: 9000, evTotal: 5000, yearlyIce: 1800, yearlyEv: 1100)
+        // Mid-band opex: clears optimistic thresholds, not pessimistic.
+        // optimistic: savings>1500, delta>250; pessimistic: savings>2500, delta>450
+        let okResult = makeResult(iceTotal: 10_000, evTotal: 8_000, yearlyIce: 2_000, yearlyEv: 1_700)
 
         let verdictOptimistic = VerdictEngine.evaluate(
             result: okResult,
             scenario: .optimistic,
-            netPurchasePremiumEUR: 2_000,
+            netPurchasePremiumEUR: 80_000,
             ownershipYears: 5,
             comparisonIntent: .consideringPurchase
         )
@@ -57,42 +58,44 @@ final class VerdictEngineTests: XCTestCase {
         let verdictPessimistic = VerdictEngine.evaluate(
             result: okResult,
             scenario: .pessimistic,
-            netPurchasePremiumEUR: 2_000,
+            netPurchasePremiumEUR: 80_000,
             ownershipYears: 5,
             comparisonIntent: .consideringPurchase
         )
 
+        XCTAssertEqual(verdictOptimistic, .yes)
+        XCTAssertEqual(verdictPessimistic, .maybe)
         XCTAssertNotEqual(verdictOptimistic, verdictPessimistic)
     }
 
-    func testYesRequiresPaybackWithinOwnershipHorizon() {
-        // Strong opex savings, but huge premium → no payback in 5 years.
+    func testListPricePremiumDoesNotBlockStrongOpex() {
+        // Strong opex savings: listino alto non deve più bloccare il sì.
         let strongOpex = makeResult(
             iceTotal: 40_000,
             evTotal: 20_000,
             yearlyIce: 8_000,
             yearlyEv: 4_000
         )
-        // Yearly delta 4000 → premium 80_000 needs 20 years.
-        let blocked = VerdictEngine.evaluate(
+        let withHugePremium = VerdictEngine.evaluate(
             result: strongOpex,
             scenario: .optimistic,
             netPurchasePremiumEUR: 80_000,
-            ownershipYears: 5
+            ownershipYears: 5,
+            comparisonIntent: .consideringPurchase
         )
-        XCTAssertEqual(blocked, .maybe)
+        XCTAssertEqual(withHugePremium, .yes)
 
-        let unlocked = VerdictEngine.evaluate(
+        let withSmallPremium = VerdictEngine.evaluate(
             result: strongOpex,
             scenario: .optimistic,
             netPurchasePremiumEUR: 5_000,
-            ownershipYears: 5
+            ownershipYears: 5,
+            comparisonIntent: .consideringPurchase
         )
-        XCTAssertEqual(unlocked, .yes)
+        XCTAssertEqual(withSmallPremium, .yes)
     }
 
-    func testOpexOnly_IgnoresHugeListPricePremium() {
-        // Same strong opex as above; purchase mode blocks, owned mode can say yes.
+    func testPurchaseAndOwned_SameVerdictWhenOpexStrong() {
         let strongOpex = makeResult(
             iceTotal: 40_000,
             evTotal: 20_000,
@@ -106,8 +109,6 @@ final class VerdictEngineTests: XCTestCase {
             ownershipYears: 5,
             comparisonIntent: .consideringPurchase
         )
-        XCTAssertNotEqual(purchase, .yes)
-
         let owned = VerdictEngine.evaluate(
             result: strongOpex,
             scenario: .realistic,
@@ -115,7 +116,9 @@ final class VerdictEngineTests: XCTestCase {
             ownershipYears: 5,
             comparisonIntent: .alreadyOwned
         )
+        XCTAssertEqual(purchase, .yes)
         XCTAssertEqual(owned, .yes)
+        XCTAssertEqual(purchase, owned)
     }
 
     func testOpexOnly_ZeroYearlyDelta_IsNotYet() {

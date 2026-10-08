@@ -429,7 +429,7 @@ private struct CodableUserInput: Codable {
         targetPurchasePrice = try container.decodeIfPresent(Double.self, forKey: .targetPurchasePrice) ?? 32_000
         includeIncentives = try container.decodeIfPresent(Bool.self, forKey: .includeIncentives) ?? true
         comparisonIntentRaw = try container.decodeIfPresent(String.self, forKey: .comparisonIntentRaw)
-            ?? ComparisonIntent.consideringPurchase.rawValue
+            ?? ComparisonIntent.alreadyOwned.rawValue
         tripProfileRaw = try container.decodeIfPresent(String.self, forKey: .tripProfileRaw) ?? TripProfile.custom.rawValue
         sourceConsumptionOverrideLPer100Km = try container.decodeIfPresent(Double.self, forKey: .sourceConsumptionOverrideLPer100Km)
         targetEnergyOverrideKWhPer100Km = try container.decodeIfPresent(Double.self, forKey: .targetEnergyOverrideKWhPer100Km)
@@ -462,7 +462,7 @@ private struct CodableUserInput: Codable {
     func toUserInput() -> UserInput {
         let scenario = Scenario.allCases.first { $0.rawValue == scenarioRaw } ?? .realistic
         let trip = TripProfile(rawValue: tripProfileRaw) ?? .custom
-        let intent = ComparisonIntent(rawValue: comparisonIntentRaw) ?? .consideringPurchase
+        let intent = ComparisonIntent(rawValue: comparisonIntentRaw) ?? .alreadyOwned
         
         // For backward compatibility, use suggested configuration if charging config data is missing
         let chargingConfig: ChargingConfiguration

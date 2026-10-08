@@ -118,11 +118,11 @@ enum TripProfile: String, CaseIterable, Identifiable {
     }
 }
 
-/// Modalità di confronto: acquisto nuovo vs auto già possedute (solo opex).
+/// Modalità di confronto. Il sì/no è sempre opex-only; “sto comprando” aggiunge solo stima payback listino.
 enum ComparisonIntent: String, CaseIterable, Identifiable {
-    /// Include premium di listino netto (EV − attuale − incentivi) nel sì/no e nel break-even.
+    /// Extra: stima payback listino (non decide il verdetto).
     case consideringPurchase
-    /// Solo costi di gestione: premium = 0 (sunk cost). Assicurazione/manutenzione su valore d’uso.
+    /// Default: solo costi di gestione; usata più cara da tenere (età).
     case alreadyOwned
 
     var id: String { rawValue }
@@ -141,12 +141,12 @@ enum ComparisonIntent: String, CaseIterable, Identifiable {
         }
     }
 
-    /// Default: se entrambe le auto sono di anni già passati → già possedute.
+    /// Default prodotto: confronto sulla gestione (età/tagliandi), non sul listino.
     static func suggested(sourceYear: Int, targetYear: Int, referenceYear: Int = Calendar.current.component(.year, from: Date())) -> ComparisonIntent {
-        if sourceYear < referenceYear, targetYear < referenceYear {
-            return .alreadyOwned
-        }
-        return .consideringPurchase
+        _ = sourceYear
+        _ = targetYear
+        _ = referenceYear
+        return .alreadyOwned
     }
 }
 
@@ -193,7 +193,7 @@ struct UserInput {
         sourcePurchasePrice: Double = 12_000,
         targetPurchasePrice: Double = 32_000,
         includeIncentives: Bool = true,
-        comparisonIntent: ComparisonIntent = .consideringPurchase,
+        comparisonIntent: ComparisonIntent = .alreadyOwned,
         tripProfile: TripProfile = .custom,
         sourceConsumptionOverrideLPer100Km: Double? = nil,
         targetEnergyOverrideKWhPer100Km: Double? = nil,

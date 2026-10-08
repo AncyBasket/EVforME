@@ -202,7 +202,8 @@ struct EVforMEApp: App {
 
         var input = snap.restoredUserInput()
         if let costs {
-            input.fuelPrice = costs.fuelPricePerLiter
+            let fuelKind = VehicleCatalogService.shared.vehicle(by: input.sourceVehicleId)?.resolvedFuelKind ?? .petrol
+            input.fuelPrice = costs.pricePerLiter(for: fuelKind)
             input.electricityPricePerKWh = costs.electricityPricePerKWh
         }
         input.chargingConfiguration = input.resolvedChargingConfiguration()

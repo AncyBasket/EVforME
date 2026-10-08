@@ -38,7 +38,7 @@
 "current_vehicle_short" = "Attuale";
 "electrified_vehicle_short" = "Elettrificata";
 "comparison_card_title" = "Comparativa veicoli (dimensioni, €/km gestione)";
-"comparison_operating_per_km_caption" = "Gestione: energia + bollo + manutenzione (l’usata pesa di più). Il prezzo di acquisto della nuova non entra in questo €/km.";
+"comparison_operating_per_km_caption" = "Gestione: energia + bollo + tagliandi + RC (l’usata pesa di più). Il prezzo di acquisto della nuova non entra in questo €/km.";
 "vehicle_search_placeholder" = "Cerca marca o modello…";
 "vehicle_picker_button" = "Scegli dal catalogo…";
 "vehicle_picker_search_title" = "Cerca nel catalogo";
@@ -153,7 +153,7 @@
 "deep_dive_costs_closed" = "EV vs Gas: quanto spendi davvero";
 "deep_dive_costs_explanation" = "Il confronto mostra quanto risparmieresti ogni anno scegliendo un'auto elettrica rispetto a una a benzina.";
 "deep_dive_costs_takeaway" = "Ogni anno che passa, l'EV diventa più conveniente";
-"calculation_explanation" = "Come calcoliamo";
+"calculation_explanation" = "Come calcoliamo (i totali includono area, profilo viaggio e scenario; la formula sotto è lo scheletro)";
 "calculation_gas_title" = "Costo auto a benzina:";
 "calculation_gas_formula" = "%d km/anno × %.3f L/km × €%.2f/L → energia €%.0f; opex €%.0f/anno";
 "calculation_gas_total" = "× %d anni = €%d totale";
@@ -327,15 +327,16 @@
 "trip_profile_commuter_subtitle" = "~18.000 km/anno, soprattutto urbano.";
 "trip_profile_weekend_subtitle" = "~14.000 km/anno con tratti autostradali.";
 "purchase_prices_title" = "Prezzi d’acquisto";
+"purchase_prices_verdict_note" = "Non decide il sì/no: il verdetto resta su energia, bollo e tagliandi (l’usata pesa di più). Qui solo stima payback se stai comprando.";
 "source_purchase_price_label" = "Auto attuale (€)";
 "target_purchase_price_label" = "EV target (€)";
 "include_incentives_toggle" = "Includi stima incentivi IT";
 "include_incentives_hint" = "Aggiunge un bonus acquisto indicativo (non è consulenza). Il bollo EV nel catalogo è spesso già basso/zero.";
 "comparison_intent_section_title" = "Cosa stai confrontando?";
 "comparison_intent_purchase_title" = "Sto comprando (listino + incentivi)";
-"comparison_intent_purchase_subtitle" = "Il payback include il premium di listino EV meno gli incentivi.";
+"comparison_intent_purchase_subtitle" = "Mostra una stima di payback sul listino; il verdetto resta solo sulla gestione (non sul prezzo iniziale).";
 "comparison_intent_owned_title" = "Già mie (solo costi di gestione)";
-"comparison_intent_owned_subtitle" = "Ignora il premium di acquisto — assicurazione/manutenzione sul valore residuo.";
+"comparison_intent_owned_subtitle" = "Confronto sulla gestione: energia, bollo, tagliandi (un’auto di 10 anni costa di più da tenere). Niente listino nel sì/no.";
 "comparison_intent_owned_reason" = "Modalità solo opex: il premium di listino è costo già sostenuto.";
 "opex_savings_only_reason" = "Circa €%d/anno in meno di gestione — niente break-even di acquisto in questa modalità.";
 "incentives_included_reason" = "Include stima incentivi acquisto ~€%d.";

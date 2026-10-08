@@ -560,6 +560,10 @@ struct VerdictView: View {
     private var assumptionsSection: some View {
         VStack(alignment: .leading, spacing: 12) {
             assumptionRow(text: L10n.assumptionCalculationsEstimates)
+            assumptionRow(text: L10n.purchasePricesVerdictNote)
+            if userInput.comparisonIntent == .consideringPurchase, let months = currentResult.breakEvenMonths {
+                assumptionRow(text: L10n.breakEvenMonthsReason(months))
+            }
             assumptionRow(text: L10n.assumptionNoDataSent)
             assumptionRow(text: L10n.assumptionAveragePrices)
             assumptionRow(text: L10n.assumptionConsumptionGas)

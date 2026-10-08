@@ -508,8 +508,8 @@ final class EVSimulatorTests: XCTestCase {
         XCTAssertGreaterThan(input.netPurchasePremiumEUR, 0)
     }
 
-    func testAteca2016_Model3_2023_OwnedMode_NotFalsifiedByListPrice() {
-        // Case that looked “non conviene” when purchase premium polluted the verdict.
+    func testAteca2016_Model3_2023_ListPriceDoesNotFlipVerdict() {
+        // Listino alto non deve più far dire “non conviene” se l’opex EV è migliore.
         let purchase = UserInput(
             dailyKm: 15_000,
             hasHomeCharging: true,
@@ -532,14 +532,39 @@ final class EVSimulatorTests: XCTestCase {
         let ownResult = requireSimulate(input: owned)
 
         XCTAssertNil(ownResult.breakEvenMonths)
+        XCTAssertNotNil(buyResult.breakEvenMonths, "Se compro: payback listino solo come extra")
         XCTAssertTrue(
             ownResult.keyReasons.contains(where: { $0 == L10n.comparisonIntentOwnedReason }),
             "Owned mode must surface opex-only reason"
         )
-        // Owned must not be strictly worse than purchase solely because of listino.
-        let buyRank = verdictRank(buyResult.verdict)
-        let ownRank = verdictRank(ownResult.verdict)
-        XCTAssertGreaterThanOrEqual(ownRank, buyRank)
+        XCTAssertEqual(buyResult.verdict, ownResult.verdict)
+        XCTAssertNotEqual(ownResult.verdict, .notYet)
+    }
+
+    func testOlderICE_HasHigherMaintenanceThanNewerEV() {
+        let ateca = VehicleCatalogService.shared.vehicle(by: "seat-ateca-2016")
+        let m3 = VehicleCatalogService.shared.vehicle(by: "tesla-model-3-2023")
+        XCTAssertNotNil(ateca)
+        XCTAssertNotNil(m3)
+        let iceMaint = OwnershipCostEstimates.maintenancePerYear(
+            purchasePrice: OwnershipCostEstimates.operatingValueBasis(
+                purchaseOrListPrice: 14_000,
+                vehicleYear: ateca!.year,
+                electrified: false
+            ),
+            vehicleAge: max(0, 2026 - ateca!.year),
+            electrified: false
+        )
+        let evMaint = OwnershipCostEstimates.maintenancePerYear(
+            purchasePrice: OwnershipCostEstimates.operatingValueBasis(
+                purchaseOrListPrice: 40_000,
+                vehicleYear: m3!.year,
+                electrified: true
+            ),
+            vehicleAge: max(0, 2026 - m3!.year),
+            electrified: true
+        )
+        XCTAssertGreaterThan(iceMaint, evMaint, "10y ICE tagliandi > EV recente")
     }
 
     func testItalianPairMatrix_MixedPowertrains_SimulateAndStayFinite() {
@@ -631,14 +656,14 @@ final class EVSimulatorTests: XCTestCase {
         XCTAssertGreaterThanOrEqual(ran, 10, "Matrix must cover ≥10 IT pairs/edges")
     }
 
-    func testComparisonIntentSuggested_UsedCarsDefaultOwned() {
+    func testComparisonIntentSuggested_AlwaysDefaultsToOwned() {
         XCTAssertEqual(
             ComparisonIntent.suggested(sourceYear: 2016, targetYear: 2023, referenceYear: 2026),
             .alreadyOwned
         )
         XCTAssertEqual(
             ComparisonIntent.suggested(sourceYear: 2026, targetYear: 2026, referenceYear: 2026),
-            .consideringPurchase
+            .alreadyOwned
         )
     }
 
