@@ -259,11 +259,16 @@ struct InputView: View {
                                     .foregroundColor(.secondaryText)
                                     .fixedSize(horizontal: false, vertical: true)
 
+                                // Listino solo come extra “se compro”: non entra nel sì/no.
                                 if userInput.comparisonIntent == .consideringPurchase {
                                     Text(L10n.purchasePricesTitle)
                                         .font(Typography.readingCaption)
                                         .foregroundColor(.secondaryText)
                                         .padding(.top, 4)
+                                    Text(L10n.purchasePricesVerdictNote)
+                                        .font(Typography.readingCaption)
+                                        .foregroundColor(.secondaryText)
+                                        .fixedSize(horizontal: false, vertical: true)
                                     HStack {
                                         Text(L10n.sourcePurchasePriceLabel)
                                             .font(Typography.readingCaption)
@@ -773,42 +778,72 @@ struct InputView: View {
         list.contains(where: { $0.id == preferred }) ? preferred : nil
     }
 
-    /// €/km di gestione: energia + bollo + manutenzione (scala con l’età).
-    /// Esclude acquisto/listino — altrimenti una nuova “perde” solo perché è nuova.
+    /// €/km di gestione allineato al simulatore (senza listino): energia×area/trip + bollo + tagliandi + RC.
     private func operatingCostPerKm(for vehicle: VehicleCatalogItem) -> Double {
         let yearlyKm = max(1.0, Double(userInput.dailyKm))
         let currentYear = Calendar.current.component(.year, from: Date())
         let age = max(0, currentYear - vehicle.year)
         let isElectrified = vehicle.powertrain != .ice
+        let isSource = vehicle.id == userInput.sourceVehicleId
+        let area = userInput.areaType
+        let trip = userInput.tripProfile
+        let scenario = userInput.scenario
+
+        let iceLPerKm: Double? = {
+            if isSource, let override = userInput.sourceConsumptionOverrideLPer100Km {
+                return override / 100.0
+            }
+            return vehicle.fuelConsumptionLPerKm
+        }()
+        let evKWhPerKm: Double? = {
+            if !isSource, let override = userInput.targetEnergyOverrideKWhPer100Km {
+                return override / 100.0
+            }
+            return vehicle.resolvedEnergyKWhPerKm
+        }()
 
         let energyOrFuel: Double
         switch vehicle.powertrain {
         case .ice:
-            energyOrFuel = (vehicle.fuelConsumptionLPerKm ?? 0) * userInput.fuelPrice
+            let lPerKm = iceLPerKm ?? 0
+            energyOrFuel = lPerKm
+                * userInput.fuelPrice
+                * area.iceConsumptionMultiplier
+                * trip.iceExtraMultiplier
+                * scenario.iceCostMultiplier
         case .ev:
-            let kWh = vehicle.resolvedEnergyKWhPerKm ?? 0
+            let kWh = evKWhPerKm ?? 0
             let annual = ChargingCostCalculator.calculateAnnualEnergyCost(
                 yearlyKm: yearlyKm,
                 energyConsumptionKWhPerKm: kWh,
                 chargingConfig: userInput.resolvedChargingConfiguration()
             )
-            energyOrFuel = annual / yearlyKm
+            energyOrFuel = (annual / yearlyKm)
+                * area.evConsumptionMultiplier
+                * trip.evExtraMultiplier
+                * scenario.evCostMultiplier
         case .phev:
             let share = vehicle.phevElectricKmShare(hasHomeCharging: userInput.hasHomeCharging)
-            let fuel = (vehicle.fuelConsumptionLPerKm ?? 0) * userInput.fuelPrice * (1 - share)
-            let kWh = vehicle.resolvedEnergyKWhPerKm ?? 0
+            let fuel = (iceLPerKm ?? 0)
+                * userInput.fuelPrice
+                * (1 - share)
+                * area.iceConsumptionMultiplier
+                * trip.iceExtraMultiplier
+                * scenario.iceCostMultiplier
+            let kWh = evKWhPerKm ?? 0
             let annualElec = ChargingCostCalculator.calculateAnnualEnergyCost(
                 yearlyKm: yearlyKm * share,
                 energyConsumptionKWhPerKm: kWh,
                 chargingConfig: userInput.resolvedChargingConfiguration()
             )
-            energyOrFuel = fuel + (annualElec / yearlyKm)
+            let elecPerKm = (annualElec / yearlyKm)
+                * area.evConsumptionMultiplier
+                * trip.evExtraMultiplier
+                * scenario.evCostMultiplier
+            energyOrFuel = fuel + elecPerKm
         }
 
-        let listOrPaid = vehicle.id == userInput.sourceVehicleId
-            ? userInput.sourcePurchasePrice
-            : userInput.targetPurchasePrice
-        // Valore d’uso (residuo se usata): non gonfiare la manut. della nuova col listino pieno.
+        let listOrPaid = isSource ? userInput.sourcePurchasePrice : userInput.targetPurchasePrice
         let valueBasis = OwnershipCostEstimates.operatingValueBasis(
             purchaseOrListPrice: listOrPaid,
             vehicleYear: vehicle.year,
@@ -818,13 +853,18 @@ struct InputView: View {
             purchasePrice: valueBasis,
             vehicleAge: age,
             electrified: isElectrified
-        )
+        ) * (isElectrified ? scenario.evCostMultiplier : scenario.iceCostMultiplier)
         let taxes = OwnershipCostEstimates.bolloPerYearEstimate(
             catalogTaxesPerYear: vehicle.taxesPerYear,
             powertrain: vehicle.powertrain,
             vehicleYear: vehicle.year
         )
-        return energyOrFuel + (maintenance + taxes) / yearlyKm
+        let insurance = OwnershipCostEstimates.insurancePerYear(
+            purchasePrice: valueBasis,
+            yearlyKm: yearlyKm,
+            electrified: isElectrified
+        )
+        return energyOrFuel + (maintenance + taxes + insurance) / yearlyKm
     }
 
     private func validateAndSimulate() {

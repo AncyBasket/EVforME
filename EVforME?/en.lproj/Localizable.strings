@@ -38,7 +38,7 @@
 "current_vehicle_short" = "Current";
 "electrified_vehicle_short" = "Electrified";
 "comparison_card_title" = "Vehicle comparison (dimensions, running €/km)";
-"comparison_operating_per_km_caption" = "Running cost: energy + tax + maintenance (older cars cost more here). Purchase price of a new car is not in this €/km.";
+"comparison_operating_per_km_caption" = "Running cost: energy + road tax + servicing + insurance (older cars cost more here). Purchase price of a new car is not in this €/km.";
 "vehicle_search_placeholder" = "Search make or model…";
 "vehicle_picker_button" = "Choose from catalog…";
 "vehicle_picker_search_title" = "Search the catalog";
@@ -134,7 +134,7 @@
 "deep_dive_costs_closed" = "EV vs Gas: how much you really spend";
 "deep_dive_costs_explanation" = "The comparison shows how much you would save each year by choosing an electric car over a gas one.";
 "deep_dive_costs_takeaway" = "Each year that passes, the EV becomes more convenient";
-"calculation_explanation" = "How we calculate";
+"calculation_explanation" = "How we calculate (totals include area, trip profile and scenario; the formula below is the skeleton)";
 "calculation_gas_title" = "Gas car cost:";
 "calculation_gas_formula" = "%d km/year × %.3f L/km × €%.2f/L → energy €%.0f; opex €%.0f/year";
 "calculation_gas_total" = "× %d years = €%d total";
@@ -313,15 +313,16 @@
 "trip_profile_commuter_subtitle" = "~18,000 km/year, mostly urban stop-and-go.";
 "trip_profile_weekend_subtitle" = "~14,000 km/year with longer highway legs.";
 "purchase_prices_title" = "Purchase prices";
+"purchase_prices_verdict_note" = "Does not decide yes/no: the verdict stays on energy, road tax and servicing (older cars cost more to run). List price is only a payback estimate if you are buying.";
 "source_purchase_price_label" = "Current car (€)";
 "target_purchase_price_label" = "EV target (€)";
 "include_incentives_toggle" = "Include IT incentive estimate";
 "include_incentives_hint" = "Adds a rough purchase bonus (not legal advice). EV tax in catalog is often already low/zero.";
 "comparison_intent_section_title" = "What are you comparing?";
 "comparison_intent_purchase_title" = "I’m buying (list price + incentives)";
-"comparison_intent_purchase_subtitle" = "Payback includes the EV list-price premium minus incentives.";
+"comparison_intent_purchase_subtitle" = "Shows a list-price payback estimate; the verdict still uses operating costs only (not the sticker price).";
 "comparison_intent_owned_title" = "Already mine (running costs only)";
-"comparison_intent_owned_subtitle" = "Ignores purchase premium — insurance/maintenance on residual value.";
+"comparison_intent_owned_subtitle" = "Operating-cost comparison: energy, road tax, servicing (a 10-year-old car costs more to keep). No list price in the yes/no.";
 "comparison_intent_owned_reason" = "Opex-only mode: list-price premium is treated as sunk cost.";
 "opex_savings_only_reason" = "About €%d/year less to run — no purchase break-even in this mode.";
 "incentives_included_reason" = "Includes ~€%d purchase-incentive estimate.";

@@ -46,7 +46,7 @@ struct PersistedScenarioInput: Equatable {
     func toUserInput() -> UserInput {
         let scenario = Scenario.allCases.first { $0.rawValue == scenarioRaw } ?? .realistic
         let trip = TripProfile(rawValue: tripProfileRaw) ?? .custom
-        let intent = ComparisonIntent(rawValue: comparisonIntentRaw) ?? .consideringPurchase
+        let intent = ComparisonIntent(rawValue: comparisonIntentRaw) ?? .alreadyOwned
         return UserInput(
             dailyKm: dailyKm,
             hasHomeCharging: hasHomeCharging,
@@ -92,7 +92,7 @@ extension PersistedScenarioInput: Codable {
         targetPurchasePrice = try c.decodeIfPresent(Double.self, forKey: .targetPurchasePrice) ?? 32_000
         includeIncentives = try c.decodeIfPresent(Bool.self, forKey: .includeIncentives) ?? true
         comparisonIntentRaw = try c.decodeIfPresent(String.self, forKey: .comparisonIntentRaw)
-            ?? ComparisonIntent.consideringPurchase.rawValue
+            ?? ComparisonIntent.alreadyOwned.rawValue
         tripProfileRaw = try c.decodeIfPresent(String.self, forKey: .tripProfileRaw) ?? TripProfile.custom.rawValue
         sourceConsumptionOverrideLPer100Km = try c.decodeIfPresent(Double.self, forKey: .sourceConsumptionOverrideLPer100Km)
         targetEnergyOverrideKWhPer100Km = try c.decodeIfPresent(Double.self, forKey: .targetEnergyOverrideKWhPer100Km)

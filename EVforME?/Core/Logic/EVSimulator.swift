@@ -15,7 +15,7 @@ struct EVSimulationInput {
     var hasHomeCharging: Bool = true
     var sourcePurchasePrice: Double = 12_000
     var targetPurchasePrice: Double = 32_000
-    var comparisonIntent: ComparisonIntent = .consideringPurchase
+    var comparisonIntent: ComparisonIntent = .alreadyOwned
     /// L/km override (già convertito da L/100 km).
     var iceFuelLPerKmOverride: Double? = nil
     /// kWh/km override (già convertito da kWh/100 km).
@@ -241,24 +241,18 @@ final class EVSimulator {
             asSource: false
         )
 
-        let sourceValueBasis: Double
-        let targetValueBasis: Double
-        switch input.comparisonIntent {
-        case .consideringPurchase:
-            sourceValueBasis = input.sourcePurchasePrice
-            targetValueBasis = input.targetPurchasePrice
-        case .alreadyOwned:
-            sourceValueBasis = OwnershipCostEstimates.operatingValueBasis(
-                purchaseOrListPrice: input.sourcePurchasePrice,
-                vehicleYear: sourceVehicle.year,
-                electrified: sourceVehicle.powertrain != .ice
-            )
-            targetValueBasis = OwnershipCostEstimates.operatingValueBasis(
-                purchaseOrListPrice: input.targetPurchasePrice,
-                vehicleYear: targetVehicle.year,
-                electrified: true
-            )
-        }
+        // Sempre valore d’uso (età): un’usata di 10 anni pesa di più in RC/tagliandi,
+        // senza gonfiare l’EV col listino nuovo.
+        let sourceValueBasis = OwnershipCostEstimates.operatingValueBasis(
+            purchaseOrListPrice: input.sourcePurchasePrice,
+            vehicleYear: sourceVehicle.year,
+            electrified: sourceVehicle.powertrain != .ice
+        )
+        let targetValueBasis = OwnershipCostEstimates.operatingValueBasis(
+            purchaseOrListPrice: input.targetPurchasePrice,
+            vehicleYear: targetVehicle.year,
+            electrified: true
+        )
 
         let sourceInsurance = OwnershipCostEstimates.insurancePerYear(
             purchasePrice: sourceValueBasis,
@@ -521,17 +515,14 @@ final class EVSimulator {
         if input.sourceConsumptionOverrideLPer100Km != nil || input.targetEnergyOverrideKWhPer100Km != nil {
             reasons.append(L10n.stickerOverrideAppliedReason)
         }
-        if input.comparisonIntent == .alreadyOwned {
-            // Break-even listino non ha senso su sunk cost: evidenzia solo opex.
-            if yearlySavings > 50 {
-                reasons.append(L10n.opexSavingsOnlyReason(Int(yearlySavings)))
-            } else {
-                reasons.append(L10n.breakEvenNotReachedReason)
-            }
-        } else if let breakEvenMonths {
-            reasons.append(L10n.breakEvenMonthsReason(breakEvenMonths))
+        // Verdetto = solo gestione; il listino (se presente) è solo nota a parte.
+        if yearlySavings > 50 {
+            reasons.append(L10n.opexSavingsOnlyReason(Int(yearlySavings)))
         } else {
             reasons.append(L10n.breakEvenNotReachedReason)
+        }
+        if input.comparisonIntent == .consideringPurchase, let breakEvenMonths {
+            reasons.append(L10n.breakEvenMonthsReason(breakEvenMonths))
         }
 
         var fears: [FearRealityItem] = []

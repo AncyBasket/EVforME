@@ -45,6 +45,22 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertEqual(costs.pricePerLiter(for: .petrol), 1.80, accuracy: 0.0001)
     }
 
+    func testRecalculatePath_UsesDieselForAtecaNotPetrol() {
+        // Mirror EVforMEApp.recalculateLastComparison fuel selection.
+        let costs = OfficialEnergyCosts(
+            country: "IT",
+            currency: "EUR",
+            fuelPricePerLiter: 1.80,
+            dieselPricePerLiter: 1.65,
+            electricityPricePerKWh: 0.30,
+            updatedAt: nil
+        )
+        let kind = VehicleCatalogService.shared.vehicle(by: "seat-ateca-2016")?.resolvedFuelKind ?? .petrol
+        XCTAssertEqual(kind, .diesel)
+        XCTAssertEqual(costs.pricePerLiter(for: kind), 1.65, accuracy: 0.0001)
+        XCTAssertNotEqual(costs.pricePerLiter(for: kind), costs.fuelPricePerLiter, accuracy: 0.0001)
+    }
+
     func testCatalog_NoImpossibleAtecaPre2016() {
         let years = VehicleCatalogService.shared.vehicles
             .filter { $0.brand == "SEAT" && $0.model == "Ateca" }
