@@ -20,14 +20,15 @@ final class ItalianIncentivesTests: XCTestCase {
                 || (schedule.sourceNote ?? "").localizedCaseInsensitiveContains("official"),
             "Bundle must tell users to verify on the official site"
         )
-        // Illustrative figure still computes, but UserInput defaults includeIncentives=false.
+        // Exact illustrative figure from italian_incentives.json brackets (≤45k → 9000).
         let bonus = schedule.estimatedPurchaseBonusEUR(
             evListPrice: 32_000,
             replacingVehiclePrice: 12_000,
             hasHomeCharging: true
         )
-        XCTAssertGreaterThan(bonus, 0)
-        var input = UserInput(
+        XCTAssertEqual(bonus, 9_000, accuracy: 0.01)
+        XCTAssertEqual(ItalianIncentives.typicalPurchaseBonusEUR, 9_000, accuracy: 0.01)
+        let input = UserInput(
             dailyKm: 12_000,
             hasHomeCharging: true,
             areaType: .urban,

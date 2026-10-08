@@ -21,9 +21,13 @@ final class StorageService {
         static let lastAutoElectricityPrice = "evforme.autocosts.lastElectricityPrice"
         static let userCustomizedFuelPrice = "evforme.autocosts.userCustomizedFuelPrice"
         static let userCustomizedElectricityPrice = "evforme.autocosts.userCustomizedElectricityPrice"
+        /// One-shot: flip legacy includeIncentives=true → false (App Review honesty default).
+        static let includeIncentivesDefaultOffMigrated = "evforme.includeIncentives.defaultOff.v1"
     }
     
-    private init() {}
+    private init() {
+        migrateIncludeIncentivesDefaultOffIfNeeded()
+    }
     
     // MARK: - User Input
     
@@ -60,6 +64,29 @@ final class StorageService {
                 userMessage: L10n.errorStorageReadFailed
             )
             return nil
+        }
+    }
+
+    /// Once per install: persisted `includeIncentives == true` (old default) → `false`, then rewrite storage.
+    /// Subsequent opt-ins by the user are left alone.
+    func migrateIncludeIncentivesDefaultOffIfNeeded() {
+        guard !defaults.bool(forKey: Keys.includeIncentivesDefaultOffMigrated) else { return }
+        defaults.set(true, forKey: Keys.includeIncentivesDefaultOffMigrated)
+
+        guard let data = defaults.data(forKey: Keys.lastUserInput) else { return }
+        do {
+            let codable = try JSONDecoder().decode(CodableUserInput.self, from: data)
+            guard codable.includeIncentives else { return }
+            var input = codable.toUserInput()
+            input.includeIncentives = false
+            let encoded = try JSONEncoder().encode(CodableUserInput(from: input))
+            defaults.set(encoded, forKey: Keys.lastUserInput)
+        } catch {
+            // Leave stored blob untouched; flag already set so we do not retry forever.
+            AppLogger.shared.warning(
+                "includeIncentives default-off migration skipped: \(error.localizedDescription)",
+                category: .storage
+            )
         }
     }
     
