@@ -222,15 +222,20 @@ struct UserInput {
         self.market = market
     }
 
-    /// Bonus acquisto stimato (IT, ordine di grandezza — non legale). Solo in modalità acquisto.
+    /// Bonus acquisto stimato (solo IT). Fuori Italia → sempre 0.
     var estimatedPurchaseIncentiveEUR: Double {
-        guard comparisonIntent == .consideringPurchase, includeIncentives else { return 0 }
+        guard market == .IT,
+              comparisonIntent == .consideringPurchase,
+              includeIncentives else { return 0 }
         return ItalianIncentives.estimatedPurchaseBonusEUR(
             evListPrice: targetPurchasePrice,
             replacingVehiclePrice: sourcePurchasePrice,
             hasHomeCharging: hasHomeCharging
         )
     }
+
+    /// Kit bollo/RC/incentivi IT mostrato solo per mercato Italia.
+    var showsItalyCostKit: Bool { market == .IT }
 
     /// Delta di listino netto (EV − ICE − incentivi). Zero se già possedute (sunk cost).
     var netPurchasePremiumEUR: Double {

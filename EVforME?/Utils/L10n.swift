@@ -211,15 +211,8 @@ enum L10n {
     static var marketSectionTitle: String { string("market_section_title") }
     static var marketSectionSubtitle: String { string("market_section_subtitle") }
     static var marketPickerLabel: String { string("market_picker_label") }
-    static var marketUseLocation: String { string("market_use_location") }
-    static var marketLocationWorking: String { string("market_location_working") }
-    static var marketLocationDenied: String { string("market_location_denied") }
-    static var marketLocationFailed: String { string("market_location_failed") }
-    static var marketLocationA11yHint: String { string("market_location_a11y_hint") }
     static var marketOtherCountry: String { string("market_other_country") }
-    static func marketLocationDetected(_ name: String) -> String {
-        format("market_location_detected", name)
-    }
+    static var nonItalyDataHonestyBanner: String { string("non_italy_data_honesty_banner") }
     static func marketMaintenanceSource(_ market: AppMarket) -> String {
         let rates = MarketMaintenanceRates.rates(for: market)
         return format(

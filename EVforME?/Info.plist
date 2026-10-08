@@ -24,7 +24,7 @@
 	<key>EVFORME_PRIVACY_URL</key>
 	<string>https://ancybasket.github.io/EVforME/privacy/</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>EVforME? uses your location while using the app to detect your country for maintenance cost estimates (at onboarding, if you allow it) and to search nearby chargers on the map. Coordinates are not stored or sent to an EVforME server.</string>
+	<string>EVforME? uses your location while using the app only to search nearby chargers on the map. Coordinates are not stored or sent to an EVforME server. Country for cost estimates comes from your device region or the country picker.</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsLocalNetworking</key>

@@ -73,8 +73,20 @@ struct VerdictView: View {
                 closedDescription: L10n.deepDiveCostsClosed
             ) {
                 VStack(alignment: .leading, spacing: 24) {
-                    incentiveWindowSection
-                    italyPracticalCostsSection(result: currentResult)
+                    if userInput.market != .IT {
+                        Text(L10n.nonItalyDataHonestyBanner)
+                            .font(Typography.readingCaption.weight(.semibold))
+                            .foregroundColor(.ink)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(12)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .background(Color.surfaceElevated.opacity(0.95))
+                            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    }
+                    if userInput.showsItalyCostKit {
+                        incentiveWindowSection
+                        italyPracticalCostsSection(result: currentResult)
+                    }
                     costsDetailSection(result: currentResult)
                     CostSectionView(result: currentResult, scenario: selectedScenario)
                     TimeEvolutionView(scenario: selectedScenario)
@@ -577,10 +589,15 @@ struct VerdictView: View {
             assumptionRow(text: L10n.assumptionConsumptionGas)
             assumptionRow(text: L10n.assumptionConsumptionEv)
             assumptionRow(text: L10n.assumptionMaintenance(for: userInput.market))
+            if userInput.market != .IT {
+                assumptionRow(text: L10n.nonItalyDataHonestyBanner)
+            }
             assumptionRow(text: L10n.assumptionTaxes)
             assumptionRow(text: L10n.assumptionElectricity)
-            assumptionRow(text: L10n.incentivesTransparencyNote)
-            assumptionRow(text: L10n.italyKitDisclaimer)
+            if userInput.showsItalyCostKit {
+                assumptionRow(text: L10n.incentivesTransparencyNote)
+                assumptionRow(text: L10n.italyKitDisclaimer)
+            }
         }
     }
 

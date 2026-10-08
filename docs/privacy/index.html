@@ -83,8 +83,8 @@
     <h3>Photos</h3>
     <p>If you use sticker scanning, photos are used <strong>on-device</strong> to read consumption figures (L/100 km or kWh/100 km). Photos are not uploaded for that feature.</p>
 
-    <h3>Location (country detection and Nearby chargers)</h3>
-    <p>The app may request <strong>Location When In Use</strong> in two optional cases: (1) during onboarding, if you tap <strong>Use my location</strong>, to take a single reading and detect your <strong>country</strong> (via Apple reverse geocoding) so maintenance cost estimates match your market; only the country code is kept, coordinates are <strong>not stored</strong>; (2) when you open <strong>Nearby chargers</strong>, to center an Apple MapKit / Maps search for public charging points. Location is <strong>not</strong> sent to an EVforME backend and is <strong>not</strong> tracked continuously or in the background. You can deny permission, pick your country manually, and still search chargers by city or open Apple Maps.</p>
+    <h3>Location (Nearby chargers only)</h3>
+    <p>The app may request <strong>Location When In Use</strong> only when you open <strong>Nearby chargers</strong>, to center an Apple MapKit / Maps search for public charging points. <strong>Country</strong> for maintenance cost estimates comes from your device region (<code>Locale</code>) or the in-app country picker — <strong>not</strong> from GPS. Location is <strong>not</strong> sent to an EVforME backend and is <strong>not</strong> tracked continuously or in the background. You can deny permission and still search chargers by city or open Apple Maps.</p>
 
     <h3>Optional network features</h3>
     <p>When configured by the developer, the app may contact:</p>
@@ -100,21 +100,21 @@
     <h2>Data we may collect (App Privacy labels)</h2>
     <ul>
       <li><strong>Name</strong> and <strong>email</strong> — only if you fill the voluntary advisor form; purpose: app functionality / follow-up you request</li>
-      <li><strong>Precise location</strong> — only if you allow it (onboarding country detection or Nearby chargers); purpose: app functionality (country for cost estimates, map search). Not used for tracking</li>
+      <li><strong>Precise location</strong> — only if you allow it for Nearby chargers; purpose: app functionality (map search). Not used for tracking or country detection</li>
       <li><strong>Product interaction</strong> — anonymous/local analytics events for improving the product (and optional remote ingest if configured)</li>
     </ul>
 
     <h2>Legal bases (EU/UK GDPR style)</h2>
     <ul>
       <li><strong>Contract / service delivery:</strong> running the simulation you request</li>
-      <li><strong>Consent:</strong> advisor lead form, location for country detection and Nearby chargers, and any optional remote analytics where consent is required</li>
+      <li><strong>Consent:</strong> advisor lead form, location for Nearby chargers, and any optional remote analytics where consent is required</li>
       <li><strong>Legitimate interest:</strong> securing the app, preventing abuse, and basic product metrics without advertising profiling</li>
     </ul>
 
     <h2>Retention</h2>
     <ul>
       <li>Local inputs and history remain until you delete the app or clear app data</li>
-      <li>Coordinates are not retained by EVforME; only the selected country code is saved on device</li>
+      <li>Coordinates are not retained by EVforME; the selected country code (from locale or picker) is saved on device with your inputs</li>
       <li>Lead/analytics payloads retained by any configured webhook/ingest follow that service’s retention; if none is configured, nothing is sent</li>
     </ul>
 

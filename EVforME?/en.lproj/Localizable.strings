@@ -133,16 +133,11 @@
 
 /* Market / country */
 "market_section_title" = "Your country";
-"market_section_subtitle" = "Maintenance costs differ by market. Pick a country or use your location (only to detect the country; coordinates are not saved).";
+"market_section_subtitle" = "Maintenance costs differ by market. Pre-filled from your device region — change it anytime. Location is only used later for Nearby chargers.";
 "market_picker_label" = "Country";
-"market_use_location" = "Use my location";
-"market_location_working" = "Detecting…";
-"market_location_detected" = "Detected country: %@";
-"market_location_denied" = "Location denied — pick the country manually.";
-"market_location_failed" = "Could not detect country — choose it from the menu.";
-"market_location_a11y_hint" = "Asks for location permission only to detect which country you are in.";
 "market_other_country" = "Other / rest of world";
 "market_maintenance_source" = "%@: typical maintenance ~€%d ICE · ~€%d EV /year (15,000 km)";
+"non_italy_data_honesty_banner" = "Fuel, electricity, road tax, insurance and incentives are Italian estimates; only maintenance changes for your country. Enter your own prices.";
 
 /* Education */
 "fear_vs_reality" = "Fear vs Reality";
