@@ -47,6 +47,7 @@
 "electrified_vehicle_short" = "Electrified";
 "comparison_card_title" = "Vehicle comparison (dimensions, running €/km)";
 "comparison_operating_per_km_caption" = "Running cost: energy + road tax + servicing + insurance (older cars cost more here). Purchase price of a new car is not in this €/km.";
+"operating_cost_enter_km_hint" = "Enter your yearly kilometres to see €/km.";
 "vehicle_search_placeholder" = "Search make or model…";
 "vehicle_picker_button" = "Choose from catalog…";
 "vehicle_picker_search_title" = "Search the catalog";

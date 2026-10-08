@@ -411,7 +411,7 @@ final class EVSimulatorTests: XCTestCase {
         }
     }
 
-    func testChargingCost_AnnualEnergy_MatchesFormula() {
+    func testChargingCost_WallToWheel_DoesNotDivideByEfficiency() {
         let config = ChargingConfiguration(
             hasHomeCharging: true,
             homeChargingType: .home,
@@ -419,11 +419,30 @@ final class EVSimulatorTests: XCTestCase {
             homeChargingShare: 1.0,
             customHomePricePerKWh: 0.25
         )
-        // 20_000 km * 0.20 kWh/km / efficiency 0.92 * 0.25 €/kWh
+        // WLTP EU = wall-to-wheel: no efficiency loss applied.
         let cost = ChargingCostCalculator.calculateAnnualEnergyCost(
             yearlyKm: 20_000,
             energyConsumptionKWhPerKm: 0.20,
-            chargingConfig: config
+            chargingConfig: config,
+            consumptionIsWallToWheel: true
+        )
+        let expected = 20_000 * 0.20 * 0.25
+        XCTAssertEqual(cost, expected, accuracy: 0.01)
+    }
+
+    func testChargingCost_BatterySide_AppliesEfficiency() {
+        let config = ChargingConfiguration(
+            hasHomeCharging: true,
+            homeChargingType: .home,
+            publicChargingType: .publicFast,
+            homeChargingShare: 1.0,
+            customHomePricePerKWh: 0.25
+        )
+        let cost = ChargingCostCalculator.calculateAnnualEnergyCost(
+            yearlyKm: 20_000,
+            energyConsumptionKWhPerKm: 0.20,
+            chargingConfig: config,
+            consumptionIsWallToWheel: false
         )
         let expected = 20_000 * 0.20 / ChargingType.home.efficiency * 0.25
         XCTAssertEqual(cost, expected, accuracy: 0.01)
@@ -546,25 +565,67 @@ final class EVSimulatorTests: XCTestCase {
         let m3 = VehicleCatalogService.shared.vehicle(by: "tesla-model-3-2023")
         XCTAssertNotNil(ateca)
         XCTAssertNotNil(m3)
+        let ref = Defaults.referenceCalendarYear
         let iceMaint = OwnershipCostEstimates.maintenancePerYear(
             purchasePrice: OwnershipCostEstimates.operatingValueBasis(
                 purchaseOrListPrice: 14_000,
                 vehicleYear: ateca!.year,
-                electrified: false
+                electrified: false,
+                referenceYear: ref
             ),
-            vehicleAge: max(0, 2026 - ateca!.year),
-            electrified: false
+            vehicleAge: max(0, ref - ateca!.year),
+            electrified: false,
+            powertrain: .ice,
+            yearlyKm: 15_000
         )
         let evMaint = OwnershipCostEstimates.maintenancePerYear(
             purchasePrice: OwnershipCostEstimates.operatingValueBasis(
                 purchaseOrListPrice: 40_000,
                 vehicleYear: m3!.year,
-                electrified: true
+                electrified: true,
+                referenceYear: ref
             ),
-            vehicleAge: max(0, 2026 - m3!.year),
-            electrified: true
+            vehicleAge: max(0, ref - m3!.year),
+            electrified: true,
+            powertrain: .ev,
+            yearlyKm: 15_000
         )
         XCTAssertGreaterThan(iceMaint, evMaint, "10y ICE tagliandi > EV recente")
+    }
+
+    func testMaintenance_HasPowertrainFloors_AndScalesWithKm() {
+        let iceLowKm = OwnershipCostEstimates.maintenancePerYear(
+            purchasePrice: 1_000,
+            vehicleAge: 0,
+            electrified: false,
+            powertrain: .ice,
+            yearlyKm: 2_000
+        )
+        let evLowKm = OwnershipCostEstimates.maintenancePerYear(
+            purchasePrice: 1_000,
+            vehicleAge: 0,
+            electrified: true,
+            powertrain: .ev,
+            yearlyKm: 2_000
+        )
+        XCTAssertGreaterThanOrEqual(iceLowKm, 180)
+        XCTAssertGreaterThanOrEqual(evLowKm, 80)
+
+        let iceHighKm = OwnershipCostEstimates.maintenancePerYear(
+            purchasePrice: 20_000,
+            vehicleAge: 5,
+            electrified: false,
+            powertrain: .ice,
+            yearlyKm: 40_000
+        )
+        let iceMidKm = OwnershipCostEstimates.maintenancePerYear(
+            purchasePrice: 20_000,
+            vehicleAge: 5,
+            electrified: false,
+            powertrain: .ice,
+            yearlyKm: 10_000
+        )
+        XCTAssertGreaterThan(iceHighKm, iceMidKm)
     }
 
     func testItalianPairMatrix_MixedPowertrains_SimulateAndStayFinite() {

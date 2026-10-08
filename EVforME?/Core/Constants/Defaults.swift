@@ -13,9 +13,18 @@ enum Defaults {
     static let starterSourceVehicleId = "volkswagen-golf-2026"
     static let starterTargetVehicleId = "tesla-model-3-2026"
 
+    /// Anno di riferimento (età veicolo, bollo, listino). Iniettabile nei test.
+    static var referenceCalendarYearProvider: () -> Int = {
+        Calendar.current.component(.year, from: Date())
+    }
+
+    static var referenceCalendarYear: Int {
+        referenceCalendarYearProvider()
+    }
+
     /// Stima listino grezza quando l’utente cambia veicolo.
     static func suggestedPurchasePrice(for vehicle: VehicleCatalogItem) -> Double {
-        let age = max(0, 2026 - vehicle.year)
+        let age = max(0, referenceCalendarYear - vehicle.year)
         switch vehicle.powertrain {
         case .ice:
             return Double(max(3_500, 16_500 - age * 900))

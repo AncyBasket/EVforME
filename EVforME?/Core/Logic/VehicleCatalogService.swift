@@ -151,6 +151,39 @@ final class VehicleCatalogService {
         vehicles = expandForTestingIfNeeded(ensureBuiltInElectrifiedOptions(loadCachedOrDefault()))
         invalidateCaches()
     }
+
+    /// Attende il primo load async (deep link / shortcut a freddo).
+    /// Continuation / AsyncStream sul notification di load — niente timeout 30s.
+    func waitUntilLoaded() async {
+        if !vehicles.isEmpty { return }
+        let stream = AsyncStream<Void> { continuation in
+            if !self.vehicles.isEmpty {
+                continuation.yield(())
+                continuation.finish()
+                return
+            }
+            let token = NotificationCenter.default.addObserver(
+                forName: .evVehicleCatalogDidUpdate,
+                object: nil,
+                queue: .main
+            ) { _ in
+                guard !self.vehicles.isEmpty else { return }
+                continuation.yield(())
+                continuation.finish()
+            }
+            continuation.onTermination = { _ in
+                NotificationCenter.default.removeObserver(token)
+            }
+            // Race: load may have completed between the empty check and observer attach.
+            if !self.vehicles.isEmpty {
+                continuation.yield(())
+                continuation.finish()
+            }
+        }
+        for await _ in stream {
+            break
+        }
+    }
     
     /// Pre-warm caches for better performance
     func warmCaches() {

@@ -235,12 +235,18 @@ struct UserInput {
     }
 
     /// Config ricarica allineata ai controlli UI (casa + €/kWh slider).
-    /// Usata al momento del calcolo così il verdetto non dipende da stato stale.
+    /// Preserva tipi/quote salvati dall’utente; non riscrive con i soli default suggeriti.
     func resolvedChargingConfiguration() -> ChargingConfiguration {
-        var config = ChargingCostCalculator.suggestedConfiguration(
-            yearlyKm: Double(dailyKm),
-            hasHomeCharging: hasHomeCharging
-        )
+        var config = chargingConfiguration
+        config.hasHomeCharging = hasHomeCharging
+        if !hasHomeCharging {
+            config.homeChargingShare = 0
+        } else if config.homeChargingShare <= 0 {
+            config.homeChargingShare = ChargingCostCalculator.suggestedConfiguration(
+                yearlyKm: Double(dailyKm),
+                hasHomeCharging: true
+            ).homeChargingShare
+        }
         config.customHomePricePerKWh = electricityPricePerKWh
         return config
     }

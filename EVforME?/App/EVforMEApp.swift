@@ -181,13 +181,21 @@ struct EVforMEApp: App {
             openLastVerdict()
             return
         }
-        let input = snap.restoredUserInput()
-        userInput = input
-        StorageService.shared.saveUserInput(input)
-        guard let result = EVSimulator.simulate(input: input) else { return }
-        simulationResult = result
-        WidgetSnapshotStore.save(from: result, input: input)
-        VerdictLiveActivityController.publish(from: result, input: input)
+        Task {
+            await VehicleCatalogService.shared.waitUntilLoaded()
+            await MainActor.run {
+                let input = snap.restoredUserInput()
+                userInput = input
+                StorageService.shared.saveUserInput(input)
+                guard let result = EVSimulator.simulate(input: input) else {
+                    AppLogger.shared.warning("Reopen last comparison skipped — catalog/input not ready", category: .simulation)
+                    return
+                }
+                simulationResult = result
+                WidgetSnapshotStore.save(from: result, input: input)
+                VerdictLiveActivityController.publish(from: result, input: input)
+            }
+        }
     }
 
     private func recalculateLastComparison() async {
@@ -196,21 +204,24 @@ struct EVforMEApp: App {
             openLastVerdict()
             return
         }
+        await VehicleCatalogService.shared.waitUntilLoaded()
         await refreshLiveData(applyCosts: false)
         _ = await ItalianIncentivesService.shared.refresh()
         let costs = await OfficialCostService.shared.fetchLatest()
 
         var input = snap.restoredUserInput()
+        // Stessa logica di StorageService: non sovrascrivere prezzi cambiati a mano.
         if let costs {
-            let fuelKind = VehicleCatalogService.shared.vehicle(by: input.sourceVehicleId)?.resolvedFuelKind ?? .petrol
-            input.fuelPrice = costs.pricePerLiter(for: fuelKind)
-            input.electricityPricePerKWh = costs.electricityPricePerKWh
+            _ = StorageService.shared.applyOfficialCostsIfNeeded(costs, to: &input)
         }
         input.chargingConfiguration = input.resolvedChargingConfiguration()
         userInput = input
         StorageService.shared.saveUserInput(input)
 
-        guard let result = EVSimulator.simulate(input: input) else { return }
+        guard let result = EVSimulator.simulate(input: input) else {
+            AppLogger.shared.warning("Recalculate skipped — catalog/input not ready", category: .simulation)
+            return
+        }
         simulationResult = result
         WidgetSnapshotStore.save(from: result, input: input)
         VerdictLiveActivityController.publish(from: result, input: input)
@@ -219,22 +230,30 @@ struct EVforMEApp: App {
 
     private func openLastVerdict() {
         showOnboarding = false
-        if ScenarioHistoryStore.latest() != nil {
-            reopenLastComparison()
-            return
+        Task {
+            await VehicleCatalogService.shared.waitUntilLoaded()
+            await MainActor.run {
+                if ScenarioHistoryStore.latest() != nil {
+                    reopenLastComparison()
+                    return
+                }
+                if userInput.sourceVehicleId.isEmpty {
+                    userInput.sourceVehicleId = VehicleCatalogService.shared.sourceVehicles().first?.id
+                        ?? "alfa-romeo-147-2005"
+                }
+                if userInput.targetVehicleId.isEmpty {
+                    userInput.targetVehicleId = VehicleCatalogService.shared.targetEVVehicles().first?.id
+                        ?? "audi-q4-e-tron-2021"
+                }
+                syncFuelFromWidgetIfNeeded()
+                guard let result = EVSimulator.simulate(input: userInput) else {
+                    AppLogger.shared.warning("Open last verdict skipped — catalog/input not ready", category: .simulation)
+                    return
+                }
+                simulationResult = result
+                WidgetSnapshotStore.save(from: result, input: userInput)
+                VerdictLiveActivityController.publish(from: result, input: userInput)
+            }
         }
-        if userInput.sourceVehicleId.isEmpty {
-            userInput.sourceVehicleId = VehicleCatalogService.shared.sourceVehicles().first?.id
-                ?? "alfa-romeo-147-2005"
-        }
-        if userInput.targetVehicleId.isEmpty {
-            userInput.targetVehicleId = VehicleCatalogService.shared.targetEVVehicles().first?.id
-                ?? "audi-q4-e-tron-2021"
-        }
-        syncFuelFromWidgetIfNeeded()
-        guard let result = EVSimulator.simulate(input: userInput) else { return }
-        simulationResult = result
-        WidgetSnapshotStore.save(from: result, input: userInput)
-        VerdictLiveActivityController.publish(from: result, input: userInput)
     }
 }
