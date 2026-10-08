@@ -61,6 +61,8 @@ struct VehiclePickPairSection: View {
         switch vehicle?.powertrain {
         case .ice:
             return (L10n.powertrainICE, Color.iceLine)
+        case .hev:
+            return (L10n.powertrainHEV, Color.accent)
         case .ev:
             return (L10n.powertrainEV, Color.evLine)
         case .phev:

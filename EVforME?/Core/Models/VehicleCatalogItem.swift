@@ -7,43 +7,59 @@ import Foundation
 
 enum Powertrain: String, Codable {
     case ice
+    case hev
     case ev
     case phev
 
-    /// Auto attuale: termica o ibrida plug-in.
+    /// Auto attuale: termica, full hybrid o plug-in.
     var isSourceCandidate: Bool {
         switch self {
-        case .ice, .phev: return true
+        case .ice, .hev, .phev: return true
         case .ev: return false
         }
     }
 
-    /// Target elettrificato: BEV o PHEV.
+    /// Target elettrificato: BEV o PHEV (non HEV).
     var isTargetCandidate: Bool {
         switch self {
         case .ev, .phev: return true
-        case .ice: return false
+        case .ice, .hev: return false
+        }
+    }
+
+    /// Usa carburante liquido/gassoso (niente sola ricarica).
+    var burnsFuel: Bool {
+        switch self {
+        case .ice, .hev, .phev: return true
+        case .ev: return false
         }
     }
 }
 
-/// Carburante liquido (ICE/PHEV). Opzionale nel seed; altrimenti euristica IT.
+/// Carburante (ICE/HEV/PHEV). Opzionale nel seed; altrimenti euristica IT.
 enum FuelKind: String, Codable {
     case petrol
     case diesel
+    /// GPL — prezzo €/L (MIMIT).
+    case lpg
+    /// Metano/CNG — prezzo €/kg (MIMIT); `fuelConsumptionLPerKm` interpreta kg/km.
+    case cng
     case unknown
 }
 
 extension Powertrain {
-    /// Etichetta IT per picker (benzina/diesel se noti).
+    /// Etichetta IT per picker (benzina/diesel/GPL/metano/ibrida).
     func catalogFuelLabel(fuelKind: FuelKind) -> String {
         switch self {
         case .ice:
             switch fuelKind {
             case .diesel: return L10n.powertrainDieselLabel
             case .petrol: return L10n.powertrainPetrolLabel
+            case .lpg: return L10n.powertrainLpgLabel
+            case .cng: return L10n.powertrainCngLabel
             case .unknown: return L10n.powertrainIceLabel
             }
+        case .hev: return L10n.powertrainHevLabel
         case .phev: return L10n.powertrainPhevLabel
         case .ev: return L10n.powertrainEvLabel
         }
@@ -126,9 +142,16 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
     }
 
     /// Quota km elettrici stimata per PHEV (0…1).
-    func phevElectricKmShare(hasHomeCharging: Bool) -> Double {
+    ///
+    /// `share = clamp(autonomiaEV × 0.8 × giorniRicarica / kmAnnui, 0.1, 0.9)`.
+    /// Con ricarica a casa si assume ricarica quasi quotidiana; senza, ~settimanale.
+    func phevElectricKmShare(hasHomeCharging: Bool, yearlyKm: Double = 15_000) -> Double {
         guard powertrain == .phev else { return powertrain == .ev ? 1 : 0 }
-        return hasHomeCharging ? 0.55 : 0.30
+        let electricRangeKm = Double(wltpRangeKm ?? 50)
+        let chargeDays = hasHomeCharging ? 300.0 : 52.0
+        let km = max(1.0, yearlyKm)
+        let raw = electricRangeKm * 0.8 * chargeDays / km
+        return min(0.9, max(0.1, raw))
     }
 
     /// Carburante effettivo per prezzi MIMIT e etichette picker.
@@ -137,7 +160,7 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         switch powertrain {
         case .ev:
             return .unknown
-        case .phev, .ice:
+        case .phev, .ice, .hev:
             return Self.inferFuelKind(brand: brand, model: model, year: year, trim: trim)
         }
     }
@@ -174,6 +197,12 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
 
     private static func inferFuelKind(brand: String, model: String, year: Int, trim: String?) -> FuelKind {
         let blob = "\(model) \(trim ?? "")".lowercased()
+        if blob.contains("gpl") || blob.contains("lpg") || blob.contains("eco-g") || blob.contains("eco g") {
+            return .lpg
+        }
+        if blob.contains("metano") || blob.contains("cng") || blob.contains("natural power") {
+            return .cng
+        }
         if blob.contains("diesel") || blob.contains("tdi") || blob.contains("tdci")
             || blob.contains(" dci") || blob.contains("hdi") || blob.contains("jtd")
             || blob.contains("crd") || blob.contains("skyactiv-d") || blob.contains("bluehdi") {

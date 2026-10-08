@@ -195,6 +195,7 @@ struct VehicleHeroImage: View {
     private var powertrainLabel: String {
         switch vehicle.powertrain {
         case .ice: return L10n.powertrainICE
+        case .hev: return L10n.powertrainHEV
         case .ev: return L10n.powertrainEV
         case .phev: return L10n.powertrainPHEV
         }
@@ -203,6 +204,7 @@ struct VehicleHeroImage: View {
     private var powertrainTint: Color {
         switch vehicle.powertrain {
         case .ice: return .iceLine
+        case .hev: return .accent
         case .ev: return .evLine
         case .phev: return .accent
         }
@@ -211,6 +213,7 @@ struct VehicleHeroImage: View {
     private var silhouetteSymbol: String {
         switch vehicle.powertrain {
         case .ice: return "car.side.fill"
+        case .hev: return "leaf.circle.fill"
         case .ev: return "bolt.car.fill"
         case .phev: return "car.fill"
         }
@@ -271,6 +274,12 @@ struct VehicleHeroImage: View {
         case .ice:
             return LinearGradient(
                 colors: [Color.iceLine.opacity(0.2), Color.surfaceElevated],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        case .hev:
+            return LinearGradient(
+                colors: [Color.accent.opacity(0.18), Color.surfaceElevated],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )

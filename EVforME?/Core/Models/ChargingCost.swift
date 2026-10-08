@@ -7,6 +7,21 @@
 
 import Foundation
 
+/// Prezzi colonnine pubbliche di default (€/kWh).
+///
+/// Fonte: stime di mercato Italia (operatori AC/DC tipici, Motus-E / listini consumer),
+/// aggiornate a settembre 2024. L’utente può sovrascrivere con `customPublicPricePerKWh`.
+enum PublicChargingPriceDefaults {
+    /// Domestico / wallbox — allineato allo slider elettricità di default.
+    static let homePerKWh: Double = 0.25
+    /// AC pubblico ~22 kW.
+    static let slowACPerKWh: Double = 0.45
+    /// DC fast ~50 kW.
+    static let fastDCPerKWh: Double = 0.65
+    /// Ultra-fast ≥100–150 kW.
+    static let ultraFastPerKWh: Double = 0.85
+}
+
 /// Tipo di ricarica disponibile
 enum ChargingType: String, CaseIterable, Identifiable {
     case home = "home"
@@ -44,17 +59,18 @@ enum ChargingType: String, CaseIterable, Identifiable {
         }
     }
     
-    /// Costo base per kWh (€) - Italia 2024
+    /// Costo base per kWh (€) — vedi `PublicChargingPriceDefaults`.
     var baseCostPerKWh: Double {
         switch self {
-        case .home: return 0.25 // Prezzo domestico
-        case .publicSlow: return 0.45 // AC pubblico
-        case .publicFast: return 0.65 // DC fast
-        case .publicUltraFast: return 0.85 // Ultra fast
+        case .home: return PublicChargingPriceDefaults.homePerKWh
+        case .publicSlow: return PublicChargingPriceDefaults.slowACPerKWh
+        case .publicFast: return PublicChargingPriceDefaults.fastDCPerKWh
+        case .publicUltraFast: return PublicChargingPriceDefaults.ultraFastPerKWh
         }
     }
     
-    /// Efficienza perdite (0-1, dove 1 = nessuna perdita)
+    /// Efficienza perdite (0-1, dove 1 = nessuna perdita).
+    /// Usata solo se il consumo è “battery-side”, non per WLTP wall-to-wheel.
     var efficiency: Double {
         switch self {
         case .home: return 0.92 // AC con perdite
@@ -113,39 +129,41 @@ struct ChargingConfiguration {
 /// Calcolatore costi ricarica avanzato
 struct ChargingCostCalculator {
     
-    /// Calcola costo annuale energia per EV con configurazione ricarica personalizzata
+    /// Calcola costo annuale energia per EV con configurazione ricarica personalizzata.
+    ///
+    /// - Parameter consumptionIsWallToWheel: `true` (default) se il consumo è WLTP EU
+    ///   misurato alla presa (perdite già incluse). In quel caso **non** si divide per
+    ///   l’efficienza di ricarica. `false` solo per dati “battery-side”.
     static func calculateAnnualEnergyCost(
         yearlyKm: Double,
         energyConsumptionKWhPerKm: Double,
-        chargingConfig: ChargingConfiguration
+        chargingConfig: ChargingConfiguration,
+        consumptionIsWallToWheel: Bool = true
     ) -> Double {
-        let efficiency = chargingConfig.weightedEfficiency()
         let costPerKWh = chargingConfig.weightedCostPerKWh()
-        
-        // kWh consumati = km × consumo/km
         let totalKWhNeeded = yearlyKm * energyConsumptionKWhPerKm
-        
-        // kWh effettivi da pagare (tenendo conto dell'efficienza)
-        let kWhToPay = totalKWhNeeded / efficiency
-        
+        let kWhToPay: Double
+        if consumptionIsWallToWheel {
+            kWhToPay = totalKWhNeeded
+        } else {
+            let efficiency = max(0.01, chargingConfig.weightedEfficiency())
+            kWhToPay = totalKWhNeeded / efficiency
+        }
         return kWhToPay * costPerKWh
     }
     
     /// Calcola costo per 100 km con configurazione specifica
     static func calculateCostPer100Km(
         energyConsumptionKWhPerKm: Double,
-        chargingConfig: ChargingConfiguration
+        chargingConfig: ChargingConfiguration,
+        consumptionIsWallToWheel: Bool = true
     ) -> Double {
-        let efficiency = chargingConfig.weightedEfficiency()
-        let costPerKWh = chargingConfig.weightedCostPerKWh()
-        
-        // kWh per 100 km
-        let kWhPer100Km = energyConsumptionKWhPerKm * 100
-        
-        // kWh effettivi da pagare
-        let kWhToPay = kWhPer100Km / efficiency
-        
-        return kWhToPay * costPerKWh
+        calculateAnnualEnergyCost(
+            yearlyKm: 100,
+            energyConsumptionKWhPerKm: energyConsumptionKWhPerKm,
+            chargingConfig: chargingConfig,
+            consumptionIsWallToWheel: consumptionIsWallToWheel
+        )
     }
     
     /// Stima tempo di ricarica per un veicolo specifico

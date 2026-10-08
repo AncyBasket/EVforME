@@ -22,6 +22,11 @@ struct EVSimulationInput {
     var evKWhPerKmOverride: Double? = nil
     /// Configurazione ricarica personalizzata
     var chargingConfiguration: ChargingConfiguration = ChargingConfiguration()
+    /// Prezzo benzina (€/L) per la quota termica delle PHEV (mai il carburante dell’auto attuale).
+    var petrolPricePerLiter: Double = 1.85
+    /// Se `false`, il consumo EV è battery-side e si applica l’efficienza di ricarica.
+    /// Default `true`: catalogo WLTP EU = wall-to-wheel (perdite già incluse).
+    var catalogEnergyIsWallToWheel: Bool = true
 }
 
 struct EVSimulationResult {
@@ -143,6 +148,10 @@ enum OwnershipCostEstimates {
                 return (base * 0.5).rounded()
             }
             return catalogTaxesPerYear > 0 ? catalogTaxesPerYear : 180
+        case .hev:
+            // Full hybrid: bollo spesso ridotto vs ICE puro (proxy −30%).
+            let base = catalogTaxesPerYear > 0 ? catalogTaxesPerYear : 180
+            return (base * 0.7).rounded()
         case .ice:
             return catalogTaxesPerYear > 0 ? catalogTaxesPerYear : 220
         }
@@ -179,12 +188,17 @@ enum OwnershipCostEstimates {
         return max(0, purchasePrice * factor)
     }
     
-    /// Costi manutenzione migliorati con fasce di età veicolo
-    static func maintenancePerYear(purchasePrice: Double, vehicleAge: Int, electrified: Bool) -> Double {
+    /// Manutenzione annua: minimo per powertrain (tagliando a tempo), poi scala con i km sopra soglia.
+    static func maintenancePerYear(
+        purchasePrice: Double,
+        vehicleAge: Int,
+        electrified: Bool,
+        powertrain: Powertrain? = nil,
+        yearlyKm: Double = 15_000
+    ) -> Double {
         let baseMaintenance: Double
         let ageMultiplier: Double
-        
-        // Base maintenance per fascia prezzo
+
         switch purchasePrice {
         case 0..<20_000:
             baseMaintenance = electrified ? 350 : 550
@@ -193,10 +207,9 @@ enum OwnershipCostEstimates {
         case 35_000..<50_000:
             baseMaintenance = electrified ? 550 : 850
         default:
-            baseMaintenance = electrified ? 700 : 1000
+            baseMaintenance = electrified ? 700 : 1_000
         }
-        
-        // Aumento manutenzione con età veicolo
+
         switch vehicleAge {
         case 0..<3:
             ageMultiplier = 0.8
@@ -207,8 +220,20 @@ enum OwnershipCostEstimates {
         default:
             ageMultiplier = 1.6
         }
-        
-        return baseMaintenance * ageMultiplier
+
+        let raw = baseMaintenance * ageMultiplier
+        let resolved = powertrain ?? (electrified ? .ev : .ice)
+        let floor: Double
+        switch resolved {
+        case .ev: floor = 80
+        case .phev: floor = 120
+        case .hev: floor = 150
+        case .ice: floor = 180
+        }
+        let floored = max(floor, raw)
+        let kmThreshold = 10_000.0
+        guard yearlyKm > kmThreshold else { return floored }
+        return floored * (1.0 + (yearlyKm - kmThreshold) / 50_000.0)
     }
 }
 
@@ -243,21 +268,24 @@ final class EVSimulator {
 
         // Sempre valore d’uso (età): un’usata di 10 anni pesa di più in RC/tagliandi,
         // senza gonfiare l’EV col listino nuovo.
+        let refYear = Defaults.referenceCalendarYear
         let sourceValueBasis = OwnershipCostEstimates.operatingValueBasis(
             purchaseOrListPrice: input.sourcePurchasePrice,
             vehicleYear: sourceVehicle.year,
-            electrified: sourceVehicle.powertrain != .ice
+            electrified: sourceVehicle.powertrain == .ev || sourceVehicle.powertrain == .phev,
+            referenceYear: refYear
         )
         let targetValueBasis = OwnershipCostEstimates.operatingValueBasis(
             purchaseOrListPrice: input.targetPurchasePrice,
             vehicleYear: targetVehicle.year,
-            electrified: true
+            electrified: true,
+            referenceYear: refYear
         )
 
         let sourceInsurance = OwnershipCostEstimates.insurancePerYear(
             purchasePrice: sourceValueBasis,
             yearlyKm: yearlyKm,
-            electrified: sourceVehicle.powertrain != .ice
+            electrified: sourceVehicle.powertrain == .ev || sourceVehicle.powertrain == .phev
         )
         let targetInsurance = OwnershipCostEstimates.insurancePerYear(
             purchasePrice: targetValueBasis,
@@ -265,16 +293,20 @@ final class EVSimulator {
             electrified: true
         )
 
-        let currentYear = Calendar.current.component(.year, from: Date())
+        let currentYear = Defaults.referenceCalendarYear
         let sourceMaintenance = OwnershipCostEstimates.maintenancePerYear(
             purchasePrice: sourceValueBasis,
             vehicleAge: max(0, currentYear - sourceVehicle.year),
-            electrified: sourceVehicle.powertrain != .ice
+            electrified: sourceVehicle.powertrain == .ev || sourceVehicle.powertrain == .phev,
+            powertrain: sourceVehicle.powertrain,
+            yearlyKm: yearlyKm
         ) * scenario.iceCostMultiplier
         let targetMaintenance = OwnershipCostEstimates.maintenancePerYear(
             purchasePrice: targetValueBasis,
             vehicleAge: max(0, currentYear - targetVehicle.year),
-            electrified: true
+            electrified: true,
+            powertrain: targetVehicle.powertrain,
+            yearlyKm: yearlyKm
         ) * scenario.evCostMultiplier
 
         let sourceBreakdown = OperatingCostBreakdown(
@@ -319,7 +351,8 @@ final class EVSimulator {
         )
     }
 
-    private func energyCostPerYear(
+    /// Costo energia annuo (unica formula condivisa con `OperatingCostCalculator`).
+    func energyCostPerYear(
         vehicle: VehicleCatalogItem,
         input: EVSimulationInput,
         scenario: Scenario,
@@ -327,22 +360,24 @@ final class EVSimulator {
         energyOverrideKWhPerKm: Double?,
         asSource: Bool
     ) -> Double {
-        let yearlyKm = input.yearlyKm
+        let yearlyKm = max(0, input.yearlyKm)
         let area = input.areaType
         let trip = input.tripProfile
         let fuelMult = asSource ? scenario.iceCostMultiplier : scenario.evCostMultiplier
         let elecMult = asSource ? scenario.iceCostMultiplier : scenario.evCostMultiplier
+        let wallToWheel = input.catalogEnergyIsWallToWheel
 
         switch vehicle.powertrain {
-        case .ice:
+        case .ice, .hev:
             guard let lPerKm = fuelOverrideLPerKm ?? vehicle.fuelConsumptionLPerKm, lPerKm > 0 else {
                 return 0
             }
+            // Per CNG, fuelConsumptionLPerKm è in kg/km e fuelPricePerLiter è €/kg.
             return yearlyKm
                 * lPerKm
                 * area.iceConsumptionMultiplier
                 * trip.iceExtraMultiplier
-                * input.fuelPricePerLiter
+                * max(0, input.fuelPricePerLiter)
                 * fuelMult
 
         case .ev:
@@ -352,7 +387,8 @@ final class EVSimulator {
             let annual = ChargingCostCalculator.calculateAnnualEnergyCost(
                 yearlyKm: yearlyKm,
                 energyConsumptionKWhPerKm: kWhPerKm,
-                chargingConfig: input.chargingConfiguration
+                chargingConfig: input.chargingConfiguration,
+                consumptionIsWallToWheel: wallToWheel
             )
             return annual
                 * area.evConsumptionMultiplier
@@ -360,23 +396,29 @@ final class EVSimulator {
                 * elecMult
 
         case .phev:
-            let share = vehicle.phevElectricKmShare(hasHomeCharging: input.hasHomeCharging)
+            let share = vehicle.phevElectricKmShare(
+                hasHomeCharging: input.hasHomeCharging,
+                yearlyKm: yearlyKm
+            )
             guard let lPerKm = fuelOverrideLPerKm ?? vehicle.fuelConsumptionLPerKm, lPerKm > 0 else {
                 return 0
             }
             guard let kWhPerKm = energyOverrideKWhPerKm ?? vehicle.resolvedEnergyKWhPerKm, kWhPerKm > 0 else {
                 return 0
             }
+            // PHEV: sempre benzina (o fuelKind della PHEV), mai il carburante dell’auto attuale.
+            let phevFuelPrice = max(0, input.petrolPricePerLiter)
             let fuelPart = yearlyKm * (1.0 - share)
                 * lPerKm
                 * area.iceConsumptionMultiplier
                 * trip.iceExtraMultiplier
-                * input.fuelPricePerLiter
+                * phevFuelPrice
                 * fuelMult
             let elecPart = ChargingCostCalculator.calculateAnnualEnergyCost(
                 yearlyKm: yearlyKm * share,
                 energyConsumptionKWhPerKm: kWhPerKm,
-                chargingConfig: input.chargingConfiguration
+                chargingConfig: input.chargingConfiguration,
+                consumptionIsWallToWheel: wallToWheel
             )
                 * area.evConsumptionMultiplier
                 * trip.evExtraMultiplier
@@ -419,23 +461,9 @@ final class EVSimulator {
             AppLogger.shared.warning("Missing consumption data for selected vehicles", category: .simulation)
             return nil
         }
-        
+
         let simulator = EVSimulator()
-        let simulationInput = EVSimulationInput(
-            yearlyKm: Double(input.dailyKm),
-            years: input.ownershipYears,
-            fuelPricePerLiter: input.fuelPrice,
-            electricityPricePerKWh: input.electricityPricePerKWh,
-            areaType: input.areaType,
-            tripProfile: input.tripProfile,
-            hasHomeCharging: input.hasHomeCharging,
-            sourcePurchasePrice: input.sourcePurchasePrice,
-            targetPurchasePrice: input.targetPurchasePrice,
-            comparisonIntent: input.comparisonIntent,
-            iceFuelLPerKmOverride: iceOverride,
-            evKWhPerKmOverride: evOverride,
-            chargingConfiguration: input.resolvedChargingConfiguration()
-        )
+        let simulationInput = OperatingCostCalculator.makeSimulationInput(from: input)
         
         let selectedScenario = scenario ?? input.scenario
         
@@ -457,7 +485,7 @@ final class EVSimulator {
             weeklyCharges = max(1, Int(ceil(weeklyKm / kmPerCharge)))
         case .phev:
             weeklyCharges = max(1, Int(ceil(weeklyKm * 0.55 / kmPerCharge)))
-        case .ice:
+        case .ice, .hev:
             weeklyCharges = 0
         }
         
@@ -574,7 +602,7 @@ final class EVSimulator {
         energyOverrideKWhPerKm: Double?
     ) -> Bool {
         switch vehicle.powertrain {
-        case .ice:
+        case .ice, .hev:
             let lPerKm = fuelOverrideLPerKm ?? vehicle.fuelConsumptionLPerKm
             return (lPerKm ?? 0) > 0
         case .ev:

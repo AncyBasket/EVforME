@@ -153,6 +153,10 @@ final class StorageService {
         }
     }
 
+    var hasUserCustomizedFuelPrice: Bool {
+        defaults.bool(forKey: Keys.userCustomizedFuelPrice)
+    }
+
     /// Marca il prezzo carburante come override utente (es. bump dal widget).
     func markFuelPriceCustomized() {
         defaults.set(true, forKey: Keys.userCustomizedFuelPrice)

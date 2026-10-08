@@ -620,7 +620,7 @@ struct VerdictView: View {
         let km = Double(userInput.dailyKm)
         let source = VehicleCatalogService.shared.vehicle(by: userInput.sourceVehicleId)
         let target = VehicleCatalogService.shared.vehicle(by: userInput.targetVehicleId)
-        let sourceElectrified = source.map { $0.powertrain != .ice } ?? false
+        let sourceElectrified = source.map { $0.powertrain == .ev || $0.powertrain == .phev } ?? false
         let sourceYear = source?.year ?? Calendar.current.component(.year, from: Date())
         let targetYear = target?.year ?? Calendar.current.component(.year, from: Date())
         // Valore d’uso (residuo), non listino nuovo: altrimenti un EV nuovo gonfia l’RC vs un’usata.

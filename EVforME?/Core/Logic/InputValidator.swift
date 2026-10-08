@@ -163,7 +163,7 @@ struct InputValidator {
         if !input.sourceVehicleId.isEmpty {
             if let source = catalog.vehicle(by: input.sourceVehicleId) {
                 let iceOverride = input.sourceConsumptionOverrideLPer100Km.map { $0 / 100.0 }
-                if source.powertrain == .ice || source.powertrain == .phev {
+                if source.powertrain == .ice || source.powertrain == .hev || source.powertrain == .phev {
                     let liters = iceOverride ?? source.fuelConsumptionLPerKm
                     if (liters ?? 0) <= 0 {
                         errors.append(L10n.validationMissingFuelConsumption)

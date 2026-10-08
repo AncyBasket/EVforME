@@ -77,18 +77,27 @@ enum L10n {
     static var sourceVehicleDescription: String { string("source_vehicle_description") }
     static var targetVehicleDescription: String { string("target_vehicle_description") }
     static var powertrainICE: String { string("powertrain_ice") }
+    static var powertrainHEV: String { string("powertrain_hev") }
     static var powertrainEV: String { string("powertrain_ev") }
     static var powertrainPHEV: String { string("powertrain_phev") }
-    /// Catalog picker fuel labels (IT-first: Benzina/Diesel → ICE, Ibrida plug-in, Elettrica).
+    /// Catalog picker fuel labels (IT-first: Benzina/Diesel/GPL/Metano → ICE, Ibrida, Elettrica).
     static var powertrainIceLabel: String { string("powertrain_ice_label") }
     static var powertrainPetrolLabel: String { string("powertrain_petrol_label") }
     static var powertrainDieselLabel: String { string("powertrain_diesel_label") }
+    static var powertrainLpgLabel: String { string("powertrain_lpg_label") }
+    static var powertrainCngLabel: String { string("powertrain_cng_label") }
+    static var powertrainHevLabel: String { string("powertrain_hev_label") }
     static var powertrainPhevLabel: String { string("powertrain_phev_label") }
     static var powertrainEvLabel: String { string("powertrain_ev_label") }
+    static var pickerFilterAll: String { string("picker_filter_all") }
+    static var pickerFilterHev: String { string("picker_filter_hev") }
+    static var pickerFilterLpg: String { string("picker_filter_lpg") }
+    static var pickerFilterCng: String { string("picker_filter_cng") }
     static var currentVehicleShort: String { string("current_vehicle_short") }
     static var electrifiedVehicleShort: String { string("electrified_vehicle_short") }
     static var comparisonCardTitle: String { string("comparison_card_title") }
     static var comparisonOperatingPerKmCaption: String { string("comparison_operating_per_km_caption") }
+    static var operatingCostEnterKmHint: String { string("operating_cost_enter_km_hint") }
     static var vehicleSearchPlaceholder: String { string("vehicle_search_placeholder") }
     static var vehiclePickerButton: String { string("vehicle_picker_button") }
     static var vehiclePickerSearchTitle: String { string("vehicle_picker_search_title") }
