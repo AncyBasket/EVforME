@@ -42,6 +42,8 @@ struct OnboardingView: View {
                         }
                         .padding(.top, 20)
 
+                        marketSection
+
                         VStack(alignment: .leading, spacing: 10) {
                             Text(L10n.dailyKmQuestion)
                                 .font(Typography.sectionEyebrow)
@@ -106,6 +108,44 @@ struct OnboardingView: View {
                 withAnimation(.spring(response: 0.55, dampingFraction: 0.88)) {
                     appeared = true
                 }
+            }
+        }
+    }
+
+    private var marketSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text(L10n.marketSectionTitle)
+                .font(Typography.sectionEyebrow)
+                .foregroundStyle(Color.secondaryText)
+                .tracking(0.6)
+
+            Text(L10n.marketSectionSubtitle)
+                .font(Typography.readingCaption)
+                .foregroundStyle(Color.secondaryText)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Picker(L10n.marketPickerLabel, selection: $userInput.market) {
+                ForEach(AppMarket.pickerCases) { market in
+                    Text(market.localizedName).tag(market)
+                }
+            }
+            .pickerStyle(.menu)
+            .tint(Color.ink)
+
+            Text(L10n.marketMaintenanceSource(userInput.market))
+                .font(Typography.readingCaption)
+                .foregroundStyle(Color.secondaryText)
+                .fixedSize(horizontal: false, vertical: true)
+
+            if userInput.market != .IT {
+                Text(L10n.nonItalyDataHonestyBanner)
+                    .font(Typography.readingCaption.weight(.semibold))
+                    .foregroundStyle(Color.ink)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(12)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(Color.surfaceElevated.opacity(0.95))
+                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             }
         }
     }

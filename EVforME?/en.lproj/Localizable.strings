@@ -131,6 +131,14 @@
 "onboarding_row_chart" = "See 5-year cost comparison";
 "onboarding_row_fear" = "Get fear vs reality tailored to you";
 
+/* Market / country */
+"market_section_title" = "Your country";
+"market_section_subtitle" = "Maintenance costs differ by market. Pre-filled from your device region — change it anytime. Location is only used later for Nearby chargers.";
+"market_picker_label" = "Country";
+"market_other_country" = "Other / rest of world";
+"market_maintenance_source" = "%@: typical maintenance ~€%d ICE · ~€%d EV /year (15,000 km)";
+"non_italy_data_honesty_banner" = "Fuel, electricity, road tax, insurance and incentives are Italian estimates; only maintenance changes for your country. Enter your own prices.";
+
 /* Education */
 "fear_vs_reality" = "Fear vs Reality";
 "common_fears" = "Common Fears";
@@ -195,7 +203,7 @@
 "deep_dive_section_title" = "Deep dive";
 "deep_dive_section_closed" = "Numbers, environment, battery and incentives";
 "subsection_where_numbers_title" = "Where the numbers come from";
-"subsection_where_numbers_body" = "Gas consumption: 6.5 L/100 km (average compact/SUV). EV consumption: 17 kWh/100 km (average current models). Maintenance: €600/year for gas, €250/year for EV (industry estimates). Taxes: average road tax €200 for gas; many EVs are exempt in Italy. Scenario multipliers (pessimistic/realistic/optimistic) only affect fuel and maintenance, not taxes.";
+"subsection_where_numbers_body" = "Gas consumption: 6.5 L/100 km (average). EV consumption: 17 kWh/100 km (average). Maintenance depends on the selected country (IT Quattroruote/SicurAUTO; DE Tec Alliance; UK Clear Vehicle Data; US DOE/ANL), with Consumer Reports 2020 age curve. Taxes: Italian road-tax estimate where applicable. Scenarios only affect energy and maintenance.";
 "subsection_environment_title" = "Environmental impact";
 "subsection_environment_body" = "A gas car emits about 120 g CO₂/km. An EV on the Italian grid emits indirectly about 40–50 g CO₂/km (well-to-wheel). Switching to electric can cut emissions by several tonnes of CO₂ over a few years, depending on how much you drive and the energy mix.";
 "subsection_battery_title" = "Battery and lifespan";
@@ -211,7 +219,8 @@
 "assumption_average_prices" = "Average prices, not promises";
 "assumption_consumption_gas" = "Gas consumption: 6.5 L/100 km (average)";
 "assumption_consumption_ev" = "EV consumption: 17 kWh/100 km (average)";
-"assumption_maintenance" = "Maintenance: industry estimates (gas €600, EV €250/year)";
+"assumption_maintenance" = "Maintenance: country rates + Consumer Reports 2020 age curve";
+"assumption_maintenance_market" = "Maintenance (%@): ~€%d ICE · ~€%d EV /year at 15,000 km (+ age)";
 "assumption_taxes" = "Taxes: average road tax; EVs often exempt in Italy";
 "assumption_electricity" = "Electricity: average domestic €0.25/kWh (public charging may cost more)";
 
@@ -322,7 +331,7 @@
 "trip_profile_commuter_subtitle" = "~18,000 km/year, mostly urban stop-and-go.";
 "trip_profile_weekend_subtitle" = "~14,000 km/year with longer highway legs.";
 "purchase_prices_title" = "Purchase prices";
-"purchase_prices_verdict_note" = "Does not decide yes/no: the verdict stays on energy, road tax and servicing (older cars cost more to run). List price is only a payback estimate if you are buying.";
+"purchase_prices_verdict_note" = "Does not decide yes/no: the verdict stays on energy, road tax and maintenance (older cars cost more to run). List price is only a payback estimate if you are buying.";
 "source_purchase_price_label" = "Current car (€)";
 "target_purchase_price_label" = "EV target (€)";
 "include_incentives_toggle" = "Include IT incentive estimate (off by default)";
@@ -331,7 +340,7 @@
 "comparison_intent_purchase_title" = "I’m buying (list price + incentives)";
 "comparison_intent_purchase_subtitle" = "Shows a list-price payback estimate; the verdict still uses operating costs only (not the sticker price).";
 "comparison_intent_owned_title" = "Already mine (running costs only)";
-"comparison_intent_owned_subtitle" = "Operating-cost comparison: energy, road tax, servicing (a 10-year-old car costs more to keep). No list price in the yes/no.";
+"comparison_intent_owned_subtitle" = "Operating-cost comparison: energy, road tax, maintenance (a 10-year-old car costs more to keep). No list price in the yes/no.";
 "comparison_intent_owned_reason" = "Opex-only mode: list-price premium is treated as sunk cost.";
 "opex_savings_only_reason" = "About €%d/year less to run — no purchase break-even in this mode.";
 "incentives_included_reason" = "Includes ~€%d purchase-incentive estimate.";
@@ -445,7 +454,7 @@
 /* Privacy */
 "privacy_policy_title" = "Privacy";
 "privacy_policy_updated" = "Updated: 8 October 2026";
-"privacy_policy_body" = "EVforME? estimates on-device whether an electric or plug-in hybrid car may fit you.\n\nKept on your phone: km, prices, chosen vehicles, scenario history, widget/Live Activity snapshots.\n\nSticker photos: used on-device only to read consumption figures; not uploaded for that feature.\n\nLocation (optional): only when you open Nearby chargers, and only While Using the App, to center a MapKit search. Location is not sent to an EVforME backend and is not tracked in the background.\n\nNetwork (optional): vehicle catalog, public energy prices, Apple Maps search results, analytics or lead webhook only if configured. In a typical build, analytics/leads stay local when those URLs are empty.\n\nWe do not sell data and do not use advertising trackers.\n\nAdvisor form: name/email/city only if you submit them with consent.\n\nYou can revoke photo/location access in iOS Settings, skip the lead form, or delete the app to remove local data.\n\nApp Store Connect also needs a public HTTPS privacy URL; open it from the button below when available.";
+"privacy_policy_body" = "EVforME? estimates on-device whether an electric or plug-in hybrid car may fit you.\n\nKept on your phone: km, prices, chosen vehicles, country selection, scenario history, widget/Live Activity snapshots.\n\nSticker photos: used on-device only to read consumption figures; not uploaded for that feature.\n\nLocation (optional): While Using the App, only when you open Nearby chargers, to center an Apple MapKit search. Country for cost estimates comes from your device region or the country picker — not from GPS. Coordinates are not stored or sent to an EVforME backend. No background tracking.\n\nNetwork (optional): vehicle catalog, public energy prices, Apple Maps search results, analytics or lead webhook only if configured. In a typical build, analytics/leads stay local when those URLs are empty.\n\nWe do not sell data and do not use advertising trackers.\n\nAdvisor form: name/email/city only if you submit them with consent.\n\nYou can revoke photo/location access in iOS Settings, skip the lead form, or delete the app to remove local data.\n\nApp Store Connect also needs a public HTTPS privacy URL; open it from the button below when available.";
 "privacy_policy_open_web" = "Open policy on the web";
 
 /* Polish extras */
@@ -498,7 +507,7 @@
 "italy_kit_disclaimer" = "Simplified estimates to orient you — not tax advice, official ACI figures, or insurance quotes.";
 "italy_kit_bollo_row" = "Road tax (est.): current ~€%d/yr · electrified ~€%d/yr";
 "italy_kit_insurance_row" = "Insurance (est.): current ~€%d/yr · electrified ~€%d/yr";
-"italy_kit_maintenance_row" = "Maintenance (est.): current ~€%d/yr · electrified ~€%d/yr";
+"italy_kit_maintenance_row" = "Maintenance (by country): current ~€%d/yr · electrified ~€%d/yr";
 "incentive_window_section_title" = "Incentive window";
 "incentive_window_verify_official" = "Incentive window: check the official site for updates.";
 "incentive_window_buy_by" = "If I buy by %@";

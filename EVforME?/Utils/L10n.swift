@@ -206,6 +206,22 @@ enum L10n {
     static var onboardingRowKm: String { string("onboarding_row_km") }
     static var onboardingRowChart: String { string("onboarding_row_chart") }
     static var onboardingRowFear: String { string("onboarding_row_fear") }
+
+    // MARK: - Market / country
+    static var marketSectionTitle: String { string("market_section_title") }
+    static var marketSectionSubtitle: String { string("market_section_subtitle") }
+    static var marketPickerLabel: String { string("market_picker_label") }
+    static var marketOtherCountry: String { string("market_other_country") }
+    static var nonItalyDataHonestyBanner: String { string("non_italy_data_honesty_banner") }
+    static func marketMaintenanceSource(_ market: AppMarket) -> String {
+        let rates = MarketMaintenanceRates.rates(for: market)
+        return format(
+            "market_maintenance_source",
+            market.localizedName,
+            Int(rates.iceEURPerYearAt15k.rounded()),
+            Int(rates.evEURPerYearAt15k.rounded())
+        )
+    }
     
     // MARK: - Education / Fear vs Reality
     static var fearVsReality: String { string("fear_vs_reality") }
@@ -311,6 +327,15 @@ enum L10n {
     static var assumptionConsumptionGas: String { string("assumption_consumption_gas") }
     static var assumptionConsumptionEv: String { string("assumption_consumption_ev") }
     static var assumptionMaintenance: String { string("assumption_maintenance") }
+    static func assumptionMaintenance(for market: AppMarket) -> String {
+        let rates = MarketMaintenanceRates.rates(for: market)
+        return format(
+            "assumption_maintenance_market",
+            market.localizedName,
+            Int(rates.iceEURPerYearAt15k.rounded()),
+            Int(rates.evEURPerYearAt15k.rounded())
+        )
+    }
     static var assumptionTaxes: String { string("assumption_taxes") }
     static var assumptionElectricity: String { string("assumption_electricity") }
     

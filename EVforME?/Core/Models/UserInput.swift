@@ -141,7 +141,7 @@ enum ComparisonIntent: String, CaseIterable, Identifiable {
         }
     }
 
-    /// Default prodotto: confronto sulla gestione (età/tagliandi), non sul listino.
+    /// Default prodotto: confronto sulla gestione (età/manutenzione), non sul listino.
     static func suggested(sourceYear: Int, targetYear: Int, referenceYear: Int = Calendar.current.component(.year, from: Date())) -> ComparisonIntent {
         _ = sourceYear
         _ = targetYear
@@ -179,6 +179,8 @@ struct UserInput {
     var targetEnergyOverrideKWhPer100Km: Double?
     /// Configurazione ricarica personalizzata
     var chargingConfiguration: ChargingConfiguration
+    /// Paese per tariffe manutenzione / contesto costi (ISO → AppMarket).
+    var market: AppMarket
 
     init(
         dailyKm: Int,
@@ -197,7 +199,8 @@ struct UserInput {
         tripProfile: TripProfile = .custom,
         sourceConsumptionOverrideLPer100Km: Double? = nil,
         targetEnergyOverrideKWhPer100Km: Double? = nil,
-        chargingConfiguration: ChargingConfiguration = ChargingConfiguration()
+        chargingConfiguration: ChargingConfiguration = ChargingConfiguration(),
+        market: AppMarket = AppMarket.fromDeviceLocale()
     ) {
         self.dailyKm = dailyKm
         self.hasHomeCharging = hasHomeCharging
@@ -216,17 +219,23 @@ struct UserInput {
         self.sourceConsumptionOverrideLPer100Km = sourceConsumptionOverrideLPer100Km
         self.targetEnergyOverrideKWhPer100Km = targetEnergyOverrideKWhPer100Km
         self.chargingConfiguration = chargingConfiguration
+        self.market = market
     }
 
-    /// Bonus acquisto stimato (IT, ordine di grandezza — non legale). Solo in modalità acquisto.
+    /// Bonus acquisto stimato (solo IT). Fuori Italia → sempre 0.
     var estimatedPurchaseIncentiveEUR: Double {
-        guard comparisonIntent == .consideringPurchase, includeIncentives else { return 0 }
+        guard market == .IT,
+              comparisonIntent == .consideringPurchase,
+              includeIncentives else { return 0 }
         return ItalianIncentives.estimatedPurchaseBonusEUR(
             evListPrice: targetPurchasePrice,
             replacingVehiclePrice: sourcePurchasePrice,
             hasHomeCharging: hasHomeCharging
         )
     }
+
+    /// Kit bollo/RC/incentivi IT mostrato solo per mercato Italia.
+    var showsItalyCostKit: Bool { market == .IT }
 
     /// Delta di listino netto (EV − ICE − incentivi). Zero se già possedute (sunk cost).
     var netPurchasePremiumEUR: Double {

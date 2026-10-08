@@ -27,6 +27,8 @@ struct EVSimulationInput {
     /// Se `false`, il consumo EV è battery-side e si applica l’efficienza di ricarica.
     /// Default `true`: catalogo WLTP EU = wall-to-wheel (perdite già incluse).
     var catalogEnergyIsWallToWheel: Bool = true
+    /// Paese per tariffe manutenzione (ISO → AppMarket).
+    var market: AppMarket = .IT
 }
 
 struct EVSimulationResult {
@@ -188,52 +190,23 @@ enum OwnershipCostEstimates {
         return max(0, purchasePrice * factor)
     }
     
-    /// Manutenzione annua: minimo per powertrain (tagliando a tempo), poi scala con i km sopra soglia.
+    /// Manutenzione ordinaria — unica fonte: `OperatingCostCalculator.maintenancePerYear`.
     static func maintenancePerYear(
-        purchasePrice: Double,
         vehicleAge: Int,
-        electrified: Bool,
-        powertrain: Powertrain? = nil,
-        yearlyKm: Double = 15_000
+        powertrain: Powertrain,
+        yearlyKm: Double,
+        market: AppMarket = .IT,
+        purchasePrice: Double = 0,
+        electrified: Bool = false
     ) -> Double {
-        let baseMaintenance: Double
-        let ageMultiplier: Double
-
-        switch purchasePrice {
-        case 0..<20_000:
-            baseMaintenance = electrified ? 350 : 550
-        case 20_000..<35_000:
-            baseMaintenance = electrified ? 450 : 700
-        case 35_000..<50_000:
-            baseMaintenance = electrified ? 550 : 850
-        default:
-            baseMaintenance = electrified ? 700 : 1_000
-        }
-
-        switch vehicleAge {
-        case 0..<3:
-            ageMultiplier = 0.8
-        case 3..<6:
-            ageMultiplier = 1.0
-        case 6..<10:
-            ageMultiplier = 1.3
-        default:
-            ageMultiplier = 1.6
-        }
-
-        let raw = baseMaintenance * ageMultiplier
-        let resolved = powertrain ?? (electrified ? .ev : .ice)
-        let floor: Double
-        switch resolved {
-        case .ev: floor = 80
-        case .phev: floor = 120
-        case .hev: floor = 150
-        case .ice: floor = 180
-        }
-        let floored = max(floor, raw)
-        let kmThreshold = 10_000.0
-        guard yearlyKm > kmThreshold else { return floored }
-        return floored * (1.0 + (yearlyKm - kmThreshold) / 50_000.0)
+        _ = purchasePrice
+        _ = electrified
+        return OperatingCostCalculator.maintenancePerYear(
+            vehicleAge: vehicleAge,
+            powertrain: powertrain,
+            yearlyKm: yearlyKm,
+            market: market
+        )
     }
 }
 
@@ -266,7 +239,7 @@ final class EVSimulator {
             asSource: false
         )
 
-        // Sempre valore d’uso (età): un’usata di 10 anni pesa di più in RC/tagliandi,
+        // Sempre valore d’uso (età): un’usata di 10 anni pesa di più in RC/manutenzione,
         // senza gonfiare l’EV col listino nuovo.
         let refYear = Defaults.referenceCalendarYear
         let sourceValueBasis = OwnershipCostEstimates.operatingValueBasis(
@@ -295,18 +268,16 @@ final class EVSimulator {
 
         let currentYear = Defaults.referenceCalendarYear
         let sourceMaintenance = OwnershipCostEstimates.maintenancePerYear(
-            purchasePrice: sourceValueBasis,
             vehicleAge: max(0, currentYear - sourceVehicle.year),
-            electrified: sourceVehicle.powertrain == .ev || sourceVehicle.powertrain == .phev,
             powertrain: sourceVehicle.powertrain,
-            yearlyKm: yearlyKm
+            yearlyKm: yearlyKm,
+            market: input.market
         ) * scenario.iceCostMultiplier
         let targetMaintenance = OwnershipCostEstimates.maintenancePerYear(
-            purchasePrice: targetValueBasis,
             vehicleAge: max(0, currentYear - targetVehicle.year),
-            electrified: true,
             powertrain: targetVehicle.powertrain,
-            yearlyKm: yearlyKm
+            yearlyKm: yearlyKm,
+            market: input.market
         ) * scenario.evCostMultiplier
 
         let sourceBreakdown = OperatingCostBreakdown(

@@ -47,12 +47,11 @@ enum OperatingCostCalculator {
             electrified: electrified,
             referenceYear: currentYear
         )
-        let maintenance = OwnershipCostEstimates.maintenancePerYear(
-            purchasePrice: valueBasis,
+        let maintenance = maintenancePerYear(
             vehicleAge: max(0, currentYear - vehicle.year),
-            electrified: electrified,
             powertrain: vehicle.powertrain,
-            yearlyKm: yearlyKm
+            yearlyKm: yearlyKm,
+            market: input.market
         ) * (asSource ? scenario.iceCostMultiplier : scenario.evCostMultiplier)
         let taxes = OwnershipCostEstimates.bolloPerYearEstimate(
             catalogTaxesPerYear: vehicle.taxesPerYear,
@@ -66,6 +65,72 @@ enum OperatingCostCalculator {
             electrified: electrified
         )
         return energy + maintenance + taxes + insurance
+    }
+
+    /// Manutenzione ordinaria (€/anno): tariffe `AppMarket` × età × km, con minimo annuo.
+    ///
+    /// Base: `MarketMaintenanceRates` (cluster IT/DE/UK/US).
+    /// Età: moltiplicatori relativi Consumer Reports 2020 Table 2.1.
+    /// HEV: tariffa a metà strada tra ICE e PHEV (stesso per i moltiplicatori età).
+    static func maintenancePerYear(
+        vehicleAge: Int,
+        powertrain: Powertrain,
+        yearlyKm: Double,
+        market: AppMarket
+    ) -> Double {
+        let rates = MarketMaintenanceRates.rates(for: market)
+        let ice = rates.iceEURPerYearAt15k
+        let phev = rates.phevEURPerYearAt15k
+        let ev = rates.evEURPerYearAt15k
+        let hev = (ice + phev) / 2.0
+
+        let baseAt15k: Double
+        switch powertrain {
+        case .ev: baseAt15k = ev
+        case .phev: baseAt15k = phev
+        case .hev: baseAt15k = hev
+        case .ice: baseAt15k = ice
+        }
+
+        // CR 2020 Table 2.1: fasce miglia → moltiplicatore vs fascia media (50–100k).
+        let iceYoung = 0.028 / 0.060
+        let phevYoung = 0.021 / 0.031
+        let evYoung = 0.012 / 0.028
+        let iceOld = 0.079 / 0.060
+        let phevOld = 0.033 / 0.031
+        let evOld = 0.043 / 0.028
+
+        let ageMultiplier: Double
+        switch max(0, vehicleAge) {
+        case 0..<4:
+            switch powertrain {
+            case .ev: ageMultiplier = evYoung
+            case .phev: ageMultiplier = phevYoung
+            case .hev: ageMultiplier = (iceYoung + phevYoung) / 2.0
+            case .ice: ageMultiplier = iceYoung
+            }
+        case 4..<7:
+            ageMultiplier = 1.0
+        default:
+            switch powertrain {
+            case .ev: ageMultiplier = evOld
+            case .phev: ageMultiplier = phevOld
+            case .hev: ageMultiplier = (iceOld + phevOld) / 2.0
+            case .ice: ageMultiplier = iceOld
+            }
+        }
+
+        let km = max(0, yearlyKm)
+        let raw = baseAt15k * ageMultiplier * (km / 15_000.0)
+
+        let floor: Double
+        switch powertrain {
+        case .ice: floor = 180
+        case .hev: floor = 150
+        case .phev: floor = 150
+        case .ev: floor = 80
+        }
+        return max(floor, raw)
     }
 
     /// Prezzo benzina per la quota termica PHEV.
@@ -101,6 +166,7 @@ enum OperatingCostCalculator {
         )
         sim.petrolPricePerLiter = resolvePetrolPricePerLiter(for: input)
         sim.catalogEnergyIsWallToWheel = true
+        sim.market = input.market
         return sim
     }
 }

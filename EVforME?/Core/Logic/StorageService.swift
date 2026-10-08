@@ -70,24 +70,30 @@ final class StorageService {
     /// Once per install: persisted `includeIncentives == true` (old default) → `false`, then rewrite storage.
     /// Subsequent opt-ins by the user are left alone.
     func migrateIncludeIncentivesDefaultOffIfNeeded() {
-        guard !defaults.bool(forKey: Keys.includeIncentivesDefaultOffMigrated) else { return }
-        defaults.set(true, forKey: Keys.includeIncentivesDefaultOffMigrated)
+        if !defaults.bool(forKey: Keys.includeIncentivesDefaultOffMigrated) {
+            defaults.set(true, forKey: Keys.includeIncentivesDefaultOffMigrated)
 
-        guard let data = defaults.data(forKey: Keys.lastUserInput) else { return }
-        do {
-            let codable = try JSONDecoder().decode(CodableUserInput.self, from: data)
-            guard codable.includeIncentives else { return }
-            var input = codable.toUserInput()
-            input.includeIncentives = false
-            let encoded = try JSONEncoder().encode(CodableUserInput(from: input))
-            defaults.set(encoded, forKey: Keys.lastUserInput)
-        } catch {
-            // Leave stored blob untouched; flag already set so we do not retry forever.
-            AppLogger.shared.warning(
-                "includeIncentives default-off migration skipped: \(error.localizedDescription)",
-                category: .storage
-            )
+            if let data = defaults.data(forKey: Keys.lastUserInput) {
+                do {
+                    let codable = try JSONDecoder().decode(CodableUserInput.self, from: data)
+                    if codable.includeIncentives {
+                        var input = codable.toUserInput()
+                        input.includeIncentives = false
+                        let encoded = try JSONEncoder().encode(CodableUserInput(from: input))
+                        defaults.set(encoded, forKey: Keys.lastUserInput)
+                    }
+                } catch {
+                    // Leave stored blob untouched; flag already set so we do not retry forever.
+                    AppLogger.shared.warning(
+                        "includeIncentives default-off migration skipped: \(error.localizedDescription)",
+                        category: .storage
+                    )
+                }
+            }
         }
+
+        // Saved comparisons must not reopen with legacy includeIncentives=true.
+        ScenarioHistoryStore.migrateIncludeIncentivesDefaultOffIfNeeded()
     }
     
     // MARK: - Onboarding
@@ -377,6 +383,7 @@ private struct CodableUserInput: Codable {
     let sourceConsumptionOverrideLPer100Km: Double?
     let targetEnergyOverrideKWhPer100Km: Double?
     private var chargingConfigData: ChargingConfigData?
+    let marketRaw: String?
 
     private enum CodingKeys: String, CodingKey {
         case dailyKm
@@ -398,6 +405,7 @@ private struct CodableUserInput: Codable {
         case sourceConsumptionOverrideLPer100Km
         case targetEnergyOverrideKWhPer100Km
         case chargingConfigData
+        case marketRaw
     }
     
     // Helper struct for encoding charging configuration
@@ -427,6 +435,7 @@ private struct CodableUserInput: Codable {
         tripProfileRaw = input.tripProfile.rawValue
         sourceConsumptionOverrideLPer100Km = input.sourceConsumptionOverrideLPer100Km
         targetEnergyOverrideKWhPer100Km = input.targetEnergyOverrideKWhPer100Km
+        marketRaw = input.market.rawValue
         
         // Encode charging configuration
         chargingConfigData = ChargingConfigData(
@@ -464,6 +473,7 @@ private struct CodableUserInput: Codable {
         tripProfileRaw = try container.decodeIfPresent(String.self, forKey: .tripProfileRaw) ?? TripProfile.custom.rawValue
         sourceConsumptionOverrideLPer100Km = try container.decodeIfPresent(Double.self, forKey: .sourceConsumptionOverrideLPer100Km)
         targetEnergyOverrideKWhPer100Km = try container.decodeIfPresent(Double.self, forKey: .targetEnergyOverrideKWhPer100Km)
+        marketRaw = try container.decodeIfPresent(String.self, forKey: .marketRaw)
         
         // Persist raw charging payload; `toUserInput()` materializes / falls back.
         chargingConfigData = try container.decodeIfPresent(ChargingConfigData.self, forKey: .chargingConfigData)
@@ -488,6 +498,7 @@ private struct CodableUserInput: Codable {
         try container.encodeIfPresent(sourceConsumptionOverrideLPer100Km, forKey: .sourceConsumptionOverrideLPer100Km)
         try container.encodeIfPresent(targetEnergyOverrideKWhPer100Km, forKey: .targetEnergyOverrideKWhPer100Km)
         try container.encodeIfPresent(chargingConfigData, forKey: .chargingConfigData)
+        try container.encodeIfPresent(marketRaw, forKey: .marketRaw)
     }
     
     func toUserInput() -> UserInput {
@@ -514,6 +525,7 @@ private struct CodableUserInput: Codable {
             )
         }
         
+        let market = marketRaw.flatMap(AppMarket.init(rawValue:)) ?? AppMarket.fromDeviceLocale()
         return UserInput(
             dailyKm: dailyKm,
             hasHomeCharging: hasHomeCharging,
@@ -531,7 +543,8 @@ private struct CodableUserInput: Codable {
             tripProfile: trip,
             sourceConsumptionOverrideLPer100Km: sourceConsumptionOverrideLPer100Km,
             targetEnergyOverrideKWhPer100Km: targetEnergyOverrideKWhPer100Km,
-            chargingConfiguration: chargingConfig
+            chargingConfiguration: chargingConfig,
+            market: market
         )
     }
 

@@ -194,6 +194,32 @@ struct InputView: View {
                                 .font(Typography.readingCaption)
                                 .foregroundColor(.secondaryText)
                                 .padding(.top, 8)
+                            VStack(alignment: .leading, spacing: 6) {
+                                Text(L10n.marketPickerLabel)
+                                    .font(.subheadline.weight(.semibold))
+                                    .foregroundStyle(Color.secondaryText)
+                                Picker(L10n.marketPickerLabel, selection: $userInput.market) {
+                                    ForEach(AppMarket.pickerCases) { market in
+                                        Text(market.localizedName).tag(market)
+                                    }
+                                }
+                                .pickerStyle(.menu)
+                                Text(L10n.marketMaintenanceSource(userInput.market))
+                                    .font(.caption)
+                                    .foregroundStyle(Color.secondaryText)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                if userInput.market != .IT {
+                                    Text(L10n.nonItalyDataHonestyBanner)
+                                        .font(.caption.weight(.semibold))
+                                        .foregroundStyle(Color.ink)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                        .padding(10)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .background(Color.surfaceElevated.opacity(0.95))
+                                        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                                }
+                            }
+
                             Picker(L10n.areaTypeLabel, selection: $userInput.areaType) {
                                 ForEach(AreaType.allCases) { areaType in
                                     Text(areaType.title).tag(areaType)
@@ -287,12 +313,14 @@ struct InputView: View {
                                             .multilineTextAlignment(.trailing)
                                             .frame(width: 100)
                                     }
-                                    Toggle(L10n.includeIncentivesToggle, isOn: $userInput.includeIncentives)
-                                        .font(Typography.readingBody)
-                                        .tint(.accent)
-                                    Text(L10n.includeIncentivesHint)
-                                        .font(Typography.readingCaption)
-                                        .foregroundColor(.secondaryText)
+                                    if userInput.showsItalyCostKit {
+                                        Toggle(L10n.includeIncentivesToggle, isOn: $userInput.includeIncentives)
+                                            .font(Typography.readingBody)
+                                            .tint(.accent)
+                                        Text(L10n.includeIncentivesHint)
+                                            .font(Typography.readingCaption)
+                                            .foregroundColor(.secondaryText)
+                                    }
                                 }
                             }
                             .padding(.top, 8)
@@ -791,6 +819,7 @@ struct InputView: View {
             input: userInput,
             asSource: asSource
         )
+
     }
 
     private func validateAndSimulate() {

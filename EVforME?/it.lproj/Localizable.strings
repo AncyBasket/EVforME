@@ -153,6 +153,14 @@
 "onboarding_row_chart" = "Vedi il confronto costi a 5 anni";
 "onboarding_row_fear" = "Paura vs realtà su misura per te";
 
+/* Market / paese */
+"market_section_title" = "Il tuo paese";
+"market_section_subtitle" = "I costi di manutenzione cambiano per mercato. Precompilato dalla regione del dispositivo — puoi cambiarlo. La posizione serve solo dopo per le Colonnine vicine.";
+"market_picker_label" = "Paese";
+"market_other_country" = "Altro / resto del mondo";
+"market_maintenance_source" = "%@: manutenzione media ~€%d ICE · ~€%d EV /anno (15.000 km)";
+"non_italy_data_honesty_banner" = "Carburante, elettricità, bollo, RC e incentivi sono stime italiane; per il tuo paese cambia solo la manutenzione. Inserisci i tuoi prezzi.";
+
 /* Education */
 "fear_vs_reality" = "Paura vs realtà";
 "common_fears" = "Paure comuni";
@@ -215,7 +223,7 @@
 "deep_dive_section_title" = "Approfondimenti";
 "deep_dive_section_closed" = "Numeri, ambiente, batteria e incentivi";
 "subsection_where_numbers_title" = "Da dove vengono i numeri";
-"subsection_where_numbers_body" = "Consumo benzina: 6,5 L/100 km (media auto compatte/SUV). Consumo EV: 17 kWh/100 km (media modelli attuali). Manutenzione: €600/anno per la benzina e €250/anno per l’EV (stime di settore). Tasse: bollo medio €200 per la benzina; molte EV in Italia sono esenti. I moltiplicatori per scenario (pessimistico/realistico/ottimistico) modificano solo carburante e manutenzione, non le tasse.";
+"subsection_where_numbers_body" = "Consumo benzina: 6,5 L/100 km (media). Consumo EV: 17 kWh/100 km (media). Manutenzione: dipende dal paese scelto (IT Quattroruote/SicurAUTO; DE Tec Alliance; UK Clear Vehicle Data; US DOE/ANL), con curva età Consumer Reports 2020. Tasse: stima bollo IT dove applica. Gli scenari modificano solo energia e manutenzione.";
 "subsection_environment_title" = "Impatto ambientale";
 "subsection_environment_body" = "Un’auto a benzina emette circa 120 g CO₂/km. Un’EV alimentata con il mix elettrico italiano emette indirettamente circa 40–50 g CO₂/km (well-to-wheel). Passando all’elettrico puoi ridurre le emissioni di diverse tonnellate di CO₂ in pochi anni, a seconda dei km che fai e del mix energetico.";
 "subsection_battery_title" = "Batteria e vita utile";
@@ -231,7 +239,8 @@
 "assumption_average_prices" = "Prezzi medi, non promesse";
 "assumption_consumption_gas" = "Consumo benzina: 6,5 L/100 km (media)";
 "assumption_consumption_ev" = "Consumo EV: 17 kWh/100 km (media)";
-"assumption_maintenance" = "Manutenzione: stime di settore (benzina €600, EV €250/anno)";
+"assumption_maintenance" = "Manutenzione: tariffe per paese + età Consumer Reports 2020";
+"assumption_maintenance_market" = "Manutenzione (%@): ~€%d ICE · ~€%d EV /anno a 15.000 km (+ età)";
 "assumption_taxes" = "Tasse: bollo medio; EV spesso esenti in Italia";
 "assumption_electricity" = "Elettricità: prezzo medio domestico €0,25/kWh (ricarica pubblica può costare di più)";
 
@@ -339,7 +348,7 @@
 "trip_profile_commuter_subtitle" = "~18.000 km/anno, soprattutto urbano.";
 "trip_profile_weekend_subtitle" = "~14.000 km/anno con tratti autostradali.";
 "purchase_prices_title" = "Prezzi d’acquisto";
-"purchase_prices_verdict_note" = "Non decide il sì/no: il verdetto resta su energia, bollo e tagliandi (l’usata pesa di più). Qui solo stima payback se stai comprando.";
+"purchase_prices_verdict_note" = "Non decide il sì/no: il verdetto resta su energia, bollo e manutenzione (l’usata pesa di più). Qui solo stima payback se stai comprando.";
 "source_purchase_price_label" = "Auto attuale (€)";
 "target_purchase_price_label" = "EV target (€)";
 "include_incentives_toggle" = "Includi stima incentivi IT (disattivata di default)";
@@ -348,7 +357,7 @@
 "comparison_intent_purchase_title" = "Sto comprando (listino + incentivi)";
 "comparison_intent_purchase_subtitle" = "Mostra una stima di payback sul listino; il verdetto resta solo sulla gestione (non sul prezzo iniziale).";
 "comparison_intent_owned_title" = "Già mie (solo costi di gestione)";
-"comparison_intent_owned_subtitle" = "Confronto sulla gestione: energia, bollo, tagliandi (un’auto di 10 anni costa di più da tenere). Niente listino nel sì/no.";
+"comparison_intent_owned_subtitle" = "Confronto sulla gestione: energia, bollo, manutenzione (un’auto di 10 anni costa di più da tenere). Niente listino nel sì/no.";
 "comparison_intent_owned_reason" = "Modalità solo opex: il premium di listino è costo già sostenuto.";
 "opex_savings_only_reason" = "Circa €%d/anno in meno di gestione — niente break-even di acquisto in questa modalità.";
 "incentives_included_reason" = "Include stima incentivi acquisto ~€%d.";
@@ -455,7 +464,7 @@
 /* Privacy */
 "privacy_policy_title" = "Privacy";
 "privacy_policy_updated" = "Aggiornata: 8 ottobre 2026";
-"privacy_policy_body" = "EVforME? calcola sul dispositivo se un’auto elettrica o plug-in può avere senso per te.\n\nCosa resta sul telefono: km, prezzi, veicoli scelti, storico scenari, snapshot widget/Live Activity.\n\nFoto sticker: usate solo on-device per leggere consumi; non vengono caricate per quella funzione.\n\nPosizione (opzionale): solo quando apri Colonnine vicine, e solo Durante l’uso dell’app, per centrare una ricerca MapKit. La posizione non viene inviata a un backend EVforME e non c’è tracking in background.\n\nRete (opzionale): catalogo veicoli, fonti prezzi pubbliche, risultati ricerca Apple Mappe, analytics o webhook lead solo se configurati. Nella build tipica analytics/lead restano locali se gli URL sono vuoti.\n\nNon vendiamo dati e non usiamo tracker pubblicitari.\n\nModulo consulente: nome/email/città solo se li invii con consenso.\n\nPuoi revocare foto/posizione in Impostazioni iOS, evitare il form lead, o cancellare l’app per rimuovere i dati locali.\n\nPer App Store Connect serve anche un URL HTTPS pubblico con la policy; aprilo dal pulsante sotto quando disponibile.";
+"privacy_policy_body" = "EVforME? calcola sul dispositivo se un’auto elettrica o plug-in può avere senso per te.\n\nCosa resta sul telefono: km, prezzi, veicoli scelti, paese selezionato, storico scenari, snapshot widget/Live Activity.\n\nFoto sticker: usate solo on-device per leggere consumi; non vengono caricate per quella funzione.\n\nPosizione (opzionale): Durante l’uso dell’app, solo quando apri Colonnine vicine, per centrare la ricerca Apple MapKit. Il paese per le stime di costo viene dalla regione del dispositivo o dal selettore paese — non dal GPS. Le coordinate non vengono salvate né inviate a un backend EVforME. Niente tracking in background.\n\nRete (opzionale): catalogo veicoli, fonti prezzi pubbliche, risultati ricerca Apple Mappe, analytics o webhook lead solo se configurati. Nella build tipica analytics/lead restano locali se gli URL sono vuoti.\n\nNon vendiamo dati e non usiamo tracker pubblicitari.\n\nModulo consulente: nome/email/città solo se li invii con consenso.\n\nPuoi revocare foto/posizione in Impostazioni iOS, evitare il form lead, o cancellare l’app per rimuovere i dati locali.\n\nPer App Store Connect serve anche un URL HTTPS pubblico con la policy; aprilo dal pulsante sotto quando disponibile.";
 "privacy_policy_open_web" = "Apri policy sul web";
 
 /* Reference quality */
@@ -496,7 +505,7 @@
 "italy_kit_disclaimer" = "Stime semplificate per orientarti — non sono consulenza fiscale, ACI ufficiale né preventivi assicurativi.";
 "italy_kit_bollo_row" = "Bollo (stima): attuale ~€%d/anno · elettrificata ~€%d/anno";
 "italy_kit_insurance_row" = "Assicurazione (stima): attuale ~€%d/anno · elettrificata ~€%d/anno";
-"italy_kit_maintenance_row" = "Manutenzione (stima): attuale ~€%d/anno · elettrificata ~€%d/anno";
+"italy_kit_maintenance_row" = "Manutenzione (paese): attuale ~€%d/anno · elettrificata ~€%d/anno";
 "incentive_window_section_title" = "Finestra incentivo";
 "incentive_window_verify_official" = "Finestra incentivo: verifica aggiornamento sul sito ufficiale.";
 "incentive_window_buy_by" = "Se compro entro %@";
