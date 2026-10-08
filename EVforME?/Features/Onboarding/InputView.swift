@@ -719,6 +719,11 @@ struct InputView: View {
                 costRow(name: source.displayName, value: operatingCostPerKm(for: source), color: .iceLine)
                 costRow(name: target.displayName, value: operatingCostPerKm(for: target), color: .evLine)
             }
+            if userInput.dailyKm < 100 {
+                Text(L10n.operatingCostEnterKmHint)
+                    .font(Typography.readingCaption)
+                    .foregroundColor(.secondaryText)
+            }
         }
         .padding(.vertical, 12)
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -727,14 +732,14 @@ struct InputView: View {
         }
     }
 
-    private func costRow(name: String, value: Double, color: Color) -> some View {
+    private func costRow(name: String, value: Double?, color: Color) -> some View {
         HStack {
             Text(name)
                 .font(Typography.readingCaption)
                 .foregroundColor(.secondaryText)
                 .lineLimit(1)
             Spacer()
-            Text(String(format: "€%.3f/km", value))
+            Text(value.map { String(format: "€%.3f/km", $0) } ?? "—")
                 .font(Typography.readingCardTitle)
                 .foregroundColor(color)
                 .monospacedDigit()
@@ -779,7 +784,7 @@ struct InputView: View {
     }
 
     /// €/km di gestione — unica fonte: `OperatingCostCalculator`.
-    private func operatingCostPerKm(for vehicle: VehicleCatalogItem) -> Double {
+    private func operatingCostPerKm(for vehicle: VehicleCatalogItem) -> Double? {
         let asSource = vehicle.id == userInput.sourceVehicleId
         return OperatingCostCalculator.operatingCostPerKm(
             vehicle: vehicle,

@@ -21,7 +21,7 @@ final class OperatingCostCalculatorTests: XCTestCase {
         super.tearDown()
     }
 
-    func testPickerEuroPerKm_MatchesSimulator_ThreeItalianPairs() {
+    func testPickerEuroPerKm_MatchesSimulator_ThreeItalianPairs() throws {
         struct Pair {
             let name: String
             let sourceId: String
@@ -61,8 +61,8 @@ final class OperatingCostCalculatorTests: XCTestCase {
                 continue
             }
             let km = Double(input.dailyKm)
-            let pickerSource = OperatingCostCalculator.operatingCostPerKm(vehicle: source, input: input, asSource: true)
-            let pickerTarget = OperatingCostCalculator.operatingCostPerKm(vehicle: target, input: input, asSource: false)
+            let pickerSource = try XCTUnwrap(OperatingCostCalculator.operatingCostPerKm(vehicle: source, input: input, asSource: true))
+            let pickerTarget = try XCTUnwrap(OperatingCostCalculator.operatingCostPerKm(vehicle: target, input: input, asSource: false))
             let simSource = result.sourceYearlyBreakdown.total / km
             let simTarget = result.targetYearlyBreakdown.total / km
             XCTAssertEqual(pickerSource, simSource, accuracy: 0.0001, "\(pair.name) source €/km")
@@ -104,7 +104,7 @@ final class OperatingCostCalculatorTests: XCTestCase {
                        "PHEV fuel leg must use petrol, not source diesel price")
     }
 
-    func testEdge_ZeroKm_IsFinite() {
+    func testEdge_ZeroKm_PerKmIsNil_YearlyStillFinite() {
         guard let source = VehicleCatalogService.shared.vehicle(by: "fiat-panda-2018"),
               let target = VehicleCatalogService.shared.vehicle(by: "fiat-500e-2023") else {
             XCTFail("Missing fixtures")
@@ -127,9 +127,56 @@ final class OperatingCostCalculatorTests: XCTestCase {
         let sourcePerKm = OperatingCostCalculator.operatingCostPerKm(vehicle: source, input: input, asSource: true)
         XCTAssertTrue(sourceYear.isFinite && sourceYear >= 0)
         XCTAssertTrue(targetYear.isFinite && targetYear >= 0)
-        XCTAssertTrue(sourcePerKm.isFinite && sourcePerKm >= 0)
-        // Energy should be ~0 at 0 km; fixed costs (RC/tagliandi/bollo) remain.
+        XCTAssertNil(sourcePerKm, "€/km must be nil at 0 km (show —), not fixed costs / 1")
         XCTAssertGreaterThan(sourceYear, 0)
+    }
+
+    func testPHEV_UsesCustomPetrolWhenSourceIsPetrol() {
+        guard let phev = VehicleCatalogService.shared.vehicle(by: "volkswagen-golf-gte-phev-2024")
+                ?? VehicleCatalogService.shared.targetEVVehicles().first(where: { $0.powertrain == .phev }),
+              let petrolSource = VehicleCatalogService.shared.vehicle(by: "fiat-panda-2018") else {
+            XCTFail("Missing fixtures")
+            return
+        }
+        XCTAssertEqual(petrolSource.resolvedFuelKind, .petrol)
+        StorageService.shared.markFuelPriceCustomized()
+        defer {
+            UserDefaults.standard.set(false, forKey: "evforme.autocosts.userCustomizedFuelPrice")
+        }
+        var input = UserInput(
+            dailyKm: 15_000,
+            hasHomeCharging: true,
+            areaType: .mixed,
+            fuelPrice: 2.22,
+            ownershipYears: 5,
+            electricityPricePerKWh: 0.28,
+            sourceVehicleId: petrolSource.id,
+            targetVehicleId: phev.id,
+            sourcePurchasePrice: 6_000,
+            targetPurchasePrice: 36_000
+        )
+        XCTAssertEqual(
+            OperatingCostCalculator.resolvePetrolPricePerLiter(for: input),
+            2.22,
+            accuracy: 0.001
+        )
+        // Diesel source + custom fuel must NOT use diesel price for PHEV petrol leg.
+        input.sourceVehicleId = "seat-ateca-2016"
+        input.fuelPrice = 1.55
+        let dieselResolved = OperatingCostCalculator.resolvePetrolPricePerLiter(for: input)
+        let mimit = OfficialCostService.shared.cachedOrBundledCosts()?.pricePerLiter(for: .petrol) ?? 1.85
+        XCTAssertEqual(dieselResolved, mimit, accuracy: 0.001)
+    }
+
+    func testCatalogWait_ColdStartContinuesWhenLoadPosts() async {
+        // Simulate empty → notification path without 30s timeout.
+        let expectation = expectation(description: "catalog wait")
+        Task {
+            // Already loaded in setUp — must return immediately.
+            await VehicleCatalogService.shared.waitUntilLoaded()
+            expectation.fulfill()
+        }
+        await fulfillment(of: [expectation], timeout: 2.0)
     }
 
     func testEdge_HugeKm_IsFinite() {
@@ -214,7 +261,7 @@ final class OperatingCostCalculatorTests: XCTestCase {
     func testCatalogWait_WhenAlreadyLoaded_ReturnsImmediately() async {
         XCTAssertFalse(VehicleCatalogService.shared.vehicles.isEmpty)
         let start = CFAbsoluteTimeGetCurrent()
-        await VehicleCatalogService.shared.waitUntilLoaded(timeoutSeconds: 2)
+        await VehicleCatalogService.shared.waitUntilLoaded()
         let elapsed = CFAbsoluteTimeGetCurrent() - start
         XCTAssertLessThan(elapsed, 1.0)
     }

@@ -8,15 +8,15 @@
 import Foundation
 
 enum OperatingCostCalculator {
-    /// €/km di gestione allineato al simulatore (senza listino).
+    /// €/km di gestione. `nil` se i km sono 0 / quasi zero (niente divisione per 1).
     static func operatingCostPerKm(
         vehicle: VehicleCatalogItem,
         input: UserInput,
         asSource: Bool
-    ) -> Double {
+    ) -> Double? {
+        guard input.dailyKm >= 100 else { return nil }
         let yearly = operatingCostPerYear(vehicle: vehicle, input: input, asSource: asSource)
-        let km = max(1.0, Double(input.dailyKm))
-        return yearly / km
+        return yearly / Double(input.dailyKm)
     }
 
     /// €/anno di gestione (stessa base del verdetto).
@@ -68,11 +68,22 @@ enum OperatingCostCalculator {
         return energy + maintenance + taxes + insurance
     }
 
+    /// Prezzo benzina per la quota termica PHEV.
+    /// Se l’utente ha personalizzato il prezzo e l’auto attuale è a benzina → usa quello;
+    /// altrimenti MIMIT benzina (mai diesel/GPL dell’auto attuale).
+    static func resolvePetrolPricePerLiter(for input: UserInput) -> Double {
+        let costs = OfficialCostService.shared.cachedOrBundledCosts()
+        let mimitPetrol = costs?.pricePerLiter(for: .petrol) ?? 1.85
+        let sourceKind = VehicleCatalogService.shared.vehicle(by: input.sourceVehicleId)?.resolvedFuelKind
+        if StorageService.shared.hasUserCustomizedFuelPrice, sourceKind == .petrol {
+            return max(0, input.fuelPrice)
+        }
+        return mimitPetrol
+    }
+
     static func makeSimulationInput(from input: UserInput) -> EVSimulationInput {
         let iceOverride = input.sourceConsumptionOverrideLPer100Km.map { $0 / 100.0 }
         let evOverride = input.targetEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
-        let costs = OfficialCostService.shared.cachedOrBundledCosts()
-        let petrol = costs?.pricePerLiter(for: .petrol) ?? max(input.fuelPrice, 1.85)
         var sim = EVSimulationInput(
             yearlyKm: Double(input.dailyKm),
             years: input.ownershipYears,
@@ -88,7 +99,7 @@ enum OperatingCostCalculator {
             evKWhPerKmOverride: evOverride,
             chargingConfiguration: input.resolvedChargingConfiguration()
         )
-        sim.petrolPricePerLiter = petrol
+        sim.petrolPricePerLiter = resolvePetrolPricePerLiter(for: input)
         sim.catalogEnergyIsWallToWheel = true
         return sim
     }

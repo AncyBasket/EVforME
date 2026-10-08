@@ -47,6 +47,7 @@
 "electrified_vehicle_short" = "Elettrificata";
 "comparison_card_title" = "Comparativa veicoli (dimensioni, €/km gestione)";
 "comparison_operating_per_km_caption" = "Gestione: energia + bollo + tagliandi + RC (l’usata pesa di più). Il prezzo di acquisto della nuova non entra in questo €/km.";
+"operating_cost_enter_km_hint" = "Inserisci i km annui per vedere il €/km.";
 "vehicle_search_placeholder" = "Cerca marca o modello…";
 "vehicle_picker_button" = "Scegli dal catalogo…";
 "vehicle_picker_search_title" = "Cerca nel catalogo";

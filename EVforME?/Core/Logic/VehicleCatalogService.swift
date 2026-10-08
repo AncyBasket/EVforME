@@ -152,32 +152,36 @@ final class VehicleCatalogService {
         invalidateCaches()
     }
 
-    /// Attende il primo load async (deep link / shortcut a freddo). No-op se già popolato.
-    func waitUntilLoaded(timeoutSeconds: TimeInterval = 30) async {
+    /// Attende il primo load async (deep link / shortcut a freddo).
+    /// Continuation / AsyncStream sul notification di load — niente timeout 30s.
+    func waitUntilLoaded() async {
         if !vehicles.isEmpty { return }
-        await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
-            if !vehicles.isEmpty {
-                continuation.resume()
+        let stream = AsyncStream<Void> { continuation in
+            if !self.vehicles.isEmpty {
+                continuation.yield(())
+                continuation.finish()
                 return
             }
-            var token: NSObjectProtocol?
-            var resumed = false
-            let finish = {
-                guard !resumed else { return }
-                resumed = true
-                if let token { NotificationCenter.default.removeObserver(token) }
-                continuation.resume()
-            }
-            token = NotificationCenter.default.addObserver(
+            let token = NotificationCenter.default.addObserver(
                 forName: .evVehicleCatalogDidUpdate,
                 object: nil,
                 queue: .main
             ) { _ in
-                finish()
+                guard !self.vehicles.isEmpty else { return }
+                continuation.yield(())
+                continuation.finish()
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + timeoutSeconds) {
-                finish()
+            continuation.onTermination = { _ in
+                NotificationCenter.default.removeObserver(token)
             }
+            // Race: load may have completed between the empty check and observer attach.
+            if !self.vehicles.isEmpty {
+                continuation.yield(())
+                continuation.finish()
+            }
+        }
+        for await _ in stream {
+            break
         }
     }
     
