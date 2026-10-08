@@ -11,6 +11,7 @@ import XCTest
 final class StorageServiceTests: XCTestCase {
 
     private let includeIncentivesMigrationKey = "evforme.includeIncentives.defaultOff.v1"
+    private let includeIncentivesHistoryMigrationKey = "evforme.includeIncentives.defaultOff.history.v1"
 
     override func setUp() {
         super.setUp()
@@ -23,6 +24,8 @@ final class StorageServiceTests: XCTestCase {
         defaults.removeObject(forKey: "evforme.autocosts.userCustomizedFuelPrice")
         defaults.removeObject(forKey: "evforme.autocosts.userCustomizedElectricityPrice")
         defaults.removeObject(forKey: includeIncentivesMigrationKey)
+        defaults.removeObject(forKey: includeIncentivesHistoryMigrationKey)
+        ScenarioHistoryStore.clear()
     }
 
     override func tearDown() {
@@ -35,6 +38,8 @@ final class StorageServiceTests: XCTestCase {
         defaults.removeObject(forKey: "evforme.autocosts.userCustomizedFuelPrice")
         defaults.removeObject(forKey: "evforme.autocosts.userCustomizedElectricityPrice")
         defaults.removeObject(forKey: includeIncentivesMigrationKey)
+        defaults.removeObject(forKey: includeIncentivesHistoryMigrationKey)
+        ScenarioHistoryStore.clear()
         super.tearDown()
     }
 
@@ -165,6 +170,48 @@ final class StorageServiceTests: XCTestCase {
 
         XCTAssertFalse(service.loadLastUserInput()?.includeIncentives ?? true)
         XCTAssertTrue(defaults.bool(forKey: includeIncentivesMigrationKey))
+    }
+
+    func testMigrateIncludeIncentives_ScenarioHistoryTrueBecomesFalse() {
+        VehicleCatalogService.shared.reloadFromBundledSeedIgnoringUserCacheForTesting()
+        let defaults = UserDefaults.standard
+
+        var input = UserInput(
+            dailyKm: 14_000,
+            hasHomeCharging: true,
+            areaType: .urban,
+            fuelPrice: 1.75,
+            ownershipYears: 5,
+            electricityPricePerKWh: 0.28,
+            sourceVehicleId: "seat-ateca-2016",
+            targetVehicleId: "tesla-model-3-2023",
+            scenario: .realistic,
+            sourcePurchasePrice: 14_000,
+            targetPurchasePrice: 40_000,
+            includeIncentives: true,
+            comparisonIntent: .consideringPurchase
+        )
+        guard let result = EVSimulator.simulate(input: input) else {
+            XCTFail("Simulate failed")
+            return
+        }
+        ScenarioHistoryStore.save(result: result, input: input)
+        XCTAssertTrue(ScenarioHistoryStore.latest()?.restoredUserInput().includeIncentives == true)
+
+        defaults.removeObject(forKey: includeIncentivesHistoryMigrationKey)
+        ScenarioHistoryStore.migrateIncludeIncentivesDefaultOffIfNeeded()
+
+        let restored = ScenarioHistoryStore.latest()?.restoredUserInput()
+        XCTAssertNotNil(restored)
+        XCTAssertFalse(restored?.includeIncentives ?? true)
+        XCTAssertEqual(restored?.estimatedPurchaseIncentiveEUR ?? -1, 0)
+        XCTAssertTrue(defaults.bool(forKey: includeIncentivesHistoryMigrationKey))
+
+        // Second run must not flip an explicit opt-in after migration.
+        input.includeIncentives = true
+        ScenarioHistoryStore.save(result: result, input: input)
+        ScenarioHistoryStore.migrateIncludeIncentivesDefaultOffIfNeeded()
+        XCTAssertTrue(ScenarioHistoryStore.latest()?.restoredUserInput().includeIncentives == true)
     }
 
     // MARK: - Onboarding Tests

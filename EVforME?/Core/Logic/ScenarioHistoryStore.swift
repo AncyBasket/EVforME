@@ -193,6 +193,9 @@ struct SavedScenarioSnapshot: Codable, Identifiable, Equatable {
 enum ScenarioHistoryStore {
     private static let key = "evforme.scenarioHistory.v1"
     private static let maxItems = 8
+    /// One-shot: flip legacy includeIncentives=true → false on saved comparisons.
+    private static let includeIncentivesDefaultOffMigratedKey =
+        "evforme.includeIncentives.defaultOff.history.v1"
 
     private static var defaults: UserDefaults { .standard }
 
@@ -202,6 +205,55 @@ enum ScenarioHistoryStore {
             return []
         }
         return decoded.sorted { $0.createdAt > $1.createdAt }
+    }
+
+    /// Once per install: persisted scenario inputs with `includeIncentives == true` → `false`.
+    /// Prevents reopening an old comparison from re-enabling incentives after App Review honesty default.
+    static func migrateIncludeIncentivesDefaultOffIfNeeded() {
+        guard !defaults.bool(forKey: includeIncentivesDefaultOffMigratedKey) else { return }
+        defaults.set(true, forKey: includeIncentivesDefaultOffMigratedKey)
+
+        guard let data = defaults.data(forKey: key),
+              let decoded = try? JSONDecoder().decode([SavedScenarioSnapshot].self, from: data) else {
+            return
+        }
+
+        var changed = false
+        let migrated: [SavedScenarioSnapshot] = decoded.map { snap in
+            guard var persisted = snap.persistedInput, persisted.includeIncentives else {
+                return snap
+            }
+            persisted.includeIncentives = false
+            changed = true
+            return SavedScenarioSnapshot(
+                id: snap.id,
+                createdAt: snap.createdAt,
+                verdictRaw: snap.verdictRaw,
+                yearlyKm: snap.yearlyKm,
+                savingsMin: snap.savingsMin,
+                savingsMax: snap.savingsMax,
+                breakEvenMonths: snap.breakEvenMonths,
+                hasHomeCharging: snap.hasHomeCharging,
+                tripProfileRaw: snap.tripProfileRaw,
+                scenarioRaw: snap.scenarioRaw,
+                sourceVehicleId: snap.sourceVehicleId,
+                targetVehicleId: snap.targetVehicleId,
+                persistedInput: persisted,
+                sourceDisplayName: snap.sourceDisplayName,
+                targetDisplayName: snap.targetDisplayName,
+                fuelPriceAtSave: snap.fuelPriceAtSave,
+                electricityPriceAtSave: snap.electricityPriceAtSave,
+                incentiveEURAtSave: 0,
+                energyUpdatedAtAtSave: snap.energyUpdatedAtAtSave,
+                incentivesUpdatedAtAtSave: snap.incentivesUpdatedAtAtSave,
+                incentivesValidUntilAtSave: snap.incentivesValidUntilAtSave
+            )
+        }
+
+        guard changed else { return }
+        if let encoded = try? JSONEncoder().encode(migrated) {
+            defaults.set(encoded, forKey: key)
+        }
     }
 
     static func latest() -> SavedScenarioSnapshot? {
