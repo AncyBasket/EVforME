@@ -576,7 +576,7 @@ struct VerdictView: View {
             assumptionRow(text: L10n.assumptionAveragePrices)
             assumptionRow(text: L10n.assumptionConsumptionGas)
             assumptionRow(text: L10n.assumptionConsumptionEv)
-            assumptionRow(text: L10n.assumptionMaintenance)
+            assumptionRow(text: L10n.assumptionMaintenance(for: userInput.market))
             assumptionRow(text: L10n.assumptionTaxes)
             assumptionRow(text: L10n.assumptionElectricity)
             assumptionRow(text: L10n.incentivesTransparencyNote)

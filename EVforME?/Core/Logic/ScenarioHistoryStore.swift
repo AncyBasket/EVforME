@@ -23,6 +23,7 @@ struct PersistedScenarioInput: Equatable {
     var tripProfileRaw: String
     var sourceConsumptionOverrideLPer100Km: Double?
     var targetEnergyOverrideKWhPer100Km: Double?
+    var marketRaw: String?
 
     init(from input: UserInput) {
         dailyKm = input.dailyKm
@@ -41,12 +42,14 @@ struct PersistedScenarioInput: Equatable {
         tripProfileRaw = input.tripProfile.rawValue
         sourceConsumptionOverrideLPer100Km = input.sourceConsumptionOverrideLPer100Km
         targetEnergyOverrideKWhPer100Km = input.targetEnergyOverrideKWhPer100Km
+        marketRaw = input.market.rawValue
     }
 
     func toUserInput() -> UserInput {
         let scenario = Scenario.allCases.first { $0.rawValue == scenarioRaw } ?? .realistic
         let trip = TripProfile(rawValue: tripProfileRaw) ?? .custom
         let intent = ComparisonIntent(rawValue: comparisonIntentRaw) ?? .alreadyOwned
+        let market = marketRaw.flatMap(AppMarket.init(rawValue:)) ?? AppMarket.fromDeviceLocale()
         return UserInput(
             dailyKm: dailyKm,
             hasHomeCharging: hasHomeCharging,
@@ -63,7 +66,8 @@ struct PersistedScenarioInput: Equatable {
             comparisonIntent: intent,
             tripProfile: trip,
             sourceConsumptionOverrideLPer100Km: sourceConsumptionOverrideLPer100Km,
-            targetEnergyOverrideKWhPer100Km: targetEnergyOverrideKWhPer100Km
+            targetEnergyOverrideKWhPer100Km: targetEnergyOverrideKWhPer100Km,
+            market: market
         )
     }
 }
@@ -75,6 +79,7 @@ extension PersistedScenarioInput: Codable {
         case sourcePurchasePrice, targetPurchasePrice, includeIncentives
         case comparisonIntentRaw, tripProfileRaw
         case sourceConsumptionOverrideLPer100Km, targetEnergyOverrideKWhPer100Km
+        case marketRaw
     }
 
     init(from decoder: Decoder) throws {
@@ -96,6 +101,7 @@ extension PersistedScenarioInput: Codable {
         tripProfileRaw = try c.decodeIfPresent(String.self, forKey: .tripProfileRaw) ?? TripProfile.custom.rawValue
         sourceConsumptionOverrideLPer100Km = try c.decodeIfPresent(Double.self, forKey: .sourceConsumptionOverrideLPer100Km)
         targetEnergyOverrideKWhPer100Km = try c.decodeIfPresent(Double.self, forKey: .targetEnergyOverrideKWhPer100Km)
+        marketRaw = try c.decodeIfPresent(String.self, forKey: .marketRaw)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -116,6 +122,7 @@ extension PersistedScenarioInput: Codable {
         try c.encode(tripProfileRaw, forKey: .tripProfileRaw)
         try c.encodeIfPresent(sourceConsumptionOverrideLPer100Km, forKey: .sourceConsumptionOverrideLPer100Km)
         try c.encodeIfPresent(targetEnergyOverrideKWhPer100Km, forKey: .targetEnergyOverrideKWhPer100Km)
+        try c.encodeIfPresent(marketRaw, forKey: .marketRaw)
     }
 }
 

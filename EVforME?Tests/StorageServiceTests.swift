@@ -70,6 +70,7 @@ final class StorageServiceTests: XCTestCase {
         XCTAssertEqual(loadedInput?.sourceVehicleId, originalInput.sourceVehicleId)
         XCTAssertEqual(loadedInput?.targetVehicleId, originalInput.targetVehicleId)
         XCTAssertEqual(loadedInput?.scenario, originalInput.scenario)
+        XCTAssertEqual(loadedInput?.market, originalInput.market)
     }
 
     func testLoadUserInput_WhenNoData_ReturnsNil() {

@@ -566,64 +566,83 @@ final class EVSimulatorTests: XCTestCase {
         XCTAssertNotNil(ateca)
         XCTAssertNotNil(m3)
         let ref = Defaults.referenceCalendarYear
+        let yearlyKm = 15_000.0
         let iceMaint = OwnershipCostEstimates.maintenancePerYear(
-            purchasePrice: OwnershipCostEstimates.operatingValueBasis(
-                purchaseOrListPrice: 14_000,
-                vehicleYear: ateca!.year,
-                electrified: false,
-                referenceYear: ref
-            ),
             vehicleAge: max(0, ref - ateca!.year),
-            electrified: false,
             powertrain: .ice,
-            yearlyKm: 15_000
+            yearlyKm: yearlyKm,
+            market: .IT
         )
         let evMaint = OwnershipCostEstimates.maintenancePerYear(
-            purchasePrice: OwnershipCostEstimates.operatingValueBasis(
-                purchaseOrListPrice: 40_000,
-                vehicleYear: m3!.year,
-                electrified: true,
-                referenceYear: ref
-            ),
             vehicleAge: max(0, ref - m3!.year),
-            electrified: true,
             powertrain: .ev,
-            yearlyKm: 15_000
+            yearlyKm: yearlyKm,
+            market: .IT
         )
-        XCTAssertGreaterThan(iceMaint, evMaint, "10y ICE tagliandi > EV recente")
+        XCTAssertGreaterThan(iceMaint, evMaint, "10y ICE manutenzione > EV recente")
+    }
+
+    func testMaintenance_ItalyMidAge_MatchesSouthernEURates() {
+        let rates = MarketMaintenanceRates.rates(for: .IT)
+        let ev = OwnershipCostEstimates.maintenancePerYear(
+            vehicleAge: 5, powertrain: .ev, yearlyKm: 15_000, market: .IT
+        )
+        let ice = OwnershipCostEstimates.maintenancePerYear(
+            vehicleAge: 5, powertrain: .ice, yearlyKm: 15_000, market: .IT
+        )
+        XCTAssertEqual(ev, rates.evEURPerYearAt15k, accuracy: 0.5)
+        XCTAssertEqual(ice, rates.iceEURPerYearAt15k, accuracy: 0.5)
+        XCTAssertLessThan(ev, ice)
+    }
+
+    func testMaintenance_USHigherThanItaly_ForSameEV() {
+        let it = OwnershipCostEstimates.maintenancePerYear(
+            vehicleAge: 5, powertrain: .ev, yearlyKm: 15_000, market: .IT
+        )
+        let us = OwnershipCostEstimates.maintenancePerYear(
+            vehicleAge: 5, powertrain: .ev, yearlyKm: 15_000, market: .US
+        )
+        XCTAssertGreaterThan(us, it, "DOE/US envelope > IT tagliandi cluster")
+    }
+
+    func testMaintenance_UKAndGermany_DifferFromItaly() {
+        let it = MarketMaintenanceRates.rates(for: .IT).evEURPerYearAt15k
+        let de = MarketMaintenanceRates.rates(for: .DE).evEURPerYearAt15k
+        let gb = MarketMaintenanceRates.rates(for: .GB).evEURPerYearAt15k
+        XCTAssertNotEqual(it, de)
+        XCTAssertNotEqual(it, gb)
+        XCTAssertGreaterThan(gb, de)
+    }
+
+    func testAppMarket_FromISO_MapsAliases() {
+        XCTAssertEqual(AppMarket.from(isoCountryCode: "it"), .IT)
+        XCTAssertEqual(AppMarket.from(isoCountryCode: "UK"), .GB)
+        XCTAssertEqual(AppMarket.from(isoCountryCode: "XX"), .other)
     }
 
     func testMaintenance_HasPowertrainFloors_AndScalesWithKm() {
         let iceLowKm = OwnershipCostEstimates.maintenancePerYear(
-            purchasePrice: 1_000,
-            vehicleAge: 0,
-            electrified: false,
-            powertrain: .ice,
-            yearlyKm: 2_000
+            vehicleAge: 0, powertrain: .ice, yearlyKm: 2_000, market: .IT
         )
         let evLowKm = OwnershipCostEstimates.maintenancePerYear(
-            purchasePrice: 1_000,
-            vehicleAge: 0,
-            electrified: true,
-            powertrain: .ev,
-            yearlyKm: 2_000
+            vehicleAge: 0, powertrain: .ev, yearlyKm: 2_000, market: .IT
+        )
+        let hevLowKm = OwnershipCostEstimates.maintenancePerYear(
+            vehicleAge: 0, powertrain: .hev, yearlyKm: 2_000, market: .IT
+        )
+        let phevLowKm = OwnershipCostEstimates.maintenancePerYear(
+            vehicleAge: 0, powertrain: .phev, yearlyKm: 2_000, market: .IT
         )
         XCTAssertGreaterThanOrEqual(iceLowKm, 180)
         XCTAssertGreaterThanOrEqual(evLowKm, 80)
+        XCTAssertGreaterThanOrEqual(hevLowKm, 150)
+        XCTAssertGreaterThanOrEqual(phevLowKm, 150)
 
         let iceHighKm = OwnershipCostEstimates.maintenancePerYear(
-            purchasePrice: 20_000,
-            vehicleAge: 5,
-            electrified: false,
-            powertrain: .ice,
-            yearlyKm: 40_000
+            vehicleAge: 5, powertrain: .ice, yearlyKm: 40_000, market: .IT
         )
         let iceMidKm = OwnershipCostEstimates.maintenancePerYear(
-            purchasePrice: 20_000,
-            vehicleAge: 5,
-            electrified: false,
-            powertrain: .ice,
-            yearlyKm: 10_000
+            vehicleAge: 5, powertrain: .ice, yearlyKm: 10_000, market: .IT
         )
         XCTAssertGreaterThan(iceHighKm, iceMidKm)
     }

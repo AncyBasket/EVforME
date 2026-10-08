@@ -194,6 +194,22 @@ struct InputView: View {
                                 .font(Typography.readingCaption)
                                 .foregroundColor(.secondaryText)
                                 .padding(.top, 8)
+                            VStack(alignment: .leading, spacing: 6) {
+                                Text(L10n.marketPickerLabel)
+                                    .font(.subheadline.weight(.semibold))
+                                    .foregroundStyle(Color.secondaryText)
+                                Picker(L10n.marketPickerLabel, selection: $userInput.market) {
+                                    ForEach(AppMarket.pickerCases) { market in
+                                        Text(market.localizedName).tag(market)
+                                    }
+                                }
+                                .pickerStyle(.menu)
+                                Text(L10n.marketMaintenanceSource(userInput.market))
+                                    .font(.caption)
+                                    .foregroundStyle(Color.secondaryText)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
+
                             Picker(L10n.areaTypeLabel, selection: $userInput.areaType) {
                                 ForEach(AreaType.allCases) { areaType in
                                     Text(areaType.title).tag(areaType)
@@ -791,6 +807,7 @@ struct InputView: View {
             input: userInput,
             asSource: asSource
         )
+
     }
 
     private func validateAndSimulate() {

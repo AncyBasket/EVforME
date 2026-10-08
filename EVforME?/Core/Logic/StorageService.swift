@@ -377,6 +377,7 @@ private struct CodableUserInput: Codable {
     let sourceConsumptionOverrideLPer100Km: Double?
     let targetEnergyOverrideKWhPer100Km: Double?
     private var chargingConfigData: ChargingConfigData?
+    let marketRaw: String?
 
     private enum CodingKeys: String, CodingKey {
         case dailyKm
@@ -398,6 +399,7 @@ private struct CodableUserInput: Codable {
         case sourceConsumptionOverrideLPer100Km
         case targetEnergyOverrideKWhPer100Km
         case chargingConfigData
+        case marketRaw
     }
     
     // Helper struct for encoding charging configuration
@@ -427,6 +429,7 @@ private struct CodableUserInput: Codable {
         tripProfileRaw = input.tripProfile.rawValue
         sourceConsumptionOverrideLPer100Km = input.sourceConsumptionOverrideLPer100Km
         targetEnergyOverrideKWhPer100Km = input.targetEnergyOverrideKWhPer100Km
+        marketRaw = input.market.rawValue
         
         // Encode charging configuration
         chargingConfigData = ChargingConfigData(
@@ -464,6 +467,7 @@ private struct CodableUserInput: Codable {
         tripProfileRaw = try container.decodeIfPresent(String.self, forKey: .tripProfileRaw) ?? TripProfile.custom.rawValue
         sourceConsumptionOverrideLPer100Km = try container.decodeIfPresent(Double.self, forKey: .sourceConsumptionOverrideLPer100Km)
         targetEnergyOverrideKWhPer100Km = try container.decodeIfPresent(Double.self, forKey: .targetEnergyOverrideKWhPer100Km)
+        marketRaw = try container.decodeIfPresent(String.self, forKey: .marketRaw)
         
         // Persist raw charging payload; `toUserInput()` materializes / falls back.
         chargingConfigData = try container.decodeIfPresent(ChargingConfigData.self, forKey: .chargingConfigData)
@@ -488,6 +492,7 @@ private struct CodableUserInput: Codable {
         try container.encodeIfPresent(sourceConsumptionOverrideLPer100Km, forKey: .sourceConsumptionOverrideLPer100Km)
         try container.encodeIfPresent(targetEnergyOverrideKWhPer100Km, forKey: .targetEnergyOverrideKWhPer100Km)
         try container.encodeIfPresent(chargingConfigData, forKey: .chargingConfigData)
+        try container.encodeIfPresent(marketRaw, forKey: .marketRaw)
     }
     
     func toUserInput() -> UserInput {
@@ -514,6 +519,7 @@ private struct CodableUserInput: Codable {
             )
         }
         
+        let market = marketRaw.flatMap(AppMarket.init(rawValue:)) ?? AppMarket.fromDeviceLocale()
         return UserInput(
             dailyKm: dailyKm,
             hasHomeCharging: hasHomeCharging,
@@ -531,7 +537,8 @@ private struct CodableUserInput: Codable {
             tripProfile: trip,
             sourceConsumptionOverrideLPer100Km: sourceConsumptionOverrideLPer100Km,
             targetEnergyOverrideKWhPer100Km: targetEnergyOverrideKWhPer100Km,
-            chargingConfiguration: chargingConfig
+            chargingConfiguration: chargingConfig,
+            market: market
         )
     }
 
