@@ -151,6 +151,35 @@ final class VehicleCatalogService {
         vehicles = expandForTestingIfNeeded(ensureBuiltInElectrifiedOptions(loadCachedOrDefault()))
         invalidateCaches()
     }
+
+    /// Attende il primo load async (deep link / shortcut a freddo). No-op se già popolato.
+    func waitUntilLoaded(timeoutSeconds: TimeInterval = 30) async {
+        if !vehicles.isEmpty { return }
+        await withCheckedContinuation { (continuation: CheckedContinuation<Void, Never>) in
+            if !vehicles.isEmpty {
+                continuation.resume()
+                return
+            }
+            var token: NSObjectProtocol?
+            var resumed = false
+            let finish = {
+                guard !resumed else { return }
+                resumed = true
+                if let token { NotificationCenter.default.removeObserver(token) }
+                continuation.resume()
+            }
+            token = NotificationCenter.default.addObserver(
+                forName: .evVehicleCatalogDidUpdate,
+                object: nil,
+                queue: .main
+            ) { _ in
+                finish()
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + timeoutSeconds) {
+                finish()
+            }
+        }
+    }
     
     /// Pre-warm caches for better performance
     func warmCaches() {

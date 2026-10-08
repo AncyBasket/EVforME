@@ -778,93 +778,14 @@ struct InputView: View {
         list.contains(where: { $0.id == preferred }) ? preferred : nil
     }
 
-    /// €/km di gestione allineato al simulatore (senza listino): energia×area/trip + bollo + tagliandi + RC.
+    /// €/km di gestione — unica fonte: `OperatingCostCalculator`.
     private func operatingCostPerKm(for vehicle: VehicleCatalogItem) -> Double {
-        let yearlyKm = max(1.0, Double(userInput.dailyKm))
-        let currentYear = Calendar.current.component(.year, from: Date())
-        let age = max(0, currentYear - vehicle.year)
-        let isElectrified = vehicle.powertrain == .ev || vehicle.powertrain == .phev
-        let isSource = vehicle.id == userInput.sourceVehicleId
-        let area = userInput.areaType
-        let trip = userInput.tripProfile
-        let scenario = userInput.scenario
-
-        let iceLPerKm: Double? = {
-            if isSource, let override = userInput.sourceConsumptionOverrideLPer100Km {
-                return override / 100.0
-            }
-            return vehicle.fuelConsumptionLPerKm
-        }()
-        let evKWhPerKm: Double? = {
-            if !isSource, let override = userInput.targetEnergyOverrideKWhPer100Km {
-                return override / 100.0
-            }
-            return vehicle.resolvedEnergyKWhPerKm
-        }()
-
-        let energyOrFuel: Double
-        switch vehicle.powertrain {
-        case .ice, .hev:
-            let lPerKm = iceLPerKm ?? 0
-            energyOrFuel = lPerKm
-                * userInput.fuelPrice
-                * area.iceConsumptionMultiplier
-                * trip.iceExtraMultiplier
-                * scenario.iceCostMultiplier
-        case .ev:
-            let kWh = evKWhPerKm ?? 0
-            let annual = ChargingCostCalculator.calculateAnnualEnergyCost(
-                yearlyKm: yearlyKm,
-                energyConsumptionKWhPerKm: kWh,
-                chargingConfig: userInput.resolvedChargingConfiguration()
-            )
-            energyOrFuel = (annual / yearlyKm)
-                * area.evConsumptionMultiplier
-                * trip.evExtraMultiplier
-                * scenario.evCostMultiplier
-        case .phev:
-            let share = vehicle.phevElectricKmShare(hasHomeCharging: userInput.hasHomeCharging)
-            let fuel = (iceLPerKm ?? 0)
-                * userInput.fuelPrice
-                * (1 - share)
-                * area.iceConsumptionMultiplier
-                * trip.iceExtraMultiplier
-                * scenario.iceCostMultiplier
-            let kWh = evKWhPerKm ?? 0
-            let annualElec = ChargingCostCalculator.calculateAnnualEnergyCost(
-                yearlyKm: yearlyKm * share,
-                energyConsumptionKWhPerKm: kWh,
-                chargingConfig: userInput.resolvedChargingConfiguration()
-            )
-            let elecPerKm = (annualElec / yearlyKm)
-                * area.evConsumptionMultiplier
-                * trip.evExtraMultiplier
-                * scenario.evCostMultiplier
-            energyOrFuel = fuel + elecPerKm
-        }
-
-        let listOrPaid = isSource ? userInput.sourcePurchasePrice : userInput.targetPurchasePrice
-        let valueBasis = OwnershipCostEstimates.operatingValueBasis(
-            purchaseOrListPrice: listOrPaid,
-            vehicleYear: vehicle.year,
-            electrified: isElectrified
+        let asSource = vehicle.id == userInput.sourceVehicleId
+        return OperatingCostCalculator.operatingCostPerKm(
+            vehicle: vehicle,
+            input: userInput,
+            asSource: asSource
         )
-        let maintenance = OwnershipCostEstimates.maintenancePerYear(
-            purchasePrice: valueBasis,
-            vehicleAge: age,
-            electrified: isElectrified
-        ) * (isElectrified ? scenario.evCostMultiplier : scenario.iceCostMultiplier)
-        let taxes = OwnershipCostEstimates.bolloPerYearEstimate(
-            catalogTaxesPerYear: vehicle.taxesPerYear,
-            powertrain: vehicle.powertrain,
-            vehicleYear: vehicle.year
-        )
-        let insurance = OwnershipCostEstimates.insurancePerYear(
-            purchasePrice: valueBasis,
-            yearlyKm: yearlyKm,
-            electrified: isElectrified
-        )
-        return energyOrFuel + (maintenance + taxes + insurance) / yearlyKm
     }
 
     private func validateAndSimulate() {
