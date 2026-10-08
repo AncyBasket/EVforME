@@ -140,14 +140,26 @@ VAN_NEEDLES = (
 )
 
 DEFAULT_PATHS = [
-    REPO / "EVforME?" / "Data" / "vehicles.seed.json",
+    # Unico seed bundlato a runtime (Fase 1).
     REPO / "EVforME?" / "Data" / "vehicles.seed.quality.json",
-    REPO / "EVforME?" / "Data" / "vehicles.seed.nhtsa_enriched.json",
-    REPO / "EVforME?" / "Data" / "vehicles.seed.nhtsa_enriched.with_images.json",
-    REPO / "EVforME?" / "Data" / "vehicles.seed.wltp_enriched.json",
     REPO / "api" / "static" / "vehicles.catalog.json",
     REPO / "api" / "static" / "vehicles.catalog.min.json",
 ]
+
+# Range produzione EU noti (subset) — fuori range = errore hygiene.
+KNOWN_EU_YEAR_RANGES = {
+    ("tesla", "model 3"): (2019, 2026),
+    ("tesla", "model y"): (2021, 2026),
+    ("seat", "ateca"): (2016, 2026),
+    ("dacia", "spring"): (2021, 2026),
+    ("fiat", "500e"): (2020, 2026),
+}
+
+BANNED_NON_EU_MODELS = {
+    ("tesla", "roadster"),
+    ("tesla", "semi"),
+    ("tesla", "cybertruck"),
+}
 
 
 def is_junk(row: dict) -> bool:
@@ -541,9 +553,12 @@ def hygiene_rows(rows: list[dict]) -> tuple[list[dict], dict]:
         elif "fuelKind" in out:
             out.pop("fuelKind", None)
 
-        if pt == "ice" and fk:
+        if pt in ("ice", "hev") and fk:
             new_cons = realistic_ice_consumption(out, fk)
             old = _as_float(out.get("fuelConsumptionLPerKm"))
+            # HEV: non alzare i consumi sopra ~6 L/100 se già realistici.
+            if pt == "hev" and old is not None and 0.035 <= old <= 0.060:
+                new_cons = old
             if new_cons is not None and (old is None or abs(old - new_cons) >= 0.00005):
                 out["fuelConsumptionLPerKm"] = new_cons
                 stats["ice_consumption_fixed"] += 1
@@ -599,18 +614,90 @@ def process(path: Path) -> dict:
     return stats
 
 
+def validate_catalog(rows: list[dict]) -> list[str]:
+    """Check hard invariants for Fase 1 (EV fuelKind, consumo bands, years, ids)."""
+    errors: list[str] = []
+    seen_ids: set[str] = set()
+    for r in rows:
+        rid = r.get("id")
+        if not rid:
+            errors.append("missing id")
+            continue
+        if rid in seen_ids:
+            errors.append(f"duplicate id {rid}")
+        seen_ids.add(rid)
+        brand = str(r.get("brand", "")).lower()
+        model = str(r.get("model", "")).lower()
+        pt = str(r.get("powertrain", "")).lower()
+        fk = r.get("fuelKind")
+        yr = int(r.get("year") or 0)
+        if (brand, model) in BANNED_NON_EU_MODELS:
+            errors.append(f"banned non-EU model still present: {rid}")
+        rng = KNOWN_EU_YEAR_RANGES.get((brand, model))
+        if rng and (yr < rng[0] or yr > rng[1]):
+            errors.append(f"year out of EU range {rid}: {yr} not in {rng}")
+        if pt == "ev":
+            if fk in ("petrol", "diesel", "lpg", "cng"):
+                errors.append(f"EV with liquid fuelKind {rid}: {fk}")
+            e = r.get("energyConsumptionKWhPerKm") or (
+                (r.get("wltpConsumptionKWh100km") or 0) / 100.0
+            )
+            k100 = float(e or 0) * 100
+            # Passenger tipico 12–28; van/SUV grandi fino a ~32.
+            if not (12.0 <= k100 <= 32.0):
+                errors.append(f"EV energy out of band {rid}: {k100:.1f} kWh/100")
+        if pt == "ice":
+            l100 = float(r.get("fuelConsumptionLPerKm") or 0) * 100
+            if fk == "cng":
+                # kg/100
+                if not (2.5 <= l100 <= 8.0):
+                    errors.append(f"CNG kg/100 out of band {rid}: {l100:.1f}")
+            elif not (3.5 <= l100 <= 15.0):
+                # 12 L tipico; fino a 15 L per sport/SUV USA ancora in catalogo.
+                errors.append(f"ICE L/100 out of band {rid}: {l100:.1f}")
+        if pt == "hev":
+            l100 = float(r.get("fuelConsumptionLPerKm") or 0) * 100
+            if not (3.5 <= l100 <= 6.0):
+                errors.append(f"HEV L/100 out of band {rid}: {l100:.1f}")
+        if pt == "phev":
+            l100 = float(r.get("fuelConsumptionLPerKm") or 0) * 100
+            e100 = float(
+                r.get("energyConsumptionKWhPerKm")
+                or ((r.get("wltpConsumptionKWh100km") or 0) / 100.0)
+                or 0
+            ) * 100
+            if l100 and not (1.0 <= l100 <= 14.0):
+                errors.append(f"PHEV fuel out of band {rid}: {l100:.1f}")
+            if e100 and not (10.0 <= e100 <= 32.0):
+                errors.append(f"PHEV energy out of band {rid}: {e100:.1f}")
+    return errors
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--path", type=Path, action="append", help="Catalog JSON (repeatable)")
+    ap.add_argument("--check-only", action="store_true", help="Validate without rewriting")
     args = ap.parse_args()
     paths = args.path or [p for p in DEFAULT_PATHS if p.exists()]
     if not paths:
         print("no catalog files found", file=sys.stderr)
         return 1
 
+    exit_code = 0
     for path in paths:
         if not path.is_absolute():
             path = REPO / path
+        rows = json.loads(path.read_text(encoding="utf-8"))
+        if args.check_only:
+            errs = validate_catalog(rows)
+            print(f"{path.relative_to(REPO)}: {len(rows)} rows, {len(errs)} errors")
+            for e in errs[:40]:
+                print("  -", e)
+            if len(errs) > 40:
+                print(f"  … {len(errs) - 40} more")
+            if errs:
+                exit_code = 1
+            continue
         stats = process(path)
         print(
             f"{stats['path']}: {stats['in']} → {stats['out']} "
@@ -619,7 +706,11 @@ def main() -> int:
             f"evRange↑ {stats['ev_range_fixed']}, "
             f"phevE↑ {stats['phev_energy_fixed']}, phevF↑ {stats['phev_fuel_fixed']})"
         )
-    return 0
+        errs = validate_catalog(json.loads(path.read_text(encoding="utf-8")))
+        if errs:
+            print(f"  validate: {len(errs)} issues (first: {errs[0]})")
+            exit_code = 1
+    return exit_code
 
 
 if __name__ == "__main__":

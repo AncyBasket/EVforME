@@ -19,6 +19,8 @@ enum Defaults {
         switch vehicle.powertrain {
         case .ice:
             return Double(max(3_500, 16_500 - age * 900))
+        case .hev:
+            return Double(max(5_000, 20_000 - age * 1_000))
         case .phev:
             return Double(max(10_000, 28_000 - age * 1_100))
         case .ev:

@@ -102,14 +102,23 @@ final class OfficialCostService {
             currency: "EUR",
             fuelPricePerLiter: (petrol * 1000).rounded() / 1000,
             dieselPricePerLiter: fuelMedians.diesel.map { ($0 * 1000).rounded() / 1000 },
+            lpgPricePerLiter: fuelMedians.lpg.map { ($0 * 1000).rounded() / 1000 },
+            cngPricePerKg: fuelMedians.cng.map { ($0 * 1000).rounded() / 1000 },
             electricityPricePerKWh: (elecPrice * 1000).rounded() / 1000,
             updatedAt: formatter.string(from: Date())
         )
     }
 
-    /// MIMIT prezzo_alle_8.csv — mediana benzina + gasolio self-service.
-    private func fetchMIMITFuelMedians() async -> (petrol: Double?, diesel: Double?) {
-        guard let url = URL(string: Defaults.mimitFuelPricesCSVURL) else { return (nil, nil) }
+    /// MIMIT prezzo_alle_8.csv — mediana benzina/gasolio/GPL/metano self-service.
+    private func fetchMIMITFuelMedians() async -> (
+        petrol: Double?,
+        diesel: Double?,
+        lpg: Double?,
+        cng: Double?
+    ) {
+        guard let url = URL(string: Defaults.mimitFuelPricesCSVURL) else {
+            return (nil, nil, nil, nil)
+        }
         do {
             let (data, response) = try await session.data(from: url)
             guard let http = response as? HTTPURLResponse, (200...299).contains(http.statusCode),
@@ -119,23 +128,29 @@ final class OfficialCostService {
                     .fuelPriceFetchFailed,
                     context: .network
                 )
-                return (nil, nil)
+                return (nil, nil, nil, nil)
             }
 
             var petrol: [Double] = []
             var diesel: [Double] = []
+            var lpg: [Double] = []
+            var cng: [Double] = []
             let lines = text.split(whereSeparator: \.isNewline)
-            guard lines.count > 1 else { return (nil, nil) }
+            guard lines.count > 1 else { return (nil, nil, nil, nil) }
             for line in lines.dropFirst(2) {
                 let cols = line.split(separator: "|", omittingEmptySubsequences: false).map(Substring.init)
                 guard cols.count >= 4 else { continue }
                 let fuelName = cols[1].trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
                 guard let parsed = parseMIMITRow(cols) else { continue }
-                guard parsed.isSelf, parsed.price >= 0.8, parsed.price <= 3.5 else { continue }
-                if fuelName == "benzina" {
+                guard parsed.isSelf else { continue }
+                if fuelName == "benzina", (0.8...3.5).contains(parsed.price) {
                     petrol.append(parsed.price)
-                } else if fuelName == "gasolio" || fuelName.contains("gasolio") {
+                } else if fuelName == "gasolio" || fuelName.contains("gasolio"), (0.8...3.5).contains(parsed.price) {
                     diesel.append(parsed.price)
+                } else if fuelName == "gpl" || fuelName.contains("gpl"), (0.4...2.0).contains(parsed.price) {
+                    lpg.append(parsed.price)
+                } else if fuelName.contains("metano"), (0.6...2.5).contains(parsed.price) {
+                    cng.append(parsed.price)
                 }
             }
             func median(_ values: [Double]) -> Double? {
@@ -143,19 +158,19 @@ final class OfficialCostService {
                 let sorted = values.sorted()
                 return sorted[sorted.count / 2]
             }
-            return (median(petrol), median(diesel))
+            return (median(petrol), median(diesel), median(lpg), median(cng))
         } catch let urlError as URLError {
             ErrorHandler.shared.handleAppError(
                 urlError.toAppError,
                 context: .network
             )
-            return (nil, nil)
+            return (nil, nil, nil, nil)
         } catch {
             ErrorHandler.shared.handle(
                 error,
                 context: .network
             )
-            return (nil, nil)
+            return (nil, nil, nil, nil)
         }
     }
 
@@ -287,6 +302,8 @@ final class OfficialCostService {
                 currency: "EUR",
                 fuelPricePerLiter: 1.739,
                 dieselPricePerLiter: 1.659,
+                lpgPricePerLiter: 0.72,
+                cngPricePerKg: 1.28,
                 electricityPricePerKWh: 0.333,
                 updatedAt: nil
             )

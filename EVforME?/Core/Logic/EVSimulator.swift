@@ -143,6 +143,10 @@ enum OwnershipCostEstimates {
                 return (base * 0.5).rounded()
             }
             return catalogTaxesPerYear > 0 ? catalogTaxesPerYear : 180
+        case .hev:
+            // Full hybrid: bollo spesso ridotto vs ICE puro (proxy −30%).
+            let base = catalogTaxesPerYear > 0 ? catalogTaxesPerYear : 180
+            return (base * 0.7).rounded()
         case .ice:
             return catalogTaxesPerYear > 0 ? catalogTaxesPerYear : 220
         }
@@ -246,7 +250,7 @@ final class EVSimulator {
         let sourceValueBasis = OwnershipCostEstimates.operatingValueBasis(
             purchaseOrListPrice: input.sourcePurchasePrice,
             vehicleYear: sourceVehicle.year,
-            electrified: sourceVehicle.powertrain != .ice
+            electrified: sourceVehicle.powertrain == .ev || sourceVehicle.powertrain == .phev
         )
         let targetValueBasis = OwnershipCostEstimates.operatingValueBasis(
             purchaseOrListPrice: input.targetPurchasePrice,
@@ -257,7 +261,7 @@ final class EVSimulator {
         let sourceInsurance = OwnershipCostEstimates.insurancePerYear(
             purchasePrice: sourceValueBasis,
             yearlyKm: yearlyKm,
-            electrified: sourceVehicle.powertrain != .ice
+            electrified: sourceVehicle.powertrain == .ev || sourceVehicle.powertrain == .phev
         )
         let targetInsurance = OwnershipCostEstimates.insurancePerYear(
             purchasePrice: targetValueBasis,
@@ -334,10 +338,11 @@ final class EVSimulator {
         let elecMult = asSource ? scenario.iceCostMultiplier : scenario.evCostMultiplier
 
         switch vehicle.powertrain {
-        case .ice:
+        case .ice, .hev:
             guard let lPerKm = fuelOverrideLPerKm ?? vehicle.fuelConsumptionLPerKm, lPerKm > 0 else {
                 return 0
             }
+            // Per CNG, fuelConsumptionLPerKm è in kg/km e fuelPricePerLiter è €/kg.
             return yearlyKm
                 * lPerKm
                 * area.iceConsumptionMultiplier
@@ -457,7 +462,7 @@ final class EVSimulator {
             weeklyCharges = max(1, Int(ceil(weeklyKm / kmPerCharge)))
         case .phev:
             weeklyCharges = max(1, Int(ceil(weeklyKm * 0.55 / kmPerCharge)))
-        case .ice:
+        case .ice, .hev:
             weeklyCharges = 0
         }
         
@@ -574,7 +579,7 @@ final class EVSimulator {
         energyOverrideKWhPerKm: Double?
     ) -> Bool {
         switch vehicle.powertrain {
-        case .ice:
+        case .ice, .hev:
             let lPerKm = fuelOverrideLPerKm ?? vehicle.fuelConsumptionLPerKm
             return (lPerKm ?? 0) > 0
         case .ev:

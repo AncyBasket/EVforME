@@ -783,7 +783,7 @@ struct InputView: View {
         let yearlyKm = max(1.0, Double(userInput.dailyKm))
         let currentYear = Calendar.current.component(.year, from: Date())
         let age = max(0, currentYear - vehicle.year)
-        let isElectrified = vehicle.powertrain != .ice
+        let isElectrified = vehicle.powertrain == .ev || vehicle.powertrain == .phev
         let isSource = vehicle.id == userInput.sourceVehicleId
         let area = userInput.areaType
         let trip = userInput.tripProfile
@@ -804,7 +804,7 @@ struct InputView: View {
 
         let energyOrFuel: Double
         switch vehicle.powertrain {
-        case .ice:
+        case .ice, .hev:
             let lPerKm = iceLPerKm ?? 0
             energyOrFuel = lPerKm
                 * userInput.fuelPrice

@@ -42,8 +42,22 @@ struct VehicleCatalogPickerSheet: View {
         case variants(brand: String, model: String)
     }
 
+    private enum FuelFilter: String, CaseIterable, Identifiable {
+        case all, hev, lpg, cng
+        var id: String { rawValue }
+        var title: String {
+            switch self {
+            case .all: return L10n.pickerFilterAll
+            case .hev: return L10n.pickerFilterHev
+            case .lpg: return L10n.pickerFilterLpg
+            case .cng: return L10n.pickerFilterCng
+            }
+        }
+    }
+
     @State private var searchText: String = ""
     @State private var level: BrowseLevel = .brands
+    @State private var fuelFilter: FuelFilter = .all
     @FocusState private var searchFocused: Bool
     @Environment(\.accessibilityReduceMotion) private var accessibilityReduceMotion
 
@@ -61,8 +75,17 @@ struct VehicleCatalogPickerSheet: View {
         searchText.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
+    private var filteredVehicles: [VehicleCatalogItem] {
+        switch fuelFilter {
+        case .all: return vehicles
+        case .hev: return vehicles.filter { $0.powertrain == .hev }
+        case .lpg: return vehicles.filter { $0.resolvedFuelKind == .lpg }
+        case .cng: return vehicles.filter { $0.resolvedFuelKind == .cng }
+        }
+    }
+
     private var searchIndex: VehicleSearchIndex {
-        VehicleSearchIndex(vehicles: vehicles)
+        VehicleSearchIndex(vehicles: filteredVehicles)
     }
 
     private var isSearching: Bool { !query.isEmpty }
@@ -75,6 +98,9 @@ struct VehicleCatalogPickerSheet: View {
                     searchField
                         .padding(.horizontal, 20)
                         .padding(.top, 8)
+
+                    fuelFilterChips
+                        .padding(.horizontal, 20)
 
                     if isSearching {
                         searchResultsSurface
@@ -104,6 +130,28 @@ struct VehicleCatalogPickerSheet: View {
         .onChange(of: searchText) { _, newValue in
             if !newValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 // Ricerca libera: esci dal drill-down.
+            }
+        }
+    }
+
+    private var fuelFilterChips: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(FuelFilter.allCases) { filter in
+                    Button {
+                        fuelFilter = filter
+                        level = .brands
+                    } label: {
+                        Text(filter.title)
+                            .font(Typography.readingCaption.weight(.semibold))
+                            .foregroundStyle(fuelFilter == filter ? Color.white : Color.ink)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .background(fuelFilter == filter ? Color.ink : Color.surfaceElevated)
+                            .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                    }
+                    .buttonStyle(.plain)
+                }
             }
         }
     }

@@ -7,43 +7,59 @@ import Foundation
 
 enum Powertrain: String, Codable {
     case ice
+    case hev
     case ev
     case phev
 
-    /// Auto attuale: termica o ibrida plug-in.
+    /// Auto attuale: termica, full hybrid o plug-in.
     var isSourceCandidate: Bool {
         switch self {
-        case .ice, .phev: return true
+        case .ice, .hev, .phev: return true
         case .ev: return false
         }
     }
 
-    /// Target elettrificato: BEV o PHEV.
+    /// Target elettrificato: BEV o PHEV (non HEV).
     var isTargetCandidate: Bool {
         switch self {
         case .ev, .phev: return true
-        case .ice: return false
+        case .ice, .hev: return false
+        }
+    }
+
+    /// Usa carburante liquido/gassoso (niente sola ricarica).
+    var burnsFuel: Bool {
+        switch self {
+        case .ice, .hev, .phev: return true
+        case .ev: return false
         }
     }
 }
 
-/// Carburante liquido (ICE/PHEV). Opzionale nel seed; altrimenti euristica IT.
+/// Carburante (ICE/HEV/PHEV). Opzionale nel seed; altrimenti euristica IT.
 enum FuelKind: String, Codable {
     case petrol
     case diesel
+    /// GPL — prezzo €/L (MIMIT).
+    case lpg
+    /// Metano/CNG — prezzo €/kg (MIMIT); `fuelConsumptionLPerKm` interpreta kg/km.
+    case cng
     case unknown
 }
 
 extension Powertrain {
-    /// Etichetta IT per picker (benzina/diesel se noti).
+    /// Etichetta IT per picker (benzina/diesel/GPL/metano/ibrida).
     func catalogFuelLabel(fuelKind: FuelKind) -> String {
         switch self {
         case .ice:
             switch fuelKind {
             case .diesel: return L10n.powertrainDieselLabel
             case .petrol: return L10n.powertrainPetrolLabel
+            case .lpg: return L10n.powertrainLpgLabel
+            case .cng: return L10n.powertrainCngLabel
             case .unknown: return L10n.powertrainIceLabel
             }
+        case .hev: return L10n.powertrainHevLabel
         case .phev: return L10n.powertrainPhevLabel
         case .ev: return L10n.powertrainEvLabel
         }
@@ -137,7 +153,7 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         switch powertrain {
         case .ev:
             return .unknown
-        case .phev, .ice:
+        case .phev, .ice, .hev:
             return Self.inferFuelKind(brand: brand, model: model, year: year, trim: trim)
         }
     }
@@ -174,6 +190,12 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
 
     private static func inferFuelKind(brand: String, model: String, year: Int, trim: String?) -> FuelKind {
         let blob = "\(model) \(trim ?? "")".lowercased()
+        if blob.contains("gpl") || blob.contains("lpg") || blob.contains("eco-g") || blob.contains("eco g") {
+            return .lpg
+        }
+        if blob.contains("metano") || blob.contains("cng") || blob.contains("natural power") {
+            return .cng
+        }
         if blob.contains("diesel") || blob.contains("tdi") || blob.contains("tdci")
             || blob.contains(" dci") || blob.contains("hdi") || blob.contains("jtd")
             || blob.contains("crd") || blob.contains("skyactiv-d") || blob.contains("bluehdi") {

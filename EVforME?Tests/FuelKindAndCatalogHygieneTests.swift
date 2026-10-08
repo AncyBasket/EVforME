@@ -130,7 +130,7 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
     func testCatalog_NoMissingICEFuelOrEVEnergy() {
         for v in VehicleCatalogService.shared.vehicles {
             switch v.powertrain {
-            case .ice:
+            case .ice, .hev:
                 XCTAssertNotNil(v.fuelConsumptionLPerKm, v.id)
                 XCTAssertGreaterThan(v.fuelConsumptionLPerKm ?? 0, 0, v.id)
             case .ev:
@@ -140,6 +140,76 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
                 XCTAssertNotNil(v.fuelConsumptionLPerKm, v.id)
                 XCTAssertNotNil(v.resolvedEnergyKWhPerKm, v.id)
             }
+        }
+    }
+
+    func testCatalog_HasHEVEntries() {
+        let hevs = VehicleCatalogService.shared.vehicles.filter { $0.powertrain == .hev }
+        XCTAssertFalse(hevs.isEmpty, "HEV powertrain must be present")
+    }
+
+    func testYaris2020Plus_IsHEVWithRealisticConsumption() {
+        let yaris = VehicleCatalogService.shared.vehicle(by: "toyota-yaris-2020")
+            ?? VehicleCatalogService.shared.vehicles.first {
+                $0.brand == "Toyota" && $0.model == "Yaris" && $0.year == 2020
+            }
+        XCTAssertNotNil(yaris)
+        XCTAssertEqual(yaris?.powertrain, .hev)
+        let l100 = (yaris?.fuelConsumptionLPerKm ?? 0) * 100
+        XCTAssertGreaterThanOrEqual(l100, 3.5)
+        XCTAssertLessThanOrEqual(l100, 5.0)
+    }
+
+    func testCatalog_HasLPGAndCNGWithPrices() {
+        let lpg = VehicleCatalogService.shared.vehicles.filter { $0.resolvedFuelKind == .lpg }
+        let cng = VehicleCatalogService.shared.vehicles.filter { $0.resolvedFuelKind == .cng }
+        XCTAssertFalse(lpg.isEmpty, "GPL vehicles required")
+        XCTAssertFalse(cng.isEmpty, "Metano vehicles required")
+        let costs = OfficialCostService.shared.cachedOrBundledCosts()
+            ?? OfficialEnergyCosts(
+                country: "IT",
+                currency: "EUR",
+                fuelPricePerLiter: 1.74,
+                dieselPricePerLiter: 1.66,
+                lpgPricePerLiter: 0.72,
+                cngPricePerKg: 1.28,
+                electricityPricePerKWh: 0.33,
+                updatedAt: nil
+            )
+        XCTAssertGreaterThan(costs.pricePerLiter(for: .lpg), 0.4)
+        XCTAssertLessThan(costs.pricePerLiter(for: .lpg), 1.5)
+        XCTAssertGreaterThan(costs.pricePerLiter(for: .cng), 0.8)
+        XCTAssertLessThan(costs.pricePerLiter(for: .cng), 2.0)
+    }
+
+    func testCatalog_NoTeslaICEOrNonEUToys() {
+        let teslaICE = VehicleCatalogService.shared.vehicles.filter {
+            $0.brand.localizedCaseInsensitiveContains("Tesla") && $0.powertrain == .ice
+        }
+        XCTAssertTrue(teslaICE.isEmpty, "Tesla must not be ICE: \(teslaICE.map(\.id))")
+        let banned = VehicleCatalogService.shared.vehicles.filter {
+            let m = $0.model.lowercased()
+            return $0.brand.localizedCaseInsensitiveContains("Tesla")
+                && (m.contains("roadster") || m.contains("semi") || m.contains("cybertruck"))
+        }
+        XCTAssertTrue(banned.isEmpty, "Non-EU Tesla models must be removed: \(banned.map(\.id))")
+    }
+
+    func testCatalog_ITBestsellersPresent() {
+        let ids = [
+            "fiat-grande-panda-ev-2024",
+            "lancia-ypsilon-hybrid-2024",
+            "leapmotor-t03-2024",
+            "citroen-e-c3-2024",
+            "dacia-spring-2024",
+            "renault-5-e-tech-2024",
+            "fiat-600e-2024",
+            "jeep-avenger-2024",
+            "byd-dolphin-surf-2025",
+            "fiat-panda-gpl-2020",
+        ]
+        for id in ids {
+            XCTAssertNotNil(VehicleCatalogService.shared.vehicle(by: id), "Missing bestseller \(id)")
         }
     }
 

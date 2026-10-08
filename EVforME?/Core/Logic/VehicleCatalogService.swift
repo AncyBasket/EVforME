@@ -20,7 +20,7 @@ final class VehicleCatalogService {
     }
 
     private let defaults = UserDefaults.standard
-    private let seedVersion = 31
+    private let seedVersion = 32
     private var remoteDisabledForTesting = false
     private let remoteSession: URLSession = {
         let config = URLSessionConfiguration.ephemeral
@@ -275,11 +275,8 @@ final class VehicleCatalogService {
     private func loadBundledSeedCatalog() -> [VehicleCatalogItem]? {
         // Catalogo WLTP/EEA come sorgente primaria; fallback ai seed precedenti.
         let preferredResources: [(String, String)] = [
+            // Solo il seed caricato a runtime (altri rimossi dal bundle in Fase 1).
             ("vehicles.seed.quality", "json"),
-            ("vehicles.seed.wltp_enriched", "json"),
-            ("vehicles.seed.nhtsa_enriched.with_images", "json"),
-            ("vehicles.seed.nhtsa_enriched", "json"),
-            ("vehicles.seed", "json"),
         ]
         for (name, ext) in preferredResources {
             guard let url = Bundle.main.url(forResource: name, withExtension: ext),
