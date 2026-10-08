@@ -361,6 +361,11 @@
 "quick_start_subtitle" = "Km, home charging, trip type — then refine prices on the bench.";
 "quick_start_continue" = "Open the bench";
 "quick_start_skip_full" = "Skip intro";
+"quick_start_thirty_second_title" = "Answer in 30 seconds";
+"quick_start_thirty_second_hint" = "We pick a sensible EV suggestion from the catalog. Customize anytime for prices, scenarios, and the full comparison.";
+"quick_start_current_car" = "Your current car";
+"quick_start_see_verdict" = "See the verdict";
+"quick_start_customize" = "Customize full inputs";
 "widget_bump_fuel_title" = "Fuel +€0.10";
 "sticker_override_applied_reason" = "Uses sticker OCR consumption instead of catalog averages where provided.";
 "sticker_clear_override" = "Clear sticker override";

@@ -378,6 +378,11 @@
 "quick_start_subtitle" = "Km, ricarica casa, tipo di tragitti — poi affini i prezzi sul banco.";
 "quick_start_continue" = "Apri il banco";
 "quick_start_skip_full" = "Salta intro";
+"quick_start_thirty_second_title" = "Risposta in 30 secondi";
+"quick_start_thirty_second_hint" = "Scegliamo un’EV sensata dal catalogo. Puoi personalizzare prezzi, scenari e il confronto completo quando vuoi.";
+"quick_start_current_car" = "La tua auto attuale";
+"quick_start_see_verdict" = "Vedi il verdetto";
+"quick_start_customize" = "Personalizza input completi";
 "widget_bump_fuel_title" = "Benzina +€0,10";
 "sticker_override_applied_reason" = "Usa i consumi dallo sticker OCR al posto delle medie catalogo, se presenti.";
 "sticker_clear_override" = "Rimuovi override sticker";
