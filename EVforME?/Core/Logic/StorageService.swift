@@ -382,6 +382,7 @@ private struct CodableUserInput: Codable {
     let tripProfileRaw: String
     let sourceConsumptionOverrideLPer100Km: Double?
     let targetEnergyOverrideKWhPer100Km: Double?
+    let marketRaw: String?
     private var chargingConfigData: ChargingConfigData?
     let marketRaw: String?
 
@@ -404,6 +405,7 @@ private struct CodableUserInput: Codable {
         case tripProfileRaw
         case sourceConsumptionOverrideLPer100Km
         case targetEnergyOverrideKWhPer100Km
+        case marketRaw
         case chargingConfigData
         case marketRaw
     }
@@ -497,6 +499,7 @@ private struct CodableUserInput: Codable {
         try container.encode(tripProfileRaw, forKey: .tripProfileRaw)
         try container.encodeIfPresent(sourceConsumptionOverrideLPer100Km, forKey: .sourceConsumptionOverrideLPer100Km)
         try container.encodeIfPresent(targetEnergyOverrideKWhPer100Km, forKey: .targetEnergyOverrideKWhPer100Km)
+        try container.encodeIfPresent(marketRaw, forKey: .marketRaw)
         try container.encodeIfPresent(chargingConfigData, forKey: .chargingConfigData)
         try container.encodeIfPresent(marketRaw, forKey: .marketRaw)
     }
@@ -505,6 +508,7 @@ private struct CodableUserInput: Codable {
         let scenario = Scenario.allCases.first { $0.rawValue == scenarioRaw } ?? .realistic
         let trip = TripProfile(rawValue: tripProfileRaw) ?? .custom
         let intent = ComparisonIntent(rawValue: comparisonIntentRaw) ?? .alreadyOwned
+        let market = marketRaw.flatMap(AppMarket.init(rawValue:)) ?? AppMarket.fromDeviceLocale()
         
         // For backward compatibility, use suggested configuration if charging config data is missing
         let chargingConfig: ChargingConfiguration

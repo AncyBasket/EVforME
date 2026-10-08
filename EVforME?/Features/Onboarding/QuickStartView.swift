@@ -2,7 +2,7 @@
 //  QuickStartView.swift
 //  EVforME?
 //
-//  Prima schermata: risposta in ~30 secondi (auto attuale, km/giorno, ricarica casa).
+//  Prima schermata: risposta in ~30 secondi (auto attuale, km/giorno, ricarica casa, paese).
 //
 
 import SwiftUI
@@ -13,10 +13,16 @@ struct QuickStartView: View {
     var onCustomize: () -> Void
 
     @State private var appear = false
+    @State private var showSourcePicker = false
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private var sourceList: [VehicleCatalogItem] {
         VehicleCatalogService.shared.sourceVehicles()
+    }
+
+    private var selectedSourceName: String {
+        VehicleCatalogService.shared.vehicle(by: userInput.sourceVehicleId)?.displayName
+            ?? L10n.vehiclePairTapToChoose
     }
 
     var body: some View {
@@ -40,9 +46,36 @@ struct QuickStartView: View {
                             Text(L10n.quickStartCurrentCar)
                                 .font(Typography.sectionEyebrow)
                                 .foregroundStyle(Color.secondaryText)
-                            Picker(L10n.quickStartCurrentCar, selection: $userInput.sourceVehicleId) {
-                                ForEach(sourceList.prefix(80)) { vehicle in
-                                    Text(vehicle.displayName).tag(vehicle.id)
+                            Button {
+                                showSourcePicker = true
+                            } label: {
+                                HStack {
+                                    Text(selectedSourceName)
+                                        .font(Typography.title2)
+                                        .foregroundStyle(Color.ink)
+                                        .multilineTextAlignment(.leading)
+                                    Spacer()
+                                    Image(systemName: "chevron.up.chevron.down")
+                                        .font(.caption.weight(.semibold))
+                                        .foregroundStyle(Color.secondaryText)
+                                }
+                                .padding(.vertical, 12)
+                                .padding(.horizontal, 14)
+                                .background(Color.ink.opacity(0.06))
+                                .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityLabel(L10n.quickStartCurrentCar)
+                            .accessibilityValue(selectedSourceName)
+                        }
+
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text(L10n.marketPickerLabel)
+                                .font(Typography.sectionEyebrow)
+                                .foregroundStyle(Color.secondaryText)
+                            Picker(L10n.marketPickerLabel, selection: $userInput.market) {
+                                ForEach(AppMarket.pickerCases) { market in
+                                    Text(market.localizedName).tag(market)
                                 }
                             }
                             .pickerStyle(.menu)
@@ -99,6 +132,13 @@ struct QuickStartView: View {
                 .padding(.top, 8)
             }
         }
+        .sheet(isPresented: $showSourcePicker) {
+            VehicleCatalogPickerSheet(
+                title: L10n.quickStartCurrentCar,
+                vehicles: sourceList,
+                selectedId: $userInput.sourceVehicleId
+            )
+        }
         .onAppear {
             ensureDefaults()
             if reduceMotion {
@@ -118,28 +158,28 @@ struct QuickStartView: View {
         if userInput.sourceVehicleId.isEmpty || VehicleCatalogService.shared.vehicle(by: userInput.sourceVehicleId) == nil {
             userInput.sourceVehicleId = sourceList.first?.id ?? Defaults.starterSourceVehicleId
         }
+        // Non sovrascrivere un target già scelto dall’utente.
         if userInput.targetVehicleId.isEmpty || VehicleCatalogService.shared.vehicle(by: userInput.targetVehicleId) == nil {
-            userInput.targetVehicleId = VehicleCatalogService.shared.targetEVVehicles().first?.id
-                ?? Defaults.starterTargetVehicleId
+            userInput.targetVehicleId = ""
         }
-        userInput.scenario = .realistic
-        userInput.comparisonIntent = .alreadyOwned
-        userInput.ownershipYears = 5
-        userInput.areaType = .mixed
-        userInput.tripProfile = .custom
-        userInput.chargingConfiguration = ChargingCostCalculator.suggestedConfiguration(
-            yearlyKm: Double(userInput.dailyKm),
-            hasHomeCharging: userInput.hasHomeCharging
-        )
+        // Non resettare scenario / ricarica già scelti dall’utente.
+        if userInput.ownershipYears <= 0 {
+            userInput.ownershipYears = 5
+        }
     }
 
     private func runQuickVerdict() {
         ensureDefaults()
-        // Suggerisci un EV target tipico se ancora sul default.
-        if let suggested = VehicleCatalogService.shared.targetEVVehicles().first(where: {
-            $0.id.contains("model-3") || $0.id.contains("mg4") || $0.id.contains("500e")
-        }) {
-            userInput.targetVehicleId = suggested.id
+        // Suggerisci Model 3 / MG4 / 500e solo se il target è ancora vuoto.
+        if userInput.targetVehicleId.isEmpty {
+            if let suggested = VehicleCatalogService.shared.targetEVVehicles().first(where: {
+                $0.id.contains("model-3") || $0.id.contains("mg4") || $0.id.contains("500e")
+            }) {
+                userInput.targetVehicleId = suggested.id
+            } else {
+                userInput.targetVehicleId = VehicleCatalogService.shared.targetEVVehicles().first?.id
+                    ?? Defaults.starterTargetVehicleId
+            }
         }
         StorageService.shared.saveUserInput(userInput)
         StorageService.shared.markOnboardingSeen()

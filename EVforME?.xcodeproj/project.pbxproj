@@ -90,10 +90,6 @@
 				Data/external/vehicle_image_map_quattroruote.json,
 				Data/external/vehicle_image_map.json,
 				Data/external/wikimedia_image_manifest.json,
-				Data/vehicles.seed.json,
-				Data/vehicles.seed.nhtsa_enriched.json,
-				Data/vehicles.seed.nhtsa_enriched.with_images.json,
-				Data/vehicles.seed.wltp_enriched.json,
 				Info.plist,
 			);
 			target = 65B857E12F2BAC4C00771010 /* EVforME? */;

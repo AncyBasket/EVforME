@@ -8,12 +8,11 @@ import XCTest
 
 final class PerfAndCacheTests: XCTestCase {
 
-    func testMIMITSampleCSV_ParsesPetrolAndDieselMedians() throws {
+    func testMIMITSampleCSV_ParsesPetrolDieselLPGAndCNG() throws {
         let url = try XCTUnwrap(
             Bundle(for: PerfAndCacheTests.self).url(forResource: "mimit_sample", withExtension: "csv")
                 ?? Bundle.main.url(forResource: "mimit_sample", withExtension: "csv")
         )
-        // Prefer test bundle via path relative to this file when XCTest copies fixtures.
         let data: Data
         if let bundled = try? Data(contentsOf: url) {
             data = bundled
@@ -26,10 +25,16 @@ final class PerfAndCacheTests: XCTestCase {
         let medians = OfficialCostService.parseMIMITFuelMedians(from: data)
         XCTAssertNotNil(medians.petrol)
         XCTAssertNotNil(medians.diesel)
+        XCTAssertNotNil(medians.lpg)
+        XCTAssertNotNil(medians.cng)
         // Self-service benzina: 1.799, 1.850, 1.820 → median 1.820
         XCTAssertEqual(medians.petrol!, 1.820, accuracy: 0.001)
         // Gasolio: 1.650, 1.700 → median of 2 is upper mid → 1.700 with count/2
         XCTAssertEqual(medians.diesel!, 1.700, accuracy: 0.001)
+        // GPL: 0.750, 0.780 → 0.780
+        XCTAssertEqual(medians.lpg!, 0.780, accuracy: 0.001)
+        // Metano: 1.250, 1.300 → 1.300
+        XCTAssertEqual(medians.cng!, 1.300, accuracy: 0.001)
     }
 
     func testInsurancePerYear_HasFloorAndScalesWithKm() {
@@ -47,14 +52,38 @@ final class PerfAndCacheTests: XCTestCase {
         XCTAssertGreaterThan(high, low)
     }
 
-    func testRemoteCatalogSmallerThanLocal_IsRejected() async {
+    func testRemoteCatalogSmallerThanLocal_IsRejected() throws {
         VehicleCatalogService.shared.reloadFromBundledSeedIgnoringUserCacheForTesting()
         let localCount = VehicleCatalogService.shared.vehicles.count
         XCTAssertGreaterThan(localCount, 100)
-        // Logic under test: refreshFromRemoteIfPossible discards when decoded.count + 50 < localCount.
-        // Simulate the predicate here (network URL empty in tests).
-        let tinyRemoteCount = 10
-        XCTAssertTrue(tinyRemoteCount + 50 < localCount)
+
+        let tinyJSON = Data("""
+        [
+          {
+            "id": "tiny-remote-1",
+            "brand": "Tiny",
+            "model": "Remote",
+            "year": 2024,
+            "powertrain": "ice",
+            "lengthM": 4.0,
+            "widthM": 1.8,
+            "heightM": 1.5,
+            "fuelConsumptionLPerKm": 0.06,
+            "energyConsumptionKWhPerKm": null,
+            "maintenancePerYear": 400,
+            "taxesPerYear": 200
+          }
+        ]
+        """.utf8)
+
+        XCTAssertFalse(
+            VehicleCatalogService.shouldAcceptRemoteCatalog(decodedCount: 1, localCount: localCount)
+        )
+        let before = VehicleCatalogService.shared.vehicles.count
+        let accepted = VehicleCatalogService.shared.applyRemoteCatalogJSONIfAcceptable(tinyJSON)
+        XCTAssertFalse(accepted)
+        XCTAssertEqual(VehicleCatalogService.shared.vehicles.count, before)
+        XCTAssertNil(VehicleCatalogService.shared.vehicle(by: "tiny-remote-1"))
     }
 
     func testScenarioHistoryStore_RoundTrip() {

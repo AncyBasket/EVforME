@@ -61,7 +61,8 @@ struct VehicleCatalogPickerSheet: View {
     @FocusState private var searchFocused: Bool
     @Environment(\.accessibilityReduceMotion) private var accessibilityReduceMotion
 
-    private static let maxSearchHits = 80
+    /// Nessun tetto artificiale: l’indice già raggruppa per modello.
+    private static let maxSearchHits = 10_000
     private static let popularBrands = [
         "Fiat", "Volkswagen", "Toyota", "Renault", "Ford", "Peugeot",
         "BMW", "Audi", "Mercedes-Benz", "Tesla", "Hyundai", "Kia", "Nissan", "Opel", "SEAT",
