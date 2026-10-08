@@ -290,12 +290,13 @@ final class EVSimulatorTests: XCTestCase {
             return
         }
 
-        let input = EVSimulationInput(
-            yearlyKm: 30,
+        var input = EVSimulationInput(
+            yearlyKm: 30_000,
             years: 5,
             fuelPricePerLiter: 1.8,
             electricityPricePerKWh: 0.25
         )
+        input.market = .IT
 
         let result = simulator.simulate(
             input: input,
@@ -312,7 +313,7 @@ final class EVSimulatorTests: XCTestCase {
 
         XCTAssertLessThan(
             result.totalSavings,
-            15000,
+            50_000,
             "Il risparmio non dovrebbe essere irrealistico"
         )
     }
@@ -326,12 +327,13 @@ final class EVSimulatorTests: XCTestCase {
             return
         }
 
-        let input = EVSimulationInput(
-            yearlyKm: 40,
+        var input = EVSimulationInput(
+            yearlyKm: 40_000,
             years: 3,
             fuelPricePerLiter: 2.0,
             electricityPricePerKWh: 0.3
         )
+        input.market = .IT
 
         let result = simulator.simulate(
             input: input,
