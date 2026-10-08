@@ -10,6 +10,8 @@ import XCTest
 
 final class StorageServiceTests: XCTestCase {
 
+    private let includeIncentivesMigrationKey = "evforme.includeIncentives.defaultOff.v1"
+
     override func setUp() {
         super.setUp()
         // Clean up any existing data
@@ -20,6 +22,7 @@ final class StorageServiceTests: XCTestCase {
         defaults.removeObject(forKey: "evforme.autocosts.lastElectricityPrice")
         defaults.removeObject(forKey: "evforme.autocosts.userCustomizedFuelPrice")
         defaults.removeObject(forKey: "evforme.autocosts.userCustomizedElectricityPrice")
+        defaults.removeObject(forKey: includeIncentivesMigrationKey)
     }
 
     override func tearDown() {
@@ -31,6 +34,7 @@ final class StorageServiceTests: XCTestCase {
         defaults.removeObject(forKey: "evforme.autocosts.lastElectricityPrice")
         defaults.removeObject(forKey: "evforme.autocosts.userCustomizedFuelPrice")
         defaults.removeObject(forKey: "evforme.autocosts.userCustomizedElectricityPrice")
+        defaults.removeObject(forKey: includeIncentivesMigrationKey)
         super.tearDown()
     }
 
@@ -109,6 +113,57 @@ final class StorageServiceTests: XCTestCase {
         XCTAssertEqual(loadedInput?.dailyKm, secondInput.dailyKm)
         XCTAssertEqual(loadedInput?.ownershipYears, secondInput.ownershipYears)
         XCTAssertEqual(loadedInput?.scenario, secondInput.scenario)
+    }
+
+    // MARK: - includeIncentives default-off migration
+
+    func testMigrateIncludeIncentives_SavedTrueBecomesFalseOnce() {
+        let service = StorageService.shared
+        let defaults = UserDefaults.standard
+
+        var legacy = UserInput(
+            dailyKm: 12_000,
+            hasHomeCharging: true,
+            areaType: .urban,
+            fuelPrice: 1.7,
+            ownershipYears: 5,
+            includeIncentives: true
+        )
+        service.saveUserInput(legacy)
+        XCTAssertTrue(service.loadLastUserInput()?.includeIncentives == true)
+
+        defaults.removeObject(forKey: includeIncentivesMigrationKey)
+        service.migrateIncludeIncentivesDefaultOffIfNeeded()
+
+        XCTAssertFalse(service.loadLastUserInput()?.includeIncentives ?? true)
+        XCTAssertTrue(defaults.bool(forKey: includeIncentivesMigrationKey))
+
+        // After migration, an explicit user opt-in must not be flipped again.
+        legacy.includeIncentives = true
+        service.saveUserInput(legacy)
+        service.migrateIncludeIncentivesDefaultOffIfNeeded()
+        XCTAssertTrue(service.loadLastUserInput()?.includeIncentives == true)
+    }
+
+    func testMigrateIncludeIncentives_AlreadyFalse_OnlySetsFlag() {
+        let service = StorageService.shared
+        let defaults = UserDefaults.standard
+
+        let input = UserInput(
+            dailyKm: 10_000,
+            hasHomeCharging: false,
+            areaType: .mixed,
+            fuelPrice: 1.6,
+            ownershipYears: 4,
+            includeIncentives: false
+        )
+        service.saveUserInput(input)
+        defaults.removeObject(forKey: includeIncentivesMigrationKey)
+
+        service.migrateIncludeIncentivesDefaultOffIfNeeded()
+
+        XCTAssertFalse(service.loadLastUserInput()?.includeIncentives ?? true)
+        XCTAssertTrue(defaults.bool(forKey: includeIncentivesMigrationKey))
     }
 
     // MARK: - Onboarding Tests

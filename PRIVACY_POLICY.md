@@ -1,6 +1,6 @@
 # Privacy Policy — EVforME?
 
-**Last updated:** 20 September 2026  
+**Last updated:** 8 October 2026  
 **App:** EVforME? (iOS)
 
 This policy describes how the EVforME? app handles information. It is written for App Store review and for people using the app in Italy and the EU.

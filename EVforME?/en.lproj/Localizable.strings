@@ -91,7 +91,7 @@
 "get_free_report" = "Export PDF report";
 "talk_to_advisor" = "Talk to an advisor";
 "lead_sheet_title" = "Free EV consultation";
-"lead_sheet_subtitle" = "Leave your name, email and city — we’ll follow up for a free EV consultation.";
+"lead_sheet_subtitle" = "Leave your name, email and city if you want an advisor to contact you. We only send this if you consent and submit.";
 "lead_name_placeholder" = "Name";
 "lead_email_placeholder" = "Email";
 "lead_city_placeholder" = "City";
@@ -325,8 +325,8 @@
 "purchase_prices_verdict_note" = "Does not decide yes/no: the verdict stays on energy, road tax and servicing (older cars cost more to run). List price is only a payback estimate if you are buying.";
 "source_purchase_price_label" = "Current car (€)";
 "target_purchase_price_label" = "EV target (€)";
-"include_incentives_toggle" = "Include IT incentive estimate";
-"include_incentives_hint" = "Adds a rough purchase bonus (not legal advice). EV tax in catalog is often already low/zero.";
+"include_incentives_toggle" = "Include IT incentive estimate (off by default)";
+"include_incentives_hint" = "Off by default: 2025 MASE/PNRR rules (ISEE, scrappage, FUA) are not fully modellable here. Verify on the official site before enabling. Not legal advice.";
 "comparison_intent_section_title" = "What are you comparing?";
 "comparison_intent_purchase_title" = "I’m buying (list price + incentives)";
 "comparison_intent_purchase_subtitle" = "Shows a list-price payback estimate; the verdict still uses operating costs only (not the sticker price).";
@@ -335,7 +335,7 @@
 "comparison_intent_owned_reason" = "Opex-only mode: list-price premium is treated as sunk cost.";
 "opex_savings_only_reason" = "About €%d/year less to run — no purchase break-even in this mode.";
 "incentives_included_reason" = "Includes ~€%d purchase-incentive estimate.";
-"incentives_transparency_note" = "Incentives are simplified IT estimates; check official rules for your region and income band.";
+"incentives_transparency_note" = "Incentives are illustrative only — verify on the official MASE/MIMIT site (ISEE, scrappage, fund availability). Not added to the verdict unless you enable the toggle.";
 "sources_section_title" = "Where numbers come from";
 "source_catalog_note" = "Vehicle figures: quality catalog downloaded from the internet on every open (bundled seed fallback). Prices: MIMIT + Eurostat.";
 "source_prices_note" = "Energy prices: refreshed on each app open from MIMIT (fuel) and Eurostat (electricity); cached if offline. You can still override sliders.";
@@ -363,7 +363,10 @@
 "yearly_km_value" = "%d km/year";
 "phev_blend_reason" = "PHEV modeled as a mix of electric + fuel km (higher electric share with home charging).";
 "insurance_included_reason" = "Yearly costs include a simplified insurance estimate from list price and km.";
-"lead_saved_locally" = "Request saved on this device. We’ll follow up once advisor contact is available.";
+"lead_saved_locally" = "Request kept on this device only — it was not sent (no contact channel configured).";
+"lead_send_unavailable" = "Contact form is not available right now — nothing was sent.";
+"lead_consent_required" = "Turn on consent to send your request.";
+"verdict_opex_only_under_headline" = "Yes/No is on running costs only (energy, tax, maintenance, insurance). Purchase price is separate.";
 "lead_sent_remote" = "Request sent. An advisor will contact you.";
 "lead_send_failed" = "Couldn’t send. Please try again shortly.";
 "tco_extras_title" = "Insurance & residual value";
@@ -441,8 +444,8 @@
 
 /* Privacy */
 "privacy_policy_title" = "Privacy";
-"privacy_policy_updated" = "Updated: 20 September 2026";
-"privacy_policy_body" = "EVforME? estimates on-device whether an electric or plug-in hybrid car may fit you.\n\nKept on your phone: km, prices, chosen vehicles, scenario history, widget/Live Activity snapshots.\n\nSticker photos: used on-device only to read consumption figures; not uploaded for that feature.\n\nLocation (optional): only when you open Nearby chargers, and only While Using the App, to center a MapKit search. Location is not sent to an EVforME backend and is not tracked in the background.\n\nNetwork (optional): vehicle catalog, public energy prices, Apple Maps search results, analytics or lead webhook only if configured. In a typical build, analytics/leads stay local when those URLs are empty.\n\nWe do not sell data and do not use advertising trackers.\n\nAdvisor form: name/email/city only if you submit them with consent.\n\nYou can revoke photo/location access in iOS Settings, skip the lead form, or delete the app to remove local data.\n\nApp Store Connect also needs a public HTTPS URL with the full policy (see PRIVACY_POLICY.md in the repo).";
+"privacy_policy_updated" = "Updated: 8 October 2026";
+"privacy_policy_body" = "EVforME? estimates on-device whether an electric or plug-in hybrid car may fit you.\n\nKept on your phone: km, prices, chosen vehicles, scenario history, widget/Live Activity snapshots.\n\nSticker photos: used on-device only to read consumption figures; not uploaded for that feature.\n\nLocation (optional): only when you open Nearby chargers, and only While Using the App, to center a MapKit search. Location is not sent to an EVforME backend and is not tracked in the background.\n\nNetwork (optional): vehicle catalog, public energy prices, Apple Maps search results, analytics or lead webhook only if configured. In a typical build, analytics/leads stay local when those URLs are empty.\n\nWe do not sell data and do not use advertising trackers.\n\nAdvisor form: name/email/city only if you submit them with consent.\n\nYou can revoke photo/location access in iOS Settings, skip the lead form, or delete the app to remove local data.\n\nApp Store Connect also needs a public HTTPS privacy URL; open it from the button below when available.";
 "privacy_policy_open_web" = "Open policy on the web";
 
 /* Polish extras */

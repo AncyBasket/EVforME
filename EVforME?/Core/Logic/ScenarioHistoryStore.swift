@@ -90,7 +90,7 @@ extension PersistedScenarioInput: Codable {
         scenarioRaw = try c.decode(Double.self, forKey: .scenarioRaw)
         sourcePurchasePrice = try c.decodeIfPresent(Double.self, forKey: .sourcePurchasePrice) ?? 12_000
         targetPurchasePrice = try c.decodeIfPresent(Double.self, forKey: .targetPurchasePrice) ?? 32_000
-        includeIncentives = try c.decodeIfPresent(Bool.self, forKey: .includeIncentives) ?? true
+        includeIncentives = try c.decodeIfPresent(Bool.self, forKey: .includeIncentives) ?? false
         comparisonIntentRaw = try c.decodeIfPresent(String.self, forKey: .comparisonIntentRaw)
             ?? ComparisonIntent.alreadyOwned.rawValue
         tripProfileRaw = try c.decodeIfPresent(String.self, forKey: .tripProfileRaw) ?? TripProfile.custom.rawValue
