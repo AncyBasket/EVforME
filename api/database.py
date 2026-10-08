@@ -9,11 +9,8 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DB_PATH = REPO_ROOT / "api" / "vehicle_catalog.db"
 SEED_PREFERRED = [
+    # Unico seed di produzione (altri seed restano in repo ma non sono sorgente API).
     REPO_ROOT / "EVforME?" / "Data" / "vehicles.seed.quality.json",
-    REPO_ROOT / "EVforME?" / "Data" / "vehicles.seed.wltp_enriched.json",
-    REPO_ROOT / "EVforME?" / "Data" / "vehicles.seed.nhtsa_enriched.with_images.json",
-    REPO_ROOT / "EVforME?" / "Data" / "vehicles.seed.nhtsa_enriched.json",
-    REPO_ROOT / "EVforME?" / "Data" / "vehicles.seed.json",
 ]
 STATE_PATH = REPO_ROOT / "api" / "catalog_state.json"
 

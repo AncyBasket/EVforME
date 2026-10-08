@@ -213,32 +213,100 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         }
     }
 
-    func testModel3_RangeNotPlaceholder350() {
+    func testModel3_RangeNotPlaceholder350_OrNilIfUnknown() {
         let m3 = VehicleCatalogService.shared.vehicle(by: "tesla-model-3-2023")
             ?? VehicleCatalogService.shared.vehicle(by: "tesla-model-3-2024")
         XCTAssertNotNil(m3)
-        XCTAssertNotEqual(m3?.wltpRangeKm, 350)
-        XCTAssertGreaterThanOrEqual(m3?.wltpRangeKm ?? 0, 450)
-        XCTAssertLessThanOrEqual(m3?.wltpRangeKm ?? 0, 580)
+        // Interpolated +N km/year ranges are cleared (nil); never keep flat 350.
+        if let range = m3?.wltpRangeKm {
+            XCTAssertNotEqual(range, 350)
+            XCTAssertGreaterThanOrEqual(range, 450)
+            XCTAssertLessThanOrEqual(range, 580)
+        }
     }
 
-    func testQ4Etron_RangeNotPlaceholder350() {
+    func testQ4Etron_RangeNotPlaceholder350_OrNilIfUnknown() {
         let q4 = VehicleCatalogService.shared.vehicle(by: "audi-q4-e-tron-2021")
         XCTAssertNotNil(q4)
-        XCTAssertNotEqual(q4?.wltpRangeKm, 350)
-        XCTAssertGreaterThanOrEqual(q4?.wltpRangeKm ?? 0, 380)
-        XCTAssertLessThanOrEqual(q4?.wltpRangeKm ?? 0, 520)
+        if let range = q4?.wltpRangeKm {
+            XCTAssertNotEqual(range, 350)
+            XCTAssertGreaterThanOrEqual(range, 380)
+            XCTAssertLessThanOrEqual(range, 520)
+        }
     }
 
-    func testEQV_RangeMayStayNearVanBand() {
+    func testEQV_RangeMayStayNearVanBand_OrNil() {
         let eqv = VehicleCatalogService.shared.vehicle(by: "mercedes-benz-eqv-2020")
             ?? VehicleCatalogService.shared.sourceVehicles().first {
                 $0.brand.localizedCaseInsensitiveContains("Mercedes") && $0.model.localizedCaseInsensitiveContains("EQV")
             }
         XCTAssertNotNil(eqv)
-        let range = eqv?.wltpRangeKm ?? 0
-        XCTAssertGreaterThanOrEqual(range, 250)
-        XCTAssertLessThanOrEqual(range, 360)
+        if let range = eqv?.wltpRangeKm {
+            XCTAssertGreaterThanOrEqual(range, 250)
+            XCTAssertLessThanOrEqual(range, 360)
+        }
+    }
+
+    func testCupraBorn_IsEVWithRealisticEnergy() {
+        let born = VehicleCatalogService.shared.vehicle(by: "cupra-born-2023")
+        XCTAssertNotNil(born)
+        XCTAssertEqual(born?.powertrain, .ev)
+        XCTAssertNil(born?.fuelKind)
+        let k100 = (born?.resolvedEnergyKWhPerKm ?? 0) * 100
+        XCTAssertGreaterThanOrEqual(k100, 14.5)
+        XCTAssertLessThanOrEqual(k100, 17.5)
+    }
+
+    func testAriyaVariants_AllEV() {
+        let ariya = VehicleCatalogService.shared.vehicles.filter {
+            $0.brand.localizedCaseInsensitiveContains("Nissan") && $0.model.localizedCaseInsensitiveContains("Ariya")
+        }
+        XCTAssertFalse(ariya.isEmpty)
+        XCTAssertTrue(ariya.allSatisfy { $0.powertrain == .ev })
+        XCTAssertTrue(ariya.allSatisfy { $0.fuelKind == nil })
+    }
+
+    func testIoniq2016_22_HybridIsHEVNotPetrolICE() {
+        let base = VehicleCatalogService.shared.vehicle(by: "hyundai-ioniq-2018")
+        XCTAssertEqual(base?.powertrain, .hev)
+        let l100 = (base?.fuelConsumptionLPerKm ?? 0) * 100
+        XCTAssertGreaterThanOrEqual(l100, 3.5)
+        XCTAssertLessThanOrEqual(l100, 5.0)
+    }
+
+    func testCatalog_NoCorollaMatrix() {
+        let matrix = VehicleCatalogService.shared.vehicles.filter {
+            $0.model.localizedCaseInsensitiveContains("Matrix")
+        }
+        XCTAssertTrue(matrix.isEmpty)
+    }
+
+    func testCatalog_NoMonotonicConstantStepEVRanges() {
+        let evs = VehicleCatalogService.shared.vehicles.filter { $0.powertrain == .ev && $0.wltpRangeKm != nil }
+        let grouped = Dictionary(grouping: evs) { "\($0.brand.lowercased())|\($0.model.lowercased())" }
+        for (_, rows) in grouped {
+            let sorted = rows.sorted { $0.year < $1.year }
+            guard sorted.count >= 3 else { continue }
+            var consecutive = true
+            var deltas: [Int] = []
+            for i in 0..<(sorted.count - 1) {
+                if sorted[i + 1].year - sorted[i].year != 1 {
+                    consecutive = false
+                    break
+                }
+                deltas.append((sorted[i + 1].wltpRangeKm ?? 0) - (sorted[i].wltpRangeKm ?? 0))
+            }
+            guard consecutive, let first = deltas.first else { continue }
+            XCTAssertFalse(
+                deltas.allSatisfy { $0 == first && first != 0 },
+                "Interpolated +\(first) km/year for \(sorted.first?.brand ?? "") \(sorted.first?.model ?? "")"
+            )
+        }
+    }
+
+    func testCatalog_NoYearBeyond2026() {
+        let future = VehicleCatalogService.shared.vehicles.filter { $0.year > 2026 }
+        XCTAssertTrue(future.isEmpty, "Years > 2026: \(future.map(\.id))")
     }
 
     func testCatalog_PassengerEVsNotMajorityPlaceholder350() {

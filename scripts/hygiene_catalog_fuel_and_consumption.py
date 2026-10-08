@@ -161,6 +161,49 @@ BANNED_NON_EU_MODELS = {
     ("tesla", "cybertruck"),
 }
 
+# Brand/model needles that must never be powertrain ICE.
+KNOWN_EV_ICE_FORBIDDEN = (
+    ("tesla", None),
+    ("polestar", None),
+    ("cupra", "born"),
+    ("volkswagen", "id."),
+    ("nissan", "ariya"),
+    ("peugeot", "e-208"),
+    ("citroen", "ë-c3"),
+    ("citroën", "ë-c3"),
+    ("citroen", "e-c3"),
+    ("citroën", "e-c3"),
+    ("mg", "mg4"),
+    ("mg", "4"),
+    ("byd", "dolphin"),
+    ("leapmotor", None),
+    ("fiat", "500e"),
+    ("fiat", "600e"),
+)
+
+
+def _is_forbidden_ice_ev(brand: str, model: str) -> bool:
+    for b, m in KNOWN_EV_ICE_FORBIDDEN:
+        if b in brand and (m is None or m in model):
+            # MG "4" is noisy — require mg4 / mg 4 / model starts with 4 electric-ish
+            if b == "mg" and m == "4":
+                compact = model.replace(" ", "")
+                if "mg4" in compact or model.strip() in {"4", "mg4"}:
+                    return True
+                continue
+            return True
+    return False
+
+
+def _constant_step_ranges(year_range_pairs: list[tuple[int, int]]) -> bool:
+    if len(year_range_pairs) < 3:
+        return False
+    rows = sorted(year_range_pairs)
+    if any(rows[i + 1][0] - rows[i][0] != 1 for i in range(len(rows) - 1)):
+        return False
+    deltas = [rows[i + 1][1] - rows[i][1] for i in range(len(rows) - 1)]
+    return len(set(deltas)) == 1 and deltas[0] != 0
+
 
 def is_junk(row: dict) -> bool:
     blob = f"{row.get('brand', '')} {row.get('model', '')}".lower()
@@ -615,9 +658,10 @@ def process(path: Path) -> dict:
 
 
 def validate_catalog(rows: list[dict]) -> list[str]:
-    """Check hard invariants for Fase 1 (EV fuelKind, consumo bands, years, ids)."""
+    """Check hard invariants (fuelKind, consumo, years, ids, no ICE-as-EV, no +N range interpolations)."""
     errors: list[str] = []
     seen_ids: set[str] = set()
+    ev_ranges: dict[tuple[str, str], list[tuple[int, int]]] = {}
     for r in rows:
         rid = r.get("id")
         if not rid:
@@ -631,11 +675,17 @@ def validate_catalog(rows: list[dict]) -> list[str]:
         pt = str(r.get("powertrain", "")).lower()
         fk = r.get("fuelKind")
         yr = int(r.get("year") or 0)
+        if yr > 2026:
+            errors.append(f"year beyond 2026: {rid}")
         if (brand, model) in BANNED_NON_EU_MODELS:
             errors.append(f"banned non-EU model still present: {rid}")
+        if "corolla matrix" in model or rid.startswith("toyota-corolla-matrix-"):
+            errors.append(f"non-existent Corolla Matrix still present: {rid}")
         rng = KNOWN_EU_YEAR_RANGES.get((brand, model))
         if rng and (yr < rng[0] or yr > rng[1]):
             errors.append(f"year out of EU range {rid}: {yr} not in {rng}")
+        if pt == "ice" and _is_forbidden_ice_ev(brand, model):
+            errors.append(f"known EV classified as ICE: {rid}")
         if pt == "ev":
             if fk in ("petrol", "diesel", "lpg", "cng"):
                 errors.append(f"EV with liquid fuelKind {rid}: {fk}")
@@ -646,6 +696,8 @@ def validate_catalog(rows: list[dict]) -> list[str]:
             # Passenger tipico 12–28; van/SUV grandi fino a ~32.
             if not (12.0 <= k100 <= 32.0):
                 errors.append(f"EV energy out of band {rid}: {k100:.1f} kWh/100")
+            if r.get("wltpRangeKm") is not None:
+                ev_ranges.setdefault((brand, model), []).append((yr, int(r["wltpRangeKm"])))
         if pt == "ice":
             l100 = float(r.get("fuelConsumptionLPerKm") or 0) * 100
             if fk == "cng":
@@ -670,6 +722,12 @@ def validate_catalog(rows: list[dict]) -> list[str]:
                 errors.append(f"PHEV fuel out of band {rid}: {l100:.1f}")
             if e100 and not (10.0 <= e100 <= 32.0):
                 errors.append(f"PHEV energy out of band {rid}: {e100:.1f}")
+    for (brand, model), pairs in ev_ranges.items():
+        if _constant_step_ranges(pairs):
+            step = sorted(pairs)[1][1] - sorted(pairs)[0][1]
+            errors.append(
+                f"EV range grows by constant +{step} km/year (interpolated): {brand} {model}"
+            )
     return errors
 
 

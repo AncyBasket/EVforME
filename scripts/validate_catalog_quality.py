@@ -22,10 +22,7 @@ def main() -> int:
     repo = Path(__file__).resolve().parents[1]
     candidates = [
         repo / "EVforME?" / "Data" / "vehicles.seed.quality.json",
-        repo / "EVforME?" / "Data" / "vehicles.seed.wltp_enriched.json",
-        repo / "EVforME?" / "Data" / "vehicles.seed.nhtsa_enriched.with_images.json",
-        repo / "EVforME?" / "Data" / "vehicles.seed.nhtsa_enriched.json",
-        repo / "EVforME?" / "Data" / "vehicles.seed.json",
+        repo / "EVforME?" / "Data" / "vehicles.seed.quality.json",
     ]
     path = next((p for p in candidates if p.exists()), candidates[-1])
 
