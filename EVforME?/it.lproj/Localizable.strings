@@ -116,6 +116,8 @@
 "verdict_opex_only_under_headline" = "Il Sì/No riguarda solo i costi di gestione (energia, bollo, manutenzione, RC). Il prezzo d’acquisto è a parte.";
 "lead_sent_remote" = "Richiesta inviata. Un advisor ti ricontatterà.";
 "lead_send_failed" = "Invio non riuscito. Riprova tra poco.";
+"market_picker_label" = "Paese";
+"market_other_country" = "Altro / resto del mondo";
 "validation_target_vehicle_required" = "Seleziona il veicolo elettrificato di confronto";
 "break_even_months_reason" = "Circa %d mesi di risparmio operativo per recuperare il maggior costo di acquisto (elettrificata − attuale − incentivi).";
 "break_even_not_reached_reason" = "Con questi prezzi, i soli costi operativi non ripagano il maggior costo di acquisto.";
@@ -156,8 +158,6 @@
 /* Market / paese */
 "market_section_title" = "Il tuo paese";
 "market_section_subtitle" = "I costi di manutenzione cambiano per mercato. Precompilato dalla regione del dispositivo — puoi cambiarlo. La posizione serve solo dopo per le Colonnine vicine.";
-"market_picker_label" = "Paese";
-"market_other_country" = "Altro / resto del mondo";
 "market_maintenance_source" = "%@: manutenzione media ~€%d ICE · ~€%d EV /anno (15.000 km)";
 "non_italy_data_honesty_banner" = "Carburante, elettricità, bollo, RC e incentivi sono stime italiane; per il tuo paese cambia solo la manutenzione. Inserisci i tuoi prezzi.";
 
@@ -378,6 +378,11 @@
 "quick_start_subtitle" = "Km, ricarica casa, tipo di tragitti — poi affini i prezzi sul banco.";
 "quick_start_continue" = "Apri il banco";
 "quick_start_skip_full" = "Salta intro";
+"quick_start_thirty_second_title" = "Risposta in 30 secondi";
+"quick_start_thirty_second_hint" = "Scegliamo un’EV sensata dal catalogo. Puoi personalizzare prezzi, scenari e il confronto completo quando vuoi.";
+"quick_start_current_car" = "La tua auto attuale";
+"quick_start_see_verdict" = "Vedi il verdetto";
+"quick_start_customize" = "Personalizza input completi";
 "widget_bump_fuel_title" = "Benzina +€0,10";
 "sticker_override_applied_reason" = "Usa i consumi dallo sticker OCR al posto delle medie catalogo, se presenti.";
 "sticker_clear_override" = "Rimuovi override sticker";

@@ -96,18 +96,16 @@ struct MainShellView: View {
         }
         .task { await catalogSetup() }
         .fullScreenCover(isPresented: $showOnboarding) {
-            OnboardingView(
+            QuickStartView(
                 userInput: $userInput,
-                onContinue: {
-                    StorageService.shared.saveUserInput(userInput)
-                    StorageService.shared.markOnboardingSeen()
-                    GrowthTracker.shared.track(.onboardingCompleted, ["path": "quick_start"])
+                onVerdict: { scenario in
                     showOnboarding = false
+                    onSimulate(scenario)
                 },
-                onSkip: {
+                onCustomize: {
                     StorageService.shared.saveUserInput(userInput)
                     StorageService.shared.markOnboardingSeen()
-                    GrowthTracker.shared.track(.onboardingCompleted, ["path": "skip"])
+                    GrowthTracker.shared.track(.onboardingCompleted, ["path": "customize"])
                     showOnboarding = false
                 }
             )

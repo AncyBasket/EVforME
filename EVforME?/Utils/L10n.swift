@@ -507,6 +507,11 @@ enum L10n {
     static var quickStartSubtitle: String { string("quick_start_subtitle") }
     static var quickStartContinue: String { string("quick_start_continue") }
     static var quickStartSkipFull: String { string("quick_start_skip_full") }
+    static var quickStartThirtySecondTitle: String { string("quick_start_thirty_second_title") }
+    static var quickStartThirtySecondHint: String { string("quick_start_thirty_second_hint") }
+    static var quickStartCurrentCar: String { string("quick_start_current_car") }
+    static var quickStartSeeVerdict: String { string("quick_start_see_verdict") }
+    static var quickStartCustomize: String { string("quick_start_customize") }
     static var widgetBumpFuelTitle: String { string("widget_bump_fuel_title") }
     static var stickerOverrideAppliedReason: String { string("sticker_override_applied_reason") }
     static var stickerClearOverride: String { string("sticker_clear_override") }

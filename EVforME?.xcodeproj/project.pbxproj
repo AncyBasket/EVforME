@@ -66,6 +66,30 @@
 		A1B2C3D4EF2BAC4D00771010 /* Exceptions for "EVforME?" folder in "EVforME?" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Data/external/co2cars_app_home.html,
+				Data/external/co2cars_index_bundle.js,
+				Data/external/eea_co2_cars_landing.html,
+				Data/external/eea_co2_cars_metadata.json,
+				Data/external/eea_discodata_home.html,
+				Data/external/eea_doi_landing.html,
+				Data/external/eea_record_2024.json,
+				Data/external/eea_wltp_enrichment_manifest.json,
+				Data/external/epa_phev_models.json,
+				Data/external/fetch_manifest.json,
+				Data/external/nhtsa_getallmakes.json,
+				Data/external/nhtsa_models_top120_makes.json,
+				Data/external/nhtsa_seed_candidates.json,
+				Data/external/nhtsa_suggested_models_filtered.json,
+				Data/external/official_energy_costs_manifest.json,
+				Data/external/public_sources_snapshot.json,
+				Data/external/seed_vs_nhtsa_report.json,
+				Data/external/vca_attempted_links.json,
+				Data/external/vca_downloads_listing.html,
+				Data/external/vca_latest_raw.bin,
+				Data/external/vca_latest_response.html,
+				Data/external/vehicle_image_map_quattroruote.json,
+				Data/external/vehicle_image_map.json,
+				Data/external/wikimedia_image_manifest.json,
 				Info.plist,
 			);
 			target = 65B857E12F2BAC4C00771010 /* EVforME? */;

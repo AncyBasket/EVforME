@@ -14,6 +14,9 @@ final class OfficialCostService {
     private enum Keys {
         static let cachedCosts = "evforme.officialCosts.cached.v1"
         static let lastFetchAt = "evforme.officialCosts.lastFetchAt"
+        static let mimitETag = "evforme.mimit.csv.etag"
+        static let mimitLastModified = "evforme.mimit.csv.lastModified"
+        static let mimitFetchedDay = "evforme.mimit.csv.fetchedDay"
     }
 
     private let defaults = UserDefaults.standard
@@ -28,6 +31,7 @@ final class OfficialCostService {
     private init() {}
 
     /// Sempre: override API (opz.) → fonti pubbliche → cache → bundle.
+    /// MIMIT CSV: al massimo 1 download/giorno (cache file + ETag/If-Modified-Since).
     func fetchLatest() async -> OfficialEnergyCosts? {
         // Under XCTest the app host also launches; skip huge MIMIT CSV to avoid
         // flaky malloc crashes on older simulator runtimes (e.g. iOS 18.x).
@@ -45,6 +49,23 @@ final class OfficialCostService {
             return cached
         }
         return loadBundled()
+    }
+
+    private var mimitCSVCacheURL: URL {
+        let dir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
+            ?? FileManager.default.temporaryDirectory
+        let folder = dir.appendingPathComponent("EVforME", isDirectory: true)
+        try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        return folder.appendingPathComponent("mimit_prezzo_alle_8.csv")
+    }
+
+    private var todayDayKey: String {
+        let f = DateFormatter()
+        f.calendar = Calendar(identifier: .gregorian)
+        f.locale = Locale(identifier: "en_US_POSIX")
+        f.timeZone = TimeZone(secondsFromGMT: 0)
+        f.dateFormat = "yyyy-MM-dd"
+        return f.string(from: Date())
     }
 
     var lastSuccessfulFetchDate: Date? {
@@ -110,72 +131,130 @@ final class OfficialCostService {
     }
 
     /// MIMIT prezzo_alle_8.csv — mediana benzina/gasolio/GPL/metano self-service.
+    /// Max 1 download/giorno; parse off-main; fallback a cache file.
     private func fetchMIMITFuelMedians() async -> (
         petrol: Double?,
         diesel: Double?,
         lpg: Double?,
         cng: Double?
     ) {
-        guard let url = URL(string: Defaults.mimitFuelPricesCSVURL) else {
-            return (nil, nil, nil, nil)
+        let cacheURL = mimitCSVCacheURL
+        let day = todayDayKey
+        if defaults.string(forKey: Keys.mimitFetchedDay) == day,
+           FileManager.default.fileExists(atPath: cacheURL.path),
+           let cachedData = try? Data(contentsOf: cacheURL) {
+            return await parseMIMITMediansOffMain(cachedData)
         }
+
+        guard let url = URL(string: Defaults.mimitFuelPricesCSVURL) else { return (nil, nil, nil, nil) }
         do {
-            let (data, response) = try await session.data(from: url)
-            guard let http = response as? HTTPURLResponse, (200...299).contains(http.statusCode),
-                  let text = String(data: data, encoding: .utf8) ?? String(data: data, encoding: .isoLatin1)
-            else {
-                ErrorHandler.shared.handleAppError(
-                    .fuelPriceFetchFailed,
-                    context: .network
-                )
-                return (nil, nil, nil, nil)
+            var request = URLRequest(url: url)
+            request.cachePolicy = .reloadIgnoringLocalCacheData
+            if let etag = defaults.string(forKey: Keys.mimitETag), !etag.isEmpty {
+                request.setValue(etag, forHTTPHeaderField: "If-None-Match")
+            }
+            if let lm = defaults.string(forKey: Keys.mimitLastModified), !lm.isEmpty {
+                request.setValue(lm, forHTTPHeaderField: "If-Modified-Since")
             }
 
-            var petrol: [Double] = []
-            var diesel: [Double] = []
-            var lpg: [Double] = []
-            var cng: [Double] = []
-            let lines = text.split(whereSeparator: \.isNewline)
-            guard lines.count > 1 else { return (nil, nil, nil, nil) }
-            for line in lines.dropFirst(2) {
-                let cols = line.split(separator: "|", omittingEmptySubsequences: false).map(Substring.init)
-                guard cols.count >= 4 else { continue }
-                let fuelName = cols[1].trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-                guard let parsed = parseMIMITRow(cols) else { continue }
-                guard parsed.isSelf else { continue }
-                if fuelName == "benzina", (0.8...3.5).contains(parsed.price) {
-                    petrol.append(parsed.price)
-                } else if fuelName == "gasolio" || fuelName.contains("gasolio"), (0.8...3.5).contains(parsed.price) {
-                    diesel.append(parsed.price)
-                } else if fuelName == "gpl" || fuelName.contains("gpl"), (0.4...2.0).contains(parsed.price) {
-                    lpg.append(parsed.price)
-                } else if fuelName.contains("metano"), (0.6...2.5).contains(parsed.price) {
-                    cng.append(parsed.price)
-                }
+            let (data, response) = try await session.data(for: request)
+            guard let http = response as? HTTPURLResponse else {
+                return await parseMIMITMediansFromDiskFallback(cacheURL)
             }
-            func median(_ values: [Double]) -> Double? {
-                guard !values.isEmpty else { return nil }
-                let sorted = values.sorted()
-                return sorted[sorted.count / 2]
+
+            if http.statusCode == 304,
+               let cachedData = try? Data(contentsOf: cacheURL) {
+                defaults.set(day, forKey: Keys.mimitFetchedDay)
+                return await parseMIMITMediansOffMain(cachedData)
             }
-            return (median(petrol), median(diesel), median(lpg), median(cng))
+
+            guard (200...299).contains(http.statusCode) else {
+                ErrorHandler.shared.handleAppError(.fuelPriceFetchFailed, context: .network)
+                return await parseMIMITMediansFromDiskFallback(cacheURL)
+            }
+
+            try? data.write(to: cacheURL, options: .atomic)
+            if let etag = http.value(forHTTPHeaderField: "ETag") {
+                defaults.set(etag, forKey: Keys.mimitETag)
+            }
+            if let lm = http.value(forHTTPHeaderField: "Last-Modified") {
+                defaults.set(lm, forKey: Keys.mimitLastModified)
+            }
+            defaults.set(day, forKey: Keys.mimitFetchedDay)
+            return await parseMIMITMediansOffMain(data)
         } catch let urlError as URLError {
-            ErrorHandler.shared.handleAppError(
-                urlError.toAppError,
-                context: .network
-            )
-            return (nil, nil, nil, nil)
+            ErrorHandler.shared.handleAppError(urlError.toAppError, context: .network)
+            return await parseMIMITMediansFromDiskFallback(cacheURL)
         } catch {
-            ErrorHandler.shared.handle(
-                error,
-                context: .network
-            )
-            return (nil, nil, nil, nil)
+            ErrorHandler.shared.handle(error, context: .network)
+            return await parseMIMITMediansFromDiskFallback(cacheURL)
         }
     }
 
-    private func parseMIMITRow(_ cols: [Substring]) -> (price: Double, isSelf: Bool)? {
-        // Colonne attese: …|descCarburante|prezzo|isSelf|…
+    private func parseMIMITMediansFromDiskFallback(_ cacheURL: URL) async -> (
+        petrol: Double?,
+        diesel: Double?,
+        lpg: Double?,
+        cng: Double?
+    ) {
+        guard let cachedData = try? Data(contentsOf: cacheURL) else { return (nil, nil, nil, nil) }
+        return await parseMIMITMediansOffMain(cachedData)
+    }
+
+    private func parseMIMITMediansOffMain(_ data: Data) async -> (
+        petrol: Double?,
+        diesel: Double?,
+        lpg: Double?,
+        cng: Double?
+    ) {
+        await withCheckedContinuation { continuation in
+            DispatchQueue.global(qos: .utility).async {
+                continuation.resume(returning: Self.parseMIMITFuelMedians(from: data))
+            }
+        }
+    }
+
+    /// Parsing MIMIT CSV (testabile). Colonne: …|descCarburante|prezzo|isSelf|…
+    static func parseMIMITFuelMedians(from data: Data) -> (
+        petrol: Double?,
+        diesel: Double?,
+        lpg: Double?,
+        cng: Double?
+    ) {
+        guard let text = String(data: data, encoding: .utf8) ?? String(data: data, encoding: .isoLatin1) else {
+            return (nil, nil, nil, nil)
+        }
+        var petrol: [Double] = []
+        var diesel: [Double] = []
+        var lpg: [Double] = []
+        var cng: [Double] = []
+        let lines = text.split(whereSeparator: \.isNewline)
+        guard lines.count > 1 else { return (nil, nil, nil, nil) }
+        for line in lines.dropFirst(2) {
+            let cols = line.split(separator: "|", omittingEmptySubsequences: false).map(Substring.init)
+            guard cols.count >= 4 else { continue }
+            let fuelName = cols[1].trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+            guard let parsed = parseMIMITRow(cols) else { continue }
+            guard parsed.isSelf else { continue }
+            if fuelName == "benzina", (0.8...3.5).contains(parsed.price) {
+                petrol.append(parsed.price)
+            } else if fuelName == "gasolio" || fuelName.contains("gasolio"), (0.8...3.5).contains(parsed.price) {
+                diesel.append(parsed.price)
+            } else if fuelName == "gpl" || fuelName.contains("gpl"), (0.4...2.0).contains(parsed.price) {
+                lpg.append(parsed.price)
+            } else if fuelName.contains("metano"), (0.6...2.5).contains(parsed.price) {
+                cng.append(parsed.price)
+            }
+        }
+        func median(_ values: [Double]) -> Double? {
+            guard !values.isEmpty else { return nil }
+            let sorted = values.sorted()
+            return sorted[sorted.count / 2]
+        }
+        return (median(petrol), median(diesel), median(lpg), median(cng))
+    }
+
+    private static func parseMIMITRow(_ cols: [Substring]) -> (price: Double, isSelf: Bool)? {
         guard cols.count >= 4 else { return nil }
         let priceRaw = cols[2].trimmingCharacters(in: .whitespacesAndNewlines)
             .replacingOccurrences(of: ",", with: ".")

@@ -17,6 +17,7 @@ final class VehicleCatalogService {
         static let remoteCatalogURL = "evforme.vehicleCatalog.remoteURL"
         static let cacheSeedVersion = "evforme.vehicleCatalog.cacheSeedVersion"
         static let vehicleCache = "evforme.vehicleCatalog.itemCache"
+        static let migratedToFile = "evforme.vehicleCatalog.migratedToFile.v1"
     }
 
     private let defaults = UserDefaults.standard
@@ -31,6 +32,7 @@ final class VehicleCatalogService {
         return URLSession(configuration: config)
     }()
 
+    /// Tutte le scritture passano da `applyCatalog` (@MainActor).
     private(set) var vehicles: [VehicleCatalogItem] = []
     private var vehicleIndexCache: [String: VehicleCatalogItem] = [:]
     private var sourceVehiclesCache: [VehicleCatalogItem]?
@@ -39,9 +41,35 @@ final class VehicleCatalogService {
     /// Scarta load async in volo quando i test forzano il seed bundlato.
     private var loadGeneration = 0
 
+    private var catalogCacheFileURL: URL {
+        let dir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
+            ?? FileManager.default.temporaryDirectory
+        let folder = dir.appendingPathComponent("EVforME", isDirectory: true)
+        try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        return folder.appendingPathComponent("vehicle_catalog_cache.json")
+    }
+
     private init() {
         // Load catalog asynchronously to avoid blocking app startup
         loadCatalogAsync()
+    }
+
+    @MainActor
+    private func applyCatalog(_ catalog: [VehicleCatalogItem]) {
+        vehicles = catalog
+        invalidateCaches()
+        NotificationCenter.default.post(name: .evVehicleCatalogDidUpdate, object: nil)
+    }
+
+    /// Applica il catalogo sul main immediatamente (test / reload sync).
+    private func applyCatalogSync(_ catalog: [VehicleCatalogItem]) {
+        if Thread.isMainThread {
+            MainActor.assumeIsolated { applyCatalog(catalog) }
+        } else {
+            DispatchQueue.main.sync {
+                MainActor.assumeIsolated { applyCatalog(catalog) }
+            }
+        }
     }
 
     private func loadCatalogAsync() {
@@ -49,22 +77,18 @@ final class VehicleCatalogService {
         let generation = loadGeneration
 
         cacheQueue.async { [weak self] in
-            guard let self = self else { return }
+            guard let self else { return }
             let startTime = CFAbsoluteTimeGetCurrent()
-
             let catalog = self.expandForTestingIfNeeded(self.ensureBuiltInElectrifiedOptions(self.loadCachedOrDefault()))
-
             let duration = (CFAbsoluteTimeGetCurrent() - startTime) * 1000
             AppLogger.shared.info("Catalog loaded with \(catalog.count) vehicles in \(String(format: "%.2f", duration))ms", category: .catalog)
 
-            DispatchQueue.main.async {
+            Task { @MainActor in
                 guard self.loadGeneration == generation else {
                     AppLogger.shared.debug("Skipping stale async catalog load", category: .catalog)
                     return
                 }
-                self.vehicles = catalog
-                self.invalidateCaches()
-                NotificationCenter.default.post(name: .evVehicleCatalogDidUpdate, object: nil)
+                self.applyCatalog(catalog)
             }
         }
     }
@@ -148,14 +172,45 @@ final class VehicleCatalogService {
         defaults.removeObject(forKey: Keys.cachedCatalog)
         defaults.removeObject(forKey: Keys.cacheSeedVersion)
         defaults.removeObject(forKey: Keys.lastUpdated)
-        vehicles = expandForTestingIfNeeded(ensureBuiltInElectrifiedOptions(loadCachedOrDefault()))
-        invalidateCaches()
+        defaults.removeObject(forKey: Keys.migratedToFile)
+        try? FileManager.default.removeItem(at: catalogCacheFileURL)
+        applyCatalogSync(expandForTestingIfNeeded(ensureBuiltInElectrifiedOptions(loadCachedOrDefault())))
     }
 
-    /// Attende il primo load async (deep link / shortcut a freddo).
-    /// Continuation / AsyncStream sul notification di load — niente timeout 30s.
-    func waitUntilLoaded() async {
-        if !vehicles.isEmpty { return }
+    /// True se il remote non è troppo piccolo rispetto al catalogo locale (`decoded + 50 < local` → reject).
+    static func shouldAcceptRemoteCatalog(decodedCount: Int, localCount: Int) -> Bool {
+        !(decodedCount + 50 < localCount)
+    }
+
+    /// Applica un payload JSON remoto se supera il controllo dimensione (usato dai test + refresh).
+    @discardableResult
+    func applyRemoteCatalogJSONIfAcceptable(_ data: Data) -> Bool {
+        guard let decoded = try? JSONDecoder().decode([VehicleCatalogItem].self, from: data)
+            .filter({ !$0.isJunkCatalogEntry }),
+            !decoded.isEmpty
+        else {
+            return false
+        }
+        let localCount = max(vehicles.count, loadBundledSeedCatalog()?.count ?? 0)
+        guard Self.shouldAcceptRemoteCatalog(decodedCount: decoded.count, localCount: localCount) else {
+            AppLogger.shared.warning(
+                "Remote catalog smaller (\(decoded.count) < \(localCount)) — keeping offline catalog",
+                category: .catalog
+            )
+            return false
+        }
+        let newVehicles = expandForTestingIfNeeded(ensureBuiltInElectrifiedOptions(decoded))
+        persistCatalogToFile(newVehicles)
+        defaults.set(Date().timeIntervalSince1970, forKey: Keys.lastUpdated)
+        defaults.set(seedVersion, forKey: Keys.cacheSeedVersion)
+        applyCatalogSync(newVehicles)
+        return true
+    }
+
+    /// Attende il primo load async (deep link / shortcut a freddo). Timeout default 10s.
+    @discardableResult
+    func waitUntilLoaded(timeoutSeconds: TimeInterval = 10) async -> Bool {
+        if !vehicles.isEmpty { return true }
         let stream = AsyncStream<Void> { continuation in
             if !self.vehicles.isEmpty {
                 continuation.yield(())
@@ -180,8 +235,21 @@ final class VehicleCatalogService {
                 continuation.finish()
             }
         }
-        for await _ in stream {
-            break
+        let timeoutNs = UInt64(max(0.1, timeoutSeconds) * 1_000_000_000)
+        return await withTaskGroup(of: Bool.self) { group in
+            group.addTask {
+                for await _ in stream {
+                    return true
+                }
+                return !self.vehicles.isEmpty
+            }
+            group.addTask {
+                try? await Task.sleep(nanoseconds: timeoutNs)
+                return false
+            }
+            let first = await group.next() ?? false
+            group.cancelAll()
+            return first
         }
     }
     
@@ -230,41 +298,19 @@ final class VehicleCatalogService {
                 return
             }
 
-            let decoded = try JSONDecoder().decode([VehicleCatalogItem].self, from: data)
-                .filter { !$0.isJunkCatalogEntry }
-            guard !decoded.isEmpty else {
-                AppLogger.shared.warning("Empty remote catalog — keeping offline catalog", category: .catalog)
-                return
-            }
-
             // Non peggiorare il catalogo locale con un remote più piccolo/incompleto.
-            let localCount = max(vehicles.count, loadBundledSeedCatalog()?.count ?? 0)
-            if decoded.count + 50 < localCount {
-                AppLogger.shared.warning(
-                    "Remote catalog smaller (\(decoded.count) < \(localCount)) — keeping offline catalog",
-                    category: .catalog
-                )
+            let beforeCount = vehicles.count
+            let accepted = applyRemoteCatalogJSONIfAcceptable(data)
+            guard accepted else {
+                if beforeCount > 0 {
+                    return
+                }
+                AppLogger.shared.warning("Empty or rejected remote catalog — keeping offline catalog", category: .catalog)
                 return
             }
 
-            AppLogger.shared.info("Applying remote catalog (\(decoded.count) vehicles)", category: .catalog)
-
+            AppLogger.shared.info("Applying remote catalog (\(vehicles.count) vehicles)", category: .catalog)
             await VehicleImageLoader.shared.clearAll()
-
-            let newVehicles = expandForTestingIfNeeded(ensureBuiltInElectrifiedOptions(decoded))
-            vehicles = newVehicles
-            invalidateCaches()
-
-            if let encoded = try? JSONEncoder().encode(vehicles) {
-                defaults.set(encoded, forKey: Keys.cachedCatalog)
-            } else {
-                defaults.set(data, forKey: Keys.cachedCatalog)
-            }
-
-            defaults.set(Date().timeIntervalSince1970, forKey: Keys.lastUpdated)
-            defaults.set(seedVersion, forKey: Keys.cacheSeedVersion)
-            NotificationCenter.default.post(name: .evVehicleCatalogDidUpdate, object: nil)
-
             AppLogger.shared.info("Catalog refresh completed successfully", category: .catalog)
 
         } catch {
@@ -287,40 +333,48 @@ final class VehicleCatalogService {
     }
 
     private func loadCachedOrDefault() -> [VehicleCatalogItem] {
+        migrateUserDefaultsCatalogToFileIfNeeded()
         let cachedVersion = defaults.integer(forKey: Keys.cacheSeedVersion)
         if cachedVersion == seedVersion,
-           let data = defaults.data(forKey: Keys.cachedCatalog),
+           let data = try? Data(contentsOf: catalogCacheFileURL),
            let cached = try? JSONDecoder().decode([VehicleCatalogItem].self, from: data),
            !cached.isEmpty {
             return cached.filter { !$0.isJunkCatalogEntry }
         }
         if let bundled = loadBundledSeedCatalog(), !bundled.isEmpty {
-            if let data = try? JSONEncoder().encode(bundled) {
-                defaults.set(data, forKey: Keys.cachedCatalog)
-                defaults.set(seedVersion, forKey: Keys.cacheSeedVersion)
-                defaults.set(Date().timeIntervalSince1970, forKey: Keys.lastUpdated)
-            }
+            persistCatalogToFile(bundled)
+            defaults.set(seedVersion, forKey: Keys.cacheSeedVersion)
+            defaults.set(Date().timeIntervalSince1970, forKey: Keys.lastUpdated)
             return bundled
         }
         return Self.defaultCatalog
     }
 
+    private func persistCatalogToFile(_ catalog: [VehicleCatalogItem]) {
+        guard let data = try? JSONEncoder().encode(catalog) else { return }
+        try? data.write(to: catalogCacheFileURL, options: .atomic)
+        defaults.removeObject(forKey: Keys.cachedCatalog)
+        defaults.set(true, forKey: Keys.migratedToFile)
+    }
+
+    private func migrateUserDefaultsCatalogToFileIfNeeded() {
+        guard !defaults.bool(forKey: Keys.migratedToFile),
+              let data = defaults.data(forKey: Keys.cachedCatalog),
+              !data.isEmpty else { return }
+        try? data.write(to: catalogCacheFileURL, options: .atomic)
+        defaults.removeObject(forKey: Keys.cachedCatalog)
+        defaults.set(true, forKey: Keys.migratedToFile)
+    }
+
     private func loadBundledSeedCatalog() -> [VehicleCatalogItem]? {
-        // Catalogo WLTP/EEA come sorgente primaria; fallback ai seed precedenti.
-        let preferredResources: [(String, String)] = [
-            // Solo il seed caricato a runtime (altri rimossi dal bundle in Fase 1).
-            ("vehicles.seed.quality", "json"),
-        ]
-        for (name, ext) in preferredResources {
-            guard let url = Bundle.main.url(forResource: name, withExtension: ext),
-                  let data = try? Data(contentsOf: url),
-                  let decoded = try? JSONDecoder().decode([VehicleCatalogItem].self, from: data),
-                  !decoded.isEmpty else {
-                continue
-            }
-            return decoded.filter { !$0.isJunkCatalogEntry }
+        // Solo il seed quality è nel bundle (altri seed rimossi dal target in Fase 1).
+        guard let url = Bundle.main.url(forResource: "vehicles.seed.quality", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let decoded = try? JSONDecoder().decode([VehicleCatalogItem].self, from: data),
+              !decoded.isEmpty else {
+            return nil
         }
-        return nil
+        return decoded.filter { !$0.isJunkCatalogEntry }
     }
 
     /// Per test di carico UI/ricerca genera un catalogo sintetico >= 4000 veicoli
