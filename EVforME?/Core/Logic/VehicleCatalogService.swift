@@ -21,7 +21,7 @@ final class VehicleCatalogService {
     }
 
     private let defaults = UserDefaults.standard
-    private let seedVersion = 33
+    private let seedVersion = 34
     private var remoteDisabledForTesting = false
     private let remoteSession: URLSession = {
         let config = URLSessionConfiguration.ephemeral
@@ -207,7 +207,9 @@ final class VehicleCatalogService {
         return true
     }
 
-    /// Attende il primo load async (deep link / shortcut a freddo). Timeout default 10s.
+    /// Attende il primo load async (deep link / shortcut a freddo).
+    /// Continuation sul notification di load; timeout di sicurezza (default 10 s) — niente attesa infinita.
+    /// - Returns: `true` se il catalogo è pronto, `false` se scade il timeout.
     @discardableResult
     func waitUntilLoaded(timeoutSeconds: TimeInterval = 10) async -> Bool {
         if !vehicles.isEmpty { return true }
@@ -236,7 +238,7 @@ final class VehicleCatalogService {
             }
         }
         let timeoutNs = UInt64(max(0.1, timeoutSeconds) * 1_000_000_000)
-        return await withTaskGroup(of: Bool.self) { group in
+        let loaded = await withTaskGroup(of: Bool.self) { group in
             group.addTask {
                 for await _ in stream {
                     return true
@@ -251,6 +253,26 @@ final class VehicleCatalogService {
             group.cancelAll()
             return first
         }
+        if loaded || !vehicles.isEmpty {
+            return true
+        }
+        AppLogger.shared.error(
+            "Catalog load timed out after \(Int(timeoutSeconds))s — deep link aborted",
+            category: .catalog
+        )
+        ErrorHandler.shared.handleAppError(
+            .catalogLoadFailed,
+            context: .catalog,
+            userMessage: L10n.errorCatalogLoadFailed
+        )
+        return false
+    }
+
+    /// Svuota il catalogo in memoria (solo test: deep-link a freddo).
+    func clearVehiclesForTesting() {
+        loadGeneration += 1
+        vehicles = []
+        invalidateCaches()
     }
     
     /// Pre-warm caches for better performance

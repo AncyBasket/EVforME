@@ -24770,7 +24770,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 15.7,
     "batteryKWh": 81.5,
-    "wltpRangeKm": 518,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -29595,7 +29595,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 14.0,
     "batteryKWh": 46.9,
-    "wltpRangeKm": 336,
+    "wltpRangeKm": 230,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -29620,7 +29620,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 13.9,
     "batteryKWh": 47.5,
-    "wltpRangeKm": 342,
+    "wltpRangeKm": 230,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -29645,7 +29645,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 13.9,
     "batteryKWh": 48.4,
-    "wltpRangeKm": 348,
+    "wltpRangeKm": 230,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -57095,7 +57095,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 16.8,
     "batteryKWh": 78.5,
-    "wltpRangeKm": 466,
+    "wltpRangeKm": 528,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -57120,7 +57120,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 16.9,
     "batteryKWh": 79.8,
-    "wltpRangeKm": 472,
+    "wltpRangeKm": 528,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -57145,7 +57145,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 17.3,
     "batteryKWh": 82.7,
-    "wltpRangeKm": 478,
+    "wltpRangeKm": 528,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -57170,7 +57170,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 17.3,
     "batteryKWh": 84.0,
-    "wltpRangeKm": 484,
+    "wltpRangeKm": 528,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -57195,7 +57195,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 19.0,
     "batteryKWh": 89.3,
-    "wltpRangeKm": 470,
+    "wltpRangeKm": 528,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -57220,7 +57220,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 18.9,
     "batteryKWh": 90.1,
-    "wltpRangeKm": 476,
+    "wltpRangeKm": 528,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -89020,7 +89020,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 17.6,
     "batteryKWh": 52.1,
-    "wltpRangeKm": 296,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -89045,7 +89045,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 17.5,
     "batteryKWh": 51.9,
-    "wltpRangeKm": 296,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -89070,7 +89070,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 17.4,
     "batteryKWh": 51.7,
-    "wltpRangeKm": 296,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -89095,7 +89095,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 16.8,
     "batteryKWh": 49.8,
-    "wltpRangeKm": 296,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -89120,7 +89120,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 15.0,
     "batteryKWh": 44.4,
-    "wltpRangeKm": 296,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -89145,7 +89145,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 15.0,
     "batteryKWh": 44.4,
-    "wltpRangeKm": 296,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -89170,7 +89170,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 15.1,
     "batteryKWh": 44.6,
-    "wltpRangeKm": 296,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -89195,7 +89195,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 15.0,
     "batteryKWh": 45.3,
-    "wltpRangeKm": 302,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -89220,7 +89220,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 19.6,
     "batteryKWh": 60.4,
-    "wltpRangeKm": 308,
+    "wltpRangeKm": 270,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -89245,7 +89245,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 20.5,
     "batteryKWh": 64.5,
-    "wltpRangeKm": 314,
+    "wltpRangeKm": 270,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -89270,7 +89270,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 20.1,
     "batteryKWh": 64.2,
-    "wltpRangeKm": 320,
+    "wltpRangeKm": 270,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -89295,7 +89295,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 18.4,
     "batteryKWh": 60.0,
-    "wltpRangeKm": 326,
+    "wltpRangeKm": 270,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -89320,7 +89320,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 17.2,
     "batteryKWh": 57.1,
-    "wltpRangeKm": 332,
+    "wltpRangeKm": 270,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -89345,7 +89345,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 17.2,
     "batteryKWh": 58.0,
-    "wltpRangeKm": 338,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -89370,7 +89370,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 17.2,
     "batteryKWh": 59.1,
-    "wltpRangeKm": 344,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -89395,7 +89395,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 16.5,
     "batteryKWh": 56.8,
-    "wltpRangeKm": 345,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -89420,7 +89420,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 16.4,
     "batteryKWh": 58.4,
-    "wltpRangeKm": 356,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -110120,7 +110120,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 16.9,
     "batteryKWh": 53.4,
-    "wltpRangeKm": 316,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -110145,7 +110145,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 14.6,
     "batteryKWh": 46.1,
-    "wltpRangeKm": 316,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -110170,7 +110170,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 14.6,
     "batteryKWh": 47.0,
-    "wltpRangeKm": 322,
+    "wltpRangeKm": 300,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -110195,7 +110195,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 14.6,
     "batteryKWh": 47.9,
-    "wltpRangeKm": 328,
+    "wltpRangeKm": 300,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -110220,7 +110220,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 17.5,
     "batteryKWh": 58.5,
-    "wltpRangeKm": 334,
+    "wltpRangeKm": 300,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -110245,7 +110245,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 17.9,
     "batteryKWh": 60.9,
-    "wltpRangeKm": 340,
+    "wltpRangeKm": 395,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -110270,7 +110270,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 17.9,
     "batteryKWh": 61.9,
-    "wltpRangeKm": 346,
+    "wltpRangeKm": 395,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -110295,7 +110295,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 17.6,
     "batteryKWh": 61.8,
-    "wltpRangeKm": 352,
+    "wltpRangeKm": 395,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -110320,7 +110320,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 17.4,
     "batteryKWh": 62.5,
-    "wltpRangeKm": 358,
+    "wltpRangeKm": 395,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -110345,7 +110345,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 17.5,
     "batteryKWh": 63.7,
-    "wltpRangeKm": 364,
+    "wltpRangeKm": 395,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -120620,7 +120620,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 17.5,
     "batteryKWh": 82.7,
-    "wltpRangeKm": 472,
+    "wltpRangeKm": 460,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -120645,7 +120645,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 17.5,
     "batteryKWh": 83.6,
-    "wltpRangeKm": 478,
+    "wltpRangeKm": 460,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -120670,7 +120670,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 17.3,
     "batteryKWh": 83.9,
-    "wltpRangeKm": 484,
+    "wltpRangeKm": 460,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -120695,7 +120695,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 19.0,
     "batteryKWh": 89.3,
-    "wltpRangeKm": 470,
+    "wltpRangeKm": 460,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -120720,7 +120720,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 18.9,
     "batteryKWh": 90.1,
-    "wltpRangeKm": 476,
+    "wltpRangeKm": 460,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -130620,7 +130620,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 16.4,
     "batteryKWh": 77.4,
-    "wltpRangeKm": 472,
+    "wltpRangeKm": 460,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -130645,7 +130645,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 16.1,
     "batteryKWh": 77.0,
-    "wltpRangeKm": 478,
+    "wltpRangeKm": 460,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -130670,7 +130670,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 15.6,
     "batteryKWh": 75.3,
-    "wltpRangeKm": 484,
+    "wltpRangeKm": 460,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -130695,7 +130695,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 18.6,
     "batteryKWh": 87.2,
-    "wltpRangeKm": 470,
+    "wltpRangeKm": 460,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -130720,7 +130720,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 18.5,
     "batteryKWh": 87.9,
-    "wltpRangeKm": 476,
+    "wltpRangeKm": 460,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -137095,7 +137095,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 12.7,
     "batteryKWh": 60.5,
-    "wltpRangeKm": 476,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -137120,7 +137120,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 12.7,
     "batteryKWh": 60.5,
-    "wltpRangeKm": 476,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -137145,7 +137145,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 15.5,
     "batteryKWh": 73.8,
-    "wltpRangeKm": 476,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -137170,7 +137170,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 15.5,
     "batteryKWh": 74.7,
-    "wltpRangeKm": 482,
+    "wltpRangeKm": 230,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -137195,7 +137195,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 12.7,
     "batteryKWh": 62.0,
-    "wltpRangeKm": 488,
+    "wltpRangeKm": 230,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -137220,7 +137220,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 15.5,
     "batteryKWh": 76.6,
-    "wltpRangeKm": 494,
+    "wltpRangeKm": 230,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -137245,7 +137245,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 15.5,
     "batteryKWh": 77.3,
-    "wltpRangeKm": 500,
+    "wltpRangeKm": 230,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -137270,7 +137270,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 14.5,
     "batteryKWh": 36.2,
-    "wltpRangeKm": 250,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -137295,7 +137295,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 14.5,
     "batteryKWh": 36.2,
-    "wltpRangeKm": 250,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -137320,7 +137320,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 14.5,
     "batteryKWh": 36.2,
-    "wltpRangeKm": 250,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -137345,7 +137345,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 14.5,
     "batteryKWh": 36.2,
-    "wltpRangeKm": 250,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -137370,7 +137370,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 14.5,
     "batteryKWh": 36.2,
-    "wltpRangeKm": 250,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -137395,7 +137395,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 12.2,
     "batteryKWh": 30.5,
-    "wltpRangeKm": 250,
+    "wltpRangeKm": null,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -137420,7 +137420,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 16.2,
     "batteryKWh": 41.1,
-    "wltpRangeKm": 254,
+    "wltpRangeKm": 260,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -137470,7 +137470,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 14.0,
     "batteryKWh": 37.1,
-    "wltpRangeKm": 266,
+    "wltpRangeKm": 260,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -137495,7 +137495,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 13.9,
     "batteryKWh": 37.7,
-    "wltpRangeKm": 272,
+    "wltpRangeKm": 260,
     "co2gKm": null,
     "fuelKind": null
   },
@@ -137520,7 +137520,7 @@
     "confidenceScore": 0.95,
     "wltpConsumptionKWh100km": 14.4,
     "batteryKWh": 40.0,
-    "wltpRangeKm": 278,
+    "wltpRangeKm": 260,
     "co2gKm": null,
     "fuelKind": null
   },
