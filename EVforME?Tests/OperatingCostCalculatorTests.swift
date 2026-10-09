@@ -173,10 +173,47 @@ final class OperatingCostCalculatorTests: XCTestCase {
         let expectation = expectation(description: "catalog wait")
         Task {
             // Already loaded in setUp — must return immediately.
-            await VehicleCatalogService.shared.waitUntilLoaded()
+            let ready = await VehicleCatalogService.shared.waitUntilLoaded()
+            XCTAssertTrue(ready)
             expectation.fulfill()
         }
         await fulfillment(of: [expectation], timeout: 2.0)
+    }
+
+    func testCatalogWait_EmptyCatalogThenLoad_ReturnsResult() async {
+        VehicleCatalogService.shared.clearVehiclesForTesting()
+        XCTAssertTrue(VehicleCatalogService.shared.vehicles.isEmpty)
+
+        let waitTask = Task {
+            await VehicleCatalogService.shared.waitUntilLoaded(timeoutSeconds: 5)
+        }
+        // Publish a real load shortly after the waiter attaches.
+        try? await Task.sleep(nanoseconds: 150_000_000)
+        VehicleCatalogService.shared.reloadFromBundledSeedIgnoringUserCacheForTesting()
+
+        let ready = await waitTask.value
+        XCTAssertTrue(ready)
+        XCTAssertFalse(VehicleCatalogService.shared.vehicles.isEmpty)
+
+        let input = UserInput(
+            dailyKm: 12_000,
+            hasHomeCharging: true,
+            areaType: .urban,
+            fuelPrice: 1.7,
+            ownershipYears: 5,
+            sourceVehicleId: "seat-ateca-2016",
+            targetVehicleId: "tesla-model-3-2023"
+        )
+        XCTAssertNotNil(EVSimulator.simulate(input: input))
+    }
+
+    func testCatalogWait_Timeout_ReturnsFalseWithoutHanging() async {
+        VehicleCatalogService.shared.clearVehiclesForTesting()
+        XCTAssertTrue(VehicleCatalogService.shared.vehicles.isEmpty)
+        let ready = await VehicleCatalogService.shared.waitUntilLoaded(timeoutSeconds: 0.3)
+        XCTAssertFalse(ready)
+        // Restore catalog for sibling tests.
+        VehicleCatalogService.shared.reloadFromBundledSeedIgnoringUserCacheForTesting()
     }
 
     func testEdge_HugeKm_IsFinite() {

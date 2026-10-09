@@ -184,6 +184,7 @@ struct QuickStartView: View {
         StorageService.shared.saveUserInput(userInput)
         StorageService.shared.markOnboardingSeen()
         GrowthTracker.shared.track(.onboardingCompleted, ["path": "thirty_second"])
-        onVerdict(.realistic)
+        // Usa lo scenario già scelto (default iniziale: realistic in UserInput).
+        onVerdict(userInput.scenario)
     }
 }

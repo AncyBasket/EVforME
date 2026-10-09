@@ -2,6 +2,8 @@
 //  OnboardingView.swift
 //  EVforME?
 //
+//  Breve benvenuto (una sola volta): cosa fa l’app, paese, posizione solo per colonnine.
+//
 
 import SwiftUI
 
@@ -35,58 +37,20 @@ struct OnboardingView: View {
                                 .font(Typography.display)
                                 .foregroundStyle(Color.ink)
 
-                            Text(L10n.quickStartTitle)
+                            Text(L10n.onboardingSubtitle)
                                 .font(Typography.readingIntro)
                                 .foregroundStyle(Color.secondaryText)
                                 .fixedSize(horizontal: false, vertical: true)
                         }
                         .padding(.top, 20)
 
+                        VStack(alignment: .leading, spacing: 12) {
+                            welcomeBullet(L10n.onboardingRowKm)
+                            welcomeBullet(L10n.onboardingRowChart)
+                            welcomeBullet(L10n.onboardingRowFear)
+                        }
+
                         marketSection
-
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text(L10n.dailyKmQuestion)
-                                .font(Typography.sectionEyebrow)
-                                .foregroundStyle(Color.secondaryText)
-                                .tracking(0.6)
-                            Text(L10n.yearlyKmValue(userInput.dailyKm))
-                                .font(Typography.metric)
-                                .foregroundStyle(Color.ink)
-                            Slider(
-                                value: Binding(
-                                    get: { Double(userInput.dailyKm) },
-                                    set: {
-                                        userInput.dailyKm = Int($0.rounded())
-                                        if userInput.tripProfile != .custom {
-                                            userInput.tripProfile = .custom
-                                        }
-                                    }
-                                ),
-                                in: 1000...120_000,
-                                step: 500
-                            )
-                            .tint(Color.ink)
-                        }
-
-                        VStack(alignment: .leading, spacing: 10) {
-                            Text(L10n.homeChargingToggle)
-                                .font(Typography.sectionEyebrow)
-                                .foregroundStyle(Color.secondaryText)
-                                .tracking(0.6)
-                            Toggle(isOn: $userInput.hasHomeCharging) {
-                                Text(L10n.homeChargingToggle)
-                                    .font(Typography.title2)
-                                    .foregroundStyle(Color.ink)
-                            }
-                            .tint(Color.accentDark)
-                            .labelsHidden()
-                            .accessibilityLabel(L10n.homeChargingA11y)
-                        }
-
-                        Text(L10n.quickStartSubtitle)
-                            .font(Typography.readingCaption)
-                            .foregroundStyle(Color.secondaryText)
-                            .fixedSize(horizontal: false, vertical: true)
 
                         Spacer(minLength: 40)
                     }
@@ -109,6 +73,18 @@ struct OnboardingView: View {
                     appeared = true
                 }
             }
+        }
+    }
+
+    private func welcomeBullet(_ text: String) -> some View {
+        HStack(alignment: .top, spacing: 10) {
+            Text("•")
+                .font(Typography.title2)
+                .foregroundStyle(Color.ink)
+            Text(text)
+                .font(Typography.readingBody)
+                .foregroundStyle(Color.ink)
+                .fixedSize(horizontal: false, vertical: true)
         }
     }
 

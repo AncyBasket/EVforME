@@ -196,13 +196,18 @@ def _is_forbidden_ice_ev(brand: str, model: str) -> bool:
 
 
 def _constant_step_ranges(year_range_pairs: list[tuple[int, int]]) -> bool:
+    """True if any contiguous ≥3-point subsequence has identical non-zero deltas."""
     if len(year_range_pairs) < 3:
         return False
     rows = sorted(year_range_pairs)
-    if any(rows[i + 1][0] - rows[i][0] != 1 for i in range(len(rows) - 1)):
-        return False
-    deltas = [rows[i + 1][1] - rows[i][1] for i in range(len(rows) - 1)]
-    return len(set(deltas)) == 1 and deltas[0] != 0
+    n = len(rows)
+    for start in range(n - 2):
+        for end in range(start + 2, n):
+            sub = rows[start : end + 1]
+            deltas = [sub[i + 1][1] - sub[i][1] for i in range(len(sub) - 1)]
+            if len(set(deltas)) == 1 and deltas[0] != 0:
+                return True
+    return False
 
 
 def is_junk(row: dict) -> bool:
@@ -675,8 +680,9 @@ def validate_catalog(rows: list[dict]) -> list[str]:
         pt = str(r.get("powertrain", "")).lower()
         fk = r.get("fuelKind")
         yr = int(r.get("year") or 0)
-        if yr > 2026:
-            errors.append(f"year beyond 2026: {rid}")
+        max_year = __import__("datetime").date.today().year + 1
+        if yr > max_year:
+            errors.append(f"year beyond {max_year}: {rid}")
         if (brand, model) in BANNED_NON_EU_MODELS:
             errors.append(f"banned non-EU model still present: {rid}")
         if "corolla matrix" in model or rid.startswith("toyota-corolla-matrix-"):
@@ -731,6 +737,21 @@ def validate_catalog(rows: list[dict]) -> list[str]:
     return errors
 
 
+def check_catalog_cdn_config_size() -> list[str]:
+    """catalog_cdn.json must stay a tiny config file — never a full seed dump."""
+    path = REPO / "EVforME?" / "Data" / "catalog_cdn.json"
+    if not path.exists():
+        return [f"missing {path.relative_to(REPO)}"]
+    size = path.stat().st_size
+    max_bytes = 10 * 1024
+    if size > max_bytes:
+        return [
+            f"{path.relative_to(REPO)} is {size} bytes (max {max_bytes}) — "
+            "config only, do not write the vehicle seed into this file"
+        ]
+    return []
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--path", type=Path, action="append", help="Catalog JSON (repeatable)")
@@ -742,6 +763,11 @@ def main() -> int:
         return 1
 
     exit_code = 0
+    cdn_errs = check_catalog_cdn_config_size()
+    if cdn_errs:
+        for e in cdn_errs:
+            print("  -", e, file=sys.stderr)
+        exit_code = 1
     for path in paths:
         if not path.is_absolute():
             path = REPO / path

@@ -182,7 +182,8 @@ struct EVforMEApp: App {
             return
         }
         Task {
-            await VehicleCatalogService.shared.waitUntilLoaded()
+            let ready = await VehicleCatalogService.shared.waitUntilLoaded()
+            guard ready else { return }
             await MainActor.run {
                 let input = snap.restoredUserInput()
                 userInput = input
@@ -204,7 +205,8 @@ struct EVforMEApp: App {
             openLastVerdict()
             return
         }
-        await VehicleCatalogService.shared.waitUntilLoaded()
+        let ready = await VehicleCatalogService.shared.waitUntilLoaded()
+        guard ready else { return }
         await refreshLiveData(applyCosts: false)
         _ = await ItalianIncentivesService.shared.refresh()
         let costs = await OfficialCostService.shared.fetchLatest()
@@ -231,7 +233,8 @@ struct EVforMEApp: App {
     private func openLastVerdict() {
         showOnboarding = false
         Task {
-            await VehicleCatalogService.shared.waitUntilLoaded()
+            let ready = await VehicleCatalogService.shared.waitUntilLoaded()
+            guard ready else { return }
             await MainActor.run {
                 if ScenarioHistoryStore.latest() != nil {
                     reopenLastComparison()

@@ -287,26 +287,31 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         for (_, rows) in grouped {
             let sorted = rows.sorted { $0.year < $1.year }
             guard sorted.count >= 3 else { continue }
-            var consecutive = true
-            var deltas: [Int] = []
-            for i in 0..<(sorted.count - 1) {
-                if sorted[i + 1].year - sorted[i].year != 1 {
-                    consecutive = false
-                    break
+            // Fail if ANY contiguous subsequence of ≥3 years has identical non-zero deltas
+            // (flat stretches elsewhere in the series do not hide an interpolated ramp).
+            let n = sorted.count
+            for start in 0..<(n - 2) {
+                for end in (start + 2)..<n {
+                    let sub = Array(sorted[start...end])
+                    let deltas = (0..<(sub.count - 1)).map {
+                        (sub[$0 + 1].wltpRangeKm ?? 0) - (sub[$0].wltpRangeKm ?? 0)
+                    }
+                    let first = deltas[0]
+                    if first != 0, deltas.allSatisfy({ $0 == first }) {
+                        XCTFail(
+                            "Interpolated +\(first) km/year subsequence \(sub.first!.year)–\(sub.last!.year) for \(sub.first!.brand) \(sub.first!.model)"
+                        )
+                        return
+                    }
                 }
-                deltas.append((sorted[i + 1].wltpRangeKm ?? 0) - (sorted[i].wltpRangeKm ?? 0))
             }
-            guard consecutive, let first = deltas.first else { continue }
-            XCTAssertFalse(
-                deltas.allSatisfy { $0 == first && first != 0 },
-                "Interpolated +\(first) km/year for \(sorted.first?.brand ?? "") \(sorted.first?.model ?? "")"
-            )
         }
     }
 
-    func testCatalog_NoYearBeyond2026() {
-        let future = VehicleCatalogService.shared.vehicles.filter { $0.year > 2026 }
-        XCTAssertTrue(future.isEmpty, "Years > 2026: \(future.map(\.id))")
+    func testCatalog_NoYearBeyondCurrentPlusOne() {
+        let maxAllowed = Calendar.current.component(.year, from: Date()) + 1
+        let future = VehicleCatalogService.shared.vehicles.filter { $0.year > maxAllowed }
+        XCTAssertTrue(future.isEmpty, "Years > \(maxAllowed): \(future.map(\.id))")
     }
 
     func testCatalog_PassengerEVsNotMajorityPlaceholder350() {

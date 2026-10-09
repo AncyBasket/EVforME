@@ -27,6 +27,8 @@ struct MainShellView: View {
 
     @State private var selectedTab: AppShellTab = .workshop
     @State private var showGrowthDebug = false
+    /// Prima schermata di benvenuto (una sola volta per sessione di onboarding).
+    @State private var showWelcomeBeforeQuickStart = true
     @Environment(\.accessibilityReduceMotion) private var accessibilityReduceMotion
 
     private var tabSwitchAnimation: Animation {
@@ -95,20 +97,37 @@ struct MainShellView: View {
             userInput.targetVehicleId = Defaults.starterTargetVehicleId
         }
         .task { await catalogSetup() }
-        .fullScreenCover(isPresented: $showOnboarding) {
-            QuickStartView(
-                userInput: $userInput,
-                onVerdict: { scenario in
-                    showOnboarding = false
-                    onSimulate(scenario)
-                },
-                onCustomize: {
-                    StorageService.shared.saveUserInput(userInput)
-                    StorageService.shared.markOnboardingSeen()
-                    GrowthTracker.shared.track(.onboardingCompleted, ["path": "customize"])
-                    showOnboarding = false
-                }
-            )
+        .fullScreenCover(isPresented: $showOnboarding, onDismiss: {
+            showWelcomeBeforeQuickStart = true
+        }) {
+            if showWelcomeBeforeQuickStart {
+                OnboardingView(
+                    userInput: $userInput,
+                    onContinue: {
+                        StorageService.shared.saveUserInput(userInput)
+                        showWelcomeBeforeQuickStart = false
+                    },
+                    onSkip: {
+                        // Salta il benvenuto e passa al percorso rapido (sempre prima volta).
+                        StorageService.shared.saveUserInput(userInput)
+                        showWelcomeBeforeQuickStart = false
+                    }
+                )
+            } else {
+                QuickStartView(
+                    userInput: $userInput,
+                    onVerdict: { scenario in
+                        showOnboarding = false
+                        onSimulate(scenario)
+                    },
+                    onCustomize: {
+                        StorageService.shared.saveUserInput(userInput)
+                        StorageService.shared.markOnboardingSeen()
+                        GrowthTracker.shared.track(.onboardingCompleted, ["path": "customize"])
+                        showOnboarding = false
+                    }
+                )
+            }
         }
         .fullScreenCover(isPresented: Binding(
             get: { simulationResult != nil },

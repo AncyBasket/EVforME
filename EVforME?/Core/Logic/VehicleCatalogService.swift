@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Catalogo veicoli: stato isolato su MainActor — niente letture/scritture da thread secondari.
 final class VehicleCatalogService {
     static let shared = VehicleCatalogService()
     private static let minimumVehiclesForTesting = 4000
@@ -21,7 +22,7 @@ final class VehicleCatalogService {
     }
 
     private let defaults = UserDefaults.standard
-    private let seedVersion = 33
+    private let seedVersion = 34
     private var remoteDisabledForTesting = false
     private let remoteSession: URLSession = {
         let config = URLSessionConfiguration.ephemeral
@@ -32,14 +33,22 @@ final class VehicleCatalogService {
         return URLSession(configuration: config)
     }()
 
-    /// Tutte le scritture passano da `applyCatalog` (@MainActor).
-    private(set) var vehicles: [VehicleCatalogItem] = []
+    /// Stato catalogo isolato: solo MainActor.
+    @MainActor
+    private var isolatedVehicles: [VehicleCatalogItem] = []
+    @MainActor
     private var vehicleIndexCache: [String: VehicleCatalogItem] = [:]
+    @MainActor
     private var sourceVehiclesCache: [VehicleCatalogItem]?
+    @MainActor
     private var targetEVVehiclesCache: [VehicleCatalogItem]?
-    private let cacheQueue = DispatchQueue(label: "com.evforme.catalogCache", qos: .utility)
     /// Scarta load async in volo quando i test forzano il seed bundlato.
     private var loadGeneration = 0
+
+    /// Snapshot pubblico — richiede il main thread.
+    var vehicles: [VehicleCatalogItem] {
+        onMainActor { isolatedVehicles }
+    }
 
     private var catalogCacheFileURL: URL {
         let dir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
@@ -54,60 +63,55 @@ final class VehicleCatalogService {
         loadCatalogAsync()
     }
 
-    @MainActor
-    private func applyCatalog(_ catalog: [VehicleCatalogItem]) {
-        vehicles = catalog
-        invalidateCaches()
-        NotificationCenter.default.post(name: .evVehicleCatalogDidUpdate, object: nil)
+    /// Esegue `body` sul MainActor (hop sync se chiamato altrove — niente lettura/scrittura off-main).
+    private func onMainActor<T>(_ body: @MainActor () -> T) -> T {
+        if Thread.isMainThread {
+            return MainActor.assumeIsolated(body)
+        }
+        return DispatchQueue.main.sync {
+            MainActor.assumeIsolated(body)
+        }
     }
 
-    /// Applica il catalogo sul main immediatamente (test / reload sync).
-    private func applyCatalogSync(_ catalog: [VehicleCatalogItem]) {
-        if Thread.isMainThread {
-            MainActor.assumeIsolated { applyCatalog(catalog) }
-        } else {
-            DispatchQueue.main.sync {
-                MainActor.assumeIsolated { applyCatalog(catalog) }
-            }
-        }
+    @MainActor
+    private func applyCatalog(_ catalog: [VehicleCatalogItem]) {
+        isolatedVehicles = catalog
+        invalidateCaches()
+        NotificationCenter.default.post(name: .evVehicleCatalogDidUpdate, object: nil)
     }
 
     private func loadCatalogAsync() {
         AppLogger.shared.debug("Loading vehicle catalog asynchronously", category: .catalog)
         let generation = loadGeneration
-
-        cacheQueue.async { [weak self] in
-            guard let self else { return }
+        Task { @MainActor in
             let startTime = CFAbsoluteTimeGetCurrent()
-            let catalog = self.expandForTestingIfNeeded(self.ensureBuiltInElectrifiedOptions(self.loadCachedOrDefault()))
+            let catalog = expandForTestingIfNeeded(ensureBuiltInElectrifiedOptions(loadCachedOrDefault()))
             let duration = (CFAbsoluteTimeGetCurrent() - startTime) * 1000
-            AppLogger.shared.info("Catalog loaded with \(catalog.count) vehicles in \(String(format: "%.2f", duration))ms", category: .catalog)
-
-            Task { @MainActor in
-                guard self.loadGeneration == generation else {
-                    AppLogger.shared.debug("Skipping stale async catalog load", category: .catalog)
-                    return
-                }
-                self.applyCatalog(catalog)
+            AppLogger.shared.info(
+                "Catalog loaded with \(catalog.count) vehicles in \(String(format: "%.2f", duration))ms",
+                category: .catalog
+            )
+            guard loadGeneration == generation else {
+                AppLogger.shared.debug("Skipping stale async catalog load", category: .catalog)
+                return
             }
+            applyCatalog(catalog)
         }
     }
 
+    @MainActor
     private func invalidateCaches() {
-        cacheQueue.sync {
-            self.vehicleIndexCache.removeAll(keepingCapacity: true)
-            self.sourceVehiclesCache = nil
-            self.targetEVVehiclesCache = nil
-        }
+        vehicleIndexCache.removeAll(keepingCapacity: true)
+        sourceVehiclesCache = nil
+        targetEVVehiclesCache = nil
     }
 
     func sourceVehicles() -> [VehicleCatalogItem] {
-        let snapshot = vehicles
-        return cacheQueue.sync {
+        onMainActor {
             if let cached = sourceVehiclesCache {
                 return cached
             }
-            let result = snapshot
+            let result = isolatedVehicles
                 .filter { $0.powertrain.isSourceCandidate }
                 .sorted { $0.displayName < $1.displayName }
             sourceVehiclesCache = result
@@ -116,12 +120,11 @@ final class VehicleCatalogService {
     }
 
     func targetEVVehicles() -> [VehicleCatalogItem] {
-        let snapshot = vehicles
-        return cacheQueue.sync {
+        onMainActor {
             if let cached = targetEVVehiclesCache {
                 return cached
             }
-            let result = snapshot
+            let result = isolatedVehicles
                 .filter { $0.powertrain.isTargetCandidate }
                 .sorted { $0.displayName < $1.displayName }
             targetEVVehiclesCache = result
@@ -130,12 +133,11 @@ final class VehicleCatalogService {
     }
 
     func vehicle(by id: String) -> VehicleCatalogItem? {
-        let snapshot = vehicles
-        return cacheQueue.sync {
+        onMainActor {
             if let cached = vehicleIndexCache[id] {
                 return cached
             }
-            let vehicle = snapshot.first { $0.id == id }
+            let vehicle = isolatedVehicles.first { $0.id == id }
             if let vehicle {
                 vehicleIndexCache[id] = vehicle
             }
@@ -174,7 +176,8 @@ final class VehicleCatalogService {
         defaults.removeObject(forKey: Keys.lastUpdated)
         defaults.removeObject(forKey: Keys.migratedToFile)
         try? FileManager.default.removeItem(at: catalogCacheFileURL)
-        applyCatalogSync(expandForTestingIfNeeded(ensureBuiltInElectrifiedOptions(loadCachedOrDefault())))
+        let catalog = expandForTestingIfNeeded(ensureBuiltInElectrifiedOptions(loadCachedOrDefault()))
+        onMainActor { applyCatalog(catalog) }
     }
 
     /// True se il remote non è troppo piccolo rispetto al catalogo locale (`decoded + 50 < local` → reject).
@@ -203,54 +206,78 @@ final class VehicleCatalogService {
         persistCatalogToFile(newVehicles)
         defaults.set(Date().timeIntervalSince1970, forKey: Keys.lastUpdated)
         defaults.set(seedVersion, forKey: Keys.cacheSeedVersion)
-        applyCatalogSync(newVehicles)
+        onMainActor { applyCatalog(newVehicles) }
         return true
     }
 
-    /// Attende il primo load async (deep link / shortcut a freddo). Timeout default 10s.
+    /// Attende il primo load async (deep link / shortcut a freddo).
+    /// Continuation sul notification di load; timeout di sicurezza (default 10 s) — niente attesa infinita.
+    /// - Returns: `true` se il catalogo è pronto, `false` se scade il timeout.
     @discardableResult
     func waitUntilLoaded(timeoutSeconds: TimeInterval = 10) async -> Bool {
         if !vehicles.isEmpty { return true }
-        let stream = AsyncStream<Void> { continuation in
-            if !self.vehicles.isEmpty {
-                continuation.yield(())
-                continuation.finish()
-                return
+
+        let timeoutNs = UInt64(max(0.1, timeoutSeconds) * 1_000_000_000)
+        let loaded: Bool = await withCheckedContinuation { continuation in
+            final class ResumeBox: @unchecked Sendable {
+                var didResume = false
+                var token: NSObjectProtocol?
             }
-            let token = NotificationCenter.default.addObserver(
+            let box = ResumeBox()
+            let resumeOnce: @Sendable (Bool) -> Void = { value in
+                Task { @MainActor in
+                    guard !box.didResume else { return }
+                    box.didResume = true
+                    if let token = box.token {
+                        NotificationCenter.default.removeObserver(token)
+                        box.token = nil
+                    }
+                    continuation.resume(returning: value)
+                }
+            }
+
+            box.token = NotificationCenter.default.addObserver(
                 forName: .evVehicleCatalogDidUpdate,
                 object: nil,
                 queue: .main
             ) { _ in
-                guard !self.vehicles.isEmpty else { return }
-                continuation.yield(())
-                continuation.finish()
-            }
-            continuation.onTermination = { _ in
-                NotificationCenter.default.removeObserver(token)
-            }
-            // Race: load may have completed between the empty check and observer attach.
-            if !self.vehicles.isEmpty {
-                continuation.yield(())
-                continuation.finish()
-            }
-        }
-        let timeoutNs = UInt64(max(0.1, timeoutSeconds) * 1_000_000_000)
-        return await withTaskGroup(of: Bool.self) { group in
-            group.addTask {
-                for await _ in stream {
-                    return true
+                Task { @MainActor in
+                    guard !self.isolatedVehicles.isEmpty else { return }
+                    resumeOnce(true)
                 }
-                return !self.vehicles.isEmpty
             }
-            group.addTask {
+
+            // Race: load may have completed between the empty check and observer attach.
+            if !vehicles.isEmpty {
+                resumeOnce(true)
+                return
+            }
+
+            Task { @MainActor in
                 try? await Task.sleep(nanoseconds: timeoutNs)
-                return false
+                resumeOnce(!self.isolatedVehicles.isEmpty)
             }
-            let first = await group.next() ?? false
-            group.cancelAll()
-            return first
         }
+
+        if loaded || !vehicles.isEmpty {
+            return true
+        }
+        AppLogger.shared.error(
+            "Catalog load timed out after \(Int(timeoutSeconds))s — deep link aborted",
+            category: .catalog
+        )
+        ErrorHandler.shared.handleAppError(
+            .catalogLoadFailed,
+            context: .catalog,
+            userMessage: L10n.errorCatalogLoadFailed
+        )
+        return false
+    }
+
+    /// Svuota il catalogo in memoria (solo test: deep-link a freddo).
+    func clearVehiclesForTesting() {
+        loadGeneration += 1
+        onMainActor { applyCatalog([]) }
     }
     
     /// Pre-warm caches for better performance
