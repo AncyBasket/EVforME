@@ -392,12 +392,12 @@ final class OperatingCostCalculatorTests: XCTestCase {
             let verdict: EVVerdict
         }
         // Valori da bundle ufficiale (benzina 2,029 / gasolio 2,257 / GPL 0,775 / elec 0,314)
-        // e RC flat 422; ricarica casa 85%. Tolleranza ±25 € su arrotondamenti.
+        // e RC flat 422; ricarica casa 85%. Tolleranza ≤ 2 €.
         let expects: [Expect] = [
-            .init(sourceId: "seat-ateca-2016", sourceTotal: 2771, evTotal: 1253, verdict: .yes),
-            .init(sourceId: "toyota-yaris-2021", sourceTotal: 2134, evTotal: 1253, verdict: .yes),
+            .init(sourceId: "seat-ateca-2016", sourceTotal: 2785, evTotal: 1253, verdict: .yes),
+            .init(sourceId: "toyota-yaris-2021", sourceTotal: 2153, evTotal: 1253, verdict: .yes),
             .init(sourceId: "dacia-sandero-eco-g-2022", sourceTotal: 1634, evTotal: 1253, verdict: .maybe),
-            .init(sourceId: "toyota-prius-2018", sourceTotal: 2166, evTotal: 1253, verdict: .yes),
+            .init(sourceId: "toyota-prius-2018", sourceTotal: 2184, evTotal: 1253, verdict: .yes),
         ]
         let costs = try! XCTUnwrap(OfficialCostService.shared.cachedOrBundledCosts())
         XCTAssertEqual(costs.electricityPricePerKWh, 0.314, accuracy: 0.001)
@@ -431,13 +431,13 @@ final class OperatingCostCalculatorTests: XCTestCase {
             XCTAssertEqual(
                 result.sourceYearlyBreakdown.total,
                 exp.sourceTotal,
-                accuracy: 25,
+                accuracy: 2,
                 "\(exp.sourceId) source tot=\(result.sourceYearlyBreakdown.total)"
             )
             XCTAssertEqual(
                 result.targetYearlyBreakdown.total,
                 exp.evTotal,
-                accuracy: 25,
+                accuracy: 2,
                 "\(exp.sourceId) ev tot=\(result.targetYearlyBreakdown.total)"
             )
             XCTAssertEqual(result.verdict, exp.verdict, exp.sourceId)
@@ -481,14 +481,15 @@ final class OperatingCostCalculatorTests: XCTestCase {
         )
         XCTAssertEqual(evKw, (2.58 * 100 * 0.25).rounded(), accuracy: 0.01)
 
-        // Senza kW e senza catalogo: 0 (niente 55/140 inventati).
-        let evUnknown = OwnershipCostEstimates.bolloPerYearEstimate(
+        // Senza kW e senza catalogo: importo 0 ma non stimato (niente 55/140 inventati).
+        let evUnknown = OwnershipCostEstimates.bolloPerYearDetail(
             catalogTaxesPerYear: 0,
             powertrain: .ev,
             vehicleYear: 2018,
             referenceYear: 2026
         )
-        XCTAssertEqual(evUnknown, 0, accuracy: 0.01)
+        XCTAssertEqual(evUnknown.amount, 0, accuracy: 0.01)
+        XCTAssertFalse(evUnknown.isKnown)
 
         // Catalogo pieno → solo 1/4.
         let evFromCatalog = OwnershipCostEstimates.bolloPerYearEstimate(

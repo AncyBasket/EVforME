@@ -52,6 +52,22 @@ struct OperatingCostBreakdown: Equatable {
     let maintenance: Double
     let taxes: Double
     let insurance: Double
+    /// `false` se il bollo EV post-5 anni non è stimabile (manca `powerKw` e catalogo).
+    let taxesKnown: Bool
+
+    init(
+        energy: Double,
+        maintenance: Double,
+        taxes: Double,
+        insurance: Double,
+        taxesKnown: Bool = true
+    ) {
+        self.energy = energy
+        self.maintenance = maintenance
+        self.taxes = taxes
+        self.insurance = insurance
+        self.taxesKnown = taxesKnown
+    }
 
     var total: Double { energy + maintenance + taxes + insurance }
 }
@@ -117,11 +133,17 @@ enum OwnershipCostEstimates {
 
     /// Bollo / tassa di possesso — stima semplificata (non ACI ufficiale).
     /// EV: 5 anni esenzione, poi 1/4 della tariffa benzina × kW (nazionale 2,58 €/kW, audit ACI).
-    /// Mai il valore pieno di catalogo per le EV; se manca kW e manca un proxy benzina-equivalente → 0.
+    /// Mai il valore pieno di catalogo per le EV; se manca kW e manca catalogo → importo 0 ma `isKnown = false`.
     /// HEV/PHEV: nessuna riduzione regionale hard-coded.
     static let petrolBolloEURPerKw: Double = 2.58
     static let petrolBolloProxyEURPerYear: Double = 220
     static let hevPhevBolloProxyEURPerYear: Double = 180
+
+    struct BolloEstimate: Equatable {
+        let amount: Double
+        /// `false` solo per EV post-5y senza `powerKw` e senza bollo di catalogo (UI: non stimato).
+        let isKnown: Bool
+    }
 
     static func bolloPerYearEstimate(
         catalogTaxesPerYear: Double,
@@ -130,22 +152,46 @@ enum OwnershipCostEstimates {
         referenceYear: Int = Calendar.current.component(.year, from: Date()),
         powerKw: Double? = nil
     ) -> Double {
+        bolloPerYearDetail(
+            catalogTaxesPerYear: catalogTaxesPerYear,
+            powertrain: powertrain,
+            vehicleYear: vehicleYear,
+            referenceYear: referenceYear,
+            powerKw: powerKw
+        ).amount
+    }
+
+    static func bolloPerYearDetail(
+        catalogTaxesPerYear: Double,
+        powertrain: Powertrain,
+        vehicleYear: Int,
+        referenceYear: Int = Calendar.current.component(.year, from: Date()),
+        powerKw: Double? = nil
+    ) -> BolloEstimate {
         let age = max(0, referenceYear - vehicleYear)
         switch powertrain {
         case .ev:
-            if age < 5 { return 0 }
+            if age < 5 { return BolloEstimate(amount: 0, isKnown: true) }
             if let kw = powerKw, kw > 0 {
-                return (petrolBolloEURPerKw * kw * 0.25).rounded()
+                return BolloEstimate(
+                    amount: (petrolBolloEURPerKw * kw * 0.25).rounded(),
+                    isKnown: true
+                )
             }
-            // Se il catalogo ha un bollo benzina-equivalente (pieno), usa solo 1/4 — mai il pieno.
+            // Catalogo presente (pieno benzina-equivalente) → solo 1/4; mai inventare kW=0.
             if catalogTaxesPerYear > 0 {
-                return (catalogTaxesPerYear * 0.25).rounded()
+                return BolloEstimate(
+                    amount: (catalogTaxesPerYear * 0.25).rounded(),
+                    isKnown: true
+                )
             }
-            return 0
+            return BolloEstimate(amount: 0, isKnown: false)
         case .phev, .hev:
-            return catalogTaxesPerYear > 0 ? catalogTaxesPerYear : hevPhevBolloProxyEURPerYear
+            let amount = catalogTaxesPerYear > 0 ? catalogTaxesPerYear : hevPhevBolloProxyEURPerYear
+            return BolloEstimate(amount: amount, isKnown: true)
         case .ice:
-            return catalogTaxesPerYear > 0 ? catalogTaxesPerYear : petrolBolloProxyEURPerYear
+            let amount = catalogTaxesPerYear > 0 ? catalogTaxesPerYear : petrolBolloProxyEURPerYear
+            return BolloEstimate(amount: amount, isKnown: true)
         }
     }
 
@@ -276,29 +322,33 @@ final class EVSimulator {
             market: input.market
         ) * scenario.evCostMultiplier
 
+        let sourceBollo = OwnershipCostEstimates.bolloPerYearDetail(
+            catalogTaxesPerYear: sourceVehicle.taxesPerYear,
+            powertrain: sourceVehicle.powertrain,
+            vehicleYear: sourceVehicle.year,
+            referenceYear: currentYear,
+            powerKw: sourceVehicle.powerKw
+        )
+        let targetBollo = OwnershipCostEstimates.bolloPerYearDetail(
+            catalogTaxesPerYear: targetVehicle.taxesPerYear,
+            powertrain: targetVehicle.powertrain,
+            vehicleYear: targetVehicle.year,
+            referenceYear: currentYear,
+            powerKw: targetVehicle.powerKw
+        )
         let sourceBreakdown = OperatingCostBreakdown(
             energy: sourceEnergy,
             maintenance: sourceMaintenance,
-            taxes: OwnershipCostEstimates.bolloPerYearEstimate(
-                catalogTaxesPerYear: sourceVehicle.taxesPerYear,
-                powertrain: sourceVehicle.powertrain,
-                vehicleYear: sourceVehicle.year,
-                referenceYear: currentYear,
-                powerKw: sourceVehicle.powerKw
-            ),
-            insurance: sourceInsurance
+            taxes: sourceBollo.amount,
+            insurance: sourceInsurance,
+            taxesKnown: sourceBollo.isKnown
         )
         let targetBreakdown = OperatingCostBreakdown(
             energy: targetEnergy,
             maintenance: targetMaintenance,
-            taxes: OwnershipCostEstimates.bolloPerYearEstimate(
-                catalogTaxesPerYear: targetVehicle.taxesPerYear,
-                powertrain: targetVehicle.powertrain,
-                vehicleYear: targetVehicle.year,
-                referenceYear: currentYear,
-                powerKw: targetVehicle.powerKw
-            ),
-            insurance: targetInsurance
+            taxes: targetBollo.amount,
+            insurance: targetInsurance,
+            taxesKnown: targetBollo.isKnown
         )
 
         let yearlyIceCost = sourceBreakdown.total

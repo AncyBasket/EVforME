@@ -602,6 +602,15 @@ enum L10n {
     static var italyKitCostsTitle: String { string("italy_kit_costs_title") }
     static var italyKitDisclaimer: String { string("italy_kit_disclaimer") }
     static func italyKitBolloRow(_ ice: Int, _ ev: Int) -> String { format("italy_kit_bollo_row", ice, ev) }
+    static func italyKitBolloRowEVUnknown(_ ice: Int) -> String { format("italy_kit_bollo_row_ev_unknown", ice) }
+    static func calculationOpexBreakdownTaxesUnknown(
+        _ energy: Double,
+        _ maintenance: Double,
+        _ insurance: Double,
+        _ yearlyCost: Double
+    ) -> String {
+        format("calculation_opex_breakdown_taxes_unknown", energy, maintenance, insurance, yearlyCost)
+    }
     static func italyKitInsuranceRow(_ ice: Int, _ ev: Int) -> String { format("italy_kit_insurance_row", ice, ev) }
     static func italyKitMaintenanceRow(_ ice: Int, _ ev: Int) -> String { format("italy_kit_maintenance_row", ice, ev) }
     static var incentiveWindowSectionTitle: String { string("incentive_window_section_title") }

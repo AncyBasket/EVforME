@@ -12,6 +12,8 @@ final class SmokeProductUITests: XCTestCase {
 
     override func setUpWithError() throws {
         continueAfterFailure = false
+        // Suite lunga (verdetto + kit + mappe): evita kill del runner su sim lento.
+        executionTimeAllowance = 600
         let fromEnv = ProcessInfo.processInfo.environment["SMOKE_SHOTS_DIR"]
         if let fromEnv, !fromEnv.isEmpty {
             shotsDir = URL(fileURLWithPath: fromEnv, isDirectory: true)
@@ -28,6 +30,7 @@ final class SmokeProductUITests: XCTestCase {
     func testSmokeRetentionKitItaliaChargers() throws {
         let app = XCUIApplication()
         app.launchEnvironment["UITEST_PRESET_VEHICLES"] = "1"
+        app.launchArguments += ["-UITesting", "-DisableAnimations"]
         app.launch()
 
         dismissQuickStartIfNeeded(app)

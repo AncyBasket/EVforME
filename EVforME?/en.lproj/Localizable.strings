@@ -518,6 +518,9 @@
 "italy_kit_costs_title" = "Road tax, insurance, maintenance (estimate)";
 "italy_kit_disclaimer" = "Simplified estimates to orient you — not tax advice, official ACI figures, or insurance quotes.";
 "italy_kit_bollo_row" = "Road tax (est.): current ~€%d/yr · electrified ~€%d/yr";
+"italy_kit_bollo_row_ev_unknown" = "Road tax (est.): current ~€%d/yr · electrified not estimated (missing power kW)";
+"calculation_opex_taxes_unknown" = "not estimated";
+"calculation_opex_breakdown_taxes_unknown" = "Energy €%.0f + Maintenance €%.0f + Road tax not estimated + Insurance €%.0f = €%.0f/yr";
 "italy_kit_insurance_row" = "Insurance (est.): current ~€%d/yr · electrified ~€%d/yr";
 "italy_kit_maintenance_row" = "Maintenance (by country): current ~€%d/yr · electrified ~€%d/yr";
 "incentive_window_section_title" = "Incentive window";

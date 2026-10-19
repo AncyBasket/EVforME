@@ -639,7 +639,11 @@ struct VerdictView: View {
                 .font(Typography.readingCaption)
                 .foregroundColor(.secondaryText)
                 .fixedSize(horizontal: false, vertical: true)
-            assumptionRow(text: L10n.italyKitBolloRow(Int(src.taxes), Int(tgt.taxes)))
+            if tgt.taxesKnown {
+                assumptionRow(text: L10n.italyKitBolloRow(Int(src.taxes), Int(tgt.taxes)))
+            } else {
+                assumptionRow(text: L10n.italyKitBolloRowEVUnknown(Int(src.taxes)))
+            }
             assumptionRow(text: L10n.italyKitInsuranceRow(Int(src.insurance), Int(tgt.insurance)))
             assumptionRow(text: L10n.italyKitMaintenanceRow(Int(src.maintenance), Int(tgt.maintenance)))
         }

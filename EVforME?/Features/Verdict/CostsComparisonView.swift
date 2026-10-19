@@ -189,13 +189,22 @@ struct CostsComparisonView: View {
                     .foregroundColor(.secondaryText)
                     .padding(.leading, 8)
                     
-                    Text(L10n.calculationOpexBreakdown(
-                        targetBreakdown.energy,
-                        targetBreakdown.maintenance,
-                        targetBreakdown.taxes,
-                        targetBreakdown.insurance,
-                        targetBreakdown.total
-                    ))
+                    Text(
+                        targetBreakdown.taxesKnown
+                            ? L10n.calculationOpexBreakdown(
+                                targetBreakdown.energy,
+                                targetBreakdown.maintenance,
+                                targetBreakdown.taxes,
+                                targetBreakdown.insurance,
+                                targetBreakdown.total
+                            )
+                            : L10n.calculationOpexBreakdownTaxesUnknown(
+                                targetBreakdown.energy,
+                                targetBreakdown.maintenance,
+                                targetBreakdown.insurance,
+                                targetBreakdown.total
+                            )
+                    )
                     .font(Typography.readingCaption)
                     .foregroundColor(.secondaryText)
                     .padding(.leading, 8)

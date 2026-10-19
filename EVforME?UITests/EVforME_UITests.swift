@@ -107,19 +107,20 @@ final class EVforME_UITests: XCTestCase {
 
         for _ in 0..<3 { app.swipeUp() }
 
+        // Controllo stretto: identifier o label km/anno (niente fallback generico su qualsiasi slider).
+        let byId = app.descendants(matching: .any)["yearly_km_slider"]
+        let byA11y = app.sliders["Yearly kilometers slider"]
+        let byKmAnno = app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "km/anno")).firstMatch
+        let byKmYear = app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "km/year")).firstMatch
         let kmControl =
-            app.descendants(matching: .any)["yearly_km_slider"].waitForExistence(timeout: 5)
-            || app.sliders["Yearly kilometers slider"].waitForExistence(timeout: 2)
-            || app.sliders.firstMatch.waitForExistence(timeout: 2)
-            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "km/anno")).firstMatch
-                .waitForExistence(timeout: 2)
-            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "km/year")).firstMatch
-                .waitForExistence(timeout: 2)
-            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Quanti km")).firstMatch
-                .waitForExistence(timeout: 2)
-            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "How many km")).firstMatch
-                .waitForExistence(timeout: 1)
-        XCTAssertTrue(kmControl, "Yearly km control should be reachable on input")
+            byId.waitForExistence(timeout: 6)
+            || byA11y.waitForExistence(timeout: 2)
+            || byKmAnno.waitForExistence(timeout: 2)
+            || byKmYear.waitForExistence(timeout: 1)
+        XCTAssertTrue(kmControl, "Yearly km/anno slider should be reachable on input")
+        if byId.exists {
+            XCTAssertTrue(byId.isHittable || byId.isEnabled, "yearly_km_slider should be interactive")
+        }
     }
 
     @MainActor

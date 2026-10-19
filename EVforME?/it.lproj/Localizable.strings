@@ -516,6 +516,9 @@
 "italy_kit_costs_title" = "Bollo, assicurazione, manutenzione (stima)";
 "italy_kit_disclaimer" = "Stime semplificate per orientarti — non sono consulenza fiscale, ACI ufficiale né preventivi assicurativi.";
 "italy_kit_bollo_row" = "Bollo (stima): attuale ~€%d/anno · elettrificata ~€%d/anno";
+"italy_kit_bollo_row_ev_unknown" = "Bollo (stima): attuale ~€%d/anno · elettrificata non stimata (manca potenza kW)";
+"calculation_opex_taxes_unknown" = "non stimato";
+"calculation_opex_breakdown_taxes_unknown" = "Energia €%.0f + Manutenzione €%.0f + Bollo non stimato + Assicurazione €%.0f = €%.0f/anno";
 "italy_kit_insurance_row" = "Assicurazione (stima): attuale ~€%d/anno · elettrificata ~€%d/anno";
 "italy_kit_maintenance_row" = "Manutenzione (paese): attuale ~€%d/anno · elettrificata ~€%d/anno";
 "incentive_window_section_title" = "Finestra incentivo";

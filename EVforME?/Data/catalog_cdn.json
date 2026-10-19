@@ -7,6 +7,6 @@
   "host": "bundled-offline-first",
   "updatedAt": "2026-10-07T16:17:31.433834+00:00",
   "policy": "offline-first",
-  "seedVersion": 36,
-  "note": "seedVersion 36: Auris/Yaris Hybrid rows, null synthetic batteries, stima 2025 YoY copies, diesel<=petrol hygiene. Offline-first."
+  "seedVersion": 37,
+  "note": "seedVersion 37: EV powerKw from EEA ep__KW_, diesel consumptions restored (no petrol-avg rewrite), Model Y 2025 EV-Database 13.1. Offline-first."
 }
