@@ -359,4 +359,52 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         }
         XCTAssertTrue(hundred.isEmpty, "Synthetic 100 kWh batteries must be null: \(hundred.map(\.id))")
     }
+
+    /// Audit 2026-10-19 §2: Prius / Niro / CT 200h / Hybrid non devono restare `ice`.
+    func testCatalog_KnownHybridsNotClassifiedAsICE() {
+        let ice = VehicleCatalogService.shared.vehicles.filter { $0.powertrain == .ice }
+        let offenders = ice.filter { v in
+            let blob = "\(v.brand) \(v.model) \(v.trim ?? "")".lowercased()
+            return blob.contains("prius")
+                || blob.contains("niro")
+                || blob.contains("ct 200h")
+                || blob.contains("hybrid")
+        }
+        XCTAssertTrue(offenders.isEmpty, "ICE hybrids: \(offenders.map(\.id))")
+    }
+
+    func testCatalog_Ateca2016_DieselNear5LPer100() {
+        let ateca = VehicleCatalogService.shared.vehicle(by: "seat-ateca-2016")
+        XCTAssertEqual(ateca?.resolvedFuelKind, .diesel)
+        let l100 = (ateca?.fuelConsumptionLPerKm ?? 0) * 100
+        XCTAssertEqual(l100, 5.0, accuracy: 0.15)
+    }
+
+    /// Se la media diesel di un modello supera la benzina dello stesso modello → fallisci.
+    func testCatalog_DieselAverageNotAbovePetrolForSameModel() {
+        let iceLike = VehicleCatalogService.shared.vehicles.filter {
+            $0.powertrain == .ice || $0.powertrain == .hev
+        }
+        let grouped = Dictionary(grouping: iceLike) {
+            "\($0.brand.lowercased())|\($0.model.lowercased())"
+        }
+        for (key, rows) in grouped {
+            let diesel = rows.compactMap { v -> Double? in
+                guard v.resolvedFuelKind == .diesel, let l = v.fuelConsumptionLPerKm else { return nil }
+                return l * 100
+            }
+            let petrol = rows.compactMap { v -> Double? in
+                guard v.resolvedFuelKind == .petrol, let l = v.fuelConsumptionLPerKm else { return nil }
+                return l * 100
+            }
+            guard diesel.count >= 2, petrol.count >= 2 else { continue }
+            let dAvg = diesel.reduce(0, +) / Double(diesel.count)
+            let pAvg = petrol.reduce(0, +) / Double(petrol.count)
+            XCTAssertLessThanOrEqual(
+                dAvg,
+                pAvg + 0.05,
+                "Diesel avg \(String(format: "%.2f", dAvg)) > petrol \(String(format: "%.2f", pAvg)) for \(key)"
+            )
+        }
+    }
 }
