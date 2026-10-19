@@ -375,6 +375,71 @@ final class OperatingCostCalculatorTests: XCTestCase {
         XCTAssertEqual(longRange.phevElectricKmShare(hasHomeCharging: true, yearlyKm: 10_000), 0.6, accuracy: 0.001)
     }
 
+    /// Probe stampato in log per la PR (15k km, Roma/IT, Model 3 2026).
+    func testTruthfulScenarios_PrintFourRomaComparisons() {
+        struct Row { let name: String; let sourceId: String }
+        var lines: [String] = []
+        let rows: [Row] = [
+            .init(name: "Seat Ateca 2016 diesel", sourceId: "seat-ateca-2016"),
+            .init(name: "Toyota Yaris Hybrid 2021", sourceId: "toyota-yaris-2021"),
+            .init(name: "Dacia Sandero ECO-G 2022", sourceId: "dacia-sandero-eco-g-2022"),
+            .init(name: "Toyota Prius 2018", sourceId: "toyota-prius-2018"),
+        ]
+        let targetId = "tesla-model-3-2026"
+        guard let target = VehicleCatalogService.shared.vehicle(by: targetId) else {
+            XCTFail("missing \(targetId)")
+            return
+        }
+        let costs = OfficialCostService.shared.cachedOrBundledCosts()
+        XCTAssertNotNil(costs)
+        for row in rows {
+            guard let source = VehicleCatalogService.shared.vehicle(by: row.sourceId) else {
+                XCTFail("missing \(row.sourceId)")
+                continue
+            }
+            let fuel: Double
+            switch source.resolvedFuelKind {
+            case .diesel: fuel = costs?.dieselPricePerLiter ?? 2.257
+            case .lpg: fuel = costs?.lpgPricePerLiter ?? 0.775
+            case .cng: fuel = costs?.cngPricePerKg ?? 1.957
+            default: fuel = costs?.fuelPricePerLiter ?? 2.029
+            }
+            let input = UserInput(
+                dailyKm: 15_000,
+                hasHomeCharging: true,
+                areaType: .mixed,
+                fuelPrice: fuel,
+                ownershipYears: 5,
+                electricityPricePerKWh: costs?.electricityPricePerKWh ?? 0.314,
+                sourceVehicleId: source.id,
+                targetVehicleId: target.id,
+                scenario: .realistic,
+                sourcePurchasePrice: Defaults.suggestedPurchasePrice(for: source),
+                targetPurchasePrice: Defaults.suggestedPurchasePrice(for: target),
+                comparisonIntent: .alreadyOwned
+            )
+            guard let result = EVSimulator.simulate(input: input) else {
+                XCTFail("simulate \(row.name)")
+                continue
+            }
+            let s = result.sourceYearlyBreakdown
+            let t = result.targetYearlyBreakdown
+            let delta = s.total - t.total
+            let line = String(
+                format: "SCENARIO_AFTER|%@|src=%.0f (e=%.0f m=%.0f b=%.0f i=%.0f)|ev=%.0f (e=%.0f m=%.0f b=%.0f i=%.0f)|delta=%+.0f|verdict=%@",
+                row.name,
+                s.total, s.energy, s.maintenance, s.taxes, s.insurance,
+                t.total, t.energy, t.maintenance, t.taxes, t.insurance,
+                delta,
+                result.verdict.rawValue
+            )
+            lines.append(line)
+        }
+        let joined = lines.joined(separator: "\n")
+        try? joined.write(toFile: "/tmp/evforme-scenarios-after.txt", atomically: true, encoding: .utf8)
+        XCTAssertFalse(lines.isEmpty, joined)
+    }
+
     func testHEVUrbanMultiplier_AtMostOne() {
         XCTAssertLessThanOrEqual(AreaType.urban.hevConsumptionMultiplier, 1.0)
         XCTAssertEqual(AreaType.urban.hevConsumptionMultiplier, 0.95, accuracy: 0.001)
