@@ -29,6 +29,10 @@ struct EVSimulationInput {
     var catalogEnergyIsWallToWheel: Bool = true
     /// Paese per tariffe manutenzione (ISO → AppMarket).
     var market: AppMarket = .IT
+    /// Override RC annuale (€); `nil`/≤0 = media IVASS per entrambe.
+    var annualInsuranceOverrideEUR: Double? = nil
+    /// Kasko/furto legata al valore (OFF di default).
+    var includeKaskoTheft: Bool = false
 }
 
 struct EVSimulationResult {

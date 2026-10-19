@@ -171,6 +171,8 @@ enum OperatingCostCalculator {
         sim.petrolPricePerLiter = resolvePetrolPricePerLiter(for: input)
         sim.catalogEnergyIsWallToWheel = true
         sim.market = input.market
+        sim.annualInsuranceOverrideEUR = input.annualInsuranceOverrideEUR
+        sim.includeKaskoTheft = input.includeKaskoTheft
         return sim
     }
 }
