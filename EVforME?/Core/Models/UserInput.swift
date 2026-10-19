@@ -181,6 +181,10 @@ struct UserInput {
     var chargingConfiguration: ChargingConfiguration
     /// Paese per tariffe manutenzione / contesto costi (ISO → AppMarket).
     var market: AppMarket
+    /// Override RC annuale (€). `nil` / ≤0 = media IVASS 422 € per entrambe le auto.
+    var annualInsuranceOverrideEUR: Double?
+    /// Include kasko/furto-incendio (proporzionale al valore). OFF di default.
+    var includeKaskoTheft: Bool
 
     init(
         dailyKm: Int,
@@ -200,7 +204,9 @@ struct UserInput {
         sourceConsumptionOverrideLPer100Km: Double? = nil,
         targetEnergyOverrideKWhPer100Km: Double? = nil,
         chargingConfiguration: ChargingConfiguration = ChargingConfiguration(),
-        market: AppMarket = AppMarket.fromDeviceLocale()
+        market: AppMarket = AppMarket.fromDeviceLocale(),
+        annualInsuranceOverrideEUR: Double? = nil,
+        includeKaskoTheft: Bool = false
     ) {
         self.dailyKm = dailyKm
         self.hasHomeCharging = hasHomeCharging
@@ -220,6 +226,8 @@ struct UserInput {
         self.targetEnergyOverrideKWhPer100Km = targetEnergyOverrideKWhPer100Km
         self.chargingConfiguration = chargingConfiguration
         self.market = market
+        self.annualInsuranceOverrideEUR = annualInsuranceOverrideEUR
+        self.includeKaskoTheft = includeKaskoTheft
     }
 
     /// Bonus acquisto stimato (solo IT). Fuori Italia → sempre 0.

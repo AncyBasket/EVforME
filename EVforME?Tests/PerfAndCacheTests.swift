@@ -37,19 +37,36 @@ final class PerfAndCacheTests: XCTestCase {
         XCTAssertEqual(medians.cng!, 1.300, accuracy: 0.001)
     }
 
-    func testInsurancePerYear_HasFloorAndScalesWithKm() {
-        let low = OwnershipCostEstimates.insurancePerYear(
-            purchasePrice: 10_000,
-            yearlyKm: 5_000,
+    func testInsurancePerYear_DefaultRCEqualForICEAndEV() {
+        let ice = OwnershipCostEstimates.insurancePerYear(
+            purchasePrice: 8_000,
+            yearlyKm: 15_000,
             electrified: false
         )
-        let high = OwnershipCostEstimates.insurancePerYear(
-            purchasePrice: 10_000,
-            yearlyKm: 40_000,
-            electrified: false
+        let ev = OwnershipCostEstimates.insurancePerYear(
+            purchasePrice: 42_000,
+            yearlyKm: 15_000,
+            electrified: true
         )
-        XCTAssertGreaterThanOrEqual(low, 320)
-        XCTAssertGreaterThan(high, low)
+        XCTAssertEqual(ice, OwnershipCostEstimates.ivassAverageRCEURPerYear, accuracy: 0.01)
+        XCTAssertEqual(ev, ice, accuracy: 0.01)
+    }
+
+    func testInsurancePerYear_OverrideAppliesEqually() {
+        let ice = OwnershipCostEstimates.insurancePerYear(
+            purchasePrice: 8_000,
+            yearlyKm: 15_000,
+            electrified: false,
+            annualInsuranceOverrideEUR: 500
+        )
+        let ev = OwnershipCostEstimates.insurancePerYear(
+            purchasePrice: 42_000,
+            yearlyKm: 15_000,
+            electrified: true,
+            annualInsuranceOverrideEUR: 500
+        )
+        XCTAssertEqual(ice, 500, accuracy: 0.01)
+        XCTAssertEqual(ev, 500, accuracy: 0.01)
     }
 
     func testRemoteCatalogSmallerThanLocal_IsRejected() throws {

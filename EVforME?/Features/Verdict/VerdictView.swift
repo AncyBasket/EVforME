@@ -662,12 +662,16 @@ struct VerdictView: View {
         let iceIns = OwnershipCostEstimates.insurancePerYear(
             purchasePrice: sourceBasis,
             yearlyKm: km,
-            electrified: sourceElectrified
+            electrified: sourceElectrified,
+            annualInsuranceOverrideEUR: userInput.annualInsuranceOverrideEUR,
+            includeKaskoTheft: userInput.includeKaskoTheft
         )
         let evIns = OwnershipCostEstimates.insurancePerYear(
             purchasePrice: targetBasis,
             yearlyKm: km,
-            electrified: true
+            electrified: true,
+            annualInsuranceOverrideEUR: userInput.annualInsuranceOverrideEUR,
+            includeKaskoTheft: userInput.includeKaskoTheft
         )
         let iceRes = OwnershipCostEstimates.residualValue(
             purchasePrice: sourceBasis,

@@ -376,11 +376,11 @@
 "validation_sticker_energy_range" = "Sticker energy figure should be between 8 and 40 kWh/100 km.";
 "yearly_km_value" = "%d km/year";
 "phev_blend_reason" = "PHEV modeled as a mix of electric + fuel km (higher electric share with home charging).";
-"insurance_included_reason" = "Yearly costs include a simplified insurance estimate from list price and km.";
+"insurance_included_reason" = "Yearly costs include insurance (estimate): IVASS average liability, same for both cars (unless you override).";
 "lead_saved_locally" = "Request kept on this device only — it was not sent (no contact channel configured).";
 "lead_send_unavailable" = "Contact form is not available right now — nothing was sent.";
 "lead_consent_required" = "Turn on consent to send your request.";
-"verdict_opex_only_under_headline" = "Yes/No is on running costs only (energy, tax, maintenance, insurance). Purchase price is separate.";
+"verdict_opex_only_under_headline" = "Yes/No is on running costs only (energy, tax, maintenance, insurance (estimate)). Purchase price is separate.";
 "lead_sent_remote" = "Request sent. An advisor will contact you.";
 "lead_send_failed" = "Couldn’t send. Please try again shortly.";
 "tco_extras_title" = "Insurance & residual value";

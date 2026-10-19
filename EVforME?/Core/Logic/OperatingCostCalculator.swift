@@ -2,7 +2,7 @@
 //  OperatingCostCalculator.swift
 //  EVforME?
 //
-//  Unica fonte di €/km e €/anno di gestione (energia + bollo + manutenzione + RC).
+//  Unica fonte di €/km e €/anno di gestione (energia + bollo + manutenzione + assicurazione).
 //
 
 import Foundation
@@ -62,7 +62,9 @@ enum OperatingCostCalculator {
         let insurance = OwnershipCostEstimates.insurancePerYear(
             purchasePrice: valueBasis,
             yearlyKm: yearlyKm,
-            electrified: electrified
+            electrified: electrified,
+            annualInsuranceOverrideEUR: input.annualInsuranceOverrideEUR,
+            includeKaskoTheft: input.includeKaskoTheft
         )
         return energy + maintenance + taxes + insurance
     }

@@ -84,51 +84,32 @@ enum OwnershipCostEstimates {
         return max(floor, min(purchaseOrListPrice, residual))
     }
 
-    /// Assicurazione annua migliorata con fascie di prezzo più granulari e fattori aggiuntivi
-    static func insurancePerYear(purchasePrice: Double, yearlyKm: Double, electrified: Bool) -> Double {
-        // Fascie di prezzo per tassi base più accurati
-        let priceTierRate: Double
-        switch purchasePrice {
-        case 0..<15_000:
-            priceTierRate = electrified ? 0.028 : 0.026
-        case 15_000..<25_000:
-            priceTierRate = electrified ? 0.030 : 0.028
-        case 25_000..<40_000:
-            priceTierRate = electrified ? 0.032 : 0.030
-        case 40_000..<60_000:
-            priceTierRate = electrified ? 0.035 : 0.033
-        case 60_000..<80_000:
-            priceTierRate = electrified ? 0.038 : 0.036
-        default:
-            priceTierRate = electrified ? 0.042 : 0.040
+    /// Media IVASS premio RC auto (2° trim. 2026) — uguale per auto attuale ed EV.
+    static let ivassAverageRCEURPerYear: Double = 422
+
+    /// Assicurazione annua: RC flat IVASS (o override utente) + kasko/furto opzionale sul valore.
+    /// - Parameters:
+    ///   - purchasePrice: usato solo se `includeKaskoTheft` (OFF di default).
+    ///   - annualInsuranceOverrideEUR: se > 0, sostituisce la RC per entrambe le auto.
+    static func insurancePerYear(
+        purchasePrice: Double,
+        yearlyKm: Double,
+        electrified: Bool,
+        annualInsuranceOverrideEUR: Double? = nil,
+        includeKaskoTheft: Bool = false
+    ) -> Double {
+        _ = yearlyKm
+        _ = electrified
+        let rc: Double
+        if let override = annualInsuranceOverrideEUR, override > 0 {
+            rc = override
+        } else {
+            rc = ivassAverageRCEURPerYear
         }
-        
-        // Fattore chilometraggio con progressione non lineare
-        let kmFactor: Double
-        switch yearlyKm {
-        case 0..<5_000:
-            kmFactor = electrified ? 0.006 : 0.008
-        case 5_000..<15_000:
-            kmFactor = electrified ? 0.008 : 0.010
-        case 15_000..<25_000:
-            kmFactor = electrified ? 0.010 : 0.012
-        case 25_000..<40_000:
-            kmFactor = electrified ? 0.012 : 0.014
-        default:
-            kmFactor = electrified ? 0.014 : 0.016
-        }
-        
-        // Calcolo base
-        let fromPrice = purchasePrice * priceTierRate
-        let fromKm = yearlyKm * kmFactor
-        
-        // Minimum base insurance (franchigia minima)
-        let minimumBase: Double = electrified ? 380 : 320
-        
-        // Fattore sicurezza extra per veicoli premium (solo su valori ancora alti)
-        let premiumFactor = purchasePrice > 50_000 ? 1.15 : 1.0
-        
-        return max(minimumBase, (fromPrice * 0.70 + fromKm) * premiumFactor)
+        guard includeKaskoTheft else { return rc }
+        // Proxy kasko/furto-incendio (~1,2% del valore d’uso); etichettata come tale in UI.
+        let kasko = max(80, purchasePrice * 0.012)
+        return rc + kasko
     }
 
     /// Bollo / tassa di possesso — stima semplificata (non ACI ufficiale).
@@ -258,12 +239,16 @@ final class EVSimulator {
         let sourceInsurance = OwnershipCostEstimates.insurancePerYear(
             purchasePrice: sourceValueBasis,
             yearlyKm: yearlyKm,
-            electrified: sourceVehicle.powertrain == .ev || sourceVehicle.powertrain == .phev
+            electrified: sourceVehicle.powertrain == .ev || sourceVehicle.powertrain == .phev,
+            annualInsuranceOverrideEUR: input.annualInsuranceOverrideEUR,
+            includeKaskoTheft: input.includeKaskoTheft
         )
         let targetInsurance = OwnershipCostEstimates.insurancePerYear(
             purchasePrice: targetValueBasis,
             yearlyKm: yearlyKm,
-            electrified: true
+            electrified: true,
+            annualInsuranceOverrideEUR: input.annualInsuranceOverrideEUR,
+            includeKaskoTheft: input.includeKaskoTheft
         )
 
         let currentYear = Defaults.referenceCalendarYear

@@ -384,6 +384,8 @@ private struct CodableUserInput: Codable {
     let targetEnergyOverrideKWhPer100Km: Double?
     private var chargingConfigData: ChargingConfigData?
     let marketRaw: String?
+    let annualInsuranceOverrideEUR: Double?
+    let includeKaskoTheft: Bool
 
     private enum CodingKeys: String, CodingKey {
         case dailyKm
@@ -406,6 +408,8 @@ private struct CodableUserInput: Codable {
         case targetEnergyOverrideKWhPer100Km
         case chargingConfigData
         case marketRaw
+        case annualInsuranceOverrideEUR
+        case includeKaskoTheft
     }
     
     // Helper struct for encoding charging configuration
@@ -436,6 +440,8 @@ private struct CodableUserInput: Codable {
         sourceConsumptionOverrideLPer100Km = input.sourceConsumptionOverrideLPer100Km
         targetEnergyOverrideKWhPer100Km = input.targetEnergyOverrideKWhPer100Km
         marketRaw = input.market.rawValue
+        annualInsuranceOverrideEUR = input.annualInsuranceOverrideEUR
+        includeKaskoTheft = input.includeKaskoTheft
         
         // Encode charging configuration
         chargingConfigData = ChargingConfigData(
@@ -474,6 +480,8 @@ private struct CodableUserInput: Codable {
         sourceConsumptionOverrideLPer100Km = try container.decodeIfPresent(Double.self, forKey: .sourceConsumptionOverrideLPer100Km)
         targetEnergyOverrideKWhPer100Km = try container.decodeIfPresent(Double.self, forKey: .targetEnergyOverrideKWhPer100Km)
         marketRaw = try container.decodeIfPresent(String.self, forKey: .marketRaw)
+        annualInsuranceOverrideEUR = try container.decodeIfPresent(Double.self, forKey: .annualInsuranceOverrideEUR)
+        includeKaskoTheft = try container.decodeIfPresent(Bool.self, forKey: .includeKaskoTheft) ?? false
         
         // Persist raw charging payload; `toUserInput()` materializes / falls back.
         chargingConfigData = try container.decodeIfPresent(ChargingConfigData.self, forKey: .chargingConfigData)
@@ -499,6 +507,8 @@ private struct CodableUserInput: Codable {
         try container.encodeIfPresent(targetEnergyOverrideKWhPer100Km, forKey: .targetEnergyOverrideKWhPer100Km)
         try container.encodeIfPresent(chargingConfigData, forKey: .chargingConfigData)
         try container.encodeIfPresent(marketRaw, forKey: .marketRaw)
+        try container.encodeIfPresent(annualInsuranceOverrideEUR, forKey: .annualInsuranceOverrideEUR)
+        try container.encode(includeKaskoTheft, forKey: .includeKaskoTheft)
     }
     
     func toUserInput() -> UserInput {
@@ -544,7 +554,9 @@ private struct CodableUserInput: Codable {
             sourceConsumptionOverrideLPer100Km: sourceConsumptionOverrideLPer100Km,
             targetEnergyOverrideKWhPer100Km: targetEnergyOverrideKWhPer100Km,
             chargingConfiguration: chargingConfig,
-            market: market
+            market: market,
+            annualInsuranceOverrideEUR: annualInsuranceOverrideEUR,
+            includeKaskoTheft: includeKaskoTheft
         )
     }
 

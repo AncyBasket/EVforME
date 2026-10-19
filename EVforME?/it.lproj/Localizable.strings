@@ -46,7 +46,7 @@
 "current_vehicle_short" = "Attuale";
 "electrified_vehicle_short" = "Elettrificata";
 "comparison_card_title" = "Comparativa veicoli (dimensioni, €/km gestione)";
-"comparison_operating_per_km_caption" = "Gestione: energia + bollo + tagliandi + RC (l’usata pesa di più). Il prezzo di acquisto della nuova non entra in questo €/km.";
+"comparison_operating_per_km_caption" = "Gestione: energia + bollo + tagliandi + assicurazione (stima). Il prezzo di acquisto della nuova non entra in questo €/km.";
 "operating_cost_enter_km_hint" = "Inserisci i km annui per vedere il €/km.";
 "vehicle_search_placeholder" = "Cerca marca o modello…";
 "vehicle_picker_button" = "Scegli dal catalogo…";
@@ -113,7 +113,7 @@
 "lead_saved_locally" = "Richiesta tenuta solo sul dispositivo — non è stata inviata (nessun canale di contatto configurato).";
 "lead_send_unavailable" = "Il form di contatto non è disponibile in questo momento — non è stato inviato nulla.";
 "lead_consent_required" = "Attiva il consenso per inviare la richiesta.";
-"verdict_opex_only_under_headline" = "Il Sì/No riguarda solo i costi di gestione (energia, bollo, manutenzione, RC). Il prezzo d’acquisto è a parte.";
+"verdict_opex_only_under_headline" = "Il Sì/No riguarda solo i costi di gestione (energia, bollo, manutenzione, assicurazione (stima)). Il prezzo d’acquisto è a parte.";
 "lead_sent_remote" = "Richiesta inviata. Un advisor ti ricontatterà.";
 "lead_send_failed" = "Invio non riuscito. Riprova tra poco.";
 "market_picker_label" = "Paese";
@@ -393,7 +393,7 @@
 "validation_sticker_energy_range" = "Il consumo sticker deve essere tra 8 e 40 kWh/100 km.";
 "yearly_km_value" = "%d km/anno";
 "phev_blend_reason" = "PHEV modellata come mix km elettrici + carburante (più elettrico con ricarica casa).";
-"insurance_included_reason" = "I costi annui includono una stima assicurativa semplificata da listino e km.";
+"insurance_included_reason" = "I costi annui includono assicurazione (stima): RC media IVASS, uguale per entrambe le auto (salvo override).";
 "tco_extras_title" = "Assicurazione e residuo";
 "tco_extras_closed" = "Stime semplificate oltre carburante e manutenzione.";
 "tco_extras_intro" = "Proxy indicativi — non sono preventivi assicurativi né quotazioni di riacquisto.";
