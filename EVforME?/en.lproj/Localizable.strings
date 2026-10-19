@@ -519,6 +519,7 @@
 "incentive_window_open_no_end" = "Incentive window open (no end date in schedule).";
 "incentive_window_possibly_stale" = "Incentive schedule may be out of date.";
 "incentive_window_possibly_stale_detail" = "The bundled end date has passed: figures remain an estimate only. Check the official site before deciding.";
+"incentive_window_closed_mase_2025" = "MASE 2025 bonus closed (funds exhausted, deadline 30/06/2026)";
 "incentive_window_starts" = "Incentive window expected from %@";
 "guide_topic_road_tax_title" = "Road tax & EV exemptions (indicative)";
 "guide_topic_road_tax_body" = "In Italy many BEVs have had road-tax exemption for the first years after registration, then regional rules. We show only a rough estimate from the catalog plus a typical early-exemption hypothesis — not a substitute for ACI, your region, or a tax advisor. Always check your province and registration year on official channels.";

@@ -567,6 +567,7 @@ enum L10n {
     static var incentiveWindowOpenNoEnd: String { string("incentive_window_open_no_end") }
     static var incentiveWindowPossiblyStale: String { string("incentive_window_possibly_stale") }
     static var incentiveWindowPossiblyStaleDetail: String { string("incentive_window_possibly_stale_detail") }
+    static var incentiveWindowClosedMASE2025: String { string("incentive_window_closed_mase_2025") }
     static func incentiveWindowStarts(_ date: String) -> String { format("incentive_window_starts", date) }
     static var guideTopicRoadTaxTitle: String { string("guide_topic_road_tax_title") }
     static var guideTopicRoadTaxBody: String { string("guide_topic_road_tax_body") }

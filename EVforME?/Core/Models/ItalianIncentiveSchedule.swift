@@ -55,8 +55,14 @@ nonisolated struct ItalianIncentiveSchedule: Codable, Equatable, Sendable {
     func estimatedPurchaseBonusEUR(
         evListPrice: Double,
         replacingVehiclePrice: Double,
-        hasHomeCharging: Bool
+        hasHomeCharging: Bool,
+        asOf date: Date = Date()
     ) -> Double {
+        // Finestra chiusa / scaduta → mai applicare l’incentivo ai calcoli.
+        if case .expired = windowStatus(asOf: date) { return 0 }
+        if case .notYetStarted = windowStatus(asOf: date) { return 0 }
+        if case .unknown = windowStatus(asOf: date) { return 0 }
+
         guard evListPrice > 0, evListPrice <= maxListPriceEUR else { return 0 }
 
         let sorted = brackets.sorted { $0.maxPriceEUR < $1.maxPriceEUR }

@@ -21,7 +21,7 @@ nonisolated enum ItalianIncentives {
         schedule.windowStatus()
     }
 
-    /// Copy UI per la finestra incentivo.
+    /// Copy UI per la finestra incentivo. Stato chiuso: niente "Se compro entro…".
     static var windowBadgeText: String {
         switch windowStatus {
         case .unknown:
@@ -32,7 +32,7 @@ nonisolated enum ItalianIncentives {
             }
             return L10n.incentiveWindowOpenNoEnd
         case .expired:
-            return L10n.incentiveWindowPossiblyStale
+            return L10n.incentiveWindowClosedMASE2025
         case .notYetStarted(let from):
             return L10n.incentiveWindowStarts(Self.displayDate(from))
         }

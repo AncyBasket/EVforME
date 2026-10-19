@@ -1,19 +1,19 @@
 {
   "country": "IT",
   "currency": "EUR",
-  "updatedAt": "2026-10-08T00:00:00Z",
-  "validFrom": "2025-08-08",
-  "validUntil": "2026-12-31",
-  "maxListPriceEUR": 45000,
+  "updatedAt": "2026-10-19T00:00:00Z",
+  "validFrom": "2025-09-01",
+  "validUntil": "2026-06-30",
+  "maxListPriceEUR": 35000,
   "maxBonusEUR": 11000,
   "scrappageExtraEUR": 0,
   "scrappageMaxReplacingPriceEUR": 0,
   "brackets": [
-    { "maxPriceEUR": 45000, "bonusEUR": 9000 }
+    { "maxPriceEUR": 35000, "bonusEUR": 9000 }
   ],
   "requiresISEE": true,
   "requiresScrappage": true,
-  "verifiedAgainstOfficialSchedule": false,
+  "verifiedAgainstOfficialSchedule": true,
   "officialInfoURL": "https://www.bonusveicolielettrici.mase.gov.it/index.html",
-  "sourceNote": "Schema 2025 MASE/PNRR (ISEE ≤40k, rottamazione, FUA) non modellabile in modo affidabile qui. Le cifre sono illustrative e NON vengono sommate al verdetto di default — attiva il toggle solo dopo aver verificato sul sito ufficiale."
+  "sourceNote": "Bonus MASE 2025 chiuso: fondi esauriti (ott 2025), contratti entro 30/06/2026. Tetto 35.000 € IVA esclusa; 11.000 € (ISEE ≤30k) / 9.000 € (ISEE 30–40k). Verifica sul sito ufficiale — l’app non applica l’incentivo ai calcoli quando lo schedule è scaduto."
 }

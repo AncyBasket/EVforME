@@ -517,6 +517,7 @@
 "incentive_window_open_no_end" = "Finestra incentivo aperta (senza data di fine nel schedule).";
 "incentive_window_possibly_stale" = "Schedule incentivo potrebbe non essere attuale.";
 "incentive_window_possibly_stale_detail" = "La data di fine nel bundle è passata: i numeri restano solo una stima. Controlla il sito ufficiale prima di decidere.";
+"incentive_window_closed_mase_2025" = "Bonus MASE 2025 chiuso (fondi esauriti, termine 30/06/2026)";
 "incentive_window_starts" = "Finestra incentivo prevista dal %@";
 "guide_topic_road_tax_title" = "Bollo ed esenzioni EV (orientativo)";
 "guide_topic_road_tax_body" = "In Italia molte BEV hanno avuto esenzione dal bollo per i primi anni dall’immatricolazione, poi regole regionali. Qui mostriamo solo una stima grezza basata sul catalogo e su un’ipotesi tipica di esenzione iniziale — non sostituisce ACI, regione o CAF. Controlla sempre la tua provincia e l’anno di immatricolazione sul canale ufficiale.";
