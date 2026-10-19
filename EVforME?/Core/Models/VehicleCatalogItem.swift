@@ -93,6 +93,8 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
     let confidenceScore: Double?
     /// `petrol` / `diesel` se noto; `nil` → `resolvedFuelKind` euristica.
     let fuelKind: FuelKind?
+    /// Potenza kW (bollo EV post-esenzione = 1/4 × 2,58 €/kW). Opzionale.
+    let powerKw: Double?
 
     var displayName: String {
         if let trim, !trim.isEmpty {
@@ -249,7 +251,8 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         sourceName: String? = nil,
         sourceUpdatedAt: String? = nil,
         confidenceScore: Double? = nil,
-        fuelKind: FuelKind? = nil
+        fuelKind: FuelKind? = nil,
+        powerKw: Double? = nil
     ) {
         self.id = id
         self.brand = brand
@@ -274,5 +277,6 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         self.sourceUpdatedAt = sourceUpdatedAt
         self.confidenceScore = confidenceScore
         self.fuelKind = fuelKind
+        self.powerKw = powerKw
     }
 }

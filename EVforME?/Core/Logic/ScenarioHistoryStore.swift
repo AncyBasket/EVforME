@@ -89,7 +89,7 @@ extension PersistedScenarioInput: Codable {
         areaTypeRaw = try c.decode(Int.self, forKey: .areaTypeRaw)
         fuelPrice = try c.decode(Double.self, forKey: .fuelPrice)
         ownershipYears = try c.decode(Int.self, forKey: .ownershipYears)
-        electricityPricePerKWh = try c.decodeIfPresent(Double.self, forKey: .electricityPricePerKWh) ?? 0.25
+        electricityPricePerKWh = try c.decodeIfPresent(Double.self, forKey: .electricityPricePerKWh) ?? 0.31
         sourceVehicleId = try c.decode(String.self, forKey: .sourceVehicleId)
         targetVehicleId = try c.decode(String.self, forKey: .targetVehicleId)
         scenarioRaw = try c.decode(Double.self, forKey: .scenarioRaw)
@@ -179,7 +179,7 @@ struct SavedScenarioSnapshot: Codable, Identifiable, Equatable {
             dailyKm: yearlyKm,
             hasHomeCharging: hasHomeCharging,
             areaType: trip.suggestedAreaType,
-            fuelPrice: fuelPriceAtSave ?? 1.7,
+            fuelPrice: fuelPriceAtSave ?? OfficialEnergyCosts.Fallback.petrolPerLiter,
             ownershipYears: 5,
             electricityPricePerKWh: electricityPriceAtSave ?? 0.31,
             sourceVehicleId: sourceVehicleId,

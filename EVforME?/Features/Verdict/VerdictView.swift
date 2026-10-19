@@ -564,18 +564,20 @@ struct VerdictView: View {
                 targetBreakdown: result.targetYearlyBreakdown
             )
 
-            HStack(alignment: .center, spacing: 12) {
-                Text(L10n.deepDiveCostsTakeaway)
-                    .font(Typography.title2)
-                    .foregroundColor(.ink)
-            }
-            .padding(.vertical, 8)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .overlay(alignment: .leading) {
-                Rectangle()
-                    .fill(Color.accent)
-                    .frame(width: 3)
-                    .padding(.leading, -10)
+            if result.sourceYearlyBreakdown.total > result.targetYearlyBreakdown.total {
+                HStack(alignment: .center, spacing: 12) {
+                    Text(L10n.deepDiveCostsTakeaway)
+                        .font(Typography.title2)
+                        .foregroundColor(.ink)
+                }
+                .padding(.vertical, 8)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .overlay(alignment: .leading) {
+                    Rectangle()
+                        .fill(Color.accent)
+                        .frame(width: 3)
+                        .padding(.leading, -10)
+                }
             }
         }
     }
@@ -667,14 +669,16 @@ struct VerdictView: View {
             yearlyKm: km,
             electrified: sourceElectrified,
             annualInsuranceOverrideEUR: userInput.annualInsuranceOverrideEUR,
-            includeKaskoTheft: userInput.includeKaskoTheft
+            includeKaskoTheft: userInput.includeKaskoTheft,
+            annualKaskoEUR: userInput.annualKaskoEUR
         )
         let evIns = OwnershipCostEstimates.insurancePerYear(
             purchasePrice: targetBasis,
             yearlyKm: km,
             electrified: true,
             annualInsuranceOverrideEUR: userInput.annualInsuranceOverrideEUR,
-            includeKaskoTheft: userInput.includeKaskoTheft
+            includeKaskoTheft: userInput.includeKaskoTheft,
+            annualKaskoEUR: userInput.annualKaskoEUR
         )
         let iceRes = OwnershipCostEstimates.residualValue(
             purchasePrice: sourceBasis,

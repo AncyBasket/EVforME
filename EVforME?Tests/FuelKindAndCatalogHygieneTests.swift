@@ -328,12 +328,18 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertLessThan(fraction, 0.05)
     }
 
-    /// Audit 2026-10-19 §1: WLTP EV in fascia realistica; Model 3 2026 sul dato ufficiale ~13,2.
-    /// Van / performance estremi possono superare 25 senza essere dati sintetici.
+    /// Audit 2026-10-19 §1: WLTP EV 11–25. Eccezioni documentate: solo furgoni / veicoli pesanti.
     func testCatalog_EVWltpConsumptionInPlausibleBand() {
-        let heavyNeedles = [
-            "eqv", "e-transit", "e-crafter", "e-berlingo", "e-partner", "e-vivaro",
-            "id. buzz", "id buzz", "transporter", "vito", "proace", "taycan", "g 580", "q8 e-tron"
+        /// Furgoni e veicoli pesanti (WLTP reale spesso >25). Ogni id va giustificato.
+        let documentedHeavyExceptions: Set<String> = [
+            // Furgoni / LCV
+            "mercedes-benz-eqv-2020", "mercedes-benz-eqv-2021", "mercedes-benz-eqv-2022",
+            "mercedes-benz-eqv-2023", "mercedes-benz-eqv-2024",
+            "toyota-proace-electric-2023",
+            // SUV / off-road / performance pesanti (non passenger compact)
+            "audi-q8-e-tron-2019", "audi-q8-e-tron-2020",
+            "mercedes-benz-g-580-eq-2024",
+            "porsche-taycan-2019", "porsche-taycan-2020",
         ]
         let evs = VehicleCatalogService.shared.vehicles.filter { $0.powertrain == .ev }
         XCTAssertFalse(evs.isEmpty)
@@ -342,11 +348,13 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
                     ?? ev.energyConsumptionKWhPerKm.map({ $0 * 100 }) else {
                 continue
             }
-            let blob = "\(ev.brand) \(ev.model) \(ev.trim ?? "")".lowercased()
-            let heavy = heavyNeedles.contains { blob.contains($0) }
+            if documentedHeavyExceptions.contains(ev.id) {
+                XCTAssertGreaterThanOrEqual(kwh100, 11.0, "\(ev.id)")
+                XCTAssertLessThanOrEqual(kwh100, 32.0, "\(ev.id) heavy cap")
+                continue
+            }
             XCTAssertGreaterThanOrEqual(kwh100, 11.0, "\(ev.id) WLTP \(kwh100) < 11")
-            let upper = heavy ? 32.0 : 25.0
-            XCTAssertLessThanOrEqual(kwh100, upper, "\(ev.id) WLTP \(kwh100) > \(upper)")
+            XCTAssertLessThanOrEqual(kwh100, 25.0, "\(ev.id) WLTP \(kwh100) > 25")
         }
     }
 
@@ -387,8 +395,7 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertEqual(l100, 5.0, accuracy: 0.15)
     }
 
-    /// Se la media diesel di un modello supera la benzina → segnala (debito catalogo residuo).
-    /// Hard gate solo su Ateca 2016 (corretto a ~5,0 WLTP).
+    /// Se la media diesel di un modello supera la benzina → fallisci.
     func testCatalog_DieselAverageNotAbovePetrolForSameModel() {
         let iceLike = VehicleCatalogService.shared.vehicles.filter {
             $0.powertrain == .ice || $0.powertrain == .hev
@@ -396,7 +403,6 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         let grouped = Dictionary(grouping: iceLike) {
             "\($0.brand.lowercased())|\($0.model.lowercased())"
         }
-        var flagged: [String] = []
         for (key, rows) in grouped {
             let diesel = rows.compactMap { v -> Double? in
                 guard v.resolvedFuelKind == .diesel, let l = v.fuelConsumptionLPerKm else { return nil }
@@ -409,20 +415,37 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             guard diesel.count >= 2, petrol.count >= 2 else { continue }
             let dAvg = diesel.reduce(0, +) / Double(diesel.count)
             let pAvg = petrol.reduce(0, +) / Double(petrol.count)
-            if dAvg > pAvg + 0.05 {
-                flagged.append(
-                    "\(key): diesel \(String(format: "%.2f", dAvg)) > petrol \(String(format: "%.2f", pAvg))"
-                )
-            }
+            XCTAssertLessThanOrEqual(
+                dAvg,
+                pAvg + 0.05,
+                "Diesel avg \(String(format: "%.2f", dAvg)) > petrol \(String(format: "%.2f", pAvg)) for \(key)"
+            )
         }
-        if !flagged.isEmpty {
-            print("SEGNALE catalogo diesel>benzina (\(flagged.count)): \(flagged.sorted().joined(separator: "; "))")
-        }
-        // Ateca 2016 non deve più essere un outlier diesel gonfiato.
         let ateca = VehicleCatalogService.shared.vehicle(by: "seat-ateca-2016")
         let atecaL100 = (ateca?.fuelConsumptionLPerKm ?? 0) * 100
         XCTAssertEqual(atecaL100, 5.0, accuracy: 0.2)
-        // Il conteggio segnalato è diagnostica (audit §2); non blocca CI sul debito residuo.
-        _ = flagged.count
+    }
+
+    func testCatalog_AurisHybridOnlyFrom2010_AndYarisHybridRows() {
+        let auris = VehicleCatalogService.shared.vehicles.filter { $0.model.localizedCaseInsensitiveContains("auris") }
+        for v in auris where v.year < 2010 {
+            XCTAssertEqual(v.powertrain, .ice, v.id)
+        }
+        for v in auris where v.powertrain == .hev {
+            XCTAssertGreaterThanOrEqual(v.year, 2010, v.id)
+            XCTAssertTrue((v.trim ?? "").localizedCaseInsensitiveContains("hybrid") || v.id.contains("hybrid"), v.id)
+        }
+        for year in 2012...2019 {
+            let hybrid = VehicleCatalogService.shared.vehicle(by: "toyota-yaris-hybrid-\(year)")
+            XCTAssertNotNil(hybrid, "missing yaris hybrid \(year)")
+            XCTAssertEqual(hybrid?.powertrain, .hev)
+        }
+    }
+
+    func testCatalog_StimaFlagOn2025YoYCopies() {
+        let stima = VehicleCatalogService.shared.vehicles.filter {
+            ($0.sourceName ?? "").localizedCaseInsensitiveContains("stima")
+        }
+        XCTAssertEqual(stima.count, 37, "expected 37 stima(anno precedente) flags, got \(stima.count)")
     }
 }

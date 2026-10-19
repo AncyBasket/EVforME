@@ -31,8 +31,9 @@ struct EVSimulationInput {
     var market: AppMarket = .IT
     /// Override RC annuale (€); `nil`/≤0 = media IVASS per entrambe.
     var annualInsuranceOverrideEUR: Double? = nil
-    /// Kasko/furto legata al valore (OFF di default).
+    /// Kasko/furto (OFF di default); richiede importo utente.
     var includeKaskoTheft: Bool = false
+    var annualKaskoEUR: Double? = nil
 }
 
 struct EVSimulationResult {
@@ -91,17 +92,17 @@ enum OwnershipCostEstimates {
     /// Media IVASS premio RC auto (2° trim. 2026) — uguale per auto attuale ed EV.
     static let ivassAverageRCEURPerYear: Double = 422
 
-    /// Assicurazione annua: RC flat IVASS (o override utente) + kasko/furto opzionale sul valore.
-    /// - Parameters:
-    ///   - purchasePrice: usato solo se `includeKaskoTheft` (OFF di default).
-    ///   - annualInsuranceOverrideEUR: se > 0, sostituisce la RC per entrambe le auto.
+    /// Assicurazione annua: RC flat IVASS (o override utente) + kasko/furto solo se l’utente indica l’importo.
+    /// Nessun proxy % sul valore: se kasko è ON senza importo, la UI deve chiederlo (qui si ignora la kasko).
     static func insurancePerYear(
         purchasePrice: Double,
         yearlyKm: Double,
         electrified: Bool,
         annualInsuranceOverrideEUR: Double? = nil,
-        includeKaskoTheft: Bool = false
+        includeKaskoTheft: Bool = false,
+        annualKaskoEUR: Double? = nil
     ) -> Double {
+        _ = purchasePrice
         _ = yearlyKm
         _ = electrified
         let rc: Double
@@ -110,15 +111,15 @@ enum OwnershipCostEstimates {
         } else {
             rc = ivassAverageRCEURPerYear
         }
-        guard includeKaskoTheft else { return rc }
-        // Proxy kasko/furto-incendio (~1,2% del valore d’uso); etichettata come tale in UI.
-        let kasko = max(80, purchasePrice * 0.012)
+        guard includeKaskoTheft, let kasko = annualKaskoEUR, kasko > 0 else { return rc }
         return rc + kasko
     }
 
     /// Bollo / tassa di possesso — stima semplificata (non ACI ufficiale).
-    /// EV: esenzione tipica nei primi 5 anni; poi catalogo o 1/4 della tariffa benzina (proxy kW).
-    /// HEV/PHEV: nessuna riduzione regionale hard-coded (−30%/−50% rimossi).
+    /// EV: 5 anni esenzione, poi 1/4 della tariffa benzina × kW (nazionale 2,58 €/kW, audit ACI).
+    /// Mai il valore pieno di catalogo per le EV; se manca kW e manca un proxy benzina-equivalente → 0.
+    /// HEV/PHEV: nessuna riduzione regionale hard-coded.
+    static let petrolBolloEURPerKw: Double = 2.58
     static let petrolBolloProxyEURPerYear: Double = 220
     static let hevPhevBolloProxyEURPerYear: Double = 180
 
@@ -126,14 +127,21 @@ enum OwnershipCostEstimates {
         catalogTaxesPerYear: Double,
         powertrain: Powertrain,
         vehicleYear: Int,
-        referenceYear: Int = Calendar.current.component(.year, from: Date())
+        referenceYear: Int = Calendar.current.component(.year, from: Date()),
+        powerKw: Double? = nil
     ) -> Double {
         let age = max(0, referenceYear - vehicleYear)
         switch powertrain {
         case .ev:
             if age < 5 { return 0 }
-            if catalogTaxesPerYear > 0 { return catalogTaxesPerYear }
-            return (petrolBolloProxyEURPerYear * 0.25).rounded()
+            if let kw = powerKw, kw > 0 {
+                return (petrolBolloEURPerKw * kw * 0.25).rounded()
+            }
+            // Se il catalogo ha un bollo benzina-equivalente (pieno), usa solo 1/4 — mai il pieno.
+            if catalogTaxesPerYear > 0 {
+                return (catalogTaxesPerYear * 0.25).rounded()
+            }
+            return 0
         case .phev, .hev:
             return catalogTaxesPerYear > 0 ? catalogTaxesPerYear : hevPhevBolloProxyEURPerYear
         case .ice:
@@ -242,14 +250,16 @@ final class EVSimulator {
             yearlyKm: yearlyKm,
             electrified: sourceVehicle.powertrain == .ev || sourceVehicle.powertrain == .phev,
             annualInsuranceOverrideEUR: input.annualInsuranceOverrideEUR,
-            includeKaskoTheft: input.includeKaskoTheft
+            includeKaskoTheft: input.includeKaskoTheft,
+            annualKaskoEUR: input.annualKaskoEUR
         )
         let targetInsurance = OwnershipCostEstimates.insurancePerYear(
             purchasePrice: targetValueBasis,
             yearlyKm: yearlyKm,
             electrified: true,
             annualInsuranceOverrideEUR: input.annualInsuranceOverrideEUR,
-            includeKaskoTheft: input.includeKaskoTheft
+            includeKaskoTheft: input.includeKaskoTheft,
+            annualKaskoEUR: input.annualKaskoEUR
         )
 
         let currentYear = Defaults.referenceCalendarYear
@@ -273,7 +283,8 @@ final class EVSimulator {
                 catalogTaxesPerYear: sourceVehicle.taxesPerYear,
                 powertrain: sourceVehicle.powertrain,
                 vehicleYear: sourceVehicle.year,
-                referenceYear: currentYear
+                referenceYear: currentYear,
+                powerKw: sourceVehicle.powerKw
             ),
             insurance: sourceInsurance
         )
@@ -284,7 +295,8 @@ final class EVSimulator {
                 catalogTaxesPerYear: targetVehicle.taxesPerYear,
                 powertrain: targetVehicle.powertrain,
                 vehicleYear: targetVehicle.year,
-                referenceYear: currentYear
+                referenceYear: currentYear,
+                powerKw: targetVehicle.powerKw
             ),
             insurance: targetInsurance
         )

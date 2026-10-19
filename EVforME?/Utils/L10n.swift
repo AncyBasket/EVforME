@@ -551,6 +551,36 @@ enum L10n {
     static func yearlyKmValue(_ km: Int) -> String { format("yearly_km_value", km) }
     static var phevBlendReason: String { string("phev_blend_reason") }
     static var insuranceIncludedReason: String { string("insurance_included_reason") }
+    static var insuranceAnnualOptionalLabel: String { string("insurance_annual_optional_label") }
+    static var insuranceAnnualOptionalPlaceholder: String { string("insurance_annual_optional_placeholder") }
+    static var kaskoTheftToggle: String { string("kasko_theft_toggle") }
+    static var kaskoTheftAmountLabel: String { string("kasko_theft_amount_label") }
+    static var kaskoTheftAmountPlaceholder: String { string("kasko_theft_amount_placeholder") }
+    static var kaskoAmountRequired: String { string("kasko_amount_required") }
+    static var publicChargingTypeLabel: String { string("public_charging_type_label") }
+    static var publicChargingSourceNote: String { string("public_charging_source_note") }
+    static func electricityEurostatPeriod(_ period: String) -> String {
+        format("electricity_eurostat_period", period)
+    }
+    static var calculationCurrentCheaper: String { string("calculation_current_cheaper") }
+    static func impactCurrentCheaper() -> String { string("impact_current_cheaper") }
+    static var shareCurrentCheaper: String { string("share_current_cheaper") }
+    static var lastComparisonDataChangedCheaper: String { string("last_comparison_data_changed_cheaper") }
+    static func calculationEvFormulaFull(
+        _ km: Int,
+        _ kWhPerKm: Double,
+        _ pricePerKWh: Double,
+        _ areaMult: Double,
+        _ tripMult: Double,
+        _ scenarioMult: Double,
+        _ energyCost: Double,
+        _ yearlyCost: Double
+    ) -> String {
+        format(
+            "calculation_ev_formula_full",
+            km, kWhPerKm, pricePerKWh, areaMult, tripMult, scenarioMult, energyCost, yearlyCost
+        )
+    }
     static var leadSavedLocally: String { string("lead_saved_locally") }
     static var leadSentRemote: String { string("lead_sent_remote") }
     static var leadSendFailed: String { string("lead_send_failed") }

@@ -22,7 +22,9 @@ extension SimulationResult {
             verdictLine,
             "",
             L10n.shareWeeklyCharges(weeklyCharges),
-            L10n.shareYearlySavings(yearlySavingsRange.lowerBound, yearlySavingsRange.upperBound),
+            yearlySavingsRange.upperBound > 0
+                ? L10n.shareYearlySavings(yearlySavingsRange.lowerBound, yearlySavingsRange.upperBound)
+                : L10n.shareCurrentCheaper,
             "",
             L10n.shareKeyReasons,
         ]

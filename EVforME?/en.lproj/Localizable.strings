@@ -450,7 +450,7 @@
 "charging_type_public_ultra_fast" = "Ultra-fast charging";
 "charging_type_public_ultra_fast_description" = "Ultra-fast charging (150+ kW)";
 "charging_type_tesla_supercharger" = "Tesla Supercharger";
-"charging_type_tesla_supercharger_description" = "Tesla network (~€0.46/kWh for owners)";
+"charging_type_tesla_supercharger_description" = "Tesla network (~€0.42/kWh for owners)";
 
 /* App Intents */
 "intent_simulate_title" = "Simulate EV suitability";
@@ -554,3 +554,19 @@
 "charging_map_city_not_found" = "City not found. Check the spelling or open Apple Maps.";
 "charging_map_verdict_nudge_title" = "No wallbox? Check public chargers near you";
 "charging_map_verdict_nudge_body" = "Indicative map search — not a guarantee of plugs where you park.";
+
+"insurance_annual_optional_label" = "How much do you pay for insurance per year (optional)";
+"insurance_annual_optional_placeholder" = "e.g. 422";
+"kasko_theft_toggle" = "Include comprehensive / theft cover";
+"kasko_theft_amount_label" = "Comprehensive / theft premium per year (€)";
+"kasko_theft_amount_placeholder" = "Required when enabled";
+"kasko_amount_required" = "Enter the comprehensive/theft amount — we do not estimate a % of car value.";
+"public_charging_type_label" = "Public charging";
+"public_charging_source_note" = "Public charging: Adiconsum September 2026";
+"electricity_eurostat_period" = "Eurostat electricity: period %@ (band 2,500–4,999 kWh)";
+"calculation_current_cheaper" = "With these numbers your current car has lower running costs.";
+"impact_current_cheaper" = "• With these numbers your current car costs less.";
+"share_current_cheaper" = "With these numbers your current car costs less";
+"last_comparison_data_changed_cheaper" = "Data changed — with these numbers your current car stays cheaper to run.";
+"calculation_ev_formula_full" = "%d km/year × %.3f kWh/km × ~€%.2f/kWh (mix) × area %.2f × trip %.2f × scenario %.2f → energy €%.0f; opex €%.0f/year";
+"deep_dive_costs_takeaway_if_saving" = "With these numbers the EV has lower running costs over time";

@@ -386,6 +386,7 @@ private struct CodableUserInput: Codable {
     let marketRaw: String?
     let annualInsuranceOverrideEUR: Double?
     let includeKaskoTheft: Bool
+    let annualKaskoEUR: Double?
 
     private enum CodingKeys: String, CodingKey {
         case dailyKm
@@ -410,6 +411,7 @@ private struct CodableUserInput: Codable {
         case marketRaw
         case annualInsuranceOverrideEUR
         case includeKaskoTheft
+        case annualKaskoEUR
     }
     
     // Helper struct for encoding charging configuration
@@ -442,6 +444,7 @@ private struct CodableUserInput: Codable {
         marketRaw = input.market.rawValue
         annualInsuranceOverrideEUR = input.annualInsuranceOverrideEUR
         includeKaskoTheft = input.includeKaskoTheft
+        annualKaskoEUR = input.annualKaskoEUR
         
         // Encode charging configuration
         chargingConfigData = ChargingConfigData(
@@ -461,7 +464,7 @@ private struct CodableUserInput: Codable {
         areaTypeRaw = try container.decode(Int.self, forKey: .areaTypeRaw)
         fuelPrice = try container.decode(Double.self, forKey: .fuelPrice)
         ownershipYears = try container.decode(Int.self, forKey: .ownershipYears)
-        electricityPricePerKWh = try container.decodeIfPresent(Double.self, forKey: .electricityPricePerKWh) ?? 0.25
+        electricityPricePerKWh = try container.decodeIfPresent(Double.self, forKey: .electricityPricePerKWh) ?? 0.31
         sourceVehicleId = try container.decodeIfPresent(String.self, forKey: .sourceVehicleId)
             ?? Self.migrateLegacySourceVehicleId(
                 try container.decodeIfPresent(String.self, forKey: .sourceVehicleRaw)
@@ -482,6 +485,7 @@ private struct CodableUserInput: Codable {
         marketRaw = try container.decodeIfPresent(String.self, forKey: .marketRaw)
         annualInsuranceOverrideEUR = try container.decodeIfPresent(Double.self, forKey: .annualInsuranceOverrideEUR)
         includeKaskoTheft = try container.decodeIfPresent(Bool.self, forKey: .includeKaskoTheft) ?? false
+        annualKaskoEUR = try container.decodeIfPresent(Double.self, forKey: .annualKaskoEUR)
         
         // Persist raw charging payload; `toUserInput()` materializes / falls back.
         chargingConfigData = try container.decodeIfPresent(ChargingConfigData.self, forKey: .chargingConfigData)
@@ -509,6 +513,7 @@ private struct CodableUserInput: Codable {
         try container.encodeIfPresent(marketRaw, forKey: .marketRaw)
         try container.encodeIfPresent(annualInsuranceOverrideEUR, forKey: .annualInsuranceOverrideEUR)
         try container.encode(includeKaskoTheft, forKey: .includeKaskoTheft)
+        try container.encodeIfPresent(annualKaskoEUR, forKey: .annualKaskoEUR)
     }
     
     func toUserInput() -> UserInput {
@@ -556,7 +561,8 @@ private struct CodableUserInput: Codable {
             chargingConfiguration: chargingConfig,
             market: market,
             annualInsuranceOverrideEUR: annualInsuranceOverrideEUR,
-            includeKaskoTheft: includeKaskoTheft
+            includeKaskoTheft: includeKaskoTheft,
+            annualKaskoEUR: annualKaskoEUR
         )
     }
 

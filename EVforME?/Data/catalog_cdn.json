@@ -7,6 +7,6 @@
   "host": "bundled-offline-first",
   "updatedAt": "2026-10-07T16:17:31.433834+00:00",
   "policy": "offline-first",
-  "seedVersion": 35,
-  "note": "seedVersion 35: no flat passenger wltpRangeKm=350; vans may stay ~250\u2013350. Offline-first."
+  "seedVersion": 36,
+  "note": "seedVersion 36: Auris/Yaris Hybrid rows, null synthetic batteries, stima 2025 YoY copies, diesel<=petrol hygiene. Offline-first."
 }

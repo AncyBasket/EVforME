@@ -172,7 +172,7 @@
 "deep_dive_costs" = "Approfondisci i costi";
 "deep_dive_costs_closed" = "EV vs Gas: quanto spendi davvero";
 "deep_dive_costs_explanation" = "Il confronto mostra quanto risparmieresti ogni anno scegliendo un'auto elettrificata rispetto alla tua auto attuale.";
-"deep_dive_costs_takeaway" = "Ogni anno che passa, l'EV diventa più conveniente";
+"deep_dive_costs_takeaway" = "Con questi dati l'EV ha costi di gestione più bassi nel tempo";
 "calculation_explanation" = "Come calcoliamo (i totali includono area, profilo viaggio e scenario; la formula sotto è lo scheletro)";
 "calculation_gas_title" = "Costo auto a benzina:";
 "calculation_gas_formula" = "%d km/anno × %.3f L/km × €%.2f/L → energia €%.0f; opex €%.0f/anno";
@@ -460,7 +460,7 @@
 "charging_type_public_ultra_fast" = "Ricarica ultra-rapida";
 "charging_type_public_ultra_fast_description" = "Ultra fast charging (150+ kW)";
 "charging_type_tesla_supercharger" = "Tesla Supercharger";
-"charging_type_tesla_supercharger_description" = "Rete Tesla (~0,46 €/kWh per proprietari)";
+"charging_type_tesla_supercharger_description" = "Rete Tesla (~0,42 €/kWh per proprietari)";
 
 /* App Intents */
 "intent_simulate_title" = "Simula idoneità EV";
@@ -552,3 +552,19 @@
 "charging_map_city_not_found" = "Città non trovata. Controlla il nome o apri Mappe.";
 "charging_map_verdict_nudge_title" = "Senza wallbox, valuta colonnine pubbliche vicino a te";
 "charging_map_verdict_nudge_body" = "Mappa orientativa — non garantisce prese dove parcheggi.";
+
+"insurance_annual_optional_label" = "Quanto paghi di assicurazione all'anno (opzionale)";
+"insurance_annual_optional_placeholder" = "es. 422";
+"kasko_theft_toggle" = "Includi kasko / furto-incendio";
+"kasko_theft_amount_label" = "Premio kasko / furto all'anno (€)";
+"kasko_theft_amount_placeholder" = "Importo obbligatorio se attiva";
+"kasko_amount_required" = "Indica l'importo kasko/furto: non stimiamo percentuali sul valore.";
+"public_charging_type_label" = "Ricarica pubblica";
+"public_charging_source_note" = "Ricarica pubblica: Adiconsum settembre 2026";
+"electricity_eurostat_period" = "Elettricità Eurostat: periodo %@ (fascia 2.500–4.999 kWh)";
+"calculation_current_cheaper" = "Con questi dati la tua auto attuale costa meno di gestione.";
+"impact_current_cheaper" = "• Con questi dati la tua auto attuale costa meno.";
+"share_current_cheaper" = "Con questi dati la tua auto attuale costa meno";
+"last_comparison_data_changed_cheaper" = "I dati sono cambiati — con questi numeri l'auto attuale resta più conveniente.";
+"calculation_ev_formula_full" = "%d km/anno × %.3f kWh/km × ~€%.2f/kWh (mix) × area %.2f × trip %.2f × scenario %.2f → energia €%.0f; opex €%.0f/anno";
+"deep_dive_costs_takeaway_if_saving" = "Con questi dati l'EV ha costi di gestione più bassi nel tempo";

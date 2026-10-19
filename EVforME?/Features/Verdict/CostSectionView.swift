@@ -24,7 +24,11 @@ struct CostSectionView: View {
                 costsTable(comparison: result.yearlyComparison)
                 if let last = result.yearlyComparison.last {
                     let savings = Int(last.gasCost - last.evCost)
-                    Text(L10n.calculationSavings(last.year, savings))
+                    Text(
+                        savings > 0
+                            ? L10n.calculationSavings(last.year, savings)
+                            : L10n.calculationCurrentCheaper
+                    )
                         .font(Typography.title2)
                         .foregroundColor(.ink)
                         .padding(.top, 4)

@@ -50,12 +50,14 @@ nonisolated enum ItalianIncentives {
     static func estimatedPurchaseBonusEUR(
         evListPrice: Double,
         replacingVehiclePrice: Double,
-        hasHomeCharging: Bool
+        hasHomeCharging: Bool,
+        iseeEUR: Double? = nil
     ) -> Double {
         schedule.estimatedPurchaseBonusEUR(
             evListPrice: evListPrice,
             replacingVehiclePrice: replacingVehiclePrice,
-            hasHomeCharging: hasHomeCharging
+            hasHomeCharging: hasHomeCharging,
+            iseeEUR: iseeEUR
         )
     }
 
@@ -64,7 +66,8 @@ nonisolated enum ItalianIncentives {
         estimatedPurchaseBonusEUR(
             evListPrice: 32_000,
             replacingVehiclePrice: 12_000,
-            hasHomeCharging: true
+            hasHomeCharging: true,
+            iseeEUR: 25_000
         )
     }
 }

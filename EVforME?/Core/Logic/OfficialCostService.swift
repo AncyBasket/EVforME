@@ -12,7 +12,8 @@ final class OfficialCostService {
     static let shared = OfficialCostService()
 
     private enum Keys {
-        static let cachedCosts = "evforme.officialCosts.cached.v1"
+        /// v2: invalida cache con prezzi pre-audit (benzina 1,739 / elec fascia sbagliata).
+        static let cachedCosts = "evforme.officialCosts.cached.v2"
         static let lastFetchAt = "evforme.officialCosts.lastFetchAt"
         static let mimitETag = "evforme.mimit.csv.etag"
         static let mimitLastModified = "evforme.mimit.csv.lastModified"
@@ -73,9 +74,29 @@ final class OfficialCostService {
         return Date(timeIntervalSince1970: t)
     }
 
-    /// Cache → bundle (no network). Per UI delta / reminder offline-first.
+    /// Cache → bundle (no network). Preferisce il bundle se più recente della cache.
     func cachedOrBundledCosts() -> OfficialEnergyCosts? {
-        loadCache() ?? loadBundled()
+        let cached = loadCache()
+        let bundled = loadBundled()
+        switch (cached, bundled) {
+        case (nil, let b):
+            return b
+        case (let c?, nil):
+            return c
+        case (let c?, let b?):
+            if Self.isUpdatedAt(b.updatedAt, newerThan: c.updatedAt) {
+                return b
+            }
+            return c
+        case (nil, nil):
+            return nil
+        }
+    }
+
+    private static func isUpdatedAt(_ lhs: String?, newerThan rhs: String?) -> Bool {
+        guard let lhs, !lhs.isEmpty else { return false }
+        guard let rhs, !rhs.isEmpty else { return true }
+        return lhs > rhs
     }
 
     private func fetchLegacyAPIOverride() async -> OfficialEnergyCosts? {

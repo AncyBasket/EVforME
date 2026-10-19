@@ -375,69 +375,75 @@ final class OperatingCostCalculatorTests: XCTestCase {
         XCTAssertEqual(longRange.phevElectricKmShare(hasHomeCharging: true, yearlyKm: 10_000), 0.6, accuracy: 0.001)
     }
 
-    /// Probe stampato in log per la PR (15k km, Roma/IT, Model 3 2026).
-    func testTruthfulScenarios_PrintFourRomaComparisons() {
-        struct Row { let name: String; let sourceId: String }
-        var lines: [String] = []
-        let rows: [Row] = [
-            .init(name: "Seat Ateca 2016 diesel", sourceId: "seat-ateca-2016"),
-            .init(name: "Toyota Yaris Hybrid 2021", sourceId: "toyota-yaris-2021"),
-            .init(name: "Dacia Sandero ECO-G 2022", sourceId: "dacia-sandero-eco-g-2022"),
-            .init(name: "Toyota Prius 2018", sourceId: "toyota-prius-2018"),
-        ]
-        let targetId = "tesla-model-3-2026"
-        guard let target = VehicleCatalogService.shared.vehicle(by: targetId) else {
-            XCTFail("missing \(targetId)")
-            return
+    /// 15k km, IT, misto, casa 85%, Model 3 2026 — assert sui totali (bundle MIMIT/Eurostat).
+    func testTruthfulScenarios_FourRomaComparisons_AssertTotals() {
+        // Simulatore “pulito”: niente cache prezzi/incentivi residua.
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: "evforme.officialCosts.cached.v1")
+        defaults.removeObject(forKey: "evforme.officialCosts.cached.v2")
+        defaults.removeObject(forKey: "evforme.officialCosts.lastFetchAt")
+        defaults.removeObject(forKey: "evforme.italianIncentives.cached.v1")
+        VehicleCatalogService.shared.reloadFromBundledSeedIgnoringUserCacheForTesting()
+
+        struct Expect {
+            let sourceId: String
+            let sourceTotal: Double
+            let evTotal: Double
+            let verdict: EVVerdict
         }
-        let costs = OfficialCostService.shared.cachedOrBundledCosts()
-        XCTAssertNotNil(costs)
-        for row in rows {
-            guard let source = VehicleCatalogService.shared.vehicle(by: row.sourceId) else {
-                XCTFail("missing \(row.sourceId)")
-                continue
-            }
-            let fuel: Double
-            switch source.resolvedFuelKind {
-            case .diesel: fuel = costs?.dieselPricePerLiter ?? 2.257
-            case .lpg: fuel = costs?.lpgPricePerLiter ?? 0.775
-            case .cng: fuel = costs?.cngPricePerKg ?? 1.957
-            default: fuel = costs?.fuelPricePerLiter ?? 2.029
-            }
+        // Valori da bundle ufficiale (benzina 2,029 / gasolio 2,257 / GPL 0,775 / elec 0,314)
+        // e RC flat 422; ricarica casa 85%. Tolleranza ±25 € su arrotondamenti.
+        let expects: [Expect] = [
+            .init(sourceId: "seat-ateca-2016", sourceTotal: 2771, evTotal: 1253, verdict: .yes),
+            .init(sourceId: "toyota-yaris-2021", sourceTotal: 2134, evTotal: 1253, verdict: .yes),
+            .init(sourceId: "dacia-sandero-eco-g-2022", sourceTotal: 1634, evTotal: 1253, verdict: .maybe),
+            .init(sourceId: "toyota-prius-2018", sourceTotal: 2166, evTotal: 1253, verdict: .yes),
+        ]
+        let costs = try! XCTUnwrap(OfficialCostService.shared.cachedOrBundledCosts())
+        XCTAssertEqual(costs.electricityPricePerKWh, 0.314, accuracy: 0.001)
+        let target = try! XCTUnwrap(VehicleCatalogService.shared.vehicle(by: "tesla-model-3-2026"))
+
+        for exp in expects {
+            let source = try! XCTUnwrap(VehicleCatalogService.shared.vehicle(by: exp.sourceId))
+            let fuel = costs.pricePerLiter(for: source.resolvedFuelKind)
+            var config = ChargingCostCalculator.suggestedConfiguration(
+                yearlyKm: 15_000,
+                hasHomeCharging: true
+            )
+            XCTAssertEqual(config.homeChargingShare, 0.85, accuracy: 0.001, exp.sourceId)
+            config.customHomePricePerKWh = costs.electricityPricePerKWh
             let input = UserInput(
                 dailyKm: 15_000,
                 hasHomeCharging: true,
                 areaType: .mixed,
                 fuelPrice: fuel,
                 ownershipYears: 5,
-                electricityPricePerKWh: costs?.electricityPricePerKWh ?? 0.314,
+                electricityPricePerKWh: costs.electricityPricePerKWh,
                 sourceVehicleId: source.id,
                 targetVehicleId: target.id,
                 scenario: .realistic,
                 sourcePurchasePrice: Defaults.suggestedPurchasePrice(for: source),
                 targetPurchasePrice: Defaults.suggestedPurchasePrice(for: target),
-                comparisonIntent: .alreadyOwned
+                comparisonIntent: .alreadyOwned,
+                chargingConfiguration: config
             )
-            guard let result = EVSimulator.simulate(input: input) else {
-                XCTFail("simulate \(row.name)")
-                continue
-            }
-            let s = result.sourceYearlyBreakdown
-            let t = result.targetYearlyBreakdown
-            let delta = s.total - t.total
-            let line = String(
-                format: "SCENARIO_AFTER|%@|src=%.0f (e=%.0f m=%.0f b=%.0f i=%.0f)|ev=%.0f (e=%.0f m=%.0f b=%.0f i=%.0f)|delta=%+.0f|verdict=%@",
-                row.name,
-                s.total, s.energy, s.maintenance, s.taxes, s.insurance,
-                t.total, t.energy, t.maintenance, t.taxes, t.insurance,
-                delta,
-                result.verdict.rawValue
+            let result = try! XCTUnwrap(EVSimulator.simulate(input: input))
+            XCTAssertEqual(
+                result.sourceYearlyBreakdown.total,
+                exp.sourceTotal,
+                accuracy: 25,
+                "\(exp.sourceId) source tot=\(result.sourceYearlyBreakdown.total)"
             )
-            lines.append(line)
+            XCTAssertEqual(
+                result.targetYearlyBreakdown.total,
+                exp.evTotal,
+                accuracy: 25,
+                "\(exp.sourceId) ev tot=\(result.targetYearlyBreakdown.total)"
+            )
+            XCTAssertEqual(result.verdict, exp.verdict, exp.sourceId)
+            XCTAssertEqual(result.sourceYearlyBreakdown.insurance, 422, accuracy: 0.5)
+            XCTAssertEqual(result.targetYearlyBreakdown.insurance, 422, accuracy: 0.5)
         }
-        let joined = lines.joined(separator: "\n")
-        try? joined.write(toFile: "/tmp/evforme-scenarios-after.txt", atomically: true, encoding: .utf8)
-        XCTAssertFalse(lines.isEmpty, joined)
     }
 
     func testHEVUrbanMultiplier_AtMostOne() {
@@ -465,14 +471,53 @@ final class OperatingCostCalculatorTests: XCTestCase {
         )
         XCTAssertEqual(phevYoung, 200, accuracy: 0.01)
 
-        let evOld = OwnershipCostEstimates.bolloPerYearEstimate(
+        // Con kW: 1/4 × 2,58 €/kW × kW (audit tariffa nazionale).
+        let evKw = OwnershipCostEstimates.bolloPerYearEstimate(
+            catalogTaxesPerYear: 0,
+            powertrain: .ev,
+            vehicleYear: 2018,
+            referenceYear: 2026,
+            powerKw: 100
+        )
+        XCTAssertEqual(evKw, (2.58 * 100 * 0.25).rounded(), accuracy: 0.01)
+
+        // Senza kW e senza catalogo: 0 (niente 55/140 inventati).
+        let evUnknown = OwnershipCostEstimates.bolloPerYearEstimate(
             catalogTaxesPerYear: 0,
             powertrain: .ev,
             vehicleYear: 2018,
             referenceYear: 2026
         )
-        XCTAssertEqual(evOld, 55, accuracy: 0.01) // 220 × 0.25
-        XCTAssertNotEqual(evOld, 140, accuracy: 0.01)
+        XCTAssertEqual(evUnknown, 0, accuracy: 0.01)
+
+        // Catalogo pieno → solo 1/4.
+        let evFromCatalog = OwnershipCostEstimates.bolloPerYearEstimate(
+            catalogTaxesPerYear: 220,
+            powertrain: .ev,
+            vehicleYear: 2018,
+            referenceYear: 2026
+        )
+        XCTAssertEqual(evFromCatalog, 55, accuracy: 0.01)
+    }
+
+    func testInsurance_NoKaskoProxyWithoutAmount() {
+        let withToggleNoAmount = OwnershipCostEstimates.insurancePerYear(
+            purchasePrice: 40_000,
+            yearlyKm: 15_000,
+            electrified: true,
+            includeKaskoTheft: true,
+            annualKaskoEUR: nil
+        )
+        XCTAssertEqual(withToggleNoAmount, OwnershipCostEstimates.ivassAverageRCEURPerYear, accuracy: 0.01)
+
+        let withAmount = OwnershipCostEstimates.insurancePerYear(
+            purchasePrice: 40_000,
+            yearlyKm: 15_000,
+            electrified: true,
+            includeKaskoTheft: true,
+            annualKaskoEUR: 300
+        )
+        XCTAssertEqual(withAmount, 422 + 300, accuracy: 0.01)
     }
 
     func testMaintenance_UsesLifetimeMilesNotCalendarYearsAlone() {

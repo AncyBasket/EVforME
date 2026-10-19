@@ -199,8 +199,12 @@ struct UserInput {
     var market: AppMarket
     /// Override RC annuale (€). `nil` / ≤0 = media IVASS 422 € per entrambe le auto.
     var annualInsuranceOverrideEUR: Double?
-    /// Include kasko/furto-incendio (proporzionale al valore). OFF di default.
+    /// Include kasko/furto-incendio. OFF di default; richiede `annualKaskoEUR`.
     var includeKaskoTheft: Bool
+    /// Premio kasko/furto annuo (€). Obbligatorio se `includeKaskoTheft` (nessuna stima).
+    var annualKaskoEUR: Double?
+    /// ISEE (€) per fascia incentivo MASE; senza valore non si applica bonus.
+    var iseeEUR: Double?
 
     init(
         dailyKm: Int,
@@ -222,7 +226,9 @@ struct UserInput {
         chargingConfiguration: ChargingConfiguration = ChargingConfiguration(),
         market: AppMarket = AppMarket.fromDeviceLocale(),
         annualInsuranceOverrideEUR: Double? = nil,
-        includeKaskoTheft: Bool = false
+        includeKaskoTheft: Bool = false,
+        annualKaskoEUR: Double? = nil,
+        iseeEUR: Double? = nil
     ) {
         self.dailyKm = dailyKm
         self.hasHomeCharging = hasHomeCharging
@@ -244,6 +250,8 @@ struct UserInput {
         self.market = market
         self.annualInsuranceOverrideEUR = annualInsuranceOverrideEUR
         self.includeKaskoTheft = includeKaskoTheft
+        self.annualKaskoEUR = annualKaskoEUR
+        self.iseeEUR = iseeEUR
     }
 
     /// Bonus acquisto stimato (solo IT). Fuori Italia → sempre 0.
@@ -254,7 +262,8 @@ struct UserInput {
         return ItalianIncentives.estimatedPurchaseBonusEUR(
             evListPrice: targetPurchasePrice,
             replacingVehiclePrice: sourcePurchasePrice,
-            hasHomeCharging: hasHomeCharging
+            hasHomeCharging: hasHomeCharging,
+            iseeEUR: iseeEUR
         )
     }
 

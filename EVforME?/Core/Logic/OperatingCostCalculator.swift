@@ -57,14 +57,16 @@ enum OperatingCostCalculator {
             catalogTaxesPerYear: vehicle.taxesPerYear,
             powertrain: vehicle.powertrain,
             vehicleYear: vehicle.year,
-            referenceYear: currentYear
+            referenceYear: currentYear,
+            powerKw: vehicle.powerKw
         )
         let insurance = OwnershipCostEstimates.insurancePerYear(
             purchasePrice: valueBasis,
             yearlyKm: yearlyKm,
             electrified: electrified,
             annualInsuranceOverrideEUR: input.annualInsuranceOverrideEUR,
-            includeKaskoTheft: input.includeKaskoTheft
+            includeKaskoTheft: input.includeKaskoTheft,
+            annualKaskoEUR: input.annualKaskoEUR
         )
         return energy + maintenance + taxes + insurance
     }
@@ -173,6 +175,7 @@ enum OperatingCostCalculator {
         sim.market = input.market
         sim.annualInsuranceOverrideEUR = input.annualInsuranceOverrideEUR
         sim.includeKaskoTheft = input.includeKaskoTheft
+        sim.annualKaskoEUR = input.annualKaskoEUR
         return sim
     }
 }

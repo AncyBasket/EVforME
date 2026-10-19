@@ -64,10 +64,16 @@ struct VerdictWidgetSnapshot: Codable {
         savingsMin = try c.decode(Int.self, forKey: .savingsMin)
         savingsMax = try c.decode(Int.self, forKey: .savingsMax)
         weeklyCharges = try c.decode(Int.self, forKey: .weeklyCharges)
-        fuelPrice = try c.decodeIfPresent(Double.self, forKey: .fuelPrice) ?? 1.7
+        // MIMIT 19/10/2026 — same source as OfficialEnergyCosts.Fallback.petrolPerLiter
+        fuelPrice = try c.decodeIfPresent(Double.self, forKey: .fuelPrice) ?? WidgetEnergyFallback.petrolPerLiter
         iceLPer100Km = try c.decodeIfPresent(Double.self, forKey: .iceLPer100Km) ?? 7.0
         updatedAt = try c.decode(TimeInterval.self, forKey: .updatedAt)
     }
+}
+
+/// Bundle-aligned ripieghi (audit AUDIT_2026-10-19) — widget target cannot import app OfficialEnergyCosts.
+enum WidgetEnergyFallback {
+    static let petrolPerLiter: Double = 2.03
 }
 
 struct MirroredWidgetInput: Codable {
@@ -132,7 +138,7 @@ struct BumpFuelPriceIntent: AppIntent {
             ?? 7.0
         var mirror = SnapshotLoader.loadMirror()
             ?? MirroredWidgetInput(
-                fuelPrice: snap?.fuelPrice ?? 1.7,
+                fuelPrice: snap?.fuelPrice ?? WidgetEnergyFallback.petrolPerLiter,
                 dailyKm: snap?.yearlyKm ?? 12_000,
                 iceLPer100Km: ice
             )
@@ -186,7 +192,7 @@ struct VerdictProvider: TimelineProvider {
                 savingsMin: 400,
                 savingsMax: 900,
                 weeklyCharges: 2,
-                fuelPrice: 1.7,
+                fuelPrice: WidgetEnergyFallback.petrolPerLiter,
                 iceLPer100Km: 7.0,
                 updatedAt: Date().timeIntervalSince1970
             )

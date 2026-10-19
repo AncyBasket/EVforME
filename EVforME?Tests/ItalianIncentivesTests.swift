@@ -49,16 +49,21 @@ final class ItalianIncentivesTests: XCTestCase {
             validFrom: "2025-01-01",
             validUntil: "2099-12-31",
             maxListPriceEUR: 35_000,
+            maxListPriceIsExVAT: true,
             maxBonusEUR: 11_000,
             scrappageExtraEUR: 0,
             scrappageMaxReplacingPriceEUR: 0,
-            brackets: [ItalianIncentiveBracket(maxPriceEUR: 35_000, bonusEUR: 9_000)],
+            brackets: [
+                ItalianIncentiveBracket(maxISEEEUR: 30_000, bonusEUR: 11_000),
+                ItalianIncentiveBracket(maxISEEEUR: 40_000, bonusEUR: 9_000),
+            ],
             sourceNote: nil
         )
         let bonus = schedule.estimatedPurchaseBonusEUR(
             evListPrice: 50_000,
             replacingVehiclePrice: 10_000,
-            hasHomeCharging: true
+            hasHomeCharging: true,
+            iseeEUR: 25_000
         )
         XCTAssertEqual(bonus, 0, accuracy: 0.01)
     }
@@ -71,17 +76,22 @@ final class ItalianIncentivesTests: XCTestCase {
             validFrom: "2025-01-01",
             validUntil: "2099-12-31",
             maxListPriceEUR: 35_000,
+            maxListPriceIsExVAT: true,
             maxBonusEUR: 11_000,
             scrappageExtraEUR: 0,
             scrappageMaxReplacingPriceEUR: 0,
-            brackets: [ItalianIncentiveBracket(maxPriceEUR: 35_000, bonusEUR: 9_000)],
+            brackets: [
+                ItalianIncentiveBracket(maxISEEEUR: 30_000, bonusEUR: 11_000),
+                ItalianIncentiveBracket(maxISEEEUR: 40_000, bonusEUR: 9_000),
+            ],
             sourceNote: nil
         )
         let bonus = schedule.estimatedPurchaseBonusEUR(
             evListPrice: 32_000,
             replacingVehiclePrice: 12_000,
-            hasHomeCharging: true
+            hasHomeCharging: true,
+            iseeEUR: 25_000
         )
-        XCTAssertEqual(bonus, 9_000, accuracy: 0.01)
+        XCTAssertEqual(bonus, 11_000, accuracy: 0.01)
     }
 }

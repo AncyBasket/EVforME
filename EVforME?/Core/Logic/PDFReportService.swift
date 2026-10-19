@@ -85,7 +85,9 @@ enum PDFReportService {
                 """
                 \(result.verdict.description)
 
-                \(L10n.impactSaveBetween(result.yearlySavingsRange.lowerBound, result.yearlySavingsRange.upperBound))
+                \(result.yearlySavingsRange.upperBound > 0
+                    ? L10n.impactSaveBetween(result.yearlySavingsRange.lowerBound, result.yearlySavingsRange.upperBound)
+                    : L10n.impactCurrentCheaper())
                 \(L10n.impactChargePerWeek(result.weeklyCharges))
                 \(result.breakEvenMonths.map { L10n.breakEvenMonthsBadge($0) } ?? L10n.breakEvenNotReachedReason)
 

@@ -175,10 +175,13 @@ struct CostsComparisonView: View {
                         .font(Typography.readingCardTitle)
                         .foregroundColor(.primaryText)
                     
-                    Text(L10n.calculationEvFormula(
+                    Text(L10n.calculationEvFormulaFull(
                         userInput.dailyKm,
                         targetEnergyKWhPerKm,
                         userInput.chargingConfiguration.weightedCostPerKWh(),
+                        userInput.areaType.evConsumptionMultiplier,
+                        userInput.tripProfile.evExtraMultiplier,
+                        userInput.scenario.evCostMultiplier,
                         targetBreakdown.energy,
                         targetBreakdown.total
                     ))
@@ -221,7 +224,11 @@ struct CostsComparisonView: View {
                                 .font(.title3)
                                 .foregroundColor(.accent)
                         }
-                        Text(L10n.calculationSavings(lastYear.year, totalSavings))
+                        Text(
+                            totalSavings > 0
+                                ? L10n.calculationSavings(lastYear.year, totalSavings)
+                                : L10n.calculationCurrentCheaper
+                        )
                             .font(Typography.readingCardTitle)
                             .foregroundColor(.accent)
                     }
@@ -268,7 +275,7 @@ struct CostsComparisonView: View {
             dailyKm: 12000,
             hasHomeCharging: true,
             areaType: .urban,
-            fuelPrice: 1.7,
+            fuelPrice: OfficialEnergyCosts.Fallback.petrolPerLiter,
             ownershipYears: 5,
             scenario: .realistic
         ),
