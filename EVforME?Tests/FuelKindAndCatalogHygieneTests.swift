@@ -328,4 +328,35 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         let fraction = Double(n350) / Double(passenger.count)
         XCTAssertLessThan(fraction, 0.05)
     }
+
+    /// Audit 2026-10-19 §1: WLTP EV in fascia realistica; Model 3 2026 sul dato ufficiale ~13,2.
+    func testCatalog_EVWltpConsumptionInPlausibleBand() {
+        let evs = VehicleCatalogService.shared.vehicles.filter { $0.powertrain == .ev }
+        XCTAssertFalse(evs.isEmpty)
+        for ev in evs {
+            guard let kwh100 = ev.wltpConsumptionKWh100km
+                    ?? ev.energyConsumptionKWhPerKm.map({ $0 * 100 }) else {
+                continue
+            }
+            XCTAssertGreaterThanOrEqual(kwh100, 11.0, "\(ev.id) WLTP \(kwh100) < 11")
+            XCTAssertLessThanOrEqual(kwh100, 25.0, "\(ev.id) WLTP \(kwh100) > 25")
+        }
+    }
+
+    func testCatalog_Model3_2026_WltpNearOfficial() {
+        let m3 = VehicleCatalogService.shared.vehicle(by: "tesla-model-3-2026")
+        XCTAssertNotNil(m3)
+        let kwh100 = m3?.wltpConsumptionKWh100km
+            ?? m3.flatMap { $0.energyConsumptionKWhPerKm.map { $0 * 100 } }
+        XCTAssertNotNil(kwh100)
+        XCTAssertGreaterThanOrEqual(kwh100!, 12.5)
+        XCTAssertLessThanOrEqual(kwh100!, 14.5)
+    }
+
+    func testCatalog_NoSynthetic100kWhBatteryShownAsKnown() {
+        let hundred = VehicleCatalogService.shared.vehicles.filter {
+            $0.powertrain == .ev && ($0.batteryKWh.map { abs($0 - 100) < 0.05 } ?? false)
+        }
+        XCTAssertTrue(hundred.isEmpty, "Synthetic 100 kWh batteries must be null: \(hundred.map(\.id))")
+    }
 }
