@@ -479,7 +479,9 @@ final class EVSimulator {
         var reasons = [
             L10n.switchingFromTo(sourceVehicle.displayName, targetVehicle.displayName),
             L10n.chargePerWeek(weeklyCharges),
-            L10n.saveUpToPerYear(Int(yearlySavings)),
+            yearlySavings > 0
+                ? L10n.saveUpToPerYear(Int(yearlySavings))
+                : L10n.saveCurrentCheaper,
             input.hasHomeCharging
                 ? L10n.homeChargingEasier
                 : L10n.publicChargingManageable
@@ -528,7 +530,9 @@ final class EVSimulator {
         ))
         fears.append(FearRealityItem(
             fear: L10n.fearCostsTooMuch,
-            reality: L10n.realitySavePerYear(savingsRangeLower, savingsRangeUpper)
+            reality: yearlySavings > 0
+                ? L10n.realitySavePerYear(savingsRangeLower, savingsRangeUpper)
+                : L10n.realityCurrentCheaper
         ))
 
         let horizonYears = max(1, input.ownershipYears)

@@ -749,6 +749,45 @@ final class EVSimulatorTests: XCTestCase {
         )
     }
 
+    /// Con delta ≤ 0 non devono comparire frasi di risparmio; timeline derivata dai numeri.
+    func testSaveCopy_WhenDeltaNonPositive_ShowsCurrentCheaperNotSavings() {
+        let input = UserInput(
+            dailyKm: 5_000,
+            hasHomeCharging: false,
+            areaType: .mixed,
+            fuelPrice: 1.5,
+            ownershipYears: 5,
+            electricityPricePerKWh: 0.55,
+            sourceVehicleId: "toyota-prius-2018",
+            targetVehicleId: "tesla-model-3-2026",
+            scenario: .realistic
+        )
+        let result = requireSimulate(input: input)
+        let opexDelta = result.sourceYearlyBreakdown.total - result.targetYearlyBreakdown.total
+        XCTAssertLessThanOrEqual(opexDelta, 0, "Fixture should make current car cheaper (delta=\(opexDelta))")
+        XCTAssertTrue(
+            result.keyReasons.contains(L10n.saveCurrentCheaper),
+            "Expected current-cheaper reason, got: \(result.keyReasons)"
+        )
+        XCTAssertFalse(
+            result.keyReasons.contains(where: { $0 == L10n.saveUpToPerYear(Int(opexDelta)) || $0.contains("risparmi") || $0.localizedCaseInsensitiveContains("save up to") || $0.localizedCaseInsensitiveContains("/anno in meno") }),
+            "Must not promise savings when delta ≤ 0: \(result.keyReasons)"
+        )
+        let realities = result.fearReality.map(\.reality)
+        XCTAssertTrue(realities.contains(L10n.realityCurrentCheaper))
+        XCTAssertFalse(realities.contains(where: { $0.contains("in meno") || $0.localizedCaseInsensitiveContains("save") }))
+
+        let timeline = Scenario.derivedTimeline(from: result.yearlyComparison)
+        XCTAssertEqual(timeline.count, 3)
+        XCTAssertFalse(timeline.contains(where: { $0.localizedCaseInsensitiveContains("risparmio diventa") }))
+        XCTAssertFalse(L10n.verdictTrustStrip.localizedCaseInsensitiveContains("prezzi da fonti ufficiali"))
+        XCTAssertFalse(L10n.verdictTrustStrip.localizedCaseInsensitiveContains("prices from official sources"))
+        XCTAssertTrue(
+            L10n.verdictTrustStrip.contains("MIMIT") || L10n.verdictTrustStrip.contains("Eurostat"),
+            L10n.verdictTrustStrip
+        )
+    }
+
     private func verdictRank(_ verdict: EVVerdict) -> Int {
         switch verdict {
         case .notYet: return 0

@@ -178,7 +178,7 @@ struct CostsComparisonView: View {
                     Text(L10n.calculationEvFormula(
                         userInput.dailyKm,
                         targetEnergyKWhPerKm,
-                        userInput.electricityPricePerKWh,
+                        userInput.chargingConfiguration.weightedCostPerKWh(),
                         targetBreakdown.energy,
                         targetBreakdown.total
                     ))

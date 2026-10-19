@@ -296,6 +296,15 @@ enum L10n {
     static var timelineOptimistic1: String { string("timeline_optimistic_1") }
     static var timelineOptimistic2: String { string("timeline_optimistic_2") }
     static var timelineOptimistic3: String { string("timeline_optimistic_3") }
+    static func timelineDerivedEvAhead(_ year: Int, _ euros: Int) -> String {
+        format("timeline_derived_ev_ahead", year, euros)
+    }
+    static func timelineDerivedCurrentAhead(_ year: Int, _ euros: Int) -> String {
+        format("timeline_derived_current_ahead", year, euros)
+    }
+    static func timelineDerivedClose(_ year: Int) -> String {
+        format("timeline_derived_close", year)
+    }
     static var howItChangesOverTime: String { string("how_it_changes_over_time") }
     static var costsOverTime: String { string("costs_over_time") }
     static var costsOverTimeIntro: String { string("costs_over_time_intro") }
@@ -385,6 +394,8 @@ enum L10n {
     // MARK: - Simulator (reasons & fear/reality)
     static func chargePerWeek(_ n: Int) -> String { format("charge_per_week", n) }
     static func saveUpToPerYear(_ n: Int) -> String { format("save_up_to_per_year", n) }
+    static var saveCurrentCheaper: String { string("save_current_cheaper") }
+    static var realityCurrentCheaper: String { string("reality_current_cheaper") }
     static func switchingFromTo(_ from: String, _ to: String) -> String { format("switching_from_to", from, to) }
     static var homeChargingEasier: String { string("home_charging_easier") }
     static var publicChargingManageable: String { string("public_charging_manageable") }

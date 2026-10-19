@@ -137,7 +137,7 @@
 "market_picker_label" = "Country";
 "market_other_country" = "Other / rest of world";
 "market_maintenance_source" = "%@: typical maintenance ~€%d ICE · ~€%d EV /year (15,000 km)";
-"non_italy_data_honesty_banner" = "Fuel, electricity, road tax, insurance and incentives are Italian estimates; only maintenance changes for your country. Enter your own prices.";
+"non_italy_data_honesty_banner" = "Fuel, electricity, road tax, insurance (estimate) and incentives are Italian estimates; only maintenance changes for your country. Enter your own prices.";
 
 /* Education */
 "fear_vs_reality" = "Fear vs Reality";
@@ -149,7 +149,7 @@
 "year_format" = "Year %d";
 "deep_dive_costs" = "Deep Dive: Costs";
 "deep_dive_costs_closed" = "EV vs Gas: how much you really spend";
-"deep_dive_costs_explanation" = "The comparison shows how much you would save each year by choosing an electric car over a gas one.";
+"deep_dive_costs_explanation" = "The comparison shows how much you would save each year by choosing an electrified car versus your current car.";
 "deep_dive_costs_takeaway" = "Each year that passes, the EV becomes more convenient";
 "calculation_explanation" = "How we calculate (totals include area, trip profile and scenario; the formula below is the skeleton)";
 "calculation_gas_title" = "Gas car cost:";
@@ -157,7 +157,7 @@
 "calculation_gas_total" = "× %d years = €%d total";
 "calculation_gas_breakdown" = "(Fuel: €%.0f + Maintenance: €600 + Taxes: €200 = €%.0f/year)";
 "calculation_ev_title" = "EV cost:";
-"calculation_ev_formula" = "%d km/year × %.3f kWh/km × ~€%.2f/kWh home → energy €%.0f; opex €%.0f/year";
+"calculation_ev_formula" = "%d km/year × %.3f kWh/km × ~€%.2f/kWh (home/public mix) → energy €%.0f; opex €%.0f/year";
 "calculation_ev_total" = "× %d years = €%d total";
 "calculation_ev_breakdown" = "(Energy: €%.0f + Maintenance: €250 + Taxes: €0 = €%.0f/year)";
 "calculation_savings" = "Total savings over %d years: €%d";
@@ -176,15 +176,18 @@
 "scenario_description_optimistic" = "Favorable scenario: efficient EV and contained energy costs.";
 
 /* Timeline Text */
-"timeline_pessimistic_1" = "Costs are similar at the start";
-"timeline_pessimistic_2" = "Savings grow slowly";
-"timeline_pessimistic_3" = "It takes time to see the advantage";
-"timeline_realistic_1" = "Slight differences at the start";
-"timeline_realistic_2" = "From year 3, EV weighs less";
-"timeline_realistic_3" = "Savings become evident";
-"timeline_optimistic_1" = "EV competitive right away";
-"timeline_optimistic_2" = "Stable costs over time";
-"timeline_optimistic_3" = "Clear advantage already at mid-period";
+"timeline_pessimistic_1" = "Cautious scenario: slower differences";
+"timeline_pessimistic_2" = "Look at the cumulative chart year by year";
+"timeline_pessimistic_3" = "Advantage is not guaranteed: it depends on your numbers";
+"timeline_realistic_1" = "Year 1: compare cumulative costs in the chart";
+"timeline_realistic_2" = "Over time costs depend on energy, tax and maintenance";
+"timeline_realistic_3" = "The verdict uses running costs only, not list price";
+"timeline_optimistic_1" = "Scenario favourable to the EV";
+"timeline_optimistic_2" = "Compare cumulative costs in the chart";
+"timeline_optimistic_3" = "Always check with your real prices";
+"timeline_derived_ev_ahead" = "Year %d: electric is about €%d cheaper in running costs (cumulative)";
+"timeline_derived_current_ahead" = "Year %d: your current car is about €%d cheaper in running costs (cumulative)";
+"timeline_derived_close" = "Year %d: running costs stay close";
 "how_it_changes_over_time" = "How It Changes Over Time";
 "costs_over_time" = "Costs Over Time";
 "costs_over_time_intro" = "Here’s how costs add up year by year: gas vs EV (same scenario selected above).";
@@ -203,7 +206,7 @@
 "deep_dive_section_title" = "Deep dive";
 "deep_dive_section_closed" = "Numbers, environment, battery and incentives";
 "subsection_where_numbers_title" = "Where the numbers come from";
-"subsection_where_numbers_body" = "Gas consumption: 6.5 L/100 km (average). EV consumption: 17 kWh/100 km (average). Maintenance depends on the selected country (IT Quattroruote/SicurAUTO; DE Tec Alliance; UK Clear Vehicle Data; US DOE/ANL), with Consumer Reports 2020 age curve. Taxes: Italian road-tax estimate where applicable. Scenarios only affect energy and maintenance.";
+"subsection_where_numbers_body" = "Consumptions from the selected vehicle catalog (WLTP where available). Maintenance depends on country, with Consumer Reports mileage curves. Tax: Italian road-tax estimate where it applies. Scenarios only change energy and maintenance.";
 "subsection_environment_title" = "Environmental impact";
 "subsection_environment_body" = "A gas car emits about 120 g CO₂/km. An EV on the Italian grid emits indirectly about 40–50 g CO₂/km (well-to-wheel). Switching to electric can cut emissions by several tonnes of CO₂ over a few years, depending on how much you drive and the energy mix.";
 "subsection_battery_title" = "Battery and lifespan";
@@ -242,18 +245,20 @@
 
 /* Simulator */
 "charge_per_week" = "You would charge about %d times per week";
-"save_up_to_per_year" = "You could save up to €%d per year";
+"save_up_to_per_year" = "Estimate: about €%d/year less";
+"save_current_cheaper" = "With these numbers your current car costs less";
+"reality_current_cheaper" = "With these numbers your current car has lower running costs.";
 "switching_from_to" = "Comparison: from %@ to %@";
 "home_charging_easier" = "Home charging makes EVs much easier";
 "public_charging_manageable" = "Public charging would be manageable";
 "fear_run_out_battery" = "I'll run out of battery.";
 "reality_charging_few_times" = "Even with your usage, charging only a few times a week is enough.";
 "fear_charging_complicated" = "Charging will be complicated.";
-"reality_public_charging" = "Public charging is accessible and predictable.";
+"reality_public_charging" = "Prices vary a lot (€0.25–€0.90/kWh): check your operator.";
 "fear_evs_unreliable" = "EVs aren't reliable.";
 "reality_fewer_parts" = "Electric cars have fewer moving parts, meaning less maintenance over time.";
 "fear_costs_too_much" = "It costs too much.";
-"reality_save_per_year" = "You could save €%d–€%d per year compared to a gas car.";
+"reality_save_per_year" = "Estimate: about €%d–€%d/year less versus your current car.";
 
 /* Share */
 "share_title" = "EVforME? – My EV Simulation";
@@ -311,7 +316,7 @@
 
 /* AI + input a11y */
 "verdict_ai_section_title" = "In plain words";
-"verdict_ai_fallback_yes" = "With about %d km/year, the numbers lean electric: roughly €%d–€%d saved per year and about %d charges per week. Home charging and your chosen pair make that path realistic.";
+"verdict_ai_fallback_yes" = "At about %d km/year the numbers favour electric: about €%d–€%d saved per year and about %d charges a week. With home charging and this pair, it looks worthwhile with these inputs.";
 "verdict_ai_fallback_maybe" = "At about %d km/year the gap is modest (about €%d–€%d/year). An EV can work, but small changes in electricity price or kilometers can flip the picture.";
 "verdict_ai_fallback_not_yet" = "At about %d km/year with these prices, electricity does not beat fuel yet. Expect about %d charges per week — wait for cheaper power, more home charging, or a thriftier EV before switching.";
 "yearly_km_slider_a11y" = "Yearly kilometers slider";
@@ -483,7 +488,7 @@
 "verdict_proof_charges_label" = "Charges / week";
 "verdict_proof_breakeven_value" = "~%d mo";
 "verdict_proof_breakeven_label" = "Break-even";
-"verdict_trust_strip" = "On-device math · official price sources";
+"verdict_trust_strip" = "On-device math · Fuel MIMIT and electricity Eurostat; other lines estimated";
 "share_card_eyebrow" = "Your readout";
 "share_card_week_short" = "wk";
 "calculating_subtitle" = "Weighing costs, charging, and payback.";

@@ -89,7 +89,10 @@ struct VerdictView: View {
                     }
                     costsDetailSection(result: currentResult)
                     CostSectionView(result: currentResult, scenario: selectedScenario)
-                    TimeEvolutionView(scenario: selectedScenario)
+                    TimeEvolutionView(
+                        scenario: selectedScenario,
+                        yearlyComparison: currentResult.yearlyComparison
+                    )
                 }
             }
 

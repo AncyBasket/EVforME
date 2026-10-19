@@ -30,23 +30,23 @@ enum Scenario: Double, CaseIterable, Identifiable {
         }
     }
     
-    var timelineText: [String] {
-        switch self {
-        case .pessimistic: return [
-            L10n.timelinePessimistic1,
-            L10n.timelinePessimistic2,
-            L10n.timelinePessimistic3
-        ]
-        case .realistic: return [
-            L10n.timelineRealistic1,
-            L10n.timelineRealistic2,
-            L10n.timelineRealistic3
-        ]
-        case .optimistic: return [
-            L10n.timelineOptimistic1,
-            L10n.timelineOptimistic2,
-            L10n.timelineOptimistic3
-        ]
+    /// Timeline fissa rimossa: prometteva risparmi anche con verdetto negativo.
+    /// `TimeEvolutionView` deriva le righe dai costi cumulati quando disponibili.
+    var timelineText: [String] { [] }
+
+    /// Tre punti derivati dai costi cumulati (anno 1, metà, fine orizzonte).
+    static func derivedTimeline(from comparison: [YearlyComparison]) -> [String] {
+        guard let first = comparison.first, let last = comparison.last else { return [] }
+        let mid = comparison[comparison.count / 2]
+        return [first, mid, last].map { year in
+            let delta = year.gasCost - year.evCost
+            if delta > 50 {
+                return L10n.timelineDerivedEvAhead(year.year, Int(delta.rounded()))
+            }
+            if delta < -50 {
+                return L10n.timelineDerivedCurrentAhead(year.year, Int((-delta).rounded()))
+            }
+            return L10n.timelineDerivedClose(year.year)
         }
     }
 

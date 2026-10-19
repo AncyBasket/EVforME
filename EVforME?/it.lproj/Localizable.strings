@@ -159,7 +159,7 @@
 "market_section_title" = "Il tuo paese";
 "market_section_subtitle" = "I costi di manutenzione cambiano per mercato. Precompilato dalla regione del dispositivo — puoi cambiarlo. La posizione serve solo dopo per le Colonnine vicine.";
 "market_maintenance_source" = "%@: manutenzione media ~€%d ICE · ~€%d EV /anno (15.000 km)";
-"non_italy_data_honesty_banner" = "Carburante, elettricità, bollo, RC e incentivi sono stime italiane; per il tuo paese cambia solo la manutenzione. Inserisci i tuoi prezzi.";
+"non_italy_data_honesty_banner" = "Carburante, elettricità, bollo, assicurazione (stima) e incentivi sono stime italiane; per il tuo paese cambia solo la manutenzione. Inserisci i tuoi prezzi.";
 
 /* Education */
 "fear_vs_reality" = "Paura vs realtà";
@@ -171,7 +171,7 @@
 "year_format" = "Anno %d";
 "deep_dive_costs" = "Approfondisci i costi";
 "deep_dive_costs_closed" = "EV vs Gas: quanto spendi davvero";
-"deep_dive_costs_explanation" = "Il confronto mostra quanto risparmieresti ogni anno scegliendo un'auto elettrica rispetto a una a benzina.";
+"deep_dive_costs_explanation" = "Il confronto mostra quanto risparmieresti ogni anno scegliendo un'auto elettrificata rispetto alla tua auto attuale.";
 "deep_dive_costs_takeaway" = "Ogni anno che passa, l'EV diventa più conveniente";
 "calculation_explanation" = "Come calcoliamo (i totali includono area, profilo viaggio e scenario; la formula sotto è lo scheletro)";
 "calculation_gas_title" = "Costo auto a benzina:";
@@ -179,7 +179,7 @@
 "calculation_gas_total" = "× %d anni = €%d totale";
 "calculation_gas_breakdown" = "(Carburante: €%.0f + Manutenzione: €600 + Tasse: €200 = €%.0f/anno)";
 "calculation_ev_title" = "Costo EV:";
-"calculation_ev_formula" = "%d km/anno × %.3f kWh/km × ~€%.2f/kWh casa → energia €%.0f; opex €%.0f/anno";
+"calculation_ev_formula" = "%d km/anno × %.3f kWh/km × ~€%.2f/kWh (mix casa/pubblico) → energia €%.0f; opex €%.0f/anno";
 "calculation_ev_total" = "× %d anni = €%d totale";
 "calculation_ev_breakdown" = "(Energia: €%.0f + Manutenzione: €250 + Tasse: €0 = €%.0f/anno)";
 "calculation_savings" = "Risparmio totale in %d anni: €%d";
@@ -196,15 +196,18 @@
 "scenario_description_optimistic" = "Scenario favorevole: EV efficiente e costi energetici contenuti.";
 
 /* Timeline Text */
-"timeline_pessimistic_1" = "All'inizio i costi sono simili";
-"timeline_pessimistic_2" = "Il risparmio cresce lentamente";
-"timeline_pessimistic_3" = "Serve tempo per vedere il vantaggio";
-"timeline_realistic_1" = "Differenze leggere all'inizio";
-"timeline_realistic_2" = "Dal terzo anno l'EV pesa meno";
-"timeline_realistic_3" = "Il risparmio diventa evidente";
-"timeline_optimistic_1" = "EV competitivo fin da subito";
-"timeline_optimistic_2" = "Costi stabili nel tempo";
-"timeline_optimistic_3" = "Vantaggio chiaro già a metà periodo";
+"timeline_pessimistic_1" = "Scenario prudente: differenze più lente";
+"timeline_pessimistic_2" = "Guarda il grafico cumulato anno per anno";
+"timeline_pessimistic_3" = "Il vantaggio non è garantito: dipende dai tuoi numeri";
+"timeline_realistic_1" = "Anno 1: confronta i costi cumulati nel grafico";
+"timeline_realistic_2" = "Nel tempo i costi dipendono da energia, bollo e manutenzione";
+"timeline_realistic_3" = "Il verdetto usa solo i costi di gestione, non il listino";
+"timeline_optimistic_1" = "Scenario favorevole all'EV";
+"timeline_optimistic_2" = "Confronta i costi cumulati nel grafico";
+"timeline_optimistic_3" = "Verifica sempre con i tuoi prezzi reali";
+"timeline_derived_ev_ahead" = "Anno %d: l'elettrico costa circa €%d in meno di gestione (cumulato)";
+"timeline_derived_current_ahead" = "Anno %d: la tua auto attuale costa circa €%d in meno di gestione (cumulato)";
+"timeline_derived_close" = "Anno %d: i costi di gestione restano vicini";
 "how_it_changes_over_time" = "Come cambia nel tempo";
 "costs_over_time" = "Costi nel tempo";
 "costs_over_time_intro" = "Ecco come si accumulano i costi anno per anno: benzina vs EV (stesso scenario selezionato sopra).";
@@ -223,7 +226,7 @@
 "deep_dive_section_title" = "Approfondimenti";
 "deep_dive_section_closed" = "Numeri, ambiente, batteria e incentivi";
 "subsection_where_numbers_title" = "Da dove vengono i numeri";
-"subsection_where_numbers_body" = "Consumo benzina: 6,5 L/100 km (media). Consumo EV: 17 kWh/100 km (media). Manutenzione: dipende dal paese scelto (IT Quattroruote/SicurAUTO; DE Tec Alliance; UK Clear Vehicle Data; US DOE/ANL), con curva età Consumer Reports 2020. Tasse: stima bollo IT dove applica. Gli scenari modificano solo energia e manutenzione.";
+"subsection_where_numbers_body" = "Consumi da catalogo del veicolo scelto (WLTP dove disponibile). Manutenzione: dipende dal paese (IT Quattroruote/SicurAUTO; DE Tec Alliance; UK Clear Vehicle Data; US DOE/ANL), con curva chilometri Consumer Reports. Tasse: stima bollo IT dove applica. Gli scenari modificano solo energia e manutenzione.";
 "subsection_environment_title" = "Impatto ambientale";
 "subsection_environment_body" = "Un’auto a benzina emette circa 120 g CO₂/km. Un’EV alimentata con il mix elettrico italiano emette indirettamente circa 40–50 g CO₂/km (well-to-wheel). Passando all’elettrico puoi ridurre le emissioni di diverse tonnellate di CO₂ in pochi anni, a seconda dei km che fai e del mix energetico.";
 "subsection_battery_title" = "Batteria e vita utile";
@@ -261,18 +264,20 @@
 
 /* Simulator */
 "charge_per_week" = "Ricaricheresti circa %d volte a settimana";
-"save_up_to_per_year" = "Potresti risparmiare fino a €%d l'anno";
+"save_up_to_per_year" = "Stima: circa €%d/anno in meno";
+"save_current_cheaper" = "Con questi dati la tua auto attuale costa meno";
+"reality_current_cheaper" = "Con questi dati la tua auto attuale costa meno di gestione.";
 "switching_from_to" = "Confronto: da %@ a %@";
 "home_charging_easier" = "La ricarica a casa rende l'EV molto più semplice";
 "public_charging_manageable" = "La ricarica pubblica è gestibile";
 "fear_run_out_battery" = "Finirò la batteria.";
 "reality_charging_few_times" = "Con il tuo uso, ricaricare poche volte a settimana basta.";
 "fear_charging_complicated" = "Ricaricare sarà complicato.";
-"reality_public_charging" = "La ricarica pubblica è accessibile e prevedibile.";
+"reality_public_charging" = "I prezzi variano molto (0,25–0,90 €/kWh): controlla il tuo operatore.";
 "fear_evs_unreliable" = "Le EV non sono affidabili.";
 "reality_fewer_parts" = "Le auto elettriche hanno meno parti in movimento, quindi meno manutenzione.";
 "fear_costs_too_much" = "Costa troppo.";
-"reality_save_per_year" = "Potresti risparmiare €%d–€%d l'anno rispetto a un'auto a benzina.";
+"reality_save_per_year" = "Stima: circa €%d–€%d/anno in meno rispetto alla tua auto attuale.";
 
 /* Share */
 "share_title" = "EVforME? – La mia simulazione EV";
@@ -330,7 +335,7 @@
 
 /* AI + input a11y */
 "verdict_ai_section_title" = "In parole semplici";
-"verdict_ai_fallback_yes" = "Con circa %d km/anno i conti favoriscono l’elettrico: circa €%d–€%d risparmiati l’anno e circa %d ricariche a settimana. Con ricarica a casa e la coppia scelta, il passaggio è realistico.";
+"verdict_ai_fallback_yes" = "Con circa %d km/anno i conti favoriscono l’elettrico: circa €%d–€%d risparmiati l’anno e circa %d ricariche a settimana. Con ricarica a casa e la coppia scelta, sembra conveniente con questi dati.";
 "verdict_ai_fallback_maybe" = "A circa %d km/anno il margine è sottile (circa €%d–€%d/anno). L’EV può funzionare, ma prezzi energia o chilometri diversi possono cambiare il verdetto.";
 "verdict_ai_fallback_not_yet" = "A circa %d km/anno con questi prezzi, l’elettrico non batte ancora il carburante. Conta circa %d ricariche a settimana: conviene aspettare energia più economica, più ricarica a casa o un’EV più parca.";
 "yearly_km_slider_a11y" = "Yearly kilometers slider";
@@ -481,7 +486,7 @@
 "verdict_proof_charges_label" = "Ricariche / sett.";
 "verdict_proof_breakeven_value" = "~%d mesi";
 "verdict_proof_breakeven_label" = "Pareggio";
-"verdict_trust_strip" = "Calcolo sul dispositivo · prezzi da fonti ufficiali";
+"verdict_trust_strip" = "Calcolo sul dispositivo · Carburante MIMIT ed elettricità Eurostat; altre voci stimate";
 "share_card_eyebrow" = "Il tuo esito";
 "share_card_week_short" = "sett.";
 "calculating_subtitle" = "Confrontiamo costi, ricarica e pareggio.";
