@@ -35,10 +35,26 @@ enum AreaType: String, CaseIterable, Identifiable {
         }
     }
 
+    /// HEV in città: spesso ≤ WLTP (recupero frenata), mai il +8% ICE.
+    var hevConsumptionMultiplier: Double {
+        switch self {
+        case .urban: return 0.95
+        case .mixed: return 1.00
+        }
+    }
+
     var evConsumptionMultiplier: Double {
         switch self {
         case .urban: return 0.94
         case .mixed: return 1.00
+        }
+    }
+
+    func fuelConsumptionMultiplier(for powertrain: Powertrain) -> Double {
+        switch powertrain {
+        case .hev: return hevConsumptionMultiplier
+        case .ice, .phev: return iceConsumptionMultiplier
+        case .ev: return evConsumptionMultiplier
         }
     }
 

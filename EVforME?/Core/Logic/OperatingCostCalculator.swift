@@ -94,7 +94,8 @@ enum OperatingCostCalculator {
         case .ice: baseAt15k = ice
         }
 
-        // CR 2020 Table 2.1: fasce miglia → moltiplicatore vs fascia media (50–100k).
+        // CR 2020 Table 2.1: fasce in miglia (0–50k / 50–100k / 100–200k), convertite
+        // in km percorsi stimati = età × km annui (non anni calendari).
         let iceYoung = 0.028 / 0.060
         let phevYoung = 0.021 / 0.031
         let evYoung = 0.012 / 0.028
@@ -102,16 +103,18 @@ enum OperatingCostCalculator {
         let phevOld = 0.033 / 0.031
         let evOld = 0.043 / 0.028
 
+        let km = max(0, yearlyKm)
+        let lifetimeMiles = (Double(max(0, vehicleAge)) * km) / 1.60934
         let ageMultiplier: Double
-        switch max(0, vehicleAge) {
-        case 0..<4:
+        switch lifetimeMiles {
+        case ..<50_000:
             switch powertrain {
             case .ev: ageMultiplier = evYoung
             case .phev: ageMultiplier = phevYoung
             case .hev: ageMultiplier = (iceYoung + phevYoung) / 2.0
             case .ice: ageMultiplier = iceYoung
             }
-        case 4..<7:
+        case ..<100_000:
             ageMultiplier = 1.0
         default:
             switch powertrain {
@@ -122,7 +125,6 @@ enum OperatingCostCalculator {
             }
         }
 
-        let km = max(0, yearlyKm)
         let raw = baseAt15k * ageMultiplier * (km / 15_000.0)
 
         let floor: Double

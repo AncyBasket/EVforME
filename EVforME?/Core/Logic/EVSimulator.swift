@@ -113,7 +113,11 @@ enum OwnershipCostEstimates {
     }
 
     /// Bollo / tassa di possesso — stima semplificata (non ACI ufficiale).
-    /// EV: esenzione tipica nei primi 5 anni dall’immatricolazione; poi catalogo o proxy.
+    /// EV: esenzione tipica nei primi 5 anni; poi catalogo o 1/4 della tariffa benzina (proxy kW).
+    /// HEV/PHEV: nessuna riduzione regionale hard-coded (−30%/−50% rimossi).
+    static let petrolBolloProxyEURPerYear: Double = 220
+    static let hevPhevBolloProxyEURPerYear: Double = 180
+
     static func bolloPerYearEstimate(
         catalogTaxesPerYear: Double,
         powertrain: Powertrain,
@@ -124,19 +128,12 @@ enum OwnershipCostEstimates {
         switch powertrain {
         case .ev:
             if age < 5 { return 0 }
-            return catalogTaxesPerYear > 0 ? catalogTaxesPerYear : 140
-        case .phev:
-            if age < 5 {
-                let base = catalogTaxesPerYear > 0 ? catalogTaxesPerYear : 180
-                return (base * 0.5).rounded()
-            }
-            return catalogTaxesPerYear > 0 ? catalogTaxesPerYear : 180
-        case .hev:
-            // Full hybrid: bollo spesso ridotto vs ICE puro (proxy −30%).
-            let base = catalogTaxesPerYear > 0 ? catalogTaxesPerYear : 180
-            return (base * 0.7).rounded()
+            if catalogTaxesPerYear > 0 { return catalogTaxesPerYear }
+            return (petrolBolloProxyEURPerYear * 0.25).rounded()
+        case .phev, .hev:
+            return catalogTaxesPerYear > 0 ? catalogTaxesPerYear : hevPhevBolloProxyEURPerYear
         case .ice:
-            return catalogTaxesPerYear > 0 ? catalogTaxesPerYear : 220
+            return catalogTaxesPerYear > 0 ? catalogTaxesPerYear : petrolBolloProxyEURPerYear
         }
     }
 
@@ -331,7 +328,7 @@ final class EVSimulator {
             // Per CNG, fuelConsumptionLPerKm è in kg/km e fuelPricePerLiter è €/kg.
             return yearlyKm
                 * lPerKm
-                * area.iceConsumptionMultiplier
+                * area.fuelConsumptionMultiplier(for: vehicle.powertrain)
                 * trip.iceExtraMultiplier
                 * max(0, input.fuelPricePerLiter)
                 * fuelMult

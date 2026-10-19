@@ -143,15 +143,15 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
 
     /// Quota km elettrici stimata per PHEV (0…1).
     ///
-    /// `share = clamp(autonomiaEV × 0.8 × giorniRicarica / kmAnnui, 0.1, 0.9)`.
-    /// Con ricarica a casa si assume ricarica quasi quotidiana; senza, ~settimanale.
+    /// `share = clamp(autonomiaEV × 0.8 × giorniRicarica / kmAnnui, 0.1, 0.6)`.
+    /// Tetto 0,6 senza dati utente (ICCT). Con ricarica a casa ≈ quotidiana; senza, ~settimanale.
     func phevElectricKmShare(hasHomeCharging: Bool, yearlyKm: Double = 15_000) -> Double {
         guard powertrain == .phev else { return powertrain == .ev ? 1 : 0 }
         let electricRangeKm = Double(wltpRangeKm ?? 50)
         let chargeDays = hasHomeCharging ? 300.0 : 52.0
         let km = max(1.0, yearlyKm)
         let raw = electricRangeKm * 0.8 * chargeDays / km
-        return min(0.9, max(0.1, raw))
+        return min(0.6, max(0.1, raw))
     }
 
     /// Carburante effettivo per prezzi MIMIT e etichette picker.

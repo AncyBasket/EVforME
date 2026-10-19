@@ -350,8 +350,85 @@ final class OperatingCostCalculatorTests: XCTestCase {
         let publicOnly = phev.phevElectricKmShare(hasHomeCharging: false, yearlyKm: 15_000)
         XCTAssertGreaterThan(home, publicOnly)
         XCTAssertGreaterThanOrEqual(home, 0.1)
-        XCTAssertLessThanOrEqual(home, 0.9)
+        XCTAssertLessThanOrEqual(home, 0.6)
         XCTAssertGreaterThanOrEqual(publicOnly, 0.1)
-        XCTAssertLessThanOrEqual(publicOnly, 0.9)
+        XCTAssertLessThanOrEqual(publicOnly, 0.6)
+        // Autonomia alta + ricarica casa non deve superare il tetto ICCT 0,6.
+        let longRange = VehicleCatalogItem(
+            id: "test-phev-long",
+            brand: "Test",
+            model: "PHEV Long",
+            year: 2024,
+            powertrain: .phev,
+            lengthM: 4.5,
+            widthM: 1.8,
+            heightM: 1.5,
+            fuelConsumptionLPerKm: 0.04,
+            energyConsumptionKWhPerKm: 0.16,
+            maintenancePerYear: 300,
+            taxesPerYear: 150,
+            imageURL: nil,
+            wltpRangeKm: 100,
+            wltpConsumptionKWh100km: 16,
+            fuelKind: .petrol
+        )
+        XCTAssertEqual(longRange.phevElectricKmShare(hasHomeCharging: true, yearlyKm: 10_000), 0.6, accuracy: 0.001)
+    }
+
+    func testHEVUrbanMultiplier_AtMostOne() {
+        XCTAssertLessThanOrEqual(AreaType.urban.hevConsumptionMultiplier, 1.0)
+        XCTAssertEqual(AreaType.urban.hevConsumptionMultiplier, 0.95, accuracy: 0.001)
+        XCTAssertGreaterThan(AreaType.urban.iceConsumptionMultiplier, 1.0)
+        XCTAssertEqual(AreaType.urban.fuelConsumptionMultiplier(for: .hev), 0.95, accuracy: 0.001)
+        XCTAssertEqual(AreaType.urban.fuelConsumptionMultiplier(for: .ice), 1.08, accuracy: 0.001)
+    }
+
+    func testBollo_NoHEVOrPHEVDiscount_EVQuarterAfterFiveYears() {
+        let hev = OwnershipCostEstimates.bolloPerYearEstimate(
+            catalogTaxesPerYear: 200,
+            powertrain: .hev,
+            vehicleYear: 2018,
+            referenceYear: 2026
+        )
+        XCTAssertEqual(hev, 200, accuracy: 0.01)
+
+        let phevYoung = OwnershipCostEstimates.bolloPerYearEstimate(
+            catalogTaxesPerYear: 200,
+            powertrain: .phev,
+            vehicleYear: 2024,
+            referenceYear: 2026
+        )
+        XCTAssertEqual(phevYoung, 200, accuracy: 0.01)
+
+        let evOld = OwnershipCostEstimates.bolloPerYearEstimate(
+            catalogTaxesPerYear: 0,
+            powertrain: .ev,
+            vehicleYear: 2018,
+            referenceYear: 2026
+        )
+        XCTAssertEqual(evOld, 55, accuracy: 0.01) // 220 × 0.25
+        XCTAssertNotEqual(evOld, 140, accuracy: 0.01)
+    }
+
+    func testMaintenance_UsesLifetimeMilesNotCalendarYearsAlone() {
+        // Stessa età (10 anni): 5.000 km/anno resta in fascia “young” (~31k mi);
+        // 20.000 km/anno entra in fascia mid/old (~124k mi) → manutenzione più alta.
+        let lowKm = OperatingCostCalculator.maintenancePerYear(
+            vehicleAge: 10,
+            powertrain: .ice,
+            yearlyKm: 5_000,
+            market: .IT
+        )
+        let highKm = OperatingCostCalculator.maintenancePerYear(
+            vehicleAge: 10,
+            powertrain: .ice,
+            yearlyKm: 20_000,
+            market: .IT
+        )
+        // Normalizzando al solo fattore km (×4), se usassimo solo età calendaria
+        // i moltiplicatori età sarebbero uguali; con miglia il highKm deve crescere di più.
+        let lowAt20kEquivalent = lowKm * (20_000.0 / 5_000.0)
+        XCTAssertGreaterThan(highKm, lowAt20kEquivalent * 1.05,
+                             "High lifetime miles should apply older CR band (low=\(lowKm) high=\(highKm))")
     }
 }
