@@ -140,7 +140,7 @@ enum OperatingCostCalculator {
     /// altrimenti MIMIT benzina (mai diesel/GPL dell’auto attuale).
     static func resolvePetrolPricePerLiter(for input: UserInput) -> Double {
         let costs = OfficialCostService.shared.cachedOrBundledCosts()
-        let mimitPetrol = costs?.pricePerLiter(for: .petrol) ?? 1.85
+        let mimitPetrol = costs?.pricePerLiter(for: .petrol) ?? OfficialEnergyCosts.Fallback.petrolPerLiter
         let sourceKind = VehicleCatalogService.shared.vehicle(by: input.sourceVehicleId)?.resolvedFuelKind
         if StorageService.shared.hasUserCustomizedFuelPrice, sourceKind == .petrol {
             return max(0, input.fuelPrice)

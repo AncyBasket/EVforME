@@ -37,6 +37,21 @@ final class PerfAndCacheTests: XCTestCase {
         XCTAssertEqual(medians.cng!, 1.300, accuracy: 0.001)
     }
 
+    func testMIMIT_ServitoOnly_LPGAndCNG_UseCSVNotFallback() throws {
+        let fixture = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .appendingPathComponent("Fixtures/mimit_servito_only.csv")
+        let data = try Data(contentsOf: fixture)
+        let medians = OfficialCostService.parseMIMITFuelMedians(from: data)
+        XCTAssertNotNil(medians.lpg)
+        XCTAssertNotNil(medians.cng)
+        // Solo servito: 0.760, 0.790 → median upper mid 0.790
+        XCTAssertEqual(medians.lpg!, 0.790, accuracy: 0.001)
+        XCTAssertEqual(medians.cng!, 1.980, accuracy: 0.001)
+        XCTAssertNotEqual(medians.lpg!, OfficialEnergyCosts.Fallback.lpgPerLiter, accuracy: 0.001)
+        XCTAssertNotEqual(medians.cng!, OfficialEnergyCosts.Fallback.cngPerKg, accuracy: 0.001)
+    }
+
     func testPublicChargingDefaults_MatchAdiconsumSep2026() {
         XCTAssertEqual(PublicChargingPriceDefaults.slowACPerKWh, 0.62, accuracy: 0.001)
         XCTAssertEqual(PublicChargingPriceDefaults.fastDCPerKWh, 0.75, accuracy: 0.001)

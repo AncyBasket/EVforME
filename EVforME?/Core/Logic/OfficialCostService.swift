@@ -114,8 +114,8 @@ final class OfficialCostService {
     private func fetchFromPublicSources() async -> OfficialEnergyCosts? {
         async let fuels = fetchMIMITFuelMedians()
         async let elec = fetchEurostatElectricityIT()
-        let (fuelMedians, elecPrice) = await (fuels, elec)
-        guard let petrol = fuelMedians.petrol, let elecPrice else { return nil }
+        let (fuelMedians, elecResult) = await (fuels, elec)
+        guard let petrol = fuelMedians.petrol, let elecResult else { return nil }
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         return OfficialEnergyCosts(
@@ -125,8 +125,9 @@ final class OfficialCostService {
             dieselPricePerLiter: fuelMedians.diesel.map { ($0 * 1000).rounded() / 1000 },
             lpgPricePerLiter: fuelMedians.lpg.map { ($0 * 1000).rounded() / 1000 },
             cngPricePerKg: fuelMedians.cng.map { ($0 * 1000).rounded() / 1000 },
-            electricityPricePerKWh: (elecPrice * 1000).rounded() / 1000,
-            updatedAt: formatter.string(from: Date())
+            electricityPricePerKWh: (elecResult.price * 1000).rounded() / 1000,
+            updatedAt: formatter.string(from: Date()),
+            electricityPeriod: elecResult.period
         )
     }
 
@@ -226,8 +227,10 @@ final class OfficialCostService {
         }
         var petrol: [Double] = []
         var diesel: [Double] = []
-        var lpg: [Double] = []
-        var cng: [Double] = []
+        var lpgSelf: [Double] = []
+        var lpgServito: [Double] = []
+        var cngSelf: [Double] = []
+        var cngServito: [Double] = []
         let lines = text.split(whereSeparator: \.isNewline)
         guard lines.count > 1 else { return (nil, nil, nil, nil) }
         for line in lines.dropFirst(2) {
@@ -235,15 +238,18 @@ final class OfficialCostService {
             guard cols.count >= 4 else { continue }
             let fuelName = cols[1].trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
             guard let parsed = parseMIMITRow(cols) else { continue }
-            guard parsed.isSelf else { continue }
             if fuelName == "benzina", (0.8...3.5).contains(parsed.price) {
+                // Benzina/gasolio: solo self (come prima).
+                guard parsed.isSelf else { continue }
                 petrol.append(parsed.price)
             } else if fuelName == "gasolio" || fuelName.contains("gasolio"), (0.8...3.5).contains(parsed.price) {
+                guard parsed.isSelf else { continue }
                 diesel.append(parsed.price)
             } else if fuelName == "gpl" || fuelName.contains("gpl"), (0.4...2.0).contains(parsed.price) {
-                lpg.append(parsed.price)
-            } else if fuelName.contains("metano"), (0.6...2.5).contains(parsed.price) {
-                cng.append(parsed.price)
+                // GPL/metano MIMIT spesso solo "servito": preferisci self, altrimenti servito.
+                if parsed.isSelf { lpgSelf.append(parsed.price) } else { lpgServito.append(parsed.price) }
+            } else if fuelName.contains("metano"), (0.6...3.0).contains(parsed.price) {
+                if parsed.isSelf { cngSelf.append(parsed.price) } else { cngServito.append(parsed.price) }
             }
         }
         func median(_ values: [Double]) -> Double? {
@@ -251,7 +257,9 @@ final class OfficialCostService {
             let sorted = values.sorted()
             return sorted[sorted.count / 2]
         }
-        return (median(petrol), median(diesel), median(lpg), median(cng))
+        let lpg = median(lpgSelf) ?? median(lpgServito)
+        let cng = median(cngSelf) ?? median(cngServito)
+        return (median(petrol), median(diesel), lpg, cng)
     }
 
     private static func parseMIMITRow(_ cols: [Substring]) -> (price: Double, isSelf: Bool)? {
@@ -263,8 +271,8 @@ final class OfficialCostService {
         return (price, selfRaw == "1")
     }
 
-    /// Eurostat nrg_pc_204 — household IT, fascia 1000–2499 kWh, con tasse.
-    private func fetchEurostatElectricityIT() async -> Double? {
+    /// Eurostat nrg_pc_204 — household IT, fascia 2500–4999 kWh (casa con EV), con tasse.
+    private func fetchEurostatElectricityIT() async -> (price: Double, period: String)? {
         guard let url = URL(string: Defaults.eurostatElectricityURL) else { return nil }
         do {
             let (data, response) = try await session.data(from: url)
@@ -292,7 +300,7 @@ final class OfficialCostService {
         }
     }
 
-    private func parseEurostatElectricity(_ data: Data) throws -> Double? {
+    private func parseEurostatElectricity(_ data: Data) throws -> (price: Double, period: String)? {
         guard let root = try JSONSerialization.jsonObject(with: data) as? [String: Any],
               let ids = root["id"] as? [String],
               let sizes = root["size"] as? [Int],
@@ -315,7 +323,7 @@ final class OfficialCostService {
         let target: [String: String] = [
             "freq": "S",
             "siec": "E7000",
-            "nrg_cons": "KWH1000-2499",
+            "nrg_cons": "KWH2500-4999",
             "unit": "KWH",
             "tax": "I_TAX",
             "currency": "EUR",
@@ -338,11 +346,12 @@ final class OfficialCostService {
             }
             guard ok else { continue }
             let flat = jsonStatFlatIndex(pos: pos, sizes: sizes)
+            let period = revTime[tPos] ?? "\(tPos)"
             if let raw = values["\(flat)"] as? Double {
-                return raw
+                return (raw, period)
             }
             if let num = values["\(flat)"] as? NSNumber {
-                return num.doubleValue
+                return (num.doubleValue, period)
             }
         }
         return nil
@@ -379,11 +388,11 @@ final class OfficialCostService {
             return OfficialEnergyCosts(
                 country: "IT",
                 currency: "EUR",
-                fuelPricePerLiter: 1.739,
-                dieselPricePerLiter: 1.659,
-                lpgPricePerLiter: 0.72,
-                cngPricePerKg: 1.28,
-                electricityPricePerKWh: 0.333,
+                fuelPricePerLiter: 2.029,
+                dieselPricePerLiter: 2.257,
+                lpgPricePerLiter: 0.775,
+                cngPricePerKg: 1.957,
+                electricityPricePerKWh: 0.314,
                 updatedAt: nil
             )
         }

@@ -23,7 +23,7 @@ struct EVSimulationInput {
     /// Configurazione ricarica personalizzata
     var chargingConfiguration: ChargingConfiguration = ChargingConfiguration()
     /// Prezzo benzina (€/L) per la quota termica delle PHEV (mai il carburante dell’auto attuale).
-    var petrolPricePerLiter: Double = 1.85
+    var petrolPricePerLiter: Double = OfficialEnergyCosts.Fallback.petrolPerLiter
     /// Se `false`, il consumo EV è battery-side e si applica l’efficienza di ricarica.
     /// Default `true`: catalogo WLTP EU = wall-to-wheel (perdite già incluse).
     var catalogEnergyIsWallToWheel: Bool = true

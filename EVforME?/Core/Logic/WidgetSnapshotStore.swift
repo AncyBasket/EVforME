@@ -62,7 +62,7 @@ struct VerdictWidgetSnapshot: Codable, Equatable {
         savingsMin = try c.decode(Int.self, forKey: .savingsMin)
         savingsMax = try c.decode(Int.self, forKey: .savingsMax)
         weeklyCharges = try c.decode(Int.self, forKey: .weeklyCharges)
-        fuelPrice = try c.decodeIfPresent(Double.self, forKey: .fuelPrice) ?? 1.7
+        fuelPrice = try c.decodeIfPresent(Double.self, forKey: .fuelPrice) ?? OfficialEnergyCosts.Fallback.petrolPerLiter
         iceLPer100Km = try c.decodeIfPresent(Double.self, forKey: .iceLPer100Km) ?? 7.0
         updatedAt = try c.decode(TimeInterval.self, forKey: .updatedAt)
     }

@@ -13,10 +13,13 @@ struct OfficialEnergyCosts: Codable {
     let cngPricePerKg: Double?
     let electricityPricePerKWh: Double
     let updatedAt: String?
+    /// Periodo Eurostat (es. `2026-S1`) per la fascia 2.500–4.999 kWh.
+    let electricityPeriod: String?
 
     enum CodingKeys: String, CodingKey {
         case country, currency, fuelPricePerLiter, dieselPricePerLiter
         case lpgPricePerLiter, cngPricePerKg, electricityPricePerKWh, updatedAt
+        case electricityPeriod
     }
 
     init(
@@ -27,7 +30,8 @@ struct OfficialEnergyCosts: Codable {
         lpgPricePerLiter: Double? = nil,
         cngPricePerKg: Double? = nil,
         electricityPricePerKWh: Double,
-        updatedAt: String?
+        updatedAt: String?,
+        electricityPeriod: String? = nil
     ) {
         self.country = country
         self.currency = currency
@@ -37,6 +41,7 @@ struct OfficialEnergyCosts: Codable {
         self.cngPricePerKg = cngPricePerKg
         self.electricityPricePerKWh = electricityPricePerKWh
         self.updatedAt = updatedAt
+        self.electricityPeriod = electricityPeriod
     }
 
     init(from decoder: Decoder) throws {
@@ -49,24 +54,28 @@ struct OfficialEnergyCosts: Codable {
         cngPricePerKg = try c.decodeIfPresent(Double.self, forKey: .cngPricePerKg)
         electricityPricePerKWh = try c.decode(Double.self, forKey: .electricityPricePerKWh)
         updatedAt = try c.decodeIfPresent(String.self, forKey: .updatedAt)
+        electricityPeriod = try c.decodeIfPresent(String.self, forKey: .electricityPeriod)
     }
 
     /// Prezzo unitario allineato al carburante del veicolo attuale (€/L o €/kg per CNG).
+    /// Ripieghi MIMIT 19/10/2026 (audit) — non derivare gasolio/GPL dalla benzina.
+    enum Fallback {
+        static let petrolPerLiter: Double = 2.03
+        static let dieselPerLiter: Double = 2.25
+        static let lpgPerLiter: Double = 0.77
+        static let cngPerKg: Double = 1.95
+    }
+
     func pricePerLiter(for fuelKind: FuelKind) -> Double {
         switch fuelKind {
         case .diesel:
-            if let dieselPricePerLiter { return dieselPricePerLiter }
-            return (fuelPricePerLiter * 0.97 * 1000).rounded() / 1000
+            return dieselPricePerLiter ?? Fallback.dieselPerLiter
         case .lpg:
-            if let lpgPricePerLiter { return lpgPricePerLiter }
-            // GPL IT tipicamente ~45–55% della benzina.
-            return (fuelPricePerLiter * 0.50 * 1000).rounded() / 1000
+            return lpgPricePerLiter ?? Fallback.lpgPerLiter
         case .cng:
-            if let cngPricePerKg { return cngPricePerKg }
-            // Metano IT ordine di grandezza ~1,2–1,4 €/kg (fallback statico).
-            return 1.28
+            return cngPricePerKg ?? Fallback.cngPerKg
         case .petrol, .unknown:
-            return fuelPricePerLiter
+            return fuelPricePerLiter > 0 ? fuelPricePerLiter : Fallback.petrolPerLiter
         }
     }
 }

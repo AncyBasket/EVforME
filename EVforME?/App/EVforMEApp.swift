@@ -12,7 +12,7 @@ struct EVforMEApp: App {
             dailyKm: 12000,
             hasHomeCharging: true,
             areaType: .urban,
-            fuelPrice: 1.7,
+            fuelPrice: OfficialEnergyCosts.Fallback.petrolPerLiter,
             ownershipYears: 5,
             sourceVehicleId: Defaults.starterSourceVehicleId,
             targetVehicleId: Defaults.starterTargetVehicleId,
