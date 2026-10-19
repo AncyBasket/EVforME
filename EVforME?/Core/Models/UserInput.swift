@@ -192,7 +192,7 @@ struct UserInput {
         areaType: AreaType,
         fuelPrice: Double,
         ownershipYears: Int,
-        electricityPricePerKWh: Double = 0.25,
+        electricityPricePerKWh: Double = 0.31,
         sourceVehicleId: String = "",
         targetVehicleId: String = "",
         scenario: Scenario = .realistic,

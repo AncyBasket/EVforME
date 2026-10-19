@@ -454,6 +454,8 @@
 "charging_type_public_fast_description" = "DC Fast charging (50 kW tipico)";
 "charging_type_public_ultra_fast" = "Ricarica ultra-rapida";
 "charging_type_public_ultra_fast_description" = "Ultra fast charging (150+ kW)";
+"charging_type_tesla_supercharger" = "Tesla Supercharger";
+"charging_type_tesla_supercharger_description" = "Rete Tesla (~0,46 €/kWh per proprietari)";
 
 /* App Intents */
 "intent_simulate_title" = "Simula idoneità EV";

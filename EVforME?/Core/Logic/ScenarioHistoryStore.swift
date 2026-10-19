@@ -181,7 +181,7 @@ struct SavedScenarioSnapshot: Codable, Identifiable, Equatable {
             areaType: trip.suggestedAreaType,
             fuelPrice: fuelPriceAtSave ?? 1.7,
             ownershipYears: 5,
-            electricityPricePerKWh: electricityPriceAtSave ?? 0.25,
+            electricityPricePerKWh: electricityPriceAtSave ?? 0.31,
             sourceVehicleId: sourceVehicleId,
             targetVehicleId: targetVehicleId,
             scenario: scenario,

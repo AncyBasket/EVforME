@@ -146,6 +146,8 @@ enum L10n {
     static var chargingTypePublicFastDescription: String { string("charging_type_public_fast_description") }
     static var chargingTypePublicUltraFast: String { string("charging_type_public_ultra_fast") }
     static var chargingTypePublicUltraFastDescription: String { string("charging_type_public_ultra_fast_description") }
+    static var chargingTypeTeslaSupercharger: String { string("charging_type_tesla_supercharger") }
+    static var chargingTypeTeslaSuperchargerDescription: String { string("charging_type_tesla_supercharger_description") }
     static var tellMeTheTruth: String { string("tell_me_the_truth") }
     static var simulateCtaA11yHint: String { string("simulate_cta_a11y_hint") }
     

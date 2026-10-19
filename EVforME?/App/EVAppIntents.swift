@@ -28,7 +28,7 @@ struct SimulateEVIntent: AppIntent {
             areaType: .urban,
             fuelPrice: 1.7,
             ownershipYears: 5,
-            electricityPricePerKWh: 0.25,
+            electricityPricePerKWh: 0.31,
             sourceVehicleId: Defaults.starterSourceVehicleId,
             targetVehicleId: Defaults.starterTargetVehicleId,
             scenario: .realistic
