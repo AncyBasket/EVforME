@@ -183,12 +183,14 @@ enum OwnershipCostEstimates {
             if italianRegion.evPermanentlyExempt {
                 return BolloEstimate(amount: 0, isKnown: true)
             }
-            if age < 5 { return BolloEstimate(amount: 0, isKnown: true) }
+            let exemptYears = italianRegion.evExemptionYears(forVehicleYear: vehicleYear)
+            if age < exemptYears { return BolloEstimate(amount: 0, isKnown: true) }
             guard let rate = italianRegion.evBolloEURPerKw else {
                 return BolloEstimate(amount: 0, isKnown: false)
             }
             if let kw = bookletPowerKwP2, kw > 0 {
                 // Lineare: nessun salto 3,87 oltre 100 kW (solo ICE). Es. naz. 100 kW → 2,58×100×1/4 = 64,50.
+                // Sicilia: tariffario = 1/4 importo benzina → stesso rate×kW×1/4.
                 let raw = rate * kw * 0.25
                 return BolloEstimate(amount: (raw * 100).rounded() / 100, isKnown: true)
             }
@@ -199,6 +201,34 @@ enum OwnershipCostEstimates {
             }
             return BolloEstimate(amount: 0, isKnown: false)
         }
+    }
+
+    /// Somma bollo anno per anno sull’orizzonte (EV può uscire dall’esenzione a metà periodo).
+    static func bolloTotalOverHorizon(
+        catalogTaxesPerYear: Double,
+        powertrain: Powertrain,
+        vehicleYear: Int,
+        referenceYear: Int,
+        ownershipYears: Int,
+        bookletPowerKwP2: Double? = nil,
+        italianRegion: ItalianRegion = .unspecified
+    ) -> BolloEstimate {
+        let years = max(1, ownershipYears)
+        var sum = 0.0
+        var known = true
+        for offset in 0..<years {
+            let detail = bolloPerYearDetail(
+                catalogTaxesPerYear: catalogTaxesPerYear,
+                powertrain: powertrain,
+                vehicleYear: vehicleYear,
+                referenceYear: referenceYear + offset,
+                bookletPowerKwP2: bookletPowerKwP2,
+                italianRegion: italianRegion
+            )
+            sum += detail.amount
+            if !detail.isKnown { known = false }
+        }
+        return BolloEstimate(amount: (sum * 100).rounded() / 100, isKnown: known)
     }
 
     /// Residuo stimato migliorato con deprezzamento non lineare
@@ -328,43 +358,48 @@ final class EVSimulator {
             market: input.market
         ) * scenario.evCostMultiplier
 
-        let sourceBollo = OwnershipCostEstimates.bolloPerYearDetail(
+        // Bollo pluriennale (EV può uscire dall’esenzione a metà orizzonte) → media annua per verdetto/break-even.
+        let sourceBolloHorizon = OwnershipCostEstimates.bolloTotalOverHorizon(
             catalogTaxesPerYear: sourceVehicle.taxesPerYear,
             powertrain: sourceVehicle.powertrain,
             vehicleYear: sourceVehicle.year,
             referenceYear: currentYear,
+            ownershipYears: years,
             bookletPowerKwP2: sourceVehicle.powertrain == .ev ? input.sourceBookletPowerKwP2 : nil,
             italianRegion: input.italianRegion
         )
-        let targetBollo = OwnershipCostEstimates.bolloPerYearDetail(
+        let targetBolloHorizon = OwnershipCostEstimates.bolloTotalOverHorizon(
             catalogTaxesPerYear: targetVehicle.taxesPerYear,
             powertrain: targetVehicle.powertrain,
             vehicleYear: targetVehicle.year,
             referenceYear: currentYear,
+            ownershipYears: years,
             bookletPowerKwP2: targetVehicle.powertrain == .ev ? input.targetBookletPowerKwP2 : nil,
             italianRegion: input.italianRegion
         )
+        let yearsD = Double(max(1, years))
+        let sourceBolloAvg = sourceBolloHorizon.amount / yearsD
+        let targetBolloAvg = targetBolloHorizon.amount / yearsD
         let sourceBreakdown = OperatingCostBreakdown(
             energy: sourceEnergy,
             maintenance: sourceMaintenance,
-            taxes: sourceBollo.amount,
+            taxes: sourceBolloAvg,
             insurance: sourceInsurance,
-            taxesKnown: sourceBollo.isKnown
+            taxesKnown: sourceBolloHorizon.isKnown
         )
         let targetBreakdown = OperatingCostBreakdown(
             energy: targetEnergy,
             maintenance: targetMaintenance,
-            taxes: targetBollo.amount,
+            taxes: targetBolloAvg,
             insurance: targetInsurance,
-            taxesKnown: targetBollo.isKnown
+            taxesKnown: targetBolloHorizon.isKnown
         )
 
         let yearlyIceCost = sourceBreakdown.total
         let yearlyEvCost = targetBreakdown.total
 
-        // Totali usati dal VerdictEngine = opex × anni (acquisto/residuo restano nel break-even).
-        let iceTotalCost = yearlyIceCost * Double(years)
-        let evTotalCost = yearlyEvCost * Double(years)
+        let iceTotalCost = yearlyIceCost * yearsD
+        let evTotalCost = yearlyEvCost * yearsD
         let totalSavings = iceTotalCost - evTotalCost
 
         return EVSimulationResult(

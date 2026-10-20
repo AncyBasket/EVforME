@@ -2,12 +2,12 @@
 //  ItalianRegion.swift
 //  EVforME?
 //
-//  Tariffari ACI bollo EV 2026 (opzionale). Fonte: tariffari ACI regionali.
+//  Tariffari ACI bollo EV 2026 (opzionale). Fonte: tariffari ACI regionali 2026.
 //
 
 import Foundation
 
-/// Regione / provincia autonoma per stima bollo EV (tariffa €/kW dopo i 5 anni).
+/// Regione / provincia autonoma per stima bollo EV (tariffa €/kW dopo l’esenzione).
 enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
     case unspecified
     case lombardia
@@ -50,7 +50,34 @@ enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
         }
     }
 
-    /// €/kW dopo esenzione 5 anni. `nil` = non stimato. Lombardia/Piemonte: 0 permanente.
+    /// Anni di esenzione bollo EV dall’immatricolazione (oltre a Lombardia/Piemonte = permanente).
+    /// Valle d’Aosta: 8 anni per EV immatricolate dal 2019 (tariffario ACI 2026).
+    /// Altrove: regola nazionale tipica 5 anni.
+    var evExemptionYears: Int {
+        switch self {
+        case .lombardia, .piemonte:
+            return Int.max
+        case .valleDAosta:
+            return 8
+        default:
+            return 5
+        }
+    }
+
+    /// `true` se l’esenzione VdA a 8 anni non applica (immatricolazione pre-2019) → usa 5 anni.
+    func evExemptionYears(forVehicleYear vehicleYear: Int) -> Int {
+        if self == .valleDAosta {
+            return vehicleYear >= 2019 ? 8 : 5
+        }
+        return evExemptionYears
+    }
+
+    /// €/kW dopo esenzione. `nil` = non stimato. Lombardia/Piemonte: 0 permanente.
+    ///
+    /// Bolzano 1,96 €/kW: tariffa Euro 6 (Euro 0–5: 1,99 €/kW — non modellato senza classe Euro).
+    /// Molise 3,12: allineato ad Abruzzo/Campania; senza conferma esplicita tariffario ACI Molise 2026 → stima.
+    /// Sicilia 2,58: il tariffario ACI applica 1/4 dell’importo calcolato sulla scala benzina;
+    /// in-app usiamo 2,58 €/kW × 1/4 (stesso schema nazionale post-esenzione).
     var evBolloEURPerKw: Double? {
         switch self {
         case .unspecified:
@@ -62,19 +89,45 @@ enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
             return 2.84
         case .toscana:
             return 2.71
-        case .abruzzo, .campania, .molise:
+        case .abruzzo, .campania:
+            return 3.12
+        case .molise:
+            // Stima (stesso cluster Abruzzo/Campania); fonte ACI Molise 2026 non verificata in-app.
             return 3.12
         case .bolzano:
+            // Euro 6: 1,96 €/kW (Euro 0–5: 1,99 — non usato senza classe Euro).
             return 1.96
-        case .basilicata, .puglia, .sicilia, .umbria, .valleDAosta:
+        case .basilicata, .puglia, .umbria:
+            return 2.58
+        case .sicilia:
+            // 1/4 dell’importo benzina (tariffario ACI Sicilia) → stesso 2,58 × 1/4 post-esenzione.
+            return 2.58
+        case .valleDAosta:
+            // Dopo gli 8 anni di esenzione (EV ≥2019): stima nazionale 2,58.
             return 2.58
         case .otherUnknown:
             return nil
         }
     }
 
-    /// Esenzione permanente (anche dopo 5 anni).
+    /// Esenzione permanente (anche dopo i primi anni).
     var evPermanentlyExempt: Bool {
         self == .lombardia || self == .piemonte
+    }
+
+    /// Nota leggibile su stime / caveat regionali (audit / UI hint).
+    var evBolloRateNote: String? {
+        switch self {
+        case .molise:
+            return "stima (tariffa ACI Molise 2026 non verificata; allineata ad Abruzzo/Campania 3,12)"
+        case .bolzano:
+            return "1,96 €/kW Euro 6 (1,99 Euro 0–5 non modellato)"
+        case .sicilia:
+            return "1/4 dell’importo benzina (ACI Sicilia) = 2,58 €/kW × 1/4"
+        case .valleDAosta:
+            return "esenzione 8 anni se immatricolazione ≥2019 (ACI VdA 2026)"
+        default:
+            return nil
+        }
     }
 }
