@@ -1,5 +1,5 @@
 /* App */
-"app_title" = "EV per ME?";
+"app_title" = "EVforME?";
 "input_section_1_title" = "Percorso e costi";
 "input_section_1_subtitle" = "Chilometri annui, prezzi di carburante e luce, anni di possesso.";
 "input_section_2_title" = "Contesto";
@@ -149,7 +149,7 @@
 
 /* Onboarding */
 "get_started" = "Inizia";
-"onboarding_title" = "EV per ME?";
+"onboarding_title" = "EVforME?";
 "onboarding_subtitle" = "Scopri se un'auto elettrica fa per te. Inserisci le tue abitudini di guida e ottieni un verdetto personalizzato in pochi secondi.";
 "onboarding_row_km" = "Imposta km giornalieri e opzioni di ricarica";
 "onboarding_row_chart" = "Vedi il confronto costi a 5 anni";

@@ -46,7 +46,8 @@ enum L10n {
     }
     
     // MARK: - App
-    static var appTitle: String { string("app_title") }
+    /// Brand name — never localized.
+    static var appTitle: String { "EVforME?" }
     
     // MARK: - Input
     static var dailyKmQuestion: String { string("daily_km_question") }

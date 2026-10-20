@@ -1,5 +1,5 @@
 /* Widget */
-"widget_brand_title" = "EV per ME?";
+"widget_brand_title" = "EVforME?";
 "widget_empty_prompt" = "Esegui una simulazione per fissare qui il verdetto.";
 "widget_bump_fuel_title" = "Benzina +€0,10";
 "widget_bump_fuel_description" = "Aumenta il prezzo del carburante di €0,10 e aggiorna la stima del verdetto sulla Home.";

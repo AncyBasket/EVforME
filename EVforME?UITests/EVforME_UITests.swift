@@ -24,11 +24,10 @@ final class EVforME_UITests: XCTestCase {
         // Dismiss onboarding / quick-start (IT/EN; PrimaryButton may uppercase label)
         dismissQuickStartIfNeeded(app)
 
-        let titleEN = app.staticTexts["EV for ME?"]
-        let titleIT = app.staticTexts["EV per ME?"]
+        let title = app.staticTexts["EVforME?"]
         XCTAssertTrue(
-            titleEN.waitForExistence(timeout: 5) || titleIT.waitForExistence(timeout: 2),
-            "Masthead title should match app_title (EN or IT)"
+            title.waitForExistence(timeout: 5),
+            "Masthead title should be the untranslated brand EVforME?"
         )
 
         // Wait for catalog-backed starters (async load) before simulating.

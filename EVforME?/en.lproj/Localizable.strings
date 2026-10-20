@@ -1,5 +1,5 @@
 /* App */
-"app_title" = "EV for ME?";
+"app_title" = "EVforME?";
 "input_section_1_title" = "Driving & costs";
 "input_section_1_subtitle" = "Yearly distance, fuel and electricity prices, ownership length.";
 "input_section_2_title" = "Context";
@@ -125,7 +125,7 @@
 
 /* Onboarding */
 "get_started" = "Get Started";
-"onboarding_title" = "EV for ME?";
+"onboarding_title" = "EVforME?";
 "onboarding_subtitle" = "Find out if an electric car fits your lifestyle. Enter your driving habits and get a personalized verdict in seconds.";
 "onboarding_row_km" = "Set your daily km and charging options";
 "onboarding_row_chart" = "See 5-year cost comparison";
