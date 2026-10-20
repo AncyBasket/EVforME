@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Support — EVforME?</title>
+  <meta name="description" content="Support and FAQ for the EVforME? iOS app." />
+  <style>
+    :root {
+      --stone: #eceee8;
+      --ink: #121412;
+      --muted: #5a5f57;
+      --volt: #b8eb2e;
+      --max: 42rem;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      background: var(--stone);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+    .mark {
+      display: inline-block;
+      width: 2.75rem;
+      height: 0.28rem;
+      background: var(--volt);
+      margin-bottom: 1.25rem;
+    }
+    h1 {
+      font-size: clamp(1.85rem, 4vw, 2.4rem);
+      letter-spacing: -0.02em;
+      margin: 0 0 0.35rem;
+    }
+    .meta { color: var(--muted); font-size: 0.95rem; margin-bottom: 2rem; }
+    h2 {
+      font-size: 1.15rem;
+      margin: 2rem 0 0.65rem;
+      letter-spacing: -0.01em;
+    }
+    p, li, dt, dd { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 0.98rem; }
+    dt { font-weight: 600; margin-top: 1rem; }
+    dd { margin: 0.35rem 0 0 0; color: var(--muted); }
+    a { color: var(--ink); }
+    footer {
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(18,20,18,0.12);
+      color: var(--muted);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="mark" aria-hidden="true"></div>
+    <h1>Support — EVforME?</h1>
+    <p class="meta">Aggiornato: 20 ottobre 2026</p>
+
+    <h2>Contatto</h2>
+    <p>
+      Andrea Ancellotti ·
+      <a href="mailto:andrea.ancellotti@gmail.com">andrea.ancellotti@gmail.com</a>
+    </p>
+
+    <h2>FAQ</h2>
+    <dl>
+      <dt>I numeri sono ufficiali?</dt>
+      <dd>
+        I calcoli restano sul dispositivo. Carburante e elettricità usano fonti pubbliche
+        (MIMIT, Eurostat) quando disponibili. Consumi veicolo dal catalogo incluso nell’app
+        (fonti EEA/costruttori). Se un dato manca, l’app dice «non stimato» invece di inventare un valore.
+      </dd>
+
+      <dt>Perché a volte vedo «Totale parziale (bollo non stimato)»?</dt>
+      <dd>
+        Per le EV dopo l’esenzione, il bollo usa i kW P.2 a libretto. Senza quel dato non stimiamo 0 € in silenzio.
+        Anche ICE/HEV/PHEV senza bollo di catalogo restano «non stimato».
+      </dd>
+
+      <dt>L’app usa la mia posizione?</dt>
+      <dd>
+        Solo se apri Colonnine vicine e concedi l’autorizzazione, per centrare Apple MapKit.
+        Il paese per le stime non deriva dal GPS.
+      </dd>
+
+      <dt>Dove leggo la privacy?</dt>
+      <dd>
+        <a href="../privacy/">Informativa privacy</a> (IT/EN).
+      </dd>
+
+      <dt>Come segnalo un errore su un modello?</dt>
+      <dd>
+        Scrivi a <a href="mailto:andrea.ancellotti@gmail.com">andrea.ancellotti@gmail.com</a>
+        indicando marca, modello, anno e cosa non torna.
+      </dd>
+    </dl>
+
+    <footer>
+      EVforME? · <a href="../privacy/">Privacy</a>
+    </footer>
+  </main>
+</body>
+</html>
