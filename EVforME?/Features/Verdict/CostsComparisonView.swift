@@ -146,13 +146,22 @@ struct CostsComparisonView: View {
                     .foregroundColor(.secondaryText)
                     .padding(.leading, 8)
                     
-                    Text(L10n.calculationOpexBreakdown(
-                        sourceBreakdown.energy,
-                        sourceBreakdown.maintenance,
-                        sourceBreakdown.taxes,
-                        sourceBreakdown.insurance,
-                        sourceBreakdown.total
-                    ))
+                    Text(
+                        sourceBreakdown.taxesKnown
+                            ? L10n.calculationOpexBreakdown(
+                                sourceBreakdown.energy,
+                                sourceBreakdown.maintenance,
+                                sourceBreakdown.taxes,
+                                sourceBreakdown.insurance,
+                                sourceBreakdown.total
+                            )
+                            : L10n.calculationOpexBreakdownTaxesUnknown(
+                                sourceBreakdown.energy,
+                                sourceBreakdown.maintenance,
+                                sourceBreakdown.insurance,
+                                sourceBreakdown.total
+                            )
+                    )
                     .font(Typography.readingCaption)
                     .foregroundColor(.secondaryText)
                     .padding(.leading, 8)
@@ -216,7 +225,7 @@ struct CostsComparisonView: View {
                             .foregroundColor(.secondaryText)
                             .padding(.leading, 8)
                             .padding(.top, 4)
-                        if !targetBreakdown.taxesKnown {
+                        if !sourceBreakdown.taxesKnown || !targetBreakdown.taxesKnown {
                             Text(L10n.partialTotalBolloUnknown)
                                 .font(Typography.readingCaption)
                                 .foregroundColor(.secondaryText)

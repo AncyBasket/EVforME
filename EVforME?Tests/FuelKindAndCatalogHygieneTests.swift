@@ -510,4 +510,31 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertTrue(withP2.isKnown)
         XCTAssertEqual(withP2.amount, 64.50, accuracy: 0.01)
     }
+
+    /// EV ≥ 5 anni senza P.2 → totale parziale sul verdetto (source o target).
+    func testSimulation_EVOverFiveYearsWithoutP2_MarksPartialTotal() {
+        VehicleCatalogService.shared.reloadFromBundledSeedIgnoringUserCacheForTesting()
+        let source = try! XCTUnwrap(VehicleCatalogService.shared.vehicle(by: "seat-ateca-2016"))
+        let target = try! XCTUnwrap(VehicleCatalogService.shared.vehicle(by: "tesla-model-3-2020"))
+        XCTAssertGreaterThanOrEqual(2026 - target.year, 5)
+        let input = UserInput(
+            dailyKm: 15_000,
+            hasHomeCharging: true,
+            areaType: .mixed,
+            fuelPrice: 2.03,
+            ownershipYears: 5,
+            electricityPricePerKWh: 0.31,
+            sourceVehicleId: source.id,
+            targetVehicleId: target.id,
+            scenario: .realistic,
+            sourcePurchasePrice: Defaults.suggestedPurchasePrice(for: source),
+            targetPurchasePrice: Defaults.suggestedPurchasePrice(for: target),
+            comparisonIntent: .alreadyOwned,
+            targetBookletPowerKwP2: nil
+        )
+        let result = try! XCTUnwrap(EVSimulator.simulate(input: input))
+        XCTAssertTrue(result.targetYearlyBreakdown.taxesKnown == false)
+        XCTAssertTrue(result.hasPartialBolloTotal)
+        XCTAssertTrue(result.sourceYearlyBreakdown.taxesKnown)
+    }
 }

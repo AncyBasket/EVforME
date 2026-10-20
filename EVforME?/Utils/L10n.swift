@@ -556,10 +556,15 @@ enum L10n {
     static var kaskoTheftToggle: String { string("kasko_theft_toggle") }
     static var kaskoTheftAmountLabel: String { string("kasko_theft_amount_label") }
     static var kaskoTheftAmountPlaceholder: String { string("kasko_theft_amount_placeholder") }
-    static var evBookletPowerKwP2Label: String { string("ev_booklet_power_kw_p2_label") }
+    static var evBookletPowerKwP2SourceLabel: String { string("ev_booklet_power_kw_p2_source_label") }
+    static var evBookletPowerKwP2TargetLabel: String { string("ev_booklet_power_kw_p2_target_label") }
     static var evBookletPowerKwP2Placeholder: String { string("ev_booklet_power_kw_p2_placeholder") }
     static var evBookletPowerKwP2Hint: String { string("ev_booklet_power_kw_p2_hint") }
     static var partialTotalBolloUnknown: String { string("partial_total_bollo_unknown") }
+    static var italyKitBolloBothUnknown: String { string("italy_kit_bollo_both_unknown") }
+    static func italyKitBolloRowSourceUnknown(_ ev: Int) -> String {
+        format("italy_kit_bollo_row_source_unknown", ev)
+    }
     static var kaskoAmountRequired: String { string("kasko_amount_required") }
     static var publicChargingTypeLabel: String { string("public_charging_type_label") }
     static var publicChargingSourceNote: String { string("public_charging_source_note") }

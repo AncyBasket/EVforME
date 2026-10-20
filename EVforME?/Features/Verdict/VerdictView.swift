@@ -430,6 +430,14 @@ struct VerdictView: View {
                 .multilineTextAlignment(.leading)
                 .fixedSize(horizontal: false, vertical: true)
 
+            if result.hasPartialBolloTotal {
+                Text(L10n.partialTotalBolloUnknown)
+                    .font(Typography.readingCaption.weight(.semibold))
+                    .foregroundColor(.warning)
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
             if let source, let target {
                 Text(L10n.verdictCompareLine(source.displayName, target.displayName))
                     .font(Typography.readingCaption)
@@ -486,6 +494,7 @@ struct VerdictView: View {
             [
                 result.verdict.title,
                 result.verdict.description,
+                result.hasPartialBolloTotal ? L10n.partialTotalBolloUnknown : "",
                 L10n.verdictProofSavingsValue(
                     result.yearlySavingsRange.lowerBound,
                     result.yearlySavingsRange.upperBound
@@ -639,11 +648,17 @@ struct VerdictView: View {
                 .font(Typography.readingCaption)
                 .foregroundColor(.secondaryText)
                 .fixedSize(horizontal: false, vertical: true)
-            if tgt.taxesKnown {
-                assumptionRow(text: L10n.italyKitBolloRow(Int(src.taxes), Int(tgt.taxes)))
-            } else {
-                assumptionRow(text: L10n.italyKitBolloRowEVUnknown(Int(src.taxes)))
+            if result.hasPartialBolloTotal {
+                if !src.taxesKnown && !tgt.taxesKnown {
+                    assumptionRow(text: L10n.italyKitBolloBothUnknown)
+                } else if !tgt.taxesKnown {
+                    assumptionRow(text: L10n.italyKitBolloRowEVUnknown(Int(src.taxes)))
+                } else {
+                    assumptionRow(text: L10n.italyKitBolloRowSourceUnknown(Int(tgt.taxes)))
+                }
                 assumptionRow(text: L10n.partialTotalBolloUnknown)
+            } else {
+                assumptionRow(text: L10n.italyKitBolloRow(Int(src.taxes), Int(tgt.taxes)))
             }
             assumptionRow(text: L10n.italyKitInsuranceRow(Int(src.insurance), Int(tgt.insurance)))
             assumptionRow(text: L10n.italyKitMaintenanceRow(Int(src.maintenance), Int(tgt.maintenance)))

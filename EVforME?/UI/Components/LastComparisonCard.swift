@@ -41,6 +41,13 @@ struct LastComparisonCard: View {
                     .foregroundStyle(Color.secondaryText)
             }
 
+            if snapshot.showsPartialBolloTotal {
+                Text(L10n.partialTotalBolloUnknown)
+                    .font(Typography.readingCaption)
+                    .foregroundStyle(Color.warning)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
             if let deltaBadge {
                 Text(deltaBadge)
                     .font(Typography.readingCaption)

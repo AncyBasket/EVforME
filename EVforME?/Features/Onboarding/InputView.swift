@@ -75,6 +75,25 @@ struct InputView: View {
                     if let source = selectedSourceVehicle, let target = selectedTargetVehicle {
                         comparisonInset(source: source, target: target)
                     }
+
+                    if selectedSourceVehicle?.powertrain == .ev {
+                        bookletP2Field(
+                            label: L10n.evBookletPowerKwP2SourceLabel,
+                            binding: Binding(
+                                get: { userInput.sourceBookletPowerKwP2 ?? 0 },
+                                set: { userInput.sourceBookletPowerKwP2 = $0 > 0 ? $0 : nil }
+                            )
+                        )
+                    }
+                    if selectedTargetVehicle?.powertrain == .ev {
+                        bookletP2Field(
+                            label: L10n.evBookletPowerKwP2TargetLabel,
+                            binding: Binding(
+                                get: { userInput.targetBookletPowerKwP2 ?? 0 },
+                                set: { userInput.targetBookletPowerKwP2 = $0 > 0 ? $0 : nil }
+                            )
+                        )
+                    }
                 }
 
                 DisclosureGroup(isExpanded: $showAdvancedDetails) {
@@ -297,24 +316,6 @@ struct InputView: View {
                                     .foregroundColor(.secondaryText)
                             }
 
-                            Text(L10n.evBookletPowerKwP2Label)
-                                .font(Typography.readingCaption)
-                                .foregroundColor(.secondaryText)
-                                .padding(.top, 10)
-                            TextField(
-                                L10n.evBookletPowerKwP2Placeholder,
-                                value: Binding(
-                                    get: { userInput.evBookletPowerKwP2 ?? 0 },
-                                    set: { userInput.evBookletPowerKwP2 = $0 > 0 ? $0 : nil }
-                                ),
-                                format: .number
-                            )
-                            .keyboardType(.decimalPad)
-                            .font(Typography.readingBody)
-                            Text(L10n.evBookletPowerKwP2Hint)
-                                .font(Typography.readingCaption)
-                                .foregroundColor(.secondaryText)
-
                             Text(L10n.insuranceAnnualOptionalLabel)
                                 .font(Typography.readingCaption)
                                 .foregroundColor(.secondaryText)
@@ -466,6 +467,11 @@ struct InputView: View {
                                                     Text("\(item.yearlyKm) km · €\(item.savingsMin)–€\(item.savingsMax)")
                                                         .font(Typography.readingCaption)
                                                         .foregroundColor(.secondaryText)
+                                                    if item.showsPartialBolloTotal {
+                                                        Text(L10n.partialTotalBolloUnknown)
+                                                            .font(Typography.readingCaption)
+                                                            .foregroundColor(.warning)
+                                                    }
                                                 }
                                                 Spacer()
                                                 Image(systemName: "arrow.uturn.backward.circle.fill")
@@ -784,6 +790,21 @@ struct InputView: View {
 
     private var validationErrorsA11yLabel: String {
         L10n.validationA11yTitle + ": " + validationErrors.joined(separator: "; ")
+    }
+
+    private func bookletP2Field(label: String, binding: Binding<Double>) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(label)
+                .font(Typography.readingCaption)
+                .foregroundColor(.secondaryText)
+                .padding(.top, 8)
+            TextField(L10n.evBookletPowerKwP2Placeholder, value: binding, format: .number)
+                .keyboardType(.decimalPad)
+                .font(Typography.readingBody)
+            Text(L10n.evBookletPowerKwP2Hint)
+                .font(Typography.readingCaption)
+                .foregroundColor(.secondaryText)
+        }
     }
 
     @ViewBuilder

@@ -556,10 +556,13 @@
 "charging_map_verdict_nudge_title" = "Senza wallbox, valuta colonnine pubbliche vicino a te";
 "charging_map_verdict_nudge_body" = "Mappa orientativa — non garantisce prese dove parcheggi.";
 
-"ev_booklet_power_kw_p2_label" = "kW a libretto (P.2) — auto elettrica (opzionale)";
+"ev_booklet_power_kw_p2_source_label" = "kW a libretto (P.2) — auto attuale (opzionale)";
+"ev_booklet_power_kw_p2_target_label" = "kW a libretto (P.2) — auto elettrica (opzionale)";
 "ev_booklet_power_kw_p2_placeholder" = "es. 100";
 "ev_booklet_power_kw_p2_hint" = "Potenza continua 30 min sul libretto. Serve per il bollo EV dopo 5 anni (1/4 × 2,58 €/kW). Non usare i kW di picco.";
 "partial_total_bollo_unknown" = "Totale parziale (bollo non stimato)";
+"italy_kit_bollo_both_unknown" = "Bollo: attuale e elettrificata non stimati (manca P.2 a libretto)";
+"italy_kit_bollo_row_source_unknown" = "Bollo (stima): attuale non stimato (manca P.2) · elettrificata ~€%d/anno";
 "insurance_annual_optional_label" = "Quanto paghi di assicurazione all'anno (opzionale)";
 "insurance_annual_optional_placeholder" = "es. 422";
 "kasko_theft_toggle" = "Includi kasko / furto-incendio";

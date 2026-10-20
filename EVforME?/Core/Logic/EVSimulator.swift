@@ -34,8 +34,10 @@ struct EVSimulationInput {
     /// Kasko/furto (OFF di default); richiede importo utente.
     var includeKaskoTheft: Bool = false
     var annualKaskoEUR: Double? = nil
-    /// kW P.2 a libretto (potenza continua 30 min) per bollo EV post-5y. Non usare EEA `ep__KW_`.
-    var evBookletPowerKwP2: Double? = nil
+    /// kW P.2 a libretto — auto attuale (se EV).
+    var sourceBookletPowerKwP2: Double? = nil
+    /// kW P.2 a libretto — EV target.
+    var targetBookletPowerKwP2: Double? = nil
 }
 
 struct EVSimulationResult {
@@ -322,14 +324,14 @@ final class EVSimulator {
             powertrain: sourceVehicle.powertrain,
             vehicleYear: sourceVehicle.year,
             referenceYear: currentYear,
-            bookletPowerKwP2: sourceVehicle.powertrain == .ev ? input.evBookletPowerKwP2 : nil
+            bookletPowerKwP2: sourceVehicle.powertrain == .ev ? input.sourceBookletPowerKwP2 : nil
         )
         let targetBollo = OwnershipCostEstimates.bolloPerYearDetail(
             catalogTaxesPerYear: targetVehicle.taxesPerYear,
             powertrain: targetVehicle.powertrain,
             vehicleYear: targetVehicle.year,
             referenceYear: currentYear,
-            bookletPowerKwP2: targetVehicle.powertrain == .ev ? input.evBookletPowerKwP2 : nil
+            bookletPowerKwP2: targetVehicle.powertrain == .ev ? input.targetBookletPowerKwP2 : nil
         )
         let sourceBreakdown = OperatingCostBreakdown(
             energy: sourceEnergy,

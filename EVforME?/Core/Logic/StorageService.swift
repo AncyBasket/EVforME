@@ -387,7 +387,8 @@ private struct CodableUserInput: Codable {
     let annualInsuranceOverrideEUR: Double?
     let includeKaskoTheft: Bool
     let annualKaskoEUR: Double?
-    let evBookletPowerKwP2: Double?
+    let sourceBookletPowerKwP2: Double?
+    let targetBookletPowerKwP2: Double?
 
     private enum CodingKeys: String, CodingKey {
         case dailyKm
@@ -413,6 +414,9 @@ private struct CodableUserInput: Codable {
         case annualInsuranceOverrideEUR
         case includeKaskoTheft
         case annualKaskoEUR
+        case sourceBookletPowerKwP2
+        case targetBookletPowerKwP2
+        /// Legacy single-field P.2 (pre source/target split) → maps to target.
         case evBookletPowerKwP2
     }
     
@@ -447,7 +451,8 @@ private struct CodableUserInput: Codable {
         annualInsuranceOverrideEUR = input.annualInsuranceOverrideEUR
         includeKaskoTheft = input.includeKaskoTheft
         annualKaskoEUR = input.annualKaskoEUR
-        evBookletPowerKwP2 = input.evBookletPowerKwP2
+        sourceBookletPowerKwP2 = input.sourceBookletPowerKwP2
+        targetBookletPowerKwP2 = input.targetBookletPowerKwP2
         
         // Encode charging configuration
         chargingConfigData = ChargingConfigData(
@@ -489,7 +494,10 @@ private struct CodableUserInput: Codable {
         annualInsuranceOverrideEUR = try container.decodeIfPresent(Double.self, forKey: .annualInsuranceOverrideEUR)
         includeKaskoTheft = try container.decodeIfPresent(Bool.self, forKey: .includeKaskoTheft) ?? false
         annualKaskoEUR = try container.decodeIfPresent(Double.self, forKey: .annualKaskoEUR)
-        evBookletPowerKwP2 = try container.decodeIfPresent(Double.self, forKey: .evBookletPowerKwP2)
+        sourceBookletPowerKwP2 = try container.decodeIfPresent(Double.self, forKey: .sourceBookletPowerKwP2)
+        let targetP2 = try container.decodeIfPresent(Double.self, forKey: .targetBookletPowerKwP2)
+        let legacyP2 = try container.decodeIfPresent(Double.self, forKey: .evBookletPowerKwP2)
+        targetBookletPowerKwP2 = targetP2 ?? legacyP2
         
         // Persist raw charging payload; `toUserInput()` materializes / falls back.
         chargingConfigData = try container.decodeIfPresent(ChargingConfigData.self, forKey: .chargingConfigData)
@@ -518,7 +526,8 @@ private struct CodableUserInput: Codable {
         try container.encodeIfPresent(annualInsuranceOverrideEUR, forKey: .annualInsuranceOverrideEUR)
         try container.encode(includeKaskoTheft, forKey: .includeKaskoTheft)
         try container.encodeIfPresent(annualKaskoEUR, forKey: .annualKaskoEUR)
-        try container.encodeIfPresent(evBookletPowerKwP2, forKey: .evBookletPowerKwP2)
+        try container.encodeIfPresent(sourceBookletPowerKwP2, forKey: .sourceBookletPowerKwP2)
+        try container.encodeIfPresent(targetBookletPowerKwP2, forKey: .targetBookletPowerKwP2)
     }
     
     func toUserInput() -> UserInput {
@@ -568,7 +577,8 @@ private struct CodableUserInput: Codable {
             annualInsuranceOverrideEUR: annualInsuranceOverrideEUR,
             includeKaskoTheft: includeKaskoTheft,
             annualKaskoEUR: annualKaskoEUR,
-            evBookletPowerKwP2: evBookletPowerKwP2
+            sourceBookletPowerKwP2: sourceBookletPowerKwP2,
+            targetBookletPowerKwP2: targetBookletPowerKwP2
         )
     }
 

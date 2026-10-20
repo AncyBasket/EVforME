@@ -149,7 +149,8 @@ final class ScenarioLiveDeltaTests: XCTestCase {
             incentiveEURAtSave: incentive,
             energyUpdatedAtAtSave: nil,
             incentivesUpdatedAtAtSave: nil,
-            incentivesValidUntilAtSave: validUntil
+            incentivesValidUntilAtSave: validUntil,
+            bolloPartial: nil
         )
     }
 

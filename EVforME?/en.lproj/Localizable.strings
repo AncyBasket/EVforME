@@ -558,10 +558,13 @@
 "charging_map_verdict_nudge_title" = "No wallbox? Check public chargers near you";
 "charging_map_verdict_nudge_body" = "Indicative map search — not a guarantee of plugs where you park.";
 
-"ev_booklet_power_kw_p2_label" = "Booklet kW (P.2) — electric car (optional)";
+"ev_booklet_power_kw_p2_source_label" = "Booklet kW (P.2) — current car (optional)";
+"ev_booklet_power_kw_p2_target_label" = "Booklet kW (P.2) — electric car (optional)";
 "ev_booklet_power_kw_p2_placeholder" = "e.g. 100";
 "ev_booklet_power_kw_p2_hint" = "Continuous 30-min power on the registration document. Needed for EV road tax after 5 years (¼ × €2.58/kW). Do not use peak kW.";
 "partial_total_bollo_unknown" = "Partial total (road tax not estimated)";
+"italy_kit_bollo_both_unknown" = "Road tax: current and electrified not estimated (missing booklet P.2)";
+"italy_kit_bollo_row_source_unknown" = "Road tax (est.): current not estimated (missing P.2) · electrified ~€%d/yr";
 "insurance_annual_optional_label" = "How much do you pay for insurance per year (optional)";
 "insurance_annual_optional_placeholder" = "e.g. 422";
 "kasko_theft_toggle" = "Include comprehensive / theft cover";

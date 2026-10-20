@@ -58,7 +58,9 @@ enum OperatingCostCalculator {
             powertrain: vehicle.powertrain,
             vehicleYear: vehicle.year,
             referenceYear: currentYear,
-            bookletPowerKwP2: vehicle.powertrain == .ev ? input.evBookletPowerKwP2 : nil
+            bookletPowerKwP2: vehicle.powertrain == .ev
+                ? (asSource ? input.sourceBookletPowerKwP2 : input.targetBookletPowerKwP2)
+                : nil
         )
         let insurance = OwnershipCostEstimates.insurancePerYear(
             purchasePrice: valueBasis,
@@ -176,7 +178,8 @@ enum OperatingCostCalculator {
         sim.annualInsuranceOverrideEUR = input.annualInsuranceOverrideEUR
         sim.includeKaskoTheft = input.includeKaskoTheft
         sim.annualKaskoEUR = input.annualKaskoEUR
-        sim.evBookletPowerKwP2 = input.evBookletPowerKwP2
+        sim.sourceBookletPowerKwP2 = input.sourceBookletPowerKwP2
+        sim.targetBookletPowerKwP2 = input.targetBookletPowerKwP2
         return sim
     }
 }

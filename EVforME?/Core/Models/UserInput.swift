@@ -205,8 +205,10 @@ struct UserInput {
     var annualKaskoEUR: Double?
     /// ISEE (€) per fascia incentivo MASE; senza valore non si applica bonus.
     var iseeEUR: Double?
-    /// kW P.2 a libretto (potenza continua 30 min) per bollo EV dopo 5 anni. Opzionale.
-    var evBookletPowerKwP2: Double?
+    /// kW P.2 a libretto (potenza continua 30 min) — solo auto attuale se EV.
+    var sourceBookletPowerKwP2: Double?
+    /// kW P.2 a libretto — solo EV target.
+    var targetBookletPowerKwP2: Double?
 
     init(
         dailyKm: Int,
@@ -231,7 +233,8 @@ struct UserInput {
         includeKaskoTheft: Bool = false,
         annualKaskoEUR: Double? = nil,
         iseeEUR: Double? = nil,
-        evBookletPowerKwP2: Double? = nil
+        sourceBookletPowerKwP2: Double? = nil,
+        targetBookletPowerKwP2: Double? = nil
     ) {
         self.dailyKm = dailyKm
         self.hasHomeCharging = hasHomeCharging
@@ -255,7 +258,8 @@ struct UserInput {
         self.includeKaskoTheft = includeKaskoTheft
         self.annualKaskoEUR = annualKaskoEUR
         self.iseeEUR = iseeEUR
-        self.evBookletPowerKwP2 = evBookletPowerKwP2
+        self.sourceBookletPowerKwP2 = sourceBookletPowerKwP2
+        self.targetBookletPowerKwP2 = targetBookletPowerKwP2
     }
 
     /// Bonus acquisto stimato (solo IT). Fuori Italia → sempre 0.
