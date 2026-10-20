@@ -23,7 +23,7 @@ final class VehicleCatalogService {
 
     private let defaults = UserDefaults.standard
     /// Bundled quality-seed revision (not the App Store marketing version).
-    static let bundledSeedVersion = 38
+    static let bundledSeedVersion = 39
     private var seedVersion: Int { Self.bundledSeedVersion }
     private var remoteDisabledForTesting = false
     private let remoteSession: URLSession = {
@@ -555,157 +555,9 @@ final class VehicleCatalogService {
             maintenancePerYear: 310,
             taxesPerYear: 0,
             imageURL: nil
-        ),
-        VehicleCatalogItem(
-            id: "toyota-prius-phev-2024",
-            brand: "Toyota",
-            model: "Prius Plug-in",
-            year: 2024,
-            powertrain: .phev,
-            lengthM: 4.60,
-            widthM: 1.78,
-            heightM: 1.42,
-            // CS fuel allineato a seed sibling toyota-prius-plug-in-phev-2024 (manual-world-PHEV).
-            fuelConsumptionLPerKm: 0.065,
-            energyConsumptionKWhPerKm: 0.145,
-            maintenancePerYear: 420,
-            taxesPerYear: 0,
-            imageURL: nil,
-            trim: "Plug-in",
-            batteryKWh: 13.6,
-            wltpRangeKm: 69,
-            wltpConsumptionKWh100km: 14.5,
-            co2gKm: 19,
-            market: "IT",
-            sourceName: "manual-IT-PHEV",
-            sourceUpdatedAt: nil,
-            confidenceScore: 0.9
-        ),
-        VehicleCatalogItem(
-            id: "toyota-rav4-phev-2024",
-            brand: "Toyota",
-            model: "RAV4 Plug-in",
-            year: 2024,
-            powertrain: .phev,
-            lengthM: 4.60,
-            widthM: 1.86,
-            heightM: 1.69,
-            // CS fuel allineato a seed sibling toyota-rav4-plug-in-phev-2024.
-            fuelConsumptionLPerKm: 0.065,
-            energyConsumptionKWhPerKm: 0.158,
-            maintenancePerYear: 460,
-            taxesPerYear: 0,
-            imageURL: nil,
-            trim: "Plug-in",
-            batteryKWh: 18.1,
-            wltpRangeKm: 75,
-            wltpConsumptionKWh100km: 15.8,
-            co2gKm: 22,
-            market: "IT",
-            sourceName: "manual-IT-PHEV",
-            sourceUpdatedAt: nil,
-            confidenceScore: 0.9
-        ),
-        VehicleCatalogItem(
-            id: "cupra-formentor-phev-2024",
-            brand: "Cupra",
-            model: "Formentor e-Hybrid",
-            year: 2024,
-            powertrain: .phev,
-            lengthM: 4.45,
-            widthM: 1.84,
-            heightM: 1.51,
-            // CS fuel allineato a seed sibling cupra-formentor-e-hybrid-phev-2024.
-            fuelConsumptionLPerKm: 0.065,
-            energyConsumptionKWhPerKm: 0.155,
-            maintenancePerYear: 480,
-            taxesPerYear: 0,
-            imageURL: nil,
-            trim: "e-Hybrid",
-            batteryKWh: 12.8,
-            wltpRangeKm: 55,
-            wltpConsumptionKWh100km: 15.5,
-            co2gKm: 31,
-            market: "IT",
-            sourceName: "manual-IT-PHEV",
-            sourceUpdatedAt: nil,
-            confidenceScore: 0.9
-        ),
-        VehicleCatalogItem(
-            id: "jeep-compass-4xe-2024",
-            brand: "Jeep",
-            model: "Compass 4xe",
-            year: 2024,
-            powertrain: .phev,
-            lengthM: 4.40,
-            widthM: 1.82,
-            heightM: 1.65,
-            // CS fuel allineato a seed sibling jeep-compass-4xe-phev-2024 (non WLTP pesato).
-            fuelConsumptionLPerKm: 0.065,
-            energyConsumptionKWhPerKm: 0.158,
-            maintenancePerYear: 500,
-            taxesPerYear: 0,
-            imageURL: nil,
-            trim: "4xe",
-            batteryKWh: 11.4,
-            wltpRangeKm: 50,
-            wltpConsumptionKWh100km: 15.8,
-            co2gKm: 44,
-            market: "IT",
-            sourceName: "manual-IT-PHEV",
-            sourceUpdatedAt: nil,
-            confidenceScore: 0.9
-        ),
-        VehicleCatalogItem(
-            id: "alfa-romeo-tonale-phev-2024",
-            brand: "Alfa Romeo",
-            model: "Tonale PHEV",
-            year: 2024,
-            powertrain: .phev,
-            lengthM: 4.53,
-            widthM: 1.84,
-            heightM: 1.60,
-            // CS fuel allineato a seed sibling alfa-romeo-tonale-phev-phev-2024.
-            fuelConsumptionLPerKm: 0.065,
-            energyConsumptionKWhPerKm: 0.152,
-            maintenancePerYear: 520,
-            taxesPerYear: 0,
-            imageURL: nil,
-            trim: "Q4",
-            batteryKWh: 15.5,
-            wltpRangeKm: 60,
-            wltpConsumptionKWh100km: 15.2,
-            co2gKm: 26,
-            market: "IT",
-            sourceName: "manual-IT-PHEV",
-            sourceUpdatedAt: nil,
-            confidenceScore: 0.9
-        ),
-        VehicleCatalogItem(
-            id: "ford-kuga-phev-2024",
-            brand: "Ford",
-            model: "Kuga PHEV",
-            year: 2024,
-            powertrain: .phev,
-            lengthM: 4.61,
-            widthM: 1.88,
-            heightM: 1.68,
-            // CS fuel allineato a seed sibling ford-kuga-phev-phev-2024.
-            fuelConsumptionLPerKm: 0.065,
-            energyConsumptionKWhPerKm: 0.151,
-            maintenancePerYear: 470,
-            taxesPerYear: 0,
-            imageURL: nil,
-            trim: "PHEV",
-            batteryKWh: 14.4,
-            wltpRangeKm: 64,
-            wltpConsumptionKWh100km: 15.1,
-            co2gKm: 23,
-            market: "IT",
-            sourceName: "manual-IT-PHEV",
-            sourceUpdatedAt: nil,
-            confidenceScore: 0.9
         )
+        // PHEV di riferimento: solo dal seed (con CS L/100 + kWh da fonte).
+        // Niente placeholder 0,065 L/km senza fonte nel defaultCatalog.
     ]
 }
 

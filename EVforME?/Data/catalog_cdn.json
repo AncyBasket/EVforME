@@ -7,6 +7,6 @@
   "host": "bundled-offline-first",
   "updatedAt": "2026-10-07T16:17:31.433834+00:00",
   "policy": "offline-first",
-  "seedVersion": 38,
-  "note": "seedVersion 38: EEA IT ICE/HEV fuels+consumptions+bollo (no Fc; CO2→FC Reg. 2017/1151 fuel-specific; no PHEV CO2 overwrite; curated ghosts)."
+  "seedVersion": 39,
+  "note": "seedVersion 39: EEA IT ICE/HEV fuels CO2→FC Reg.2017/1151 E10/B7; family match C-Class/A4/3-Series/911/500; Mini→MINI"
 }

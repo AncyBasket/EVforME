@@ -36,17 +36,23 @@ CACHE_DIR = REPO / "scripts" / "cache" / "eea"
 MANIFEST_PATH = CACHE_DIR / "fill_catalog_fuels_manifest.json"
 CATALOG_SERVICE = REPO / "EVforME?" / "Core" / "Logic" / "VehicleCatalogService.swift"
 
-# Reg. (EU) 2017/1151 Annex XXI Sub-Annex 7 §6 — fuel-specific CF + densities (HC=CO=0).
-# Petrol CF 0.1154 / density ≈0.743 → ~CO2/23.2; diesel CF 0.1155 / 0.832 → ~CO2/26.3.
-C_PETROL = 0.1154
-C_DIESEL = 0.1155
+# Reg. (EU) 2017/1151 Annex XXI Sub-Annex 7 §6 — simplified FC equations (HC=CO=0).
+# Petrol (E10) §6.5: FC = (0.1206 / 0.745) × (0.866·HC + 0.429·CO + 0.273·CO2)
+#   → CO2/FC ≈ 22.63. Density 0.745 kg/l is within Annex IX E10 band 743–756 kg/m³.
+# Diesel (B7) §6.10: FC = (0.1162 / 0.834) × (0.861·HC + 0.429·CO + 0.273·CO2)
+#   → CO2/FC ≈ 26.32.
+# LPG / NG: same Sub-Annex 7 coefficients (pre-existing).
+C_PETROL = 0.1206
+C_DIESEL = 0.1162
 C_LPG = 0.1212
 C_NG = 0.1336
-D_PETROL = 0.743  # kg/l — yields ≈ CO2/23.2 with CF 0.1154 × 0.273
-D_DIESEL = 0.832
+D_PETROL = 0.745  # kg/l — Annex IX petrol (E10) reference density used in §6.5
+D_DIESEL = 0.834  # kg/l — B7 reference density used in §6.10
 D_LPG = 0.538
 D_NG = 0.654  # kg/m³
 CO2_FACTOR = 0.273
+PETROL_CO2_PER_L100 = D_PETROL / (C_PETROL * CO2_FACTOR)  # ≈ 22.63
+DIESEL_CO2_PER_L100 = D_DIESEL / (C_DIESEL * CO2_FACTOR)  # ≈ 26.32
 
 REFERENCE_YEAR = 2026
 
@@ -306,53 +312,176 @@ def match_model(seed_model: str, eea_models: set[str]) -> str | None:
     raw = norm_alnum(seed_model)
     if raw in {"ACLASS", "CLASSEA"}:
         candidates = ["ACLASS", "A"] + candidates
+    # Short tokens (C, 500, 911) are handled by family_eea_hit — avoid greedy substring matches.
+    weak_short = {c for c in candidates if c and len(c) <= 3}
     for sn in candidates:
-        if sn and sn in eea_models:
+        if sn and sn in eea_models and sn not in weak_short:
+            return sn
+        if sn and sn in eea_models and sn in weak_short and sn in {"A4", "I10", "I20"}:
             return sn
     best: tuple[int, str] | None = None
     for sn in candidates:
-        if not sn:
+        if not sn or len(sn) <= 2:
             continue
         for em in eea_models:
             if not em:
                 continue
             if sn == em or sn in em or em in sn:
                 score = min(len(sn), len(em))
-                # Prefer longer EEA keys when both match (NISSANQASHQAI over QASHQAI)
-                score = score * 1000 + len(em)
+                # Prefer longer seed token; among equals prefer shorter EEA key
+                # (911 over 911GT3MANTHEYPERFORMANCE).
+                score = score * 1000 + len(sn) * 10 - len(em)
                 if best is None or score > best[0]:
                     best = (score, em)
     return best[1] if best and best[0] >= 3000 else None
+
+
+def _aggregate_family_hit(
+    ice_map: dict[tuple[str, int, str], dict],
+    year: int,
+    ft: str,
+    predicate,
+    label: str,
+) -> dict | None:
+    """Enrolment-weighted average of EEA cells matching predicate(model_norm)."""
+    total_n = 0.0
+    co2_acc = 0.0
+    co2_n = 0.0
+    kw_acc = 0.0
+    kw_n = 0.0
+    for (model_n, y, fuel), payload in ice_map.items():
+        if y != year or fuel != ft:
+            continue
+        if not predicate(model_n):
+            continue
+        n = float(payload.get("n") or 0)
+        if n <= 0:
+            continue
+        total_n += n
+        if isinstance(payload.get("co2"), (int, float)) and float(payload["co2"]) > 0:
+            co2_acc += float(payload["co2"]) * n
+            co2_n += n
+        if isinstance(payload.get("kw"), (int, float)) and float(payload["kw"]) > 0:
+            kw_acc += float(payload["kw"]) * n
+            kw_n += n
+    if total_n < 100:
+        return None
+    # Require enough regs with CO2 so missing-Ewltp cells cannot dilute the average.
+    if co2_n < 100:
+        return None
+    return {
+        "n": total_n,
+        "co2": co2_acc / co2_n,
+        "kw": (kw_acc / kw_n) if kw_n > 0 else None,
+        "model_raw": label,
+    }
 
 
 def mercedes_a_class_diesel_hit(
     ice_map: dict[tuple[str, int, str], dict], year: int
 ) -> dict | None:
     """Aggregate Mercedes A 180 D / A 200 D / … diesel cells for seed model A-Class."""
-    total_n = 0.0
-    co2_acc = 0.0
-    kw_acc = 0.0
-    for (model_n, y, ft), payload in ice_map.items():
-        if y != year or ft != "DIESEL":
-            continue
-        if not re.match(r"^A\d{2,3}D", model_n):
-            continue
-        n = float(payload.get("n") or 0)
-        if n <= 0:
-            continue
-        total_n += n
-        if isinstance(payload.get("co2"), (int, float)):
-            co2_acc += float(payload["co2"]) * n
-        if isinstance(payload.get("kw"), (int, float)):
-            kw_acc += float(payload["kw"]) * n
-    if total_n < 100:
-        return None
-    return {
-        "n": total_n,
-        "co2": co2_acc / total_n if co2_acc else None,
-        "kw": kw_acc / total_n if kw_acc else None,
-        "model_raw": "A-Class",
-    }
+    return _aggregate_family_hit(
+        ice_map,
+        year,
+        "DIESEL",
+        lambda m: bool(re.match(r"^A\d{2,3}D", m)),
+        "A-Class",
+    )
+
+
+def mercedes_c_class_diesel_hit(
+    ice_map: dict[tuple[str, int, str], dict], year: int
+) -> dict | None:
+    """C 200 D / C 220 D / … — exclude GLC/CLA/CLE prefixes."""
+    return _aggregate_family_hit(
+        ice_map,
+        year,
+        "DIESEL",
+        lambda m: bool(re.match(r"^C\d{2,3}D", m)),
+        "C-Class",
+    )
+
+
+def audi_a4_diesel_hit(
+    ice_map: dict[tuple[str, int, str], dict], year: int
+) -> dict | None:
+    """A4 / A4 AVANT / LIMOUSINE / ALLROAD (not A40/A41…)."""
+    return _aggregate_family_hit(
+        ice_map,
+        year,
+        "DIESEL",
+        lambda m: m == "A4"
+        or (m.startswith("A4") and not m.startswith("A40") and not m.startswith("A41"))
+        or m in {"AUDIA4", "AUDIA4AVANT"},
+        "A4",
+    )
+
+
+def bmw_3_series_diesel_hit(
+    ice_map: dict[tuple[str, int, str], dict], year: int
+) -> dict | None:
+    """320d / 330d family; exclude X3 20D etc."""
+    return _aggregate_family_hit(
+        ice_map,
+        year,
+        "DIESEL",
+        lambda m: bool(re.match(r"^3[0-9]{2}D", m)),
+        "3-Series",
+    )
+
+
+def porsche_911_petrol_hit(
+    ice_map: dict[tuple[str, int, str], dict], year: int
+) -> dict | None:
+    return _aggregate_family_hit(
+        ice_map,
+        year,
+        "PETROL",
+        lambda m: m.startswith("911") or m.startswith("991"),
+        "911",
+    )
+
+
+def mercedes_500_petrol_hit(
+    ice_map: dict[tuple[str, int, str], dict], year: int
+) -> dict | None:
+    """Seed model '500' → S 500 / G 500 ICE (not EQ*)."""
+    return _aggregate_family_hit(
+        ice_map,
+        year,
+        "PETROL",
+        lambda m: bool(re.match(r"^(S|G)500", m)),
+        "500",
+    )
+
+
+def family_eea_hit(
+    brand_u: str,
+    model_raw: str,
+    year: int,
+    ft: str,
+    ice_map: dict[tuple[str, int, str], dict],
+) -> dict | None:
+    """Special family aggregations when seed names don't match EEA Cn tokens."""
+    raw = norm_alnum(model_raw)
+    clean = clean_model_norm(model_raw)
+    if brand_u == "MERCEDES-BENZ":
+        if raw in {"ACLASS", "CLASSEA"} and ft == "DIESEL":
+            return mercedes_a_class_diesel_hit(ice_map, year)
+        if raw in {"CCLASS", "CLASSEC"} or clean == "C":
+            if ft == "DIESEL":
+                return mercedes_c_class_diesel_hit(ice_map, year)
+        if raw == "500" or clean == "500":
+            if ft == "PETROL":
+                return mercedes_500_petrol_hit(ice_map, year)
+    if brand_u == "AUDI" and (raw == "A4" or clean == "A4") and ft == "DIESEL":
+        return audi_a4_diesel_hit(ice_map, year)
+    if brand_u == "BMW" and (raw in {"3SERIES", "SERIES3"} or clean == "3SERIES") and ft == "DIESEL":
+        return bmw_3_series_diesel_hit(ice_map, year)
+    if brand_u == "PORSCHE" and (raw == "911" or clean == "911") and ft == "PETROL":
+        return porsche_911_petrol_hit(ice_map, year)
+    return None
 
 
 def bifuel_alias_hit(
@@ -448,7 +577,7 @@ def main() -> None:
     parser.add_argument("--no-cache", action="store_true")
     parser.add_argument("--brands", nargs="*")
     parser.add_argument("--dry-run", action="store_true")
-    parser.add_argument("--seed-version", type=int, default=38)
+    parser.add_argument("--seed-version", type=int, default=39)
     args = parser.parse_args()
     use_cache = not args.no_cache
 
@@ -496,26 +625,41 @@ def main() -> None:
             continue
         model_raw = str(r.get("model", ""))
         year = int(r.get("year") or 0)
+        fk = (r.get("fuelKind") or "").lower()
         eea_models = {k[0] for k in ice_maps[brand_u]}
         if brand_u == "MERCEDES-BENZ" and norm_alnum(model_raw) in {"ACLASS", "CLASSEA"}:
             model_n = "ACLASS"
         else:
             model_n = match_model(model_raw, eea_models)
-        if not model_n:
+        # Family aggregations (C-Class, A4, 3-Series, 911, Mercedes 500) may have no Cn match.
+        want_preview = None
+        if pt == "hev":
+            want_preview = "DIESEL" if fk == "diesel" else "PETROL"
+        elif pt == "ice":
+            want_preview = {"petrol": "PETROL", "diesel": "DIESEL", "lpg": "LPG", "cng": "NG"}.get(fk)
+        family_preview = (
+            family_eea_hit(brand_u, model_raw, year, want_preview, ice_maps[brand_u])
+            if want_preview
+            else None
+        )
+        if not model_n and not family_preview:
             if pt == "phev" and float(r.get("taxesPerYear") or 0) == 90:
                 r["taxesPerYear"] = 0
                 bollo_updates.append({"id": r.get("id"), "from": 90, "to": 0, "reason": "strip_flat_90_no_match"})
             continue
+        if not model_n and family_preview:
+            model_n = clean_model_norm(model_raw) or norm_alnum(model_raw)
 
-        fk = (r.get("fuelKind") or "").lower()
         hit = None
         source_ft = ""
 
         if pt == "hev":
             want = "DIESEL" if fk == "diesel" else "PETROL"
-            hit = hev_maps.get(brand_u, {}).get((model_n, year, want)) or ice_maps[brand_u].get(
-                (model_n, year, want)
-            )
+            hit = family_eea_hit(brand_u, model_raw, year, want, ice_maps[brand_u])
+            if not hit:
+                hit = hev_maps.get(brand_u, {}).get((model_n, year, want)) or ice_maps[brand_u].get(
+                    (model_n, year, want)
+                )
             source_ft = want
             if brand_u in MILD_HYBRID_BRANDS and not (brand_u == "JEEP" and year >= 2024):
                 if (r.get("trim") or "") != "Mild Hybrid":
@@ -529,10 +673,8 @@ def main() -> None:
             want = {"petrol": "PETROL", "diesel": "DIESEL", "lpg": "LPG", "cng": "NG"}.get(fk)
             if not want:
                 continue
-            if brand_u == "MERCEDES-BENZ" and norm_alnum(model_raw) in {"ACLASS", "CLASSEA"} and want == "DIESEL":
-                hit = mercedes_a_class_diesel_hit(ice_maps[brand_u], year)
-                model_n = model_n or "ACLASS"
-            else:
+            hit = family_eea_hit(brand_u, model_raw, year, want, ice_maps[brand_u])
+            if not hit and model_n:
                 hit = bifuel_alias_hit(ice_maps[brand_u], model_n, year, want)
             source_ft = want or ""
 
@@ -573,46 +715,31 @@ def main() -> None:
             continue
         new_l_per_km = round(fc100 / 100.0, 5)
         old = r.get("fuelConsumptionLPerKm")
-        # CNG: always refresh from CO2 when available (kg/100 km). ICE/HEV: only if >20% off.
-        force = fk == "cng"
-        if isinstance(old, (int, float)) and old > 0:
-            ratio = new_l_per_km / float(old)
-            if force or abs(ratio - 1.0) > 0.20:
-                corrections.append(
-                    {
-                        "id": r.get("id"),
-                        "brand": brand_u,
-                        "model": model_raw,
-                        "year": year,
-                        "fuel": fk,
-                        "old_l100": round(float(old) * 100, 3),
-                        "new_l100": round(fc100, 3),
-                        "co2": hit.get("co2"),
-                        "n": hit_n,
-                        "eea_model": model_n,
-                        "forced_cng": force,
-                    }
-                )
-                r["fuelConsumptionLPerKm"] = new_l_per_km
-                if isinstance(hit.get("co2"), (int, float)):
-                    r["co2gKm"] = int(round(float(hit["co2"])))
-                r["sourceName"] = f"EEA co2cars IT {year} n={int(hit_n)}"
-                r["confidenceScore"] = 0.8
-                r["sourceUpdatedAt"] = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-        elif not old or float(old or 0) <= 0:
+        # Always refresh from EEA CO2 when n≥100 (propagates coefficient changes; CNG kg/100 too).
+        old_l100 = round(float(old) * 100, 3) if isinstance(old, (int, float)) and old > 0 else None
+        if old_l100 is None or abs(new_l_per_km - float(old)) > 1e-6 or not str(
+            r.get("sourceName") or ""
+        ).startswith("EEA co2cars"):
+            corrections.append(
+                {
+                    "id": r.get("id"),
+                    "brand": brand_u,
+                    "model": model_raw,
+                    "year": year,
+                    "fuel": fk,
+                    "old_l100": old_l100,
+                    "new_l100": round(fc100, 3),
+                    "co2": hit.get("co2"),
+                    "n": hit_n,
+                    "eea_model": model_n,
+                }
+            )
             r["fuelConsumptionLPerKm"] = new_l_per_km
             if isinstance(hit.get("co2"), (int, float)):
                 r["co2gKm"] = int(round(float(hit["co2"])))
             r["sourceName"] = f"EEA co2cars IT {year} n={int(hit_n)}"
             r["confidenceScore"] = 0.8
-            corrections.append(
-                {
-                    "id": r.get("id"),
-                    "filled_empty": True,
-                    "new_l100": round(fc100, 3),
-                    "n": hit_n,
-                }
-            )
+            r["sourceUpdatedAt"] = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
     for r in rows:
         if (r.get("powertrain") or "").lower() == "phev" and float(r.get("taxesPerYear") or 0) == 90:
@@ -925,6 +1052,41 @@ def main() -> None:
                 kept.append(r)
         rows = kept
 
+    # Unify brand casing Mini → MINI (single family in picker).
+    for r in rows:
+        if str(r.get("brand", "")) == "Mini":
+            r["brand"] = "MINI"
+
+    # Panda metano 2018 bollo was out of line (~113 vs ~160): same national kW formula as peers.
+    panda_kw = None
+    for r in rows:
+        if (
+            str(r.get("brand", "")).upper() == "FIAT"
+            and str(r.get("model", "")).lower() == "panda"
+            and (r.get("fuelKind") or "").lower() == "cng"
+            and int(r.get("year") or 0) in (2019, 2020, 2021, 2022)
+        ):
+            # Back-calc kW from taxes ≈ 2.58 * kw when kw ≤ 100.
+            tax = float(r.get("taxesPerYear") or 0)
+            if tax > 100:
+                panda_kw = tax / 2.58
+                break
+    if panda_kw:
+        for r in rows:
+            if (
+                str(r.get("brand", "")).upper() == "FIAT"
+                and str(r.get("model", "")).lower() == "panda"
+                and (r.get("fuelKind") or "").lower() == "cng"
+                and int(r.get("year") or 0) == 2018
+            ):
+                new_tax, note = national_bollo_eur(panda_kw, 2018, fuel_kind="cng")
+                old = float(r.get("taxesPerYear") or 0)
+                if abs(new_tax - old) > 0.5:
+                    bollo_updates.append(
+                        {"id": r.get("id"), "from": old, "to": new_tax, "kw": panda_kw, "note": note + "_panda_2018_align"}
+                    )
+                    r["taxesPerYear"] = new_tax
+
     manifest = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "source": "https://co2cars.apps.eea.europa.eu/tools/api",
@@ -932,8 +1094,19 @@ def main() -> None:
         "aggregation": "Cn→year→Ft; sum r; avg Ewltp; avg ep__KW_; no Fc; brand-stripped Cn aliases",
         "co2_to_fc": {
             "regulation": "Reg. (EU) 2017/1151 Annex XXI Sub-Annex 7 §6 (HC=CO=0)",
-            "petrol": {"CF": C_PETROL, "D": D_PETROL, "approx": "CO2/23.2"},
-            "diesel": {"CF": C_DIESEL, "D": D_DIESEL, "approx": "CO2/26.3"},
+            "reference_fuels": "Petrol (E10) §6.5; Diesel (B7) §6.10; densities Annex IX",
+            "petrol": {
+                "CF": C_PETROL,
+                "D": D_PETROL,
+                "approx": f"CO2/{PETROL_CO2_PER_L100:.2f}",
+                "co2_per_l100": round(PETROL_CO2_PER_L100, 4),
+            },
+            "diesel": {
+                "CF": C_DIESEL,
+                "D": D_DIESEL,
+                "approx": f"CO2/{DIESEL_CO2_PER_L100:.2f}",
+                "co2_per_l100": round(DIESEL_CO2_PER_L100, 4),
+            },
             "lpg": {"CF": C_LPG, "D": D_LPG},
             "cng_kg_per_100km": {"CF": C_NG, "note": "kg/100 km"},
         },
