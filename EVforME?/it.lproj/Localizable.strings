@@ -483,6 +483,7 @@
 "verdict_compare_line" = "Da %@ a %@";
 "verdict_proof_savings_value" = "€%d–%d";
 "verdict_proof_savings_label" = "Risparmio / anno";
+"verdict_proof_extra_cost_label" = "Costo in più / anno";
 "verdict_proof_charges_label" = "Ricariche / sett.";
 "verdict_proof_breakeven_value" = "~%d mesi";
 "verdict_proof_breakeven_label" = "Pareggio";

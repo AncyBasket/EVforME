@@ -366,6 +366,22 @@ enum L10n {
         format("verdict_proof_savings_value", min, max)
     }
     static var verdictProofSavingsLabel: String { string("verdict_proof_savings_label") }
+    static var verdictProofExtraCostLabel: String { string("verdict_proof_extra_cost_label") }
+
+    /// Proof metric label: savings when positive, extra cost when the yearly range is non-positive.
+    static func verdictProofMoneyLabel(for range: ClosedRange<Int>) -> String {
+        range.upperBound <= 0 ? verdictProofExtraCostLabel : verdictProofSavingsLabel
+    }
+
+    /// Proof metric value with positive euro amounts (no "€-").
+    static func verdictProofMoneyValue(for range: ClosedRange<Int>) -> String {
+        if range.upperBound <= 0 {
+            let a = abs(range.lowerBound)
+            let b = abs(range.upperBound)
+            return verdictProofSavingsValue(min(a, b), max(a, b))
+        }
+        return verdictProofSavingsValue(range.lowerBound, range.upperBound)
+    }
     static var verdictProofChargesLabel: String { string("verdict_proof_charges_label") }
     static func verdictProofBreakEvenValue(_ months: Int) -> String {
         format("verdict_proof_breakeven_value", months)

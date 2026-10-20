@@ -448,11 +448,8 @@ struct VerdictView: View {
             // Prova numerica immediata — il cuore di un decision tool di riferimento.
             HStack(alignment: .top, spacing: 0) {
                 verdictProofMetric(
-                    value: L10n.verdictProofSavingsValue(
-                        result.yearlySavingsRange.lowerBound,
-                        result.yearlySavingsRange.upperBound
-                    ),
-                    label: L10n.verdictProofSavingsLabel
+                    value: L10n.verdictProofMoneyValue(for: result.yearlySavingsRange),
+                    label: L10n.verdictProofMoneyLabel(for: result.yearlySavingsRange)
                 )
                 Rectangle()
                     .fill(Color.hairlineBorder)
@@ -495,11 +492,8 @@ struct VerdictView: View {
                 result.verdict.title,
                 result.verdict.description,
                 result.hasPartialBolloTotal ? L10n.partialTotalBolloUnknown : "",
-                L10n.verdictProofSavingsValue(
-                    result.yearlySavingsRange.lowerBound,
-                    result.yearlySavingsRange.upperBound
-                ),
-                L10n.verdictProofSavingsLabel,
+                L10n.verdictProofMoneyValue(for: result.yearlySavingsRange),
+                L10n.verdictProofMoneyLabel(for: result.yearlySavingsRange),
                 "\(result.weeklyCharges)×",
                 L10n.verdictProofChargesLabel,
                 result.breakEvenMonths.map { L10n.verdictProofBreakEvenValue($0) } ?? "",

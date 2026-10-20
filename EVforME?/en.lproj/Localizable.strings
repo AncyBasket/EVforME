@@ -485,6 +485,7 @@
 "verdict_compare_line" = "From %@ to %@";
 "verdict_proof_savings_value" = "€%d–%d";
 "verdict_proof_savings_label" = "Savings / year";
+"verdict_proof_extra_cost_label" = "Extra cost / year";
 "verdict_proof_charges_label" = "Charges / week";
 "verdict_proof_breakeven_value" = "~%d mo";
 "verdict_proof_breakeven_label" = "Break-even";

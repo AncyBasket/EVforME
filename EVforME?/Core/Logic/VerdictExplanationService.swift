@@ -58,7 +58,7 @@ enum VerdictExplanationService {
         Area: \(input.areaType.rawValue)
         Scenario: \(input.scenario.title)
         Ricariche/settimana stimate: \(result.weeklyCharges)
-        Risparmio annuo stimato (€): \(result.yearlySavingsRange.lowerBound)–\(result.yearlySavingsRange.upperBound)
+        \(Self.explanationMoneyLine(for: result.yearlySavingsRange))
         Motivi: \(result.keyReasons.joined(separator: " | "))
         Spiega perché questo verdetto ha senso per questa persona.
         """
@@ -83,5 +83,15 @@ enum VerdictExplanationService {
         case .notYet:
             return L10n.verdictAIFallbackNotYet(input.dailyKm, result.weeklyCharges)
         }
+    }
+
+    /// Prompt line for AI: savings or extra annual cost (positive euros when negative delta).
+    private static func explanationMoneyLine(for range: ClosedRange<Int>) -> String {
+        if range.upperBound <= 0 {
+            let a = abs(range.lowerBound)
+            let b = abs(range.upperBound)
+            return "Costo aggiuntivo annuo (€): \(min(a, b))–\(max(a, b))"
+        }
+        return "Risparmio annuo stimato (€): \(range.lowerBound)–\(range.upperBound)"
     }
 }
