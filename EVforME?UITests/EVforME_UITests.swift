@@ -70,6 +70,41 @@ final class EVforME_UITests: XCTestCase {
         }
     }
     
+    /// EV ≥ 5 anni senza P.2 → header verdetto mostra “Totale parziale (bollo non stimato)”.
+    @MainActor
+    func testVerdictHeaderShowsPartialBolloWhenEVOverFiveYearsWithoutP2() throws {
+        let app = XCUIApplication()
+        app.launchEnvironment["UITEST_PRESET_VEHICLES"] = "1"
+        app.launchEnvironment["UITEST_PARTIAL_BOLLO"] = "1"
+        app.launch()
+
+        dismissQuickStartIfNeeded(app)
+
+        let startersReady =
+            app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Golf")).firstMatch
+                .waitForExistence(timeout: 12)
+            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Model 3")).firstMatch
+                .waitForExistence(timeout: 2)
+            || app.buttons["Dimmi la verità"].waitForExistence(timeout: 2)
+            || app.buttons["Tell me the truth"].waitForExistence(timeout: 1)
+        XCTAssertTrue(startersReady, "Input bench should load with preset vehicles")
+
+        let tellMeEN = app.buttons["Tell me the truth"]
+        let tellMeIT = app.buttons["Dimmi la verità"]
+        XCTAssertTrue(
+            tellMeEN.waitForExistence(timeout: 3) || tellMeIT.waitForExistence(timeout: 1),
+            "Main simulate button should exist"
+        )
+        if tellMeEN.exists { tellMeEN.tap() } else { tellMeIT.tap() }
+
+        let partialIT = app.staticTexts["Totale parziale (bollo non stimato)"]
+        let partialEN = app.staticTexts["Partial total (road tax not estimated)"]
+        XCTAssertTrue(
+            partialIT.waitForExistence(timeout: 15) || partialEN.waitForExistence(timeout: 2),
+            "Verdict header should show partial total when EV is 5+ years without booklet P.2"
+        )
+    }
+
     @MainActor
     func testSliderUpdatesValue() throws {
         let app = XCUIApplication()

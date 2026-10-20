@@ -19,14 +19,18 @@ struct VerdictWidgetSnapshot: Codable, Equatable {
     /// Consumo ICE usato nell’ultima sim (L/100 km) per bump carburante realistico.
     var iceLPer100Km: Double
     var updatedAt: TimeInterval
+    /// Bollo EV non stimabile (manca P.2) → totale parziale.
+    var bolloPartial: Bool?
 
     var verdict: EVVerdict {
         EVVerdict(rawValue: verdictRaw) ?? .maybe
     }
 
+    var showsPartialBolloTotal: Bool { bolloPartial == true }
+
     enum CodingKeys: String, CodingKey {
         case verdictRaw, title, subtitle, yearlyKm, savingsMin, savingsMax
-        case weeklyCharges, fuelPrice, iceLPer100Km, updatedAt
+        case weeklyCharges, fuelPrice, iceLPer100Km, updatedAt, bolloPartial
     }
 
     init(
@@ -39,7 +43,8 @@ struct VerdictWidgetSnapshot: Codable, Equatable {
         weeklyCharges: Int,
         fuelPrice: Double,
         iceLPer100Km: Double,
-        updatedAt: TimeInterval
+        updatedAt: TimeInterval,
+        bolloPartial: Bool? = nil
     ) {
         self.verdictRaw = verdictRaw
         self.title = title
@@ -51,6 +56,7 @@ struct VerdictWidgetSnapshot: Codable, Equatable {
         self.fuelPrice = fuelPrice
         self.iceLPer100Km = iceLPer100Km
         self.updatedAt = updatedAt
+        self.bolloPartial = bolloPartial
     }
 
     init(from decoder: Decoder) throws {
@@ -65,6 +71,7 @@ struct VerdictWidgetSnapshot: Codable, Equatable {
         fuelPrice = try c.decodeIfPresent(Double.self, forKey: .fuelPrice) ?? OfficialEnergyCosts.Fallback.petrolPerLiter
         iceLPer100Km = try c.decodeIfPresent(Double.self, forKey: .iceLPer100Km) ?? 7.0
         updatedAt = try c.decode(TimeInterval.self, forKey: .updatedAt)
+        bolloPartial = try c.decodeIfPresent(Bool.self, forKey: .bolloPartial)
     }
 }
 
@@ -125,7 +132,8 @@ enum WidgetSnapshotStore {
             weeklyCharges: result.weeklyCharges,
             fuelPrice: input.fuelPrice,
             iceLPer100Km: ice,
-            updatedAt: Date().timeIntervalSince1970
+            updatedAt: Date().timeIntervalSince1970,
+            bolloPartial: result.hasPartialBolloTotal
         )
         if let data = try? JSONEncoder().encode(snapshot) {
             suite.set(data, forKey: key)

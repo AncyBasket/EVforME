@@ -763,6 +763,11 @@ struct VerdictView: View {
                                     Text("\(L10n.yearlyKmValue(item.yearlyKm)) · €\(item.savingsMin)–€\(item.savingsMax)")
                                         .font(Typography.readingCaption)
                                         .foregroundColor(.secondaryText)
+                                    if item.showsPartialBolloTotal {
+                                        Text(L10n.partialTotalBolloUnknown)
+                                            .font(Typography.readingCaption)
+                                            .foregroundColor(.warning)
+                                    }
                                 }
                                 Spacer()
                                 if let months = item.breakEvenMonths {

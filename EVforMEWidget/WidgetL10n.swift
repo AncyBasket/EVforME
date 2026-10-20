@@ -32,6 +32,8 @@ enum WidgetL10n {
         format("widget_savings_charges_line", min, max, charges)
     }
 
+    static var partialTotalBolloUnknown: String { string("partial_total_bollo_unknown") }
+
     static func fuelKmLine(price: Double, km: Int) -> String {
         format("widget_fuel_km_line", price, km)
     }

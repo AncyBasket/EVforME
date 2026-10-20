@@ -25,10 +25,13 @@ struct VerdictWidgetSnapshot: Codable {
     var fuelPrice: Double
     var iceLPer100Km: Double
     var updatedAt: TimeInterval
+    var bolloPartial: Bool?
+
+    var showsPartialBolloTotal: Bool { bolloPartial == true }
 
     enum CodingKeys: String, CodingKey {
         case verdictRaw, title, subtitle, yearlyKm, savingsMin, savingsMax
-        case weeklyCharges, fuelPrice, iceLPer100Km, updatedAt
+        case weeklyCharges, fuelPrice, iceLPer100Km, updatedAt, bolloPartial
     }
 
     init(
@@ -41,7 +44,8 @@ struct VerdictWidgetSnapshot: Codable {
         weeklyCharges: Int,
         fuelPrice: Double,
         iceLPer100Km: Double,
-        updatedAt: TimeInterval
+        updatedAt: TimeInterval,
+        bolloPartial: Bool? = nil
     ) {
         self.verdictRaw = verdictRaw
         self.title = title
@@ -53,6 +57,7 @@ struct VerdictWidgetSnapshot: Codable {
         self.fuelPrice = fuelPrice
         self.iceLPer100Km = iceLPer100Km
         self.updatedAt = updatedAt
+        self.bolloPartial = bolloPartial
     }
 
     init(from decoder: Decoder) throws {
@@ -68,6 +73,7 @@ struct VerdictWidgetSnapshot: Codable {
         fuelPrice = try c.decodeIfPresent(Double.self, forKey: .fuelPrice) ?? WidgetEnergyFallback.petrolPerLiter
         iceLPer100Km = try c.decodeIfPresent(Double.self, forKey: .iceLPer100Km) ?? 7.0
         updatedAt = try c.decode(TimeInterval.self, forKey: .updatedAt)
+        bolloPartial = try c.decodeIfPresent(Bool.self, forKey: .bolloPartial)
     }
 }
 
@@ -226,6 +232,12 @@ struct VerdictWidgetView: View {
                     Text(WidgetL10n.savingsChargesLine(min: snap.savingsMin, max: snap.savingsMax, charges: snap.weeklyCharges))
                         .font(.caption2.weight(.semibold))
                         .foregroundStyle(.secondary)
+                    if snap.showsPartialBolloTotal {
+                        Text(WidgetL10n.partialTotalBolloUnknown)
+                            .font(.caption2.weight(.semibold))
+                            .foregroundStyle(.secondary)
+                            .lineLimit(2)
+                    }
                     Text(WidgetL10n.fuelKmLine(price: snap.fuelPrice, km: snap.yearlyKm))
                         .font(.caption2)
                         .foregroundStyle(.tertiary)

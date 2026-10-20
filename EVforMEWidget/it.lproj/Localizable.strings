@@ -11,6 +11,7 @@
 "widget_config_description" = "Mostra l’ultimo esito EVforME? sulla Home.";
 "widget_savings_charges_line" = "€%d–€%d/anno · %d×/sett.";
 "widget_fuel_km_line" = "€%.2f/L · %d km/anno";
+"partial_total_bollo_unknown" = "Totale parziale (bollo non stimato)";
 
 /* Live Activity */
 "live_activity_brand_short" = "EV?";
