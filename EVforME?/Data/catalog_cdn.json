@@ -8,5 +8,5 @@
   "updatedAt": "2026-10-07T16:17:31.433834+00:00",
   "policy": "offline-first",
   "seedVersion": 37,
-  "note": "seedVersion 37: EV powerKw from EEA ep__KW_, diesel consumptions restored (no petrol-avg rewrite), Model Y 2025 EV-Database 13.1. Offline-first."
+  "note": "seedVersion 37: diesel restored; Model Y 2025 EV-Database 13.1; powerKw EEA optional info only (bollo EV uses booklet P.2). Offline-first."
 }

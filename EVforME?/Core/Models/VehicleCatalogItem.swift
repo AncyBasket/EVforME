@@ -93,7 +93,7 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
     let confidenceScore: Double?
     /// `petrol` / `diesel` se noto; `nil` → `resolvedFuelKind` euristica.
     let fuelKind: FuelKind?
-    /// Potenza kW (bollo EV post-esenzione = 1/4 × 2,58 €/kW). Opzionale.
+    /// Potenza kW da EEA (`ep__KW_`, spesso picco). Solo informativa — il bollo EV usa P.2 a libretto dall’utente.
     let powerKw: Double?
 
     var displayName: String {

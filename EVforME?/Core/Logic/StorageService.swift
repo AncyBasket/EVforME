@@ -387,6 +387,7 @@ private struct CodableUserInput: Codable {
     let annualInsuranceOverrideEUR: Double?
     let includeKaskoTheft: Bool
     let annualKaskoEUR: Double?
+    let evBookletPowerKwP2: Double?
 
     private enum CodingKeys: String, CodingKey {
         case dailyKm
@@ -412,6 +413,7 @@ private struct CodableUserInput: Codable {
         case annualInsuranceOverrideEUR
         case includeKaskoTheft
         case annualKaskoEUR
+        case evBookletPowerKwP2
     }
     
     // Helper struct for encoding charging configuration
@@ -445,6 +447,7 @@ private struct CodableUserInput: Codable {
         annualInsuranceOverrideEUR = input.annualInsuranceOverrideEUR
         includeKaskoTheft = input.includeKaskoTheft
         annualKaskoEUR = input.annualKaskoEUR
+        evBookletPowerKwP2 = input.evBookletPowerKwP2
         
         // Encode charging configuration
         chargingConfigData = ChargingConfigData(
@@ -486,6 +489,7 @@ private struct CodableUserInput: Codable {
         annualInsuranceOverrideEUR = try container.decodeIfPresent(Double.self, forKey: .annualInsuranceOverrideEUR)
         includeKaskoTheft = try container.decodeIfPresent(Bool.self, forKey: .includeKaskoTheft) ?? false
         annualKaskoEUR = try container.decodeIfPresent(Double.self, forKey: .annualKaskoEUR)
+        evBookletPowerKwP2 = try container.decodeIfPresent(Double.self, forKey: .evBookletPowerKwP2)
         
         // Persist raw charging payload; `toUserInput()` materializes / falls back.
         chargingConfigData = try container.decodeIfPresent(ChargingConfigData.self, forKey: .chargingConfigData)
@@ -514,6 +518,7 @@ private struct CodableUserInput: Codable {
         try container.encodeIfPresent(annualInsuranceOverrideEUR, forKey: .annualInsuranceOverrideEUR)
         try container.encode(includeKaskoTheft, forKey: .includeKaskoTheft)
         try container.encodeIfPresent(annualKaskoEUR, forKey: .annualKaskoEUR)
+        try container.encodeIfPresent(evBookletPowerKwP2, forKey: .evBookletPowerKwP2)
     }
     
     func toUserInput() -> UserInput {
@@ -562,7 +567,8 @@ private struct CodableUserInput: Codable {
             market: market,
             annualInsuranceOverrideEUR: annualInsuranceOverrideEUR,
             includeKaskoTheft: includeKaskoTheft,
-            annualKaskoEUR: annualKaskoEUR
+            annualKaskoEUR: annualKaskoEUR,
+            evBookletPowerKwP2: evBookletPowerKwP2
         )
     }
 

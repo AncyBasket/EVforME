@@ -24,6 +24,7 @@ struct PersistedScenarioInput: Equatable {
     var sourceConsumptionOverrideLPer100Km: Double?
     var targetEnergyOverrideKWhPer100Km: Double?
     var marketRaw: String?
+    var evBookletPowerKwP2: Double?
 
     init(from input: UserInput) {
         dailyKm = input.dailyKm
@@ -43,6 +44,7 @@ struct PersistedScenarioInput: Equatable {
         sourceConsumptionOverrideLPer100Km = input.sourceConsumptionOverrideLPer100Km
         targetEnergyOverrideKWhPer100Km = input.targetEnergyOverrideKWhPer100Km
         marketRaw = input.market.rawValue
+        evBookletPowerKwP2 = input.evBookletPowerKwP2
     }
 
     func toUserInput() -> UserInput {
@@ -67,7 +69,8 @@ struct PersistedScenarioInput: Equatable {
             tripProfile: trip,
             sourceConsumptionOverrideLPer100Km: sourceConsumptionOverrideLPer100Km,
             targetEnergyOverrideKWhPer100Km: targetEnergyOverrideKWhPer100Km,
-            market: market
+            market: market,
+            evBookletPowerKwP2: evBookletPowerKwP2
         )
     }
 }
@@ -80,6 +83,7 @@ extension PersistedScenarioInput: Codable {
         case comparisonIntentRaw, tripProfileRaw
         case sourceConsumptionOverrideLPer100Km, targetEnergyOverrideKWhPer100Km
         case marketRaw
+        case evBookletPowerKwP2
     }
 
     init(from decoder: Decoder) throws {
@@ -102,6 +106,7 @@ extension PersistedScenarioInput: Codable {
         sourceConsumptionOverrideLPer100Km = try c.decodeIfPresent(Double.self, forKey: .sourceConsumptionOverrideLPer100Km)
         targetEnergyOverrideKWhPer100Km = try c.decodeIfPresent(Double.self, forKey: .targetEnergyOverrideKWhPer100Km)
         marketRaw = try c.decodeIfPresent(String.self, forKey: .marketRaw)
+        evBookletPowerKwP2 = try c.decodeIfPresent(Double.self, forKey: .evBookletPowerKwP2)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -123,6 +128,7 @@ extension PersistedScenarioInput: Codable {
         try c.encodeIfPresent(sourceConsumptionOverrideLPer100Km, forKey: .sourceConsumptionOverrideLPer100Km)
         try c.encodeIfPresent(targetEnergyOverrideKWhPer100Km, forKey: .targetEnergyOverrideKWhPer100Km)
         try c.encodeIfPresent(marketRaw, forKey: .marketRaw)
+        try c.encodeIfPresent(evBookletPowerKwP2, forKey: .evBookletPowerKwP2)
     }
 }
 

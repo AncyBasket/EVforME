@@ -471,34 +471,25 @@ final class OperatingCostCalculatorTests: XCTestCase {
         )
         XCTAssertEqual(phevYoung, 200, accuracy: 0.01)
 
-        // Con kW: 1/4 × 2,58 €/kW × kW (audit tariffa nazionale).
+        // Con P.2 a libretto: 1/4 × 2,58 €/kW × kW (es. 100 → 64,50).
         let evKw = OwnershipCostEstimates.bolloPerYearEstimate(
             catalogTaxesPerYear: 0,
             powertrain: .ev,
             vehicleYear: 2018,
             referenceYear: 2026,
-            powerKw: 100
+            bookletPowerKwP2: 100
         )
-        XCTAssertEqual(evKw, (2.58 * 100 * 0.25).rounded(), accuracy: 0.01)
+        XCTAssertEqual(evKw, 64.50, accuracy: 0.01)
 
-        // Senza kW e senza catalogo: importo 0 ma non stimato (niente 55/140 inventati).
+        // Senza P.2: importo 0 ma non stimato (niente catalogo/EEA/55 inventati).
         let evUnknown = OwnershipCostEstimates.bolloPerYearDetail(
-            catalogTaxesPerYear: 0,
+            catalogTaxesPerYear: 220,
             powertrain: .ev,
             vehicleYear: 2018,
             referenceYear: 2026
         )
         XCTAssertEqual(evUnknown.amount, 0, accuracy: 0.01)
         XCTAssertFalse(evUnknown.isKnown)
-
-        // Catalogo pieno → solo 1/4.
-        let evFromCatalog = OwnershipCostEstimates.bolloPerYearEstimate(
-            catalogTaxesPerYear: 220,
-            powertrain: .ev,
-            vehicleYear: 2018,
-            referenceYear: 2026
-        )
-        XCTAssertEqual(evFromCatalog, 55, accuracy: 0.01)
     }
 
     func testInsurance_NoKaskoProxyWithoutAmount() {

@@ -297,6 +297,24 @@ struct InputView: View {
                                     .foregroundColor(.secondaryText)
                             }
 
+                            Text(L10n.evBookletPowerKwP2Label)
+                                .font(Typography.readingCaption)
+                                .foregroundColor(.secondaryText)
+                                .padding(.top, 10)
+                            TextField(
+                                L10n.evBookletPowerKwP2Placeholder,
+                                value: Binding(
+                                    get: { userInput.evBookletPowerKwP2 ?? 0 },
+                                    set: { userInput.evBookletPowerKwP2 = $0 > 0 ? $0 : nil }
+                                ),
+                                format: .number
+                            )
+                            .keyboardType(.decimalPad)
+                            .font(Typography.readingBody)
+                            Text(L10n.evBookletPowerKwP2Hint)
+                                .font(Typography.readingCaption)
+                                .foregroundColor(.secondaryText)
+
                             Text(L10n.insuranceAnnualOptionalLabel)
                                 .font(Typography.readingCaption)
                                 .foregroundColor(.secondaryText)

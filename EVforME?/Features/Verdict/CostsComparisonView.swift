@@ -216,6 +216,13 @@ struct CostsComparisonView: View {
                             .foregroundColor(.secondaryText)
                             .padding(.leading, 8)
                             .padding(.top, 4)
+                        if !targetBreakdown.taxesKnown {
+                            Text(L10n.partialTotalBolloUnknown)
+                                .font(Typography.readingCaption)
+                                .foregroundColor(.secondaryText)
+                                .padding(.leading, 8)
+                                .padding(.top, 2)
+                        }
                     }
                 }
                 .padding(12)

@@ -556,6 +556,10 @@ enum L10n {
     static var kaskoTheftToggle: String { string("kasko_theft_toggle") }
     static var kaskoTheftAmountLabel: String { string("kasko_theft_amount_label") }
     static var kaskoTheftAmountPlaceholder: String { string("kasko_theft_amount_placeholder") }
+    static var evBookletPowerKwP2Label: String { string("ev_booklet_power_kw_p2_label") }
+    static var evBookletPowerKwP2Placeholder: String { string("ev_booklet_power_kw_p2_placeholder") }
+    static var evBookletPowerKwP2Hint: String { string("ev_booklet_power_kw_p2_hint") }
+    static var partialTotalBolloUnknown: String { string("partial_total_bollo_unknown") }
     static var kaskoAmountRequired: String { string("kasko_amount_required") }
     static var publicChargingTypeLabel: String { string("public_charging_type_label") }
     static var publicChargingSourceNote: String { string("public_charging_source_note") }

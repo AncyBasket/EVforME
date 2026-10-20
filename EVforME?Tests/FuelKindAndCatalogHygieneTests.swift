@@ -486,19 +486,28 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertTrue((y?.sourceName ?? "").localizedCaseInsensitiveContains("EV-Database"))
     }
 
-    func testCatalog_EVPowerKw_FromEEA_Model32020() {
+    func testCatalog_Model32020_BolloRequiresBookletP2() {
         let m3 = VehicleCatalogService.shared.vehicle(by: "tesla-model-3-2020")
-        XCTAssertNotNil(m3?.powerKw)
-        XCTAssertGreaterThan(m3?.powerKw ?? 0, 0)
-        let bollo = OwnershipCostEstimates.bolloPerYearEstimate(
+        XCTAssertNotNil(m3)
+        // powerKw EEA (picco) può restare nel seed come info, ma non entra nel bollo.
+        let withoutP2 = OwnershipCostEstimates.bolloPerYearDetail(
             catalogTaxesPerYear: m3?.taxesPerYear ?? 0,
             powertrain: .ev,
             vehicleYear: 2020,
             referenceYear: 2026,
-            powerKw: m3?.powerKw
+            bookletPowerKwP2: nil
         )
-        XCTAssertGreaterThan(bollo, 0)
-        let expected = (2.58 * (m3?.powerKw ?? 0) * 0.25).rounded()
-        XCTAssertEqual(bollo, expected, accuracy: 0.01)
+        XCTAssertFalse(withoutP2.isKnown)
+        XCTAssertEqual(withoutP2.amount, 0, accuracy: 0.01)
+
+        let withP2 = OwnershipCostEstimates.bolloPerYearDetail(
+            catalogTaxesPerYear: m3?.taxesPerYear ?? 0,
+            powertrain: .ev,
+            vehicleYear: 2020,
+            referenceYear: 2026,
+            bookletPowerKwP2: 100
+        )
+        XCTAssertTrue(withP2.isKnown)
+        XCTAssertEqual(withP2.amount, 64.50, accuracy: 0.01)
     }
 }
