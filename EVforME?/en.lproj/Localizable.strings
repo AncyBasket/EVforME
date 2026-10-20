@@ -13,7 +13,13 @@
 
 /* Input */
 "daily_km_question" = "How many km do you drive per year?";
-"fuel_price_label" = "Fuel price (€/L)";
+"fuel_price_label" = "Petrol price (€/L)";
+"fuel_price_label_diesel" = "Diesel price (€/L)";
+"fuel_price_label_lpg" = "LPG price (€/L)";
+"fuel_price_label_cng" = "CNG price (€/kg)";
+"fuel_price_a11y_value_per_liter" = "%.2f euros per liter";
+"fuel_price_a11y_value_per_kg" = "%.2f euros per kilogram";
+"electricity_price_a11y_value" = "%.2f euros per kWh";
 "electricity_price_label" = "Electricity price (€/kWh)";
 "ownership_years_label" = "Years of ownership";
 "year_singular" = "year";
@@ -210,7 +216,7 @@
 "subsection_environment_title" = "Environmental impact";
 "subsection_environment_body" = "A gas car emits about 120 g CO₂/km. An EV on the Italian grid emits indirectly about 40–50 g CO₂/km (well-to-wheel). Switching to electric can cut emissions by several tonnes of CO₂ over a few years, depending on how much you drive and the energy mix.";
 "subsection_battery_title" = "Battery and lifespan";
-"subsection_battery_body" = "EV batteries typically have an 8-year or 160,000 km warranty. Average degradation is about 2–3% per year; after 10 years many packs still retain around 80% capacity. Replacement costs are falling; this simulation does not include possible battery replacement.";
+"subsection_battery_body" = "EV batteries typically have an 8-year or 160,000 km warranty. Capacity declines with time and use; warranty thresholds vary by model. This simulation does not include possible battery replacement.";
 "subsection_incentives_title" = "Incentives";
 "subsection_incentives_body" = "In Italy, ecobonus and other schemes can lower purchase price. Home charging points may qualify for tax deductions.";
 "incentives_link_title" = "Find out about incentives and ecobonus";
@@ -224,7 +230,7 @@
 "assumption_consumption_ev" = "EV consumption: 17 kWh/100 km (average)";
 "assumption_maintenance" = "Maintenance: country rates + Consumer Reports 2020 age curve";
 "assumption_maintenance_market" = "Maintenance (%@): ~€%d ICE · ~€%d EV /year at 15,000 km (+ age)";
-"assumption_taxes" = "Taxes: average road tax; EVs often exempt in Italy";
+"assumption_taxes" = "Taxes: national or regional road-tax estimate (ACI); EVs often exempt for the first years";
 "assumption_electricity" = "Electricity: average domestic €0.25/kWh (public charging may cost more)";
 
 /* Loading */
@@ -298,7 +304,7 @@
 "share_link_a11y_hint" = "Opens the system share sheet with a text summary of your readout.";
 "fear_vs_reality_a11y_fear_prefix" = "Concern";
 "fear_vs_reality_a11y_reality_prefix" = "Reality";
-"costs_chart_a11y_summary" = "Grouped bar chart: cumulative estimated cost by ownership year. Orange bars: gasoline car. Teal bars: electric car.";
+"costs_chart_a11y_summary" = "Grouped bar chart: cumulative estimated cost by ownership year. Orange bars: current car (fuel). Teal bars: electric car.";
 "costs_chart_a11y_hint" = "Explore the chart with VoiceOver rotor for data series details.";
 "scenario_chip_a11y_hint" = "Recalculates the readout using this optimism level for costs.";
 "guides_sheet_close" = "Done";

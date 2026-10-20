@@ -151,10 +151,10 @@ struct InputView: View {
                             }
 
                             sliderBlock(
-                                title: L10n.fuelPriceLabel,
-                                valueLabel: String(format: "€%.2f/L", userInput.fuelPrice),
+                                title: fuelPriceSliderTitle,
+                                valueLabel: fuelPriceValueLabel,
                                 accessibilityLabel: L10n.fuelPriceSliderA11y,
-                                accessibilityValue: String(format: "%.2f euros per liter", userInput.fuelPrice)
+                                accessibilityValue: fuelPriceA11yValue
                             ) {
                                 Slider(
                                     value: Binding(
@@ -166,17 +166,18 @@ struct InputView: View {
                                             }
                                         }
                                     ),
-                                    in: 1.0...2.5,
-                                    step: 0.05
+                                    in: fuelPriceSliderRange,
+                                    step: fuelPriceSliderStep
                                 )
                                 .tint(.accent)
+                                .accessibilityIdentifier("fuel_price_slider")
                             }
 
                             sliderBlock(
                                 title: L10n.electricityPriceLabel,
                                 valueLabel: String(format: "€%.2f/kWh", userInput.electricityPricePerKWh),
                                 accessibilityLabel: L10n.electricityPriceSliderA11y,
-                                accessibilityValue: String(format: "%.2f euros per kWh", userInput.electricityPricePerKWh)
+                                accessibilityValue: L10n.electricityPriceA11yValue(userInput.electricityPricePerKWh)
                             ) {
                                 Slider(
                                     value: Binding(
@@ -574,6 +575,11 @@ struct InputView: View {
             userInput.sourcePurchasePrice = Defaults.suggestedPurchasePrice(for: vehicle)
             applySuggestedComparisonIntent()
             _ = StorageService.shared.syncFuelPriceForSourceVehicle(in: &userInput)
+            // UI test: ripristina prezzo forzato dopo sync ufficiale.
+            if let raw = ProcessInfo.processInfo.environment["UITEST_FUEL_PRICE"],
+               let price = Double(raw.replacingOccurrences(of: ",", with: ".")) {
+                userInput.fuelPrice = price
+            }
         }
         .onChange(of: userInput.targetVehicleId) { _, newId in
             guard let vehicle = targetVehicles.first(where: { $0.id == newId }) else { return }
@@ -896,6 +902,46 @@ struct InputView: View {
 
     private var selectedSourceVehicle: VehicleCatalogItem? {
         sourceVehicles.first(where: { $0.id == userInput.sourceVehicleId })
+    }
+
+    private var sourceFuelKind: FuelKind {
+        selectedSourceVehicle?.resolvedFuelKind ?? .petrol
+    }
+
+    /// Range slider per carburante (GPL 0,5–1,2 €/L; metano €/kg; benzina/diesel 1,0–2,5 €/L).
+    private var fuelPriceSliderRange: ClosedRange<Double> {
+        switch sourceFuelKind {
+        case .lpg: return 0.50...1.20
+        case .cng: return 0.80...2.20
+        case .diesel, .petrol, .unknown: return 1.0...2.5
+        }
+    }
+
+    private var fuelPriceSliderStep: Double {
+        sourceFuelKind == .lpg || sourceFuelKind == .cng ? 0.02 : 0.05
+    }
+
+    private var fuelPriceSliderTitle: String {
+        switch sourceFuelKind {
+        case .lpg: return L10n.fuelPriceLabelLPG
+        case .cng: return L10n.fuelPriceLabelCNG
+        case .diesel: return L10n.fuelPriceLabelDiesel
+        case .petrol, .unknown: return L10n.fuelPriceLabel
+        }
+    }
+
+    private var fuelPriceValueLabel: String {
+        switch sourceFuelKind {
+        case .cng: return String(format: "€%.2f/kg", userInput.fuelPrice)
+        default: return String(format: "€%.2f/L", userInput.fuelPrice)
+        }
+    }
+
+    private var fuelPriceA11yValue: String {
+        switch sourceFuelKind {
+        case .cng: return L10n.fuelPriceA11yValuePerKg(userInput.fuelPrice)
+        default: return L10n.fuelPriceA11yValuePerLiter(userInput.fuelPrice)
+        }
     }
 
     private var targetBrandIsTesla: Bool {

@@ -64,6 +64,18 @@ enum L10n {
     static var inputSection4Title: String { string("input_section_4_title") }
     static var inputSection4Subtitle: String { string("input_section_4_subtitle") }
     static var fuelPriceLabel: String { string("fuel_price_label") }
+    static var fuelPriceLabelDiesel: String { string("fuel_price_label_diesel") }
+    static var fuelPriceLabelLPG: String { string("fuel_price_label_lpg") }
+    static var fuelPriceLabelCNG: String { string("fuel_price_label_cng") }
+    static func fuelPriceA11yValuePerLiter(_ price: Double) -> String {
+        format("fuel_price_a11y_value_per_liter", price)
+    }
+    static func fuelPriceA11yValuePerKg(_ price: Double) -> String {
+        format("fuel_price_a11y_value_per_kg", price)
+    }
+    static func electricityPriceA11yValue(_ price: Double) -> String {
+        format("electricity_price_a11y_value", price)
+    }
     static var electricityPriceLabel: String { string("electricity_price_label") }
     static var ownershipYearsLabel: String { string("ownership_years_label") }
     static var yearSingular: String { string("year_singular") }
