@@ -94,6 +94,24 @@ struct InputView: View {
                             )
                         )
                     }
+                    if userInput.market == .IT,
+                       selectedSourceVehicle?.powertrain == .ev || selectedTargetVehicle?.powertrain == .ev {
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text(L10n.italianRegionLabel)
+                                .font(Typography.readingCaption)
+                                .foregroundStyle(Color.secondaryText)
+                            Picker(L10n.italianRegionLabel, selection: $userInput.italianRegion) {
+                                ForEach(ItalianRegion.allCases) { region in
+                                    Text(region.title).tag(region)
+                                }
+                            }
+                            .pickerStyle(.menu)
+                            Text(L10n.italianRegionHint)
+                                .font(Typography.readingCaption)
+                                .foregroundStyle(Color.secondaryText)
+                        }
+                        .padding(.top, 4)
+                    }
                 }
 
                 DisclosureGroup(isExpanded: $showAdvancedDetails) {

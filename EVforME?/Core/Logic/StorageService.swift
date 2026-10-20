@@ -389,6 +389,7 @@ private struct CodableUserInput: Codable {
     let annualKaskoEUR: Double?
     let sourceBookletPowerKwP2: Double?
     let targetBookletPowerKwP2: Double?
+    let italianRegionRaw: String?
 
     private enum CodingKeys: String, CodingKey {
         case dailyKm
@@ -416,6 +417,7 @@ private struct CodableUserInput: Codable {
         case annualKaskoEUR
         case sourceBookletPowerKwP2
         case targetBookletPowerKwP2
+        case italianRegionRaw
         /// Legacy single-field P.2 (pre source/target split) → maps to target.
         case evBookletPowerKwP2
     }
@@ -453,6 +455,7 @@ private struct CodableUserInput: Codable {
         annualKaskoEUR = input.annualKaskoEUR
         sourceBookletPowerKwP2 = input.sourceBookletPowerKwP2
         targetBookletPowerKwP2 = input.targetBookletPowerKwP2
+        italianRegionRaw = input.italianRegion.rawValue
         
         // Encode charging configuration
         chargingConfigData = ChargingConfigData(
@@ -498,6 +501,7 @@ private struct CodableUserInput: Codable {
         let targetP2 = try container.decodeIfPresent(Double.self, forKey: .targetBookletPowerKwP2)
         let legacyP2 = try container.decodeIfPresent(Double.self, forKey: .evBookletPowerKwP2)
         targetBookletPowerKwP2 = targetP2 ?? legacyP2
+        italianRegionRaw = try container.decodeIfPresent(String.self, forKey: .italianRegionRaw)
         
         // Persist raw charging payload; `toUserInput()` materializes / falls back.
         chargingConfigData = try container.decodeIfPresent(ChargingConfigData.self, forKey: .chargingConfigData)
@@ -528,6 +532,7 @@ private struct CodableUserInput: Codable {
         try container.encodeIfPresent(annualKaskoEUR, forKey: .annualKaskoEUR)
         try container.encodeIfPresent(sourceBookletPowerKwP2, forKey: .sourceBookletPowerKwP2)
         try container.encodeIfPresent(targetBookletPowerKwP2, forKey: .targetBookletPowerKwP2)
+        try container.encodeIfPresent(italianRegionRaw, forKey: .italianRegionRaw)
     }
     
     func toUserInput() -> UserInput {
@@ -578,7 +583,8 @@ private struct CodableUserInput: Codable {
             includeKaskoTheft: includeKaskoTheft,
             annualKaskoEUR: annualKaskoEUR,
             sourceBookletPowerKwP2: sourceBookletPowerKwP2,
-            targetBookletPowerKwP2: targetBookletPowerKwP2
+            targetBookletPowerKwP2: targetBookletPowerKwP2,
+            italianRegion: italianRegionRaw.flatMap(ItalianRegion.init(rawValue:)) ?? .unspecified
         )
     }
 

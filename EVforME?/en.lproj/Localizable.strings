@@ -562,7 +562,11 @@
 "ev_booklet_power_kw_p2_source_label" = "Booklet kW (P.2) — current car (optional)";
 "ev_booklet_power_kw_p2_target_label" = "Booklet kW (P.2) — electric car (optional)";
 "ev_booklet_power_kw_p2_placeholder" = "e.g. 100";
-"ev_booklet_power_kw_p2_hint" = "Continuous 30-min power on the registration document. Needed for EV road tax after 5 years (¼ × €2.58/kW). Do not use peak kW.";
+"ev_booklet_power_kw_p2_hint" = "Continuous 30-min power on the registration document. Needed for EV road tax after 5 years (¼ × €/kW rate × kW). €2.58/kW is a national estimate: it varies by region (e.g. Lazio €2.84; Lombardy and Piedmont €0). Do not use peak kW.";
+"italian_region_label" = "Region (EV road tax)";
+"italian_region_unspecified" = "Not set (national estimate €2.58/kW)";
+"italian_region_other_unknown" = "Other region (EV road tax not estimated)";
+"italian_region_hint" = "ACI 2026 tariffs. Lombardy/Piedmont: permanent exemption. Without an official rate: not estimated.";
 "partial_total_bollo_unknown" = "Partial total (road tax not estimated)";
 "italy_kit_bollo_both_unknown" = "Road tax: current and electrified not estimated (missing booklet P.2)";
 "italy_kit_bollo_row_source_unknown" = "Road tax (est.): current not estimated (missing P.2) · electrified ~€%d/yr";

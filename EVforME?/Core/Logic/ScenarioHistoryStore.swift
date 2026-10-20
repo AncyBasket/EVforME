@@ -26,6 +26,7 @@ struct PersistedScenarioInput: Equatable {
     var marketRaw: String?
     var sourceBookletPowerKwP2: Double?
     var targetBookletPowerKwP2: Double?
+    var italianRegionRaw: String?
 
     init(from input: UserInput) {
         dailyKm = input.dailyKm
@@ -47,6 +48,7 @@ struct PersistedScenarioInput: Equatable {
         marketRaw = input.market.rawValue
         sourceBookletPowerKwP2 = input.sourceBookletPowerKwP2
         targetBookletPowerKwP2 = input.targetBookletPowerKwP2
+        italianRegionRaw = input.italianRegion.rawValue
     }
 
     func toUserInput() -> UserInput {
@@ -73,7 +75,8 @@ struct PersistedScenarioInput: Equatable {
             targetEnergyOverrideKWhPer100Km: targetEnergyOverrideKWhPer100Km,
             market: market,
             sourceBookletPowerKwP2: sourceBookletPowerKwP2,
-            targetBookletPowerKwP2: targetBookletPowerKwP2
+            targetBookletPowerKwP2: targetBookletPowerKwP2,
+            italianRegion: italianRegionRaw.flatMap(ItalianRegion.init(rawValue:)) ?? .unspecified
         )
     }
 }
@@ -88,6 +91,7 @@ extension PersistedScenarioInput: Codable {
         case marketRaw
         case sourceBookletPowerKwP2
         case targetBookletPowerKwP2
+        case italianRegionRaw
         case evBookletPowerKwP2 // legacy → target
     }
 
@@ -115,6 +119,7 @@ extension PersistedScenarioInput: Codable {
         let targetP2 = try c.decodeIfPresent(Double.self, forKey: .targetBookletPowerKwP2)
         let legacyP2 = try c.decodeIfPresent(Double.self, forKey: .evBookletPowerKwP2)
         targetBookletPowerKwP2 = targetP2 ?? legacyP2
+        italianRegionRaw = try c.decodeIfPresent(String.self, forKey: .italianRegionRaw)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -138,6 +143,7 @@ extension PersistedScenarioInput: Codable {
         try c.encodeIfPresent(marketRaw, forKey: .marketRaw)
         try c.encodeIfPresent(sourceBookletPowerKwP2, forKey: .sourceBookletPowerKwP2)
         try c.encodeIfPresent(targetBookletPowerKwP2, forKey: .targetBookletPowerKwP2)
+        try c.encodeIfPresent(italianRegionRaw, forKey: .italianRegionRaw)
     }
 }
 

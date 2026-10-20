@@ -38,6 +38,8 @@ struct EVSimulationInput {
     var sourceBookletPowerKwP2: Double? = nil
     /// kW P.2 a libretto — EV target.
     var targetBookletPowerKwP2: Double? = nil
+    /// Regione IT per tariffa bollo EV (opzionale).
+    var italianRegion: ItalianRegion = .unspecified
 }
 
 struct EVSimulationResult {
@@ -136,14 +138,16 @@ enum OwnershipCostEstimates {
     }
 
     /// Bollo / tassa di possesso — stima semplificata (non ACI ufficiale).
-    /// EV: 5 anni esenzione, poi 1/4 × 2,58 €/kW × **P.2 a libretto** (potenza continua 30 min).
-    /// Non usare EEA `ep__KW_` (picco) né inventare 0 € in silenzio: senza P.2 → `isKnown = false`.
+    /// EV: 5 anni esenzione nazionale, poi **1/4 × tariffa regionale lineare €/kW × P.2 a libretto**.
+    /// Nessuna fascia 3,87 €/kW oltre 100 kW per le EV (quella vale per benzina/diesel).
+    /// 2,58 €/kW è stima nazionale di ripiego: Lazio 2,84, Lombardia/Piemonte 0 €, ecc. (ACI 2026).
+    /// Non usare EEA `ep__KW_` (picco) né inventare 0 € in silenzio: senza P.2 o senza tariffa → `isKnown = false`.
     /// ICE/HEV/PHEV: solo `taxesPerYear` di catalogo; se ≤ 0 → non stimato (niente proxy).
-    static let petrolBolloEURPerKw: Double = 2.58
+    static let nationalEVBolloEURPerKw: Double = 2.58
 
     struct BolloEstimate: Equatable {
         let amount: Double
-        /// `false` quando non stimabile (EV post-5y senza P.2, o ICE/HEV/PHEV senza bollo catalogo).
+        /// `false` quando non stimabile (EV post-5y senza P.2/tariffa, o ICE/HEV/PHEV senza bollo catalogo).
         let isKnown: Bool
     }
 
@@ -152,14 +156,16 @@ enum OwnershipCostEstimates {
         powertrain: Powertrain,
         vehicleYear: Int,
         referenceYear: Int = Calendar.current.component(.year, from: Date()),
-        bookletPowerKwP2: Double? = nil
+        bookletPowerKwP2: Double? = nil,
+        italianRegion: ItalianRegion = .unspecified
     ) -> Double {
         bolloPerYearDetail(
             catalogTaxesPerYear: catalogTaxesPerYear,
             powertrain: powertrain,
             vehicleYear: vehicleYear,
             referenceYear: referenceYear,
-            bookletPowerKwP2: bookletPowerKwP2
+            bookletPowerKwP2: bookletPowerKwP2,
+            italianRegion: italianRegion
         ).amount
     }
 
@@ -168,18 +174,24 @@ enum OwnershipCostEstimates {
         powertrain: Powertrain,
         vehicleYear: Int,
         referenceYear: Int = Calendar.current.component(.year, from: Date()),
-        bookletPowerKwP2: Double? = nil
+        bookletPowerKwP2: Double? = nil,
+        italianRegion: ItalianRegion = .unspecified
     ) -> BolloEstimate {
         let age = max(0, referenceYear - vehicleYear)
         switch powertrain {
         case .ev:
+            if italianRegion.evPermanentlyExempt {
+                return BolloEstimate(amount: 0, isKnown: true)
+            }
             if age < 5 { return BolloEstimate(amount: 0, isKnown: true) }
+            guard let rate = italianRegion.evBolloEURPerKw else {
+                return BolloEstimate(amount: 0, isKnown: false)
+            }
             if let kw = bookletPowerKwP2, kw > 0 {
-                // Es. 100 kW P.2 → 2,58 × 100 × 1/4 = 64,50 € (niente arrotondamento a euro interi).
-                let raw = petrolBolloEURPerKw * kw * 0.25
+                // Lineare: nessun salto 3,87 oltre 100 kW (solo ICE). Es. naz. 100 kW → 2,58×100×1/4 = 64,50.
+                let raw = rate * kw * 0.25
                 return BolloEstimate(amount: (raw * 100).rounded() / 100, isKnown: true)
             }
-            // Senza P.2 non stimiamo: importo 0 escluso dal totale “completo”, UI segnala parziale.
             return BolloEstimate(amount: 0, isKnown: false)
         case .phev, .hev, .ice:
             if catalogTaxesPerYear > 0 {
@@ -321,14 +333,16 @@ final class EVSimulator {
             powertrain: sourceVehicle.powertrain,
             vehicleYear: sourceVehicle.year,
             referenceYear: currentYear,
-            bookletPowerKwP2: sourceVehicle.powertrain == .ev ? input.sourceBookletPowerKwP2 : nil
+            bookletPowerKwP2: sourceVehicle.powertrain == .ev ? input.sourceBookletPowerKwP2 : nil,
+            italianRegion: input.italianRegion
         )
         let targetBollo = OwnershipCostEstimates.bolloPerYearDetail(
             catalogTaxesPerYear: targetVehicle.taxesPerYear,
             powertrain: targetVehicle.powertrain,
             vehicleYear: targetVehicle.year,
             referenceYear: currentYear,
-            bookletPowerKwP2: targetVehicle.powertrain == .ev ? input.targetBookletPowerKwP2 : nil
+            bookletPowerKwP2: targetVehicle.powertrain == .ev ? input.targetBookletPowerKwP2 : nil,
+            italianRegion: input.italianRegion
         )
         let sourceBreakdown = OperatingCostBreakdown(
             energy: sourceEnergy,

@@ -579,6 +579,10 @@ enum L10n {
     static var evBookletPowerKwP2TargetLabel: String { string("ev_booklet_power_kw_p2_target_label") }
     static var evBookletPowerKwP2Placeholder: String { string("ev_booklet_power_kw_p2_placeholder") }
     static var evBookletPowerKwP2Hint: String { string("ev_booklet_power_kw_p2_hint") }
+    static var italianRegionLabel: String { string("italian_region_label") }
+    static var italianRegionUnspecified: String { string("italian_region_unspecified") }
+    static var italianRegionOtherUnknown: String { string("italian_region_other_unknown") }
+    static var italianRegionHint: String { string("italian_region_hint") }
     static var partialTotalBolloUnknown: String { string("partial_total_bollo_unknown") }
     static var italyKitBolloBothUnknown: String { string("italy_kit_bollo_both_unknown") }
     static func italyKitBolloRowSourceUnknown(_ ev: Int) -> String {

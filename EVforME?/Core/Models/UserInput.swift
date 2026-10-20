@@ -209,6 +209,8 @@ struct UserInput {
     var sourceBookletPowerKwP2: Double?
     /// kW P.2 a libretto — solo EV target.
     var targetBookletPowerKwP2: Double?
+    /// Regione IT per tariffa bollo EV (ACI 2026). Opzionale.
+    var italianRegion: ItalianRegion
 
     init(
         dailyKm: Int,
@@ -234,7 +236,8 @@ struct UserInput {
         annualKaskoEUR: Double? = nil,
         iseeEUR: Double? = nil,
         sourceBookletPowerKwP2: Double? = nil,
-        targetBookletPowerKwP2: Double? = nil
+        targetBookletPowerKwP2: Double? = nil,
+        italianRegion: ItalianRegion = .unspecified
     ) {
         self.dailyKm = dailyKm
         self.hasHomeCharging = hasHomeCharging
@@ -260,6 +263,7 @@ struct UserInput {
         self.iseeEUR = iseeEUR
         self.sourceBookletPowerKwP2 = sourceBookletPowerKwP2
         self.targetBookletPowerKwP2 = targetBookletPowerKwP2
+        self.italianRegion = italianRegion
     }
 
     /// Bonus acquisto stimato (solo IT). Fuori Italia → sempre 0.

@@ -560,7 +560,11 @@
 "ev_booklet_power_kw_p2_source_label" = "kW a libretto (P.2) — auto attuale (opzionale)";
 "ev_booklet_power_kw_p2_target_label" = "kW a libretto (P.2) — auto elettrica (opzionale)";
 "ev_booklet_power_kw_p2_placeholder" = "es. 100";
-"ev_booklet_power_kw_p2_hint" = "Potenza continua 30 min sul libretto. Serve per il bollo EV dopo 5 anni (1/4 × 2,58 €/kW). Non usare i kW di picco.";
+"ev_booklet_power_kw_p2_hint" = "Potenza continua 30 min sul libretto. Serve per il bollo EV dopo 5 anni (1/4 × tariffa €/kW × kW). 2,58 €/kW è una stima nazionale: varia per regione (es. Lazio 2,84; Lombardia e Piemonte 0 €). Non usare i kW di picco.";
+"italian_region_label" = "Regione (bollo EV)";
+"italian_region_unspecified" = "Non specificata (stima nazionale 2,58 €/kW)";
+"italian_region_other_unknown" = "Altra regione (bollo EV non stimato)";
+"italian_region_hint" = "Tariffe ACI 2026. Lombardia/Piemonte: esenzione permanente. Senza tariffa ufficiale: non stimato.";
 "partial_total_bollo_unknown" = "Totale parziale (bollo non stimato)";
 "italy_kit_bollo_both_unknown" = "Bollo: attuale e elettrificata non stimati (manca P.2 a libretto)";
 "italy_kit_bollo_row_source_unknown" = "Bollo (stima): attuale non stimato (manca P.2) · elettrificata ~€%d/anno";
