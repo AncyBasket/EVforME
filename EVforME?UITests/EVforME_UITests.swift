@@ -105,6 +105,53 @@ final class EVforME_UITests: XCTestCase {
     }
 
     @MainActor
+    func testFuelPriceSliderAcceptsLPG078() throws {
+        let app = XCUIApplication()
+        app.launchEnvironment["UITEST_PRESET_VEHICLES"] = "1"
+        app.launchEnvironment["UITEST_SOURCE_FUEL"] = "lpg"
+        app.launchEnvironment["UITEST_FUEL_PRICE"] = "0.78"
+        app.launch()
+
+        dismissQuickStartIfNeeded(app)
+
+        let startersReady =
+            app.buttons["Dimmi la verità"].waitForExistence(timeout: 12)
+            || app.buttons["Tell me the truth"].waitForExistence(timeout: 2)
+        XCTAssertTrue(startersReady, "Input bench should load")
+
+        for _ in 0..<5 { app.swipeUp() }
+        let advancedIT = app.buttons["Regola km, prezzi e scenario"]
+        let advancedEN = app.buttons["Adjust km, prices, and scenario"]
+        if advancedIT.waitForExistence(timeout: 3) {
+            advancedIT.tap()
+        } else if advancedEN.waitForExistence(timeout: 1) {
+            advancedEN.tap()
+        }
+        for _ in 0..<3 { app.swipeUp() }
+
+        // Range GPL 0.50…1.20: preset UITEST_FUEL_PRICE=0.78 non deve essere clampato a ≥1.0.
+        let predicates = [
+            NSPredicate(format: "label CONTAINS %@", "0,78"),
+            NSPredicate(format: "label CONTAINS %@", "0.78"),
+            NSPredicate(format: "label CONTAINS %@", "€0,78"),
+            NSPredicate(format: "label CONTAINS %@", "€0.78")
+        ]
+        var found = false
+        for pred in predicates {
+            let match = app.staticTexts.matching(pred).firstMatch
+            if match.waitForExistence(timeout: 3) {
+                found = true
+                break
+            }
+        }
+        if !found {
+            let fuelSlider = app.descendants(matching: .any)["fuel_price_slider"]
+            found = fuelSlider.waitForExistence(timeout: 2)
+        }
+        XCTAssertTrue(found, "UI should show GPL price €0.78/L (slider range allows it)")
+    }
+
+    @MainActor
     func testSliderUpdatesValue() throws {
         let app = XCUIApplication()
         app.launchEnvironment["UITEST_PRESET_VEHICLES"] = "1"

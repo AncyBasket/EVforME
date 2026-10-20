@@ -587,7 +587,7 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertTrue(eeaLowN.isEmpty, "EEA sourceName must have n≥100: \(eeaLowN.map(\.id))")
     }
 
-    func testCatalog_ICEITNotOver25PercentAboveEEAManifest() throws {
+    func testCatalog_ICEITWithin25PercentOfEEABothDirections() throws {
         let manifestURL = URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()
             .deletingLastPathComponent()
@@ -597,20 +597,68 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         }
         let data = try Data(contentsOf: manifestURL)
         let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
-        let corrections = json?["corrections"] as? [[String: Any]] ?? []
+        let co2 = json?["co2_to_fc"] as? [String: Any]
+        let petrolMeta = co2?["petrol"] as? [String: Any]
+        let dieselMeta = co2?["diesel"] as? [String: Any]
+        let petrolDiv = petrolMeta?["co2_per_l100"] as? Double ?? 22.63
+        let dieselDiv = dieselMeta?["co2_per_l100"] as? Double ?? 26.29
+
+        let eeaPattern = try NSRegularExpression(pattern: #"EEA co2cars IT \d{4} n=(\d+)"#)
         var offenders: [String] = []
-        for c in corrections {
-            guard let id = c["id"] as? String,
-                  let newL100 = c["new_l100"] as? Double,
-                  let vehicle = VehicleCatalogService.shared.vehicle(by: id),
-                  vehicle.powertrain == .ice,
-                  let fc = vehicle.fuelConsumptionLPerKm else { continue }
+        for vehicle in VehicleCatalogService.shared.vehicles {
+            guard vehicle.powertrain == .ice,
+                  (vehicle.market ?? "IT") == "IT",
+                  let sn = vehicle.sourceName,
+                  let match = eeaPattern.firstMatch(in: sn, range: NSRange(sn.startIndex..., in: sn)),
+                  let nRange = Range(match.range(at: 1), in: sn),
+                  let n = Int(sn[nRange]), n >= 100,
+                  let fc = vehicle.fuelConsumptionLPerKm, fc > 0,
+                  let co2g = vehicle.co2gKm, co2g > 0 else { continue }
+            let fk = vehicle.resolvedFuelKind
+            let divisor: Double
+            switch fk {
+            case .petrol: divisor = petrolDiv
+            case .diesel: divisor = dieselDiv
+            default: continue
+            }
+            let expected = Double(co2g) / divisor
             let actual = fc * 100
-            if actual > newL100 * 1.25 {
-                offenders.append("\(id): \(actual) > \(newL100)*1.25")
+            if actual > expected * 1.25 || expected > actual * 1.25 {
+                offenders.append("\(vehicle.id): actual \(actual) vs EEA \(expected) (co2=\(co2g))")
             }
         }
         XCTAssertTrue(offenders.isEmpty, offenders.joined(separator: "\n"))
+    }
+
+    func testCatalog_PetrolEEAMedianCO2PerL100MatchesCitedCoefficient() throws {
+        let manifestURL = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .appendingPathComponent("scripts/cache/eea/fill_catalog_fuels_manifest.json")
+        guard FileManager.default.fileExists(atPath: manifestURL.path) else {
+            throw XCTSkip("EEA manifest not present")
+        }
+        let data = try Data(contentsOf: manifestURL)
+        let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+        let cited = ((json?["co2_to_fc"] as? [String: Any])?["petrol"] as? [String: Any])?["co2_per_l100"] as? Double
+            ?? 22.63
+        let eeaPattern = try NSRegularExpression(pattern: #"EEA co2cars IT \d{4} n=(\d+)"#)
+        var ratios: [Double] = []
+        for vehicle in VehicleCatalogService.shared.vehicles {
+            guard vehicle.powertrain == .ice,
+                  vehicle.resolvedFuelKind == .petrol,
+                  let sn = vehicle.sourceName,
+                  let match = eeaPattern.firstMatch(in: sn, range: NSRange(sn.startIndex..., in: sn)),
+                  let nRange = Range(match.range(at: 1), in: sn),
+                  let n = Int(sn[nRange]), n >= 100,
+                  let fc = vehicle.fuelConsumptionLPerKm, fc > 0,
+                  let co2g = vehicle.co2gKm, co2g > 0 else { continue }
+            ratios.append(Double(co2g) / (fc * 100))
+        }
+        XCTAssertFalse(ratios.isEmpty)
+        ratios.sort()
+        let median = ratios[ratios.count / 2]
+        XCTAssertEqual(median, cited, accuracy: 0.2, "median CO2/L100 \(median) vs cited \(cited)")
     }
 
     func testEVBollo_RegionalRates_LinearNo387Band() {
@@ -665,5 +713,32 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             italianRegion: .otherUnknown
         )
         XCTAssertFalse(unknown.isKnown)
+
+        // VdA: EV immatricolata 2019 → 8 anni esenzione (età 7 nel 2026 ancora 0).
+        let vda = OwnershipCostEstimates.bolloPerYearDetail(
+            catalogTaxesPerYear: 0,
+            powertrain: .ev,
+            vehicleYear: 2019,
+            referenceYear: 2026,
+            bookletPowerKwP2: 100,
+            italianRegion: .valleDAosta
+        )
+        XCTAssertEqual(vda.amount, 0, accuracy: 0.01)
+    }
+
+    func testEVBollo_HorizonExitsExemptionMidway() {
+        // EV di 3 anni (immatr. 2023, ref 2026) su orizzonte 5: anni 0–1 esenti (età 3–4),
+        // anni 2–4 a pagamento (età 5–7) → 3 × (2.58×100×0.25) = 193.50
+        let total = OwnershipCostEstimates.bolloTotalOverHorizon(
+            catalogTaxesPerYear: 0,
+            powertrain: .ev,
+            vehicleYear: 2023,
+            referenceYear: 2026,
+            ownershipYears: 5,
+            bookletPowerKwP2: 100,
+            italianRegion: .unspecified
+        )
+        XCTAssertEqual(total.amount, 193.50, accuracy: 0.05)
+        XCTAssertTrue(total.isKnown)
     }
 }
