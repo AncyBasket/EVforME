@@ -522,7 +522,9 @@ enum L10n {
     static func incentivesIncludedReason(_ euro: Int) -> String { format("incentives_included_reason", euro) }
     static var incentivesTransparencyNote: String { string("incentives_transparency_note") }
     static var sourcesSectionTitle: String { string("sources_section_title") }
-    static var sourceCatalogNote: String { string("source_catalog_note") }
+    static var sourceCatalogNote: String {
+        format("source_catalog_note", VehicleCatalogService.bundledSeedVersion)
+    }
     static var sourcePricesNote: String { string("source_prices_note") }
     static var historySectionTitle: String { string("history_section_title") }
     static var historyEmpty: String { string("history_empty") }

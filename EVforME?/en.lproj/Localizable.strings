@@ -351,7 +351,7 @@
 "incentives_included_reason" = "Includes ~€%d purchase-incentive estimate.";
 "incentives_transparency_note" = "Incentives are illustrative only — verify on the official MASE/MIMIT site (ISEE, scrappage, fund availability). Not added to the verdict unless you enable the toggle.";
 "sources_section_title" = "Where numbers come from";
-"source_catalog_note" = "Vehicle figures: quality catalog downloaded from the internet on every open (bundled seed fallback). Prices: MIMIT + Eurostat.";
+"source_catalog_note" = "Vehicle data: catalog bundled in the app (seed v%d, EEA/manufacturer sources). Prices: MIMIT + Eurostat.";
 "source_prices_note" = "Energy prices: refreshed on each app open from MIMIT (fuel) and Eurostat (electricity); cached if offline. You can still override sliders.";
 "history_section_title" = "Saved readouts";
 "history_empty" = "No saved scenarios yet. Run a simulation to pin one here.";

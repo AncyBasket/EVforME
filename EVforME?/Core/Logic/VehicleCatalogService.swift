@@ -22,7 +22,9 @@ final class VehicleCatalogService {
     }
 
     private let defaults = UserDefaults.standard
-    private let seedVersion = 37
+    /// Bundled quality-seed revision (not the App Store marketing version).
+    static let bundledSeedVersion = 37
+    private var seedVersion: Int { Self.bundledSeedVersion }
     private var remoteDisabledForTesting = false
     private let remoteSession: URLSession = {
         let config = URLSessionConfiguration.ephemeral

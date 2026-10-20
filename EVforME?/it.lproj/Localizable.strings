@@ -368,7 +368,7 @@
 "incentives_included_reason" = "Include stima incentivi acquisto ~€%d.";
 "incentives_transparency_note" = "Gli incentivi sono solo illustrativi — verifica sul sito ufficiale MASE/MIMIT (ISEE, rottamazione, fondi). Non entrano nel verdetto finché non attivi il toggle.";
 "sources_section_title" = "Da dove arrivano i numeri";
-"source_catalog_note" = "Consumi veicoli: catalogo quality scaricato da internet a ogni apertura (fallback seed in bundle). Prezzi: MIMIT + Eurostat.";
+"source_catalog_note" = "Dati veicolo: catalogo incluso nell'app (seed v%d, fonti EEA/costruttori). Prezzi: MIMIT + Eurostat.";
 "source_prices_note" = "Prezzi energia: aggiornati a ogni apertura da MIMIT (carburante) ed Eurostat (elettricità); in cache se offline. Puoi comunque sovrascrivere gli slider.";
 "history_section_title" = "Esiti salvati";
 "history_empty" = "Nessuno scenario salvato. Simula per fissarne uno qui.";
