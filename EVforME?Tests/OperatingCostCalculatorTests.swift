@@ -393,11 +393,12 @@ final class OperatingCostCalculatorTests: XCTestCase {
         }
         // Valori da bundle ufficiale (benzina 2,029 / gasolio 2,257 / GPL 0,775 / elec 0,314)
         // e RC flat 422; ricarica casa 85%. Tolleranza ≤ 2 €.
+        // seedVersion 38: bollo da kW EEA (niente proxy) + consumi ICE/HEV riallineati.
         let expects: [Expect] = [
             .init(sourceId: "seat-ateca-2016", sourceTotal: 2785, evTotal: 1253, verdict: .yes),
-            .init(sourceId: "toyota-yaris-2021", sourceTotal: 2153, evTotal: 1253, verdict: .yes),
-            .init(sourceId: "dacia-sandero-eco-g-2022", sourceTotal: 1634, evTotal: 1253, verdict: .maybe),
-            .init(sourceId: "toyota-prius-2018", sourceTotal: 2184, evTotal: 1253, verdict: .yes),
+            .init(sourceId: "toyota-yaris-2021", sourceTotal: 2126, evTotal: 1253, verdict: .yes),
+            .init(sourceId: "dacia-sandero-eco-g-2022", sourceTotal: 1686, evTotal: 1253, verdict: .yes),
+            .init(sourceId: "toyota-prius-2018", sourceTotal: 2149, evTotal: 1253, verdict: .yes),
         ]
         let costs = try! XCTUnwrap(OfficialCostService.shared.cachedOrBundledCosts())
         XCTAssertEqual(costs.electricityPricePerKWh, 0.314, accuracy: 0.001)

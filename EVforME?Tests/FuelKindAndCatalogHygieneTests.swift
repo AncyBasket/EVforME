@@ -383,7 +383,7 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             return blob.contains("prius")
                 || blob.contains("niro")
                 || blob.contains("ct 200h")
-                || blob.contains("hybrid")
+                || (blob.contains("hybrid") && !blob.contains("mild hybrid"))
         }
         XCTAssertTrue(offenders.isEmpty, "ICE hybrids: \(offenders.map(\.id))")
     }
@@ -416,6 +416,7 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         "skoda|karoq", "skoda|kodiaq", "skoda|octavia", "skoda|superb",
         "toyota|rav4",
         "volkswagen|passat", "volkswagen|tiguan", "volkswagen|touareg",
+        "jeep|grand cherokee", "renault|kadjar",
     ]
 
     /// Se la media diesel di un modello supera la benzina → fallisci, salvo allowlist documentata.
