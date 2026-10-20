@@ -138,14 +138,12 @@ enum OwnershipCostEstimates {
     /// Bollo / tassa di possesso — stima semplificata (non ACI ufficiale).
     /// EV: 5 anni esenzione, poi 1/4 × 2,58 €/kW × **P.2 a libretto** (potenza continua 30 min).
     /// Non usare EEA `ep__KW_` (picco) né inventare 0 € in silenzio: senza P.2 → `isKnown = false`.
-    /// HEV/PHEV: nessuna riduzione regionale hard-coded.
+    /// ICE/HEV/PHEV: solo `taxesPerYear` di catalogo; se ≤ 0 → non stimato (niente proxy).
     static let petrolBolloEURPerKw: Double = 2.58
-    static let petrolBolloProxyEURPerYear: Double = 220
-    static let hevPhevBolloProxyEURPerYear: Double = 180
 
     struct BolloEstimate: Equatable {
         let amount: Double
-        /// `false` solo per EV post-5y senza kW P.2 a libretto (UI: non stimato / totale parziale).
+        /// `false` quando non stimabile (EV post-5y senza P.2, o ICE/HEV/PHEV senza bollo catalogo).
         let isKnown: Bool
     }
 
@@ -183,12 +181,11 @@ enum OwnershipCostEstimates {
             }
             // Senza P.2 non stimiamo: importo 0 escluso dal totale “completo”, UI segnala parziale.
             return BolloEstimate(amount: 0, isKnown: false)
-        case .phev, .hev:
-            let amount = catalogTaxesPerYear > 0 ? catalogTaxesPerYear : hevPhevBolloProxyEURPerYear
-            return BolloEstimate(amount: amount, isKnown: true)
-        case .ice:
-            let amount = catalogTaxesPerYear > 0 ? catalogTaxesPerYear : petrolBolloProxyEURPerYear
-            return BolloEstimate(amount: amount, isKnown: true)
+        case .phev, .hev, .ice:
+            if catalogTaxesPerYear > 0 {
+                return BolloEstimate(amount: catalogTaxesPerYear, isKnown: true)
+            }
+            return BolloEstimate(amount: 0, isKnown: false)
         }
     }
 
