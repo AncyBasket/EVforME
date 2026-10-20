@@ -9,17 +9,22 @@ import Foundation
 
 /// Prezzi colonnine pubbliche di default (€/kWh).
 ///
-/// Fonte: stime di mercato Italia (operatori AC/DC tipici, Motus-E / listini consumer),
-/// aggiornate a settembre 2024. L’utente può sovrascrivere con `customPublicPricePerKWh`.
+/// Fonte: Adiconsum Osservatorio tariffe di ricarica, settembre 2026.
+/// L’utente può sovrascrivere con `customPublicPricePerKWh`.
 enum PublicChargingPriceDefaults {
-    /// Domestico / wallbox — allineato allo slider elettricità di default.
-    static let homePerKWh: Double = 0.25
-    /// AC pubblico ~22 kW.
-    static let slowACPerKWh: Double = 0.45
-    /// DC fast ~50 kW.
-    static let fastDCPerKWh: Double = 0.65
-    /// Ultra-fast ≥100–150 kW.
-    static let ultraFastPerKWh: Double = 0.85
+    /// Periodo della fonte prezzi pubblici.
+    static let sourcePeriodLabel = "Adiconsum settembre 2026"
+
+    /// Domestico / wallbox — allineato allo slider elettricità di default (fascia Eurostat 2.500–4.999).
+    static let homePerKWh: Double = 0.31
+    /// AC pubblico ~22 kW (media Adiconsum).
+    static let slowACPerKWh: Double = 0.62
+    /// DC fast ~50 kW (media Adiconsum).
+    static let fastDCPerKWh: Double = 0.75
+    /// Ultra-fast / HPC (media Adiconsum).
+    static let ultraFastPerKWh: Double = 0.74
+    /// Tesla Supercharger (proprietari Tesla) — media attuale Italia ~0,42 €/kWh.
+    static let teslaSuperchargerPerKWh: Double = 0.42
 }
 
 /// Tipo di ricarica disponibile
@@ -28,6 +33,7 @@ enum ChargingType: String, CaseIterable, Identifiable {
     case publicSlow = "public_slow"
     case publicFast = "public_fast"
     case publicUltraFast = "public_ultra_fast"
+    case teslaSupercharger = "tesla_supercharger"
     
     var id: String { rawValue }
     
@@ -37,6 +43,7 @@ enum ChargingType: String, CaseIterable, Identifiable {
         case .publicSlow: return L10n.chargingTypePublicSlow
         case .publicFast: return L10n.chargingTypePublicFast
         case .publicUltraFast: return L10n.chargingTypePublicUltraFast
+        case .teslaSupercharger: return L10n.chargingTypeTeslaSupercharger
         }
     }
     
@@ -46,6 +53,7 @@ enum ChargingType: String, CaseIterable, Identifiable {
         case .publicSlow: return L10n.chargingTypePublicSlowDescription
         case .publicFast: return L10n.chargingTypePublicFastDescription
         case .publicUltraFast: return L10n.chargingTypePublicUltraFastDescription
+        case .teslaSupercharger: return L10n.chargingTypeTeslaSuperchargerDescription
         }
     }
     
@@ -56,6 +64,7 @@ enum ChargingType: String, CaseIterable, Identifiable {
         case .publicSlow: return 22.0 // AC pubblico
         case .publicFast: return 50.0 // DC fast
         case .publicUltraFast: return 150.0 // Ultra fast
+        case .teslaSupercharger: return 250.0
         }
     }
     
@@ -66,6 +75,7 @@ enum ChargingType: String, CaseIterable, Identifiable {
         case .publicSlow: return PublicChargingPriceDefaults.slowACPerKWh
         case .publicFast: return PublicChargingPriceDefaults.fastDCPerKWh
         case .publicUltraFast: return PublicChargingPriceDefaults.ultraFastPerKWh
+        case .teslaSupercharger: return PublicChargingPriceDefaults.teslaSuperchargerPerKWh
         }
     }
     
@@ -77,7 +87,17 @@ enum ChargingType: String, CaseIterable, Identifiable {
         case .publicSlow: return 0.90 // AC pubblico
         case .publicFast: return 0.85 // DC con conversione
         case .publicUltraFast: return 0.80 // Ultra fast con maggiori perdite
+        case .teslaSupercharger: return 0.85
         }
+    }
+
+    /// Tipi pubblici selezionabili; Supercharger solo se il target è Tesla.
+    static func publicCases(targetBrandIsTesla: Bool) -> [ChargingType] {
+        var cases: [ChargingType] = [.publicSlow, .publicFast, .publicUltraFast]
+        if targetBrandIsTesla {
+            cases.append(.teslaSupercharger)
+        }
+        return cases
     }
 }
 

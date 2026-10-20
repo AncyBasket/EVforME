@@ -35,10 +35,26 @@ enum AreaType: String, CaseIterable, Identifiable {
         }
     }
 
+    /// HEV in città: spesso ≤ WLTP (recupero frenata), mai il +8% ICE.
+    var hevConsumptionMultiplier: Double {
+        switch self {
+        case .urban: return 0.95
+        case .mixed: return 1.00
+        }
+    }
+
     var evConsumptionMultiplier: Double {
         switch self {
         case .urban: return 0.94
         case .mixed: return 1.00
+        }
+    }
+
+    func fuelConsumptionMultiplier(for powertrain: Powertrain) -> Double {
+        switch powertrain {
+        case .hev: return hevConsumptionMultiplier
+        case .ice, .phev: return iceConsumptionMultiplier
+        case .ev: return evConsumptionMultiplier
         }
     }
 
@@ -181,6 +197,18 @@ struct UserInput {
     var chargingConfiguration: ChargingConfiguration
     /// Paese per tariffe manutenzione / contesto costi (ISO → AppMarket).
     var market: AppMarket
+    /// Override RC annuale (€). `nil` / ≤0 = media IVASS 422 € per entrambe le auto.
+    var annualInsuranceOverrideEUR: Double?
+    /// Include kasko/furto-incendio. OFF di default; richiede `annualKaskoEUR`.
+    var includeKaskoTheft: Bool
+    /// Premio kasko/furto annuo (€). Obbligatorio se `includeKaskoTheft` (nessuna stima).
+    var annualKaskoEUR: Double?
+    /// ISEE (€) per fascia incentivo MASE; senza valore non si applica bonus.
+    var iseeEUR: Double?
+    /// kW P.2 a libretto (potenza continua 30 min) — solo auto attuale se EV.
+    var sourceBookletPowerKwP2: Double?
+    /// kW P.2 a libretto — solo EV target.
+    var targetBookletPowerKwP2: Double?
 
     init(
         dailyKm: Int,
@@ -188,7 +216,7 @@ struct UserInput {
         areaType: AreaType,
         fuelPrice: Double,
         ownershipYears: Int,
-        electricityPricePerKWh: Double = 0.25,
+        electricityPricePerKWh: Double = 0.31,
         sourceVehicleId: String = "",
         targetVehicleId: String = "",
         scenario: Scenario = .realistic,
@@ -200,7 +228,13 @@ struct UserInput {
         sourceConsumptionOverrideLPer100Km: Double? = nil,
         targetEnergyOverrideKWhPer100Km: Double? = nil,
         chargingConfiguration: ChargingConfiguration = ChargingConfiguration(),
-        market: AppMarket = AppMarket.fromDeviceLocale()
+        market: AppMarket = AppMarket.fromDeviceLocale(),
+        annualInsuranceOverrideEUR: Double? = nil,
+        includeKaskoTheft: Bool = false,
+        annualKaskoEUR: Double? = nil,
+        iseeEUR: Double? = nil,
+        sourceBookletPowerKwP2: Double? = nil,
+        targetBookletPowerKwP2: Double? = nil
     ) {
         self.dailyKm = dailyKm
         self.hasHomeCharging = hasHomeCharging
@@ -220,6 +254,12 @@ struct UserInput {
         self.targetEnergyOverrideKWhPer100Km = targetEnergyOverrideKWhPer100Km
         self.chargingConfiguration = chargingConfiguration
         self.market = market
+        self.annualInsuranceOverrideEUR = annualInsuranceOverrideEUR
+        self.includeKaskoTheft = includeKaskoTheft
+        self.annualKaskoEUR = annualKaskoEUR
+        self.iseeEUR = iseeEUR
+        self.sourceBookletPowerKwP2 = sourceBookletPowerKwP2
+        self.targetBookletPowerKwP2 = targetBookletPowerKwP2
     }
 
     /// Bonus acquisto stimato (solo IT). Fuori Italia → sempre 0.
@@ -230,7 +270,8 @@ struct UserInput {
         return ItalianIncentives.estimatedPurchaseBonusEUR(
             evListPrice: targetPurchasePrice,
             replacingVehiclePrice: sourcePurchasePrice,
-            hasHomeCharging: hasHomeCharging
+            hasHomeCharging: hasHomeCharging,
+            iseeEUR: iseeEUR
         )
     }
 

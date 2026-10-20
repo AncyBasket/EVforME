@@ -19,10 +19,9 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertEqual(ateca?.fuelKind, .diesel)
         XCTAssertEqual(ateca?.resolvedFuelKind, .diesel)
         XCTAssertEqual(ateca?.catalogFuelLabel, L10n.powertrainDieselLabel)
-        // Uso reale ~7–8 L/100 (non WLTP ottimistico ~6.3).
+        // Audit 2026-10-19: 1.6 TDI ≈ 5,0 L/100 WLTP (non 7+ gonfiato).
         let l100 = (ateca?.fuelConsumptionLPerKm ?? 0) * 100
-        XCTAssertGreaterThanOrEqual(l100, 7.0)
-        XCTAssertLessThanOrEqual(l100, 9.0)
+        XCTAssertEqual(l100, 5.0, accuracy: 0.2)
     }
 
     func testPanda_IsPetrol() {
@@ -327,5 +326,215 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertEqual(n350, 0, "Passenger EVs must not keep flat placeholder wltpRangeKm=350 (got \(n350)/\(passenger.count))")
         let fraction = Double(n350) / Double(passenger.count)
         XCTAssertLessThan(fraction, 0.05)
+    }
+
+    /// Audit 2026-10-19 §1: WLTP EV 11–25. Eccezioni documentate: solo furgoni / veicoli pesanti.
+    func testCatalog_EVWltpConsumptionInPlausibleBand() {
+        /// Furgoni e veicoli pesanti (WLTP reale spesso >25). Ogni id va giustificato.
+        let documentedHeavyExceptions: Set<String> = [
+            // Furgoni / LCV
+            "mercedes-benz-eqv-2020", "mercedes-benz-eqv-2021", "mercedes-benz-eqv-2022",
+            "mercedes-benz-eqv-2023", "mercedes-benz-eqv-2024",
+            "toyota-proace-electric-2023",
+            // SUV / off-road / performance pesanti (non passenger compact)
+            "audi-q8-e-tron-2019", "audi-q8-e-tron-2020",
+            "mercedes-benz-g-580-eq-2024",
+            "porsche-taycan-2019", "porsche-taycan-2020",
+        ]
+        let evs = VehicleCatalogService.shared.vehicles.filter { $0.powertrain == .ev }
+        XCTAssertFalse(evs.isEmpty)
+        for ev in evs {
+            guard let kwh100 = ev.wltpConsumptionKWh100km
+                    ?? ev.energyConsumptionKWhPerKm.map({ $0 * 100 }) else {
+                continue
+            }
+            if documentedHeavyExceptions.contains(ev.id) {
+                XCTAssertGreaterThanOrEqual(kwh100, 11.0, "\(ev.id)")
+                XCTAssertLessThanOrEqual(kwh100, 32.0, "\(ev.id) heavy cap")
+                continue
+            }
+            XCTAssertGreaterThanOrEqual(kwh100, 11.0, "\(ev.id) WLTP \(kwh100) < 11")
+            XCTAssertLessThanOrEqual(kwh100, 25.0, "\(ev.id) WLTP \(kwh100) > 25")
+        }
+    }
+
+    func testCatalog_Model3_2026_WltpNearOfficial() {
+        let m3 = VehicleCatalogService.shared.vehicle(by: "tesla-model-3-2026")
+        XCTAssertNotNil(m3)
+        let kwh100 = m3?.wltpConsumptionKWh100km
+            ?? m3.flatMap { $0.energyConsumptionKWhPerKm.map { $0 * 100 } }
+        XCTAssertNotNil(kwh100)
+        XCTAssertGreaterThanOrEqual(kwh100!, 12.5)
+        XCTAssertLessThanOrEqual(kwh100!, 14.5)
+    }
+
+    func testCatalog_NoSynthetic100kWhBatteryShownAsKnown() {
+        let hundred = VehicleCatalogService.shared.vehicles.filter {
+            $0.powertrain == .ev && ($0.batteryKWh.map { abs($0 - 100) < 0.05 } ?? false)
+        }
+        XCTAssertTrue(hundred.isEmpty, "Synthetic 100 kWh batteries must be null: \(hundred.map(\.id))")
+    }
+
+    /// Audit 2026-10-19 §2: Prius / Niro / CT 200h / Hybrid non devono restare `ice`.
+    func testCatalog_KnownHybridsNotClassifiedAsICE() {
+        let ice = VehicleCatalogService.shared.vehicles.filter { $0.powertrain == .ice }
+        let offenders = ice.filter { v in
+            let blob = "\(v.brand) \(v.model) \(v.trim ?? "")".lowercased()
+            return blob.contains("prius")
+                || blob.contains("niro")
+                || blob.contains("ct 200h")
+                || blob.contains("hybrid")
+        }
+        XCTAssertTrue(offenders.isEmpty, "ICE hybrids: \(offenders.map(\.id))")
+    }
+
+    func testCatalog_Ateca2016_DieselNear5LPer100() {
+        let ateca = VehicleCatalogService.shared.vehicle(by: "seat-ateca-2016")
+        XCTAssertEqual(ateca?.resolvedFuelKind, .diesel)
+        let l100 = (ateca?.fuelConsumptionLPerKm ?? 0) * 100
+        XCTAssertEqual(l100, 5.0, accuracy: 0.15)
+    }
+
+    /// Debito noto: media diesel EEA > benzina per questi modelli (match aggregato).
+    /// Non riscrivere i consumi per far passare il test — solo allowlist o correzione con fonte.
+    private static let dieselAbovePetrolKnownIssues: Set<String> = [
+        "audi|a4", "audi|a6", "audi|q5", "audi|q7",
+        "bmw|3 series", "bmw|5 series", "bmw|x3", "bmw|x5",
+        "citroen|c5 aircross",
+        "cupra|ateca", "cupra|formentor",
+        "ford|kuga", "ford|mondeo",
+        "hyundai|santa fe", "hyundai|tucson",
+        "kia|sorento", "kia|sportage",
+        "land rover|defender", "land rover|discovery", "land rover|discovery sport",
+        "land rover|range rover evoque", "land rover|range rover sport",
+        "mercedes-benz|c-class", "mercedes-benz|e-class", "mercedes-benz|glc", "mercedes-benz|gle",
+        "mitsubishi|asx", "mitsubishi|outlander",
+        "nissan|qashqai", "nissan|x-trail",
+        "peugeot|3008", "peugeot|5008", "peugeot|508",
+        "renault|koleos",
+        "seat|ateca", "seat|tarraco",
+        "skoda|karoq", "skoda|kodiaq", "skoda|octavia", "skoda|superb",
+        "toyota|rav4",
+        "volkswagen|passat", "volkswagen|tiguan", "volkswagen|touareg",
+    ]
+
+    /// Se la media diesel di un modello supera la benzina → fallisci, salvo allowlist documentata.
+    func testCatalog_DieselAverageNotAbovePetrolForSameModel() {
+        let iceLike = VehicleCatalogService.shared.vehicles.filter {
+            $0.powertrain == .ice || $0.powertrain == .hev
+        }
+        let grouped = Dictionary(grouping: iceLike) {
+            "\($0.brand.lowercased())|\($0.model.lowercased())"
+        }
+        var unexpected: [String] = []
+        for (key, rows) in grouped {
+            let diesel = rows.compactMap { v -> Double? in
+                guard v.resolvedFuelKind == .diesel, let l = v.fuelConsumptionLPerKm else { return nil }
+                return l * 100
+            }
+            let petrol = rows.compactMap { v -> Double? in
+                guard v.resolvedFuelKind == .petrol, let l = v.fuelConsumptionLPerKm else { return nil }
+                return l * 100
+            }
+            guard diesel.count >= 2, petrol.count >= 2 else { continue }
+            let dAvg = diesel.reduce(0, +) / Double(diesel.count)
+            let pAvg = petrol.reduce(0, +) / Double(petrol.count)
+            guard dAvg > pAvg + 0.05 else { continue }
+            if Self.dieselAbovePetrolKnownIssues.contains(key) { continue }
+            unexpected.append(
+                "\(key): diesel \(String(format: "%.2f", dAvg)) > petrol \(String(format: "%.2f", pAvg))"
+            )
+        }
+        XCTAssertTrue(
+            unexpected.isEmpty,
+            "Diesel avg above petrol outside known-issues allowlist:\n" + unexpected.joined(separator: "\n")
+        )
+        let ateca = VehicleCatalogService.shared.vehicle(by: "seat-ateca-2016")
+        let atecaL100 = (ateca?.fuelConsumptionLPerKm ?? 0) * 100
+        XCTAssertEqual(atecaL100, 5.0, accuracy: 0.2)
+    }
+
+    func testCatalog_AurisHybridOnlyFrom2010_AndYarisHybridRows() {
+        let auris = VehicleCatalogService.shared.vehicles.filter { $0.model.localizedCaseInsensitiveContains("auris") }
+        for v in auris where v.year < 2010 {
+            XCTAssertEqual(v.powertrain, .ice, v.id)
+        }
+        for v in auris where v.powertrain == .hev {
+            XCTAssertGreaterThanOrEqual(v.year, 2010, v.id)
+            XCTAssertTrue((v.trim ?? "").localizedCaseInsensitiveContains("hybrid") || v.id.contains("hybrid"), v.id)
+        }
+        for year in 2012...2019 {
+            let hybrid = VehicleCatalogService.shared.vehicle(by: "toyota-yaris-hybrid-\(year)")
+            XCTAssertNotNil(hybrid, "missing yaris hybrid \(year)")
+            XCTAssertEqual(hybrid?.powertrain, .hev)
+        }
+    }
+
+    func testCatalog_StimaFlagOn2025YoYCopies() {
+        let stima = VehicleCatalogService.shared.vehicles.filter {
+            ($0.sourceName ?? "").localizedCaseInsensitiveContains("stima")
+        }
+        // 36 restanti dopo correzione Model Y 2025 (EV-Database 13,1, non più copia 2024).
+        XCTAssertEqual(stima.count, 36, "expected 36 stima(anno precedente) flags, got \(stima.count)")
+    }
+
+    func testCatalog_ModelY2025_EVDatabaseJuniperRWD() {
+        let y = VehicleCatalogService.shared.vehicle(by: "tesla-model-y-2025")
+        XCTAssertNotNil(y)
+        XCTAssertEqual(y?.wltpConsumptionKWh100km ?? 0, 13.1, accuracy: 0.05)
+        XCTAssertFalse((y?.sourceName ?? "").localizedCaseInsensitiveContains("stima"))
+        XCTAssertTrue((y?.sourceName ?? "").localizedCaseInsensitiveContains("EV-Database"))
+    }
+
+    func testCatalog_Model32020_BolloRequiresBookletP2() {
+        let m3 = VehicleCatalogService.shared.vehicle(by: "tesla-model-3-2020")
+        XCTAssertNotNil(m3)
+        // powerKw EEA (picco) può restare nel seed come info, ma non entra nel bollo.
+        let withoutP2 = OwnershipCostEstimates.bolloPerYearDetail(
+            catalogTaxesPerYear: m3?.taxesPerYear ?? 0,
+            powertrain: .ev,
+            vehicleYear: 2020,
+            referenceYear: 2026,
+            bookletPowerKwP2: nil
+        )
+        XCTAssertFalse(withoutP2.isKnown)
+        XCTAssertEqual(withoutP2.amount, 0, accuracy: 0.01)
+
+        let withP2 = OwnershipCostEstimates.bolloPerYearDetail(
+            catalogTaxesPerYear: m3?.taxesPerYear ?? 0,
+            powertrain: .ev,
+            vehicleYear: 2020,
+            referenceYear: 2026,
+            bookletPowerKwP2: 100
+        )
+        XCTAssertTrue(withP2.isKnown)
+        XCTAssertEqual(withP2.amount, 64.50, accuracy: 0.01)
+    }
+
+    /// EV ≥ 5 anni senza P.2 → totale parziale sul verdetto (source o target).
+    func testSimulation_EVOverFiveYearsWithoutP2_MarksPartialTotal() {
+        VehicleCatalogService.shared.reloadFromBundledSeedIgnoringUserCacheForTesting()
+        let source = try! XCTUnwrap(VehicleCatalogService.shared.vehicle(by: "seat-ateca-2016"))
+        let target = try! XCTUnwrap(VehicleCatalogService.shared.vehicle(by: "tesla-model-3-2020"))
+        XCTAssertGreaterThanOrEqual(2026 - target.year, 5)
+        let input = UserInput(
+            dailyKm: 15_000,
+            hasHomeCharging: true,
+            areaType: .mixed,
+            fuelPrice: 2.03,
+            ownershipYears: 5,
+            electricityPricePerKWh: 0.31,
+            sourceVehicleId: source.id,
+            targetVehicleId: target.id,
+            scenario: .realistic,
+            sourcePurchasePrice: Defaults.suggestedPurchasePrice(for: source),
+            targetPurchasePrice: Defaults.suggestedPurchasePrice(for: target),
+            comparisonIntent: .alreadyOwned,
+            targetBookletPowerKwP2: nil
+        )
+        let result = try! XCTUnwrap(EVSimulator.simulate(input: input))
+        XCTAssertTrue(result.targetYearlyBreakdown.taxesKnown == false)
+        XCTAssertTrue(result.hasPartialBolloTotal)
+        XCTAssertTrue(result.sourceYearlyBreakdown.taxesKnown)
     }
 }

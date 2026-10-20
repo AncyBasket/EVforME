@@ -146,13 +146,22 @@ struct CostsComparisonView: View {
                     .foregroundColor(.secondaryText)
                     .padding(.leading, 8)
                     
-                    Text(L10n.calculationOpexBreakdown(
-                        sourceBreakdown.energy,
-                        sourceBreakdown.maintenance,
-                        sourceBreakdown.taxes,
-                        sourceBreakdown.insurance,
-                        sourceBreakdown.total
-                    ))
+                    Text(
+                        sourceBreakdown.taxesKnown
+                            ? L10n.calculationOpexBreakdown(
+                                sourceBreakdown.energy,
+                                sourceBreakdown.maintenance,
+                                sourceBreakdown.taxes,
+                                sourceBreakdown.insurance,
+                                sourceBreakdown.total
+                            )
+                            : L10n.calculationOpexBreakdownTaxesUnknown(
+                                sourceBreakdown.energy,
+                                sourceBreakdown.maintenance,
+                                sourceBreakdown.insurance,
+                                sourceBreakdown.total
+                            )
+                    )
                     .font(Typography.readingCaption)
                     .foregroundColor(.secondaryText)
                     .padding(.leading, 8)
@@ -175,10 +184,13 @@ struct CostsComparisonView: View {
                         .font(Typography.readingCardTitle)
                         .foregroundColor(.primaryText)
                     
-                    Text(L10n.calculationEvFormula(
+                    Text(L10n.calculationEvFormulaFull(
                         userInput.dailyKm,
                         targetEnergyKWhPerKm,
-                        userInput.electricityPricePerKWh,
+                        userInput.chargingConfiguration.weightedCostPerKWh(),
+                        userInput.areaType.evConsumptionMultiplier,
+                        userInput.tripProfile.evExtraMultiplier,
+                        userInput.scenario.evCostMultiplier,
                         targetBreakdown.energy,
                         targetBreakdown.total
                     ))
@@ -186,13 +198,22 @@ struct CostsComparisonView: View {
                     .foregroundColor(.secondaryText)
                     .padding(.leading, 8)
                     
-                    Text(L10n.calculationOpexBreakdown(
-                        targetBreakdown.energy,
-                        targetBreakdown.maintenance,
-                        targetBreakdown.taxes,
-                        targetBreakdown.insurance,
-                        targetBreakdown.total
-                    ))
+                    Text(
+                        targetBreakdown.taxesKnown
+                            ? L10n.calculationOpexBreakdown(
+                                targetBreakdown.energy,
+                                targetBreakdown.maintenance,
+                                targetBreakdown.taxes,
+                                targetBreakdown.insurance,
+                                targetBreakdown.total
+                            )
+                            : L10n.calculationOpexBreakdownTaxesUnknown(
+                                targetBreakdown.energy,
+                                targetBreakdown.maintenance,
+                                targetBreakdown.insurance,
+                                targetBreakdown.total
+                            )
+                    )
                     .font(Typography.readingCaption)
                     .foregroundColor(.secondaryText)
                     .padding(.leading, 8)
@@ -204,6 +225,13 @@ struct CostsComparisonView: View {
                             .foregroundColor(.secondaryText)
                             .padding(.leading, 8)
                             .padding(.top, 4)
+                        if !sourceBreakdown.taxesKnown || !targetBreakdown.taxesKnown {
+                            Text(L10n.partialTotalBolloUnknown)
+                                .font(Typography.readingCaption)
+                                .foregroundColor(.secondaryText)
+                                .padding(.leading, 8)
+                                .padding(.top, 2)
+                        }
                     }
                 }
                 .padding(12)
@@ -221,7 +249,11 @@ struct CostsComparisonView: View {
                                 .font(.title3)
                                 .foregroundColor(.accent)
                         }
-                        Text(L10n.calculationSavings(lastYear.year, totalSavings))
+                        Text(
+                            totalSavings > 0
+                                ? L10n.calculationSavings(lastYear.year, totalSavings)
+                                : L10n.calculationCurrentCheaper
+                        )
                             .font(Typography.readingCardTitle)
                             .foregroundColor(.accent)
                     }
@@ -268,7 +300,7 @@ struct CostsComparisonView: View {
             dailyKm: 12000,
             hasHomeCharging: true,
             areaType: .urban,
-            fuelPrice: 1.7,
+            fuelPrice: OfficialEnergyCosts.Fallback.petrolPerLiter,
             ownershipYears: 5,
             scenario: .realistic
         ),

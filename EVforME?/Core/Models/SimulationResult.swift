@@ -66,4 +66,9 @@ struct SimulationResult {
 
     /// Spezzatino opex annuo veicolo elettrificato (allineato al motore).
     let targetYearlyBreakdown: OperatingCostBreakdown
+
+    /// Almeno un bollo EV post-5y non stimabile (manca P.2) → totale parziale.
+    var hasPartialBolloTotal: Bool {
+        !sourceYearlyBreakdown.taxesKnown || !targetYearlyBreakdown.taxesKnown
+    }
 }

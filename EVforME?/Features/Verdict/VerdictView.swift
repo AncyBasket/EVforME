@@ -89,7 +89,10 @@ struct VerdictView: View {
                     }
                     costsDetailSection(result: currentResult)
                     CostSectionView(result: currentResult, scenario: selectedScenario)
-                    TimeEvolutionView(scenario: selectedScenario)
+                    TimeEvolutionView(
+                        scenario: selectedScenario,
+                        yearlyComparison: currentResult.yearlyComparison
+                    )
                 }
             }
 
@@ -427,6 +430,14 @@ struct VerdictView: View {
                 .multilineTextAlignment(.leading)
                 .fixedSize(horizontal: false, vertical: true)
 
+            if result.hasPartialBolloTotal {
+                Text(L10n.partialTotalBolloUnknown)
+                    .font(Typography.readingCaption.weight(.semibold))
+                    .foregroundColor(.warning)
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
             if let source, let target {
                 Text(L10n.verdictCompareLine(source.displayName, target.displayName))
                     .font(Typography.readingCaption)
@@ -483,6 +494,7 @@ struct VerdictView: View {
             [
                 result.verdict.title,
                 result.verdict.description,
+                result.hasPartialBolloTotal ? L10n.partialTotalBolloUnknown : "",
                 L10n.verdictProofSavingsValue(
                     result.yearlySavingsRange.lowerBound,
                     result.yearlySavingsRange.upperBound
@@ -561,18 +573,20 @@ struct VerdictView: View {
                 targetBreakdown: result.targetYearlyBreakdown
             )
 
-            HStack(alignment: .center, spacing: 12) {
-                Text(L10n.deepDiveCostsTakeaway)
-                    .font(Typography.title2)
-                    .foregroundColor(.ink)
-            }
-            .padding(.vertical, 8)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .overlay(alignment: .leading) {
-                Rectangle()
-                    .fill(Color.accent)
-                    .frame(width: 3)
-                    .padding(.leading, -10)
+            if result.sourceYearlyBreakdown.total > result.targetYearlyBreakdown.total {
+                HStack(alignment: .center, spacing: 12) {
+                    Text(L10n.deepDiveCostsTakeaway)
+                        .font(Typography.title2)
+                        .foregroundColor(.ink)
+                }
+                .padding(.vertical, 8)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .overlay(alignment: .leading) {
+                    Rectangle()
+                        .fill(Color.accent)
+                        .frame(width: 3)
+                        .padding(.leading, -10)
+                }
             }
         }
     }
@@ -634,7 +648,18 @@ struct VerdictView: View {
                 .font(Typography.readingCaption)
                 .foregroundColor(.secondaryText)
                 .fixedSize(horizontal: false, vertical: true)
-            assumptionRow(text: L10n.italyKitBolloRow(Int(src.taxes), Int(tgt.taxes)))
+            if result.hasPartialBolloTotal {
+                if !src.taxesKnown && !tgt.taxesKnown {
+                    assumptionRow(text: L10n.italyKitBolloBothUnknown)
+                } else if !tgt.taxesKnown {
+                    assumptionRow(text: L10n.italyKitBolloRowEVUnknown(Int(src.taxes)))
+                } else {
+                    assumptionRow(text: L10n.italyKitBolloRowSourceUnknown(Int(tgt.taxes)))
+                }
+                assumptionRow(text: L10n.partialTotalBolloUnknown)
+            } else {
+                assumptionRow(text: L10n.italyKitBolloRow(Int(src.taxes), Int(tgt.taxes)))
+            }
             assumptionRow(text: L10n.italyKitInsuranceRow(Int(src.insurance), Int(tgt.insurance)))
             assumptionRow(text: L10n.italyKitMaintenanceRow(Int(src.maintenance), Int(tgt.maintenance)))
         }
@@ -662,12 +687,18 @@ struct VerdictView: View {
         let iceIns = OwnershipCostEstimates.insurancePerYear(
             purchasePrice: sourceBasis,
             yearlyKm: km,
-            electrified: sourceElectrified
+            electrified: sourceElectrified,
+            annualInsuranceOverrideEUR: userInput.annualInsuranceOverrideEUR,
+            includeKaskoTheft: userInput.includeKaskoTheft,
+            annualKaskoEUR: userInput.annualKaskoEUR
         )
         let evIns = OwnershipCostEstimates.insurancePerYear(
             purchasePrice: targetBasis,
             yearlyKm: km,
-            electrified: true
+            electrified: true,
+            annualInsuranceOverrideEUR: userInput.annualInsuranceOverrideEUR,
+            includeKaskoTheft: userInput.includeKaskoTheft,
+            annualKaskoEUR: userInput.annualKaskoEUR
         )
         let iceRes = OwnershipCostEstimates.residualValue(
             purchasePrice: sourceBasis,
@@ -732,6 +763,11 @@ struct VerdictView: View {
                                     Text("\(L10n.yearlyKmValue(item.yearlyKm)) · €\(item.savingsMin)–€\(item.savingsMax)")
                                         .font(Typography.readingCaption)
                                         .foregroundColor(.secondaryText)
+                                    if item.showsPartialBolloTotal {
+                                        Text(L10n.partialTotalBolloUnknown)
+                                            .font(Typography.readingCaption)
+                                            .foregroundColor(.warning)
+                                    }
                                 }
                                 Spacer()
                                 if let months = item.breakEvenMonths {

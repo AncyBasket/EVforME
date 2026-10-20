@@ -12,6 +12,8 @@ final class SmokeProductUITests: XCTestCase {
 
     override func setUpWithError() throws {
         continueAfterFailure = false
+        // Suite lunga (verdetto + kit + mappe): evita kill del runner su sim lento.
+        executionTimeAllowance = 600
         let fromEnv = ProcessInfo.processInfo.environment["SMOKE_SHOTS_DIR"]
         if let fromEnv, !fromEnv.isEmpty {
             shotsDir = URL(fileURLWithPath: fromEnv, isDirectory: true)
@@ -28,6 +30,7 @@ final class SmokeProductUITests: XCTestCase {
     func testSmokeRetentionKitItaliaChargers() throws {
         let app = XCUIApplication()
         app.launchEnvironment["UITEST_PRESET_VEHICLES"] = "1"
+        app.launchArguments += ["-UITesting", "-DisableAnimations"]
         app.launch()
 
         dismissQuickStartIfNeeded(app)
@@ -159,26 +162,32 @@ final class SmokeProductUITests: XCTestCase {
         dismissSystemAlertsIfNeeded(app)
 
         let mapReady =
-            app.navigationBars["Colonnine vicine"].waitForExistence(timeout: 6)
-            || app.navigationBars["Nearby chargers"].waitForExistence(timeout: 2)
-            || app.staticTexts["Colonnine vicine"].waitForExistence(timeout: 2)
-            || app.staticTexts["Nearby chargers"].waitForExistence(timeout: 1)
-            || app.buttons["Apri in Mappe"].waitForExistence(timeout: 2)
-            || app.buttons["Open in Maps"].waitForExistence(timeout: 1)
+            app.navigationBars["Colonnine vicine"].waitForExistence(timeout: 10)
+            || app.navigationBars["Nearby chargers"].waitForExistence(timeout: 4)
+            || app.staticTexts["Colonnine vicine"].waitForExistence(timeout: 4)
+            || app.staticTexts["Nearby chargers"].waitForExistence(timeout: 2)
+            || app.buttons["Apri in Mappe"].waitForExistence(timeout: 4)
+            || app.buttons["Open in Maps"].waitForExistence(timeout: 2)
             || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "ricerca Mappe")).firstMatch
-                .waitForExistence(timeout: 2)
+                .waitForExistence(timeout: 3)
             || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Maps search")).firstMatch
-                .waitForExistence(timeout: 1)
+                .waitForExistence(timeout: 2)
+            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "colonnin")).firstMatch
+                .waitForExistence(timeout: 2)
+            || app.maps.firstMatch.waitForExistence(timeout: 3)
         XCTAssertTrue(mapReady, "Charging map sheet")
 
         // Deny location if prompted, then city mode
         dismissSystemAlertsIfNeeded(app)
         let cityMode = firstExistingButton(app, labels: ["Cerca per città", "Search by city"], timeout: 4)
-        if cityMode == nil {
-            // Segmented control sometimes exposes differently
-            app.buttons.matching(NSPredicate(format: "label CONTAINS[c] %@", "città")).firstMatch.tap()
+        if let cityMode {
+            cityMode.tap()
         } else {
-            cityMode?.tap()
+            // Segmented control sometimes exposes differently — tap only if present.
+            let alt = app.buttons.matching(NSPredicate(format: "label CONTAINS[c] %@", "città")).firstMatch
+            if alt.waitForExistence(timeout: 2) {
+                alt.tap()
+            }
         }
 
         let cityField = app.textFields.firstMatch

@@ -94,7 +94,13 @@ struct MainShellView: View {
         .onAppear {
             guard ProcessInfo.processInfo.environment["UITEST_PRESET_VEHICLES"] == "1" else { return }
             userInput.sourceVehicleId = Defaults.starterSourceVehicleId
-            userInput.targetVehicleId = Defaults.starterTargetVehicleId
+            if ProcessInfo.processInfo.environment["UITEST_PARTIAL_BOLLO"] == "1" {
+                // EV ≥ 5 anni senza P.2 → header “Totale parziale (bollo non stimato)”.
+                userInput.targetVehicleId = "tesla-model-3-2020"
+                userInput.targetBookletPowerKwP2 = nil
+            } else {
+                userInput.targetVehicleId = Defaults.starterTargetVehicleId
+            }
         }
         .task { await catalogSetup() }
         .fullScreenCover(isPresented: $showOnboarding, onDismiss: {

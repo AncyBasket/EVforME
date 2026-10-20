@@ -22,7 +22,7 @@ final class VehicleCatalogService {
     }
 
     private let defaults = UserDefaults.standard
-    private let seedVersion = 34
+    private let seedVersion = 37
     private var remoteDisabledForTesting = false
     private let remoteSession: URLSession = {
         let config = URLSessionConfiguration.ephemeral
@@ -450,7 +450,8 @@ final class VehicleCatalogService {
                     sourceName: item.sourceName,
                     sourceUpdatedAt: item.sourceUpdatedAt,
                     confidenceScore: item.confidenceScore,
-                    fuelKind: item.fuelKind
+                    fuelKind: item.fuelKind,
+                    powerKw: item.powerKw
                 )
                 expanded.append(generated)
             }

@@ -12,7 +12,7 @@ struct ContentView: View {
         dailyKm: 12000,
         hasHomeCharging: true,
         areaType: .urban,
-        fuelPrice: 1.7,
+        fuelPrice: OfficialEnergyCosts.Fallback.petrolPerLiter,
         ownershipYears: 5,
         sourceVehicleId: "",
         targetVehicleId: "",
@@ -45,7 +45,10 @@ struct ContentView: View {
             if userInput.sourceVehicleId.isEmpty {
                 userInput.sourceVehicleId = "alfa-romeo-147-2005"
             }
-            if userInput.targetVehicleId.isEmpty {
+            if ProcessInfo.processInfo.environment["UITEST_PARTIAL_BOLLO"] == "1" {
+                userInput.targetVehicleId = "tesla-model-3-2020"
+                userInput.targetBookletPowerKwP2 = nil
+            } else if userInput.targetVehicleId.isEmpty {
                 userInput.targetVehicleId = "audi-q4-e-tron-2021"
             }
         }

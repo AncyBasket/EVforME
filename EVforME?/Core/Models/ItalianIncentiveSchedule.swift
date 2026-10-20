@@ -8,8 +8,17 @@
 import Foundation
 
 nonisolated struct ItalianIncentiveBracket: Codable, Equatable, Sendable {
-    let maxPriceEUR: Double
+    /// Soglia ISEE massima (€) per questo importo. Preferita rispetto a `maxPriceEUR`.
+    let maxISEEEUR: Double?
+    /// Legacy: soglia listino (JSON vecchi).
+    let maxPriceEUR: Double?
     let bonusEUR: Double
+
+    init(maxISEEEUR: Double? = nil, maxPriceEUR: Double? = nil, bonusEUR: Double) {
+        self.maxISEEEUR = maxISEEEUR
+        self.maxPriceEUR = maxPriceEUR
+        self.bonusEUR = bonusEUR
+    }
 }
 
 enum IncentiveWindowStatus: Equatable, Sendable {
@@ -23,48 +32,83 @@ nonisolated struct ItalianIncentiveSchedule: Codable, Equatable, Sendable {
     let country: String
     let currency: String
     let updatedAt: String?
-    /// ISO date (yyyy-MM-dd) o datetime — opzionale, retrocompatibile.
+    /// ISO date — opzionale; omesso se senza fonte (audit).
     let validFrom: String?
     let validUntil: String?
+    /// Tetto listino: di default IVA esclusa (vedi `maxListPriceIsExVAT`).
     let maxListPriceEUR: Double
+    let maxListPriceIsExVAT: Bool?
     let maxBonusEUR: Double
     let scrappageExtraEUR: Double
     let scrappageMaxReplacingPriceEUR: Double
     let brackets: [ItalianIncentiveBracket]
     let sourceNote: String?
 
+    static let italianVATDivisor: Double = 1.22
+
     static let bundledFallback = ItalianIncentiveSchedule(
         country: "IT",
         currency: "EUR",
         updatedAt: nil,
         validFrom: nil,
-        validUntil: nil,
-        maxListPriceEUR: 45_000,
-        maxBonusEUR: 7_000,
-        scrappageExtraEUR: 2_000,
-        scrappageMaxReplacingPriceEUR: 18_000,
+        validUntil: "2026-06-30",
+        maxListPriceEUR: 35_000,
+        maxListPriceIsExVAT: true,
+        maxBonusEUR: 11_000,
+        scrappageExtraEUR: 0,
+        scrappageMaxReplacingPriceEUR: 0,
         brackets: [
-            ItalianIncentiveBracket(maxPriceEUR: 30_000, bonusEUR: 5_000),
-            ItalianIncentiveBracket(maxPriceEUR: 35_000, bonusEUR: 4_000),
-            ItalianIncentiveBracket(maxPriceEUR: 42_000, bonusEUR: 2_500),
-            ItalianIncentiveBracket(maxPriceEUR: 45_000, bonusEUR: 1_500),
+            ItalianIncentiveBracket(maxISEEEUR: 30_000, bonusEUR: 11_000),
+            ItalianIncentiveBracket(maxISEEEUR: 40_000, bonusEUR: 9_000),
         ],
-        sourceNote: nil
+        sourceNote: "Bonus MASE 2025 chiuso"
     )
 
+    /// - Parameters:
+    ///   - evListPrice: listino IVA inclusa (€).
+    ///   - iseeEUR: ISEE dichiarato; senza ISEE valido → 0 (non inventiamo la fascia).
     func estimatedPurchaseBonusEUR(
         evListPrice: Double,
         replacingVehiclePrice: Double,
-        hasHomeCharging: Bool
+        hasHomeCharging: Bool,
+        iseeEUR: Double? = nil,
+        asOf date: Date = Date()
     ) -> Double {
-        guard evListPrice > 0, evListPrice <= maxListPriceEUR else { return 0 }
+        // Finestra chiusa / scaduta → mai applicare l’incentivo ai calcoli.
+        if case .expired = windowStatus(asOf: date) { return 0 }
+        if case .notYetStarted = windowStatus(asOf: date) { return 0 }
+        if case .unknown = windowStatus(asOf: date) { return 0 }
 
-        let sorted = brackets.sorted { $0.maxPriceEUR < $1.maxPriceEUR }
-        var bonus: Double = sorted.last?.bonusEUR ?? 0
-        for bracket in sorted {
-            if evListPrice <= bracket.maxPriceEUR {
-                bonus = bracket.bonusEUR
-                break
+        guard evListPrice > 0 else { return 0 }
+        let exVAT = (maxListPriceIsExVAT ?? true) ? (evListPrice / Self.italianVATDivisor) : evListPrice
+        guard exVAT <= maxListPriceEUR else { return 0 }
+
+        let iseeBrackets = brackets.compactMap { b -> (Double, Double)? in
+            guard let cap = b.maxISEEEUR else { return nil }
+            return (cap, b.bonusEUR)
+        }.sorted { $0.0 < $1.0 }
+
+        var bonus: Double = 0
+        if !iseeBrackets.isEmpty {
+            guard let isee = iseeEUR, isee > 0, isee <= 40_000 else { return 0 }
+            for (cap, amount) in iseeBrackets {
+                if isee <= cap {
+                    bonus = amount
+                    break
+                }
+            }
+        } else {
+            // Legacy price brackets (JSON vecchi / test).
+            let sorted = brackets.compactMap { b -> (Double, Double)? in
+                guard let cap = b.maxPriceEUR else { return nil }
+                return (cap, b.bonusEUR)
+            }.sorted { $0.0 < $1.0 }
+            bonus = sorted.last?.1 ?? 0
+            for (cap, amount) in sorted {
+                if evListPrice <= cap {
+                    bonus = amount
+                    break
+                }
             }
         }
 

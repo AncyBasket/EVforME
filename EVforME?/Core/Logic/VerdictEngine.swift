@@ -9,7 +9,7 @@ import Foundation
 
 struct VerdictEngine {
 
-    /// Verdetto solo su costi di gestione (energia + bollo + manutenzione + RC).
+    /// Verdetto solo su costi di gestione (energia + bollo + manutenzione + assicurazione (stima)).
     /// Il premium di listino non decide mai sì/no — resta eventuale nota “se compro” a parte.
     /// - Parameters:
     ///   - netPurchasePremiumEUR: ignorato per il verdetto (compat API / call site).

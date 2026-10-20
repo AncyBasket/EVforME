@@ -585,12 +585,13 @@ final class EVSimulatorTests: XCTestCase {
     }
 
     func testMaintenance_ItalyMidAge_MatchesSouthernEURates() {
+        // Fascia CR mid = 50–100k miglia ≈ età 7 × 15.000 km (~65k mi).
         let rates = MarketMaintenanceRates.rates(for: .IT)
         let ev = OwnershipCostEstimates.maintenancePerYear(
-            vehicleAge: 5, powertrain: .ev, yearlyKm: 15_000, market: .IT
+            vehicleAge: 7, powertrain: .ev, yearlyKm: 15_000, market: .IT
         )
         let ice = OwnershipCostEstimates.maintenancePerYear(
-            vehicleAge: 5, powertrain: .ice, yearlyKm: 15_000, market: .IT
+            vehicleAge: 7, powertrain: .ice, yearlyKm: 15_000, market: .IT
         )
         XCTAssertEqual(ev, rates.evEURPerYearAt15k, accuracy: 0.5)
         XCTAssertEqual(ice, rates.iceEURPerYearAt15k, accuracy: 0.5)
@@ -746,6 +747,48 @@ final class EVSimulatorTests: XCTestCase {
         XCTAssertEqual(
             ComparisonIntent.suggested(sourceYear: 2026, targetYear: 2026, referenceYear: 2026),
             .alreadyOwned
+        )
+    }
+
+    /// Con delta ≤ 0 non devono comparire frasi di risparmio; timeline derivata dai numeri.
+    func testSaveCopy_WhenDeltaNonPositive_ShowsCurrentCheaperNotSavings() {
+        var input = UserInput(
+            dailyKm: 8_000,
+            hasHomeCharging: false,
+            areaType: .mixed,
+            fuelPrice: 1.5,
+            ownershipYears: 5,
+            electricityPricePerKWh: 0.90,
+            sourceVehicleId: "toyota-prius-2018",
+            targetVehicleId: "tesla-model-3-2026",
+            scenario: .realistic
+        )
+        // Forza opex EV peggiore dell’attuale senza inventare catalogo.
+        input.sourceConsumptionOverrideLPer100Km = 3.8
+        input.targetEnergyOverrideKWhPer100Km = 22
+        let result = requireSimulate(input: input)
+        let opexDelta = result.sourceYearlyBreakdown.total - result.targetYearlyBreakdown.total
+        XCTAssertLessThanOrEqual(opexDelta, 0, "Fixture should make current car cheaper (delta=\(opexDelta))")
+        XCTAssertTrue(
+            result.keyReasons.contains(L10n.saveCurrentCheaper),
+            "Expected current-cheaper reason, got: \(result.keyReasons)"
+        )
+        XCTAssertFalse(
+            result.keyReasons.contains(where: { $0 == L10n.saveUpToPerYear(Int(opexDelta)) || $0.contains("risparmi") || $0.localizedCaseInsensitiveContains("save up to") || $0.localizedCaseInsensitiveContains("/anno in meno") }),
+            "Must not promise savings when delta ≤ 0: \(result.keyReasons)"
+        )
+        let realities = result.fearReality.map(\.reality)
+        XCTAssertTrue(realities.contains(L10n.realityCurrentCheaper))
+        XCTAssertFalse(realities.contains(where: { $0.contains("in meno") || $0.localizedCaseInsensitiveContains("save") }))
+
+        let timeline = Scenario.derivedTimeline(from: result.yearlyComparison)
+        XCTAssertEqual(timeline.count, 3)
+        XCTAssertFalse(timeline.contains(where: { $0.localizedCaseInsensitiveContains("risparmio diventa") }))
+        XCTAssertFalse(L10n.verdictTrustStrip.localizedCaseInsensitiveContains("prezzi da fonti ufficiali"))
+        XCTAssertFalse(L10n.verdictTrustStrip.localizedCaseInsensitiveContains("prices from official sources"))
+        XCTAssertTrue(
+            L10n.verdictTrustStrip.contains("MIMIT") || L10n.verdictTrustStrip.contains("Eurostat"),
+            L10n.verdictTrustStrip
         )
     }
 

@@ -25,10 +25,13 @@ struct VerdictWidgetSnapshot: Codable {
     var fuelPrice: Double
     var iceLPer100Km: Double
     var updatedAt: TimeInterval
+    var bolloPartial: Bool?
+
+    var showsPartialBolloTotal: Bool { bolloPartial == true }
 
     enum CodingKeys: String, CodingKey {
         case verdictRaw, title, subtitle, yearlyKm, savingsMin, savingsMax
-        case weeklyCharges, fuelPrice, iceLPer100Km, updatedAt
+        case weeklyCharges, fuelPrice, iceLPer100Km, updatedAt, bolloPartial
     }
 
     init(
@@ -41,7 +44,8 @@ struct VerdictWidgetSnapshot: Codable {
         weeklyCharges: Int,
         fuelPrice: Double,
         iceLPer100Km: Double,
-        updatedAt: TimeInterval
+        updatedAt: TimeInterval,
+        bolloPartial: Bool? = nil
     ) {
         self.verdictRaw = verdictRaw
         self.title = title
@@ -53,6 +57,7 @@ struct VerdictWidgetSnapshot: Codable {
         self.fuelPrice = fuelPrice
         self.iceLPer100Km = iceLPer100Km
         self.updatedAt = updatedAt
+        self.bolloPartial = bolloPartial
     }
 
     init(from decoder: Decoder) throws {
@@ -64,10 +69,17 @@ struct VerdictWidgetSnapshot: Codable {
         savingsMin = try c.decode(Int.self, forKey: .savingsMin)
         savingsMax = try c.decode(Int.self, forKey: .savingsMax)
         weeklyCharges = try c.decode(Int.self, forKey: .weeklyCharges)
-        fuelPrice = try c.decodeIfPresent(Double.self, forKey: .fuelPrice) ?? 1.7
+        // MIMIT 19/10/2026 — same source as OfficialEnergyCosts.Fallback.petrolPerLiter
+        fuelPrice = try c.decodeIfPresent(Double.self, forKey: .fuelPrice) ?? WidgetEnergyFallback.petrolPerLiter
         iceLPer100Km = try c.decodeIfPresent(Double.self, forKey: .iceLPer100Km) ?? 7.0
         updatedAt = try c.decode(TimeInterval.self, forKey: .updatedAt)
+        bolloPartial = try c.decodeIfPresent(Bool.self, forKey: .bolloPartial)
     }
+}
+
+/// Bundle-aligned ripieghi (audit AUDIT_2026-10-19) — widget target cannot import app OfficialEnergyCosts.
+enum WidgetEnergyFallback {
+    static let petrolPerLiter: Double = 2.03
 }
 
 struct MirroredWidgetInput: Codable {
@@ -132,7 +144,7 @@ struct BumpFuelPriceIntent: AppIntent {
             ?? 7.0
         var mirror = SnapshotLoader.loadMirror()
             ?? MirroredWidgetInput(
-                fuelPrice: snap?.fuelPrice ?? 1.7,
+                fuelPrice: snap?.fuelPrice ?? WidgetEnergyFallback.petrolPerLiter,
                 dailyKm: snap?.yearlyKm ?? 12_000,
                 iceLPer100Km: ice
             )
@@ -186,7 +198,7 @@ struct VerdictProvider: TimelineProvider {
                 savingsMin: 400,
                 savingsMax: 900,
                 weeklyCharges: 2,
-                fuelPrice: 1.7,
+                fuelPrice: WidgetEnergyFallback.petrolPerLiter,
                 iceLPer100Km: 7.0,
                 updatedAt: Date().timeIntervalSince1970
             )
@@ -220,6 +232,12 @@ struct VerdictWidgetView: View {
                     Text(WidgetL10n.savingsChargesLine(min: snap.savingsMin, max: snap.savingsMax, charges: snap.weeklyCharges))
                         .font(.caption2.weight(.semibold))
                         .foregroundStyle(.secondary)
+                    if snap.showsPartialBolloTotal {
+                        Text(WidgetL10n.partialTotalBolloUnknown)
+                            .font(.caption2.weight(.semibold))
+                            .foregroundStyle(.secondary)
+                            .lineLimit(2)
+                    }
                     Text(WidgetL10n.fuelKmLine(price: snap.fuelPrice, km: snap.yearlyKm))
                         .font(.caption2)
                         .foregroundStyle(.tertiary)

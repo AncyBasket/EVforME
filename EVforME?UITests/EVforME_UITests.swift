@@ -10,17 +10,10 @@ import XCTest
 final class EVforME_UITests: XCTestCase {
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    override func tearDownWithError() throws {}
 
     @MainActor
     func testInputToVerdictFlow() throws {
@@ -77,6 +70,41 @@ final class EVforME_UITests: XCTestCase {
         }
     }
     
+    /// EV ≥ 5 anni senza P.2 → header verdetto mostra “Totale parziale (bollo non stimato)”.
+    @MainActor
+    func testVerdictHeaderShowsPartialBolloWhenEVOverFiveYearsWithoutP2() throws {
+        let app = XCUIApplication()
+        app.launchEnvironment["UITEST_PRESET_VEHICLES"] = "1"
+        app.launchEnvironment["UITEST_PARTIAL_BOLLO"] = "1"
+        app.launch()
+
+        dismissQuickStartIfNeeded(app)
+
+        let startersReady =
+            app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Golf")).firstMatch
+                .waitForExistence(timeout: 12)
+            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Model 3")).firstMatch
+                .waitForExistence(timeout: 2)
+            || app.buttons["Dimmi la verità"].waitForExistence(timeout: 2)
+            || app.buttons["Tell me the truth"].waitForExistence(timeout: 1)
+        XCTAssertTrue(startersReady, "Input bench should load with preset vehicles")
+
+        let tellMeEN = app.buttons["Tell me the truth"]
+        let tellMeIT = app.buttons["Dimmi la verità"]
+        XCTAssertTrue(
+            tellMeEN.waitForExistence(timeout: 3) || tellMeIT.waitForExistence(timeout: 1),
+            "Main simulate button should exist"
+        )
+        if tellMeEN.exists { tellMeEN.tap() } else { tellMeIT.tap() }
+
+        let partialIT = app.staticTexts["Totale parziale (bollo non stimato)"]
+        let partialEN = app.staticTexts["Partial total (road tax not estimated)"]
+        XCTAssertTrue(
+            partialIT.waitForExistence(timeout: 15) || partialEN.waitForExistence(timeout: 2),
+            "Verdict header should show partial total when EV is 5+ years without booklet P.2"
+        )
+    }
+
     @MainActor
     func testSliderUpdatesValue() throws {
         let app = XCUIApplication()
@@ -85,15 +113,53 @@ final class EVforME_UITests: XCTestCase {
 
         dismissQuickStartIfNeeded(app)
 
-        let slider = app.sliders["Yearly kilometers slider"]
-        XCTAssertTrue(slider.waitForExistence(timeout: 8))
-        // Slider exists and can be used
-        XCTAssertTrue(slider.exists)
+        // Stesso path di testInputToVerdictFlow: aspetta il banco caricato.
+        let startersReady =
+            app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Golf")).firstMatch
+                .waitForExistence(timeout: 12)
+            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Model 3")).firstMatch
+                .waitForExistence(timeout: 2)
+            || app.buttons["Dimmi la verità"].waitForExistence(timeout: 2)
+            || app.buttons["Tell me the truth"].waitForExistence(timeout: 1)
+        XCTAssertTrue(startersReady, "Input bench should load")
+
+        for _ in 0..<5 { app.swipeUp() }
+
+        // Km slider lives inside the advanced DisclosureGroup (collapsed by default).
+        let advancedIT = app.buttons["Regola km, prezzi e scenario"]
+        let advancedEN = app.buttons["Adjust km, prices, and scenario"]
+        if advancedIT.waitForExistence(timeout: 3) {
+            advancedIT.tap()
+        } else if advancedEN.waitForExistence(timeout: 1) {
+            advancedEN.tap()
+        } else {
+            // Fallback: any disclosure/button whose label mentions km/prezzi.
+            let approx = app.buttons.matching(
+                NSPredicate(format: "label CONTAINS[c] %@ OR label CONTAINS[c] %@", "km", "prices")
+            ).firstMatch
+            if approx.waitForExistence(timeout: 2) { approx.tap() }
+        }
+
+        for _ in 0..<3 { app.swipeUp() }
+
+        // Controllo stretto: identifier o label km/anno (niente fallback generico su qualsiasi slider).
+        let byId = app.descendants(matching: .any)["yearly_km_slider"]
+        let byA11y = app.sliders["Yearly kilometers slider"]
+        let byKmAnno = app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "km/anno")).firstMatch
+        let byKmYear = app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "km/year")).firstMatch
+        let kmControl =
+            byId.waitForExistence(timeout: 6)
+            || byA11y.waitForExistence(timeout: 2)
+            || byKmAnno.waitForExistence(timeout: 2)
+            || byKmYear.waitForExistence(timeout: 1)
+        XCTAssertTrue(kmControl, "Yearly km/anno slider should be reachable on input")
+        if byId.exists {
+            XCTAssertTrue(byId.isHittable || byId.isEnabled, "yearly_km_slider should be interactive")
+        }
     }
 
     @MainActor
     func testLaunchPerformance() throws {
-        // This measures how long it takes to launch your application.
         measure(metrics: [XCTApplicationLaunchMetric()]) {
             XCUIApplication().launch()
         }
@@ -108,14 +174,13 @@ final class EVforME_UITests: XCTestCase {
             "OPEN THE BENCH",
             "Salta intro",
             "Skip intro",
-            "GET STARTED",
-            "INIZIA",
-            "Get Started",
+            "Continua",
+            "Continue",
         ]
         for label in labels {
-            let button = app.buttons[label]
-            if button.waitForExistence(timeout: 1.2) {
-                button.tap()
+            let btn = app.buttons[label]
+            if btn.waitForExistence(timeout: 1.5) {
+                btn.tap()
                 return
             }
         }

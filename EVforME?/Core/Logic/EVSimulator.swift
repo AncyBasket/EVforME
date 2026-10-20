@@ -23,12 +23,21 @@ struct EVSimulationInput {
     /// Configurazione ricarica personalizzata
     var chargingConfiguration: ChargingConfiguration = ChargingConfiguration()
     /// Prezzo benzina (€/L) per la quota termica delle PHEV (mai il carburante dell’auto attuale).
-    var petrolPricePerLiter: Double = 1.85
+    var petrolPricePerLiter: Double = OfficialEnergyCosts.Fallback.petrolPerLiter
     /// Se `false`, il consumo EV è battery-side e si applica l’efficienza di ricarica.
     /// Default `true`: catalogo WLTP EU = wall-to-wheel (perdite già incluse).
     var catalogEnergyIsWallToWheel: Bool = true
     /// Paese per tariffe manutenzione (ISO → AppMarket).
     var market: AppMarket = .IT
+    /// Override RC annuale (€); `nil`/≤0 = media IVASS per entrambe.
+    var annualInsuranceOverrideEUR: Double? = nil
+    /// Kasko/furto (OFF di default); richiede importo utente.
+    var includeKaskoTheft: Bool = false
+    var annualKaskoEUR: Double? = nil
+    /// kW P.2 a libretto — auto attuale (se EV).
+    var sourceBookletPowerKwP2: Double? = nil
+    /// kW P.2 a libretto — EV target.
+    var targetBookletPowerKwP2: Double? = nil
 }
 
 struct EVSimulationResult {
@@ -47,6 +56,22 @@ struct OperatingCostBreakdown: Equatable {
     let maintenance: Double
     let taxes: Double
     let insurance: Double
+    /// `false` se il bollo EV post-5 anni non è stimabile (manca P.2 a libretto).
+    let taxesKnown: Bool
+
+    init(
+        energy: Double,
+        maintenance: Double,
+        taxes: Double,
+        insurance: Double,
+        taxesKnown: Bool = true
+    ) {
+        self.energy = energy
+        self.maintenance = maintenance
+        self.taxes = taxes
+        self.insurance = insurance
+        self.taxesKnown = taxesKnown
+    }
 
     var total: Double { energy + maintenance + taxes + insurance }
 }
@@ -84,78 +109,86 @@ enum OwnershipCostEstimates {
         return max(floor, min(purchaseOrListPrice, residual))
     }
 
-    /// Assicurazione annua migliorata con fascie di prezzo più granulari e fattori aggiuntivi
-    static func insurancePerYear(purchasePrice: Double, yearlyKm: Double, electrified: Bool) -> Double {
-        // Fascie di prezzo per tassi base più accurati
-        let priceTierRate: Double
-        switch purchasePrice {
-        case 0..<15_000:
-            priceTierRate = electrified ? 0.028 : 0.026
-        case 15_000..<25_000:
-            priceTierRate = electrified ? 0.030 : 0.028
-        case 25_000..<40_000:
-            priceTierRate = electrified ? 0.032 : 0.030
-        case 40_000..<60_000:
-            priceTierRate = electrified ? 0.035 : 0.033
-        case 60_000..<80_000:
-            priceTierRate = electrified ? 0.038 : 0.036
-        default:
-            priceTierRate = electrified ? 0.042 : 0.040
+    /// Media IVASS premio RC auto (2° trim. 2026) — uguale per auto attuale ed EV.
+    static let ivassAverageRCEURPerYear: Double = 422
+
+    /// Assicurazione annua: RC flat IVASS (o override utente) + kasko/furto solo se l’utente indica l’importo.
+    /// Nessun proxy % sul valore: se kasko è ON senza importo, la UI deve chiederlo (qui si ignora la kasko).
+    static func insurancePerYear(
+        purchasePrice: Double,
+        yearlyKm: Double,
+        electrified: Bool,
+        annualInsuranceOverrideEUR: Double? = nil,
+        includeKaskoTheft: Bool = false,
+        annualKaskoEUR: Double? = nil
+    ) -> Double {
+        _ = purchasePrice
+        _ = yearlyKm
+        _ = electrified
+        let rc: Double
+        if let override = annualInsuranceOverrideEUR, override > 0 {
+            rc = override
+        } else {
+            rc = ivassAverageRCEURPerYear
         }
-        
-        // Fattore chilometraggio con progressione non lineare
-        let kmFactor: Double
-        switch yearlyKm {
-        case 0..<5_000:
-            kmFactor = electrified ? 0.006 : 0.008
-        case 5_000..<15_000:
-            kmFactor = electrified ? 0.008 : 0.010
-        case 15_000..<25_000:
-            kmFactor = electrified ? 0.010 : 0.012
-        case 25_000..<40_000:
-            kmFactor = electrified ? 0.012 : 0.014
-        default:
-            kmFactor = electrified ? 0.014 : 0.016
-        }
-        
-        // Calcolo base
-        let fromPrice = purchasePrice * priceTierRate
-        let fromKm = yearlyKm * kmFactor
-        
-        // Minimum base insurance (franchigia minima)
-        let minimumBase: Double = electrified ? 380 : 320
-        
-        // Fattore sicurezza extra per veicoli premium (solo su valori ancora alti)
-        let premiumFactor = purchasePrice > 50_000 ? 1.15 : 1.0
-        
-        return max(minimumBase, (fromPrice * 0.70 + fromKm) * premiumFactor)
+        guard includeKaskoTheft, let kasko = annualKaskoEUR, kasko > 0 else { return rc }
+        return rc + kasko
     }
 
     /// Bollo / tassa di possesso — stima semplificata (non ACI ufficiale).
-    /// EV: esenzione tipica nei primi 5 anni dall’immatricolazione; poi catalogo o proxy.
+    /// EV: 5 anni esenzione, poi 1/4 × 2,58 €/kW × **P.2 a libretto** (potenza continua 30 min).
+    /// Non usare EEA `ep__KW_` (picco) né inventare 0 € in silenzio: senza P.2 → `isKnown = false`.
+    /// HEV/PHEV: nessuna riduzione regionale hard-coded.
+    static let petrolBolloEURPerKw: Double = 2.58
+    static let petrolBolloProxyEURPerYear: Double = 220
+    static let hevPhevBolloProxyEURPerYear: Double = 180
+
+    struct BolloEstimate: Equatable {
+        let amount: Double
+        /// `false` solo per EV post-5y senza kW P.2 a libretto (UI: non stimato / totale parziale).
+        let isKnown: Bool
+    }
+
     static func bolloPerYearEstimate(
         catalogTaxesPerYear: Double,
         powertrain: Powertrain,
         vehicleYear: Int,
-        referenceYear: Int = Calendar.current.component(.year, from: Date())
+        referenceYear: Int = Calendar.current.component(.year, from: Date()),
+        bookletPowerKwP2: Double? = nil
     ) -> Double {
+        bolloPerYearDetail(
+            catalogTaxesPerYear: catalogTaxesPerYear,
+            powertrain: powertrain,
+            vehicleYear: vehicleYear,
+            referenceYear: referenceYear,
+            bookletPowerKwP2: bookletPowerKwP2
+        ).amount
+    }
+
+    static func bolloPerYearDetail(
+        catalogTaxesPerYear: Double,
+        powertrain: Powertrain,
+        vehicleYear: Int,
+        referenceYear: Int = Calendar.current.component(.year, from: Date()),
+        bookletPowerKwP2: Double? = nil
+    ) -> BolloEstimate {
         let age = max(0, referenceYear - vehicleYear)
         switch powertrain {
         case .ev:
-            if age < 5 { return 0 }
-            return catalogTaxesPerYear > 0 ? catalogTaxesPerYear : 140
-        case .phev:
-            if age < 5 {
-                let base = catalogTaxesPerYear > 0 ? catalogTaxesPerYear : 180
-                return (base * 0.5).rounded()
+            if age < 5 { return BolloEstimate(amount: 0, isKnown: true) }
+            if let kw = bookletPowerKwP2, kw > 0 {
+                // Es. 100 kW P.2 → 2,58 × 100 × 1/4 = 64,50 € (niente arrotondamento a euro interi).
+                let raw = petrolBolloEURPerKw * kw * 0.25
+                return BolloEstimate(amount: (raw * 100).rounded() / 100, isKnown: true)
             }
-            return catalogTaxesPerYear > 0 ? catalogTaxesPerYear : 180
-        case .hev:
-            // Full hybrid: bollo spesso ridotto vs ICE puro (proxy −30%).
-            let base = catalogTaxesPerYear > 0 ? catalogTaxesPerYear : 180
-            return (base * 0.7).rounded()
+            // Senza P.2 non stimiamo: importo 0 escluso dal totale “completo”, UI segnala parziale.
+            return BolloEstimate(amount: 0, isKnown: false)
+        case .phev, .hev:
+            let amount = catalogTaxesPerYear > 0 ? catalogTaxesPerYear : hevPhevBolloProxyEURPerYear
+            return BolloEstimate(amount: amount, isKnown: true)
         case .ice:
-            return catalogTaxesPerYear > 0 ? catalogTaxesPerYear : 220
+            let amount = catalogTaxesPerYear > 0 ? catalogTaxesPerYear : petrolBolloProxyEURPerYear
+            return BolloEstimate(amount: amount, isKnown: true)
         }
     }
 
@@ -258,12 +291,18 @@ final class EVSimulator {
         let sourceInsurance = OwnershipCostEstimates.insurancePerYear(
             purchasePrice: sourceValueBasis,
             yearlyKm: yearlyKm,
-            electrified: sourceVehicle.powertrain == .ev || sourceVehicle.powertrain == .phev
+            electrified: sourceVehicle.powertrain == .ev || sourceVehicle.powertrain == .phev,
+            annualInsuranceOverrideEUR: input.annualInsuranceOverrideEUR,
+            includeKaskoTheft: input.includeKaskoTheft,
+            annualKaskoEUR: input.annualKaskoEUR
         )
         let targetInsurance = OwnershipCostEstimates.insurancePerYear(
             purchasePrice: targetValueBasis,
             yearlyKm: yearlyKm,
-            electrified: true
+            electrified: true,
+            annualInsuranceOverrideEUR: input.annualInsuranceOverrideEUR,
+            includeKaskoTheft: input.includeKaskoTheft,
+            annualKaskoEUR: input.annualKaskoEUR
         )
 
         let currentYear = Defaults.referenceCalendarYear
@@ -280,27 +319,33 @@ final class EVSimulator {
             market: input.market
         ) * scenario.evCostMultiplier
 
+        let sourceBollo = OwnershipCostEstimates.bolloPerYearDetail(
+            catalogTaxesPerYear: sourceVehicle.taxesPerYear,
+            powertrain: sourceVehicle.powertrain,
+            vehicleYear: sourceVehicle.year,
+            referenceYear: currentYear,
+            bookletPowerKwP2: sourceVehicle.powertrain == .ev ? input.sourceBookletPowerKwP2 : nil
+        )
+        let targetBollo = OwnershipCostEstimates.bolloPerYearDetail(
+            catalogTaxesPerYear: targetVehicle.taxesPerYear,
+            powertrain: targetVehicle.powertrain,
+            vehicleYear: targetVehicle.year,
+            referenceYear: currentYear,
+            bookletPowerKwP2: targetVehicle.powertrain == .ev ? input.targetBookletPowerKwP2 : nil
+        )
         let sourceBreakdown = OperatingCostBreakdown(
             energy: sourceEnergy,
             maintenance: sourceMaintenance,
-            taxes: OwnershipCostEstimates.bolloPerYearEstimate(
-                catalogTaxesPerYear: sourceVehicle.taxesPerYear,
-                powertrain: sourceVehicle.powertrain,
-                vehicleYear: sourceVehicle.year,
-                referenceYear: currentYear
-            ),
-            insurance: sourceInsurance
+            taxes: sourceBollo.amount,
+            insurance: sourceInsurance,
+            taxesKnown: sourceBollo.isKnown
         )
         let targetBreakdown = OperatingCostBreakdown(
             energy: targetEnergy,
             maintenance: targetMaintenance,
-            taxes: OwnershipCostEstimates.bolloPerYearEstimate(
-                catalogTaxesPerYear: targetVehicle.taxesPerYear,
-                powertrain: targetVehicle.powertrain,
-                vehicleYear: targetVehicle.year,
-                referenceYear: currentYear
-            ),
-            insurance: targetInsurance
+            taxes: targetBollo.amount,
+            insurance: targetInsurance,
+            taxesKnown: targetBollo.isKnown
         )
 
         let yearlyIceCost = sourceBreakdown.total
@@ -346,7 +391,7 @@ final class EVSimulator {
             // Per CNG, fuelConsumptionLPerKm è in kg/km e fuelPricePerLiter è €/kg.
             return yearlyKm
                 * lPerKm
-                * area.iceConsumptionMultiplier
+                * area.fuelConsumptionMultiplier(for: vehicle.powertrain)
                 * trip.iceExtraMultiplier
                 * max(0, input.fuelPricePerLiter)
                 * fuelMult
@@ -494,7 +539,9 @@ final class EVSimulator {
         var reasons = [
             L10n.switchingFromTo(sourceVehicle.displayName, targetVehicle.displayName),
             L10n.chargePerWeek(weeklyCharges),
-            L10n.saveUpToPerYear(Int(yearlySavings)),
+            yearlySavings > 0
+                ? L10n.saveUpToPerYear(Int(yearlySavings))
+                : L10n.saveCurrentCheaper,
             input.hasHomeCharging
                 ? L10n.homeChargingEasier
                 : L10n.publicChargingManageable
@@ -543,7 +590,9 @@ final class EVSimulator {
         ))
         fears.append(FearRealityItem(
             fear: L10n.fearCostsTooMuch,
-            reality: L10n.realitySavePerYear(savingsRangeLower, savingsRangeUpper)
+            reality: yearlySavings > 0
+                ? L10n.realitySavePerYear(savingsRangeLower, savingsRangeUpper)
+                : L10n.realityCurrentCheaper
         ))
 
         let horizonYears = max(1, input.ownershipYears)

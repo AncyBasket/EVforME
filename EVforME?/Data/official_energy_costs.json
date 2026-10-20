@@ -1,31 +1,32 @@
 {
   "country": "IT",
   "currency": "EUR",
-  "fuelPricePerLiter": 1.739,
-  "dieselPricePerLiter": 1.659,
-  "lpgPricePerLiter": 0.72,
-  "cngPricePerKg": 1.28,
-  "electricityPricePerKWh": 0.333,
-  "updatedAt": "2026-04-30T12:21:29.157392+00:00",
+  "fuelPricePerLiter": 2.029,
+  "dieselPricePerLiter": 2.257,
+  "lpgPricePerLiter": 0.775,
+  "cngPricePerKg": 1.957,
+  "electricityPricePerKWh": 0.314,
+  "electricityPeriod": "2026-S1",
+  "updatedAt": "2026-10-19T00:00:00+00:00",
   "sources": {
     "fuel": {
-      "source": "MIMIT prezzo_alle_8.csv",
-      "rows_used": 20260,
-      "extraction": "Estrazione del 2026-04-29",
-      "url": "https://www.mimit.gov.it/images/exportCSV/prezzo_alle_8.csv"
+      "source": "MIMIT medie nazionali",
+      "extraction": "2026-10-19",
+      "url": "https://www.mimit.gov.it/it/prezzi-carburanti-media-nazionale"
     },
     "electricity": {
       "source": "Eurostat nrg_pc_204",
       "series": {
         "freq": "S",
         "siec": "E7000",
-        "nrg_cons": "KWH1000-2499",
+        "nrg_cons": "KWH2500-4999",
         "unit": "KWH",
         "tax": "I_TAX",
         "currency": "EUR",
         "geo": "IT"
       },
-      "latest_period": "2025-S2",
+      "latest_period": "2026-S1",
+      "note": "Fascia 2.500–4.999 kWh/anno (casa con EV). Dato semestrale.",
       "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/nrg_pc_204?geo=IT"
     }
   }

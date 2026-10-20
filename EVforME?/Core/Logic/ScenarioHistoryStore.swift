@@ -24,6 +24,8 @@ struct PersistedScenarioInput: Equatable {
     var sourceConsumptionOverrideLPer100Km: Double?
     var targetEnergyOverrideKWhPer100Km: Double?
     var marketRaw: String?
+    var sourceBookletPowerKwP2: Double?
+    var targetBookletPowerKwP2: Double?
 
     init(from input: UserInput) {
         dailyKm = input.dailyKm
@@ -43,6 +45,8 @@ struct PersistedScenarioInput: Equatable {
         sourceConsumptionOverrideLPer100Km = input.sourceConsumptionOverrideLPer100Km
         targetEnergyOverrideKWhPer100Km = input.targetEnergyOverrideKWhPer100Km
         marketRaw = input.market.rawValue
+        sourceBookletPowerKwP2 = input.sourceBookletPowerKwP2
+        targetBookletPowerKwP2 = input.targetBookletPowerKwP2
     }
 
     func toUserInput() -> UserInput {
@@ -67,7 +71,9 @@ struct PersistedScenarioInput: Equatable {
             tripProfile: trip,
             sourceConsumptionOverrideLPer100Km: sourceConsumptionOverrideLPer100Km,
             targetEnergyOverrideKWhPer100Km: targetEnergyOverrideKWhPer100Km,
-            market: market
+            market: market,
+            sourceBookletPowerKwP2: sourceBookletPowerKwP2,
+            targetBookletPowerKwP2: targetBookletPowerKwP2
         )
     }
 }
@@ -80,6 +86,9 @@ extension PersistedScenarioInput: Codable {
         case comparisonIntentRaw, tripProfileRaw
         case sourceConsumptionOverrideLPer100Km, targetEnergyOverrideKWhPer100Km
         case marketRaw
+        case sourceBookletPowerKwP2
+        case targetBookletPowerKwP2
+        case evBookletPowerKwP2 // legacy → target
     }
 
     init(from decoder: Decoder) throws {
@@ -89,7 +98,7 @@ extension PersistedScenarioInput: Codable {
         areaTypeRaw = try c.decode(Int.self, forKey: .areaTypeRaw)
         fuelPrice = try c.decode(Double.self, forKey: .fuelPrice)
         ownershipYears = try c.decode(Int.self, forKey: .ownershipYears)
-        electricityPricePerKWh = try c.decodeIfPresent(Double.self, forKey: .electricityPricePerKWh) ?? 0.25
+        electricityPricePerKWh = try c.decodeIfPresent(Double.self, forKey: .electricityPricePerKWh) ?? 0.31
         sourceVehicleId = try c.decode(String.self, forKey: .sourceVehicleId)
         targetVehicleId = try c.decode(String.self, forKey: .targetVehicleId)
         scenarioRaw = try c.decode(Double.self, forKey: .scenarioRaw)
@@ -102,6 +111,10 @@ extension PersistedScenarioInput: Codable {
         sourceConsumptionOverrideLPer100Km = try c.decodeIfPresent(Double.self, forKey: .sourceConsumptionOverrideLPer100Km)
         targetEnergyOverrideKWhPer100Km = try c.decodeIfPresent(Double.self, forKey: .targetEnergyOverrideKWhPer100Km)
         marketRaw = try c.decodeIfPresent(String.self, forKey: .marketRaw)
+        sourceBookletPowerKwP2 = try c.decodeIfPresent(Double.self, forKey: .sourceBookletPowerKwP2)
+        let targetP2 = try c.decodeIfPresent(Double.self, forKey: .targetBookletPowerKwP2)
+        let legacyP2 = try c.decodeIfPresent(Double.self, forKey: .evBookletPowerKwP2)
+        targetBookletPowerKwP2 = targetP2 ?? legacyP2
     }
 
     func encode(to encoder: Encoder) throws {
@@ -123,6 +136,8 @@ extension PersistedScenarioInput: Codable {
         try c.encodeIfPresent(sourceConsumptionOverrideLPer100Km, forKey: .sourceConsumptionOverrideLPer100Km)
         try c.encodeIfPresent(targetEnergyOverrideKWhPer100Km, forKey: .targetEnergyOverrideKWhPer100Km)
         try c.encodeIfPresent(marketRaw, forKey: .marketRaw)
+        try c.encodeIfPresent(sourceBookletPowerKwP2, forKey: .sourceBookletPowerKwP2)
+        try c.encodeIfPresent(targetBookletPowerKwP2, forKey: .targetBookletPowerKwP2)
     }
 }
 
@@ -151,10 +166,14 @@ struct SavedScenarioSnapshot: Codable, Identifiable, Equatable {
     let energyUpdatedAtAtSave: String?
     let incentivesUpdatedAtAtSave: String?
     let incentivesValidUntilAtSave: String?
+    /// `true` se al salvataggio il bollo EV era non stimabile (P.2 mancante).
+    let bolloPartial: Bool?
 
     var verdictTitle: String {
         (EVVerdict(rawValue: verdictRaw) ?? .maybe).title
     }
+
+    var showsPartialBolloTotal: Bool { bolloPartial == true }
 
     var createdDate: Date { Date(timeIntervalSince1970: createdAt) }
 
@@ -179,9 +198,9 @@ struct SavedScenarioSnapshot: Codable, Identifiable, Equatable {
             dailyKm: yearlyKm,
             hasHomeCharging: hasHomeCharging,
             areaType: trip.suggestedAreaType,
-            fuelPrice: fuelPriceAtSave ?? 1.7,
+            fuelPrice: fuelPriceAtSave ?? OfficialEnergyCosts.Fallback.petrolPerLiter,
             ownershipYears: 5,
-            electricityPricePerKWh: electricityPriceAtSave ?? 0.25,
+            electricityPricePerKWh: electricityPriceAtSave ?? 0.31,
             sourceVehicleId: sourceVehicleId,
             targetVehicleId: targetVehicleId,
             scenario: scenario,
@@ -246,7 +265,8 @@ enum ScenarioHistoryStore {
                 incentiveEURAtSave: 0,
                 energyUpdatedAtAtSave: snap.energyUpdatedAtAtSave,
                 incentivesUpdatedAtAtSave: snap.incentivesUpdatedAtAtSave,
-                incentivesValidUntilAtSave: snap.incentivesValidUntilAtSave
+                incentivesValidUntilAtSave: snap.incentivesValidUntilAtSave,
+                bolloPartial: snap.bolloPartial
             )
         }
 
@@ -286,7 +306,8 @@ enum ScenarioHistoryStore {
             incentiveEURAtSave: input.estimatedPurchaseIncentiveEUR,
             energyUpdatedAtAtSave: costs?.updatedAt,
             incentivesUpdatedAtAtSave: ItalianIncentivesService.shared.currentSchedule.updatedAt,
-            incentivesValidUntilAtSave: ItalianIncentivesService.shared.currentSchedule.validUntil
+            incentivesValidUntilAtSave: ItalianIncentivesService.shared.currentSchedule.validUntil,
+            bolloPartial: result.hasPartialBolloTotal
         )
         items.insert(snap, at: 0)
         if items.count > maxItems {

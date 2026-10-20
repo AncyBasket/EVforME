@@ -146,6 +146,8 @@ enum L10n {
     static var chargingTypePublicFastDescription: String { string("charging_type_public_fast_description") }
     static var chargingTypePublicUltraFast: String { string("charging_type_public_ultra_fast") }
     static var chargingTypePublicUltraFastDescription: String { string("charging_type_public_ultra_fast_description") }
+    static var chargingTypeTeslaSupercharger: String { string("charging_type_tesla_supercharger") }
+    static var chargingTypeTeslaSuperchargerDescription: String { string("charging_type_tesla_supercharger_description") }
     static var tellMeTheTruth: String { string("tell_me_the_truth") }
     static var simulateCtaA11yHint: String { string("simulate_cta_a11y_hint") }
     
@@ -294,6 +296,15 @@ enum L10n {
     static var timelineOptimistic1: String { string("timeline_optimistic_1") }
     static var timelineOptimistic2: String { string("timeline_optimistic_2") }
     static var timelineOptimistic3: String { string("timeline_optimistic_3") }
+    static func timelineDerivedEvAhead(_ year: Int, _ euros: Int) -> String {
+        format("timeline_derived_ev_ahead", year, euros)
+    }
+    static func timelineDerivedCurrentAhead(_ year: Int, _ euros: Int) -> String {
+        format("timeline_derived_current_ahead", year, euros)
+    }
+    static func timelineDerivedClose(_ year: Int) -> String {
+        format("timeline_derived_close", year)
+    }
     static var howItChangesOverTime: String { string("how_it_changes_over_time") }
     static var costsOverTime: String { string("costs_over_time") }
     static var costsOverTimeIntro: String { string("costs_over_time_intro") }
@@ -383,6 +394,8 @@ enum L10n {
     // MARK: - Simulator (reasons & fear/reality)
     static func chargePerWeek(_ n: Int) -> String { format("charge_per_week", n) }
     static func saveUpToPerYear(_ n: Int) -> String { format("save_up_to_per_year", n) }
+    static var saveCurrentCheaper: String { string("save_current_cheaper") }
+    static var realityCurrentCheaper: String { string("reality_current_cheaper") }
     static func switchingFromTo(_ from: String, _ to: String) -> String { format("switching_from_to", from, to) }
     static var homeChargingEasier: String { string("home_charging_easier") }
     static var publicChargingManageable: String { string("public_charging_manageable") }
@@ -538,6 +551,45 @@ enum L10n {
     static func yearlyKmValue(_ km: Int) -> String { format("yearly_km_value", km) }
     static var phevBlendReason: String { string("phev_blend_reason") }
     static var insuranceIncludedReason: String { string("insurance_included_reason") }
+    static var insuranceAnnualOptionalLabel: String { string("insurance_annual_optional_label") }
+    static var insuranceAnnualOptionalPlaceholder: String { string("insurance_annual_optional_placeholder") }
+    static var kaskoTheftToggle: String { string("kasko_theft_toggle") }
+    static var kaskoTheftAmountLabel: String { string("kasko_theft_amount_label") }
+    static var kaskoTheftAmountPlaceholder: String { string("kasko_theft_amount_placeholder") }
+    static var evBookletPowerKwP2SourceLabel: String { string("ev_booklet_power_kw_p2_source_label") }
+    static var evBookletPowerKwP2TargetLabel: String { string("ev_booklet_power_kw_p2_target_label") }
+    static var evBookletPowerKwP2Placeholder: String { string("ev_booklet_power_kw_p2_placeholder") }
+    static var evBookletPowerKwP2Hint: String { string("ev_booklet_power_kw_p2_hint") }
+    static var partialTotalBolloUnknown: String { string("partial_total_bollo_unknown") }
+    static var italyKitBolloBothUnknown: String { string("italy_kit_bollo_both_unknown") }
+    static func italyKitBolloRowSourceUnknown(_ ev: Int) -> String {
+        format("italy_kit_bollo_row_source_unknown", ev)
+    }
+    static var kaskoAmountRequired: String { string("kasko_amount_required") }
+    static var publicChargingTypeLabel: String { string("public_charging_type_label") }
+    static var publicChargingSourceNote: String { string("public_charging_source_note") }
+    static func electricityEurostatPeriod(_ period: String) -> String {
+        format("electricity_eurostat_period", period)
+    }
+    static var calculationCurrentCheaper: String { string("calculation_current_cheaper") }
+    static func impactCurrentCheaper() -> String { string("impact_current_cheaper") }
+    static var shareCurrentCheaper: String { string("share_current_cheaper") }
+    static var lastComparisonDataChangedCheaper: String { string("last_comparison_data_changed_cheaper") }
+    static func calculationEvFormulaFull(
+        _ km: Int,
+        _ kWhPerKm: Double,
+        _ pricePerKWh: Double,
+        _ areaMult: Double,
+        _ tripMult: Double,
+        _ scenarioMult: Double,
+        _ energyCost: Double,
+        _ yearlyCost: Double
+    ) -> String {
+        format(
+            "calculation_ev_formula_full",
+            km, kWhPerKm, pricePerKWh, areaMult, tripMult, scenarioMult, energyCost, yearlyCost
+        )
+    }
     static var leadSavedLocally: String { string("lead_saved_locally") }
     static var leadSentRemote: String { string("lead_sent_remote") }
     static var leadSendFailed: String { string("lead_send_failed") }
@@ -559,6 +611,15 @@ enum L10n {
     static var italyKitCostsTitle: String { string("italy_kit_costs_title") }
     static var italyKitDisclaimer: String { string("italy_kit_disclaimer") }
     static func italyKitBolloRow(_ ice: Int, _ ev: Int) -> String { format("italy_kit_bollo_row", ice, ev) }
+    static func italyKitBolloRowEVUnknown(_ ice: Int) -> String { format("italy_kit_bollo_row_ev_unknown", ice) }
+    static func calculationOpexBreakdownTaxesUnknown(
+        _ energy: Double,
+        _ maintenance: Double,
+        _ insurance: Double,
+        _ yearlyCost: Double
+    ) -> String {
+        format("calculation_opex_breakdown_taxes_unknown", energy, maintenance, insurance, yearlyCost)
+    }
     static func italyKitInsuranceRow(_ ice: Int, _ ev: Int) -> String { format("italy_kit_insurance_row", ice, ev) }
     static func italyKitMaintenanceRow(_ ice: Int, _ ev: Int) -> String { format("italy_kit_maintenance_row", ice, ev) }
     static var incentiveWindowSectionTitle: String { string("incentive_window_section_title") }
@@ -567,6 +628,7 @@ enum L10n {
     static var incentiveWindowOpenNoEnd: String { string("incentive_window_open_no_end") }
     static var incentiveWindowPossiblyStale: String { string("incentive_window_possibly_stale") }
     static var incentiveWindowPossiblyStaleDetail: String { string("incentive_window_possibly_stale_detail") }
+    static var incentiveWindowClosedMASE2025: String { string("incentive_window_closed_mase_2025") }
     static func incentiveWindowStarts(_ date: String) -> String { format("incentive_window_starts", date) }
     static var guideTopicRoadTaxTitle: String { string("guide_topic_road_tax_title") }
     static var guideTopicRoadTaxBody: String { string("guide_topic_road_tax_body") }

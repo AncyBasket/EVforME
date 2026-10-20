@@ -538,6 +538,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "EVforME?/Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "EVforME? uses your location while using the app only to search nearby chargers on the map. Coordinates are not stored or sent to an EVforME server. Country for cost estimates comes from your device region or the country picker.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "EVforME? uses photos only on-device to read consumption stickers (L/100 km or kWh/100 km).";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -574,6 +575,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "EVforME?/Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "EVforME? uses your location while using the app only to search nearby chargers on the map. Coordinates are not stored or sent to an EVforME server. Country for cost estimates comes from your device region or the country picker.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "EVforME? uses photos only on-device to read consumption stickers (L/100 km or kWh/100 km).";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

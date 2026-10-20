@@ -56,6 +56,14 @@ struct VerdictShareCardView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.bottom, 22)
 
+            if result.hasPartialBolloTotal {
+                Text(L10n.partialTotalBolloUnknown)
+                    .font(.system(size: 12, weight: .semibold, design: .default))
+                    .foregroundStyle(ink)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.bottom, 14)
+            }
+
             Text(L10n.verdictCompareLine(sourceName, targetName))
                 .font(.system(size: 12, weight: .medium))
                 .foregroundStyle(muted)

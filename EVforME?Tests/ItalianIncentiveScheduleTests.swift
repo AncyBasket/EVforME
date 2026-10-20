@@ -12,12 +12,17 @@ final class ItalianIncentiveScheduleTests: XCTestCase {
         UserDefaults.standard.removeObject(forKey: "evforme.italianIncentives.cached.v1")
         UserDefaults.standard.removeObject(forKey: "evforme.italianIncentives.lastFetchAt")
         let schedule = await ItalianIncentivesService.shared.refresh()
-        XCTAssertEqual(schedule.validUntil, "2026-12-31")
+        XCTAssertEqual(schedule.validUntil, "2026-06-30")
         XCTAssertNotNil(schedule.validUntilDate)
         if case .active(let until) = schedule.windowStatus(asOf: date("2026-06-15")) {
             XCTAssertEqual(until, schedule.validUntilDate)
         } else {
-            XCTFail("Expected active window in mid-2026")
+            XCTFail("Expected active window before 30/06/2026")
+        }
+        if case .expired = schedule.windowStatus(asOf: date("2026-07-01")) {
+            // closed after validUntil
+        } else {
+            XCTFail("Expected expired after 30/06/2026")
         }
     }
 
@@ -59,9 +64,10 @@ final class ItalianIncentiveScheduleTests: XCTestCase {
         let decoded = try JSONDecoder().decode(ItalianIncentiveSchedule.self, from: json)
         XCTAssertNil(decoded.validUntil)
         XCTAssertEqual(decoded.windowStatus(), .unknown)
+        // Finestra sconosciuta: non applicare mai l’incentivo (audit 2026-10-19).
         XCTAssertEqual(
             decoded.estimatedPurchaseBonusEUR(evListPrice: 28_000, replacingVehiclePrice: 0, hasHomeCharging: true),
-            5_000,
+            0,
             accuracy: 0.01
         )
     }
@@ -86,6 +92,57 @@ final class ItalianIncentiveScheduleTests: XCTestCase {
         XCTAssertEqual(bollo, 210, accuracy: 0.01)
     }
 
+    func testISEEBracketsAndExVATCeiling() {
+        let schedule = ItalianIncentiveSchedule.bundledFallback
+        // Listino 42.000 IVA incl. → 42k/1,22 ≈ 34426 ≤ 35000 → ok
+        XCTAssertEqual(
+            schedule.estimatedPurchaseBonusEUR(
+                evListPrice: 42_000,
+                replacingVehiclePrice: 0,
+                hasHomeCharging: true,
+                iseeEUR: 25_000,
+                asOf: date("2026-06-01")
+            ),
+            11_000,
+            accuracy: 0.01
+        )
+        XCTAssertEqual(
+            schedule.estimatedPurchaseBonusEUR(
+                evListPrice: 42_000,
+                replacingVehiclePrice: 0,
+                hasHomeCharging: true,
+                iseeEUR: 35_000,
+                asOf: date("2026-06-01")
+            ),
+            9_000,
+            accuracy: 0.01
+        )
+        // Sopra tetto IVA esclusa
+        XCTAssertEqual(
+            schedule.estimatedPurchaseBonusEUR(
+                evListPrice: 45_000,
+                replacingVehiclePrice: 0,
+                hasHomeCharging: true,
+                iseeEUR: 25_000,
+                asOf: date("2026-06-01")
+            ),
+            0,
+            accuracy: 0.01
+        )
+        // Senza ISEE → 0
+        XCTAssertEqual(
+            schedule.estimatedPurchaseBonusEUR(
+                evListPrice: 30_000,
+                replacingVehiclePrice: 0,
+                hasHomeCharging: true,
+                iseeEUR: nil,
+                asOf: date("2026-06-01")
+            ),
+            0,
+            accuracy: 0.01
+        )
+    }
+
     private func makeSchedule(validUntil: String?) -> ItalianIncentiveSchedule {
         ItalianIncentiveSchedule(
             country: "IT",
@@ -94,6 +151,7 @@ final class ItalianIncentiveScheduleTests: XCTestCase {
             validFrom: nil,
             validUntil: validUntil,
             maxListPriceEUR: 45_000,
+            maxListPriceIsExVAT: false,
             maxBonusEUR: 7_000,
             scrappageExtraEUR: 2_000,
             scrappageMaxReplacingPriceEUR: 18_000,

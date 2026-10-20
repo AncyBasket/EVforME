@@ -26,9 +26,9 @@ struct SimulateEVIntent: AppIntent {
             dailyKm: yearlyKm,
             hasHomeCharging: hasHomeCharging,
             areaType: .urban,
-            fuelPrice: 1.7,
+            fuelPrice: OfficialEnergyCosts.Fallback.petrolPerLiter,
             ownershipYears: 5,
-            electricityPricePerKWh: 0.25,
+            electricityPricePerKWh: 0.31,
             sourceVehicleId: Defaults.starterSourceVehicleId,
             targetVehicleId: Defaults.starterTargetVehicleId,
             scenario: .realistic
@@ -53,7 +53,13 @@ struct SimulateEVIntent: AppIntent {
         ScenarioHistoryStore.save(result: result, input: input)
         WidgetSnapshotStore.save(from: result, input: input)
 
-        let summary = "\(result.verdict.title). \(L10n.impactSaveBetween(result.yearlySavingsRange.lowerBound, result.yearlySavingsRange.upperBound)) · \(L10n.impactChargePerWeek(result.weeklyCharges))"
+        let savingsBit: String
+        if result.yearlySavingsRange.upperBound > 0 {
+            savingsBit = L10n.impactSaveBetween(result.yearlySavingsRange.lowerBound, result.yearlySavingsRange.upperBound)
+        } else {
+            savingsBit = L10n.impactCurrentCheaper()
+        }
+        let summary = "\(result.verdict.title). \(savingsBit) · \(L10n.impactChargePerWeek(result.weeklyCharges))"
         return .result(value: summary, dialog: IntentDialog(stringLiteral: summary))
     }
 }

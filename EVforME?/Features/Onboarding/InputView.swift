@@ -75,6 +75,25 @@ struct InputView: View {
                     if let source = selectedSourceVehicle, let target = selectedTargetVehicle {
                         comparisonInset(source: source, target: target)
                     }
+
+                    if selectedSourceVehicle?.powertrain == .ev {
+                        bookletP2Field(
+                            label: L10n.evBookletPowerKwP2SourceLabel,
+                            binding: Binding(
+                                get: { userInput.sourceBookletPowerKwP2 ?? 0 },
+                                set: { userInput.sourceBookletPowerKwP2 = $0 > 0 ? $0 : nil }
+                            )
+                        )
+                    }
+                    if selectedTargetVehicle?.powertrain == .ev {
+                        bookletP2Field(
+                            label: L10n.evBookletPowerKwP2TargetLabel,
+                            binding: Binding(
+                                get: { userInput.targetBookletPowerKwP2 ?? 0 },
+                                set: { userInput.targetBookletPowerKwP2 = $0 > 0 ? $0 : nil }
+                            )
+                        )
+                    }
                 }
 
                 DisclosureGroup(isExpanded: $showAdvancedDetails) {
@@ -110,6 +129,7 @@ struct InputView: View {
                                     step: 500
                                 )
                                 .tint(.accent)
+                                .accessibilityIdentifier("yearly_km_slider")
                             }
 
                             sliderBlock(
@@ -270,6 +290,65 @@ struct InputView: View {
                                     userInput.chargingConfiguration.customHomePricePerKWh = userInput.electricityPricePerKWh
                                 }
 
+                            Text(L10n.publicChargingTypeLabel)
+                                .font(Typography.readingCaption)
+                                .foregroundColor(.secondaryText)
+                                .padding(.top, 8)
+                            Picker(L10n.publicChargingTypeLabel, selection: $userInput.chargingConfiguration.publicChargingType) {
+                                ForEach(ChargingType.publicCases(targetBrandIsTesla: targetBrandIsTesla)) { type in
+                                    Text(type.displayName).tag(type)
+                                }
+                            }
+                            .pickerStyle(.menu)
+                            .onChange(of: userInput.targetVehicleId) { _, _ in
+                                let allowed = ChargingType.publicCases(targetBrandIsTesla: targetBrandIsTesla)
+                                if !allowed.contains(userInput.chargingConfiguration.publicChargingType) {
+                                    userInput.chargingConfiguration.publicChargingType = .publicFast
+                                }
+                            }
+                            Text(L10n.publicChargingSourceNote)
+                                .font(Typography.readingCaption)
+                                .foregroundColor(.secondaryText)
+
+                            if let period = OfficialCostService.shared.cachedOrBundledCosts()?.electricityPeriod {
+                                Text(L10n.electricityEurostatPeriod(period))
+                                    .font(Typography.readingCaption)
+                                    .foregroundColor(.secondaryText)
+                            }
+
+                            Text(L10n.insuranceAnnualOptionalLabel)
+                                .font(Typography.readingCaption)
+                                .foregroundColor(.secondaryText)
+                                .padding(.top, 10)
+                            TextField(
+                                L10n.insuranceAnnualOptionalPlaceholder,
+                                value: Binding(
+                                    get: { userInput.annualInsuranceOverrideEUR ?? 0 },
+                                    set: { userInput.annualInsuranceOverrideEUR = $0 > 0 ? $0 : nil }
+                                ),
+                                format: .number
+                            )
+                            .keyboardType(.decimalPad)
+                            .font(Typography.readingBody)
+                            Toggle(L10n.kaskoTheftToggle, isOn: $userInput.includeKaskoTheft)
+                                .font(Typography.readingBody)
+                                .tint(.accent)
+                            if userInput.includeKaskoTheft {
+                                Text(L10n.kaskoTheftAmountLabel)
+                                    .font(Typography.readingCaption)
+                                    .foregroundColor(.secondaryText)
+                                TextField(
+                                    L10n.kaskoTheftAmountPlaceholder,
+                                    value: Binding(
+                                        get: { userInput.annualKaskoEUR ?? 0 },
+                                        set: { userInput.annualKaskoEUR = $0 > 0 ? $0 : nil }
+                                    ),
+                                    format: .number
+                                )
+                                .keyboardType(.decimalPad)
+                                .font(Typography.readingBody)
+                            }
+
                             VStack(alignment: .leading, spacing: 10) {
                                 Text(L10n.comparisonIntentSectionTitle)
                                     .font(Typography.readingCaption)
@@ -388,6 +467,11 @@ struct InputView: View {
                                                     Text("\(item.yearlyKm) km · €\(item.savingsMin)–€\(item.savingsMax)")
                                                         .font(Typography.readingCaption)
                                                         .foregroundColor(.secondaryText)
+                                                    if item.showsPartialBolloTotal {
+                                                        Text(L10n.partialTotalBolloUnknown)
+                                                            .font(Typography.readingCaption)
+                                                            .foregroundColor(.warning)
+                                                    }
                                                 }
                                                 Spacer()
                                                 Image(systemName: "arrow.uturn.backward.circle.fill")
@@ -539,10 +623,13 @@ struct InputView: View {
             liveResult: liveResult
         )
         if report.isMaterial, let min = report.currentSavingsMin, let max = report.currentSavingsMax {
+            let changed = max > 0
+                ? L10n.lastComparisonDataChanged(min, max)
+                : L10n.lastComparisonDataChangedCheaper
             if report.incentiveWindowChanged || report.incentiveWindowExpiredNow {
-                return L10n.lastComparisonDataChanged(min, max) + " · " + ItalianIncentives.windowBadgeText
+                return changed + " · " + ItalianIncentives.windowBadgeText
             }
-            return L10n.lastComparisonDataChanged(min, max)
+            return changed
         }
         if report.incentiveWindowChanged || report.incentiveWindowExpiredNow {
             return ItalianIncentives.windowBadgeText
@@ -705,6 +792,21 @@ struct InputView: View {
         L10n.validationA11yTitle + ": " + validationErrors.joined(separator: "; ")
     }
 
+    private func bookletP2Field(label: String, binding: Binding<Double>) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(label)
+                .font(Typography.readingCaption)
+                .foregroundColor(.secondaryText)
+                .padding(.top, 8)
+            TextField(L10n.evBookletPowerKwP2Placeholder, value: binding, format: .number)
+                .keyboardType(.decimalPad)
+                .font(Typography.readingBody)
+            Text(L10n.evBookletPowerKwP2Hint)
+                .font(Typography.readingCaption)
+                .foregroundColor(.secondaryText)
+        }
+    }
+
     @ViewBuilder
     private func sliderBlock<Controls: View>(
         title: String,
@@ -778,6 +880,10 @@ struct InputView: View {
         sourceVehicles.first(where: { $0.id == userInput.sourceVehicleId })
     }
 
+    private var targetBrandIsTesla: Bool {
+        selectedTargetVehicle?.brand.localizedCaseInsensitiveContains("tesla") ?? false
+    }
+
     private var selectedTargetVehicle: VehicleCatalogItem? {
         targetVehicles.first(where: { $0.id == userInput.targetVehicleId })
     }
@@ -847,7 +953,7 @@ struct InputView: View {
                 dailyKm: 12_000,
                 hasHomeCharging: true,
                 areaType: .urban,
-                fuelPrice: 1.7,
+                fuelPrice: OfficialEnergyCosts.Fallback.petrolPerLiter,
                 ownershipYears: 5,
                 scenario: .realistic
             )),

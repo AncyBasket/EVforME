@@ -159,6 +159,13 @@ struct InputValidator {
             errors.append(L10n.validationStickerEnergyRange)
         }
 
+        if input.includeKaskoTheft {
+            let kasko = input.annualKaskoEUR ?? 0
+            if kasko <= 0 {
+                errors.append(L10n.kaskoAmountRequired)
+            }
+        }
+
         let catalog = VehicleCatalogService.shared
         if !input.sourceVehicleId.isEmpty {
             if let source = catalog.vehicle(by: input.sourceVehicleId) {
