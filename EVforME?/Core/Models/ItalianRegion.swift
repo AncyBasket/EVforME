@@ -75,7 +75,9 @@ enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
     /// €/kW dopo esenzione. `nil` = non stimato. Lombardia/Piemonte: 0 permanente.
     ///
     /// Bolzano 1,96 €/kW: tariffa Euro 6 (Euro 0–5: 1,99 €/kW — non modellato senza classe Euro).
-    /// Molise 3,12: allineato ad Abruzzo/Campania; senza conferma esplicita tariffario ACI Molise 2026 → stima.
+    /// Molise 2,76 €/kW: Regione Molise Tariffario 2026 (riportato da Quattroruote, guida bollo Molise
+    /// aggiornata al 17/02/2026) — EV esenti 5 anni, poi 1/4 della tariffa Euro 4/5/6 ≤100 kW (2,76),
+    /// lineare anche oltre 100 kW.
     /// Sicilia: clausola ACI «a prescindere» sull’importo benzina a 2,58 €/kW; in-app 2,58 × 1/4 post-esenzione.
     var evBolloEURPerKw: Double? {
         switch self {
@@ -91,8 +93,8 @@ enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
         case .abruzzo, .campania:
             return 3.12
         case .molise:
-            // Stima (stesso cluster Abruzzo/Campania); fonte ACI Molise 2026 non verificata in-app.
-            return 3.12
+            // Regione Molise Tariffario 2026 (Quattroruote, 17/02/2026): Euro 4/5/6 ≤100 kW = 2,76 €/kW.
+            return 2.76
         case .bolzano:
             // Euro 6: 1,96 €/kW (Euro 0–5: 1,99 — non usato senza classe Euro).
             return 1.96

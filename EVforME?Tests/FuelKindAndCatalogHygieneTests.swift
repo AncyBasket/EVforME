@@ -785,6 +785,19 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         )
         XCTAssertEqual(lazio.amount, 2.84 * 100 * 0.25, accuracy: 0.01)
 
+        // Molise: esenzione 5 anni, poi 2,76 €/kW × 1/4 (Tariffario 2026). 2018→2026 età 8 → 69,00.
+        let molise = OwnershipCostEstimates.bolloPerYearDetail(
+            catalogTaxesPerYear: 0,
+            powertrain: .ev,
+            vehicleYear: 2018,
+            referenceYear: 2026,
+            bookletPowerKwP2: 100,
+            italianRegion: .molise
+        )
+        XCTAssertEqual(molise.amount, 2.76 * 100 * 0.25, accuracy: 0.01)
+        XCTAssertEqual(molise.amount, 69.00, accuracy: 0.01)
+        XCTAssertEqual(ItalianRegion.molise.evBolloEURPerKw ?? -1, 2.76, accuracy: 0.001)
+
         let lombardia = OwnershipCostEstimates.bolloPerYearDetail(
             catalogTaxesPerYear: 0,
             powertrain: .ev,
