@@ -599,6 +599,7 @@ enum L10n {
     static var italianRegionBolloNoteBolzano: String { string("italian_region_bollo_note_bolzano") }
     static var italianRegionBolloNoteSicilia: String { string("italian_region_bollo_note_sicilia") }
     static var italianRegionBolloNoteValleDAosta: String { string("italian_region_bollo_note_valledaosta") }
+    static var italianRegionBolloNoteNationalThermal: String { string("italian_region_bollo_note_national_thermal") }
     static var partialTotalBolloUnknown: String { string("partial_total_bollo_unknown") }
     static var italyKitBolloBothUnknown: String { string("italy_kit_bollo_both_unknown") }
     static func italyKitBolloRowSourceUnknown(_ ev: Int) -> String {

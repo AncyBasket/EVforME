@@ -2,12 +2,12 @@
 //  ItalianRegion.swift
 //  EVforME?
 //
-//  Tariffari ACI bollo EV 2026 (opzionale). Fonte: tariffari ACI regionali 2026.
+//  Tariffari ACI / regionali bollo 2026 (opzionale).
 //
 
 import Foundation
 
-/// Regione / provincia autonoma per stima bollo EV (tariffa €/kW dopo l’esenzione).
+/// Regione / provincia autonoma per stima bollo EV e, dove citato, bollo termico.
 enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
     case unspecified
     case lombardia
@@ -116,6 +116,34 @@ enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
         self == .lombardia || self == .piemonte
     }
 
+    /// `true` se in-app c’è un tariffario termico 2026 citato (altrimenti stima nazionale catalogo).
+    var hasCitedThermalBolloTariff: Bool {
+        self == .molise
+    }
+
+    /// Bollo termico (ICE/HEV/PHEV) con tariffario regionale 2026 citato.
+    ///
+    /// Molise (Regione Molise Tariffario 2026, Quattroruote 17/02/2026), Euro 4/5/6:
+    /// - benzina/diesel: 2,76 €/kW fino a 100 kW + 4,14 €/kW oltre;
+    /// - solo GPL o solo metano: 1/4 di 2,76 €/kW (lineare);
+    /// - bifuel GPL/metano–benzina: non modellato (manca `FuelKind` bifuel) → stima nazionale.
+    func thermalBolloEUR(powerKw: Double, fuelKind: FuelKind) -> Double? {
+        guard powerKw > 0 else { return nil }
+        switch self {
+        case .molise:
+            switch fuelKind {
+            case .lpg, .cng:
+                let raw = 2.76 * 0.25 * powerKw
+                return (raw * 100).rounded() / 100
+            case .petrol, .diesel, .unknown:
+                let raw = 2.76 * min(powerKw, 100) + 4.14 * max(0, powerKw - 100)
+                return (raw * 100).rounded() / 100
+            }
+        default:
+            return nil
+        }
+    }
+
     /// Nota leggibile su stime / caveat regionali (Localizable IT/EN).
     var evBolloRateNote: String? {
         switch self {
@@ -130,5 +158,13 @@ enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
         default:
             return nil
         }
+    }
+
+    /// Nota sotto il picker: caveat EV regionali, oppure avviso stima nazionale sul termico.
+    var bolloPickerNote: String? {
+        if let ev = evBolloRateNote { return ev }
+        if hasCitedThermalBolloTariff { return nil }
+        if self == .otherUnknown { return nil }
+        return L10n.italianRegionBolloNoteNationalThermal
     }
 }

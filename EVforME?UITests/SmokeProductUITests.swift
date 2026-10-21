@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import UIKit
 
 final class SmokeProductUITests: XCTestCase {
     private var shotsDir: URL!
@@ -247,18 +248,10 @@ final class SmokeProductUITests: XCTestCase {
             app.textFields["charging_map_city_field"].exists
             ? app.textFields["charging_map_city_field"]
             : app.textFields.firstMatch
-        if field.waitForExistence(timeout: 5) {
-            field.tap()
-            field.typeText("Milano")
-            let search =
-                app.buttons["charging_map_city_search"].exists
-                ? app.buttons["charging_map_city_search"]
-                : firstExistingButton(app, labels: ["Cerca", "Search"], timeout: 2)
-            search?.tap()
-            RunLoop.current.run(until: Date().addingTimeInterval(6))
-        }
+        XCTAssertTrue(field.waitForExistence(timeout: 5), "city field for 08/08b")
+        // 08b first: city mode with empty query → in-app fallback coordinate (distinct from Milano).
+        RunLoop.current.run(until: Date().addingTimeInterval(3))
         dismissSystemAlertsIfNeeded(app)
-        // Require map chrome so we never overwrite 08 with the guides hub.
         let mapChrome =
             app.descendants(matching: .any)["charging_map_mode_picker"].exists
             || app.navigationBars["Colonnine vicine"].exists
@@ -266,11 +259,25 @@ final class SmokeProductUITests: XCTestCase {
             || app.maps.firstMatch.exists
             || app.buttons["Apri in Mappe"].exists
             || app.buttons["Open in Maps"].exists
-        XCTAssertTrue(mapChrome, "08 shot must be the charging map, not guides hub")
+        XCTAssertTrue(mapChrome, "08/08b must be the charging map, not guides hub")
+        saveShot(app, name: "08b_charging_map_fallback")
+
+        field.tap()
+        field.typeText("Milano")
+        let search =
+            app.buttons["charging_map_city_search"].exists
+            ? app.buttons["charging_map_city_search"]
+            : firstExistingButton(app, labels: ["Cerca", "Search"], timeout: 2)
+        search?.tap()
+        RunLoop.current.run(until: Date().addingTimeInterval(6))
+        dismissSystemAlertsIfNeeded(app)
         saveShot(app, name: "08_charging_map_city")
-        if app.buttons["Apri in Mappe"].exists || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Nessuna")).firstMatch.exists {
-            saveShot(app, name: "08b_charging_map_fallback")
-        }
+
+        let cityURL = shotsDir.appendingPathComponent("08_charging_map_city.png")
+        let fallbackURL = shotsDir.appendingPathComponent("08b_charging_map_fallback.png")
+        let cityData = try Data(contentsOf: cityURL)
+        let fallbackData = try Data(contentsOf: fallbackURL)
+        XCTAssertNotEqual(cityData, fallbackData, "08 and 08b must be different screenshots")
         firstExistingButton(app, labels: ["Fatto", "Close", "Done"], timeout: 4)?.tap()
         dismissSystemAlertsIfNeeded(app)
 
@@ -350,10 +357,72 @@ final class SmokeProductUITests: XCTestCase {
         add(attachment)
         let url = shotsDir.appendingPathComponent("\(name).png")
         do {
-            try shot.pngRepresentation.write(to: url)
+            let upright = try uprightPortraitPNG(from: shot.pngRepresentation, name: name)
+            try upright.write(to: url)
         } catch {
             XCTFail("Could not write smoke shot \(name): \(error)")
         }
+    }
+
+    /// Bake EXIF orientation into pixels (XCUIScreenshot often writes Orientation=6 as 2622×1206 raw).
+    private func uprightPortraitPNG(from raw: Data, name: String) throws -> Data {
+        guard let image = UIImage(data: raw) else {
+            throw NSError(domain: "SmokeShot", code: 1, userInfo: [NSLocalizedDescriptionKey: "\(name): invalid PNG"])
+        }
+        let format = UIGraphicsImageRendererFormat.default()
+        format.scale = 1
+        format.opaque = true
+        let renderer = UIGraphicsImageRenderer(size: image.size, format: format)
+        let upright = renderer.image { _ in
+            image.draw(in: CGRect(origin: .zero, size: image.size))
+        }
+        guard let data = upright.pngData(), let check = UIImage(data: data), let cg = check.cgImage else {
+            throw NSError(domain: "SmokeShot", code: 2, userInfo: [NSLocalizedDescriptionKey: "\(name): could not re-encode PNG"])
+        }
+        let w = cg.width
+        let h = cg.height
+        XCTAssertGreaterThan(h, w, "\(name) must be portrait after orientation bake, got \(w)×\(h)")
+        assertNoFullyBlackHalf(cgImage: cg, name: name)
+        return data
+    }
+
+    /// Reject landscape-with-black-strip artifacts (entire left or right half ≈ black).
+    private func assertNoFullyBlackHalf(cgImage: CGImage, name: String) {
+        let w = cgImage.width
+        let h = cgImage.height
+        guard w > 10, h > 10 else {
+            XCTFail("\(name): image too small \(w)×\(h)")
+            return
+        }
+        guard let data = cgImage.dataProvider?.data,
+              let ptr = CFDataGetBytePtr(data) else {
+            XCTFail("\(name): cannot read pixels")
+            return
+        }
+        let bpr = cgImage.bytesPerRow
+        let bpp = max(1, cgImage.bitsPerPixel / 8)
+        func halfMostlyBlack(x0: Int, x1: Int) -> Bool {
+            var dark = 0
+            var total = 0
+            var y = 0
+            while y < h {
+                var x = x0
+                while x < x1 {
+                    let i = y * bpr + x * bpp
+                    let r = Int(ptr[i])
+                    let g = bpp > 1 ? Int(ptr[i + 1]) : r
+                    let b = bpp > 2 ? Int(ptr[i + 2]) : r
+                    if r < 8 && g < 8 && b < 8 { dark += 1 }
+                    total += 1
+                    x += max(1, (x1 - x0) / 24)
+                }
+                y += max(1, h / 48)
+            }
+            return total > 0 && Double(dark) / Double(total) > 0.92
+        }
+        let mid = w / 2
+        XCTAssertFalse(halfMostlyBlack(x0: 0, x1: mid), "\(name): left half is fully black")
+        XCTAssertFalse(halfMostlyBlack(x0: mid, x1: w), "\(name): right half is fully black")
     }
 
     @MainActor

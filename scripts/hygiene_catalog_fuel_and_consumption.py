@@ -351,15 +351,21 @@ def realistic_ev_energy(row: dict) -> float:
     return default
 
 
-def realistic_phev_fuel(row: dict) -> float | None:
-    cons = _as_float(row.get("fuelConsumptionLPerKm"))
-    seg = segment_from_length(row.get("lengthM"))
-    default = PHEV_FUEL_DEFAULT[seg]
+def is_phev_placeholder_fuel(cons: float | None) -> bool:
+    """True for missing/thin/segment-default fuels (not honest charge-sustaining)."""
     if cons is None or cons <= 0:
-        return default
+        return True
     if cons < PHEV_FUEL_MIN_L_PER_KM:
-        # WLTP blended troppo basso per la quota termica del simulatore.
-        return default
+        return True
+    return any(abs(cons - d) < 1e-9 for d in PHEV_FUEL_DEFAULT.values())
+
+
+def realistic_phev_fuel(row: dict) -> float | None:
+    """Keep only plausible CS fuel; never stamp segment defaults (those are placeholders)."""
+    cons = _as_float(row.get("fuelConsumptionLPerKm"))
+    if is_phev_placeholder_fuel(cons):
+        return None
+    assert cons is not None
     if cons > PHEV_FUEL_MAX_L_PER_KM:
         return PHEV_FUEL_MAX_L_PER_KM
     return round(cons, 4)
@@ -584,6 +590,7 @@ def hygiene_rows(rows: list[dict]) -> tuple[list[dict], dict]:
         "ev_range_fixed": 0,
         "phev_energy_fixed": 0,
         "phev_fuel_fixed": 0,
+        "phev_dropped_no_cs": 0,
         "diesel": 0,
         "petrol": 0,
     }
@@ -622,6 +629,12 @@ def hygiene_rows(rows: list[dict]) -> tuple[list[dict], dict]:
                 stats["ev_range_fixed"] += 1
 
         elif pt == "phev":
+            old_f = _as_float(out.get("fuelConsumptionLPerKm"))
+            new_f = realistic_phev_fuel(out)
+            if new_f is None:
+                # No honest charge-sustaining source — drop (do not stamp segment defaults).
+                stats["phev_dropped_no_cs"] += 1
+                continue
             old_e = resolve_raw_ev_kwh_per_km(out)
             new_e = realistic_ev_energy(out)
             energy_changed = old_e is None or abs(old_e - new_e) >= 0.00005
@@ -629,9 +642,7 @@ def hygiene_rows(rows: list[dict]) -> tuple[list[dict], dict]:
             sync_ev_energy_fields(out, new_e)
             if energy_changed:
                 stats["phev_energy_fixed"] += 1
-            new_f = realistic_phev_fuel(out)
-            old_f = _as_float(out.get("fuelConsumptionLPerKm"))
-            if new_f is not None and (old_f is None or abs(old_f - new_f) >= 0.00005):
+            if old_f is None or abs(old_f - new_f) >= 0.00005:
                 out["fuelConsumptionLPerKm"] = new_f
                 stats["phev_fuel_fixed"] += 1
 

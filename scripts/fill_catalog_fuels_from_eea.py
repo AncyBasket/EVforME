@@ -37,7 +37,7 @@ MANIFEST_PATH = CACHE_DIR / "fill_catalog_fuels_manifest.json"
 CATALOG_SERVICE = REPO / "EVforME?" / "Core" / "Logic" / "VehicleCatalogService.swift"
 
 # Reg. (EU) 2017/1151 Annex XXI Sub-Annex 7 §6 — simplified FC equations (HC=CO=0).
-# Petrol (E10) §6.5: FC = (0.1206 / 0.745) × (0.866·HC + 0.429·CO + 0.273·CO2)
+# Petrol (E10) §6.5: FC = (0.1206 / 0.745) × (0.829·HC + 0.429·CO + 0.273·CO2)
 #   → CO2/FC ≈ 22.63. Density 0.745 kg/l is within Annex IX E10 band 743–756 kg/m³.
 # Diesel (B7) §6.10: FC = (0.1165 / 0.834) × (0.858·HC + 0.429·CO + 0.273·CO2)
 #   → CO2/FC ≈ 26.22 (HC=CO=0 in our simplified path).
@@ -94,7 +94,9 @@ TRUE_GHOST_IDS = {
 }
 
 # Placeholder CS fuel used when no charge-sustaining source existed (not honest for catalog).
+# Hygiene segment defaults / old placeholders — not honest charge-sustaining sources.
 PHEV_PLACEHOLDER_L_PER_KM = 0.065
+PHEV_PLACEHOLDER_FUELS = {0.045, 0.055, 0.065, 0.075}
 
 
 def http_get_json(url: str, timeout: int = 120) -> dict:
@@ -798,6 +800,10 @@ def main() -> None:
     skipped_no_co2 = 0
     phev_bollo_only = 0
 
+    # EEA PETROL "TOYOTA AURIS" 2018 (n=9244, CO2≈116) is contaminated with hybrids
+    # (sibling empty-Ft bucket n=4592). Keep seed stima; do not overwrite from that cell.
+    SKIP_EEA_CONSUMPTION_IDS = {"toyota-auris-2018", "toyota-auris-hybrid-2018"}
+
     # --- Correct ICE/HEV consumptions; bollo for ICE/HEV/PHEV; never PHEV L/100 from CO2 ---
     for r in rows:
         brand_u = str(r.get("brand", "")).upper()
@@ -805,6 +811,9 @@ def main() -> None:
             continue
         pt = (r.get("powertrain") or "").lower()
         if pt == "ev":
+            continue
+        rid = str(r.get("id") or "")
+        if rid in SKIP_EEA_CONSUMPTION_IDS:
             continue
         model_raw = str(r.get("model", ""))
         year = int(r.get("year") or 0)
@@ -1308,13 +1317,18 @@ def main() -> None:
         else:
             hev_drop_contaminated.add(str(r.get("id") or ""))
 
-    # PHEV placeholder 0.065 L/km (manual-world-PHEV) — no honest CS source.
+    # PHEV hygiene/segment placeholders — no honest charge-sustaining source.
+    def _is_phev_placeholder_fuel(val: object) -> bool:
+        if not isinstance(val, (int, float)):
+            return False
+        f = float(val)
+        return any(abs(f - p) < 1e-9 for p in PHEV_PLACEHOLDER_FUELS)
+
     phev_placeholder_ids = {
         str(r.get("id") or "")
         for r in rows
         if (r.get("powertrain") or "").lower() == "phev"
-        and isinstance(r.get("fuelConsumptionLPerKm"), (int, float))
-        and abs(float(r["fuelConsumptionLPerKm"]) - PHEV_PLACEHOLDER_L_PER_KM) < 1e-9
+        and _is_phev_placeholder_fuel(r.get("fuelConsumptionLPerKm"))
     }
 
     removed: list[dict] = []

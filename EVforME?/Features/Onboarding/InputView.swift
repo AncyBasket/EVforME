@@ -94,8 +94,7 @@ struct InputView: View {
                             )
                         )
                     }
-                    if userInput.market == .IT,
-                       selectedSourceVehicle?.powertrain == .ev || selectedTargetVehicle?.powertrain == .ev {
+                    if userInput.market == .IT {
                         VStack(alignment: .leading, spacing: 6) {
                             Text(L10n.italianRegionLabel)
                                 .font(Typography.readingCaption)
@@ -109,7 +108,7 @@ struct InputView: View {
                             Text(L10n.italianRegionHint)
                                 .font(Typography.readingCaption)
                                 .foregroundStyle(Color.secondaryText)
-                            if let rateNote = userInput.italianRegion.evBolloRateNote {
+                            if let rateNote = userInput.italianRegion.bolloPickerNote {
                                 Text(rateNote)
                                     .font(Typography.readingCaption)
                                     .foregroundStyle(Color.secondaryText)
