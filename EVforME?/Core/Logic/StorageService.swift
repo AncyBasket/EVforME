@@ -154,20 +154,32 @@ final class StorageService {
         return changed
     }
 
-    /// Aggiorna €/L quando cambia il veicolo attuale (benzina ↔ diesel), se non c’è override manuale.
+    /// Aggiorna €/L (o €/kg) quando cambia il veicolo attuale.
+    /// Se il prezzo manuale resta fuori range per il nuovo carburante (es. 1,90 €/L su GPL),
+    /// lo reimposta al prezzo ufficiale del nuovo tipo.
     @discardableResult
     func syncFuelPriceForSourceVehicle(in input: inout UserInput) -> Bool {
-        guard !defaults.bool(forKey: Keys.userCustomizedFuelPrice) else { return false }
         guard let costs = OfficialCostService.shared.cachedOrBundledCosts() else { return false }
         let kind = VehicleCatalogService.shared.vehicle(by: input.sourceVehicleId)?.resolvedFuelKind ?? .petrol
-        let price = costs.pricePerLiter(for: kind)
+        let official = costs.pricePerLiter(for: kind)
+        let range = InputValidator.fuelPriceSliderRange(for: kind)
         let epsilon = 0.0001
-        guard abs(input.fuelPrice - price) >= epsilon else {
-            defaults.set(price, forKey: Keys.lastAutoFuelPrice)
+        let outOfRange =
+            input.fuelPrice < range.lowerBound - epsilon
+            || input.fuelPrice > range.upperBound + epsilon
+        if outOfRange {
+            input.fuelPrice = official
+            defaults.set(official, forKey: Keys.lastAutoFuelPrice)
+            defaults.set(false, forKey: Keys.userCustomizedFuelPrice)
+            return true
+        }
+        guard !defaults.bool(forKey: Keys.userCustomizedFuelPrice) else { return false }
+        guard abs(input.fuelPrice - official) >= epsilon else {
+            defaults.set(official, forKey: Keys.lastAutoFuelPrice)
             return false
         }
-        input.fuelPrice = price
-        defaults.set(price, forKey: Keys.lastAutoFuelPrice)
+        input.fuelPrice = official
+        defaults.set(official, forKey: Keys.lastAutoFuelPrice)
         return true
     }
 

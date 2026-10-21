@@ -76,8 +76,7 @@ enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
     ///
     /// Bolzano 1,96 €/kW: tariffa Euro 6 (Euro 0–5: 1,99 €/kW — non modellato senza classe Euro).
     /// Molise 3,12: allineato ad Abruzzo/Campania; senza conferma esplicita tariffario ACI Molise 2026 → stima.
-    /// Sicilia 2,58: il tariffario ACI applica 1/4 dell’importo calcolato sulla scala benzina;
-    /// in-app usiamo 2,58 €/kW × 1/4 (stesso schema nazionale post-esenzione).
+    /// Sicilia: clausola ACI «a prescindere» sull’importo benzina a 2,58 €/kW; in-app 2,58 × 1/4 post-esenzione.
     var evBolloEURPerKw: Double? {
         switch self {
         case .unspecified:
@@ -100,7 +99,7 @@ enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
         case .basilicata, .puglia, .umbria:
             return 2.58
         case .sicilia:
-            // 1/4 dell’importo benzina (tariffario ACI Sicilia) → stesso 2,58 × 1/4 post-esenzione.
+            // Clausola «a prescindere»: 1/4 dell’importo calcolato a 2,58 €/kW (scala benzina nazionale).
             return 2.58
         case .valleDAosta:
             // Dopo gli 8 anni di esenzione (EV ≥2019): stima nazionale 2,58.
@@ -123,7 +122,7 @@ enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
         case .bolzano:
             return "1,96 €/kW Euro 6 (1,99 Euro 0–5 non modellato)"
         case .sicilia:
-            return "1/4 dell’importo benzina (ACI Sicilia) = 2,58 €/kW × 1/4"
+            return "ACI Sicilia «a prescindere»: 1/4 di 2,58 €/kW (scala benzina)"
         case .valleDAosta:
             return "esenzione 8 anni se immatricolazione ≥2019 (ACI VdA 2026)"
         default:

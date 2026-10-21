@@ -190,7 +190,7 @@ enum OwnershipCostEstimates {
             }
             if let kw = bookletPowerKwP2, kw > 0 {
                 // Lineare: nessun salto 3,87 oltre 100 kW (solo ICE). Es. naz. 100 kW → 2,58×100×1/4 = 64,50.
-                // Sicilia: tariffario = 1/4 importo benzina → stesso rate×kW×1/4.
+                // Sicilia: clausola ACI «a prescindere» a 2,58 €/kW → rate×kW×1/4.
                 let raw = rate * kw * 0.25
                 return BolloEstimate(amount: (raw * 100).rounded() / 100, isKnown: true)
             }

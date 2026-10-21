@@ -109,6 +109,12 @@ struct InputView: View {
                             Text(L10n.italianRegionHint)
                                 .font(Typography.readingCaption)
                                 .foregroundStyle(Color.secondaryText)
+                            if let rateNote = userInput.italianRegion.evBolloRateNote {
+                                Text(rateNote)
+                                    .font(Typography.readingCaption)
+                                    .foregroundStyle(Color.secondaryText)
+                                    .accessibilityIdentifier("italian_region_bollo_rate_note")
+                            }
                         }
                         .padding(.top, 4)
                     }
@@ -538,6 +544,16 @@ struct InputView: View {
             selectedScenario = userInput.scenario
             refreshHistoryState()
             loadCatalog()
+#if DEBUG
+            if ProcessInfo.processInfo.environment["UITEST_EXPAND_ADVANCED"] == "1" {
+                showAdvancedDetails = true
+            }
+            // UI test: ripristina prezzo forzato anche senza onChange del veicolo.
+            if let raw = ProcessInfo.processInfo.environment["UITEST_FUEL_PRICE"],
+               let price = Double(raw.replacingOccurrences(of: ",", with: ".")) {
+                userInput.fuelPrice = price
+            }
+#endif
             if accessibilityReduceMotion {
                 appearAnimation = true
             } else {

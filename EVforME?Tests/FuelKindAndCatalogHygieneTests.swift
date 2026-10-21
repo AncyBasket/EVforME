@@ -587,6 +587,8 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertTrue(eeaLowN.isEmpty, "EEA sourceName must have n≥100: \(eeaLowN.map(\.id))")
     }
 
+    /// Ogni riga ICE/HEV IT con bucket EEA nel manifest deve restare entro ±25% del L/100 del bucket
+    /// (anche se la riga non è stata riscritta). Non confrontare il consumo con la CO₂ della stessa riga.
     func testCatalog_ICEITWithin25PercentOfEEABothDirections() throws {
         let manifestURL = URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()
@@ -597,37 +599,60 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         }
         let data = try Data(contentsOf: manifestURL)
         let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
-        let co2 = json?["co2_to_fc"] as? [String: Any]
-        let petrolMeta = co2?["petrol"] as? [String: Any]
-        let dieselMeta = co2?["diesel"] as? [String: Any]
-        let petrolDiv = petrolMeta?["co2_per_l100"] as? Double ?? 22.63
-        let dieselDiv = dieselMeta?["co2_per_l100"] as? Double ?? 26.29
+        guard let refs = json?["eea_bucket_refs"] as? [[String: Any]], !refs.isEmpty else {
+            throw XCTSkip("eea_bucket_refs missing from EEA manifest")
+        }
+        var expectedById: [String: Double] = [:]
+        for ref in refs {
+            guard let id = ref["id"] as? String,
+                  let eeaL100 = ref["eea_l100"] as? Double, eeaL100 > 0,
+                  let n = ref["n"] as? Int, n >= 100,
+                  let pt = (ref["powertrain"] as? String)?.lowercased(),
+                  pt == "ice" || pt == "hev" else { continue }
+            expectedById[id] = eeaL100
+        }
+        XCTAssertFalse(expectedById.isEmpty, "manifest must list ICE/HEV EEA buckets")
 
-        let eeaPattern = try NSRegularExpression(pattern: #"EEA co2cars IT \d{4} n=(\d+)"#)
         var offenders: [String] = []
+        var checked = 0
         for vehicle in VehicleCatalogService.shared.vehicles {
-            guard vehicle.powertrain == .ice,
+            guard (vehicle.powertrain == .ice || vehicle.powertrain == .hev),
                   (vehicle.market ?? "IT") == "IT",
-                  let sn = vehicle.sourceName,
-                  let match = eeaPattern.firstMatch(in: sn, range: NSRange(sn.startIndex..., in: sn)),
-                  let nRange = Range(match.range(at: 1), in: sn),
-                  let n = Int(sn[nRange]), n >= 100,
-                  let fc = vehicle.fuelConsumptionLPerKm, fc > 0,
-                  let co2g = vehicle.co2gKm, co2g > 0 else { continue }
-            let fk = vehicle.resolvedFuelKind
-            let divisor: Double
-            switch fk {
-            case .petrol: divisor = petrolDiv
-            case .diesel: divisor = dieselDiv
-            default: continue
-            }
-            let expected = Double(co2g) / divisor
+                  let expected = expectedById[vehicle.id],
+                  let fc = vehicle.fuelConsumptionLPerKm, fc > 0 else { continue }
+            checked += 1
             let actual = fc * 100
             if actual > expected * 1.25 || expected > actual * 1.25 {
-                offenders.append("\(vehicle.id): actual \(actual) vs EEA \(expected) (co2=\(co2g))")
+                offenders.append(
+                    "\(vehicle.id): actual \(String(format: "%.2f", actual)) vs EEA bucket \(String(format: "%.2f", expected))"
+                )
             }
         }
+        XCTAssertGreaterThan(checked, 50, "should compare many ICE/HEV rows to EEA buckets")
         XCTAssertTrue(offenders.isEmpty, offenders.joined(separator: "\n"))
+    }
+
+    func testCatalog_FullHybridBucketsPreferETechNotPetrolSibling() {
+        let clio22 = VehicleCatalogService.shared.vehicle(by: "renault-clio-2022")
+        let clio23 = VehicleCatalogService.shared.vehicle(by: "renault-clio-2023")
+        for v in [clio22, clio23].compactMap({ $0 }) {
+            XCTAssertEqual(v.powertrain, .hev, v.id)
+            let l100 = (v.fuelConsumptionLPerKm ?? 0) * 100
+            XCTAssertLessThanOrEqual(l100, 4.8, "\(v.id) should be E-Tech (~96–98 g), not petrol Clio (~118 g)")
+            if let co2 = v.co2gKm {
+                XCTAssertLessThanOrEqual(co2, 105, "\(v.id) co2=\(co2)")
+            }
+        }
+        let yaris18 = VehicleCatalogService.shared.vehicle(by: "toyota-yaris-hybrid-2018")
+        let yaris19 = VehicleCatalogService.shared.vehicle(by: "toyota-yaris-hybrid-2019")
+        for v in [yaris18, yaris19].compactMap({ $0 }) {
+            XCTAssertEqual(v.powertrain, .hev, v.id)
+            let l100 = (v.fuelConsumptionLPerKm ?? 0) * 100
+            XCTAssertLessThanOrEqual(l100, 5.2, "\(v.id) should be Yaris Hybrid bucket, not petrol Yaris")
+            if let co2 = v.co2gKm {
+                XCTAssertLessThanOrEqual(co2, 115, "\(v.id) co2=\(co2)")
+            }
+        }
     }
 
     func testCatalog_PetrolEEAMedianCO2PerL100MatchesCitedCoefficient() throws {

@@ -107,6 +107,8 @@ struct MainShellView: View {
             if let raw = ProcessInfo.processInfo.environment["UITEST_FUEL_PRICE"],
                let price = Double(raw.replacingOccurrences(of: ",", with: ".")) {
                 userInput.fuelPrice = price
+                // Evita che applyOfficialCosts / sync sovrascrivano il preset (es. 0,78 GPL).
+                StorageService.shared.markFuelPriceCustomized()
             }
         }
         .task { await catalogSetup() }

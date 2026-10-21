@@ -326,7 +326,7 @@
 "verdict_ai_fallback_maybe" = "At about %d km/year the gap is modest (about €%d–€%d/year). An EV can work, but small changes in electricity price or kilometers can flip the picture.";
 "verdict_ai_fallback_not_yet" = "At about %d km/year with these prices, electricity does not beat fuel yet. Expect about %d charges per week — wait for cheaper power, more home charging, or a thriftier EV before switching.";
 "yearly_km_slider_a11y" = "Yearly kilometers slider";
-"fuel_price_slider_a11y" = "Fuel price per liter";
+"fuel_price_slider_a11y" = "Fuel price (€/L or €/kg)";
 "electricity_price_slider_a11y" = "Electricity price per kWh";
 "area_type_picker_a11y" = "Driving area type selection";
 "home_charging_a11y" = "Home charging availability";

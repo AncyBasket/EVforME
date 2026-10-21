@@ -157,8 +157,8 @@ EVforME? is a free decision-support app (no IAP, no account).
 ### Privacy nutrition (aligned with PrivacyInfo + policy)
 
 - Data not sold; no advertising tracking (`NSPrivacyTracking` = false)
-- Precise location: App Functionality only, if user allows for the map
-- Name/email: only if user submits optional advisor form
+- `NSPrivacyCollectedDataTypes` empty in app PrivacyInfo (release: no lead URL / analytics; MapKit only for Nearby chargers)
+- ASC App Privacy: no Name / Email / Precise Location collected by EVforME
 
 ---
 

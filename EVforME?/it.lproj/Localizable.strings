@@ -344,11 +344,11 @@
 "verdict_ai_fallback_yes" = "Con circa %d km/anno i conti favoriscono l’elettrico: circa €%d–€%d risparmiati l’anno e circa %d ricariche a settimana. Con ricarica a casa e la coppia scelta, sembra conveniente con questi dati.";
 "verdict_ai_fallback_maybe" = "A circa %d km/anno il margine è sottile (circa €%d–€%d/anno). L’EV può funzionare, ma prezzi energia o chilometri diversi possono cambiare il verdetto.";
 "verdict_ai_fallback_not_yet" = "A circa %d km/anno con questi prezzi, l’elettrico non batte ancora il carburante. Conta circa %d ricariche a settimana: conviene aspettare energia più economica, più ricarica a casa o un’EV più parca.";
-"yearly_km_slider_a11y" = "Yearly kilometers slider";
-"fuel_price_slider_a11y" = "Fuel price per liter";
-"electricity_price_slider_a11y" = "Electricity price per kWh";
-"area_type_picker_a11y" = "Driving area type selection";
-"home_charging_a11y" = "Home charging availability";
+"yearly_km_slider_a11y" = "Cursore chilometri annui";
+"fuel_price_slider_a11y" = "Prezzo carburante (€/L o €/kg)";
+"electricity_price_slider_a11y" = "Cursore prezzo elettricità per kWh";
+"area_type_picker_a11y" = "Selezione tipo di percorso";
+"home_charging_a11y" = "Disponibilità ricarica a casa";
 "break_even_months_badge" = "Pareggio ~%d mesi";
 "open_last_verdict_dialog" = "Apro il tuo ultimo esito EV.";
 "trip_profile_label" = "Tragitti tipici";
@@ -361,7 +361,7 @@
 "purchase_prices_title" = "Prezzi d’acquisto";
 "purchase_prices_verdict_note" = "Non decide il sì/no: il verdetto resta su energia, bollo e manutenzione (l’usata pesa di più). Qui solo stima payback se stai comprando.";
 "source_purchase_price_label" = "Auto attuale (€)";
-"target_purchase_price_label" = "EV target (€)";
+"target_purchase_price_label" = "EV di destinazione (€)";
 "include_incentives_toggle" = "Includi stima incentivi IT (disattivata di default)";
 "include_incentives_hint" = "Disattivata di default: le regole 2025 MASE/PNRR (ISEE, rottamazione, FUA) non sono modellabili in modo affidabile qui. Verifica sul sito ufficiale prima di attivarla. Non è consulenza.";
 "comparison_intent_section_title" = "Cosa stai confrontando?";

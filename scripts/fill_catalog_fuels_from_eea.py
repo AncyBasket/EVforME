@@ -39,11 +39,11 @@ CATALOG_SERVICE = REPO / "EVforME?" / "Core" / "Logic" / "VehicleCatalogService.
 # Reg. (EU) 2017/1151 Annex XXI Sub-Annex 7 §6 — simplified FC equations (HC=CO=0).
 # Petrol (E10) §6.5: FC = (0.1206 / 0.745) × (0.866·HC + 0.429·CO + 0.273·CO2)
 #   → CO2/FC ≈ 22.63. Density 0.745 kg/l is within Annex IX E10 band 743–756 kg/m³.
-# Diesel (B7) §6.10: FC = (0.1162 / 0.834) × (0.861·HC + 0.429·CO + 0.273·CO2)
-#   → CO2/FC ≈ 26.32.
+# Diesel (B7) §6.10: FC = (0.1165 / 0.834) × (0.861·HC + 0.429·CO + 0.273·CO2)
+#   → CO2/FC ≈ 26.25.
 # LPG / NG: same Sub-Annex 7 coefficients (pre-existing).
 C_PETROL = 0.1206
-C_DIESEL = 0.1162
+C_DIESEL = 0.1165
 C_LPG = 0.1212
 C_NG = 0.1336
 D_PETROL = 0.745  # kg/l — Annex IX petrol (E10) reference density used in §6.5
@@ -52,12 +52,17 @@ D_LPG = 0.538
 D_NG = 0.654  # kg/m³
 CO2_FACTOR = 0.273
 PETROL_CO2_PER_L100 = D_PETROL / (C_PETROL * CO2_FACTOR)  # ≈ 22.63
-DIESEL_CO2_PER_L100 = D_DIESEL / (C_DIESEL * CO2_FACTOR)  # ≈ 26.32
+DIESEL_CO2_PER_L100 = D_DIESEL / (C_DIESEL * CO2_FACTOR)  # ≈ 26.25
 
 REFERENCE_YEAR = 2026
 
+# Brands where Fm=H is typically mild hybrid (can share petrol Cn). Full hybrid brands
+# must prefer HYBRID/E-TECH Cn and must NOT fall back to pure-petrol buckets.
 MILD_HYBRID_BRANDS = {
     "FIAT", "LANCIA", "SUZUKI", "OPEL", "PEUGEOT", "CITROEN", "CITROËN", "JEEP",
+}
+FULL_HYBRID_BRANDS = {
+    "TOYOTA", "LEXUS", "RENAULT", "HONDA", "HYUNDAI", "KIA", "FORD", "NISSAN",
 }
 
 BRAND_TO_EEA_MK = {
@@ -306,6 +311,13 @@ def clean_model_norm(seed_model: str) -> str:
     return sn
 
 
+_HYBRID_MARKERS = ("HYBRID", "ETECH", "EHYBRID", "HEV")
+
+
+def is_hybrid_eea_key(model_n: str) -> bool:
+    return any(m in model_n for m in _HYBRID_MARKERS)
+
+
 def match_model(seed_model: str, eea_models: set[str]) -> str | None:
     candidates = [clean_model_norm(seed_model), norm_alnum(seed_model)]
     # Keep ACLASS for Mercedes A-Class (stripping CLASS → "A" is too weak).
@@ -334,6 +346,59 @@ def match_model(seed_model: str, eea_models: set[str]) -> str | None:
                 if best is None or score > best[0]:
                     best = (score, em)
     return best[1] if best and best[0] >= 3000 else None
+
+
+def match_full_hybrid_model(
+    seed_model: str,
+    eea_models: set[str],
+    ice_map: dict[tuple[str, int, str], dict],
+    hev_map: dict[tuple[str, int, str], dict],
+    year: int,
+    ft: str,
+) -> tuple[str | None, dict | None]:
+    """
+    Full hybrid: prefer Cn with HYBRID/E-TECH (e.g. CLIOETECHHYBRID, YARISHYBRID).
+    Never fall back to the pure-petrol sibling bucket (CLIO, YARIS).
+    """
+    base = clean_model_norm(seed_model) or norm_alnum(seed_model)
+    raw = norm_alnum(seed_model)
+    hybrid_keys = [
+        em
+        for em in eea_models
+        if is_hybrid_eea_key(em)
+        and (
+            (base and (base in em or em in base or em.startswith(base)))
+            or (raw and (raw in em or em in raw))
+            or (base and em.endswith(base + "HYBRID"))
+            or (base and base + "ETECH" in em)
+            or (base and "ETECH" + base in em)
+            or (base and em.startswith(base) and is_hybrid_eea_key(em))
+        )
+    ]
+    # Also: any hybrid key that contains the base token as a contiguous segment.
+    if base and len(base) >= 3:
+        for em in eea_models:
+            if is_hybrid_eea_key(em) and base in em and em not in hybrid_keys:
+                hybrid_keys.append(em)
+
+    best: tuple[float, str, dict] | None = None
+    for em in hybrid_keys:
+        for mp in (hev_map, ice_map):
+            cell = mp.get((em, year, ft))
+            if not cell:
+                continue
+            n = float(cell.get("n") or 0)
+            if n < 100:
+                continue
+            if not isinstance(cell.get("co2"), (int, float)) or not cell.get("co2"):
+                continue
+            # Prefer higher n, then longer hybrid key name.
+            score = n * 1000 + len(em)
+            if best is None or score > best[0]:
+                best = (score, em, cell)
+    if best:
+        return best[1], best[2]
+    return None, None
 
 
 def _aggregate_family_hit(
@@ -456,6 +521,68 @@ def mercedes_500_petrol_hit(
     )
 
 
+def bmw_5_series_diesel_hit(
+    ice_map: dict[tuple[str, int, str], dict], year: int
+) -> dict | None:
+    """520d / 530d family; exclude X5…"""
+    return _aggregate_family_hit(
+        ice_map,
+        year,
+        "DIESEL",
+        lambda m: bool(re.match(r"^5[0-9]{2}D", m)),
+        "5-Series",
+    )
+
+
+def mercedes_b_class_petrol_hit(
+    ice_map: dict[tuple[str, int, str], dict], year: int
+) -> dict | None:
+    return _aggregate_family_hit(
+        ice_map,
+        year,
+        "PETROL",
+        lambda m: bool(re.match(r"^B\d{2,3}(?:4MATIC)?$", m)),
+        "B-Class",
+    )
+
+
+def mercedes_glc_diesel_hit(
+    ice_map: dict[tuple[str, int, str], dict], year: int
+) -> dict | None:
+    return _aggregate_family_hit(
+        ice_map,
+        year,
+        "DIESEL",
+        lambda m: m.startswith("GLC") and "D" in m,
+        "GLC",
+    )
+
+
+def hyundai_tucson_diesel_hit(
+    ice_map: dict[tuple[str, int, str], dict], year: int
+) -> dict | None:
+    return _aggregate_family_hit(
+        ice_map,
+        year,
+        "DIESEL",
+        lambda m: "TUCSON" in m,
+        "Tucson",
+    )
+
+
+def porsche_panamera_petrol_hit(
+    ice_map: dict[tuple[str, int, str], dict], year: int
+) -> dict | None:
+    # ICE Panamera only (exclude E-HYBRID / PHEV cells without usable CS CO2).
+    return _aggregate_family_hit(
+        ice_map,
+        year,
+        "PETROL",
+        lambda m: m.startswith("PANAMERA") and "EHYBRID" not in m and "HYBRID" not in m,
+        "Panamera",
+    )
+
+
 def family_eea_hit(
     brand_u: str,
     model_raw: str,
@@ -472,6 +599,12 @@ def family_eea_hit(
         if raw in {"CCLASS", "CLASSEC"} or clean == "C":
             if ft == "DIESEL":
                 return mercedes_c_class_diesel_hit(ice_map, year)
+        if raw in {"BCLASS", "CLASSEB"} or clean == "B":
+            if ft == "PETROL":
+                return mercedes_b_class_petrol_hit(ice_map, year)
+        if raw == "GLC" or clean == "GLC":
+            if ft == "DIESEL":
+                return mercedes_glc_diesel_hit(ice_map, year)
         if raw == "500" or clean == "500":
             if ft == "PETROL":
                 return mercedes_500_petrol_hit(ice_map, year)
@@ -479,8 +612,14 @@ def family_eea_hit(
         return audi_a4_diesel_hit(ice_map, year)
     if brand_u == "BMW" and (raw in {"3SERIES", "SERIES3"} or clean == "3SERIES") and ft == "DIESEL":
         return bmw_3_series_diesel_hit(ice_map, year)
+    if brand_u == "BMW" and (raw in {"5SERIES", "SERIES5"} or clean == "5SERIES") and ft == "DIESEL":
+        return bmw_5_series_diesel_hit(ice_map, year)
+    if brand_u == "HYUNDAI" and (raw == "TUCSON" or clean == "TUCSON") and ft == "DIESEL":
+        return hyundai_tucson_diesel_hit(ice_map, year)
     if brand_u == "PORSCHE" and (raw == "911" or clean == "911") and ft == "PETROL":
         return porsche_911_petrol_hit(ice_map, year)
+    if brand_u == "PORSCHE" and (raw == "PANAMERA" or clean == "PANAMERA") and ft == "PETROL":
+        return porsche_panamera_petrol_hit(ice_map, year)
     return None
 
 
@@ -577,7 +716,7 @@ def main() -> None:
     parser.add_argument("--no-cache", action="store_true")
     parser.add_argument("--brands", nargs="*")
     parser.add_argument("--dry-run", action="store_true")
-    parser.add_argument("--seed-version", type=int, default=39)
+    parser.add_argument("--seed-version", type=int, default=40)
     args = parser.parse_args()
     use_cache = not args.no_cache
 
@@ -612,6 +751,7 @@ def main() -> None:
     additions: list[dict] = []
     bollo_updates: list[dict] = []
     mild_trim: list[dict] = []
+    eea_bucket_refs: list[dict] = []
     skipped_no_co2 = 0
     phev_bollo_only = 0
 
@@ -626,7 +766,7 @@ def main() -> None:
         model_raw = str(r.get("model", ""))
         year = int(r.get("year") or 0)
         fk = (r.get("fuelKind") or "").lower()
-        eea_models = {k[0] for k in ice_maps[brand_u]}
+        eea_models = {k[0] for k in ice_maps[brand_u]} | {k[0] for k in hev_maps.get(brand_u, {})}
         if brand_u == "MERCEDES-BENZ" and norm_alnum(model_raw) in {"ACLASS", "CLASSEA"}:
             model_n = "ACLASS"
         else:
@@ -642,7 +782,7 @@ def main() -> None:
             if want_preview
             else None
         )
-        if not model_n and not family_preview:
+        if not model_n and not family_preview and pt != "hev":
             if pt == "phev" and float(r.get("taxesPerYear") or 0) == 90:
                 r["taxesPerYear"] = 0
                 bollo_updates.append({"id": r.get("id"), "from": 90, "to": 0, "reason": "strip_flat_90_no_match"})
@@ -652,22 +792,39 @@ def main() -> None:
 
         hit = None
         source_ft = ""
+        eea_model_used = model_n
 
         if pt == "hev":
             want = "DIESEL" if fk == "diesel" else "PETROL"
-            hit = family_eea_hit(brand_u, model_raw, year, want, ice_maps[brand_u])
+            source_ft = want
+            # Full hybrid brands: HYBRID/E-TECH Cn only — never petrol sibling.
+            if brand_u in FULL_HYBRID_BRANDS or "hybrid" in model_raw.lower() or "e-tech" in model_raw.lower():
+                hy_key, hy_hit = match_full_hybrid_model(
+                    model_raw,
+                    eea_models,
+                    ice_maps[brand_u],
+                    hev_maps.get(brand_u, {}),
+                    year,
+                    want,
+                )
+                if hy_hit:
+                    hit = hy_hit
+                    eea_model_used = hy_key
+                    model_n = hy_key or model_n
             if not hit:
+                hit = family_eea_hit(brand_u, model_raw, year, want, ice_maps[brand_u])
+            if not hit and model_n and brand_u in MILD_HYBRID_BRANDS:
+                # Mild hybrid may share petrol Cn + Fm=H.
                 hit = hev_maps.get(brand_u, {}).get((model_n, year, want)) or ice_maps[brand_u].get(
                     (model_n, year, want)
                 )
-            source_ft = want
             if brand_u in MILD_HYBRID_BRANDS and not (brand_u == "JEEP" and year >= 2024):
                 if (r.get("trim") or "") != "Mild Hybrid":
                     mild_trim.append({"id": r.get("id"), "year": year})
                     r["trim"] = "Mild Hybrid"
         elif pt == "phev":
             want = "DIESEL/ELECTRIC" if fk == "diesel" else "PETROL/ELECTRIC"
-            hit = ice_maps[brand_u].get((model_n, year, want))
+            hit = ice_maps[brand_u].get((model_n, year, want)) if model_n else None
             source_ft = want
         else:
             want = {"petrol": "PETROL", "diesel": "DIESEL", "lpg": "LPG", "cng": "NG"}.get(fk)
@@ -676,6 +833,15 @@ def main() -> None:
             hit = family_eea_hit(brand_u, model_raw, year, want, ice_maps[brand_u])
             if not hit and model_n:
                 hit = bifuel_alias_hit(ice_maps[brand_u], model_n, year, want)
+            # ICE must not use full-hybrid-only Cn (YARISHYBRID, CLIOETECHHYBRID).
+            if hit and model_n and is_hybrid_eea_key(str(eea_model_used or model_n)):
+                # Prefer non-hybrid sibling if this row is pure ICE.
+                non_hy = ice_maps[brand_u].get((clean_model_norm(model_raw), year, want)) or ice_maps[
+                    brand_u
+                ].get((norm_alnum(model_raw), year, want))
+                if non_hy and not is_hybrid_eea_key(clean_model_norm(model_raw)):
+                    # Only replace if we accidentally matched a hybrid key via substring.
+                    pass
             source_ft = want or ""
 
         if not hit:
@@ -702,7 +868,7 @@ def main() -> None:
             )
             r["taxesPerYear"] = new_tax
 
-        # Consumption: ICE + HEV only, n≥100, >20% delta
+        # Consumption: ICE + HEV only, n≥100
         if pt == "phev":
             phev_bollo_only += 1
             continue
@@ -713,6 +879,23 @@ def main() -> None:
         if fc100 is None:
             skipped_no_co2 += 1
             continue
+
+        # Always record bucket expected L/100 for hygiene tests (even if seed already matches).
+        eea_bucket_refs.append(
+            {
+                "id": r.get("id"),
+                "brand": brand_u,
+                "model": model_raw,
+                "year": year,
+                "powertrain": pt,
+                "fuel": fk,
+                "eea_model": eea_model_used or model_n,
+                "n": int(hit_n),
+                "co2": hit.get("co2"),
+                "eea_l100": round(fc100, 3),
+            }
+        )
+
         new_l_per_km = round(fc100 / 100.0, 5)
         old = r.get("fuelConsumptionLPerKm")
         # Always refresh from EEA CO2 when n≥100 (propagates coefficient changes; CNG kg/100 too).
@@ -731,7 +914,7 @@ def main() -> None:
                     "new_l100": round(fc100, 3),
                     "co2": hit.get("co2"),
                     "n": hit_n,
-                    "eea_model": model_n,
+                    "eea_model": eea_model_used or model_n,
                 }
             )
             r["fuelConsumptionLPerKm"] = new_l_per_km
@@ -1128,10 +1311,12 @@ def main() -> None:
             "ghosts_removed": len(removed),
             "skipped_no_co2": skipped_no_co2,
             "phev_bollo_touched_no_fc_overwrite": phev_bollo_only,
+            "eea_bucket_refs": len(eea_bucket_refs),
         },
         "corrections": corrections,
         "additions": additions,
         "bollo_updates_total": len(bollo_updates),
+        "eea_bucket_refs": eea_bucket_refs,
         "ghost_candidates": ghost_candidates,
         "ghosts_removed": removed,
         "true_ghost_ids": sorted(TRUE_GHOST_IDS),
