@@ -977,6 +977,8 @@ def main() -> None:
             r["fuelConsumptionLPerKm"] = new_l_per_km
             if isinstance(hit.get("co2"), (int, float)):
                 r["co2gKm"] = int(round(float(hit["co2"])))
+            if isinstance(hit.get("kw"), (int, float)) and float(hit["kw"]) > 0:
+                r["powerKw"] = round(float(hit["kw"]), 1)
             r["sourceName"] = f"EEA co2cars IT {year} n={int(hit_n)}"
             r["confidenceScore"] = 0.8
             r["sourceUpdatedAt"] = datetime.now(timezone.utc).strftime("%Y-%m-%d")

@@ -829,16 +829,28 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertEqual(molisePetrol.amount, 317.40, accuracy: 0.01)
         XCTAssertTrue(molisePetrol.isKnown)
 
-        let moliseLpg = OwnershipCostEstimates.bolloPerYearDetail(
+        // Bifuel (GPL/metano sconosciuto → bifuel): 2,76 €/kW pieno. 74 kW → 204,24.
+        let moliseBifuel = OwnershipCostEstimates.bolloPerYearDetail(
             catalogTaxesPerYear: 999,
             powertrain: .ice,
             vehicleYear: 2020,
             referenceYear: 2026,
-            bookletPowerKwP2: 100,
+            bookletPowerKwP2: 74,
             italianRegion: .molise,
             fuelKind: .lpg
         )
-        XCTAssertEqual(moliseLpg.amount, 2.76 * 0.25 * 100, accuracy: 0.01)
+        XCTAssertEqual(moliseBifuel.amount, 74 * 2.76, accuracy: 0.01)
+        XCTAssertEqual(moliseBifuel.amount, 204.24, accuracy: 0.01)
+
+        // Solo GPL esclusivo: 1/4 di 2,76.
+        let exclusive = ItalianRegion.molise.thermalBolloEUR(
+            powerKw: 100,
+            fuelKind: .lpg,
+            vehicleYear: 2020,
+            referenceYear: 2026,
+            gasIsExclusive: true
+        )
+        XCTAssertEqual(exclusive ?? -1, 2.76 * 0.25 * 100, accuracy: 0.01)
 
         // Senza tariffario termico regionale → catalogo (stima nazionale).
         let lazioPetrol = OwnershipCostEstimates.bolloPerYearDetail(
@@ -851,6 +863,29 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             fuelKind: .petrol
         )
         XCTAssertEqual(lazioPetrol.amount, 250, accuracy: 0.01)
+
+        // Bolzano/Sicilia/VdA: nota picker include anche stima nazionale termica.
+        for region in [ItalianRegion.bolzano, .sicilia, .valleDAosta] {
+            let note = region.bolloPickerNote ?? ""
+            XCTAssertTrue(
+                note.contains(L10n.italianRegionBolloNoteNationalThermal),
+                "\(region) picker note must include national thermal estimate: \(note)"
+            )
+            XCTAssertNotNil(region.evBolloRateNote)
+        }
+
+        // Con P.2/catalog kW Molise applica tariffario; senza kW resta catalogo nazionale.
+        let noKw = OwnershipCostEstimates.bolloPerYearDetail(
+            catalogTaxesPerYear: 188.35,
+            powertrain: .ice,
+            vehicleYear: 2018,
+            referenceYear: 2026,
+            bookletPowerKwP2: nil,
+            italianRegion: .molise,
+            fuelKind: .petrol,
+            catalogPowerKw: nil
+        )
+        XCTAssertEqual(noKw.amount, 188.35, accuracy: 0.01)
 
         let lombardia = OwnershipCostEstimates.bolloPerYearDetail(
             catalogTaxesPerYear: 0,

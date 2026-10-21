@@ -591,6 +591,10 @@ enum L10n {
     static var evBookletPowerKwP2TargetLabel: String { string("ev_booklet_power_kw_p2_target_label") }
     static var evBookletPowerKwP2Placeholder: String { string("ev_booklet_power_kw_p2_placeholder") }
     static var evBookletPowerKwP2Hint: String { string("ev_booklet_power_kw_p2_hint") }
+    static var thermalBookletPowerKwP2SourceLabel: String { string("thermal_booklet_power_kw_p2_source_label") }
+    static var thermalBookletPowerKwP2TargetLabel: String { string("thermal_booklet_power_kw_p2_target_label") }
+    static var thermalBookletPowerKwP2Hint: String { string("thermal_booklet_power_kw_p2_hint") }
+    static var phevCatalogUsaNote: String { string("phev_catalog_usa_note") }
     static var italianRegionLabel: String { string("italian_region_label") }
     static var italianRegionUnspecified: String { string("italian_region_unspecified") }
     static var italianRegionOtherUnknown: String { string("italian_region_other_unknown") }

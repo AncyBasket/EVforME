@@ -675,8 +675,8 @@ final class EVSimulatorTests: XCTestCase {
             .init(name: "Serie3→Model3 buy", source: "bmw-3-series-2018", target: "tesla-model-3-2024", intent: .consideringPurchase, home: true, km: 20_000, sourcePrice: 22_000, targetPrice: 42_000, stickerFuel: nil, stickerEnergy: nil),
             // ICE → PHEV (EPA CS fuel — no 0.065 placeholder)
             .init(name: "Corsa→330ePHEV", source: "opel-corsa-2018", target: "bmw-330e-xdrive-sedan-phev-2024", intent: .consideringPurchase, home: true, km: 15_000, sourcePrice: 8_000, targetPrice: 34_000, stickerFuel: nil, stickerEnergy: nil),
-            // ICE → PHEV (EPA CS fuel; Golf GTE manual-world placeholder removed)
-            .init(name: "Golf→330ePHEV", source: "volkswagen-golf-2016", target: "bmw-330e-xdrive-sedan-phev-2024", intent: .alreadyOwned, home: true, km: 14_000, sourcePrice: 10_000, targetPrice: 36_000, stickerFuel: nil, stickerEnergy: nil),
+            // ICE → PHEV (EU WLTP CS Golf GTE)
+            .init(name: "Golf→GolfGTE", source: "volkswagen-golf-2016", target: "volkswagen-golf-gte-phev-2024", intent: .alreadyOwned, home: true, km: 14_000, sourcePrice: 10_000, targetPrice: 36_000, stickerFuel: nil, stickerEnergy: nil),
             // PHEV → EV
             .init(name: "PriusPHEV→ID.3", source: "toyota-prius-prime-se-phev-2024", target: "volkswagen-id3-2024", intent: .alreadyOwned, home: true, km: 18_000, sourcePrice: 28_000, targetPrice: 36_000, stickerFuel: nil, stickerEnergy: nil),
             // City → Leaf

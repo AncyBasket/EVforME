@@ -204,9 +204,15 @@ enum OwnershipCostEstimates {
         case .phev, .hev, .ice:
             let kw = bookletPowerKwP2 ?? catalogPowerKw
             if let kw, kw > 0,
-               let regional = italianRegion.thermalBolloEUR(powerKw: kw, fuelKind: fuelKind) {
+               let regional = italianRegion.thermalBolloEUR(
+                powerKw: kw,
+                fuelKind: fuelKind,
+                vehicleYear: vehicleYear,
+                referenceYear: referenceYear
+               ) {
                 return BolloEstimate(amount: regional, isKnown: true)
             }
+            // Senza kW (P.2 / catalogo) o senza tariffario regionale → bollo catalogo (stima nazionale).
             if catalogTaxesPerYear > 0 {
                 return BolloEstimate(amount: catalogTaxesPerYear, isKnown: true)
             }
@@ -380,7 +386,7 @@ final class EVSimulator {
             vehicleYear: sourceVehicle.year,
             referenceYear: currentYear,
             ownershipYears: years,
-            bookletPowerKwP2: sourceVehicle.powertrain == .ev ? input.sourceBookletPowerKwP2 : nil,
+            bookletPowerKwP2: input.sourceBookletPowerKwP2,
             italianRegion: input.italianRegion,
             fuelKind: sourceVehicle.resolvedFuelKind,
             catalogPowerKw: sourceVehicle.powertrain == .ev ? nil : sourceVehicle.powerKw
@@ -391,7 +397,7 @@ final class EVSimulator {
             vehicleYear: targetVehicle.year,
             referenceYear: currentYear,
             ownershipYears: years,
-            bookletPowerKwP2: targetVehicle.powertrain == .ev ? input.targetBookletPowerKwP2 : nil,
+            bookletPowerKwP2: input.targetBookletPowerKwP2,
             italianRegion: input.italianRegion,
             fuelKind: targetVehicle.resolvedFuelKind,
             catalogPowerKw: targetVehicle.powertrain == .ev ? nil : targetVehicle.powerKw

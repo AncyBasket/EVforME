@@ -6,7 +6,9 @@
 //
 
 import XCTest
-import UIKit
+import ImageIO
+import CoreGraphics
+import Darwin
 
 final class SmokeProductUITests: XCTestCase {
     private var shotsDir: URL!
@@ -350,43 +352,55 @@ final class SmokeProductUITests: XCTestCase {
 
     @MainActor
     private func saveShot(_ app: XCUIApplication, name: String) {
-        let shot = app.screenshot()
+        // Do not redraw XCUIScreenshot via UIImage (EXIF Orientation=6 → cropped/black halves).
+        // Prefer simctl full-resolution PNG for the UI-test simulator (posix_spawn; Process is macOS-only).
+        let url = shotsDir.appendingPathComponent("\(name).png")
+        let udid = ProcessInfo.processInfo.environment["SIMULATOR_UDID"] ?? "booted"
+        let simctlOK = runSimctlScreenshot(udid: udid, path: url.path)
+        let shot = XCUIScreen.main.screenshot()
         let attachment = XCTAttachment(screenshot: shot)
         attachment.name = name
         attachment.lifetime = .keepAlways
         add(attachment)
-        let url = shotsDir.appendingPathComponent("\(name).png")
         do {
-            let upright = try uprightPortraitPNG(from: shot.pngRepresentation, name: name)
-            try upright.write(to: url)
+            if !simctlOK {
+                try shot.pngRepresentation.write(to: url)
+            }
+            try validateSmokePNG(at: url, name: name)
         } catch {
             XCTFail("Could not write smoke shot \(name): \(error)")
         }
     }
 
-    /// Bake EXIF orientation into pixels (XCUIScreenshot often writes Orientation=6 as 2622×1206 raw).
-    private func uprightPortraitPNG(from raw: Data, name: String) throws -> Data {
-        guard let image = UIImage(data: raw) else {
-            throw NSError(domain: "SmokeShot", code: 1, userInfo: [NSLocalizedDescriptionKey: "\(name): invalid PNG"])
+    /// Host-side `xcrun simctl io <udid> screenshot` (UI tests run under Simulator runtime).
+    private func runSimctlScreenshot(udid: String, path: String) -> Bool {
+        let args = ["/usr/bin/xcrun", "simctl", "io", udid, "screenshot", path]
+        var cArgs = args.map { strdup($0) }
+        cArgs.append(nil)
+        defer { cArgs.forEach { if let p = $0 { free(p) } } }
+        var pid: pid_t = 0
+        let spawned = cArgs.withUnsafeBufferPointer { buf -> Int32 in
+            posix_spawn(&pid, buf.baseAddress![0], nil, nil, buf.baseAddress!, environ)
         }
-        let format = UIGraphicsImageRendererFormat.default()
-        format.scale = 1
-        format.opaque = true
-        let renderer = UIGraphicsImageRenderer(size: image.size, format: format)
-        let upright = renderer.image { _ in
-            image.draw(in: CGRect(origin: .zero, size: image.size))
-        }
-        guard let data = upright.pngData(), let check = UIImage(data: data), let cg = check.cgImage else {
-            throw NSError(domain: "SmokeShot", code: 2, userInfo: [NSLocalizedDescriptionKey: "\(name): could not re-encode PNG"])
+        guard spawned == 0 else { return false }
+        var status: Int32 = 0
+        waitpid(pid, &status, 0)
+        return status == 0 && FileManager.default.fileExists(atPath: path)
+    }
+
+    /// Portrait full-bleed checks — no UIImage redraw; read pixels as stored.
+    private func validateSmokePNG(at url: URL, name: String) throws {
+        guard let src = CGImageSourceCreateWithURL(url as CFURL, nil),
+              let cg = CGImageSourceCreateImageAtIndex(src, 0, nil) else {
+            throw NSError(domain: "SmokeShot", code: 1, userInfo: [NSLocalizedDescriptionKey: "\(name): cannot read PNG"])
         }
         let w = cg.width
         let h = cg.height
-        XCTAssertGreaterThan(h, w, "\(name) must be portrait after orientation bake, got \(w)×\(h)")
+        XCTAssertGreaterThan(h, w, "\(name) must be portrait, got \(w)×\(h)")
         assertNoFullyBlackHalf(cgImage: cg, name: name)
-        return data
     }
 
-    /// Reject landscape-with-black-strip artifacts (entire left or right half ≈ black).
+    /// Reject black-strip artifacts on left/right/top/bottom halves.
     private func assertNoFullyBlackHalf(cgImage: CGImage, name: String) {
         let w = cgImage.width
         let h = cgImage.height
@@ -401,11 +415,11 @@ final class SmokeProductUITests: XCTestCase {
         }
         let bpr = cgImage.bytesPerRow
         let bpp = max(1, cgImage.bitsPerPixel / 8)
-        func halfMostlyBlack(x0: Int, x1: Int) -> Bool {
+        func regionMostlyBlack(x0: Int, x1: Int, y0: Int, y1: Int) -> Bool {
             var dark = 0
             var total = 0
-            var y = 0
-            while y < h {
+            var y = y0
+            while y < y1 {
                 var x = x0
                 while x < x1 {
                     let i = y * bpr + x * bpp
@@ -416,13 +430,16 @@ final class SmokeProductUITests: XCTestCase {
                     total += 1
                     x += max(1, (x1 - x0) / 24)
                 }
-                y += max(1, h / 48)
+                y += max(1, (y1 - y0) / 48)
             }
             return total > 0 && Double(dark) / Double(total) > 0.92
         }
-        let mid = w / 2
-        XCTAssertFalse(halfMostlyBlack(x0: 0, x1: mid), "\(name): left half is fully black")
-        XCTAssertFalse(halfMostlyBlack(x0: mid, x1: w), "\(name): right half is fully black")
+        let midX = w / 2
+        let midY = h / 2
+        XCTAssertFalse(regionMostlyBlack(x0: 0, x1: midX, y0: 0, y1: h), "\(name): left half is fully black")
+        XCTAssertFalse(regionMostlyBlack(x0: midX, x1: w, y0: 0, y1: h), "\(name): right half is fully black")
+        XCTAssertFalse(regionMostlyBlack(x0: 0, x1: w, y0: 0, y1: midY), "\(name): top half is fully black")
+        XCTAssertFalse(regionMostlyBlack(x0: 0, x1: w, y0: midY, y1: h), "\(name): bottom half is fully black")
     }
 
     @MainActor

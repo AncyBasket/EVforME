@@ -121,30 +121,64 @@ enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
         self == .molise
     }
 
+    /// Superbollo nazionale (>185 kW): 20 €/kW oltre soglia, riduzioni per età (stima ACI).
+    static func nationalSuperbolloEUR(
+        powerKw: Double,
+        vehicleYear: Int,
+        referenceYear: Int
+    ) -> Double {
+        guard powerKw > 185 else { return 0 }
+        var sb = 20.0 * (powerKw - 185.0)
+        let age = max(0, referenceYear - vehicleYear)
+        if age >= 20 { sb = 0 }
+        else if age >= 15 { sb *= 0.15 }
+        else if age >= 10 { sb *= 0.30 }
+        else if age >= 5 { sb *= 0.60 }
+        return sb
+    }
+
     /// Bollo termico (ICE/HEV/PHEV) con tariffario regionale 2026 citato.
     ///
     /// Molise (Regione Molise Tariffario 2026, Quattroruote 17/02/2026), Euro 4/5/6:
     /// - benzina/diesel: 2,76 €/kW fino a 100 kW + 4,14 €/kW oltre;
-    /// - solo GPL o solo metano: 1/4 di 2,76 €/kW (lineare);
-    /// - bifuel GPL/metano–benzina: non modellato (manca `FuelKind` bifuel) → stima nazionale.
-    func thermalBolloEUR(powerKw: Double, fuelKind: FuelKind) -> Double? {
+    /// - solo GPL o solo metano **esclusivi**: 1/4 di 2,76 €/kW (lineare);
+    /// - bifuel GPL/metano–benzina: 2,76 €/kW pieno anche oltre 100 kW;
+    /// - se non si sa se è bifuel → trattata come bifuel (`gasIsExclusive == false`);
+    /// - superbollo nazionale oltre 185 kW.
+    func thermalBolloEUR(
+        powerKw: Double,
+        fuelKind: FuelKind,
+        vehicleYear: Int,
+        referenceYear: Int = Calendar.current.component(.year, from: Date()),
+        gasIsExclusive: Bool = false
+    ) -> Double? {
         guard powerKw > 0 else { return nil }
         switch self {
         case .molise:
+            let base: Double
             switch fuelKind {
             case .lpg, .cng:
-                let raw = 2.76 * 0.25 * powerKw
-                return (raw * 100).rounded() / 100
+                if gasIsExclusive {
+                    base = 2.76 * 0.25 * powerKw
+                } else {
+                    // Bifuel (default): 2,76 fisso anche oltre 100 kW.
+                    base = 2.76 * powerKw
+                }
             case .petrol, .diesel, .unknown:
-                let raw = 2.76 * min(powerKw, 100) + 4.14 * max(0, powerKw - 100)
-                return (raw * 100).rounded() / 100
+                base = 2.76 * min(powerKw, 100) + 4.14 * max(0, powerKw - 100)
             }
+            let total = base + Self.nationalSuperbolloEUR(
+                powerKw: powerKw,
+                vehicleYear: vehicleYear,
+                referenceYear: referenceYear
+            )
+            return (total * 100).rounded() / 100
         default:
             return nil
         }
     }
 
-    /// Nota leggibile su stime / caveat regionali (Localizable IT/EN).
+    /// Nota leggibile su stime / caveat regionali EV (Localizable IT/EN).
     var evBolloRateNote: String? {
         switch self {
         case .molise:
@@ -160,11 +194,13 @@ enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
         }
     }
 
-    /// Nota sotto il picker: caveat EV regionali, oppure avviso stima nazionale sul termico.
+    /// Nota sotto il picker: caveat EV + avviso stima nazionale sul termico quando manca tariffario citato.
     var bolloPickerNote: String? {
-        if let ev = evBolloRateNote { return ev }
-        if hasCitedThermalBolloTariff { return nil }
-        if self == .otherUnknown { return nil }
-        return L10n.italianRegionBolloNoteNationalThermal
+        var parts: [String] = []
+        if let ev = evBolloRateNote { parts.append(ev) }
+        if !hasCitedThermalBolloTariff, self != .otherUnknown {
+            parts.append(L10n.italianRegionBolloNoteNationalThermal)
+        }
+        return parts.isEmpty ? nil : parts.joined(separator: "\n")
     }
 }
