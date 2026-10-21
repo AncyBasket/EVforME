@@ -114,17 +114,17 @@ enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
         self == .lombardia || self == .piemonte
     }
 
-    /// Nota leggibile su stime / caveat regionali (audit / UI hint).
+    /// Nota leggibile su stime / caveat regionali (Localizable IT/EN).
     var evBolloRateNote: String? {
         switch self {
         case .molise:
-            return "stima (tariffa ACI Molise 2026 non verificata; allineata ad Abruzzo/Campania 3,12)"
+            return L10n.italianRegionBolloNoteMolise
         case .bolzano:
-            return "1,96 €/kW Euro 6 (1,99 Euro 0–5 non modellato)"
+            return L10n.italianRegionBolloNoteBolzano
         case .sicilia:
-            return "ACI Sicilia «a prescindere»: 1/4 di 2,58 €/kW (scala benzina)"
+            return L10n.italianRegionBolloNoteSicilia
         case .valleDAosta:
-            return "esenzione 8 anni se immatricolazione ≥2019 (ACI VdA 2026)"
+            return L10n.italianRegionBolloNoteValleDAosta
         default:
             return nil
         }

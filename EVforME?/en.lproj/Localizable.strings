@@ -573,6 +573,10 @@
 "italian_region_unspecified" = "Not set (national estimate €2.58/kW)";
 "italian_region_other_unknown" = "Other region (EV road tax not estimated)";
 "italian_region_hint" = "ACI 2026 tariffs. Lombardy/Piedmont: permanent exemption. Without an official rate: not estimated.";
+"italian_region_bollo_note_molise" = "Estimate: ACI Molise 2026 tariff not verified; aligned with Abruzzo/Campania €3.12/kW.";
+"italian_region_bollo_note_bolzano" = "€1.96/kW Euro 6 (€1.99 Euro 0–5 not modelled).";
+"italian_region_bollo_note_sicilia" = "ACI Sicily “a prescindere”: 1/4 of €2.58/kW (petrol scale).";
+"italian_region_bollo_note_valledaosta" = "8-year exemption if first registration ≥2019 (ACI Valle d’Aosta 2026).";
 "partial_total_bollo_unknown" = "Partial total (road tax not estimated)";
 "italy_kit_bollo_both_unknown" = "Road tax: current and electrified not estimated (missing booklet P.2)";
 "italy_kit_bollo_row_source_unknown" = "Road tax (est.): current not estimated (missing P.2) · electrified ~€%d/yr";

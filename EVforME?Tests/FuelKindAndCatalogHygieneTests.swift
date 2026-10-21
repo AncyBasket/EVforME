@@ -632,6 +632,73 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertTrue(offenders.isEmpty, offenders.joined(separator: "\n"))
     }
 
+    /// Benzina ICE e full hybrid stesso modello/anno non possono condividere lo stesso bucket EEA (n=).
+    func testCatalog_PetrolICEAndFullHybridSameModelYear_DistinctEEABuckets() {
+        let eeaN = try! NSRegularExpression(pattern: #"EEA co2cars IT \d{4} n=(\d+)"#)
+        func eeaNValue(_ sn: String?) -> Int? {
+            guard let sn,
+                  let m = eeaN.firstMatch(in: sn, range: NSRange(sn.startIndex..., in: sn)),
+                  let r = Range(m.range(at: 1), in: sn) else { return nil }
+            return Int(sn[r])
+        }
+        // Alnum upper without HYBRID / ETECH noise so "Auris" and "Auris Hybrid" share a key.
+        func normModel(_ model: String) -> String {
+            let u = String(model.uppercased().filter { $0.isLetter || $0.isNumber })
+            return u
+                .replacingOccurrences(of: "HYBRID", with: "")
+                .replacingOccurrences(of: "ETECH", with: "")
+                .replacingOccurrences(of: "MILD", with: "")
+        }
+
+        var iceBuckets: [String: (id: String, n: Int)] = [:]
+        var offenders: [String] = []
+        for v in VehicleCatalogService.shared.vehicles where (v.market ?? "IT") == "IT" {
+            guard let n = eeaNValue(v.sourceName) else { continue }
+            let key = "\(v.brand.uppercased())|\(normModel(v.model))|\(v.year)"
+            if v.powertrain == .ice, v.resolvedFuelKind == .petrol || v.resolvedFuelKind == .diesel {
+                iceBuckets[key] = (v.id, n)
+            }
+        }
+        for v in VehicleCatalogService.shared.vehicles where (v.market ?? "IT") == "IT" {
+            guard v.powertrain == .hev,
+                  let n = eeaNValue(v.sourceName) else { continue }
+            let key = "\(v.brand.uppercased())|\(normModel(v.model))|\(v.year)"
+            if let ice = iceBuckets[key], ice.n == n {
+                offenders.append("\(v.id) shares EEA n=\(n) with \(ice.id)")
+            }
+        }
+        XCTAssertTrue(offenders.isEmpty, offenders.joined(separator: "\n"))
+        // Explicit Auris 2018 case from audit.
+        let aurisIce = VehicleCatalogService.shared.vehicle(by: "toyota-auris-2018")
+        let aurisHev = VehicleCatalogService.shared.vehicle(by: "toyota-auris-hybrid-2018")
+        if let ice = aurisIce, let hev = aurisHev,
+           let nIce = eeaNValue(ice.sourceName), let nHev = eeaNValue(hev.sourceName) {
+            XCTAssertNotEqual(nIce, nHev, "Auris 2018 petrol and hybrid must not share EEA n=")
+        }
+    }
+
+    func testCatalog_NoPHEVPlaceholder065LPerKm() {
+        let bad = VehicleCatalogService.shared.vehicles.filter { v in
+            v.powertrain == .phev
+                && abs((v.fuelConsumptionLPerKm ?? -1) - 0.065) < 1e-9
+        }
+        XCTAssertTrue(bad.isEmpty, "No PHEV with 0.065 L/km placeholder: \(bad.map(\.id))")
+        let manualThin = VehicleCatalogService.shared.vehicles.filter { v in
+            v.powertrain == .phev && (v.sourceName ?? "") == "manual-world-PHEV"
+                && abs((v.fuelConsumptionLPerKm ?? -1) - 0.065) < 1e-9
+        }
+        XCTAssertTrue(manualThin.isEmpty)
+    }
+
+    func testCatalog_NoCorollaCrossICEOrCorollaIMInItaly() {
+        let ghosts = VehicleCatalogService.shared.vehicles.filter { v in
+            let id = v.id.lowercased()
+            return id.contains("corolla-cross") && v.powertrain == .ice
+                || id.contains("corolla-im")
+        }
+        XCTAssertTrue(ghosts.isEmpty, "Remove unsourced Corolla Cross ICE / Corolla iM: \(ghosts.map(\.id))")
+    }
+
     func testCatalog_FullHybridBucketsPreferETechNotPetrolSibling() {
         let clio22 = VehicleCatalogService.shared.vehicle(by: "renault-clio-2022")
         let clio23 = VehicleCatalogService.shared.vehicle(by: "renault-clio-2023")

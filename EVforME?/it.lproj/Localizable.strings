@@ -571,6 +571,10 @@
 "italian_region_unspecified" = "Non specificata (stima nazionale 2,58 €/kW)";
 "italian_region_other_unknown" = "Altra regione (bollo EV non stimato)";
 "italian_region_hint" = "Tariffe ACI 2026. Lombardia/Piemonte: esenzione permanente. Senza tariffa ufficiale: non stimato.";
+"italian_region_bollo_note_molise" = "Stima: tariffa ACI Molise 2026 non verificata; allineata ad Abruzzo/Campania 3,12 €/kW.";
+"italian_region_bollo_note_bolzano" = "1,96 €/kW Euro 6 (1,99 Euro 0–5 non modellato).";
+"italian_region_bollo_note_sicilia" = "ACI Sicilia «a prescindere»: 1/4 di 2,58 €/kW (scala benzina).";
+"italian_region_bollo_note_valledaosta" = "Esenzione 8 anni se immatricolazione ≥2019 (ACI VdA 2026).";
 "partial_total_bollo_unknown" = "Totale parziale (bollo non stimato)";
 "italy_kit_bollo_both_unknown" = "Bollo: attuale e elettrificata non stimati (manca P.2 a libretto)";
 "italy_kit_bollo_row_source_unknown" = "Bollo (stima): attuale non stimato (manca P.2) · elettrificata ~€%d/anno";

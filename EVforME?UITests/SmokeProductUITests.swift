@@ -147,76 +147,79 @@ final class SmokeProductUITests: XCTestCase {
 
         let bollo = app.staticTexts["Bollo ed esenzioni EV (orientativo)"]
         let roadTax = app.staticTexts["Road tax & EV exemptions (indicative)"]
-        if bollo.waitForExistence(timeout: 2) || roadTax.waitForExistence(timeout: 1) {
-            if bollo.exists { bollo.tap() } else { roadTax.tap() }
-            saveShot(app, name: "07_guides_bollo")
-            firstExistingButton(app, labels: ["Fatto", "Close", "Done"], timeout: 3)?.tap()
-        }
+        XCTAssertTrue(
+            bollo.waitForExistence(timeout: 5) || roadTax.waitForExistence(timeout: 2),
+            "Guides must list bollo article"
+        )
+        if bollo.exists { bollo.tap() } else { roadTax.tap() }
+        // Wait until article content is on screen (not still the hub).
+        let bolloBody =
+            app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "esenzion")).firstMatch
+                .waitForExistence(timeout: 6)
+            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "exemption")).firstMatch
+                .waitForExistence(timeout: 3)
+            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "bollo")).firstMatch
+                .waitForExistence(timeout: 3)
+            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "road tax")).firstMatch
+                .waitForExistence(timeout: 2)
+        XCTAssertTrue(bolloBody, "Bollo guide detail should open")
+        RunLoop.current.run(until: Date().addingTimeInterval(0.6))
+        saveShot(app, name: "07_guides_bollo")
+        firstExistingButton(app, labels: ["Fatto", "Close", "Done"], timeout: 4)?.tap()
 
+        // Map city shot is owned by testSmokeChargingMapCityOnly (avoids overwriting with hub/bollo).
+        // Here only open map if the sheet appears; then always return to workshop for 09.
+        if let guidesTab = firstExistingButton(app, labels: ["Letture", "Guides", "Readings"], timeout: 3) {
+            guidesTab.tap()
+        }
         let entryTitle = app.staticTexts["Colonnine vicino a te"].exists
             ? app.staticTexts["Colonnine vicino a te"]
             : app.staticTexts["Chargers near you"]
-        entryTitle.tap()
-        dismissSystemAlertsIfNeeded(app)
-        RunLoop.current.run(until: Date().addingTimeInterval(1.2))
-        dismissSystemAlertsIfNeeded(app)
-
-        let mapReady =
-            app.navigationBars["Colonnine vicine"].waitForExistence(timeout: 10)
-            || app.navigationBars["Nearby chargers"].waitForExistence(timeout: 4)
-            || app.staticTexts["Colonnine vicine"].waitForExistence(timeout: 4)
-            || app.staticTexts["Nearby chargers"].waitForExistence(timeout: 2)
-            || app.buttons["Apri in Mappe"].waitForExistence(timeout: 4)
-            || app.buttons["Open in Maps"].waitForExistence(timeout: 2)
-            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "ricerca Mappe")).firstMatch
-                .waitForExistence(timeout: 3)
-            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Maps search")).firstMatch
-                .waitForExistence(timeout: 2)
-            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "colonnin")).firstMatch
-                .waitForExistence(timeout: 2)
-            || app.maps.firstMatch.waitForExistence(timeout: 3)
-        XCTAssertTrue(mapReady, "Charging map sheet")
-
-        // Deny location if prompted, then city mode
-        dismissSystemAlertsIfNeeded(app)
-        let cityMode = firstExistingButton(app, labels: ["Cerca per città", "Search by city"], timeout: 4)
-        if let cityMode {
-            cityMode.tap()
-        } else {
-            // Segmented control sometimes exposes differently — tap only if present.
-            let alt = app.buttons.matching(NSPredicate(format: "label CONTAINS[c] %@", "città")).firstMatch
-            if alt.waitForExistence(timeout: 2) {
-                alt.tap()
+        if entryTitle.waitForExistence(timeout: 5) {
+            entryTitle.tap()
+            dismissSystemAlertsIfNeeded(app)
+            RunLoop.current.run(until: Date().addingTimeInterval(1.2))
+            dismissSystemAlertsIfNeeded(app)
+            let mapReady =
+                app.navigationBars["Colonnine vicine"].waitForExistence(timeout: 8)
+                || app.navigationBars["Nearby chargers"].waitForExistence(timeout: 3)
+                || app.descendants(matching: .any)["charging_map_mode_picker"].waitForExistence(timeout: 4)
+                || app.buttons["Apri in Mappe"].waitForExistence(timeout: 3)
+                || app.buttons["Open in Maps"].waitForExistence(timeout: 2)
+                || app.maps.firstMatch.waitForExistence(timeout: 3)
+            if mapReady {
+                dismissSystemAlertsIfNeeded(app)
+                firstExistingButton(app, labels: ["Fatto", "Close", "Done"], timeout: 4)?.tap()
             }
         }
 
-        let cityField = app.textFields.firstMatch
-        if cityField.waitForExistence(timeout: 3) {
-            cityField.tap()
-            cityField.typeText("Milano")
-            firstExistingButton(app, labels: ["Cerca", "Search"], timeout: 2)?.tap()
-            RunLoop.current.run(until: Date().addingTimeInterval(5))
-        }
-        dismissSystemAlertsIfNeeded(app)
-        saveShot(app, name: "08_charging_map_city")
+        // Shot 09 is captured in testSmokeChargingMapCityOnly (reliable path back to workshop).
+    }
 
-        // Empty/fallback capture if present
-        if app.buttons["Apri in Mappe"].exists || app.buttons["Open in Maps"].exists {
-            saveShot(app, name: "08b_charging_map_fallback")
+    @MainActor
+    private func activateChargingMapCityMode(_ app: XCUIApplication) {
+        let labels = ["Cerca per città", "Search by city"]
+        for label in labels {
+            let btn = app.buttons[label]
+            if btn.waitForExistence(timeout: 2), btn.isHittable {
+                btn.tap()
+                return
+            }
+            let seg = app.segmentedControls.buttons[label]
+            if seg.waitForExistence(timeout: 1), seg.isHittable {
+                seg.tap()
+                return
+            }
         }
-
-        firstExistingButton(app, labels: ["Fatto", "Close", "Done"], timeout: 4)?.tap()
-        dismissSystemAlertsIfNeeded(app)
-        XCTAssertTrue(
-            app.staticTexts["Colonnine vicino a te"].waitForExistence(timeout: 4)
-                || app.staticTexts["Chargers near you"].waitForExistence(timeout: 2)
-                || firstExistingButton(app, labels: ["Letture", "Guides"], timeout: 2) != nil
-        )
-
-        if let workshop = firstExistingButton(app, labels: ["Banco", "Workshop", "Bench"], timeout: 4) {
-            workshop.tap()
+        let picker = app.descendants(matching: .any)["charging_map_mode_picker"]
+        if picker.waitForExistence(timeout: 2) {
+            let city = picker.buttons.matching(
+                NSPredicate(format: "label CONTAINS[c] %@ OR label CONTAINS[c] %@", "città", "city")
+            ).firstMatch
+            if city.exists { city.tap(); return }
+            // Last resort: tap right half of segmented control (city is usually second).
+            picker.coordinate(withNormalizedOffset: CGVector(dx: 0.78, dy: 0.5)).tap()
         }
-        saveShot(app, name: "09_workshop_after_smoke")
     }
 
     @MainActor
@@ -239,21 +242,49 @@ final class SmokeProductUITests: XCTestCase {
         dismissSystemAlertsIfNeeded(app)
         saveShot(app, name: "08_charging_map_sheet")
 
-        let cityMode = firstExistingButton(app, labels: ["Cerca per città", "Search by city"], timeout: 5)
-        cityMode?.tap()
-        let field = app.textFields.firstMatch
-        if field.waitForExistence(timeout: 3) {
+        activateChargingMapCityMode(app)
+        let field =
+            app.textFields["charging_map_city_field"].exists
+            ? app.textFields["charging_map_city_field"]
+            : app.textFields.firstMatch
+        if field.waitForExistence(timeout: 5) {
             field.tap()
             field.typeText("Milano")
-            firstExistingButton(app, labels: ["Cerca", "Search"], timeout: 2)?.tap()
+            let search =
+                app.buttons["charging_map_city_search"].exists
+                ? app.buttons["charging_map_city_search"]
+                : firstExistingButton(app, labels: ["Cerca", "Search"], timeout: 2)
+            search?.tap()
             RunLoop.current.run(until: Date().addingTimeInterval(6))
         }
         dismissSystemAlertsIfNeeded(app)
+        // Require map chrome so we never overwrite 08 with the guides hub.
+        let mapChrome =
+            app.descendants(matching: .any)["charging_map_mode_picker"].exists
+            || app.navigationBars["Colonnine vicine"].exists
+            || app.navigationBars["Nearby chargers"].exists
+            || app.maps.firstMatch.exists
+            || app.buttons["Apri in Mappe"].exists
+            || app.buttons["Open in Maps"].exists
+        XCTAssertTrue(mapChrome, "08 shot must be the charging map, not guides hub")
         saveShot(app, name: "08_charging_map_city")
         if app.buttons["Apri in Mappe"].exists || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Nessuna")).firstMatch.exists {
             saveShot(app, name: "08b_charging_map_fallback")
         }
         firstExistingButton(app, labels: ["Fatto", "Close", "Done"], timeout: 4)?.tap()
+        dismissSystemAlertsIfNeeded(app)
+
+        let workshop = firstExistingButton(app, labels: ["Banco", "Workshop", "Bench"], timeout: 8)
+        XCTAssertNotNil(workshop, "Workshop tab for 09 shot")
+        workshop?.tap()
+        let workshopReady =
+            app.buttons["Dimmi la verità"].waitForExistence(timeout: 10)
+            || app.buttons["Tell me the truth"].waitForExistence(timeout: 4)
+            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Golf")).firstMatch
+                .waitForExistence(timeout: 4)
+        XCTAssertTrue(workshopReady, "Workshop bench visible for 09 shot")
+        RunLoop.current.run(until: Date().addingTimeInterval(0.5))
+        saveShot(app, name: "09_workshop_after_smoke")
     }
 
     @MainActor

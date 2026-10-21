@@ -82,6 +82,7 @@ struct ChargingMapView: View {
                 Text(L10n.chargingMapModeCity).tag(false)
             }
             .pickerStyle(.segmented)
+            .accessibilityIdentifier("charging_map_mode_picker")
             .onChange(of: useDeviceLocation) { _, useLoc in
                 Task {
                     if useLoc {
@@ -98,6 +99,7 @@ struct ChargingMapView: View {
                         .textFieldStyle(.roundedBorder)
                         .textInputAutocapitalization(.words)
                         .submitLabel(.search)
+                        .accessibilityIdentifier("charging_map_city_field")
                         .onSubmit {
                             Task { await searchByCityIfPossible() }
                         }
@@ -106,6 +108,7 @@ struct ChargingMapView: View {
                     }
                     .font(Typography.bodyBold)
                     .foregroundStyle(Color.ink)
+                    .accessibilityIdentifier("charging_map_city_search")
                 }
             }
         }
