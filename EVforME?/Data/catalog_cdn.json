@@ -7,6 +7,6 @@
   "host": "bundled-offline-first",
   "updatedAt": "2026-10-07T16:17:31.433834+00:00",
   "policy": "offline-first",
-  "seedVersion": 37,
-  "note": "seedVersion 37: diesel restored; Model Y 2025 EV-Database 13.1; powerKw EEA optional info only (bollo EV uses booklet P.2). Offline-first."
+  "seedVersion": 40,
+  "note": "seedVersion 40: EEA IT ICE/HEV fuels+consumptions+bollo (no Fc; CO2→FC Reg. 2017/1151 fuel-specific; no PHEV CO2 overwrite; curated ghosts)."
 }

@@ -7,6 +7,6 @@
   "host": "bundled-offline-first",
   "updatedAt": "2026-10-07T16:17:31.433834+00:00",
   "policy": "offline-first",
-  "seedVersion": 31,
-  "note": "seedVersion 31: no flat passenger wltpRangeKm=350; vans may stay ~250\u2013350. Offline-first."
+  "seedVersion": 39,
+  "note": "seedVersion 39: EEA IT ICE/HEV fuels CO2→FC Reg.2017/1151 E10/B7; family match C-Class/A4/3-Series/911/500; Mini→MINI"
 }

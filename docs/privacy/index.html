@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Privacy Policy — EVforME?</title>
-  <meta name="description" content="Privacy Policy for the EVforME? iOS app." />
+  <meta name="description" content="Informativa privacy / Privacy Policy for the EVforME? iOS app." />
   <style>
     :root {
       --stone: #eceee8;
@@ -38,7 +38,9 @@
       letter-spacing: -0.02em;
       margin: 0 0 0.35rem;
     }
-    .meta { color: var(--muted); font-size: 0.95rem; margin-bottom: 2rem; }
+    .meta { color: var(--muted); font-size: 0.95rem; margin-bottom: 1.25rem; }
+    .lang { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 0.9rem; margin-bottom: 2rem; }
+    .lang a { color: var(--ink); margin-right: 0.75rem; }
     h2 {
       font-size: 1.15rem;
       margin: 2rem 0 0.65rem;
@@ -48,6 +50,7 @@
     p, li { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 0.98rem; }
     ul { padding-left: 1.2rem; }
     a { color: var(--ink); }
+    hr { border: none; border-top: 1px solid rgba(18,20,18,0.12); margin: 3rem 0; }
     footer {
       margin-top: 3rem;
       padding-top: 1rem;
@@ -61,85 +64,91 @@
 <body>
   <main>
     <div class="mark" aria-hidden="true"></div>
-    <h1>Privacy Policy — EVforME?</h1>
-    <p class="meta">Last updated: 8 October 2026 · App: EVforME? (iOS)</p>
+    <h1>Privacy — EVforME?</h1>
+    <p class="meta">Aggiornata: 20 ottobre 2026 · App: EVforME? (iOS)</p>
+    <p class="lang"><a href="#it">Italiano</a><a href="#en">English</a></p>
 
-    <p>This policy describes how the EVforME? app handles information. It is written for App Store review and for people using the app in Italy and the EU.</p>
+    <section id="it">
+      <h2>Titolare del trattamento</h2>
+      <p>Il titolare è <strong>Andrea Ancellotti</strong>. Contatto: <a href="mailto:andrea.ancellotti@gmail.com">andrea.ancellotti@gmail.com</a>.</p>
 
-    <h2>Who we are</h2>
-    <p>EVforME? is a decision tool that estimates whether switching from a combustion car to an electric or plug-in hybrid car may make sense for your driving profile. It is provided by the app developer listed on the App Store product page (“we”, “us”).</p>
+      <h2>Cosa fa l’app con i dati</h2>
+      <p>EVforME? stima sul dispositivo se passare a un’auto elettrica o plug-in può avere senso per il tuo profilo di guida.</p>
+      <h3>Sul telefono (predefinito)</h3>
+      <ul>
+        <li>Km, prezzi carburante/elettricità, veicoli scelti, paese, storico scenari</li>
+        <li>Snapshot widget / Live Activity solo tramite App Group sullo stesso dispositivo</li>
+        <li>Campi del form consulente (nome, email, città) finché non li invii</li>
+      </ul>
+      <p>Non vendiamo dati personali. Non usiamo tracker pubblicitari (<code>NSPrivacyTracking</code> = false).</p>
 
-    <h2>What the app does with data</h2>
-    <h3>On your device (default)</h3>
-    <p>Most processing stays on your iPhone:</p>
-    <ul>
-      <li>Driving and cost inputs you enter (km/year, fuel and electricity prices, charging preferences, selected vehicles)</li>
-      <li>Simulation results and scenario history stored locally</li>
-      <li>Optional lead form fields you type (name, email, city) until/unless you send them</li>
-      <li>Widget / Live Activity snapshots shared only via the app’s App Group on the same device</li>
-    </ul>
-    <p>We do <strong>not</strong> sell personal data. We do <strong>not</strong> use advertising trackers in the current build (<code>NSPrivacyTracking</code> = false).</p>
+      <h3>Foto</h3>
+      <p>La scansione dello sticker legge i consumi <strong>on-device</strong>; le foto non vengono caricate per quella funzione.</p>
 
-    <h3>Photos</h3>
-    <p>If you use sticker scanning, photos are used <strong>on-device</strong> to read consumption figures (L/100 km or kWh/100 km). Photos are not uploaded for that feature.</p>
+      <h3>Posizione (solo Colonnine vicine)</h3>
+      <p>L’app può chiedere la posizione <strong>durante l’uso</strong> solo quando apri <strong>Colonnine vicine</strong>, per centrare una ricerca <strong>Apple MapKit</strong>. Il paese per le stime di costo viene dalla regione del dispositivo o dal selettore in-app — non dal GPS. Le coordinate non vengono salvate né inviate a un backend EVforME. Niente tracking in background.</p>
 
-    <h3>Location (Nearby chargers only)</h3>
-    <p>The app may request <strong>Location When In Use</strong> only when you open <strong>Nearby chargers</strong>, to center an Apple MapKit / Maps search for public charging points. <strong>Country</strong> for maintenance cost estimates comes from your device region (<code>Locale</code>) or the in-app country picker — <strong>not</strong> from GPS. Location is <strong>not</strong> sent to an EVforME backend and is <strong>not</strong> tracked continuously or in the background. You can deny permission and still search chargers by city or open Apple Maps.</p>
+      <h3>Rete (opzionale)</h3>
+      <ul>
+        <li>Catalogo veicoli HTTPS (se configurato; di norma il catalogo è incluso nell’app)</li>
+        <li>Prezzi energetici pubblici: <strong>MIMIT</strong> (carburanti) ed <strong>Eurostat</strong> (elettricità)</li>
+        <li>Risultati ricerca <strong>Apple MapKit / Mappe</strong></li>
+        <li>Analytics o webhook lead solo se configurati dal sviluppatore</li>
+      </ul>
 
-    <h3>Optional network features</h3>
-    <p>When configured by the developer, the app may contact:</p>
-    <ul>
-      <li>A <strong>vehicle catalog</strong> HTTPS endpoint (public JSON) to refresh model data</li>
-      <li><strong>Public energy price sources</strong> (e.g. official fuel/electricity statistics)</li>
-      <li><strong>Apple Maps / MapKit</strong> for charging-point search results (Apple’s services; not an EVforME server)</li>
-      <li>An optional <strong>analytics</strong> ingest URL (product events such as “verdict shown”)</li>
-      <li>An optional <strong>lead webhook</strong> if you submit the advisor contact form with consent</li>
-    </ul>
-    <p>If those URLs are empty (typical production default for analytics/leads), related data stays on device or is not sent.</p>
+      <h2>Diritti e scelte</h2>
+      <ul>
+        <li>Non compilare il form consulente se non vuoi condividere contatti</li>
+        <li>Revoca foto/posizione in Impostazioni iOS → EVforME?</li>
+        <li>Elimina l’app per rimuovere i dati locali</li>
+        <li>Scrivi a <a href="mailto:andrea.ancellotti@gmail.com">andrea.ancellotti@gmail.com</a> per assistenza</li>
+      </ul>
+    </section>
 
-    <h2>Data we may collect (App Privacy labels)</h2>
-    <ul>
-      <li><strong>Name</strong> and <strong>email</strong> — only if you fill the voluntary advisor form; purpose: app functionality / follow-up you request</li>
-      <li><strong>Precise location</strong> — only if you allow it for Nearby chargers; purpose: app functionality (map search). Not used for tracking or country detection</li>
-      <li><strong>Product interaction</strong> — anonymous/local analytics events for improving the product (and optional remote ingest if configured)</li>
-    </ul>
+    <hr />
 
-    <h2>Legal bases (EU/UK GDPR style)</h2>
-    <ul>
-      <li><strong>Contract / service delivery:</strong> running the simulation you request</li>
-      <li><strong>Consent:</strong> advisor lead form, location for Nearby chargers, and any optional remote analytics where consent is required</li>
-      <li><strong>Legitimate interest:</strong> securing the app, preventing abuse, and basic product metrics without advertising profiling</li>
-    </ul>
+    <section id="en" lang="en">
+      <p class="meta">Last updated: 20 October 2026 · App: EVforME? (iOS)</p>
 
-    <h2>Retention</h2>
-    <ul>
-      <li>Local inputs and history remain until you delete the app or clear app data</li>
-      <li>Coordinates are not retained by EVforME; the selected country code (from locale or picker) is saved on device with your inputs</li>
-      <li>Lead/analytics payloads retained by any configured webhook/ingest follow that service’s retention; if none is configured, nothing is sent</li>
-    </ul>
+      <h2>Data controller</h2>
+      <p>The controller is <strong>Andrea Ancellotti</strong>. Contact: <a href="mailto:andrea.ancellotti@gmail.com">andrea.ancellotti@gmail.com</a>.</p>
 
-    <h2>Your choices</h2>
-    <ul>
-      <li>Do not fill the lead form if you do not want to share contact details</li>
-      <li>Revoke photo or location access in iOS Settings → EVforME?</li>
-      <li>Delete the app to remove local storage on device</li>
-      <li>Contact us via the App Store support URL to request assistance with remotely stored leads (only if you previously submitted them to a configured webhook)</li>
-    </ul>
+      <h2>What the app does with data</h2>
+      <p>EVforME? estimates on your device whether switching to an electric or plug-in hybrid may fit your driving profile.</p>
+      <h3>On your device (default)</h3>
+      <ul>
+        <li>Km, fuel/electricity prices, chosen vehicles, country, scenario history</li>
+        <li>Widget / Live Activity snapshots only via the app’s App Group on the same device</li>
+        <li>Optional advisor form fields until/unless you submit them</li>
+      </ul>
+      <p>We do not sell personal data. We do not use advertising trackers (<code>NSPrivacyTracking</code> = false).</p>
 
-    <h2>Children</h2>
-    <p>EVforME? is not directed at children under 13 (or the minimum age required in your country). Do not submit personal data about children through the lead form.</p>
+      <h3>Photos</h3>
+      <p>Sticker scanning reads consumption figures <strong>on-device</strong>; photos are not uploaded for that feature.</p>
 
-    <h2>International transfers</h2>
-    <p>If you enable optional remote endpoints hosted outside your country, data you send may be processed in those regions under the provider’s terms.</p>
+      <h3>Location (Nearby chargers only)</h3>
+      <p>The app may request <strong>Location When In Use</strong> only when you open <strong>Nearby chargers</strong>, to center an <strong>Apple MapKit</strong> search. Country for cost estimates comes from device region or the in-app picker — not GPS. Coordinates are not stored or sent to an EVforME backend. No background tracking.</p>
 
-    <h2>Changes</h2>
-    <p>We may update this policy when the app’s data practices change. The “Last updated” date will change accordingly. Material changes that require consent will be surfaced in the app when feasible.</p>
+      <h3>Optional network features</h3>
+      <ul>
+        <li>Vehicle catalog HTTPS endpoint (if configured; typically the catalog is bundled)</li>
+        <li>Public energy prices: <strong>MIMIT</strong> (fuel) and <strong>Eurostat</strong> (electricity)</li>
+        <li><strong>Apple MapKit / Maps</strong> charging-point search results</li>
+        <li>Analytics or lead webhook only if configured</li>
+      </ul>
 
-    <h2>Contact</h2>
-    <p>Use the support contact shown on the App Store listing for EVforME?.</p>
+      <h2>Your choices</h2>
+      <ul>
+        <li>Skip the advisor form if you do not want to share contact details</li>
+        <li>Revoke photo or location access in iOS Settings → EVforME?</li>
+        <li>Delete the app to remove local data</li>
+        <li>Email <a href="mailto:andrea.ancellotti@gmail.com">andrea.ancellotti@gmail.com</a> for assistance</li>
+      </ul>
+    </section>
 
     <footer>
-      Host this page on public HTTPS, then set the same URL in App Store Connect and in <code>EVFORME_PRIVACY_URL</code> (Info.plist).
+      EVforME? · Andrea Ancellotti · <a href="mailto:andrea.ancellotti@gmail.com">andrea.ancellotti@gmail.com</a>
+      · <a href="../support/">Support / FAQ</a>
     </footer>
   </main>
 </body>

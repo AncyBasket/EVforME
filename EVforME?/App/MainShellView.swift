@@ -101,6 +101,15 @@ struct MainShellView: View {
             } else {
                 userInput.targetVehicleId = Defaults.starterTargetVehicleId
             }
+            if ProcessInfo.processInfo.environment["UITEST_SOURCE_FUEL"] == "lpg" {
+                userInput.sourceVehicleId = "dacia-sandero-eco-g-2022"
+            }
+            if let raw = ProcessInfo.processInfo.environment["UITEST_FUEL_PRICE"],
+               let price = Double(raw.replacingOccurrences(of: ",", with: ".")) {
+                userInput.fuelPrice = price
+                // Evita che applyOfficialCosts / sync sovrascrivano il preset (es. 0,78 GPL).
+                StorageService.shared.markFuelPriceCustomized()
+            }
         }
         .task { await catalogSetup() }
         .fullScreenCover(isPresented: $showOnboarding, onDismiss: {

@@ -71,11 +71,8 @@ struct VerdictShareCardView: View {
 
             VStack(alignment: .leading, spacing: 0) {
                 shareMetricRow(
-                    label: L10n.verdictProofSavingsLabel,
-                    value: L10n.verdictProofSavingsValue(
-                        result.yearlySavingsRange.lowerBound,
-                        result.yearlySavingsRange.upperBound
-                    )
+                    label: L10n.verdictProofMoneyLabel(for: result.yearlySavingsRange),
+                    value: L10n.verdictProofMoneyValue(for: result.yearlySavingsRange)
                 )
                 shareMetricRow(
                     label: L10n.verdictProofChargesLabel,

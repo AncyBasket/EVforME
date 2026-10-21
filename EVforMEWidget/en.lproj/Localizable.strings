@@ -1,5 +1,5 @@
 /* Widget */
-"widget_brand_title" = "EV for ME?";
+"widget_brand_title" = "EVforME?";
 "widget_empty_prompt" = "Run a simulation to pin your verdict here.";
 "widget_bump_fuel_title" = "Fuel +€0.10";
 "widget_bump_fuel_description" = "Raises the fuel price by €0.10 and refreshes the Home Screen verdict estimate.";

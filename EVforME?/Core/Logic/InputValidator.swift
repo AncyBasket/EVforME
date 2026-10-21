@@ -30,10 +30,20 @@ struct InputValidator {
         if price <= 0 {
             return .invalid(L10n.validationFuelPositive)
         }
+        // Upper bound covers diesel/petrol (~2.5) and leaves margin; GPL/CNG use lower ranges in UI.
         if price > 3.0 {
             return .invalid(L10n.validationFuelHigh)
         }
         return .valid
+    }
+
+    /// Range slider consigliato per carburante (UI).
+    static func fuelPriceSliderRange(for fuelKind: FuelKind) -> ClosedRange<Double> {
+        switch fuelKind {
+        case .lpg: return 0.50...1.20
+        case .cng: return 0.80...2.20
+        case .diesel, .petrol, .unknown: return 1.0...2.5
+        }
     }
 
     /// Prezzo energia €/kWh (domestico o stima ricarica pubblica).

@@ -47,26 +47,28 @@ enum VerdictExplanationService {
             instructions: """
             Sei un consulente auto elettriche chiaro e onesto. Rispondi nella stessa lingua \
             dell'utente (italiano o inglese). Massimo 4 frasi corte. Niente markdown, \
-            niente elenchi, niente promesse di incentivi. Usa solo i numeri forniti.
+            niente elenchi, niente promesse di incentivi. Spiegazione solo qualitativa: \
+            non scrivere cifre, importi in euro, percentuali né km.
             """
         )
 
         let prompt = """
         Verdetto: \(result.verdict.rawValue) (\(result.verdict.title))
-        Km/anno: \(input.dailyKm)
-        Ricarica casa: \(input.hasHomeCharging ? "sì" : "no")
+        Ha ricarica a casa: \(input.hasHomeCharging ? "sì" : "no")
         Area: \(input.areaType.rawValue)
         Scenario: \(input.scenario.title)
-        Ricariche/settimana stimate: \(result.weeklyCharges)
-        Risparmio annuo stimato (€): \(result.yearlySavingsRange.lowerBound)–\(result.yearlySavingsRange.upperBound)
-        Motivi: \(result.keyReasons.joined(separator: " | "))
-        Spiega perché questo verdetto ha senso per questa persona.
+        Motivi (qualitativi): \(result.keyReasons.joined(separator: " | "))
+        Spiega in modo qualitativo perché questo verdetto ha senso. Nessun numero.
         """
 
         do {
             let response = try await session.respond(to: prompt)
             let text = response.content.trimmingCharacters(in: .whitespacesAndNewlines)
-            return text.isEmpty ? fallback : text
+            if text.isEmpty { return fallback }
+            if Self.containsDisallowedFigures(text, relativeTo: result, input: input) {
+                return fallback
+            }
+            return text
         } catch {
             return fallback
         }
@@ -83,5 +85,40 @@ enum VerdictExplanationService {
         case .notYet:
             return L10n.verdictAIFallbackNotYet(input.dailyKm, result.weeklyCharges)
         }
+    }
+
+    /// Se il modello inventa cifre diverse da quelle calcolate, scarta il testo.
+    static func containsDisallowedFigures(
+        _ text: String,
+        relativeTo result: SimulationResult,
+        input: UserInput
+    ) -> Bool {
+        let allowed = Set(Self.allowedFigureTokens(result: result, input: input))
+        let pattern = #"\d+(?:[.,]\d+)?"#
+        guard let regex = try? NSRegularExpression(pattern: pattern) else { return false }
+        let ns = text as NSString
+        let matches = regex.matches(in: text, range: NSRange(location: 0, length: ns.length))
+        for m in matches {
+            let token = ns.substring(with: m.range)
+                .replacingOccurrences(of: ",", with: ".")
+            if !allowed.contains(token) {
+                // Qualsiasi cifra non nella allowlist → fallback (prompt chiede zero numeri).
+                return true
+            }
+        }
+        // Prompt qualitativo: anche cifre “ammesse” fanno scattare il fallback.
+        return !matches.isEmpty
+    }
+
+    private static func allowedFigureTokens(result: SimulationResult, input: UserInput) -> [String] {
+        var tokens: [String] = [
+            "\(input.dailyKm)",
+            "\(result.weeklyCharges)",
+            "\(result.yearlySavingsRange.lowerBound)",
+            "\(result.yearlySavingsRange.upperBound)",
+            "\(abs(result.yearlySavingsRange.lowerBound))",
+            "\(abs(result.yearlySavingsRange.upperBound))"
+        ]
+        return tokens
     }
 }

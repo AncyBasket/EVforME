@@ -46,7 +46,8 @@ enum L10n {
     }
     
     // MARK: - App
-    static var appTitle: String { string("app_title") }
+    /// Brand name — never localized.
+    static var appTitle: String { "EVforME?" }
     
     // MARK: - Input
     static var dailyKmQuestion: String { string("daily_km_question") }
@@ -63,6 +64,18 @@ enum L10n {
     static var inputSection4Title: String { string("input_section_4_title") }
     static var inputSection4Subtitle: String { string("input_section_4_subtitle") }
     static var fuelPriceLabel: String { string("fuel_price_label") }
+    static var fuelPriceLabelDiesel: String { string("fuel_price_label_diesel") }
+    static var fuelPriceLabelLPG: String { string("fuel_price_label_lpg") }
+    static var fuelPriceLabelCNG: String { string("fuel_price_label_cng") }
+    static func fuelPriceA11yValuePerLiter(_ price: Double) -> String {
+        format("fuel_price_a11y_value_per_liter", price)
+    }
+    static func fuelPriceA11yValuePerKg(_ price: Double) -> String {
+        format("fuel_price_a11y_value_per_kg", price)
+    }
+    static func electricityPriceA11yValue(_ price: Double) -> String {
+        format("electricity_price_a11y_value", price)
+    }
     static var electricityPriceLabel: String { string("electricity_price_label") }
     static var ownershipYearsLabel: String { string("ownership_years_label") }
     static var yearSingular: String { string("year_singular") }
@@ -365,6 +378,22 @@ enum L10n {
         format("verdict_proof_savings_value", min, max)
     }
     static var verdictProofSavingsLabel: String { string("verdict_proof_savings_label") }
+    static var verdictProofExtraCostLabel: String { string("verdict_proof_extra_cost_label") }
+
+    /// Proof metric label: savings when positive, extra cost when the yearly range is non-positive.
+    static func verdictProofMoneyLabel(for range: ClosedRange<Int>) -> String {
+        range.upperBound <= 0 ? verdictProofExtraCostLabel : verdictProofSavingsLabel
+    }
+
+    /// Proof metric value with positive euro amounts (no "€-").
+    static func verdictProofMoneyValue(for range: ClosedRange<Int>) -> String {
+        if range.upperBound <= 0 {
+            let a = abs(range.lowerBound)
+            let b = abs(range.upperBound)
+            return verdictProofSavingsValue(min(a, b), max(a, b))
+        }
+        return verdictProofSavingsValue(range.lowerBound, range.upperBound)
+    }
     static var verdictProofChargesLabel: String { string("verdict_proof_charges_label") }
     static func verdictProofBreakEvenValue(_ months: Int) -> String {
         format("verdict_proof_breakeven_value", months)
@@ -505,7 +534,9 @@ enum L10n {
     static func incentivesIncludedReason(_ euro: Int) -> String { format("incentives_included_reason", euro) }
     static var incentivesTransparencyNote: String { string("incentives_transparency_note") }
     static var sourcesSectionTitle: String { string("sources_section_title") }
-    static var sourceCatalogNote: String { string("source_catalog_note") }
+    static var sourceCatalogNote: String {
+        format("source_catalog_note", VehicleCatalogService.bundledSeedVersion)
+    }
     static var sourcePricesNote: String { string("source_prices_note") }
     static var historySectionTitle: String { string("history_section_title") }
     static var historyEmpty: String { string("history_empty") }
@@ -560,6 +591,10 @@ enum L10n {
     static var evBookletPowerKwP2TargetLabel: String { string("ev_booklet_power_kw_p2_target_label") }
     static var evBookletPowerKwP2Placeholder: String { string("ev_booklet_power_kw_p2_placeholder") }
     static var evBookletPowerKwP2Hint: String { string("ev_booklet_power_kw_p2_hint") }
+    static var italianRegionLabel: String { string("italian_region_label") }
+    static var italianRegionUnspecified: String { string("italian_region_unspecified") }
+    static var italianRegionOtherUnknown: String { string("italian_region_other_unknown") }
+    static var italianRegionHint: String { string("italian_region_hint") }
     static var partialTotalBolloUnknown: String { string("partial_total_bollo_unknown") }
     static var italyKitBolloBothUnknown: String { string("italy_kit_bollo_both_unknown") }
     static func italyKitBolloRowSourceUnknown(_ ev: Int) -> String {

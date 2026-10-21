@@ -24,11 +24,10 @@ final class EVforME_UITests: XCTestCase {
         // Dismiss onboarding / quick-start (IT/EN; PrimaryButton may uppercase label)
         dismissQuickStartIfNeeded(app)
 
-        let titleEN = app.staticTexts["EV for ME?"]
-        let titleIT = app.staticTexts["EV per ME?"]
+        let title = app.staticTexts["EVforME?"]
         XCTAssertTrue(
-            titleEN.waitForExistence(timeout: 5) || titleIT.waitForExistence(timeout: 2),
-            "Masthead title should match app_title (EN or IT)"
+            title.waitForExistence(timeout: 5),
+            "Masthead title should be the untranslated brand EVforME?"
         )
 
         // Wait for catalog-backed starters (async load) before simulating.
@@ -103,6 +102,70 @@ final class EVforME_UITests: XCTestCase {
             partialIT.waitForExistence(timeout: 15) || partialEN.waitForExistence(timeout: 2),
             "Verdict header should show partial total when EV is 5+ years without booklet P.2"
         )
+    }
+
+    @MainActor
+    func testFuelPriceSliderAcceptsLPG078() throws {
+        let app = XCUIApplication()
+        app.launchEnvironment["UITEST_PRESET_VEHICLES"] = "1"
+        app.launchEnvironment["UITEST_SOURCE_FUEL"] = "lpg"
+        app.launchEnvironment["UITEST_FUEL_PRICE"] = "0.78"
+        app.launchEnvironment["UITEST_EXPAND_ADVANCED"] = "1"
+        app.launch()
+
+        dismissQuickStartIfNeeded(app)
+
+        let startersReady =
+            app.buttons["Dimmi la verità"].waitForExistence(timeout: 12)
+            || app.buttons["Tell me the truth"].waitForExistence(timeout: 2)
+        XCTAssertTrue(startersReady, "Input bench should load")
+
+        // Advanced già espanso via UITEST_EXPAND_ADVANCED; scroll fino allo slider carburante.
+        for _ in 0..<8 { app.swipeUp() }
+
+        // Valore mostrato obbligatorio: 0,78 (range GPL 0,50…1,20). Non basta che esista lo slider.
+        let valuePredicates = [
+            NSPredicate(format: "label CONTAINS %@", "0,78"),
+            NSPredicate(format: "label CONTAINS %@", "0.78"),
+            NSPredicate(format: "value CONTAINS %@", "0,78"),
+            NSPredicate(format: "value CONTAINS %@", "0.78")
+        ]
+        var shown078 = false
+        for pred in valuePredicates {
+            let match = app.descendants(matching: .any).matching(pred).firstMatch
+            if match.waitForExistence(timeout: 4) {
+                shown078 = true
+                break
+            }
+        }
+        XCTAssertTrue(shown078, "UI must show GPL price €0.78/L (not overwritten by petrol official / not clamped ≥1.0)")
+
+        // Controllo raggiungibile + bounds 0,50…1,20 (clamp reale sul tipo carburante).
+        let byId = app.descendants(matching: .any)["fuel_price_slider"]
+        let byA11yIT = app.sliders["Prezzo carburante (€/L o €/kg)"]
+        let byA11yEN = app.sliders["Fuel price (€/L or €/kg)"]
+        let byTitle = app.staticTexts.matching(
+            NSPredicate(format: "label CONTAINS[c] %@ OR label CONTAINS[c] %@", "GPL", "LPG")
+        ).firstMatch
+        let fuelControl =
+            byId.exists || byA11yIT.exists || byA11yEN.exists || byTitle.exists
+            || byId.waitForExistence(timeout: 3)
+            || byA11yIT.waitForExistence(timeout: 1)
+            || byA11yEN.waitForExistence(timeout: 1)
+            || byTitle.waitForExistence(timeout: 1)
+        XCTAssertTrue(fuelControl, "Fuel price control should be reachable for GPL source")
+
+        let slider = [byId, byA11yIT, byA11yEN].first(where: \.exists) ?? byId
+        if let raw = slider.value as? String {
+            let digits = raw
+                .replacingOccurrences(of: ",", with: ".")
+                .components(separatedBy: CharacterSet(charactersIn: "0123456789.").inverted)
+                .joined()
+            if let numeric = Double(digits), numeric > 0 {
+                XCTAssertGreaterThanOrEqual(numeric, 0.50, "GPL value below min")
+                XCTAssertLessThanOrEqual(numeric, 1.20, "GPL value above max — clamp on fuel-kind change failed")
+            }
+        }
     }
 
     @MainActor

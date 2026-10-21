@@ -154,20 +154,32 @@ final class StorageService {
         return changed
     }
 
-    /// Aggiorna €/L quando cambia il veicolo attuale (benzina ↔ diesel), se non c’è override manuale.
+    /// Aggiorna €/L (o €/kg) quando cambia il veicolo attuale.
+    /// Se il prezzo manuale resta fuori range per il nuovo carburante (es. 1,90 €/L su GPL),
+    /// lo reimposta al prezzo ufficiale del nuovo tipo.
     @discardableResult
     func syncFuelPriceForSourceVehicle(in input: inout UserInput) -> Bool {
-        guard !defaults.bool(forKey: Keys.userCustomizedFuelPrice) else { return false }
         guard let costs = OfficialCostService.shared.cachedOrBundledCosts() else { return false }
         let kind = VehicleCatalogService.shared.vehicle(by: input.sourceVehicleId)?.resolvedFuelKind ?? .petrol
-        let price = costs.pricePerLiter(for: kind)
+        let official = costs.pricePerLiter(for: kind)
+        let range = InputValidator.fuelPriceSliderRange(for: kind)
         let epsilon = 0.0001
-        guard abs(input.fuelPrice - price) >= epsilon else {
-            defaults.set(price, forKey: Keys.lastAutoFuelPrice)
+        let outOfRange =
+            input.fuelPrice < range.lowerBound - epsilon
+            || input.fuelPrice > range.upperBound + epsilon
+        if outOfRange {
+            input.fuelPrice = official
+            defaults.set(official, forKey: Keys.lastAutoFuelPrice)
+            defaults.set(false, forKey: Keys.userCustomizedFuelPrice)
+            return true
+        }
+        guard !defaults.bool(forKey: Keys.userCustomizedFuelPrice) else { return false }
+        guard abs(input.fuelPrice - official) >= epsilon else {
+            defaults.set(official, forKey: Keys.lastAutoFuelPrice)
             return false
         }
-        input.fuelPrice = price
-        defaults.set(price, forKey: Keys.lastAutoFuelPrice)
+        input.fuelPrice = official
+        defaults.set(official, forKey: Keys.lastAutoFuelPrice)
         return true
     }
 
@@ -389,6 +401,7 @@ private struct CodableUserInput: Codable {
     let annualKaskoEUR: Double?
     let sourceBookletPowerKwP2: Double?
     let targetBookletPowerKwP2: Double?
+    let italianRegionRaw: String?
 
     private enum CodingKeys: String, CodingKey {
         case dailyKm
@@ -416,6 +429,7 @@ private struct CodableUserInput: Codable {
         case annualKaskoEUR
         case sourceBookletPowerKwP2
         case targetBookletPowerKwP2
+        case italianRegionRaw
         /// Legacy single-field P.2 (pre source/target split) → maps to target.
         case evBookletPowerKwP2
     }
@@ -453,6 +467,7 @@ private struct CodableUserInput: Codable {
         annualKaskoEUR = input.annualKaskoEUR
         sourceBookletPowerKwP2 = input.sourceBookletPowerKwP2
         targetBookletPowerKwP2 = input.targetBookletPowerKwP2
+        italianRegionRaw = input.italianRegion.rawValue
         
         // Encode charging configuration
         chargingConfigData = ChargingConfigData(
@@ -498,6 +513,7 @@ private struct CodableUserInput: Codable {
         let targetP2 = try container.decodeIfPresent(Double.self, forKey: .targetBookletPowerKwP2)
         let legacyP2 = try container.decodeIfPresent(Double.self, forKey: .evBookletPowerKwP2)
         targetBookletPowerKwP2 = targetP2 ?? legacyP2
+        italianRegionRaw = try container.decodeIfPresent(String.self, forKey: .italianRegionRaw)
         
         // Persist raw charging payload; `toUserInput()` materializes / falls back.
         chargingConfigData = try container.decodeIfPresent(ChargingConfigData.self, forKey: .chargingConfigData)
@@ -528,6 +544,7 @@ private struct CodableUserInput: Codable {
         try container.encodeIfPresent(annualKaskoEUR, forKey: .annualKaskoEUR)
         try container.encodeIfPresent(sourceBookletPowerKwP2, forKey: .sourceBookletPowerKwP2)
         try container.encodeIfPresent(targetBookletPowerKwP2, forKey: .targetBookletPowerKwP2)
+        try container.encodeIfPresent(italianRegionRaw, forKey: .italianRegionRaw)
     }
     
     func toUserInput() -> UserInput {
@@ -578,7 +595,8 @@ private struct CodableUserInput: Codable {
             includeKaskoTheft: includeKaskoTheft,
             annualKaskoEUR: annualKaskoEUR,
             sourceBookletPowerKwP2: sourceBookletPowerKwP2,
-            targetBookletPowerKwP2: targetBookletPowerKwP2
+            targetBookletPowerKwP2: targetBookletPowerKwP2,
+            italianRegion: italianRegionRaw.flatMap(ItalianRegion.init(rawValue:)) ?? .unspecified
         )
     }
 

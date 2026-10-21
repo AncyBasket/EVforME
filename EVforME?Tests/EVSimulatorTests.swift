@@ -750,6 +750,41 @@ final class EVSimulatorTests: XCTestCase {
         )
     }
 
+    /// Con risparmio annuo ≤ 0 la prova numerica mostra costo in più (numeri positivi), non “Risparmio”/€-.
+    func testProofMoneyCopy_WhenSavingsNonPositive_ShowsExtraCostNotNegativeEuros() {
+        var input = UserInput(
+            dailyKm: 8_000,
+            hasHomeCharging: false,
+            areaType: .mixed,
+            fuelPrice: 1.5,
+            ownershipYears: 5,
+            electricityPricePerKWh: 0.90,
+            sourceVehicleId: "toyota-prius-2018",
+            targetVehicleId: "tesla-model-3-2026",
+            scenario: .realistic
+        )
+        input.sourceConsumptionOverrideLPer100Km = 3.8
+        input.targetEnergyOverrideKWhPer100Km = 22
+        let result = requireSimulate(input: input)
+        XCTAssertLessThanOrEqual(
+            result.yearlySavingsRange.upperBound,
+            0,
+            "Fixture should yield non-positive savings, got \(result.yearlySavingsRange)"
+        )
+        let label = L10n.verdictProofMoneyLabel(for: result.yearlySavingsRange)
+        let value = L10n.verdictProofMoneyValue(for: result.yearlySavingsRange)
+        XCTAssertFalse(label.localizedCaseInsensitiveContains("Risparmio"))
+        XCTAssertFalse(label.localizedCaseInsensitiveContains("Savings"))
+        XCTAssertTrue(
+            label == L10n.verdictProofExtraCostLabel
+                || label.localizedCaseInsensitiveContains("Costo in più")
+                || label.localizedCaseInsensitiveContains("Extra cost"),
+            "Expected extra-cost label, got: \(label)"
+        )
+        XCTAssertFalse(value.contains("€-"), "Extra-cost value must use positive euros: \(value)")
+        XCTAssertFalse(value.contains("Risparmio"))
+    }
+
     /// Con delta ≤ 0 non devono comparire frasi di risparmio; timeline derivata dai numeri.
     func testSaveCopy_WhenDeltaNonPositive_ShowsCurrentCheaperNotSavings() {
         var input = UserInput(

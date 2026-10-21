@@ -383,7 +383,7 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             return blob.contains("prius")
                 || blob.contains("niro")
                 || blob.contains("ct 200h")
-                || blob.contains("hybrid")
+                || (blob.contains("hybrid") && !blob.contains("mild hybrid"))
         }
         XCTAssertTrue(offenders.isEmpty, "ICE hybrids: \(offenders.map(\.id))")
     }
@@ -416,6 +416,7 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         "skoda|karoq", "skoda|kodiaq", "skoda|octavia", "skoda|superb",
         "toyota|rav4",
         "volkswagen|passat", "volkswagen|tiguan", "volkswagen|touareg",
+        "jeep|grand cherokee", "renault|kadjar",
     ]
 
     /// Se la media diesel di un modello supera la benzina → fallisci, salvo allowlist documentata.
@@ -536,5 +537,233 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertTrue(result.targetYearlyBreakdown.taxesKnown == false)
         XCTAssertTrue(result.hasPartialBolloTotal)
         XCTAssertTrue(result.sourceYearlyBreakdown.taxesKnown)
+    }
+
+    func testCatalog_DieselPresentForKeyITModels() {
+        let catalog = VehicleCatalogService.shared.vehicles
+        func hasDiesel(_ brand: String, _ model: String) -> Bool {
+            catalog.contains {
+                $0.brand.caseInsensitiveCompare(brand) == .orderedSame
+                    && $0.model.caseInsensitiveCompare(model) == .orderedSame
+                    && $0.fuelKind == .diesel
+            }
+        }
+        XCTAssertTrue(hasDiesel("Volkswagen", "Golf"))
+        XCTAssertTrue(hasDiesel("Volkswagen", "T-Roc"))
+        XCTAssertTrue(hasDiesel("Fiat", "500X"))
+        XCTAssertTrue(hasDiesel("Fiat", "Tipo"))
+        XCTAssertTrue(hasDiesel("Mercedes-Benz", "A-Class"))
+    }
+
+    func testCatalog_LPGAndCNGPresentForKeyITModels() {
+        let catalog = VehicleCatalogService.shared.vehicles
+        XCTAssertTrue(catalog.contains { $0.model == "Duster" && $0.fuelKind == .lpg })
+        XCTAssertTrue(catalog.contains { $0.model.localizedCaseInsensitiveContains("Sandero") && $0.fuelKind == .lpg })
+        XCTAssertTrue(catalog.contains { $0.model == "i10" && $0.fuelKind == .lpg })
+        XCTAssertTrue(catalog.contains { $0.model == "Panda" && $0.fuelKind == .cng })
+    }
+
+    func testCatalog_NoPHEVFlat90_NoThinPHEVFuel_EEASourceNAtLeast100() {
+        let catalog = VehicleCatalogService.shared.vehicles
+        let phev90 = catalog.filter { $0.powertrain == .phev && abs($0.taxesPerYear - 90) < 0.01 }
+        XCTAssertTrue(phev90.isEmpty, "PHEV flat €90 removed: \(phev90.map(\.id))")
+
+        let thinPHEV = catalog.filter { v in
+            guard v.powertrain == .phev else { return false }
+            let l100 = (v.fuelConsumptionLPerKm ?? 0) * 100
+            let hasKWh = (v.energyConsumptionKWhPerKm ?? 0) > 0
+                || (v.wltpConsumptionKWh100km ?? 0) > 0
+                || (v.batteryKWh ?? 0) > 0
+            return (l100 > 0 && l100 < 3.0) || !hasKWh
+        }
+        XCTAssertTrue(thinPHEV.isEmpty, "PHEV need CS ≥3 L/100 and kWh: \(thinPHEV.map(\.id))")
+
+        let eeaLowN = catalog.filter { v in
+            guard let sn = v.sourceName, sn.hasPrefix("EEA co2cars") else { return false }
+            guard let range = sn.range(of: #"n=(\d+)"#, options: .regularExpression) else { return true }
+            let digits = sn[range].dropFirst(2)
+            return (Int(digits) ?? 0) < 100
+        }
+        XCTAssertTrue(eeaLowN.isEmpty, "EEA sourceName must have n≥100: \(eeaLowN.map(\.id))")
+    }
+
+    /// Ogni riga ICE/HEV IT con bucket EEA nel manifest deve restare entro ±25% del L/100 del bucket
+    /// (anche se la riga non è stata riscritta). Non confrontare il consumo con la CO₂ della stessa riga.
+    func testCatalog_ICEITWithin25PercentOfEEABothDirections() throws {
+        let manifestURL = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .appendingPathComponent("scripts/cache/eea/fill_catalog_fuels_manifest.json")
+        guard FileManager.default.fileExists(atPath: manifestURL.path) else {
+            throw XCTSkip("EEA manifest not present at \(manifestURL.path)")
+        }
+        let data = try Data(contentsOf: manifestURL)
+        let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+        guard let refs = json?["eea_bucket_refs"] as? [[String: Any]], !refs.isEmpty else {
+            throw XCTSkip("eea_bucket_refs missing from EEA manifest")
+        }
+        var expectedById: [String: Double] = [:]
+        for ref in refs {
+            guard let id = ref["id"] as? String,
+                  let eeaL100 = ref["eea_l100"] as? Double, eeaL100 > 0,
+                  let n = ref["n"] as? Int, n >= 100,
+                  let pt = (ref["powertrain"] as? String)?.lowercased(),
+                  pt == "ice" || pt == "hev" else { continue }
+            expectedById[id] = eeaL100
+        }
+        XCTAssertFalse(expectedById.isEmpty, "manifest must list ICE/HEV EEA buckets")
+
+        var offenders: [String] = []
+        var checked = 0
+        for vehicle in VehicleCatalogService.shared.vehicles {
+            guard (vehicle.powertrain == .ice || vehicle.powertrain == .hev),
+                  (vehicle.market ?? "IT") == "IT",
+                  let expected = expectedById[vehicle.id],
+                  let fc = vehicle.fuelConsumptionLPerKm, fc > 0 else { continue }
+            checked += 1
+            let actual = fc * 100
+            if actual > expected * 1.25 || expected > actual * 1.25 {
+                offenders.append(
+                    "\(vehicle.id): actual \(String(format: "%.2f", actual)) vs EEA bucket \(String(format: "%.2f", expected))"
+                )
+            }
+        }
+        XCTAssertGreaterThan(checked, 50, "should compare many ICE/HEV rows to EEA buckets")
+        XCTAssertTrue(offenders.isEmpty, offenders.joined(separator: "\n"))
+    }
+
+    func testCatalog_FullHybridBucketsPreferETechNotPetrolSibling() {
+        let clio22 = VehicleCatalogService.shared.vehicle(by: "renault-clio-2022")
+        let clio23 = VehicleCatalogService.shared.vehicle(by: "renault-clio-2023")
+        for v in [clio22, clio23].compactMap({ $0 }) {
+            XCTAssertEqual(v.powertrain, .hev, v.id)
+            let l100 = (v.fuelConsumptionLPerKm ?? 0) * 100
+            XCTAssertLessThanOrEqual(l100, 4.8, "\(v.id) should be E-Tech (~96–98 g), not petrol Clio (~118 g)")
+            if let co2 = v.co2gKm {
+                XCTAssertLessThanOrEqual(co2, 105, "\(v.id) co2=\(co2)")
+            }
+        }
+        let yaris18 = VehicleCatalogService.shared.vehicle(by: "toyota-yaris-hybrid-2018")
+        let yaris19 = VehicleCatalogService.shared.vehicle(by: "toyota-yaris-hybrid-2019")
+        for v in [yaris18, yaris19].compactMap({ $0 }) {
+            XCTAssertEqual(v.powertrain, .hev, v.id)
+            let l100 = (v.fuelConsumptionLPerKm ?? 0) * 100
+            XCTAssertLessThanOrEqual(l100, 5.2, "\(v.id) should be Yaris Hybrid bucket, not petrol Yaris")
+            if let co2 = v.co2gKm {
+                XCTAssertLessThanOrEqual(co2, 115, "\(v.id) co2=\(co2)")
+            }
+        }
+    }
+
+    func testCatalog_PetrolEEAMedianCO2PerL100MatchesCitedCoefficient() throws {
+        let manifestURL = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .appendingPathComponent("scripts/cache/eea/fill_catalog_fuels_manifest.json")
+        guard FileManager.default.fileExists(atPath: manifestURL.path) else {
+            throw XCTSkip("EEA manifest not present")
+        }
+        let data = try Data(contentsOf: manifestURL)
+        let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
+        let cited = ((json?["co2_to_fc"] as? [String: Any])?["petrol"] as? [String: Any])?["co2_per_l100"] as? Double
+            ?? 22.63
+        let eeaPattern = try NSRegularExpression(pattern: #"EEA co2cars IT \d{4} n=(\d+)"#)
+        var ratios: [Double] = []
+        for vehicle in VehicleCatalogService.shared.vehicles {
+            guard vehicle.powertrain == .ice,
+                  vehicle.resolvedFuelKind == .petrol,
+                  let sn = vehicle.sourceName,
+                  let match = eeaPattern.firstMatch(in: sn, range: NSRange(sn.startIndex..., in: sn)),
+                  let nRange = Range(match.range(at: 1), in: sn),
+                  let n = Int(sn[nRange]), n >= 100,
+                  let fc = vehicle.fuelConsumptionLPerKm, fc > 0,
+                  let co2g = vehicle.co2gKm, co2g > 0 else { continue }
+            ratios.append(Double(co2g) / (fc * 100))
+        }
+        XCTAssertFalse(ratios.isEmpty)
+        ratios.sort()
+        let median = ratios[ratios.count / 2]
+        XCTAssertEqual(median, cited, accuracy: 0.2, "median CO2/L100 \(median) vs cited \(cited)")
+    }
+
+    func testEVBollo_RegionalRates_LinearNo387Band() {
+        // Nazionale 100 kW → 64.50; 150 kW resta lineare (no +3,87 oltre 100).
+        let national100 = OwnershipCostEstimates.bolloPerYearDetail(
+            catalogTaxesPerYear: 0,
+            powertrain: .ev,
+            vehicleYear: 2018,
+            referenceYear: 2026,
+            bookletPowerKwP2: 100,
+            italianRegion: .unspecified
+        )
+        XCTAssertEqual(national100.amount, 64.50, accuracy: 0.01)
+
+        let national150 = OwnershipCostEstimates.bolloPerYearDetail(
+            catalogTaxesPerYear: 0,
+            powertrain: .ev,
+            vehicleYear: 2018,
+            referenceYear: 2026,
+            bookletPowerKwP2: 150,
+            italianRegion: .unspecified
+        )
+        XCTAssertEqual(national150.amount, 2.58 * 150 * 0.25, accuracy: 0.01)
+
+        let lazio = OwnershipCostEstimates.bolloPerYearDetail(
+            catalogTaxesPerYear: 0,
+            powertrain: .ev,
+            vehicleYear: 2018,
+            referenceYear: 2026,
+            bookletPowerKwP2: 100,
+            italianRegion: .lazio
+        )
+        XCTAssertEqual(lazio.amount, 2.84 * 100 * 0.25, accuracy: 0.01)
+
+        let lombardia = OwnershipCostEstimates.bolloPerYearDetail(
+            catalogTaxesPerYear: 0,
+            powertrain: .ev,
+            vehicleYear: 2018,
+            referenceYear: 2026,
+            bookletPowerKwP2: 100,
+            italianRegion: .lombardia
+        )
+        XCTAssertEqual(lombardia.amount, 0, accuracy: 0.01)
+        XCTAssertTrue(lombardia.isKnown)
+
+        let unknown = OwnershipCostEstimates.bolloPerYearDetail(
+            catalogTaxesPerYear: 0,
+            powertrain: .ev,
+            vehicleYear: 2018,
+            referenceYear: 2026,
+            bookletPowerKwP2: 100,
+            italianRegion: .otherUnknown
+        )
+        XCTAssertFalse(unknown.isKnown)
+
+        // VdA: EV immatricolata 2019 → 8 anni esenzione (età 7 nel 2026 ancora 0).
+        let vda = OwnershipCostEstimates.bolloPerYearDetail(
+            catalogTaxesPerYear: 0,
+            powertrain: .ev,
+            vehicleYear: 2019,
+            referenceYear: 2026,
+            bookletPowerKwP2: 100,
+            italianRegion: .valleDAosta
+        )
+        XCTAssertEqual(vda.amount, 0, accuracy: 0.01)
+    }
+
+    func testEVBollo_HorizonExitsExemptionMidway() {
+        // EV di 3 anni (immatr. 2023, ref 2026) su orizzonte 5: anni 0–1 esenti (età 3–4),
+        // anni 2–4 a pagamento (età 5–7) → 3 × (2.58×100×0.25) = 193.50
+        let total = OwnershipCostEstimates.bolloTotalOverHorizon(
+            catalogTaxesPerYear: 0,
+            powertrain: .ev,
+            vehicleYear: 2023,
+            referenceYear: 2026,
+            ownershipYears: 5,
+            bookletPowerKwP2: 100,
+            italianRegion: .unspecified
+        )
+        XCTAssertEqual(total.amount, 193.50, accuracy: 0.05)
+        XCTAssertTrue(total.isKnown)
     }
 }

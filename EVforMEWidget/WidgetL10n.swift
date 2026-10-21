@@ -16,7 +16,8 @@ enum WidgetL10n {
         String(format: string(key), arguments: arguments)
     }
 
-    static var brandTitle: String { string("widget_brand_title") }
+    /// Brand name — never localized.
+    static var brandTitle: String { "EVforME?" }
     static var brandShort: String { string("live_activity_brand_short") }
     static var brandFull: String { string("live_activity_brand") }
     static var emptyPrompt: String { string("widget_empty_prompt") }

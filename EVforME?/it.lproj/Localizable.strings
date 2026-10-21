@@ -1,5 +1,5 @@
 /* App */
-"app_title" = "EV per ME?";
+"app_title" = "EVforME?";
 "input_section_1_title" = "Percorso e costi";
 "input_section_1_subtitle" = "Chilometri annui, prezzi di carburante e luce, anni di possesso.";
 "input_section_2_title" = "Contesto";
@@ -14,6 +14,12 @@
 /* Input */
 "daily_km_question" = "Quanti km fai in un anno?";
 "fuel_price_label" = "Prezzo benzina (€/L)";
+"fuel_price_label_diesel" = "Prezzo diesel (€/L)";
+"fuel_price_label_lpg" = "Prezzo GPL (€/L)";
+"fuel_price_label_cng" = "Prezzo metano (€/kg)";
+"fuel_price_a11y_value_per_liter" = "%.2f euro al litro";
+"fuel_price_a11y_value_per_kg" = "%.2f euro al chilo";
+"electricity_price_a11y_value" = "%.2f euro per kWh";
 "electricity_price_label" = "Prezzo elettricità (€/kWh)";
 "ownership_years_label" = "Anni di proprietà";
 "year_singular" = "anno";
@@ -149,7 +155,7 @@
 
 /* Onboarding */
 "get_started" = "Inizia";
-"onboarding_title" = "EV per ME?";
+"onboarding_title" = "EVforME?";
 "onboarding_subtitle" = "Scopri se un'auto elettrica fa per te. Inserisci le tue abitudini di guida e ottieni un verdetto personalizzato in pochi secondi.";
 "onboarding_row_km" = "Imposta km giornalieri e opzioni di ricarica";
 "onboarding_row_chart" = "Vedi il confronto costi a 5 anni";
@@ -230,7 +236,7 @@
 "subsection_environment_title" = "Impatto ambientale";
 "subsection_environment_body" = "Un’auto a benzina emette circa 120 g CO₂/km. Un’EV alimentata con il mix elettrico italiano emette indirettamente circa 40–50 g CO₂/km (well-to-wheel). Passando all’elettrico puoi ridurre le emissioni di diverse tonnellate di CO₂ in pochi anni, a seconda dei km che fai e del mix energetico.";
 "subsection_battery_title" = "Batteria e vita utile";
-"subsection_battery_body" = "Le batterie EV hanno di solito garanzia di 8 anni o 160.000 km. La degradazione media è circa 2–3% l’anno; dopo 10 anni molte batterie mantengono ancora circa l’80% della capacità. I costi di sostituzione stanno calando; questa simulazione non include eventuale sostituzione batteria.";
+"subsection_battery_body" = "Le batterie EV hanno di solito garanzia di 8 anni o 160.000 km. La capacità cala con il tempo e l’uso, ma i dati di garanzia e le soglie di sostituzione variano per modello; questa simulazione non include eventuale sostituzione batteria.";
 "subsection_incentives_title" = "Incentivi";
 "subsection_incentives_body" = "In Italia ecobonus e agevolazioni possono ridurre il prezzo d’acquisto. Per le colonnine domestiche sono possibili detrazioni fiscali. ";
 "incentives_link_title" = "Scopri incentivi e ecobonus aggiornati";
@@ -244,7 +250,7 @@
 "assumption_consumption_ev" = "Consumo EV: 17 kWh/100 km (media)";
 "assumption_maintenance" = "Manutenzione: tariffe per paese + età Consumer Reports 2020";
 "assumption_maintenance_market" = "Manutenzione (%@): ~€%d ICE · ~€%d EV /anno a 15.000 km (+ età)";
-"assumption_taxes" = "Tasse: bollo medio; EV spesso esenti in Italia";
+"assumption_taxes" = "Tasse: bollo stima nazionale o regionale (ACI); EV spesso esenti i primi anni";
 "assumption_electricity" = "Elettricità: prezzo medio domestico €0,25/kWh (ricarica pubblica può costare di più)";
 
 /* Loading */
@@ -317,7 +323,7 @@
 "share_link_a11y_hint" = "Apre il foglio di condivisione di sistema con un riepilogo testuale dell’esito.";
 "fear_vs_reality_a11y_fear_prefix" = "Dubbio";
 "fear_vs_reality_a11y_reality_prefix" = "Realtà";
-"costs_chart_a11y_summary" = "Grafico a barre affiancate: costo cumulativo stimato per anno di possesso. Barre arancioni: benzina. Barre verdi: elettrico.";
+"costs_chart_a11y_summary" = "Grafico a barre affiancate: costo cumulativo stimato per anno di possesso. Barre arancioni: auto attuale (carburante). Barre verdi: elettrico.";
 "costs_chart_a11y_hint" = "Con VoiceOver usa il rotore dati per esplorare le serie del grafico.";
 "scenario_chip_a11y_hint" = "Ricalcola l’esito con questo livello di prudenza sui costi.";
 "guides_sheet_close" = "Fatto";
@@ -338,11 +344,11 @@
 "verdict_ai_fallback_yes" = "Con circa %d km/anno i conti favoriscono l’elettrico: circa €%d–€%d risparmiati l’anno e circa %d ricariche a settimana. Con ricarica a casa e la coppia scelta, sembra conveniente con questi dati.";
 "verdict_ai_fallback_maybe" = "A circa %d km/anno il margine è sottile (circa €%d–€%d/anno). L’EV può funzionare, ma prezzi energia o chilometri diversi possono cambiare il verdetto.";
 "verdict_ai_fallback_not_yet" = "A circa %d km/anno con questi prezzi, l’elettrico non batte ancora il carburante. Conta circa %d ricariche a settimana: conviene aspettare energia più economica, più ricarica a casa o un’EV più parca.";
-"yearly_km_slider_a11y" = "Yearly kilometers slider";
-"fuel_price_slider_a11y" = "Fuel price per liter";
-"electricity_price_slider_a11y" = "Electricity price per kWh";
-"area_type_picker_a11y" = "Driving area type selection";
-"home_charging_a11y" = "Home charging availability";
+"yearly_km_slider_a11y" = "Cursore chilometri annui";
+"fuel_price_slider_a11y" = "Prezzo carburante (€/L o €/kg)";
+"electricity_price_slider_a11y" = "Cursore prezzo elettricità per kWh";
+"area_type_picker_a11y" = "Selezione tipo di percorso";
+"home_charging_a11y" = "Disponibilità ricarica a casa";
 "break_even_months_badge" = "Pareggio ~%d mesi";
 "open_last_verdict_dialog" = "Apro il tuo ultimo esito EV.";
 "trip_profile_label" = "Tragitti tipici";
@@ -355,7 +361,7 @@
 "purchase_prices_title" = "Prezzi d’acquisto";
 "purchase_prices_verdict_note" = "Non decide il sì/no: il verdetto resta su energia, bollo e manutenzione (l’usata pesa di più). Qui solo stima payback se stai comprando.";
 "source_purchase_price_label" = "Auto attuale (€)";
-"target_purchase_price_label" = "EV target (€)";
+"target_purchase_price_label" = "EV di destinazione (€)";
 "include_incentives_toggle" = "Includi stima incentivi IT (disattivata di default)";
 "include_incentives_hint" = "Disattivata di default: le regole 2025 MASE/PNRR (ISEE, rottamazione, FUA) non sono modellabili in modo affidabile qui. Verifica sul sito ufficiale prima di attivarla. Non è consulenza.";
 "comparison_intent_section_title" = "Cosa stai confrontando?";
@@ -368,7 +374,7 @@
 "incentives_included_reason" = "Include stima incentivi acquisto ~€%d.";
 "incentives_transparency_note" = "Gli incentivi sono solo illustrativi — verifica sul sito ufficiale MASE/MIMIT (ISEE, rottamazione, fondi). Non entrano nel verdetto finché non attivi il toggle.";
 "sources_section_title" = "Da dove arrivano i numeri";
-"source_catalog_note" = "Consumi veicoli: catalogo quality scaricato da internet a ogni apertura (fallback seed in bundle). Prezzi: MIMIT + Eurostat.";
+"source_catalog_note" = "Dati veicolo: catalogo incluso nell'app (seed v%d, fonti EEA/costruttori). Prezzi: MIMIT + Eurostat.";
 "source_prices_note" = "Prezzi energia: aggiornati a ogni apertura da MIMIT (carburante) ed Eurostat (elettricità); in cache se offline. Puoi comunque sovrascrivere gli slider.";
 "history_section_title" = "Esiti salvati";
 "history_empty" = "Nessuno scenario salvato. Simula per fissarne uno qui.";
@@ -475,14 +481,15 @@
 
 /* Privacy */
 "privacy_policy_title" = "Privacy";
-"privacy_policy_updated" = "Aggiornata: 8 ottobre 2026";
-"privacy_policy_body" = "EVforME? calcola sul dispositivo se un’auto elettrica o plug-in può avere senso per te.\n\nCosa resta sul telefono: km, prezzi, veicoli scelti, paese selezionato, storico scenari, snapshot widget/Live Activity.\n\nFoto sticker: usate solo on-device per leggere consumi; non vengono caricate per quella funzione.\n\nPosizione (opzionale): Durante l’uso dell’app, solo quando apri Colonnine vicine, per centrare la ricerca Apple MapKit. Il paese per le stime di costo viene dalla regione del dispositivo o dal selettore paese — non dal GPS. Le coordinate non vengono salvate né inviate a un backend EVforME. Niente tracking in background.\n\nRete (opzionale): catalogo veicoli, fonti prezzi pubbliche, risultati ricerca Apple Mappe, analytics o webhook lead solo se configurati. Nella build tipica analytics/lead restano locali se gli URL sono vuoti.\n\nNon vendiamo dati e non usiamo tracker pubblicitari.\n\nModulo consulente: nome/email/città solo se li invii con consenso.\n\nPuoi revocare foto/posizione in Impostazioni iOS, evitare il form lead, o cancellare l’app per rimuovere i dati locali.\n\nPer App Store Connect serve anche un URL HTTPS pubblico con la policy; aprilo dal pulsante sotto quando disponibile.";
+"privacy_policy_updated" = "Aggiornata: 20 ottobre 2026";
+"privacy_policy_body" = "EVforME? calcola sul dispositivo se un’auto elettrica o plug-in può avere senso per te.\n\nTitolare: Andrea Ancellotti — andrea.ancellotti@gmail.com.\n\nCosa resta sul telefono: km, prezzi, veicoli scelti, paese selezionato, storico scenari, snapshot widget/Live Activity.\n\nFoto sticker: usate solo on-device per leggere consumi; non vengono caricate per quella funzione.\n\nPosizione (opzionale): Durante l’uso dell’app, solo quando apri Colonnine vicine, per centrare la ricerca Apple MapKit. Il paese per le stime di costo viene dalla regione del dispositivo o dal selettore paese — non dal GPS. Le coordinate non vengono salvate né inviate a un backend EVforME. Niente tracking in background.\n\nRete (opzionale): catalogo veicoli incluso nell’app (fonti EEA/costruttori), prezzi MIMIT + Eurostat, risultati ricerca Apple Mappe, analytics o webhook lead solo se configurati. Nella build tipica analytics/lead restano locali se gli URL sono vuoti.\n\nNon vendiamo dati e non usiamo tracker pubblicitari.\n\nModulo consulente: nome/email/città solo se li invii con consenso.\n\nPuoi revocare foto/posizione in Impostazioni iOS, evitare il form lead, o cancellare l’app per rimuovere i dati locali. Policy completa: pulsante sotto.";
 "privacy_policy_open_web" = "Apri policy sul web";
 
 /* Reference quality */
 "verdict_compare_line" = "Da %@ a %@";
 "verdict_proof_savings_value" = "€%d–%d";
 "verdict_proof_savings_label" = "Risparmio / anno";
+"verdict_proof_extra_cost_label" = "Costo in più / anno";
 "verdict_proof_charges_label" = "Ricariche / sett.";
 "verdict_proof_breakeven_value" = "~%d mesi";
 "verdict_proof_breakeven_label" = "Pareggio";
@@ -559,7 +566,11 @@
 "ev_booklet_power_kw_p2_source_label" = "kW a libretto (P.2) — auto attuale (opzionale)";
 "ev_booklet_power_kw_p2_target_label" = "kW a libretto (P.2) — auto elettrica (opzionale)";
 "ev_booklet_power_kw_p2_placeholder" = "es. 100";
-"ev_booklet_power_kw_p2_hint" = "Potenza continua 30 min sul libretto. Serve per il bollo EV dopo 5 anni (1/4 × 2,58 €/kW). Non usare i kW di picco.";
+"ev_booklet_power_kw_p2_hint" = "Potenza continua 30 min sul libretto. Serve per il bollo EV dopo 5 anni (1/4 × tariffa €/kW × kW). 2,58 €/kW è una stima nazionale: varia per regione (es. Lazio 2,84; Lombardia e Piemonte 0 €). Non usare i kW di picco.";
+"italian_region_label" = "Regione (bollo EV)";
+"italian_region_unspecified" = "Non specificata (stima nazionale 2,58 €/kW)";
+"italian_region_other_unknown" = "Altra regione (bollo EV non stimato)";
+"italian_region_hint" = "Tariffe ACI 2026. Lombardia/Piemonte: esenzione permanente. Senza tariffa ufficiale: non stimato.";
 "partial_total_bollo_unknown" = "Totale parziale (bollo non stimato)";
 "italy_kit_bollo_both_unknown" = "Bollo: attuale e elettrificata non stimati (manca P.2 a libretto)";
 "italy_kit_bollo_row_source_unknown" = "Bollo (stima): attuale non stimato (manca P.2) · elettrificata ~€%d/anno";

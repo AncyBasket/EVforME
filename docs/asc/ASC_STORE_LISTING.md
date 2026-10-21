@@ -21,7 +21,7 @@ Canonical pack for Connect. Root `ASC_STORE_LISTING.md` points here.
 | Secondary category | **Utilities** — calcolatore on-device (costi, km, scenario) |
 | Age rating | **4+** — no UGC, no chat, no unrestricted web; location optional for map only |
 | Privacy Policy URL | https://ancybasket.github.io/EVforME/privacy/ |
-| Support URL | **TODO Andrea** — interim: https://github.com/AncyBasket/EVforME/issues (no new domain). Optional later: GitHub Pages `/support/` under existing `ancybasket.github.io/EVforME/` |
+| Support URL | https://ancybasket.github.io/EVforME/support/ |
 | Marketing URL (optional) | https://github.com/AncyBasket/EVforME |
 
 ---
@@ -157,8 +157,8 @@ EVforME? is a free decision-support app (no IAP, no account).
 ### Privacy nutrition (aligned with PrivacyInfo + policy)
 
 - Data not sold; no advertising tracking (`NSPrivacyTracking` = false)
-- Precise location: App Functionality only, if user allows for the map
-- Name/email: only if user submits optional advisor form
+- `NSPrivacyCollectedDataTypes` empty in app PrivacyInfo (release: no lead URL / analytics; MapKit only for Nearby chargers)
+- ASC App Privacy: no Name / Email / Precise Location collected by EVforME
 
 ---
 

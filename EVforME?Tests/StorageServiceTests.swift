@@ -347,6 +347,33 @@ final class StorageServiceTests: XCTestCase {
         XCTAssertTrue(defaults.bool(forKey: "evforme.autocosts.userCustomizedFuelPrice"))
     }
 
+    /// Prezzo benzina manuale (1,90) su auto GPL: fuori range 0,50…1,20 → reset al prezzo ufficiale GPL.
+    func testSyncFuelPriceForSourceVehicle_ClampsOutOfRangeManualPriceToOfficial() {
+        let service = StorageService.shared
+        let defaults = UserDefaults.standard
+        defaults.set(true, forKey: "evforme.autocosts.userCustomizedFuelPrice")
+        defaults.set(1.90, forKey: "evforme.autocosts.lastFuelPrice")
+
+        var input = UserInput(
+            dailyKm: 12_000,
+            hasHomeCharging: true,
+            areaType: .urban,
+            fuelPrice: 1.90,
+            ownershipYears: 5,
+            electricityPricePerKWh: 0.30,
+            sourceVehicleId: "dacia-sandero-eco-g-2022",
+            scenario: .realistic
+        )
+
+        let changed = service.syncFuelPriceForSourceVehicle(in: &input)
+        XCTAssertTrue(changed)
+        let range = InputValidator.fuelPriceSliderRange(for: .lpg)
+        XCTAssertGreaterThanOrEqual(input.fuelPrice, range.lowerBound)
+        XCTAssertLessThanOrEqual(input.fuelPrice, range.upperBound)
+        XCTAssertNotEqual(input.fuelPrice, 1.90, accuracy: 0.001)
+        XCTAssertFalse(defaults.bool(forKey: "evforme.autocosts.userCustomizedFuelPrice"))
+    }
+
     func testImportWidgetFuelCustomizationFlag_ImportsFlag() {
         // Given
         let service = StorageService.shared
