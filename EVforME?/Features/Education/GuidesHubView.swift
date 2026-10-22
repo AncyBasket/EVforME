@@ -39,8 +39,20 @@ struct GuidesHubView: View {
     @State private var selectedTopic: GuideTopic?
     @State private var showPrivacy = false
     @State private var showChargingMap = false
+    @State private var showHowWeCalculate = false
     @State private var appeared = false
     @Environment(\.accessibilityReduceMotion) private var accessibilityReduceMotion
+
+    private var lastUserInput: UserInput {
+        StorageService.shared.loadLastUserInput()
+            ?? UserInput(
+                dailyKm: 12_000,
+                hasHomeCharging: true,
+                areaType: .mixed,
+                fuelPrice: 1.80,
+                ownershipYears: 5
+            )
+    }
 
     var body: some View {
         ScrollView {
@@ -54,6 +66,33 @@ struct GuidesHubView: View {
                     .font(Typography.readingIntro)
                     .foregroundStyle(Color.secondaryText)
                     .fixedSize(horizontal: false, vertical: true)
+
+                Button {
+                    showHowWeCalculate = true
+                } label: {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(L10n.howWeCalculateEntryTitle)
+                            .font(Typography.title2)
+                            .foregroundStyle(Color.ink)
+                            .multilineTextAlignment(.leading)
+                        Text(L10n.howWeCalculateEntrySubtitle)
+                            .font(Typography.readingCaption)
+                            .foregroundStyle(Color.secondaryText)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.vertical, 16)
+                    .padding(.horizontal, 14)
+                    .background(Color.surfaceElevated)
+                    .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 4, style: .continuous)
+                            .stroke(Color.hairlineBorder, lineWidth: 1)
+                    )
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("guides_how_we_calculate_entry")
+                .accessibilityHint(L10n.howWeCalculateEntryA11yHint)
 
                 Button {
                     showChargingMap = true
@@ -172,7 +211,14 @@ struct GuidesHubView: View {
                 .presentationDetents([.medium, .large])
         }
         .sheet(isPresented: $showChargingMap) {
-            ChargingMapView(areaType: StorageService.shared.loadLastUserInput()?.areaType ?? .mixed)
+            ChargingMapView(
+                areaType: lastUserInput.areaType,
+                preferDeviceLocation: true
+            )
+            .presentationDetents([.large])
+        }
+        .sheet(isPresented: $showHowWeCalculate) {
+            HowWeCalculateView(userInput: lastUserInput)
                 .presentationDetents([.large])
         }
     }

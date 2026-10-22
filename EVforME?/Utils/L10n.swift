@@ -702,6 +702,56 @@ enum L10n {
     static var chargingMapCityNotFound: String { string("charging_map_city_not_found") }
     static var chargingMapVerdictNudgeTitle: String { string("charging_map_verdict_nudge_title") }
     static var chargingMapVerdictNudgeBody: String { string("charging_map_verdict_nudge_body") }
+    static var chargingMapOpenSettings: String { string("charging_map_open_settings") }
+
+    // MARK: - Come calcoliamo
+    static var howWeCalculateTitle: String { string("how_we_calculate_title") }
+    static var howWeCalculateIntro: String { string("how_we_calculate_intro") }
+    static var howWeCalculateEntryTitle: String { string("how_we_calculate_entry_title") }
+    static var howWeCalculateEntrySubtitle: String { string("how_we_calculate_entry_subtitle") }
+    static var howWeCalculateEntryA11yHint: String { string("how_we_calculate_entry_a11y_hint") }
+    static var howWeCalculateRoleSource: String { string("how_we_calculate_role_source") }
+    static var howWeCalculateRoleTarget: String { string("how_we_calculate_role_target") }
+    static var howWeCalculateConsumptionHeading: String { string("how_we_calculate_consumption_heading") }
+    static func howWeCalculateSourceFormat(_ source: String) -> String {
+        format("how_we_calculate_source_format", source)
+    }
+    static var howWeCalculateSourceUnknown: String { string("how_we_calculate_source_unknown") }
+    static var howWeCalculateOpenSource: String { string("how_we_calculate_open_source") }
+    static func howWeCalculateConfidenceFormat(_ band: String) -> String {
+        format("how_we_calculate_confidence_format", band)
+    }
+    static var howWeCalculateConfidenceHigh: String { string("how_we_calculate_confidence_high") }
+    static var howWeCalculateConfidenceMedium: String { string("how_we_calculate_confidence_medium") }
+    static var howWeCalculateConfidenceLow: String { string("how_we_calculate_confidence_low") }
+    static var howWeCalculateConfidenceUnknown: String { string("how_we_calculate_confidence_unknown") }
+    static var howWeCalculateCO2AppliesToVehicle: String { string("how_we_calculate_co2_applies_to_vehicle") }
+    static var howWeCalculateBolloHeading: String { string("how_we_calculate_bollo_heading") }
+    static var howWeCalculateBolloFormula: String { string("how_we_calculate_bollo_formula") }
+    static func howWeCalculateBolloRegionFormat(_ region: String) -> String {
+        format("how_we_calculate_bollo_region_format", region)
+    }
+    static var howWeCalculateBolloPermanentExempt: String { string("how_we_calculate_bollo_permanent_exempt") }
+    static func howWeCalculateBolloRateFormat(_ rate: String) -> String {
+        format("how_we_calculate_bollo_rate_format", rate)
+    }
+    static func howWeCalculateBolloExemptionFormat(_ years: Int) -> String {
+        format("how_we_calculate_bollo_exemption_format", years)
+    }
+    static var howWeCalculateBolloNotEstimated: String { string("how_we_calculate_bollo_not_estimated") }
+    static func howWeCalculateBolloNationalEstimateFormat(_ rate: String) -> String {
+        format("how_we_calculate_bollo_national_estimate_format", rate)
+    }
+    static func howWeCalculateBolloSuperbolloFormat(_ threshold: String, _ rate: String) -> String {
+        format("how_we_calculate_bollo_superbollo_format", threshold, rate)
+    }
+    static var howWeCalculatePricesHeading: String { string("how_we_calculate_prices_heading") }
+    static var howWeCalculatePricesBody: String { string("how_we_calculate_prices_body") }
+    static var howWeCalculateCO2Heading: String { string("how_we_calculate_co2_heading") }
+    static func howWeCalculateCO2BodyFormat(_ petrol: String, _ diesel: String) -> String {
+        format("how_we_calculate_co2_body_format", petrol, diesel)
+    }
+    static var howWeCalculateOpenEurLex: String { string("how_we_calculate_open_eurlex") }
 
     static var liveActivityClear: String { string("live_activity_clear") }
 

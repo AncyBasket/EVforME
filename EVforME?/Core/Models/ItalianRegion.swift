@@ -121,14 +121,17 @@ enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
         self == .molise
     }
 
-    /// Superbollo nazionale (>185 kW): 20 €/kW oltre soglia, riduzioni per età (stima ACI).
+    /// Superbollo nazionale (> soglia kW): €/kW oltre soglia, riduzioni per età (stima ACI).
+    /// Soglia e tariffa: `HowWeCalculateExplainer.superbollo*` (unica fonte di verità).
     static func nationalSuperbolloEUR(
         powerKw: Double,
         vehicleYear: Int,
         referenceYear: Int
     ) -> Double {
-        guard powerKw > 185 else { return 0 }
-        var sb = 20.0 * (powerKw - 185.0)
+        let threshold = HowWeCalculateExplainer.superbolloThresholdKw
+        let rate = HowWeCalculateExplainer.superbolloEURPerKwAboveThreshold
+        guard powerKw > threshold else { return 0 }
+        var sb = rate * (powerKw - threshold)
         let age = max(0, referenceYear - vehicleYear)
         if age >= 20 { sb = 0 }
         else if age >= 15 { sb *= 0.15 }

@@ -30,6 +30,7 @@ struct VerdictView: View {
     @State private var aiLoading = false
     @State private var shareCard: ShareableVerdictCard?
     @State private var showChargingMap = false
+    @State private var showHowWeCalculate = false
     @Environment(\.dismiss) private var dismiss
     @Environment(\.accessibilityReduceMotion) private var accessibilityReduceMotion
     @Environment(\.requestReview) private var requestReview
@@ -59,9 +60,9 @@ struct VerdictView: View {
 
             reasonsSection(result: currentResult)
 
-            if !userInput.hasHomeCharging {
-                publicChargingNudge
-            }
+            chargersEntry
+
+            howWeCalculateEntry
 
             aiExplanationSection
 
@@ -242,21 +243,31 @@ struct VerdictView: View {
             )
         }
         .sheet(isPresented: $showChargingMap) {
-            ChargingMapView(areaType: userInput.areaType)
+            ChargingMapView(areaType: userInput.areaType, preferDeviceLocation: true)
+                .presentationDetents([.large])
+        }
+        .sheet(isPresented: $showHowWeCalculate) {
+            HowWeCalculateView(userInput: userInput)
                 .presentationDetents([.large])
         }
     }
 
-    private var publicChargingNudge: some View {
-        Button {
+    private var chargersEntry: some View {
+        let title = userInput.hasHomeCharging
+            ? L10n.chargingMapEntryTitle
+            : L10n.chargingMapVerdictNudgeTitle
+        let subtitle = userInput.hasHomeCharging
+            ? L10n.chargingMapEntrySubtitle
+            : L10n.chargingMapVerdictNudgeBody
+        return Button {
             showChargingMap = true
         } label: {
             VStack(alignment: .leading, spacing: 6) {
-                Text(L10n.chargingMapVerdictNudgeTitle)
+                Text(title)
                     .font(Typography.readingCardTitle)
                     .foregroundStyle(Color.ink)
                     .multilineTextAlignment(.leading)
-                Text(L10n.chargingMapVerdictNudgeBody)
+                Text(subtitle)
                     .font(Typography.readingCaption)
                     .foregroundStyle(Color.secondaryText)
                     .fixedSize(horizontal: false, vertical: true)
@@ -271,7 +282,36 @@ struct VerdictView: View {
             )
         }
         .buttonStyle(.plain)
+        .accessibilityIdentifier("verdict_chargers_entry")
         .accessibilityHint(L10n.chargingMapEntryA11yHint)
+    }
+
+    private var howWeCalculateEntry: some View {
+        Button {
+            showHowWeCalculate = true
+        } label: {
+            VStack(alignment: .leading, spacing: 6) {
+                Text(L10n.howWeCalculateEntryTitle)
+                    .font(Typography.readingCardTitle)
+                    .foregroundStyle(Color.ink)
+                    .multilineTextAlignment(.leading)
+                Text(L10n.howWeCalculateEntrySubtitle)
+                    .font(Typography.readingCaption)
+                    .foregroundStyle(Color.secondaryText)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(14)
+            .background(Color.surfaceElevated)
+            .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 4, style: .continuous)
+                    .stroke(Color.hairlineBorder, lineWidth: 1)
+            )
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("verdict_how_we_calculate_entry")
+        .accessibilityHint(L10n.howWeCalculateEntryA11yHint)
     }
 
     private func loadAIExplanation() async {
