@@ -728,17 +728,20 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertTrue(ghosts.isEmpty, "Remove SF90 / Artura placeholders: \(ghosts.map(\.id))")
     }
 
-    func testCatalog_ITPHEVSourcesIncludeDocumentURL() {
-        let itPhev = VehicleCatalogService.shared.vehicles.filter {
-            $0.powertrain == .phev && ($0.market ?? "") == "IT"
+    func testCatalog_NonEPAPHEVSourcesIncludeDocumentURL() {
+        let nonEpa = VehicleCatalogService.shared.vehicles.filter { v in
+            guard v.powertrain == .phev else { return false }
+            let market = (v.market ?? "").uppercased()
+            let src = (v.sourceName ?? "").uppercased()
+            return market != "US/EPA" && !src.contains("EPA-FUELECONOMY")
         }
-        XCTAssertGreaterThanOrEqual(itPhev.count, 8, "expected curated IT/EU PHEV set")
-        let missingHTTP = itPhev.filter { !($0.sourceName ?? "").contains("http") }
-        XCTAssertTrue(missingHTTP.isEmpty, "IT PHEV sourceName must cite a doc URL: \(missingHTTP.map(\.id))")
-        let tilde = itPhev.filter { ($0.sourceName ?? "").contains("~") }
-        XCTAssertTrue(tilde.isEmpty, "IT PHEV sources must not use '~' approximations: \(tilde.map(\.id))")
-        // Reject bare marketing model pages (…/auto/kuga, …/compass.html) — want PDF/listino/press doc.
-        let generic = itPhev.filter { v in
+        XCTAssertGreaterThanOrEqual(nonEpa.count, 3, "expected a small curated non-EPA PHEV set")
+        let missingHTTP = nonEpa.filter { !($0.sourceName ?? "").contains("http") }
+        XCTAssertTrue(missingHTTP.isEmpty, "non-EPA PHEV sourceName must cite a doc URL: \(missingHTTP.map(\.id))")
+        let tilde = nonEpa.filter { ($0.sourceName ?? "").contains("~") }
+        XCTAssertTrue(tilde.isEmpty, "non-EPA PHEV sources must not use '~' approximations: \(tilde.map(\.id))")
+        // Reject bare marketing model pages — want PDF/listino/press/newsroom doc that holds the numbers.
+        let generic = nonEpa.filter { v in
             let s = (v.sourceName ?? "").lowercased()
             guard let urlPart = s.split(separator: "http").last.map({ "http" + $0 }) else { return true }
             let url = urlPart.split(whereSeparator: { $0.isWhitespace || $0 == "—" || $0 == "|" }).first.map(String.init) ?? ""
@@ -747,31 +750,49 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
                 || url.contains("press.")
                 || url.contains("newsroom")
                 || url.contains("media-assets")
-                || url.contains("media.ford")
-                || url.contains("listino")
-                || url.contains("brochure")
-                || url.contains("technical")
-                || url.contains("technische")
-                || url.contains("environmental-check")
                 || url.contains("attachment")
-                || url.contains("datasheet")
-                || url.contains("type-approval")
-                || url.contains("omolog")
-                || url.contains("adac.de")
-                || url.contains("moto.it/pricelist")
             return !looksDoc
         }
-        XCTAssertTrue(generic.isEmpty, "IT PHEV source must be a precise doc URL, not a model page: \(generic.map(\.id))")
-        let energyKind = itPhev.filter { v in
+        XCTAssertTrue(generic.isEmpty, "non-EPA PHEV source must be a precise doc URL: \(generic.map(\.id))")
+        let energyKind = nonEpa.filter { v in
             let s = (v.sourceName ?? "").lowercased()
-            let solo = s.contains("solo elettr") || s.contains("rein elektr") || s.contains("electric-only") || s.contains("charge-depleting") || s.contains("ec mode")
+            let solo = s.contains("solo elettr") || s.contains("rein elektr") || s.contains("electric-only")
+                || s.contains("charge-depleting") || s.contains("ec mode")
             let ponderato = s.contains("ponderat") || s.contains("weighted") || s.contains("gewichtet")
             return !(solo || ponderato)
         }
         XCTAssertTrue(
             energyKind.isEmpty,
-            "IT PHEV source must state solo elettrico or ponderato for kWh: \(energyKind.map(\.id))"
+            "non-EPA PHEV source must state solo elettrico or ponderato for kWh: \(energyKind.map(\.id))"
         )
+        let weightedMismatch = nonEpa.filter { v in
+            let s = (v.sourceName ?? "").lowercased()
+            let claimsWeighted = s.contains("ponderat") || s.contains("weighted") || s.contains("gewichtet")
+            let claimsSolo = s.contains("solo elettr") || s.contains("rein elektr") || s.contains("electric-only")
+            if claimsWeighted && !claimsSolo { return v.energyIsWeighted != true }
+            if claimsSolo && !claimsWeighted { return v.energyIsWeighted == true }
+            return false
+        }
+        XCTAssertTrue(
+            weightedMismatch.isEmpty,
+            "energyIsWeighted must match source wording: \(weightedMismatch.map(\.id))"
+        )
+    }
+
+    func testCatalog_WeightedElectricEnergyExposesInAppNote() {
+        let weighted = VehicleCatalogService.shared.vehicles.filter {
+            $0.powertrain == .phev && $0.usesWeightedElectricEnergy
+        }
+        XCTAssertFalse(weighted.isEmpty, "curated EU PHEVs should flag weighted kWh")
+        XCTAssertFalse(L10n.phevWeightedEnergyNote.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+        let it = L10n.phevWeightedEnergyNote
+        // Locale may be IT or EN in unit tests; accept either official wording.
+        let ok =
+            it.localizedCaseInsensitiveContains("ponderato")
+            || it.localizedCaseInsensitiveContains("weighted")
+            || it.localizedCaseInsensitiveContains("sottostimato")
+            || it.localizedCaseInsensitiveContains("understated")
+        XCTAssertTrue(ok, "weighted-energy note should warn about understated electricity cost: \(it)")
     }
 
     func testCatalog_AurisHybrid2018ConfidenceIsStimaLevel() {

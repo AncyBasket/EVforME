@@ -95,6 +95,8 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
     let fuelKind: FuelKind?
     /// Potenza kW da EEA (`ep__KW_`, spesso picco). Solo informativa — il bollo EV usa P.2 a libretto dall’utente.
     let powerKw: Double?
+    /// `true` se `energyConsumptionKWhPerKm` / WLTP kWh è il valore **ponderato** (non solo elettrico).
+    let energyIsWeighted: Bool?
 
     var displayName: String {
         if let trim, !trim.isEmpty {
@@ -142,6 +144,9 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         if let wltp = wltpConsumptionKWh100km { return wltp / 100.0 }
         return nil
     }
+
+    /// Energia catalogo dichiarata come WLTP ponderato (non charge-depleting / solo elettrico).
+    var usesWeightedElectricEnergy: Bool { energyIsWeighted == true }
 
     /// Quota km elettrici stimata per PHEV (0…1).
     ///
@@ -252,7 +257,8 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         sourceUpdatedAt: String? = nil,
         confidenceScore: Double? = nil,
         fuelKind: FuelKind? = nil,
-        powerKw: Double? = nil
+        powerKw: Double? = nil,
+        energyIsWeighted: Bool? = nil
     ) {
         self.id = id
         self.brand = brand
@@ -278,5 +284,6 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         self.confidenceScore = confidenceScore
         self.fuelKind = fuelKind
         self.powerKw = powerKw
+        self.energyIsWeighted = energyIsWeighted
     }
 }

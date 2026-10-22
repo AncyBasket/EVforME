@@ -678,7 +678,7 @@ final class EVSimulatorTests: XCTestCase {
             // ICE → PHEV (EU WLTP CS Golf GTE)
             .init(name: "Golf→GolfGTE", source: "volkswagen-golf-2016", target: "volkswagen-golf-gte-phev-2024", intent: .alreadyOwned, home: true, km: 14_000, sourcePrice: 10_000, targetPrice: 36_000, stickerFuel: nil, stickerEnergy: nil),
             // PHEV → EV
-            .init(name: "KugaPHEV→ID.3", source: "ford-kuga-phev-2024", target: "volkswagen-id3-2024", intent: .alreadyOwned, home: true, km: 18_000, sourcePrice: 28_000, targetPrice: 36_000, stickerFuel: nil, stickerEnergy: nil),
+            .init(name: "CX60PHEV→ID.3", source: "mazda-cx-60-phev-2024", target: "volkswagen-id3-2024", intent: .alreadyOwned, home: true, km: 18_000, sourcePrice: 28_000, targetPrice: 36_000, stickerFuel: nil, stickerEnergy: nil),
             // City → Leaf
             .init(name: "208→Leaf", source: "peugeot-208-2018", target: "nissan-leaf-2023", intent: .alreadyOwned, home: false, km: 10_000, sourcePrice: 9_000, targetPrice: 24_000, stickerFuel: nil, stickerEnergy: nil),
             // Yaris → Ioniq 5

@@ -453,7 +453,8 @@ final class VehicleCatalogService {
                     sourceUpdatedAt: item.sourceUpdatedAt,
                     confidenceScore: item.confidenceScore,
                     fuelKind: item.fuelKind,
-                    powerKw: item.powerKw
+                    powerKw: item.powerKw,
+                    energyIsWeighted: item.energyIsWeighted
                 )
                 expanded.append(generated)
             }

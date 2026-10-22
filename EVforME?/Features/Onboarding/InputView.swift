@@ -913,6 +913,12 @@ struct InputView: View {
                     .foregroundColor(.secondaryText)
                     .accessibilityIdentifier("phev_catalog_usa_note")
             }
+            if source.usesWeightedElectricEnergy || target.usesWeightedElectricEnergy {
+                Text(L10n.phevWeightedEnergyNote)
+                    .font(Typography.readingCaption)
+                    .foregroundColor(.secondaryText)
+                    .accessibilityIdentifier("phev_weighted_energy_note")
+            }
         }
         .padding(.vertical, 12)
         .frame(maxWidth: .infinity, alignment: .leading)

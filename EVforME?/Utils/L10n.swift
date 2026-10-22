@@ -595,6 +595,7 @@ enum L10n {
     static var thermalBookletPowerKwP2TargetLabel: String { string("thermal_booklet_power_kw_p2_target_label") }
     static var thermalBookletPowerKwP2Hint: String { string("thermal_booklet_power_kw_p2_hint") }
     static var phevCatalogUsaNote: String { string("phev_catalog_usa_note") }
+    static var phevWeightedEnergyNote: String { string("phev_weighted_energy_note") }
     static var italianRegionLabel: String { string("italian_region_label") }
     static var italianRegionUnspecified: String { string("italian_region_unspecified") }
     static var italianRegionOtherUnknown: String { string("italian_region_other_unknown") }
