@@ -682,29 +682,52 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         }
     }
 
-    func testCatalog_NoPHEVManualWorldRepeatedPlaceholderFuel() {
-        let placeholders: Set<Double> = [0.045, 0.055, 0.065, 0.075]
-        let badPlaceholder = VehicleCatalogService.shared.vehicles.filter { v in
-            guard v.powertrain == .phev, let fuel = v.fuelConsumptionLPerKm else { return false }
+    func testCatalog_NoPHEVRepeatedFuelOrEnergyAcrossModels() {
+        let placeholders: Set<Double> = [0.045, 0.055, 0.065, 0.075, 0.12]
+        let phevs = VehicleCatalogService.shared.vehicles.filter { $0.powertrain == .phev }
+        let badPlaceholder = phevs.filter { v in
+            guard let fuel = v.fuelConsumptionLPerKm else { return false }
             return placeholders.contains { abs(fuel - $0) < 1e-9 }
         }
         XCTAssertTrue(
             badPlaceholder.isEmpty,
-            "No PHEV with hygiene segment-default fuel: \(badPlaceholder.map { "\($0.id)=\($0.fuelConsumptionLPerKm ?? -1)" })"
+            "No PHEV with stamped placeholder fuel: \(badPlaceholder.map { "\($0.id)=\($0.fuelConsumptionLPerKm ?? -1)" })"
         )
-        let manual = VehicleCatalogService.shared.vehicles.filter {
-            $0.powertrain == .phev && ($0.sourceName ?? "") == "manual-world-PHEV"
+        var fuelCounts: [String: [String]] = [:]
+        var energyCounts: [String: [String]] = [:]
+        for v in phevs {
+            let fKey = String(format: "%.5f", v.fuelConsumptionLPerKm ?? -1)
+            let eKey = String(format: "%.5f", v.energyConsumptionKWhPerKm ?? -1)
+            fuelCounts[fKey, default: []].append(v.id)
+            energyCounts[eKey, default: []].append(v.id)
         }
-        var counts: [String: [String]] = [:]
-        for v in manual {
-            let key = String(format: "%.5f", v.fuelConsumptionLPerKm ?? -1)
-            counts[key, default: []].append(v.id)
+        let repeatedFuel = fuelCounts.filter { $0.value.count > 1 }
+        let repeatedEnergy = energyCounts.filter { $0.value.count > 1 }
+        XCTAssertTrue(repeatedFuel.isEmpty, "PHEV fuel L/km must be unique per model: \(repeatedFuel)")
+        XCTAssertTrue(repeatedEnergy.isEmpty, "PHEV kWh/km must be unique per model: \(repeatedEnergy)")
+    }
+
+    func testCatalog_NoFerrariSF90OrMcLarenArtura() {
+        let ghosts = VehicleCatalogService.shared.vehicles.filter { v in
+            let id = v.id.lowercased()
+            return id.contains("sf90") || id.contains("artura")
         }
-        let repeated = counts.filter { $0.value.count > 1 }
-        XCTAssertTrue(
-            repeated.isEmpty,
-            "manual-world-PHEV must not stamp the same L/km on multiple rows: \(repeated)"
-        )
+        XCTAssertTrue(ghosts.isEmpty, "Remove SF90 / Artura placeholders: \(ghosts.map(\.id))")
+    }
+
+    func testCatalog_ITPHEVSourcesIncludeDocumentURL() {
+        let itPhev = VehicleCatalogService.shared.vehicles.filter {
+            $0.powertrain == .phev && ($0.market ?? "") == "IT"
+        }
+        XCTAssertGreaterThanOrEqual(itPhev.count, 10, "expected curated IT/EU PHEV set")
+        let missing = itPhev.filter { !($0.sourceName ?? "").contains("http") }
+        XCTAssertTrue(missing.isEmpty, "IT PHEV sourceName must cite a doc URL: \(missing.map(\.id))")
+    }
+
+    func testCatalog_AurisHybrid2018ConfidenceIsStimaLevel() {
+        let hev = VehicleCatalogService.shared.vehicle(by: "toyota-auris-hybrid-2018")
+        XCTAssertNotNil(hev)
+        XCTAssertEqual(hev?.confidenceScore ?? -1, 0.5, accuracy: 0.001)
     }
 
     func testCatalog_NoCorollaCrossICEOrCorollaIMInItaly() {

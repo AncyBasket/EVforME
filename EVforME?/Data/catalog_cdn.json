@@ -1,12 +1,12 @@
 {
   "url": "",
   "publishedUrl": "https://files.catbox.moe/3i0nro.json",
-  "rows": 6440,
+  "rows": 6310,
   "bytes": 2091829,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-21T20:27:19.432338+00:00",
+  "updatedAt": "2026-10-22T08:01:09.722666+00:00",
   "policy": "offline-first",
   "seedVersion": 42,
-  "note": "seedVersion 42: Molise thermal bollo + P.2; EU WLTP-CS PHEV set; drop SF90/Artura; Auris 2018 stima; EEA powerKw backfill; smoke simctl shots."
+  "note": "seedVersion 42: drop SF90/Artura + EPA 0.12/4.55/0.168 stamps; unique PHEV fuel/kWh; EU WLTP-CS with doc URLs; Auris hybrid conf 0.5."
 }
