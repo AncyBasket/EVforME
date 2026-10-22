@@ -186,7 +186,12 @@ struct HowWeCalculateView: View {
         case .evNotEstimated:
             return [L10n.howWeCalculateBolloNotEstimated]
         case .thermalRegional:
-            return [L10n.howWeCalculateBolloThermalRegional]
+            return [
+                L10n.howWeCalculateBolloThermalRegionalFormat(
+                    shared.regionTitle,
+                    String(format: "%.0f", shared.superbolloThresholdKw)
+                ),
+            ]
         case .thermalCatalogEstimate:
             return [L10n.howWeCalculateBolloThermalCatalog]
         case .thermalUnknown:
@@ -198,9 +203,13 @@ struct HowWeCalculateView: View {
         if !block.bolloIsKnown {
             return L10n.howWeCalculateBolloAmountUnknown
         }
-        return L10n.howWeCalculateBolloAmountFormat(
-            HowWeCalculateExplainer.formatEURAmount(block.bolloAmountEUR)
+        let average = L10n.howWeCalculateBolloAmountFormat(
+            HowWeCalculateExplainer.formatEURAmount(block.bolloAverageEUR)
         )
+        let thisYear = L10n.howWeCalculateBolloThisYearFormat(
+            HowWeCalculateExplainer.formatEURAmount(block.bolloThisYearEUR)
+        )
+        return "\(average)\n\(thisYear)"
     }
 
     private var pricesSection: some View {

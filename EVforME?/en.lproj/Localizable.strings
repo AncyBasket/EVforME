@@ -595,11 +595,12 @@
 "how_we_calculate_bollo_ev_formula_format" = "EV: after %d years of exemption, (¼) × %@ €/kW × booklet kW (P.2). No superbollo.";
 "how_we_calculate_bollo_not_estimated" = "EV: road tax not estimated (missing regional rate or booklet P.2 kW).";
 "how_we_calculate_bollo_national_estimate_format" = "Note: rate = national estimate %@ €/kW (same value as the calculation).";
-"how_we_calculate_bollo_thermal_regional" = "Thermal: in-app regional tariff (Molise), with national superbollo only above 185 kW.";
-"how_we_calculate_bollo_thermal_catalog" = "Thermal: national catalog estimate (taxesPerYear) — no 2026 regional tariff cited in-app.";
+"how_we_calculate_bollo_thermal_regional_format" = "Thermal: in-app regional tariff (%@), with national superbollo only above %@ kW.";
+"how_we_calculate_bollo_thermal_catalog" = "Thermal: national catalog estimate — no 2026 regional tariff cited in-app.";
 "how_we_calculate_bollo_thermal_unknown" = "Thermal: road tax not estimated (no catalog tax and no kW for a regional tariff).";
 "how_we_calculate_bollo_superbollo_format" = "Superbollo applied in this calculation: above %@ kW, %@ €/kW on the excess (age-based reductions).";
 "how_we_calculate_bollo_amount_format" = "Amount used in the calculation: €%@/year";
+"how_we_calculate_bollo_this_year_format" = "This year: €%@";
 "how_we_calculate_bollo_amount_unknown" = "Amount: not estimable with current data (same outcome as the calculation).";
 "how_we_calculate_prices_heading" = "Fuel and electricity prices";
 "how_we_calculate_prices_body" = "Defaults from MIMIT (fuels) and Eurostat (household electricity). You can override them with the form sliders — the verdict uses your values.";

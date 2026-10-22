@@ -82,8 +82,10 @@ struct HowWeCalculateVehicleBlock: Equatable {
     let showsCO2ToFuelNote: Bool
     let fuelKindForCO2: FuelKind
     let bolloPath: HowWeCalculateBolloPath
-    /// Stesso importo di `OwnershipCostEstimates.bolloPerYearDetail`.
-    let bolloAmountEUR: Double
+    /// Media annua sull’orizzonte — stesso valore di `OperatingCostBreakdown.taxes` nel simulatore.
+    let bolloAverageEUR: Double
+    /// Bollo del solo anno di riferimento (`bolloPerYearDetail`).
+    let bolloThisYearEUR: Double
     let bolloIsKnown: Bool
 }
 
@@ -133,10 +135,10 @@ enum HowWeCalculateExplainer {
         }
     }
 
-    /// Formatta €/kW con virgola decimale italiana (es. `2,58`).
+    /// Formatta €/kW con la locale corrente (virgola in IT, punto in EN).
     static func formatEURPerKw(_ value: Double) -> String {
         let nf = NumberFormatter()
-        nf.locale = Locale(identifier: "it_IT")
+        nf.locale = .autoupdatingCurrent
         nf.numberStyle = .decimal
         nf.minimumFractionDigits = 2
         nf.maximumFractionDigits = 2
@@ -145,17 +147,25 @@ enum HowWeCalculateExplainer {
 
     static func formatEURAmount(_ value: Double) -> String {
         let nf = NumberFormatter()
-        nf.locale = Locale(identifier: "it_IT")
+        nf.locale = .autoupdatingCurrent
         nf.numberStyle = .decimal
         nf.minimumFractionDigits = 0
         nf.maximumFractionDigits = 2
         return nf.string(from: NSNumber(value: value)) ?? String(format: "%.2f", value)
     }
 
+    /// EPA solo come token (`EPA-FuelEconomy`, `epa` non attaccato a lettere) o `fueleconomy`.
+    static func looksLikeEPASource(_ sourceName: String) -> Bool {
+        let s = sourceName.lowercased()
+        if s.contains("fueleconomy") { return true }
+        // `(?<![a-z0-9])epa(?![a-z0-9])` — evita match in "grandepanda".
+        return s.range(of: #"(?<![a-z0-9])epa(?![a-z0-9])"#, options: .regularExpression) != nil
+    }
+
     static func consumptionSourceCategory(from sourceName: String?) -> ConsumptionSourceCategory {
         let s = (sourceName ?? "").lowercased()
         guard !s.isEmpty else { return .unknown }
-        if s.contains("epa") || s.contains("fueleconomy") {
+        if looksLikeEPASource(sourceName ?? "") {
             return .epaUSA
         }
         if s.contains("stima") {
@@ -216,16 +226,18 @@ enum HowWeCalculateExplainer {
     static func makeModel(
         userInput: UserInput,
         catalog: VehicleCatalogService = .shared,
-        referenceYear: Int = Calendar.current.component(.year, from: Date())
+        referenceYear: Int = Defaults.referenceCalendarYear
     ) -> HowWeCalculateModel {
         let region = userInput.italianRegion
+        let years = max(1, userInput.ownershipYears)
         let source = catalog.vehicle(by: userInput.sourceVehicleId).map {
             vehicleBlock(
                 role: L10n.howWeCalculateRoleSource,
                 vehicle: $0,
                 bookletKw: userInput.sourceBookletPowerKwP2,
                 region: region,
-                referenceYear: referenceYear
+                referenceYear: referenceYear,
+                ownershipYears: years
             )
         }
         let target = catalog.vehicle(by: userInput.targetVehicleId).map {
@@ -234,7 +246,8 @@ enum HowWeCalculateExplainer {
                 vehicle: $0,
                 bookletKw: userInput.targetBookletPowerKwP2,
                 region: region,
-                referenceYear: referenceYear
+                referenceYear: referenceYear,
+                ownershipYears: years
             )
         }
 
@@ -257,14 +270,23 @@ enum HowWeCalculateExplainer {
         )
     }
 
-    /// Stesso risultato di calcolo usato dal verdetto (importo + percorso descrittivo).
+    /// Stesso media/isKnown del verdetto (`bolloTotalOverHorizon` / anni) + dettaglio anno corrente.
     static func bolloDetail(
         vehicle: VehicleCatalogItem,
         bookletKw: Double?,
         region: ItalianRegion,
-        referenceYear: Int = Calendar.current.component(.year, from: Date())
-    ) -> (path: HowWeCalculateBolloPath, estimate: OwnershipCostEstimates.BolloEstimate) {
-        let estimate = OwnershipCostEstimates.bolloPerYearDetail(
+        referenceYear: Int = Defaults.referenceCalendarYear,
+        ownershipYears: Int
+    ) -> (
+        path: HowWeCalculateBolloPath,
+        averageEUR: Double,
+        thisYearEUR: Double,
+        isKnown: Bool
+    ) {
+        // Allineato a `EVSimulator.simulate`: EV non usano `catalogPowerKw` (solo P.2).
+        let catalogKw: Double? = vehicle.powertrain == .ev ? nil : vehicle.powerKw
+        let years = max(1, ownershipYears)
+        let thisYear = OwnershipCostEstimates.bolloPerYearDetail(
             catalogTaxesPerYear: vehicle.taxesPerYear,
             powertrain: vehicle.powertrain,
             vehicleYear: vehicle.year,
@@ -272,16 +294,32 @@ enum HowWeCalculateExplainer {
             bookletPowerKwP2: bookletKw,
             italianRegion: region,
             fuelKind: vehicle.resolvedFuelKind,
-            catalogPowerKw: vehicle.powerKw
+            catalogPowerKw: catalogKw
+        )
+        let horizon = OwnershipCostEstimates.bolloTotalOverHorizon(
+            catalogTaxesPerYear: vehicle.taxesPerYear,
+            powertrain: vehicle.powertrain,
+            vehicleYear: vehicle.year,
+            referenceYear: referenceYear,
+            ownershipYears: years,
+            bookletPowerKwP2: bookletKw,
+            italianRegion: region,
+            fuelKind: vehicle.resolvedFuelKind,
+            catalogPowerKw: catalogKw
         )
         let path = bolloPath(
             vehicle: vehicle,
             bookletKw: bookletKw,
             region: region,
             referenceYear: referenceYear,
-            estimate: estimate
+            estimate: thisYear
         )
-        return (path, estimate)
+        return (
+            path,
+            horizon.amount / Double(years),
+            thisYear.amount,
+            horizon.isKnown
+        )
     }
 
     private static func vehicleBlock(
@@ -289,14 +327,16 @@ enum HowWeCalculateExplainer {
         vehicle: VehicleCatalogItem,
         bookletKw: Double?,
         region: ItalianRegion,
-        referenceYear: Int
+        referenceYear: Int,
+        ownershipYears: Int
     ) -> HowWeCalculateVehicleBlock {
         let category = consumptionSourceCategory(from: vehicle.sourceName)
-        let (path, estimate) = bolloDetail(
+        let detail = bolloDetail(
             vehicle: vehicle,
             bookletKw: bookletKw,
             region: region,
-            referenceYear: referenceYear
+            referenceYear: referenceYear,
+            ownershipYears: ownershipYears
         )
         return HowWeCalculateVehicleBlock(
             roleTitle: role,
@@ -308,9 +348,10 @@ enum HowWeCalculateExplainer {
             showsWeightedEnergyNote: vehicle.usesWeightedElectricEnergy,
             showsCO2ToFuelNote: fuelLikelyFromCO2(sourceName: vehicle.sourceName, powertrain: vehicle.powertrain),
             fuelKindForCO2: vehicle.resolvedFuelKind,
-            bolloPath: path,
-            bolloAmountEUR: estimate.amount,
-            bolloIsKnown: estimate.isKnown
+            bolloPath: detail.path,
+            bolloAverageEUR: detail.averageEUR,
+            bolloThisYearEUR: detail.thisYearEUR,
+            bolloIsKnown: detail.isKnown
         )
     }
 

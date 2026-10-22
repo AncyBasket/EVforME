@@ -748,7 +748,9 @@ enum L10n {
     static func howWeCalculateBolloNationalEstimateFormat(_ rate: String) -> String {
         format("how_we_calculate_bollo_national_estimate_format", rate)
     }
-    static var howWeCalculateBolloThermalRegional: String { string("how_we_calculate_bollo_thermal_regional") }
+    static func howWeCalculateBolloThermalRegionalFormat(_ region: String, _ thresholdKw: String) -> String {
+        format("how_we_calculate_bollo_thermal_regional_format", region, thresholdKw)
+    }
     static var howWeCalculateBolloThermalCatalog: String { string("how_we_calculate_bollo_thermal_catalog") }
     static var howWeCalculateBolloThermalUnknown: String { string("how_we_calculate_bollo_thermal_unknown") }
     static func howWeCalculateBolloSuperbolloFormat(_ threshold: String, _ rate: String) -> String {
@@ -756,6 +758,9 @@ enum L10n {
     }
     static func howWeCalculateBolloAmountFormat(_ amount: String) -> String {
         format("how_we_calculate_bollo_amount_format", amount)
+    }
+    static func howWeCalculateBolloThisYearFormat(_ amount: String) -> String {
+        format("how_we_calculate_bollo_this_year_format", amount)
     }
     static var howWeCalculateBolloAmountUnknown: String { string("how_we_calculate_bollo_amount_unknown") }
     static var howWeCalculatePricesHeading: String { string("how_we_calculate_prices_heading") }

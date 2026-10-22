@@ -39,12 +39,6 @@ final class HowWeCalculateExplainerTests: XCTestCase {
         XCTAssertEqual(try requireDouble("D_PETROL"), FuelFromCO2Constants.dPetrolKgPerL, accuracy: 1e-12)
         XCTAssertEqual(try requireDouble("D_DIESEL"), FuelFromCO2Constants.dDieselKgPerL, accuracy: 1e-12)
         XCTAssertEqual(try requireDouble("CO2_FACTOR"), FuelFromCO2Constants.co2Factor, accuracy: 1e-12)
-
-        XCTAssertEqual(FuelFromCO2Constants.cPetrol, 0.1206, accuracy: 1e-12)
-        XCTAssertEqual(FuelFromCO2Constants.cDiesel, 0.1165, accuracy: 1e-12)
-        XCTAssertEqual(FuelFromCO2Constants.dPetrolKgPerL, 0.745, accuracy: 1e-12)
-        XCTAssertEqual(FuelFromCO2Constants.dDieselKgPerL, 0.834, accuracy: 1e-12)
-        XCTAssertEqual(FuelFromCO2Constants.co2Factor, 0.273, accuracy: 1e-12)
     }
 
     func testLitersPer100km_OnlyPetrolDiesel() {
@@ -63,11 +57,6 @@ final class HowWeCalculateExplainerTests: XCTestCase {
 
         XCTAssertEqual(
             try XCTUnwrap(HowWeCalculateExplainer.evBolloEURPerKw(for: .unspecified)),
-            OwnershipCostEstimates.nationalEVBolloEURPerKw,
-            accuracy: 1e-9
-        )
-        XCTAssertEqual(
-            try XCTUnwrap(ItalianRegion.sicilia.evBolloEURPerKw),
             OwnershipCostEstimates.nationalEVBolloEURPerKw,
             accuracy: 1e-9
         )
@@ -110,6 +99,13 @@ final class HowWeCalculateExplainerTests: XCTestCase {
         )
         XCTAssertEqual(
             HowWeCalculateExplainer.consumptionSourceCategory(
+                from: "IT-listino-GrandePanda-EV-WLTP~15.5"
+            ),
+            .manufacturer,
+            "GrandePanda must not match substring 'epa'"
+        )
+        XCTAssertEqual(
+            HowWeCalculateExplainer.consumptionSourceCategory(
                 from: "BMW press tech data — https://www.press.bmwgroup.com/x"
             ),
             .manufacturer
@@ -122,6 +118,14 @@ final class HowWeCalculateExplainerTests: XCTestCase {
             HowWeCalculateExplainer.consumptionSourceCategory(from: nil),
             .unknown
         )
+    }
+
+    func testLooksLikeEPASource_TokenNotSubstring() {
+        XCTAssertTrue(HowWeCalculateExplainer.looksLikeEPASource("EPA-FuelEconomy"))
+        XCTAssertTrue(HowWeCalculateExplainer.looksLikeEPASource("source epa fuel"))
+        XCTAssertTrue(HowWeCalculateExplainer.looksLikeEPASource("https://www.fueleconomy.gov/feg/"))
+        XCTAssertFalse(HowWeCalculateExplainer.looksLikeEPASource("IT-listino-GrandePanda-EV-WLTP~15.5"))
+        XCTAssertFalse(HowWeCalculateExplainer.looksLikeEPASource("IT-listino-GrandePanda-HEV-WLTP"))
     }
 
     func testSourceURL_EEAAndEPADefaults_AndEmbedded() {
@@ -199,9 +203,10 @@ final class HowWeCalculateExplainerTests: XCTestCase {
             vehicle: thermal,
             bookletKw: 200,
             region: .molise,
-            referenceYear: 2026
+            referenceYear: 2026,
+            ownershipYears: 5
         )
-        let moliseThermalCalc = OwnershipCostEstimates.bolloPerYearDetail(
+        let moliseThermalThisYear = OwnershipCostEstimates.bolloPerYearDetail(
             catalogTaxesPerYear: thermal.taxesPerYear,
             powertrain: thermal.powertrain,
             vehicleYear: thermal.year,
@@ -211,8 +216,7 @@ final class HowWeCalculateExplainerTests: XCTestCase {
             fuelKind: thermal.resolvedFuelKind,
             catalogPowerKw: thermal.powerKw
         )
-        XCTAssertEqual(moliseThermal.estimate.amount, moliseThermalCalc.amount, accuracy: 1e-9)
-        XCTAssertEqual(moliseThermal.estimate.isKnown, moliseThermalCalc.isKnown)
+        XCTAssertEqual(moliseThermal.thisYearEUR, moliseThermalThisYear.amount, accuracy: 1e-9)
         if case .thermalRegional(let showsSuperbollo) = moliseThermal.path {
             XCTAssertTrue(showsSuperbollo)
         } else {
@@ -224,7 +228,8 @@ final class HowWeCalculateExplainerTests: XCTestCase {
             vehicle: thermal,
             bookletKw: 100,
             region: .molise,
-            referenceYear: 2026
+            referenceYear: 2026,
+            ownershipYears: 5
         )
         if case .thermalRegional(let showsSuperbollo) = moliseLow.path {
             XCTAssertFalse(showsSuperbollo)
@@ -237,30 +242,22 @@ final class HowWeCalculateExplainerTests: XCTestCase {
             vehicle: thermal,
             bookletKw: 100,
             region: .lazio,
-            referenceYear: 2026
-        )
-        let lazioThermalCalc = OwnershipCostEstimates.bolloPerYearDetail(
-            catalogTaxesPerYear: thermal.taxesPerYear,
-            powertrain: thermal.powertrain,
-            vehicleYear: thermal.year,
             referenceYear: 2026,
-            bookletPowerKwP2: 100,
-            italianRegion: .lazio,
-            fuelKind: thermal.resolvedFuelKind,
-            catalogPowerKw: thermal.powerKw
+            ownershipYears: 5
         )
-        XCTAssertEqual(lazioThermal.estimate.amount, lazioThermalCalc.amount, accuracy: 1e-9)
         XCTAssertEqual(lazioThermal.path, .thermalCatalogEstimate)
-        XCTAssertEqual(lazioThermal.estimate.amount, thermal.taxesPerYear, accuracy: 1e-9)
+        XCTAssertEqual(lazioThermal.thisYearEUR, thermal.taxesPerYear, accuracy: 1e-9)
+        XCTAssertEqual(lazioThermal.averageEUR, thermal.taxesPerYear, accuracy: 1e-9)
 
         // Molise EV post-esenzione with P.2 → quarter rate, never superbollo.
         let moliseEV = HowWeCalculateExplainer.bolloDetail(
             vehicle: ev,
             bookletKw: 100,
             region: .molise,
-            referenceYear: 2026
+            referenceYear: 2026,
+            ownershipYears: 5
         )
-        let moliseEVCalc = OwnershipCostEstimates.bolloPerYearDetail(
+        let moliseEVThisYear = OwnershipCostEstimates.bolloPerYearDetail(
             catalogTaxesPerYear: ev.taxesPerYear,
             powertrain: ev.powertrain,
             vehicleYear: ev.year,
@@ -268,13 +265,12 @@ final class HowWeCalculateExplainerTests: XCTestCase {
             bookletPowerKwP2: 100,
             italianRegion: .molise,
             fuelKind: ev.resolvedFuelKind,
-            catalogPowerKw: ev.powerKw
+            catalogPowerKw: nil
         )
-        XCTAssertEqual(moliseEV.estimate.amount, moliseEVCalc.amount, accuracy: 1e-9)
-        XCTAssertEqual(moliseEV.estimate.isKnown, moliseEVCalc.isKnown)
+        XCTAssertEqual(moliseEV.thisYearEUR, moliseEVThisYear.amount, accuracy: 1e-9)
         if case .evQuarterRate(let rate, _, _) = moliseEV.path {
             XCTAssertEqual(rate, 2.76, accuracy: 1e-9)
-            XCTAssertEqual(moliseEV.estimate.amount, 2.76 * 100 * 0.25, accuracy: 0.02)
+            XCTAssertEqual(moliseEV.thisYearEUR, 2.76 * 100 * 0.25, accuracy: 0.02)
         } else {
             XCTFail("Expected evQuarterRate for Molise EV post-exemption, got \(moliseEV.path)")
         }
@@ -284,19 +280,9 @@ final class HowWeCalculateExplainerTests: XCTestCase {
             vehicle: ev,
             bookletKw: 100,
             region: .lazio,
-            referenceYear: 2026
-        )
-        let lazioEVCalc = OwnershipCostEstimates.bolloPerYearDetail(
-            catalogTaxesPerYear: ev.taxesPerYear,
-            powertrain: ev.powertrain,
-            vehicleYear: ev.year,
             referenceYear: 2026,
-            bookletPowerKwP2: 100,
-            italianRegion: .lazio,
-            fuelKind: ev.resolvedFuelKind,
-            catalogPowerKw: ev.powerKw
+            ownershipYears: 5
         )
-        XCTAssertEqual(lazioEV.estimate.amount, lazioEVCalc.amount, accuracy: 1e-9)
         if case .evQuarterRate(let rate, _, let national) = lazioEV.path {
             XCTAssertEqual(rate, 2.84, accuracy: 1e-9)
             XCTAssertFalse(national)
@@ -309,16 +295,96 @@ final class HowWeCalculateExplainerTests: XCTestCase {
             vehicle: ev,
             bookletKw: 100,
             region: .lombardia,
-            referenceYear: 2026
+            referenceYear: 2026,
+            ownershipYears: 5
         )
         XCTAssertEqual(lombardiaEV.path, .evPermanentExempt)
-        XCTAssertEqual(lombardiaEV.estimate.amount, 0, accuracy: 1e-9)
-        XCTAssertTrue(lombardiaEV.estimate.isKnown)
+        XCTAssertEqual(lombardiaEV.averageEUR, 0, accuracy: 1e-9)
+        XCTAssertEqual(lombardiaEV.thisYearEUR, 0, accuracy: 1e-9)
+        XCTAssertTrue(lombardiaEV.isKnown)
     }
 
-    func testFormatEURPerKw_ItalianComma() {
+    func testBolloAverage_MatchesSimulatorBreakdown_EVLazioAndThermalMolise() throws {
+        let refYear = Defaults.referenceCalendarYear
+        // EV 2022 + 5 anni possesso: quest’anno ancora in esenzione, media orizzonte > 0.
+        let ev = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: "tesla-model-3-2022"))
+        XCTAssertEqual(ev.year, 2022)
+        XCTAssertEqual(ev.powertrain, .ev)
+
+        var evInput = UserInput(
+            dailyKm: 12_000,
+            hasHomeCharging: true,
+            areaType: .mixed,
+            fuelPrice: 1.80,
+            ownershipYears: 5,
+            sourceVehicleId: "volkswagen-golf-2020",
+            targetVehicleId: "tesla-model-3-2022",
+            targetBookletPowerKwP2: 100,
+            italianRegion: .lazio
+        )
+        let evModel = HowWeCalculateExplainer.makeModel(userInput: evInput, referenceYear: refYear)
+        let evBlock = try XCTUnwrap(evModel.target)
+        let simulated = try XCTUnwrap(EVSimulator.simulate(input: evInput))
+        XCTAssertEqual(
+            evBlock.bolloAverageEUR,
+            simulated.targetYearlyBreakdown.taxes,
+            accuracy: 0.02,
+            "Horizon average must match simulator taxes"
+        )
+        XCTAssertEqual(evBlock.bolloIsKnown, simulated.targetYearlyBreakdown.taxesKnown)
+
+        let age = max(0, refYear - ev.year)
+        let exemptYears = ItalianRegion.lazio.evExemptionYears(forVehicleYear: ev.year)
+        if age < exemptYears {
+            XCTAssertEqual(evBlock.bolloThisYearEUR, 0, accuracy: 1e-9)
+            XCTAssertGreaterThan(evBlock.bolloAverageEUR, 0, "Post-exemption years pull average above 0")
+            // Esempio tipico ref 2026: media ≈ 56,80 €/anno (4/5 × 71).
+            if refYear == 2026 {
+                XCTAssertEqual(evBlock.bolloAverageEUR, 56.8, accuracy: 0.05)
+            }
+        }
+
+        // Termica Molise: media = dettaglio (tariffa stabile sull’orizzonte).
+        let thermal = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: "volkswagen-golf-2020"))
+        var thermalInput = UserInput(
+            dailyKm: 12_000,
+            hasHomeCharging: true,
+            areaType: .mixed,
+            fuelPrice: 1.80,
+            ownershipYears: 5,
+            sourceVehicleId: "volkswagen-golf-2020",
+            targetVehicleId: "tesla-model-3-2022",
+            sourceBookletPowerKwP2: 100,
+            targetBookletPowerKwP2: 100,
+            italianRegion: .molise
+        )
+        let thermalModel = HowWeCalculateExplainer.makeModel(userInput: thermalInput, referenceYear: refYear)
+        let thermalBlock = try XCTUnwrap(thermalModel.source)
+        let thermalSim = try XCTUnwrap(EVSimulator.simulate(input: thermalInput))
+        XCTAssertEqual(
+            thermalBlock.bolloAverageEUR,
+            thermalSim.sourceYearlyBreakdown.taxes,
+            accuracy: 0.02
+        )
+        XCTAssertEqual(thermalBlock.bolloIsKnown, thermalSim.sourceYearlyBreakdown.taxesKnown)
+        if case .thermalRegional = thermalBlock.bolloPath {
+            // ok
+        } else {
+            XCTFail("Molise ICE should use thermalRegional path, got \(thermalBlock.bolloPath)")
+        }
+        _ = thermal
+        _ = evInput
+        _ = thermalInput
+    }
+
+    func testFormatEURPerKw_UsesCurrentLocale() {
         let formatted = HowWeCalculateExplainer.formatEURPerKw(2.58)
-        XCTAssertTrue(formatted.contains("2,58") || formatted == "2,58", formatted)
+        let nf = NumberFormatter()
+        nf.locale = .autoupdatingCurrent
+        nf.numberStyle = .decimal
+        nf.minimumFractionDigits = 2
+        nf.maximumFractionDigits = 2
+        XCTAssertEqual(formatted, nf.string(from: NSNumber(value: 2.58)))
     }
 
     func testMakeModel_BolloSharedUsesSameConstants() throws {

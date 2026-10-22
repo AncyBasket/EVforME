@@ -593,11 +593,12 @@
 "how_we_calculate_bollo_ev_formula_format" = "EV: dopo %d anni di esenzione, (1/4) × %@ €/kW × kW a libretto (P.2). Nessun superbollo.";
 "how_we_calculate_bollo_not_estimated" = "EV: bollo non stimato (manca tariffa regionale o kW P.2 a libretto).";
 "how_we_calculate_bollo_national_estimate_format" = "Nota: tariffa = stima nazionale %@ €/kW (stesso valore del calcolo).";
-"how_we_calculate_bollo_thermal_regional" = "Termica: tariffario regionale citato in-app (Molise), con superbollo nazionale solo sopra 185 kW.";
-"how_we_calculate_bollo_thermal_catalog" = "Termica: stima nazionale da catalogo (taxesPerYear) — nessun tariffario regionale 2026 citato in-app.";
+"how_we_calculate_bollo_thermal_regional_format" = "Termica: tariffario regionale citato in-app (%@), con superbollo nazionale solo sopra %@ kW.";
+"how_we_calculate_bollo_thermal_catalog" = "Termica: stima nazionale da catalogo — nessun tariffario regionale 2026 citato in-app.";
 "how_we_calculate_bollo_thermal_unknown" = "Termica: bollo non stimato (manca bollo di catalogo e kW per tariffario regionale).";
 "how_we_calculate_bollo_superbollo_format" = "Superbollo applicato in questo calcolo: oltre %@ kW, %@ €/kW sulla parte eccedente (riduzioni per età).";
 "how_we_calculate_bollo_amount_format" = "Importo usato nel calcolo: €%@/anno";
+"how_we_calculate_bollo_this_year_format" = "Quest’anno: €%@";
 "how_we_calculate_bollo_amount_unknown" = "Importo: non stimabile con i dati attuali (stesso esito del calcolo).";
 "how_we_calculate_prices_heading" = "Prezzi carburante e elettricità";
 "how_we_calculate_prices_body" = "Default da MIMIT (carburanti) ed Eurostat (elettricità domestica). Puoi modificarli con gli slider nel form: il verdetto usa i tuoi valori.";
