@@ -63,26 +63,32 @@ final class SmokeProductUITests: XCTestCase {
         XCTAssertNotNil(modify, "Verdict should open")
         saveShot(app, name: "02_verdict_open")
 
-        // Come calcoliamo + prominent chargers on verdict
+        // Come calcoliamo + prominent chargers on verdict (both visible in one portrait shot)
         let howCalc = firstExistingStatic(
             app,
             labels: ["Come calcoliamo", "How we calculate"],
             timeout: 6
         )
         XCTAssertNotNil(howCalc, "How we calculate entry on verdict")
+        let chargersLabel = firstExistingStatic(
+            app,
+            labels: [
+                "Colonnine vicino a te",
+                "Chargers near you",
+                "Senza wallbox, valuta colonnine pubbliche vicino a te",
+                "No wallbox? Check public chargers near you",
+            ],
+            timeout: 3
+        )
         let chargersOnVerdict =
-            app.descendants(matching: .any)["verdict_chargers_entry"].waitForExistence(timeout: 3)
-            || firstExistingStatic(
-                app,
-                labels: [
-                    "Colonnine vicino a te",
-                    "Chargers near you",
-                    "Senza wallbox, valuta colonnine pubbliche vicino a te",
-                    "No wallbox? Check public chargers near you",
-                ],
-                timeout: 3
-            ) != nil
+            app.descendants(matching: .any)["verdict_chargers_entry"].waitForExistence(timeout: 2)
+            || chargersLabel != nil
         XCTAssertTrue(chargersOnVerdict, "Prominent chargers entry on verdict")
+        // Ensure both entry titles are on-screen before the dedicated smoke shot.
+        if howCalc?.isHittable != true || chargersLabel?.isHittable != true {
+            scrollDown(app, times: 1)
+        }
+        saveShot(app, name: "02a_verdict_trust_entries")
         howCalc?.tap()
         let howCalcReady =
             app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Come calcoliamo")).firstMatch

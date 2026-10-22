@@ -34,9 +34,22 @@ struct HowWeCalculateView: View {
                         vehicleSection(target)
                     }
 
-                    bolloSection(model.bollo)
+                    Text(L10n.howWeCalculateBolloHeading)
+                        .font(Typography.readingTitle)
+                        .foregroundStyle(Color.ink)
+                    Text(L10n.howWeCalculateBolloRegionFormat(model.bolloShared.regionTitle))
+                        .font(Typography.readingCaption)
+                        .foregroundStyle(Color.secondaryText)
+
+                    if let source = model.source {
+                        bolloVehicleSection(source, shared: model.bolloShared)
+                    }
+                    if let target = model.target {
+                        bolloVehicleSection(target, shared: model.bolloShared)
+                    }
+
                     pricesSection
-                    co2FormulaSection(model.bollo)
+                    co2FormulaSection(model.bolloShared)
                 }
                 .padding(24)
             }
@@ -64,16 +77,12 @@ struct HowWeCalculateView: View {
             Text(L10n.howWeCalculateConsumptionHeading)
                 .font(Typography.readingCardTitle)
                 .foregroundStyle(Color.ink)
-            if let label = block.sourceLabel, !label.isEmpty {
-                Text(L10n.howWeCalculateSourceFormat(label))
-                    .font(Typography.readingBody)
-                    .foregroundStyle(Color.secondaryText)
-                    .fixedSize(horizontal: false, vertical: true)
-            } else {
-                Text(L10n.howWeCalculateSourceUnknown)
-                    .font(Typography.readingBody)
-                    .foregroundStyle(Color.secondaryText)
-            }
+            Text(L10n.howWeCalculateSourceFormat(block.sourceCategory.localizedTitle))
+                .font(Typography.readingBody)
+                .foregroundStyle(Color.secondaryText)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityIdentifier("how_we_calculate_source_category")
+
             if let url = block.sourceURL {
                 Button {
                     openURL(url)
@@ -98,71 +107,100 @@ struct HowWeCalculateView: View {
                 Text(L10n.howWeCalculateCO2AppliesToVehicle)
                     .font(Typography.readingCaption)
                     .foregroundStyle(Color.secondaryText)
+                    .accessibilityIdentifier("how_we_calculate_co2_note")
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .accessibilityElement(children: .contain)
     }
 
-    private func bolloSection(_ bollo: HowWeCalculateBolloBlock) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text(L10n.howWeCalculateBolloHeading)
-                .font(Typography.readingTitle)
+    private func bolloVehicleSection(
+        _ block: HowWeCalculateVehicleBlock,
+        shared: HowWeCalculateBolloShared
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("\(block.roleTitle) — \(block.displayName)")
+                .font(Typography.readingCardTitle)
                 .foregroundStyle(Color.ink)
-            Text(L10n.howWeCalculateBolloFormula)
-                .font(Typography.readingBody)
-                .foregroundStyle(Color.secondaryText)
-                .fixedSize(horizontal: false, vertical: true)
 
-            Text(L10n.howWeCalculateBolloRegionFormat(bollo.regionTitle))
-                .font(Typography.readingCaption)
-                .foregroundStyle(Color.secondaryText)
-
-            if bollo.permanentlyExempt {
-                Text(L10n.howWeCalculateBolloPermanentExempt)
-                    .font(Typography.readingCaption)
+            ForEach(Array(bolloExplanationLines(for: block, shared: shared).enumerated()), id: \.offset) { _, line in
+                Text(line)
+                    .font(Typography.readingBody)
                     .foregroundStyle(Color.secondaryText)
-            } else if let rate = bollo.evEURPerKw {
-                Text(
-                    L10n.howWeCalculateBolloRateFormat(
-                        String(format: "%.2f", rate)
-                    )
-                )
-                .font(Typography.readingBody)
-                .foregroundStyle(Color.ink)
-                .accessibilityIdentifier("how_we_calculate_bollo_rate")
-                if bollo.evExemptionYears != Int.max {
-                    Text(L10n.howWeCalculateBolloExemptionFormat(bollo.evExemptionYears))
-                        .font(Typography.readingCaption)
-                        .foregroundStyle(Color.secondaryText)
-                }
-            } else {
-                Text(L10n.howWeCalculateBolloNotEstimated)
-                    .font(Typography.readingCaption)
-                    .foregroundStyle(Color.secondaryText)
+                    .fixedSize(horizontal: false, vertical: true)
             }
 
-            if bollo.usesNationalEVEstimate {
+            if case .thermalRegional(let showsSuperbollo) = block.bolloPath, showsSuperbollo {
                 Text(
-                    L10n.howWeCalculateBolloNationalEstimateFormat(
-                        String(format: "%.2f", bollo.nationalEVBolloEURPerKw)
+                    L10n.howWeCalculateBolloSuperbolloFormat(
+                        String(format: "%.0f", shared.superbolloThresholdKw),
+                        String(format: "%.0f", shared.superbolloEURPerKwAbove)
                     )
                 )
                 .font(Typography.readingCaption)
                 .foregroundStyle(Color.secondaryText)
-                .accessibilityIdentifier("how_we_calculate_bollo_national")
+                .accessibilityIdentifier("how_we_calculate_bollo_superbollo")
             }
 
-            Text(
-                L10n.howWeCalculateBolloSuperbolloFormat(
-                    String(format: "%.0f", bollo.superbolloThresholdKw),
-                    String(format: "%.0f", bollo.superbolloEURPerKwAbove)
-                )
-            )
-            .font(Typography.readingCaption)
-            .foregroundStyle(Color.secondaryText)
+            Text(bolloAmountLine(for: block))
+                .font(Typography.readingCaption)
+                .foregroundStyle(Color.ink)
+                .accessibilityIdentifier("how_we_calculate_bollo_amount")
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.vertical, 4)
+    }
+
+    private func bolloExplanationLines(
+        for block: HowWeCalculateVehicleBlock,
+        shared: HowWeCalculateBolloShared
+    ) -> [String] {
+        switch block.bolloPath {
+        case .evPermanentExempt:
+            return [L10n.howWeCalculateBolloPermanentExempt]
+        case .evInExemption(let years):
+            return [
+                L10n.howWeCalculateBolloEVExemptionActiveFormat(years),
+                L10n.howWeCalculateBolloEVAfterExemptionFormat(
+                    HowWeCalculateExplainer.formatEURPerKw(
+                        HowWeCalculateExplainer.evBolloEURPerKw(for: userInput.italianRegion)
+                            ?? shared.nationalEVBolloEURPerKw
+                    )
+                ),
+            ]
+        case .evQuarterRate(let rate, let years, let usesNational):
+            var lines = [
+                L10n.howWeCalculateBolloEVFormulaFormat(
+                    years,
+                    HowWeCalculateExplainer.formatEURPerKw(rate)
+                ),
+            ]
+            if usesNational {
+                lines.append(
+                    L10n.howWeCalculateBolloNationalEstimateFormat(
+                        HowWeCalculateExplainer.formatEURPerKw(shared.nationalEVBolloEURPerKw)
+                    )
+                )
+            }
+            return lines
+        case .evNotEstimated:
+            return [L10n.howWeCalculateBolloNotEstimated]
+        case .thermalRegional:
+            return [L10n.howWeCalculateBolloThermalRegional]
+        case .thermalCatalogEstimate:
+            return [L10n.howWeCalculateBolloThermalCatalog]
+        case .thermalUnknown:
+            return [L10n.howWeCalculateBolloThermalUnknown]
+        }
+    }
+
+    private func bolloAmountLine(for block: HowWeCalculateVehicleBlock) -> String {
+        if !block.bolloIsKnown {
+            return L10n.howWeCalculateBolloAmountUnknown
+        }
+        return L10n.howWeCalculateBolloAmountFormat(
+            HowWeCalculateExplainer.formatEURAmount(block.bolloAmountEUR)
+        )
     }
 
     private var pricesSection: some View {
@@ -178,15 +216,15 @@ struct HowWeCalculateView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    private func co2FormulaSection(_ bollo: HowWeCalculateBolloBlock) -> some View {
+    private func co2FormulaSection(_ shared: HowWeCalculateBolloShared) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Text(L10n.howWeCalculateCO2Heading)
                 .font(Typography.readingTitle)
                 .foregroundStyle(Color.ink)
             Text(
                 L10n.howWeCalculateCO2BodyFormat(
-                    String(format: "%.2f", bollo.petrolCO2PerL100),
-                    String(format: "%.2f", bollo.dieselCO2PerL100)
+                    HowWeCalculateExplainer.formatEURPerKw(shared.petrolCO2PerL100),
+                    HowWeCalculateExplainer.formatEURPerKw(shared.dieselCO2PerL100)
                 )
             )
             .font(Typography.readingBody)

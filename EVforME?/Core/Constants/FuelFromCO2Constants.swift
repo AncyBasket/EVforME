@@ -26,13 +26,16 @@ enum FuelFromCO2Constants {
         string: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32017R1151"
     )!
 
+    /// Solo benzina/diesel (Reg. 2017/1151 HC=CO=0). LPG/CNG/unknown → `nil`.
     static func litersPer100km(fromCO2GramsPerKm co2: Double, fuelKind: FuelKind) -> Double? {
         guard co2 > 0 else { return nil }
         switch fuelKind {
-        case .petrol, .unknown, .lpg, .cng:
+        case .petrol:
             return co2 / petrolCO2PerL100
         case .diesel:
             return co2 / dieselCO2PerL100
+        case .lpg, .cng, .unknown:
+            return nil
         }
     }
 }

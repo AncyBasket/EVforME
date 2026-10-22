@@ -716,7 +716,11 @@ enum L10n {
     static func howWeCalculateSourceFormat(_ source: String) -> String {
         format("how_we_calculate_source_format", source)
     }
-    static var howWeCalculateSourceUnknown: String { string("how_we_calculate_source_unknown") }
+    static var howWeCalculateSourceCategoryEEA: String { string("how_we_calculate_source_category_eea") }
+    static var howWeCalculateSourceCategoryEPA: String { string("how_we_calculate_source_category_epa") }
+    static var howWeCalculateSourceCategoryManufacturer: String { string("how_we_calculate_source_category_manufacturer") }
+    static var howWeCalculateSourceCategoryEstimate: String { string("how_we_calculate_source_category_estimate") }
+    static var howWeCalculateSourceCategoryUnknown: String { string("how_we_calculate_source_category_unknown") }
     static var howWeCalculateOpenSource: String { string("how_we_calculate_open_source") }
     static func howWeCalculateConfidenceFormat(_ band: String) -> String {
         format("how_we_calculate_confidence_format", band)
@@ -727,24 +731,33 @@ enum L10n {
     static var howWeCalculateConfidenceUnknown: String { string("how_we_calculate_confidence_unknown") }
     static var howWeCalculateCO2AppliesToVehicle: String { string("how_we_calculate_co2_applies_to_vehicle") }
     static var howWeCalculateBolloHeading: String { string("how_we_calculate_bollo_heading") }
-    static var howWeCalculateBolloFormula: String { string("how_we_calculate_bollo_formula") }
     static func howWeCalculateBolloRegionFormat(_ region: String) -> String {
         format("how_we_calculate_bollo_region_format", region)
     }
     static var howWeCalculateBolloPermanentExempt: String { string("how_we_calculate_bollo_permanent_exempt") }
-    static func howWeCalculateBolloRateFormat(_ rate: String) -> String {
-        format("how_we_calculate_bollo_rate_format", rate)
+    static func howWeCalculateBolloEVExemptionActiveFormat(_ years: Int) -> String {
+        format("how_we_calculate_bollo_ev_exemption_active_format", years)
     }
-    static func howWeCalculateBolloExemptionFormat(_ years: Int) -> String {
-        format("how_we_calculate_bollo_exemption_format", years)
+    static func howWeCalculateBolloEVAfterExemptionFormat(_ rate: String) -> String {
+        format("how_we_calculate_bollo_ev_after_exemption_format", rate)
+    }
+    static func howWeCalculateBolloEVFormulaFormat(_ years: Int, _ rate: String) -> String {
+        format("how_we_calculate_bollo_ev_formula_format", years, rate)
     }
     static var howWeCalculateBolloNotEstimated: String { string("how_we_calculate_bollo_not_estimated") }
     static func howWeCalculateBolloNationalEstimateFormat(_ rate: String) -> String {
         format("how_we_calculate_bollo_national_estimate_format", rate)
     }
+    static var howWeCalculateBolloThermalRegional: String { string("how_we_calculate_bollo_thermal_regional") }
+    static var howWeCalculateBolloThermalCatalog: String { string("how_we_calculate_bollo_thermal_catalog") }
+    static var howWeCalculateBolloThermalUnknown: String { string("how_we_calculate_bollo_thermal_unknown") }
     static func howWeCalculateBolloSuperbolloFormat(_ threshold: String, _ rate: String) -> String {
         format("how_we_calculate_bollo_superbollo_format", threshold, rate)
     }
+    static func howWeCalculateBolloAmountFormat(_ amount: String) -> String {
+        format("how_we_calculate_bollo_amount_format", amount)
+    }
+    static var howWeCalculateBolloAmountUnknown: String { string("how_we_calculate_bollo_amount_unknown") }
     static var howWeCalculatePricesHeading: String { string("how_we_calculate_prices_heading") }
     static var howWeCalculatePricesBody: String { string("how_we_calculate_prices_body") }
     static var howWeCalculateCO2Heading: String { string("how_we_calculate_co2_heading") }

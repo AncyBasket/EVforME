@@ -80,10 +80,11 @@ enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
     /// lineare anche oltre 100 kW.
     /// Sicilia: clausola ACI «a prescindere» sull’importo benzina a 2,58 €/kW; in-app 2,58 × 1/4 post-esenzione.
     var evBolloEURPerKw: Double? {
+        let national = OwnershipCostEstimates.nationalEVBolloEURPerKw
         switch self {
         case .unspecified:
             // Stima nazionale di ripiego quando l’utente non sceglie regione.
-            return 2.58
+            return national
         case .lombardia, .piemonte:
             return 0
         case .lazio, .emiliaRomagna:
@@ -99,13 +100,13 @@ enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
             // Euro 6: 1,96 €/kW (Euro 0–5: 1,99 — non usato senza classe Euro).
             return 1.96
         case .basilicata, .puglia, .umbria:
-            return 2.58
+            return national
         case .sicilia:
-            // Clausola «a prescindere»: 1/4 dell’importo calcolato a 2,58 €/kW (scala benzina nazionale).
-            return 2.58
+            // Clausola «a prescindere»: 1/4 dell’importo calcolato a tariffa nazionale (scala benzina).
+            return national
         case .valleDAosta:
-            // Dopo gli 8 anni di esenzione (EV ≥2019): stima nazionale 2,58.
-            return 2.58
+            // Dopo gli 8 anni di esenzione (EV ≥2019): stima nazionale.
+            return national
         case .otherUnknown:
             return nil
         }
