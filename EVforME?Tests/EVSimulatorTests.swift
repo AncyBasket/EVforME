@@ -673,12 +673,12 @@ final class EVSimulatorTests: XCTestCase {
             .init(name: "Ateca→Model3", source: "seat-ateca-2016", target: "tesla-model-3-2023", intent: .alreadyOwned, home: true, km: 16_000, sourcePrice: 14_000, targetPrice: 40_000, stickerFuel: nil, stickerEnergy: nil),
             // Premium ICE → EV purchase
             .init(name: "Serie3→Model3 buy", source: "bmw-3-series-2018", target: "tesla-model-3-2024", intent: .consideringPurchase, home: true, km: 20_000, sourcePrice: 22_000, targetPrice: 42_000, stickerFuel: nil, stickerEnergy: nil),
-            // ICE → PHEV
-            .init(name: "Corsa→AstraPHEV", source: "opel-corsa-2018", target: "opel-astra-hybrid-phev-2024", intent: .consideringPurchase, home: true, km: 15_000, sourcePrice: 8_000, targetPrice: 34_000, stickerFuel: nil, stickerEnergy: nil),
-            // ICE → PHEV (Golf GTE)
+            // ICE → PHEV (EU WLTP CS)
+            .init(name: "Corsa→330ePHEV", source: "opel-corsa-2018", target: "bmw-330e-phev-2024", intent: .consideringPurchase, home: true, km: 15_000, sourcePrice: 8_000, targetPrice: 34_000, stickerFuel: nil, stickerEnergy: nil),
+            // ICE → PHEV (EU WLTP CS Golf GTE)
             .init(name: "Golf→GolfGTE", source: "volkswagen-golf-2016", target: "volkswagen-golf-gte-phev-2024", intent: .alreadyOwned, home: true, km: 14_000, sourcePrice: 10_000, targetPrice: 36_000, stickerFuel: nil, stickerEnergy: nil),
             // PHEV → EV
-            .init(name: "PriusPHEV→ID.3", source: "toyota-prius-plug-in-phev-2024", target: "volkswagen-id3-2024", intent: .alreadyOwned, home: true, km: 18_000, sourcePrice: 28_000, targetPrice: 36_000, stickerFuel: nil, stickerEnergy: nil),
+            .init(name: "CX60PHEV→ID.3", source: "mazda-cx-60-phev-2024", target: "volkswagen-id3-2024", intent: .alreadyOwned, home: true, km: 18_000, sourcePrice: 28_000, targetPrice: 36_000, stickerFuel: nil, stickerEnergy: nil),
             // City → Leaf
             .init(name: "208→Leaf", source: "peugeot-208-2018", target: "nissan-leaf-2023", intent: .alreadyOwned, home: false, km: 10_000, sourcePrice: 9_000, targetPrice: 24_000, stickerFuel: nil, stickerEnergy: nil),
             // Yaris → Ioniq 5

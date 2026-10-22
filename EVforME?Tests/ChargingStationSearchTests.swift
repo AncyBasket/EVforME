@@ -54,6 +54,25 @@ final class ChargingStationSearchTests: XCTestCase {
         XCTAssertEqual(pins.first?.name, "Near")
     }
 
+    func testPinsDropResultsBeyondMaxDistance() {
+        // Milano → Udine ~462 km must not appear for a city search.
+        let milano = CLLocationCoordinate2D(latitude: 45.4642, longitude: 9.1900)
+        let local = makeItem(name: "Milano charger", lat: 45.47, lon: 9.20)
+        let udine = makeItem(name: "Udine charger", lat: 46.07, lon: 13.23)
+        let pins = ChargingStationSearch.pins(
+            from: [udine, local],
+            relativeTo: milano,
+            maxDistanceMeters: ChargingStationSearch.maxResultDistanceMeters
+        )
+        XCTAssertEqual(pins.map(\.name), ["Milano charger"])
+        let empty = ChargingStationSearch.pins(
+            from: [udine],
+            relativeTo: milano,
+            maxDistanceMeters: ChargingStationSearch.maxResultDistanceMeters
+        )
+        XCTAssertTrue(empty.isEmpty, "no pins within radius → empty (UI shows nessun risultato)")
+    }
+
     func testRegionHasPositiveSpan() {
         let region = ChargingStationSearch.region(
             around: CLLocationCoordinate2D(latitude: 41.9, longitude: 12.5),

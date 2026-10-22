@@ -23,7 +23,7 @@ final class VehicleCatalogService {
 
     private let defaults = UserDefaults.standard
     /// Bundled quality-seed revision (not the App Store marketing version).
-    static let bundledSeedVersion = 40
+    static let bundledSeedVersion = 42
     private var seedVersion: Int { Self.bundledSeedVersion }
     private var remoteDisabledForTesting = false
     private let remoteSession: URLSession = {
@@ -453,7 +453,8 @@ final class VehicleCatalogService {
                     sourceUpdatedAt: item.sourceUpdatedAt,
                     confidenceScore: item.confidenceScore,
                     fuelKind: item.fuelKind,
-                    powerKw: item.powerKw
+                    powerKw: item.powerKw,
+                    energyIsWeighted: item.energyIsWeighted
                 )
                 expanded.append(generated)
             }

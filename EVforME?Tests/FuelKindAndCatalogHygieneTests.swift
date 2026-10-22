@@ -476,7 +476,7 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             ($0.sourceName ?? "").localizedCaseInsensitiveContains("stima")
         }
         // 36 restanti dopo correzione Model Y 2025 (EV-Database 13,1, non più copia 2024).
-        XCTAssertEqual(stima.count, 36, "expected 36 stima(anno precedente) flags, got \(stima.count)")
+        XCTAssertEqual(stima.count, 38, "expected 38 stima flags (36 YoY EV + Auris 2018 pair), got \(stima.count)")
     }
 
     func testCatalog_ModelY2025_EVDatabaseJuniperRWD() {
@@ -620,6 +620,8 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
                   (vehicle.market ?? "IT") == "IT",
                   let expected = expectedById[vehicle.id],
                   let fc = vehicle.fuelConsumptionLPerKm, fc > 0 else { continue }
+            // Skip rows deliberately marked stima (e.g. contaminated EEA PETROL/hybrid mix).
+            if (vehicle.sourceName ?? "").localizedCaseInsensitiveContains("stima") { continue }
             checked += 1
             let actual = fc * 100
             if actual > expected * 1.25 || expected > actual * 1.25 {
@@ -630,6 +632,182 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         }
         XCTAssertGreaterThan(checked, 50, "should compare many ICE/HEV rows to EEA buckets")
         XCTAssertTrue(offenders.isEmpty, offenders.joined(separator: "\n"))
+    }
+
+    /// Benzina ICE e full hybrid stesso modello/anno non possono condividere lo stesso bucket EEA (n=).
+    func testCatalog_PetrolICEAndFullHybridSameModelYear_DistinctEEABuckets() {
+        let eeaN = try! NSRegularExpression(pattern: #"EEA co2cars IT \d{4} n=(\d+)"#)
+        func eeaNValue(_ sn: String?) -> Int? {
+            guard let sn,
+                  let m = eeaN.firstMatch(in: sn, range: NSRange(sn.startIndex..., in: sn)),
+                  let r = Range(m.range(at: 1), in: sn) else { return nil }
+            return Int(sn[r])
+        }
+        // Alnum upper without HYBRID / ETECH noise so "Auris" and "Auris Hybrid" share a key.
+        func normModel(_ model: String) -> String {
+            let u = String(model.uppercased().filter { $0.isLetter || $0.isNumber })
+            return u
+                .replacingOccurrences(of: "HYBRID", with: "")
+                .replacingOccurrences(of: "ETECH", with: "")
+                .replacingOccurrences(of: "MILD", with: "")
+        }
+
+        var iceBuckets: [String: (id: String, n: Int)] = [:]
+        var offenders: [String] = []
+        for v in VehicleCatalogService.shared.vehicles where (v.market ?? "IT") == "IT" {
+            guard let n = eeaNValue(v.sourceName) else { continue }
+            let key = "\(v.brand.uppercased())|\(normModel(v.model))|\(v.year)"
+            if v.powertrain == .ice, v.resolvedFuelKind == .petrol || v.resolvedFuelKind == .diesel {
+                iceBuckets[key] = (v.id, n)
+            }
+        }
+        for v in VehicleCatalogService.shared.vehicles where (v.market ?? "IT") == "IT" {
+            guard v.powertrain == .hev,
+                  let n = eeaNValue(v.sourceName) else { continue }
+            let key = "\(v.brand.uppercased())|\(normModel(v.model))|\(v.year)"
+            if let ice = iceBuckets[key], ice.n == n {
+                offenders.append("\(v.id) shares EEA n=\(n) with \(ice.id)")
+            }
+        }
+        XCTAssertTrue(offenders.isEmpty, offenders.joined(separator: "\n"))
+        // Explicit Auris 2018: EEA PETROL n=9244 is mixed with hybrids — both rows marked stima, no EEA n=.
+        let aurisIce = VehicleCatalogService.shared.vehicle(by: "toyota-auris-2018")
+        let aurisHev = VehicleCatalogService.shared.vehicle(by: "toyota-auris-hybrid-2018")
+        XCTAssertNotNil(aurisIce)
+        XCTAssertNotNil(aurisHev)
+        for v in [aurisIce, aurisHev].compactMap({ $0 }) {
+            let sn = v.sourceName ?? ""
+            XCTAssertTrue(sn.localizedCaseInsensitiveContains("stima"), "\(v.id) must be marked stima, got \(sn)")
+            XCTAssertNil(eeaNValue(sn), "\(v.id) must not use contaminated EEA PETROL bucket")
+        }
+    }
+
+    func testCatalog_NoPHEVRepeatedFuelOrEnergyAcrossModels() {
+        let placeholders: Set<Double> = [0.045, 0.055, 0.065, 0.075, 0.12]
+        let phevs = VehicleCatalogService.shared.vehicles.filter { $0.powertrain == .phev }
+        let badPlaceholder = phevs.filter { v in
+            guard let fuel = v.fuelConsumptionLPerKm else { return false }
+            return placeholders.contains { abs(fuel - $0) < 1e-9 }
+        }
+        XCTAssertTrue(
+            badPlaceholder.isEmpty,
+            "No PHEV with stamped placeholder fuel: \(badPlaceholder.map { "\($0.id)=\($0.fuelConsumptionLPerKm ?? -1)" })"
+        )
+        // Same L/km (or kWh/km) may repeat on years/trims of the same brand+model.
+        // Fail only when the same stamped value appears on *different* brand+model keys.
+        func modelKey(_ v: VehicleCatalogItem) -> String {
+            "\(v.brand.lowercased())|\(v.model.lowercased())"
+        }
+        func collisions(for values: [(String, String, Double?)]) -> [String: Set<String>] {
+            var byValue: [String: Set<String>] = [:]
+            for (id, key, raw) in values {
+                guard let raw else { continue }
+                let vKey = String(format: "%.5f", raw)
+                byValue[vKey, default: []].insert(key)
+                _ = id
+            }
+            return byValue.filter { $0.value.count > 1 }
+        }
+        let fuelCollisions = collisions(for: phevs.map { ($0.id, modelKey($0), $0.fuelConsumptionLPerKm) })
+        let energyCollisions = collisions(for: phevs.map { ($0.id, modelKey($0), $0.energyConsumptionKWhPerKm) })
+        XCTAssertTrue(
+            fuelCollisions.isEmpty,
+            "PHEV fuel L/km must not be shared across different brand+model: \(fuelCollisions)"
+        )
+        XCTAssertTrue(
+            energyCollisions.isEmpty,
+            "PHEV kWh/km must not be shared across different brand+model: \(energyCollisions)"
+        )
+    }
+
+    func testCatalog_NoFerrariSF90OrMcLarenArtura() {
+        let ghosts = VehicleCatalogService.shared.vehicles.filter { v in
+            let id = v.id.lowercased()
+            return id.contains("sf90") || id.contains("artura")
+        }
+        XCTAssertTrue(ghosts.isEmpty, "Remove SF90 / Artura placeholders: \(ghosts.map(\.id))")
+    }
+
+    func testCatalog_NonEPAPHEVSourcesIncludeDocumentURL() {
+        let nonEpa = VehicleCatalogService.shared.vehicles.filter { v in
+            guard v.powertrain == .phev else { return false }
+            let market = (v.market ?? "").uppercased()
+            let src = (v.sourceName ?? "").uppercased()
+            return market != "US/EPA" && !src.contains("EPA-FUELECONOMY")
+        }
+        XCTAssertGreaterThanOrEqual(nonEpa.count, 3, "expected a small curated non-EPA PHEV set")
+        let missingHTTP = nonEpa.filter { !($0.sourceName ?? "").contains("http") }
+        XCTAssertTrue(missingHTTP.isEmpty, "non-EPA PHEV sourceName must cite a doc URL: \(missingHTTP.map(\.id))")
+        let tilde = nonEpa.filter { ($0.sourceName ?? "").contains("~") }
+        XCTAssertTrue(tilde.isEmpty, "non-EPA PHEV sources must not use '~' approximations: \(tilde.map(\.id))")
+        // Reject bare marketing model pages — want PDF/listino/press/newsroom doc that holds the numbers.
+        let generic = nonEpa.filter { v in
+            let s = (v.sourceName ?? "").lowercased()
+            guard let urlPart = s.split(separator: "http").last.map({ "http" + $0 }) else { return true }
+            let url = urlPart.split(whereSeparator: { $0.isWhitespace || $0 == "—" || $0 == "|" }).first.map(String.init) ?? ""
+            let looksDoc =
+                url.contains(".pdf")
+                || url.contains("press.")
+                || url.contains("newsroom")
+                || url.contains("media-assets")
+                || url.contains("attachment")
+            return !looksDoc
+        }
+        XCTAssertTrue(generic.isEmpty, "non-EPA PHEV source must be a precise doc URL: \(generic.map(\.id))")
+        let energyKind = nonEpa.filter { v in
+            let s = (v.sourceName ?? "").lowercased()
+            let solo = s.contains("solo elettr") || s.contains("rein elektr") || s.contains("electric-only")
+                || s.contains("charge-depleting") || s.contains("ec mode")
+            let ponderato = s.contains("ponderat") || s.contains("weighted") || s.contains("gewichtet")
+            return !(solo || ponderato)
+        }
+        XCTAssertTrue(
+            energyKind.isEmpty,
+            "non-EPA PHEV source must state solo elettrico or ponderato for kWh: \(energyKind.map(\.id))"
+        )
+        let weightedMismatch = nonEpa.filter { v in
+            let s = (v.sourceName ?? "").lowercased()
+            let claimsWeighted = s.contains("ponderat") || s.contains("weighted") || s.contains("gewichtet")
+            let claimsSolo = s.contains("solo elettr") || s.contains("rein elektr") || s.contains("electric-only")
+            if claimsWeighted && !claimsSolo { return v.energyIsWeighted != true }
+            if claimsSolo && !claimsWeighted { return v.energyIsWeighted == true }
+            return false
+        }
+        XCTAssertTrue(
+            weightedMismatch.isEmpty,
+            "energyIsWeighted must match source wording: \(weightedMismatch.map(\.id))"
+        )
+    }
+
+    func testCatalog_WeightedElectricEnergyExposesInAppNote() {
+        let weighted = VehicleCatalogService.shared.vehicles.filter {
+            $0.powertrain == .phev && $0.usesWeightedElectricEnergy
+        }
+        XCTAssertFalse(weighted.isEmpty, "curated EU PHEVs should flag weighted kWh")
+        XCTAssertFalse(L10n.phevWeightedEnergyNote.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+        let it = L10n.phevWeightedEnergyNote
+        // Locale may be IT or EN in unit tests; accept either official wording.
+        let ok =
+            it.localizedCaseInsensitiveContains("ponderato")
+            || it.localizedCaseInsensitiveContains("weighted")
+            || it.localizedCaseInsensitiveContains("sottostimato")
+            || it.localizedCaseInsensitiveContains("understated")
+        XCTAssertTrue(ok, "weighted-energy note should warn about understated electricity cost: \(it)")
+    }
+
+    func testCatalog_AurisHybrid2018ConfidenceIsStimaLevel() {
+        let hev = VehicleCatalogService.shared.vehicle(by: "toyota-auris-hybrid-2018")
+        XCTAssertNotNil(hev)
+        XCTAssertEqual(hev?.confidenceScore ?? -1, 0.5, accuracy: 0.001)
+    }
+
+    func testCatalog_NoCorollaCrossICEOrCorollaIMInItaly() {
+        let ghosts = VehicleCatalogService.shared.vehicles.filter { v in
+            let id = v.id.lowercased()
+            return id.contains("corolla-cross") && v.powertrain == .ice
+                || id.contains("corolla-im")
+        }
+        XCTAssertTrue(ghosts.isEmpty, "Remove unsourced Corolla Cross ICE / Corolla iM: \(ghosts.map(\.id))")
     }
 
     func testCatalog_FullHybridBucketsPreferETechNotPetrolSibling() {
@@ -717,6 +895,91 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             italianRegion: .lazio
         )
         XCTAssertEqual(lazio.amount, 2.84 * 100 * 0.25, accuracy: 0.01)
+
+        // Molise: esenzione 5 anni, poi 2,76 €/kW × 1/4 (Tariffario 2026). 2018→2026 età 8 → 69,00.
+        let molise = OwnershipCostEstimates.bolloPerYearDetail(
+            catalogTaxesPerYear: 0,
+            powertrain: .ev,
+            vehicleYear: 2018,
+            referenceYear: 2026,
+            bookletPowerKwP2: 100,
+            italianRegion: .molise
+        )
+        XCTAssertEqual(molise.amount, 2.76 * 100 * 0.25, accuracy: 0.01)
+        XCTAssertEqual(molise.amount, 69.00, accuracy: 0.01)
+        XCTAssertEqual(ItalianRegion.molise.evBolloEURPerKw ?? -1, 2.76, accuracy: 0.001)
+
+        // Molise termico Euro 4–6: 110 kW benzina = 100×2,76 + 10×4,14 = 317,40.
+        let molisePetrol = OwnershipCostEstimates.bolloPerYearDetail(
+            catalogTaxesPerYear: 0,
+            powertrain: .ice,
+            vehicleYear: 2020,
+            referenceYear: 2026,
+            bookletPowerKwP2: 110,
+            italianRegion: .molise,
+            fuelKind: .petrol
+        )
+        XCTAssertEqual(molisePetrol.amount, 100 * 2.76 + 10 * 4.14, accuracy: 0.01)
+        XCTAssertEqual(molisePetrol.amount, 317.40, accuracy: 0.01)
+        XCTAssertTrue(molisePetrol.isKnown)
+
+        // Bifuel (GPL/metano sconosciuto → bifuel): 2,76 €/kW pieno. 74 kW → 204,24.
+        let moliseBifuel = OwnershipCostEstimates.bolloPerYearDetail(
+            catalogTaxesPerYear: 999,
+            powertrain: .ice,
+            vehicleYear: 2020,
+            referenceYear: 2026,
+            bookletPowerKwP2: 74,
+            italianRegion: .molise,
+            fuelKind: .lpg
+        )
+        XCTAssertEqual(moliseBifuel.amount, 74 * 2.76, accuracy: 0.01)
+        XCTAssertEqual(moliseBifuel.amount, 204.24, accuracy: 0.01)
+
+        // Solo GPL esclusivo: 1/4 di 2,76.
+        let exclusive = ItalianRegion.molise.thermalBolloEUR(
+            powerKw: 100,
+            fuelKind: .lpg,
+            vehicleYear: 2020,
+            referenceYear: 2026,
+            gasIsExclusive: true
+        )
+        XCTAssertEqual(exclusive ?? -1, 2.76 * 0.25 * 100, accuracy: 0.01)
+
+        // Senza tariffario termico regionale → catalogo (stima nazionale).
+        let lazioPetrol = OwnershipCostEstimates.bolloPerYearDetail(
+            catalogTaxesPerYear: 250,
+            powertrain: .ice,
+            vehicleYear: 2020,
+            referenceYear: 2026,
+            bookletPowerKwP2: 110,
+            italianRegion: .lazio,
+            fuelKind: .petrol
+        )
+        XCTAssertEqual(lazioPetrol.amount, 250, accuracy: 0.01)
+
+        // Bolzano/Sicilia/VdA: nota picker include anche stima nazionale termica.
+        for region in [ItalianRegion.bolzano, .sicilia, .valleDAosta] {
+            let note = region.bolloPickerNote ?? ""
+            XCTAssertTrue(
+                note.contains(L10n.italianRegionBolloNoteNationalThermal),
+                "\(region) picker note must include national thermal estimate: \(note)"
+            )
+            XCTAssertNotNil(region.evBolloRateNote)
+        }
+
+        // Con P.2/catalog kW Molise applica tariffario; senza kW resta catalogo nazionale.
+        let noKw = OwnershipCostEstimates.bolloPerYearDetail(
+            catalogTaxesPerYear: 188.35,
+            powertrain: .ice,
+            vehicleYear: 2018,
+            referenceYear: 2026,
+            bookletPowerKwP2: nil,
+            italianRegion: .molise,
+            fuelKind: .petrol,
+            catalogPowerKw: nil
+        )
+        XCTAssertEqual(noKw.amount, 188.35, accuracy: 0.01)
 
         let lombardia = OwnershipCostEstimates.bolloPerYearDetail(
             catalogTaxesPerYear: 0,

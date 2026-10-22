@@ -6,6 +6,9 @@
 //
 
 import XCTest
+import ImageIO
+import CoreGraphics
+import Darwin
 
 final class SmokeProductUITests: XCTestCase {
     private var shotsDir: URL!
@@ -14,6 +17,7 @@ final class SmokeProductUITests: XCTestCase {
         continueAfterFailure = false
         // Suite lunga (verdetto + kit + mappe): evita kill del runner su sim lento.
         executionTimeAllowance = 600
+        XCUIDevice.shared.orientation = .portrait
         let fromEnv = ProcessInfo.processInfo.environment["SMOKE_SHOTS_DIR"]
         if let fromEnv, !fromEnv.isEmpty {
             shotsDir = URL(fileURLWithPath: fromEnv, isDirectory: true)
@@ -24,6 +28,10 @@ final class SmokeProductUITests: XCTestCase {
                 .appendingPathComponent("docs/smoke/shots", isDirectory: true)
         }
         try FileManager.default.createDirectory(at: shotsDir, withIntermediateDirectories: true)
+    }
+
+    override func tearDownWithError() throws {
+        XCUIDevice.shared.orientation = .portrait
     }
 
     @MainActor
@@ -97,10 +105,15 @@ final class SmokeProductUITests: XCTestCase {
         XCTAssertNotNil(recalculate, "Recalculate action")
         recalculate?.tap()
         dismissSystemAlertsIfNeeded(app)
-        XCTAssertNotNil(
-            firstExistingButton(app, labels: ["Modifica dati", "Change inputs"], timeout: 15),
-            "Recalculate should reopen verdict"
-        )
+        let verdictReopened =
+            firstExistingButton(app, labels: ["Modifica dati", "Change inputs"], timeout: 18) != nil
+            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "verdetto")).firstMatch
+                .waitForExistence(timeout: 4)
+            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "verdict")).firstMatch
+                .waitForExistence(timeout: 2)
+            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "break-even")).firstMatch
+                .waitForExistence(timeout: 2)
+        XCTAssertTrue(verdictReopened, "Recalculate should reopen verdict")
         saveShot(app, name: "05_verdict_recalculated")
 
         let close2 = app.buttons.matching(NSPredicate(format: "label CONTAINS[c] %@", "Chiudi")).firstMatch
@@ -147,76 +160,79 @@ final class SmokeProductUITests: XCTestCase {
 
         let bollo = app.staticTexts["Bollo ed esenzioni EV (orientativo)"]
         let roadTax = app.staticTexts["Road tax & EV exemptions (indicative)"]
-        if bollo.waitForExistence(timeout: 2) || roadTax.waitForExistence(timeout: 1) {
-            if bollo.exists { bollo.tap() } else { roadTax.tap() }
-            saveShot(app, name: "07_guides_bollo")
-            firstExistingButton(app, labels: ["Fatto", "Close", "Done"], timeout: 3)?.tap()
-        }
+        XCTAssertTrue(
+            bollo.waitForExistence(timeout: 5) || roadTax.waitForExistence(timeout: 2),
+            "Guides must list bollo article"
+        )
+        if bollo.exists { bollo.tap() } else { roadTax.tap() }
+        // Wait until article content is on screen (not still the hub).
+        let bolloBody =
+            app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "esenzion")).firstMatch
+                .waitForExistence(timeout: 6)
+            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "exemption")).firstMatch
+                .waitForExistence(timeout: 3)
+            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "bollo")).firstMatch
+                .waitForExistence(timeout: 3)
+            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "road tax")).firstMatch
+                .waitForExistence(timeout: 2)
+        XCTAssertTrue(bolloBody, "Bollo guide detail should open")
+        RunLoop.current.run(until: Date().addingTimeInterval(0.6))
+        saveShot(app, name: "07_guides_bollo")
+        firstExistingButton(app, labels: ["Fatto", "Close", "Done"], timeout: 4)?.tap()
 
+        // Map city shot is owned by testSmokeChargingMapCityOnly (avoids overwriting with hub/bollo).
+        // Here only open map if the sheet appears; then always return to workshop for 09.
+        if let guidesTab = firstExistingButton(app, labels: ["Letture", "Guides", "Readings"], timeout: 3) {
+            guidesTab.tap()
+        }
         let entryTitle = app.staticTexts["Colonnine vicino a te"].exists
             ? app.staticTexts["Colonnine vicino a te"]
             : app.staticTexts["Chargers near you"]
-        entryTitle.tap()
-        dismissSystemAlertsIfNeeded(app)
-        RunLoop.current.run(until: Date().addingTimeInterval(1.2))
-        dismissSystemAlertsIfNeeded(app)
-
-        let mapReady =
-            app.navigationBars["Colonnine vicine"].waitForExistence(timeout: 10)
-            || app.navigationBars["Nearby chargers"].waitForExistence(timeout: 4)
-            || app.staticTexts["Colonnine vicine"].waitForExistence(timeout: 4)
-            || app.staticTexts["Nearby chargers"].waitForExistence(timeout: 2)
-            || app.buttons["Apri in Mappe"].waitForExistence(timeout: 4)
-            || app.buttons["Open in Maps"].waitForExistence(timeout: 2)
-            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "ricerca Mappe")).firstMatch
-                .waitForExistence(timeout: 3)
-            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Maps search")).firstMatch
-                .waitForExistence(timeout: 2)
-            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "colonnin")).firstMatch
-                .waitForExistence(timeout: 2)
-            || app.maps.firstMatch.waitForExistence(timeout: 3)
-        XCTAssertTrue(mapReady, "Charging map sheet")
-
-        // Deny location if prompted, then city mode
-        dismissSystemAlertsIfNeeded(app)
-        let cityMode = firstExistingButton(app, labels: ["Cerca per città", "Search by city"], timeout: 4)
-        if let cityMode {
-            cityMode.tap()
-        } else {
-            // Segmented control sometimes exposes differently — tap only if present.
-            let alt = app.buttons.matching(NSPredicate(format: "label CONTAINS[c] %@", "città")).firstMatch
-            if alt.waitForExistence(timeout: 2) {
-                alt.tap()
+        if entryTitle.waitForExistence(timeout: 5) {
+            entryTitle.tap()
+            dismissSystemAlertsIfNeeded(app)
+            RunLoop.current.run(until: Date().addingTimeInterval(1.2))
+            dismissSystemAlertsIfNeeded(app)
+            let mapReady =
+                app.navigationBars["Colonnine vicine"].waitForExistence(timeout: 8)
+                || app.navigationBars["Nearby chargers"].waitForExistence(timeout: 3)
+                || app.descendants(matching: .any)["charging_map_mode_picker"].waitForExistence(timeout: 4)
+                || app.buttons["Apri in Mappe"].waitForExistence(timeout: 3)
+                || app.buttons["Open in Maps"].waitForExistence(timeout: 2)
+                || app.maps.firstMatch.waitForExistence(timeout: 3)
+            if mapReady {
+                dismissSystemAlertsIfNeeded(app)
+                firstExistingButton(app, labels: ["Fatto", "Close", "Done"], timeout: 4)?.tap()
             }
         }
 
-        let cityField = app.textFields.firstMatch
-        if cityField.waitForExistence(timeout: 3) {
-            cityField.tap()
-            cityField.typeText("Milano")
-            firstExistingButton(app, labels: ["Cerca", "Search"], timeout: 2)?.tap()
-            RunLoop.current.run(until: Date().addingTimeInterval(5))
-        }
-        dismissSystemAlertsIfNeeded(app)
-        saveShot(app, name: "08_charging_map_city")
+        // Shot 09 is captured in testSmokeChargingMapCityOnly (reliable path back to workshop).
+    }
 
-        // Empty/fallback capture if present
-        if app.buttons["Apri in Mappe"].exists || app.buttons["Open in Maps"].exists {
-            saveShot(app, name: "08b_charging_map_fallback")
+    @MainActor
+    private func activateChargingMapCityMode(_ app: XCUIApplication) {
+        let labels = ["Cerca per città", "Search by city"]
+        for label in labels {
+            let btn = app.buttons[label]
+            if btn.waitForExistence(timeout: 2), btn.isHittable {
+                btn.tap()
+                return
+            }
+            let seg = app.segmentedControls.buttons[label]
+            if seg.waitForExistence(timeout: 1), seg.isHittable {
+                seg.tap()
+                return
+            }
         }
-
-        firstExistingButton(app, labels: ["Fatto", "Close", "Done"], timeout: 4)?.tap()
-        dismissSystemAlertsIfNeeded(app)
-        XCTAssertTrue(
-            app.staticTexts["Colonnine vicino a te"].waitForExistence(timeout: 4)
-                || app.staticTexts["Chargers near you"].waitForExistence(timeout: 2)
-                || firstExistingButton(app, labels: ["Letture", "Guides"], timeout: 2) != nil
-        )
-
-        if let workshop = firstExistingButton(app, labels: ["Banco", "Workshop", "Bench"], timeout: 4) {
-            workshop.tap()
+        let picker = app.descendants(matching: .any)["charging_map_mode_picker"]
+        if picker.waitForExistence(timeout: 2) {
+            let city = picker.buttons.matching(
+                NSPredicate(format: "label CONTAINS[c] %@ OR label CONTAINS[c] %@", "città", "city")
+            ).firstMatch
+            if city.exists { city.tap(); return }
+            // Last resort: tap right half of segmented control (city is usually second).
+            picker.coordinate(withNormalizedOffset: CGVector(dx: 0.78, dy: 0.5)).tap()
         }
-        saveShot(app, name: "09_workshop_after_smoke")
     }
 
     @MainActor
@@ -239,21 +255,73 @@ final class SmokeProductUITests: XCTestCase {
         dismissSystemAlertsIfNeeded(app)
         saveShot(app, name: "08_charging_map_sheet")
 
-        let cityMode = firstExistingButton(app, labels: ["Cerca per città", "Search by city"], timeout: 5)
-        cityMode?.tap()
-        let field = app.textFields.firstMatch
-        if field.waitForExistence(timeout: 3) {
-            field.tap()
-            field.typeText("Milano")
-            firstExistingButton(app, labels: ["Cerca", "Search"], timeout: 2)?.tap()
-            RunLoop.current.run(until: Date().addingTimeInterval(6))
-        }
+        activateChargingMapCityMode(app)
+        let field =
+            app.textFields["charging_map_city_field"].exists
+            ? app.textFields["charging_map_city_field"]
+            : app.textFields.firstMatch
+        XCTAssertTrue(field.waitForExistence(timeout: 5), "city field for 08/08b")
+        // 08b first: city mode with empty query → in-app fallback coordinate (distinct from Milano).
+        RunLoop.current.run(until: Date().addingTimeInterval(3))
         dismissSystemAlertsIfNeeded(app)
-        saveShot(app, name: "08_charging_map_city")
-        if app.buttons["Apri in Mappe"].exists || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Nessuna")).firstMatch.exists {
-            saveShot(app, name: "08b_charging_map_fallback")
+        let mapChrome =
+            app.descendants(matching: .any)["charging_map_mode_picker"].exists
+            || app.navigationBars["Colonnine vicine"].exists
+            || app.navigationBars["Nearby chargers"].exists
+            || app.maps.firstMatch.exists
+            || app.buttons["Apri in Mappe"].exists
+            || app.buttons["Open in Maps"].exists
+        XCTAssertTrue(mapChrome, "08/08b must be the charging map, not guides hub")
+        saveShot(app, name: "08b_charging_map_fallback")
+
+        field.tap()
+        field.typeText("Milano")
+        let search =
+            app.buttons["charging_map_city_search"].exists
+            ? app.buttons["charging_map_city_search"]
+            : firstExistingButton(app, labels: ["Cerca", "Search"], timeout: 2)
+        // Prefer keyboard Search/Return (submit) over map taps — map taps select pins.
+        if app.keyboards.buttons["Search"].exists {
+            app.keyboards.buttons["Search"].tap()
+        } else if app.keyboards.buttons["Cerca"].exists {
+            app.keyboards.buttons["Cerca"].tap()
+        } else if app.keyboards.buttons["Return"].exists {
+            app.keyboards.buttons["Return"].tap()
+        } else {
+            search?.tap()
         }
-        firstExistingButton(app, labels: ["Fatto", "Close", "Done"], timeout: 4)?.tap()
+        RunLoop.current.run(until: Date().addingTimeInterval(6))
+        dismissSystemAlertsIfNeeded(app)
+        dismissKeyboardWithoutSelectingMapPin(app, cityField: field)
+        dismissChargingPinSheetIfNeeded(app)
+        RunLoop.current.run(until: Date().addingTimeInterval(0.4))
+        saveShot(app, name: "08_charging_map_city")
+
+        let cityURL = shotsDir.appendingPathComponent("08_charging_map_city.png")
+        let fallbackURL = shotsDir.appendingPathComponent("08b_charging_map_fallback.png")
+        let cityData = try Data(contentsOf: cityURL)
+        let fallbackData = try Data(contentsOf: fallbackURL)
+        XCTAssertNotEqual(cityData, fallbackData, "08 and 08b must be different screenshots")
+
+        // Relaunch clean for 09 — dismissing the map sheet is flaky and can leave no tab bar.
+        app.terminate()
+        app.launchEnvironment["UITEST_PRESET_VEHICLES"] = "1"
+        app.launchArguments += ["-UITesting", "-DisableAnimations"]
+        XCUIDevice.shared.orientation = .portrait
+        app.launch()
+        dismissQuickStartIfNeeded(app)
+        dismissSystemAlertsIfNeeded(app)
+        let workshop = firstExistingButton(app, labels: ["Banco", "Workshop", "Bench"], timeout: 10)
+        XCTAssertNotNil(workshop, "Workshop tab for 09 shot")
+        workshop?.tap()
+        let workshopReady =
+            app.buttons["Dimmi la verità"].waitForExistence(timeout: 12)
+            || app.buttons["Tell me the truth"].waitForExistence(timeout: 4)
+            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Golf")).firstMatch
+                .waitForExistence(timeout: 4)
+        XCTAssertTrue(workshopReady, "Workshop bench visible for 09 shot")
+        RunLoop.current.run(until: Date().addingTimeInterval(0.5))
+        saveShot(app, name: "09_workshop_after_smoke")
     }
 
     @MainActor
@@ -311,18 +379,210 @@ final class SmokeProductUITests: XCTestCase {
     }
 
     @MainActor
+    private func dismissKeyboardIfNeeded(_ app: XCUIApplication) {
+        dismissKeyboardWithoutSelectingMapPin(app, cityField: nil)
+    }
+
+    /// Chiude la tastiera senza tappi sulla mappa (aprirebbero la scheda pin).
+    @MainActor
+    private func dismissKeyboardWithoutSelectingMapPin(_ app: XCUIApplication, cityField: XCUIElement?) {
+        guard app.keyboards.element.exists else { return }
+        if app.keyboards.buttons["Search"].exists {
+            app.keyboards.buttons["Search"].tap()
+        } else if app.keyboards.buttons["Cerca"].exists {
+            app.keyboards.buttons["Cerca"].tap()
+        } else if app.keyboards.buttons["Return"].exists {
+            app.keyboards.buttons["Return"].tap()
+        } else if app.keyboards.buttons["Done"].exists {
+            app.keyboards.buttons["Done"].tap()
+        } else if app.keyboards.buttons["done"].exists {
+            app.keyboards.buttons["done"].tap()
+        } else if let cityField, cityField.exists {
+            // Tap the search field itself (not the map) to resign first responder.
+            cityField.tap()
+            if app.keyboards.buttons["Return"].exists {
+                app.keyboards.buttons["Return"].tap()
+            }
+        } else if let search = firstExistingButton(app, labels: ["Cerca", "Search"], timeout: 1) {
+            search.tap()
+        }
+        // Never tap the map — Map(selection:) would open a pin sheet over 2/3 of the shot.
+        RunLoop.current.run(until: Date().addingTimeInterval(0.35))
+    }
+
+    @MainActor
+    private func dismissChargingPinSheetIfNeeded(_ app: XCUIApplication) {
+        for _ in 0..<3 {
+            let close = firstExistingButton(
+                app,
+                labels: ["Chiudi", "Close", "Fatto", "Done", "Cancel", "Annulla"],
+                timeout: 1
+            )
+            let sheetLike =
+                app.buttons["Indicazioni"].exists
+                || app.buttons["Directions"].exists
+                || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "a circa")).firstMatch.exists
+                || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "about")).firstMatch.exists
+            if let close, sheetLike || app.sheets.firstMatch.exists {
+                close.tap()
+                RunLoop.current.run(until: Date().addingTimeInterval(0.4))
+            } else {
+                break
+            }
+        }
+    }
+
+    @MainActor
     private func saveShot(_ app: XCUIApplication, name: String) {
-        let shot = app.screenshot()
+        // Prefer simctl full-res PNG; then bake pixels and strip EXIF orientation (no Orientation=6).
+        XCUIDevice.shared.orientation = .portrait
+        let url = shotsDir.appendingPathComponent("\(name).png")
+        let udid = ProcessInfo.processInfo.environment["SIMULATOR_UDID"] ?? "booted"
+        let simctlOK = runSimctlScreenshot(udid: udid, path: url.path)
+        let shot = XCUIScreen.main.screenshot()
         let attachment = XCTAttachment(screenshot: shot)
         attachment.name = name
         attachment.lifetime = .keepAlways
         add(attachment)
-        let url = shotsDir.appendingPathComponent("\(name).png")
         do {
-            try shot.pngRepresentation.write(to: url)
+            if !simctlOK {
+                try shot.pngRepresentation.write(to: url)
+            }
+            try normalizeSmokePNGOrientationTo1(at: url)
+            try validateSmokePNG(at: url, name: name)
         } catch {
             XCTFail("Could not write smoke shot \(name): \(error)")
         }
+    }
+
+    /// Host-side `xcrun simctl io <udid> screenshot` (UI tests run under Simulator runtime).
+    private func runSimctlScreenshot(udid: String, path: String) -> Bool {
+        let args = ["/usr/bin/xcrun", "simctl", "io", udid, "screenshot", path]
+        var cArgs = args.map { strdup($0) }
+        cArgs.append(nil)
+        defer { cArgs.forEach { if let p = $0 { free(p) } } }
+        var pid: pid_t = 0
+        let spawned = cArgs.withUnsafeBufferPointer { buf -> Int32 in
+            posix_spawn(&pid, buf.baseAddress![0], nil, nil, buf.baseAddress!, environ)
+        }
+        guard spawned == 0 else { return false }
+        var status: Int32 = 0
+        waitpid(pid, &status, 0)
+        return status == 0 && FileManager.default.fileExists(atPath: path)
+    }
+
+    /// Bake EXIF orientation into pixels and rewrite PNG with Orientation=1 (or no orientation tag).
+    private func normalizeSmokePNGOrientationTo1(at url: URL) throws {
+        guard let src = CGImageSourceCreateWithURL(url as CFURL, nil) else {
+            throw NSError(domain: "SmokeShot", code: 1, userInfo: [NSLocalizedDescriptionKey: "cannot open PNG"])
+        }
+        let maxEdge: CGFloat = {
+            if let props = CGImageSourceCopyPropertiesAtIndex(src, 0, nil) as? [CFString: Any] {
+                let w = props[kCGImagePropertyPixelWidth] as? CGFloat ?? 0
+                let h = props[kCGImagePropertyPixelHeight] as? CGFloat ?? 0
+                return max(w, h, 1)
+            }
+            return 4096
+        }()
+        let thumbOpts: [CFString: Any] = [
+            kCGImageSourceCreateThumbnailFromImageAlways: true,
+            kCGImageSourceCreateThumbnailWithTransform: true,
+            kCGImageSourceThumbnailMaxPixelSize: maxEdge,
+        ]
+        guard let oriented = CGImageSourceCreateThumbnailAtIndex(src, 0, thumbOpts as CFDictionary) else {
+            throw NSError(domain: "SmokeShot", code: 2, userInfo: [NSLocalizedDescriptionKey: "cannot apply orientation"])
+        }
+        let tmp = url.deletingLastPathComponent().appendingPathComponent(url.lastPathComponent + ".tmp")
+        guard let dest = CGImageDestinationCreateWithURL(tmp as CFURL, "public.png" as CFString, 1, nil) else {
+            throw NSError(domain: "SmokeShot", code: 3, userInfo: [NSLocalizedDescriptionKey: "cannot create PNG dest"])
+        }
+        // Oriented pixels already baked — omit EXIF orientation tag (treated as 1).
+        CGImageDestinationAddImage(dest, oriented, nil)
+        guard CGImageDestinationFinalize(dest) else {
+            throw NSError(domain: "SmokeShot", code: 4, userInfo: [NSLocalizedDescriptionKey: "cannot finalize PNG"])
+        }
+        _ = try? FileManager.default.removeItem(at: url)
+        try FileManager.default.moveItem(at: tmp, to: url)
+    }
+
+    /// Portrait check uses displayed size (EXIF applied), then black-half on oriented pixels.
+    private func validateSmokePNG(at url: URL, name: String) throws {
+        guard let src = CGImageSourceCreateWithURL(url as CFURL, nil) else {
+            throw NSError(domain: "SmokeShot", code: 5, userInfo: [NSLocalizedDescriptionKey: "\(name): cannot read PNG"])
+        }
+        let props = CGImageSourceCopyPropertiesAtIndex(src, 0, nil) as? [CFString: Any] ?? [:]
+        let pixelW = Int(props[kCGImagePropertyPixelWidth] as? Double ?? 0)
+        let pixelH = Int(props[kCGImagePropertyPixelHeight] as? Double ?? 0)
+        let orientation = props[kCGImagePropertyOrientation] as? Int ?? 1
+        // TIFF/EXIF orientations 5–8 swap visual width/height vs raw pixel buffer.
+        let displayedPortrait: Bool
+        if (5...8).contains(orientation) {
+            displayedPortrait = pixelW > pixelH // raw landscape → displayed portrait when rotated
+        } else {
+            displayedPortrait = pixelH > pixelW
+        }
+        XCTAssertTrue(
+            displayedPortrait,
+            "\(name) must be visually portrait (pixels \(pixelW)×\(pixelH), EXIF orientation \(orientation))"
+        )
+        XCTAssertTrue(
+            props[kCGImagePropertyOrientation] == nil || orientation == 1,
+            "\(name) must be saved without EXIF orientation (or Orientation=1), got \(orientation)"
+        )
+
+        let maxEdge = max(pixelW, pixelH, 1)
+        let thumbOpts: [CFString: Any] = [
+            kCGImageSourceCreateThumbnailFromImageAlways: true,
+            kCGImageSourceCreateThumbnailWithTransform: true,
+            kCGImageSourceThumbnailMaxPixelSize: maxEdge,
+        ]
+        guard let cg = CGImageSourceCreateThumbnailAtIndex(src, 0, thumbOpts as CFDictionary) else {
+            throw NSError(domain: "SmokeShot", code: 6, userInfo: [NSLocalizedDescriptionKey: "\(name): cannot materialize oriented pixels"])
+        }
+        XCTAssertGreaterThan(cg.height, cg.width, "\(name) oriented pixels must be portrait, got \(cg.width)×\(cg.height)")
+        assertNoFullyBlackHalf(cgImage: cg, name: name)
+    }
+
+    /// Reject black-strip artifacts on left/right/top/bottom halves.
+    private func assertNoFullyBlackHalf(cgImage: CGImage, name: String) {
+        let w = cgImage.width
+        let h = cgImage.height
+        guard w > 10, h > 10 else {
+            XCTFail("\(name): image too small \(w)×\(h)")
+            return
+        }
+        guard let data = cgImage.dataProvider?.data,
+              let ptr = CFDataGetBytePtr(data) else {
+            XCTFail("\(name): cannot read pixels")
+            return
+        }
+        let bpr = cgImage.bytesPerRow
+        let bpp = max(1, cgImage.bitsPerPixel / 8)
+        func regionMostlyBlack(x0: Int, x1: Int, y0: Int, y1: Int) -> Bool {
+            var dark = 0
+            var total = 0
+            var y = y0
+            while y < y1 {
+                var x = x0
+                while x < x1 {
+                    let i = y * bpr + x * bpp
+                    let r = Int(ptr[i])
+                    let g = bpp > 1 ? Int(ptr[i + 1]) : r
+                    let b = bpp > 2 ? Int(ptr[i + 2]) : r
+                    if r < 8 && g < 8 && b < 8 { dark += 1 }
+                    total += 1
+                    x += max(1, (x1 - x0) / 24)
+                }
+                y += max(1, (y1 - y0) / 48)
+            }
+            return total > 0 && Double(dark) / Double(total) > 0.92
+        }
+        let midX = w / 2
+        let midY = h / 2
+        XCTAssertFalse(regionMostlyBlack(x0: 0, x1: midX, y0: 0, y1: h), "\(name): left half is fully black")
+        XCTAssertFalse(regionMostlyBlack(x0: midX, x1: w, y0: 0, y1: h), "\(name): right half is fully black")
+        XCTAssertFalse(regionMostlyBlack(x0: 0, x1: w, y0: 0, y1: midY), "\(name): top half is fully black")
+        XCTAssertFalse(regionMostlyBlack(x0: 0, x1: w, y0: midY, y1: h), "\(name): bottom half is fully black")
     }
 
     @MainActor

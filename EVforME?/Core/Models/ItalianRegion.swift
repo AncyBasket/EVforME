@@ -2,12 +2,12 @@
 //  ItalianRegion.swift
 //  EVforME?
 //
-//  Tariffari ACI bollo EV 2026 (opzionale). Fonte: tariffari ACI regionali 2026.
+//  Tariffari ACI / regionali bollo 2026 (opzionale).
 //
 
 import Foundation
 
-/// Regione / provincia autonoma per stima bollo EV (tariffa €/kW dopo l’esenzione).
+/// Regione / provincia autonoma per stima bollo EV e, dove citato, bollo termico.
 enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
     case unspecified
     case lombardia
@@ -75,7 +75,9 @@ enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
     /// €/kW dopo esenzione. `nil` = non stimato. Lombardia/Piemonte: 0 permanente.
     ///
     /// Bolzano 1,96 €/kW: tariffa Euro 6 (Euro 0–5: 1,99 €/kW — non modellato senza classe Euro).
-    /// Molise 3,12: allineato ad Abruzzo/Campania; senza conferma esplicita tariffario ACI Molise 2026 → stima.
+    /// Molise 2,76 €/kW: Regione Molise Tariffario 2026 (riportato da Quattroruote, guida bollo Molise
+    /// aggiornata al 17/02/2026) — EV esenti 5 anni, poi 1/4 della tariffa Euro 4/5/6 ≤100 kW (2,76),
+    /// lineare anche oltre 100 kW.
     /// Sicilia: clausola ACI «a prescindere» sull’importo benzina a 2,58 €/kW; in-app 2,58 × 1/4 post-esenzione.
     var evBolloEURPerKw: Double? {
         switch self {
@@ -91,8 +93,8 @@ enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
         case .abruzzo, .campania:
             return 3.12
         case .molise:
-            // Stima (stesso cluster Abruzzo/Campania); fonte ACI Molise 2026 non verificata in-app.
-            return 3.12
+            // Regione Molise Tariffario 2026 (Quattroruote, 17/02/2026): Euro 4/5/6 ≤100 kW = 2,76 €/kW.
+            return 2.76
         case .bolzano:
             // Euro 6: 1,96 €/kW (Euro 0–5: 1,99 — non usato senza classe Euro).
             return 1.96
@@ -114,19 +116,91 @@ enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
         self == .lombardia || self == .piemonte
     }
 
-    /// Nota leggibile su stime / caveat regionali (audit / UI hint).
-    var evBolloRateNote: String? {
+    /// `true` se in-app c’è un tariffario termico 2026 citato (altrimenti stima nazionale catalogo).
+    var hasCitedThermalBolloTariff: Bool {
+        self == .molise
+    }
+
+    /// Superbollo nazionale (>185 kW): 20 €/kW oltre soglia, riduzioni per età (stima ACI).
+    static func nationalSuperbolloEUR(
+        powerKw: Double,
+        vehicleYear: Int,
+        referenceYear: Int
+    ) -> Double {
+        guard powerKw > 185 else { return 0 }
+        var sb = 20.0 * (powerKw - 185.0)
+        let age = max(0, referenceYear - vehicleYear)
+        if age >= 20 { sb = 0 }
+        else if age >= 15 { sb *= 0.15 }
+        else if age >= 10 { sb *= 0.30 }
+        else if age >= 5 { sb *= 0.60 }
+        return sb
+    }
+
+    /// Bollo termico (ICE/HEV/PHEV) con tariffario regionale 2026 citato.
+    ///
+    /// Molise (Regione Molise Tariffario 2026, Quattroruote 17/02/2026), Euro 4/5/6:
+    /// - benzina/diesel: 2,76 €/kW fino a 100 kW + 4,14 €/kW oltre;
+    /// - solo GPL o solo metano **esclusivi**: 1/4 di 2,76 €/kW (lineare);
+    /// - bifuel GPL/metano–benzina: 2,76 €/kW pieno anche oltre 100 kW;
+    /// - se non si sa se è bifuel → trattata come bifuel (`gasIsExclusive == false`);
+    /// - superbollo nazionale oltre 185 kW.
+    func thermalBolloEUR(
+        powerKw: Double,
+        fuelKind: FuelKind,
+        vehicleYear: Int,
+        referenceYear: Int = Calendar.current.component(.year, from: Date()),
+        gasIsExclusive: Bool = false
+    ) -> Double? {
+        guard powerKw > 0 else { return nil }
         switch self {
         case .molise:
-            return "stima (tariffa ACI Molise 2026 non verificata; allineata ad Abruzzo/Campania 3,12)"
-        case .bolzano:
-            return "1,96 €/kW Euro 6 (1,99 Euro 0–5 non modellato)"
-        case .sicilia:
-            return "ACI Sicilia «a prescindere»: 1/4 di 2,58 €/kW (scala benzina)"
-        case .valleDAosta:
-            return "esenzione 8 anni se immatricolazione ≥2019 (ACI VdA 2026)"
+            let base: Double
+            switch fuelKind {
+            case .lpg, .cng:
+                if gasIsExclusive {
+                    base = 2.76 * 0.25 * powerKw
+                } else {
+                    // Bifuel (default): 2,76 fisso anche oltre 100 kW.
+                    base = 2.76 * powerKw
+                }
+            case .petrol, .diesel, .unknown:
+                base = 2.76 * min(powerKw, 100) + 4.14 * max(0, powerKw - 100)
+            }
+            let total = base + Self.nationalSuperbolloEUR(
+                powerKw: powerKw,
+                vehicleYear: vehicleYear,
+                referenceYear: referenceYear
+            )
+            return (total * 100).rounded() / 100
         default:
             return nil
         }
+    }
+
+    /// Nota leggibile su stime / caveat regionali EV (Localizable IT/EN).
+    var evBolloRateNote: String? {
+        switch self {
+        case .molise:
+            return L10n.italianRegionBolloNoteMolise
+        case .bolzano:
+            return L10n.italianRegionBolloNoteBolzano
+        case .sicilia:
+            return L10n.italianRegionBolloNoteSicilia
+        case .valleDAosta:
+            return L10n.italianRegionBolloNoteValleDAosta
+        default:
+            return nil
+        }
+    }
+
+    /// Nota sotto il picker: caveat EV + avviso stima nazionale sul termico quando manca tariffario citato.
+    var bolloPickerNote: String? {
+        var parts: [String] = []
+        if let ev = evBolloRateNote { parts.append(ev) }
+        if !hasCitedThermalBolloTariff, self != .otherUnknown {
+            parts.append(L10n.italianRegionBolloNoteNationalThermal)
+        }
+        return parts.isEmpty ? nil : parts.joined(separator: "\n")
     }
 }

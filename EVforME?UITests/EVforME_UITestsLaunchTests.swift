@@ -15,10 +15,17 @@ final class EVforME_UITestsLaunchTests: XCTestCase {
 
     override func setUpWithError() throws {
         continueAfterFailure = false
+        XCUIDevice.shared.orientation = .portrait
+    }
+
+    override func tearDownWithError() throws {
+        // Launch tests may leave the device in landscape; restore portrait for later suites (smoke).
+        XCUIDevice.shared.orientation = .portrait
     }
 
     @MainActor
     func testLaunch() throws {
+        XCUIDevice.shared.orientation = .portrait
         let app = XCUIApplication()
         app.launch()
 

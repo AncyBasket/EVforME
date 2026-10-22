@@ -52,6 +52,14 @@ struct CostsComparisonView: View {
             .font(Typography.readingCaption)
             .foregroundColor(.secondaryText)
 
+            if (sourceVehicle?.usesWeightedElectricEnergy == true)
+                || (targetVehicle?.usesWeightedElectricEnergy == true) {
+                Text(L10n.phevWeightedEnergyNote)
+                    .font(Typography.readingCaption)
+                    .foregroundColor(.secondaryText)
+                    .accessibilityIdentifier("phev_weighted_energy_note")
+            }
+
             Link(destination: L10n.externalAutomobileDimensionsComparisonURL) {
                 HStack(spacing: 6) {
                     Text(L10n.externalDimensionsLinkTitle)

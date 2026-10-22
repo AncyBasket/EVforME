@@ -76,26 +76,39 @@ struct InputView: View {
                         comparisonInset(source: source, target: target)
                     }
 
-                    if selectedSourceVehicle?.powertrain == .ev {
+                    let thermalP2 = userInput.market == .IT
+                        && userInput.italianRegion.hasCitedThermalBolloTariff
+                    if selectedSourceVehicle?.powertrain == .ev
+                        || (thermalP2 && selectedSourceVehicle.map { $0.powertrain != .ev } == true) {
                         bookletP2Field(
-                            label: L10n.evBookletPowerKwP2SourceLabel,
+                            label: selectedSourceVehicle?.powertrain == .ev
+                                ? L10n.evBookletPowerKwP2SourceLabel
+                                : L10n.thermalBookletPowerKwP2SourceLabel,
                             binding: Binding(
                                 get: { userInput.sourceBookletPowerKwP2 ?? 0 },
                                 set: { userInput.sourceBookletPowerKwP2 = $0 > 0 ? $0 : nil }
-                            )
+                            ),
+                            hint: selectedSourceVehicle?.powertrain == .ev
+                                ? L10n.evBookletPowerKwP2Hint
+                                : L10n.thermalBookletPowerKwP2Hint
                         )
                     }
-                    if selectedTargetVehicle?.powertrain == .ev {
+                    if selectedTargetVehicle?.powertrain == .ev
+                        || (thermalP2 && selectedTargetVehicle.map { $0.powertrain != .ev } == true) {
                         bookletP2Field(
-                            label: L10n.evBookletPowerKwP2TargetLabel,
+                            label: selectedTargetVehicle?.powertrain == .ev
+                                ? L10n.evBookletPowerKwP2TargetLabel
+                                : L10n.thermalBookletPowerKwP2TargetLabel,
                             binding: Binding(
                                 get: { userInput.targetBookletPowerKwP2 ?? 0 },
                                 set: { userInput.targetBookletPowerKwP2 = $0 > 0 ? $0 : nil }
-                            )
+                            ),
+                            hint: selectedTargetVehicle?.powertrain == .ev
+                                ? L10n.evBookletPowerKwP2Hint
+                                : L10n.thermalBookletPowerKwP2Hint
                         )
                     }
-                    if userInput.market == .IT,
-                       selectedSourceVehicle?.powertrain == .ev || selectedTargetVehicle?.powertrain == .ev {
+                    if userInput.market == .IT {
                         VStack(alignment: .leading, spacing: 6) {
                             Text(L10n.italianRegionLabel)
                                 .font(Typography.readingCaption)
@@ -109,7 +122,7 @@ struct InputView: View {
                             Text(L10n.italianRegionHint)
                                 .font(Typography.readingCaption)
                                 .foregroundStyle(Color.secondaryText)
-                            if let rateNote = userInput.italianRegion.evBolloRateNote {
+                            if let rateNote = userInput.italianRegion.bolloPickerNote {
                                 Text(rateNote)
                                     .font(Typography.readingCaption)
                                     .foregroundStyle(Color.secondaryText)
@@ -832,7 +845,7 @@ struct InputView: View {
         L10n.validationA11yTitle + ": " + validationErrors.joined(separator: "; ")
     }
 
-    private func bookletP2Field(label: String, binding: Binding<Double>) -> some View {
+    private func bookletP2Field(label: String, binding: Binding<Double>, hint: String = L10n.evBookletPowerKwP2Hint) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(label)
                 .font(Typography.readingCaption)
@@ -841,7 +854,7 @@ struct InputView: View {
             TextField(L10n.evBookletPowerKwP2Placeholder, value: binding, format: .number)
                 .keyboardType(.decimalPad)
                 .font(Typography.readingBody)
-            Text(L10n.evBookletPowerKwP2Hint)
+            Text(hint)
                 .font(Typography.readingCaption)
                 .foregroundColor(.secondaryText)
         }
@@ -893,6 +906,18 @@ struct InputView: View {
                 Text(L10n.operatingCostEnterKmHint)
                     .font(Typography.readingCaption)
                     .foregroundColor(.secondaryText)
+            }
+            if source.powertrain == .phev || target.powertrain == .phev {
+                Text(L10n.phevCatalogUsaNote)
+                    .font(Typography.readingCaption)
+                    .foregroundColor(.secondaryText)
+                    .accessibilityIdentifier("phev_catalog_usa_note")
+            }
+            if source.usesWeightedElectricEnergy || target.usesWeightedElectricEnergy {
+                Text(L10n.phevWeightedEnergyNote)
+                    .font(Typography.readingCaption)
+                    .foregroundColor(.secondaryText)
+                    .accessibilityIdentifier("phev_weighted_energy_note")
             }
         }
         .padding(.vertical, 12)

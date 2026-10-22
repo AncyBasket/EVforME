@@ -591,10 +591,20 @@ enum L10n {
     static var evBookletPowerKwP2TargetLabel: String { string("ev_booklet_power_kw_p2_target_label") }
     static var evBookletPowerKwP2Placeholder: String { string("ev_booklet_power_kw_p2_placeholder") }
     static var evBookletPowerKwP2Hint: String { string("ev_booklet_power_kw_p2_hint") }
+    static var thermalBookletPowerKwP2SourceLabel: String { string("thermal_booklet_power_kw_p2_source_label") }
+    static var thermalBookletPowerKwP2TargetLabel: String { string("thermal_booklet_power_kw_p2_target_label") }
+    static var thermalBookletPowerKwP2Hint: String { string("thermal_booklet_power_kw_p2_hint") }
+    static var phevCatalogUsaNote: String { string("phev_catalog_usa_note") }
+    static var phevWeightedEnergyNote: String { string("phev_weighted_energy_note") }
     static var italianRegionLabel: String { string("italian_region_label") }
     static var italianRegionUnspecified: String { string("italian_region_unspecified") }
     static var italianRegionOtherUnknown: String { string("italian_region_other_unknown") }
     static var italianRegionHint: String { string("italian_region_hint") }
+    static var italianRegionBolloNoteMolise: String { string("italian_region_bollo_note_molise") }
+    static var italianRegionBolloNoteBolzano: String { string("italian_region_bollo_note_bolzano") }
+    static var italianRegionBolloNoteSicilia: String { string("italian_region_bollo_note_sicilia") }
+    static var italianRegionBolloNoteValleDAosta: String { string("italian_region_bollo_note_valledaosta") }
+    static var italianRegionBolloNoteNationalThermal: String { string("italian_region_bollo_note_national_thermal") }
     static var partialTotalBolloUnknown: String { string("partial_total_bollo_unknown") }
     static var italyKitBolloBothUnknown: String { string("italy_kit_bollo_both_unknown") }
     static func italyKitBolloRowSourceUnknown(_ ev: Int) -> String {

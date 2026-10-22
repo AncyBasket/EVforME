@@ -58,10 +58,10 @@ enum OperatingCostCalculator {
             powertrain: vehicle.powertrain,
             vehicleYear: vehicle.year,
             referenceYear: currentYear,
-            bookletPowerKwP2: vehicle.powertrain == .ev
-                ? (asSource ? input.sourceBookletPowerKwP2 : input.targetBookletPowerKwP2)
-                : nil,
-            italianRegion: input.italianRegion
+            bookletPowerKwP2: asSource ? input.sourceBookletPowerKwP2 : input.targetBookletPowerKwP2,
+            italianRegion: input.italianRegion,
+            fuelKind: vehicle.resolvedFuelKind,
+            catalogPowerKw: vehicle.powertrain == .ev ? nil : vehicle.powerKw
         )
         let insurance = OwnershipCostEstimates.insurancePerYear(
             purchasePrice: valueBasis,

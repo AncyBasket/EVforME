@@ -37,10 +37,10 @@ MANIFEST_PATH = CACHE_DIR / "fill_catalog_fuels_manifest.json"
 CATALOG_SERVICE = REPO / "EVforME?" / "Core" / "Logic" / "VehicleCatalogService.swift"
 
 # Reg. (EU) 2017/1151 Annex XXI Sub-Annex 7 §6 — simplified FC equations (HC=CO=0).
-# Petrol (E10) §6.5: FC = (0.1206 / 0.745) × (0.866·HC + 0.429·CO + 0.273·CO2)
+# Petrol (E10) §6.5: FC = (0.1206 / 0.745) × (0.829·HC + 0.429·CO + 0.273·CO2)
 #   → CO2/FC ≈ 22.63. Density 0.745 kg/l is within Annex IX E10 band 743–756 kg/m³.
-# Diesel (B7) §6.10: FC = (0.1165 / 0.834) × (0.861·HC + 0.429·CO + 0.273·CO2)
-#   → CO2/FC ≈ 26.25.
+# Diesel (B7) §6.10: FC = (0.1165 / 0.834) × (0.858·HC + 0.429·CO + 0.273·CO2)
+#   → CO2/FC ≈ 26.22 (HC=CO=0 in our simplified path).
 # LPG / NG: same Sub-Annex 7 coefficients (pre-existing).
 C_PETROL = 0.1206
 C_DIESEL = 0.1165
@@ -79,7 +79,24 @@ TRUE_GHOST_IDS = {
     "citroën-e-c3-2023",
     # Weighted WLTP L/100 too low for charge-sustaining use; no honest CS+kWh source.
     "ford-transit-custom-phev-phev-2024",
+    # US-market Corolla iM — not sold in Italy; EEA had no Cn (wrongly matched Corolla HEV).
+    "toyota-corolla-im-2022",
+    "toyota-corolla-im-2023",
+    "toyota-corolla-im-2024",
+    "toyota-corolla-im-2025",
+    "toyota-corolla-im-2026",
+    # Corolla Cross EU is hybrid-only; ICE petrol rows had no EEA Cn (wrongly matched Corolla HEV).
+    "toyota-corolla-cross-2022",
+    "toyota-corolla-cross-2023",
+    "toyota-corolla-cross-2024",
+    "toyota-corolla-cross-2025",
+    "toyota-corolla-cross-2026",
 }
+
+# Placeholder CS fuel used when no charge-sustaining source existed (not honest for catalog).
+# Hygiene segment defaults / old placeholders — not honest charge-sustaining sources.
+PHEV_PLACEHOLDER_L_PER_KM = 0.065
+PHEV_PLACEHOLDER_FUELS = {0.045, 0.055, 0.065, 0.075}
 
 
 def http_get_json(url: str, timeout: int = 120) -> dict:
@@ -318,7 +335,28 @@ def is_hybrid_eea_key(model_n: str) -> bool:
     return any(m in model_n for m in _HYBRID_MARKERS)
 
 
-def match_model(seed_model: str, eea_models: set[str]) -> str | None:
+def ice_seed_accepts_eea_key(seed_model: str, eea_key: str) -> bool:
+    """
+    ICE must not attach to a hybrid-only Cn, nor to a shorter parent Cn when the seed
+    has extra tokens (Corolla Cross → COROLLA, Corolla iM → COROLLA).
+    """
+    if not eea_key or is_hybrid_eea_key(eea_key):
+        return False
+    sn = clean_model_norm(seed_model) or norm_alnum(seed_model)
+    if not sn:
+        return False
+    if sn == eea_key:
+        return True
+    # EEA key may be longer (trim/suffix) if it still starts with the seed token.
+    if eea_key.startswith(sn) and len(sn) >= 3:
+        return True
+    # Seed longer than EEA key → unmatched suffix (CROSS, IM, …) — reject.
+    if sn.startswith(eea_key) and len(sn) > len(eea_key):
+        return False
+    return False
+
+
+def match_model(seed_model: str, eea_models: set[str], *, for_ice: bool = False) -> str | None:
     candidates = [clean_model_norm(seed_model), norm_alnum(seed_model)]
     # Keep ACLASS for Mercedes A-Class (stripping CLASS → "A" is too weak).
     raw = norm_alnum(seed_model)
@@ -326,17 +364,24 @@ def match_model(seed_model: str, eea_models: set[str]) -> str | None:
         candidates = ["ACLASS", "A"] + candidates
     # Short tokens (C, 500, 911) are handled by family_eea_hit — avoid greedy substring matches.
     weak_short = {c for c in candidates if c and len(c) <= 3}
+    pool = eea_models
+    if for_ice:
+        pool = {em for em in eea_models if not is_hybrid_eea_key(em)}
     for sn in candidates:
-        if sn and sn in eea_models and sn not in weak_short:
+        if sn and sn in pool and sn not in weak_short:
+            if for_ice and not ice_seed_accepts_eea_key(seed_model, sn):
+                continue
             return sn
-        if sn and sn in eea_models and sn in weak_short and sn in {"A4", "I10", "I20"}:
+        if sn and sn in pool and sn in weak_short and sn in {"A4", "I10", "I20"}:
             return sn
     best: tuple[int, str] | None = None
     for sn in candidates:
         if not sn or len(sn) <= 2:
             continue
-        for em in eea_models:
+        for em in pool:
             if not em:
+                continue
+            if for_ice and not ice_seed_accepts_eea_key(seed_model, em):
                 continue
             if sn == em or sn in em or em in sn:
                 score = min(len(sn), len(em))
@@ -716,7 +761,7 @@ def main() -> None:
     parser.add_argument("--no-cache", action="store_true")
     parser.add_argument("--brands", nargs="*")
     parser.add_argument("--dry-run", action="store_true")
-    parser.add_argument("--seed-version", type=int, default=40)
+    parser.add_argument("--seed-version", type=int, default=41)
     args = parser.parse_args()
     use_cache = not args.no_cache
 
@@ -755,6 +800,10 @@ def main() -> None:
     skipped_no_co2 = 0
     phev_bollo_only = 0
 
+    # EEA PETROL "TOYOTA AURIS" 2018 (n=9244, CO2≈116) is contaminated with hybrids
+    # (sibling empty-Ft bucket n=4592). Keep seed stima; do not overwrite from that cell.
+    SKIP_EEA_CONSUMPTION_IDS = {"toyota-auris-2018", "toyota-auris-hybrid-2018"}
+
     # --- Correct ICE/HEV consumptions; bollo for ICE/HEV/PHEV; never PHEV L/100 from CO2 ---
     for r in rows:
         brand_u = str(r.get("brand", "")).upper()
@@ -763,6 +812,9 @@ def main() -> None:
         pt = (r.get("powertrain") or "").lower()
         if pt == "ev":
             continue
+        rid = str(r.get("id") or "")
+        if rid in SKIP_EEA_CONSUMPTION_IDS:
+            continue
         model_raw = str(r.get("model", ""))
         year = int(r.get("year") or 0)
         fk = (r.get("fuelKind") or "").lower()
@@ -770,7 +822,7 @@ def main() -> None:
         if brand_u == "MERCEDES-BENZ" and norm_alnum(model_raw) in {"ACLASS", "CLASSEA"}:
             model_n = "ACLASS"
         else:
-            model_n = match_model(model_raw, eea_models)
+            model_n = match_model(model_raw, eea_models, for_ice=(pt == "ice"))
         # Family aggregations (C-Class, A4, 3-Series, 911, Mercedes 500) may have no Cn match.
         want_preview = None
         if pt == "hev":
@@ -793,12 +845,21 @@ def main() -> None:
         hit = None
         source_ft = ""
         eea_model_used = model_n
+        full_hybrid_row = (
+            pt == "hev"
+            and (
+                brand_u in FULL_HYBRID_BRANDS
+                or "hybrid" in model_raw.lower()
+                or "e-tech" in model_raw.lower()
+                or str(r.get("trim") or "").lower() == "hybrid"
+            )
+        )
 
         if pt == "hev":
             want = "DIESEL" if fk == "diesel" else "PETROL"
             source_ft = want
-            # Full hybrid brands: HYBRID/E-TECH Cn only — never petrol sibling.
-            if brand_u in FULL_HYBRID_BRANDS or "hybrid" in model_raw.lower() or "e-tech" in model_raw.lower():
+            # Full hybrid: HYBRID/E-TECH Cn only — never petrol sibling / family petrol aggregate.
+            if full_hybrid_row:
                 hy_key, hy_hit = match_full_hybrid_model(
                     model_raw,
                     eea_models,
@@ -811,13 +872,15 @@ def main() -> None:
                     hit = hy_hit
                     eea_model_used = hy_key
                     model_n = hy_key or model_n
-            if not hit:
-                hit = family_eea_hit(brand_u, model_raw, year, want, ice_maps[brand_u])
-            if not hit and model_n and brand_u in MILD_HYBRID_BRANDS:
-                # Mild hybrid may share petrol Cn + Fm=H.
-                hit = hev_maps.get(brand_u, {}).get((model_n, year, want)) or ice_maps[brand_u].get(
-                    (model_n, year, want)
-                )
+                # No petrol fallback for full hybrids (Auris Hybrid must not share Auris petrol Cn).
+            else:
+                if not hit:
+                    hit = family_eea_hit(brand_u, model_raw, year, want, ice_maps[brand_u])
+                if not hit and model_n and brand_u in MILD_HYBRID_BRANDS:
+                    # Mild hybrid may share petrol Cn + Fm=H.
+                    hit = hev_maps.get(brand_u, {}).get((model_n, year, want)) or ice_maps[brand_u].get(
+                        (model_n, year, want)
+                    )
             if brand_u in MILD_HYBRID_BRANDS and not (brand_u == "JEEP" and year >= 2024):
                 if (r.get("trim") or "") != "Mild Hybrid":
                     mild_trim.append({"id": r.get("id"), "year": year})
@@ -831,17 +894,11 @@ def main() -> None:
             if not want:
                 continue
             hit = family_eea_hit(brand_u, model_raw, year, want, ice_maps[brand_u])
-            if not hit and model_n:
+            if not hit and model_n and ice_seed_accepts_eea_key(model_raw, model_n):
                 hit = bifuel_alias_hit(ice_maps[brand_u], model_n, year, want)
-            # ICE must not use full-hybrid-only Cn (YARISHYBRID, CLIOETECHHYBRID).
-            if hit and model_n and is_hybrid_eea_key(str(eea_model_used or model_n)):
-                # Prefer non-hybrid sibling if this row is pure ICE.
-                non_hy = ice_maps[brand_u].get((clean_model_norm(model_raw), year, want)) or ice_maps[
-                    brand_u
-                ].get((norm_alnum(model_raw), year, want))
-                if non_hy and not is_hybrid_eea_key(clean_model_norm(model_raw)):
-                    # Only replace if we accidentally matched a hybrid key via substring.
-                    pass
+            # Never keep a hybrid Cn hit on an ICE row.
+            if hit and is_hybrid_eea_key(str(eea_model_used or model_n or "")):
+                hit = None
             source_ft = want or ""
 
         if not hit:
@@ -920,6 +977,8 @@ def main() -> None:
             r["fuelConsumptionLPerKm"] = new_l_per_km
             if isinstance(hit.get("co2"), (int, float)):
                 r["co2gKm"] = int(round(float(hit["co2"])))
+            if isinstance(hit.get("kw"), (int, float)) and float(hit["kw"]) > 0:
+                r["powerKw"] = round(float(hit["kw"]), 1)
             r["sourceName"] = f"EEA co2cars IT {year} n={int(hit_n)}"
             r["confidenceScore"] = 0.8
             r["sourceUpdatedAt"] = datetime.now(timezone.utc).strftime("%Y-%m-%d")
@@ -1201,8 +1260,81 @@ def main() -> None:
                 }
             )
 
+    # Full hybrid that still carries the petrol sibling EEA bucket (same n= in sourceName):
+    # restore from nearest prior hybrid peer with non-EEA source, else drop the row.
+    eea_n_re = re.compile(r"EEA co2cars IT \d{4} n=(\d+)")
+    ice_eea_n: dict[tuple[str, str, int], str] = {}
+    for r in rows:
+        if (r.get("powertrain") or "").lower() != "ice":
+            continue
+        sn = str(r.get("sourceName") or "")
+        m = eea_n_re.search(sn)
+        if not m:
+            continue
+        brand_u = str(r.get("brand", "")).upper()
+        base = clean_model_norm(str(r.get("model", ""))) or norm_alnum(str(r.get("model", "")))
+        year = int(r.get("year") or 0)
+        ice_eea_n[(brand_u, base, year)] = m.group(1)
+
+    hev_restored = 0
+    hev_drop_contaminated: set[str] = set()
+    for r in rows:
+        if (r.get("powertrain") or "").lower() != "hev":
+            continue
+        sn = str(r.get("sourceName") or "")
+        m = eea_n_re.search(sn)
+        if not m:
+            continue
+        brand_u = str(r.get("brand", "")).upper()
+        base = clean_model_norm(str(r.get("model", ""))) or norm_alnum(str(r.get("model", "")))
+        year = int(r.get("year") or 0)
+        ice_n = ice_eea_n.get((brand_u, base, year))
+        if ice_n is None or ice_n != m.group(1):
+            continue
+        # Contaminated: same EEA bucket as petrol ICE sibling.
+        peer = None
+        for y in range(year - 1, year - 9, -1):
+            for cand in rows:
+                if (
+                    str(cand.get("brand", "")).upper() == brand_u
+                    and (cand.get("powertrain") or "").lower() == "hev"
+                    and int(cand.get("year") or 0) == y
+                    and (clean_model_norm(str(cand.get("model", ""))) or norm_alnum(str(cand.get("model", ""))))
+                    == base
+                    and not eea_n_re.search(str(cand.get("sourceName") or ""))
+                    and isinstance(cand.get("fuelConsumptionLPerKm"), (int, float))
+                    and float(cand["fuelConsumptionLPerKm"]) > 0
+                ):
+                    peer = cand
+                    break
+            if peer:
+                break
+        if peer:
+            r["fuelConsumptionLPerKm"] = peer.get("fuelConsumptionLPerKm")
+            r["co2gKm"] = peer.get("co2gKm")
+            r["sourceName"] = peer.get("sourceName") or "seed+EEA-WLTP"
+            r["sourceUpdatedAt"] = peer.get("sourceUpdatedAt")
+            r["confidenceScore"] = peer.get("confidenceScore")
+            hev_restored += 1
+        else:
+            hev_drop_contaminated.add(str(r.get("id") or ""))
+
+    # PHEV hygiene/segment placeholders — no honest charge-sustaining source.
+    def _is_phev_placeholder_fuel(val: object) -> bool:
+        if not isinstance(val, (int, float)):
+            return False
+        f = float(val)
+        return any(abs(f - p) < 1e-9 for p in PHEV_PLACEHOLDER_FUELS)
+
+    phev_placeholder_ids = {
+        str(r.get("id") or "")
+        for r in rows
+        if (r.get("powertrain") or "").lower() == "phev"
+        and _is_phev_placeholder_fuel(r.get("fuelConsumptionLPerKm"))
+    }
+
     removed: list[dict] = []
-    remove_ids = set()
+    remove_ids = set(hev_drop_contaminated) | phev_placeholder_ids
     for r in rows:
         rid = str(r.get("id") or "")
         rid_l = rid.lower()
@@ -1223,6 +1355,11 @@ def main() -> None:
             remove_ids.add(rid)
         if re.match(r"citro[eë]n-e-c3-2023|citro[eë]n-ec3-2023", rid_l) or (
             brand_u in {"CITROEN", "CITROËN"} and re.search(r"e-?c3", model_l) and year == 2023 and pt == "ev"
+        ):
+            remove_ids.add(rid)
+        # Corolla Cross ICE / Corolla iM (see TRUE_GHOST_IDS) also matched by model name.
+        if brand_u == "TOYOTA" and pt == "ice" and (
+            "corolla cross" in model_l or "corolla im" in model_l or "corolla-im" in rid_l
         ):
             remove_ids.add(rid)
 
@@ -1312,6 +1449,8 @@ def main() -> None:
             "skipped_no_co2": skipped_no_co2,
             "phev_bollo_touched_no_fc_overwrite": phev_bollo_only,
             "eea_bucket_refs": len(eea_bucket_refs),
+            "hev_restored_from_peer": hev_restored,
+            "phev_placeholder_065_removed": len(phev_placeholder_ids),
         },
         "corrections": corrections,
         "additions": additions,
