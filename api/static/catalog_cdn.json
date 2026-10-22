@@ -1,12 +1,12 @@
 {
   "url": "",
   "publishedUrl": "https://files.catbox.moe/3i0nro.json",
-  "rows": 5761,
-  "bytes": 2091829,
+  "rows": 6310,
+  "bytes": 3126403,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-07T16:17:31.433834+00:00",
+  "updatedAt": "2026-10-22T09:52:13.474978+00:00",
   "policy": "offline-first",
-  "seedVersion": 39,
-  "note": "seedVersion 39: EEA IT ICE/HEV fuels CO2→FC Reg.2017/1151 E10/B7; family match C-Class/A4/3-Series/911/500; Mini→MINI"
+  "seedVersion": 42,
+  "note": "seedVersion 42: portrait smoke+30km charger radius; PHEV IT docs/solo-elettrico or ponderato; EPA dims/battery/co2; unique fuel by brand+model."
 }

@@ -231,6 +231,7 @@ struct ChargingMapView: View {
 
     private func searchByCityIfPossible() async {
         let trimmed = cityQuery.trimmingCharacters(in: .whitespacesAndNewlines)
+        selectedPin = nil
         if trimmed.isEmpty {
             await runSearch(
                 at: ChargingStationSearch.fallbackCoordinate(for: areaType),
@@ -246,6 +247,7 @@ struct ChargingMapView: View {
             await runSearch(at: coord, note: nil)
         } catch {
             pins = []
+            selectedPin = nil
             statusMessage = L10n.chargingMapCityNotFound
         }
     }
@@ -253,27 +255,27 @@ struct ChargingMapView: View {
     private func runSearch(at coordinate: CLLocationCoordinate2D, note: String?) async {
         isSearching = true
         statusMessage = note
+        selectedPin = nil
         searchCenter = coordinate
+        // Resta centrata sulla città cercata — non saltare sul primo pin (poteva essere a 400+ km).
         cameraPosition = .region(ChargingStationSearch.region(around: coordinate))
         defer { isSearching = false }
         do {
             let found = try await ChargingStationSearch.searchNearby(
                 coordinate: coordinate,
+                radiusMeters: ChargingStationSearch.maxResultDistanceMeters,
                 locale: locale
             )
             pins = found
+            selectedPin = nil
             if found.isEmpty {
                 statusMessage = note ?? L10n.chargingMapNoResults
             } else {
                 statusMessage = nil
             }
-            if let first = found.first {
-                cameraPosition = .region(
-                    ChargingStationSearch.region(around: first.coordinate, radiusMeters: 8_000)
-                )
-            }
         } catch {
             pins = []
+            selectedPin = nil
             statusMessage = L10n.chargingMapSearchFailed
         }
     }

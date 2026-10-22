@@ -280,10 +280,20 @@ final class SmokeProductUITests: XCTestCase {
             app.buttons["charging_map_city_search"].exists
             ? app.buttons["charging_map_city_search"]
             : firstExistingButton(app, labels: ["Cerca", "Search"], timeout: 2)
-        search?.tap()
+        // Prefer keyboard Search/Return (submit) over map taps — map taps select pins.
+        if app.keyboards.buttons["Search"].exists {
+            app.keyboards.buttons["Search"].tap()
+        } else if app.keyboards.buttons["Cerca"].exists {
+            app.keyboards.buttons["Cerca"].tap()
+        } else if app.keyboards.buttons["Return"].exists {
+            app.keyboards.buttons["Return"].tap()
+        } else {
+            search?.tap()
+        }
         RunLoop.current.run(until: Date().addingTimeInterval(6))
         dismissSystemAlertsIfNeeded(app)
-        dismissKeyboardIfNeeded(app)
+        dismissKeyboardWithoutSelectingMapPin(app, cityField: field)
+        dismissChargingPinSheetIfNeeded(app)
         RunLoop.current.run(until: Date().addingTimeInterval(0.4))
         saveShot(app, name: "08_charging_map_city")
 
@@ -370,20 +380,55 @@ final class SmokeProductUITests: XCTestCase {
 
     @MainActor
     private func dismissKeyboardIfNeeded(_ app: XCUIApplication) {
-        if app.keyboards.element.exists {
-            // Prefer tapping the map / chrome so the city map is visible in 08_city.
-            if app.maps.firstMatch.exists {
-                app.maps.firstMatch.tap()
-            } else if app.keyboards.buttons["Return"].exists {
+        dismissKeyboardWithoutSelectingMapPin(app, cityField: nil)
+    }
+
+    /// Chiude la tastiera senza tappi sulla mappa (aprirebbero la scheda pin).
+    @MainActor
+    private func dismissKeyboardWithoutSelectingMapPin(_ app: XCUIApplication, cityField: XCUIElement?) {
+        guard app.keyboards.element.exists else { return }
+        if app.keyboards.buttons["Search"].exists {
+            app.keyboards.buttons["Search"].tap()
+        } else if app.keyboards.buttons["Cerca"].exists {
+            app.keyboards.buttons["Cerca"].tap()
+        } else if app.keyboards.buttons["Return"].exists {
+            app.keyboards.buttons["Return"].tap()
+        } else if app.keyboards.buttons["Done"].exists {
+            app.keyboards.buttons["Done"].tap()
+        } else if app.keyboards.buttons["done"].exists {
+            app.keyboards.buttons["done"].tap()
+        } else if let cityField, cityField.exists {
+            // Tap the search field itself (not the map) to resign first responder.
+            cityField.tap()
+            if app.keyboards.buttons["Return"].exists {
                 app.keyboards.buttons["Return"].tap()
-            } else if app.keyboards.buttons["Done"].exists {
-                app.keyboards.buttons["Done"].tap()
-            } else if app.keyboards.buttons["done"].exists {
-                app.keyboards.buttons["done"].tap()
-            } else {
-                app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.35)).tap()
             }
-            RunLoop.current.run(until: Date().addingTimeInterval(0.35))
+        } else if let search = firstExistingButton(app, labels: ["Cerca", "Search"], timeout: 1) {
+            search.tap()
+        }
+        // Never tap the map — Map(selection:) would open a pin sheet over 2/3 of the shot.
+        RunLoop.current.run(until: Date().addingTimeInterval(0.35))
+    }
+
+    @MainActor
+    private func dismissChargingPinSheetIfNeeded(_ app: XCUIApplication) {
+        for _ in 0..<3 {
+            let close = firstExistingButton(
+                app,
+                labels: ["Chiudi", "Close", "Fatto", "Done", "Cancel", "Annulla"],
+                timeout: 1
+            )
+            let sheetLike =
+                app.buttons["Indicazioni"].exists
+                || app.buttons["Directions"].exists
+                || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "a circa")).firstMatch.exists
+                || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "about")).firstMatch.exists
+            if let close, sheetLike || app.sheets.firstMatch.exists {
+                close.tap()
+                RunLoop.current.run(until: Date().addingTimeInterval(0.4))
+            } else {
+                break
+            }
         }
     }
 

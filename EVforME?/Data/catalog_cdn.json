@@ -2,11 +2,11 @@
   "url": "",
   "publishedUrl": "https://files.catbox.moe/3i0nro.json",
   "rows": 6310,
-  "bytes": 2091829,
+  "bytes": 3126403,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-22T08:01:09.722666+00:00",
+  "updatedAt": "2026-10-22T09:52:13.474978+00:00",
   "policy": "offline-first",
   "seedVersion": 42,
-  "note": "seedVersion 42: drop SF90/Artura + EPA 0.12/4.55/0.168 stamps; unique PHEV fuel/kWh; EU WLTP-CS with doc URLs; Auris hybrid conf 0.5."
+  "note": "seedVersion 42: portrait smoke+30km charger radius; PHEV IT docs/solo-elettrico or ponderato; EPA dims/battery/co2; unique fuel by brand+model."
 }

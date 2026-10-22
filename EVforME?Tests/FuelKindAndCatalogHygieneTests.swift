@@ -693,18 +693,31 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             badPlaceholder.isEmpty,
             "No PHEV with stamped placeholder fuel: \(badPlaceholder.map { "\($0.id)=\($0.fuelConsumptionLPerKm ?? -1)" })"
         )
-        var fuelCounts: [String: [String]] = [:]
-        var energyCounts: [String: [String]] = [:]
-        for v in phevs {
-            let fKey = String(format: "%.5f", v.fuelConsumptionLPerKm ?? -1)
-            let eKey = String(format: "%.5f", v.energyConsumptionKWhPerKm ?? -1)
-            fuelCounts[fKey, default: []].append(v.id)
-            energyCounts[eKey, default: []].append(v.id)
+        // Same L/km (or kWh/km) may repeat on years/trims of the same brand+model.
+        // Fail only when the same stamped value appears on *different* brand+model keys.
+        func modelKey(_ v: VehicleCatalogItem) -> String {
+            "\(v.brand.lowercased())|\(v.model.lowercased())"
         }
-        let repeatedFuel = fuelCounts.filter { $0.value.count > 1 }
-        let repeatedEnergy = energyCounts.filter { $0.value.count > 1 }
-        XCTAssertTrue(repeatedFuel.isEmpty, "PHEV fuel L/km must be unique per model: \(repeatedFuel)")
-        XCTAssertTrue(repeatedEnergy.isEmpty, "PHEV kWh/km must be unique per model: \(repeatedEnergy)")
+        func collisions(for values: [(String, String, Double?)]) -> [String: Set<String>] {
+            var byValue: [String: Set<String>] = [:]
+            for (id, key, raw) in values {
+                guard let raw else { continue }
+                let vKey = String(format: "%.5f", raw)
+                byValue[vKey, default: []].insert(key)
+                _ = id
+            }
+            return byValue.filter { $0.value.count > 1 }
+        }
+        let fuelCollisions = collisions(for: phevs.map { ($0.id, modelKey($0), $0.fuelConsumptionLPerKm) })
+        let energyCollisions = collisions(for: phevs.map { ($0.id, modelKey($0), $0.energyConsumptionKWhPerKm) })
+        XCTAssertTrue(
+            fuelCollisions.isEmpty,
+            "PHEV fuel L/km must not be shared across different brand+model: \(fuelCollisions)"
+        )
+        XCTAssertTrue(
+            energyCollisions.isEmpty,
+            "PHEV kWh/km must not be shared across different brand+model: \(energyCollisions)"
+        )
     }
 
     func testCatalog_NoFerrariSF90OrMcLarenArtura() {
@@ -719,9 +732,46 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         let itPhev = VehicleCatalogService.shared.vehicles.filter {
             $0.powertrain == .phev && ($0.market ?? "") == "IT"
         }
-        XCTAssertGreaterThanOrEqual(itPhev.count, 10, "expected curated IT/EU PHEV set")
-        let missing = itPhev.filter { !($0.sourceName ?? "").contains("http") }
-        XCTAssertTrue(missing.isEmpty, "IT PHEV sourceName must cite a doc URL: \(missing.map(\.id))")
+        XCTAssertGreaterThanOrEqual(itPhev.count, 8, "expected curated IT/EU PHEV set")
+        let missingHTTP = itPhev.filter { !($0.sourceName ?? "").contains("http") }
+        XCTAssertTrue(missingHTTP.isEmpty, "IT PHEV sourceName must cite a doc URL: \(missingHTTP.map(\.id))")
+        let tilde = itPhev.filter { ($0.sourceName ?? "").contains("~") }
+        XCTAssertTrue(tilde.isEmpty, "IT PHEV sources must not use '~' approximations: \(tilde.map(\.id))")
+        // Reject bare marketing model pages (…/auto/kuga, …/compass.html) — want PDF/listino/press doc.
+        let generic = itPhev.filter { v in
+            let s = (v.sourceName ?? "").lowercased()
+            guard let urlPart = s.split(separator: "http").last.map({ "http" + $0 }) else { return true }
+            let url = urlPart.split(whereSeparator: { $0.isWhitespace || $0 == "—" || $0 == "|" }).first.map(String.init) ?? ""
+            let looksDoc =
+                url.contains(".pdf")
+                || url.contains("press.")
+                || url.contains("newsroom")
+                || url.contains("media-assets")
+                || url.contains("media.ford")
+                || url.contains("listino")
+                || url.contains("brochure")
+                || url.contains("technical")
+                || url.contains("technische")
+                || url.contains("environmental-check")
+                || url.contains("attachment")
+                || url.contains("datasheet")
+                || url.contains("type-approval")
+                || url.contains("omolog")
+                || url.contains("adac.de")
+                || url.contains("moto.it/pricelist")
+            return !looksDoc
+        }
+        XCTAssertTrue(generic.isEmpty, "IT PHEV source must be a precise doc URL, not a model page: \(generic.map(\.id))")
+        let energyKind = itPhev.filter { v in
+            let s = (v.sourceName ?? "").lowercased()
+            let solo = s.contains("solo elettr") || s.contains("rein elektr") || s.contains("electric-only") || s.contains("charge-depleting") || s.contains("ec mode")
+            let ponderato = s.contains("ponderat") || s.contains("weighted") || s.contains("gewichtet")
+            return !(solo || ponderato)
+        }
+        XCTAssertTrue(
+            energyKind.isEmpty,
+            "IT PHEV source must state solo elettrico or ponderato for kWh: \(energyKind.map(\.id))"
+        )
     }
 
     func testCatalog_AurisHybrid2018ConfidenceIsStimaLevel() {

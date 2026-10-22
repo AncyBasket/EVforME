@@ -26,7 +26,10 @@ struct ChargingStationPin: Identifiable, Equatable, Hashable {
 }
 
 enum ChargingStationSearch {
-    static let defaultRadiusMeters: CLLocationDistance = 20_000
+    /// Raggio di ricerca MapKit (span regione).
+    static let defaultRadiusMeters: CLLocationDistance = 30_000
+    /// Scarta pin oltre questa distanza dal centro (evita colonnine a centinaia di km).
+    static let maxResultDistanceMeters: CLLocationDistance = 30_000
     static let maxResults = 25
 
     /// Query orientative per MapKit / deep link Mappe.
@@ -92,10 +95,12 @@ enum ChargingStationSearch {
     }
 
     /// Costruisce pin da `MKMapItem` (testabile senza rete se si passa lista vuota / mock).
+    /// Pin oltre `maxDistanceMeters` dal centro vengono scartati (es. Udine su ricerca Milano).
     static func pins(
         from items: [MKMapItem],
         relativeTo origin: CLLocationCoordinate2D?,
-        limit: Int = maxResults
+        limit: Int = maxResults,
+        maxDistanceMeters: CLLocationDistance = maxResultDistanceMeters
     ) -> [ChargingStationPin] {
         let originLocation = origin.map { CLLocation(latitude: $0.latitude, longitude: $0.longitude) }
         var seen = Set<String>()
@@ -110,6 +115,10 @@ enum ChargingStationSearch {
             let distance: CLLocationDistance? = originLocation.map {
                 $0.distance(from: CLLocation(latitude: coord.latitude, longitude: coord.longitude))
             }
+            if let distance, distance > maxDistanceMeters {
+                continue
+            }
+            // Senza origine non possiamo filtrare per raggio: resta il comportamento legacy.
             let address = [
                 item.placemark.thoroughfare,
                 item.placemark.locality
@@ -148,14 +157,22 @@ enum ChargingStationSearch {
         request.pointOfInterestFilter = MKPointOfInterestFilter(including: [.evCharger])
         let search = MKLocalSearch(request: request)
         let response = try await search.start()
-        let pins = pins(from: response.mapItems, relativeTo: coordinate)
+        let pins = pins(
+            from: response.mapItems,
+            relativeTo: coordinate,
+            maxDistanceMeters: min(radiusMeters, maxResultDistanceMeters)
+        )
         if pins.isEmpty {
             // Retry senza filtro POI stretto (alcune regioni non etichettano EV charger).
             let loose = MKLocalSearch.Request()
             loose.naturalLanguageQuery = naturalLanguageQuery(locale: locale)
             loose.region = region(around: coordinate, radiusMeters: radiusMeters)
             let looseResponse = try await MKLocalSearch(request: loose).start()
-            return Self.pins(from: looseResponse.mapItems, relativeTo: coordinate)
+            return Self.pins(
+                from: looseResponse.mapItems,
+                relativeTo: coordinate,
+                maxDistanceMeters: min(radiusMeters, maxResultDistanceMeters)
+            )
         }
         return pins
     }
