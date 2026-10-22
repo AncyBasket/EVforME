@@ -8,16 +8,19 @@
 import CoreLocation
 import MapKit
 import SwiftUI
+import UIKit
 
 struct ChargingMapView: View {
     var areaType: AreaType = .mixed
+    /// When true (default), start in device-location mode and request When-In-Use.
+    var preferDeviceLocation: Bool = true
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
     @Environment(\.locale) private var locale
 
     @StateObject private var locationProvider = ChargingLocationProvider()
-    @State private var useDeviceLocation = true
+    @State private var useDeviceLocation: Bool
     @State private var cityQuery = ""
     @State private var pins: [ChargingStationPin] = []
     @State private var selectedPin: ChargingStationPin?
@@ -27,13 +30,25 @@ struct ChargingMapView: View {
     @State private var statusMessage: String?
     @State private var didInitialLoad = false
 
+    init(areaType: AreaType = .mixed, preferDeviceLocation: Bool = true) {
+        self.areaType = areaType
+        self.preferDeviceLocation = preferDeviceLocation
+        _useDeviceLocation = State(initialValue: preferDeviceLocation)
+    }
+
+    private var isLocationDenied: Bool {
+        if case .denied = locationProvider.status { return true }
+        return false
+    }
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
                 controls
                 ZStack(alignment: .bottom) {
                     mapLayer
-                    if let statusMessage, pins.isEmpty, !isSearching {
+                    if let statusMessage, !isSearching,
+                       pins.isEmpty || isLocationDenied {
                         emptyBanner(statusMessage)
                     }
                     if isSearching
@@ -149,6 +164,16 @@ struct ChargingMapView: View {
                 .font(Typography.readingCaption)
                 .foregroundStyle(Color.ink)
                 .fixedSize(horizontal: false, vertical: true)
+            if isLocationDenied {
+                Button(L10n.chargingMapOpenSettings) {
+                    if let url = URL(string: UIApplication.openSettingsURLString) {
+                        openURL(url)
+                    }
+                }
+                .font(Typography.bodyBold)
+                .foregroundStyle(Color.ink)
+                .accessibilityIdentifier("charging_map_open_settings")
+            }
             Button(L10n.chargingMapOpenInMaps) {
                 openAppleMapsFallback()
             }
@@ -270,6 +295,9 @@ struct ChargingMapView: View {
             selectedPin = nil
             if found.isEmpty {
                 statusMessage = note ?? L10n.chargingMapNoResults
+            } else if let note {
+                // Keep denied / fallback notes visible even when pins exist.
+                statusMessage = note
             } else {
                 statusMessage = nil
             }

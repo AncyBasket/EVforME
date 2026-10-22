@@ -63,6 +63,48 @@ final class SmokeProductUITests: XCTestCase {
         XCTAssertNotNil(modify, "Verdict should open")
         saveShot(app, name: "02_verdict_open")
 
+        // Come calcoliamo + prominent chargers on verdict (both visible in one portrait shot)
+        let howCalc = firstExistingStatic(
+            app,
+            labels: ["Come calcoliamo", "How we calculate"],
+            timeout: 6
+        )
+        XCTAssertNotNil(howCalc, "How we calculate entry on verdict")
+        let chargersLabel = firstExistingStatic(
+            app,
+            labels: [
+                "Colonnine vicino a te",
+                "Chargers near you",
+                "Senza wallbox, valuta colonnine pubbliche vicino a te",
+                "No wallbox? Check public chargers near you",
+            ],
+            timeout: 3
+        )
+        let chargersOnVerdict =
+            app.descendants(matching: .any)["verdict_chargers_entry"].waitForExistence(timeout: 2)
+            || chargersLabel != nil
+        XCTAssertTrue(chargersOnVerdict, "Prominent chargers entry on verdict")
+        // Ensure both entry titles are on-screen before the dedicated smoke shot.
+        if howCalc?.isHittable != true || chargersLabel?.isHittable != true {
+            scrollDown(app, times: 1)
+        }
+        saveShot(app, name: "02a_verdict_trust_entries")
+        howCalc?.tap()
+        let howCalcReady =
+            app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Come calcoliamo")).firstMatch
+                .waitForExistence(timeout: 6)
+            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "How we calculate")).firstMatch
+                .waitForExistence(timeout: 3)
+            || app.descendants(matching: .any)["how_we_calculate_intro"].waitForExistence(timeout: 4)
+        XCTAssertTrue(howCalcReady, "How we calculate sheet should open")
+        RunLoop.current.run(until: Date().addingTimeInterval(0.6))
+        saveShot(app, name: "02b_how_we_calculate")
+        firstExistingButton(app, labels: ["Fatto", "Close", "Done"], timeout: 4)?.tap()
+        XCTAssertNotNil(
+            firstExistingButton(app, labels: ["Modifica dati", "Change inputs", "Modify input"], timeout: 8),
+            "Back on verdict after how-we-calculate"
+        )
+
         // 1.2 — expand costs for kit Italia rows
         let costs = firstExistingStatic(
             app,
@@ -153,6 +195,9 @@ final class SmokeProductUITests: XCTestCase {
         if let guidesTab = firstExistingButton(app, labels: ["Letture", "Guides", "Readings"], timeout: 5) {
             guidesTab.tap()
         }
+        let howCalcGuides = app.staticTexts["Come calcoliamo"].waitForExistence(timeout: 5)
+            || app.staticTexts["How we calculate"].waitForExistence(timeout: 2)
+        XCTAssertTrue(howCalcGuides, "How we calculate entry on Guides")
         let chargingEntry = app.staticTexts["Colonnine vicino a te"].waitForExistence(timeout: 5)
             || app.staticTexts["Chargers near you"].waitForExistence(timeout: 2)
         XCTAssertTrue(chargingEntry, "1.3 entry on Guides")
