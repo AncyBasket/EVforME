@@ -232,6 +232,18 @@ def brand_payload(brand: str, hev_only: bool = False) -> dict:
                             "fuels": {
                                 "terms": {"field": "Ft", "size": 30},
                                 "aggs": {
+                                    # Status F = definitivo, P = provvisorio. The IT index
+                                    # duplicates each registration under both for most years
+                                    # through 2024; prefer F, fall back to P (e.g. 2025).
+                                    "status": {
+                                        "terms": {"field": "Status", "size": 5},
+                                        "aggs": {
+                                            "sum_r": {"sum": {"field": "r"}},
+                                            "avg_co2": {"avg": {"field": "Ewltp__g_km_"}},
+                                            "avg_kw": {"avg": {"field": "ep__KW_"}},
+                                        },
+                                    },
+                                    # Legacy top-level metrics kept for older cached responses.
                                     "sum_r": {"sum": {"field": "r"}},
                                     "avg_co2": {"avg": {"field": "Ewltp__g_km_"}},
                                     "avg_kw": {"avg": {"field": "ep__KW_"}},
@@ -245,24 +257,60 @@ def brand_payload(brand: str, hev_only: bool = False) -> dict:
     }
 
 
+def status_preferred_metrics(fuel_bucket: dict) -> dict:
+    """
+    Prefer Status F (final) over P (provisional).
+
+    Through 2024 the IT co2cars index lists each registration twice (F+P), often in
+    the same Ft bucket — summing them doubles n. In 2022 F/P also used different Ft
+    casing (diesel vs DIESEL); case-dedupe alone fixed that year. Prefer F; if only
+    P exists (typical for 2025), use P. CO₂/kW are the same on F and P.
+    """
+    statuses = fuel_bucket.get("status", {}).get("buckets") or []
+    if statuses:
+        by_key = {str(s.get("key", "")).upper(): s for s in statuses}
+        chosen = by_key.get("F") or by_key.get("P")
+        if chosen is None:
+            chosen = max(
+                statuses,
+                key=lambda s: float(s.get("sum_r", {}).get("value") or s.get("doc_count") or 0),
+            )
+        return {
+            "n": float(chosen.get("sum_r", {}).get("value") or chosen.get("doc_count") or 0),
+            "co2": chosen.get("avg_co2", {}).get("value"),
+            "kw": chosen.get("avg_kw", {}).get("value"),
+            "status": str(chosen.get("key", "")).upper() or None,
+        }
+    # Legacy cache without Status sub-agg (may still be F+P summed).
+    return {
+        "n": float(fuel_bucket.get("sum_r", {}).get("value") or fuel_bucket.get("doc_count") or 0),
+        "co2": fuel_bucket.get("avg_co2", {}).get("value"),
+        "kw": fuel_bucket.get("avg_kw", {}).get("value"),
+        "status": None,
+    }
+
+
 def dedupe_fuel_buckets(fuel_buckets: list[dict]) -> dict[str, dict]:
     """
     Merge Ft buckets that normalize to the same key (e.g. DIESEL vs diesel).
 
-    EEA co2cars often emits the same registrations twice with different Ft casing.
-    Those must NOT be summed — keep the max-n cell (same volume, same CO₂/kW).
+    After Status F-preference, 2022 still has F under 'diesel' and P under 'DIESEL';
+    take max-n (they match), never sum.
     """
     merged: dict[str, dict] = {}
     for fb in fuel_buckets:
         key = normalize_ft(str(fb.get("key", "")))
         if not key:
             continue
-        n = float(fb.get("sum_r", {}).get("value") or fb.get("doc_count") or 0)
-        co2 = fb.get("avg_co2", {}).get("value")
-        kw = fb.get("avg_kw", {}).get("value")
+        metrics = status_preferred_metrics(fb)
         prev = merged.get(key)
-        if prev is None or n > float(prev["n"] or 0):
-            merged[key] = {"n": n, "co2": co2, "kw": kw}
+        if prev is None or float(metrics["n"]) > float(prev["n"] or 0):
+            merged[key] = {
+                "n": metrics["n"],
+                "co2": metrics["co2"],
+                "kw": metrics["kw"],
+                "status": metrics.get("status"),
+            }
     return merged
 
 

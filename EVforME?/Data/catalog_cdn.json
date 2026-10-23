@@ -2,11 +2,11 @@
   "url": "",
   "publishedUrl": "https://files.catbox.moe/3i0nro.json",
   "rows": 5654,
-  "bytes": 2835008,
+  "bytes": 2834634,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-23T17:37:37.825665+00:00",
+  "updatedAt": "2026-10-23T19:24:40.998018+00:00",
   "policy": "offline-first",
-  "seedVersion": 46,
-  "note": "seedVersion 46: catalog-restore follow-up — drop no-IT-EEA / PHEV-only ICE; Scenic EV; S-Cross same-year; S-Class label; Ft dedupe labels; da EEA IT year."
+  "seedVersion": 47,
+  "note": "seedVersion 47: EEA n labels use Status F (else P); no consumption/kW change — F/P share the same metrics."
 }

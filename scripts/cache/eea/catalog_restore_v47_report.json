@@ -1,0 +1,21 @@
+{
+  "seedVersion": 47,
+  "rows": 5654,
+  "bytes": 2834634,
+  "sourceName_n_label_updates": 1182,
+  "examples": {
+    "mercedes-benz-c-class-2024": "EEA co2cars IT 2024 n=845",
+    "renault-scenic-2024": "EEA co2cars IT 2024 SCENIC E-TECH ELECTRIC n=449; kWh/100 da Scenic E-Tech 2023 (EEA cache senza Wh/km)",
+    "ds-ds-7-2024": "EEA co2cars IT 2024 n=2927",
+    "volkswagen-touareg-2024": "EEA co2cars IT 2024 n=317",
+    "mercedes-benz-s-class-2025": "EEA co2cars IT 2025 S 450 d 4MATIC n=54"
+  },
+  "launch_performance": {
+    "method": "XCTest testLaunchPerformance, mean of 5 cold launches",
+    "main_s": 2.133,
+    "branch_s": 2.119,
+    "catalog_decode_ms_approx": 30
+  },
+  "note": "EEA n from Status F (else P). Labels only.",
+  "updatedAt": "2026-10-23T19:26:01.002565+00:00"
+}

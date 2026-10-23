@@ -127,18 +127,26 @@ final class CatalogTruthHygieneTests: XCTestCase {
         XCTAssertFalse(z350Real.isJunkCatalogEntry, "350Z 2003–2009 was a real car")
     }
 
-    func testCatalog_EEA2022FuelBucketsNotDoubleCounted() {
-        // EEA cache often emits DIESEL + diesel for the same Cn/year; n must be max, not sum.
-        let cClass = VehicleCatalogService.shared.vehicle(by: "mercedes-benz-c-class-2022")
-        XCTAssertNotNil(cClass)
-        let cSrc = cClass?.sourceName ?? ""
-        XCTAssertTrue(cSrc.contains("n=1218"), "C-Class 2022 must cite n=1218 not 2436: \(cSrc)")
-        XCTAssertFalse(cSrc.contains("n=2436"), cSrc)
+    func testCatalog_EEAStatusFNotDoubleCountedWithP() {
+        // co2cars IT lists each registration under Status F (final) and P (provisional)
+        // through ~2024. In 2022 those copies also used diesel vs DIESEL casing.
+        // Cited n must use F (or P when F is absent, e.g. 2025) — never F+P.
+        let cClass2022 = VehicleCatalogService.shared.vehicle(by: "mercedes-benz-c-class-2022")
+        XCTAssertNotNil(cClass2022)
+        let c22 = cClass2022?.sourceName ?? ""
+        XCTAssertTrue(c22.contains("n=1218"), "C-Class 2022 Status F n=1218 not F+P 2436: \(c22)")
+        XCTAssertFalse(c22.contains("n=2436"), c22)
         let lc = VehicleCatalogService.shared.vehicle(by: "toyota-land-cruiser-2022")
         XCTAssertNotNil(lc)
         let lcSrc = lc?.sourceName ?? ""
-        XCTAssertTrue(lcSrc.contains("n=264"), "Land Cruiser 2022 must cite n=264 not 528: \(lcSrc)")
+        XCTAssertTrue(lcSrc.contains("n=264"), "Land Cruiser 2022 Status F n=264 not 528: \(lcSrc)")
         XCTAssertFalse(lcSrc.contains("n=528"), lcSrc)
+
+        let cClass2024 = VehicleCatalogService.shared.vehicle(by: "mercedes-benz-c-class-2024")
+        XCTAssertNotNil(cClass2024)
+        let c24 = cClass2024?.sourceName ?? ""
+        XCTAssertTrue(c24.contains("n=845"), "C-Class 2024 Status F n=845 not F+P 1690: \(c24)")
+        XCTAssertFalse(c24.contains("n=1690"), c24)
     }
 
     func testCatalog_RestoreFollowUpDropsAndFixes() {
@@ -154,7 +162,9 @@ final class CatalogTruthHygieneTests: XCTestCase {
         }
         let scenic = catalog.vehicle(by: "renault-scenic-2024")
         XCTAssertEqual(scenic?.powertrain, .ev)
-        XCTAssertTrue((scenic?.sourceName ?? "").contains("n=898"), scenic?.sourceName ?? "")
+        let scenicSrc = scenic?.sourceName ?? ""
+        XCTAssertTrue(scenicSrc.contains("n=449"), "Scenic 2024 Status F n=449 not F+P 898: \(scenicSrc)")
+        XCTAssertFalse(scenicSrc.contains("n=898"), scenicSrc)
         let sCross22 = catalog.vehicle(by: "suzuki-s-cross-2022")
         XCTAssertTrue((sCross22?.sourceName ?? "").contains("2022"), sCross22?.sourceName ?? "")
         XCTAssertFalse((sCross22?.sourceName ?? "").contains("2025"), sCross22?.sourceName ?? "")
