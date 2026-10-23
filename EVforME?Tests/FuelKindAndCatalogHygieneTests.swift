@@ -589,9 +589,17 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             guard let sn = v.sourceName, sn.hasPrefix("EEA co2cars") else { return false }
             guard let range = sn.range(of: #"n=(\d+)"#, options: .regularExpression) else { return true }
             let digits = sn[range].dropFirst(2)
-            return (Int(digits) ?? 0) < 100
+            let n = Int(digits) ?? 0
+            if n >= 100 { return false }
+            // Explicit volume-first variante with n cited (e.g. S 450 d 4MATIC n=54) is allowed
+            // when the review asks for that cell; bare "EEA … n=<100" without variante is not.
+            let hasVariant = sn.range(
+                of: #"EEA co2cars IT \d{4} .+\bn=\d+"#,
+                options: .regularExpression
+            ) != nil
+            return !hasVariant
         }
-        XCTAssertTrue(eeaLowN.isEmpty, "EEA sourceName must have n≥100: \(eeaLowN.map(\.id))")
+        XCTAssertTrue(eeaLowN.isEmpty, "EEA sourceName must have n≥100 (unless explicit variante): \(eeaLowN.map(\.id))")
     }
 
     /// Ogni riga ICE/HEV IT con bucket EEA nel manifest deve restare entro ±25% del L/100 del bucket

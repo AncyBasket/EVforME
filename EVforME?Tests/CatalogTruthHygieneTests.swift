@@ -127,6 +127,48 @@ final class CatalogTruthHygieneTests: XCTestCase {
         XCTAssertFalse(z350Real.isJunkCatalogEntry, "350Z 2003–2009 was a real car")
     }
 
+    func testCatalog_EEA2022FuelBucketsNotDoubleCounted() {
+        // EEA cache often emits DIESEL + diesel for the same Cn/year; n must be max, not sum.
+        let cClass = VehicleCatalogService.shared.vehicle(by: "mercedes-benz-c-class-2022")
+        XCTAssertNotNil(cClass)
+        let cSrc = cClass?.sourceName ?? ""
+        XCTAssertTrue(cSrc.contains("n=1218"), "C-Class 2022 must cite n=1218 not 2436: \(cSrc)")
+        XCTAssertFalse(cSrc.contains("n=2436"), cSrc)
+        let lc = VehicleCatalogService.shared.vehicle(by: "toyota-land-cruiser-2022")
+        XCTAssertNotNil(lc)
+        let lcSrc = lc?.sourceName ?? ""
+        XCTAssertTrue(lcSrc.contains("n=264"), "Land Cruiser 2022 must cite n=264 not 528: \(lcSrc)")
+        XCTAssertFalse(lcSrc.contains("n=528"), lcSrc)
+    }
+
+    func testCatalog_RestoreFollowUpDropsAndFixes() {
+        let catalog = VehicleCatalogService.shared
+        for id in [
+            "nissan-navara-2022", "mitsubishi-outlander-2022", "volkswagen-arteon-2022",
+            "renault-koleos-2023", "lexus-is-2023", "nissan-micra-2024", "kia-rio-2024",
+            "mg-mg3-2022", "mitsubishi-asx-2022", "suzuki-jimny-2023",
+            "jeep-grand-cherokee-2023", "mazda-cx-60-2022", "mitsubishi-eclipse-cross-2022",
+            "toyota-prius-2024", "peugeot-408-2022",
+        ] {
+            XCTAssertNil(catalog.vehicle(by: id), "Should be excluded: \(id)")
+        }
+        let scenic = catalog.vehicle(by: "renault-scenic-2024")
+        XCTAssertEqual(scenic?.powertrain, .ev)
+        XCTAssertTrue((scenic?.sourceName ?? "").contains("n=898"), scenic?.sourceName ?? "")
+        let sCross22 = catalog.vehicle(by: "suzuki-s-cross-2022")
+        XCTAssertTrue((sCross22?.sourceName ?? "").contains("2022"), sCross22?.sourceName ?? "")
+        XCTAssertFalse((sCross22?.sourceName ?? "").contains("2025"), sCross22?.sourceName ?? "")
+        let sClass = catalog.vehicle(by: "mercedes-benz-s-class-2025")
+        let sSrc = sClass?.sourceName ?? ""
+        XCTAssertTrue(sSrc.localizedCaseInsensitiveContains("S 450"), sSrc)
+        XCTAssertTrue(sSrc.contains("n=54"), sSrc)
+        XCTAssertFalse(sSrc.lowercased().contains("anno precedente"))
+        let prior = catalog.vehicles.filter {
+            ($0.sourceName ?? "").localizedCaseInsensitiveContains("anno precedente")
+        }
+        XCTAssertTrue(prior.isEmpty, "Must cite real EEA year, not 'anno precedente': \(prior.prefix(5).map(\.id))")
+    }
+
     func testCatalog_CoreModelsPresent() {
         let catalog = VehicleCatalogService.shared.vehicles
         func hasBrandModel(_ brand: String, _ modelContains: String) -> Bool {

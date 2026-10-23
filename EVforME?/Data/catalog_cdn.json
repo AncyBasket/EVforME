@@ -1,12 +1,12 @@
 {
   "url": "",
   "publishedUrl": "https://files.catbox.moe/3i0nro.json",
-  "rows": 5685,
-  "bytes": 2849899,
+  "rows": 5654,
+  "bytes": 2835008,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-23T13:22:36.544959+00:00",
+  "updatedAt": "2026-10-23T17:37:37.825665+00:00",
   "policy": "offline-first",
-  "seedVersion": 45,
-  "note": "seedVersion 45: restore Mercedes/MINI/gaps via EEA volume IT; BMW 2 Series Active Tourer rename; catalog load off main thread."
+  "seedVersion": 46,
+  "note": "seedVersion 46: catalog-restore follow-up — drop no-IT-EEA / PHEV-only ICE; Scenic EV; S-Cross same-year; S-Class label; Ft dedupe labels; da EEA IT year."
 }

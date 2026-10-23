@@ -246,6 +246,12 @@ def brand_payload(brand: str, hev_only: bool = False) -> dict:
 
 
 def dedupe_fuel_buckets(fuel_buckets: list[dict]) -> dict[str, dict]:
+    """
+    Merge Ft buckets that normalize to the same key (e.g. DIESEL vs diesel).
+
+    EEA co2cars often emits the same registrations twice with different Ft casing.
+    Those must NOT be summed — keep the max-n cell (same volume, same CO₂/kW).
+    """
     merged: dict[str, dict] = {}
     for fb in fuel_buckets:
         key = normalize_ft(str(fb.get("key", "")))
@@ -254,20 +260,9 @@ def dedupe_fuel_buckets(fuel_buckets: list[dict]) -> dict[str, dict]:
         n = float(fb.get("sum_r", {}).get("value") or fb.get("doc_count") or 0)
         co2 = fb.get("avg_co2", {}).get("value")
         kw = fb.get("avg_kw", {}).get("value")
-        if key not in merged:
+        prev = merged.get(key)
+        if prev is None or n > float(prev["n"] or 0):
             merged[key] = {"n": n, "co2": co2, "kw": kw}
-            continue
-        prev = merged[key]
-        total = prev["n"] + n
-        if total > 0 and isinstance(co2, (int, float)) and isinstance(prev["co2"], (int, float)):
-            prev["co2"] = (prev["co2"] * prev["n"] + float(co2) * n) / total
-        elif isinstance(co2, (int, float)) and n >= prev["n"]:
-            prev["co2"] = co2
-        if total > 0 and isinstance(kw, (int, float)) and isinstance(prev["kw"], (int, float)):
-            prev["kw"] = (prev["kw"] * prev["n"] + float(kw) * n) / total
-        elif isinstance(kw, (int, float)) and n >= prev["n"]:
-            prev["kw"] = kw
-        prev["n"] = total
     return merged
 
 

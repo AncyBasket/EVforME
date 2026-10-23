@@ -343,7 +343,7 @@ def apply_hit_to_row(
         if any(tok in prev.lower() for tok in ("ev-database", "listino", "stima(", "+stima")):
             pass
         elif int(row.get("year") or 0) != eea_year:
-            row["sourceName"] = f"EEA co2cars IT {eea_year} n={int(n)} (stima anno precedente)"
+            row["sourceName"] = f"EEA co2cars IT {eea_year} n={int(n)} (da EEA IT {eea_year})"
             row["confidenceScore"] = 0.45
         else:
             row["sourceName"] = f"EEA co2cars IT {eea_year} n={int(n)}"
