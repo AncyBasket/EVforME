@@ -335,6 +335,7 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             // Furgoni / LCV
             "mercedes-benz-eqv-2020", "mercedes-benz-eqv-2021", "mercedes-benz-eqv-2022",
             "mercedes-benz-eqv-2023", "mercedes-benz-eqv-2024", "mercedes-benz-eqv-2025",
+            "mercedes-benz-eqv-2026",
             "toyota-proace-electric-2023",
             // SUV / off-road / performance pesanti (non passenger compact)
             "audi-q8-e-tron-2019", "audi-q8-e-tron-2020",

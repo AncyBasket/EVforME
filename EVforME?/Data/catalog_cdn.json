@@ -1,12 +1,12 @@
 {
   "url": "",
   "publishedUrl": "https://files.catbox.moe/3i0nro.json",
-  "rows": 5568,
-  "bytes": 2769198,
+  "rows": 5616,
+  "bytes": 2813506,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-23T10:54:02.112749+00:00",
+  "updatedAt": "2026-10-23T12:15:09.470346+00:00",
   "policy": "offline-first",
-  "seedVersion": 43,
-  "note": "seedVersion 43: catalog truth — drop fake/no-EEA rows; bollo from max-sum_r EEA variant; NEDC/estimate labels; ±20% EEA consumption."
+  "seedVersion": 44,
+  "note": "seedVersion 44: catalog truth follow-up — drop 500/350Z ghosts; pre-2010 stima (no EEA); 2026←2025; restore series/Doblo/Trax/Genesis."
 }

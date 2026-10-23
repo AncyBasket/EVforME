@@ -192,7 +192,7 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
             return true
         }
         if brandKey.contains("mercedes"),
-           ["190", "200", "220", "230", "240", "250", "260", "280", "300", "380", "420", "560", "600"].contains(modelKey),
+           ["190", "200", "220", "230", "240", "250", "260", "280", "300", "380", "420", "500", "560", "600"].contains(modelKey),
            year >= 2010 {
             return true
         }
@@ -200,7 +200,7 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
             return true
         }
         if brandKey.contains("kia"), modelKey == "miami" { return true }
-        if brandKey.contains("nissan"), modelKey == "axxess" { return true }
+        if brandKey.contains("nissan"), modelKey == "axxess" || modelKey == "350z" { return true }
         if brandKey.contains("peugeot"), modelKey == "405", year >= 2010 { return true }
         if brandKey.contains("hyundai"), ["genesis", "excel"].contains(modelKey), year >= 2015 {
             return true

@@ -107,6 +107,20 @@ final class HowWeCalculateExplainerTests: XCTestCase {
             .eeaNEDC
         )
         XCTAssertEqual(
+            HowWeCalculateExplainer.consumptionSourceCategory(
+                from: "seed+EEA-NEDC",
+                vehicleYear: 2008
+            ),
+            .estimate,
+            "Pre-2010 must not be categorized as EEA"
+        )
+        XCTAssertNil(
+            HowWeCalculateExplainer.sourceURL(
+                from: "stima (pre-2010; dati consumi non da co2cars IT)",
+                category: .estimate
+            )
+        )
+        XCTAssertEqual(
             HowWeCalculateExplainer.consumptionSourceCategory(from: "EPA-FuelEconomy"),
             .epaUSA
         )

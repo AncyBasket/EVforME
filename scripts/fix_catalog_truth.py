@@ -51,11 +51,11 @@ MIN_EEA_N_FOR_CONS = 100
 DEAD_MODEL_PATTERNS: list[tuple[str, re.Pattern[str], int]] = [
     # (brand_norm_substring, model regex, min_year_to_drop)
     ("AUDI", re.compile(r"^(100|200|80|90|4000|5000)$", re.I), 2000),
-    ("MERCEDES", re.compile(r"^(190|200|220|230|240|250|260|280|300|380|420|560|600)$", re.I), 2010),
+    ("MERCEDES", re.compile(r"^(190|200|220|230|240|250|260|280|300|380|420|500|560|600)$", re.I), 2010),
     ("BMW", re.compile(r"^(228|323I|323)$", re.I), 2015),
     ("FORD", re.compile(r"(bradford|affordable\s*aluminum|b-?750)", re.I), 0),
     ("KIA", re.compile(r"^miami$", re.I), 0),
-    ("NISSAN", re.compile(r"^axxess$", re.I), 0),
+    ("NISSAN", re.compile(r"^(axxess|350z)$", re.I), 0),
     ("PEUGEOT", re.compile(r"^405$", re.I), 2010),
     ("HYUNDAI", re.compile(r"^(genesis|excel)$", re.I), 2015),
 ]

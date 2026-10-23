@@ -40,9 +40,9 @@ final class CatalogTruthHygieneTests: XCTestCase {
     func testCatalog_NoDeadModelNames() {
         let banned: [(String, String)] = [
             ("audi", "100"), ("audi", "200"), ("audi", "80"), ("audi", "90"),
-            ("mercedes", "600"), ("mercedes", "190"),
+            ("mercedes", "600"), ("mercedes", "190"), ("mercedes", "500"),
             ("bmw", "228"), ("bmw", "323i"),
-            ("kia", "miami"), ("nissan", "axxess"),
+            ("kia", "miami"), ("nissan", "axxess"), ("nissan", "350z"),
             ("peugeot", "405"), ("hyundai", "excel"), ("hyundai", "genesis"),
             ("ford", "bradford"),
         ]
@@ -74,6 +74,111 @@ final class CatalogTruthHygieneTests: XCTestCase {
             fuelKind: .petrol
         )
         XCTAssertTrue(audi100.isJunkCatalogEntry)
+        let mb500 = VehicleCatalogItem(
+            id: "mercedes-benz-500-2022",
+            brand: "Mercedes-Benz",
+            model: "500",
+            year: 2022,
+            powertrain: .ice,
+            lengthM: 5.0,
+            widthM: 1.9,
+            heightM: 1.5,
+            fuelConsumptionLPerKm: 0.12,
+            energyConsumptionKWhPerKm: nil,
+            maintenancePerYear: 800,
+            taxesPerYear: 500,
+            imageURL: nil,
+            fuelKind: .petrol
+        )
+        XCTAssertTrue(mb500.isJunkCatalogEntry, "Mercedes 500 is an EEA aggregate ghost")
+        let z350 = VehicleCatalogItem(
+            id: "nissan-350z-2023",
+            brand: "Nissan",
+            model: "350Z",
+            year: 2023,
+            powertrain: .ice,
+            lengthM: 4.3,
+            widthM: 1.8,
+            heightM: 1.3,
+            fuelConsumptionLPerKm: 0.11,
+            energyConsumptionKWhPerKm: nil,
+            maintenancePerYear: 600,
+            taxesPerYear: 400,
+            imageURL: nil,
+            fuelKind: .petrol
+        )
+        XCTAssertTrue(z350.isJunkCatalogEntry)
+    }
+
+    func testCatalog_NoEEALabelBefore2010() {
+        let bad = VehicleCatalogService.shared.vehicles.filter { v in
+            guard v.year < 2010, let sn = v.sourceName?.lowercased() else { return false }
+            if sn.hasPrefix("stima") { return false }
+            return sn.contains("seed+eea") || sn.hasPrefix("eea") || sn.contains("co2cars")
+        }
+        XCTAssertTrue(bad.isEmpty, "Pre-2010 must not claim EEA: \(bad.prefix(8).map(\.id))")
+        // Come calcoliamo must not offer the EEA dataset link for those years.
+        for v in VehicleCatalogService.shared.vehicles where v.year < 2010 {
+            let cat = HowWeCalculateExplainer.consumptionSourceCategory(
+                from: v.sourceName,
+                vehicleYear: v.year
+            )
+            XCTAssertNotEqual(cat, .eeaWLTP, v.id)
+            XCTAssertNotEqual(cat, .eeaNEDC, v.id)
+            XCTAssertNil(HowWeCalculateExplainer.sourceURL(from: v.sourceName, category: cat), v.id)
+        }
+    }
+
+    func testCatalog_Estimate2026Within20PercentOfEEA2025Sibling() {
+        var failures: [String] = []
+        var checked = 0
+        let vehicles = VehicleCatalogService.shared.vehicles
+        let byId = Dictionary(uniqueKeysWithValues: vehicles.map { ($0.id, $0) })
+        for v in vehicles where v.year == 2026 {
+            guard v.id.hasSuffix("-2026") else { continue }
+            let sibId = String(v.id.dropLast(4)) + "2025"
+            guard let sib = byId[sibId] else { continue }
+            let sn = (sib.sourceName ?? "").lowercased()
+            let sibIsEEA = sn.contains("eea") || sn.contains("co2cars") || sn.contains("wh/km")
+            guard sibIsEEA, !sn.hasPrefix("stima") else { continue }
+            checked += 1
+            switch v.powertrain {
+            case .ev:
+                guard let a = v.resolvedEnergyKWhPerKm, let b = sib.resolvedEnergyKWhPerKm, b > 0 else {
+                    failures.append("\(v.id): missing EV energy")
+                    continue
+                }
+                if abs(a - b) / b > 0.20 {
+                    failures.append(String(format: "%@: kWh/100 %.2f vs 2025 %.2f", v.id, a * 100, b * 100))
+                }
+            case .ice, .hev, .phev:
+                guard v.resolvedFuelKind == sib.resolvedFuelKind else { continue }
+                guard let a = v.fuelConsumptionLPerKm, let b = sib.fuelConsumptionLPerKm, b > 0 else {
+                    failures.append("\(v.id): missing fuel")
+                    continue
+                }
+                if abs(a - b) / b > 0.20 {
+                    failures.append(String(format: "%@: L/100 %.2f vs 2025 %.2f", v.id, a * 100, b * 100))
+                }
+            }
+        }
+        XCTAssertGreaterThan(checked, 20, "Expected many 2026←2025 EEA siblings")
+        XCTAssertTrue(failures.isEmpty, "2026 drift vs 2025: \(failures.prefix(12))")
+    }
+
+    func testCatalog_RestoredSeriesAndDobloPresent() {
+        for id in ["bmw-1-series-2024", "bmw-3-series-2024", "bmw-5-series-2024", "fiat-doblo-2023"] {
+            XCTAssertNotNil(VehicleCatalogService.shared.vehicle(by: id), id)
+        }
+        let one = VehicleCatalogService.shared.vehicle(by: "bmw-1-series-2024")
+        XCTAssertEqual(one?.resolvedFuelKind, .diesel)
+        XCTAssertLessThan(one?.taxesPerYear ?? 9_999, 800)
+        XCTAssertTrue((one?.sourceName ?? "").contains("EEA"), one?.sourceName ?? "")
+        let trax = VehicleCatalogService.shared.vehicle(by: "chevrolet-trax-2024")
+        XCTAssertNotNil(trax)
+        XCTAssertTrue((trax?.sourceName ?? "").localizedCaseInsensitiveContains("stima"))
+        let g70 = VehicleCatalogService.shared.vehicle(by: "genesis-g70-2024")
+        XCTAssertNotNil(g70)
     }
 
     func testCatalog_GLEBolloFromVolumeDieselNotAMG() {
@@ -117,6 +222,7 @@ final class CatalogTruthHygieneTests: XCTestCase {
     func testCatalog_Pre2018NotLabeledWLTPWithoutNEDC() {
         let bad = VehicleCatalogService.shared.vehicles.filter { v in
             guard v.year < 2018, let src = v.sourceName?.lowercased() else { return false }
+            if src.hasPrefix("stima") { return false }
             return src.contains("wltp") && !src.contains("nedc")
         }
         XCTAssertTrue(bad.isEmpty, "Pre-2018 WLTP without NEDC: \(bad.prefix(8).map(\.id))")

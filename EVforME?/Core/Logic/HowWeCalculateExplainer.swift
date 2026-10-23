@@ -164,7 +164,7 @@ enum HowWeCalculateExplainer {
         return s.range(of: #"(?<![a-z0-9])epa(?![a-z0-9])"#, options: .regularExpression) != nil
     }
 
-    static func consumptionSourceCategory(from sourceName: String?) -> ConsumptionSourceCategory {
+    static func consumptionSourceCategory(from sourceName: String?, vehicleYear: Int? = nil) -> ConsumptionSourceCategory {
         let s = (sourceName ?? "").lowercased()
         guard !s.isEmpty else { return .unknown }
         if looksLikeEPASource(sourceName ?? "") {
@@ -172,6 +172,12 @@ enum HowWeCalculateExplainer {
         }
         if s.contains("stima") {
             return .estimate
+        }
+        // EEA co2cars IT has no passenger-car records before 2010 — never link those years as EEA.
+        if let vehicleYear, vehicleYear < 2010 {
+            if s.contains("eea") || s.contains("nedc") || s.contains("co2cars") {
+                return .estimate
+            }
         }
         // NEDC before generic EEA/WLTP — pre-2018 rows are labeled `;NEDC` / `seed+EEA-NEDC`.
         if s.contains("nedc") {
@@ -336,7 +342,7 @@ enum HowWeCalculateExplainer {
         referenceYear: Int,
         ownershipYears: Int
     ) -> HowWeCalculateVehicleBlock {
-        let category = consumptionSourceCategory(from: vehicle.sourceName)
+        let category = consumptionSourceCategory(from: vehicle.sourceName, vehicleYear: vehicle.year)
         let detail = bolloDetail(
             vehicle: vehicle,
             bookletKw: bookletKw,
