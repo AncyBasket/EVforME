@@ -53,16 +53,20 @@ enum OperatingCostCalculator {
             yearlyKm: yearlyKm,
             market: input.market
         ) * (asSource ? scenario.iceCostMultiplier : scenario.evCostMultiplier)
-        let taxes = OwnershipCostEstimates.bolloPerYearEstimate(
+        // Stessa media del verdetto: totale orizzonte / anni di possesso.
+        let years = max(1, input.ownershipYears)
+        let bolloHorizon = OwnershipCostEstimates.bolloTotalOverHorizon(
             catalogTaxesPerYear: vehicle.taxesPerYear,
             powertrain: vehicle.powertrain,
             vehicleYear: vehicle.year,
             referenceYear: currentYear,
+            ownershipYears: years,
             bookletPowerKwP2: asSource ? input.sourceBookletPowerKwP2 : input.targetBookletPowerKwP2,
             italianRegion: input.italianRegion,
             fuelKind: vehicle.resolvedFuelKind,
             catalogPowerKw: vehicle.powertrain == .ev ? nil : vehicle.powerKw
         )
+        let taxes = bolloHorizon.amount / Double(years)
         let insurance = OwnershipCostEstimates.insurancePerYear(
             purchasePrice: valueBasis,
             yearlyKm: yearlyKm,

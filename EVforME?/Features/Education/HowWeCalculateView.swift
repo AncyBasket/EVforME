@@ -27,6 +27,12 @@ struct HowWeCalculateView: View {
                         .fixedSize(horizontal: false, vertical: true)
                         .accessibilityIdentifier("how_we_calculate_intro")
 
+                    Text(L10n.howWeCalculateModelEstimatesNote)
+                        .font(Typography.readingCaption)
+                        .foregroundStyle(Color.secondaryText)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityIdentifier("how_we_calculate_model_estimates")
+
                     if let source = model.source {
                         vehicleSection(source)
                     }

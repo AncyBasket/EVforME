@@ -89,7 +89,7 @@ enum PDFReportService {
                     ? L10n.impactSaveBetween(result.yearlySavingsRange.lowerBound, result.yearlySavingsRange.upperBound)
                     : L10n.impactCurrentCheaper())
                 \(L10n.impactChargePerWeek(result.weeklyCharges))
-                \(result.breakEvenMonths.map { L10n.breakEvenMonthsBadge($0) } ?? L10n.breakEvenNotReachedReason)
+                \(pdfBreakEvenLine(result: result, input: input))
 
                 \(result.keyReasons.map { "• \($0)" }.joined(separator: "\n"))
                 """
@@ -141,5 +141,16 @@ enum PDFReportService {
             .appendingPathComponent("EVforME-report-\(Int(Date().timeIntervalSince1970)).pdf")
         try data.write(to: url, options: .atomic)
         return url
+    }
+
+    /// Pareggio solo in modalità acquisto quando davvero non raggiunto; altrimenti mesi o niente.
+    static func pdfBreakEvenLine(result: SimulationResult, input: UserInput) -> String {
+        if let months = result.breakEvenMonths {
+            return L10n.breakEvenMonthsBadge(months)
+        }
+        guard input.comparisonIntent == .consideringPurchase else {
+            return ""
+        }
+        return L10n.breakEvenNotReachedReason
     }
 }

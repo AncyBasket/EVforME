@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>charge_per_week</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>You would charge about %d time per week</string>
+			<key>other</key>
+			<string>You would charge about %d times per week</string>
+		</dict>
+	</dict>
+	<key>impact_charge_per_week</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>• You'd charge about %d time per week.</string>
+			<key>other</key>
+			<string>• You'd charge about %d times per week.</string>
+		</dict>
+	</dict>
+	<key>verdict_ai_fallback_yes</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@charges@</string>
+		<key>charges</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>At about %2$d km/year the numbers favour electric: about €%3$d–€%4$d saved per year and about %1$d charge a week. With home charging and this pair, it looks worthwhile with these inputs.</string>
+			<key>other</key>
+			<string>At about %2$d km/year the numbers favour electric: about €%3$d–€%4$d saved per year and about %1$d charges a week. With home charging and this pair, it looks worthwhile with these inputs.</string>
+		</dict>
+	</dict>
+	<key>verdict_ai_fallback_yes_public</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@charges@</string>
+		<key>charges</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>At about %2$d km/year the numbers favour electric: about €%3$d–€%4$d saved per year and about %1$d charge a week. Without home charging (public only) and with this pair, it looks worthwhile with these inputs.</string>
+			<key>other</key>
+			<string>At about %2$d km/year the numbers favour electric: about €%3$d–€%4$d saved per year and about %1$d charges a week. Without home charging (public only) and with this pair, it looks worthwhile with these inputs.</string>
+		</dict>
+	</dict>
+	<key>verdict_ai_fallback_not_yet</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@charges@</string>
+		<key>charges</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>At about %2$d km/year with these prices, electricity does not beat fuel yet. Expect about %1$d charge per week — wait for cheaper power, more home charging, or a thriftier EV before switching.</string>
+			<key>other</key>
+			<string>At about %2$d km/year with these prices, electricity does not beat fuel yet. Expect about %1$d charges per week — wait for cheaper power, more home charging, or a thriftier EV before switching.</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

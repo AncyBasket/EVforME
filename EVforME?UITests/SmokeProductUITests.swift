@@ -369,6 +369,67 @@ final class SmokeProductUITests: XCTestCase {
         saveShot(app, name: "09_workshop_after_smoke")
     }
 
+    /// Dynamic Type Accessibility XXXL — home + verdict Assunzioni (vertical, no EXIF).
+    @MainActor
+    func testSmokeDynamicTypeXXXL_HomeAndAssumptions() throws {
+        let app = XCUIApplication()
+        app.launchEnvironment["UITEST_PRESET_VEHICLES"] = "1"
+        app.launchArguments += [
+            "-UITesting",
+            "-DisableAnimations",
+            "-UIPreferredContentSizeCategoryName",
+            "UICTContentSizeCategoryAccessibilityXXXL",
+        ]
+        app.launch()
+
+        dismissQuickStartIfNeeded(app)
+        dismissSystemAlertsIfNeeded(app)
+        XCUIDevice.shared.orientation = .portrait
+        saveShot(app, name: "10_home_xxxl")
+
+        let tellMe = firstExistingButton(app, labels: ["Dimmi la verità", "Tell me the truth"], timeout: 12)
+        XCTAssertNotNil(tellMe, "Simulate CTA at XXXL")
+        tellMe?.tap()
+        dismissSystemAlertsIfNeeded(app)
+
+        let modify = firstExistingButton(
+            app,
+            labels: ["Modifica dati", "Change inputs", "Modify input"],
+            timeout: 20
+        )
+        XCTAssertNotNil(modify, "Verdict should open at XXXL")
+
+        // Expand “Assunzioni & trasparenza” (closed by default), then require the section hittable.
+        let expandLabels = [
+            "Assunzioni & trasparenza",
+            "Assumptions & Transparency",
+            "Assunzioni & Trasparenza",
+        ]
+        var expanded = false
+        for _ in 0..<24 {
+            if let btn = firstExistingButton(app, labels: expandLabels, timeout: 0.8), btn.isHittable {
+                btn.tap()
+                expanded = true
+                break
+            }
+            scrollDown(app, times: 1)
+        }
+        XCTAssertTrue(expanded, "Must expand Assumptions & Transparency before shot 11")
+        RunLoop.current.run(until: Date().addingTimeInterval(0.6))
+
+        let assumptions = app.descendants(matching: .any)["verdict_assumptions_section"]
+        var visible = false
+        for _ in 0..<20 {
+            if assumptions.exists, assumptions.isHittable {
+                visible = true
+                break
+            }
+            scrollDown(app, times: 1)
+        }
+        XCTAssertTrue(visible, "verdict_assumptions_section must be hittable before shot 11")
+        saveShot(app, name: "11_verdict_assumptions_xxxl")
+    }
+
     @MainActor
     private func dismissSystemAlertsIfNeeded(_ app: XCUIApplication) {
         let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")

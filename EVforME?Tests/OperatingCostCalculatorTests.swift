@@ -534,4 +534,84 @@ final class OperatingCostCalculatorTests: XCTestCase {
         XCTAssertGreaterThan(highKm, lowAt20kEquivalent * 1.05,
                              "High lifetime miles should apply older CR band (low=\(lowKm) high=\(highKm))")
     }
+
+    func testOperatingCostPerYear_UsesBolloHorizonAverageNotFirstYearOnly() throws {
+        // Lazio EV 2022 + 5 anni: anno corrente spesso €0 (esenzione), media orizzonte > 0.
+        let target = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: "tesla-model-3-2022"))
+        let input = UserInput(
+            dailyKm: 12_000,
+            hasHomeCharging: true,
+            areaType: .mixed,
+            fuelPrice: 1.80,
+            ownershipYears: 5,
+            electricityPricePerKWh: 0.28,
+            sourceVehicleId: "volkswagen-golf-2020",
+            targetVehicleId: target.id,
+            targetPurchasePrice: 40_000,
+            targetBookletPowerKwP2: 100,
+            italianRegion: .lazio
+        )
+        let years = max(1, input.ownershipYears)
+        let horizon = OwnershipCostEstimates.bolloTotalOverHorizon(
+            catalogTaxesPerYear: target.taxesPerYear,
+            powertrain: target.powertrain,
+            vehicleYear: target.year,
+            referenceYear: Defaults.referenceCalendarYear,
+            ownershipYears: years,
+            bookletPowerKwP2: input.targetBookletPowerKwP2,
+            italianRegion: .lazio,
+            fuelKind: target.resolvedFuelKind,
+            catalogPowerKw: nil
+        )
+        let firstYear = OwnershipCostEstimates.bolloPerYearDetail(
+            catalogTaxesPerYear: target.taxesPerYear,
+            powertrain: target.powertrain,
+            vehicleYear: target.year,
+            referenceYear: Defaults.referenceCalendarYear,
+            bookletPowerKwP2: input.targetBookletPowerKwP2,
+            italianRegion: .lazio,
+            fuelKind: target.resolvedFuelKind,
+            catalogPowerKw: nil
+        )
+        XCTAssertEqual(firstYear.amount, 0, accuracy: 0.01, "Still in EV exemption in 2026")
+        XCTAssertGreaterThan(horizon.amount / Double(years), 0)
+
+        let yearCost = OperatingCostCalculator.operatingCostPerYear(
+            vehicle: target,
+            input: input,
+            asSource: false
+        )
+        let energy = EVSimulator().energyCostPerYear(
+            vehicle: target,
+            input: OperatingCostCalculator.makeSimulationInput(from: input),
+            scenario: input.scenario,
+            fuelOverrideLPerKm: nil,
+            energyOverrideKWhPerKm: nil,
+            asSource: false
+        )
+        let maintenance = OperatingCostCalculator.maintenancePerYear(
+            vehicleAge: max(0, Defaults.referenceCalendarYear - target.year),
+            powertrain: target.powertrain,
+            yearlyKm: Double(input.dailyKm),
+            market: input.market
+        ) * input.scenario.evCostMultiplier
+        let insurance = OwnershipCostEstimates.insurancePerYear(
+            purchasePrice: OwnershipCostEstimates.operatingValueBasis(
+                purchaseOrListPrice: input.targetPurchasePrice,
+                vehicleYear: target.year,
+                electrified: true,
+                referenceYear: Defaults.referenceCalendarYear
+            ),
+            yearlyKm: Double(input.dailyKm),
+            electrified: true,
+            annualInsuranceOverrideEUR: input.annualInsuranceOverrideEUR,
+            includeKaskoTheft: input.includeKaskoTheft,
+            annualKaskoEUR: input.annualKaskoEUR
+        )
+        let expected = energy + maintenance + (horizon.amount / Double(years)) + insurance
+        XCTAssertEqual(yearCost, expected, accuracy: 0.05)
+        // Must not use first-year bollo (€0) as the only tax line.
+        let wrongFirstYearOnly = energy + maintenance + firstYear.amount + insurance
+        XCTAssertNotEqual(yearCost, wrongFirstYearOnly, accuracy: 0.05)
+    }
 }

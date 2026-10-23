@@ -48,17 +48,18 @@ struct LastComparisonCard: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
 
+            // Una sola volta (non anche in `makeDeltaBadge`).
+            Text(ItalianIncentives.windowBadgeText)
+                .font(Typography.readingCaption)
+                .foregroundStyle(Color.secondaryText)
+                .fixedSize(horizontal: false, vertical: true)
+
             if let deltaBadge {
                 Text(deltaBadge)
                     .font(Typography.readingCaption)
                     .foregroundStyle(Color.ink)
                     .fixedSize(horizontal: false, vertical: true)
             }
-
-            Text(ItalianIncentives.windowBadgeText)
-                .font(Typography.readingCaption)
-                .foregroundStyle(Color.secondaryText)
-                .fixedSize(horizontal: false, vertical: true)
 
             Text(dataFreshness)
                 .font(Typography.readingCaption)

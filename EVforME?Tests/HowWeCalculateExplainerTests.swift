@@ -11,6 +11,15 @@ final class HowWeCalculateExplainerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         VehicleCatalogService.shared.reloadFromBundledSeedIgnoringUserCacheForTesting()
+        // Pin calendar year so horizon averages (e.g. Lazio EV ≈ 56,80) stay stable past 2026.
+        Defaults.referenceCalendarYearProvider = { 2026 }
+    }
+
+    override func tearDown() {
+        Defaults.referenceCalendarYearProvider = {
+            Calendar.current.component(.year, from: Date())
+        }
+        super.tearDown()
     }
 
     func testFuelFromCO2Constants_MatchPythonScriptCoefficientsViaFilePath() throws {
@@ -339,9 +348,8 @@ final class HowWeCalculateExplainerTests: XCTestCase {
             XCTAssertEqual(evBlock.bolloThisYearEUR, 0, accuracy: 1e-9)
             XCTAssertGreaterThan(evBlock.bolloAverageEUR, 0, "Post-exemption years pull average above 0")
             // Esempio tipico ref 2026: media ≈ 56,80 €/anno (4/5 × 71).
-            if refYear == 2026 {
-                XCTAssertEqual(evBlock.bolloAverageEUR, 56.8, accuracy: 0.05)
-            }
+            XCTAssertEqual(refYear, 2026, "setUp pins referenceCalendarYearProvider to 2026")
+            XCTAssertEqual(evBlock.bolloAverageEUR, 56.8, accuracy: 0.05)
         }
 
         // Termica Molise: media = dettaglio (tariffa stabile sull’orizzonte).

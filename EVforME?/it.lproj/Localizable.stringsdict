@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>charge_per_week</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>Ricaricheresti circa %d volta a settimana</string>
+			<key>other</key>
+			<string>Ricaricheresti circa %d volte a settimana</string>
+		</dict>
+	</dict>
+	<key>impact_charge_per_week</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>• Ricaricheresti circa %d volta a settimana.</string>
+			<key>other</key>
+			<string>• Ricaricheresti circa %d volte a settimana.</string>
+		</dict>
+	</dict>
+	<key>verdict_ai_fallback_yes</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@charges@</string>
+		<key>charges</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>Con circa %2$d km/anno i conti favoriscono l’elettrico: circa €%3$d–€%4$d risparmiati l’anno e circa %1$d ricarica a settimana. Con ricarica a casa e la coppia scelta, sembra conveniente con questi dati.</string>
+			<key>other</key>
+			<string>Con circa %2$d km/anno i conti favoriscono l’elettrico: circa €%3$d–€%4$d risparmiati l’anno e circa %1$d ricariche a settimana. Con ricarica a casa e la coppia scelta, sembra conveniente con questi dati.</string>
+		</dict>
+	</dict>
+	<key>verdict_ai_fallback_yes_public</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@charges@</string>
+		<key>charges</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>Con circa %2$d km/anno i conti favoriscono l’elettrico: circa €%3$d–€%4$d risparmiati l’anno e circa %1$d ricarica a settimana. Senza ricarica a casa (solo pubblica) e con la coppia scelta, sembra conveniente con questi dati.</string>
+			<key>other</key>
+			<string>Con circa %2$d km/anno i conti favoriscono l’elettrico: circa €%3$d–€%4$d risparmiati l’anno e circa %1$d ricariche a settimana. Senza ricarica a casa (solo pubblica) e con la coppia scelta, sembra conveniente con questi dati.</string>
+		</dict>
+	</dict>
+	<key>verdict_ai_fallback_not_yet</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@charges@</string>
+		<key>charges</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>A circa %2$d km/anno con questi prezzi, l’elettrico non batte ancora il carburante. Conta circa %1$d ricarica a settimana: conviene aspettare energia più economica, più ricarica a casa o un’EV più parca.</string>
+			<key>other</key>
+			<string>A circa %2$d km/anno con questi prezzi, l’elettrico non batte ancora il carburante. Conta circa %1$d ricariche a settimana: conviene aspettare energia più economica, più ricarica a casa o un’EV più parca.</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

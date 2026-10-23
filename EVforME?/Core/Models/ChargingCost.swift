@@ -23,8 +23,9 @@ enum PublicChargingPriceDefaults {
     static let fastDCPerKWh: Double = 0.75
     /// Ultra-fast / HPC (media Adiconsum).
     static let ultraFastPerKWh: Double = 0.74
-    /// Tesla Supercharger (proprietari Tesla) — media attuale Italia ~0,42 €/kWh.
-    static let teslaSuperchargerPerKWh: Double = 0.42
+    /// Tesla Supercharger: senza tariffa Adiconsum dedicata usiamo la fascia HPC Adiconsum
+    /// (verifica sempre il prezzo in-app Tesla).
+    static let teslaSuperchargerPerKWh: Double = ultraFastPerKWh
 }
 
 /// Tipo di ricarica disponibile

@@ -635,8 +635,15 @@ final class EVSimulator {
         // Verdetto = solo gestione; il listino (se presente) è solo nota a parte.
         if yearlySavings > 50 {
             reasons.append(L10n.opexSavingsOnlyReason(Int(yearlySavings)))
-        } else {
+        } else if input.comparisonIntent == .consideringPurchase {
             reasons.append(L10n.breakEvenNotReachedReason)
+        } else {
+            // Già posseduta: niente “maggior costo di acquisto” — solo opex.
+            reasons.append(
+                yearlySavings > 0
+                    ? L10n.opexSavingsLimitedReason(Int(yearlySavings))
+                    : L10n.saveCurrentCheaper
+            )
         }
         if input.comparisonIntent == .consideringPurchase, let breakEvenMonths {
             reasons.append(L10n.breakEvenMonthsReason(breakEvenMonths))
