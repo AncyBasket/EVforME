@@ -35,6 +35,7 @@ enum ConfidenceBand: Equatable {
 /// Categoria fonte consumi (localizzata), ricavata da `sourceName`.
 enum ConsumptionSourceCategory: Equatable {
     case eeaWLTP
+    case eeaNEDC
     case epaUSA
     case manufacturer
     case estimate
@@ -43,6 +44,7 @@ enum ConsumptionSourceCategory: Equatable {
     var localizedTitle: String {
         switch self {
         case .eeaWLTP: return L10n.howWeCalculateSourceCategoryEEA
+        case .eeaNEDC: return L10n.howWeCalculateSourceCategoryNEDC
         case .epaUSA: return L10n.howWeCalculateSourceCategoryEPA
         case .manufacturer: return L10n.howWeCalculateSourceCategoryManufacturer
         case .estimate: return L10n.howWeCalculateSourceCategoryEstimate
@@ -53,7 +55,7 @@ enum ConsumptionSourceCategory: Equatable {
     /// Link di default quando `sourceName` non contiene già un URL.
     var defaultURL: URL? {
         switch self {
-        case .eeaWLTP: return OfficialLinks.eeaCO2CarsDataset
+        case .eeaWLTP, .eeaNEDC: return OfficialLinks.eeaCO2CarsDataset
         case .epaUSA: return OfficialLinks.epaFuelEconomy
         case .manufacturer, .estimate, .unknown: return nil
         }
@@ -170,6 +172,10 @@ enum HowWeCalculateExplainer {
         }
         if s.contains("stima") {
             return .estimate
+        }
+        // NEDC before generic EEA/WLTP — pre-2018 rows are labeled `;NEDC` / `seed+EEA-NEDC`.
+        if s.contains("nedc") {
+            return .eeaNEDC
         }
         if s.contains("eea") || s.contains("co2cars") {
             return .eeaWLTP

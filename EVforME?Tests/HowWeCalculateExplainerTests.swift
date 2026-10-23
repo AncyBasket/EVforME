@@ -99,6 +99,14 @@ final class HowWeCalculateExplainerTests: XCTestCase {
             .eeaWLTP
         )
         XCTAssertEqual(
+            HowWeCalculateExplainer.consumptionSourceCategory(from: "seed+EEA-NEDC"),
+            .eeaNEDC
+        )
+        XCTAssertEqual(
+            HowWeCalculateExplainer.consumptionSourceCategory(from: "EEA co2cars IT 2017 n=80;NEDC"),
+            .eeaNEDC
+        )
+        XCTAssertEqual(
             HowWeCalculateExplainer.consumptionSourceCategory(from: "EPA-FuelEconomy"),
             .epaUSA
         )

@@ -764,6 +764,7 @@ enum L10n {
         format("how_we_calculate_source_format", source)
     }
     static var howWeCalculateSourceCategoryEEA: String { string("how_we_calculate_source_category_eea") }
+    static var howWeCalculateSourceCategoryNEDC: String { string("how_we_calculate_source_category_nedc") }
     static var howWeCalculateSourceCategoryEPA: String { string("how_we_calculate_source_category_epa") }
     static var howWeCalculateSourceCategoryManufacturer: String { string("how_we_calculate_source_category_manufacturer") }
     static var howWeCalculateSourceCategoryEstimate: String { string("how_we_calculate_source_category_estimate") }
