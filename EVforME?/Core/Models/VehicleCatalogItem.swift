@@ -176,14 +176,36 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         powertrain.catalogFuelLabel(fuelKind: resolvedFuelKind)
     }
 
-    /// Nomi NHTSA / spazzatura da non mostrare nel picker.
+    /// Nomi NHTSA / spazzatura / modelli fantasma da non mostrare nel picker.
     var isJunkCatalogEntry: Bool {
         let blob = "\(brand) \(model)".lowercased()
         let needles = [
             "radiator", "trailer", "manufacturing", " llc", " inc", " ltd",
             "company", "chassis", "incomplete", "motorhome", "cutaway",
+            "bradford", "affordable aluminum", "b-750", "axxess",
         ]
-        return needles.contains { blob.contains($0) }
+        if needles.contains(where: { blob.contains($0) }) { return true }
+        // Dead EU passenger names that must not reappear as recent catalog years.
+        let brandKey = brand.lowercased().replacingOccurrences(of: "-", with: " ")
+        let modelKey = model.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        if brandKey.contains("audi"), ["100", "200", "80", "90", "4000", "5000"].contains(modelKey), year >= 2000 {
+            return true
+        }
+        if brandKey.contains("mercedes"),
+           ["190", "200", "220", "230", "240", "250", "260", "280", "300", "380", "420", "500", "560", "600"].contains(modelKey),
+           year >= 2010 {
+            return true
+        }
+        if brandKey.contains("bmw"), ["228", "323i", "323"].contains(modelKey), year >= 2015 {
+            return true
+        }
+        if brandKey.contains("kia"), modelKey == "miami" { return true }
+        if brandKey.contains("nissan"), modelKey == "axxess" || modelKey == "350z" { return true }
+        if brandKey.contains("peugeot"), modelKey == "405", year >= 2010 { return true }
+        if brandKey.contains("hyundai"), ["genesis", "excel"].contains(modelKey), year >= 2015 {
+            return true
+        }
+        return false
     }
 
     private static let dieselLeanModels: Set<String> = [

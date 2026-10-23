@@ -334,7 +334,8 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         let documentedHeavyExceptions: Set<String> = [
             // Furgoni / LCV
             "mercedes-benz-eqv-2020", "mercedes-benz-eqv-2021", "mercedes-benz-eqv-2022",
-            "mercedes-benz-eqv-2023", "mercedes-benz-eqv-2024",
+            "mercedes-benz-eqv-2023", "mercedes-benz-eqv-2024", "mercedes-benz-eqv-2025",
+            "mercedes-benz-eqv-2026",
             "toyota-proace-electric-2023",
             // SUV / off-road / performance pesanti (non passenger compact)
             "audi-q8-e-tron-2019", "audi-q8-e-tron-2020",
@@ -414,7 +415,7 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         "renault|koleos",
         "seat|ateca", "seat|tarraco",
         "skoda|karoq", "skoda|kodiaq", "skoda|octavia", "skoda|superb",
-        "toyota|rav4",
+        "toyota|rav4", "toyota|land cruiser",
         "volkswagen|passat", "volkswagen|tiguan", "volkswagen|touareg",
         "jeep|grand cherokee", "renault|kadjar",
     ]
@@ -475,8 +476,14 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         let stima = VehicleCatalogService.shared.vehicles.filter {
             ($0.sourceName ?? "").localizedCaseInsensitiveContains("stima")
         }
-        // 36 restanti dopo correzione Model Y 2025 (EV-Database 13,1, non più copia 2024).
-        XCTAssertEqual(stima.count, 38, "expected 38 stima flags (36 YoY EV + Auris 2018 pair), got \(stima.count)")
+        // Pre-catalog-truth: 38 (YoY EV + Auris). After truth pass, bare high-conf
+        // 2025/2026 seed+EEA-WLTP rows are also labeled stima (no EEA year match).
+        XCTAssertGreaterThanOrEqual(stima.count, 38, "expected ≥38 stima flags, got \(stima.count)")
+        let modelY = VehicleCatalogService.shared.vehicle(by: "tesla-model-y-2025")
+        XCTAssertFalse(
+            (modelY?.sourceName ?? "").localizedCaseInsensitiveContains("stima"),
+            "Model Y 2025 keeps EV-Database provenance"
+        )
     }
 
     func testCatalog_ModelY2025_EVDatabaseJuniperRWD() {

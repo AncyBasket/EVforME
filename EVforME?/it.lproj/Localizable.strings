@@ -582,6 +582,7 @@
 "how_we_calculate_consumption_heading" = "Consumo";
 "how_we_calculate_source_format" = "Fonte: %@";
 "how_we_calculate_source_category_eea" = "EEA WLTP";
+"how_we_calculate_source_category_nedc" = "EEA NEDC";
 "how_we_calculate_source_category_epa" = "EPA USA";
 "how_we_calculate_source_category_manufacturer" = "Scheda costruttore";
 "how_we_calculate_source_category_estimate" = "Stima";

@@ -35,6 +35,7 @@ enum ConfidenceBand: Equatable {
 /// Categoria fonte consumi (localizzata), ricavata da `sourceName`.
 enum ConsumptionSourceCategory: Equatable {
     case eeaWLTP
+    case eeaNEDC
     case epaUSA
     case manufacturer
     case estimate
@@ -43,6 +44,7 @@ enum ConsumptionSourceCategory: Equatable {
     var localizedTitle: String {
         switch self {
         case .eeaWLTP: return L10n.howWeCalculateSourceCategoryEEA
+        case .eeaNEDC: return L10n.howWeCalculateSourceCategoryNEDC
         case .epaUSA: return L10n.howWeCalculateSourceCategoryEPA
         case .manufacturer: return L10n.howWeCalculateSourceCategoryManufacturer
         case .estimate: return L10n.howWeCalculateSourceCategoryEstimate
@@ -53,7 +55,7 @@ enum ConsumptionSourceCategory: Equatable {
     /// Link di default quando `sourceName` non contiene già un URL.
     var defaultURL: URL? {
         switch self {
-        case .eeaWLTP: return OfficialLinks.eeaCO2CarsDataset
+        case .eeaWLTP, .eeaNEDC: return OfficialLinks.eeaCO2CarsDataset
         case .epaUSA: return OfficialLinks.epaFuelEconomy
         case .manufacturer, .estimate, .unknown: return nil
         }
@@ -162,7 +164,7 @@ enum HowWeCalculateExplainer {
         return s.range(of: #"(?<![a-z0-9])epa(?![a-z0-9])"#, options: .regularExpression) != nil
     }
 
-    static func consumptionSourceCategory(from sourceName: String?) -> ConsumptionSourceCategory {
+    static func consumptionSourceCategory(from sourceName: String?, vehicleYear: Int? = nil) -> ConsumptionSourceCategory {
         let s = (sourceName ?? "").lowercased()
         guard !s.isEmpty else { return .unknown }
         if looksLikeEPASource(sourceName ?? "") {
@@ -170,6 +172,16 @@ enum HowWeCalculateExplainer {
         }
         if s.contains("stima") {
             return .estimate
+        }
+        // EEA co2cars IT has no passenger-car records before 2010 — never link those years as EEA.
+        if let vehicleYear, vehicleYear < 2010 {
+            if s.contains("eea") || s.contains("nedc") || s.contains("co2cars") {
+                return .estimate
+            }
+        }
+        // NEDC before generic EEA/WLTP — pre-2018 rows are labeled `;NEDC` / `seed+EEA-NEDC`.
+        if s.contains("nedc") {
+            return .eeaNEDC
         }
         if s.contains("eea") || s.contains("co2cars") {
             return .eeaWLTP
@@ -330,7 +342,7 @@ enum HowWeCalculateExplainer {
         referenceYear: Int,
         ownershipYears: Int
     ) -> HowWeCalculateVehicleBlock {
-        let category = consumptionSourceCategory(from: vehicle.sourceName)
+        let category = consumptionSourceCategory(from: vehicle.sourceName, vehicleYear: vehicle.year)
         let detail = bolloDetail(
             vehicle: vehicle,
             bookletKw: bookletKw,

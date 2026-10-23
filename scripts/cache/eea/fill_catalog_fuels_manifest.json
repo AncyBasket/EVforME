@@ -1254,10 +1254,11 @@
       "year": 2021,
       "powertrain": "ice",
       "fuel": "diesel",
-      "eea_model": "A4",
-      "n": 8550,
+      "eea_model": "A4AVANT",
+      "n": 6022,
       "co2": 138.53227119815426,
-      "eea_l100": 5.283
+      "eea_l100": 5.091,
+      "ft": "DIESEL"
     },
     {
       "id": "audi-a4-allroad-2023",
@@ -5287,9 +5288,10 @@
       "powertrain": "ice",
       "fuel": "petrol",
       "eea_model": "DEFENDER",
-      "n": 250,
+      "n": 2444,
       "co2": 307.184,
-      "eea_l100": 13.575
+      "eea_l100": 8.9,
+      "ft": "DIESEL"
     },
     {
       "id": "land-rover-defender-2023",
@@ -5299,9 +5301,10 @@
       "powertrain": "ice",
       "fuel": "petrol",
       "eea_model": "DEFENDER",
-      "n": 235,
+      "n": 4239,
       "co2": 307.12340425531914,
-      "eea_l100": 13.573
+      "eea_l100": 8.708,
+      "ft": "DIESEL"
     },
     {
       "id": "land-rover-discovery-2018",
@@ -5467,9 +5470,10 @@
       "powertrain": "ice",
       "fuel": "petrol",
       "eea_model": "RANGEROVERSPORT",
-      "n": 128,
+      "n": 4306,
       "co2": 271.8359375,
-      "eea_l100": 12.013
+      "eea_l100": 7.559,
+      "ft": "DIESEL"
     },
     {
       "id": "mazda-cx-3-2018",
@@ -6126,10 +6130,11 @@
       "year": 2020,
       "powertrain": "ice",
       "fuel": "petrol",
-      "eea_model": "CLA180",
-      "n": 132,
+      "eea_model": "CLA200",
+      "n": 496,
       "co2": 139.46875,
-      "eea_l100": 6.164
+      "eea_l100": 6.267,
+      "ft": "PETROL"
     },
     {
       "id": "mercedes-benz-cla-2021",
@@ -6138,10 +6143,11 @@
       "year": 2021,
       "powertrain": "ice",
       "fuel": "petrol",
-      "eea_model": "CLA180",
-      "n": 134,
+      "eea_model": "CLA200",
+      "n": 260,
       "co2": 138.87218045112783,
-      "eea_l100": 6.137
+      "eea_l100": 6.307,
+      "ft": "PETROL"
     },
     {
       "id": "mercedes-benz-cla-2022",
@@ -6162,10 +6168,11 @@
       "year": 2023,
       "powertrain": "ice",
       "fuel": "petrol",
-      "eea_model": "CLA180",
-      "n": 214,
+      "eea_model": "CLA200",
+      "n": 246,
       "co2": 139.00934579439252,
-      "eea_l100": 6.143
+      "eea_l100": 6.272,
+      "ft": "PETROL"
     },
     {
       "id": "mercedes-benz-cla-2024",
@@ -6174,10 +6181,11 @@
       "year": 2024,
       "powertrain": "ice",
       "fuel": "petrol",
-      "eea_model": "CLA180",
-      "n": 146,
+      "eea_model": "CLA200",
+      "n": 292,
       "co2": 138.2054794520548,
-      "eea_l100": 6.108
+      "eea_l100": 6.225,
+      "ft": "PETROL"
     },
     {
       "id": "mercedes-benz-glc-2019",
@@ -6186,10 +6194,11 @@
       "year": 2019,
       "powertrain": "ice",
       "fuel": "diesel",
-      "eea_model": "GLC3004MATIC",
-      "n": 16036,
+      "eea_model": "GLC220D4MATIC",
+      "n": 6770,
       "co2": 179.61229345323957,
-      "eea_l100": 6.849
+      "eea_l100": 6.612,
+      "ft": "DIESEL"
     },
     {
       "id": "mercedes-benz-glc-2020",
@@ -6198,10 +6207,11 @@
       "year": 2020,
       "powertrain": "ice",
       "fuel": "diesel",
-      "eea_model": "GLC3004MATIC",
-      "n": 11656,
+      "eea_model": "GLC220D4MATIC",
+      "n": 6780,
       "co2": 168.48648497461585,
-      "eea_l100": 6.425
+      "eea_l100": 6.345,
+      "ft": "DIESEL"
     },
     {
       "id": "mercedes-benz-glc-2021",
@@ -7950,10 +7960,11 @@
       "year": 2021,
       "powertrain": "ice",
       "fuel": "petrol",
-      "eea_model": "911R",
-      "n": 2422,
+      "eea_model": "911CARRERA4S",
+      "n": 578,
       "co2": 250.67981663882787,
-      "eea_l100": 11.078
+      "eea_l100": 10.71,
+      "ft": "PETROL"
     },
     {
       "id": "porsche-911-2022",
@@ -7962,10 +7973,11 @@
       "year": 2022,
       "powertrain": "ice",
       "fuel": "petrol",
-      "eea_model": "911R",
-      "n": 2656,
+      "eea_model": "911GT3",
+      "n": 574,
       "co2": 257.43771178463857,
-      "eea_l100": 11.377
+      "eea_l100": 12.97,
+      "ft": "PETROL"
     },
     {
       "id": "porsche-911-2023",
@@ -7974,10 +7986,11 @@
       "year": 2023,
       "powertrain": "ice",
       "fuel": "petrol",
-      "eea_model": "911R",
-      "n": 3422,
+      "eea_model": "911CARRERA4S",
+      "n": 410,
       "co2": 253.86732904734075,
-      "eea_l100": 11.219
+      "eea_l100": 10.712,
+      "ft": "PETROL"
     },
     {
       "id": "porsche-911-2024",
@@ -7986,10 +7999,11 @@
       "year": 2024,
       "powertrain": "ice",
       "fuel": "petrol",
-      "eea_model": "911R",
-      "n": 3050,
+      "eea_model": "911CARRERA",
+      "n": 854,
       "co2": 254.31803278688525,
-      "eea_l100": 11.239
+      "eea_l100": 10.324,
+      "ft": "PETROL"
     },
     {
       "id": "porsche-911-2025",
@@ -7998,10 +8012,11 @@
       "year": 2025,
       "powertrain": "ice",
       "fuel": "petrol",
-      "eea_model": "911R",
-      "n": 2449,
+      "eea_model": "911CARRERA",
+      "n": 602,
       "co2": 250.9591670069416,
-      "eea_l100": 11.091
+      "eea_l100": 10.293,
+      "ft": "PETROL"
     },
     {
       "id": "porsche-cayenne-2019",
@@ -8442,10 +8457,11 @@
       "year": 2020,
       "powertrain": "hev",
       "fuel": "petrol",
-      "eea_model": "CLIOETECHHYBRID",
-      "n": 1388,
+      "eea_model": "CLIO",
+      "n": 26734,
       "co2": 98.57997118155619,
-      "eea_l100": 4.357
+      "eea_l100": 5.239,
+      "ft": "PETROL"
     },
     {
       "id": "renault-clio-2021",
@@ -8454,10 +8470,11 @@
       "year": 2021,
       "powertrain": "hev",
       "fuel": "petrol",
-      "eea_model": "CLIOETECHHYBRID",
-      "n": 7007,
+      "eea_model": "CLIO",
+      "n": 19783,
       "co2": 98.76980162694448,
-      "eea_l100": 4.365
+      "eea_l100": 4.932,
+      "ft": "PETROL"
     },
     {
       "id": "renault-clio-2022",
@@ -8466,10 +8483,11 @@
       "year": 2022,
       "powertrain": "hev",
       "fuel": "petrol",
-      "eea_model": "CLIOETECHHYBRID",
-      "n": 8228,
+      "eea_model": "CLIO",
+      "n": 10240,
       "co2": 98.47350510452115,
-      "eea_l100": 4.352
+      "eea_l100": 5.21,
+      "ft": "PETROL"
     },
     {
       "id": "renault-clio-2023",
@@ -8478,10 +8496,11 @@
       "year": 2023,
       "powertrain": "hev",
       "fuel": "petrol",
-      "eea_model": "CLIOETECHHYBRID",
-      "n": 9896,
+      "eea_model": "CLIO",
+      "n": 16008,
       "co2": 96.1552142279709,
-      "eea_l100": 4.249
+      "eea_l100": 5.222,
+      "ft": "PETROL"
     },
     {
       "id": "renault-clio-2024",
@@ -8490,10 +8509,11 @@
       "year": 2024,
       "powertrain": "hev",
       "fuel": "petrol",
-      "eea_model": "CLIOETECHHYBRID",
-      "n": 5597,
+      "eea_model": "CLIO",
+      "n": 26982,
       "co2": 96.43165981775951,
-      "eea_l100": 4.262
+      "eea_l100": 5.066,
+      "ft": "PETROL"
     },
     {
       "id": "renault-clio-2025",
@@ -8502,10 +8522,11 @@
       "year": 2025,
       "powertrain": "hev",
       "fuel": "petrol",
-      "eea_model": "CLIOETECHHYBRID",
-      "n": 2977,
+      "eea_model": "CLIO",
+      "n": 9198,
       "co2": 96.35606315082298,
-      "eea_l100": 4.258
+      "eea_l100": 5.192,
+      "ft": "PETROL"
     },
     {
       "id": "renault-espace-2023",
@@ -10878,10 +10899,11 @@
       "year": 2020,
       "powertrain": "hev",
       "fuel": "petrol",
-      "eea_model": "TOYOTAYARISHYBRID",
-      "n": 14800,
+      "eea_model": "YARIS",
+      "n": 44186,
       "co2": 108.59087833265666,
-      "eea_l100": 4.799
+      "eea_l100": 4.534,
+      "ft": "PETROL"
     },
     {
       "id": "toyota-yaris-hybrid-2018",
@@ -10890,10 +10912,11 @@
       "year": 2018,
       "powertrain": "hev",
       "fuel": "petrol",
-      "eea_model": "TOYOTAYARISHYBRID",
-      "n": 45070,
+      "eea_model": "YARIS",
+      "n": 21805,
       "co2": 109.01518209741114,
-      "eea_l100": 4.818
+      "eea_l100": 5.816,
+      "ft": "PETROL"
     },
     {
       "id": "toyota-yaris-hybrid-2019",
@@ -10902,10 +10925,11 @@
       "year": 2019,
       "powertrain": "hev",
       "fuel": "petrol",
-      "eea_model": "TOYOTAYARISHYBRID",
-      "n": 47932,
+      "eea_model": "YARIS",
+      "n": 25420,
       "co2": 109.3307451471509,
-      "eea_l100": 4.832
+      "eea_l100": 5.808,
+      "ft": "PETROL"
     },
     {
       "id": "volkswagen-golf-2018",
@@ -15739,9 +15763,10 @@
       "powertrain": "ice",
       "fuel": "petrol",
       "eea_model": "RANGEROVERSPORT",
-      "n": 558,
+      "n": 4426,
       "co2": 300.2201834862385,
-      "eea_l100": 13.268
+      "eea_l100": 9.152,
+      "ft": "DIESEL"
     },
     {
       "id": "land-rover-range-rover-sport-petrol-2018",
@@ -15751,9 +15776,10 @@
       "powertrain": "ice",
       "fuel": "petrol",
       "eea_model": "RANGEROVERSPORT",
-      "n": 170,
+      "n": 5084,
       "co2": 294.9047619047619,
-      "eea_l100": 13.033
+      "eea_l100": 9.231,
+      "ft": "DIESEL"
     },
     {
       "id": "land-rover-range-rover-sport-diesel-2024",
@@ -15775,9 +15801,10 @@
       "powertrain": "ice",
       "fuel": "petrol",
       "eea_model": "RANGEROVERSPORT",
-      "n": 290,
+      "n": 2882,
       "co2": 310.993006993007,
-      "eea_l100": 13.744
+      "eea_l100": 8.668,
+      "ft": "DIESEL"
     },
     {
       "id": "land-rover-range-rover-sport-petrol-2020",
@@ -15787,9 +15814,10 @@
       "powertrain": "ice",
       "fuel": "petrol",
       "eea_model": "RANGEROVERSPORT",
-      "n": 304,
+      "n": 2658,
       "co2": 283.37630662020905,
-      "eea_l100": 12.523
+      "eea_l100": 9.121,
+      "ft": "DIESEL"
     },
     {
       "id": "land-rover-range-rover-sport-diesel-2025",
@@ -15931,9 +15959,10 @@
       "powertrain": "ice",
       "fuel": "petrol",
       "eea_model": "DEFENDER",
-      "n": 174,
+      "n": 3390,
       "co2": 271.35632183908046,
-      "eea_l100": 11.992
+      "eea_l100": 8.9,
+      "ft": "DIESEL"
     },
     {
       "id": "land-rover-defender-diesel-2022",
@@ -15967,9 +15996,10 @@
       "powertrain": "ice",
       "fuel": "petrol",
       "eea_model": "DEFENDER",
-      "n": 130,
+      "n": 1306,
       "co2": 263.25384615384615,
-      "eea_l100": 11.634
+      "eea_l100": 9.169,
+      "ft": "DIESEL"
     },
     {
       "id": "land-rover-discovery-diesel-2023",

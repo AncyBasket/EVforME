@@ -1,0 +1,688 @@
+{
+  "before": 5568,
+  "removed_ghosts": [
+    "mercedes-benz-500-2022",
+    "mercedes-benz-500-2023",
+    "mercedes-benz-500-2024",
+    "nissan-350z-2023",
+    "nissan-350z-2025"
+  ],
+  "pre2010_relabeled": 682,
+  "propagated_2026": [
+    {
+      "id": "alfa-romeo-giulia-2026",
+      "from": "alfa-romeo-giulia-2025",
+      "l100_from": 7.27,
+      "l100_to": 8.12
+    },
+    {
+      "id": "alfa-romeo-stelvio-2026",
+      "from": "alfa-romeo-stelvio-2025",
+      "l100_from": 8.24,
+      "l100_to": 8.62
+    },
+    {
+      "id": "alfa-romeo-tonale-2026",
+      "from": "alfa-romeo-tonale-2025",
+      "l100_from": 6.62,
+      "l100_to": 5.72
+    },
+    {
+      "id": "audi-q7-2026",
+      "from": "audi-q7-2025",
+      "l100_from": 10.56,
+      "l100_to": 8.09
+    },
+    {
+      "id": "bmw-ix1-2026",
+      "from": "bmw-ix1-2025",
+      "kwh100_from": 17.2,
+      "kwh100_to": 16.4
+    },
+    {
+      "id": "byd-dolphin-2026",
+      "from": "byd-dolphin-2025",
+      "kwh100_from": 16.8,
+      "kwh100_to": 16.0
+    },
+    {
+      "id": "citroen-c3-aircross-2026",
+      "from": "citroen-c3-aircross-2025",
+      "l100_from": 5.97,
+      "l100_to": 5.75
+    },
+    {
+      "id": "citroen-c4-2026",
+      "from": "citroen-c4-2025",
+      "l100_from": 5.19,
+      "l100_to": 4.98
+    },
+    {
+      "id": "citroen-c5-aircross-2026",
+      "from": "citroen-c5-aircross-2025",
+      "l100_from": 6.62,
+      "l100_to": 5.58
+    },
+    {
+      "id": "cupra-ateca-2026",
+      "from": "cupra-ateca-2025",
+      "l100_from": 7.38,
+      "l100_to": 6.92
+    },
+    {
+      "id": "cupra-formentor-2026",
+      "from": "cupra-formentor-2025",
+      "l100_from": 6.73,
+      "l100_to": 6.15
+    },
+    {
+      "id": "cupra-leon-2026",
+      "from": "cupra-leon-2025",
+      "l100_from": 6.73,
+      "l100_to": 5.67
+    },
+    {
+      "id": "dacia-sandero-eco-g-2026",
+      "from": "dacia-sandero-eco-g-2025",
+      "l100_from": 7.5,
+      "l100_to": 6.86
+    },
+    {
+      "id": "fiat-doblo-2026",
+      "from": "fiat-doblo-2025",
+      "l100_from": 6.62,
+      "l100_to": 6.46
+    },
+    {
+      "id": "fiat-grande-panda-hybrid-2026",
+      "from": "fiat-grande-panda-hybrid-2025",
+      "l100_from": 4.5,
+      "l100_to": 5.05
+    },
+    {
+      "id": "fiat-panda-2026",
+      "from": "fiat-panda-2025",
+      "l100_from": 5.32,
+      "l100_to": 5.05
+    },
+    {
+      "id": "ford-tourneo-connect-2026",
+      "from": "ford-tourneo-connect-2025",
+      "l100_from": 7.7,
+      "l100_to": 6.83
+    },
+    {
+      "id": "honda-jazz-2026",
+      "from": "honda-jazz-2025",
+      "l100_from": 4.6,
+      "l100_to": 4.66
+    },
+    {
+      "id": "hyundai-bayon-2026",
+      "from": "hyundai-bayon-2025",
+      "l100_from": 6.08,
+      "l100_to": 5.57
+    },
+    {
+      "id": "hyundai-i10-2026",
+      "from": "hyundai-i10-2025",
+      "l100_from": 5.2,
+      "l100_to": 5.21
+    },
+    {
+      "id": "hyundai-ioniq-5-n-2026",
+      "from": "hyundai-ioniq-5-n-2025",
+      "kwh100_from": 16.7,
+      "kwh100_to": 21.2
+    },
+    {
+      "id": "hyundai-santa-fe-2026",
+      "from": "hyundai-santa-fe-2025",
+      "l100_from": 7.7,
+      "l100_to": 7.13
+    },
+    {
+      "id": "jaguar-i-pace-2026",
+      "from": "jaguar-i-pace-2025",
+      "kwh100_from": 16.8,
+      "kwh100_to": 24.7
+    },
+    {
+      "id": "jeep-avenger-2026",
+      "from": "jeep-avenger-2025",
+      "l100_from": 5.5,
+      "l100_to": 5.32
+    },
+    {
+      "id": "jeep-renegade-2026",
+      "from": "jeep-renegade-2025",
+      "l100_from": 6.73,
+      "l100_to": 5.62
+    },
+    {
+      "id": "kia-ev4-2026",
+      "from": "kia-ev4-2025",
+      "kwh100_from": 17.7,
+      "kwh100_to": 15.3
+    },
+    {
+      "id": "kia-ev9-2026",
+      "from": "kia-ev9-2025",
+      "kwh100_from": 18.0,
+      "kwh100_to": 22.7
+    },
+    {
+      "id": "kia-niro-2026",
+      "from": "kia-niro-2025",
+      "l100_from": 4.4,
+      "l100_to": 4.59
+    },
+    {
+      "id": "kia-picanto-2026",
+      "from": "kia-picanto-2025",
+      "l100_from": 5.22,
+      "l100_to": 5.28
+    },
+    {
+      "id": "kia-proceed-2026",
+      "from": "kia-proceed-2025",
+      "l100_from": 6.73,
+      "l100_to": 5.94
+    },
+    {
+      "id": "kia-sorento-2026",
+      "from": "kia-sorento-2025",
+      "l100_from": 7.81,
+      "l100_to": 6.92
+    },
+    {
+      "id": "kia-stonic-2026",
+      "from": "kia-stonic-2025",
+      "l100_from": 6.08,
+      "l100_to": 5.67
+    },
+    {
+      "id": "lancia-ypsilon-hybrid-2026",
+      "from": "lancia-ypsilon-hybrid-2025",
+      "l100_from": 4.4,
+      "l100_to": 4.53
+    },
+    {
+      "id": "land-rover-defender-2026",
+      "from": "land-rover-defender-2025",
+      "l100_from": 13.47,
+      "l100_to": 8.54
+    },
+    {
+      "id": "land-rover-range-rover-sport-2026",
+      "from": "land-rover-range-rover-sport-2025",
+      "l100_from": 11.76,
+      "l100_to": 7.38
+    },
+    {
+      "id": "lexus-ux-300e-2026",
+      "from": "lexus-ux-300e-2025",
+      "kwh100_from": 17.62,
+      "kwh100_to": 16.8
+    },
+    {
+      "id": "mazda-6e-2026",
+      "from": "mazda-6e-2025",
+      "kwh100_from": 19.7,
+      "kwh100_to": 16.6
+    },
+    {
+      "id": "mazda-cx-30-2026",
+      "from": "mazda-cx-30-2025",
+      "l100_from": 7.27,
+      "l100_to": 6.1
+    },
+    {
+      "id": "mazda-mazda3-2026",
+      "from": "mazda-mazda3-2025",
+      "l100_from": 6.62,
+      "l100_to": 5.92
+    },
+    {
+      "id": "mazda-mx-5-2026",
+      "from": "mazda-mx-5-2025",
+      "l100_from": 6.08,
+      "l100_to": 6.23
+    },
+    {
+      "id": "mercedes-benz-eqv-2026",
+      "from": "mercedes-benz-eqv-2025",
+      "kwh100_from": 18.35,
+      "kwh100_to": 28.2
+    },
+    {
+      "id": "mercedes-benz-gla-2026",
+      "from": "mercedes-benz-gla-2025",
+      "l100_from": 7.27,
+      "l100_to": 6.73
+    },
+    {
+      "id": "mercedes-benz-gle-2026",
+      "from": "mercedes-benz-gle-2025",
+      "l100_from": 9.83,
+      "l100_to": 7.03
+    },
+    {
+      "id": "mg-mg3-2026",
+      "from": "mg-mg3-2025",
+      "l100_from": 6.3,
+      "l100_to": 6.05
+    },
+    {
+      "id": "mini-countryman-2026",
+      "from": "mini-countryman-2025",
+      "l100_from": 6.94,
+      "l100_to": 6.04
+    },
+    {
+      "id": "mitsubishi-asx-2026",
+      "from": "mitsubishi-asx-2025",
+      "l100_from": 6.94,
+      "l100_to": 5.85
+    },
+    {
+      "id": "nissan-juke-2026",
+      "from": "nissan-juke-2025",
+      "l100_from": 6.3,
+      "l100_to": 5.46
+    },
+    {
+      "id": "opel-grandland-2026",
+      "from": "opel-grandland-2025",
+      "l100_from": 6.51,
+      "l100_to": 5.51
+    },
+    {
+      "id": "opel-grandland-electric-2026",
+      "from": "opel-grandland-electric-2025",
+      "kwh100_from": 17.7,
+      "kwh100_to": 16.9
+    },
+    {
+      "id": "opel-mokka-2026",
+      "from": "opel-mokka-2025",
+      "l100_from": 6.3,
+      "l100_to": 5.52
+    },
+    {
+      "id": "peugeot-2008-2026",
+      "from": "peugeot-2008-2025",
+      "l100_from": 5.86,
+      "l100_to": 5.36
+    },
+    {
+      "id": "porsche-panamera-2026",
+      "from": "porsche-panamera-2025",
+      "l100_from": 9.96,
+      "l100_to": 10.66
+    },
+    {
+      "id": "renault-captur-2026",
+      "from": "renault-captur-2025",
+      "l100_from": 6.19,
+      "l100_to": 5.92
+    },
+    {
+      "id": "renault-clio-2026",
+      "from": "renault-clio-2025",
+      "l100_from": 4.4,
+      "l100_to": 4.26
+    },
+    {
+      "id": "seat-arona-2026",
+      "from": "seat-arona-2025",
+      "l100_from": 6.62,
+      "l100_to": 5.55
+    },
+    {
+      "id": "seat-ateca-2026",
+      "from": "seat-ateca-2025",
+      "l100_from": 6.51,
+      "l100_to": 6.46
+    },
+    {
+      "id": "skoda-karoq-2026",
+      "from": "skoda-karoq-2025",
+      "l100_from": 7.38,
+      "l100_to": 6.19
+    },
+    {
+      "id": "skoda-kodiaq-2026",
+      "from": "skoda-kodiaq-2025",
+      "l100_from": 7.59,
+      "l100_to": 6.38
+    },
+    {
+      "id": "subaru-forester-2026",
+      "from": "subaru-forester-2025",
+      "l100_from": 8.13,
+      "l100_to": 8.09
+    },
+    {
+      "id": "subaru-outback-2026",
+      "from": "subaru-outback-2025",
+      "l100_from": 7.7,
+      "l100_to": 8.53
+    },
+    {
+      "id": "suzuki-ignis-2026",
+      "from": "suzuki-ignis-2025",
+      "l100_from": 5.43,
+      "l100_to": 5.05
+    },
+    {
+      "id": "suzuki-s-cross-2026",
+      "from": "suzuki-s-cross-2025",
+      "l100_from": 6.51,
+      "l100_to": 5.54
+    },
+    {
+      "id": "suzuki-vitara-2026",
+      "from": "suzuki-vitara-2025",
+      "l100_from": 6.51,
+      "l100_to": 5.43
+    },
+    {
+      "id": "toyota-c-hr-2026",
+      "from": "toyota-c-hr-2025",
+      "l100_from": 4.8,
+      "l100_to": 4.76
+    },
+    {
+      "id": "toyota-corolla-2026",
+      "from": "toyota-corolla-2025",
+      "l100_from": 4.5,
+      "l100_to": 4.8
+    },
+    {
+      "id": "toyota-rav4-2026",
+      "from": "toyota-rav4-2025",
+      "l100_from": 6.51,
+      "l100_to": 5.71
+    },
+    {
+      "id": "toyota-yaris-2026",
+      "from": "toyota-yaris-2025",
+      "l100_from": 4.3,
+      "l100_to": 4.0
+    },
+    {
+      "id": "volkswagen-golf-2026",
+      "from": "volkswagen-golf-2025",
+      "l100_from": 6.51,
+      "l100_to": 5.84
+    },
+    {
+      "id": "volkswagen-polo-2026",
+      "from": "volkswagen-polo-2025",
+      "l100_from": 5.86,
+      "l100_to": 5.37
+    },
+    {
+      "id": "volkswagen-t-cross-2026",
+      "from": "volkswagen-t-cross-2025",
+      "l100_from": 6.4,
+      "l100_to": 5.75
+    },
+    {
+      "id": "volkswagen-t-roc-2026",
+      "from": "volkswagen-t-roc-2025",
+      "l100_from": 6.73,
+      "l100_to": 5.95
+    },
+    {
+      "id": "volkswagen-tiguan-2026",
+      "from": "volkswagen-tiguan-2025",
+      "l100_from": 7.05,
+      "l100_to": 6.26
+    },
+    {
+      "id": "volvo-xc40-2026",
+      "from": "volvo-xc40-2025",
+      "l100_from": 6.94,
+      "l100_to": 6.62
+    },
+    {
+      "id": "volvo-xc60-2026",
+      "from": "volvo-xc60-2025",
+      "l100_from": 8.13,
+      "l100_to": 7.73
+    },
+    {
+      "id": "volvo-xc90-2026",
+      "from": "volvo-xc90-2025",
+      "l100_from": 7.81,
+      "l100_to": 8.68
+    }
+  ],
+  "restored_eea": [
+    {
+      "id": "bmw-1-series-2022",
+      "eea_model": "118D",
+      "ft": "DIESEL",
+      "n": 2003.0,
+      "eea_year": 2022
+    },
+    {
+      "id": "bmw-1-series-2023",
+      "eea_model": "116D",
+      "ft": "DIESEL",
+      "n": 5710.0,
+      "eea_year": 2023
+    },
+    {
+      "id": "bmw-1-series-2024",
+      "eea_model": "118D",
+      "ft": "DIESEL",
+      "n": 8448.0,
+      "eea_year": 2024
+    },
+    {
+      "id": "bmw-1-series-2025",
+      "eea_model": "118D",
+      "ft": "DIESEL",
+      "n": 4671.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "bmw-1-series-2026",
+      "eea_model": "118D",
+      "ft": "DIESEL",
+      "n": 4671.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "bmw-2-series-2022",
+      "eea_model": "218DACTIVETOURER",
+      "ft": "DIESEL",
+      "n": 1063.0,
+      "eea_year": 2022
+    },
+    {
+      "id": "bmw-2-series-2023",
+      "eea_model": "218DACTIVETOURER",
+      "ft": "DIESEL",
+      "n": 4502.0,
+      "eea_year": 2023
+    },
+    {
+      "id": "bmw-2-series-2024",
+      "eea_model": "218DACTIVETOURER",
+      "ft": "DIESEL",
+      "n": 3292.0,
+      "eea_year": 2024
+    },
+    {
+      "id": "bmw-2-series-2025",
+      "eea_model": "218DACTIVETOURER",
+      "ft": "DIESEL",
+      "n": 1475.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "bmw-2-series-2026",
+      "eea_model": "218DACTIVETOURER",
+      "ft": "DIESEL",
+      "n": 1475.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "bmw-3-series-2022",
+      "eea_model": "318D",
+      "ft": "DIESEL",
+      "n": 1088.0,
+      "eea_year": 2022
+    },
+    {
+      "id": "bmw-3-series-2023",
+      "eea_model": "320DXDRIVE",
+      "ft": "DIESEL",
+      "n": 2690.0,
+      "eea_year": 2023
+    },
+    {
+      "id": "bmw-3-series-2024",
+      "eea_model": "320DXDRIVE",
+      "ft": "DIESEL",
+      "n": 4876.0,
+      "eea_year": 2024
+    },
+    {
+      "id": "bmw-3-series-2025",
+      "eea_model": "320DXDRIVE",
+      "ft": "DIESEL",
+      "n": 1786.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "bmw-3-series-2026",
+      "eea_model": "320DXDRIVE",
+      "ft": "DIESEL",
+      "n": 1786.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "bmw-4-series-2022",
+      "eea_model": "420D",
+      "ft": "DIESEL",
+      "n": 941.0,
+      "eea_year": 2022
+    },
+    {
+      "id": "bmw-4-series-2023",
+      "eea_model": "420D",
+      "ft": "DIESEL",
+      "n": 1488.0,
+      "eea_year": 2023
+    },
+    {
+      "id": "bmw-4-series-2024",
+      "eea_model": "420DXDRIVE",
+      "ft": "DIESEL",
+      "n": 1542.0,
+      "eea_year": 2024
+    },
+    {
+      "id": "bmw-4-series-2025",
+      "eea_model": "420DXDRIVE",
+      "ft": "DIESEL",
+      "n": 910.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "bmw-4-series-2026",
+      "eea_model": "420DXDRIVE",
+      "ft": "DIESEL",
+      "n": 910.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "bmw-5-series-2022",
+      "eea_model": "520DXDRIVE",
+      "ft": "DIESEL",
+      "n": 778.0,
+      "eea_year": 2022
+    },
+    {
+      "id": "bmw-5-series-2023",
+      "eea_model": "520DXDRIVE",
+      "ft": "DIESEL",
+      "n": 822.0,
+      "eea_year": 2023
+    },
+    {
+      "id": "bmw-5-series-2024",
+      "eea_model": "520DXDRIVE",
+      "ft": "DIESEL",
+      "n": 2142.0,
+      "eea_year": 2024
+    },
+    {
+      "id": "bmw-5-series-2025",
+      "eea_model": "520DXDRIVE",
+      "ft": "DIESEL",
+      "n": 1063.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "bmw-5-series-2026",
+      "eea_model": "520DXDRIVE",
+      "ft": "DIESEL",
+      "n": 1063.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "fiat-doblo-2023",
+      "eea_model": "DOBLO",
+      "ft": "DIESEL",
+      "n": 88.0,
+      "eea_year": 2023
+    },
+    {
+      "id": "fiat-doblo-2024",
+      "eea_model": "DOBLO",
+      "ft": "DIESEL",
+      "n": 134.0,
+      "eea_year": 2024
+    }
+  ],
+  "restored_stima": [
+    "chevrolet-trax-2022",
+    "chevrolet-trax-2023",
+    "chevrolet-trax-2024",
+    "chevrolet-trax-2025",
+    "chevrolet-trax-2026",
+    "fiat-doblo-2022",
+    "genesis-g70-2022",
+    "genesis-g70-2023",
+    "genesis-g70-2024",
+    "genesis-g70-2025",
+    "genesis-g70-2026",
+    "genesis-g80-2022",
+    "genesis-g80-2023",
+    "genesis-g80-2024",
+    "genesis-g80-2025",
+    "genesis-g80-2026",
+    "genesis-gv70-2022",
+    "genesis-gv70-2023",
+    "genesis-gv70-2024",
+    "genesis-gv70-2025",
+    "genesis-gv70-2026",
+    "genesis-gv80-2022",
+    "genesis-gv80-2023",
+    "genesis-gv80-2024",
+    "genesis-gv80-2025",
+    "genesis-gv80-2026"
+  ],
+  "skipped_dead": [],
+  "after": 5616,
+  "seedVersion": 44,
+  "rows": 5616,
+  "bytes": 2816916,
+  "pre2010_label": "stima (pre-2010; dati consumi non da co2cars IT)"
+}
