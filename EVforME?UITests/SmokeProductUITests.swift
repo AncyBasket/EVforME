@@ -399,18 +399,34 @@ final class SmokeProductUITests: XCTestCase {
         )
         XCTAssertNotNil(modify, "Verdict should open at XXXL")
 
-        // Scroll to Assunzioni section.
-        let assumptions = app.descendants(matching: .any)["verdict_assumptions_section"]
-        for _ in 0..<14 {
-            if assumptions.exists { break }
+        // Expand “Assunzioni & trasparenza” (closed by default), then require the section hittable.
+        let expandLabels = [
+            "Assunzioni & trasparenza",
+            "Assumptions & Transparency",
+            "Assunzioni & Trasparenza",
+        ]
+        var expanded = false
+        for _ in 0..<24 {
+            if let btn = firstExistingButton(app, labels: expandLabels, timeout: 0.8), btn.isHittable {
+                btn.tap()
+                expanded = true
+                break
+            }
             scrollDown(app, times: 1)
         }
-        XCTAssertTrue(
-            assumptions.waitForExistence(timeout: 4)
-                || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Assunzioni")).firstMatch.exists
-                || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Assumptions")).firstMatch.exists,
-            "Assumptions section should be reachable at XXXL"
-        )
+        XCTAssertTrue(expanded, "Must expand Assumptions & Transparency before shot 11")
+        RunLoop.current.run(until: Date().addingTimeInterval(0.6))
+
+        let assumptions = app.descendants(matching: .any)["verdict_assumptions_section"]
+        var visible = false
+        for _ in 0..<20 {
+            if assumptions.exists, assumptions.isHittable {
+                visible = true
+                break
+            }
+            scrollDown(app, times: 1)
+        }
+        XCTAssertTrue(visible, "verdict_assumptions_section must be hittable before shot 11")
         saveShot(app, name: "11_verdict_assumptions_xxxl")
     }
 

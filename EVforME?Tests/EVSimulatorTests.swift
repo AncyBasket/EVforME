@@ -554,6 +554,10 @@ final class EVSimulatorTests: XCTestCase {
 
         XCTAssertNil(ownResult.breakEvenMonths)
         XCTAssertNotNil(buyResult.breakEvenMonths, "Se compro: payback listino solo come extra")
+        XCTAssertFalse(
+            ownResult.keyReasons.contains(L10n.breakEvenNotReachedReason),
+            "Owned mode must not cite purchase break-even: \(ownResult.keyReasons)"
+        )
         XCTAssertTrue(
             ownResult.keyReasons.contains(where: { $0 == L10n.comparisonIntentOwnedReason }),
             "Owned mode must surface opex-only reason"

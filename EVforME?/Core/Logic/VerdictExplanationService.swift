@@ -79,7 +79,13 @@ enum VerdictExplanationService {
         let savings = result.yearlySavingsRange
         switch result.verdict {
         case .yes:
-            return L10n.verdictAIFallbackYes(input.dailyKm, savings.lowerBound, savings.upperBound, result.weeklyCharges)
+            return L10n.verdictAIFallbackYes(
+                km: input.dailyKm,
+                min: savings.lowerBound,
+                max: savings.upperBound,
+                charges: result.weeklyCharges,
+                hasHomeCharging: input.hasHomeCharging
+            )
         case .maybe:
             return L10n.verdictAIFallbackMaybe(input.dailyKm, savings.lowerBound, savings.upperBound)
         case .notYet:

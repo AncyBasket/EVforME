@@ -226,12 +226,14 @@
 "assumption_calculations_estimates" = "Calculations are estimates";
 "assumption_no_data_sent" = "We don’t send your inputs to an EVforME server: we only fetch public prices (MIMIT/Eurostat) and the vehicle catalog.";
 "assumption_average_prices" = "Average prices, not promises";
-"assumption_consumption_source_format" = "Current-car consumption used in the calculation: %.1f L/100 km";
+"assumption_consumption_source_effective_format" = "Current-car consumption used in the calculation: %.1f L/100 km (catalog × area/trip/scenario)";
 "assumption_consumption_source_unknown" = "Current-car consumption: not available in the catalog";
-"assumption_consumption_target_format" = "EV consumption used in the calculation: %.1f kWh/100 km";
+"assumption_consumption_target_effective_format" = "EV consumption used in the calculation: %.1f kWh/100 km (catalog × area/trip/scenario)";
 "assumption_consumption_target_unknown" = "EV consumption: not available in the catalog";
 "assumption_fuel_price_format" = "Fuel price used in the calculation: €%.2f/L";
-"assumption_electricity_format" = "Electricity price used in the calculation: €%.2f/kWh";
+"assumption_electricity_weighted_format" = "Home €%.2f/kWh for %d%% of charges, public €%.2f/kWh for %d%%: average €%.2f/kWh";
+"assumption_electricity_home_only_format" = "Electricity price used in the calculation: home €%.2f/kWh (100%% of charges)";
+"assumption_electricity_public_only_format" = "Electricity price used in the calculation: public €%.2f/kWh (no home charging)";
 "assumption_model_estimates_note" = "Area/trip multipliers, residual-value rates and maintenance buffers are model estimates (not official tariffs).";
 "assumption_maintenance" = "Maintenance: country rates + Consumer Reports 2020 age curve";
 "assumption_maintenance_market" = "Maintenance (%@): ~€%d ICE · ~€%d EV /year at 15,000 km (+ age)";
@@ -327,9 +329,8 @@
 
 /* AI + input a11y */
 "verdict_ai_section_title" = "In plain words";
-"verdict_ai_fallback_yes" = "At about %d km/year the numbers favour electric: about €%d–€%d saved per year and about %d charges a week. With home charging and this pair, it looks worthwhile with these inputs.";
+/* verdict_ai_fallback_yes / yes_public / not_yet → Localizable.stringsdict (plurals) */
 "verdict_ai_fallback_maybe" = "At about %d km/year the gap is modest (about €%d–€%d/year). An EV can work, but small changes in electricity price or kilometers can flip the picture.";
-"verdict_ai_fallback_not_yet" = "At about %d km/year with these prices, electricity does not beat fuel yet. Expect about %d charges per week — wait for cheaper power, more home charging, or a thriftier EV before switching.";
 "yearly_km_slider_a11y" = "Yearly kilometers slider";
 "fuel_price_slider_a11y" = "Fuel price (€/L or €/kg)";
 "electricity_price_slider_a11y" = "Electricity price per kWh";
@@ -359,6 +360,7 @@
 "comparison_intent_owned_subtitle" = "Operating-cost comparison: energy, road tax, maintenance (a 10-year-old car costs more to keep). No list price in the yes/no.";
 "comparison_intent_owned_reason" = "Opex-only mode: list-price premium is treated as sunk cost.";
 "opex_savings_only_reason" = "About €%d/year less to run — no purchase break-even in this mode.";
+"opex_savings_limited_reason" = "Limited operating savings (~€%d/year) with these inputs — no purchase premium in already-owned mode.";
 "incentives_included_reason" = "Includes ~€%d purchase-incentive estimate.";
 "incentives_transparency_note" = "Incentives are illustrative only — verify on the official MASE/MIMIT site (ISEE, scrappage, fund availability). Not added to the verdict unless you enable the toggle.";
 "sources_section_title" = "Where numbers come from";

@@ -649,6 +649,7 @@ struct VerdictView: View {
                 assumptionRow(text: L10n.italyKitDisclaimer)
             }
         }
+        .accessibilityElement(children: .combine)
         .accessibilityIdentifier("verdict_assumptions_section")
     }
 

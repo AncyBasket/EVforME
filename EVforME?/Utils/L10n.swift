@@ -351,19 +351,38 @@ enum L10n {
     static var assumptionNoDataSent: String { string("assumption_no_data_sent") }
     static var assumptionAveragePrices: String { string("assumption_average_prices") }
     static var assumptionModelEstimatesNote: String { string("assumption_model_estimates_note") }
-    static func assumptionConsumptionSourceFormat(_ litersPer100: Double) -> String {
-        format("assumption_consumption_source_format", litersPer100)
+    static func assumptionConsumptionSourceEffectiveFormat(_ litersPer100: Double) -> String {
+        format("assumption_consumption_source_effective_format", litersPer100)
     }
     static var assumptionConsumptionSourceUnknown: String { string("assumption_consumption_source_unknown") }
-    static func assumptionConsumptionTargetFormat(_ kWhPer100: Double) -> String {
-        format("assumption_consumption_target_format", kWhPer100)
+    static func assumptionConsumptionTargetEffectiveFormat(_ kWhPer100: Double) -> String {
+        format("assumption_consumption_target_effective_format", kWhPer100)
     }
     static var assumptionConsumptionTargetUnknown: String { string("assumption_consumption_target_unknown") }
     static func assumptionFuelPriceFormat(_ price: Double) -> String {
         format("assumption_fuel_price_format", price)
     }
-    static func assumptionElectricityFormat(_ price: Double) -> String {
-        format("assumption_electricity_format", price)
+    static func assumptionElectricityWeightedFormat(
+        _ homePrice: Double,
+        _ homePct: Int,
+        _ publicPrice: Double,
+        _ publicPct: Int,
+        _ average: Double
+    ) -> String {
+        format(
+            "assumption_electricity_weighted_format",
+            homePrice,
+            homePct,
+            publicPrice,
+            publicPct,
+            average
+        )
+    }
+    static func assumptionElectricityHomeOnlyFormat(_ price: Double) -> String {
+        format("assumption_electricity_home_only_format", price)
+    }
+    static func assumptionElectricityPublicOnlyFormat(_ price: Double) -> String {
+        format("assumption_electricity_public_only_format", price)
     }
     static var assumptionMaintenance: String { string("assumption_maintenance") }
     static func assumptionMaintenance(for market: AppMarket) -> String {
@@ -511,14 +530,23 @@ enum L10n {
 
     // MARK: - AI verdict explanation
     static var verdictAISectionTitle: String { string("verdict_ai_section_title") }
-    static func verdictAIFallbackYes(_ km: Int, _ min: Int, _ max: Int, _ charges: Int) -> String {
-        format("verdict_ai_fallback_yes", km, min, max, charges)
+    /// Plurali su `charges` via stringsdict; arg1 = charges (plural), poi km, min, max.
+    static func verdictAIFallbackYes(
+        km: Int,
+        min: Int,
+        max: Int,
+        charges: Int,
+        hasHomeCharging: Bool
+    ) -> String {
+        let key = hasHomeCharging ? "verdict_ai_fallback_yes" : "verdict_ai_fallback_yes_public"
+        return String.localizedStringWithFormat(string(key), charges, km, min, max)
     }
     static func verdictAIFallbackMaybe(_ km: Int, _ min: Int, _ max: Int) -> String {
         format("verdict_ai_fallback_maybe", km, min, max)
     }
+    /// Plurali su `charges` via stringsdict; arg1 = charges, arg2 = km.
     static func verdictAIFallbackNotYet(_ km: Int, _ charges: Int) -> String {
-        format("verdict_ai_fallback_not_yet", km, charges)
+        String.localizedStringWithFormat(string("verdict_ai_fallback_not_yet"), charges, km)
     }
 
     // MARK: - Break-even
@@ -548,6 +576,7 @@ enum L10n {
     static var comparisonIntentOwnedSubtitle: String { string("comparison_intent_owned_subtitle") }
     static var comparisonIntentOwnedReason: String { string("comparison_intent_owned_reason") }
     static func opexSavingsOnlyReason(_ euro: Int) -> String { format("opex_savings_only_reason", euro) }
+    static func opexSavingsLimitedReason(_ euro: Int) -> String { format("opex_savings_limited_reason", euro) }
     static func incentivesIncludedReason(_ euro: Int) -> String { format("incentives_included_reason", euro) }
     static var incentivesTransparencyNote: String { string("incentives_transparency_note") }
     static var sourcesSectionTitle: String { string("sources_section_title") }

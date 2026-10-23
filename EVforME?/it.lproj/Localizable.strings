@@ -246,12 +246,14 @@
 "assumption_calculations_estimates" = "I calcoli sono stime";
 "assumption_no_data_sent" = "Non inviamo i tuoi dati a un server EVforME: scarichiamo solo prezzi pubblici (MIMIT/Eurostat) e catalogo veicoli.";
 "assumption_average_prices" = "Prezzi medi, non promesse";
-"assumption_consumption_source_format" = "Consumo auto attuale usato nel calcolo: %.1f L/100 km";
+"assumption_consumption_source_effective_format" = "Consumo auto attuale usato nel calcolo: %.1f L/100 km (catalogo × area/tragitto/scenario)";
 "assumption_consumption_source_unknown" = "Consumo auto attuale: non disponibile nel catalogo";
-"assumption_consumption_target_format" = "Consumo EV usato nel calcolo: %.1f kWh/100 km";
+"assumption_consumption_target_effective_format" = "Consumo EV usato nel calcolo: %.1f kWh/100 km (catalogo × area/tragitto/scenario)";
 "assumption_consumption_target_unknown" = "Consumo EV: non disponibile nel catalogo";
 "assumption_fuel_price_format" = "Prezzo carburante usato nel calcolo: €%.2f/L";
-"assumption_electricity_format" = "Prezzo elettricità usato nel calcolo: €%.2f/kWh";
+"assumption_electricity_weighted_format" = "Casa €%.2f/kWh per il %d%% delle ricariche, pubblica €%.2f/kWh per il %d%%: media €%.2f/kWh";
+"assumption_electricity_home_only_format" = "Prezzo elettricità usato nel calcolo: casa €%.2f/kWh (100%% delle ricariche)";
+"assumption_electricity_public_only_format" = "Prezzo elettricità usato nel calcolo: pubblica €%.2f/kWh (nessuna ricarica a casa)";
 "assumption_model_estimates_note" = "Moltiplicatori area/tragitto, svalutazione e buffer manutenzione sono stime del modello (non tariffe ufficiali).";
 "assumption_maintenance" = "Manutenzione: tariffe per paese + età Consumer Reports 2020";
 "assumption_maintenance_market" = "Manutenzione (%@): ~€%d ICE · ~€%d EV /anno a 15.000 km (+ età)";
@@ -346,9 +348,8 @@
 
 /* AI + input a11y */
 "verdict_ai_section_title" = "In parole semplici";
-"verdict_ai_fallback_yes" = "Con circa %d km/anno i conti favoriscono l’elettrico: circa €%d–€%d risparmiati l’anno e circa %d ricariche a settimana. Con ricarica a casa e la coppia scelta, sembra conveniente con questi dati.";
+/* verdict_ai_fallback_yes / yes_public / not_yet → Localizable.stringsdict (plurals) */
 "verdict_ai_fallback_maybe" = "A circa %d km/anno il margine è sottile (circa €%d–€%d/anno). L’EV può funzionare, ma prezzi energia o chilometri diversi possono cambiare il verdetto.";
-"verdict_ai_fallback_not_yet" = "A circa %d km/anno con questi prezzi, l’elettrico non batte ancora il carburante. Conta circa %d ricariche a settimana: conviene aspettare energia più economica, più ricarica a casa o un’EV più parca.";
 "yearly_km_slider_a11y" = "Cursore chilometri annui";
 "fuel_price_slider_a11y" = "Prezzo carburante (€/L o €/kg)";
 "electricity_price_slider_a11y" = "Cursore prezzo elettricità per kWh";
@@ -376,6 +377,7 @@
 "comparison_intent_owned_subtitle" = "Confronto sulla gestione: energia, bollo, manutenzione (un’auto di 10 anni costa di più da tenere). Niente listino nel sì/no.";
 "comparison_intent_owned_reason" = "Modalità solo opex: il premium di listino è costo già sostenuto.";
 "opex_savings_only_reason" = "Circa €%d/anno in meno di gestione — niente break-even di acquisto in questa modalità.";
+"opex_savings_limited_reason" = "Risparmio di gestione contenuto (~€%d/anno) con questi dati — niente maggior costo di acquisto in modalità già posseduta.";
 "incentives_included_reason" = "Include stima incentivi acquisto ~€%d.";
 "incentives_transparency_note" = "Gli incentivi sono solo illustrativi — verifica sul sito ufficiale MASE/MIMIT (ISEE, rottamazione, fondi). Non entrano nel verdetto finché non attivi il toggle.";
 "sources_section_title" = "Da dove arrivano i numeri";
