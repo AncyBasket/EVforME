@@ -936,15 +936,25 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertEqual(moliseBifuel.amount, 74 * 2.76, accuracy: 0.01)
         XCTAssertEqual(moliseBifuel.amount, 204.24, accuracy: 0.01)
 
-        // Solo GPL esclusivo: 1/4 di 2,76.
-        let exclusive = ItalianRegion.molise.thermalBolloEUR(
+        // Solo GPL esclusivo: tariffa piena (FAQ regionale: −75% solo metano esclusivo).
+        let exclusiveLPG = ItalianRegion.molise.thermalBolloEUR(
             powerKw: 100,
             fuelKind: .lpg,
             vehicleYear: 2020,
             referenceYear: 2026,
             gasIsExclusive: true
         )
-        XCTAssertEqual(exclusive ?? -1, 2.76 * 0.25 * 100, accuracy: 0.01)
+        XCTAssertEqual(exclusiveLPG ?? -1, 2.76 * 100, accuracy: 0.01)
+
+        // Solo metano esclusivo: −75% (FAQ regionale).
+        let exclusiveCNG = ItalianRegion.molise.thermalBolloEUR(
+            powerKw: 100,
+            fuelKind: .cng,
+            vehicleYear: 2020,
+            referenceYear: 2026,
+            gasIsExclusive: true
+        )
+        XCTAssertEqual(exclusiveCNG ?? -1, 2.76 * 0.25 * 100, accuracy: 0.01)
 
         // Senza tariffario termico regionale → catalogo (stima nazionale).
         let lazioPetrol = OwnershipCostEstimates.bolloPerYearDetail(

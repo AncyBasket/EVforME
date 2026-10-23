@@ -171,7 +171,7 @@ enum L10n {
     static var exportPDFReport: String { string("export_pdf_report") }
     static var sharePDFReport: String { string("share_pdf_report") }
     static var freeReportTitle: String { string("free_report_title") }
-    static var freeReportSubtitle: String { string("free_report_subtitle") }
+    static func freeReportSubtitle(_ years: Int) -> String { format("free_report_subtitle", years) }
     static var freeReportBadge: String { string("free_report_badge") }
     static var exportPDFA11yHint: String { string("export_pdf_a11y_hint") }
     static var talkToAdvisorA11yHint: String { string("talk_to_advisor_a11y_hint") }
@@ -209,7 +209,9 @@ enum L10n {
     static var why: String { string("why") }
     static var whatThisMeans: String { string("what_this_means") }
     static func impactSaveBetween(_ min: Int, _ max: Int) -> String { format("impact_save_between", min, max) }
-    static func impactChargePerWeek(_ count: Int) -> String { format("impact_charge_per_week", count) }
+    static func impactChargePerWeek(_ count: Int) -> String {
+        String.localizedStringWithFormat(string("impact_charge_per_week"), count)
+    }
     static var impactGasCostMore: String { string("impact_gas_cost_more") }
     static var shareSubject: String { string("share_subject") }
     static var shareMessage: String { string("share_message") }
@@ -348,8 +350,21 @@ enum L10n {
     static var assumptionCalculationsEstimates: String { string("assumption_calculations_estimates") }
     static var assumptionNoDataSent: String { string("assumption_no_data_sent") }
     static var assumptionAveragePrices: String { string("assumption_average_prices") }
-    static var assumptionConsumptionGas: String { string("assumption_consumption_gas") }
-    static var assumptionConsumptionEv: String { string("assumption_consumption_ev") }
+    static var assumptionModelEstimatesNote: String { string("assumption_model_estimates_note") }
+    static func assumptionConsumptionSourceFormat(_ litersPer100: Double) -> String {
+        format("assumption_consumption_source_format", litersPer100)
+    }
+    static var assumptionConsumptionSourceUnknown: String { string("assumption_consumption_source_unknown") }
+    static func assumptionConsumptionTargetFormat(_ kWhPer100: Double) -> String {
+        format("assumption_consumption_target_format", kWhPer100)
+    }
+    static var assumptionConsumptionTargetUnknown: String { string("assumption_consumption_target_unknown") }
+    static func assumptionFuelPriceFormat(_ price: Double) -> String {
+        format("assumption_fuel_price_format", price)
+    }
+    static func assumptionElectricityFormat(_ price: Double) -> String {
+        format("assumption_electricity_format", price)
+    }
     static var assumptionMaintenance: String { string("assumption_maintenance") }
     static func assumptionMaintenance(for market: AppMarket) -> String {
         let rates = MarketMaintenanceRates.rates(for: market)
@@ -421,7 +436,9 @@ enum L10n {
     static var checkInputValues: String { string("check_input_values") }
     
     // MARK: - Simulator (reasons & fear/reality)
-    static func chargePerWeek(_ n: Int) -> String { format("charge_per_week", n) }
+    static func chargePerWeek(_ n: Int) -> String {
+        String.localizedStringWithFormat(string("charge_per_week"), n)
+    }
     static func saveUpToPerYear(_ n: Int) -> String { format("save_up_to_per_year", n) }
     static var saveCurrentCheaper: String { string("save_current_cheaper") }
     static var realityCurrentCheaper: String { string("reality_current_cheaper") }
@@ -707,6 +724,7 @@ enum L10n {
     // MARK: - Come calcoliamo
     static var howWeCalculateTitle: String { string("how_we_calculate_title") }
     static var howWeCalculateIntro: String { string("how_we_calculate_intro") }
+    static var howWeCalculateModelEstimatesNote: String { string("how_we_calculate_model_estimates_note") }
     static var howWeCalculateEntryTitle: String { string("how_we_calculate_entry_title") }
     static var howWeCalculateEntrySubtitle: String { string("how_we_calculate_entry_subtitle") }
     static var howWeCalculateEntryA11yHint: String { string("how_we_calculate_entry_a11y_hint") }

@@ -104,7 +104,7 @@
 "lead_consent_text" = "I agree to be contacted for EV consultation.";
 "lead_send" = "Send request";
 "free_report_title" = "Decision report";
-"free_report_subtitle" = "5-year scenario with assumptions and action checklist.";
+"free_report_subtitle" = "%d-year scenario with assumptions and action checklist.";
 "free_report_badge" = "Included in the app";
 "report_included_1" = "Cost sensitivity table (fuel/electricity).";
 "report_included_2" = "Charging feasibility summary for your profile.";
@@ -124,7 +124,7 @@
 "why" = "Why";
 "what_this_means" = "What this means";
 "impact_save_between" = "• You could save between €%d and €%d per year.";
-"impact_charge_per_week" = "• You'd charge about %d times per week.";
+/* impact_charge_per_week → Localizable.stringsdict (plurals) */
 "impact_gas_cost_more" = "• Sticking with gas will likely cost more over time.";
 "share_subject" = "My EV Simulation";
 "share_message" = "Check out my EVforME? result";
@@ -214,7 +214,7 @@
 "subsection_where_numbers_title" = "Where the numbers come from";
 "subsection_where_numbers_body" = "Consumptions from the selected vehicle catalog (WLTP where available). Maintenance depends on country, with Consumer Reports mileage curves. Tax: Italian road-tax estimate where it applies. Scenarios only change energy and maintenance.";
 "subsection_environment_title" = "Environmental impact";
-"subsection_environment_body" = "A gas car emits about 120 g CO₂/km. An EV on the Italian grid emits indirectly about 40–50 g CO₂/km (well-to-wheel). Switching to electric can cut emissions by several tonnes of CO₂ over a few years, depending on how much you drive and the energy mix.";
+"subsection_environment_body" = "A combustion car emits CO₂ at the tailpipe; an EV shifts emissions to the grid electricity mix (well-to-wheel). The benefit depends on how much you drive and the carbon intensity of power — compare official ISPRA / EEA grid figures, not fixed marketing numbers.";
 "subsection_battery_title" = "Battery and lifespan";
 "subsection_battery_body" = "EV batteries typically have an 8-year or 160,000 km warranty. Capacity declines with time and use; warranty thresholds vary by model. This simulation does not include possible battery replacement.";
 "subsection_incentives_title" = "Incentives";
@@ -224,14 +224,19 @@
 /* Assumptions & Transparency */
 "assumptions_transparency" = "Assumptions & Transparency";
 "assumption_calculations_estimates" = "Calculations are estimates";
-"assumption_no_data_sent" = "No data sent online";
+"assumption_no_data_sent" = "We don’t send your inputs to an EVforME server: we only fetch public prices (MIMIT/Eurostat) and the vehicle catalog.";
 "assumption_average_prices" = "Average prices, not promises";
-"assumption_consumption_gas" = "Gas consumption: 6.5 L/100 km (average)";
-"assumption_consumption_ev" = "EV consumption: 17 kWh/100 km (average)";
+"assumption_consumption_source_format" = "Current-car consumption used in the calculation: %.1f L/100 km";
+"assumption_consumption_source_unknown" = "Current-car consumption: not available in the catalog";
+"assumption_consumption_target_format" = "EV consumption used in the calculation: %.1f kWh/100 km";
+"assumption_consumption_target_unknown" = "EV consumption: not available in the catalog";
+"assumption_fuel_price_format" = "Fuel price used in the calculation: €%.2f/L";
+"assumption_electricity_format" = "Electricity price used in the calculation: €%.2f/kWh";
+"assumption_model_estimates_note" = "Area/trip multipliers, residual-value rates and maintenance buffers are model estimates (not official tariffs).";
 "assumption_maintenance" = "Maintenance: country rates + Consumer Reports 2020 age curve";
 "assumption_maintenance_market" = "Maintenance (%@): ~€%d ICE · ~€%d EV /year at 15,000 km (+ age)";
 "assumption_taxes" = "Taxes: national or regional road-tax estimate (ACI); EVs often exempt for the first years";
-"assumption_electricity" = "Electricity: average domestic €0.25/kWh (public charging may cost more)";
+"assumption_electricity" = "Electricity: uses the price from the slider (public charging may cost more)";
 
 /* Loading */
 "calculating" = "Calculating...";
@@ -250,7 +255,7 @@
 "check_input_values" = "Please check your input values";
 
 /* Simulator */
-"charge_per_week" = "You would charge about %d times per week";
+/* charge_per_week → Localizable.stringsdict (plurals) */
 "save_up_to_per_year" = "Estimate: about €%d/year less";
 "save_current_cheaper" = "With these numbers your current car costs less";
 "reality_current_cheaper" = "With these numbers your current car has lower running costs.";
@@ -399,7 +404,7 @@
 "tco_extras_intro" = "These are rough proxies — not insurer quotes or dealer buy-back offers.";
 "tco_insurance_row" = "Insurance / year (est.): ICE €%d · electrified €%d";
 "tco_residual_row" = "Residual after %d years (est.): ICE €%d · EV €%d";
-"tco_residual_note" = "Residual is shown for transparency; break-even uses extra purchase cost, not residual.";
+"tco_residual_note" = "Residual = model estimate (depreciation rates are not official); break-even uses extra purchase cost, not residual.";
 "prices_fresh_just_now" = "Energy prices refreshed just now (MIMIT / Eurostat).";
 "prices_fresh_minutes_ago" = "Energy prices refreshed %d min ago.";
 "prices_fresh_cached" = "Using last cached energy prices (offline or source busy).";
@@ -456,7 +461,7 @@
 "charging_type_public_ultra_fast" = "Ultra-fast charging";
 "charging_type_public_ultra_fast_description" = "Ultra-fast charging (150+ kW)";
 "charging_type_tesla_supercharger" = "Tesla Supercharger";
-"charging_type_tesla_supercharger_description" = "Tesla network (~€0.42/kWh for owners)";
+"charging_type_tesla_supercharger_description" = "Tesla network (starter estimate = Adiconsum HPC band; check the Tesla app price)";
 
 /* App Intents */
 "intent_simulate_title" = "Simulate EV suitability";
@@ -568,6 +573,7 @@
 
 "how_we_calculate_title" = "How we calculate";
 "how_we_calculate_intro" = "Same constants and formulas as the simulator — no display-only numbers. Check sources, confidence, and road-tax rates for both cars you selected.";
+"how_we_calculate_model_estimates_note" = "Area/trip multipliers, residual-value rates and maintenance floors are model estimates, not official tariffs.";
 "how_we_calculate_entry_title" = "How we calculate";
 "how_we_calculate_entry_subtitle" = "Consumption sources, CO₂→L/100, road tax, and prices — the same numbers as the verdict.";
 "how_we_calculate_entry_a11y_hint" = "Opens an explanation of how costs are calculated";
@@ -621,7 +627,7 @@
 "italian_region_unspecified" = "Not set (national estimate €2.58/kW)";
 "italian_region_other_unknown" = "Other region (EV road tax not estimated)";
 "italian_region_hint" = "ACI/regional 2026 tariffs. Lombardy/Piedmont: permanent EV exemption. Thermal: regional tariff only when cited in-app; otherwise national estimate.";
-"italian_region_bollo_note_molise" = "Molise Tariffario 2026 (Quattroruote 17/02/2026): EV €2.76/kW × 1/4 after 5 years; thermal Euro 4–6 €2.76 ≤100 kW + €4.14 above; bifuel LPG/CNG–petrol €2.76 flat (also >100 kW); exclusive LPG/CNG-only 1/4 of €2.76. Needs P.2 (or catalog kW): without it, national list-price road tax is still used.";
+"italian_region_bollo_note_molise" = "Regione Molise — Road tax (tariff in force since 2016 + regional FAQ): EV €2.76/kW × 1/4 after 5 years; thermal Euro 4–6 €2.76 ≤100 kW + €4.14 above; bifuel LPG/CNG–petrol €2.76 flat (also >100 kW); exclusive CNG −75% (FAQ); exclusive LPG full rate. Needs P.2 (or catalog kW): without it, national list-price road tax is still used.";
 "italian_region_bollo_note_bolzano" = "EV: €1.96/kW Euro 6 (€1.99 Euro 0–5 not modelled).";
 "italian_region_bollo_note_sicilia" = "EV: ACI Sicily “a prescindere”: 1/4 of €2.58/kW (petrol scale).";
 "italian_region_bollo_note_valledaosta" = "EV: 8-year exemption if first registration ≥2019 (ACI Valle d’Aosta 2026).";

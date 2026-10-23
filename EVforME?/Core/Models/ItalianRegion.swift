@@ -75,9 +75,8 @@ enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
     /// €/kW dopo esenzione. `nil` = non stimato. Lombardia/Piemonte: 0 permanente.
     ///
     /// Bolzano 1,96 €/kW: tariffa Euro 6 (Euro 0–5: 1,99 €/kW — non modellato senza classe Euro).
-    /// Molise 2,76 €/kW: Regione Molise Tariffario 2026 (riportato da Quattroruote, guida bollo Molise
-    /// aggiornata al 17/02/2026) — EV esenti 5 anni, poi 1/4 della tariffa Euro 4/5/6 ≤100 kW (2,76),
-    /// lineare anche oltre 100 kW.
+    /// Molise 2,76 €/kW: Regione Molise — Tasse automobilistiche (tariffario in vigore dal 2016) + FAQ regionale.
+    /// EV esenti 5 anni, poi 1/4 della tariffa Euro 4/5/6 ≤100 kW (2,76), lineare anche oltre 100 kW.
     /// Sicilia: clausola ACI «a prescindere» sull’importo benzina a 2,58 €/kW; in-app 2,58 × 1/4 post-esenzione.
     var evBolloEURPerKw: Double? {
         let national = OwnershipCostEstimates.nationalEVBolloEURPerKw
@@ -94,7 +93,7 @@ enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
         case .abruzzo, .campania:
             return 3.12
         case .molise:
-            // Regione Molise Tariffario 2026 (Quattroruote, 17/02/2026): Euro 4/5/6 ≤100 kW = 2,76 €/kW.
+            // Regione Molise Tasse automobilistiche (dal 2016): Euro 4/5/6 ≤100 kW = 2,76 €/kW.
             return 2.76
         case .bolzano:
             // Euro 6: 1,96 €/kW (Euro 0–5: 1,99 — non usato senza classe Euro).
@@ -141,11 +140,12 @@ enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
         return sb
     }
 
-    /// Bollo termico (ICE/HEV/PHEV) con tariffario regionale 2026 citato.
+    /// Bollo termico (ICE/HEV/PHEV) con tariffario regionale citato.
     ///
-    /// Molise (Regione Molise Tariffario 2026, Quattroruote 17/02/2026), Euro 4/5/6:
+    /// Molise (Regione Molise — Tasse automobilistiche dal 2016 + FAQ regionale), Euro 4/5/6:
     /// - benzina/diesel: 2,76 €/kW fino a 100 kW + 4,14 €/kW oltre;
-    /// - solo GPL o solo metano **esclusivi**: 1/4 di 2,76 €/kW (lineare);
+    /// - solo **metano** esclusivo: riduzione 75% (1/4 di 2,76 €/kW) secondo FAQ regionale;
+    /// - solo **GPL** esclusivo: tariffa piena (nessuna riduzione FAQ);
     /// - bifuel GPL/metano–benzina: 2,76 €/kW pieno anche oltre 100 kW;
     /// - se non si sa se è bifuel → trattata come bifuel (`gasIsExclusive == false`);
     /// - superbollo nazionale oltre 185 kW.
@@ -161,13 +161,16 @@ enum ItalianRegion: String, CaseIterable, Identifiable, Codable {
         case .molise:
             let base: Double
             switch fuelKind {
-            case .lpg, .cng:
+            case .cng:
                 if gasIsExclusive {
+                    // FAQ regionale: riduzione 75% solo metano esclusivo.
                     base = 2.76 * 0.25 * powerKw
                 } else {
-                    // Bifuel (default): 2,76 fisso anche oltre 100 kW.
                     base = 2.76 * powerKw
                 }
+            case .lpg:
+                // GPL esclusivo o bifuel: tariffa piena (FAQ: riduzione solo metano).
+                base = 2.76 * powerKw
             case .petrol, .diesel, .unknown:
                 base = 2.76 * min(powerKw, 100) + 4.14 * max(0, powerKw - 100)
             }

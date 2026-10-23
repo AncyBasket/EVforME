@@ -20,6 +20,9 @@ enum OfficialLinks {
     /// EPA Fuel Economy (fonte consumi USA in catalogo).
     static let epaFuelEconomy = URL(string: "https://www.fueleconomy.gov/")!
 
+    /// Regione Molise — Tasse automobilistiche (tariffario in vigore dal 2016 + FAQ).
+    static let moliseRoadTax = URL(string: "https://www.regione.molise.it/flex/cm/pages/ServeBLOB.php/L/IT/IDPagina/359")!
+
     /// Tutti gli URL https da verificare nei test.
     static var allHTTPSLinks: [URL] {
         [
@@ -27,6 +30,7 @@ enum OfficialLinks {
             mimitEcobonusContributi,
             eeaCO2CarsDataset,
             epaFuelEconomy,
+            moliseRoadTax,
             FuelFromCO2Constants.eurLexRegulationURL,
             URL(string: Defaults.mimitFuelPricesCSVURL)!,
             URL(string: Defaults.eurostatElectricityURL)!,

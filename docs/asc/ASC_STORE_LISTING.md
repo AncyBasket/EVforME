@@ -51,7 +51,7 @@ Inserisci chilometri, prezzi e le due auto: ottieni un verdetto chiaro (sì / di
 Cosa trovi nell’app
 • Banco di prova con catalogo veicoli e scenari ottimistico / realistico / pessimistico
 • Ultimo confronto: riapri, ricalcola con i dati di oggi o ripristina il form
-• Kit Italia: finestra incentivo (“se compro entro…”), stime orientative di bollo, assicurazione e manutenzione (ICE vs EV)
+• Kit Italia: stato Bonus MASE (chiuso 2025), stime orientative di bollo, assicurazione e manutenzione (ICE vs EV)
 • Colonnine vicine: mappa leggera via Mappe Apple (ricerca locale), posizione solo se la chiedi
 • Guide brevi, report PDF gratis, widget / Live Activity sul verdetto
 
@@ -97,7 +97,7 @@ Enter km, prices and two vehicles for a clear verdict (yes / maybe / not yet), e
 What’s inside
 • Workshop bench with vehicle catalog and optimistic / realistic / pessimistic scenarios
 • Last comparison: reopen, recalculate with today’s data, or restore the form
-• Italy kit: incentive window (“if I buy by…”), indicative road tax, insurance and maintenance (ICE vs EV)
+• Italy kit: Bonus MASE status (closed 2025), indicative road tax, insurance and maintenance (ICE vs EV)
 • Nearby chargers: lightweight Apple Maps search; location only when you open the map
 • Short guides, free PDF report, widget / Live Activity
 

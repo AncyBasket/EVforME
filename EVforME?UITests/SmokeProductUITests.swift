@@ -369,6 +369,51 @@ final class SmokeProductUITests: XCTestCase {
         saveShot(app, name: "09_workshop_after_smoke")
     }
 
+    /// Dynamic Type Accessibility XXXL — home + verdict Assunzioni (vertical, no EXIF).
+    @MainActor
+    func testSmokeDynamicTypeXXXL_HomeAndAssumptions() throws {
+        let app = XCUIApplication()
+        app.launchEnvironment["UITEST_PRESET_VEHICLES"] = "1"
+        app.launchArguments += [
+            "-UITesting",
+            "-DisableAnimations",
+            "-UIPreferredContentSizeCategoryName",
+            "UICTContentSizeCategoryAccessibilityXXXL",
+        ]
+        app.launch()
+
+        dismissQuickStartIfNeeded(app)
+        dismissSystemAlertsIfNeeded(app)
+        XCUIDevice.shared.orientation = .portrait
+        saveShot(app, name: "10_home_xxxl")
+
+        let tellMe = firstExistingButton(app, labels: ["Dimmi la verità", "Tell me the truth"], timeout: 12)
+        XCTAssertNotNil(tellMe, "Simulate CTA at XXXL")
+        tellMe?.tap()
+        dismissSystemAlertsIfNeeded(app)
+
+        let modify = firstExistingButton(
+            app,
+            labels: ["Modifica dati", "Change inputs", "Modify input"],
+            timeout: 20
+        )
+        XCTAssertNotNil(modify, "Verdict should open at XXXL")
+
+        // Scroll to Assunzioni section.
+        let assumptions = app.descendants(matching: .any)["verdict_assumptions_section"]
+        for _ in 0..<14 {
+            if assumptions.exists { break }
+            scrollDown(app, times: 1)
+        }
+        XCTAssertTrue(
+            assumptions.waitForExistence(timeout: 4)
+                || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Assunzioni")).firstMatch.exists
+                || app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Assumptions")).firstMatch.exists,
+            "Assumptions section should be reachable at XXXL"
+        )
+        saveShot(app, name: "11_verdict_assumptions_xxxl")
+    }
+
     @MainActor
     private func dismissSystemAlertsIfNeeded(_ app: XCUIApplication) {
         let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")

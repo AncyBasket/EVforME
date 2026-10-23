@@ -57,7 +57,11 @@ final class PerfAndCacheTests: XCTestCase {
         XCTAssertEqual(PublicChargingPriceDefaults.fastDCPerKWh, 0.75, accuracy: 0.001)
         XCTAssertEqual(PublicChargingPriceDefaults.ultraFastPerKWh, 0.74, accuracy: 0.001)
         XCTAssertEqual(PublicChargingPriceDefaults.homePerKWh, 0.31, accuracy: 0.001)
-        XCTAssertEqual(PublicChargingPriceDefaults.teslaSuperchargerPerKWh, 0.42, accuracy: 0.001)
+        XCTAssertEqual(
+            PublicChargingPriceDefaults.teslaSuperchargerPerKWh,
+            PublicChargingPriceDefaults.ultraFastPerKWh,
+            accuracy: 0.001
+        )
         XCTAssertTrue(PublicChargingPriceDefaults.sourcePeriodLabel.contains("2026"))
         XCTAssertTrue(ChargingType.publicCases(targetBrandIsTesla: false).allSatisfy { $0 != .teslaSupercharger })
         XCTAssertTrue(ChargingType.publicCases(targetBrandIsTesla: true).contains(.teslaSupercharger))

@@ -23,10 +23,5 @@
 	<string></string>
 	<key>EVFORME_PRIVACY_URL</key>
 	<string>https://ancybasket.github.io/EVforME/privacy/</string>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsLocalNetworking</key>
-		<true/>
-	</dict>
 </dict>
 </plist>

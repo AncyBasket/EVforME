@@ -626,27 +626,30 @@ struct VerdictView: View {
     }
 
     private var assumptionsSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        let snap = VerdictAssumptions.snapshot(userInput: userInput)
+        return VStack(alignment: .leading, spacing: 12) {
             assumptionRow(text: L10n.assumptionCalculationsEstimates)
+            assumptionRow(text: L10n.assumptionModelEstimatesNote)
             assumptionRow(text: L10n.purchasePricesVerdictNote)
             if userInput.comparisonIntent == .consideringPurchase, let months = currentResult.breakEvenMonths {
                 assumptionRow(text: L10n.breakEvenMonthsReason(months))
             }
             assumptionRow(text: L10n.assumptionNoDataSent)
-            assumptionRow(text: L10n.assumptionAveragePrices)
-            assumptionRow(text: L10n.assumptionConsumptionGas)
-            assumptionRow(text: L10n.assumptionConsumptionEv)
+            assumptionRow(text: VerdictAssumptions.consumptionSourceLine(from: snap))
+            assumptionRow(text: VerdictAssumptions.consumptionTargetLine(from: snap))
+            assumptionRow(text: VerdictAssumptions.fuelPriceLine(from: snap))
+            assumptionRow(text: VerdictAssumptions.electricityLine(from: snap))
             assumptionRow(text: L10n.assumptionMaintenance(for: userInput.market))
             if userInput.market != .IT {
                 assumptionRow(text: L10n.nonItalyDataHonestyBanner)
             }
             assumptionRow(text: L10n.assumptionTaxes)
-            assumptionRow(text: L10n.assumptionElectricity)
             if userInput.showsItalyCostKit {
                 assumptionRow(text: L10n.incentivesTransparencyNote)
                 assumptionRow(text: L10n.italyKitDisclaimer)
             }
         }
+        .accessibilityIdentifier("verdict_assumptions_section")
     }
 
     private var incentiveWindowSection: some View {

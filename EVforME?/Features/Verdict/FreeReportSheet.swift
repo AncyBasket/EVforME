@@ -14,7 +14,7 @@ struct FreeReportSheet: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 14) {
-                Text(L10n.freeReportSubtitle)
+                Text(L10n.freeReportSubtitle(userInput.ownershipYears))
                     .font(Typography.readingBody)
                     .foregroundColor(.secondaryText)
                 Text("• \(L10n.reportIncluded1)")

@@ -305,6 +305,11 @@ struct InputView: View {
                                     userInput.applyTripProfileDefaults()
                                 }
                             }
+                            Text(L10n.assumptionModelEstimatesNote)
+                                .font(Typography.caption)
+                                .foregroundStyle(Color.secondaryText)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding(.top, 6)
                         }
 
                         InputSectionCard(
@@ -675,17 +680,11 @@ struct InputView: View {
             liveIncentiveEUR: input.estimatedPurchaseIncentiveEUR,
             liveResult: liveResult
         )
+        // La card mostra già `windowBadgeText` quando non c’è delta: qui solo variazioni prezzi/risparmio.
         if report.isMaterial, let min = report.currentSavingsMin, let max = report.currentSavingsMax {
-            let changed = max > 0
+            return max > 0
                 ? L10n.lastComparisonDataChanged(min, max)
                 : L10n.lastComparisonDataChangedCheaper
-            if report.incentiveWindowChanged || report.incentiveWindowExpiredNow {
-                return changed + " · " + ItalianIncentives.windowBadgeText
-            }
-            return changed
-        }
-        if report.incentiveWindowChanged || report.incentiveWindowExpiredNow {
-            return ItalianIncentives.windowBadgeText
         }
         if snapshot.fuelPriceAtSave != nil || snapshot.electricityPriceAtSave != nil {
             return L10n.lastComparisonDataUnchanged
