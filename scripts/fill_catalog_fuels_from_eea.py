@@ -257,26 +257,41 @@ def brand_payload(brand: str, hev_only: bool = False) -> dict:
     }
 
 
+def _status_n(bucket: dict) -> float:
+    return float(bucket.get("sum_r", {}).get("value") or bucket.get("doc_count") or 0)
+
+
 def status_preferred_metrics(fuel_bucket: dict) -> dict:
     """
     Prefer Status F (final) over P (provisional).
 
-    Through 2024 the IT co2cars index lists each registration twice (F+P), often in
-    the same Ft bucket — summing them doubles n. In 2022 F/P also used different Ft
-    casing (diesel vs DIESEL); case-dedupe alone fixed that year. Prefer F; if only
-    P exists (typical for 2025), use P. CO₂/kW are the same on F and P.
+    Through 2024 the IT co2cars index usually lists each registration twice (F+P)
+    with F≈P — summing doubles n; use F. If only P exists (typical for 2025), use P.
+
+    Rare quirk: F is present but tiny while P holds nearly all regs (e.g. I10 2021
+    F=12 vs P=11699, Ceed LPG F=18 vs P=824). Treating that F as the volume would
+    under-count; fall back to P when F < 25% of P.
     """
     statuses = fuel_bucket.get("status", {}).get("buckets") or []
     if statuses:
         by_key = {str(s.get("key", "")).upper(): s for s in statuses}
-        chosen = by_key.get("F") or by_key.get("P")
+        f_b = by_key.get("F")
+        p_b = by_key.get("P")
+        chosen = None
+        if f_b and p_b:
+            f_n, p_n = _status_n(f_b), _status_n(p_b)
+            if f_n >= p_n * 0.25:
+                chosen = f_b
+            else:
+                chosen = p_b
+        elif f_b:
+            chosen = f_b
+        elif p_b:
+            chosen = p_b
         if chosen is None:
-            chosen = max(
-                statuses,
-                key=lambda s: float(s.get("sum_r", {}).get("value") or s.get("doc_count") or 0),
-            )
+            chosen = max(statuses, key=_status_n)
         return {
-            "n": float(chosen.get("sum_r", {}).get("value") or chosen.get("doc_count") or 0),
+            "n": _status_n(chosen),
             "co2": chosen.get("avg_co2", {}).get("value"),
             "kw": chosen.get("avg_kw", {}).get("value"),
             "status": str(chosen.get("key", "")).upper() or None,

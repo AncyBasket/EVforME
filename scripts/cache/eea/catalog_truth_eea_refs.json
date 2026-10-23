@@ -1,5 +1,435 @@
 [
   {
+    "id": "alfa-romeo-giulia-2018",
+    "eea_l100": 8.464,
+    "n": 484,
+    "eea_year": 2018,
+    "eea_model": "GIULIA",
+    "ft": "PETROL",
+    "powerKw": 165.1301652892562,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "alfa-romeo-giulia-diesel-2018",
+    "eea_l100": 5.503,
+    "n": 6578,
+    "eea_year": 2018,
+    "eea_model": "GIULIA",
+    "ft": "DIESEL",
+    "powerKw": 122.038917604135,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "alfa-romeo-giulia-2019",
+    "eea_l100": 8.399,
+    "n": 424,
+    "eea_year": 2019,
+    "eea_model": "GIULIA",
+    "ft": "PETROL",
+    "powerKw": 168.30424528301887,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "alfa-romeo-giulia-diesel-2019",
+    "eea_l100": 5.615,
+    "n": 3162,
+    "eea_year": 2019,
+    "eea_model": "GIULIA",
+    "ft": "DIESEL",
+    "powerKw": 129.02498418722328,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "alfa-romeo-giulia-2020",
+    "eea_l100": 8.311,
+    "n": 249,
+    "eea_year": 2020,
+    "eea_model": "GIULIA",
+    "ft": "PETROL",
+    "powerKw": 171.55020080321285,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "alfa-romeo-giulia-diesel-2020",
+    "eea_l100": 5.575,
+    "n": 2085,
+    "eea_year": 2020,
+    "eea_model": "GIULIA",
+    "ft": "DIESEL",
+    "powerKw": 132.06906474820144,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "alfa-romeo-giulia-2021",
+    "eea_l100": 7.451,
+    "n": 340,
+    "eea_year": 2021,
+    "eea_model": "GIULIA",
+    "ft": "PETROL",
+    "powerKw": 167.56176470588235,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "alfa-romeo-giulia-diesel-2021",
+    "eea_l100": 5.166,
+    "n": 1476,
+    "eea_year": 2021,
+    "eea_model": "GIULIA",
+    "ft": "DIESEL",
+    "powerKw": 134.74932249322492,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "alfa-romeo-giulia-2022",
+    "eea_l100": 7.533,
+    "n": 277,
+    "eea_year": 2022,
+    "eea_model": "GIULIA",
+    "ft": "PETROL",
+    "powerKw": 169.77617328519855,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "alfa-romeo-giulia-diesel-2022",
+    "eea_l100": 5.203,
+    "n": 847,
+    "eea_year": 2022,
+    "eea_model": "GIULIA",
+    "ft": "DIESEL",
+    "powerKw": 138.4604486422668,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "alfa-romeo-giulia-2023",
+    "eea_l100": 7.865,
+    "n": 340,
+    "eea_year": 2023,
+    "eea_model": "GIULIA",
+    "ft": "PETROL",
+    "powerKw": 203.27058823529413,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "alfa-romeo-giulia-diesel-2023",
+    "eea_l100": 5.482,
+    "n": 802,
+    "eea_year": 2023,
+    "eea_model": "GIULIA",
+    "ft": "DIESEL",
+    "powerKw": 142.54114713216958,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "alfa-romeo-giulia-2024",
+    "eea_l100": 7.959,
+    "n": 322,
+    "eea_year": 2024,
+    "eea_model": "GIULIA",
+    "ft": "PETROL",
+    "powerKw": 205.8198757763975,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "alfa-romeo-giulia-diesel-2024",
+    "eea_l100": 5.428,
+    "n": 738,
+    "eea_year": 2024,
+    "eea_model": "GIULIA",
+    "ft": "DIESEL",
+    "powerKw": 140.34146341463415,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "alfa-romeo-giulia-2025",
+    "eea_l100": 8.118,
+    "n": 228,
+    "eea_year": 2025,
+    "eea_model": "GIULIA",
+    "ft": "PETROL",
+    "powerKw": 206.0,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "alfa-romeo-giulia-diesel-2025",
+    "eea_l100": 5.463,
+    "n": 456,
+    "eea_year": 2025,
+    "eea_model": "GIULIA",
+    "ft": "DIESEL",
+    "powerKw": 143.02631578947367,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "alfa-romeo-giulia-2026",
+    "eea_l100": 8.118,
+    "n": 228,
+    "eea_year": 2025,
+    "eea_model": "GIULIA",
+    "ft": "PETROL",
+    "powerKw": 206.0,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "alfa-romeo-stelvio-2018",
+    "eea_l100": 9.562,
+    "n": 861,
+    "eea_year": 2018,
+    "eea_model": "STELVIO",
+    "ft": "PETROL",
+    "powerKw": 183.63530778164923,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "alfa-romeo-stelvio-diesel-2018",
+    "eea_l100": 6.734,
+    "n": 11706,
+    "eea_year": 2018,
+    "eea_model": "STELVIO",
+    "ft": "DIESEL",
+    "powerKw": 145.07602938663933,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "alfa-romeo-stelvio-2019",
+    "eea_l100": 9.514,
+    "n": 750,
+    "eea_year": 2019,
+    "eea_model": "STELVIO",
+    "ft": "PETROL",
+    "powerKw": 172.66933333333333,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "alfa-romeo-stelvio-diesel-2019",
+    "eea_l100": 6.461,
+    "n": 11477,
+    "eea_year": 2019,
+    "eea_model": "STELVIO",
+    "ft": "DIESEL",
+    "powerKw": 142.01463797159536,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "alfa-romeo-stelvio-2020",
+    "eea_l100": 9.328,
+    "n": 442,
+    "eea_year": 2020,
+    "eea_model": "STELVIO",
+    "ft": "PETROL",
+    "powerKw": 177.4162895927602,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "alfa-romeo-stelvio-diesel-2020",
+    "eea_l100": 6.328,
+    "n": 7589,
+    "eea_year": 2020,
+    "eea_model": "STELVIO",
+    "ft": "DIESEL",
+    "powerKw": 138.9223876663592,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "alfa-romeo-stelvio-2021",
+    "eea_l100": 8.694,
+    "n": 375,
+    "eea_year": 2021,
+    "eea_model": "STELVIO",
+    "ft": "PETROL",
+    "powerKw": 184.288,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "alfa-romeo-stelvio-diesel-2021",
+    "eea_l100": 5.984,
+    "n": 7198,
+    "eea_year": 2021,
+    "eea_model": "STELVIO",
+    "ft": "DIESEL",
+    "powerKw": 140.93803834398443,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "alfa-romeo-stelvio-2022",
+    "eea_l100": 8.64,
+    "n": 304,
+    "eea_year": 2022,
+    "eea_model": "STELVIO",
+    "ft": "PETROL",
+    "powerKw": 183.22368421052633,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "alfa-romeo-stelvio-diesel-2022",
+    "eea_l100": 5.964,
+    "n": 8048,
+    "eea_year": 2022,
+    "eea_model": "STELVIO",
+    "ft": "DIESEL",
+    "powerKw": 140.42196819085487,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "alfa-romeo-stelvio-2023",
+    "eea_l100": 8.713,
+    "n": 445,
+    "eea_year": 2023,
+    "eea_model": "STELVIO",
+    "ft": "PETROL",
+    "powerKw": 204.69662921348313,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "alfa-romeo-stelvio-diesel-2023",
+    "eea_l100": 6.028,
+    "n": 6120,
+    "eea_year": 2023,
+    "eea_model": "STELVIO",
+    "ft": "DIESEL",
+    "powerKw": 144.51895424836601,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "alfa-romeo-stelvio-2024",
+    "eea_l100": 8.709,
+    "n": 360,
+    "eea_year": 2024,
+    "eea_model": "STELVIO",
+    "ft": "PETROL",
+    "powerKw": 206.0,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "alfa-romeo-stelvio-diesel-2024",
+    "eea_l100": 6.047,
+    "n": 5008,
+    "eea_year": 2024,
+    "eea_model": "STELVIO",
+    "ft": "DIESEL",
+    "powerKw": 145.07907348242813,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "alfa-romeo-stelvio-2025",
+    "eea_l100": 8.619,
+    "n": 361,
+    "eea_year": 2025,
+    "eea_model": "STELVIO",
+    "ft": "PETROL",
+    "powerKw": 206.0,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "alfa-romeo-stelvio-diesel-2025",
+    "eea_l100": 6.082,
+    "n": 2494,
+    "eea_year": 2025,
+    "eea_model": "STELVIO",
+    "ft": "DIESEL",
+    "powerKw": 148.7457898957498,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "alfa-romeo-stelvio-2026",
+    "eea_l100": 8.619,
+    "n": 361,
+    "eea_year": 2025,
+    "eea_model": "STELVIO",
+    "ft": "PETROL",
+    "powerKw": 206.0,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "alfa-romeo-tonale-2022",
+    "eea_l100": 6.105,
+    "n": 4185,
+    "eea_year": 2022,
+    "eea_model": "TONALE",
+    "ft": "PETROL",
+    "powerKw": 101.04014336917562,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "alfa-romeo-tonale-diesel-2022",
+    "eea_l100": 5.614,
+    "n": 449,
+    "eea_year": 2022,
+    "eea_model": "TONALE",
+    "ft": "DIESEL",
+    "powerKw": 96.0445434298441,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "alfa-romeo-tonale-2023",
+    "eea_l100": 6.006,
+    "n": 9433,
+    "eea_year": 2023,
+    "eea_model": "TONALE",
+    "ft": "PETROL",
+    "powerKw": 107.21891232905756,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "alfa-romeo-tonale-diesel-2023",
+    "eea_l100": 5.603,
+    "n": 7370,
+    "eea_year": 2023,
+    "eea_model": "TONALE",
+    "ft": "DIESEL",
+    "powerKw": 96.0,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "alfa-romeo-tonale-2024",
+    "eea_l100": 5.828,
+    "n": 5655,
+    "eea_year": 2024,
+    "eea_model": "TONALE",
+    "ft": "PETROL",
+    "powerKw": 109.85411140583554,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "alfa-romeo-tonale-diesel-2024",
+    "eea_l100": 5.399,
+    "n": 7049,
+    "eea_year": 2024,
+    "eea_model": "TONALE",
+    "ft": "DIESEL",
+    "powerKw": 96.0,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "alfa-romeo-tonale-2025",
+    "eea_l100": 5.723,
+    "n": 2301,
+    "eea_year": 2025,
+    "eea_model": "TONALE",
+    "ft": "PETROL",
+    "powerKw": 114.38331160365058,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "alfa-romeo-tonale-diesel-2025",
+    "eea_l100": 5.336,
+    "n": 6203,
+    "eea_year": 2025,
+    "eea_model": "TONALE",
+    "ft": "DIESEL",
+    "powerKw": 96.0,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "alfa-romeo-tonale-2026",
+    "eea_l100": 5.723,
+    "n": 2301,
+    "eea_year": 2025,
+    "eea_model": "TONALE",
+    "ft": "PETROL",
+    "powerKw": 114.38331160365058,
+    "fuelKind": "petrol"
+  },
+  {
     "id": "audi-a1-2018",
     "eea_l100": 5.903,
     "n": 2822,
@@ -1122,21 +1552,21 @@
   {
     "id": "bmw-x1-2019",
     "eea_l100": 6.911,
-    "n": 1355,
+    "n": 1358,
     "eea_year": 2019,
     "eea_model": "X1SDRIVE18I",
     "ft": "PETROL",
-    "powerKw": 103.0,
+    "powerKw": 102.9977908689249,
     "fuelKind": "petrol"
   },
   {
     "id": "bmw-x1-2020",
     "eea_l100": 6.715,
-    "n": 1049,
+    "n": 1051,
     "eea_year": 2020,
     "eea_model": "X1SDRIVE18I",
     "ft": "PETROL",
-    "powerKw": 102.38226882745472,
+    "powerKw": 102.38344433872503,
     "fuelKind": "petrol"
   },
   {
@@ -1212,7 +1642,7 @@
   {
     "id": "bmw-x2-2019",
     "eea_l100": 6.817,
-    "n": 529,
+    "n": 530,
     "eea_year": 2019,
     "eea_model": "X2SDRIVE18I",
     "ft": "PETROL",
@@ -1302,7 +1732,7 @@
   {
     "id": "bmw-x3-2019",
     "eea_l100": 6.926,
-    "n": 4944,
+    "n": 4946,
     "eea_year": 2019,
     "eea_model": "X3XDRIVE20D",
     "ft": "DIESEL",
@@ -1312,7 +1742,7 @@
   {
     "id": "bmw-x3-2020",
     "eea_l100": 6.381,
-    "n": 3145,
+    "n": 3149,
     "eea_year": 2020,
     "eea_model": "X3XDRIVE20D",
     "ft": "DIESEL",
@@ -1322,7 +1752,7 @@
   {
     "id": "bmw-x3-2021",
     "eea_l100": 5.97,
-    "n": 3480,
+    "n": 3485,
     "eea_year": 2021,
     "eea_model": "X3XDRIVE20D",
     "ft": "DIESEL",
@@ -1392,31 +1822,31 @@
   {
     "id": "bmw-x5-2019",
     "eea_l100": 7.932,
-    "n": 1813,
+    "n": 1831,
     "eea_year": 2019,
     "eea_model": "X5XDRIVE30D",
     "ft": "DIESEL",
-    "powerKw": 194.9773855488141,
+    "powerKw": 194.96941561987984,
     "fuelKind": "diesel"
   },
   {
     "id": "bmw-x5-2020",
     "eea_l100": 7.83,
-    "n": 1081,
+    "n": 1087,
     "eea_year": 2020,
     "eea_model": "X5XDRIVE30D",
     "ft": "DIESEL",
-    "powerKw": 197.16466234967623,
+    "powerKw": 197.16651333946643,
     "fuelKind": "diesel"
   },
   {
     "id": "bmw-x5-2021",
     "eea_l100": 7.199,
-    "n": 791,
+    "n": 802,
     "eea_year": 2021,
     "eea_model": "X5XDRIVE30D",
     "ft": "DIESEL",
-    "powerKw": 208.71049304677624,
+    "powerKw": 208.70324189526184,
     "fuelKind": "diesel"
   },
   {
@@ -2951,22 +3381,22 @@
   },
   {
     "id": "dacia-dokker-2018",
-    "eea_l100": 7.611,
-    "n": 159,
+    "eea_l100": 7.612,
+    "n": 165,
     "eea_year": 2018,
     "eea_model": "DOKKER",
     "ft": "PETROL",
-    "powerKw": 77.0754716981132,
+    "powerKw": 77.12121212121212,
     "fuelKind": "petrol"
   },
   {
     "id": "dacia-dokker-diesel-2018",
     "eea_l100": 5.43,
-    "n": 1215,
+    "n": 1230,
     "eea_year": 2018,
     "eea_model": "DOKKER",
     "ft": "DIESEL",
-    "powerKw": 64.65102880658436,
+    "powerKw": 64.62276422764228,
     "fuelKind": "diesel"
   },
   {
@@ -3042,21 +3472,21 @@
   {
     "id": "dacia-duster-2018",
     "eea_l100": 7.803,
-    "n": 2944,
+    "n": 2948,
     "eea_year": 2018,
     "eea_model": "DUSTER",
     "ft": "PETROL",
-    "powerKw": 84.42934782608695,
+    "powerKw": 84.43419267299865,
     "fuelKind": "petrol"
   },
   {
     "id": "dacia-duster-diesel-2018",
     "eea_l100": 5.483,
-    "n": 19253,
+    "n": 19268,
     "eea_year": 2018,
     "eea_model": "DUSTER",
     "ft": "DIESEL",
-    "powerKw": 80.3172492598556,
+    "powerKw": 80.31726178119162,
     "fuelKind": "diesel"
   },
   {
@@ -3562,21 +3992,21 @@
   {
     "id": "dacia-sandero-2018",
     "eea_l100": 6.444,
-    "n": 8717,
+    "n": 8720,
     "eea_year": 2018,
     "eea_model": "SANDERO",
     "ft": "PETROL",
-    "powerKw": 60.0942984971894,
+    "powerKw": 60.096330275229356,
     "fuelKind": "petrol"
   },
   {
     "id": "dacia-sandero-diesel-2018",
     "eea_l100": 4.72,
-    "n": 12923,
+    "n": 12926,
     "eea_year": 2018,
     "eea_model": "SANDERO",
     "ft": "DIESEL",
-    "powerKw": 64.99218447728856,
+    "powerKw": 64.991567383568,
     "fuelKind": "diesel"
   },
   {
@@ -6182,11 +6612,11 @@
   {
     "id": "hyundai-tucson-2021",
     "eea_l100": 5.393,
-    "n": 4231,
+    "n": 4243,
     "eea_year": 2021,
     "eea_model": "TUCSONIX35",
     "ft": "DIESEL",
-    "powerKw": 89.95272985109904,
+    "powerKw": 89.99457930709404,
     "fuelKind": "diesel"
   },
   {
@@ -6201,12 +6631,12 @@
   },
   {
     "id": "hyundai-tucson-2023",
-    "eea_l100": 5.931,
-    "n": 10510,
+    "eea_l100": 5.932,
+    "n": 10511,
     "eea_year": 2023,
     "eea_model": "TUCSONIX35",
     "ft": "PETROL",
-    "powerKw": 127.61674595623217,
+    "powerKw": 127.61716297212445,
     "fuelKind": "petrol"
   },
   {
@@ -6278,6 +6708,16 @@
     "ft": "LPG",
     "powerKw": 48.00058411214953,
     "fuelKind": "lpg"
+  },
+  {
+    "id": "hyundai-i10-2021",
+    "eea_l100": 5.248,
+    "n": 11699,
+    "eea_year": 2021,
+    "eea_model": "I10",
+    "ft": "PETROL",
+    "powerKw": 49.45961193264382,
+    "fuelKind": "petrol"
   },
   {
     "id": "hyundai-i10-2022",
@@ -6408,6 +6848,16 @@
     "ft": "LPG",
     "powerKw": 54.0,
     "fuelKind": "lpg"
+  },
+  {
+    "id": "hyundai-i20-2021",
+    "eea_l100": 5.236,
+    "n": 5612,
+    "eea_year": 2021,
+    "eea_model": "I20",
+    "ft": "PETROL",
+    "powerKw": 67.52352102637207,
+    "fuelKind": "petrol"
   },
   {
     "id": "hyundai-i20-lpg-2021",
@@ -7370,6 +7820,16 @@
     "fuelKind": "diesel"
   },
   {
+    "id": "kia-ceed-lpg-2019",
+    "eea_l100": 9.041,
+    "n": 824,
+    "eea_year": 2019,
+    "eea_model": "CEED",
+    "ft": "LPG",
+    "powerKw": 73.0,
+    "fuelKind": "lpg"
+  },
+  {
     "id": "kia-ceed-2020",
     "eea_l100": 6.449,
     "n": 882,
@@ -7838,6 +8298,16 @@
     "ft": "PETROL",
     "powerKw": 62.735849056603776,
     "fuelKind": "petrol"
+  },
+  {
+    "id": "kia-rio-lpg-2019",
+    "eea_l100": 8.364,
+    "n": 536,
+    "eea_year": 2019,
+    "eea_model": "RIO",
+    "ft": "LPG",
+    "powerKw": 62.0,
+    "fuelKind": "lpg"
   },
   {
     "id": "kia-rio-2020",
@@ -8332,7 +8802,7 @@
   {
     "id": "kia-stonic-lpg-2019",
     "eea_l100": 8.303,
-    "n": 412,
+    "n": 4947,
     "eea_year": 2019,
     "eea_model": "STONIC",
     "ft": "LPG",
@@ -8358,6 +8828,16 @@
     "ft": "DIESEL",
     "powerKw": 85.0,
     "fuelKind": "diesel"
+  },
+  {
+    "id": "kia-stonic-lpg-2020",
+    "eea_l100": 8.302,
+    "n": 3968,
+    "eea_year": 2020,
+    "eea_model": "STONIC",
+    "ft": "LPG",
+    "powerKw": 72.9944556451613,
+    "fuelKind": "lpg"
   },
   {
     "id": "kia-stonic-2021",
@@ -8608,6 +9088,456 @@
     "ft": "PETROL",
     "powerKw": 73.98974836905872,
     "fuelKind": "petrol"
+  },
+  {
+    "id": "land-rover-defender-2020",
+    "eea_l100": 9.169,
+    "n": 653,
+    "eea_year": 2020,
+    "eea_model": "DEFENDER",
+    "ft": "DIESEL",
+    "powerKw": 171.7626339969372,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-defender-petrol-2020",
+    "eea_l100": 9.169,
+    "n": 653,
+    "eea_year": 2020,
+    "eea_model": "DEFENDER",
+    "ft": "DIESEL",
+    "powerKw": 171.7626339969372,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-defender-2021",
+    "eea_l100": 8.9,
+    "n": 1695,
+    "eea_year": 2021,
+    "eea_model": "DEFENDER",
+    "ft": "DIESEL",
+    "powerKw": 168.247197640118,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-defender-petrol-2021",
+    "eea_l100": 8.9,
+    "n": 1695,
+    "eea_year": 2021,
+    "eea_model": "DEFENDER",
+    "ft": "DIESEL",
+    "powerKw": 168.247197640118,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-defender-2022",
+    "eea_l100": 8.9,
+    "n": 1222,
+    "eea_year": 2022,
+    "eea_model": "DEFENDER",
+    "ft": "DIESEL",
+    "powerKw": 170.1620294599018,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-defender-diesel-2022",
+    "eea_l100": 8.9,
+    "n": 1222,
+    "eea_year": 2022,
+    "eea_model": "DEFENDER",
+    "ft": "DIESEL",
+    "powerKw": 170.1620294599018,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-defender-2023",
+    "eea_l100": 8.708,
+    "n": 2120,
+    "eea_year": 2023,
+    "eea_model": "DEFENDER",
+    "ft": "DIESEL",
+    "powerKw": 170.12924528301886,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-defender-diesel-2023",
+    "eea_l100": 8.708,
+    "n": 2120,
+    "eea_year": 2023,
+    "eea_model": "DEFENDER",
+    "ft": "DIESEL",
+    "powerKw": 170.12924528301886,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-defender-2024",
+    "eea_l100": 8.518,
+    "n": 1754,
+    "eea_year": 2024,
+    "eea_model": "DEFENDER",
+    "ft": "DIESEL",
+    "powerKw": 163.6339794754846,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-defender-diesel-2024",
+    "eea_l100": 8.518,
+    "n": 1754,
+    "eea_year": 2024,
+    "eea_model": "DEFENDER",
+    "ft": "DIESEL",
+    "powerKw": 163.6339794754846,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-defender-2025",
+    "eea_l100": 8.539,
+    "n": 1604,
+    "eea_year": 2025,
+    "eea_model": "DEFENDER",
+    "ft": "DIESEL",
+    "powerKw": 160.40960099750623,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-defender-diesel-2025",
+    "eea_l100": 8.539,
+    "n": 1604,
+    "eea_year": 2025,
+    "eea_model": "DEFENDER",
+    "ft": "DIESEL",
+    "powerKw": 160.40960099750623,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-defender-2026",
+    "eea_l100": 8.539,
+    "n": 1604,
+    "eea_year": 2025,
+    "eea_model": "DEFENDER",
+    "ft": "DIESEL",
+    "powerKw": 160.40960099750623,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-discovery-2018",
+    "eea_l100": 8.84,
+    "n": 596,
+    "eea_year": 2018,
+    "eea_model": "DISCOVERY",
+    "ft": "DIESEL",
+    "powerKw": 171.99664429530202,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-discovery-2019",
+    "eea_l100": 8.859,
+    "n": 315,
+    "eea_year": 2019,
+    "eea_model": "DISCOVERY",
+    "ft": "DIESEL",
+    "powerKw": 183.01904761904763,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-discovery-2020",
+    "eea_l100": 8.865,
+    "n": 139,
+    "eea_year": 2020,
+    "eea_model": "DISCOVERY",
+    "ft": "DIESEL",
+    "powerKw": 187.01438848920864,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-discovery-2021",
+    "eea_l100": 8.525,
+    "n": 168,
+    "eea_year": 2021,
+    "eea_model": "DISCOVERY",
+    "ft": "DIESEL",
+    "powerKw": 184.33333333333334,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-discovery-sport-2018",
+    "eea_l100": 7.783,
+    "n": 3930,
+    "eea_year": 2018,
+    "eea_model": "DISCOVERYSPORT",
+    "ft": "DIESEL",
+    "powerKw": 113.64834605597964,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-discovery-sport-2019",
+    "eea_l100": 7.511,
+    "n": 2725,
+    "eea_year": 2019,
+    "eea_model": "DISCOVERYSPORT",
+    "ft": "DIESEL",
+    "powerKw": 114.1394495412844,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-discovery-sport-petrol-2019",
+    "eea_l100": 9.678,
+    "n": 106,
+    "eea_year": 2019,
+    "eea_model": "DISCOVERYSPORT",
+    "ft": "PETROL",
+    "powerKw": 164.71698113207546,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "land-rover-discovery-sport-2020",
+    "eea_l100": 7.088,
+    "n": 1742,
+    "eea_year": 2020,
+    "eea_model": "DISCOVERYSPORT",
+    "ft": "DIESEL",
+    "powerKw": 117.98679678530425,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-discovery-sport-petrol-2020",
+    "eea_l100": 9.491,
+    "n": 172,
+    "eea_year": 2020,
+    "eea_model": "DISCOVERYSPORT",
+    "ft": "PETROL",
+    "powerKw": 149.72093023255815,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "land-rover-discovery-sport-2021",
+    "eea_l100": 6.812,
+    "n": 1215,
+    "eea_year": 2021,
+    "eea_model": "DISCOVERYSPORT",
+    "ft": "DIESEL",
+    "powerKw": 124.22633744855968,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-discovery-sport-2022",
+    "eea_l100": 9.266,
+    "n": 144,
+    "eea_year": 2022,
+    "eea_model": "DISCOVERYSPORT",
+    "ft": "PETROL",
+    "powerKw": 147.45833333333334,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "land-rover-discovery-sport-diesel-2022",
+    "eea_l100": 6.805,
+    "n": 808,
+    "eea_year": 2022,
+    "eea_model": "DISCOVERYSPORT",
+    "ft": "DIESEL",
+    "powerKw": 124.41831683168317,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-discovery-sport-diesel-2023",
+    "eea_l100": 6.729,
+    "n": 641,
+    "eea_year": 2023,
+    "eea_model": "DISCOVERYSPORT",
+    "ft": "DIESEL",
+    "powerKw": 126.03744149765991,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-discovery-sport-diesel-2024",
+    "eea_l100": 6.717,
+    "n": 617,
+    "eea_year": 2024,
+    "eea_model": "DISCOVERYSPORT",
+    "ft": "DIESEL",
+    "powerKw": 124.27876823338735,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-discovery-sport-diesel-2025",
+    "eea_l100": 6.7,
+    "n": 347,
+    "eea_year": 2025,
+    "eea_model": "DISCOVERYSPORT",
+    "ft": "DIESEL",
+    "powerKw": 123.97694524495677,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-range-rover-sport-2018",
+    "eea_l100": 9.231,
+    "n": 2542,
+    "eea_year": 2018,
+    "eea_model": "RANGEROVERSPORT",
+    "ft": "DIESEL",
+    "powerKw": 187.55782848151063,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-range-rover-sport-petrol-2018",
+    "eea_l100": 9.231,
+    "n": 2542,
+    "eea_year": 2018,
+    "eea_model": "RANGEROVERSPORT",
+    "ft": "DIESEL",
+    "powerKw": 187.55782848151063,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-range-rover-sport-2019",
+    "eea_l100": 9.152,
+    "n": 2213,
+    "eea_year": 2019,
+    "eea_model": "RANGEROVERSPORT",
+    "ft": "DIESEL",
+    "powerKw": 186.35110709444194,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-range-rover-sport-petrol-2019",
+    "eea_l100": 9.152,
+    "n": 2213,
+    "eea_year": 2019,
+    "eea_model": "RANGEROVERSPORT",
+    "ft": "DIESEL",
+    "powerKw": 186.35110709444194,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-range-rover-sport-2020",
+    "eea_l100": 9.125,
+    "n": 1329,
+    "eea_year": 2020,
+    "eea_model": "RANGEROVERSPORT",
+    "ft": "DIESEL",
+    "powerKw": 185.18585402558315,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-range-rover-sport-petrol-2020",
+    "eea_l100": 9.125,
+    "n": 1329,
+    "eea_year": 2020,
+    "eea_model": "RANGEROVERSPORT",
+    "ft": "DIESEL",
+    "powerKw": 185.18585402558315,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-range-rover-sport-2021",
+    "eea_l100": 8.668,
+    "n": 1441,
+    "eea_year": 2021,
+    "eea_model": "RANGEROVERSPORT",
+    "ft": "DIESEL",
+    "powerKw": 186.81054823039557,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-range-rover-sport-petrol-2021",
+    "eea_l100": 8.668,
+    "n": 1441,
+    "eea_year": 2021,
+    "eea_model": "RANGEROVERSPORT",
+    "ft": "DIESEL",
+    "powerKw": 186.81054823039557,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-range-rover-sport-2022",
+    "eea_l100": 8.39,
+    "n": 739,
+    "eea_year": 2022,
+    "eea_model": "RANGEROVERSPORT",
+    "ft": "DIESEL",
+    "powerKw": 186.96887686062246,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-range-rover-sport-diesel-2022",
+    "eea_l100": 8.39,
+    "n": 739,
+    "eea_year": 2022,
+    "eea_model": "RANGEROVERSPORT",
+    "ft": "DIESEL",
+    "powerKw": 186.96887686062246,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-range-rover-sport-2023",
+    "eea_l100": 7.668,
+    "n": 2675,
+    "eea_year": 2023,
+    "eea_model": "RANGEROVERSPORT",
+    "ft": "DIESEL",
+    "powerKw": 196.23065420560746,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-range-rover-sport-diesel-2023",
+    "eea_l100": 7.668,
+    "n": 2675,
+    "eea_year": 2023,
+    "eea_model": "RANGEROVERSPORT",
+    "ft": "DIESEL",
+    "powerKw": 196.23065420560746,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-range-rover-sport-2024",
+    "eea_l100": 7.559,
+    "n": 2153,
+    "eea_year": 2024,
+    "eea_model": "RANGEROVERSPORT",
+    "ft": "DIESEL",
+    "powerKw": 193.9038550859266,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-range-rover-sport-diesel-2024",
+    "eea_l100": 7.559,
+    "n": 2153,
+    "eea_year": 2024,
+    "eea_model": "RANGEROVERSPORT",
+    "ft": "DIESEL",
+    "powerKw": 193.9038550859266,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-range-rover-sport-2025",
+    "eea_l100": 7.379,
+    "n": 1558,
+    "eea_year": 2025,
+    "eea_model": "RANGEROVERSPORT",
+    "ft": "DIESEL",
+    "powerKw": 191.92362002567396,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-range-rover-sport-diesel-2025",
+    "eea_l100": 7.379,
+    "n": 1558,
+    "eea_year": 2025,
+    "eea_model": "RANGEROVERSPORT",
+    "ft": "DIESEL",
+    "powerKw": 191.92362002567396,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "land-rover-range-rover-sport-2026",
+    "eea_l100": 7.379,
+    "n": 1558,
+    "eea_year": 2025,
+    "eea_model": "RANGEROVERSPORT",
+    "ft": "DIESEL",
+    "powerKw": 191.92362002567396,
+    "fuelKind": "diesel"
   },
   {
     "id": "lexus-ct-2019",
@@ -9800,6 +10730,36 @@
     "fuelKind": "diesel"
   },
   {
+    "id": "mercedes-benz-cla-2019",
+    "eea_l100": 6.443,
+    "n": 245,
+    "eea_year": 2019,
+    "eea_model": "CLA200",
+    "ft": "PETROL",
+    "powerKw": 119.57142857142857,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "mercedes-benz-cla-2020",
+    "eea_l100": 6.267,
+    "n": 248,
+    "eea_year": 2020,
+    "eea_model": "CLA200",
+    "ft": "PETROL",
+    "powerKw": 120.0,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "mercedes-benz-cla-2021",
+    "eea_l100": 6.307,
+    "n": 130,
+    "eea_year": 2021,
+    "eea_model": "CLA200",
+    "ft": "PETROL",
+    "powerKw": 120.0,
+    "fuelKind": "petrol"
+  },
+  {
     "id": "mercedes-benz-cla-2023",
     "eea_l100": 6.272,
     "n": 123,
@@ -9820,83 +10780,23 @@
     "fuelKind": "petrol"
   },
   {
-    "id": "mercedes-benz-gla-2019",
-    "eea_l100": 7.726,
-    "n": 441,
-    "eea_year": 2019,
-    "eea_model": "GLA200",
-    "ft": "PETROL",
-    "powerKw": 115.0,
-    "fuelKind": "petrol"
-  },
-  {
-    "id": "mercedes-benz-gla-2020",
-    "eea_l100": 6.955,
-    "n": 475,
-    "eea_year": 2020,
-    "eea_model": "GLA200",
-    "ft": "PETROL",
-    "powerKw": 118.92631578947369,
-    "fuelKind": "petrol"
-  },
-  {
-    "id": "mercedes-benz-gla-2021",
-    "eea_l100": 6.767,
-    "n": 327,
-    "eea_year": 2021,
-    "eea_model": "GLA200",
-    "ft": "PETROL",
-    "powerKw": 119.98470948012232,
-    "fuelKind": "petrol"
-  },
-  {
-    "id": "mercedes-benz-gla-2022",
-    "eea_l100": 6.764,
-    "n": 327,
-    "eea_year": 2022,
-    "eea_model": "GLA200",
-    "ft": "PETROL",
-    "powerKw": 120.0,
-    "fuelKind": "petrol"
-  },
-  {
-    "id": "mercedes-benz-gla-2023",
-    "eea_l100": 6.774,
-    "n": 402,
-    "eea_year": 2023,
-    "eea_model": "GLA200",
-    "ft": "PETROL",
-    "powerKw": 120.0,
-    "fuelKind": "petrol"
-  },
-  {
-    "id": "mercedes-benz-gla-2024",
-    "eea_l100": 6.82,
-    "n": 378,
-    "eea_year": 2024,
-    "eea_model": "GLA200",
-    "ft": "PETROL",
-    "powerKw": 120.0,
-    "fuelKind": "petrol"
-  },
-  {
     "id": "mercedes-benz-gla-2025",
-    "eea_l100": 6.726,
-    "n": 323,
+    "eea_l100": 6.655,
+    "n": 1164,
     "eea_year": 2025,
-    "eea_model": "GLA200",
+    "eea_model": "GLA180",
     "ft": "PETROL",
-    "powerKw": 120.0,
+    "powerKw": 100.0,
     "fuelKind": "petrol"
   },
   {
     "id": "mercedes-benz-gla-2026",
-    "eea_l100": 6.726,
-    "n": 323,
+    "eea_l100": 6.655,
+    "n": 1164,
     "eea_year": 2025,
-    "eea_model": "GLA200",
+    "eea_model": "GLA180",
     "ft": "PETROL",
-    "powerKw": 120.0,
+    "powerKw": 100.0,
     "fuelKind": "petrol"
   },
   {
@@ -10334,6 +11234,16 @@
     "eea_l100": 5.01,
     "n": 1754,
     "eea_year": 2022,
+    "eea_model": "SPACESTAR",
+    "ft": "PETROL",
+    "powerKw": 52.0,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "mitsubishi-space-star-2023",
+    "eea_l100": 5.006,
+    "n": 696,
+    "eea_year": 2023,
     "eea_model": "SPACESTAR",
     "ft": "PETROL",
     "powerKw": 52.0,
@@ -12932,21 +13842,21 @@
   {
     "id": "renault-captur-2018",
     "eea_l100": 6.213,
-    "n": 8388,
+    "n": 8399,
     "eea_year": 2018,
     "eea_model": "CAPTUR",
     "ft": "PETROL",
-    "powerKw": 67.93776824034335,
+    "powerKw": 67.93773068222407,
     "fuelKind": "petrol"
   },
   {
     "id": "renault-captur-diesel-2018",
     "eea_l100": 5.321,
-    "n": 20662,
+    "n": 20694,
     "eea_year": 2018,
     "eea_model": "CAPTUR",
     "ft": "DIESEL",
-    "powerKw": 70.06543413028749,
+    "powerKw": 70.06422151348217,
     "fuelKind": "diesel"
   },
   {
@@ -13122,11 +14032,11 @@
   {
     "id": "renault-clio-2018",
     "eea_l100": 5.952,
-    "n": 15666,
+    "n": 15671,
     "eea_year": 2018,
     "eea_model": "CLIO",
     "ft": "PETROL",
-    "powerKw": 61.86818588025022,
+    "powerKw": 61.868419373364816,
     "fuelKind": "petrol"
   },
   {
@@ -13452,21 +14362,21 @@
   {
     "id": "renault-kadjar-2018",
     "eea_l100": 5.079,
-    "n": 12592,
+    "n": 12594,
     "eea_year": 2018,
     "eea_model": "KADJAR",
     "ft": "DIESEL",
-    "powerKw": 82.6384212198221,
+    "powerKw": 82.63816102906146,
     "fuelKind": "diesel"
   },
   {
     "id": "renault-kadjar-petrol-2018",
     "eea_l100": 6.569,
-    "n": 1279,
+    "n": 1280,
     "eea_year": 2018,
     "eea_model": "KADJAR",
     "ft": "PETROL",
-    "powerKw": 100.16966379984363,
+    "powerKw": 100.16640625,
     "fuelKind": "petrol"
   },
   {
@@ -13592,11 +14502,11 @@
   {
     "id": "renault-megane-2018",
     "eea_l100": 6.327,
-    "n": 469,
+    "n": 470,
     "eea_year": 2018,
     "eea_model": "MEGANE",
     "ft": "PETROL",
-    "powerKw": 117.61620469083155,
+    "powerKw": 117.71702127659574,
     "fuelKind": "petrol"
   },
   {
@@ -13801,12 +14711,12 @@
   },
   {
     "id": "renault-twingo-2018",
-    "eea_l100": 5.992,
-    "n": 8465,
+    "eea_l100": 5.993,
+    "n": 8468,
     "eea_year": 2018,
     "eea_model": "TWINGO",
     "ft": "PETROL",
-    "powerKw": 53.65044300059067,
+    "powerKw": 53.64962210675484,
     "fuelKind": "petrol"
   },
   {

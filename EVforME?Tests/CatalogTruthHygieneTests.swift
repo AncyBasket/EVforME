@@ -147,6 +147,18 @@ final class CatalogTruthHygieneTests: XCTestCase {
         let c24 = cClass2024?.sourceName ?? ""
         XCTAssertTrue(c24.contains("n=845"), "C-Class 2024 Status F n=845 not F+P 1690: \(c24)")
         XCTAssertFalse(c24.contains("n=1690"), c24)
+
+        // Uneven F vs P (not a clean 2×) must still cite Status F.
+        let stelvio = VehicleCatalogService.shared.vehicle(by: "alfa-romeo-stelvio-diesel-2023")
+        XCTAssertNotNil(stelvio)
+        let stSrc = stelvio?.sourceName ?? ""
+        XCTAssertTrue(stSrc.contains("n=6120"), "Stelvio diesel 2023 Status F n=6120 not 12240: \(stSrc)")
+        XCTAssertFalse(stSrc.contains("n=12240"), stSrc)
+        let ceed = VehicleCatalogService.shared.vehicle(by: "kia-ceed-2019")
+        XCTAssertNotNil(ceed)
+        let ceedSrc = ceed?.sourceName ?? ""
+        XCTAssertTrue(ceedSrc.contains("n=1297"), "Ceed 2019 Status F n=1297 not 1788: \(ceedSrc)")
+        XCTAssertFalse(ceedSrc.contains("n=1788"), ceedSrc)
     }
 
     func testCatalog_RestoreFollowUpDropsAndFixes() {

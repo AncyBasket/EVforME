@@ -2,11 +2,11 @@
   "url": "",
   "publishedUrl": "https://files.catbox.moe/3i0nro.json",
   "rows": 5654,
-  "bytes": 2834634,
+  "bytes": 2834543,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-23T19:24:40.998018+00:00",
+  "updatedAt": "2026-10-23T22:48:17.694155+00:00",
   "policy": "offline-first",
-  "seedVersion": 47,
-  "note": "seedVersion 47: EEA n labels use Status F (else P); no consumption/kW change — F/P share the same metrics."
+  "seedVersion": 48,
+  "note": "seedVersion 48: every EEA n= label recomputed from Status F (P if F absent or F≪P) for same variant/fuel/year — label-only, no consumption/kW/bollo change."
 }

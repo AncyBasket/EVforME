@@ -79,20 +79,34 @@ def is_dead_model(row: dict) -> bool:
     return False
 
 
+def _cache_brand_key(path: Path, wrap: dict, *, fuels: bool) -> str:
+    """Filename IT_ALFA_ROMEO_*.json → 'ALFA ROMEO'; query Mk wins when present (spaces)."""
+    suffix = "_fuels.json" if fuels else "_hev_FmH.json"
+    from_name = path.name[len("IT_") : -len(suffix)]
+    if from_name == "MERCEDES-BENZ":
+        from_name = "MERCEDES-BENZ"
+    else:
+        from_name = from_name.replace("_", " ")
+    brand_key = brand_u({"brand": from_name})
+    for term in (wrap.get("_query") or {}).get("query", {}).get("bool", {}).get("must", []):
+        if "term" in term and "Mk" in term["term"]:
+            mk = str(term["term"]["Mk"]).upper()
+            if mk == "MERCEDES-BENZ":
+                brand_key = "MERCEDES-BENZ"
+            else:
+                # Legacy bad refreshes used ALFA_ROMEO; normalize to API Mk with spaces.
+                brand_key = mk.replace("_", " ")
+            break
+    return brand_key
+
+
 def load_ice_maps(use_cache: bool = True) -> dict[str, dict]:
     maps: dict[str, dict] = {}
     for path in sorted(CACHE_DIR.glob("IT_*_fuels.json")):
         if "_hev_" in path.name:
             continue
-        brand = path.name[len("IT_") : -len("_fuels.json")].replace("_", " ")
-        brand = brand.replace("MERCEDES-BENZ", "MERCEDES-BENZ")
         wrap = json.loads(path.read_text(encoding="utf-8"))
-        # Mk in cache query
-        mk = (wrap.get("_query") or {}).get("query", {}).get("bool", {}).get("must", [])
-        brand_key = brand_u({"brand": brand})
-        for term in mk:
-            if "term" in term and "Mk" in term["term"]:
-                brand_key = str(term["term"]["Mk"]).upper()
+        brand_key = _cache_brand_key(path, wrap, fuels=True)
         maps[brand_key] = eea.parse_brand_aggs(wrap, brand_key)
     return maps
 
@@ -101,10 +115,7 @@ def load_hev_maps() -> dict[str, dict]:
     maps: dict[str, dict] = {}
     for path in sorted(CACHE_DIR.glob("IT_*_hev_FmH.json")):
         wrap = json.loads(path.read_text(encoding="utf-8"))
-        brand_key = path.name[len("IT_") : -len("_hev_FmH.json")].replace("_", " ").upper()
-        for term in (wrap.get("_query") or {}).get("query", {}).get("bool", {}).get("must", []):
-            if "term" in term and "Mk" in term["term"]:
-                brand_key = str(term["term"]["Mk"]).upper()
+        brand_key = _cache_brand_key(path, wrap, fuels=False)
         maps[brand_key] = eea.parse_brand_aggs(wrap, brand_key)
     return maps
 
