@@ -91,7 +91,7 @@ final class CatalogTruthHygieneTests: XCTestCase {
             fuelKind: .petrol
         )
         XCTAssertTrue(mb500.isJunkCatalogEntry, "Mercedes 500 is an EEA aggregate ghost")
-        let z350 = VehicleCatalogItem(
+        let z350Ghost = VehicleCatalogItem(
             id: "nissan-350z-2023",
             brand: "Nissan",
             model: "350Z",
@@ -107,7 +107,53 @@ final class CatalogTruthHygieneTests: XCTestCase {
             imageURL: nil,
             fuelKind: .petrol
         )
-        XCTAssertTrue(z350.isJunkCatalogEntry)
+        XCTAssertTrue(z350Ghost.isJunkCatalogEntry, "350Z after 2009 is a ghost")
+        let z350Real = VehicleCatalogItem(
+            id: "nissan-350z-2007",
+            brand: "Nissan",
+            model: "350Z",
+            year: 2007,
+            powertrain: .ice,
+            lengthM: 4.3,
+            widthM: 1.8,
+            heightM: 1.3,
+            fuelConsumptionLPerKm: 0.11,
+            energyConsumptionKWhPerKm: nil,
+            maintenancePerYear: 600,
+            taxesPerYear: 400,
+            imageURL: nil,
+            fuelKind: .petrol
+        )
+        XCTAssertFalse(z350Real.isJunkCatalogEntry, "350Z 2003–2009 was a real car")
+    }
+
+    func testCatalog_CoreModelsPresent() {
+        let catalog = VehicleCatalogService.shared.vehicles
+        func hasBrandModel(_ brand: String, _ modelContains: String) -> Bool {
+            catalog.contains {
+                $0.brand.localizedCaseInsensitiveContains(brand)
+                    && $0.model.localizedCaseInsensitiveContains(modelContains)
+            }
+        }
+        XCTAssertTrue(hasBrandModel("Volkswagen", "Golf"), "Golf")
+        XCTAssertTrue(hasBrandModel("Fiat", "Panda"), "Panda")
+        XCTAssertTrue(hasBrandModel("BMW", "3 Series"), "Serie 3")
+        XCTAssertTrue(hasBrandModel("Mercedes", "C-Class"), "Classe C")
+        XCTAssertTrue(hasBrandModel("Mercedes", "A-Class"), "Classe A")
+        XCTAssertTrue(
+            catalog.contains {
+                $0.brand.localizedCaseInsensitiveContains("MINI")
+                    && ($0.model.localizedCaseInsensitiveContains("Hatch")
+                        || $0.model.localizedCaseInsensitiveContains("Cooper"))
+            },
+            "MINI"
+        )
+        XCTAssertTrue(hasBrandModel("Tesla", "Model 3"), "Model 3")
+        XCTAssertTrue(hasBrandModel("Tesla", "Model Y"), "Model Y")
+        let series2AT = catalog.first {
+            $0.id.hasPrefix("bmw-2-series-") && $0.year >= 2022
+        }
+        XCTAssertEqual(series2AT?.model, "2 Series Active Tourer")
     }
 
     func testCatalog_NoEEALabelBefore2010() {

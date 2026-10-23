@@ -55,7 +55,8 @@ DEAD_MODEL_PATTERNS: list[tuple[str, re.Pattern[str], int]] = [
     ("BMW", re.compile(r"^(228|323I|323)$", re.I), 2015),
     ("FORD", re.compile(r"(bradford|affordable\s*aluminum|b-?750)", re.I), 0),
     ("KIA", re.compile(r"^miami$", re.I), 0),
-    ("NISSAN", re.compile(r"^(axxess|350z)$", re.I), 0),
+    ("NISSAN", re.compile(r"^axxess$", re.I), 0),
+    ("NISSAN", re.compile(r"^350z$", re.I), 2010),  # real car through ~2009
     ("PEUGEOT", re.compile(r"^405$", re.I), 2010),
     ("HYUNDAI", re.compile(r"^(genesis|excel)$", re.I), 2015),
 ]

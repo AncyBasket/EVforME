@@ -23,7 +23,7 @@ final class VehicleCatalogService {
 
     private let defaults = UserDefaults.standard
     /// Bundled quality-seed revision (not the App Store marketing version).
-    static let bundledSeedVersion = 44
+    static let bundledSeedVersion = 45
     private var seedVersion: Int { Self.bundledSeedVersion }
     private var remoteDisabledForTesting = false
     private let remoteSession: URLSession = {
@@ -85,19 +85,25 @@ final class VehicleCatalogService {
     private func loadCatalogAsync() {
         AppLogger.shared.debug("Loading vehicle catalog asynchronously", category: .catalog)
         let generation = loadGeneration
-        Task { @MainActor in
+        // Decode/expand off the main thread — previous `Task { @MainActor }` still blocked launch (~400% CPU).
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let self else { return }
             let startTime = CFAbsoluteTimeGetCurrent()
-            let catalog = expandForTestingIfNeeded(ensureBuiltInElectrifiedOptions(loadCachedOrDefault()))
-            let duration = (CFAbsoluteTimeGetCurrent() - startTime) * 1000
-            AppLogger.shared.info(
-                "Catalog loaded with \(catalog.count) vehicles in \(String(format: "%.2f", duration))ms",
-                category: .catalog
-            )
-            guard loadGeneration == generation else {
-                AppLogger.shared.debug("Skipping stale async catalog load", category: .catalog)
-                return
+            CatalogSignposts.load.begin()
+            let catalog = self.expandForTestingIfNeeded(self.ensureBuiltInElectrifiedOptions(self.loadCachedOrDefault()))
+            CatalogSignposts.load.end()
+            let durationMs = (CFAbsoluteTimeGetCurrent() - startTime) * 1000
+            DispatchQueue.main.async {
+                AppLogger.shared.info(
+                    "Catalog loaded with \(catalog.count) vehicles in \(String(format: "%.2f", durationMs))ms (background decode)",
+                    category: .catalog
+                )
+                guard self.loadGeneration == generation else {
+                    AppLogger.shared.debug("Skipping stale async catalog load", category: .catalog)
+                    return
+                }
+                self.applyCatalog(catalog)
             }
-            applyCatalog(catalog)
         }
     }
 

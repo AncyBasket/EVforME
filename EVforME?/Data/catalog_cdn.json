@@ -1,12 +1,12 @@
 {
   "url": "",
   "publishedUrl": "https://files.catbox.moe/3i0nro.json",
-  "rows": 5616,
-  "bytes": 2813506,
+  "rows": 5685,
+  "bytes": 2849899,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-23T12:15:09.470346+00:00",
+  "updatedAt": "2026-10-23T13:22:36.544959+00:00",
   "policy": "offline-first",
-  "seedVersion": 44,
-  "note": "seedVersion 44: catalog truth follow-up — drop 500/350Z ghosts; pre-2010 stima (no EEA); 2026←2025; restore series/Doblo/Trax/Genesis."
+  "seedVersion": 45,
+  "note": "seedVersion 45: restore Mercedes/MINI/gaps via EEA volume IT; BMW 2 Series Active Tourer rename; catalog load off main thread."
 }

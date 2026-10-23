@@ -3520,6 +3520,16 @@
     "fuelKind": "diesel"
   },
   {
+    "id": "ds-ds-7-2024",
+    "eea_l100": 5.52,
+    "n": 5854,
+    "eea_year": 2024,
+    "eea_model": "DS7",
+    "ft": "DIESEL",
+    "powerKw": 96.0,
+    "fuelKind": "diesel"
+  },
+  {
     "id": "ds-ds-7-diesel-2024",
     "eea_l100": 5.52,
     "n": 5854,
@@ -10990,6 +11000,16 @@
     "fuelKind": "diesel"
   },
   {
+    "id": "mazda-cx-60-2026",
+    "eea_l100": 5.286,
+    "n": 818,
+    "eea_year": 2025,
+    "eea_model": "CX60",
+    "ft": "DIESEL",
+    "powerKw": 175.47432762836186,
+    "fuelKind": "diesel"
+  },
+  {
     "id": "mazda-mx-5-2018",
     "eea_l100": 6.794,
     "n": 1224,
@@ -11281,52 +11301,122 @@
   },
   {
     "id": "mercedes-benz-cla-2019",
-    "eea_l100": 6.443,
-    "n": 490,
+    "eea_l100": 6.49,
+    "n": 172,
     "eea_year": 2019,
-    "eea_model": "CLA200",
+    "eea_model": "CLA180",
     "ft": "PETROL",
-    "powerKw": 119.57142857142857,
+    "powerKw": 97.32558139534883,
     "fuelKind": "petrol"
   },
   {
     "id": "mercedes-benz-cla-2020",
-    "eea_l100": 6.267,
-    "n": 496,
+    "eea_l100": 6.164,
+    "n": 132,
     "eea_year": 2020,
-    "eea_model": "CLA200",
+    "eea_model": "CLA180",
     "ft": "PETROL",
-    "powerKw": 120.0,
+    "powerKw": 100.0,
     "fuelKind": "petrol"
   },
   {
     "id": "mercedes-benz-cla-2021",
-    "eea_l100": 6.307,
-    "n": 260,
+    "eea_l100": 6.137,
+    "n": 134,
     "eea_year": 2021,
-    "eea_model": "CLA200",
+    "eea_model": "CLA180",
     "ft": "PETROL",
-    "powerKw": 120.0,
+    "powerKw": 100.0,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "mercedes-benz-cla-2022",
+    "eea_l100": 6.207,
+    "n": 100,
+    "eea_year": 2022,
+    "eea_model": "CLA180",
+    "ft": "PETROL",
+    "powerKw": 100.0,
     "fuelKind": "petrol"
   },
   {
     "id": "mercedes-benz-cla-2023",
-    "eea_l100": 6.272,
-    "n": 246,
+    "eea_l100": 6.143,
+    "n": 214,
     "eea_year": 2023,
-    "eea_model": "CLA200",
+    "eea_model": "CLA180",
     "ft": "PETROL",
-    "powerKw": 120.0,
+    "powerKw": 100.0,
     "fuelKind": "petrol"
   },
   {
     "id": "mercedes-benz-cla-2024",
-    "eea_l100": 6.225,
-    "n": 292,
+    "eea_l100": 6.108,
+    "n": 146,
     "eea_year": 2024,
-    "eea_model": "CLA200",
+    "eea_model": "CLA180",
     "ft": "PETROL",
-    "powerKw": 120.0,
+    "powerKw": 100.0,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "mercedes-benz-gla-2019",
+    "eea_l100": 7.396,
+    "n": 3452,
+    "eea_year": 2019,
+    "eea_model": "GLA180",
+    "ft": "PETROL",
+    "powerKw": 90.0,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "mercedes-benz-gla-2020",
+    "eea_l100": 7.362,
+    "n": 1092,
+    "eea_year": 2020,
+    "eea_model": "GLA180",
+    "ft": "PETROL",
+    "powerKw": 90.49450549450549,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "mercedes-benz-gla-2021",
+    "eea_l100": 6.743,
+    "n": 494,
+    "eea_year": 2021,
+    "eea_model": "GLA180",
+    "ft": "PETROL",
+    "powerKw": 99.67611336032388,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "mercedes-benz-gla-2022",
+    "eea_l100": 6.718,
+    "n": 1032,
+    "eea_year": 2022,
+    "eea_model": "GLA180",
+    "ft": "PETROL",
+    "powerKw": 100.0,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "mercedes-benz-gla-2023",
+    "eea_l100": 6.752,
+    "n": 2026,
+    "eea_year": 2023,
+    "eea_model": "GLA180",
+    "ft": "PETROL",
+    "powerKw": 100.0,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "mercedes-benz-gla-2024",
+    "eea_l100": 6.761,
+    "n": 2644,
+    "eea_year": 2024,
+    "eea_model": "GLA180",
+    "ft": "PETROL",
+    "powerKw": 100.0,
     "fuelKind": "petrol"
   },
   {
@@ -11400,23 +11490,53 @@
     "fuelKind": "diesel"
   },
   {
-    "id": "mercedes-benz-glc-2023",
-    "eea_l100": 7.675,
-    "n": 260,
-    "eea_year": 2023,
-    "eea_model": "GLC3004MATIC",
+    "id": "mercedes-benz-glc-2022",
+    "eea_l100": 8.243,
+    "n": 556,
+    "eea_year": 2022,
+    "eea_model": "GLC2004MATIC",
     "ft": "PETROL",
-    "powerKw": 190.0,
+    "powerKw": 145.71942446043167,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "mercedes-benz-glc-2023",
+    "eea_l100": 7.516,
+    "n": 886,
+    "eea_year": 2023,
+    "eea_model": "GLC2004MATIC",
+    "ft": "PETROL",
+    "powerKw": 149.68397291196388,
     "fuelKind": "petrol"
   },
   {
     "id": "mercedes-benz-glc-2024",
-    "eea_l100": 7.605,
-    "n": 220,
+    "eea_l100": 7.369,
+    "n": 794,
     "eea_year": 2024,
-    "eea_model": "GLC3004MATIC",
+    "eea_model": "GLC2004MATIC",
     "ft": "PETROL",
-    "powerKw": 190.0,
+    "powerKw": 149.9874055415617,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "mercedes-benz-glc-2025",
+    "eea_l100": 7.277,
+    "n": 407,
+    "eea_year": 2025,
+    "eea_model": "GLC2004MATIC",
+    "ft": "PETROL",
+    "powerKw": 150.0,
+    "fuelKind": "petrol"
+  },
+  {
+    "id": "mercedes-benz-glc-2026",
+    "eea_l100": 7.277,
+    "n": 407,
+    "eea_year": 2025,
+    "eea_model": "GLC2004MATIC",
+    "ft": "PETROL",
+    "powerKw": 150.0,
     "fuelKind": "petrol"
   },
   {
@@ -12908,6 +13028,16 @@
     "ft": "PETROL",
     "powerKw": 99.83261538461538,
     "fuelKind": "petrol"
+  },
+  {
+    "id": "opel-insignia-2022",
+    "eea_l100": 5.089,
+    "n": 258,
+    "eea_year": 2022,
+    "eea_model": "INSIGNIASPORTSTOURER",
+    "ft": "DIESEL",
+    "powerKw": 115.4108527131783,
+    "fuelKind": "diesel"
   },
   {
     "id": "opel-mokka-2018",
@@ -18490,6 +18620,16 @@
     "fuelKind": "diesel"
   },
   {
+    "id": "toyota-land-cruiser-2023",
+    "eea_l100": 9.433,
+    "n": 239,
+    "eea_year": 2023,
+    "eea_model": "LANDCRUISER150SERIES",
+    "ft": "DIESEL",
+    "powerKw": 150.0,
+    "fuelKind": "diesel"
+  },
+  {
     "id": "toyota-land-cruiser-diesel-2024",
     "eea_l100": 10.552,
     "n": 396,
@@ -19947,6 +20087,16 @@
     "eea_model": "TOUAREG",
     "ft": "DIESEL",
     "powerKw": 178.84735202492212,
+    "fuelKind": "diesel"
+  },
+  {
+    "id": "volkswagen-touareg-2024",
+    "eea_l100": 8.26,
+    "n": 634,
+    "eea_year": 2024,
+    "eea_model": "TOUAREG",
+    "ft": "DIESEL",
+    "powerKw": 179.33753943217667,
     "fuelKind": "diesel"
   },
   {
