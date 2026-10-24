@@ -1,0 +1,535 @@
+{
+  "skip_fetch": true,
+  "only_empty": false,
+  "cache_refresh": {
+    "skipped": true
+  },
+  "label_n_fixes": 76,
+  "label_n_unresolved": [],
+  "label_n_sample": [
+    {
+      "id": "alfa-romeo-giulia-2025",
+      "n_from": 228,
+      "n_to": 228,
+      "eea_model": "GIULIA",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "alfa-romeo-giulia-diesel-2025",
+      "n_from": 456,
+      "n_to": 456,
+      "eea_model": "GIULIA",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "alfa-romeo-giulietta-2018",
+      "n_from": 2907,
+      "n_to": 2908,
+      "eea_model": "ALFAGIULIETTA",
+      "ft": "PETROL",
+      "eea_year": 2018,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "alfa-romeo-stelvio-2025",
+      "n_from": 361,
+      "n_to": 361,
+      "eea_model": "STELVIO",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "alfa-romeo-stelvio-diesel-2025",
+      "n_from": 2494,
+      "n_to": 2494,
+      "eea_model": "STELVIO",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "alfa-romeo-tonale-2025",
+      "n_from": 2301,
+      "n_to": 2301,
+      "eea_model": "TONALE",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "alfa-romeo-tonale-diesel-2025",
+      "n_from": 6203,
+      "n_to": 6203,
+      "eea_model": "TONALE",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "audi-a6-allroad-2025",
+      "n_from": 331,
+      "n_to": 331,
+      "eea_model": "A6ALLROADQUATTRO",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "audi-a8-diesel-2019",
+      "n_from": 203,
+      "n_to": 204,
+      "eea_model": "A8",
+      "ft": "DIESEL",
+      "eea_year": 2019,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "audi-a8-diesel-2025",
+      "n_from": 101,
+      "n_to": 101,
+      "eea_model": "A8",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "audi-q2-diesel-2025",
+      "n_from": 2821,
+      "n_to": 2821,
+      "eea_model": "Q2",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "audi-q3-diesel-2025",
+      "n_from": 4894,
+      "n_to": 4894,
+      "eea_model": "Q3SPORTBACK",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "audi-q5-diesel-2025",
+      "n_from": 3189,
+      "n_to": 3189,
+      "eea_model": "Q5",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "audi-q7-2025",
+      "n_from": 474,
+      "n_to": 474,
+      "eea_model": "Q7",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "audi-q7-diesel-2025",
+      "n_from": 474,
+      "n_to": 474,
+      "eea_model": "Q7",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "bmw-5-series-2019",
+      "n_from": 3516,
+      "n_to": 3515,
+      "eea_model": "5-Series",
+      "ft": "DIESEL",
+      "eea_year": 2019,
+      "status": "F",
+      "variants": [
+        "520D",
+        "520D XDRIVE",
+        "530D XDRIVE",
+        "518D",
+        "530D",
+        "525D",
+        "540D XDRIVE",
+        "525D XDRIVE",
+        "520d EffDyn Edition"
+      ]
+    },
+    {
+      "id": "jeep-avenger-2025",
+      "n_from": 44657,
+      "n_to": 44657,
+      "eea_model": "AVENGER",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "jeep-compass-2025",
+      "n_from": 4524,
+      "n_to": 4524,
+      "eea_model": "COMPASS",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "jeep-compass-diesel-2025",
+      "n_from": 199,
+      "n_to": 199,
+      "eea_model": "COMPASS",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "jeep-renegade-2025",
+      "n_from": 4519,
+      "n_to": 4519,
+      "eea_model": "RENEGADE",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "jeep-wrangler-2025",
+      "n_from": 422,
+      "n_to": 422,
+      "eea_model": "WRANGLERUNLIMITED",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "land-rover-range-rover-evoque-2021",
+      "n_from": 3574,
+      "n_to": 3581,
+      "eea_model": "RANGEROVEREVOQUE",
+      "ft": "DIESEL",
+      "eea_year": 2021,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "renault-austral-2025",
+      "n_from": 4335,
+      "n_to": 4335,
+      "eea_model": "AUSTRAL",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "renault-captur-2025",
+      "n_from": 4328,
+      "n_to": 4328,
+      "eea_model": "CAPTUR",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "renault-captur-lpg-2025",
+      "n_from": 15388,
+      "n_to": 15388,
+      "eea_model": "CAPTUR",
+      "ft": "LPG",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "renault-clio-diesel-2018",
+      "n_from": 26106,
+      "n_to": 26089,
+      "eea_model": "Clio",
+      "ft": "DIESEL",
+      "eea_year": 2018,
+      "status": "F",
+      "variants": [
+        "CLIO",
+        "NUOVA CLIO 5 PORTE"
+      ]
+    },
+    {
+      "id": "renault-clio-2020",
+      "n_from": 1388,
+      "n_to": 1388,
+      "eea_model": "CLIOETECHHYBRID",
+      "ft": "PETROL",
+      "eea_year": 2020,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "renault-clio-2024",
+      "n_from": 5597,
+      "n_to": 5597,
+      "eea_model": "CLIOETECHHYBRID",
+      "ft": "PETROL",
+      "eea_year": 2024,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "renault-clio-diesel-2024",
+      "n_from": 3298,
+      "n_to": 3280,
+      "eea_model": "Clio",
+      "ft": "DIESEL",
+      "eea_year": 2024,
+      "status": "F",
+      "variants": [
+        "CLIO"
+      ]
+    },
+    {
+      "id": "renault-clio-2025",
+      "n_from": 2977,
+      "n_to": 2977,
+      "eea_model": "CLIOETECHHYBRID",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "renault-clio-lpg-2025",
+      "n_from": 11977,
+      "n_to": 11977,
+      "eea_model": "CLIO",
+      "ft": "LPG",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "renault-espace-2025",
+      "n_from": 1119,
+      "n_to": 1119,
+      "eea_model": "ESPACE",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "subaru-forester-2022",
+      "n_from": 449,
+      "n_to": 450,
+      "eea_model": "FORESTER",
+      "ft": "PETROL",
+      "eea_year": 2022,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "subaru-forester-2023",
+      "n_from": 498,
+      "n_to": 499,
+      "eea_model": "FORESTER",
+      "ft": "PETROL",
+      "eea_year": 2023,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "subaru-forester-2025",
+      "n_from": 1033,
+      "n_to": 1033,
+      "eea_model": "FORESTER",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "subaru-outback-2025",
+      "n_from": 146,
+      "n_to": 146,
+      "eea_model": "OUTBACK",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "volkswagen-golf-diesel-2019",
+      "n_from": 13369,
+      "n_to": 13374,
+      "eea_model": "GOLF",
+      "ft": "DIESEL",
+      "eea_year": 2019,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "volkswagen-golf-2020",
+      "n_from": 7602,
+      "n_to": 7609,
+      "eea_model": "GOLF",
+      "ft": "PETROL",
+      "eea_year": 2020,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "volkswagen-golf-diesel-2020",
+      "n_from": 7206,
+      "n_to": 7207,
+      "eea_model": "GOLF",
+      "ft": "DIESEL",
+      "eea_year": 2020,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "volkswagen-golf-2021",
+      "n_from": 6856,
+      "n_to": 6865,
+      "eea_model": "GOLF",
+      "ft": "PETROL",
+      "eea_year": 2021,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "volkswagen-golf-diesel-2021",
+      "n_from": 5159,
+      "n_to": 5164,
+      "eea_model": "GOLF",
+      "ft": "DIESEL",
+      "eea_year": 2021,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "volkswagen-golf-2022",
+      "n_from": 5954,
+      "n_to": 5963,
+      "eea_model": "GOLF",
+      "ft": "PETROL",
+      "eea_year": 2022,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "volkswagen-golf-diesel-2022",
+      "n_from": 5058,
+      "n_to": 5061,
+      "eea_model": "GOLF",
+      "ft": "DIESEL",
+      "eea_year": 2022,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "volkswagen-golf-2023",
+      "n_from": 5964,
+      "n_to": 5972,
+      "eea_model": "GOLF",
+      "ft": "PETROL",
+      "eea_year": 2023,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "volkswagen-golf-diesel-2023",
+      "n_from": 4074,
+      "n_to": 4075,
+      "eea_model": "GOLF",
+      "ft": "DIESEL",
+      "eea_year": 2023,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "volkswagen-golf-2024",
+      "n_from": 7356,
+      "n_to": 7360,
+      "eea_model": "GOLF",
+      "ft": "PETROL",
+      "eea_year": 2024,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "volkswagen-golf-diesel-2024",
+      "n_from": 5567,
+      "n_to": 5569,
+      "eea_model": "GOLF",
+      "ft": "DIESEL",
+      "eea_year": 2024,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "volkswagen-golf-gti-2022",
+      "n_from": 5954,
+      "n_to": 5963,
+      "eea_model": "GOLF",
+      "ft": "PETROL",
+      "eea_year": 2022,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "volkswagen-golf-gti-2023",
+      "n_from": 5964,
+      "n_to": 5972,
+      "eea_model": "GOLF",
+      "ft": "PETROL",
+      "eea_year": 2023,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "volkswagen-golf-gti-2024",
+      "n_from": 7356,
+      "n_to": 7360,
+      "eea_model": "GOLF",
+      "ft": "PETROL",
+      "eea_year": 2024,
+      "status": "F",
+      "variants": null
+    }
+  ],
+  "examples": {
+    "alfa-romeo-stelvio-diesel-2023": null,
+    "kia-ceed-2019": null,
+    "bmw-2-series-2023": null,
+    "hyundai-bayon-2023": null
+  },
+  "seedVersion": 53,
+  "rows": 5654,
+  "bytes": 2848666
+}

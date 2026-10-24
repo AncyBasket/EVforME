@@ -1,12 +1,12 @@
 {
   "url": "",
   "publishedUrl": "https://files.catbox.moe/3i0nro.json",
-  "rows": 5616,
-  "bytes": 2813506,
+  "rows": 5654,
+  "bytes": 2848666,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-23T12:15:09.470346+00:00",
+  "updatedAt": "2026-10-24T20:28:26.598309+00:00",
   "policy": "offline-first",
-  "seedVersion": 44,
-  "note": "seedVersion 44: catalog truth follow-up — drop 500/350Z ghosts; pre-2010 stima (no EEA); 2026←2025; restore series/Doblo/Trax/Genesis."
+  "seedVersion": 54,
+  "note": "seedVersion 54: every EEA n= from Status F (sum F across Mk aliases+Cn strip+casefold+brand-prefix and Ft casing; P only if no F / thin incomplete F); empty/absent Mk only when Cn carries brand — label-only."
 }

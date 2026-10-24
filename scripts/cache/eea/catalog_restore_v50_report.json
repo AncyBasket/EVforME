@@ -1,0 +1,250 @@
+{
+  "skip_fetch": true,
+  "only_empty": false,
+  "cache_refresh": {
+    "skipped": true
+  },
+  "label_n_fixes": 23,
+  "label_n_unresolved": [],
+  "label_n_sample": [
+    {
+      "id": "hyundai-i30-2022",
+      "n_from": 246,
+      "n_to": 247,
+      "eea_model": "I30",
+      "ft": "PETROL",
+      "eea_year": 2022,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "lancia-ypsilon-hybrid-2025",
+      "n_from": 8575,
+      "n_to": 8584,
+      "eea_model": "YPSILON",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "land-rover-discovery-sport-2018",
+      "n_from": 3930,
+      "n_to": 3930,
+      "eea_model": "DISCOVERYSPORT",
+      "ft": "DIESEL",
+      "eea_year": 2018,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "land-rover-discovery-sport-2019",
+      "n_from": 2725,
+      "n_to": 2725,
+      "eea_model": "DISCOVERYSPORT",
+      "ft": "DIESEL",
+      "eea_year": 2019,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "land-rover-discovery-sport-petrol-2019",
+      "n_from": 106,
+      "n_to": 106,
+      "eea_model": "DISCOVERYSPORT",
+      "ft": "PETROL",
+      "eea_year": 2019,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "land-rover-discovery-sport-2020",
+      "n_from": 1742,
+      "n_to": 1742,
+      "eea_model": "DISCOVERYSPORT",
+      "ft": "DIESEL",
+      "eea_year": 2020,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "land-rover-discovery-sport-petrol-2020",
+      "n_from": 172,
+      "n_to": 172,
+      "eea_model": "DISCOVERYSPORT",
+      "ft": "PETROL",
+      "eea_year": 2020,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "land-rover-discovery-sport-2021",
+      "n_from": 1215,
+      "n_to": 1215,
+      "eea_model": "DISCOVERYSPORT",
+      "ft": "DIESEL",
+      "eea_year": 2021,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "land-rover-discovery-sport-petrol-2021",
+      "n_from": 74,
+      "n_to": 74,
+      "eea_model": "DISCOVERYSPORT",
+      "ft": "PETROL",
+      "eea_year": 2021,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "land-rover-discovery-sport-2022",
+      "n_from": 144,
+      "n_to": 144,
+      "eea_model": "DISCOVERYSPORT",
+      "ft": "PETROL",
+      "eea_year": 2022,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "land-rover-discovery-sport-diesel-2022",
+      "n_from": 808,
+      "n_to": 808,
+      "eea_model": "DISCOVERYSPORT",
+      "ft": "DIESEL",
+      "eea_year": 2022,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "land-rover-discovery-sport-diesel-2023",
+      "n_from": 641,
+      "n_to": 641,
+      "eea_model": "DISCOVERYSPORT",
+      "ft": "DIESEL",
+      "eea_year": 2023,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "land-rover-discovery-sport-diesel-2024",
+      "n_from": 617,
+      "n_to": 617,
+      "eea_model": "DISCOVERYSPORT",
+      "ft": "DIESEL",
+      "eea_year": 2024,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "land-rover-discovery-sport-diesel-2025",
+      "n_from": 347,
+      "n_to": 347,
+      "eea_model": "DISCOVERYSPORT",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "land-rover-range-rover-evoque-2018",
+      "n_from": 5836,
+      "n_to": 5836,
+      "eea_model": "RANGEROVEREVOQUE",
+      "ft": "DIESEL",
+      "eea_year": 2018,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "land-rover-range-rover-evoque-2019",
+      "n_from": 6195,
+      "n_to": 6195,
+      "eea_model": "RANGEROVEREVOQUE",
+      "ft": "DIESEL",
+      "eea_year": 2019,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "land-rover-range-rover-evoque-2020",
+      "n_from": 4363,
+      "n_to": 4363,
+      "eea_model": "RANGEROVEREVOQUE",
+      "ft": "DIESEL",
+      "eea_year": 2020,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "land-rover-range-rover-evoque-2021",
+      "n_from": 3574,
+      "n_to": 3574,
+      "eea_model": "RANGEROVEREVOQUE",
+      "ft": "DIESEL",
+      "eea_year": 2021,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "land-rover-range-rover-evoque-2022",
+      "n_from": 282,
+      "n_to": 282,
+      "eea_model": "RANGEROVEREVOQUE",
+      "ft": "PETROL",
+      "eea_year": 2022,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "land-rover-range-rover-evoque-2023",
+      "n_from": 239,
+      "n_to": 239,
+      "eea_model": "RANGEROVEREVOQUE",
+      "ft": "PETROL",
+      "eea_year": 2023,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "land-rover-range-rover-evoque-2024",
+      "n_from": 225,
+      "n_to": 225,
+      "eea_model": "RANGEROVEREVOQUE",
+      "ft": "PETROL",
+      "eea_year": 2024,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "land-rover-range-rover-evoque-2025",
+      "n_from": 1108,
+      "n_to": 1108,
+      "eea_model": "RANGEROVEREVOQUE",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "renault-clio-2021",
+      "n_from": 7005,
+      "n_to": 13394,
+      "eea_model": "CLIO",
+      "ft": "PETROL",
+      "eea_year": 2021,
+      "status": "F",
+      "variants": null
+    }
+  ],
+  "examples": {
+    "alfa-romeo-stelvio-diesel-2023": null,
+    "kia-ceed-2019": null,
+    "bmw-2-series-2023": null,
+    "hyundai-bayon-2023": null
+  },
+  "seedVersion": 50,
+  "rows": 5654,
+  "bytes": 2848989
+}

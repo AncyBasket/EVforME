@@ -200,7 +200,9 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
             return true
         }
         if brandKey.contains("kia"), modelKey == "miami" { return true }
-        if brandKey.contains("nissan"), modelKey == "axxess" || modelKey == "350z" { return true }
+        if brandKey.contains("nissan"), modelKey == "axxess" { return true }
+        // 350Z left production ~2009 — later catalog years are ghosts.
+        if brandKey.contains("nissan"), modelKey == "350z", year >= 2010 { return true }
         if brandKey.contains("peugeot"), modelKey == "405", year >= 2010 { return true }
         if brandKey.contains("hyundai"), ["genesis", "excel"].contains(modelKey), year >= 2015 {
             return true

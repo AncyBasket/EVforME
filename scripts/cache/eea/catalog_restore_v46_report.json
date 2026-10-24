@@ -1,0 +1,186 @@
+{
+  "seedVersion": 46,
+  "rows": 5654,
+  "bytes": 2835008,
+  "restored_still_present_eea": 27,
+  "restored_still_present_stima": 11,
+  "restored_eea_ids": [
+    "mercedes-benz-c-class-2022",
+    "mercedes-benz-c-class-2023",
+    "mercedes-benz-c-class-2024",
+    "mercedes-benz-c-class-2025",
+    "mercedes-benz-e-class-2022",
+    "mercedes-benz-e-class-2023",
+    "mercedes-benz-e-class-2024",
+    "mercedes-benz-e-class-2025",
+    "mercedes-benz-s-class-2022",
+    "mercedes-benz-s-class-2023",
+    "mercedes-benz-s-class-2024",
+    "mercedes-benz-s-class-2025",
+    "mercedes-benz-a-class-2026",
+    "mini-hatch-2022",
+    "mini-hatch-2023",
+    "mini-hatch-2024",
+    "mini-hatch-2025",
+    "mazda-cx-60-2026",
+    "land-rover-range-rover-evoque-2025",
+    "toyota-land-cruiser-2022",
+    "toyota-land-cruiser-2023",
+    "renault-scenic-2024",
+    "volkswagen-touareg-2024",
+    "ds-ds-7-2024",
+    "suzuki-s-cross-2022",
+    "suzuki-s-cross-2023",
+    "opel-insignia-2022"
+  ],
+  "restored_stima_ids": [
+    "mercedes-benz-c-class-2026",
+    "mercedes-benz-e-class-2026",
+    "mercedes-benz-s-class-2026",
+    "mercedes-benz-b-class-2026",
+    "mini-hatch-2026",
+    "mini-convertible-2022",
+    "mini-convertible-2023",
+    "mini-convertible-2024",
+    "mini-convertible-2025",
+    "mini-convertible-2026",
+    "land-rover-range-rover-evoque-2026"
+  ],
+  "intentional_exclusions": [
+    {
+      "id": "nissan-navara-2022",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "nissan-navara-2023",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "nissan-navara-2024",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "nissan-navara-2025",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "nissan-navara-2026",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "mitsubishi-outlander-2022",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "mitsubishi-outlander-2023",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "mitsubishi-outlander-2024",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "volkswagen-arteon-2022",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "volkswagen-arteon-2023",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "volkswagen-arteon-2024",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "renault-koleos-2023",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "renault-koleos-2024",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "lexus-is-2023",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "lexus-is-2024",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "nissan-micra-2024",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "kia-rio-2024",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "mg-mg3-2022",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "mg-mg3-2023",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "mitsubishi-asx-2022",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "mitsubishi-asx-2023",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "suzuki-jimny-2023",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "suzuki-jimny-2024",
+      "reason": "nessuna immatricolazione IT EEA in quell'anno"
+    },
+    {
+      "id": "jeep-grand-cherokee-2023",
+      "reason": "solo PHEV in EEA IT quell'anno; senza L/100 charge-sustaining + kWh verificati (non si lascia ICE/diesel con litri seed)"
+    },
+    {
+      "id": "jeep-grand-cherokee-2024",
+      "reason": "solo PHEV in EEA IT quell'anno; senza L/100 charge-sustaining + kWh verificati (non si lascia ICE/diesel con litri seed)"
+    },
+    {
+      "id": "mazda-cx-60-2022",
+      "reason": "solo PHEV in EEA IT quell'anno; senza L/100 charge-sustaining + kWh verificati (non si lascia ICE/diesel con litri seed)"
+    },
+    {
+      "id": "mitsubishi-eclipse-cross-2022",
+      "reason": "solo PHEV in EEA IT quell'anno; senza L/100 charge-sustaining + kWh verificati (non si lascia ICE/diesel con litri seed)"
+    },
+    {
+      "id": "mitsubishi-eclipse-cross-2023",
+      "reason": "solo PHEV in EEA IT quell'anno; senza L/100 charge-sustaining + kWh verificati (non si lascia ICE/diesel con litri seed)"
+    },
+    {
+      "id": "mitsubishi-eclipse-cross-2024",
+      "reason": "solo PHEV in EEA IT quell'anno; senza L/100 charge-sustaining + kWh verificati (non si lascia ICE/diesel con litri seed)"
+    },
+    {
+      "id": "toyota-prius-2024",
+      "reason": "solo PHEV in EEA IT quell'anno; senza L/100 charge-sustaining + kWh verificati (non si lascia ICE/diesel con litri seed)"
+    },
+    {
+      "id": "peugeot-408-2022",
+      "reason": "solo PHEV in EEA IT quell'anno; senza L/100 charge-sustaining + kWh verificati (non si lascia ICE/diesel con litri seed)"
+    }
+  ],
+  "intentional_exclusions_counts": {
+    "nessuna immatricolazione IT EEA in quell'anno": 23,
+    "solo PHEV in EEA IT quell'anno; senza L/100 charge-sustaining + kWh verificati (non si lascia ICE/diesel con litri seed)": 8
+  },
+  "launch_performance": {
+    "method": "XCTest testLaunchPerformance, mean of 5 cold launches",
+    "main_s": 2.133,
+    "branch_s": 2.119,
+    "catalog_decode_ms_approx": 30
+  },
+  "updatedAt": "2026-10-23T17:38:34.423174+00:00"
+}

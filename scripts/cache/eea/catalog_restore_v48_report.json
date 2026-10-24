@@ -1,0 +1,502 @@
+{
+  "skip_fetch": true,
+  "only_empty": false,
+  "cache_refresh": {
+    "skipped": true
+  },
+  "label_n_fixes": 285,
+  "label_n_unresolved": [],
+  "label_n_sample": [
+    {
+      "id": "alfa-romeo-giulia-2018",
+      "n_from": 968,
+      "n_to": 484,
+      "eea_model": "GIULIA",
+      "ft": "PETROL",
+      "eea_year": 2018,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-giulia-diesel-2018",
+      "n_from": 13156,
+      "n_to": 6578,
+      "eea_model": "GIULIA",
+      "ft": "DIESEL",
+      "eea_year": 2018,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-giulia-2019",
+      "n_from": 848,
+      "n_to": 424,
+      "eea_model": "GIULIA",
+      "ft": "PETROL",
+      "eea_year": 2019,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-giulia-diesel-2019",
+      "n_from": 6324,
+      "n_to": 3162,
+      "eea_model": "GIULIA",
+      "ft": "DIESEL",
+      "eea_year": 2019,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-giulia-2020",
+      "n_from": 498,
+      "n_to": 249,
+      "eea_model": "GIULIA",
+      "ft": "PETROL",
+      "eea_year": 2020,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-giulia-diesel-2020",
+      "n_from": 4170,
+      "n_to": 2085,
+      "eea_model": "GIULIA",
+      "ft": "DIESEL",
+      "eea_year": 2020,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-giulia-2021",
+      "n_from": 680,
+      "n_to": 340,
+      "eea_model": "GIULIA",
+      "ft": "PETROL",
+      "eea_year": 2021,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-giulia-diesel-2021",
+      "n_from": 2952,
+      "n_to": 1476,
+      "eea_model": "GIULIA",
+      "ft": "DIESEL",
+      "eea_year": 2021,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-giulia-2023",
+      "n_from": 680,
+      "n_to": 340,
+      "eea_model": "GIULIA",
+      "ft": "PETROL",
+      "eea_year": 2023,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-giulia-diesel-2023",
+      "n_from": 1604,
+      "n_to": 802,
+      "eea_model": "GIULIA",
+      "ft": "DIESEL",
+      "eea_year": 2023,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-giulia-2024",
+      "n_from": 644,
+      "n_to": 322,
+      "eea_model": "GIULIA",
+      "ft": "PETROL",
+      "eea_year": 2024,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-giulia-diesel-2024",
+      "n_from": 1476,
+      "n_to": 738,
+      "eea_model": "GIULIA",
+      "ft": "DIESEL",
+      "eea_year": 2024,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-giulietta-2018",
+      "n_from": 5814,
+      "n_to": 2907,
+      "eea_model": "ALFAGIULIETTA",
+      "ft": "PETROL",
+      "eea_year": 2018,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-giulietta-2019",
+      "n_from": 5576,
+      "n_to": 2788,
+      "eea_model": "ALFAGIULIETTA",
+      "ft": "PETROL",
+      "eea_year": 2019,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-giulietta-2020",
+      "n_from": 5326,
+      "n_to": 2663,
+      "eea_model": "ALFAGIULIETTA",
+      "ft": "PETROL",
+      "eea_year": 2020,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-stelvio-2018",
+      "n_from": 1722,
+      "n_to": 861,
+      "eea_model": "STELVIO",
+      "ft": "PETROL",
+      "eea_year": 2018,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-stelvio-diesel-2018",
+      "n_from": 23412,
+      "n_to": 11706,
+      "eea_model": "STELVIO",
+      "ft": "DIESEL",
+      "eea_year": 2018,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-stelvio-2019",
+      "n_from": 1500,
+      "n_to": 750,
+      "eea_model": "STELVIO",
+      "ft": "PETROL",
+      "eea_year": 2019,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-stelvio-diesel-2019",
+      "n_from": 22954,
+      "n_to": 11477,
+      "eea_model": "STELVIO",
+      "ft": "DIESEL",
+      "eea_year": 2019,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-stelvio-2020",
+      "n_from": 884,
+      "n_to": 442,
+      "eea_model": "STELVIO",
+      "ft": "PETROL",
+      "eea_year": 2020,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-stelvio-diesel-2020",
+      "n_from": 15178,
+      "n_to": 7589,
+      "eea_model": "STELVIO",
+      "ft": "DIESEL",
+      "eea_year": 2020,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-stelvio-2021",
+      "n_from": 750,
+      "n_to": 375,
+      "eea_model": "STELVIO",
+      "ft": "PETROL",
+      "eea_year": 2021,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-stelvio-diesel-2021",
+      "n_from": 14396,
+      "n_to": 7198,
+      "eea_model": "STELVIO",
+      "ft": "DIESEL",
+      "eea_year": 2021,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-stelvio-2023",
+      "n_from": 890,
+      "n_to": 445,
+      "eea_model": "STELVIO",
+      "ft": "PETROL",
+      "eea_year": 2023,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-stelvio-diesel-2023",
+      "n_from": 12240,
+      "n_to": 6120,
+      "eea_model": "STELVIO",
+      "ft": "DIESEL",
+      "eea_year": 2023,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-stelvio-2024",
+      "n_from": 720,
+      "n_to": 360,
+      "eea_model": "STELVIO",
+      "ft": "PETROL",
+      "eea_year": 2024,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-stelvio-diesel-2024",
+      "n_from": 10016,
+      "n_to": 5008,
+      "eea_model": "STELVIO",
+      "ft": "DIESEL",
+      "eea_year": 2024,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-tonale-2022",
+      "n_from": 8368,
+      "n_to": 4185,
+      "eea_model": "TONALE",
+      "ft": "PETROL",
+      "eea_year": 2022,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-tonale-2023",
+      "n_from": 18866,
+      "n_to": 9433,
+      "eea_model": "TONALE",
+      "ft": "PETROL",
+      "eea_year": 2023,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-tonale-diesel-2023",
+      "n_from": 14740,
+      "n_to": 7370,
+      "eea_model": "TONALE",
+      "ft": "DIESEL",
+      "eea_year": 2023,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-tonale-2024",
+      "n_from": 11310,
+      "n_to": 5655,
+      "eea_model": "TONALE",
+      "ft": "PETROL",
+      "eea_year": 2024,
+      "status": null
+    },
+    {
+      "id": "alfa-romeo-tonale-diesel-2024",
+      "n_from": 14098,
+      "n_to": 7049,
+      "eea_model": "TONALE",
+      "ft": "DIESEL",
+      "eea_year": 2024,
+      "status": null
+    },
+    {
+      "id": "audi-a4-2018",
+      "n_from": 15622,
+      "n_to": 7811,
+      "eea_model": "A4",
+      "ft": "DIESEL",
+      "eea_year": 2018,
+      "status": null
+    },
+    {
+      "id": "audi-a4-2019",
+      "n_from": 13088,
+      "n_to": 6544,
+      "eea_model": "A4",
+      "ft": "DIESEL",
+      "eea_year": 2019,
+      "status": null
+    },
+    {
+      "id": "audi-a4-2020",
+      "n_from": 10346,
+      "n_to": 5173,
+      "eea_model": "A4",
+      "ft": "DIESEL",
+      "eea_year": 2020,
+      "status": null
+    },
+    {
+      "id": "audi-a4-2021",
+      "n_from": 8550,
+      "n_to": 4275,
+      "eea_model": "A4",
+      "ft": "DIESEL",
+      "eea_year": 2021,
+      "status": null
+    },
+    {
+      "id": "audi-q3-diesel-2020",
+      "n_from": 8194,
+      "n_to": 4619,
+      "eea_model": "Q3SPORTBACK",
+      "ft": "DIESEL",
+      "eea_year": 2020,
+      "status": null
+    },
+    {
+      "id": "audi-q3-diesel-2023",
+      "n_from": 9626,
+      "n_to": 5804,
+      "eea_model": "Q3SPORTBACK",
+      "ft": "DIESEL",
+      "eea_year": 2023,
+      "status": null
+    },
+    {
+      "id": "audi-q3-diesel-2024",
+      "n_from": 10272,
+      "n_to": 5796,
+      "eea_model": "Q3SPORTBACK",
+      "ft": "DIESEL",
+      "eea_year": 2024,
+      "status": null
+    },
+    {
+      "id": "audi-q5-diesel-2022",
+      "n_from": 4372,
+      "n_to": 3997,
+      "eea_model": "Q5SPORTBACK",
+      "ft": "DIESEL",
+      "eea_year": 2022,
+      "status": null
+    },
+    {
+      "id": "audi-q5-diesel-2023",
+      "n_from": 6466,
+      "n_to": 3345,
+      "eea_model": "Q5SPORTBACK",
+      "ft": "DIESEL",
+      "eea_year": 2023,
+      "status": null
+    },
+    {
+      "id": "audi-q5-diesel-2024",
+      "n_from": 3646,
+      "n_to": 2298,
+      "eea_model": "Q5SPORTBACK",
+      "ft": "DIESEL",
+      "eea_year": 2024,
+      "status": null
+    },
+    {
+      "id": "bmw-1-series-2022",
+      "n_from": 2003,
+      "n_to": 2002,
+      "eea_model": "118D",
+      "ft": "DIESEL",
+      "eea_year": 2022,
+      "status": null
+    },
+    {
+      "id": "bmw-2-series-2023",
+      "n_from": 4502,
+      "n_to": 2251,
+      "eea_model": "218DACTIVETOURER",
+      "ft": "DIESEL",
+      "eea_year": 2023,
+      "status": null
+    },
+    {
+      "id": "bmw-2-series-2024",
+      "n_from": 3292,
+      "n_to": 1646,
+      "eea_model": "218DACTIVETOURER",
+      "ft": "DIESEL",
+      "eea_year": 2024,
+      "status": null
+    },
+    {
+      "id": "bmw-3-series-2018",
+      "n_from": 11540,
+      "n_to": 5770,
+      "eea_model": "3-Series",
+      "ft": "DIESEL",
+      "eea_year": 2018,
+      "status": null
+    },
+    {
+      "id": "bmw-3-series-2019",
+      "n_from": 5099,
+      "n_to": 5004,
+      "eea_model": "3-Series",
+      "ft": "DIESEL",
+      "eea_year": 2019,
+      "status": null
+    },
+    {
+      "id": "bmw-3-series-2020",
+      "n_from": 4888,
+      "n_to": 4870,
+      "eea_model": "3-Series",
+      "ft": "DIESEL",
+      "eea_year": 2020,
+      "status": null
+    },
+    {
+      "id": "bmw-3-series-2021",
+      "n_from": 3732,
+      "n_to": 3631,
+      "eea_model": "3-Series",
+      "ft": "DIESEL",
+      "eea_year": 2021,
+      "status": null
+    },
+    {
+      "id": "bmw-3-series-2022",
+      "n_from": 1088,
+      "n_to": 2685,
+      "eea_model": "3-Series",
+      "ft": "DIESEL",
+      "eea_year": 2022,
+      "status": null
+    }
+  ],
+  "examples": {
+    "alfa-romeo-stelvio-diesel-2023": {
+      "id": "alfa-romeo-stelvio-diesel-2023",
+      "n_from": 12240,
+      "n_to": 6120,
+      "eea_model": "STELVIO",
+      "ft": "DIESEL",
+      "eea_year": 2023,
+      "status": null
+    },
+    "kia-ceed-2019": {
+      "id": "kia-ceed-2019",
+      "n_from": 1788,
+      "n_to": 1297,
+      "eea_model": "CEED",
+      "ft": "PETROL",
+      "eea_year": 2019,
+      "status": null
+    },
+    "bmw-2-series-2023": {
+      "id": "bmw-2-series-2023",
+      "n_from": 4502,
+      "n_to": 2251,
+      "eea_model": "218DACTIVETOURER",
+      "ft": "DIESEL",
+      "eea_year": 2023,
+      "status": null
+    },
+    "hyundai-bayon-2023": {
+      "id": "hyundai-bayon-2023",
+      "n_from": 5140,
+      "n_to": 3255,
+      "eea_model": "BAYON",
+      "ft": "PETROL",
+      "eea_year": 2023,
+      "status": null
+    }
+  },
+  "seedVersion": 48,
+  "rows": 5654,
+  "bytes": 2834543
+}

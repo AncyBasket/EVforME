@@ -91,7 +91,7 @@ final class CatalogTruthHygieneTests: XCTestCase {
             fuelKind: .petrol
         )
         XCTAssertTrue(mb500.isJunkCatalogEntry, "Mercedes 500 is an EEA aggregate ghost")
-        let z350 = VehicleCatalogItem(
+        let z350Ghost = VehicleCatalogItem(
             id: "nissan-350z-2023",
             brand: "Nissan",
             model: "350Z",
@@ -107,7 +107,117 @@ final class CatalogTruthHygieneTests: XCTestCase {
             imageURL: nil,
             fuelKind: .petrol
         )
-        XCTAssertTrue(z350.isJunkCatalogEntry)
+        XCTAssertTrue(z350Ghost.isJunkCatalogEntry, "350Z after 2009 is a ghost")
+        let z350Real = VehicleCatalogItem(
+            id: "nissan-350z-2007",
+            brand: "Nissan",
+            model: "350Z",
+            year: 2007,
+            powertrain: .ice,
+            lengthM: 4.3,
+            widthM: 1.8,
+            heightM: 1.3,
+            fuelConsumptionLPerKm: 0.11,
+            energyConsumptionKWhPerKm: nil,
+            maintenancePerYear: 600,
+            taxesPerYear: 400,
+            imageURL: nil,
+            fuelKind: .petrol
+        )
+        XCTAssertFalse(z350Real.isJunkCatalogEntry, "350Z 2003–2009 was a real car")
+    }
+
+    func testCatalog_EEAStatusFNotDoubleCountedWithP() {
+        // co2cars IT lists each registration under Status F (final) and P (provisional)
+        // through ~2024. In 2022 those copies also used diesel vs DIESEL casing.
+        // Cited n must use F (or P when F is absent, e.g. 2025) — never F+P.
+        let cClass2022 = VehicleCatalogService.shared.vehicle(by: "mercedes-benz-c-class-2022")
+        XCTAssertNotNil(cClass2022)
+        let c22 = cClass2022?.sourceName ?? ""
+        XCTAssertTrue(c22.contains("n=1218"), "C-Class 2022 Status F n=1218 not F+P 2436: \(c22)")
+        XCTAssertFalse(c22.contains("n=2436"), c22)
+        let lc = VehicleCatalogService.shared.vehicle(by: "toyota-land-cruiser-2022")
+        XCTAssertNotNil(lc)
+        let lcSrc = lc?.sourceName ?? ""
+        XCTAssertTrue(lcSrc.contains("n=264"), "Land Cruiser 2022 Status F n=264 not 528: \(lcSrc)")
+        XCTAssertFalse(lcSrc.contains("n=528"), lcSrc)
+
+        let cClass2024 = VehicleCatalogService.shared.vehicle(by: "mercedes-benz-c-class-2024")
+        XCTAssertNotNil(cClass2024)
+        let c24 = cClass2024?.sourceName ?? ""
+        XCTAssertTrue(c24.contains("n=845"), "C-Class 2024 Status F n=845 not F+P 1690: \(c24)")
+        XCTAssertFalse(c24.contains("n=1690"), c24)
+
+        // Uneven F vs P (not a clean 2×) must still cite Status F.
+        let stelvio = VehicleCatalogService.shared.vehicle(by: "alfa-romeo-stelvio-diesel-2023")
+        XCTAssertNotNil(stelvio)
+        let stSrc = stelvio?.sourceName ?? ""
+        XCTAssertTrue(stSrc.contains("n=6120"), "Stelvio diesel 2023 Status F n=6120 not 12240: \(stSrc)")
+        XCTAssertFalse(stSrc.contains("n=12240"), stSrc)
+        let ceed = VehicleCatalogService.shared.vehicle(by: "kia-ceed-2019")
+        XCTAssertNotNil(ceed)
+        let ceedSrc = ceed?.sourceName ?? ""
+        XCTAssertTrue(ceedSrc.contains("n=1298"), "Ceed 2019 Status F n=1298 (CEED+CEE'D) not 1788: \(ceedSrc)")
+        XCTAssertFalse(ceedSrc.contains("n=1788"), ceedSrc)
+    }
+
+    func testCatalog_RestoreFollowUpDropsAndFixes() {
+        let catalog = VehicleCatalogService.shared
+        for id in [
+            "nissan-navara-2022", "mitsubishi-outlander-2022", "volkswagen-arteon-2022",
+            "renault-koleos-2023", "lexus-is-2023", "nissan-micra-2024", "kia-rio-2024",
+            "mg-mg3-2022", "mitsubishi-asx-2022", "suzuki-jimny-2023",
+            "jeep-grand-cherokee-2023", "mazda-cx-60-2022", "mitsubishi-eclipse-cross-2022",
+            "toyota-prius-2024", "peugeot-408-2022",
+        ] {
+            XCTAssertNil(catalog.vehicle(by: id), "Should be excluded: \(id)")
+        }
+        let scenic = catalog.vehicle(by: "renault-scenic-2024")
+        XCTAssertEqual(scenic?.powertrain, .ev)
+        let scenicSrc = scenic?.sourceName ?? ""
+        XCTAssertTrue(scenicSrc.contains("n=449"), "Scenic 2024 Status F n=449 not F+P 898: \(scenicSrc)")
+        XCTAssertFalse(scenicSrc.contains("n=898"), scenicSrc)
+        let sCross22 = catalog.vehicle(by: "suzuki-s-cross-2022")
+        XCTAssertTrue((sCross22?.sourceName ?? "").contains("2022"), sCross22?.sourceName ?? "")
+        XCTAssertFalse((sCross22?.sourceName ?? "").contains("2025"), sCross22?.sourceName ?? "")
+        let sClass = catalog.vehicle(by: "mercedes-benz-s-class-2025")
+        let sSrc = sClass?.sourceName ?? ""
+        XCTAssertTrue(sSrc.localizedCaseInsensitiveContains("S 450"), sSrc)
+        XCTAssertTrue(sSrc.contains("n=54"), sSrc)
+        XCTAssertFalse(sSrc.lowercased().contains("anno precedente"))
+        let prior = catalog.vehicles.filter {
+            ($0.sourceName ?? "").localizedCaseInsensitiveContains("anno precedente")
+        }
+        XCTAssertTrue(prior.isEmpty, "Must cite real EEA year, not 'anno precedente': \(prior.prefix(5).map(\.id))")
+    }
+
+    func testCatalog_CoreModelsPresent() {
+        let catalog = VehicleCatalogService.shared.vehicles
+        func hasBrandModel(_ brand: String, _ modelContains: String) -> Bool {
+            catalog.contains {
+                $0.brand.localizedCaseInsensitiveContains(brand)
+                    && $0.model.localizedCaseInsensitiveContains(modelContains)
+            }
+        }
+        XCTAssertTrue(hasBrandModel("Volkswagen", "Golf"), "Golf")
+        XCTAssertTrue(hasBrandModel("Fiat", "Panda"), "Panda")
+        XCTAssertTrue(hasBrandModel("BMW", "3 Series"), "Serie 3")
+        XCTAssertTrue(hasBrandModel("Mercedes", "C-Class"), "Classe C")
+        XCTAssertTrue(hasBrandModel("Mercedes", "A-Class"), "Classe A")
+        XCTAssertTrue(
+            catalog.contains {
+                $0.brand.localizedCaseInsensitiveContains("MINI")
+                    && ($0.model.localizedCaseInsensitiveContains("Hatch")
+                        || $0.model.localizedCaseInsensitiveContains("Cooper"))
+            },
+            "MINI"
+        )
+        XCTAssertTrue(hasBrandModel("Tesla", "Model 3"), "Model 3")
+        XCTAssertTrue(hasBrandModel("Tesla", "Model Y"), "Model Y")
+        let series2AT = catalog.first {
+            $0.id.hasPrefix("bmw-2-series-") && $0.year >= 2022
+        }
+        XCTAssertEqual(series2AT?.model, "2 Series Active Tourer")
     }
 
     func testCatalog_NoEEALabelBefore2010() {
