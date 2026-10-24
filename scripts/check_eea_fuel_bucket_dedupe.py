@@ -100,6 +100,8 @@ SEED_N_CASES = [
     ("alfa-romeo-giulietta-2018", 2908),
     ("subaru-forester-2022", 450),
     ("subaru-forester-2023", 499),
+    ("nissan-qashqai-2018", 24526),
+    ("ford-mustang-2018", 356),
 ]
 
 # Bad cited n that must fail (pre-merge / thin-F / pre-Mk-merge stubs).
@@ -115,6 +117,8 @@ SEED_N_MUST_FAIL = [
     ("volkswagen-taigo-2024", 9618),
     ("land-rover-range-rover-evoque-2021", 3574),
     ("renault-clio-diesel-2018", 26106),
+    ("nissan-qashqai-2018", 24525),
+    ("ford-mustang-2018", 353),
 ]
 
 # Labels that must name the counted Cn / list aggregated variants.
@@ -242,6 +246,9 @@ def main() -> int:
         ("LAND ROVER", ("RANGEROVEREVOQUE", 2021, "DIESEL"), 3581.0),
         ("SUBARU", ("FORESTER", 2022, "PETROL"), 450.0),
         ("VOLKSWAGEN", ("PASSAT", 2019, "DIESEL"), 5152.0),
+        # Absent/null Mk ≡ empty Mk when Cn carries the brand
+        ("NISSAN", ("QASHQAI", 2018, "DIESEL"), 24526.0),
+        ("FORD", ("MUSTANG", 2018, "PETROL"), 356.0),
     ]
     for brand, key, expect in checks:
         got = float((ice.get(brand) or {}).get(key, {}).get("n") or 0)
@@ -267,6 +274,14 @@ def main() -> int:
         failures.append("canonical_ice_brand_key: padded Jaguar → JAGUAR")
     if eea.model_name_merge_key("FIAT 500", "FIAT") != eea.model_name_merge_key("500", "FIAT"):
         failures.append("model_name_merge_key: FIAT 500 must merge with 500")
+    # Absent/null Mk must be queried like empty Mk (brand token required in Cn).
+    mk_clauses = json.dumps(eea.brand_mk_should_clauses("NISSAN"))
+    if '"Mk": ""' not in mk_clauses and '"Mk":""' not in mk_clauses:
+        failures.append("brand_mk_should_clauses: must include empty Mk \"\"")
+    if "must_not" not in mk_clauses or "exists" not in mk_clauses:
+        failures.append("brand_mk_should_clauses: must include Mk absent/null (must_not exists)")
+    if "*NISSAN*" not in mk_clauses:
+        failures.append("brand_mk_should_clauses: empty/absent Mk requires Cn brand token")
 
     s450 = float(
         (ice.get("MERCEDES-BENZ") or {}).get(("S450D4MATIC", 2025, "DIESEL"), {}).get("n") or 0

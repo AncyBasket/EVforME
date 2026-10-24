@@ -308,7 +308,12 @@ def brand_cn_match_tokens(brand: str) -> list[str]:
 
 
 def brand_mk_should_clauses(brand: str) -> list[dict]:
-    """Catch Mk casing, trailing spaces, known aliases, and empty Mk (brand in Cn)."""
+    """Catch Mk casing, trailing spaces, known aliases, and empty/absent Mk (brand in Cn).
+
+    Mk absent or null is treated like Mk=\"\": count the row only when Cn contains
+    the manufacturer (e.g. \"NISSAN QASHQAI\", \"FORD MUSTANG\"). Bare model names
+    without the brand token (e.g. \"MUSTANG\") do not count.
+    """
     names = brand_aliases_for(brand)
     should: list[dict] = []
     seen: set[str] = set()
@@ -319,7 +324,7 @@ def brand_mk_should_clauses(brand: str) -> list[dict]:
             seen.add(candidate)
             should.append({"term": {"Mk": candidate}})
             should.append({"wildcard": {"Mk": candidate + "*"}})
-    # Empty / missing Mk: only when Cn contains the manufacturer name.
+    # Empty string Mk and field-absent/null Mk: same rule (brand token must be in Cn).
     cn_tokens = [t for t in brand_cn_match_tokens(brand) if t]
     if cn_tokens:
         cn_should = [{"wildcard": {"Cn": f"*{t}*"}} for t in cn_tokens]
