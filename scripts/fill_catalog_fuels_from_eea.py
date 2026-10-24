@@ -69,6 +69,59 @@ BRAND_TO_EEA_MK = {
     "CITROËN": "CITROEN",
 }
 
+# Extra EEA Mk spellings that must be queried/merged with the canonical brand.
+# SEAT and CUPRA stay separate (do not list each other here).
+BRAND_MK_ALIASES: dict[str, list[str]] = {
+    "DS": ["DS", "DS AUTOMOBILES"],
+    "JAGUAR": ["JAGUAR", "Jaguar"],
+    "LAND ROVER": ["LAND ROVER", "Land Rover"],
+}
+
+
+def brand_name_merge_key(raw: str) -> str:
+    """
+    Identity for EEA Mk variants that differ only by case / surrounding spaces.
+
+    "DS AUTOMOBILES" merges with "DS". SEAT and CUPRA stay distinct.
+    """
+    k = " ".join(str(raw or "").split()).casefold()
+    if k in {"ds", "ds automobiles"}:
+        return "ds"
+    return k
+
+
+def canonical_ice_brand_key(raw: str) -> str:
+    """Map any Mk / cache filename to the ice_maps key used by seed brand_u."""
+    k = brand_name_merge_key(raw)
+    if k == "ds":
+        return "DS"
+    if k == "mercedes-benz":
+        return "MERCEDES-BENZ"
+    cleaned = " ".join(str(raw or "").split())
+    if cleaned.upper() == "MERCEDES-BENZ":
+        return "MERCEDES-BENZ"
+    return cleaned.upper()
+
+
+def brand_mk_should_clauses(brand: str) -> list[dict]:
+    """Catch Mk casing, trailing spaces, and known aliases (DS AUTOMOBILES, …)."""
+    primary = BRAND_TO_EEA_MK.get(brand, brand)
+    names = list(BRAND_MK_ALIASES.get(primary.upper(), [primary]))
+    if primary not in names:
+        names.insert(0, primary)
+    should: list[dict] = []
+    seen: set[str] = set()
+    for name in names:
+        for candidate in (name, name.title(), name.upper(), name.lower()):
+            if candidate in seen:
+                continue
+            seen.add(candidate)
+            should.append({"term": {"Mk": candidate}})
+            # Trailing-space / padded Mk (Jaguar / Land Rover in IT index).
+            should.append({"wildcard": {"Mk": candidate + "*"}})
+    return should
+
+
 # Curated true ghosts only (manual review). Do NOT auto-drop Fiat 500 MHEV, Panda CNG, etc.
 TRUE_GHOST_IDS = {
     "toyota-rav4-diesel-2019",
@@ -213,7 +266,8 @@ def load_or_fetch(cache_name: str, payload: dict, use_cache: bool) -> dict:
 def brand_payload(brand: str, hev_only: bool = False) -> dict:
     must: list[dict] = [
         {"term": {"MS": "IT"}},
-        {"term": {"Mk": brand}},
+        # Merge Mk spellings (case / trailing spaces / DS AUTOMOBILES≡DS).
+        {"bool": {"should": brand_mk_should_clauses(brand), "minimum_should_match": 1}},
         {"range": {"year": {"gte": 2017, "lte": 2025}}},
     ]
     if hev_only:
@@ -255,6 +309,29 @@ def brand_payload(brand: str, hev_only: bool = False) -> dict:
             }
         },
     }
+
+
+def merge_brand_wraps(wraps: list[dict]) -> dict:
+    """Concatenate model buckets from several brand-cache responses (Mk aliases)."""
+    buckets: list[dict] = []
+    fetched: list[str] = []
+    query = None
+    for wrap in wraps:
+        if query is None and wrap.get("_query"):
+            query = wrap["_query"]
+        if wrap.get("_fetched_at"):
+            fetched.append(str(wrap["_fetched_at"]))
+        resp = wrap.get("response", wrap)
+        buckets.extend(
+            resp.get("aggregations", {}).get("models", {}).get("buckets") or []
+        )
+    out: dict = {
+        "_fetched_at": max(fetched) if fetched else "",
+        "response": {"aggregations": {"models": {"buckets": buckets}}},
+    }
+    if query is not None:
+        out["_query"] = query
+    return out
 
 
 def _status_n(bucket: dict) -> float:

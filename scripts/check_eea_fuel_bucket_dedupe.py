@@ -80,12 +80,18 @@ SEED_N_CASES = [
     ("renault-clio-2023", 4948),
     ("land-rover-range-rover-evoque-2018", 5836),
     ("lancia-ypsilon-hybrid-2025", 8584),
+    ("ds-ds-3-2025", 280),
+    ("jaguar-e-pace-diesel-2021", 2049),
+    ("land-rover-discovery-sport-2021", 1216),
 ]
 
-# Bad cited n that must fail (pre-merge / thin-F stubs).
+# Bad cited n that must fail (pre-merge / thin-F / pre-Mk-merge stubs).
 SEED_N_MUST_FAIL = [
     ("hyundai-i10-2021", 12),
     ("bmw-3-series-2021", 3615),
+    ("ds-ds-3-2025", 155),
+    ("jaguar-e-pace-diesel-2021", 2048),
+    ("land-rover-discovery-sport-2021", 1215),
 ]
 
 # Labels that must name the counted Cn / list aggregated variants.
@@ -191,11 +197,23 @@ def main() -> int:
         ("ALFA ROMEO", ("STELVIO", 2023, "DIESEL"), 6120.0),
         ("RENAULT", ("CAPTUR", 2018, "DIESEL"), 20696.0),
         ("LAND ROVER", ("RANGEROVERSPORT", 2022, "DIESEL"), 738.0),
+        # Mk merge: DS≡DS AUTOMOBILES; Jaguar/Land Rover trailing-space Mk
+        ("DS", ("DS3", 2025, "PETROL"), 280.0),
+        ("JAGUAR", ("JAGUAREPACE", 2021, "DIESEL"), 2049.0),
+        ("LAND ROVER", ("DISCOVERYSPORT", 2021, "DIESEL"), 1216.0),
     ]
     for brand, key, expect in checks:
         got = float((ice.get(brand) or {}).get(key, {}).get("n") or 0)
         if abs(got - expect) > 0.5:
             failures.append(f"ice_map {brand} {key}: n={got} want {expect}")
+
+    # Brand merge keys: DS AUTOMOBILES ≡ DS; SEAT ≠ CUPRA
+    if eea.brand_name_merge_key("DS AUTOMOBILES") != eea.brand_name_merge_key("DS"):
+        failures.append("brand_name_merge_key: DS AUTOMOBILES must merge with DS")
+    if eea.brand_name_merge_key("SEAT") == eea.brand_name_merge_key("CUPRA"):
+        failures.append("brand_name_merge_key: SEAT and CUPRA must stay separate")
+    if eea.canonical_ice_brand_key("Jaguar   ") != "JAGUAR":
+        failures.append("canonical_ice_brand_key: padded Jaguar → JAGUAR")
 
     s450 = float(
         (ice.get("MERCEDES-BENZ") or {}).get(("S450D4MATIC", 2025, "DIESEL"), {}).get("n") or 0

@@ -2602,13 +2602,13 @@
   },
   {
     "id": "ds-ds-3-2025",
-    "n": 155,
+    "n": 280,
     "eea_year": 2025,
     "eea_model": "DS 3",
     "ft": "PETROL",
-    "powerKw": 97.09677419354838,
+    "powerKw": 98.39285714285714,
     "fuelKind": "petrol",
-    "eea_l100": 5.133
+    "eea_l100": 5.053
   },
   {
     "id": "ds-ds-3-diesel-2025",
@@ -6350,7 +6350,7 @@
   },
   {
     "id": "jaguar-e-pace-diesel-2021",
-    "n": 2048,
+    "n": 2049,
     "eea_year": 2021,
     "eea_model": "JAGUAR E-PACE",
     "ft": "DIESEL",
@@ -6560,11 +6560,11 @@
   },
   {
     "id": "jaguar-xe-diesel-2019",
-    "n": 621,
+    "n": 623,
     "eea_year": 2019,
     "eea_model": "JAGUAR XE",
     "ft": "DIESEL",
-    "powerKw": 133.21256038647343,
+    "powerKw": 133.20866773675763,
     "fuelKind": "diesel",
     "eea_l100": 6.021
   },
@@ -8570,7 +8570,7 @@
   },
   {
     "id": "land-rover-discovery-sport-2021",
-    "n": 1215,
+    "n": 1216,
     "eea_year": 2021,
     "eea_model": "DISCOVERY SPORT",
     "ft": "DIESEL",

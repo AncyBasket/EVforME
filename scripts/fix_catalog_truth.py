@@ -80,43 +80,58 @@ def is_dead_model(row: dict) -> bool:
 
 
 def _cache_brand_key(path: Path, wrap: dict, *, fuels: bool) -> str:
-    """Filename IT_ALFA_ROMEO_*.json → 'ALFA ROMEO'; query Mk wins when present (spaces)."""
+    """Filename IT_ALFA_ROMEO_*.json → 'ALFA ROMEO'; Mk aliases merge (DS AUTOMOBILES→DS)."""
     suffix = "_fuels.json" if fuels else "_hev_FmH.json"
     from_name = path.name[len("IT_") : -len(suffix)]
     if from_name == "MERCEDES-BENZ":
         from_name = "MERCEDES-BENZ"
     else:
         from_name = from_name.replace("_", " ")
-    brand_key = brand_u({"brand": from_name})
-    for term in (wrap.get("_query") or {}).get("query", {}).get("bool", {}).get("must", []):
+    brand_key = eea.canonical_ice_brand_key(from_name)
+    must = (wrap.get("_query") or {}).get("query", {}).get("bool", {}).get("must", [])
+    for term in must:
         if "term" in term and "Mk" in term["term"]:
-            mk = str(term["term"]["Mk"]).upper()
-            if mk == "MERCEDES-BENZ":
-                brand_key = "MERCEDES-BENZ"
-            else:
-                # Legacy bad refreshes used ALFA_ROMEO; normalize to API Mk with spaces.
-                brand_key = mk.replace("_", " ")
+            brand_key = eea.canonical_ice_brand_key(str(term["term"]["Mk"]))
+            break
+        # New payloads use bool.should over Mk aliases / wildcards.
+        if "bool" in term and "should" in term["bool"]:
+            for clause in term["bool"]["should"]:
+                if "term" in clause and "Mk" in clause["term"]:
+                    brand_key = eea.canonical_ice_brand_key(str(clause["term"]["Mk"]))
+                    break
             break
     return brand_key
 
 
 def load_ice_maps(use_cache: bool = True) -> dict[str, dict]:
-    maps: dict[str, dict] = {}
+    from collections import defaultdict
+
+    groups: dict[str, list[dict]] = defaultdict(list)
     for path in sorted(CACHE_DIR.glob("IT_*_fuels.json")):
         if "_hev_" in path.name:
             continue
         wrap = json.loads(path.read_text(encoding="utf-8"))
         brand_key = _cache_brand_key(path, wrap, fuels=True)
-        maps[brand_key] = eea.parse_brand_aggs(wrap, brand_key)
+        groups[brand_key].append(wrap)
+    maps: dict[str, dict] = {}
+    for brand_key, wraps in groups.items():
+        merged = eea.merge_brand_wraps(wraps) if len(wraps) > 1 else wraps[0]
+        maps[brand_key] = eea.parse_brand_aggs(merged, brand_key)
     return maps
 
 
 def load_hev_maps() -> dict[str, dict]:
-    maps: dict[str, dict] = {}
+    from collections import defaultdict
+
+    groups: dict[str, list[dict]] = defaultdict(list)
     for path in sorted(CACHE_DIR.glob("IT_*_hev_FmH.json")):
         wrap = json.loads(path.read_text(encoding="utf-8"))
         brand_key = _cache_brand_key(path, wrap, fuels=False)
-        maps[brand_key] = eea.parse_brand_aggs(wrap, brand_key)
+        groups[brand_key].append(wrap)
+    maps: dict[str, dict] = {}
+    for brand_key, wraps in groups.items():
+        merged = eea.merge_brand_wraps(wraps) if len(wraps) > 1 else wraps[0]
+        maps[brand_key] = eea.parse_brand_aggs(merged, brand_key)
     return maps
 
 

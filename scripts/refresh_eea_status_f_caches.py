@@ -23,8 +23,8 @@ import fill_catalog_fuels_from_eea as eea
 import fix_catalog_restore_v45 as v45
 import fix_catalog_truth as truth
 
-NEW_SEED_VERSION = 50
-REPORT_PATH = truth.CACHE_DIR / "catalog_restore_v50_report.json"
+NEW_SEED_VERSION = 51
+REPORT_PATH = truth.CACHE_DIR / "catalog_restore_v51_report.json"
 N_PAT = re.compile(r"\bn=(\d+)\b")
 EEA_LABEL_PAT = re.compile(r"^EEA\b", re.I)
 BMW_SERIES_PAT = re.compile(r"^(\d)\s*series", re.I)
@@ -635,8 +635,8 @@ def bump_metadata(rows: list[dict], report: dict) -> None:
     cdn["updatedAt"] = datetime.now(timezone.utc).isoformat()
     cdn["note"] = (
         f"seedVersion {NEW_SEED_VERSION}: every EEA n= from Status F (sum F across "
-        f"Cn strip+casefold and Ft casing; P only if no F / thin incomplete F); "
-        f"aggregates list full variants — label-only."
+        f"Mk+Cn strip+casefold and Ft casing; DS≡DS AUTOMOBILES; P only if no F / "
+        f"thin incomplete F); aggregates list full variants — label-only."
     )
     truth.CDN_PATH.write_text(json.dumps(cdn, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     report["seedVersion"] = NEW_SEED_VERSION
@@ -707,7 +707,7 @@ def main() -> int:
     REPORT_PATH.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     niro = ice.get("KIA", {}).get(("NIRO", 2022, "PETROL"), {})
     print(
-        f"v50: label n fixes={len(changes)} unresolved={len(unresolved)} rows={len(rows)} "
+        f"v51: label n fixes={len(changes)} unresolved={len(unresolved)} rows={len(rows)} "
         f"stelvio2023={stelvio.get('n')} ceed2019={ceed.get('n')} niro2022={niro.get('n')}"
     )
     by = {r["id"]: r for r in rows}
