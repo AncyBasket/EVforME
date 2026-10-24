@@ -23,11 +23,15 @@ import fill_catalog_fuels_from_eea as eea
 import fix_catalog_restore_v45 as v45
 import fix_catalog_truth as truth
 
-NEW_SEED_VERSION = 48
-REPORT_PATH = truth.CACHE_DIR / "catalog_restore_v48_report.json"
+NEW_SEED_VERSION = 49
+REPORT_PATH = truth.CACHE_DIR / "catalog_restore_v49_report.json"
 N_PAT = re.compile(r"\bn=(\d+)\b")
 EEA_LABEL_PAT = re.compile(r"^EEA\b", re.I)
 BMW_SERIES_PAT = re.compile(r"^(\d)\s*series", re.I)
+# Trailing annotation after n= (variant list / kWh note) — stripped when rewriting.
+EEA_TAIL_PAT = re.compile(
+    r"^(EEA co2cars IT \d{4})(?:\s+.+?)?\s+n=(\d+)(.*)$", re.I
+)
 
 
 def mk_from_cache_filename(path: Path, *, kind: str) -> str:
@@ -338,25 +342,19 @@ def resolve_label_cell(
             if not hit:
                 hit = ice_map.get((model_n, year, want)) or hev_map.get((model_n, year, want))
             if hit and float(hit.get("n") or 0) >= 1:
+                # Prefer a high-volume sibling (Tucson → TUCSON IX35) over a tiny exact Cn.
+                best = truth.best_hit_for_family(
+                    ice_map, model_n, year, prefer_ft=want, thermal_only=True
+                )
+                if (
+                    best
+                    and float(best[2].get("n") or 0) >= 100
+                    and float(best[2].get("n") or 0) > float(hit.get("n") or 0) * 5
+                ):
+                    return best[0], best[1], best[2], year
                 return model_n, want, hit, year
 
-        # Contains-token fallback (Giulietta → ALFAGIULIETTA, Tipo Cross → TIPO).
-        token = eea.clean_model_norm(model_raw) or eea.norm_alnum(model_raw)
-        if token and want and len(token) >= 3:
-            cands = []
-            for (mn, y, ft), cell in ice_map.items():
-                if y != year or ft != want:
-                    continue
-                if token in mn or mn in token:
-                    n = float(cell.get("n") or 0)
-                    if n >= 1:
-                        cands.append((n, mn, ft, cell))
-            if cands:
-                cands.sort(key=lambda t: -t[0])
-                _, mn, ft, cell = cands[0]
-                return mn, ft, cell, year
-
-        # Land Rover / special family prefixes (Evoque, …).
+        # Land Rover / special family prefixes BEFORE contains (Evoque strips "EV").
         fam = v45.family_for_row(row)
         if fam and want:
             best = truth.best_hit_for_family(ice_map, fam, year, prefer_ft=want, thermal_only=True)
@@ -365,6 +363,23 @@ def resolve_label_cell(
             best_h = truth.best_hit_for_family(hev_map, fam, year, prefer_ft=want, thermal_only=True)
             if best_h and float(best_h[2].get("n") or 0) >= 1:
                 return best_h[0], best_h[1], best_h[2], year
+
+        # Contains-token fallback (Giulietta → ALFAGIULIETTA, Tipo Cross → TIPO).
+        # Never match a shorter parent Cn inside the token (RANGEROVER ⊂ RANGEROVEROQUE).
+        token = fam or eea.norm_alnum(model_raw)
+        if token and want and len(token) >= 3:
+            cands = []
+            for (mn, y, ft), cell in ice_map.items():
+                if y != year or ft != want:
+                    continue
+                if mn == token or mn.startswith(token) or token in mn:
+                    n = float(cell.get("n") or 0)
+                    if n >= 1:
+                        cands.append((n, mn, ft, cell))
+            if cands:
+                cands.sort(key=lambda t: -t[0])
+                _, mn, ft, cell = cands[0]
+                return mn, ft, cell, year
 
         hit = truth.resolve_eea_hit(row, ice_maps, hev_maps, prefer_seed_fuel=True, volume_first=False)
         if hit and int(hit[3]) == year and float(hit[2].get("n") or 0) >= 1:
@@ -379,25 +394,87 @@ def resolve_label_cell(
 
     preferred = pick_preferred()
 
-    # If cited n already matches a Status-F cell in the same family/fuel/year, keep it.
-    if cited_n is not None and want:
-        token = eea.clean_model_norm(model_raw) or eea.norm_alnum(model_raw)
-        alias = MODEL_CN_ALIASES.get((brand, token))
-        tokens = {token}
-        if alias:
-            tokens.add(alias)
-        # Also accept aggregate family hit n.
-        if preferred and int(float(preferred[2].get("n") or 0)) == cited_n:
+    # Family aggregates (A4 / 3-Series / Clio diesel / …) always win — the label
+    # must list the summed variants even when a single Cn matched the old n=.
+    if preferred and isinstance(preferred[2].get("variants"), list) and len(preferred[2]["variants"]) >= 2:
+        return preferred
+
+    # Keep cited n only when it matches preferred or a Cn that properly belongs
+    # to the seed family (token ⊂ Cn), not a shorter parent nameplate.
+    if cited_n is not None and want and preferred:
+        pref_n = int(float(preferred[2].get("n") or 0))
+        if pref_n == cited_n:
             return preferred
+        # Don't keep a thin leftover Cn (TUCSON n=1) when preferred is the real volume.
+        if pref_n >= 100 and cited_n < 30 and pref_n > cited_n * 5:
+            return preferred
+        fam = v45.family_for_row(row)
+        tokens = {t for t in (fam, eea.norm_alnum(model_raw)) if t and len(t) >= 3}
         for tok in tokens:
             for mn, ft, cell in _family_cells(ice_map, hev_map, tok, year, want):
-                if int(float(cell.get("n") or 0)) == cited_n:
-                    return mn, ft, cell, year
-        # Family aggregate cells (A4 / 3-Series) — cited may equal the sum.
-        if preferred and preferred[2].get("model_raw") and int(float(preferred[2].get("n") or 0)) == cited_n:
-            return preferred
+                if int(float(cell.get("n") or 0)) != cited_n:
+                    continue
+                # Reject parent Cn shorter than the family token (RANGE ROVER vs Evoque).
+                if len(mn) < len(tok) and mn != tok:
+                    continue
+                return mn, ft, cell, year
 
     return preferred
+
+
+def format_eea_source_name(
+    year: int,
+    n: int,
+    *,
+    eea_model: str,
+    cell: dict,
+    seed_model: str,
+    prior_sn: str,
+) -> str:
+    """
+    Build EEA sourceName. Aggregates list summed variants; single Cn that differs
+    from the seed model is named explicitly (GLC 300 4MATIC, CLIO E-TECH HYBRID).
+    Preserve trailing notes (kWh) from the previous label when present.
+    """
+    tail = ""
+    m = EEA_TAIL_PAT.match(prior_sn.strip())
+    if m and m.group(3):
+        # Keep "; kWh/…" style notes only (not old variant lists in parens).
+        raw_tail = m.group(3).strip()
+        if raw_tail.startswith(";"):
+            tail = " " + raw_tail
+        elif raw_tail.startswith("(") and "kWh" in raw_tail.lower():
+            tail = " " + raw_tail
+
+    variants = cell.get("variants") or []
+    if isinstance(variants, list) and len(variants) >= 2:
+        shown = "+".join(str(v) for v in variants[:12])
+        if len(variants) > 12:
+            shown += "+…"
+        return f"EEA co2cars IT {year} n={n} ({shown}){tail}"
+
+    display = str(cell.get("model_raw") or eea_model or "").strip()
+    seed_u = eea.norm_alnum(seed_model)
+    disp_u = eea.norm_alnum(display)
+    # Always name sparse cells (n<30) so hygiene can accept them.
+    if n < 30 and display:
+        return f"EEA co2cars IT {year} {display} n={n}{tail}"
+    # Name the counted Cn when it is not the bare seed model family.
+    if display and disp_u and disp_u != seed_u and not disp_u.startswith(seed_u + "SERIES"):
+        # Skip generic aggregate labels like "3-Series" / "A4" / "911".
+        if display not in {
+            "3-Series",
+            "5-Series",
+            "A4",
+            "911",
+            "Panamera",
+            "A-Class",
+            "B-Class",
+            "C-Class",
+            "Tucson",
+        }:
+            return f"EEA co2cars IT {year} {display} n={n}{tail}"
+    return f"EEA co2cars IT {year} n={n}{tail}"
 
 
 def label_only_recalc_n(rows: list[dict], ice_maps: dict, hev_maps: dict) -> tuple[list[dict], list[str]]:
@@ -418,7 +495,6 @@ def label_only_recalc_n(rows: list[dict], ice_maps: dict, hev_maps: dict) -> tup
             unresolved.append(str(r.get("id")))
             continue
         mn, ft, cell, ey = hit
-        # Cited calendar year in the label must match the resolved EEA year.
         cite_y = _cite_year(sn, int(r.get("year") or 0))
         if int(ey) != cite_y:
             unresolved.append(str(r.get("id")))
@@ -427,10 +503,15 @@ def label_only_recalc_n(rows: list[dict], ice_maps: dict, hev_maps: dict) -> tup
         if real <= 0:
             unresolved.append(str(r.get("id")))
             continue
-        if cited == real:
-            continue
-        new_sn = N_PAT.sub(f"n={real}", sn, count=1)
-        if new_sn == sn:
+        new_sn = format_eea_source_name(
+            ey,
+            real,
+            eea_model=str(mn),
+            cell=cell,
+            seed_model=str(r.get("model") or ""),
+            prior_sn=sn,
+        )
+        if new_sn == sn and cited == real:
             continue
         r["sourceName"] = new_sn
         changes.append(
@@ -442,9 +523,59 @@ def label_only_recalc_n(rows: list[dict], ice_maps: dict, hev_maps: dict) -> tup
                 "ft": ft,
                 "eea_year": ey,
                 "status": cell.get("status"),
+                "variants": cell.get("variants"),
             }
         )
     return changes, unresolved
+
+
+def build_label_refs(rows: list[dict], ice_maps: dict, hev_maps: dict) -> list[dict]:
+    """EEA refs aligned to the same cell/variant the sourceName n= counts."""
+    refs: list[dict] = []
+    for r in rows:
+        sn = str(r.get("sourceName") or "")
+        if not EEA_LABEL_PAT.match(sn) or "n=" not in sn:
+            continue
+        pt = (r.get("powertrain") or "").lower()
+        if pt not in ("ice", "hev"):
+            continue
+        hit = resolve_label_cell(r, ice_maps, hev_maps)
+        if not hit:
+            continue
+        eea_model, ft, cell, eea_year = hit
+        n = float(cell.get("n") or 0)
+        if n < 1:
+            continue
+        locked = truth.seed_fuel_locked(r)
+        fk = locked or truth.ft_to_fuel_kind(ft)
+        fc100 = eea.co2_to_fuel_per_100km(
+            cell.get("co2"), fk if fk in ("petrol", "diesel", "lpg", "cng") else "petrol"
+        )
+        ref = {
+            "id": r.get("id"),
+            "n": int(n),
+            "eea_year": eea_year,
+            "eea_model": eea_model,
+            "ft": ft,
+            "powerKw": cell.get("kw"),
+            "fuelKind": fk,
+        }
+        if cell.get("variants"):
+            ref["variants"] = cell["variants"]
+        if fc100 is not None:
+            ref["eea_l100"] = round(fc100, 3)
+        display = str(cell.get("model_raw") or eea_model)
+        if display and not cell.get("variants"):
+            ref["eea_model"] = eea.norm_alnum(display) if " " not in display else display
+            # Prefer readable model_raw for humans/tests.
+            if cell.get("model_raw"):
+                ref["eea_model"] = str(cell["model_raw"])
+        refs.append(ref)
+    for r in rows:
+        rid = r.get("id")
+        if rid in truth.EV_EEA_KWH100:
+            refs.append({"id": rid, "eea_kwh100": truth.EV_EEA_KWH100[rid], "kind": "ev"})
+    return refs
 
 
 def bump_metadata(rows: list[dict], report: dict) -> None:
@@ -456,9 +587,8 @@ def bump_metadata(rows: list[dict], report: dict) -> None:
     cdn["bytes"] = len(raw)
     cdn["updatedAt"] = datetime.now(timezone.utc).isoformat()
     cdn["note"] = (
-        f"seedVersion {NEW_SEED_VERSION}: every EEA n= label recomputed from Status F "
-        f"(P if F absent or F≪P) for same variant/fuel/year — label-only, "
-        f"no consumption/kW/bollo change."
+        f"seedVersion {NEW_SEED_VERSION}: every EEA n= from Status F (sum F across "
+        f"Ft casing; P only if no F); aggregates list variants — label-only."
     )
     truth.CDN_PATH.write_text(json.dumps(cdn, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     report["seedVersion"] = NEW_SEED_VERSION
@@ -519,7 +649,7 @@ def main() -> int:
     truth.SEED_PATH.write_text(
         json.dumps(rows, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8"
     )
-    refs = truth.build_refs(rows, ice, hev)
+    refs = build_label_refs(rows, ice, hev)
     truth.REFS_PATH.write_text(json.dumps(refs, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     fixture = truth.REPO / "EVforME?Tests" / "Fixtures" / "catalog_truth_eea_refs.json"
     if fixture.parent.is_dir():
@@ -527,21 +657,25 @@ def main() -> int:
 
     bump_metadata(rows, report)
     REPORT_PATH.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    niro = ice.get("KIA", {}).get(("NIRO", 2022, "PETROL"), {})
     print(
-        f"v48: label n fixes={len(changes)} unresolved={len(unresolved)} rows={len(rows)} "
-        f"stelvio2023={stelvio.get('n')} ceed2019={ceed.get('n')}"
+        f"v49: label n fixes={len(changes)} unresolved={len(unresolved)} rows={len(rows)} "
+        f"stelvio2023={stelvio.get('n')} ceed2019={ceed.get('n')} niro2022={niro.get('n')}"
     )
     by = {r["id"]: r for r in rows}
     for rid in (
         "alfa-romeo-stelvio-diesel-2023",
-        "alfa-romeo-stelvio-diesel-2024",
-        "bmw-2-series-2023",
+        "kia-niro-2022",
         "kia-ceed-2019",
-        "hyundai-bayon-2023",
+        "bmw-3-series-2023",
+        "mercedes-benz-glc-2023",
+        "renault-clio-2023",
+        "land-rover-range-rover-evoque-2018",
+        "renault-captur-diesel-2018",
         "mercedes-benz-c-class-2024",
-        "renault-scenic-2024",
     ):
-        print(rid, (by[rid].get("sourceName") or "")[:100])
+        if rid in by:
+            print(rid, (by[rid].get("sourceName") or "")[:120])
     errs = report.get("cache_refresh", {}).get("errors") or []
     return 1 if errs else 0
 

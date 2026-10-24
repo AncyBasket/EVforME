@@ -261,41 +261,32 @@ def _status_n(bucket: dict) -> float:
     return float(bucket.get("sum_r", {}).get("value") or bucket.get("doc_count") or 0)
 
 
+def _metrics_from_status_bucket(bucket: dict, status: str) -> dict:
+    return {
+        "n": _status_n(bucket),
+        "co2": bucket.get("avg_co2", {}).get("value"),
+        "kw": bucket.get("avg_kw", {}).get("value"),
+        "status": status,
+    }
+
+
 def status_preferred_metrics(fuel_bucket: dict) -> dict:
     """
     Prefer Status F (final) over P (provisional).
 
     Through 2024 the IT co2cars index usually lists each registration twice (F+P)
     with F≈P — summing doubles n; use F. If only P exists (typical for 2025), use P.
-
-    Rare quirk: F is present but tiny while P holds nearly all regs (e.g. I10 2021
-    F=12 vs P=11699, Ceed LPG F=18 vs P=824). Treating that F as the volume would
-    under-count; fall back to P when F < 25% of P.
+    Always prefer F when present in this Ft bucket (never fall back to P just because
+    F is smaller — sibling casing buckets are merged in dedupe_fuel_buckets).
     """
     statuses = fuel_bucket.get("status", {}).get("buckets") or []
     if statuses:
         by_key = {str(s.get("key", "")).upper(): s for s in statuses}
-        f_b = by_key.get("F")
-        p_b = by_key.get("P")
-        chosen = None
-        if f_b and p_b:
-            f_n, p_n = _status_n(f_b), _status_n(p_b)
-            if f_n >= p_n * 0.25:
-                chosen = f_b
-            else:
-                chosen = p_b
-        elif f_b:
-            chosen = f_b
-        elif p_b:
-            chosen = p_b
+        chosen = by_key.get("F") or by_key.get("P")
         if chosen is None:
             chosen = max(statuses, key=_status_n)
-        return {
-            "n": _status_n(chosen),
-            "co2": chosen.get("avg_co2", {}).get("value"),
-            "kw": chosen.get("avg_kw", {}).get("value"),
-            "status": str(chosen.get("key", "")).upper() or None,
-        }
+        st = str(chosen.get("key", "")).upper() or None
+        return _metrics_from_status_bucket(chosen, st or "")
     # Legacy cache without Status sub-agg (may still be F+P summed).
     return {
         "n": float(fuel_bucket.get("sum_r", {}).get("value") or fuel_bucket.get("doc_count") or 0),
@@ -305,27 +296,63 @@ def status_preferred_metrics(fuel_bucket: dict) -> dict:
     }
 
 
+def _combine_status_metrics(parts: list[dict], status: str) -> dict:
+    """Sum n across casing variants; enrolment-weighted CO₂/kW."""
+    total_n = 0.0
+    co2_acc = 0.0
+    co2_n = 0.0
+    kw_acc = 0.0
+    kw_n = 0.0
+    for m in parts:
+        n = float(m.get("n") or 0)
+        if n <= 0:
+            continue
+        total_n += n
+        if isinstance(m.get("co2"), (int, float)) and float(m["co2"]) > 0:
+            co2_acc += float(m["co2"]) * n
+            co2_n += n
+        if isinstance(m.get("kw"), (int, float)) and float(m["kw"]) > 0:
+            kw_acc += float(m["kw"]) * n
+            kw_n += n
+    return {
+        "n": total_n,
+        "co2": (co2_acc / co2_n) if co2_n else None,
+        "kw": (kw_acc / kw_n) if kw_n else None,
+        "status": status,
+    }
+
+
 def dedupe_fuel_buckets(fuel_buckets: list[dict]) -> dict[str, dict]:
     """
-    Merge Ft buckets that normalize to the same key (e.g. DIESEL vs diesel).
+    Merge Ft buckets that normalize to the same key (e.g. DIESEL vs diesel / Diesel).
 
-    After Status F-preference, 2022 still has F under 'diesel' and P under 'DIESEL';
-    take max-n (they match), never sum.
+    2022 often splits Status F and P across Ft casing. Sum only F across casings
+    (Captur diesel: Diesel F=20662 + DIESEL F=34 → 20696). If no F exists on any
+    casing, use P. Never sum F+P and never let a larger P beat a smaller F.
     """
-    merged: dict[str, dict] = {}
+    from collections import defaultdict
+
+    pools: dict[str, dict[str, list[dict]]] = defaultdict(lambda: {"F": [], "P": []})
     for fb in fuel_buckets:
         key = normalize_ft(str(fb.get("key", "")))
         if not key:
             continue
-        metrics = status_preferred_metrics(fb)
-        prev = merged.get(key)
-        if prev is None or float(metrics["n"]) > float(prev["n"] or 0):
-            merged[key] = {
-                "n": metrics["n"],
-                "co2": metrics["co2"],
-                "kw": metrics["kw"],
-                "status": metrics.get("status"),
-            }
+        statuses = fb.get("status", {}).get("buckets") or []
+        if statuses:
+            by_key = {str(s.get("key", "")).upper(): s for s in statuses}
+            for st in ("F", "P"):
+                if st in by_key:
+                    pools[key][st].append(_metrics_from_status_bucket(by_key[st], st))
+        else:
+            # Legacy: treat top-level as unknown; keep via P pool as last resort.
+            pools[key]["P"].append(status_preferred_metrics(fb))
+
+    merged: dict[str, dict] = {}
+    for key, st_pools in pools.items():
+        if st_pools["F"]:
+            merged[key] = _combine_status_metrics(st_pools["F"], "F")
+        elif st_pools["P"]:
+            merged[key] = _combine_status_metrics(st_pools["P"], "P")
     return merged
 
 
@@ -504,19 +531,59 @@ def match_full_hybrid_model(
     return None, None
 
 
+_BRAND_PREFIXES_FOR_DEDUP = (
+    "AUDIAUDI",  # nonsense guard
+    "AUDI",
+    "TOYOTA",
+    "BMW",
+    "MERCEDESBENZ",
+    "VOLKSWAGEN",
+    "RENAULT",
+    "HYUNDAI",
+    "KIA",
+    "PORSCHE",
+    "ALFA",
+    "FIAT",
+    "FORD",
+    "OPEL",
+    "PEUGEOT",
+    "CITROEN",
+    "SKODA",
+    "SEAT",
+    "CUPRA",
+    "NISSAN",
+    "MAZDA",
+    "SUZUKI",
+    "JEEP",
+    "LANDROVER",
+    "MINI",
+    "VOLVO",
+    "DACIA",
+    "DS",
+)
+
+
+def _canonical_cn_key(model_n: str) -> str:
+    """Strip brand prefix so A4 and AUDIA4 collapse when aggregating."""
+    for prefix in _BRAND_PREFIXES_FOR_DEDUP:
+        if model_n.startswith(prefix) and len(model_n) > len(prefix):
+            return model_n[len(prefix) :]
+    return model_n
+
+
 def _aggregate_family_hit(
     ice_map: dict[tuple[str, int, str], dict],
     year: int,
     ft: str,
     predicate,
     label: str,
+    *,
+    require_co2: bool = True,
+    min_n: float = 100.0,
 ) -> dict | None:
     """Enrolment-weighted average of EEA cells matching predicate(model_norm)."""
-    total_n = 0.0
-    co2_acc = 0.0
-    co2_n = 0.0
-    kw_acc = 0.0
-    kw_n = 0.0
+    # Dedupe brand-prefixed aliases (A4 vs AUDIA4) — keep max-n per canonical Cn.
+    best_by_key: dict[str, tuple[float, str, dict]] = {}
     for (model_n, y, fuel), payload in ice_map.items():
         if y != year or fuel != ft:
             continue
@@ -525,23 +592,39 @@ def _aggregate_family_hit(
         n = float(payload.get("n") or 0)
         if n <= 0:
             continue
+        key = _canonical_cn_key(model_n)
+        prev = best_by_key.get(key)
+        if prev is None or n > prev[0]:
+            best_by_key[key] = (n, model_n, payload)
+
+    total_n = 0.0
+    co2_acc = 0.0
+    co2_n = 0.0
+    kw_acc = 0.0
+    kw_n = 0.0
+    variants: list[tuple[float, str]] = []
+    for n, model_n, payload in best_by_key.values():
         total_n += n
+        raw = str(payload.get("model_raw") or model_n)
+        variants.append((n, raw))
         if isinstance(payload.get("co2"), (int, float)) and float(payload["co2"]) > 0:
             co2_acc += float(payload["co2"]) * n
             co2_n += n
         if isinstance(payload.get("kw"), (int, float)) and float(payload["kw"]) > 0:
             kw_acc += float(payload["kw"]) * n
             kw_n += n
-    if total_n < 100:
+    if total_n < min_n:
         return None
     # Require enough regs with CO2 so missing-Ewltp cells cannot dilute the average.
-    if co2_n < 100:
+    if require_co2 and co2_n < min_n:
         return None
+    variants.sort(key=lambda t: -t[0])
     return {
         "n": total_n,
-        "co2": co2_acc / co2_n,
+        "co2": (co2_acc / co2_n) if co2_n else None,
         "kw": (kw_acc / kw_n) if kw_n > 0 else None,
         "model_raw": label,
+        "variants": [v for _, v in variants],
     }
 
 
@@ -589,12 +672,12 @@ def audi_a4_diesel_hit(
 def bmw_3_series_diesel_hit(
     ice_map: dict[tuple[str, int, str], dict], year: int
 ) -> dict | None:
-    """320d / 330d family; exclude X3 20D etc."""
+    """320d / 330d / M340d family; exclude X3 20D etc."""
     return _aggregate_family_hit(
         ice_map,
         year,
         "DIESEL",
-        lambda m: bool(re.match(r"^3[0-9]{2}D", m)),
+        lambda m: bool(re.match(r"^3[0-9]{2}D", m)) or m.startswith("M340D"),
         "3-Series",
     )
 
@@ -602,12 +685,14 @@ def bmw_3_series_diesel_hit(
 def porsche_911_petrol_hit(
     ice_map: dict[tuple[str, int, str], dict], year: int
 ) -> dict | None:
+    # 911 cells often lack Ewltp — still sum Status-F n for catalogue labels.
     return _aggregate_family_hit(
         ice_map,
         year,
         "PETROL",
         lambda m: m.startswith("911") or m.startswith("991"),
         "911",
+        require_co2=False,
     )
 
 
@@ -683,6 +768,23 @@ def porsche_panamera_petrol_hit(
         "PETROL",
         lambda m: m.startswith("PANAMERA") and "EHYBRID" not in m and "HYBRID" not in m,
         "Panamera",
+        require_co2=False,
+        min_n=30.0,
+    )
+
+
+def renault_clio_diesel_hit(
+    ice_map: dict[tuple[str, int, str], dict], year: int
+) -> dict | None:
+    """CLIO + CLIO AUTOSCUOLA / NUOVA CLIO … diesel family for seed Clio diesel."""
+    return _aggregate_family_hit(
+        ice_map,
+        year,
+        "DIESEL",
+        lambda m: "CLIO" in m and "CAPTUR" not in m,
+        "Clio",
+        require_co2=False,
+        min_n=30.0,
     )
 
 
@@ -717,12 +819,13 @@ def family_eea_hit(
         return bmw_3_series_diesel_hit(ice_map, year)
     if brand_u == "BMW" and (raw in {"5SERIES", "SERIES5"} or clean == "5SERIES") and ft == "DIESEL":
         return bmw_5_series_diesel_hit(ice_map, year)
-    if brand_u == "HYUNDAI" and (raw == "TUCSON" or clean == "TUCSON") and ft == "DIESEL":
-        return hyundai_tucson_diesel_hit(ice_map, year)
+    # Tucson: do not sum TUCSON+TUCSONIX35(+LM) for labels — use the dominant Cn cell.
     if brand_u == "PORSCHE" and (raw == "911" or clean == "911") and ft == "PETROL":
         return porsche_911_petrol_hit(ice_map, year)
     if brand_u == "PORSCHE" and (raw == "PANAMERA" or clean == "PANAMERA") and ft == "PETROL":
         return porsche_panamera_petrol_hit(ice_map, year)
+    if brand_u == "RENAULT" and (raw == "CLIO" or clean == "CLIO") and ft == "DIESEL":
+        return renault_clio_diesel_hit(ice_map, year)
     return None
 
 
@@ -739,13 +842,20 @@ def bifuel_alias_hit(
     for suffix in ("BIFUEL", "BIFUEL", "BIFUELLPG"):
         alt = ice_map.get((model_n + "BIFUEL", year, ft)) or ice_map.get((model_n + suffix, year, ft))
         if alt and float(alt.get("n") or 0) >= 100:
-            if direct:
-                # Merge n; prefer alt CO2/kW
+            if direct and float(direct.get("n") or 0) >= 1:
+                # Merge n; prefer alt CO2/kW; list both Cn for verifiable labels.
+                d_raw = str(direct.get("model_raw") or model_n)
+                a_raw = str(alt.get("model_raw") or (model_n + " BI-FUEL"))
+                parts = sorted(
+                    [(float(alt.get("n") or 0), a_raw), (float(direct.get("n") or 0), d_raw)],
+                    key=lambda t: -t[0],
+                )
                 return {
                     "n": float(direct.get("n") or 0) + float(alt.get("n") or 0),
                     "co2": alt.get("co2") if isinstance(alt.get("co2"), (int, float)) else direct.get("co2"),
                     "kw": alt.get("kw") if isinstance(alt.get("kw"), (int, float)) else direct.get("kw"),
-                    "model_raw": alt.get("model_raw") or direct.get("model_raw"),
+                    "model_raw": a_raw,
+                    "variants": [v for _, v in parts],
                 }
             return alt
     return direct

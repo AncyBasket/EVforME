@@ -1,0 +1,604 @@
+{
+  "skip_fetch": true,
+  "only_empty": false,
+  "cache_refresh": {
+    "skipped": true
+  },
+  "label_n_fixes": 659,
+  "label_n_unresolved": [],
+  "label_n_sample": [
+    {
+      "id": "alfa-romeo-giulia-2022",
+      "n_from": 277,
+      "n_to": 277,
+      "eea_model": "GIULIA",
+      "ft": "PETROL",
+      "eea_year": 2022,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "alfa-romeo-giulia-diesel-2022",
+      "n_from": 847,
+      "n_to": 847,
+      "eea_model": "GIULIA",
+      "ft": "DIESEL",
+      "eea_year": 2022,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "alfa-romeo-giulietta-2018",
+      "n_from": 2907,
+      "n_to": 2907,
+      "eea_model": "ALFAGIULIETTA",
+      "ft": "PETROL",
+      "eea_year": 2018,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "alfa-romeo-giulietta-2019",
+      "n_from": 2788,
+      "n_to": 2788,
+      "eea_model": "ALFAGIULIETTA",
+      "ft": "PETROL",
+      "eea_year": 2019,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "alfa-romeo-giulietta-2020",
+      "n_from": 2663,
+      "n_to": 2663,
+      "eea_model": "ALFAGIULIETTA",
+      "ft": "PETROL",
+      "eea_year": 2020,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "alfa-romeo-stelvio-2022",
+      "n_from": 304,
+      "n_to": 304,
+      "eea_model": "STELVIO",
+      "ft": "PETROL",
+      "eea_year": 2022,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "alfa-romeo-stelvio-diesel-2022",
+      "n_from": 8048,
+      "n_to": 8048,
+      "eea_model": "STELVIO",
+      "ft": "DIESEL",
+      "eea_year": 2022,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "alfa-romeo-tonale-diesel-2022",
+      "n_from": 449,
+      "n_to": 449,
+      "eea_model": "TONALE",
+      "ft": "DIESEL",
+      "eea_year": 2022,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-a4-2018",
+      "n_from": 7811,
+      "n_to": 7806,
+      "eea_model": "A4",
+      "ft": "DIESEL",
+      "eea_year": 2018,
+      "status": null,
+      "variants": [
+        "A4 AVANT",
+        "A4 ALLROAD QUATTRO",
+        "A4 LIMOUSINE",
+        "AUDI A4"
+      ]
+    },
+    {
+      "id": "audi-a4-2019",
+      "n_from": 6544,
+      "n_to": 6542,
+      "eea_model": "A4",
+      "ft": "DIESEL",
+      "eea_year": 2019,
+      "status": null,
+      "variants": [
+        "A4 AVANT",
+        "A4 LIMOUSINE",
+        "A4 ALLROAD QUATTRO",
+        "AUDI A4"
+      ]
+    },
+    {
+      "id": "audi-a4-2020",
+      "n_from": 5173,
+      "n_to": 5172,
+      "eea_model": "A4",
+      "ft": "DIESEL",
+      "eea_year": 2020,
+      "status": null,
+      "variants": [
+        "A4 AVANT",
+        "A4 ALLROAD QUATTRO",
+        "A4 LIMOUSINE",
+        "A4"
+      ]
+    },
+    {
+      "id": "audi-a4-2021",
+      "n_from": 4275,
+      "n_to": 4275,
+      "eea_model": "A4",
+      "ft": "DIESEL",
+      "eea_year": 2021,
+      "status": null,
+      "variants": [
+        "A4 AVANT",
+        "A4 ALLROAD QUATTRO",
+        "A4 LIMOUSINE",
+        "A4 35 TDI AVANT"
+      ]
+    },
+    {
+      "id": "audi-a4-allroad-2023",
+      "n_from": 90,
+      "n_to": 90,
+      "eea_model": "A4ALLROADQUATTRO",
+      "ft": "PETROL",
+      "eea_year": 2023,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-a4-allroad-2024",
+      "n_from": 71,
+      "n_to": 71,
+      "eea_model": "A4ALLROADQUATTRO",
+      "ft": "PETROL",
+      "eea_year": 2024,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-a6-2018",
+      "n_from": 2649,
+      "n_to": 2649,
+      "eea_model": "A6AVANT",
+      "ft": "DIESEL",
+      "eea_year": 2018,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-a6-2019",
+      "n_from": 3399,
+      "n_to": 3399,
+      "eea_model": "A6AVANT",
+      "ft": "DIESEL",
+      "eea_year": 2019,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-a6-2020",
+      "n_from": 1255,
+      "n_to": 1255,
+      "eea_model": "A6AVANT",
+      "ft": "DIESEL",
+      "eea_year": 2020,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-a6-2021",
+      "n_from": 1360,
+      "n_to": 1360,
+      "eea_model": "A6AVANT",
+      "ft": "DIESEL",
+      "eea_year": 2021,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-a6-allroad-2023",
+      "n_from": 496,
+      "n_to": 496,
+      "eea_model": "A6ALLROADQUATTRO",
+      "ft": "DIESEL",
+      "eea_year": 2023,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-a6-allroad-2024",
+      "n_from": 514,
+      "n_to": 514,
+      "eea_model": "A6ALLROADQUATTRO",
+      "ft": "DIESEL",
+      "eea_year": 2024,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-a6-allroad-2025",
+      "n_from": 331,
+      "n_to": 331,
+      "eea_model": "A6ALLROADQUATTRO",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-a7-2023",
+      "n_from": 72,
+      "n_to": 72,
+      "eea_model": "A7SPORTBACK",
+      "ft": "DIESEL",
+      "eea_year": 2023,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-a8-diesel-2022",
+      "n_from": 127,
+      "n_to": 127,
+      "eea_model": "A8",
+      "ft": "DIESEL",
+      "eea_year": 2022,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-q2-diesel-2022",
+      "n_from": 4034,
+      "n_to": 4034,
+      "eea_model": "Q2",
+      "ft": "DIESEL",
+      "eea_year": 2022,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-q3-diesel-2020",
+      "n_from": 4619,
+      "n_to": 4619,
+      "eea_model": "Q3SPORTBACK",
+      "ft": "DIESEL",
+      "eea_year": 2020,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-q3-diesel-2022",
+      "n_from": 4865,
+      "n_to": 4865,
+      "eea_model": "Q3",
+      "ft": "DIESEL",
+      "eea_year": 2022,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-q3-diesel-2023",
+      "n_from": 5804,
+      "n_to": 5804,
+      "eea_model": "Q3SPORTBACK",
+      "ft": "DIESEL",
+      "eea_year": 2023,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-q3-diesel-2024",
+      "n_from": 5796,
+      "n_to": 5796,
+      "eea_model": "Q3SPORTBACK",
+      "ft": "DIESEL",
+      "eea_year": 2024,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-q3-diesel-2025",
+      "n_from": 3123,
+      "n_to": 4894,
+      "eea_model": "Q3SPORTBACK",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-q5-diesel-2022",
+      "n_from": 3997,
+      "n_to": 3997,
+      "eea_model": "Q5SPORTBACK",
+      "ft": "DIESEL",
+      "eea_year": 2022,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-q5-diesel-2023",
+      "n_from": 3345,
+      "n_to": 3345,
+      "eea_model": "Q5SPORTBACK",
+      "ft": "DIESEL",
+      "eea_year": 2023,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-q5-diesel-2024",
+      "n_from": 2298,
+      "n_to": 2298,
+      "eea_model": "Q5SPORTBACK",
+      "ft": "DIESEL",
+      "eea_year": 2024,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-q5-diesel-2025",
+      "n_from": 2340,
+      "n_to": 2340,
+      "eea_model": "Q5",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-q7-2022",
+      "n_from": 260,
+      "n_to": 260,
+      "eea_model": "Q7",
+      "ft": "DIESEL",
+      "eea_year": 2022,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-q7-diesel-2022",
+      "n_from": 260,
+      "n_to": 260,
+      "eea_model": "Q7",
+      "ft": "DIESEL",
+      "eea_year": 2022,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "audi-tt-2023",
+      "n_from": 119,
+      "n_to": 119,
+      "eea_model": "TTCOUPE",
+      "ft": "PETROL",
+      "eea_year": 2023,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "bmw-1-series-2022",
+      "n_from": 2002,
+      "n_to": 2001,
+      "eea_model": "118D",
+      "ft": "DIESEL",
+      "eea_year": 2022,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "bmw-1-series-2023",
+      "n_from": 2855,
+      "n_to": 2855,
+      "eea_model": "116D",
+      "ft": "DIESEL",
+      "eea_year": 2023,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "bmw-1-series-2024",
+      "n_from": 4224,
+      "n_to": 4224,
+      "eea_model": "118D",
+      "ft": "DIESEL",
+      "eea_year": 2024,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "bmw-1-series-2025",
+      "n_from": 4671,
+      "n_to": 4671,
+      "eea_model": "118D",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "bmw-2-series-2022",
+      "n_from": 1063,
+      "n_to": 1063,
+      "eea_model": "218DACTIVETOURER",
+      "ft": "DIESEL",
+      "eea_year": 2022,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "bmw-2-series-2023",
+      "n_from": 2251,
+      "n_to": 2251,
+      "eea_model": "218DACTIVETOURER",
+      "ft": "DIESEL",
+      "eea_year": 2023,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "bmw-2-series-2024",
+      "n_from": 1646,
+      "n_to": 1646,
+      "eea_model": "218DACTIVETOURER",
+      "ft": "DIESEL",
+      "eea_year": 2024,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "bmw-2-series-2025",
+      "n_from": 1475,
+      "n_to": 1475,
+      "eea_model": "218DACTIVETOURER",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": null,
+      "variants": null
+    },
+    {
+      "id": "bmw-3-series-2018",
+      "n_from": 5770,
+      "n_to": 5770,
+      "eea_model": "3-Series",
+      "ft": "DIESEL",
+      "eea_year": 2018,
+      "status": null,
+      "variants": [
+        "318D",
+        "316D",
+        "320D XDRIVE",
+        "320D",
+        "320D EFFICIENT DYNAMICS",
+        "330D XDRIVE",
+        "330D",
+        "318D XDRIVE",
+        "335D XDRIVE",
+        "325D"
+      ]
+    },
+    {
+      "id": "bmw-3-series-2019",
+      "n_from": 5004,
+      "n_to": 4909,
+      "eea_model": "3-Series",
+      "ft": "DIESEL",
+      "eea_year": 2019,
+      "status": null,
+      "variants": [
+        "320d",
+        "318d",
+        "320d xDrive",
+        "316D",
+        "330D XDRIVE",
+        "330d",
+        "320D EFFICIENT DYNAMICS",
+        "335D XDRIVE",
+        "325D",
+        "320d EffDyn Edition"
+      ]
+    },
+    {
+      "id": "bmw-3-series-2020",
+      "n_from": 4870,
+      "n_to": 4887,
+      "eea_model": "3-Series",
+      "ft": "DIESEL",
+      "eea_year": 2020,
+      "status": null,
+      "variants": [
+        "320d",
+        "320d xDrive",
+        "318D",
+        "330D XDRIVE",
+        "316D",
+        "M340D XDRIVE",
+        "330d",
+        "335D XDRIVE"
+      ]
+    },
+    {
+      "id": "bmw-3-series-2021",
+      "n_from": 3631,
+      "n_to": 3615,
+      "eea_model": "3-Series",
+      "ft": "DIESEL",
+      "eea_year": 2021,
+      "status": null,
+      "variants": [
+        "320D",
+        "320d xDrive",
+        "318d",
+        "316d",
+        "330d xDrive",
+        "M340D XDRIVE",
+        "330D"
+      ]
+    },
+    {
+      "id": "bmw-3-series-2022",
+      "n_from": 2685,
+      "n_to": 2732,
+      "eea_model": "3-Series",
+      "ft": "DIESEL",
+      "eea_year": 2022,
+      "status": null,
+      "variants": [
+        "318D",
+        "320d xDrive",
+        "320D",
+        "316D",
+        "330D XDRIVE",
+        "M340D XDRIVE",
+        "330d"
+      ]
+    },
+    {
+      "id": "bmw-3-series-2023",
+      "n_from": 3940,
+      "n_to": 4073,
+      "eea_model": "3-Series",
+      "ft": "DIESEL",
+      "eea_year": 2023,
+      "status": null,
+      "variants": [
+        "320D XDRIVE",
+        "318D",
+        "320D",
+        "316D",
+        "330D XDRIVE",
+        "M340D XDRIVE",
+        "330D"
+      ]
+    }
+  ],
+  "examples": {
+    "alfa-romeo-stelvio-diesel-2023": null,
+    "kia-ceed-2019": null,
+    "bmw-2-series-2023": {
+      "id": "bmw-2-series-2023",
+      "n_from": 2251,
+      "n_to": 2251,
+      "eea_model": "218DACTIVETOURER",
+      "ft": "DIESEL",
+      "eea_year": 2023,
+      "status": null,
+      "variants": null
+    },
+    "hyundai-bayon-2023": null
+  },
+  "seedVersion": 49,
+  "rows": 5654,
+  "bytes": 2841752
+}
