@@ -89,16 +89,21 @@ BRAND_MK_ALIASES: dict[str, list[str]] = {
         "Mitsubishi Motors (Thailand) C",
     ],
     "FORD": ["FORD", "FORD-CNG TECHNIK", "FORD W GMBH"],
-    # Note: bare Mk "VW" is NOT merged (would over-count vs VOLKSWAGEN).
-    # Only the composite spellings listed by review.
     "VOLKSWAGEN": [
         "VOLKSWAGEN",
         "VOLKSWAGEN, VW",
         "VOLKSWAGEN VW",
         "VOLKSWAGEN  VW",
+        "VW",
     ],
     "JAGUAR": ["JAGUAR", "Jaguar", "JAGUAR LAND ROVER LIMITED"],
-    "LAND ROVER": ["LAND ROVER", "Land Rover", "JAGUAR LAND ROVER LIMITED"],
+    # ROVER → Land Rover (model filter). ROVER CARS → Alfa (model filter).
+    "LAND ROVER": [
+        "LAND ROVER",
+        "Land Rover",
+        "JAGUAR LAND ROVER LIMITED",
+        "ROVER",
+    ],
     "DS": ["DS", "DS AUTOMOBILES"],
     "BMW": ["BMW", "BMW AG", "BMW I", "BMW i"],
     "MERCEDES-BENZ": [
@@ -107,16 +112,17 @@ BRAND_MK_ALIASES: dict[str, list[str]] = {
         "MERCEDES",
         "MERCEDES-AMG",
         "MERCEDES AMG",
+        "DAIMLERCHRYSLER AG",
     ],
     "TESLA": ["TESLA", "TESLA MOTORS"],
     "HYUNDAI": ["HYUNDAI"],
-    "ALFA ROMEO": ["ALFA ROMEO"],
-    "AUDI": ["AUDI"],
+    "ALFA ROMEO": ["ALFA ROMEO", "ROVER CARS"],
+    "AUDI": ["AUDI", "QUATTRO"],
     "CITROEN": ["CITROEN"],
     "CUPRA": ["CUPRA"],
     "DACIA": ["DACIA"],
     "HONDA": ["HONDA"],
-    "JEEP": ["JEEP"],
+    "JEEP": ["JEEP", "CHRYSLER"],
     "KIA": ["KIA"],
     "LEXUS": ["LEXUS"],
     "MAZDA": ["MAZDA"],
@@ -129,6 +135,7 @@ BRAND_MK_ALIASES: dict[str, list[str]] = {
     "RENAULT": ["RENAULT"],
     "SEAT": ["SEAT"],
     "SKODA": ["SKODA"],
+    "SUBARU": ["SUBARU", "FUJI HEAVY IND", "FUJI HEAVY IND."],
     "SUZUKI": ["SUZUKI"],
     "TOYOTA": ["TOYOTA"],
     "VOLVO": ["VOLVO"],
@@ -168,10 +175,19 @@ BRAND_CN_PREFIXES: dict[str, list[str]] = {
     "RENAULT": ["RENAULT"],
     "SEAT": ["SEAT"],
     "SKODA": ["SKODA"],
+    "SUBARU": ["SUBARU"],
     "SUZUKI": ["SUZUKI"],
     "TOYOTA": ["TOYOTA"],
     "VOLVO": ["VOLVO"],
     "BYD": ["BYD"],
+}
+
+# Mk spellings that must be routed by Cn (not collapsed in brand_name_merge_key).
+_AMBIGUOUS_MK = {
+    "jaguar land rover limited",
+    "rover cars",
+    "chrysler",
+    "rover",
 }
 
 
@@ -182,7 +198,15 @@ def _alias_lookup() -> dict[str, str]:
         ck = canon.casefold()
         out[ck] = ck
         for a in aliases:
-            out[" ".join(a.split()).casefold()] = ck
+            ak = " ".join(a.split()).casefold()
+            if ak in _AMBIGUOUS_MK:
+                continue
+            out[ak] = ck
+    out["vw"] = "volkswagen"
+    out["fuji heavy ind"] = "subaru"
+    out["fuji heavy ind."] = "subaru"
+    out["daimlerchrysler ag"] = "mercedes-benz"
+    out["quattro"] = "audi"
     return out
 
 
@@ -193,35 +217,33 @@ def brand_name_merge_key(raw: str) -> str:
     """
     Identity for EEA Mk variants (strip + casefold + explicit aliases).
 
-    DS AUTOMOBILES→ds, FIAT - INNOCENTI→fiat, VW→volkswagen, …
-    SEAT and CUPRA stay distinct. JAGUAR LAND ROVER LIMITED is NOT collapsed here
-    (models are routed per-Cn when parsing Jaguar vs Land Rover caches).
+    Ambiguous Mk (JLR Limited, ROVER, ROVER CARS, CHRYSLER) stay distinct here
+    and are routed per-Cn in parse_brand_aggs.
     """
     k = " ".join(str(raw or "").split()).casefold()
-    if k == "jaguar land rover limited":
-        return k  # ambiguous; handled in parse
+    if k in _AMBIGUOUS_MK:
+        return k
     return _ALIAS_LOOKUP.get(k, k)
 
 
 def canonical_ice_brand_key(raw: str) -> str:
     """Map any Mk / cache filename to the ice_maps key used by seed brand_u."""
     k = brand_name_merge_key(raw)
-    if k == "jaguar land rover limited":
-        # Should not own a cache file; callers route by model.
-        return "JAGUAR LAND ROVER LIMITED"
+    if k in _AMBIGUOUS_MK:
+        return k.upper() if k != "jaguar land rover limited" else "JAGUAR LAND ROVER LIMITED"
     special = {
         "ds": "DS",
         "mercedes-benz": "MERCEDES-BENZ",
         "volkswagen": "VOLKSWAGEN",
         "alfa romeo": "ALFA ROMEO",
         "land rover": "LAND ROVER",
+        "subaru": "SUBARU",
     }
     if k in special:
         return special[k]
     cleaned = " ".join(str(raw or "").split())
     if cleaned.upper() in {"MERCEDES-BENZ", "MERCEDES BENZ"}:
         return "MERCEDES-BENZ"
-    # Prefer canonical spelling from alias table.
     for canon, aliases in BRAND_MK_ALIASES.items():
         if k == canon.casefold() or any(
             " ".join(a.split()).casefold() == k for a in aliases
@@ -233,7 +255,6 @@ def canonical_ice_brand_key(raw: str) -> str:
 def brand_aliases_for(brand: str) -> list[str]:
     primary = BRAND_TO_EEA_MK.get(brand, brand)
     primary_u = primary.upper() if primary != "MERCEDES-BENZ" else "MERCEDES-BENZ"
-    # Normalize mercedes keys
     if primary_u.replace(" ", "-") == "MERCEDES-BENZ" or primary_u == "MERCEDES BENZ":
         primary_u = "MERCEDES-BENZ"
     names = list(BRAND_MK_ALIASES.get(primary_u, BRAND_MK_ALIASES.get(primary, [primary])))
@@ -242,8 +263,52 @@ def brand_aliases_for(brand: str) -> list[str]:
     return names
 
 
+def brand_cn_match_tokens(brand: str) -> list[str]:
+    """Tokens that must appear in Cn for empty/missing Mk rows to count."""
+    b = canonical_ice_brand_key(brand)
+    tokens = {
+        "ALFA ROMEO": ["ALFA", "ALFAROMEO"],
+        "AUDI": ["AUDI"],
+        "BMW": ["BMW"],
+        "CITROEN": ["CITROEN", "CITROËN"],
+        "CUPRA": ["CUPRA"],
+        "DACIA": ["DACIA"],
+        "DS": ["DS"],
+        "FIAT": ["FIAT"],
+        "FORD": ["FORD"],
+        "HONDA": ["HONDA"],
+        "HYUNDAI": ["HYUNDAI"],
+        "JAGUAR": ["JAGUAR"],
+        "JEEP": ["JEEP"],
+        "KIA": ["KIA"],
+        "LANCIA": ["LANCIA"],
+        "LAND ROVER": ["LAND", "ROVER", "RANGEROVER", "DISCOVERY", "DEFENDER", "EVOQUE"],
+        "LEXUS": ["LEXUS"],
+        "MAZDA": ["MAZDA"],
+        "MERCEDES-BENZ": ["MERCEDES", "AMG"],
+        "MG": ["MG"],
+        "MINI": ["MINI"],
+        "MITSUBISHI": ["MITSUBISHI"],
+        "NISSAN": ["NISSAN"],
+        "OPEL": ["OPEL"],
+        "PEUGEOT": ["PEUGEOT"],
+        "PORSCHE": ["PORSCHE"],
+        "RENAULT": ["RENAULT"],
+        "SEAT": ["SEAT"],
+        "SKODA": ["SKODA"],
+        "SUBARU": ["SUBARU", "FORESTER", "OUTBACK", "XV", "IMPREZA", "LEGACY", "BRZ"],
+        "SUZUKI": ["SUZUKI"],
+        "TESLA": ["TESLA"],
+        "TOYOTA": ["TOYOTA"],
+        "VOLKSWAGEN": ["VOLKSWAGEN", "VW"],
+        "VOLVO": ["VOLVO"],
+        "BYD": ["BYD"],
+    }
+    return tokens.get(b, [b.split()[0] if b else ""])
+
+
 def brand_mk_should_clauses(brand: str) -> list[dict]:
-    """Catch Mk casing, trailing spaces, and known aliases."""
+    """Catch Mk casing, trailing spaces, known aliases, and empty Mk (brand in Cn)."""
     names = brand_aliases_for(brand)
     should: list[dict] = []
     seen: set[str] = set()
@@ -253,13 +318,28 @@ def brand_mk_should_clauses(brand: str) -> list[dict]:
                 continue
             seen.add(candidate)
             should.append({"term": {"Mk": candidate}})
-            # Trailing-space / padded Mk (Jaguar / Land Rover / Hyundai in IT index).
             should.append({"wildcard": {"Mk": candidate + "*"}})
+    # Empty / missing Mk: only when Cn contains the manufacturer name.
+    cn_tokens = [t for t in brand_cn_match_tokens(brand) if t]
+    if cn_tokens:
+        cn_should = [{"wildcard": {"Cn": f"*{t}*"}} for t in cn_tokens]
+        cn_clause = {"bool": {"should": cn_should, "minimum_should_match": 1}}
+        should.append({"bool": {"must": [{"term": {"Mk": ""}}, cn_clause]}})
+        should.append(
+            {
+                "bool": {
+                    "must": [
+                        {"bool": {"must_not": [{"exists": {"field": "Mk"}}]}},
+                        cn_clause,
+                    ]
+                }
+            }
+        )
     return should
 
 
 def jlr_model_owner(model_raw: str) -> str | None:
-    """Route JAGUAR LAND ROVER LIMITED Cn → JAGUAR or LAND ROVER."""
+    """Route JAGUAR LAND ROVER LIMITED / ROVER Cn → JAGUAR or LAND ROVER."""
     mn = norm_alnum(model_raw)
     lr_markers = (
         "RANGEROVER",
@@ -268,6 +348,7 @@ def jlr_model_owner(model_raw: str) -> str | None:
         "EVOQUE",
         "VELAR",
         "LANDROVER",
+        "FREELANDER",
     )
     if any(m in mn for m in lr_markers):
         return "LAND ROVER"
@@ -283,7 +364,6 @@ def jlr_model_owner(model_raw: str) -> str | None:
     )
     if any(m in mn for m in jag_markers):
         return "JAGUAR"
-    # Bare XE / XF / XJ / XK (not X3 etc.)
     if mn in {"XE", "XF", "XJ", "XK"} or mn.startswith(("XE", "XF", "XJ", "XK")):
         if not mn.startswith("X3") and not mn.startswith("X5"):
             return "JAGUAR"
@@ -292,15 +372,64 @@ def jlr_model_owner(model_raw: str) -> str | None:
     return None
 
 
+def alfa_model_ok(model_raw: str) -> bool:
+    mn = norm_alnum(model_raw)
+    return any(
+        t in mn
+        for t in (
+            "ALFA",
+            "GIULIETTA",
+            "GIULIA",
+            "STELVIO",
+            "TONALE",
+            "MITO",
+            "BRERA",
+            "SPIDER",
+            "4C",
+            "159",
+            "147",
+            "156",
+            "166",
+        )
+    )
+
+
+def jeep_model_ok(model_raw: str) -> bool:
+    mn = norm_alnum(model_raw)
+    return any(
+        t in mn
+        for t in (
+            "JEEP",
+            "WRANGLER",
+            "CHEROKEE",
+            "RENEGADE",
+            "COMPASS",
+            "GLADIATOR",
+            "PATRIOT",
+            "COMMANDER",
+            "WAGONEER",
+            "AVENGER",
+        )
+    )
+
+
 def model_accepted_for_brand(model_raw: str, brand: str) -> bool:
-    """Drop cross-brand Cn when querying shared JAGUAR LAND ROVER LIMITED Mk."""
+    """Drop cross-brand Cn for shared/ambiguous Mk aliases."""
     b = canonical_ice_brand_key(brand)
-    if b not in {"JAGUAR", "LAND ROVER"}:
-        return True
-    owner = jlr_model_owner(model_raw)
-    if owner is None:
-        return True
-    return owner == b
+    if b in {"JAGUAR", "LAND ROVER"}:
+        owner = jlr_model_owner(model_raw)
+        if owner is None:
+            # Bare ROVER Mk may carry non-LR cars — require LR markers.
+            return b != "LAND ROVER" or any(
+                t in norm_alnum(model_raw)
+                for t in ("RANGEROVER", "DISCOVERY", "DEFENDER", "EVOQUE", "VELAR", "LANDROVER")
+            )
+        return owner == b
+    if b == "ALFA ROMEO":
+        return alfa_model_ok(model_raw)
+    if b == "JEEP":
+        return jeep_model_ok(model_raw)
+    return True
 
 
 def brand_alias_report() -> dict[str, list[str]]:
@@ -938,13 +1067,22 @@ def _aggregate_family_hit(
         if prev is None or n > prev[0]:
             best_by_key[key] = (n, model_n, payload)
 
+    cells = list(best_by_key.values())
+    # If any Status F cell exists, drop P-only siblings (CLIO AUTOSCUOLA P, …).
+    if any(str(p.get("status") or "").upper() == "F" for _, _, p in cells):
+        cells = [
+            (n, m, p)
+            for n, m, p in cells
+            if str(p.get("status") or "").upper() == "F"
+        ]
+
     total_n = 0.0
     co2_acc = 0.0
     co2_n = 0.0
     kw_acc = 0.0
     kw_n = 0.0
     variants: list[tuple[float, str]] = []
-    for n, model_n, payload in best_by_key.values():
+    for n, model_n, payload in cells:
         total_n += n
         raw = str(payload.get("model_raw") or model_n)
         variants.append((n, raw))
@@ -966,6 +1104,9 @@ def _aggregate_family_hit(
         "kw": (kw_acc / kw_n) if kw_n > 0 else None,
         "model_raw": label,
         "variants": [v for _, v in variants],
+        "status": "F"
+        if any(str(p.get("status") or "").upper() == "F" for _, _, p in cells)
+        else "P",
     }
 
 

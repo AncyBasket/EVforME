@@ -161,11 +161,11 @@
   },
   {
     "id": "alfa-romeo-giulietta-2018",
-    "n": 2907,
+    "n": 2908,
     "eea_year": 2018,
     "eea_model": "ALFA GIULIETTA",
     "ft": "PETROL",
-    "powerKw": 96.74475404196767,
+    "powerKw": 96.77235213204952,
     "fuelKind": "petrol",
     "eea_l100": 7.789
   },
@@ -635,11 +635,11 @@
   },
   {
     "id": "audi-a8-diesel-2019",
-    "n": 203,
+    "n": 204,
     "eea_year": 2019,
     "eea_model": "A8",
     "ft": "DIESEL",
-    "powerKw": 210.23645320197045,
+    "powerKw": 210.0441176470588,
     "fuelKind": "diesel",
     "eea_l100": 7.199
   },
@@ -1405,11 +1405,11 @@
   },
   {
     "id": "bmw-5-series-2019",
-    "n": 3516,
+    "n": 3515,
     "eea_year": 2019,
     "eea_model": "5-Series",
     "ft": "DIESEL",
-    "powerKw": 148.51535836177473,
+    "powerKw": 148.51778093883357,
     "fuelKind": "diesel",
     "variants": [
       "520D",
@@ -1420,7 +1420,6 @@
       "525D",
       "540D XDRIVE",
       "525D XDRIVE",
-      "520D EFFICIENT DYNAMICS",
       "520d EffDyn Edition"
     ],
     "eea_l100": 6.296
@@ -8670,11 +8669,11 @@
   },
   {
     "id": "land-rover-range-rover-evoque-2021",
-    "n": 3574,
+    "n": 3581,
     "eea_year": 2021,
     "eea_model": "RANGE ROVER EVOQUE",
     "ft": "DIESEL",
-    "powerKw": 125.02014549524343,
+    "powerKw": 125.01033230941079,
     "fuelKind": "diesel",
     "eea_l100": 6.563
   },
@@ -13454,15 +13453,14 @@
   },
   {
     "id": "renault-clio-diesel-2018",
-    "n": 26106,
+    "n": 26089,
     "eea_year": 2018,
     "eea_model": "Clio",
     "ft": "DIESEL",
-    "powerKw": 59.90672642304451,
+    "powerKw": 59.90992372264173,
     "fuelKind": "diesel",
     "variants": [
       "CLIO",
-      "CLIO AUTOSCUOLA",
       "NUOVA CLIO 5 PORTE"
     ],
     "eea_l100": 4.925
@@ -13655,15 +13653,14 @@
   },
   {
     "id": "renault-clio-diesel-2024",
-    "n": 3298,
+    "n": 3280,
     "eea_year": 2024,
     "eea_model": "Clio",
     "ft": "DIESEL",
     "powerKw": 74.0,
     "fuelKind": "diesel",
     "variants": [
-      "CLIO",
-      "CLIO AUTOSCUOLA"
+      "CLIO"
     ],
     "eea_l100": 4.147
   },
@@ -16183,7 +16180,7 @@
   },
   {
     "id": "subaru-forester-2022",
-    "n": 449,
+    "n": 450,
     "eea_year": 2022,
     "eea_model": "FORESTER",
     "ft": "PETROL",
@@ -16193,7 +16190,7 @@
   },
   {
     "id": "subaru-forester-2023",
-    "n": 498,
+    "n": 499,
     "eea_year": 2023,
     "eea_model": "FORESTER",
     "ft": "PETROL",
@@ -17393,21 +17390,21 @@
   },
   {
     "id": "volkswagen-golf-diesel-2019",
-    "n": 13369,
+    "n": 13374,
     "eea_year": 2019,
     "eea_model": "GOLF",
     "ft": "DIESEL",
-    "powerKw": 87.30630563243324,
+    "powerKw": 87.3054433976372,
     "fuelKind": "diesel",
     "eea_l100": 5.127
   },
   {
     "id": "volkswagen-golf-2020",
-    "n": 7602,
+    "n": 7609,
     "eea_year": 2020,
     "eea_model": "GOLF",
     "ft": "PETROL",
-    "powerKw": 99.8893712181005,
+    "powerKw": 99.88579313970298,
     "fuelKind": "petrol",
     "eea_l100": 5.705
   },
@@ -17423,21 +17420,21 @@
   },
   {
     "id": "volkswagen-golf-diesel-2020",
-    "n": 7206,
+    "n": 7207,
     "eea_year": 2020,
     "eea_model": "GOLF",
     "ft": "DIESEL",
-    "powerKw": 94.82861504301971,
+    "powerKw": 94.83072013320383,
     "fuelKind": "diesel",
     "eea_l100": 4.782
   },
   {
     "id": "volkswagen-golf-2021",
-    "n": 6856,
+    "n": 6865,
     "eea_year": 2021,
     "eea_model": "GOLF",
     "ft": "PETROL",
-    "powerKw": 98.02435822637106,
+    "powerKw": 98.02374362709395,
     "fuelKind": "petrol",
     "eea_l100": 5.647
   },
@@ -17453,23 +17450,23 @@
   },
   {
     "id": "volkswagen-golf-diesel-2021",
-    "n": 5159,
+    "n": 5164,
     "eea_year": 2021,
     "eea_model": "GOLF",
     "ft": "DIESEL",
-    "powerKw": 94.28881566195,
+    "powerKw": 94.27982184353215,
     "fuelKind": "diesel",
     "eea_l100": 4.637
   },
   {
     "id": "volkswagen-golf-2022",
-    "n": 5954,
+    "n": 5963,
     "eea_year": 2022,
     "eea_model": "GOLF",
     "ft": "PETROL",
-    "powerKw": 95.94205576083306,
+    "powerKw": 95.97501257756163,
     "fuelKind": "petrol",
-    "eea_l100": 5.576
+    "eea_l100": 5.577
   },
   {
     "id": "volkswagen-golf-cng-2022",
@@ -17483,51 +17480,51 @@
   },
   {
     "id": "volkswagen-golf-diesel-2022",
-    "n": 5058,
+    "n": 5061,
     "eea_year": 2022,
     "eea_model": "GOLF",
     "ft": "DIESEL",
-    "powerKw": 91.14966389877422,
+    "powerKw": 91.15589804386485,
     "fuelKind": "diesel",
     "eea_l100": 4.481
   },
   {
     "id": "volkswagen-golf-2023",
-    "n": 5964,
+    "n": 5972,
     "eea_year": 2023,
     "eea_model": "GOLF",
     "ft": "PETROL",
-    "powerKw": 99.21059691482226,
+    "powerKw": 99.26908908238445,
     "fuelKind": "petrol",
-    "eea_l100": 5.613
+    "eea_l100": 5.614
   },
   {
     "id": "volkswagen-golf-diesel-2023",
-    "n": 4074,
+    "n": 4075,
     "eea_year": 2023,
     "eea_model": "GOLF",
     "ft": "DIESEL",
-    "powerKw": 94.46244477172313,
+    "powerKw": 94.46625766871166,
     "fuelKind": "diesel",
     "eea_l100": 4.516
   },
   {
     "id": "volkswagen-golf-2024",
-    "n": 7356,
+    "n": 7360,
     "eea_year": 2024,
     "eea_model": "GOLF",
     "ft": "PETROL",
-    "powerKw": 100.47226753670473,
+    "powerKw": 100.48315217391304,
     "fuelKind": "petrol",
     "eea_l100": 5.644
   },
   {
     "id": "volkswagen-golf-diesel-2024",
-    "n": 5567,
+    "n": 5569,
     "eea_year": 2024,
     "eea_model": "GOLF",
     "ft": "DIESEL",
-    "powerKw": 98.05227231902282,
+    "powerKw": 98.05656311725625,
     "fuelKind": "diesel",
     "eea_l100": 4.583
   },
@@ -17553,31 +17550,31 @@
   },
   {
     "id": "volkswagen-golf-gti-2022",
-    "n": 5954,
+    "n": 5963,
     "eea_year": 2022,
     "eea_model": "GOLF",
     "ft": "PETROL",
-    "powerKw": 95.94205576083306,
+    "powerKw": 95.97501257756163,
     "fuelKind": "petrol",
-    "eea_l100": 5.576
+    "eea_l100": 5.577
   },
   {
     "id": "volkswagen-golf-gti-2023",
-    "n": 5964,
+    "n": 5972,
     "eea_year": 2023,
     "eea_model": "GOLF",
     "ft": "PETROL",
-    "powerKw": 99.21059691482226,
+    "powerKw": 99.26908908238445,
     "fuelKind": "petrol",
-    "eea_l100": 5.613
+    "eea_l100": 5.614
   },
   {
     "id": "volkswagen-golf-gti-2024",
-    "n": 7356,
+    "n": 7360,
     "eea_year": 2024,
     "eea_model": "GOLF",
     "ft": "PETROL",
-    "powerKw": 100.47226753670473,
+    "powerKw": 100.48315217391304,
     "fuelKind": "petrol",
     "eea_l100": 5.644
   },
@@ -17603,11 +17600,11 @@
   },
   {
     "id": "volkswagen-passat-2019",
-    "n": 5151,
+    "n": 5152,
     "eea_year": 2019,
     "eea_model": "PASSAT",
     "ft": "DIESEL",
-    "powerKw": 113.8495437779072,
+    "powerKw": 113.86160714285714,
     "fuelKind": "diesel",
     "eea_l100": 5.729
   },
@@ -17683,13 +17680,13 @@
   },
   {
     "id": "volkswagen-passat-2024",
-    "n": 330,
+    "n": 333,
     "eea_year": 2024,
     "eea_model": "PASSAT",
     "ft": "PETROL",
     "powerKw": 110.0,
     "fuelKind": "petrol",
-    "eea_l100": 5.661
+    "eea_l100": 5.669
   },
   {
     "id": "volkswagen-passat-diesel-2024",
@@ -17823,11 +17820,11 @@
   },
   {
     "id": "volkswagen-polo-2022",
-    "n": 11493,
+    "n": 11498,
     "eea_year": 2022,
     "eea_model": "POLO",
     "ft": "PETROL",
-    "powerKw": 71.0131384320891,
+    "powerKw": 71.01174117237781,
     "fuelKind": "petrol",
     "eea_l100": 5.439
   },
@@ -17843,21 +17840,21 @@
   },
   {
     "id": "volkswagen-polo-2023",
-    "n": 18217,
+    "n": 18218,
     "eea_year": 2023,
     "eea_model": "POLO",
     "ft": "PETROL",
-    "powerKw": 70.85628808256024,
+    "powerKw": 70.8556372818092,
     "fuelKind": "petrol",
     "eea_l100": 5.402
   },
   {
     "id": "volkswagen-polo-2024",
-    "n": 12462,
+    "n": 12467,
     "eea_year": 2024,
     "eea_model": "POLO",
     "ft": "PETROL",
-    "powerKw": 69.65077836623335,
+    "powerKw": 69.64650677789363,
     "fuelKind": "petrol",
     "eea_l100": 5.416
   },
@@ -17923,51 +17920,51 @@
   },
   {
     "id": "volkswagen-t-cross-2021",
-    "n": 23730,
+    "n": 23760,
     "eea_year": 2021,
     "eea_model": "T-CROSS",
     "ft": "PETROL",
-    "powerKw": 76.02338811630847,
+    "powerKw": 76.02967171717172,
     "fuelKind": "petrol",
     "eea_l100": 6.006
   },
   {
     "id": "volkswagen-t-cross-2022",
-    "n": 20817,
+    "n": 20826,
     "eea_year": 2022,
     "eea_model": "T-CROSS",
     "ft": "PETROL",
-    "powerKw": 76.24311860498631,
+    "powerKw": 76.24411792951119,
     "fuelKind": "petrol",
     "eea_l100": 5.903
   },
   {
     "id": "volkswagen-t-cross-2023",
-    "n": 21850,
+    "n": 21870,
     "eea_year": 2023,
     "eea_model": "T-CROSS",
     "ft": "PETROL",
-    "powerKw": 76.18054919908467,
+    "powerKw": 76.18445358939186,
     "fuelKind": "petrol",
-    "eea_l100": 5.892
+    "eea_l100": 5.891
   },
   {
     "id": "volkswagen-t-cross-2024",
-    "n": 24204,
+    "n": 24214,
     "eea_year": 2024,
     "eea_model": "T-CROSS",
     "ft": "PETROL",
-    "powerKw": 79.82845810609817,
+    "powerKw": 79.83170892871892,
     "fuelKind": "petrol",
     "eea_l100": 5.787
   },
   {
     "id": "volkswagen-t-cross-2025",
-    "n": 21576,
+    "n": 21582,
     "eea_year": 2025,
     "eea_model": "T-CROSS",
     "ft": "PETROL",
-    "powerKw": 80.14720059325175,
+    "powerKw": 80.14785469372626,
     "fuelKind": "petrol",
     "eea_l100": 5.749
   },
@@ -18003,21 +18000,21 @@
   },
   {
     "id": "volkswagen-t-roc-diesel-2019",
-    "n": 19226,
+    "n": 19227,
     "eea_year": 2019,
     "eea_model": "T-ROC",
     "ft": "DIESEL",
-    "powerKw": 92.16477686466244,
+    "powerKw": 92.1657044780777,
     "fuelKind": "diesel",
     "eea_l100": 5.778
   },
   {
     "id": "volkswagen-t-roc-2020",
-    "n": 12742,
+    "n": 12745,
     "eea_year": 2020,
     "eea_model": "T-ROC",
     "ft": "PETROL",
-    "powerKw": 99.49262282216293,
+    "powerKw": 99.49509611612397,
     "fuelKind": "petrol",
     "eea_l100": 6.401
   },
@@ -18033,11 +18030,11 @@
   },
   {
     "id": "volkswagen-t-roc-2021",
-    "n": 19295,
+    "n": 19302,
     "eea_year": 2021,
     "eea_model": "T-ROC",
     "ft": "PETROL",
-    "powerKw": 93.31002850479399,
+    "powerKw": 93.3130763651435,
     "fuelKind": "petrol",
     "eea_l100": 6.362
   },
@@ -18063,21 +18060,21 @@
   },
   {
     "id": "volkswagen-t-roc-diesel-2022",
-    "n": 8101,
+    "n": 8102,
     "eea_year": 2022,
     "eea_model": "T-ROC",
     "ft": "DIESEL",
-    "powerKw": 96.31959017405259,
+    "powerKw": 96.32127869661812,
     "fuelKind": "diesel",
-    "eea_l100": 4.913
+    "eea_l100": 4.914
   },
   {
     "id": "volkswagen-t-roc-2023",
-    "n": 21459,
+    "n": 21462,
     "eea_year": 2023,
     "eea_model": "T-ROC",
     "ft": "PETROL",
-    "powerKw": 95.2624539820122,
+    "powerKw": 95.264514024788,
     "fuelKind": "petrol",
     "eea_l100": 6.165
   },
@@ -18143,31 +18140,31 @@
   },
   {
     "id": "volkswagen-taigo-2023",
-    "n": 9389,
+    "n": 9434,
     "eea_year": 2023,
     "eea_model": "TAIGO",
     "ft": "PETROL",
-    "powerKw": 82.20066034721482,
+    "powerKw": 82.18327326690694,
     "fuelKind": "petrol",
     "eea_l100": 5.673
   },
   {
     "id": "volkswagen-taigo-2024",
-    "n": 9618,
+    "n": 9656,
     "eea_year": 2024,
     "eea_model": "TAIGO",
     "ft": "PETROL",
-    "powerKw": 83.31274693283427,
+    "powerKw": 83.26035625517812,
     "fuelKind": "petrol",
-    "eea_l100": 5.687
+    "eea_l100": 5.686
   },
   {
     "id": "volkswagen-taigo-2025",
-    "n": 7348,
+    "n": 7349,
     "eea_year": 2025,
     "eea_model": "TAIGO",
     "ft": "PETROL",
-    "powerKw": 85.14684267827981,
+    "powerKw": 85.14478160293918,
     "fuelKind": "petrol",
     "eea_l100": 5.59
   },
@@ -18193,11 +18190,11 @@
   },
   {
     "id": "volkswagen-tiguan-2019",
-    "n": 19868,
+    "n": 19869,
     "eea_year": 2019,
     "eea_model": "TIGUAN",
     "ft": "DIESEL",
-    "powerKw": 104.7371149587276,
+    "powerKw": 104.73737983793849,
     "fuelKind": "diesel",
     "eea_l100": 6.308
   },
@@ -18253,13 +18250,13 @@
   },
   {
     "id": "volkswagen-tiguan-2022",
-    "n": 3001,
+    "n": 3002,
     "eea_year": 2022,
     "eea_model": "TIGUAN",
     "ft": "PETROL",
-    "powerKw": 110.24391869376875,
+    "powerKw": 110.24383744170552,
     "fuelKind": "petrol",
-    "eea_l100": 6.929
+    "eea_l100": 6.928
   },
   {
     "id": "volkswagen-tiguan-diesel-2022",
@@ -18373,23 +18370,23 @@
   },
   {
     "id": "volkswagen-touareg-2022",
-    "n": 185,
+    "n": 186,
     "eea_year": 2022,
     "eea_model": "TOUAREG",
     "ft": "DIESEL",
-    "powerKw": 178.21621621621622,
+    "powerKw": 178.1720430107527,
     "fuelKind": "diesel",
-    "eea_l100": 8.272
+    "eea_l100": 8.265
   },
   {
     "id": "volkswagen-touareg-diesel-2022",
-    "n": 185,
+    "n": 186,
     "eea_year": 2022,
     "eea_model": "TOUAREG",
     "ft": "DIESEL",
-    "powerKw": 178.21621621621622,
+    "powerKw": 178.1720430107527,
     "fuelKind": "diesel",
-    "eea_l100": 8.272
+    "eea_l100": 8.265
   },
   {
     "id": "volkswagen-touareg-2023",
@@ -18473,11 +18470,11 @@
   },
   {
     "id": "volkswagen-touran-diesel-2019",
-    "n": 1445,
+    "n": 1446,
     "eea_year": 2019,
     "eea_model": "TOURAN",
     "ft": "DIESEL",
-    "powerKw": 92.9993079584775,
+    "powerKw": 92.98616874135546,
     "fuelKind": "diesel",
     "eea_l100": 5.784
   },
@@ -18543,7 +18540,7 @@
   },
   {
     "id": "volkswagen-touran-2023",
-    "n": 122,
+    "n": 123,
     "eea_year": 2023,
     "eea_model": "TOURAN",
     "ft": "PETROL",
@@ -18553,17 +18550,17 @@
   },
   {
     "id": "volkswagen-touran-diesel-2023",
-    "n": 320,
+    "n": 321,
     "eea_year": 2023,
     "eea_model": "TOURAN",
     "ft": "DIESEL",
-    "powerKw": 104.0,
+    "powerKw": 104.01869158878505,
     "fuelKind": "diesel",
-    "eea_l100": 5.251
+    "eea_l100": 5.252
   },
   {
     "id": "volkswagen-touran-2024",
-    "n": 115,
+    "n": 116,
     "eea_year": 2024,
     "eea_model": "TOURAN",
     "ft": "PETROL",

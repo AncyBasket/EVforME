@@ -65,7 +65,7 @@ SEED_N_CASES = [
     ("bmw-3-series-2019", 5003),
     ("bmw-3-series-2020", 4905),
     ("bmw-3-series-2022", 2767),
-    ("bmw-5-series-2019", 3516),
+    ("bmw-5-series-2019", 3515),
     ("bmw-5-series-2020", 1848),
     ("bmw-5-series-2021", 1860),
     ("bmw-5-series-2022", 1956),
@@ -90,8 +90,16 @@ SEED_N_CASES = [
     ("ford-fiesta-lpg-2021", 2547),
     ("land-rover-range-rover-evoque-2019", 6196),
     ("land-rover-range-rover-evoque-2020", 4366),
-    ("volkswagen-golf-2020", 7602),
-    ("volkswagen-golf-2021", 6856),
+    ("volkswagen-golf-2020", 7609),
+    ("volkswagen-golf-2021", 6865),
+    ("volkswagen-taigo-2024", 9656),
+    ("land-rover-range-rover-evoque-2021", 3581),
+    ("renault-clio-diesel-2018", 26089),
+    ("renault-clio-diesel-2024", 3280),
+    ("audi-a8-diesel-2019", 204),
+    ("alfa-romeo-giulietta-2018", 2908),
+    ("subaru-forester-2022", 450),
+    ("subaru-forester-2023", 499),
 ]
 
 # Bad cited n that must fail (pre-merge / thin-F / pre-Mk-merge stubs).
@@ -104,6 +112,9 @@ SEED_N_MUST_FAIL = [
     ("ford-fiesta-lpg-2020", 2065),
     ("mitsubishi-space-star-2022", 1754),
     ("land-rover-range-rover-evoque-2020", 4363),
+    ("volkswagen-taigo-2024", 9618),
+    ("land-rover-range-rover-evoque-2021", 3574),
+    ("renault-clio-diesel-2018", 26106),
 ]
 
 # Labels that must name the counted Cn / list aggregated variants.
@@ -220,11 +231,17 @@ def main() -> int:
         ("FORD", ("KUGA", 2020, "DIESEL"), 6525.0),
         ("FORD", ("MONDEO", 2019, "DIESEL"), 911.0),
         ("LAND ROVER", ("RANGEROVEREVOQUE", 2020, "DIESEL"), 4366.0),
-        ("VOLKSWAGEN", ("GOLF", 2020, "PETROL"), 7602.0),
-        ("VOLKSWAGEN", ("GOLF", 2021, "PETROL"), 6856.0),
-        ("VOLKSWAGEN", ("TIGUAN", 2019, "DIESEL"), 19868.0),
+        ("VOLKSWAGEN", ("GOLF", 2020, "PETROL"), 7609.0),
+        ("VOLKSWAGEN", ("GOLF", 2021, "PETROL"), 6865.0),
+        ("VOLKSWAGEN", ("TIGUAN", 2019, "DIESEL"), 19869.0),
+        ("VOLKSWAGEN", ("TAIGO", 2024, "PETROL"), 9656.0),
         ("FIAT", ("500", 2023, "PETROL"), 27079.0),
         ("FIAT", ("500X", 2023, "PETROL"), 13317.0),
+        ("AUDI", ("A8", 2019, "DIESEL"), 204.0),
+        ("ALFA ROMEO", ("GIULIETTA", 2018, "PETROL"), 2908.0),
+        ("LAND ROVER", ("RANGEROVEREVOQUE", 2021, "DIESEL"), 3581.0),
+        ("SUBARU", ("FORESTER", 2022, "PETROL"), 450.0),
+        ("VOLKSWAGEN", ("PASSAT", 2019, "DIESEL"), 5152.0),
     ]
     for brand, key, expect in checks:
         got = float((ice.get(brand) or {}).get(key, {}).get("n") or 0)
@@ -238,8 +255,12 @@ def main() -> int:
         failures.append("brand_name_merge_key: SEAT and CUPRA must stay separate")
     if eea.brand_name_merge_key("VOLKSWAGEN VW") != eea.brand_name_merge_key("VOLKSWAGEN"):
         failures.append("brand_name_merge_key: VOLKSWAGEN VW must merge with VOLKSWAGEN")
-    if eea.brand_name_merge_key("VW") == eea.brand_name_merge_key("VOLKSWAGEN"):
-        failures.append("brand_name_merge_key: bare VW must NOT merge with VOLKSWAGEN")
+    if eea.brand_name_merge_key("VW") != eea.brand_name_merge_key("VOLKSWAGEN"):
+        failures.append("brand_name_merge_key: bare VW must merge with VOLKSWAGEN")
+    if eea.brand_name_merge_key("FUJI HEAVY IND.") != eea.brand_name_merge_key("SUBARU"):
+        failures.append("brand_name_merge_key: FUJI HEAVY IND. must merge with SUBARU")
+    if eea.brand_name_merge_key("QUATTRO") != eea.brand_name_merge_key("AUDI"):
+        failures.append("brand_name_merge_key: QUATTRO must merge with AUDI")
     if eea.brand_name_merge_key("FIAT - INNOCENTI") != eea.brand_name_merge_key("FIAT"):
         failures.append("brand_name_merge_key: FIAT - INNOCENTI must merge with FIAT")
     if eea.canonical_ice_brand_key("Jaguar   ") != "JAGUAR":
@@ -263,11 +284,17 @@ def main() -> int:
     if fam23 and "M340D" not in " ".join(fam23.get("variants") or []):
         failures.append("bmw_3_series_diesel_hit 2023: variants must include M340D XDRIVE")
 
-    for year, expect in ((2019, 3516.0), (2020, 1848.0), (2021, 1860.0), (2022, 1956.0)):
+    for year, expect in ((2019, 3515.0), (2020, 1848.0), (2021, 1860.0), (2022, 1956.0)):
         fam = eea.bmw_5_series_diesel_hit(ice.get("BMW") or {}, year)
         got = float(fam.get("n") or 0) if fam else 0.0
         if abs(got - expect) > 0.5:
             failures.append(f"bmw_5_series_diesel_hit {year}: n={got} want {expect}")
+
+    clio18 = eea.renault_clio_diesel_hit(ice.get("RENAULT") or {}, 2018)
+    if not clio18 or abs(float(clio18.get("n") or 0) - 26089.0) > 0.5:
+        failures.append(
+            f"renault_clio_diesel_hit 2018: n={clio18.get('n') if clio18 else None} want 26089 (F-only)"
+        )
 
     rows: list[dict] = json.loads(truth.SEED_PATH.read_text(encoding="utf-8"))
     by_id = {r["id"]: r for r in rows}
