@@ -201,11 +201,11 @@
   },
   {
     "id": "alfa-romeo-stelvio-diesel-2018",
-    "n": 11706,
+    "n": 11707,
     "eea_year": 2018,
     "eea_model": "STELVIO",
     "ft": "DIESEL",
-    "powerKw": 145.07602938663933,
+    "powerKw": 145.07679166310754,
     "fuelKind": "diesel",
     "eea_l100": 6.734
   },
@@ -431,11 +431,11 @@
   },
   {
     "id": "audi-a4-2018",
-    "n": 7806,
+    "n": 7808,
     "eea_year": 2018,
     "eea_model": "A4",
     "ft": "DIESEL",
-    "powerKw": 118.86241352805534,
+    "powerKw": 118.85835040983606,
     "fuelKind": "diesel",
     "variants": [
       "A4 AVANT",
@@ -463,17 +463,17 @@
   },
   {
     "id": "audi-a4-2020",
-    "n": 5172,
+    "n": 5173,
     "eea_year": 2020,
     "eea_model": "A4",
     "ft": "DIESEL",
-    "powerKw": 128.82153905645785,
+    "powerKw": 128.81654745795475,
     "fuelKind": "diesel",
     "variants": [
       "A4 AVANT",
       "A4 ALLROAD QUATTRO",
       "A4 LIMOUSINE",
-      "A4"
+      "AUDI A4"
     ],
     "eea_l100": 5.65
   },
@@ -625,21 +625,21 @@
   },
   {
     "id": "audi-a8-diesel-2018",
-    "n": 110,
+    "n": 111,
     "eea_year": 2018,
     "eea_model": "A8",
     "ft": "DIESEL",
-    "powerKw": 209.84545454545454,
+    "powerKw": 210.27927927927928,
     "fuelKind": "diesel",
     "eea_l100": 7.064
   },
   {
     "id": "audi-a8-diesel-2019",
-    "n": 202,
+    "n": 203,
     "eea_year": 2019,
     "eea_model": "A8",
     "ft": "DIESEL",
-    "powerKw": 210.0,
+    "powerKw": 210.23645320197045,
     "fuelKind": "diesel",
     "eea_l100": 7.199
   },
@@ -785,21 +785,21 @@
   },
   {
     "id": "audi-q3-diesel-2018",
-    "n": 6711,
+    "n": 6719,
     "eea_year": 2018,
     "eea_model": "Q3",
     "ft": "DIESEL",
-    "powerKw": 100.25867977946655,
+    "powerKw": 100.27027831522548,
     "fuelKind": "diesel",
     "eea_l100": 5.936
   },
   {
     "id": "audi-q3-diesel-2019",
-    "n": 7835,
+    "n": 7836,
     "eea_year": 2019,
     "eea_model": "Q3",
     "ft": "DIESEL",
-    "powerKw": 115.5825143586471,
+    "powerKw": 115.58499234303216,
     "fuelKind": "diesel",
     "eea_l100": 6.218
   },
@@ -905,13 +905,13 @@
   },
   {
     "id": "audi-q5-diesel-2025",
-    "n": 2340,
+    "n": 3189,
     "eea_year": 2025,
-    "eea_model": "AUDI Q5",
+    "eea_model": "Q5",
     "ft": "DIESEL",
-    "powerKw": 150.0,
+    "powerKw": 149.51081843838193,
     "fuelKind": "diesel",
-    "eea_l100": 6.275
+    "eea_l100": 6.361
   },
   {
     "id": "audi-q7-2022",
@@ -3562,11 +3562,11 @@
   },
   {
     "id": "fiat-500-2019",
-    "n": 29985,
+    "n": 29990,
     "eea_year": 2019,
     "eea_model": "FIAT 500",
     "ft": "PETROL",
-    "powerKw": 51.098515924628984,
+    "powerKw": 51.09889963321107,
     "fuelKind": "petrol",
     "eea_l100": 6.044
   },
@@ -3602,11 +3602,11 @@
   },
   {
     "id": "fiat-500-2021",
-    "n": 32105,
+    "n": 32122,
     "eea_year": 2021,
     "eea_model": "FIAT 500",
     "ft": "PETROL",
-    "powerKw": 51.982775268649746,
+    "powerKw": 51.982784384533964,
     "fuelKind": "petrol",
     "eea_l100": 5.031
   },
@@ -3642,11 +3642,11 @@
   },
   {
     "id": "fiat-500-2023",
-    "n": 27069,
+    "n": 27079,
     "eea_year": 2023,
     "eea_model": "FIAT 500",
     "ft": "PETROL",
-    "powerKw": 52.0,
+    "powerKw": 51.99996307101444,
     "fuelKind": "petrol",
     "eea_l100": 4.659
   },
@@ -3662,11 +3662,11 @@
   },
   {
     "id": "fiat-500-2024",
-    "n": 14775,
+    "n": 14776,
     "eea_year": 2024,
     "eea_model": "FIAT 500",
     "ft": "PETROL",
-    "powerKw": 51.999864636209814,
+    "powerKw": 51.99986464537087,
     "fuelKind": "petrol",
     "eea_l100": 4.734
   },
@@ -3812,71 +3812,71 @@
   },
   {
     "id": "fiat-500x-2022",
-    "n": 4396,
+    "n": 8167,
     "eea_year": 2022,
-    "eea_model": "500X",
+    "eea_model": "FIAT 500X",
     "ft": "PETROL",
-    "powerKw": 90.20655141037307,
+    "powerKw": 91.39928982490511,
     "fuelKind": "petrol",
-    "eea_l100": 6.118
+    "eea_l100": 6.239
   },
   {
     "id": "fiat-500x-diesel-2022",
-    "n": 6884,
+    "n": 13744,
     "eea_year": 2022,
     "eea_model": "FIAT 500X",
     "ft": "DIESEL",
-    "powerKw": 79.08803021499128,
+    "powerKw": 78.30325960419091,
     "fuelKind": "diesel",
-    "eea_l100": 4.805
+    "eea_l100": 4.764
   },
   {
     "id": "fiat-500x-2023",
-    "n": 13315,
+    "n": 13317,
     "eea_year": 2023,
-    "eea_model": "500X",
+    "eea_model": "FIAT 500X",
     "ft": "PETROL",
-    "powerKw": 90.82688696958317,
+    "powerKw": 90.82811444018922,
     "fuelKind": "petrol",
     "eea_l100": 5.993
   },
   {
     "id": "fiat-500x-diesel-2023",
-    "n": 14036,
+    "n": 14037,
     "eea_year": 2023,
-    "eea_model": "500X",
+    "eea_model": "FIAT 500X",
     "ft": "DIESEL",
-    "powerKw": 71.26332288401254,
+    "powerKw": 71.26451520980267,
     "fuelKind": "diesel",
     "eea_l100": 4.683
   },
   {
     "id": "fiat-500x-2024",
-    "n": 5325,
+    "n": 5326,
     "eea_year": 2024,
-    "eea_model": "500X",
+    "eea_model": "FIAT 500X",
     "ft": "PETROL",
-    "powerKw": 95.34046948356807,
+    "powerKw": 95.3419076229816,
     "fuelKind": "petrol",
     "eea_l100": 5.723
   },
   {
     "id": "fiat-500x-diesel-2024",
-    "n": 5585,
+    "n": 5587,
     "eea_year": 2024,
-    "eea_model": "500X",
+    "eea_model": "FIAT 500X",
     "ft": "DIESEL",
-    "powerKw": 70.00465532676813,
+    "powerKw": 70.01378199391445,
     "fuelKind": "diesel",
     "eea_l100": 4.719
   },
   {
     "id": "fiat-doblo-2019",
-    "n": 389,
+    "n": 392,
     "eea_year": 2019,
     "eea_model": "FIAT DOBLO'",
     "ft": "PETROL",
-    "powerKw": 87.58354755784062,
+    "powerKw": 87.58673469387755,
     "fuelKind": "petrol",
     "eea_l100": 9.702
   },
@@ -3892,13 +3892,13 @@
   },
   {
     "id": "fiat-doblo-diesel-2019",
-    "n": 1384,
+    "n": 1430,
     "eea_year": 2019,
     "eea_model": "FIAT DOBLO'",
     "ft": "DIESEL",
-    "powerKw": 84.03323699421966,
+    "powerKw": 84.16083916083917,
     "fuelKind": "diesel",
-    "eea_l100": 6.785
+    "eea_l100": 6.782
   },
   {
     "id": "fiat-doblo-diesel-2020",
@@ -3914,7 +3914,7 @@
     "id": "fiat-doblo-2024",
     "n": 68,
     "eea_year": 2024,
-    "eea_model": "DOBLO",
+    "eea_model": "FIAT DOBLO'",
     "ft": "DIESEL",
     "powerKw": 86.91176470588235,
     "fuelKind": "diesel",
@@ -3924,7 +3924,7 @@
     "id": "fiat-doblo-diesel-2024",
     "n": 68,
     "eea_year": 2024,
-    "eea_model": "DOBLO",
+    "eea_model": "FIAT DOBLO'",
     "ft": "DIESEL",
     "powerKw": 86.91176470588235,
     "fuelKind": "diesel",
@@ -3934,7 +3934,7 @@
     "id": "fiat-doblo-2025",
     "n": 168,
     "eea_year": 2025,
-    "eea_model": "DOBLO",
+    "eea_model": "FIAT DOBLO'",
     "ft": "PETROL",
     "powerKw": 81.0,
     "fuelKind": "petrol",
@@ -3944,7 +3944,7 @@
     "id": "fiat-doblo-diesel-2025",
     "n": 747,
     "eea_year": 2025,
-    "eea_model": "DOBLO",
+    "eea_model": "FIAT DOBLO'",
     "ft": "DIESEL",
     "powerKw": 90.855421686747,
     "fuelKind": "diesel",
@@ -3952,31 +3952,31 @@
   },
   {
     "id": "fiat-grande-panda-hybrid-2024",
-    "n": 97218,
+    "n": 97220,
     "eea_year": 2024,
     "eea_model": "PANDA",
     "ft": "PETROL",
-    "powerKw": 52.065728568783555,
+    "powerKw": 52.06552149763423,
     "fuelKind": "petrol",
     "eea_l100": 4.941
   },
   {
     "id": "fiat-grande-panda-hybrid-2025",
-    "n": 110610,
+    "n": 110611,
     "eea_year": 2025,
     "eea_model": "PANDA",
     "ft": "PETROL",
-    "powerKw": 53.74463430069614,
+    "powerKw": 53.74451003968864,
     "fuelKind": "petrol",
     "eea_l100": 5.05
   },
   {
     "id": "fiat-panda-2019",
-    "n": 109199,
+    "n": 109209,
     "eea_year": 2019,
     "eea_model": "PANDA",
     "ft": "PETROL",
-    "powerKw": 52.09592578686618,
+    "powerKw": 52.09523940334588,
     "fuelKind": "petrol",
     "eea_l100": 6.348
   },
@@ -3992,27 +3992,27 @@
   },
   {
     "id": "fiat-panda-metano-2019",
-    "n": 4659,
+    "n": 4660,
     "eea_year": 2019,
     "eea_model": "PANDA",
     "ft": "NG",
-    "powerKw": 62.00493668169135,
+    "powerKw": 62.00107296137339,
     "fuelKind": "cng",
     "eea_l100": 4.004
   },
   {
     "id": "fiat-panda-2020",
-    "n": 96373,
+    "n": 96380,
     "eea_year": 2020,
     "eea_model": "PANDA",
     "ft": "PETROL",
-    "powerKw": 52.20640635862742,
+    "powerKw": 52.20583108528741,
     "fuelKind": "petrol",
     "eea_l100": 5.906
   },
   {
     "id": "fiat-panda-gpl-2020",
-    "n": 10601,
+    "n": 10603,
     "eea_year": 2020,
     "eea_model": "PANDA",
     "ft": "LPG",
@@ -4022,21 +4022,21 @@
   },
   {
     "id": "fiat-panda-metano-2020",
-    "n": 2899,
+    "n": 2903,
     "eea_year": 2020,
     "eea_model": "PANDA",
     "ft": "NG",
-    "powerKw": 62.0,
+    "powerKw": 61.98415432311402,
     "fuelKind": "cng",
     "eea_l100": 4.024
   },
   {
     "id": "fiat-panda-2021",
-    "n": 98939,
+    "n": 98954,
     "eea_year": 2021,
     "eea_model": "PANDA",
     "ft": "PETROL",
-    "powerKw": 52.77299143916959,
+    "powerKw": 52.77178284859632,
     "fuelKind": "petrol",
     "eea_l100": 5.377
   },
@@ -4062,11 +4062,11 @@
   },
   {
     "id": "fiat-panda-2022",
-    "n": 93407,
+    "n": 93411,
     "eea_year": 2022,
     "eea_model": "PANDA",
     "ft": "PETROL",
-    "powerKw": 52.35646150716756,
+    "powerKw": 52.356264251533545,
     "fuelKind": "petrol",
     "eea_l100": 4.978
   },
@@ -4092,11 +4092,11 @@
   },
   {
     "id": "fiat-panda-2023",
-    "n": 95454,
+    "n": 95462,
     "eea_year": 2023,
     "eea_model": "PANDA",
     "ft": "PETROL",
-    "powerKw": 52.2905168981918,
+    "powerKw": 52.289570719239066,
     "fuelKind": "petrol",
     "eea_l100": 4.913
   },
@@ -4112,11 +4112,11 @@
   },
   {
     "id": "fiat-panda-2024",
-    "n": 97218,
+    "n": 97220,
     "eea_year": 2024,
     "eea_model": "PANDA",
     "ft": "PETROL",
-    "powerKw": 52.065728568783555,
+    "powerKw": 52.06552149763423,
     "fuelKind": "petrol",
     "eea_l100": 4.941
   },
@@ -4132,11 +4132,11 @@
   },
   {
     "id": "fiat-panda-2025",
-    "n": 110610,
+    "n": 110611,
     "eea_year": 2025,
     "eea_model": "PANDA",
     "ft": "PETROL",
-    "powerKw": 53.74463430069614,
+    "powerKw": 53.74451003968864,
     "fuelKind": "petrol",
     "eea_l100": 5.05
   },
@@ -4392,11 +4392,11 @@
   },
   {
     "id": "ford-c-max-diesel-2019",
-    "n": 1540,
+    "n": 1785,
     "eea_year": 2019,
     "eea_model": "C-MAX",
     "ft": "DIESEL",
-    "powerKw": 85.45454545454545,
+    "powerKw": 85.40056022408963,
     "fuelKind": "diesel",
     "eea_l100": 5.931
   },
@@ -4432,21 +4432,21 @@
   },
   {
     "id": "ford-fiesta-2019",
-    "n": 19861,
+    "n": 20239,
     "eea_year": 2019,
     "eea_model": "FIESTA",
     "ft": "PETROL",
-    "powerKw": 68.72529077085746,
+    "powerKw": 68.7173279312219,
     "fuelKind": "petrol",
     "eea_l100": 6.045
   },
   {
     "id": "ford-fiesta-diesel-2019",
-    "n": 8262,
+    "n": 8691,
     "eea_year": 2019,
     "eea_model": "FIESTA",
     "ft": "DIESEL",
-    "powerKw": 63.46744129750666,
+    "powerKw": 63.634219307329424,
     "fuelKind": "diesel",
     "eea_l100": 4.969
   },
@@ -4472,13 +4472,13 @@
   },
   {
     "id": "ford-fiesta-lpg-2020",
-    "n": 2065,
+    "n": 4716,
     "eea_year": 2020,
     "eea_model": "FIESTA",
     "ft": "LPG",
-    "powerKw": 55.00774818401937,
+    "powerKw": 55.003392705682785,
     "fuelKind": "lpg",
-    "eea_l100": 6.927
+    "eea_l100": 6.977
   },
   {
     "id": "ford-fiesta-2021",
@@ -4492,7 +4492,7 @@
   },
   {
     "id": "ford-fiesta-lpg-2021",
-    "n": 1328,
+    "n": 2547,
     "eea_year": 2021,
     "eea_model": "FIESTA",
     "ft": "LPG",
@@ -4562,11 +4562,11 @@
   },
   {
     "id": "ford-focus-diesel-2019",
-    "n": 8619,
+    "n": 8742,
     "eea_year": 2019,
     "eea_model": "FOCUS",
     "ft": "DIESEL",
-    "powerKw": 86.62048961596473,
+    "powerKw": 86.56863417982156,
     "fuelKind": "diesel",
     "eea_l100": 4.837
   },
@@ -4702,11 +4702,11 @@
   },
   {
     "id": "ford-galaxy-diesel-2019",
-    "n": 320,
+    "n": 321,
     "eea_year": 2019,
     "eea_model": "GALAXY",
     "ft": "DIESEL",
-    "powerKw": 115.484375,
+    "powerKw": 115.46728971962617,
     "fuelKind": "diesel",
     "eea_l100": 6.597
   },
@@ -4772,13 +4772,13 @@
   },
   {
     "id": "ford-kuga-2019",
-    "n": 11565,
+    "n": 11907,
     "eea_year": 2019,
     "eea_model": "KUGA",
     "ft": "DIESEL",
-    "powerKw": 93.42602680501513,
+    "powerKw": 93.53254388175023,
     "fuelKind": "diesel",
-    "eea_l100": 6.598
+    "eea_l100": 6.599
   },
   {
     "id": "ford-kuga-petrol-2019",
@@ -4792,11 +4792,11 @@
   },
   {
     "id": "ford-kuga-2020",
-    "n": 6524,
+    "n": 6525,
     "eea_year": 2020,
     "eea_model": "KUGA",
     "ft": "DIESEL",
-    "powerKw": 93.38749233599019,
+    "powerKw": 93.38666666666667,
     "fuelKind": "diesel",
     "eea_l100": 5.396
   },
@@ -4912,11 +4912,11 @@
   },
   {
     "id": "ford-mondeo-2019",
-    "n": 892,
+    "n": 911,
     "eea_year": 2019,
     "eea_model": "MONDEO",
     "ft": "DIESEL",
-    "powerKw": 113.04260089686099,
+    "powerKw": 113.07574094401757,
     "fuelKind": "diesel",
     "eea_l100": 5.998
   },
@@ -4952,11 +4952,11 @@
   },
   {
     "id": "ford-mustang-2019",
-    "n": 239,
+    "n": 255,
     "eea_year": 2019,
     "eea_model": "MUSTANG",
     "ft": "PETROL",
-    "powerKw": 257.2008368200837,
+    "powerKw": 257.1921568627451,
     "fuelKind": "petrol",
     "eea_l100": 9.998
   },
@@ -5132,11 +5132,11 @@
   },
   {
     "id": "ford-s-max-diesel-2019",
-    "n": 764,
+    "n": 780,
     "eea_year": 2019,
     "eea_model": "S-MAX",
     "ft": "DIESEL",
-    "powerKw": 119.6217277486911,
+    "powerKw": 119.56666666666666,
     "fuelKind": "diesel",
     "eea_l100": 6.549
   },
@@ -5222,11 +5222,11 @@
   },
   {
     "id": "ford-tourneo-connect-diesel-2019",
-    "n": 453,
+    "n": 510,
     "eea_year": 2019,
     "eea_model": "TOURNEO CONNECT",
     "ft": "DIESEL",
-    "powerKw": 86.76379690949227,
+    "powerKw": 86.73725490196078,
     "fuelKind": "diesel",
     "eea_l100": 5.94
   },
@@ -5342,11 +5342,11 @@
   },
   {
     "id": "honda-cr-v-2018",
-    "n": 256,
+    "n": 330,
     "eea_year": 2018,
     "eea_model": "CR-V",
     "ft": "PETROL",
-    "powerKw": 135.73046875,
+    "powerKw": 130.85757575757575,
     "fuelKind": "petrol",
     "eea_l100": 8.254
   },
@@ -5962,7 +5962,7 @@
     "ft": "PETROL",
     "powerKw": 49.45961193264382,
     "fuelKind": "petrol",
-    "eea_l100": 5.248
+    "eea_l100": 5.249
   },
   {
     "id": "hyundai-i10-lpg-2021",
@@ -6094,7 +6094,7 @@
     "eea_year": 2021,
     "eea_model": "I20",
     "ft": "PETROL",
-    "powerKw": 67.52352102637207,
+    "powerKw": 67.52352102637205,
     "fuelKind": "petrol",
     "eea_l100": 5.236
   },
@@ -6106,7 +6106,7 @@
     "ft": "LPG",
     "powerKw": 57.18327974276527,
     "fuelKind": "lpg",
-    "eea_l100": 7.379
+    "eea_l100": 7.651
   },
   {
     "id": "hyundai-i20-2022",
@@ -6650,7 +6650,7 @@
   },
   {
     "id": "jeep-avenger-2024",
-    "n": 38545,
+    "n": 38549,
     "eea_year": 2024,
     "eea_model": "AVENGER",
     "ft": "PETROL",
@@ -6670,21 +6670,21 @@
   },
   {
     "id": "jeep-cherokee-diesel-2019",
-    "n": 2221,
+    "n": 2224,
     "eea_year": 2019,
     "eea_model": "CHEROKEE",
     "ft": "DIESEL",
-    "powerKw": 142.907699234579,
+    "powerKw": 142.88354316546761,
     "fuelKind": "diesel",
     "eea_l100": 7.472
   },
   {
     "id": "jeep-cherokee-diesel-2020",
-    "n": 594,
+    "n": 595,
     "eea_year": 2020,
     "eea_model": "CHEROKEE",
     "ft": "DIESEL",
-    "powerKw": 142.16666666666666,
+    "powerKw": 142.1747899159664,
     "fuelKind": "diesel",
     "eea_l100": 7.506
   },
@@ -6750,11 +6750,11 @@
   },
   {
     "id": "jeep-compass-2022",
-    "n": 2937,
+    "n": 2939,
     "eea_year": 2022,
     "eea_model": "COMPASS",
     "ft": "PETROL",
-    "powerKw": 97.86142322097378,
+    "powerKw": 97.86015651582171,
     "fuelKind": "petrol",
     "eea_l100": 6.302
   },
@@ -6980,11 +6980,11 @@
   },
   {
     "id": "jeep-wrangler-2019",
-    "n": 80,
+    "n": 81,
     "eea_year": 2019,
     "eea_model": "WRANGLER",
     "ft": "PETROL",
-    "powerKw": 200.0,
+    "powerKw": 199.06172839506172,
     "fuelKind": "petrol",
     "eea_l100": 11.002
   },
@@ -7790,11 +7790,11 @@
   },
   {
     "id": "kia-sportage-2019",
-    "n": 8083,
+    "n": 8084,
     "eea_year": 2019,
     "eea_model": "SPORTAGE",
     "ft": "DIESEL",
-    "powerKw": 91.89595447234937,
+    "powerKw": 91.8951014349332,
     "fuelKind": "diesel",
     "eea_l100": 5.956
   },
@@ -8200,11 +8200,11 @@
   },
   {
     "id": "lancia-ypsilon-petrol-2019",
-    "n": 38992,
+    "n": 38994,
     "eea_year": 2019,
     "eea_model": "YPSILON",
     "ft": "PETROL",
-    "powerKw": 51.0,
+    "powerKw": 50.9996409704057,
     "fuelKind": "petrol",
     "eea_l100": 6.186
   },
@@ -8220,11 +8220,11 @@
   },
   {
     "id": "lancia-ypsilon-petrol-2020",
-    "n": 33588,
+    "n": 33590,
     "eea_year": 2020,
     "eea_model": "YPSILON",
     "ft": "PETROL",
-    "powerKw": 51.42821841133738,
+    "powerKw": 51.427776123846385,
     "fuelKind": "petrol",
     "eea_l100": 5.907
   },
@@ -8260,11 +8260,11 @@
   },
   {
     "id": "lancia-ypsilon-petrol-2022",
-    "n": 35578,
+    "n": 35579,
     "eea_year": 2022,
     "eea_model": "YPSILON",
     "ft": "PETROL",
-    "powerKw": 51.99997189274271,
+    "powerKw": 51.999747041794315,
     "fuelKind": "petrol",
     "eea_l100": 4.918
   },
@@ -8290,11 +8290,11 @@
   },
   {
     "id": "lancia-ypsilon-hybrid-2024",
-    "n": 27530,
+    "n": 27531,
     "eea_year": 2024,
     "eea_model": "YPSILON",
     "ft": "PETROL",
-    "powerKw": 54.504431529240826,
+    "powerKw": 54.50452217500273,
     "fuelKind": "petrol",
     "eea_l100": 4.832
   },
@@ -8650,21 +8650,21 @@
   },
   {
     "id": "land-rover-range-rover-evoque-2019",
-    "n": 6195,
+    "n": 6196,
     "eea_year": 2019,
     "eea_model": "RANGE ROVER EVOQUE",
     "ft": "DIESEL",
-    "powerKw": 116.74350282485875,
+    "powerKw": 116.74725629438348,
     "fuelKind": "diesel",
     "eea_l100": 7.052
   },
   {
     "id": "land-rover-range-rover-evoque-2020",
-    "n": 4363,
+    "n": 4366,
     "eea_year": 2020,
     "eea_model": "RANGE ROVER EVOQUE",
     "ft": "DIESEL",
-    "powerKw": 116.8668347467339,
+    "powerKw": 116.8689876316995,
     "fuelKind": "diesel",
     "eea_l100": 6.876
   },
@@ -9140,11 +9140,11 @@
   },
   {
     "id": "mini-hatch-2024",
-    "n": 3106,
+    "n": 3107,
     "eea_year": 2024,
     "eea_model": "COOPER",
     "ft": "PETROL",
-    "powerKw": 100.0,
+    "powerKw": 99.99613775345993,
     "fuelKind": "petrol",
     "eea_l100": 5.663
   },
@@ -9480,11 +9480,11 @@
   },
   {
     "id": "mazda-cx-60-diesel-2024",
-    "n": 956,
+    "n": 957,
     "eea_year": 2024,
     "eea_model": "MAZDA CX-60",
     "ft": "DIESEL",
-    "powerKw": 170.836820083682,
+    "powerKw": 170.85370950888193,
     "fuelKind": "diesel",
     "eea_l100": 5.164
   },
@@ -10422,7 +10422,7 @@
     "id": "mitsubishi-asx-2024",
     "n": 634,
     "eea_year": 2024,
-    "eea_model": "ASX",
+    "eea_model": "MITSUBISHI ASX",
     "ft": "PETROL",
     "powerKw": 97.94952681388013,
     "fuelKind": "petrol",
@@ -10432,7 +10432,7 @@
     "id": "mitsubishi-asx-2025",
     "n": 238,
     "eea_year": 2025,
-    "eea_model": "ASX",
+    "eea_model": "MITSUBISHI ASX",
     "ft": "PETROL",
     "powerKw": 82.90756302521008,
     "fuelKind": "petrol",
@@ -10442,7 +10442,7 @@
     "id": "mitsubishi-asx-lpg-2025",
     "n": 143,
     "eea_year": 2025,
-    "eea_model": "ASX",
+    "eea_model": "MITSUBISHI ASX",
     "ft": "LPG",
     "powerKw": 74.0,
     "fuelKind": "lpg",
@@ -10620,27 +10620,27 @@
   },
   {
     "id": "mitsubishi-space-star-2021",
-    "n": 2737,
+    "n": 3008,
     "eea_year": 2021,
     "eea_model": "MITSUBISHI SPACE STAR",
     "ft": "PETROL",
-    "powerKw": 52.38618925831202,
+    "powerKw": 52.35139627659574,
     "fuelKind": "petrol",
     "eea_l100": 5.104
   },
   {
     "id": "mitsubishi-space-star-2022",
-    "n": 1754,
+    "n": 1638,
     "eea_year": 2022,
     "eea_model": "MITSUBISHI SPACE STAR",
     "ft": "PETROL",
     "powerKw": 52.0,
     "fuelKind": "petrol",
-    "eea_l100": 5.01
+    "eea_l100": 5.011
   },
   {
     "id": "mitsubishi-space-star-2023",
-    "n": 696,
+    "n": 699,
     "eea_year": 2023,
     "eea_model": "MITSUBISHI SPACE STAR",
     "ft": "PETROL",
@@ -10800,11 +10800,11 @@
   },
   {
     "id": "nissan-micra-diesel-2018",
-    "n": 6657,
+    "n": 6658,
     "eea_year": 2018,
     "eea_model": "NISSAN MICRA",
     "ft": "DIESEL",
-    "powerKw": 66.0,
+    "powerKw": 65.99909882847702,
     "fuelKind": "diesel",
     "eea_l100": 5.397
   },
@@ -10980,11 +10980,11 @@
   },
   {
     "id": "nissan-qashqai-2021",
-    "n": 3250,
+    "n": 3251,
     "eea_year": 2021,
     "eea_model": "NISSAN QASHQAI",
     "ft": "DIESEL",
-    "powerKw": 85.62184615384615,
+    "powerKw": 85.62165487542295,
     "fuelKind": "diesel",
     "eea_l100": 5.409
   },
@@ -11040,11 +11040,11 @@
   },
   {
     "id": "nissan-x-trail-2019",
-    "n": 2276,
+    "n": 2277,
     "eea_year": 2019,
     "eea_model": "NISSAN X-TRAIL",
     "ft": "DIESEL",
-    "powerKw": 116.85237258347979,
+    "powerKw": 116.8449714536671,
     "fuelKind": "diesel",
     "eea_l100": 6.985
   },
@@ -11700,11 +11700,11 @@
   },
   {
     "id": "peugeot-108-2019",
-    "n": 5685,
+    "n": 5700,
     "eea_year": 2019,
     "eea_model": "108",
     "ft": "PETROL",
-    "powerKw": 53.000527704485485,
+    "powerKw": 53.00052631578947,
     "fuelKind": "petrol",
     "eea_l100": 5.024
   },
@@ -11930,11 +11930,11 @@
   },
   {
     "id": "peugeot-208-2020",
-    "n": 16259,
+    "n": 16261,
     "eea_year": 2020,
     "eea_model": "208",
     "ft": "PETROL",
-    "powerKw": 64.93455932099145,
+    "powerKw": 64.93567431277289,
     "fuelKind": "petrol",
     "eea_l100": 5.486
   },
@@ -11950,11 +11950,11 @@
   },
   {
     "id": "peugeot-208-2021",
-    "n": 15857,
+    "n": 15858,
     "eea_year": 2021,
     "eea_model": "208",
     "ft": "PETROL",
-    "powerKw": 65.90603518950621,
+    "powerKw": 65.90654559213016,
     "fuelKind": "petrol",
     "eea_l100": 5.284
   },
@@ -14473,29 +14473,29 @@
   },
   {
     "id": "seat-ateca-2021",
-    "n": 763,
+    "n": 1272,
     "eea_year": 2021,
     "eea_model": "ATECA",
     "ft": "DIESEL",
-    "powerKw": 108.42726081258192,
+    "powerKw": 106.3246855345912,
     "fuelKind": "diesel",
-    "eea_l100": 5.165
+    "eea_l100": 5.216
   },
   {
     "id": "seat-ateca-petrol-2021",
-    "n": 619,
+    "n": 1184,
     "eea_year": 2021,
     "eea_model": "ATECA",
     "ft": "PETROL",
-    "powerKw": 103.58804523424878,
+    "powerKw": 104.55912162162163,
     "fuelKind": "petrol",
-    "eea_l100": 6.624
+    "eea_l100": 6.644
   },
   {
     "id": "seat-ateca-2022",
     "n": 934,
     "eea_year": 2022,
-    "eea_model": "SEAT ATECA",
+    "eea_model": "ATECA",
     "ft": "PETROL",
     "powerKw": 104.09421841541756,
     "fuelKind": "petrol",
@@ -14505,7 +14505,7 @@
     "id": "seat-ateca-diesel-2022",
     "n": 1526,
     "eea_year": 2022,
-    "eea_model": "SEAT ATECA",
+    "eea_model": "ATECA",
     "ft": "DIESEL",
     "powerKw": 107.14941022280472,
     "fuelKind": "diesel",
@@ -14515,7 +14515,7 @@
     "id": "seat-ateca-2023",
     "n": 1490,
     "eea_year": 2023,
-    "eea_model": "SEAT ATECA",
+    "eea_model": "ATECA",
     "ft": "PETROL",
     "powerKw": 103.94697986577181,
     "fuelKind": "petrol",
@@ -14525,7 +14525,7 @@
     "id": "seat-ateca-diesel-2023",
     "n": 936,
     "eea_year": 2023,
-    "eea_model": "SEAT ATECA",
+    "eea_model": "ATECA",
     "ft": "DIESEL",
     "powerKw": 104.87179487179488,
     "fuelKind": "diesel",
@@ -14535,7 +14535,7 @@
     "id": "seat-ateca-2024",
     "n": 726,
     "eea_year": 2024,
-    "eea_model": "SEAT ATECA",
+    "eea_model": "ATECA",
     "ft": "PETROL",
     "powerKw": 104.22727272727273,
     "fuelKind": "petrol",
@@ -14545,7 +14545,7 @@
     "id": "seat-ateca-diesel-2024",
     "n": 379,
     "eea_year": 2024,
-    "eea_model": "SEAT ATECA",
+    "eea_model": "ATECA",
     "ft": "DIESEL",
     "powerKw": 107.95514511873351,
     "fuelKind": "diesel",
@@ -14555,7 +14555,7 @@
     "id": "seat-ateca-2025",
     "n": 263,
     "eea_year": 2025,
-    "eea_model": "SEAT ATECA",
+    "eea_model": "ATECA",
     "ft": "PETROL",
     "powerKw": 101.53992395437263,
     "fuelKind": "petrol",
@@ -14565,7 +14565,7 @@
     "id": "seat-ateca-diesel-2025",
     "n": 168,
     "eea_year": 2025,
-    "eea_model": "SEAT ATECA",
+    "eea_model": "ATECA",
     "ft": "DIESEL",
     "powerKw": 110.0,
     "fuelKind": "diesel",
@@ -14813,19 +14813,19 @@
   },
   {
     "id": "seat-leon-2021",
-    "n": 938,
+    "n": 1401,
     "eea_year": 2021,
-    "eea_model": "SEAT LEON",
+    "eea_model": "LEON",
     "ft": "PETROL",
-    "powerKw": 103.38805970149254,
+    "powerKw": 101.45753033547466,
     "fuelKind": "petrol",
-    "eea_l100": 5.771
+    "eea_l100": 5.747
   },
   {
     "id": "seat-leon-cng-2021",
-    "n": 356,
+    "n": 361,
     "eea_year": 2021,
-    "eea_model": "SEAT LEON",
+    "eea_model": "LEON",
     "ft": "NG",
     "powerKw": 96.0,
     "fuelKind": "cng",
@@ -14833,19 +14833,19 @@
   },
   {
     "id": "seat-leon-diesel-2021",
-    "n": 264,
+    "n": 525,
     "eea_year": 2021,
-    "eea_model": "SEAT LEON",
+    "eea_model": "LEON",
     "ft": "DIESEL",
-    "powerKw": 102.42424242424242,
+    "powerKw": 100.23809523809524,
     "fuelKind": "diesel",
-    "eea_l100": 4.455
+    "eea_l100": 4.467
   },
   {
     "id": "seat-leon-2022",
     "n": 614,
     "eea_year": 2022,
-    "eea_model": "SEAT LEON",
+    "eea_model": "LEON",
     "ft": "PETROL",
     "powerKw": 94.03420195439739,
     "fuelKind": "petrol",
@@ -14855,7 +14855,7 @@
     "id": "seat-leon-cng-2022",
     "n": 363,
     "eea_year": 2022,
-    "eea_model": "SEAT LEON",
+    "eea_model": "LEON",
     "ft": "NG",
     "powerKw": 96.0,
     "fuelKind": "cng",
@@ -14865,7 +14865,7 @@
     "id": "seat-leon-diesel-2022",
     "n": 430,
     "eea_year": 2022,
-    "eea_model": "SEAT LEON",
+    "eea_model": "LEON",
     "ft": "DIESEL",
     "powerKw": 100.05813953488372,
     "fuelKind": "diesel",
@@ -14875,7 +14875,7 @@
     "id": "seat-leon-2023",
     "n": 378,
     "eea_year": 2023,
-    "eea_model": "SEAT LEON",
+    "eea_model": "LEON",
     "ft": "PETROL",
     "powerKw": 100.95238095238095,
     "fuelKind": "petrol",
@@ -14885,7 +14885,7 @@
     "id": "seat-leon-cng-2023",
     "n": 58,
     "eea_year": 2023,
-    "eea_model": "SEAT LEON",
+    "eea_model": "LEON",
     "ft": "NG",
     "powerKw": 96.0,
     "fuelKind": "cng",
@@ -14895,7 +14895,7 @@
     "id": "seat-leon-diesel-2023",
     "n": 357,
     "eea_year": 2023,
-    "eea_model": "SEAT LEON",
+    "eea_model": "LEON",
     "ft": "DIESEL",
     "powerKw": 102.22689075630252,
     "fuelKind": "diesel",
@@ -14905,7 +14905,7 @@
     "id": "seat-leon-2024",
     "n": 156,
     "eea_year": 2024,
-    "eea_model": "SEAT LEON",
+    "eea_model": "LEON",
     "ft": "PETROL",
     "powerKw": 89.41666666666667,
     "fuelKind": "petrol",
@@ -14915,7 +14915,7 @@
     "id": "seat-leon-diesel-2024",
     "n": 269,
     "eea_year": 2024,
-    "eea_model": "SEAT LEON",
+    "eea_model": "LEON",
     "ft": "DIESEL",
     "powerKw": 105.53903345724908,
     "fuelKind": "diesel",
@@ -14925,7 +14925,7 @@
     "id": "seat-leon-2025",
     "n": 252,
     "eea_year": 2025,
-    "eea_model": "SEAT LEON",
+    "eea_model": "LEON",
     "ft": "PETROL",
     "powerKw": 90.63888888888889,
     "fuelKind": "petrol",
@@ -14935,7 +14935,7 @@
     "id": "seat-leon-diesel-2025",
     "n": 192,
     "eea_year": 2025,
-    "eea_model": "SEAT LEON",
+    "eea_model": "LEON",
     "ft": "DIESEL",
     "powerKw": 103.359375,
     "fuelKind": "diesel",
@@ -16803,11 +16803,11 @@
   },
   {
     "id": "toyota-aygo-2020",
-    "n": 14389,
+    "n": 14390,
     "eea_year": 2020,
     "eea_model": "TOYOTA AYGO",
     "ft": "PETROL",
-    "powerKw": 52.99972200986865,
+    "powerKw": 52.999513551077136,
     "fuelKind": "petrol",
     "eea_l100": 5.051
   },
@@ -16913,11 +16913,11 @@
   },
   {
     "id": "toyota-corolla-2019",
-    "n": 8926,
+    "n": 8929,
     "eea_year": 2019,
     "eea_model": "TOYOTA COROLLA",
     "ft": "PETROL",
-    "powerKw": 84.9822989020838,
+    "powerKw": 84.98073692462762,
     "fuelKind": "petrol",
     "eea_l100": 4.858
   },
@@ -17123,11 +17123,11 @@
   },
   {
     "id": "toyota-rav4-petrol-2018",
-    "n": 7259,
+    "n": 7260,
     "eea_year": 2018,
     "eea_model": "TOYOTA RAV4",
     "ft": "PETROL",
-    "powerKw": 114.04573632731781,
+    "powerKw": 114.04710743801652,
     "fuelKind": "petrol",
     "eea_l100": 6.424
   },
@@ -17163,7 +17163,7 @@
   },
   {
     "id": "toyota-rav4-2022",
-    "n": 5892,
+    "n": 5893,
     "eea_year": 2022,
     "eea_model": "TOYOTA RAV4",
     "ft": "PETROL",
@@ -17183,7 +17183,7 @@
   },
   {
     "id": "toyota-rav4-2024",
-    "n": 4688,
+    "n": 4689,
     "eea_year": 2024,
     "eea_model": "TOYOTA RAV4",
     "ft": "PETROL",
@@ -17203,11 +17203,11 @@
   },
   {
     "id": "toyota-yaris-2018",
-    "n": 10903,
+    "n": 10904,
     "eea_year": 2018,
     "eea_model": "TOYOTA YARIS",
     "ft": "PETROL",
-    "powerKw": 54.11813262404843,
+    "powerKw": 54.11986426999266,
     "fuelKind": "petrol",
     "eea_l100": 5.816
   },
@@ -17223,11 +17223,11 @@
   },
   {
     "id": "toyota-yaris-2019",
-    "n": 12710,
+    "n": 12713,
     "eea_year": 2019,
     "eea_model": "TOYOTA YARIS",
     "ft": "PETROL",
-    "powerKw": 55.44634146341463,
+    "powerKw": 55.44702273263589,
     "fuelKind": "petrol",
     "eea_l100": 5.808
   },
@@ -17243,21 +17243,21 @@
   },
   {
     "id": "toyota-yaris-2020",
-    "n": 7400,
+    "n": 7401,
     "eea_year": 2020,
     "eea_model": "TOYOTA YARIS HYBRID",
     "ft": "PETROL",
-    "powerKw": 54.0,
+    "powerKw": 54.000135116876095,
     "fuelKind": "petrol",
     "eea_l100": 4.799
   },
   {
     "id": "toyota-yaris-2021",
-    "n": 31613,
+    "n": 31615,
     "eea_year": 2021,
     "eea_model": "TOYOTA YARIS",
     "ft": "PETROL",
-    "powerKw": 66.28548381994749,
+    "powerKw": 66.28521271548315,
     "fuelKind": "petrol",
     "eea_l100": 4.202
   },
@@ -17293,11 +17293,11 @@
   },
   {
     "id": "toyota-yaris-2025",
-    "n": 33419,
+    "n": 33420,
     "eea_year": 2025,
     "eea_model": "TOYOTA YARIS",
     "ft": "PETROL",
-    "powerKw": 68.0,
+    "powerKw": 67.99949132256134,
     "fuelKind": "petrol",
     "eea_l100": 3.999
   },
@@ -17403,11 +17403,11 @@
   },
   {
     "id": "volkswagen-golf-2020",
-    "n": 7601,
+    "n": 7602,
     "eea_year": 2020,
     "eea_model": "GOLF",
     "ft": "PETROL",
-    "powerKw": 99.88804104723063,
+    "powerKw": 99.8893712181005,
     "fuelKind": "petrol",
     "eea_l100": 5.705
   },
@@ -17423,21 +17423,21 @@
   },
   {
     "id": "volkswagen-golf-diesel-2020",
-    "n": 7204,
+    "n": 7206,
     "eea_year": 2020,
     "eea_model": "GOLF",
     "ft": "DIESEL",
-    "powerKw": 94.82440310938368,
+    "powerKw": 94.82861504301971,
     "fuelKind": "diesel",
     "eea_l100": 4.782
   },
   {
     "id": "volkswagen-golf-2021",
-    "n": 6800,
+    "n": 6856,
     "eea_year": 2021,
     "eea_model": "GOLF",
     "ft": "PETROL",
-    "powerKw": 98.0995588235294,
+    "powerKw": 98.02435822637106,
     "fuelKind": "petrol",
     "eea_l100": 5.647
   },
@@ -17453,23 +17453,23 @@
   },
   {
     "id": "volkswagen-golf-diesel-2021",
-    "n": 5137,
+    "n": 5159,
     "eea_year": 2021,
     "eea_model": "GOLF",
     "ft": "DIESEL",
-    "powerKw": 94.27272727272727,
+    "powerKw": 94.28881566195,
     "fuelKind": "diesel",
     "eea_l100": 4.637
   },
   {
     "id": "volkswagen-golf-2022",
-    "n": 5945,
+    "n": 5954,
     "eea_year": 2022,
     "eea_model": "GOLF",
     "ft": "PETROL",
-    "powerKw": 95.93877207737594,
+    "powerKw": 95.94205576083306,
     "fuelKind": "petrol",
-    "eea_l100": 5.577
+    "eea_l100": 5.576
   },
   {
     "id": "volkswagen-golf-cng-2022",
@@ -17493,11 +17493,11 @@
   },
   {
     "id": "volkswagen-golf-2023",
-    "n": 5962,
+    "n": 5964,
     "eea_year": 2023,
     "eea_model": "GOLF",
     "ft": "PETROL",
-    "powerKw": 99.19523649781952,
+    "powerKw": 99.21059691482226,
     "fuelKind": "petrol",
     "eea_l100": 5.613
   },
@@ -17523,21 +17523,21 @@
   },
   {
     "id": "volkswagen-golf-diesel-2024",
-    "n": 5566,
+    "n": 5567,
     "eea_year": 2024,
     "eea_model": "GOLF",
     "ft": "DIESEL",
-    "powerKw": 98.0501257635645,
+    "powerKw": 98.05227231902282,
     "fuelKind": "diesel",
     "eea_l100": 4.583
   },
   {
     "id": "volkswagen-golf-2025",
-    "n": 5699,
+    "n": 5701,
     "eea_year": 2025,
     "eea_model": "GOLF",
     "ft": "PETROL",
-    "powerKw": 115.55500965081593,
+    "powerKw": 115.55306086651464,
     "fuelKind": "petrol",
     "eea_l100": 5.84
   },
@@ -17553,21 +17553,21 @@
   },
   {
     "id": "volkswagen-golf-gti-2022",
-    "n": 5945,
+    "n": 5954,
     "eea_year": 2022,
     "eea_model": "GOLF",
     "ft": "PETROL",
-    "powerKw": 95.93877207737594,
+    "powerKw": 95.94205576083306,
     "fuelKind": "petrol",
-    "eea_l100": 5.577
+    "eea_l100": 5.576
   },
   {
     "id": "volkswagen-golf-gti-2023",
-    "n": 5962,
+    "n": 5964,
     "eea_year": 2023,
     "eea_model": "GOLF",
     "ft": "PETROL",
-    "powerKw": 99.19523649781952,
+    "powerKw": 99.21059691482226,
     "fuelKind": "petrol",
     "eea_l100": 5.613
   },
@@ -17583,11 +17583,11 @@
   },
   {
     "id": "volkswagen-golf-gti-2025",
-    "n": 5699,
+    "n": 5701,
     "eea_year": 2025,
     "eea_model": "GOLF",
     "ft": "PETROL",
-    "powerKw": 115.55500965081593,
+    "powerKw": 115.55306086651464,
     "fuelKind": "petrol",
     "eea_l100": 5.84
   },
@@ -17743,11 +17743,11 @@
   },
   {
     "id": "volkswagen-polo-2019",
-    "n": 23080,
+    "n": 23123,
     "eea_year": 2019,
     "eea_model": "POLO",
     "ft": "PETROL",
-    "powerKw": 62.2540294627383,
+    "powerKw": 62.268001556891406,
     "fuelKind": "petrol",
     "eea_l100": 5.746
   },
@@ -17763,21 +17763,21 @@
   },
   {
     "id": "volkswagen-polo-diesel-2019",
-    "n": 8103,
+    "n": 8104,
     "eea_year": 2019,
     "eea_model": "POLO",
     "ft": "DIESEL",
-    "powerKw": 63.320251758607924,
+    "powerKw": 63.321076011846,
     "fuelKind": "diesel",
     "eea_l100": 4.966
   },
   {
     "id": "volkswagen-polo-2020",
-    "n": 15150,
+    "n": 15156,
     "eea_year": 2020,
     "eea_model": "POLO",
     "ft": "PETROL",
-    "powerKw": 66.77399339933993,
+    "powerKw": 66.7752705199261,
     "fuelKind": "petrol",
     "eea_l100": 5.685
   },
@@ -17903,11 +17903,11 @@
   },
   {
     "id": "volkswagen-t-cross-2020",
-    "n": 17663,
+    "n": 17664,
     "eea_year": 2020,
     "eea_model": "T-CROSS",
     "ft": "PETROL",
-    "powerKw": 78.10230425182586,
+    "powerKw": 78.1018455615942,
     "fuelKind": "petrol",
     "eea_l100": 6.07
   },
@@ -17953,21 +17953,21 @@
   },
   {
     "id": "volkswagen-t-cross-2024",
-    "n": 24199,
+    "n": 24204,
     "eea_year": 2024,
     "eea_model": "T-CROSS",
     "ft": "PETROL",
-    "powerKw": 79.82772015372537,
+    "powerKw": 79.82845810609817,
     "fuelKind": "petrol",
     "eea_l100": 5.787
   },
   {
     "id": "volkswagen-t-cross-2025",
-    "n": 21575,
+    "n": 21576,
     "eea_year": 2025,
     "eea_model": "T-CROSS",
     "ft": "PETROL",
-    "powerKw": 80.14697566628041,
+    "powerKw": 80.14720059325175,
     "fuelKind": "petrol",
     "eea_l100": 5.749
   },
@@ -17993,71 +17993,71 @@
   },
   {
     "id": "volkswagen-t-roc-2019",
-    "n": 20308,
+    "n": 20320,
     "eea_year": 2019,
     "eea_model": "T-ROC",
     "ft": "PETROL",
-    "powerKw": 93.03289344100847,
+    "powerKw": 93.03799212598425,
     "fuelKind": "petrol",
     "eea_l100": 6.495
   },
   {
     "id": "volkswagen-t-roc-diesel-2019",
-    "n": 19225,
+    "n": 19226,
     "eea_year": 2019,
     "eea_model": "T-ROC",
     "ft": "DIESEL",
-    "powerKw": 92.16384915474643,
+    "powerKw": 92.16477686466244,
     "fuelKind": "diesel",
     "eea_l100": 5.778
   },
   {
     "id": "volkswagen-t-roc-2020",
-    "n": 12716,
+    "n": 12742,
     "eea_year": 2020,
     "eea_model": "T-ROC",
     "ft": "PETROL",
-    "powerKw": 99.50220195029884,
+    "powerKw": 99.49262282216293,
     "fuelKind": "petrol",
     "eea_l100": 6.401
   },
   {
     "id": "volkswagen-t-roc-diesel-2020",
-    "n": 12019,
+    "n": 12022,
     "eea_year": 2020,
     "eea_model": "T-ROC",
     "ft": "DIESEL",
-    "powerKw": 90.90731342041767,
+    "powerKw": 90.90791881550491,
     "fuelKind": "diesel",
     "eea_l100": 5.544
   },
   {
     "id": "volkswagen-t-roc-2021",
-    "n": 19289,
+    "n": 19295,
     "eea_year": 2021,
     "eea_model": "T-ROC",
     "ft": "PETROL",
-    "powerKw": 93.31002125563793,
+    "powerKw": 93.31002850479399,
     "fuelKind": "petrol",
     "eea_l100": 6.362
   },
   {
     "id": "volkswagen-t-roc-diesel-2021",
-    "n": 8967,
+    "n": 8968,
     "eea_year": 2021,
     "eea_model": "T-ROC",
     "ft": "DIESEL",
-    "powerKw": 96.21612579458012,
+    "powerKw": 96.21487511150758,
     "fuelKind": "diesel",
     "eea_l100": 4.987
   },
   {
     "id": "volkswagen-t-roc-2022",
-    "n": 16698,
+    "n": 16700,
     "eea_year": 2022,
     "eea_model": "T-ROC",
     "ft": "PETROL",
-    "powerKw": 94.4530482692538,
+    "powerKw": 94.45491017964072,
     "fuelKind": "petrol",
     "eea_l100": 6.224
   },
@@ -18133,21 +18133,21 @@
   },
   {
     "id": "volkswagen-taigo-2022",
-    "n": 8673,
+    "n": 8676,
     "eea_year": 2022,
     "eea_model": "TAIGO",
     "ft": "PETROL",
-    "powerKw": 81.51089588377724,
+    "powerKw": 81.50818349469802,
     "fuelKind": "petrol",
     "eea_l100": 5.736
   },
   {
     "id": "volkswagen-taigo-2023",
-    "n": 9388,
+    "n": 9389,
     "eea_year": 2023,
     "eea_model": "TAIGO",
     "ft": "PETROL",
-    "powerKw": 82.2019599488709,
+    "powerKw": 82.20066034721482,
     "fuelKind": "petrol",
     "eea_l100": 5.673
   },
@@ -18193,11 +18193,11 @@
   },
   {
     "id": "volkswagen-tiguan-2019",
-    "n": 19865,
+    "n": 19868,
     "eea_year": 2019,
     "eea_model": "TIGUAN",
     "ft": "DIESEL",
-    "powerKw": 104.73632016108733,
+    "powerKw": 104.7371149587276,
     "fuelKind": "diesel",
     "eea_l100": 6.308
   },
@@ -19183,21 +19183,21 @@
   },
   {
     "id": "volvo-xc90-diesel-2017",
-    "n": 1422,
+    "n": 1423,
     "eea_year": 2017,
     "eea_model": "XC90",
     "ft": "DIESEL",
-    "powerKw": 158.61702127659575,
+    "powerKw": 158.6011273754878,
     "fuelKind": "diesel",
     "eea_l100": 8.008
   },
   {
     "id": "volvo-xc90-diesel-2018",
-    "n": 1233,
+    "n": 1234,
     "eea_year": 2018,
     "eea_model": "XC90",
     "ft": "DIESEL",
-    "powerKw": 171.76885644768856,
+    "powerKw": 171.73987034035656,
     "fuelKind": "diesel",
     "eea_l100": 7.931
   },

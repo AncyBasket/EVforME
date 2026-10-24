@@ -83,6 +83,15 @@ SEED_N_CASES = [
     ("ds-ds-3-2025", 280),
     ("jaguar-e-pace-diesel-2021", 2049),
     ("land-rover-discovery-sport-2021", 1216),
+    ("mitsubishi-space-star-2021", 3008),
+    ("mitsubishi-space-star-2022", 1638),
+    ("mitsubishi-space-star-2023", 699),
+    ("ford-fiesta-lpg-2020", 4716),
+    ("ford-fiesta-lpg-2021", 2547),
+    ("land-rover-range-rover-evoque-2019", 6196),
+    ("land-rover-range-rover-evoque-2020", 4366),
+    ("volkswagen-golf-2020", 7602),
+    ("volkswagen-golf-2021", 6856),
 ]
 
 # Bad cited n that must fail (pre-merge / thin-F / pre-Mk-merge stubs).
@@ -92,6 +101,9 @@ SEED_N_MUST_FAIL = [
     ("ds-ds-3-2025", 155),
     ("jaguar-e-pace-diesel-2021", 2048),
     ("land-rover-discovery-sport-2021", 1215),
+    ("ford-fiesta-lpg-2020", 2065),
+    ("mitsubishi-space-star-2022", 1754),
+    ("land-rover-range-rover-evoque-2020", 4363),
 ]
 
 # Labels that must name the counted Cn / list aggregated variants.
@@ -201,19 +213,39 @@ def main() -> int:
         ("DS", ("DS3", 2025, "PETROL"), 280.0),
         ("JAGUAR", ("JAGUAREPACE", 2021, "DIESEL"), 2049.0),
         ("LAND ROVER", ("DISCOVERYSPORT", 2021, "DIESEL"), 1216.0),
+        ("MITSUBISHI", ("SPACESTAR", 2021, "PETROL"), 3008.0),
+        ("MITSUBISHI", ("SPACESTAR", 2022, "PETROL"), 1638.0),
+        ("FORD", ("FIESTA", 2020, "LPG"), 4716.0),
+        ("FORD", ("KUGA", 2019, "DIESEL"), 11907.0),
+        ("FORD", ("KUGA", 2020, "DIESEL"), 6525.0),
+        ("FORD", ("MONDEO", 2019, "DIESEL"), 911.0),
+        ("LAND ROVER", ("RANGEROVEREVOQUE", 2020, "DIESEL"), 4366.0),
+        ("VOLKSWAGEN", ("GOLF", 2020, "PETROL"), 7602.0),
+        ("VOLKSWAGEN", ("GOLF", 2021, "PETROL"), 6856.0),
+        ("VOLKSWAGEN", ("TIGUAN", 2019, "DIESEL"), 19868.0),
+        ("FIAT", ("500", 2023, "PETROL"), 27079.0),
+        ("FIAT", ("500X", 2023, "PETROL"), 13317.0),
     ]
     for brand, key, expect in checks:
         got = float((ice.get(brand) or {}).get(key, {}).get("n") or 0)
         if abs(got - expect) > 0.5:
             failures.append(f"ice_map {brand} {key}: n={got} want {expect}")
 
-    # Brand merge keys: DS AUTOMOBILES ≡ DS; SEAT ≠ CUPRA
+    # Brand merge keys: DS AUTOMOBILES ≡ DS; SEAT ≠ CUPRA; VW ≡ Volkswagen
     if eea.brand_name_merge_key("DS AUTOMOBILES") != eea.brand_name_merge_key("DS"):
         failures.append("brand_name_merge_key: DS AUTOMOBILES must merge with DS")
     if eea.brand_name_merge_key("SEAT") == eea.brand_name_merge_key("CUPRA"):
         failures.append("brand_name_merge_key: SEAT and CUPRA must stay separate")
+    if eea.brand_name_merge_key("VOLKSWAGEN VW") != eea.brand_name_merge_key("VOLKSWAGEN"):
+        failures.append("brand_name_merge_key: VOLKSWAGEN VW must merge with VOLKSWAGEN")
+    if eea.brand_name_merge_key("VW") == eea.brand_name_merge_key("VOLKSWAGEN"):
+        failures.append("brand_name_merge_key: bare VW must NOT merge with VOLKSWAGEN")
+    if eea.brand_name_merge_key("FIAT - INNOCENTI") != eea.brand_name_merge_key("FIAT"):
+        failures.append("brand_name_merge_key: FIAT - INNOCENTI must merge with FIAT")
     if eea.canonical_ice_brand_key("Jaguar   ") != "JAGUAR":
         failures.append("canonical_ice_brand_key: padded Jaguar → JAGUAR")
+    if eea.model_name_merge_key("FIAT 500", "FIAT") != eea.model_name_merge_key("500", "FIAT"):
+        failures.append("model_name_merge_key: FIAT 500 must merge with 500")
 
     s450 = float(
         (ice.get("MERCEDES-BENZ") or {}).get(("S450D4MATIC", 2025, "DIESEL"), {}).get("n") or 0
@@ -239,6 +271,13 @@ def main() -> int:
 
     rows: list[dict] = json.loads(truth.SEED_PATH.read_text(encoding="utf-8"))
     by_id = {r["id"]: r for r in rows}
+
+    # space-star-2022 must not stay provisional once F is available after Mk merge
+    ss22 = by_id.get("mitsubishi-space-star-2022") or {}
+    sn22 = str(ss22.get("sourceName") or "")
+    if "provvisorio" in sn22.casefold():
+        failures.append(f"space-star-2022 must not be provisional after F merge: {sn22}")
+
     for rid, expect_n in SEED_N_CASES:
         row = by_id.get(rid)
         if not row:

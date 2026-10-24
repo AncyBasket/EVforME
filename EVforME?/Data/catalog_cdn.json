@@ -2,11 +2,11 @@
   "url": "",
   "publishedUrl": "https://files.catbox.moe/3i0nro.json",
   "rows": 5654,
-  "bytes": 2848989,
+  "bytes": 2848729,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-24T13:12:55.513814+00:00",
+  "updatedAt": "2026-10-24T18:05:44.958972+00:00",
   "policy": "offline-first",
-  "seedVersion": 51,
-  "note": "seedVersion 51: every EEA n= from Status F (sum F across Mk+Cn strip+casefold and Ft casing; DS≡DS AUTOMOBILES; P only if no F / thin incomplete F); aggregates list full variants — label-only."
+  "seedVersion": 52,
+  "note": "seedVersion 52: every EEA n= from Status F (sum F across Mk aliases+Cn strip+casefold+brand-prefix and Ft casing; P only if no F / thin incomplete F); aggregates list full variants — label-only."
 }

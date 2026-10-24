@@ -1,0 +1,530 @@
+{
+  "skip_fetch": true,
+  "only_empty": false,
+  "cache_refresh": {
+    "skipped": true
+  },
+  "label_n_fixes": 189,
+  "label_n_unresolved": [],
+  "label_n_sample": [
+    {
+      "id": "alfa-romeo-stelvio-diesel-2018",
+      "n_from": 11706,
+      "n_to": 11707,
+      "eea_model": "STELVIO",
+      "ft": "DIESEL",
+      "eea_year": 2018,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "audi-a4-2018",
+      "n_from": 7806,
+      "n_to": 7808,
+      "eea_model": "A4",
+      "ft": "DIESEL",
+      "eea_year": 2018,
+      "status": null,
+      "variants": [
+        "A4 AVANT",
+        "A4 ALLROAD QUATTRO",
+        "A4 LIMOUSINE",
+        "AUDI A4"
+      ]
+    },
+    {
+      "id": "audi-a4-2020",
+      "n_from": 5172,
+      "n_to": 5173,
+      "eea_model": "A4",
+      "ft": "DIESEL",
+      "eea_year": 2020,
+      "status": null,
+      "variants": [
+        "A4 AVANT",
+        "A4 ALLROAD QUATTRO",
+        "A4 LIMOUSINE",
+        "AUDI A4"
+      ]
+    },
+    {
+      "id": "audi-a8-diesel-2018",
+      "n_from": 110,
+      "n_to": 111,
+      "eea_model": "A8",
+      "ft": "DIESEL",
+      "eea_year": 2018,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "audi-a8-diesel-2019",
+      "n_from": 202,
+      "n_to": 203,
+      "eea_model": "A8",
+      "ft": "DIESEL",
+      "eea_year": 2019,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "audi-q3-diesel-2018",
+      "n_from": 6711,
+      "n_to": 6719,
+      "eea_model": "Q3",
+      "ft": "DIESEL",
+      "eea_year": 2018,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "audi-q3-diesel-2019",
+      "n_from": 7835,
+      "n_to": 7836,
+      "eea_model": "Q3",
+      "ft": "DIESEL",
+      "eea_year": 2019,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "audi-q5-diesel-2025",
+      "n_from": 2340,
+      "n_to": 3189,
+      "eea_model": "Q5",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "bmw-1-series-2025",
+      "n_from": 4672,
+      "n_to": 4672,
+      "eea_model": "118D",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "bmw-2-series-2025",
+      "n_from": 1475,
+      "n_to": 1475,
+      "eea_model": "218DACTIVETOURER",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "bmw-4-series-2025",
+      "n_from": 910,
+      "n_to": 910,
+      "eea_model": "420DXDRIVE",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "bmw-x2-2025",
+      "n_from": 739,
+      "n_to": 739,
+      "eea_model": "X2SDRIVE20I",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "fiat-500-2019",
+      "n_from": 29985,
+      "n_to": 29990,
+      "eea_model": "500",
+      "ft": "PETROL",
+      "eea_year": 2019,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-500-2021",
+      "n_from": 32105,
+      "n_to": 32122,
+      "eea_model": "500",
+      "ft": "PETROL",
+      "eea_year": 2021,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-500-2023",
+      "n_from": 27069,
+      "n_to": 27079,
+      "eea_model": "500",
+      "ft": "PETROL",
+      "eea_year": 2023,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-500-2024",
+      "n_from": 14775,
+      "n_to": 14776,
+      "eea_model": "500",
+      "ft": "PETROL",
+      "eea_year": 2024,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-500x-2022",
+      "n_from": 4396,
+      "n_to": 8167,
+      "eea_model": "500X",
+      "ft": "PETROL",
+      "eea_year": 2022,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-500x-diesel-2022",
+      "n_from": 6884,
+      "n_to": 13744,
+      "eea_model": "500X",
+      "ft": "DIESEL",
+      "eea_year": 2022,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-500x-2023",
+      "n_from": 13315,
+      "n_to": 13317,
+      "eea_model": "500X",
+      "ft": "PETROL",
+      "eea_year": 2023,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-500x-diesel-2023",
+      "n_from": 14036,
+      "n_to": 14037,
+      "eea_model": "500X",
+      "ft": "DIESEL",
+      "eea_year": 2023,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-500x-2024",
+      "n_from": 5325,
+      "n_to": 5326,
+      "eea_model": "500X",
+      "ft": "PETROL",
+      "eea_year": 2024,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-500x-diesel-2024",
+      "n_from": 5585,
+      "n_to": 5587,
+      "eea_model": "500X",
+      "ft": "DIESEL",
+      "eea_year": 2024,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-doblo-2019",
+      "n_from": 389,
+      "n_to": 392,
+      "eea_model": "DOBLO",
+      "ft": "PETROL",
+      "eea_year": 2019,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-doblo-diesel-2019",
+      "n_from": 1384,
+      "n_to": 1430,
+      "eea_model": "DOBLO",
+      "ft": "DIESEL",
+      "eea_year": 2019,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-doblo-2024",
+      "n_from": 68,
+      "n_to": 68,
+      "eea_model": "DOBLO",
+      "ft": "DIESEL",
+      "eea_year": 2024,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-doblo-diesel-2024",
+      "n_from": 68,
+      "n_to": 68,
+      "eea_model": "DOBLO",
+      "ft": "DIESEL",
+      "eea_year": 2024,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-doblo-2025",
+      "n_from": 168,
+      "n_to": 168,
+      "eea_model": "DOBLO",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "fiat-doblo-diesel-2025",
+      "n_from": 747,
+      "n_to": 747,
+      "eea_model": "DOBLO",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "fiat-grande-panda-hybrid-2024",
+      "n_from": 97218,
+      "n_to": 97220,
+      "eea_model": "PANDA",
+      "ft": "PETROL",
+      "eea_year": 2024,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-grande-panda-hybrid-2025",
+      "n_from": 110610,
+      "n_to": 110611,
+      "eea_model": "PANDA",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "fiat-panda-2019",
+      "n_from": 109199,
+      "n_to": 109209,
+      "eea_model": "PANDA",
+      "ft": "PETROL",
+      "eea_year": 2019,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-panda-metano-2019",
+      "n_from": 4659,
+      "n_to": 4660,
+      "eea_model": "PANDA",
+      "ft": "NG",
+      "eea_year": 2019,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-panda-2020",
+      "n_from": 96373,
+      "n_to": 96380,
+      "eea_model": "PANDA",
+      "ft": "PETROL",
+      "eea_year": 2020,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-panda-gpl-2020",
+      "n_from": 10601,
+      "n_to": 10603,
+      "eea_model": "PANDA",
+      "ft": "LPG",
+      "eea_year": 2020,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-panda-metano-2020",
+      "n_from": 2899,
+      "n_to": 2903,
+      "eea_model": "PANDA",
+      "ft": "NG",
+      "eea_year": 2020,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-panda-2021",
+      "n_from": 98939,
+      "n_to": 98954,
+      "eea_model": "PANDA",
+      "ft": "PETROL",
+      "eea_year": 2021,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-panda-2022",
+      "n_from": 93407,
+      "n_to": 93411,
+      "eea_model": "PANDA",
+      "ft": "PETROL",
+      "eea_year": 2022,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-panda-2023",
+      "n_from": 95454,
+      "n_to": 95462,
+      "eea_model": "PANDA",
+      "ft": "PETROL",
+      "eea_year": 2023,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-panda-2024",
+      "n_from": 97218,
+      "n_to": 97220,
+      "eea_model": "PANDA",
+      "ft": "PETROL",
+      "eea_year": 2024,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "fiat-panda-2025",
+      "n_from": 110610,
+      "n_to": 110611,
+      "eea_model": "PANDA",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "fiat-tipo-2025",
+      "n_from": 221,
+      "n_to": 221,
+      "eea_model": "TIPO",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "fiat-tipo-diesel-2025",
+      "n_from": 3316,
+      "n_to": 3316,
+      "eea_model": "TIPO",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "fiat-tipo-cross-2025",
+      "n_from": 221,
+      "n_to": 221,
+      "eea_model": "TIPO",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "ford-c-max-diesel-2019",
+      "n_from": 1540,
+      "n_to": 1785,
+      "eea_model": "CMAX",
+      "ft": "DIESEL",
+      "eea_year": 2019,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "ford-fiesta-2019",
+      "n_from": 19861,
+      "n_to": 20239,
+      "eea_model": "FIESTA",
+      "ft": "PETROL",
+      "eea_year": 2019,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "ford-fiesta-diesel-2019",
+      "n_from": 8262,
+      "n_to": 8691,
+      "eea_model": "FIESTA",
+      "ft": "DIESEL",
+      "eea_year": 2019,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "ford-fiesta-lpg-2020",
+      "n_from": 2065,
+      "n_to": 4716,
+      "eea_model": "FIESTA",
+      "ft": "LPG",
+      "eea_year": 2020,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "ford-fiesta-lpg-2021",
+      "n_from": 1328,
+      "n_to": 2547,
+      "eea_model": "FIESTA",
+      "ft": "LPG",
+      "eea_year": 2021,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "ford-focus-diesel-2019",
+      "n_from": 8619,
+      "n_to": 8742,
+      "eea_model": "FOCUS",
+      "ft": "DIESEL",
+      "eea_year": 2019,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "ford-focus-2025",
+      "n_from": 4268,
+      "n_to": 4268,
+      "eea_model": "FOCUS",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    }
+  ],
+  "examples": {
+    "alfa-romeo-stelvio-diesel-2023": null,
+    "kia-ceed-2019": null,
+    "bmw-2-series-2023": null,
+    "hyundai-bayon-2023": null
+  },
+  "seedVersion": 52,
+  "rows": 5654,
+  "bytes": 2848729
+}

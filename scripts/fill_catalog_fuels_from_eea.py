@@ -69,46 +69,182 @@ BRAND_TO_EEA_MK = {
     "CITROËN": "CITROEN",
 }
 
-# Extra EEA Mk spellings that must be queried/merged with the canonical brand.
-# SEAT and CUPRA stay separate (do not list each other here).
+# Canonical brand → EEA Mk spellings to query/merge (plus strip+casefold / trailing spaces).
+# SEAT and CUPRA stay separate. "JAGUAR LAND ROVER LIMITED" is listed under both
+# Jaguar and Land Rover; models are routed by Cn in parse_brand_aggs.
 BRAND_MK_ALIASES: dict[str, list[str]] = {
+    "FIAT": [
+        "FIAT",
+        "FIAT - INNOCENTI",
+        "FIAT GROUP AUTOMOBILES SPA",
+        "FIAT AUTO SPA",
+    ],
+    "LANCIA": ["LANCIA", "LANCIA - AUTOBIANCHI"],
+    "MITSUBISHI": [
+        "MITSUBISHI",
+        "MITSUBISHI MOTORS (THAILAND)",
+        "MITSUBISHI MOTORS THAILAND",
+        "MITSUBISHI MOTORS THAILAND Ltd.",
+        "MITSUBISHI MOTORS CORPORATION",
+        "Mitsubishi Motors (Thailand) C",
+    ],
+    "FORD": ["FORD", "FORD-CNG TECHNIK", "FORD W GMBH"],
+    # Note: bare Mk "VW" is NOT merged (would over-count vs VOLKSWAGEN).
+    # Only the composite spellings listed by review.
+    "VOLKSWAGEN": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN  VW",
+    ],
+    "JAGUAR": ["JAGUAR", "Jaguar", "JAGUAR LAND ROVER LIMITED"],
+    "LAND ROVER": ["LAND ROVER", "Land Rover", "JAGUAR LAND ROVER LIMITED"],
     "DS": ["DS", "DS AUTOMOBILES"],
-    "JAGUAR": ["JAGUAR", "Jaguar"],
-    "LAND ROVER": ["LAND ROVER", "Land Rover"],
+    "BMW": ["BMW", "BMW AG", "BMW I", "BMW i"],
+    "MERCEDES-BENZ": [
+        "MERCEDES-BENZ",
+        "MERCEDES BENZ",
+        "MERCEDES",
+        "MERCEDES-AMG",
+        "MERCEDES AMG",
+    ],
+    "TESLA": ["TESLA", "TESLA MOTORS"],
+    "HYUNDAI": ["HYUNDAI"],
+    "ALFA ROMEO": ["ALFA ROMEO"],
+    "AUDI": ["AUDI"],
+    "CITROEN": ["CITROEN"],
+    "CUPRA": ["CUPRA"],
+    "DACIA": ["DACIA"],
+    "HONDA": ["HONDA"],
+    "JEEP": ["JEEP"],
+    "KIA": ["KIA"],
+    "LEXUS": ["LEXUS"],
+    "MAZDA": ["MAZDA"],
+    "MG": ["MG"],
+    "MINI": ["MINI"],
+    "NISSAN": ["NISSAN"],
+    "OPEL": ["OPEL"],
+    "PEUGEOT": ["PEUGEOT"],
+    "PORSCHE": ["PORSCHE"],
+    "RENAULT": ["RENAULT"],
+    "SEAT": ["SEAT"],
+    "SKODA": ["SKODA"],
+    "SUZUKI": ["SUZUKI"],
+    "TOYOTA": ["TOYOTA"],
+    "VOLVO": ["VOLVO"],
+    "BYD": ["BYD"],
 }
+
+# Short Cn prefixes to strip so "FIAT 500" ≡ "500", "VW GOLF" ≡ "GOLF".
+BRAND_CN_PREFIXES: dict[str, list[str]] = {
+    "FIAT": ["FIAT"],
+    "LANCIA": ["LANCIA"],
+    "FORD": ["FORD"],
+    "VOLKSWAGEN": ["VOLKSWAGEN", "VW"],
+    "MITSUBISHI": ["MITSUBISHI"],
+    "JAGUAR": ["JAGUAR"],
+    "LAND ROVER": ["LANDROVER"],
+    "BMW": ["BMW"],
+    "MERCEDES-BENZ": ["MERCEDESBENZ", "MERCEDESAMG", "MERCEDES"],
+    "DS": ["DS", "DSAUTOMOBILES"],
+    "HYUNDAI": ["HYUNDAI"],
+    "TESLA": ["TESLA", "TESLAMOTORS"],
+    "ALFA ROMEO": ["ALFAROMEO", "ALFA"],
+    "AUDI": ["AUDI"],
+    "CITROEN": ["CITROEN"],
+    "CUPRA": ["CUPRA"],
+    "DACIA": ["DACIA"],
+    "HONDA": ["HONDA"],
+    "JEEP": ["JEEP"],
+    "KIA": ["KIA"],
+    "LEXUS": ["LEXUS"],
+    "MAZDA": ["MAZDA"],
+    "MG": ["MG"],
+    "MINI": ["MINI"],
+    "NISSAN": ["NISSAN"],
+    "OPEL": ["OPEL"],
+    "PEUGEOT": ["PEUGEOT"],
+    "PORSCHE": ["PORSCHE"],
+    "RENAULT": ["RENAULT"],
+    "SEAT": ["SEAT"],
+    "SKODA": ["SKODA"],
+    "SUZUKI": ["SUZUKI"],
+    "TOYOTA": ["TOYOTA"],
+    "VOLVO": ["VOLVO"],
+    "BYD": ["BYD"],
+}
+
+
+def _alias_lookup() -> dict[str, str]:
+    """casefold Mk spelling → canonical casefold key (seat ≠ cupra)."""
+    out: dict[str, str] = {}
+    for canon, aliases in BRAND_MK_ALIASES.items():
+        ck = canon.casefold()
+        out[ck] = ck
+        for a in aliases:
+            out[" ".join(a.split()).casefold()] = ck
+    return out
+
+
+_ALIAS_LOOKUP = _alias_lookup()
 
 
 def brand_name_merge_key(raw: str) -> str:
     """
-    Identity for EEA Mk variants that differ only by case / surrounding spaces.
+    Identity for EEA Mk variants (strip + casefold + explicit aliases).
 
-    "DS AUTOMOBILES" merges with "DS". SEAT and CUPRA stay distinct.
+    DS AUTOMOBILES→ds, FIAT - INNOCENTI→fiat, VW→volkswagen, …
+    SEAT and CUPRA stay distinct. JAGUAR LAND ROVER LIMITED is NOT collapsed here
+    (models are routed per-Cn when parsing Jaguar vs Land Rover caches).
     """
     k = " ".join(str(raw or "").split()).casefold()
-    if k in {"ds", "ds automobiles"}:
-        return "ds"
-    return k
+    if k == "jaguar land rover limited":
+        return k  # ambiguous; handled in parse
+    return _ALIAS_LOOKUP.get(k, k)
 
 
 def canonical_ice_brand_key(raw: str) -> str:
     """Map any Mk / cache filename to the ice_maps key used by seed brand_u."""
     k = brand_name_merge_key(raw)
-    if k == "ds":
-        return "DS"
-    if k == "mercedes-benz":
-        return "MERCEDES-BENZ"
+    if k == "jaguar land rover limited":
+        # Should not own a cache file; callers route by model.
+        return "JAGUAR LAND ROVER LIMITED"
+    special = {
+        "ds": "DS",
+        "mercedes-benz": "MERCEDES-BENZ",
+        "volkswagen": "VOLKSWAGEN",
+        "alfa romeo": "ALFA ROMEO",
+        "land rover": "LAND ROVER",
+    }
+    if k in special:
+        return special[k]
     cleaned = " ".join(str(raw or "").split())
-    if cleaned.upper() == "MERCEDES-BENZ":
+    if cleaned.upper() in {"MERCEDES-BENZ", "MERCEDES BENZ"}:
         return "MERCEDES-BENZ"
+    # Prefer canonical spelling from alias table.
+    for canon, aliases in BRAND_MK_ALIASES.items():
+        if k == canon.casefold() or any(
+            " ".join(a.split()).casefold() == k for a in aliases
+        ):
+            return canon
     return cleaned.upper()
 
 
-def brand_mk_should_clauses(brand: str) -> list[dict]:
-    """Catch Mk casing, trailing spaces, and known aliases (DS AUTOMOBILES, …)."""
+def brand_aliases_for(brand: str) -> list[str]:
     primary = BRAND_TO_EEA_MK.get(brand, brand)
-    names = list(BRAND_MK_ALIASES.get(primary.upper(), [primary]))
-    if primary not in names:
+    primary_u = primary.upper() if primary != "MERCEDES-BENZ" else "MERCEDES-BENZ"
+    # Normalize mercedes keys
+    if primary_u.replace(" ", "-") == "MERCEDES-BENZ" or primary_u == "MERCEDES BENZ":
+        primary_u = "MERCEDES-BENZ"
+    names = list(BRAND_MK_ALIASES.get(primary_u, BRAND_MK_ALIASES.get(primary, [primary])))
+    if primary not in names and primary_u not in names:
         names.insert(0, primary)
+    return names
+
+
+def brand_mk_should_clauses(brand: str) -> list[dict]:
+    """Catch Mk casing, trailing spaces, and known aliases."""
+    names = brand_aliases_for(brand)
     should: list[dict] = []
     seen: set[str] = set()
     for name in names:
@@ -117,9 +253,59 @@ def brand_mk_should_clauses(brand: str) -> list[dict]:
                 continue
             seen.add(candidate)
             should.append({"term": {"Mk": candidate}})
-            # Trailing-space / padded Mk (Jaguar / Land Rover in IT index).
+            # Trailing-space / padded Mk (Jaguar / Land Rover / Hyundai in IT index).
             should.append({"wildcard": {"Mk": candidate + "*"}})
     return should
+
+
+def jlr_model_owner(model_raw: str) -> str | None:
+    """Route JAGUAR LAND ROVER LIMITED Cn → JAGUAR or LAND ROVER."""
+    mn = norm_alnum(model_raw)
+    lr_markers = (
+        "RANGEROVER",
+        "DISCOVERY",
+        "DEFENDER",
+        "EVOQUE",
+        "VELAR",
+        "LANDROVER",
+    )
+    if any(m in mn for m in lr_markers):
+        return "LAND ROVER"
+    jag_markers = (
+        "JAGUAR",
+        "EPACE",
+        "FPACE",
+        "IPACE",
+        "FTYPE",
+        "XETYPE",
+        "XEL",
+        "XFL",
+    )
+    if any(m in mn for m in jag_markers):
+        return "JAGUAR"
+    # Bare XE / XF / XJ / XK (not X3 etc.)
+    if mn in {"XE", "XF", "XJ", "XK"} or mn.startswith(("XE", "XF", "XJ", "XK")):
+        if not mn.startswith("X3") and not mn.startswith("X5"):
+            return "JAGUAR"
+    if "PACE" in mn:
+        return "JAGUAR"
+    return None
+
+
+def model_accepted_for_brand(model_raw: str, brand: str) -> bool:
+    """Drop cross-brand Cn when querying shared JAGUAR LAND ROVER LIMITED Mk."""
+    b = canonical_ice_brand_key(brand)
+    if b not in {"JAGUAR", "LAND ROVER"}:
+        return True
+    owner = jlr_model_owner(model_raw)
+    if owner is None:
+        return True
+    return owner == b
+
+
+def brand_alias_report() -> dict[str, list[str]]:
+    """Canonical → aliases for PR / docs (stable order)."""
+    return {k: list(v) for k, v in sorted(BRAND_MK_ALIASES.items())}
 
 
 # Curated true ghosts only (manual review). Do NOT auto-drop Fiat 500 MHEV, Panda CNG, etc.
@@ -399,15 +585,27 @@ def _combine_status_metrics(parts: list[dict], status: str) -> dict:
     }
 
 
-def model_name_merge_key(raw: str) -> str:
+def model_name_merge_key(raw: str, brand: str | None = None) -> str:
     """
-    Identity for EEA Cn variants that differ only by case / surrounding spaces.
+    Identity for EEA Cn variants that differ only by case / spaces / brand prefix.
 
     EEA often splits the same model across Status F vs P with different Cn spelling
-    ("X3 xDrive20d" / "X3 XDRIVE20D", "320d" / "320D", "I10" / "I10 ").
-    strip + casefold (+ collapse internal whitespace via alnum) before summing F.
+    ("X3 xDrive20d" / "X3 XDRIVE20D", "FIAT 500" / "500"). strip + casefold via
+    alnum, then strip manufacturer prefix when `brand` is known.
     """
-    return norm_alnum(raw)
+    mk = norm_alnum(raw)
+    if not mk:
+        return mk
+    if brand:
+        canon = canonical_ice_brand_key(brand)
+        prefixes = list(BRAND_CN_PREFIXES.get(canon, [norm_alnum(canon)]))
+        brand_n = norm_alnum(canon)
+        if brand_n and brand_n not in prefixes:
+            prefixes.append(brand_n)
+        for p in sorted({p for p in prefixes if p}, key=len, reverse=True):
+            if mk.startswith(p) and len(mk) > len(p):
+                return mk[len(p) :]
+    return mk
 
 
 def dedupe_fuel_buckets(fuel_buckets: list[dict]) -> dict[str, dict]:
@@ -470,22 +668,24 @@ def parse_brand_aggs(data_wrap: dict, brand: str) -> dict[tuple[str, int, str], 
     """
     (model_norm, year, ft) → {n, co2, kw, model_raw, status}.
 
-    Cn variants that share model_name_merge_key (strip/casefold/alnum) are pooled
-    before Status F preference, so F counts sum across "320d"/"320D" etc. Indexes
-    both raw Cn and brand-stripped Cn.
+    Cn variants that share model_name_merge_key (case/spaces/brand prefix) are
+    pooled before Status F preference. Indexes both merge key and brand-stripped
+    key. JAGUAR LAND ROVER LIMITED models are kept only for the matching brand.
     """
     from collections import defaultdict
 
     resp = data_wrap.get("response", data_wrap)
     fetched_at = str(data_wrap.get("_fetched_at") or "")
-    brand_n = norm_alnum(brand)
+    brand_n = norm_alnum(canonical_ice_brand_key(brand))
     out: dict[tuple[str, int, str], dict] = {}
 
-    # Group model buckets that are the same Cn under strip+casefold / alnum.
+    # Group model buckets that are the same Cn under strip+casefold / brand prefix.
     by_merge: dict[str, list[dict]] = defaultdict(list)
     for mb in resp.get("aggregations", {}).get("models", {}).get("buckets", []):
         raw = str(mb.get("key", ""))
-        mk = model_name_merge_key(raw)
+        if not model_accepted_for_brand(raw, brand):
+            continue
+        mk = model_name_merge_key(raw, brand)
         if mk:
             by_merge[mk].append(mb)
 
@@ -525,12 +725,17 @@ def parse_brand_aggs(data_wrap: dict, brand: str) -> dict[tuple[str, int, str], 
             for yb in mb.get("years", {}).get("buckets", []):
                 years[int(yb.get("key"))].extend(yb.get("fuels", {}).get("buckets") or [])
 
-        stripped = strip_brand_prefix(merge_key, brand_n)
+        # merge_key is already brand-prefix-stripped; also index under full alnum
+        # of the preferred display name for match_model lookups.
+        display_n = norm_alnum(display_raw)
         for year, fuel_buckets in years.items():
             fuels = dedupe_fuel_buckets(fuel_buckets)
             for ft, payload in fuels.items():
                 put(merge_key, year, ft, payload, display_raw)
-                if stripped != merge_key:
+                if display_n and display_n != merge_key:
+                    put(display_n, year, ft, payload, display_raw)
+                stripped = strip_brand_prefix(display_n or merge_key, brand_n)
+                if stripped and stripped not in {merge_key, display_n}:
                     put(stripped, year, ft, payload, display_raw)
     return out
 
