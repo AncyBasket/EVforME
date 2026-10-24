@@ -322,13 +322,29 @@ def _combine_status_metrics(parts: list[dict], status: str) -> dict:
     }
 
 
+def model_name_merge_key(raw: str) -> str:
+    """
+    Identity for EEA Cn variants that differ only by case / surrounding spaces.
+
+    EEA often splits the same model across Status F vs P with different Cn spelling
+    ("X3 xDrive20d" / "X3 XDRIVE20D", "320d" / "320D", "I10" / "I10 ").
+    strip + casefold (+ collapse internal whitespace via alnum) before summing F.
+    """
+    return norm_alnum(raw)
+
+
 def dedupe_fuel_buckets(fuel_buckets: list[dict]) -> dict[str, dict]:
     """
     Merge Ft buckets that normalize to the same key (e.g. DIESEL vs diesel / Diesel).
 
-    2022 often splits Status F and P across Ft casing. Sum only F across casings
-    (Captur diesel: Diesel F=20662 + DIESEL F=34 → 20696). If no F exists on any
-    casing, use P. Never sum F+P and never let a larger P beat a smaller F.
+    Also used after model-name merge: pass every Ft bucket from every Cn casing
+    variant for the same year. Sum only F across casings (Captur diesel:
+    Diesel F=20662 + DIESEL F=34 → 20696; X3: F=4 + F=3145 → 3149). If no F
+    exists on any casing, use P. Never sum F+P and never let a larger P beat a
+    smaller complete F.
+
+    Thin incomplete F (F<30, P≥100, P>5·F) — e.g. Hyundai I10/I20 2021 where
+    final Status F is still a stub — falls back to P (provvisorio).
     """
     from collections import defaultdict
 
@@ -350,7 +366,18 @@ def dedupe_fuel_buckets(fuel_buckets: list[dict]) -> dict[str, dict]:
     merged: dict[str, dict] = {}
     for key, st_pools in pools.items():
         if st_pools["F"]:
-            merged[key] = _combine_status_metrics(st_pools["F"], "F")
+            f_m = _combine_status_metrics(st_pools["F"], "F")
+            if st_pools["P"]:
+                p_m = _combine_status_metrics(st_pools["P"], "P")
+                # Incomplete F finalization still mirrored under P (I10 2021 etc.).
+                if (
+                    f_m["n"] < 30
+                    and p_m["n"] >= 100
+                    and p_m["n"] > f_m["n"] * 5
+                ):
+                    merged[key] = p_m
+                    continue
+            merged[key] = f_m
         elif st_pools["P"]:
             merged[key] = _combine_status_metrics(st_pools["P"], "P")
     return merged
@@ -364,12 +391,26 @@ def strip_brand_prefix(model_norm: str, brand_norm: str) -> str:
 
 def parse_brand_aggs(data_wrap: dict, brand: str) -> dict[tuple[str, int, str], dict]:
     """
-    (model_norm, year, ft) → {n, co2, kw, model_raw}.
-    Indexes both raw Cn and brand-stripped Cn; keeps max-n cell on collision.
+    (model_norm, year, ft) → {n, co2, kw, model_raw, status}.
+
+    Cn variants that share model_name_merge_key (strip/casefold/alnum) are pooled
+    before Status F preference, so F counts sum across "320d"/"320D" etc. Indexes
+    both raw Cn and brand-stripped Cn.
     """
+    from collections import defaultdict
+
     resp = data_wrap.get("response", data_wrap)
+    fetched_at = str(data_wrap.get("_fetched_at") or "")
     brand_n = norm_alnum(brand)
     out: dict[tuple[str, int, str], dict] = {}
+
+    # Group model buckets that are the same Cn under strip+casefold / alnum.
+    by_merge: dict[str, list[dict]] = defaultdict(list)
+    for mb in resp.get("aggregations", {}).get("models", {}).get("buckets", []):
+        raw = str(mb.get("key", ""))
+        mk = model_name_merge_key(raw)
+        if mk:
+            by_merge[mk].append(mb)
 
     def put(model_n: str, year: int, ft: str, payload: dict, model_raw: str) -> None:
         if not model_n:
@@ -380,22 +421,40 @@ def parse_brand_aggs(data_wrap: dict, brand: str) -> dict[tuple[str, int, str], 
             "co2": payload["co2"],
             "kw": payload["kw"],
             "model_raw": model_raw,
+            "status": payload.get("status"),
+            "fetched_at": fetched_at,
         }
         prev = out.get(key)
+        # Same logical Cn already merged; brand-stripped alias keeps max-n only
+        # when a longer prefixed key collided (should be equal after merge).
         if prev is None or cell["n"] > prev["n"]:
             out[key] = cell
 
-    for mb in resp.get("aggregations", {}).get("models", {}).get("buckets", []):
-        model_raw = str(mb.get("key", ""))
-        model_n = norm_alnum(model_raw)
-        stripped = strip_brand_prefix(model_n, brand_n)
-        for yb in mb.get("years", {}).get("buckets", []):
-            year = int(yb.get("key"))
-            fuels = dedupe_fuel_buckets(yb.get("fuels", {}).get("buckets", []))
+    for merge_key, mbs in by_merge.items():
+        # Prefer the display Cn with the largest combined enrolment.
+        def _mb_weight(mb: dict) -> float:
+            total = 0.0
+            for yb in mb.get("years", {}).get("buckets", []):
+                for fb in yb.get("fuels", {}).get("buckets", []):
+                    for s in (fb.get("status") or {}).get("buckets") or []:
+                        total += _status_n(s)
+            return total
+
+        mbs_sorted = sorted(mbs, key=_mb_weight, reverse=True)
+        display_raw = str(mbs_sorted[0].get("key", ""))
+
+        years: dict[int, list[dict]] = defaultdict(list)
+        for mb in mbs:
+            for yb in mb.get("years", {}).get("buckets", []):
+                years[int(yb.get("key"))].extend(yb.get("fuels", {}).get("buckets") or [])
+
+        stripped = strip_brand_prefix(merge_key, brand_n)
+        for year, fuel_buckets in years.items():
+            fuels = dedupe_fuel_buckets(fuel_buckets)
             for ft, payload in fuels.items():
-                put(model_n, year, ft, payload, model_raw)
-                if stripped != model_n:
-                    put(stripped, year, ft, payload, model_raw)
+                put(merge_key, year, ft, payload, display_raw)
+                if stripped != merge_key:
+                    put(stripped, year, ft, payload, display_raw)
     return out
 
 

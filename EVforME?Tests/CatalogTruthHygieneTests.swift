@@ -157,7 +157,7 @@ final class CatalogTruthHygieneTests: XCTestCase {
         let ceed = VehicleCatalogService.shared.vehicle(by: "kia-ceed-2019")
         XCTAssertNotNil(ceed)
         let ceedSrc = ceed?.sourceName ?? ""
-        XCTAssertTrue(ceedSrc.contains("n=1297"), "Ceed 2019 Status F n=1297 not 1788: \(ceedSrc)")
+        XCTAssertTrue(ceedSrc.contains("n=1298"), "Ceed 2019 Status F n=1298 (CEED+CEE'D) not 1788: \(ceedSrc)")
         XCTAssertFalse(ceedSrc.contains("n=1788"), ceedSrc)
     }
 

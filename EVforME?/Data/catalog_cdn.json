@@ -2,11 +2,11 @@
   "url": "",
   "publishedUrl": "https://files.catbox.moe/3i0nro.json",
   "rows": 5654,
-  "bytes": 2841752,
+  "bytes": 2848989,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-24T07:51:37.988072+00:00",
+  "updatedAt": "2026-10-24T08:43:34.367702+00:00",
   "policy": "offline-first",
-  "seedVersion": 49,
-  "note": "seedVersion 49: every EEA n= from Status F (sum F across Ft casing; P only if no F); aggregates list variants — label-only."
+  "seedVersion": 50,
+  "note": "seedVersion 50: every EEA n= from Status F (sum F across Cn strip+casefold and Ft casing; P only if no F / thin incomplete F); aggregates list full variants — label-only."
 }
