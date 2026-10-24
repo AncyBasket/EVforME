@@ -1,0 +1,60 @@
+{
+  "skip_fetch": true,
+  "only_empty": false,
+  "cache_refresh": {
+    "skipped": true
+  },
+  "label_n_fixes": 4,
+  "label_n_unresolved": [],
+  "label_n_sample": [
+    {
+      "id": "ds-ds-3-2025",
+      "n_from": 155,
+      "n_to": 280,
+      "eea_model": "DS3",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "jaguar-e-pace-diesel-2021",
+      "n_from": 2048,
+      "n_to": 2049,
+      "eea_model": "EPACE",
+      "ft": "DIESEL",
+      "eea_year": 2021,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "jaguar-xe-diesel-2019",
+      "n_from": 621,
+      "n_to": 623,
+      "eea_model": "XE",
+      "ft": "DIESEL",
+      "eea_year": 2019,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "land-rover-discovery-sport-2021",
+      "n_from": 1215,
+      "n_to": 1216,
+      "eea_model": "DISCOVERYSPORT",
+      "ft": "DIESEL",
+      "eea_year": 2021,
+      "status": "F",
+      "variants": null
+    }
+  ],
+  "examples": {
+    "alfa-romeo-stelvio-diesel-2023": null,
+    "kia-ceed-2019": null,
+    "bmw-2-series-2023": null,
+    "hyundai-bayon-2023": null
+  },
+  "seedVersion": 51,
+  "rows": 5654,
+  "bytes": 2848989
+}

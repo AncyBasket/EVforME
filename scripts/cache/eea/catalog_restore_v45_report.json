@@ -1,0 +1,1000 @@
+{
+  "before": 5616,
+  "restored_eea": [
+    {
+      "id": "mercedes-benz-c-class-2022",
+      "eea_model": "C220D",
+      "ft": "DIESEL",
+      "n": 2436.0,
+      "eea_year": 2022
+    },
+    {
+      "id": "mercedes-benz-c-class-2023",
+      "eea_model": "C220D",
+      "ft": "DIESEL",
+      "n": 1412.0,
+      "eea_year": 2023
+    },
+    {
+      "id": "mercedes-benz-c-class-2024",
+      "eea_model": "C200D",
+      "ft": "DIESEL",
+      "n": 1690.0,
+      "eea_year": 2024
+    },
+    {
+      "id": "mercedes-benz-c-class-2025",
+      "eea_model": "C220D4MATIC",
+      "ft": "DIESEL",
+      "n": 673.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "mercedes-benz-c-class-2026",
+      "eea_model": "C220D4MATIC",
+      "ft": "DIESEL",
+      "n": 673.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "mercedes-benz-e-class-2022",
+      "eea_model": "E220D4MATIC",
+      "ft": "DIESEL",
+      "n": 536.0,
+      "eea_year": 2022
+    },
+    {
+      "id": "mercedes-benz-e-class-2023",
+      "eea_model": "E220D",
+      "ft": "DIESEL",
+      "n": 376.0,
+      "eea_year": 2023
+    },
+    {
+      "id": "mercedes-benz-e-class-2024",
+      "eea_model": "E220D",
+      "ft": "DIESEL",
+      "n": 1290.0,
+      "eea_year": 2024
+    },
+    {
+      "id": "mercedes-benz-e-class-2025",
+      "eea_model": "E220D4MATIC",
+      "ft": "DIESEL",
+      "n": 393.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "mercedes-benz-e-class-2026",
+      "eea_model": "E220D4MATIC",
+      "ft": "DIESEL",
+      "n": 393.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "mercedes-benz-s-class-2022",
+      "eea_model": "S400D4MATIC",
+      "ft": "DIESEL",
+      "n": 246.0,
+      "eea_year": 2022
+    },
+    {
+      "id": "mercedes-benz-s-class-2023",
+      "eea_model": "S350D4MATIC",
+      "ft": "DIESEL",
+      "n": 268.0,
+      "eea_year": 2023
+    },
+    {
+      "id": "mercedes-benz-s-class-2024",
+      "eea_model": "S350D4MATIC",
+      "ft": "DIESEL",
+      "n": 128.0,
+      "eea_year": 2024
+    },
+    {
+      "id": "mercedes-benz-s-class-2025",
+      "eea_model": "S450D4MATIC",
+      "ft": "DIESEL",
+      "n": 54.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "mercedes-benz-s-class-2026",
+      "eea_model": "S450D4MATIC",
+      "ft": "DIESEL",
+      "n": 54.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "mercedes-benz-a-class-2026",
+      "eea_model": "A180D",
+      "ft": "DIESEL",
+      "n": 3460.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "mercedes-benz-b-class-2026",
+      "eea_model": "B180D",
+      "ft": "DIESEL",
+      "n": 836.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "mini-hatch-2022",
+      "eea_model": "COOPER",
+      "ft": "PETROL",
+      "n": 3879.0,
+      "eea_year": 2022
+    },
+    {
+      "id": "mini-hatch-2023",
+      "eea_model": "COOPER",
+      "ft": "PETROL",
+      "n": 11186.0,
+      "eea_year": 2023
+    },
+    {
+      "id": "mini-hatch-2024",
+      "eea_model": "COOPER",
+      "ft": "PETROL",
+      "n": 6212.0,
+      "eea_year": 2024
+    },
+    {
+      "id": "mini-hatch-2025",
+      "eea_model": "COOPERC",
+      "ft": "PETROL",
+      "n": 4260.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "mini-hatch-2026",
+      "eea_model": "COOPERC",
+      "ft": "PETROL",
+      "n": 4260.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "mazda-cx-60-2026",
+      "eea_model": "CX60",
+      "ft": "DIESEL",
+      "n": 2196.0,
+      "eea_year": 2023
+    },
+    {
+      "id": "volkswagen-arteon-2022",
+      "eea_model": "ARTEON",
+      "ft": "DIESEL",
+      "n": 540.0,
+      "eea_year": 2019
+    },
+    {
+      "id": "volkswagen-arteon-2023",
+      "eea_model": "ARTEON",
+      "ft": "DIESEL",
+      "n": 540.0,
+      "eea_year": 2019
+    },
+    {
+      "id": "volkswagen-arteon-2024",
+      "eea_model": "ARTEON",
+      "ft": "DIESEL",
+      "n": 540.0,
+      "eea_year": 2019
+    },
+    {
+      "id": "jeep-grand-cherokee-2024",
+      "eea_model": "GRANDCHEROKEE",
+      "ft": "DIESEL",
+      "n": 1476.0,
+      "eea_year": 2019
+    },
+    {
+      "id": "land-rover-range-rover-evoque-2025",
+      "eea_model": "RANGEROVEREVOQUE",
+      "ft": "DIESEL",
+      "n": 1108.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "land-rover-range-rover-evoque-2026",
+      "eea_model": "RANGEROVEREVOQUE",
+      "ft": "DIESEL",
+      "n": 15496.0,
+      "eea_year": 2017
+    },
+    {
+      "id": "toyota-land-cruiser-2022",
+      "eea_model": "LANDCRUISER150SERIES",
+      "ft": "DIESEL",
+      "n": 528.0,
+      "eea_year": 2022
+    },
+    {
+      "id": "toyota-land-cruiser-2023",
+      "eea_model": "LANDCRUISER150SERIES",
+      "ft": "DIESEL",
+      "n": 239.0,
+      "eea_year": 2023
+    },
+    {
+      "id": "mitsubishi-outlander-2022",
+      "eea_model": "OUTLANDER",
+      "ft": "DIESEL",
+      "n": 960.0,
+      "eea_year": 2017
+    },
+    {
+      "id": "mitsubishi-outlander-2023",
+      "eea_model": "OUTLANDER",
+      "ft": "DIESEL",
+      "n": 960.0,
+      "eea_year": 2017
+    },
+    {
+      "id": "mitsubishi-outlander-2024",
+      "eea_model": "OUTLANDER",
+      "ft": "DIESEL",
+      "n": 960.0,
+      "eea_year": 2017
+    },
+    {
+      "id": "mitsubishi-asx-2022",
+      "eea_model": "ASX",
+      "ft": "PETROL",
+      "n": 2784.0,
+      "eea_year": 2019
+    },
+    {
+      "id": "mitsubishi-asx-2023",
+      "eea_model": "ASX",
+      "ft": "PETROL",
+      "n": 2784.0,
+      "eea_year": 2019
+    },
+    {
+      "id": "nissan-navara-2022",
+      "eea_model": "NAVARASW",
+      "ft": "DIESEL",
+      "n": 56.0,
+      "eea_year": 2018
+    },
+    {
+      "id": "nissan-navara-2023",
+      "eea_model": "NAVARASW",
+      "ft": "DIESEL",
+      "n": 56.0,
+      "eea_year": 2018
+    },
+    {
+      "id": "nissan-navara-2024",
+      "eea_model": "NAVARASW",
+      "ft": "DIESEL",
+      "n": 56.0,
+      "eea_year": 2018
+    },
+    {
+      "id": "nissan-navara-2025",
+      "eea_model": "NAVARASW",
+      "ft": "DIESEL",
+      "n": 56.0,
+      "eea_year": 2018
+    },
+    {
+      "id": "nissan-navara-2026",
+      "eea_model": "NAVARASW",
+      "ft": "DIESEL",
+      "n": 56.0,
+      "eea_year": 2018
+    },
+    {
+      "id": "kia-rio-2024",
+      "eea_model": "RIO",
+      "ft": "DIESEL",
+      "n": 9412.0,
+      "eea_year": 2017
+    },
+    {
+      "id": "nissan-micra-2024",
+      "eea_model": "MICRA",
+      "ft": "PETROL",
+      "n": 16938.0,
+      "eea_year": 2017
+    },
+    {
+      "id": "renault-scenic-2024",
+      "eea_model": "SCENICETECHELECTRIC",
+      "ft": "ELECTRIC",
+      "n": 898.0,
+      "eea_year": 2024
+    },
+    {
+      "id": "volkswagen-touareg-2024",
+      "eea_model": "TOUAREG",
+      "ft": "DIESEL",
+      "n": 634.0,
+      "eea_year": 2024
+    },
+    {
+      "id": "ds-ds-7-2024",
+      "eea_model": "DS7",
+      "ft": "DIESEL",
+      "n": 5854.0,
+      "eea_year": 2024
+    },
+    {
+      "id": "renault-koleos-2023",
+      "eea_model": "KOLEOS",
+      "ft": "DIESEL",
+      "n": 3188.0,
+      "eea_year": 2018
+    },
+    {
+      "id": "renault-koleos-2024",
+      "eea_model": "KOLEOS",
+      "ft": "DIESEL",
+      "n": 3188.0,
+      "eea_year": 2018
+    },
+    {
+      "id": "lexus-is-2023",
+      "eea_model": "IS300H",
+      "ft": "PETROL",
+      "n": 122.0,
+      "eea_year": 2019
+    },
+    {
+      "id": "lexus-is-2024",
+      "eea_model": "IS300H",
+      "ft": "PETROL",
+      "n": 122.0,
+      "eea_year": 2019
+    },
+    {
+      "id": "suzuki-s-cross-2022",
+      "eea_model": "SCROSS",
+      "ft": "PETROL",
+      "n": 5108.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "suzuki-s-cross-2023",
+      "eea_model": "SCROSS",
+      "ft": "PETROL",
+      "n": 5108.0,
+      "eea_year": 2025
+    },
+    {
+      "id": "suzuki-jimny-2023",
+      "eea_model": "JIMNY",
+      "ft": "PETROL",
+      "n": 7520.0,
+      "eea_year": 2019
+    },
+    {
+      "id": "suzuki-jimny-2024",
+      "eea_model": "JIMNY",
+      "ft": "PETROL",
+      "n": 7520.0,
+      "eea_year": 2019
+    },
+    {
+      "id": "mg-mg3-2022",
+      "eea_model": "MG3HYBRID",
+      "ft": "PETROL",
+      "n": 8420.0,
+      "eea_year": 2024
+    },
+    {
+      "id": "mg-mg3-2023",
+      "eea_model": "MG3HYBRID",
+      "ft": "PETROL",
+      "n": 8420.0,
+      "eea_year": 2024
+    },
+    {
+      "id": "opel-insignia-2022",
+      "eea_model": "INSIGNIASPORTSTOURER",
+      "ft": "DIESEL",
+      "n": 258.0,
+      "eea_year": 2022
+    }
+  ],
+  "restored_stima": [
+    {
+      "id": "mini-convertible-2022",
+      "eea_model": "MINICOOPERSCABRIO",
+      "ft": "PETROL",
+      "n": 2.0,
+      "eea_year": 2020
+    },
+    {
+      "id": "mini-convertible-2023",
+      "eea_model": "MINICOOPERSCABRIO",
+      "ft": "PETROL",
+      "n": 2.0,
+      "eea_year": 2020
+    },
+    {
+      "id": "mini-convertible-2024",
+      "eea_model": "MINICOOPERSCABRIO",
+      "ft": "PETROL",
+      "n": 2.0,
+      "eea_year": 2020
+    },
+    {
+      "id": "mini-convertible-2025",
+      "eea_model": "MINICOOPERSCABRIO",
+      "ft": "PETROL",
+      "n": 2.0,
+      "eea_year": 2020
+    },
+    {
+      "id": "mini-convertible-2026",
+      "eea_model": "MINICOOPERSCABRIO",
+      "ft": "PETROL",
+      "n": 2.0,
+      "eea_year": 2020
+    },
+    {
+      "id": "mazda-cx-60-2022",
+      "eea_model": "CX60",
+      "ft": "PETROL/ELECTRIC",
+      "n": 526.0,
+      "eea_year": 2022
+    },
+    {
+      "id": "jeep-grand-cherokee-2023",
+      "eea_model": "GRANDCHEROKEE",
+      "ft": "PETROL/ELECTRIC",
+      "n": 620.0,
+      "eea_year": 2023
+    },
+    {
+      "id": "mitsubishi-eclipse-cross-2022",
+      "eea_model": "ECLIPSECROSS",
+      "ft": "PETROL/ELECTRIC",
+      "n": 439.0,
+      "eea_year": 2022
+    },
+    {
+      "id": "mitsubishi-eclipse-cross-2023",
+      "eea_model": "ECLIPSECROSS",
+      "ft": "PETROL/ELECTRIC",
+      "n": 339.0,
+      "eea_year": 2023
+    },
+    {
+      "id": "mitsubishi-eclipse-cross-2024",
+      "eea_model": "ECLIPSECROSS",
+      "ft": "PETROL/ELECTRIC",
+      "n": 45.0,
+      "eea_year": 2024
+    },
+    {
+      "id": "toyota-prius-2024",
+      "eea_model": "PRIUSPHEV",
+      "ft": "PETROL/ELECTRIC",
+      "n": 452.0,
+      "eea_year": 2024
+    },
+    {
+      "id": "peugeot-408-2022",
+      "eea_model": "408",
+      "ft": "PETROL/ELECTRIC",
+      "n": 96.0,
+      "eea_year": 2022
+    }
+  ],
+  "missing_in_pre_truth": [],
+  "renamed_active_tourer": 5,
+  "intentional_exclusions_sample": [
+    {
+      "id": "audi-100-2022",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-100-2023",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-100-2024",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-100-2025",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-100-2026",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-200-2022",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-200-2023",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-200-2024",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-200-2025",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-200-2026",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-4000-2022",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-4000-2023",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-4000-2024",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-4000-2025",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-4000-2026",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-5000-2022",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-5000-2023",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-5000-2024",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-5000-2025",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-5000-2026",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-80-2022",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-80-2023",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-80-2024",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-80-2025",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-80-2026",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-90-2022",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-90-2023",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-90-2024",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-90-2025",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "audi-90-2026",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "bmw-128i-2022",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-128i-2023",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-128i-2024",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-128i-2025",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-128i-2026",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-1m-2022",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-1m-2023",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-1m-2024",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-1m-2025",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-1m-2026",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-228-2022",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "bmw-228-2023",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "bmw-228-2024",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "bmw-228-2025",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "bmw-228-2026",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "bmw-228i-2022",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-228i-2023",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-228i-2024",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-228i-2025",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-228i-2026",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-318ic-2022",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-318ic-2025",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-318ic-2026",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-318is-2022",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-318is-2025",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-318is-2026",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-318ti-2022",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-318ti-2023",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-318ti-2024",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-318ti-2025",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-318ti-2026",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "bmw-323i-2022",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "bmw-323i-2023",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "bmw-323i-2024",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "bmw-323i-2025",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "bmw-323i-2026",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "ford-aerostar-2022",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "ford-aerostar-2023",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "ford-aerostar-2024",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "ford-aerostar-2025",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "ford-aerostar-2026",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "ford-affordable-aluminum-2022",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "ford-affordable-aluminum-2023",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "ford-affordable-aluminum-2024",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "ford-affordable-aluminum-2025",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "ford-affordable-aluminum-2026",
+      "reason": "modello fantasma / morto (dead-model filter)"
+    },
+    {
+      "id": "ford-aspire-2022",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "ford-aspire-2023",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "ford-aspire-2024",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    },
+    {
+      "id": "ford-aspire-2025",
+      "reason": "US-only / non-IT / fantasma già escluso in catalog-truth"
+    }
+  ],
+  "propagated_2026": [
+    {
+      "id": "mercedes-benz-b-class-2026",
+      "from": "mercedes-benz-b-class-2025",
+      "l100_from": 5.26,
+      "l100_to": 6.28
+    },
+    {
+      "id": "land-rover-range-rover-evoque-2026",
+      "from": "land-rover-range-rover-evoque-2025",
+      "l100_from": 6.62,
+      "l100_to": 6.48
+    },
+    {
+      "id": "nissan-navara-2026",
+      "from": "nissan-navara-2025",
+      "l100_from": 7.81,
+      "l100_to": 7.87
+    }
+  ],
+  "after": 5685,
+  "intentional_exclusions_note": "Elenco completo esclusi: US-only, dead/aggregate, e gap non richiesti in questa PR. Sample 80 voci.",
+  "seedVersion": 45,
+  "rows": 5685,
+  "bytes": 2849899,
+  "intentional_left_out": {
+    "fantasma": [
+      "audi-100-2022",
+      "audi-100-2023",
+      "audi-100-2024",
+      "audi-100-2025",
+      "audi-100-2026",
+      "mercedes-benz-190-2022",
+      "mercedes-benz-190-2023",
+      "mercedes-benz-190-2024",
+      "mercedes-benz-190-2025",
+      "mercedes-benz-190-2026"
+    ],
+    "US-only (non venduta IT come 128i recente)": [
+      "bmw-128i-2022",
+      "bmw-128i-2023",
+      "bmw-128i-2024",
+      "bmw-128i-2025",
+      "bmw-128i-2026"
+    ],
+    "modello speciale/raro non richiesto": [
+      "bmw-1m-2022",
+      "bmw-1m-2023",
+      "bmw-1m-2024",
+      "bmw-1m-2025",
+      "bmw-1m-2026"
+    ],
+    "dead-model filter (fantasma)": [
+      "bmw-228-2022",
+      "bmw-228-2023",
+      "bmw-228-2024",
+      "bmw-228-2025",
+      "bmw-228-2026",
+      "bmw-323i-2022",
+      "bmw-323i-2023",
+      "bmw-323i-2024",
+      "bmw-323i-2025",
+      "bmw-323i-2026"
+    ],
+    "fuori produzione / non IT volume": [
+      "bmw-318ti-2022",
+      "bmw-318ti-2023",
+      "bmw-318ti-2024",
+      "bmw-318ti-2025",
+      "bmw-318ti-2026"
+    ],
+    "non in priorità restore di questa PR": [
+      "ds-ds-9-2022",
+      "ds-ds-9-2023"
+    ],
+    "US-only / fuori produzione": [
+      "ford-aerostar-2022",
+      "ford-aerostar-2023",
+      "ford-aerostar-2024",
+      "ford-aerostar-2025",
+      "ford-aerostar-2026"
+    ],
+    "US-only": [
+      "ford-aspire-2022",
+      "ford-aspire-2023",
+      "ford-aspire-2024",
+      "ford-aspire-2025",
+      "ford-aspire-2026",
+      "ford-bronco-2022",
+      "ford-bronco-2023",
+      "ford-bronco-2024",
+      "ford-bronco-2025",
+      "ford-bronco-2026",
+      "ford-bronco-ii-2022",
+      "ford-bronco-ii-2023",
+      "… +18"
+    ],
+    "US-only (IT: i10/i20)": [
+      "hyundai-accent-2022",
+      "hyundai-accent-2023",
+      "hyundai-accent-2024",
+      "hyundai-accent-2025",
+      "hyundai-accent-2026"
+    ],
+    "US/KR naming; IT: i30": [
+      "hyundai-elantra-2022",
+      "hyundai-elantra-2023",
+      "hyundai-elantra-2024",
+      "hyundai-elantra-2025",
+      "hyundai-elantra-2026",
+      "hyundai-elantra-gt-2022",
+      "hyundai-elantra-gt-2023",
+      "hyundai-elantra-gt-2024",
+      "hyundai-elantra-gt-2025",
+      "hyundai-elantra-gt-2026",
+      "hyundai-elantra-n-2022",
+      "hyundai-elantra-n-2023",
+      "… +8"
+    ],
+    "dead-model filter (Genesis è brand separato)": [
+      "hyundai-genesis-2022",
+      "hyundai-genesis-2023",
+      "hyundai-genesis-2024",
+      "hyundai-genesis-2025",
+      "hyundai-genesis-2026",
+      "hyundai-genesis-coupe-2022",
+      "hyundai-genesis-coupe-2023",
+      "hyundai-genesis-coupe-2024",
+      "hyundai-genesis-coupe-2025",
+      "hyundai-genesis-coupe-2026"
+    ],
+    "US-only / non catalogo IT": [
+      "kia-cadenza-2022",
+      "kia-cadenza-2023",
+      "kia-cadenza-2024",
+      "kia-cadenza-2025",
+      "kia-cadenza-2026"
+    ],
+    "US-only (IT: Ceed)": [
+      "kia-forte-2022",
+      "kia-forte-2023",
+      "kia-forte-2024",
+      "kia-forte-2025",
+      "kia-forte-2026",
+      "kia-forte-koup-2022",
+      "kia-forte-koup-2023",
+      "kia-forte-koup-2024",
+      "kia-forte-koup-2025",
+      "kia-forte-koup-2026"
+    ],
+    "già coperto da varianti diesel/phev in catalogo; gap petrol non prioritario oltre 2022/2026": [
+      "mazda-cx-60-2023"
+    ],
+    "aggregate EEA G500+S500": [
+      "mercedes-benz-500-2022",
+      "mercedes-benz-500-2023",
+      "mercedes-benz-500-2024",
+      "mercedes-benz-500-2025",
+      "mercedes-benz-500-2026"
+    ],
+    "fantasma post-2009": [
+      "nissan-350z-2022",
+      "nissan-350z-2023",
+      "nissan-350z-2024",
+      "nissan-350z-2025",
+      "nissan-350z-2026"
+    ]
+  },
+  "intentional_left_out_counts": {
+    "fantasma": 10,
+    "US-only (non venduta IT come 128i recente)": 5,
+    "modello speciale/raro non richiesto": 5,
+    "dead-model filter (fantasma)": 10,
+    "fuori produzione / non IT volume": 5,
+    "non in priorità restore di questa PR": 2,
+    "US-only / fuori produzione": 5,
+    "US-only": 30,
+    "US-only (IT: i10/i20)": 5,
+    "US/KR naming; IT: i30": 20,
+    "dead-model filter (Genesis è brand separato)": 10,
+    "US-only / non catalogo IT": 5,
+    "US-only (IT: Ceed)": 10,
+    "già coperto da varianti diesel/phev in catalogo; gap petrol non prioritario oltre 2022/2026": 1,
+    "aggregate EEA G500+S500": 5,
+    "fantasma post-2009": 5
+  }
+}

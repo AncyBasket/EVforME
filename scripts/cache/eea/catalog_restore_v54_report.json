@@ -1,0 +1,521 @@
+{
+  "skip_fetch": true,
+  "only_empty": false,
+  "cache_refresh": {
+    "skipped": true
+  },
+  "label_n_fixes": 2,
+  "label_n_unresolved": [],
+  "label_n_sample": [
+    {
+      "id": "citroen-berlingo-diesel-2025",
+      "n_from": 352,
+      "n_to": 352,
+      "eea_model": "BERLINGO",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "citroen-c3-aircross-2025",
+      "n_from": 5413,
+      "n_to": 5413,
+      "eea_model": "C3AIRCROSS",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "citroen-c4-2025",
+      "n_from": 2741,
+      "n_to": 2741,
+      "eea_model": "C4",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "citroen-c4-diesel-2025",
+      "n_from": 213,
+      "n_to": 213,
+      "eea_model": "C4",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "citroen-c5-2025",
+      "n_from": 1601,
+      "n_to": 1601,
+      "eea_model": "C5AIRCROSS",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "citroen-c5-aircross-2025",
+      "n_from": 1601,
+      "n_to": 1601,
+      "eea_model": "C5AIRCROSS",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "citroen-c5-aircross-diesel-2025",
+      "n_from": 2721,
+      "n_to": 2721,
+      "eea_model": "C5AIRCROSS",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "cupra-ateca-2025",
+      "n_from": 195,
+      "n_to": 195,
+      "eea_model": "ATECA",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "cupra-formentor-2025",
+      "n_from": 3080,
+      "n_to": 3080,
+      "eea_model": "FORMENTOR",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "cupra-formentor-diesel-2025",
+      "n_from": 2512,
+      "n_to": 2512,
+      "eea_model": "FORMENTOR",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "cupra-leon-2025",
+      "n_from": 3064,
+      "n_to": 3064,
+      "eea_model": "LEON",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "cupra-leon-diesel-2025",
+      "n_from": 946,
+      "n_to": 946,
+      "eea_model": "LEON",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "dacia-duster-2025",
+      "n_from": 7243,
+      "n_to": 7243,
+      "eea_model": "DUSTER",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "dacia-duster-lpg-2025",
+      "n_from": 24901,
+      "n_to": 24901,
+      "eea_model": "DUSTER",
+      "ft": "LPG",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "dacia-jogger-2025",
+      "n_from": 715,
+      "n_to": 715,
+      "eea_model": "JOGGER",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "dacia-jogger-lpg-2025",
+      "n_from": 4182,
+      "n_to": 4182,
+      "eea_model": "JOGGER",
+      "ft": "LPG",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "dacia-sandero-2025",
+      "n_from": 5703,
+      "n_to": 5703,
+      "eea_model": "SANDERO",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "dacia-sandero-eco-g-2025",
+      "n_from": 43488,
+      "n_to": 43488,
+      "eea_model": "SANDERO",
+      "ft": "LPG",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "ford-mustang-2018",
+      "n_from": 353,
+      "n_to": 356,
+      "eea_model": "MUSTANG",
+      "ft": "PETROL",
+      "eea_year": 2018,
+      "status": "F",
+      "variants": null
+    },
+    {
+      "id": "honda-cr-v-2025",
+      "n_from": 810,
+      "n_to": 810,
+      "eea_model": "CRV",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "honda-civic-2025",
+      "n_from": 616,
+      "n_to": 616,
+      "eea_model": "CIVIC",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "honda-hr-v-2025",
+      "n_from": 3959,
+      "n_to": 3959,
+      "eea_model": "HRV",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "honda-jazz-2025",
+      "n_from": 2966,
+      "n_to": 2966,
+      "eea_model": "JAZZ",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-ceed-lpg-2019",
+      "n_from": 824,
+      "n_to": 824,
+      "eea_model": "CEED",
+      "ft": "LPG",
+      "eea_year": 2019,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-ceed-lpg-2020",
+      "n_from": 620,
+      "n_to": 620,
+      "eea_model": "CEED",
+      "ft": "LPG",
+      "eea_year": 2020,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-ceed-lpg-2021",
+      "n_from": 224,
+      "n_to": 224,
+      "eea_model": "CEED",
+      "ft": "LPG",
+      "eea_year": 2021,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-niro-2020",
+      "n_from": 2410,
+      "n_to": 2410,
+      "eea_model": "NIRO",
+      "ft": "PETROL",
+      "eea_year": 2020,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-niro-2025",
+      "n_from": 1625,
+      "n_to": 1625,
+      "eea_model": "NIRO",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-picanto-lpg-2020",
+      "n_from": 3508,
+      "n_to": 3508,
+      "eea_model": "PICANTO",
+      "ft": "LPG",
+      "eea_year": 2020,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-picanto-lpg-2021",
+      "n_from": 3611,
+      "n_to": 3611,
+      "eea_model": "PICANTO",
+      "ft": "LPG",
+      "eea_year": 2021,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-picanto-lpg-2023",
+      "n_from": 2681,
+      "n_to": 2681,
+      "eea_model": "PICANTO",
+      "ft": "LPG",
+      "eea_year": 2023,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-picanto-2025",
+      "n_from": 10979,
+      "n_to": 10979,
+      "eea_model": "PICANTO",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-picanto-lpg-2025",
+      "n_from": 2944,
+      "n_to": 2944,
+      "eea_model": "PICANTO",
+      "ft": "LPG",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-proceed-2025",
+      "n_from": 111,
+      "n_to": 111,
+      "eea_model": "PROCEED",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-rio-lpg-2020",
+      "n_from": 1805,
+      "n_to": 1805,
+      "eea_model": "RIO",
+      "ft": "LPG",
+      "eea_year": 2020,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-rio-lpg-2021",
+      "n_from": 1598,
+      "n_to": 1598,
+      "eea_model": "RIO",
+      "ft": "LPG",
+      "eea_year": 2021,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-rio-lpg-2023",
+      "n_from": 518,
+      "n_to": 518,
+      "eea_model": "RIO",
+      "ft": "LPG",
+      "eea_year": 2023,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-sorento-2025",
+      "n_from": 261,
+      "n_to": 261,
+      "eea_model": "SORENTO",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-sorento-diesel-2025",
+      "n_from": 335,
+      "n_to": 335,
+      "eea_model": "SORENTO",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-sportage-lpg-2020",
+      "n_from": 3370,
+      "n_to": 3370,
+      "eea_model": "SPORTAGE",
+      "ft": "LPG",
+      "eea_year": 2020,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-sportage-lpg-2021",
+      "n_from": 3987,
+      "n_to": 3987,
+      "eea_model": "SPORTAGE",
+      "ft": "LPG",
+      "eea_year": 2021,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-sportage-lpg-2023",
+      "n_from": 2970,
+      "n_to": 2970,
+      "eea_model": "SPORTAGE",
+      "ft": "LPG",
+      "eea_year": 2023,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-sportage-2025",
+      "n_from": 8303,
+      "n_to": 8303,
+      "eea_model": "SPORTAGE",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-sportage-diesel-2025",
+      "n_from": 6634,
+      "n_to": 6634,
+      "eea_model": "SPORTAGE",
+      "ft": "DIESEL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-sportage-lpg-2025",
+      "n_from": 2905,
+      "n_to": 2905,
+      "eea_model": "SPORTAGE",
+      "ft": "LPG",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-stonic-lpg-2020",
+      "n_from": 3968,
+      "n_to": 3968,
+      "eea_model": "STONIC",
+      "ft": "LPG",
+      "eea_year": 2020,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-stonic-lpg-2021",
+      "n_from": 3717,
+      "n_to": 3717,
+      "eea_model": "STONIC",
+      "ft": "LPG",
+      "eea_year": 2021,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-stonic-lpg-2023",
+      "n_from": 3297,
+      "n_to": 3297,
+      "eea_model": "STONIC",
+      "ft": "LPG",
+      "eea_year": 2023,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-stonic-2025",
+      "n_from": 3310,
+      "n_to": 3310,
+      "eea_model": "STONIC",
+      "ft": "PETROL",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    },
+    {
+      "id": "kia-stonic-lpg-2025",
+      "n_from": 2503,
+      "n_to": 2503,
+      "eea_model": "STONIC",
+      "ft": "LPG",
+      "eea_year": 2025,
+      "status": "P",
+      "variants": null
+    }
+  ],
+  "examples": {
+    "alfa-romeo-stelvio-diesel-2023": null,
+    "kia-ceed-2019": null,
+    "bmw-2-series-2023": null,
+    "hyundai-bayon-2023": null
+  },
+  "seedVersion": 54,
+  "rows": 5654,
+  "bytes": 2848666,
+  "note": "absent/null Mk \u2261 empty Mk (Cn must contain brand); qashqai-2018 24526, mustang-2018 356"
+}

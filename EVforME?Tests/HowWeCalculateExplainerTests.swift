@@ -142,7 +142,7 @@ final class HowWeCalculateExplainerTests: XCTestCase {
             .manufacturer
         )
         XCTAssertEqual(
-            HowWeCalculateExplainer.consumptionSourceCategory(from: "seed+EEA-WLTP+stima(anno precedente)"),
+            HowWeCalculateExplainer.consumptionSourceCategory(from: "seed+EEA-WLTP+stima(da EEA IT 2024)"),
             .estimate
         )
         XCTAssertEqual(

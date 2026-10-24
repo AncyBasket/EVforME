@@ -55,7 +55,8 @@ DEAD_MODEL_PATTERNS: list[tuple[str, re.Pattern[str], int]] = [
     ("BMW", re.compile(r"^(228|323I|323)$", re.I), 2015),
     ("FORD", re.compile(r"(bradford|affordable\s*aluminum|b-?750)", re.I), 0),
     ("KIA", re.compile(r"^miami$", re.I), 0),
-    ("NISSAN", re.compile(r"^(axxess|350z)$", re.I), 0),
+    ("NISSAN", re.compile(r"^axxess$", re.I), 0),
+    ("NISSAN", re.compile(r"^350z$", re.I), 2010),  # real car through ~2009
     ("PEUGEOT", re.compile(r"^405$", re.I), 2010),
     ("HYUNDAI", re.compile(r"^(genesis|excel)$", re.I), 2015),
 ]
@@ -78,33 +79,59 @@ def is_dead_model(row: dict) -> bool:
     return False
 
 
+def _cache_brand_key(path: Path, wrap: dict, *, fuels: bool) -> str:
+    """Filename IT_ALFA_ROMEO_*.json → 'ALFA ROMEO'; Mk aliases merge (DS AUTOMOBILES→DS)."""
+    suffix = "_fuels.json" if fuels else "_hev_FmH.json"
+    from_name = path.name[len("IT_") : -len(suffix)]
+    if from_name == "MERCEDES-BENZ":
+        from_name = "MERCEDES-BENZ"
+    else:
+        from_name = from_name.replace("_", " ")
+    brand_key = eea.canonical_ice_brand_key(from_name)
+    must = (wrap.get("_query") or {}).get("query", {}).get("bool", {}).get("must", [])
+    for term in must:
+        if "term" in term and "Mk" in term["term"]:
+            brand_key = eea.canonical_ice_brand_key(str(term["term"]["Mk"]))
+            break
+        # New payloads use bool.should over Mk aliases / wildcards.
+        if "bool" in term and "should" in term["bool"]:
+            for clause in term["bool"]["should"]:
+                if "term" in clause and "Mk" in clause["term"]:
+                    brand_key = eea.canonical_ice_brand_key(str(clause["term"]["Mk"]))
+                    break
+            break
+    return brand_key
+
+
 def load_ice_maps(use_cache: bool = True) -> dict[str, dict]:
-    maps: dict[str, dict] = {}
+    from collections import defaultdict
+
+    groups: dict[str, list[dict]] = defaultdict(list)
     for path in sorted(CACHE_DIR.glob("IT_*_fuels.json")):
         if "_hev_" in path.name:
             continue
-        brand = path.name[len("IT_") : -len("_fuels.json")].replace("_", " ")
-        brand = brand.replace("MERCEDES-BENZ", "MERCEDES-BENZ")
         wrap = json.loads(path.read_text(encoding="utf-8"))
-        # Mk in cache query
-        mk = (wrap.get("_query") or {}).get("query", {}).get("bool", {}).get("must", [])
-        brand_key = brand_u({"brand": brand})
-        for term in mk:
-            if "term" in term and "Mk" in term["term"]:
-                brand_key = str(term["term"]["Mk"]).upper()
-        maps[brand_key] = eea.parse_brand_aggs(wrap, brand_key)
+        brand_key = _cache_brand_key(path, wrap, fuels=True)
+        groups[brand_key].append(wrap)
+    maps: dict[str, dict] = {}
+    for brand_key, wraps in groups.items():
+        merged = eea.merge_brand_wraps(wraps) if len(wraps) > 1 else wraps[0]
+        maps[brand_key] = eea.parse_brand_aggs(merged, brand_key)
     return maps
 
 
 def load_hev_maps() -> dict[str, dict]:
-    maps: dict[str, dict] = {}
+    from collections import defaultdict
+
+    groups: dict[str, list[dict]] = defaultdict(list)
     for path in sorted(CACHE_DIR.glob("IT_*_hev_FmH.json")):
         wrap = json.loads(path.read_text(encoding="utf-8"))
-        brand_key = path.name[len("IT_") : -len("_hev_FmH.json")].replace("_", " ").upper()
-        for term in (wrap.get("_query") or {}).get("query", {}).get("bool", {}).get("must", []):
-            if "term" in term and "Mk" in term["term"]:
-                brand_key = str(term["term"]["Mk"]).upper()
-        maps[brand_key] = eea.parse_brand_aggs(wrap, brand_key)
+        brand_key = _cache_brand_key(path, wrap, fuels=False)
+        groups[brand_key].append(wrap)
+    maps: dict[str, dict] = {}
+    for brand_key, wraps in groups.items():
+        merged = eea.merge_brand_wraps(wraps) if len(wraps) > 1 else wraps[0]
+        maps[brand_key] = eea.parse_brand_aggs(merged, brand_key)
     return maps
 
 
@@ -342,7 +369,7 @@ def apply_hit_to_row(
         if any(tok in prev.lower() for tok in ("ev-database", "listino", "stima(", "+stima")):
             pass
         elif int(row.get("year") or 0) != eea_year:
-            row["sourceName"] = f"EEA co2cars IT {eea_year} n={int(n)} (stima anno precedente)"
+            row["sourceName"] = f"EEA co2cars IT {eea_year} n={int(n)} (da EEA IT {eea_year})"
             row["confidenceScore"] = 0.45
         else:
             row["sourceName"] = f"EEA co2cars IT {eea_year} n={int(n)}"

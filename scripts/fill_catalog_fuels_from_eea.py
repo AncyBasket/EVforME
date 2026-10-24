@@ -69,6 +69,379 @@ BRAND_TO_EEA_MK = {
     "CITROËN": "CITROEN",
 }
 
+# Canonical brand → EEA Mk spellings to query/merge (plus strip+casefold / trailing spaces).
+# SEAT and CUPRA stay separate. "JAGUAR LAND ROVER LIMITED" is listed under both
+# Jaguar and Land Rover; models are routed by Cn in parse_brand_aggs.
+BRAND_MK_ALIASES: dict[str, list[str]] = {
+    "FIAT": [
+        "FIAT",
+        "FIAT - INNOCENTI",
+        "FIAT GROUP AUTOMOBILES SPA",
+        "FIAT AUTO SPA",
+    ],
+    "LANCIA": ["LANCIA", "LANCIA - AUTOBIANCHI"],
+    "MITSUBISHI": [
+        "MITSUBISHI",
+        "MITSUBISHI MOTORS (THAILAND)",
+        "MITSUBISHI MOTORS THAILAND",
+        "MITSUBISHI MOTORS THAILAND Ltd.",
+        "MITSUBISHI MOTORS CORPORATION",
+        "Mitsubishi Motors (Thailand) C",
+    ],
+    "FORD": ["FORD", "FORD-CNG TECHNIK", "FORD W GMBH"],
+    "VOLKSWAGEN": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN  VW",
+        "VW",
+    ],
+    "JAGUAR": ["JAGUAR", "Jaguar", "JAGUAR LAND ROVER LIMITED"],
+    # ROVER → Land Rover (model filter). ROVER CARS → Alfa (model filter).
+    "LAND ROVER": [
+        "LAND ROVER",
+        "Land Rover",
+        "JAGUAR LAND ROVER LIMITED",
+        "ROVER",
+    ],
+    "DS": ["DS", "DS AUTOMOBILES"],
+    "BMW": ["BMW", "BMW AG", "BMW I", "BMW i"],
+    "MERCEDES-BENZ": [
+        "MERCEDES-BENZ",
+        "MERCEDES BENZ",
+        "MERCEDES",
+        "MERCEDES-AMG",
+        "MERCEDES AMG",
+        "DAIMLERCHRYSLER AG",
+    ],
+    "TESLA": ["TESLA", "TESLA MOTORS"],
+    "HYUNDAI": ["HYUNDAI"],
+    "ALFA ROMEO": ["ALFA ROMEO", "ROVER CARS"],
+    "AUDI": ["AUDI", "QUATTRO"],
+    "CITROEN": ["CITROEN"],
+    "CUPRA": ["CUPRA"],
+    "DACIA": ["DACIA"],
+    "HONDA": ["HONDA"],
+    "JEEP": ["JEEP", "CHRYSLER"],
+    "KIA": ["KIA"],
+    "LEXUS": ["LEXUS"],
+    "MAZDA": ["MAZDA"],
+    "MG": ["MG"],
+    "MINI": ["MINI"],
+    "NISSAN": ["NISSAN"],
+    "OPEL": ["OPEL"],
+    "PEUGEOT": ["PEUGEOT"],
+    "PORSCHE": ["PORSCHE"],
+    "RENAULT": ["RENAULT"],
+    "SEAT": ["SEAT"],
+    "SKODA": ["SKODA"],
+    "SUBARU": ["SUBARU", "FUJI HEAVY IND", "FUJI HEAVY IND."],
+    "SUZUKI": ["SUZUKI"],
+    "TOYOTA": ["TOYOTA"],
+    "VOLVO": ["VOLVO"],
+    "BYD": ["BYD"],
+}
+
+# Short Cn prefixes to strip so "FIAT 500" ≡ "500", "VW GOLF" ≡ "GOLF".
+BRAND_CN_PREFIXES: dict[str, list[str]] = {
+    "FIAT": ["FIAT"],
+    "LANCIA": ["LANCIA"],
+    "FORD": ["FORD"],
+    "VOLKSWAGEN": ["VOLKSWAGEN", "VW"],
+    "MITSUBISHI": ["MITSUBISHI"],
+    "JAGUAR": ["JAGUAR"],
+    "LAND ROVER": ["LANDROVER"],
+    "BMW": ["BMW"],
+    "MERCEDES-BENZ": ["MERCEDESBENZ", "MERCEDESAMG", "MERCEDES"],
+    "DS": ["DS", "DSAUTOMOBILES"],
+    "HYUNDAI": ["HYUNDAI"],
+    "TESLA": ["TESLA", "TESLAMOTORS"],
+    "ALFA ROMEO": ["ALFAROMEO", "ALFA"],
+    "AUDI": ["AUDI"],
+    "CITROEN": ["CITROEN"],
+    "CUPRA": ["CUPRA"],
+    "DACIA": ["DACIA"],
+    "HONDA": ["HONDA"],
+    "JEEP": ["JEEP"],
+    "KIA": ["KIA"],
+    "LEXUS": ["LEXUS"],
+    "MAZDA": ["MAZDA"],
+    "MG": ["MG"],
+    "MINI": ["MINI"],
+    "NISSAN": ["NISSAN"],
+    "OPEL": ["OPEL"],
+    "PEUGEOT": ["PEUGEOT"],
+    "PORSCHE": ["PORSCHE"],
+    "RENAULT": ["RENAULT"],
+    "SEAT": ["SEAT"],
+    "SKODA": ["SKODA"],
+    "SUBARU": ["SUBARU"],
+    "SUZUKI": ["SUZUKI"],
+    "TOYOTA": ["TOYOTA"],
+    "VOLVO": ["VOLVO"],
+    "BYD": ["BYD"],
+}
+
+# Mk spellings that must be routed by Cn (not collapsed in brand_name_merge_key).
+_AMBIGUOUS_MK = {
+    "jaguar land rover limited",
+    "rover cars",
+    "chrysler",
+    "rover",
+}
+
+
+def _alias_lookup() -> dict[str, str]:
+    """casefold Mk spelling → canonical casefold key (seat ≠ cupra)."""
+    out: dict[str, str] = {}
+    for canon, aliases in BRAND_MK_ALIASES.items():
+        ck = canon.casefold()
+        out[ck] = ck
+        for a in aliases:
+            ak = " ".join(a.split()).casefold()
+            if ak in _AMBIGUOUS_MK:
+                continue
+            out[ak] = ck
+    out["vw"] = "volkswagen"
+    out["fuji heavy ind"] = "subaru"
+    out["fuji heavy ind."] = "subaru"
+    out["daimlerchrysler ag"] = "mercedes-benz"
+    out["quattro"] = "audi"
+    return out
+
+
+_ALIAS_LOOKUP = _alias_lookup()
+
+
+def brand_name_merge_key(raw: str) -> str:
+    """
+    Identity for EEA Mk variants (strip + casefold + explicit aliases).
+
+    Ambiguous Mk (JLR Limited, ROVER, ROVER CARS, CHRYSLER) stay distinct here
+    and are routed per-Cn in parse_brand_aggs.
+    """
+    k = " ".join(str(raw or "").split()).casefold()
+    if k in _AMBIGUOUS_MK:
+        return k
+    return _ALIAS_LOOKUP.get(k, k)
+
+
+def canonical_ice_brand_key(raw: str) -> str:
+    """Map any Mk / cache filename to the ice_maps key used by seed brand_u."""
+    k = brand_name_merge_key(raw)
+    if k in _AMBIGUOUS_MK:
+        return k.upper() if k != "jaguar land rover limited" else "JAGUAR LAND ROVER LIMITED"
+    special = {
+        "ds": "DS",
+        "mercedes-benz": "MERCEDES-BENZ",
+        "volkswagen": "VOLKSWAGEN",
+        "alfa romeo": "ALFA ROMEO",
+        "land rover": "LAND ROVER",
+        "subaru": "SUBARU",
+    }
+    if k in special:
+        return special[k]
+    cleaned = " ".join(str(raw or "").split())
+    if cleaned.upper() in {"MERCEDES-BENZ", "MERCEDES BENZ"}:
+        return "MERCEDES-BENZ"
+    for canon, aliases in BRAND_MK_ALIASES.items():
+        if k == canon.casefold() or any(
+            " ".join(a.split()).casefold() == k for a in aliases
+        ):
+            return canon
+    return cleaned.upper()
+
+
+def brand_aliases_for(brand: str) -> list[str]:
+    primary = BRAND_TO_EEA_MK.get(brand, brand)
+    primary_u = primary.upper() if primary != "MERCEDES-BENZ" else "MERCEDES-BENZ"
+    if primary_u.replace(" ", "-") == "MERCEDES-BENZ" or primary_u == "MERCEDES BENZ":
+        primary_u = "MERCEDES-BENZ"
+    names = list(BRAND_MK_ALIASES.get(primary_u, BRAND_MK_ALIASES.get(primary, [primary])))
+    if primary not in names and primary_u not in names:
+        names.insert(0, primary)
+    return names
+
+
+def brand_cn_match_tokens(brand: str) -> list[str]:
+    """Tokens that must appear in Cn for empty/missing Mk rows to count."""
+    b = canonical_ice_brand_key(brand)
+    tokens = {
+        "ALFA ROMEO": ["ALFA", "ALFAROMEO"],
+        "AUDI": ["AUDI"],
+        "BMW": ["BMW"],
+        "CITROEN": ["CITROEN", "CITROËN"],
+        "CUPRA": ["CUPRA"],
+        "DACIA": ["DACIA"],
+        "DS": ["DS"],
+        "FIAT": ["FIAT"],
+        "FORD": ["FORD"],
+        "HONDA": ["HONDA"],
+        "HYUNDAI": ["HYUNDAI"],
+        "JAGUAR": ["JAGUAR"],
+        "JEEP": ["JEEP"],
+        "KIA": ["KIA"],
+        "LANCIA": ["LANCIA"],
+        "LAND ROVER": ["LAND", "ROVER", "RANGEROVER", "DISCOVERY", "DEFENDER", "EVOQUE"],
+        "LEXUS": ["LEXUS"],
+        "MAZDA": ["MAZDA"],
+        "MERCEDES-BENZ": ["MERCEDES", "AMG"],
+        "MG": ["MG"],
+        "MINI": ["MINI"],
+        "MITSUBISHI": ["MITSUBISHI"],
+        "NISSAN": ["NISSAN"],
+        "OPEL": ["OPEL"],
+        "PEUGEOT": ["PEUGEOT"],
+        "PORSCHE": ["PORSCHE"],
+        "RENAULT": ["RENAULT"],
+        "SEAT": ["SEAT"],
+        "SKODA": ["SKODA"],
+        "SUBARU": ["SUBARU", "FORESTER", "OUTBACK", "XV", "IMPREZA", "LEGACY", "BRZ"],
+        "SUZUKI": ["SUZUKI"],
+        "TESLA": ["TESLA"],
+        "TOYOTA": ["TOYOTA"],
+        "VOLKSWAGEN": ["VOLKSWAGEN", "VW"],
+        "VOLVO": ["VOLVO"],
+        "BYD": ["BYD"],
+    }
+    return tokens.get(b, [b.split()[0] if b else ""])
+
+
+def brand_mk_should_clauses(brand: str) -> list[dict]:
+    """Catch Mk casing, trailing spaces, known aliases, and empty/absent Mk (brand in Cn).
+
+    Mk absent or null is treated like Mk=\"\": count the row only when Cn contains
+    the manufacturer (e.g. \"NISSAN QASHQAI\", \"FORD MUSTANG\"). Bare model names
+    without the brand token (e.g. \"MUSTANG\") do not count.
+    """
+    names = brand_aliases_for(brand)
+    should: list[dict] = []
+    seen: set[str] = set()
+    for name in names:
+        for candidate in (name, name.title(), name.upper(), name.lower()):
+            if candidate in seen:
+                continue
+            seen.add(candidate)
+            should.append({"term": {"Mk": candidate}})
+            should.append({"wildcard": {"Mk": candidate + "*"}})
+    # Empty string Mk and field-absent/null Mk: same rule (brand token must be in Cn).
+    cn_tokens = [t for t in brand_cn_match_tokens(brand) if t]
+    if cn_tokens:
+        cn_should = [{"wildcard": {"Cn": f"*{t}*"}} for t in cn_tokens]
+        cn_clause = {"bool": {"should": cn_should, "minimum_should_match": 1}}
+        should.append({"bool": {"must": [{"term": {"Mk": ""}}, cn_clause]}})
+        should.append(
+            {
+                "bool": {
+                    "must": [
+                        {"bool": {"must_not": [{"exists": {"field": "Mk"}}]}},
+                        cn_clause,
+                    ]
+                }
+            }
+        )
+    return should
+
+
+def jlr_model_owner(model_raw: str) -> str | None:
+    """Route JAGUAR LAND ROVER LIMITED / ROVER Cn → JAGUAR or LAND ROVER."""
+    mn = norm_alnum(model_raw)
+    lr_markers = (
+        "RANGEROVER",
+        "DISCOVERY",
+        "DEFENDER",
+        "EVOQUE",
+        "VELAR",
+        "LANDROVER",
+        "FREELANDER",
+    )
+    if any(m in mn for m in lr_markers):
+        return "LAND ROVER"
+    jag_markers = (
+        "JAGUAR",
+        "EPACE",
+        "FPACE",
+        "IPACE",
+        "FTYPE",
+        "XETYPE",
+        "XEL",
+        "XFL",
+    )
+    if any(m in mn for m in jag_markers):
+        return "JAGUAR"
+    if mn in {"XE", "XF", "XJ", "XK"} or mn.startswith(("XE", "XF", "XJ", "XK")):
+        if not mn.startswith("X3") and not mn.startswith("X5"):
+            return "JAGUAR"
+    if "PACE" in mn:
+        return "JAGUAR"
+    return None
+
+
+def alfa_model_ok(model_raw: str) -> bool:
+    mn = norm_alnum(model_raw)
+    return any(
+        t in mn
+        for t in (
+            "ALFA",
+            "GIULIETTA",
+            "GIULIA",
+            "STELVIO",
+            "TONALE",
+            "MITO",
+            "BRERA",
+            "SPIDER",
+            "4C",
+            "159",
+            "147",
+            "156",
+            "166",
+        )
+    )
+
+
+def jeep_model_ok(model_raw: str) -> bool:
+    mn = norm_alnum(model_raw)
+    return any(
+        t in mn
+        for t in (
+            "JEEP",
+            "WRANGLER",
+            "CHEROKEE",
+            "RENEGADE",
+            "COMPASS",
+            "GLADIATOR",
+            "PATRIOT",
+            "COMMANDER",
+            "WAGONEER",
+            "AVENGER",
+        )
+    )
+
+
+def model_accepted_for_brand(model_raw: str, brand: str) -> bool:
+    """Drop cross-brand Cn for shared/ambiguous Mk aliases."""
+    b = canonical_ice_brand_key(brand)
+    if b in {"JAGUAR", "LAND ROVER"}:
+        owner = jlr_model_owner(model_raw)
+        if owner is None:
+            # Bare ROVER Mk may carry non-LR cars — require LR markers.
+            return b != "LAND ROVER" or any(
+                t in norm_alnum(model_raw)
+                for t in ("RANGEROVER", "DISCOVERY", "DEFENDER", "EVOQUE", "VELAR", "LANDROVER")
+            )
+        return owner == b
+    if b == "ALFA ROMEO":
+        return alfa_model_ok(model_raw)
+    if b == "JEEP":
+        return jeep_model_ok(model_raw)
+    return True
+
+
+def brand_alias_report() -> dict[str, list[str]]:
+    """Canonical → aliases for PR / docs (stable order)."""
+    return {k: list(v) for k, v in sorted(BRAND_MK_ALIASES.items())}
+
+
 # Curated true ghosts only (manual review). Do NOT auto-drop Fiat 500 MHEV, Panda CNG, etc.
 TRUE_GHOST_IDS = {
     "toyota-rav4-diesel-2019",
@@ -213,7 +586,8 @@ def load_or_fetch(cache_name: str, payload: dict, use_cache: bool) -> dict:
 def brand_payload(brand: str, hev_only: bool = False) -> dict:
     must: list[dict] = [
         {"term": {"MS": "IT"}},
-        {"term": {"Mk": brand}},
+        # Merge Mk spellings (case / trailing spaces / DS AUTOMOBILES≡DS).
+        {"bool": {"should": brand_mk_should_clauses(brand), "minimum_should_match": 1}},
         {"range": {"year": {"gte": 2017, "lte": 2025}}},
     ]
     if hev_only:
@@ -232,6 +606,18 @@ def brand_payload(brand: str, hev_only: bool = False) -> dict:
                             "fuels": {
                                 "terms": {"field": "Ft", "size": 30},
                                 "aggs": {
+                                    # Status F = definitivo, P = provvisorio. The IT index
+                                    # duplicates each registration under both for most years
+                                    # through 2024; prefer F, fall back to P (e.g. 2025).
+                                    "status": {
+                                        "terms": {"field": "Status", "size": 5},
+                                        "aggs": {
+                                            "sum_r": {"sum": {"field": "r"}},
+                                            "avg_co2": {"avg": {"field": "Ewltp__g_km_"}},
+                                            "avg_kw": {"avg": {"field": "ep__KW_"}},
+                                        },
+                                    },
+                                    # Legacy top-level metrics kept for older cached responses.
                                     "sum_r": {"sum": {"field": "r"}},
                                     "avg_co2": {"avg": {"field": "Ewltp__g_km_"}},
                                     "avg_kw": {"avg": {"field": "ep__KW_"}},
@@ -245,29 +631,164 @@ def brand_payload(brand: str, hev_only: bool = False) -> dict:
     }
 
 
+def merge_brand_wraps(wraps: list[dict]) -> dict:
+    """Concatenate model buckets from several brand-cache responses (Mk aliases)."""
+    buckets: list[dict] = []
+    fetched: list[str] = []
+    query = None
+    for wrap in wraps:
+        if query is None and wrap.get("_query"):
+            query = wrap["_query"]
+        if wrap.get("_fetched_at"):
+            fetched.append(str(wrap["_fetched_at"]))
+        resp = wrap.get("response", wrap)
+        buckets.extend(
+            resp.get("aggregations", {}).get("models", {}).get("buckets") or []
+        )
+    out: dict = {
+        "_fetched_at": max(fetched) if fetched else "",
+        "response": {"aggregations": {"models": {"buckets": buckets}}},
+    }
+    if query is not None:
+        out["_query"] = query
+    return out
+
+
+def _status_n(bucket: dict) -> float:
+    return float(bucket.get("sum_r", {}).get("value") or bucket.get("doc_count") or 0)
+
+
+def _metrics_from_status_bucket(bucket: dict, status: str) -> dict:
+    return {
+        "n": _status_n(bucket),
+        "co2": bucket.get("avg_co2", {}).get("value"),
+        "kw": bucket.get("avg_kw", {}).get("value"),
+        "status": status,
+    }
+
+
+def status_preferred_metrics(fuel_bucket: dict) -> dict:
+    """
+    Prefer Status F (final) over P (provisional).
+
+    Through 2024 the IT co2cars index usually lists each registration twice (F+P)
+    with F≈P — summing doubles n; use F. If only P exists (typical for 2025), use P.
+    Always prefer F when present in this Ft bucket (never fall back to P just because
+    F is smaller — sibling casing buckets are merged in dedupe_fuel_buckets).
+    """
+    statuses = fuel_bucket.get("status", {}).get("buckets") or []
+    if statuses:
+        by_key = {str(s.get("key", "")).upper(): s for s in statuses}
+        chosen = by_key.get("F") or by_key.get("P")
+        if chosen is None:
+            chosen = max(statuses, key=_status_n)
+        st = str(chosen.get("key", "")).upper() or None
+        return _metrics_from_status_bucket(chosen, st or "")
+    # Legacy cache without Status sub-agg (may still be F+P summed).
+    return {
+        "n": float(fuel_bucket.get("sum_r", {}).get("value") or fuel_bucket.get("doc_count") or 0),
+        "co2": fuel_bucket.get("avg_co2", {}).get("value"),
+        "kw": fuel_bucket.get("avg_kw", {}).get("value"),
+        "status": None,
+    }
+
+
+def _combine_status_metrics(parts: list[dict], status: str) -> dict:
+    """Sum n across casing variants; enrolment-weighted CO₂/kW."""
+    total_n = 0.0
+    co2_acc = 0.0
+    co2_n = 0.0
+    kw_acc = 0.0
+    kw_n = 0.0
+    for m in parts:
+        n = float(m.get("n") or 0)
+        if n <= 0:
+            continue
+        total_n += n
+        if isinstance(m.get("co2"), (int, float)) and float(m["co2"]) > 0:
+            co2_acc += float(m["co2"]) * n
+            co2_n += n
+        if isinstance(m.get("kw"), (int, float)) and float(m["kw"]) > 0:
+            kw_acc += float(m["kw"]) * n
+            kw_n += n
+    return {
+        "n": total_n,
+        "co2": (co2_acc / co2_n) if co2_n else None,
+        "kw": (kw_acc / kw_n) if kw_n else None,
+        "status": status,
+    }
+
+
+def model_name_merge_key(raw: str, brand: str | None = None) -> str:
+    """
+    Identity for EEA Cn variants that differ only by case / spaces / brand prefix.
+
+    EEA often splits the same model across Status F vs P with different Cn spelling
+    ("X3 xDrive20d" / "X3 XDRIVE20D", "FIAT 500" / "500"). strip + casefold via
+    alnum, then strip manufacturer prefix when `brand` is known.
+    """
+    mk = norm_alnum(raw)
+    if not mk:
+        return mk
+    if brand:
+        canon = canonical_ice_brand_key(brand)
+        prefixes = list(BRAND_CN_PREFIXES.get(canon, [norm_alnum(canon)]))
+        brand_n = norm_alnum(canon)
+        if brand_n and brand_n not in prefixes:
+            prefixes.append(brand_n)
+        for p in sorted({p for p in prefixes if p}, key=len, reverse=True):
+            if mk.startswith(p) and len(mk) > len(p):
+                return mk[len(p) :]
+    return mk
+
+
 def dedupe_fuel_buckets(fuel_buckets: list[dict]) -> dict[str, dict]:
-    merged: dict[str, dict] = {}
+    """
+    Merge Ft buckets that normalize to the same key (e.g. DIESEL vs diesel / Diesel).
+
+    Also used after model-name merge: pass every Ft bucket from every Cn casing
+    variant for the same year. Sum only F across casings (Captur diesel:
+    Diesel F=20662 + DIESEL F=34 → 20696; X3: F=4 + F=3145 → 3149). If no F
+    exists on any casing, use P. Never sum F+P and never let a larger P beat a
+    smaller complete F.
+
+    Thin incomplete F (F<30, P≥100, P>5·F) — e.g. Hyundai I10/I20 2021 where
+    final Status F is still a stub — falls back to P (provvisorio).
+    """
+    from collections import defaultdict
+
+    pools: dict[str, dict[str, list[dict]]] = defaultdict(lambda: {"F": [], "P": []})
     for fb in fuel_buckets:
         key = normalize_ft(str(fb.get("key", "")))
         if not key:
             continue
-        n = float(fb.get("sum_r", {}).get("value") or fb.get("doc_count") or 0)
-        co2 = fb.get("avg_co2", {}).get("value")
-        kw = fb.get("avg_kw", {}).get("value")
-        if key not in merged:
-            merged[key] = {"n": n, "co2": co2, "kw": kw}
-            continue
-        prev = merged[key]
-        total = prev["n"] + n
-        if total > 0 and isinstance(co2, (int, float)) and isinstance(prev["co2"], (int, float)):
-            prev["co2"] = (prev["co2"] * prev["n"] + float(co2) * n) / total
-        elif isinstance(co2, (int, float)) and n >= prev["n"]:
-            prev["co2"] = co2
-        if total > 0 and isinstance(kw, (int, float)) and isinstance(prev["kw"], (int, float)):
-            prev["kw"] = (prev["kw"] * prev["n"] + float(kw) * n) / total
-        elif isinstance(kw, (int, float)) and n >= prev["n"]:
-            prev["kw"] = kw
-        prev["n"] = total
+        statuses = fb.get("status", {}).get("buckets") or []
+        if statuses:
+            by_key = {str(s.get("key", "")).upper(): s for s in statuses}
+            for st in ("F", "P"):
+                if st in by_key:
+                    pools[key][st].append(_metrics_from_status_bucket(by_key[st], st))
+        else:
+            # Legacy: treat top-level as unknown; keep via P pool as last resort.
+            pools[key]["P"].append(status_preferred_metrics(fb))
+
+    merged: dict[str, dict] = {}
+    for key, st_pools in pools.items():
+        if st_pools["F"]:
+            f_m = _combine_status_metrics(st_pools["F"], "F")
+            if st_pools["P"]:
+                p_m = _combine_status_metrics(st_pools["P"], "P")
+                # Incomplete F finalization still mirrored under P (I10 2021 etc.).
+                if (
+                    f_m["n"] < 30
+                    and p_m["n"] >= 100
+                    and p_m["n"] > f_m["n"] * 5
+                ):
+                    merged[key] = p_m
+                    continue
+            merged[key] = f_m
+        elif st_pools["P"]:
+            merged[key] = _combine_status_metrics(st_pools["P"], "P")
     return merged
 
 
@@ -279,12 +800,28 @@ def strip_brand_prefix(model_norm: str, brand_norm: str) -> str:
 
 def parse_brand_aggs(data_wrap: dict, brand: str) -> dict[tuple[str, int, str], dict]:
     """
-    (model_norm, year, ft) → {n, co2, kw, model_raw}.
-    Indexes both raw Cn and brand-stripped Cn; keeps max-n cell on collision.
+    (model_norm, year, ft) → {n, co2, kw, model_raw, status}.
+
+    Cn variants that share model_name_merge_key (case/spaces/brand prefix) are
+    pooled before Status F preference. Indexes both merge key and brand-stripped
+    key. JAGUAR LAND ROVER LIMITED models are kept only for the matching brand.
     """
+    from collections import defaultdict
+
     resp = data_wrap.get("response", data_wrap)
-    brand_n = norm_alnum(brand)
+    fetched_at = str(data_wrap.get("_fetched_at") or "")
+    brand_n = norm_alnum(canonical_ice_brand_key(brand))
     out: dict[tuple[str, int, str], dict] = {}
+
+    # Group model buckets that are the same Cn under strip+casefold / brand prefix.
+    by_merge: dict[str, list[dict]] = defaultdict(list)
+    for mb in resp.get("aggregations", {}).get("models", {}).get("buckets", []):
+        raw = str(mb.get("key", ""))
+        if not model_accepted_for_brand(raw, brand):
+            continue
+        mk = model_name_merge_key(raw, brand)
+        if mk:
+            by_merge[mk].append(mb)
 
     def put(model_n: str, year: int, ft: str, payload: dict, model_raw: str) -> None:
         if not model_n:
@@ -295,22 +832,45 @@ def parse_brand_aggs(data_wrap: dict, brand: str) -> dict[tuple[str, int, str], 
             "co2": payload["co2"],
             "kw": payload["kw"],
             "model_raw": model_raw,
+            "status": payload.get("status"),
+            "fetched_at": fetched_at,
         }
         prev = out.get(key)
+        # Same logical Cn already merged; brand-stripped alias keeps max-n only
+        # when a longer prefixed key collided (should be equal after merge).
         if prev is None or cell["n"] > prev["n"]:
             out[key] = cell
 
-    for mb in resp.get("aggregations", {}).get("models", {}).get("buckets", []):
-        model_raw = str(mb.get("key", ""))
-        model_n = norm_alnum(model_raw)
-        stripped = strip_brand_prefix(model_n, brand_n)
-        for yb in mb.get("years", {}).get("buckets", []):
-            year = int(yb.get("key"))
-            fuels = dedupe_fuel_buckets(yb.get("fuels", {}).get("buckets", []))
+    for merge_key, mbs in by_merge.items():
+        # Prefer the display Cn with the largest combined enrolment.
+        def _mb_weight(mb: dict) -> float:
+            total = 0.0
+            for yb in mb.get("years", {}).get("buckets", []):
+                for fb in yb.get("fuels", {}).get("buckets", []):
+                    for s in (fb.get("status") or {}).get("buckets") or []:
+                        total += _status_n(s)
+            return total
+
+        mbs_sorted = sorted(mbs, key=_mb_weight, reverse=True)
+        display_raw = str(mbs_sorted[0].get("key", ""))
+
+        years: dict[int, list[dict]] = defaultdict(list)
+        for mb in mbs:
+            for yb in mb.get("years", {}).get("buckets", []):
+                years[int(yb.get("key"))].extend(yb.get("fuels", {}).get("buckets") or [])
+
+        # merge_key is already brand-prefix-stripped; also index under full alnum
+        # of the preferred display name for match_model lookups.
+        display_n = norm_alnum(display_raw)
+        for year, fuel_buckets in years.items():
+            fuels = dedupe_fuel_buckets(fuel_buckets)
             for ft, payload in fuels.items():
-                put(model_n, year, ft, payload, model_raw)
-                if stripped != model_n:
-                    put(stripped, year, ft, payload, model_raw)
+                put(merge_key, year, ft, payload, display_raw)
+                if display_n and display_n != merge_key:
+                    put(display_n, year, ft, payload, display_raw)
+                stripped = strip_brand_prefix(display_n or merge_key, brand_n)
+                if stripped and stripped not in {merge_key, display_n}:
+                    put(stripped, year, ft, payload, display_raw)
     return out
 
 
@@ -446,19 +1006,59 @@ def match_full_hybrid_model(
     return None, None
 
 
+_BRAND_PREFIXES_FOR_DEDUP = (
+    "AUDIAUDI",  # nonsense guard
+    "AUDI",
+    "TOYOTA",
+    "BMW",
+    "MERCEDESBENZ",
+    "VOLKSWAGEN",
+    "RENAULT",
+    "HYUNDAI",
+    "KIA",
+    "PORSCHE",
+    "ALFA",
+    "FIAT",
+    "FORD",
+    "OPEL",
+    "PEUGEOT",
+    "CITROEN",
+    "SKODA",
+    "SEAT",
+    "CUPRA",
+    "NISSAN",
+    "MAZDA",
+    "SUZUKI",
+    "JEEP",
+    "LANDROVER",
+    "MINI",
+    "VOLVO",
+    "DACIA",
+    "DS",
+)
+
+
+def _canonical_cn_key(model_n: str) -> str:
+    """Strip brand prefix so A4 and AUDIA4 collapse when aggregating."""
+    for prefix in _BRAND_PREFIXES_FOR_DEDUP:
+        if model_n.startswith(prefix) and len(model_n) > len(prefix):
+            return model_n[len(prefix) :]
+    return model_n
+
+
 def _aggregate_family_hit(
     ice_map: dict[tuple[str, int, str], dict],
     year: int,
     ft: str,
     predicate,
     label: str,
+    *,
+    require_co2: bool = True,
+    min_n: float = 100.0,
 ) -> dict | None:
     """Enrolment-weighted average of EEA cells matching predicate(model_norm)."""
-    total_n = 0.0
-    co2_acc = 0.0
-    co2_n = 0.0
-    kw_acc = 0.0
-    kw_n = 0.0
+    # Dedupe brand-prefixed aliases (A4 vs AUDIA4) — keep max-n per canonical Cn.
+    best_by_key: dict[str, tuple[float, str, dict]] = {}
     for (model_n, y, fuel), payload in ice_map.items():
         if y != year or fuel != ft:
             continue
@@ -467,23 +1067,51 @@ def _aggregate_family_hit(
         n = float(payload.get("n") or 0)
         if n <= 0:
             continue
+        key = _canonical_cn_key(model_n)
+        prev = best_by_key.get(key)
+        if prev is None or n > prev[0]:
+            best_by_key[key] = (n, model_n, payload)
+
+    cells = list(best_by_key.values())
+    # If any Status F cell exists, drop P-only siblings (CLIO AUTOSCUOLA P, …).
+    if any(str(p.get("status") or "").upper() == "F" for _, _, p in cells):
+        cells = [
+            (n, m, p)
+            for n, m, p in cells
+            if str(p.get("status") or "").upper() == "F"
+        ]
+
+    total_n = 0.0
+    co2_acc = 0.0
+    co2_n = 0.0
+    kw_acc = 0.0
+    kw_n = 0.0
+    variants: list[tuple[float, str]] = []
+    for n, model_n, payload in cells:
         total_n += n
+        raw = str(payload.get("model_raw") or model_n)
+        variants.append((n, raw))
         if isinstance(payload.get("co2"), (int, float)) and float(payload["co2"]) > 0:
             co2_acc += float(payload["co2"]) * n
             co2_n += n
         if isinstance(payload.get("kw"), (int, float)) and float(payload["kw"]) > 0:
             kw_acc += float(payload["kw"]) * n
             kw_n += n
-    if total_n < 100:
+    if total_n < min_n:
         return None
     # Require enough regs with CO2 so missing-Ewltp cells cannot dilute the average.
-    if co2_n < 100:
+    if require_co2 and co2_n < min_n:
         return None
+    variants.sort(key=lambda t: -t[0])
     return {
         "n": total_n,
-        "co2": co2_acc / co2_n,
+        "co2": (co2_acc / co2_n) if co2_n else None,
         "kw": (kw_acc / kw_n) if kw_n > 0 else None,
         "model_raw": label,
+        "variants": [v for _, v in variants],
+        "status": "F"
+        if any(str(p.get("status") or "").upper() == "F" for _, _, p in cells)
+        else "P",
     }
 
 
@@ -531,12 +1159,12 @@ def audi_a4_diesel_hit(
 def bmw_3_series_diesel_hit(
     ice_map: dict[tuple[str, int, str], dict], year: int
 ) -> dict | None:
-    """320d / 330d family; exclude X3 20D etc."""
+    """320d / 330d / M340d family; exclude X3 20D etc."""
     return _aggregate_family_hit(
         ice_map,
         year,
         "DIESEL",
-        lambda m: bool(re.match(r"^3[0-9]{2}D", m)),
+        lambda m: bool(re.match(r"^3[0-9]{2}D", m)) or m.startswith("M340D"),
         "3-Series",
     )
 
@@ -544,12 +1172,14 @@ def bmw_3_series_diesel_hit(
 def porsche_911_petrol_hit(
     ice_map: dict[tuple[str, int, str], dict], year: int
 ) -> dict | None:
+    # 911 cells often lack Ewltp — still sum Status-F n for catalogue labels.
     return _aggregate_family_hit(
         ice_map,
         year,
         "PETROL",
         lambda m: m.startswith("911") or m.startswith("991"),
         "911",
+        require_co2=False,
     )
 
 
@@ -625,6 +1255,23 @@ def porsche_panamera_petrol_hit(
         "PETROL",
         lambda m: m.startswith("PANAMERA") and "EHYBRID" not in m and "HYBRID" not in m,
         "Panamera",
+        require_co2=False,
+        min_n=30.0,
+    )
+
+
+def renault_clio_diesel_hit(
+    ice_map: dict[tuple[str, int, str], dict], year: int
+) -> dict | None:
+    """CLIO + CLIO AUTOSCUOLA / NUOVA CLIO … diesel family for seed Clio diesel."""
+    return _aggregate_family_hit(
+        ice_map,
+        year,
+        "DIESEL",
+        lambda m: "CLIO" in m and "CAPTUR" not in m,
+        "Clio",
+        require_co2=False,
+        min_n=30.0,
     )
 
 
@@ -659,12 +1306,13 @@ def family_eea_hit(
         return bmw_3_series_diesel_hit(ice_map, year)
     if brand_u == "BMW" and (raw in {"5SERIES", "SERIES5"} or clean == "5SERIES") and ft == "DIESEL":
         return bmw_5_series_diesel_hit(ice_map, year)
-    if brand_u == "HYUNDAI" and (raw == "TUCSON" or clean == "TUCSON") and ft == "DIESEL":
-        return hyundai_tucson_diesel_hit(ice_map, year)
+    # Tucson: do not sum TUCSON+TUCSONIX35(+LM) for labels — use the dominant Cn cell.
     if brand_u == "PORSCHE" and (raw == "911" or clean == "911") and ft == "PETROL":
         return porsche_911_petrol_hit(ice_map, year)
     if brand_u == "PORSCHE" and (raw == "PANAMERA" or clean == "PANAMERA") and ft == "PETROL":
         return porsche_panamera_petrol_hit(ice_map, year)
+    if brand_u == "RENAULT" and (raw == "CLIO" or clean == "CLIO") and ft == "DIESEL":
+        return renault_clio_diesel_hit(ice_map, year)
     return None
 
 
@@ -681,13 +1329,20 @@ def bifuel_alias_hit(
     for suffix in ("BIFUEL", "BIFUEL", "BIFUELLPG"):
         alt = ice_map.get((model_n + "BIFUEL", year, ft)) or ice_map.get((model_n + suffix, year, ft))
         if alt and float(alt.get("n") or 0) >= 100:
-            if direct:
-                # Merge n; prefer alt CO2/kW
+            if direct and float(direct.get("n") or 0) >= 1:
+                # Merge n; prefer alt CO2/kW; list both Cn for verifiable labels.
+                d_raw = str(direct.get("model_raw") or model_n)
+                a_raw = str(alt.get("model_raw") or (model_n + " BI-FUEL"))
+                parts = sorted(
+                    [(float(alt.get("n") or 0), a_raw), (float(direct.get("n") or 0), d_raw)],
+                    key=lambda t: -t[0],
+                )
                 return {
                     "n": float(direct.get("n") or 0) + float(alt.get("n") or 0),
                     "co2": alt.get("co2") if isinstance(alt.get("co2"), (int, float)) else direct.get("co2"),
                     "kw": alt.get("kw") if isinstance(alt.get("kw"), (int, float)) else direct.get("kw"),
-                    "model_raw": alt.get("model_raw") or direct.get("model_raw"),
+                    "model_raw": a_raw,
+                    "variants": [v for _, v in parts],
                 }
             return alt
     return direct
