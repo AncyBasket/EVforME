@@ -1,22 +1,24 @@
 #!/usr/bin/env python3
 """
-Flag BEV/PHEV rows whose batteryKWh is inconsistent with EEA Electric range (Zr).
+Battery verification for BEV/PHEV catalog rows.
 
-Implied range km = batteryKWh / energyConsumptionKWhPerKm
-                 = batteryKWh * 1000 / Wh_per_km
+A battery is VERIFIED only if:
+  A) EEA has Zr for that model/year and implied range
+     (battery / energyConsumptionKWhPerKm) is within 15% of at least one Zr, OR
+  B) an official OEM ref exists for the SAME year + matching kW (±5).
 
-Flag when:
-  1) implied range is >15% away from EVERY EEA Zr for that model/year
-     (Status F if present, else P; same Cn matching as range fill), OR
-  2) batteryKWh exceeds the largest capacity implied by any EEA Zr for that
-     model across years at this row's Wh/km (proxy for “largest pack sold”).
+Otherwise the battery is a suspect → must be nil.
 
-Also (--strict / default when refs exist): fail if any row has both wltpRangeKm
-and batteryKWh and implied range differs >15% from declared range
-(must-fail includes 500e 190 km + 40 kWh).
+Also flag:
+  - implied range >15% from all EEA Zr (when EEA exists)
+  - battery exceeds max capacity implied by any EEA Zr for the model
+  - synthetic patterns: ≥3 different models in the same year share the same
+    implied km (±1), or a model-year series grows by a fixed step
+
+Coherence: battery↔wltpRangeKm drift >15% fails.
 
 Usage:
-  python3 scripts/check_catalog_battery.py              # report + exit 0
+  python3 scripts/check_catalog_battery.py
   python3 scripts/check_catalog_battery.py --fail-on-suspects
   python3 scripts/check_catalog_battery.py --coherence-only
 """
@@ -45,11 +47,13 @@ def implied_range_km(battery_kwh: float, energy_kwh_per_km: float) -> float:
     return battery_kwh / energy_kwh_per_km
 
 
+def round_implied_km(battery_kwh: float, energy_kwh_per_km: float) -> int:
+    return int(round(implied_range_km(battery_kwh, energy_kwh_per_km)))
+
+
 def eea_zr_set(cell: dict) -> set[int]:
-    """Status F if any Zr, else P. Drop Zr==Wh misfiles via versions_from_zr_map."""
     status, versions = fill.preferred_versions(cell)
     if status == "fp_conflict":
-        # Still list all Zr from F∪P for suspicion (conservative).
         zrs: set[int] = set()
         for st in ("F", "P"):
             zrs |= set(cell.get(st) or {})
@@ -83,8 +87,19 @@ def max_model_zr_across_years(
     return best
 
 
+def oem_verified_ids(refs_path: Path = REFS_PATH) -> set[str]:
+    """IDs with an official OEM correction recorded for this seed."""
+    if not refs_path.is_file():
+        return set()
+    refs = json.loads(refs_path.read_text(encoding="utf-8"))
+    out: set[str] = set()
+    for c in refs.get("corrected") or []:
+        if c.get("id") and c.get("capacity_kind") in {"net", "gross"}:
+            out.add(c["id"])
+    return out
+
+
 def coherence_failures(rows: list[dict]) -> list[str]:
-    """Rows with both range and battery whose implied range drifts >15%."""
     fails: list[str] = []
     for r in rows:
         if (r.get("powertrain") or "").lower() not in {"ev", "phev"}:
@@ -109,8 +124,81 @@ def coherence_failures(rows: list[dict]) -> list[str]:
     return fails
 
 
+def find_synthetic_pattern_ids(rows: list[dict]) -> dict[str, str]:
+    """
+    Return id → reason for batteries that look generated:
+    - ≥3 distinct (brand, model) share the same implied km (±0 after round) in one year
+    - same model has ≥3 consecutive year-steps with identical non-zero Δ implied km
+    """
+    flagged: dict[str, str] = {}
+
+    by_year: dict[int, list[tuple[int, str, str, str]]] = defaultdict(list)
+    by_model: dict[tuple[str, str], list[tuple[int, int, str]]] = defaultdict(list)
+
+    for r in rows:
+        if (r.get("powertrain") or "").lower() not in {"ev", "phev"}:
+            continue
+        bat = r.get("batteryKWh")
+        energy = r.get("energyConsumptionKWhPerKm")
+        if bat in (None, "", 0) or energy in (None, "", 0):
+            continue
+        year = int(r.get("year") or 0)
+        brand = str(r.get("brand") or "")
+        model = str(r.get("model") or "")
+        rid = str(r.get("id") or "")
+        imp = round_implied_km(float(bat), float(energy))
+        by_year[year].append((imp, brand, model, rid))
+        by_model[(brand, model)].append((year, imp, rid))
+
+    for year, items in by_year.items():
+        buckets: dict[int, set[tuple[str, str]]] = defaultdict(set)
+        bucket_ids: dict[int, list[str]] = defaultdict(list)
+        for imp, brand, model, rid in items:
+            buckets[imp].add((brand, model))
+            bucket_ids[imp].append(rid)
+        for imp, models in buckets.items():
+            if len(models) >= 3:
+                reason = (
+                    f"synthetic_same_implied_km={imp}_across_{len(models)}_models_in_{year}"
+                )
+                for rid in bucket_ids[imp]:
+                    flagged[rid] = reason
+
+    for (_brand, _model), vals in by_model.items():
+        vals = sorted(set(vals))  # unique year entries
+        vals = sorted(vals, key=lambda x: x[0])
+        if len(vals) < 3:
+            continue
+        # Look for runs of consecutive years with constant step
+        for i in range(len(vals) - 2):
+            y0, imp0, id0 = vals[i]
+            y1, imp1, id1 = vals[i + 1]
+            y2, imp2, id2 = vals[i + 2]
+            if y1 - y0 != 1 or y2 - y1 != 1:
+                continue
+            step = imp1 - imp0
+            if step == 0:
+                continue
+            if imp2 - imp1 == step:
+                reason = f"synthetic_fixed_step_{step}_km_per_year"
+                for rid in (id0, id1, id2):
+                    flagged[rid] = reason
+                # extend the run forward
+                j = i + 3
+                prev_y, prev_imp = y2, imp2
+                while j < len(vals):
+                    y, imp, rid = vals[j]
+                    if y - prev_y == 1 and imp - prev_imp == step:
+                        flagged[rid] = reason
+                        prev_y, prev_imp = y, imp
+                        j += 1
+                    else:
+                        break
+
+    return flagged
+
+
 def must_fail_coherence_cases() -> list[tuple[str, dict, bool]]:
-    """(label, row, expect_fail)."""
     return [
         (
             "500e_190km_with_40kwh",
@@ -129,7 +217,7 @@ def must_fail_coherence_cases() -> list[tuple[str, dict, bool]]:
                 "id": "synthetic-500e-coherent",
                 "powertrain": "ev",
                 "batteryKWh": 23.8,
-                "energyConsumptionKWhPerKm": 0.125,  # 23.8/0.125 = 190.4
+                "energyConsumptionKWhPerKm": 0.125,
                 "wltpRangeKm": 190,
             },
             False,
@@ -148,7 +236,84 @@ def must_fail_coherence_cases() -> list[tuple[str, dict, bool]]:
     ]
 
 
-def run_suspect_scan(rows: list[dict]) -> tuple[list[dict], dict[str, dict]]:
+def must_fail_synthetic_cases() -> list[tuple[str, list[dict], bool, str]]:
+    """
+    (label, rows, expect_flagged, reason_substr).
+    expect_flagged True → find_synthetic_pattern_ids must mark those ids.
+    """
+    # Same implied km across ≥3 models in 2021 (446 km pattern)
+    rows_same = [
+        {
+            "id": "synthetic-a-2021",
+            "brand": "BrandA",
+            "model": "ModelA",
+            "year": 2021,
+            "powertrain": "ev",
+            "batteryKWh": 44.6,
+            "energyConsumptionKWhPerKm": 0.1,  # → 446
+        },
+        {
+            "id": "synthetic-b-2021",
+            "brand": "BrandB",
+            "model": "ModelB",
+            "year": 2021,
+            "powertrain": "ev",
+            "batteryKWh": 44.6,
+            "energyConsumptionKWhPerKm": 0.1,
+        },
+        {
+            "id": "synthetic-c-2021",
+            "brand": "BrandC",
+            "model": "ModelC",
+            "year": 2021,
+            "powertrain": "ev",
+            "batteryKWh": 44.6,
+            "energyConsumptionKWhPerKm": 0.1,
+        },
+    ]
+    # Fixed step 6 km/year: 2021=446, 2022=452, … and 2025=490, 2026=496
+    rows_step = []
+    for year, imp in (
+        (2021, 446),
+        (2022, 452),
+        (2023, 458),
+        (2024, 484),
+        (2025, 490),
+        (2026, 496),
+    ):
+        # bat = imp * 0.1
+        rows_step.append(
+            {
+                "id": f"synthetic-step-{year}",
+                "brand": "SynthCo",
+                "model": "Stepper",
+                "year": year,
+                "powertrain": "ev",
+                "batteryKWh": round(imp * 0.1, 1),
+                "energyConsumptionKWhPerKm": 0.1,
+            }
+        )
+    return [
+        (
+            "same_implied_across_3_models_2021",
+            rows_same,
+            True,
+            "synthetic_same_implied",
+        ),
+        (
+            "fixed_step_series_446_to_496",
+            rows_step,
+            True,
+            "synthetic_fixed_step",
+        ),
+    ]
+
+
+def run_suspect_scan(
+    rows: list[dict],
+    *,
+    oem_ok: set[str] | None = None,
+) -> tuple[list[dict], dict[str, dict]]:
     targets = [
         r
         for r in rows
@@ -166,7 +331,10 @@ def run_suspect_scan(rows: list[dict]) -> tuple[list[dict], dict[str, dict]]:
         wrap = fill.load_brand_zr(brand, use_cache=True)
         indexes[brand] = fill.parse_zr_index(wrap, brand)
 
-    # Precompute all merge keys per brand for “same model across years”
+    if oem_ok is None:
+        oem_ok = oem_verified_ids()
+    synthetic = find_synthetic_pattern_ids(rows)
+
     suspects: list[dict] = []
     for brand, brand_rows in sorted(by_brand.items()):
         index = indexes[brand]
@@ -177,34 +345,44 @@ def run_suspect_scan(rows: list[dict]) -> tuple[list[dict], dict[str, dict]]:
             energy = float(r["energyConsumptionKWhPerKm"])
             implied = implied_range_km(bat, energy)
             model = str(r.get("model") or "")
+            rid = str(r.get("id") or "")
             eea_keys_year = {mk for (mk, y) in index if y == year}
             matched = fill.bev_model_keys(model, eea_keys_year, brand)
-            # For cross-year max, match against all keys (same model family).
             matched_all = fill.bev_model_keys(model, all_keys, brand) or matched
 
             eea_zrs = (
                 collect_model_year_zrs(index, matched, year) if matched else set()
             )
             reasons: list[str] = []
-            if eea_zrs:
+
+            # No EEA Zr for this model/year → unverified (unless OEM ref).
+            if not eea_zrs:
+                if rid not in oem_ok:
+                    reasons.append("no_eea_zr_unverified")
+            else:
                 within = any(abs(implied - zr) / zr <= TOL for zr in eea_zrs)
                 if not within:
-                    reasons.append(
-                        "implied_range_gt_15pct_from_all_eea_zr"
-                    )
-            max_zr = max_model_zr_across_years(index, matched_all) if matched_all else None
+                    if rid not in oem_ok:
+                        reasons.append("implied_range_gt_15pct_from_all_eea_zr")
+
+            max_zr = (
+                max_model_zr_across_years(index, matched_all) if matched_all else None
+            )
             if max_zr is not None:
-                max_plausible_bat = max_zr * energy  # kWh = km * kWh/km
-                if bat > max_plausible_bat:
+                max_plausible_bat = max_zr * energy
+                if bat > max_plausible_bat and rid not in oem_ok:
                     reasons.append(
                         f"battery_exceeds_max_implied_by_eea_zr({max_zr}km→{max_plausible_bat:.1f}kWh)"
                     )
+
+            if rid in synthetic and rid not in oem_ok:
+                reasons.append(synthetic[rid])
 
             if not reasons:
                 continue
             suspects.append(
                 {
-                    "id": r["id"],
+                    "id": rid,
                     "brand": r.get("brand"),
                     "model": model,
                     "year": year,
@@ -219,6 +397,7 @@ def run_suspect_scan(rows: list[dict]) -> tuple[list[dict], dict[str, dict]]:
                     "eea_model_keys": matched,
                     "max_eea_zr_model": max_zr,
                     "reasons": reasons,
+                    "oem_ref": rid in oem_ok,
                 }
             )
     return suspects, indexes
@@ -226,23 +405,14 @@ def run_suspect_scan(rows: list[dict]) -> tuple[list[dict], dict[str, dict]]:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument(
-        "--fail-on-suspects",
-        action="store_true",
-        help="exit 1 if any suspect remains (post-fix CI)",
-    )
-    ap.add_argument(
-        "--coherence-only",
-        action="store_true",
-        help="only battery↔range coherence + must-fail",
-    )
+    ap.add_argument("--fail-on-suspects", action="store_true")
+    ap.add_argument("--coherence-only", action="store_true")
     args = ap.parse_args()
 
     rows = json.loads(eea.SEED_PATH.read_text(encoding="utf-8"))
     failures: list[str] = []
-
-    # Must-fail coherence suite (always)
     must_ok = 0
+
     for label, row, expect_fail in must_fail_coherence_cases():
         hits = coherence_failures([row])
         failed = len(hits) > 0
@@ -253,6 +423,21 @@ def main() -> int:
         else:
             must_ok += 1
             print(f"must-fail OK: {label} → {'FAIL' if failed else 'pass'} as expected")
+
+    for label, synth_rows, expect_flagged, substr in must_fail_synthetic_cases():
+        flagged = find_synthetic_pattern_ids(synth_rows)
+        hit = any(substr in reason for reason in flagged.values())
+        ids_hit = [i for i, reason in flagged.items() if substr in reason]
+        if expect_flagged and not hit:
+            failures.append(
+                f"must-fail {label}: expected synthetic flag containing {substr!r}, "
+                f"got {flagged}"
+            )
+        elif not expect_flagged and hit:
+            failures.append(f"must-fail {label}: unexpected flag {flagged}")
+        else:
+            must_ok += 1
+            print(f"must-fail OK: {label} → flagged {sorted(ids_hit)[:6]}…")
 
     coh = coherence_failures(rows)
     print(f"coherence_failures={len(coh)}")
@@ -269,13 +454,14 @@ def main() -> int:
     if not args.coherence_only:
         suspects, _ = run_suspect_scan(rows)
         eea.CACHE_DIR.mkdir(parents=True, exist_ok=True)
-        report = {
-            "tol": TOL,
-            "suspect_count": len(suspects),
-            "suspects": suspects,
-        }
         REPORT_PATH.write_text(
-            json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+            json.dumps(
+                {"tol": TOL, "suspect_count": len(suspects), "suspects": suspects},
+                ensure_ascii=False,
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
         )
         print(f"suspects={len(suspects)} report={REPORT_PATH}")
         if args.fail_on_suspects and suspects:

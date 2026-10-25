@@ -2,11 +2,11 @@
   "url": "",
   "publishedUrl": "https://files.catbox.moe/3i0nro.json",
   "rows": 5654,
-  "bytes": 2848670,
+  "bytes": 2848695,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-25T15:56:46.414035+00:00",
+  "updatedAt": "2026-10-25T20:04:06.415836+00:00",
   "policy": "offline-first",
   "seedVersion": 56,
-  "note": "seedVersion 56: batteryKWh — nil EEA-inconsistent packs; OEM sheet overrides only (Honda e 35.5, MG ZS EV 2021 44.5, BYD Dolphin 60.4); Fiat 500e 2021–22 range+battery nil (ambiguous 24 vs 42 kWh)."
+  "note": "seedVersion 56: batteryKWh only if EEA-verified (±15% Zr) or same-year OEM sheet (net/gross); else nil. Synthetic pack patterns cleared."
 }
