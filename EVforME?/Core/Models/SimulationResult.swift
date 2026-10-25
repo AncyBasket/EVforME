@@ -43,8 +43,8 @@ struct SimulationResult {
     /// Overall verdict on EV suitability
     let verdict: EVVerdict
     
-    /// Estimated number of charges needed per week
-    let weeklyCharges: Int
+    /// Estimated charges per week from declared range. `nil` if EV/PHEV has no catalog range.
+    let weeklyCharges: Int?
     
     /// Estimated yearly savings range compared to gas car (in local currency)
     let yearlySavingsRange: ClosedRange<Int>

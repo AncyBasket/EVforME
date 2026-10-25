@@ -10,6 +10,8 @@
 "widget_config_display_name" = "Last EV verdict";
 "widget_config_description" = "Shows your latest EVforME? readout on the Home Screen.";
 "widget_savings_charges_line" = "€%d–€%d/yr · %d×/wk";
+"widget_savings_charges_line_unavailable" = "€%d–€%d/yr · charges n/a";
+"live_activity_charges_unavailable" = "n/a";
 "widget_fuel_km_line" = "€%.2f/L · %d km/yr";
 "partial_total_bollo_unknown" = "Partial total (road tax not estimated)";
 

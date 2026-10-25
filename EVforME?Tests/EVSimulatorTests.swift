@@ -12,9 +12,9 @@ final class EVSimulatorTests: XCTestCase {
 
     private var simulator: EVSimulator!
 
-    /// ID noti nel `vehicles.seed.json` (ICE + EV) per input valido in test.
+    /// ID noti nel seed (ICE + EV con autonomia dichiarata per la stima ricariche).
     private let testSourceVehicleId = "alfa-romeo-147-2005"
-    private let testTargetVehicleId = "audi-q4-e-tron-2021"
+    private let testTargetVehicleId = "byd-dolphin-surf-2025"
 
     override func setUp() {
         super.setUp()
@@ -101,7 +101,8 @@ final class EVSimulatorTests: XCTestCase {
         
         // Then
         XCTAssertEqual(result.verdict, .yes)
-        XCTAssertGreaterThan(result.weeklyCharges, 0)
+        XCTAssertNotNil(result.weeklyCharges)
+        XCTAssertGreaterThan(result.weeklyCharges ?? 0, 0)
         XCTAssertFalse(result.keyReasons.isEmpty)
     }
     
@@ -144,7 +145,8 @@ final class EVSimulatorTests: XCTestCase {
 
         let result = requireSimulate(input: input)
         XCTAssertFalse(result.keyReasons.isEmpty)
-        XCTAssertGreaterThan(result.weeklyCharges, 0)
+        XCTAssertNotNil(result.weeklyCharges)
+        XCTAssertGreaterThan(result.weeklyCharges ?? 0, 0)
         if result.verdict != .notYet {
             // Con alcuni seed EV molto efficienti il verdetto può restare positivo.
             XCTAssertTrue([EVVerdict.yes, .maybe, .notYet].contains(result.verdict))
@@ -181,8 +183,9 @@ final class EVSimulatorTests: XCTestCase {
         let resultWithHome = requireSimulate(input: inputWithHome)
         let resultWithoutHome = requireSimulate(input: inputWithoutHome)
         
-        // Then
-        XCTAssertLessThanOrEqual(resultWithHome.weeklyCharges, resultWithoutHome.weeklyCharges)
+        // Then — stessa autonomia dichiarata: casa/pubblico non inventa più 300 vs 250 km.
+        XCTAssertEqual(resultWithHome.weeklyCharges, resultWithoutHome.weeklyCharges)
+        XCTAssertNotNil(resultWithHome.weeklyCharges)
     }
     
     func testSimulate_GeneratesYearlyComparison() {
@@ -381,7 +384,8 @@ final class EVSimulatorTests: XCTestCase {
             result.keyReasons.contains(where: { $0.localizedCaseInsensitiveContains("PHEV") || $0 == L10n.phevBlendReason }),
             "PHEV target should surface blend reason"
         )
-        XCTAssertGreaterThan(result.weeklyCharges, 0)
+        XCTAssertNotNil(result.weeklyCharges)
+        XCTAssertGreaterThan(result.weeklyCharges ?? 0, 0)
         XCTAssertFalse(result.yearlyComparison.isEmpty)
     }
 

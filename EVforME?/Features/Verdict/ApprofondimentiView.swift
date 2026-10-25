@@ -29,6 +29,22 @@ struct ApprofondimentiView: View {
                     }
                 }
                 .accessibilityHint(L10n.incentivesLinkA11yHint)
+                Link(destination: OfficialLinks.mimitBonusColonnineDomestiche) {
+                    HStack(spacing: 8) {
+                        Text(L10n.wallboxBonusLinkTitle)
+                            .font(Typography.readingCardTitle)
+                        Image(systemName: "arrow.up.right")
+                            .font(.caption.weight(.semibold))
+                    }
+                    .foregroundColor(.ink)
+                    .padding(.vertical, 10)
+                    .overlay(alignment: .bottom) {
+                        Rectangle()
+                            .fill(Color.accent)
+                            .frame(height: 2)
+                    }
+                }
+                .accessibilityHint(L10n.wallboxBonusLinkA11yHint)
             }
         }
     }

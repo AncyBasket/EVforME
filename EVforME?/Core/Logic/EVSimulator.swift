@@ -563,18 +563,13 @@ final class EVSimulator {
             targetVehicle: targetVehicle
         )
         
-        let weeklyKm = Double(input.dailyKm) / 52.0
-        let baseKmPerCharge = input.hasHomeCharging ? 300.0 : 250.0
-        let kmPerCharge = baseKmPerCharge * input.areaType.kmPerChargeFactor * input.tripProfile.chargeSeverityFactor
-        let weeklyCharges: Int
-        switch targetVehicle.powertrain {
-        case .ev:
-            weeklyCharges = max(1, Int(ceil(weeklyKm / kmPerCharge)))
-        case .phev:
-            weeklyCharges = max(1, Int(ceil(weeklyKm * 0.55 / kmPerCharge)))
-        case .ice, .hev:
-            weeklyCharges = 0
-        }
+        let weeklyCharges = WeeklyChargeEstimator.weeklyCharges(
+            yearlyKm: Double(input.dailyKm),
+            powertrain: targetVehicle.powertrain,
+            rangeKm: WeeklyChargeEstimator.declaredRangeKm(for: targetVehicle),
+            areaType: input.areaType,
+            tripProfile: input.tripProfile
+        )
         
         let yearlySavings = result.yearlyIceCost - result.yearlyEvCost
         let savingsBandLow = Int(yearlySavings * 0.9)
@@ -609,7 +604,7 @@ final class EVSimulator {
 
         var reasons = [
             L10n.switchingFromTo(sourceVehicle.displayName, targetVehicle.displayName),
-            L10n.chargePerWeek(weeklyCharges),
+            L10n.chargePerWeekLine(weeklyCharges),
             yearlySavings > 0
                 ? L10n.saveUpToPerYear(Int(yearlySavings))
                 : L10n.saveCurrentCheaper,
@@ -650,7 +645,7 @@ final class EVSimulator {
         }
 
         var fears: [FearRealityItem] = []
-        if weeklyCharges > 2 {
+        if let weeklyCharges, weeklyCharges > 2 {
             fears.append(FearRealityItem(
                 fear: L10n.fearRunOutBattery,
                 reality: L10n.realityChargingFewTimes

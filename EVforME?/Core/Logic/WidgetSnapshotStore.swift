@@ -14,7 +14,7 @@ struct VerdictWidgetSnapshot: Codable, Equatable {
     var yearlyKm: Int
     var savingsMin: Int
     var savingsMax: Int
-    var weeklyCharges: Int
+    var weeklyCharges: Int?
     var fuelPrice: Double
     /// Consumo ICE usato nell’ultima sim (L/100 km) per bump carburante realistico.
     var iceLPer100Km: Double
@@ -40,7 +40,7 @@ struct VerdictWidgetSnapshot: Codable, Equatable {
         yearlyKm: Int,
         savingsMin: Int,
         savingsMax: Int,
-        weeklyCharges: Int,
+        weeklyCharges: Int?,
         fuelPrice: Double,
         iceLPer100Km: Double,
         updatedAt: TimeInterval,
@@ -67,7 +67,7 @@ struct VerdictWidgetSnapshot: Codable, Equatable {
         yearlyKm = try c.decode(Int.self, forKey: .yearlyKm)
         savingsMin = try c.decode(Int.self, forKey: .savingsMin)
         savingsMax = try c.decode(Int.self, forKey: .savingsMax)
-        weeklyCharges = try c.decode(Int.self, forKey: .weeklyCharges)
+        weeklyCharges = try c.decodeIfPresent(Int.self, forKey: .weeklyCharges)
         fuelPrice = try c.decodeIfPresent(Double.self, forKey: .fuelPrice) ?? OfficialEnergyCosts.Fallback.petrolPerLiter
         iceLPer100Km = try c.decodeIfPresent(Double.self, forKey: .iceLPer100Km) ?? 7.0
         updatedAt = try c.decode(TimeInterval.self, forKey: .updatedAt)

@@ -14,7 +14,7 @@ struct VerdictActivityAttributes: ActivityAttributes {
         var subtitle: String
         var savingsMin: Int
         var savingsMax: Int
-        var weeklyCharges: Int
+        var weeklyCharges: Int?
         var breakEvenMonths: Int?
         var fuelPrice: Double
     }

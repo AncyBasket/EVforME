@@ -10,7 +10,7 @@ import SwiftUI
 struct CostsComparisonView: View {
     let comparison: [YearlyComparison]
     let userInput: UserInput
-    let weeklyCharges: Int
+    let weeklyCharges: Int?
     let sourceBreakdown: OperatingCostBreakdown
     let targetBreakdown: OperatingCostBreakdown
 

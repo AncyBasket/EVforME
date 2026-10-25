@@ -238,8 +238,10 @@
 "subsection_battery_title" = "Batteria e vita utile";
 "subsection_battery_body" = "Le batterie EV hanno di solito garanzia di 8 anni o 160.000 km. La capacità cala con il tempo e l’uso, ma i dati di garanzia e le soglie di sostituzione variano per modello; questa simulazione non include eventuale sostituzione batteria.";
 "subsection_incentives_title" = "Incentivi";
-"subsection_incentives_body" = "In Italia ecobonus e agevolazioni possono ridurre il prezzo d’acquisto. Per le colonnine domestiche sono possibili detrazioni fiscali. ";
+"subsection_incentives_body" = "In Italia ecobonus e agevolazioni possono ridurre il prezzo d’acquisto. Per le colonnine domestiche esiste un contributo MIMIT (Bonus colonnine): non è incluso nei calcoli di questa app — verifica requisiti e importi sul sito ufficiale.";
 "incentives_link_title" = "Scopri incentivi e ecobonus aggiornati";
+"wallbox_bonus_link_title" = "Bonus colonnine domestiche (MIMIT)";
+"wallbox_bonus_link_a11y_hint" = "Apre nel browser la pagina MIMIT sul Bonus colonnine domestiche.";
 
 /* Assumptions & Transparency */
 "assumptions_transparency" = "Assunzioni & trasparenza";
@@ -303,7 +305,7 @@
 "share_signature" = "— EVforME?";
 
 /* Shell & guides */
-"shell_edition_mark" = "Lab ’26";
+"shell_edition_mark" = "Lab ’%02d";
 "shell_tagline_workshop" = "Costruisci il confronto: km, prezzi, due auto, un esito senza giri di parole.";
 "shell_tagline_guides" = "Letture brevi: autonomia, ricarica, batteria, costo totale.";
 "shell_tab_workshop" = "Banco";
@@ -512,7 +514,15 @@
 "validation_unknown_target_vehicle" = "Veicolo elettrificato non trovato nel catalogo.";
 
 "calculation_opex_breakdown" = "Energia €%.0f + Manutenzione €%.0f + Bollo €%.0f + Assicurazione €%.0f = €%.0f/anno";
-"calculation_charging_note" = "Ricariche stimate: %d× / settimana (mix casa/pubblico nel totale energia).";
+"calculation_charging_note" = "Ricariche stimate: %d× / settimana (stima sull’autonomia dichiarata; mix casa/pubblico nel totale energia).";
+"calculation_charging_note_unavailable" = "Ricariche a settimana: non disponibili (manca l’autonomia dichiarata in catalogo).";
+"charges_unavailable_short" = "n/d";
+"charge_per_week_unavailable" = "Ricariche a settimana: non disponibili (manca autonomia dichiarata)";
+"share_weekly_charges_unavailable" = "Ricariche a settimana: non disponibili";
+"impact_charge_per_week_unavailable" = "• Ricariche a settimana: non disponibili (manca autonomia dichiarata).";
+"verdict_ai_fallback_yes_no_charges" = "Con circa %1$d km/anno i conti favoriscono l’elettrico: circa €%2$d–€%3$d risparmiati l’anno. Con ricarica a casa e la coppia scelta, sembra conveniente con questi dati. (Ricariche/sett. non stimate: manca autonomia catalogo.)";
+"verdict_ai_fallback_yes_public_no_charges" = "Con circa %1$d km/anno i conti favoriscono l’elettrico: circa €%2$d–€%3$d risparmiati l’anno. Senza ricarica a casa (solo pubblica) e con la coppia scelta, sembra conveniente con questi dati. (Ricariche/sett. non stimate: manca autonomia catalogo.)";
+"verdict_ai_fallback_not_yet_no_charges" = "A circa %1$d km/anno con questi prezzi, l’elettrico non batte ancora il carburante. Conviene aspettare energia più economica, più ricarica a casa o un’EV più parca. (Ricariche/sett. non stimate: manca autonomia catalogo.)";
 
 /* Retention 1.1 */
 "last_comparison_title" = "Ultimo confronto";

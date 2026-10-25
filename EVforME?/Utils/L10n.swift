@@ -209,8 +209,9 @@ enum L10n {
     static var why: String { string("why") }
     static var whatThisMeans: String { string("what_this_means") }
     static func impactSaveBetween(_ min: Int, _ max: Int) -> String { format("impact_save_between", min, max) }
-    static func impactChargePerWeek(_ count: Int) -> String {
-        String.localizedStringWithFormat(string("impact_charge_per_week"), count)
+    static func impactChargePerWeek(_ count: Int?) -> String {
+        guard let count else { return string("impact_charge_per_week_unavailable") }
+        return String.localizedStringWithFormat(string("impact_charge_per_week"), count)
     }
     static var impactGasCostMore: String { string("impact_gas_cost_more") }
     static var shareSubject: String { string("share_subject") }
@@ -283,9 +284,12 @@ enum L10n {
         format("calculation_ev_formula", km, kWhPerKm, pricePerKWh, energyCost, yearlyCost)
     }
     static func calculationEvTotal(_ years: Int, _ total: Int) -> String { format("calculation_ev_total", years, total) }
-    static func calculationChargingNote(_ weeklyCharges: Int) -> String {
-        format("calculation_charging_note", weeklyCharges)
+    static func calculationChargingNote(_ weeklyCharges: Int?) -> String {
+        guard let weeklyCharges else { return string("calculation_charging_note_unavailable") }
+        return format("calculation_charging_note", weeklyCharges)
     }
+
+    static var chargesUnavailableShort: String { string("charges_unavailable_short") }
     static func calculationSavings(_ years: Int, _ savings: Int) -> String { format("calculation_savings", years, savings) }
     static var savings: String { string("savings") }
     static var gasLabel: String { string("gas_label") }
@@ -344,6 +348,8 @@ enum L10n {
     static var subsectionIncentivesTitle: String { string("subsection_incentives_title") }
     static var subsectionIncentivesBody: String { string("subsection_incentives_body") }
     static var incentivesLinkTitle: String { string("incentives_link_title") }
+    static var wallboxBonusLinkTitle: String { string("wallbox_bonus_link_title") }
+    static var wallboxBonusLinkA11yHint: String { string("wallbox_bonus_link_a11y_hint") }
     
     // MARK: - Assumptions & Transparency
     static var assumptionsTransparency: String { string("assumptions_transparency") }
@@ -458,6 +464,12 @@ enum L10n {
     static func chargePerWeek(_ n: Int) -> String {
         String.localizedStringWithFormat(string("charge_per_week"), n)
     }
+
+    /// Stima ricariche/sett. da autonomia dichiarata; `nil` → non disponibile.
+    static func chargePerWeekLine(_ n: Int?) -> String {
+        guard let n else { return string("charge_per_week_unavailable") }
+        return chargePerWeek(n)
+    }
     static func saveUpToPerYear(_ n: Int) -> String { format("save_up_to_per_year", n) }
     static var saveCurrentCheaper: String { string("save_current_cheaper") }
     static var realityCurrentCheaper: String { string("reality_current_cheaper") }
@@ -478,13 +490,19 @@ enum L10n {
     static var shareVerdictYes: String { string("share_verdict_yes") }
     static var shareVerdictMaybe: String { string("share_verdict_maybe") }
     static var shareVerdictNotYet: String { string("share_verdict_not_yet") }
-    static func shareWeeklyCharges(_ n: Int) -> String { format("share_weekly_charges", n) }
+    static func shareWeeklyCharges(_ n: Int?) -> String {
+        guard let n else { return string("share_weekly_charges_unavailable") }
+        return format("share_weekly_charges", n)
+    }
     static func shareYearlySavings(_ min: Int, _ max: Int) -> String { format("share_yearly_savings", min, max) }
     static var shareKeyReasons: String { string("share_key_reasons") }
     static var shareSignature: String { string("share_signature") }
 
     // MARK: - Shell & guides
-    static var shellEditionMark: String { string("shell_edition_mark") }
+    static var shellEditionMark: String {
+        let year = Calendar.current.component(.year, from: Date()) % 100
+        return format("shell_edition_mark", year)
+    }
     static var shellTaglineWorkshop: String { string("shell_tagline_workshop") }
     static var shellTaglineGuides: String { string("shell_tagline_guides") }
     static var shellTabWorkshop: String { string("shell_tab_workshop") }
@@ -535,9 +553,15 @@ enum L10n {
         km: Int,
         min: Int,
         max: Int,
-        charges: Int,
+        charges: Int?,
         hasHomeCharging: Bool
     ) -> String {
+        guard let charges else {
+            let key = hasHomeCharging
+                ? "verdict_ai_fallback_yes_no_charges"
+                : "verdict_ai_fallback_yes_public_no_charges"
+            return String.localizedStringWithFormat(string(key), km, min, max)
+        }
         let key = hasHomeCharging ? "verdict_ai_fallback_yes" : "verdict_ai_fallback_yes_public"
         return String.localizedStringWithFormat(string(key), charges, km, min, max)
     }
@@ -545,8 +569,11 @@ enum L10n {
         format("verdict_ai_fallback_maybe", km, min, max)
     }
     /// Plurali su `charges` via stringsdict; arg1 = charges, arg2 = km.
-    static func verdictAIFallbackNotYet(_ km: Int, _ charges: Int) -> String {
-        String.localizedStringWithFormat(string("verdict_ai_fallback_not_yet"), charges, km)
+    static func verdictAIFallbackNotYet(_ km: Int, _ charges: Int?) -> String {
+        guard let charges else {
+            return String.localizedStringWithFormat(string("verdict_ai_fallback_not_yet_no_charges"), km)
+        }
+        return String.localizedStringWithFormat(string("verdict_ai_fallback_not_yet"), charges, km)
     }
 
     // MARK: - Break-even
