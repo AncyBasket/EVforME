@@ -21,7 +21,7 @@ struct VerdictWidgetSnapshot: Codable {
     var yearlyKm: Int
     var savingsMin: Int
     var savingsMax: Int
-    var weeklyCharges: Int
+    var weeklyCharges: Int?
     var fuelPrice: Double
     var iceLPer100Km: Double
     var updatedAt: TimeInterval
@@ -41,7 +41,7 @@ struct VerdictWidgetSnapshot: Codable {
         yearlyKm: Int,
         savingsMin: Int,
         savingsMax: Int,
-        weeklyCharges: Int,
+        weeklyCharges: Int?,
         fuelPrice: Double,
         iceLPer100Km: Double,
         updatedAt: TimeInterval,
@@ -68,7 +68,7 @@ struct VerdictWidgetSnapshot: Codable {
         yearlyKm = try c.decode(Int.self, forKey: .yearlyKm)
         savingsMin = try c.decode(Int.self, forKey: .savingsMin)
         savingsMax = try c.decode(Int.self, forKey: .savingsMax)
-        weeklyCharges = try c.decode(Int.self, forKey: .weeklyCharges)
+        weeklyCharges = try c.decodeIfPresent(Int.self, forKey: .weeklyCharges)
         // MIMIT 19/10/2026 — same source as OfficialEnergyCosts.Fallback.petrolPerLiter
         fuelPrice = try c.decodeIfPresent(Double.self, forKey: .fuelPrice) ?? WidgetEnergyFallback.petrolPerLiter
         iceLPer100Km = try c.decodeIfPresent(Double.self, forKey: .iceLPer100Km) ?? 7.0

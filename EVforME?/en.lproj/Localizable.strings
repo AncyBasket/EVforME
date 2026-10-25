@@ -218,8 +218,10 @@
 "subsection_battery_title" = "Battery and lifespan";
 "subsection_battery_body" = "EV batteries typically have an 8-year or 160,000 km warranty. Capacity declines with time and use; warranty thresholds vary by model. This simulation does not include possible battery replacement.";
 "subsection_incentives_title" = "Incentives";
-"subsection_incentives_body" = "In Italy, ecobonus and other schemes can lower purchase price. Home charging points may qualify for tax deductions.";
+"subsection_incentives_body" = "In Italy, ecobonus and other schemes can lower purchase price. Home chargers may qualify for a MIMIT contribution (Bonus colonnine): it is not included in this app’s calculations — check eligibility and amounts on the official site.";
 "incentives_link_title" = "Find out about incentives and ecobonus";
+"wallbox_bonus_link_title" = "Home charger bonus (MIMIT)";
+"wallbox_bonus_link_a11y_hint" = "Opens the MIMIT Bonus colonnine domestiche page in your browser.";
 
 /* Assumptions & Transparency */
 "assumptions_transparency" = "Assumptions & Transparency";
@@ -266,6 +268,7 @@
 "public_charging_manageable" = "Public charging would be manageable";
 "fear_run_out_battery" = "I'll run out of battery.";
 "reality_charging_few_times" = "Even with your usage, charging only a few times a week is enough.";
+"reality_charging_about_times" = "With your usage you need about %d charges a week.";
 "fear_charging_complicated" = "Charging will be complicated.";
 "reality_public_charging" = "Prices vary a lot (€0.25–€0.90/kWh): check your operator.";
 "fear_evs_unreliable" = "EVs aren't reliable.";
@@ -284,7 +287,7 @@
 "share_signature" = "— EVforME?";
 
 /* Shell & guides */
-"shell_edition_mark" = "Lab ’26";
+"shell_edition_mark" = "Lab ’%02d";
 "shell_tagline_workshop" = "Build your comparison: km, prices, two cars, one blunt readout.";
 "shell_tagline_guides" = "Short reads: range, charging, battery, total cost of ownership.";
 "shell_tab_workshop" = "Bench";
@@ -514,7 +517,15 @@
 "validation_unknown_target_vehicle" = "Electrified vehicle not found in the catalog.";
 
 "calculation_opex_breakdown" = "Energy €%.0f + Maintenance €%.0f + Tax €%.0f + Insurance €%.0f = €%.0f/year";
-"calculation_charging_note" = "Estimated charges: %d× / week (home/public mix in energy total).";
+"calculation_charging_note" = "Estimated charges: %d× / week (based on declared range; home/public mix in energy total).";
+"calculation_charging_note_unavailable" = "Weekly charges: not available (declared range missing from catalog).";
+"charges_unavailable_short" = "n/a";
+"charge_per_week_unavailable" = "Weekly charges: not available (declared range missing)";
+"share_weekly_charges_unavailable" = "Weekly charges: not available";
+"impact_charge_per_week_unavailable" = "• Weekly charges: not available (declared range missing).";
+"verdict_ai_fallback_yes_no_charges" = "At about %1$d km/year the numbers favour electric: about €%2$d–€%3$d saved per year. With home charging and this pair, it looks worthwhile on these inputs. (Weekly charges not estimated: catalog range missing.)";
+"verdict_ai_fallback_yes_public_no_charges" = "At about %1$d km/year the numbers favour electric: about €%2$d–€%3$d saved per year. Without home charging (public only) and this pair, it looks worthwhile on these inputs. (Weekly charges not estimated: catalog range missing.)";
+"verdict_ai_fallback_not_yet_no_charges" = "At about %1$d km/year with these prices, electric does not yet beat fuel. Waiting for cheaper energy, more home charging, or a thriftier EV may help. (Weekly charges not estimated: catalog range missing.)";
 
 /* Retention 1.1 */
 "last_comparison_title" = "Last comparison";

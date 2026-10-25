@@ -14,6 +14,9 @@ enum OfficialLinks {
     /// Ecobonus MIMIT / Invitalia (tabelle contributi storiche).
     static let mimitEcobonusContributi = URL(string: "https://ecobonus.mimit.gov.it/index.php/contributi")!
 
+    /// Bonus colonnine domestiche MIMIT (contributo acquisto/posa). Verificato 25/10/2026.
+    static let mimitBonusColonnineDomestiche = URL(string: "https://www.mimit.gov.it/it/incentivi/bonus-colonnine-domestiche")!
+
     /// Dataset EEA CO₂ cars (fonte catalogo WLTP / fill da co2cars).
     static let eeaCO2CarsDataset = URL(string: "https://www.eea.europa.eu/data-and-maps/data/co2-cars-emission-22")!
 
@@ -28,6 +31,7 @@ enum OfficialLinks {
         [
             italianVehicleIncentives,
             mimitEcobonusContributi,
+            mimitBonusColonnineDomestiche,
             eeaCO2CarsDataset,
             epaFuelEconomy,
             moliseRoadTax,

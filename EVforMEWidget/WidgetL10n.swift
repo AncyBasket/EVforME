@@ -29,8 +29,11 @@ enum WidgetL10n {
     static var configDescription: String { string("widget_config_description") }
     static var kmPerYearLabel: String { string("live_activity_km_per_year_label") }
 
-    static func savingsChargesLine(min: Int, max: Int, charges: Int) -> String {
-        format("widget_savings_charges_line", min, max, charges)
+    static func savingsChargesLine(min: Int, max: Int, charges: Int?) -> String {
+        guard let charges else {
+            return format("widget_savings_charges_line_unavailable", min, max)
+        }
+        return format("widget_savings_charges_line", min, max, charges)
     }
 
     static var partialTotalBolloUnknown: String { string("partial_total_bollo_unknown") }
@@ -43,8 +46,9 @@ enum WidgetL10n {
         format("widget_fuel_price_per_liter", price)
     }
 
-    static func chargesPerWeek(_ n: Int) -> String {
-        format("live_activity_charges_per_week", n)
+    static func chargesPerWeek(_ n: Int?) -> String {
+        guard let n else { return string("live_activity_charges_unavailable") }
+        return format("live_activity_charges_per_week", n)
     }
 
     static func kmPerYear(_ km: Int) -> String {

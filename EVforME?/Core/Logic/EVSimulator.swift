@@ -563,18 +563,25 @@ final class EVSimulator {
             targetVehicle: targetVehicle
         )
         
-        let weeklyKm = Double(input.dailyKm) / 52.0
-        let baseKmPerCharge = input.hasHomeCharging ? 300.0 : 250.0
-        let kmPerCharge = baseKmPerCharge * input.areaType.kmPerChargeFactor * input.tripProfile.chargeSeverityFactor
-        let weeklyCharges: Int
+        let yearlyKm = Double(input.dailyKm)
+        let electricShare: Double
         switch targetVehicle.powertrain {
-        case .ev:
-            weeklyCharges = max(1, Int(ceil(weeklyKm / kmPerCharge)))
         case .phev:
-            weeklyCharges = max(1, Int(ceil(weeklyKm * 0.55 / kmPerCharge)))
+            electricShare = targetVehicle.phevElectricKmShare(
+                hasHomeCharging: input.hasHomeCharging,
+                yearlyKm: yearlyKm
+            )
+        case .ev:
+            electricShare = 1.0
         case .ice, .hev:
-            weeklyCharges = 0
+            electricShare = 0
         }
+        let weeklyCharges = WeeklyChargeEstimator.weeklyCharges(
+            yearlyKm: yearlyKm,
+            powertrain: targetVehicle.powertrain,
+            rangeKm: WeeklyChargeEstimator.declaredRangeKm(for: targetVehicle),
+            electricKmShare: electricShare
+        )
         
         let yearlySavings = result.yearlyIceCost - result.yearlyEvCost
         let savingsBandLow = Int(yearlySavings * 0.9)
@@ -609,7 +616,7 @@ final class EVSimulator {
 
         var reasons = [
             L10n.switchingFromTo(sourceVehicle.displayName, targetVehicle.displayName),
-            L10n.chargePerWeek(weeklyCharges),
+            L10n.chargePerWeekLine(weeklyCharges),
             yearlySavings > 0
                 ? L10n.saveUpToPerYear(Int(yearlySavings))
                 : L10n.saveCurrentCheaper,
@@ -650,10 +657,10 @@ final class EVSimulator {
         }
 
         var fears: [FearRealityItem] = []
-        if weeklyCharges > 2 {
+        if let chargingReality = ChargingFearCopy.reality(for: weeklyCharges) {
             fears.append(FearRealityItem(
                 fear: L10n.fearRunOutBattery,
-                reality: L10n.realityChargingFewTimes
+                reality: chargingReality
             ))
         }
         if !input.hasHomeCharging {

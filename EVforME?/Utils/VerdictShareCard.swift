@@ -76,7 +76,8 @@ struct VerdictShareCardView: View {
                 )
                 shareMetricRow(
                     label: L10n.verdictProofChargesLabel,
-                    value: "\(result.weeklyCharges)× / \(L10n.shareCardWeekShort)"
+                    value: result.weeklyCharges.map { "\($0)× / \(L10n.shareCardWeekShort)" }
+                        ?? L10n.chargesUnavailableShort
                 )
                 if let months = result.breakEvenMonths {
                     shareMetricRow(

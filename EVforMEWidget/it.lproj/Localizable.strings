@@ -10,6 +10,8 @@
 "widget_config_display_name" = "Ultimo verdetto EV";
 "widget_config_description" = "Mostra l’ultimo esito EVforME? sulla Home.";
 "widget_savings_charges_line" = "€%d–€%d/anno · %d×/sett.";
+"widget_savings_charges_line_unavailable" = "€%d–€%d/anno · ricariche n/d";
+"live_activity_charges_unavailable" = "n/d";
 "widget_fuel_km_line" = "€%.2f/L · %d km/anno";
 "partial_total_bollo_unknown" = "Totale parziale (bollo non stimato)";
 

@@ -496,7 +496,7 @@ struct VerdictView: View {
                     .frame(width: 1)
                     .padding(.vertical, 4)
                 verdictProofMetric(
-                    value: "\(result.weeklyCharges)×",
+                    value: result.weeklyCharges.map { "\($0)×" } ?? L10n.chargesUnavailableShort,
                     label: L10n.verdictProofChargesLabel
                 )
                 Rectangle()
@@ -534,7 +534,7 @@ struct VerdictView: View {
                 result.hasPartialBolloTotal ? L10n.partialTotalBolloUnknown : "",
                 L10n.verdictProofMoneyValue(for: result.yearlySavingsRange),
                 L10n.verdictProofMoneyLabel(for: result.yearlySavingsRange),
-                "\(result.weeklyCharges)×",
+                result.weeklyCharges.map { "\($0)×" } ?? L10n.chargesUnavailableShort,
                 L10n.verdictProofChargesLabel,
                 result.breakEvenMonths.map { L10n.verdictProofBreakEvenValue($0) } ?? "",
                 L10n.verdictTrustStrip

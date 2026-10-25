@@ -119,12 +119,14 @@ enum VerdictExplanationService {
     private static func allowedFigureTokens(result: SimulationResult, input: UserInput) -> [String] {
         var tokens: [String] = [
             "\(input.dailyKm)",
-            "\(result.weeklyCharges)",
             "\(result.yearlySavingsRange.lowerBound)",
             "\(result.yearlySavingsRange.upperBound)",
             "\(abs(result.yearlySavingsRange.lowerBound))",
             "\(abs(result.yearlySavingsRange.upperBound))"
         ]
+        if let charges = result.weeklyCharges {
+            tokens.append("\(charges)")
+        }
         return tokens
     }
 }
