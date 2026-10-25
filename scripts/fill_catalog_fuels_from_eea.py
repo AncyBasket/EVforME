@@ -935,10 +935,11 @@ def match_model(seed_model: str, eea_models: set[str], *, for_ice: bool = False)
         if sn and sn in pool and sn in weak_short and sn in {"A4", "I10", "I20"}:
             return sn
     best: tuple[int, str] | None = None
+    # sorted(pool) so PYTHONHASHSEED cannot change which equal-score key wins.
     for sn in candidates:
         if not sn or len(sn) <= 2:
             continue
-        for em in pool:
+        for em in sorted(pool):
             if not em:
                 continue
             if for_ice and not ice_seed_accepts_eea_key(seed_model, em):
@@ -946,9 +947,9 @@ def match_model(seed_model: str, eea_models: set[str], *, for_ice: bool = False)
             if sn == em or sn in em or em in sn:
                 score = min(len(sn), len(em))
                 # Prefer longer seed token; among equals prefer shorter EEA key
-                # (911 over 911GT3MANTHEYPERFORMANCE).
+                # (911 over 911GT3MANTHEYPERFORMANCE); tie-break lexicographic.
                 score = score * 1000 + len(sn) * 10 - len(em)
-                if best is None or score > best[0]:
+                if best is None or score > best[0] or (score == best[0] and em < best[1]):
                     best = (score, em)
     return best[1] if best and best[0] >= 3000 else None
 

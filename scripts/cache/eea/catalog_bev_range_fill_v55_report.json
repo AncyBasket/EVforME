@@ -1,0 +1,122 @@
+{
+  "dry_run": false,
+  "seedVersion": 55,
+  "bev_total": 728,
+  "with_range_before": 108,
+  "with_range_after": 127,
+  "filled": 19,
+  "skipped": 601,
+  "skip_reasons": {
+    "no EEA version jointly matches catalog kW (±5) and Wh/km (±1)": 190,
+    "no EEA Cn match for model/year": 222,
+    "year 2026 outside EEA IT Zr window 2017–2025": 103,
+    "year 2016 outside EEA IT Zr window 2017–2025": 6,
+    "Zr equals Wh/km on EEA record(s) or no joint Wh×kW versions": 20,
+    "ambiguous Zr (multiple versions jointly match kW+Wh)": 16,
+    "F/P conflict: Final and Provisional Zr differ for same model/year": 24,
+    "missing catalog powerKw and/or Wh/km; cannot jointly match EEA version": 8,
+    "year 2010 outside EEA IT Zr window 2017–2025": 1,
+    "year 2011 outside EEA IT Zr window 2017–2025": 1,
+    "year 2012 outside EEA IT Zr window 2017–2025": 1,
+    "year 2013 outside EEA IT Zr window 2017–2025": 2,
+    "year 2014 outside EEA IT Zr window 2017–2025": 3,
+    "year 2015 outside EEA IT Zr window 2017–2025": 4
+  },
+  "fill_ids": [
+    "bmw-i5-2023",
+    "bmw-ix3-2025",
+    "byd-dolphin-2024",
+    "byd-dolphin-2025",
+    "fiat-500e-2021",
+    "fiat-500e-2022",
+    "honda-e-2023",
+    "hyundai-ioniq-5-n-2024",
+    "hyundai-ioniq-5-n-2025",
+    "kia-e-niro-2021",
+    "kia-e-niro-2022",
+    "lexus-ux-300e-2022",
+    "lexus-ux-300e-2025",
+    "mazda-6e-2025",
+    "mazda-mx-30-2023",
+    "mg-marvel-r-2023",
+    "mg-mg-zs-ev-2021",
+    "smart-1-2023",
+    "toyota-proace-electric-2023"
+  ],
+  "examples": {
+    "tesla-model-3-2026": {
+      "id": "tesla-model-3-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    "tesla-model-3-2024": {
+      "id": "tesla-model-3-2024",
+      "result": "skip",
+      "reason": "no EEA version jointly matches catalog kW (±5) and Wh/km (±1)",
+      "eea_model": "MODEL3",
+      "year": 2024,
+      "status": "F",
+      "catalog_wh": 136.4,
+      "catalog_kw": 249.6,
+      "candidate_zr": [
+        491,
+        513,
+        528,
+        602,
+        629,
+        640,
+        702
+      ]
+    },
+    "mazda-mx-30-2020": {
+      "id": "mazda-mx-30-2020",
+      "result": "skip",
+      "reason": "F/P conflict: Final and Provisional Zr differ for same model/year",
+      "eea_model": "MX30",
+      "year": 2020,
+      "f_zr": [
+        237
+      ],
+      "p_zr": [
+        200
+      ]
+    },
+    "jaguar-i-pace-2021": {
+      "id": "jaguar-i-pace-2021",
+      "result": "skip",
+      "reason": "F/P conflict: Final and Provisional Zr differ for same model/year",
+      "eea_model": "IPACE",
+      "year": 2021,
+      "f_zr": [
+        248
+      ],
+      "p_zr": [
+        418,
+        421,
+        424,
+        427,
+        432,
+        436,
+        437,
+        438,
+        439,
+        447,
+        448,
+        449,
+        450,
+        451,
+        452,
+        453,
+        454,
+        455,
+        456,
+        457,
+        460,
+        463,
+        467,
+        468,
+        469
+      ]
+    }
+  }
+}
