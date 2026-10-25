@@ -1,0 +1,291 @@
+{
+  "seedVersion": 56,
+  "generatedAt": "2026-10-25T20:36:29.639036+00:00",
+  "consulted_date": "2026-10-25",
+  "rules": [
+    "Keep batteryKWh ONLY with official OEM URL in refs: source_year == row year, matching powerKw (±5), capacity_kind net|gross",
+    "No kW on row → nil; EEA ±15% alone is not enough; no IT-listino without URL",
+    "Synthetic: same implied km (±1) across ≥3 models/year, or constant implied-km step (incl. 0) across consecutive years → nil"
+  ],
+  "counts": {
+    "battery_before_ev_vs_main": 403,
+    "battery_before_phev_vs_main": 10,
+    "battery_before_ev_tip": 35,
+    "battery_before_phev_tip": 0,
+    "battery_after_ev": 3,
+    "battery_after_phev": 0,
+    "ended_nil_net_vs_main": 410,
+    "nil_operations_this_run": 32,
+    "corrected_oem": 3,
+    "suspects_after": 0
+  },
+  "nilled": [
+    {
+      "id": "bmw-i4-2025",
+      "action": "nil_battery",
+      "old_batteryKWh": 86.8,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "bmw-i5-2025",
+      "action": "nil_battery",
+      "old_batteryKWh": 91.2,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "byd-dolphin-surf-2025",
+      "action": "nil_battery",
+      "old_batteryKWh": 38,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "dacia-spring-2024",
+      "action": "nil_battery",
+      "old_batteryKWh": 26.8,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "dacia-spring-2025",
+      "action": "nil_battery",
+      "old_batteryKWh": 26.8,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "fiat-grande-panda-ev-2024",
+      "action": "nil_battery",
+      "old_batteryKWh": 44,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "hyundai-ioniq-5-n-2025",
+      "action": "nil_battery",
+      "old_batteryKWh": 81.8,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "kia-ev6-2024",
+      "action": "nil_battery",
+      "old_batteryKWh": 84.0,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "kia-ev6-2025",
+      "action": "nil_battery",
+      "old_batteryKWh": 89.3,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "lexus-rz-2022",
+      "action": "nil_battery",
+      "old_batteryKWh": 71.4,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "lexus-rz-2025",
+      "action": "nil_battery",
+      "old_batteryKWh": 71.4,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "lexus-rz-2026",
+      "action": "nil_battery",
+      "old_batteryKWh": 71.4,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "mini-electric-hatch-2019",
+      "action": "nil_battery",
+      "old_batteryKWh": 28.9,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "mini-electric-hatch-2020",
+      "action": "nil_battery",
+      "old_batteryKWh": 28.9,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "mini-electric-hatch-2021",
+      "action": "nil_battery",
+      "old_batteryKWh": 28.9,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "mini-electric-hatch-2022",
+      "action": "nil_battery",
+      "old_batteryKWh": 28.9,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "mini-electric-hatch-2023",
+      "action": "nil_battery",
+      "old_batteryKWh": 28.9,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "mercedes-benz-eqa-2025",
+      "action": "nil_battery",
+      "old_batteryKWh": 86.1,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "mercedes-benz-eqv-2020",
+      "action": "nil_battery",
+      "old_batteryKWh": 98.8,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "mercedes-benz-eqv-2021",
+      "action": "nil_battery",
+      "old_batteryKWh": 98.1,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "mercedes-benz-eqv-2022",
+      "action": "nil_battery",
+      "old_batteryKWh": 98.5,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "mercedes-benz-eqv-2023",
+      "action": "nil_battery",
+      "old_batteryKWh": 101.1,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "mercedes-benz-eqv-2024",
+      "action": "nil_battery",
+      "old_batteryKWh": 99.3,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "nissan-ariya-2025",
+      "action": "nil_battery",
+      "old_batteryKWh": 86.1,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "polestar-2-2025",
+      "action": "nil_battery",
+      "old_batteryKWh": 87.8,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "polestar-4-2025",
+      "action": "nil_battery",
+      "old_batteryKWh": 90.7,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "renault-5-e-tech-2024",
+      "action": "nil_battery",
+      "old_batteryKWh": 52,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "renault-5-e-tech-2025",
+      "action": "nil_battery",
+      "old_batteryKWh": 52,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "volkswagen-id-buzz-2022",
+      "action": "nil_battery",
+      "old_batteryKWh": 74.2,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "volkswagen-id-buzz-2023",
+      "action": "nil_battery",
+      "old_batteryKWh": 72.8,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "volkswagen-id-buzz-2024",
+      "action": "nil_battery",
+      "old_batteryKWh": 71.8,
+      "reason": "no_official_oem_url_same_year_kw"
+    },
+    {
+      "id": "xpeng-g6-2025",
+      "action": "nil_battery",
+      "old_batteryKWh": 89.3,
+      "reason": "no_official_oem_url_same_year_kw"
+    }
+  ],
+  "corrected": [
+    {
+      "id": "byd-dolphin-2023",
+      "old_batteryKWh": 60.4,
+      "batteryKWh": 60.4,
+      "capacity_kind": "gross",
+      "url": "https://press.bydauto.be/byd-dolphin-plonge-dans-le-bain-europeen",
+      "consulted": "2026-10-25",
+      "note": "BYD EU launch 2023: Blade 60.4 kWh Comfort/Design (nominal), 150 kW.",
+      "powerKw": 150.0,
+      "source_year": 2023
+    },
+    {
+      "id": "honda-e-2020",
+      "old_batteryKWh": 35.5,
+      "batteryKWh": 35.5,
+      "capacity_kind": "gross",
+      "url": "https://hondanews.eu/eu/en/cars/media/pressreleases/199768/2020-honda-e-33",
+      "consulted": "2026-10-25",
+      "note": "Honda Europe 2020 press: 35.5 kWh Li-ion (nominal/gross).",
+      "powerKw": 96.5,
+      "source_year": 2020
+    },
+    {
+      "id": "mg-mg-zs-ev-2021",
+      "old_batteryKWh": 44.5,
+      "batteryKWh": 44.5,
+      "capacity_kind": "gross",
+      "url": "https://news.mgmotor.eu/it/press/prima-uscita-in-pubblico-per-mg-al-milano-monza-motor-show-con-zx-ev-100-elettrica-e-ehs-plug-in-hybrid/",
+      "consulted": "2026-10-25",
+      "note": "MG Italy 2021: ZS EV 44.5 kWh nominal / 263 km / 105 kW.",
+      "powerKw": 105.0,
+      "source_year": 2021
+    }
+  ],
+  "synthetic_ids_after": [],
+  "suspects_after": [],
+  "dubious_models_no_delete": [
+    "chevrolet-bolt-euv-2021",
+    "honda-e-2019",
+    "hyundai-equus-2022",
+    "hyundai-equus-2023",
+    "hyundai-equus-2024",
+    "hyundai-equus-2025",
+    "hyundai-equus-2026",
+    "jaguar-i-pace-2025",
+    "jaguar-i-pace-2026",
+    "kia-soul-ev-2024",
+    "kia-soul-ev-2025",
+    "kia-soul-ev-2026",
+    "lexus-rz-2022",
+    "lucid-gravity-2022",
+    "lucid-gravity-2023",
+    "mini-electric-hatch-2019",
+    "nio-el6-2021",
+    "nio-el6-2022",
+    "nio-el8-2021",
+    "nio-el8-2022",
+    "nio-et5-2021",
+    "nio-et5-touring-2021",
+    "nio-et5-touring-2022",
+    "nissan-altra-ev-2022",
+    "nissan-altra-ev-2023",
+    "nissan-altra-ev-2024",
+    "nissan-altra-ev-2025",
+    "nissan-altra-ev-2026",
+    "renault-scenic-2024",
+    "volvo-c40-recharge-2025",
+    "volvo-c40-recharge-2026",
+    "volvo-xc40-recharge-2025",
+    "volvo-xc40-recharge-2026",
+    "xpeng-g6-2021",
+    "xpeng-g6-2022",
+    "xpeng-g9-2021"
+  ]
+}

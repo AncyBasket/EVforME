@@ -225,6 +225,22 @@ def main() -> int:
             must_fail_ok += 1
             print(f"must-fail OK: {label} → {decision.get('reason')}")
 
+    # Battery↔range coherence (same 15% rule as check_catalog_battery.py)
+    import check_catalog_battery as batt
+
+    for label, row, expect_fail in batt.must_fail_coherence_cases():
+        hits = batt.coherence_failures([row])
+        failed = len(hits) > 0
+        if failed != expect_fail:
+            failures.append(
+                f"must-fail coherence {label}: expect_fail={expect_fail} hits={hits}"
+            )
+        else:
+            must_fail_ok += 1
+            print(f"must-fail OK: coherence_{label}")
+    for line in batt.coherence_failures(list(rows.values())):
+        failures.append(f"coherence: {line}")
+
     print(f"checked_fills={checked} must_fail_ok={must_fail_ok} failures={len(failures)}")
     if failures:
         print("FAILURES:", file=sys.stderr)
@@ -233,7 +249,7 @@ def main() -> int:
         if len(failures) > 50:
             print(f"  … +{len(failures) - 50} more", file=sys.stderr)
         return 1
-    print("OK: all range refs match EEA re-resolve; must-fail cases rejected")
+    print("OK: all range refs match EEA re-resolve; must-fail cases rejected; battery coherence OK")
     return 0
 
 
