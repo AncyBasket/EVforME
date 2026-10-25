@@ -27,15 +27,11 @@ import fill_catalog_fuels_from_eea as eea
 REFS_PATH = fill.REFS_PATH
 SEED_PATH = eea.SEED_PATH
 
-# Synthetic must-fail cases: (description, mutate_fn returning (row, index, brand, expect_fail_reason_substr))
-# These never write to disk; they only assert the resolver rejects bad situations.
-
 
 def _must_fail_cases(indexes: dict[str, dict]) -> list[tuple[str, dict, dict, str, str]]:
     """Return (label, row, index, brand, reason_substr_expected)."""
     cases: list[tuple[str, dict, dict, str, str]] = []
 
-    # 1) Year outside EEA window must not invent a number.
     cases.append(
         (
             "year_2026_outside_window",
@@ -52,7 +48,6 @@ def _must_fail_cases(indexes: dict[str, dict]) -> list[tuple[str, dict, dict, st
         )
     )
 
-    # 2) Multi-Zr with no catalog Wh/kW → ambiguous (leave nil).
     tesla_idx = indexes.get("TESLA") or {}
     if ("MODEL3", 2024) in tesla_idx:
         cases.append(
@@ -67,13 +62,9 @@ def _must_fail_cases(indexes: dict[str, dict]) -> list[tuple[str, dict, dict, st
                 },
                 tesla_idx,
                 "TESLA",
-                "ambiguous",
+                "missing catalog",
             )
         )
-
-    # 3) Wh that matches multiple Zr bands still needs unique pin — use a Wh that
-    # hits nothing and a kW that hits many → still ambiguous or skip, never a guess.
-    if ("MODEL3", 2024) in tesla_idx:
         cases.append(
             (
                 "wh_miss_kw_multi",
@@ -81,17 +72,15 @@ def _must_fail_cases(indexes: dict[str, dict]) -> list[tuple[str, dict, dict, st
                     "id": "synthetic-model3-bad-wh",
                     "model": "Model 3",
                     "year": 2024,
-                    "energyConsumptionKWhPerKm": 0.999,  # no EEA Wh near 999
-                    "powerKw": 208,  # several Zr share 208 kW
+                    "energyConsumptionKWhPerKm": 0.999,
+                    "powerKw": 208,
                 },
                 tesla_idx,
                 "TESLA",
-                "ambiguous",
+                "no EEA version jointly matches",
             )
         )
 
-    # 4) Wrong-year copy must not be accepted: 2023 Wh/kW against empty year index cell.
-    empty_index: dict = {}
     cases.append(
         (
             "no_cn_for_year",
@@ -102,9 +91,62 @@ def _must_fail_cases(indexes: dict[str, dict]) -> list[tuple[str, dict, dict, st
                 "energyConsumptionKWhPerKm": 0.132,
                 "powerKw": 208,
             },
-            empty_index,
+            {},
             "TESLA",
             "no EEA Cn match",
+        )
+    )
+
+    # Zr == Wh/km on the same synthetic EEA record → must not fill.
+    zr_eq_wh_index = {
+        ("SYNTH", 2024): {
+            "F": {
+                248: {
+                    "n": 10.0,
+                    "pairs": {(248.0, 200.0): 10.0},  # Zr equals Wh
+                }
+            },
+            "P": {},
+            "cn_raws": {"SYNTH"},
+        }
+    }
+    cases.append(
+        (
+            "zr_equals_wh_on_record",
+            {
+                "id": "synthetic-zr-eq-wh",
+                "model": "Synth",
+                "year": 2024,
+                "energyConsumptionKWhPerKm": 0.248,
+                "powerKw": 200,
+            },
+            zr_eq_wh_index,
+            "TESLA",
+            "Zr equals Wh/km",
+        )
+    )
+
+    # F vs P different Zr for same cars → nil (mazda-style).
+    fp_conflict_index = {
+        ("MX30", 2020): {
+            "F": {237: {"n": 100.0, "pairs": {(182.0, 91.0): 100.0}}},
+            "P": {200: {"n": 100.0, "pairs": {(182.0, 91.0): 100.0}}},
+            "cn_raws": {"MX-30"},
+        }
+    }
+    cases.append(
+        (
+            "fp_conflict_different_zr",
+            {
+                "id": "synthetic-mx30-fp",
+                "model": "MX-30",
+                "year": 2020,
+                "energyConsumptionKWhPerKm": 0.182,
+                "powerKw": 91,
+            },
+            fp_conflict_index,
+            "MAZDA",
+            "F/P conflict",
         )
     )
 
@@ -127,8 +169,9 @@ def main() -> int:
 
     rows = {r["id"]: r for r in json.loads(SEED_PATH.read_text(encoding="utf-8"))}
     brands = sorted({str(f.get("eea_brand") or "") for f in fills if f.get("eea_brand")})
-    if "TESLA" not in brands:
-        brands.append("TESLA")
+    for extra in ("TESLA", "MAZDA"):
+        if extra not in brands:
+            brands.append(extra)
     indexes: dict[str, dict] = {}
     for brand in brands:
         wrap = fill.load_brand_zr(brand, use_cache=True)
@@ -152,9 +195,7 @@ def main() -> int:
         decision = fill.resolve_zr_for_row(row, indexes.get(brand) or {}, brand)
         checked += 1
         if not decision or decision.get("result") != "fill":
-            failures.append(
-                f"{rid}: re-resolve did not fill (got {decision})"
-            )
+            failures.append(f"{rid}: re-resolve did not fill (got {decision})")
             continue
         got = decision.get("wltpRangeKm")
         if got != exp:
@@ -168,7 +209,6 @@ def main() -> int:
                 f"{rid}: status re-resolve={decision.get('status')} ≠ ref={ref.get('status')}"
             )
 
-    # Must-fail suite
     must_fail_ok = 0
     for label, row, index, brand, substr in _must_fail_cases(indexes):
         decision = fill.resolve_zr_for_row(row, index, brand)

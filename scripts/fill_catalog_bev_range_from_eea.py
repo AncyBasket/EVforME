@@ -4,10 +4,15 @@ Fill BEV `wltpRangeKm` from EEA co2cars IT field `Zr` (Electric range km).
 
 Rules (no invented numbers):
 - Prefer Status F; use P only when F has no Zr for that model/year.
-- Match Cn with the same brand aliases / model merge as fuel scripts.
-- If multiple Zr values exist, disambiguate with catalog Wh/km and/or powerKw.
-- If still ambiguous or year absent in EEA → leave nil (no other-year copy).
-- Never average Zr values.
+- If F and P both exist with different Zr sets for the same Cn/year → leave nil.
+- Match all EEA Cn variants of the same model (e-C4 / e-C4 X, …); never merge
+  distinct models (Dolphin ≠ Dolphin Surf).
+- When EEA has one or more Zr values: fill only if exactly one Zr remains after
+  requiring a single EEA version (record) that matches catalog kW (±5) AND
+  Wh/km (±1) jointly. Empty filter → nil (never skip a filter). Multiple Zr
+  still matching → nil.
+- Drop versions where Zr == Wh/km on the same record (misfiled consumption).
+- Never average Zr values / copy other years.
 
 Writes:
   scripts/cache/eea/catalog_truth_range_refs.json
@@ -22,7 +27,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import math
 import re
 import sys
 import time
@@ -41,7 +45,6 @@ REFS_PATH = eea.CACHE_DIR / "catalog_truth_range_refs.json"
 REPORT_PATH = eea.CACHE_DIR / "catalog_bev_range_fill_v55_report.json"
 FIXTURE_REFS = eea.REPO / "EVforME?Tests" / "Fixtures" / "catalog_truth_range_refs.json"
 
-# Extra Mk spellings for BEV brands not in BRAND_MK_ALIASES.
 EXTRA_MK: dict[str, list[str]] = {
     "GENESIS": ["GENESIS"],
     "NIO": ["NIO"],
@@ -55,8 +58,19 @@ EXTRA_MK: dict[str, list[str]] = {
 }
 
 KW_TOL_ABS = 5.0
-KW_TOL_REL = 0.03
-WH_TOL = 1.0  # Wh/km integer match
+WH_TOL = 1.0
+
+# Suffixes that mean trim/body/power of the same model — not a different model name.
+_VARIANT_SUFFIX_RE = re.compile(
+    r"^(?:"
+    r"X|GT|GTS|TURBO|TURBOS|S|R|PRO|PURE|PROS|PERFORMANCE|"
+    r"CROSSCOUNTRY|CROSS|SPORTBACK|SPORT|COUPE|CABRIO|"
+    r"EDRIVE\d*|XDRIVE\d*|M\d*|"
+    r"4S|LONG|STANDARD|RWD|AWD|PLUS|"
+    r"(?:PRO|PURE|PROS|PERFORMANCE)?\d*KW\d*"
+    r")$",
+    re.I,
+)
 
 
 def brand_key_for_row(row: dict) -> str:
@@ -71,7 +85,6 @@ def mk_names_for_brand(brand_key: str) -> list[str]:
         return list(eea.BRAND_MK_ALIASES[key])
     if key in EXTRA_MK:
         return list(EXTRA_MK[key])
-    # fall back to aliases_for / bare name
     try:
         return eea.brand_aliases_for(brand_key)
     except Exception:
@@ -79,10 +92,15 @@ def mk_names_for_brand(brand_key: str) -> list[str]:
 
 
 def electric_range_payload(brand_key: str) -> dict:
-    # Prefer shared alias clauses when the brand is in BRAND_MK_ALIASES.
-    key_u = "MERCEDES-BENZ" if brand_key.upper().replace(" ", "-") == "MERCEDES-BENZ" else brand_key.upper()
+    key_u = (
+        "MERCEDES-BENZ"
+        if brand_key.upper().replace(" ", "-") == "MERCEDES-BENZ"
+        else brand_key.upper()
+    )
     if key_u in eea.BRAND_MK_ALIASES or brand_key in eea.BRAND_MK_ALIASES:
-        should = eea.brand_mk_should_clauses(brand_key if brand_key in eea.BRAND_MK_ALIASES else key_u)
+        should = eea.brand_mk_should_clauses(
+            brand_key if brand_key in eea.BRAND_MK_ALIASES else key_u
+        )
     else:
         should = []
         names = mk_names_for_brand(brand_key)
@@ -96,11 +114,25 @@ def electric_range_payload(brand_key: str) -> dict:
                 should.append({"wildcard": {"Mk": candidate + "*"}})
         token = re.sub(r"[^A-Z0-9]", "", brand_key.upper())[:12]
         if token:
-            cn = {"bool": {"should": [{"wildcard": {"Cn": f"*{token}*"}}], "minimum_should_match": 1}}
+            cn = {
+                "bool": {
+                    "should": [{"wildcard": {"Cn": f"*{token}*"}}],
+                    "minimum_should_match": 1,
+                }
+            }
             should.append({"bool": {"must": [{"term": {"Mk": ""}}, cn]}})
             should.append(
-                {"bool": {"must": [{"bool": {"must_not": [{"exists": {"field": "Mk"}}]}}, cn]}}
+                {
+                    "bool": {
+                        "must": [
+                            {"bool": {"must_not": [{"exists": {"field": "Mk"}}]}},
+                            cn,
+                        ]
+                    }
+                }
             )
+    # Nest kw under wh so each version is a joint (Zr, Wh, kW) record — never
+    # combine Wh from one trim with kW from another under the same Zr.
     return {
         "size": 0,
         "query": {
@@ -138,12 +170,24 @@ def electric_range_payload(brand_key: str) -> dict:
                                         "aggs": {
                                             "sum_r": {"sum": {"field": "r"}},
                                             "wh": {
-                                                "terms": {"field": "z__Wh_km_", "size": 20},
-                                                "aggs": {"sum_r": {"sum": {"field": "r"}}},
-                                            },
-                                            "kw": {
-                                                "terms": {"field": "ep__KW_", "size": 20},
-                                                "aggs": {"sum_r": {"sum": {"field": "r"}}},
+                                                "terms": {
+                                                    "field": "z__Wh_km_",
+                                                    "size": 20,
+                                                },
+                                                "aggs": {
+                                                    "sum_r": {"sum": {"field": "r"}},
+                                                    "kw": {
+                                                        "terms": {
+                                                            "field": "ep__KW_",
+                                                            "size": 20,
+                                                        },
+                                                        "aggs": {
+                                                            "sum_r": {
+                                                                "sum": {"field": "r"}
+                                                            }
+                                                        },
+                                                    },
+                                                },
                                             },
                                         },
                                     }
@@ -173,7 +217,7 @@ def load_brand_zr(brand_key: str, *, use_cache: bool) -> dict:
 def parse_zr_index(wrap: dict, brand_key: str) -> dict[tuple[str, int], dict]:
     """
     (model_merge_key, year) → {
-      'F': {zr: {n, whs: {wh: n}, kws: {kw: n}}},
+      'F': {zr: {n, pairs: {(wh, kw): n}}},
       'P': {...},
       'cn_raws': set
     }
@@ -183,7 +227,6 @@ def parse_zr_index(wrap: dict, brand_key: str) -> dict[tuple[str, int], dict]:
     for mb in resp.get("aggregations", {}).get("models", {}).get("buckets", []) or []:
         cn_raw = str(mb.get("key") or "")
         if not eea.model_accepted_for_brand(cn_raw, brand_key):
-            # model_accepted may be strict for JLR etc.; for pure BEV brands allow all
             if brand_key in {"JAGUAR", "LAND ROVER", "ALFA ROMEO", "JEEP"}:
                 continue
         merge = eea.model_name_merge_key(cn_raw, brand_key) or eea.norm_alnum(cn_raw)
@@ -205,90 +248,144 @@ def parse_zr_index(wrap: dict, brand_key: str) -> dict[tuple[str, int], dict]:
                         continue
                     if zr <= 0:
                         continue
-                    n = float((zb.get("sum_r") or {}).get("value") or zb.get("doc_count") or 0)
-                    entry = bucket.setdefault(zr, {"n": 0.0, "whs": defaultdict(float), "kws": defaultdict(float)})
+                    n = float(
+                        (zb.get("sum_r") or {}).get("value") or zb.get("doc_count") or 0
+                    )
+                    entry = bucket.setdefault(
+                        zr, {"n": 0.0, "pairs": defaultdict(float)}
+                    )
                     entry["n"] += n
                     for whb in zb.get("wh", {}).get("buckets", []) or []:
                         try:
                             wh = float(whb.get("key"))
                         except (TypeError, ValueError):
                             continue
-                        entry["whs"][wh] += float((whb.get("sum_r") or {}).get("value") or 0)
-                    for kwb in zb.get("kw", {}).get("buckets", []) or []:
-                        try:
-                            kw = float(kwb.get("key"))
-                        except (TypeError, ValueError):
+                        kw_buckets = whb.get("kw", {}).get("buckets") or []
+                        if not kw_buckets:
+                            # Legacy cache without nested kw: cannot form a joint
+                            # version — skip (forces --refresh).
                             continue
-                        entry["kws"][kw] += float((kwb.get("sum_r") or {}).get("value") or 0)
+                        for kwb in kw_buckets:
+                            try:
+                                kw = float(kwb.get("key"))
+                            except (TypeError, ValueError):
+                                continue
+                            pn = float(
+                                (kwb.get("sum_r") or {}).get("value")
+                                or kwb.get("doc_count")
+                                or 0
+                            )
+                            entry["pairs"][(wh, kw)] += pn
     return out
-
-
-def preferred_status_map(cell: dict) -> tuple[str, dict]:
-    """Return (status, zr_map) preferring F when it has any Zr."""
-    if cell.get("F"):
-        return "F", cell["F"]
-    return "P", cell.get("P") or {}
 
 
 def kw_matches(catalog_kw: float, eea_kw: float) -> bool:
     if catalog_kw <= 0 or eea_kw <= 0:
         return False
-    if abs(catalog_kw - eea_kw) <= KW_TOL_ABS:
-        return True
-    return abs(catalog_kw - eea_kw) / catalog_kw <= KW_TOL_REL
+    return abs(catalog_kw - eea_kw) <= KW_TOL_ABS
 
 
 def wh_matches(catalog_wh: float, eea_wh: float) -> bool:
     return abs(catalog_wh - eea_wh) <= WH_TOL
 
 
+def is_same_model_variant(seed_key: str, eea_key: str) -> bool:
+    """True if eea_key is seed_key or a trim/power variant — not a different model."""
+    if not seed_key or not eea_key:
+        return False
+    if eea_key == seed_key:
+        return True
+    if not eea_key.startswith(seed_key):
+        return False
+    rest = eea_key[len(seed_key) :]
+    if not rest:
+        return True
+    return bool(_VARIANT_SUFFIX_RE.match(rest))
+
+
 def bev_model_keys(seed_model: str, eea_keys: set[str], brand_key: str) -> list[str]:
     """
-    Exact Cn merge-key first; else family of trim keys that share the seed prefix
-    (e.g. ID.3 → ID3PRO150KW / ID3PURE110KW; i4 → I4EDRIVE40 / I4M50).
-    Never invent a key; empty list means no EEA Cn for this year.
+    All EEA Cn merge-keys for this catalog model (exact + same-model variants).
+    Deterministic sorted order. Empty → no Cn for this year.
     """
-    seed_merge = eea.model_name_merge_key(seed_model, brand_key) or eea.norm_alnum(seed_model)
+    seed_merge = eea.model_name_merge_key(seed_model, brand_key) or eea.norm_alnum(
+        seed_model
+    )
     sn = eea.clean_model_norm(seed_model) or eea.norm_alnum(seed_model)
+    seeds = []
     for cand in (seed_merge, sn):
-        if cand and cand in eea_keys:
-            return [cand]
+        if cand and cand not in seeds:
+            seeds.append(cand)
 
     family: set[str] = set()
-    for cand in (seed_merge, sn):
-        if not cand or len(cand) < 2:
-            continue
-        for em in eea_keys:
-            if em == cand:
+    for cand in seeds:
+        for em in sorted(eea_keys):
+            if is_same_model_variant(cand, em):
                 family.add(em)
-            elif em.startswith(cand):
-                rest = em[len(cand) :]
-                # Trim/power suffix must start with a letter (I4→I4EDRIVE40; IX↛IX3).
-                if rest and rest[0].isalpha():
-                    family.add(em)
+
     if family:
         return sorted(family)
 
     fuzzy = eea.match_model(seed_model, eea_keys, for_ice=False)
-    return [fuzzy] if fuzzy else []
+    if fuzzy and fuzzy in eea_keys:
+        # Expand fuzzy hit to its same-model variants too.
+        for em in sorted(eea_keys):
+            if is_same_model_variant(fuzzy, em) or is_same_model_variant(em, fuzzy):
+                family.add(em)
+            # Also: if fuzzy is a longer trim, include other trims sharing the
+            # longest seed prefix among seeds.
+            for cand in seeds:
+                if is_same_model_variant(cand, em):
+                    family.add(em)
+        if family:
+            return sorted(family)
+        return [fuzzy]
+    return []
 
 
 def merge_cells(cells: list[dict]) -> dict:
-    """Union F/P Zr maps and cn_raws across family Cn keys for one year."""
+    """Union F/P Zr→pairs and cn_raws across same-model Cn keys for one year."""
     out: dict = {"F": {}, "P": {}, "cn_raws": set()}
     for cell in cells:
         out["cn_raws"] |= set(cell.get("cn_raws") or [])
         for status in ("F", "P"):
             for zr, meta in (cell.get(status) or {}).items():
                 dest = out[status].setdefault(
-                    zr, {"n": 0.0, "whs": defaultdict(float), "kws": defaultdict(float)}
+                    zr, {"n": 0.0, "pairs": defaultdict(float)}
                 )
                 dest["n"] += float(meta.get("n") or 0)
-                for wh, n in (meta.get("whs") or {}).items():
-                    dest["whs"][wh] += float(n)
-                for kw, n in (meta.get("kws") or {}).items():
-                    dest["kws"][kw] += float(n)
+                for pair, n in (meta.get("pairs") or {}).items():
+                    dest["pairs"][pair] += float(n)
     return out
+
+
+def versions_from_zr_map(zr_map: dict) -> list[dict]:
+    """Flatten to joint versions; drop Zr==Wh (misfiled consumption as range)."""
+    versions: list[dict] = []
+    for zr in sorted(zr_map.keys()):
+        meta = zr_map[zr]
+        for (wh, kw), n in sorted((meta.get("pairs") or {}).items()):
+            if int(zr) == int(round(float(wh))):
+                # Sanity: Electric range equals Wh/km on the same record.
+                continue
+            versions.append(
+                {"zr": int(zr), "wh": float(wh), "kw": float(kw), "n": float(n)}
+            )
+    return versions
+
+
+def preferred_versions(cell: dict) -> tuple[str, list[dict]]:
+    """
+    Return (status|conflict, versions).
+    If both F and P exist with different Zr sets → ('fp_conflict', []).
+    """
+    f_zrs = set(cell.get("F") or {})
+    p_zrs = set(cell.get("P") or {})
+    if f_zrs and p_zrs and f_zrs != p_zrs:
+        return "fp_conflict", []
+    if f_zrs:
+        return "F", versions_from_zr_map(cell["F"])
+    return "P", versions_from_zr_map(cell.get("P") or {})
 
 
 def resolve_zr_for_row(
@@ -327,79 +424,99 @@ def resolve_zr_for_row(
         }
 
     cell = merge_cells(cells) if len(cells) > 1 else cells[0]
-    status, zr_map = preferred_status_map(cell)
-    if not zr_map:
+    status, versions = preferred_versions(cell)
+    eea_model_label = (
+        matched_keys[0] if len(matched_keys) == 1 else ",".join(matched_keys)
+    )
+
+    if status == "fp_conflict":
+        return {
+            "id": row.get("id"),
+            "result": "skip",
+            "reason": "F/P conflict: Final and Provisional Zr differ for same model/year",
+            "eea_model": eea_model_label,
+            "year": year,
+            "f_zr": sorted(cell.get("F") or {}),
+            "p_zr": sorted(cell.get("P") or {}),
+        }
+
+    if not versions:
+        # All versions dropped (e.g. every Zr==Wh) or empty status map.
+        raw_f = cell.get("F") or {}
+        raw_p = cell.get("P") or {}
+        if raw_f or raw_p:
+            return {
+                "id": row.get("id"),
+                "result": "skip",
+                "reason": "Zr equals Wh/km on EEA record(s) or no joint Wh×kW versions",
+                "eea_model": eea_model_label,
+                "year": year,
+                "status": "F" if raw_f else "P",
+            }
         return {
             "id": row.get("id"),
             "result": "skip",
             "reason": "no Zr under preferred Status",
-            "eea_model": ",".join(matched_keys),
+            "eea_model": eea_model_label,
             "year": year,
             "status": status,
         }
 
-    candidates = dict(zr_map)
     energy = row.get("energyConsumptionKWhPerKm")
     catalog_wh = float(energy) * 1000.0 if energy and float(energy) > 0 else None
-    catalog_kw = float(row["powerKw"]) if row.get("powerKw") not in (None, "", 0) else None
-    eea_model_label = matched_keys[0] if len(matched_keys) == 1 else ",".join(matched_keys)
+    catalog_kw = (
+        float(row["powerKw"]) if row.get("powerKw") not in (None, "", 0) else None
+    )
 
-    # Unique Zr for this model/year → take it (Wh/kW only for disambiguation).
-    if len(candidates) == 1:
-        zr = next(iter(candidates))
-        meta = candidates[zr]
-        return {
-            "id": row["id"],
-            "result": "fill",
-            "wltpRangeKm": int(zr),
-            "eea_brand": brand_key,
-            "eea_model": eea_model_label,
-            "eea_cn_raws": sorted(cell.get("cn_raws") or []),
-            "eea_year": year,
-            "status": status,
-            "n": meta.get("n"),
-            "catalog_wh": catalog_wh,
-            "catalog_kw": catalog_kw,
-            "source": "EEA co2cars IT Zr",
-            "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-        }
-
-    # Disambiguate: power first (user rule), then Wh/km. Never hard-fail on a miss —
-    # only narrow when the filter still leaves ≥1 candidate.
-    if catalog_kw is not None:
-        kw_filtered = {
-            zr: meta
-            for zr, meta in candidates.items()
-            if any(kw_matches(catalog_kw, float(kw)) for kw in (meta.get("kws") or {}))
-        }
-        if kw_filtered:
-            candidates = kw_filtered
-
-    if len(candidates) > 1 and catalog_wh is not None:
-        wh_filtered = {
-            zr: meta
-            for zr, meta in candidates.items()
-            if any(wh_matches(catalog_wh, float(wh)) for wh in (meta.get("whs") or {}))
-        }
-        if wh_filtered:
-            candidates = wh_filtered
-
-    if len(candidates) != 1:
+    # Both filters are mandatory. Missing catalog field → filter empty → nil.
+    if catalog_kw is None or catalog_wh is None:
         return {
             "id": row.get("id"),
             "result": "skip",
-            "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+            "reason": "missing catalog powerKw and/or Wh/km; cannot jointly match EEA version",
             "eea_model": eea_model_label,
             "year": year,
             "status": status,
-            "candidate_zr": sorted(candidates.keys()),
+            "catalog_wh": catalog_wh,
+            "catalog_kw": catalog_kw,
+            "candidate_zr": sorted({v["zr"] for v in versions}),
+        }
+
+    matched = [
+        v
+        for v in versions
+        if kw_matches(catalog_kw, v["kw"]) and wh_matches(catalog_wh, v["wh"])
+    ]
+    if not matched:
+        return {
+            "id": row.get("id"),
+            "result": "skip",
+            "reason": "no EEA version jointly matches catalog kW (±5) and Wh/km (±1)",
+            "eea_model": eea_model_label,
+            "year": year,
+            "status": status,
+            "catalog_wh": catalog_wh,
+            "catalog_kw": catalog_kw,
+            "candidate_zr": sorted({v["zr"] for v in versions}),
+        }
+
+    zrs = sorted({v["zr"] for v in matched})
+    if len(zrs) != 1:
+        return {
+            "id": row.get("id"),
+            "result": "skip",
+            "reason": "ambiguous Zr (multiple versions jointly match kW+Wh)",
+            "eea_model": eea_model_label,
+            "year": year,
+            "status": status,
+            "candidate_zr": zrs,
             "cn_raws": sorted(cell.get("cn_raws") or []),
             "catalog_wh": catalog_wh,
             "catalog_kw": catalog_kw,
         }
 
-    zr = next(iter(candidates))
-    meta = candidates[zr]
+    zr = zrs[0]
+    meta_n = sum(v["n"] for v in matched if v["zr"] == zr)
     return {
         "id": row["id"],
         "result": "fill",
@@ -409,11 +526,17 @@ def resolve_zr_for_row(
         "eea_cn_raws": sorted(cell.get("cn_raws") or []),
         "eea_year": year,
         "status": status,
-        "n": meta.get("n"),
+        "n": meta_n,
         "catalog_wh": catalog_wh,
         "catalog_kw": catalog_kw,
+        "matched_versions": [
+            {"wh": v["wh"], "kw": v["kw"], "n": v["n"]} for v in matched if v["zr"] == zr
+        ],
         "source": "EEA co2cars IT Zr",
-        "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+        "fetched_note": (
+            "Status F preferred; P only if F has no Zr; joint Wh×kW match required; "
+            "F/P Zr conflict or Zr==Wh → nil"
+        ),
     }
 
 
@@ -427,9 +550,12 @@ def bump_metadata(rows: list[dict]) -> None:
     cdn["updatedAt"] = datetime.now(timezone.utc).isoformat()
     cdn["note"] = (
         f"seedVersion {NEW_SEED_VERSION}: BEV wltpRangeKm from EEA IT Zr "
-        "(F preferred; unique match via Cn + Wh/km and/or kW; no averages)."
+        "(F preferred; joint kW±5 & Wh±1 on same record; no averages; "
+        "F/P conflict or Zr==Wh → nil)."
     )
-    eea.CDN_PATH.write_text(json.dumps(cdn, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    eea.CDN_PATH.write_text(
+        json.dumps(cdn, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
 
 
 def main() -> int:
@@ -459,7 +585,7 @@ def main() -> int:
         fetched_at[brand_key] = str(wrap.get("_fetched_at") or "")
         time.sleep(0.15)
 
-    for brand_key, brand_rows in by_brand.items():
+    for brand_key, brand_rows in sorted(by_brand.items()):
         index = indexes.get(brand_key) or {}
         for r in brand_rows:
             decision = resolve_zr_for_row(r, index, brand_key)
@@ -471,15 +597,16 @@ def main() -> int:
             else:
                 skips.append(decision)
 
+    fills.sort(key=lambda d: d.get("id") or "")
+    skips.sort(key=lambda d: d.get("id") or "")
+
     if not args.dry_run:
         by_id = {d["id"]: d for d in fills}
-        changed = 0
         for r in rows:
             d = by_id.get(r.get("id"))
             if not d:
                 continue
             r["wltpRangeKm"] = int(d["wltpRangeKm"])
-            changed += 1
         eea.SEED_PATH.write_text(
             json.dumps(rows, ensure_ascii=False, separators=(",", ":")) + "\n",
             encoding="utf-8",
@@ -491,23 +618,40 @@ def main() -> int:
             "source": "EEA co2cars IT field Zr (Electric range km)",
             "rules": [
                 "Status F preferred; P only if F has no Zr",
-                "Cn match via fill_catalog_fuels_from_eea.match_model / merge keys",
-                "Disambiguate multi-Zr with catalog Wh/km then powerKw",
-                "Never average; leave nil if ambiguous or year outside 2017–2025",
+                "F and P with different Zr sets → nil",
+                "All same-model Cn variants included before ambiguity check",
+                "Fill only if exactly one Zr has a joint Wh×kW version matching catalog (±1 Wh, ±5 kW)",
+                "Empty filter → nil; never average; Zr==Wh on record → drop version",
             ],
             "fills": fills,
             "skips": skips,
         }
         eea.CACHE_DIR.mkdir(parents=True, exist_ok=True)
-        REFS_PATH.write_text(json.dumps(refs, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        REFS_PATH.write_text(
+            json.dumps(refs, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
         if FIXTURE_REFS.parent.is_dir():
-            FIXTURE_REFS.write_text(json.dumps(refs, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            FIXTURE_REFS.write_text(
+                json.dumps(refs, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+            )
 
-    after_rows = rows if not args.dry_run else [
-        {**r, "wltpRangeKm": next((f["wltpRangeKm"] for f in fills if f["id"] == r["id"]), r.get("wltpRangeKm"))}
-        for r in rows
-    ]
-    after_with = sum(1 for r in after_rows if r.get("powertrain") == "ev" and r.get("wltpRangeKm"))
+    after_rows = (
+        rows
+        if not args.dry_run
+        else [
+            {
+                **r,
+                "wltpRangeKm": next(
+                    (f["wltpRangeKm"] for f in fills if f["id"] == r["id"]),
+                    r.get("wltpRangeKm"),
+                ),
+            }
+            for r in rows
+        ]
+    )
+    after_with = sum(
+        1 for r in after_rows if r.get("powertrain") == "ev" and r.get("wltpRangeKm")
+    )
     report = {
         "dry_run": args.dry_run,
         "seedVersion": NEW_SEED_VERSION,
@@ -517,18 +661,29 @@ def main() -> int:
         "filled": len(fills),
         "skipped": len(skips),
         "skip_reasons": {},
+        "fill_ids": [f["id"] for f in fills],
         "examples": {
-            "tesla-model-3-2026": next((s for s in skips + fills if s.get("id") == "tesla-model-3-2026"), None),
-            "tesla-model-3-2025": next((s for s in skips + fills if s.get("id") == "tesla-model-3-2025"), None),
-            "tesla-model-3-2024": next((s for s in skips + fills if s.get("id") == "tesla-model-3-2024"), None),
+            "tesla-model-3-2026": next(
+                (s for s in skips + fills if s.get("id") == "tesla-model-3-2026"), None
+            ),
+            "tesla-model-3-2024": next(
+                (s for s in skips + fills if s.get("id") == "tesla-model-3-2024"), None
+            ),
+            "mazda-mx-30-2020": next(
+                (s for s in skips + fills if s.get("id") == "mazda-mx-30-2020"), None
+            ),
+            "jaguar-i-pace-2021": next(
+                (s for s in skips + fills if s.get("id") == "jaguar-i-pace-2021"), None
+            ),
         },
-        "fill_sample": fills[:30],
     }
     for s in skips:
         reason = s.get("reason") or "unknown"
         report["skip_reasons"][reason] = report["skip_reasons"].get(reason, 0) + 1
 
-    REPORT_PATH.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    REPORT_PATH.write_text(
+        json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
     print(
         f"BEV {before_total}: with_range {before_with}→{after_with} "
         f"filled={len(fills)} skipped={len(skips)} dry={args.dry_run}"

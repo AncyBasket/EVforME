@@ -3,14 +3,18 @@
   "seedVersion": 55,
   "bev_total": 728,
   "with_range_before": 108,
-  "with_range_after": 198,
-  "filled": 90,
-  "skipped": 530,
+  "with_range_after": 127,
+  "filled": 19,
+  "skipped": 601,
   "skip_reasons": {
-    "ambiguous Zr (multiple versions; cannot uniquely match)": 187,
+    "no EEA version jointly matches catalog kW (±5) and Wh/km (±1)": 190,
     "no EEA Cn match for model/year": 222,
     "year 2026 outside EEA IT Zr window 2017–2025": 103,
     "year 2016 outside EEA IT Zr window 2017–2025": 6,
+    "Zr equals Wh/km on EEA record(s) or no joint Wh×kW versions": 20,
+    "ambiguous Zr (multiple versions jointly match kW+Wh)": 16,
+    "F/P conflict: Final and Provisional Zr differ for same model/year": 24,
+    "missing catalog powerKw and/or Wh/km; cannot jointly match EEA version": 8,
     "year 2010 outside EEA IT Zr window 2017–2025": 1,
     "year 2011 outside EEA IT Zr window 2017–2025": 1,
     "year 2012 outside EEA IT Zr window 2017–2025": 1,
@@ -18,592 +22,101 @@
     "year 2014 outside EEA IT Zr window 2017–2025": 3,
     "year 2015 outside EEA IT Zr window 2017–2025": 4
   },
+  "fill_ids": [
+    "bmw-i5-2023",
+    "bmw-ix3-2025",
+    "byd-dolphin-2024",
+    "byd-dolphin-2025",
+    "fiat-500e-2021",
+    "fiat-500e-2022",
+    "honda-e-2023",
+    "hyundai-ioniq-5-n-2024",
+    "hyundai-ioniq-5-n-2025",
+    "kia-e-niro-2021",
+    "kia-e-niro-2022",
+    "lexus-ux-300e-2022",
+    "lexus-ux-300e-2025",
+    "mazda-6e-2025",
+    "mazda-mx-30-2023",
+    "mg-marvel-r-2023",
+    "mg-mg-zs-ev-2021",
+    "smart-1-2023",
+    "toyota-proace-electric-2023"
+  ],
   "examples": {
     "tesla-model-3-2026": {
       "id": "tesla-model-3-2026",
       "result": "skip",
       "reason": "year 2026 outside EEA IT Zr window 2017–2025"
     },
-    "tesla-model-3-2025": {
-      "id": "tesla-model-3-2025",
-      "result": "skip",
-      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
-      "eea_model": "MODEL3",
-      "year": 2025,
-      "status": "P",
-      "candidate_zr": [
-        640,
-        691,
-        702,
-        750
-      ],
-      "cn_raws": [
-        "MODEL 3"
-      ],
-      "catalog_wh": 132.0,
-      "catalog_kw": 236.5
-    },
     "tesla-model-3-2024": {
       "id": "tesla-model-3-2024",
-      "result": "fill",
-      "wltpRangeKm": 640,
-      "eea_brand": "TESLA",
+      "result": "skip",
+      "reason": "no EEA version jointly matches catalog kW (±5) and Wh/km (±1)",
       "eea_model": "MODEL3",
-      "eea_cn_raws": [
-        "MODEL 3"
-      ],
-      "eea_year": 2024,
+      "year": 2024,
       "status": "F",
-      "n": 5.0,
       "catalog_wh": 136.4,
       "catalog_kw": 249.6,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:50.920623+00:00"
-    }
-  },
-  "fill_sample": [
-    {
-      "id": "bmw-i5-2023",
-      "result": "fill",
-      "wltpRangeKm": 557,
-      "eea_brand": "BMW",
-      "eea_model": "I5EDRIVE40,I5M60XDRIVE",
-      "eea_cn_raws": [
-        "I5 EDRIVE40",
-        "I5 M60 XDRIVE"
-      ],
-      "eea_year": 2023,
-      "status": "F",
-      "n": 1.0,
-      "catalog_wh": 166.0,
-      "catalog_kw": 253.7,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:34.547289+00:00"
+      "candidate_zr": [
+        491,
+        513,
+        528,
+        602,
+        629,
+        640,
+        702
+      ]
     },
-    {
-      "id": "bmw-ix3-2025",
-      "result": "fill",
-      "wltpRangeKm": 461,
-      "eea_brand": "BMW",
-      "eea_model": "IX3",
-      "eea_cn_raws": [
-        "IX3"
+    "mazda-mx-30-2020": {
+      "id": "mazda-mx-30-2020",
+      "result": "skip",
+      "reason": "F/P conflict: Final and Provisional Zr differ for same model/year",
+      "eea_model": "MX30",
+      "year": 2020,
+      "f_zr": [
+        237
       ],
-      "eea_year": 2025,
-      "status": "P",
-      "n": 1.0,
-      "catalog_wh": 184.70000000000002,
-      "catalog_kw": 205.0,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:34.547289+00:00"
+      "p_zr": [
+        200
+      ]
     },
-    {
-      "id": "byd-atto-3-2024",
-      "result": "fill",
-      "wltpRangeKm": 420,
-      "eea_brand": "BYD",
-      "eea_model": "ATTO3",
-      "eea_cn_raws": [
-        "ATTO 3"
-      ],
-      "eea_year": 2024,
-      "status": "F",
-      "n": 172.0,
-      "catalog_wh": 155.4,
-      "catalog_kw": 138.7,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:35.053012+00:00"
-    },
-    {
-      "id": "byd-atto-3-2025",
-      "result": "fill",
-      "wltpRangeKm": 420,
-      "eea_brand": "BYD",
-      "eea_model": "ATTO3",
-      "eea_cn_raws": [
-        "ATTO 3"
-      ],
-      "eea_year": 2025,
-      "status": "P",
-      "n": 931.0,
-      "catalog_wh": 155.0,
-      "catalog_kw": 146.0,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:35.053012+00:00"
-    },
-    {
-      "id": "byd-dolphin-2024",
-      "result": "fill",
-      "wltpRangeKm": 427,
-      "eea_brand": "BYD",
-      "eea_model": "DOLPHIN",
-      "eea_cn_raws": [
-        "BYD DOLPHIN"
-      ],
-      "eea_year": 2024,
-      "status": "F",
-      "n": 132.0,
-      "catalog_wh": 159.89999999999998,
-      "catalog_kw": 150.3,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:35.053012+00:00"
-    },
-    {
-      "id": "byd-dolphin-2025",
-      "result": "fill",
-      "wltpRangeKm": 427,
-      "eea_brand": "BYD",
-      "eea_model": "DOLPHIN",
-      "eea_cn_raws": [
-        "BYD DOLPHIN"
-      ],
-      "eea_year": 2025,
-      "status": "P",
-      "n": 845.0,
-      "catalog_wh": 160.0,
-      "catalog_kw": 149.1,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:35.053012+00:00"
-    },
-    {
-      "id": "byd-han-2024",
-      "result": "fill",
-      "wltpRangeKm": 521,
-      "eea_brand": "BYD",
-      "eea_model": "HAN",
-      "eea_cn_raws": [
-        "HAN"
-      ],
-      "eea_year": 2024,
-      "status": "F",
-      "n": 6.0,
-      "catalog_wh": 185.0,
-      "catalog_kw": 272.3,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:35.053012+00:00"
-    },
-    {
-      "id": "byd-tang-2025",
-      "result": "fill",
-      "wltpRangeKm": 530,
-      "eea_brand": "BYD",
-      "eea_model": "TANGEV",
-      "eea_cn_raws": [
-        "TANG EV"
-      ],
-      "eea_year": 2025,
-      "status": "P",
-      "n": 17.0,
-      "catalog_wh": 184.2,
-      "catalog_kw": 278.1,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:35.053012+00:00"
-    },
-    {
-      "id": "citroen-e-c4-2025",
-      "result": "fill",
-      "wltpRangeKm": 353,
-      "eea_brand": "CITROEN",
-      "eea_model": "EC4",
-      "eea_cn_raws": [
-        "E-C4"
-      ],
-      "eea_year": 2025,
-      "status": "P",
-      "n": 4.0,
-      "catalog_wh": 152.0,
-      "catalog_kw": 109.6,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:36.319104+00:00"
-    },
-    {
-      "id": "fiat-500e-2021",
-      "result": "fill",
-      "wltpRangeKm": 190,
-      "eea_brand": "FIAT",
-      "eea_model": "500",
-      "eea_cn_raws": [
-        "500"
-      ],
-      "eea_year": 2021,
-      "status": "F",
-      "n": 997.0,
-      "catalog_wh": 129.70000000000002,
-      "catalog_kw": 43.0,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:37.592616+00:00"
-    },
-    {
-      "id": "fiat-500e-2022",
-      "result": "fill",
-      "wltpRangeKm": 190,
-      "eea_brand": "FIAT",
-      "eea_model": "500",
-      "eea_cn_raws": [
-        "500"
-      ],
-      "eea_year": 2022,
-      "status": "F",
-      "n": 708.0,
-      "catalog_wh": 129.5,
-      "catalog_kw": 43.0,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:37.592616+00:00"
-    },
-    {
-      "id": "ford-mustang-mach-e-2020",
-      "result": "fill",
-      "wltpRangeKm": 540,
-      "eea_brand": "FORD",
-      "eea_model": "MUSTANGMACHE",
-      "eea_cn_raws": [
-        "MUSTANG MACH-E"
-      ],
-      "eea_year": 2020,
-      "status": "F",
-      "n": 2.0,
-      "catalog_wh": 193.8,
-      "catalog_kw": 240.5,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:38.147643+00:00"
-    },
-    {
-      "id": "ford-mustang-mach-e-2025",
-      "result": "fill",
-      "wltpRangeKm": 435,
-      "eea_brand": "FORD",
-      "eea_model": "MUSTANGMACHE",
-      "eea_cn_raws": [
-        "MUSTANG MACH-E"
-      ],
-      "eea_year": 2025,
-      "status": "P",
-      "n": 4.0,
-      "catalog_wh": 190.0,
-      "catalog_kw": 259.8,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:38.147643+00:00"
-    },
-    {
-      "id": "genesis-gv60-2025",
-      "result": "fill",
-      "wltpRangeKm": 501,
-      "eea_brand": "GENESIS",
-      "eea_model": "GV60GENESISGV60",
-      "eea_cn_raws": [
-        "GV60, GENESIS GV60"
-      ],
-      "eea_year": 2025,
-      "status": "P",
-      "n": 3.0,
-      "catalog_wh": 179.2,
-      "catalog_kw": 200.5,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:38.556239+00:00"
-    },
-    {
-      "id": "honda-e-2020",
-      "result": "fill",
-      "wltpRangeKm": 222,
-      "eea_brand": "HONDA",
-      "eea_model": "E",
-      "eea_cn_raws": [
-        "HONDA E"
-      ],
-      "eea_year": 2020,
-      "status": "F",
-      "n": 9.0,
-      "catalog_wh": 177.9,
-      "catalog_kw": 96.5,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:38.943460+00:00"
-    },
-    {
-      "id": "honda-e-2022",
-      "result": "fill",
-      "wltpRangeKm": 210,
-      "eea_brand": "HONDA",
-      "eea_model": "E",
-      "eea_cn_raws": [
-        "HONDA E"
-      ],
-      "eea_year": 2022,
-      "status": "F",
-      "n": 56.0,
-      "catalog_wh": 177.4,
-      "catalog_kw": 105.4,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:38.943460+00:00"
-    },
-    {
-      "id": "honda-e-2023",
-      "result": "fill",
-      "wltpRangeKm": 210,
-      "eea_brand": "HONDA",
-      "eea_model": "E",
-      "eea_cn_raws": [
-        "HONDA E"
-      ],
-      "eea_year": 2023,
-      "status": "F",
-      "n": 20.0,
-      "catalog_wh": 178.0,
-      "catalog_kw": 113.0,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:38.943460+00:00"
-    },
-    {
-      "id": "honda-eny1-2023",
-      "result": "fill",
-      "wltpRangeKm": 412,
-      "eea_brand": "HONDA",
-      "eea_model": "ENY1",
-      "eea_cn_raws": [
-        "E:NY1"
-      ],
-      "eea_year": 2023,
-      "status": "F",
-      "n": 47.0,
-      "catalog_wh": 180.0,
-      "catalog_kw": 150.0,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:38.943460+00:00"
-    },
-    {
-      "id": "hyundai-inster-2025",
-      "result": "fill",
-      "wltpRangeKm": 370,
-      "eea_brand": "HYUNDAI",
-      "eea_model": "INSTER",
-      "eea_cn_raws": [
-        "INSTER"
-      ],
-      "eea_year": 2025,
-      "status": "P",
-      "n": 568.0,
-      "catalog_wh": 148.0,
-      "catalog_kw": 78.4,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:39.474156+00:00"
-    },
-    {
-      "id": "hyundai-ioniq-5-2021",
-      "result": "fill",
-      "wltpRangeKm": 451,
-      "eea_brand": "HYUNDAI",
-      "eea_model": "IONIQ5",
-      "eea_cn_raws": [
-        "IONIQ5"
-      ],
-      "eea_year": 2021,
-      "status": "F",
-      "n": 62.0,
-      "catalog_wh": 179.9,
-      "catalog_kw": 180.1,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:39.474156+00:00"
-    },
-    {
-      "id": "hyundai-ioniq-5-n-2024",
-      "result": "fill",
-      "wltpRangeKm": 448,
-      "eea_brand": "HYUNDAI",
-      "eea_model": "IONIQ5N",
-      "eea_cn_raws": [
-        "IONIQ5 N"
-      ],
-      "eea_year": 2024,
-      "status": "F",
-      "n": 27.0,
-      "catalog_wh": 212.0,
-      "catalog_kw": 478.0,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:39.474156+00:00"
-    },
-    {
-      "id": "hyundai-ioniq-5-n-2025",
-      "result": "fill",
-      "wltpRangeKm": 448,
-      "eea_brand": "HYUNDAI",
-      "eea_model": "IONIQ5N",
-      "eea_cn_raws": [
-        "IONIQ5 N"
-      ],
-      "eea_year": 2025,
-      "status": "P",
-      "n": 17.0,
-      "catalog_wh": 212.0,
-      "catalog_kw": 478.0,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:39.474156+00:00"
-    },
-    {
-      "id": "hyundai-ioniq-6-2022",
-      "result": "fill",
-      "wltpRangeKm": 519,
-      "eea_brand": "HYUNDAI",
-      "eea_model": "IONIQ6",
-      "eea_cn_raws": [
-        "IONIQ6"
-      ],
-      "eea_year": 2022,
-      "status": "F",
-      "n": 2.0,
-      "catalog_wh": 169.0,
-      "catalog_kw": 160.0,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:39.474156+00:00"
-    },
-    {
-      "id": "hyundai-kona-electric-2020",
-      "result": "fill",
-      "wltpRangeKm": 289,
-      "eea_brand": "HYUNDAI",
-      "eea_model": "KONAKAUAI",
-      "eea_cn_raws": [
-        "KONA  KAUAI"
-      ],
-      "eea_year": 2020,
-      "status": "F",
-      "n": 99.0,
-      "catalog_wh": 149.4,
-      "catalog_kw": 75.8,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:39.474156+00:00"
-    },
-    {
-      "id": "hyundai-kona-electric-2021",
-      "result": "fill",
-      "wltpRangeKm": 484,
-      "eea_brand": "HYUNDAI",
-      "eea_model": "KONAKAUAI",
-      "eea_cn_raws": [
-        "KONA KAUAI",
-        "KONAKAUAI"
-      ],
-      "eea_year": 2021,
-      "status": "F",
-      "n": 1012.0,
-      "catalog_wh": 146.5,
-      "catalog_kw": 77.2,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:39.474156+00:00"
-    },
-    {
-      "id": "hyundai-kona-electric-2023",
-      "result": "fill",
-      "wltpRangeKm": 305,
-      "eea_brand": "HYUNDAI",
-      "eea_model": "KONAKAUAI",
-      "eea_cn_raws": [
-        "KONA KAUAI"
-      ],
-      "eea_year": 2023,
-      "status": "F",
-      "n": 457.0,
-      "catalog_wh": 148.60000000000002,
-      "catalog_kw": 99.8,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:39.474156+00:00"
-    },
-    {
-      "id": "hyundai-kona-electric-2025",
-      "result": "fill",
-      "wltpRangeKm": 380,
-      "eea_brand": "HYUNDAI",
-      "eea_model": "KONAKAUAI",
-      "eea_cn_raws": [
-        "KONA, KAUAI"
-      ],
-      "eea_year": 2025,
-      "status": "P",
-      "n": 21.0,
-      "catalog_wh": 150.0,
-      "catalog_kw": 97.3,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:39.474156+00:00"
-    },
-    {
+    "jaguar-i-pace-2021": {
       "id": "jaguar-i-pace-2021",
-      "result": "fill",
-      "wltpRangeKm": 248,
-      "eea_brand": "JAGUAR",
+      "result": "skip",
+      "reason": "F/P conflict: Final and Provisional Zr differ for same model/year",
       "eea_model": "IPACE",
-      "eea_cn_raws": [
-        "JAGUAR I-PACE"
+      "year": 2021,
+      "f_zr": [
+        248
       ],
-      "eea_year": 2021,
-      "status": "F",
-      "n": 95.0,
-      "catalog_wh": 172.0,
-      "catalog_kw": 294.0,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:39.931827+00:00"
-    },
-    {
-      "id": "jaguar-i-pace-2025",
-      "result": "fill",
-      "wltpRangeKm": 448,
-      "eea_brand": "JAGUAR",
-      "eea_model": "IPACE",
-      "eea_cn_raws": [
-        "JAGUAR I-PACE"
-      ],
-      "eea_year": 2025,
-      "status": "P",
-      "n": 1.0,
-      "catalog_wh": 247.0,
-      "catalog_kw": 294.0,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:39.931827+00:00"
-    },
-    {
-      "id": "kia-ev9-2024",
-      "result": "fill",
-      "wltpRangeKm": 505,
-      "eea_brand": "KIA",
-      "eea_model": "EV9",
-      "eea_cn_raws": [
-        "EV9"
-      ],
-      "eea_year": 2024,
-      "status": "F",
-      "n": 109.0,
-      "catalog_wh": 223.89999999999998,
-      "catalog_kw": 262.9,
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
-      "eea_data_fetched_at": "2026-10-25T12:22:40.975919+00:00"
+      "p_zr": [
+        418,
+        421,
+        424,
+        427,
+        432,
+        436,
+        437,
+        438,
+        439,
+        447,
+        448,
+        449,
+        450,
+        451,
+        452,
+        453,
+        454,
+        455,
+        456,
+        457,
+        460,
+        463,
+        467,
+        468,
+        469
+      ]
     }
-  ]
+  }
 }
