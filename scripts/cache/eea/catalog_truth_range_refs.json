@@ -1,0 +1,8423 @@
+{
+  "seedVersion": 55,
+  "generatedAt": "2026-10-25T12:44:20.016871+00:00",
+  "source": "EEA co2cars IT field Zr (Electric range km)",
+  "rules": [
+    "Status F preferred; P only if F has no Zr",
+    "Cn match via fill_catalog_fuels_from_eea.match_model / merge keys",
+    "Disambiguate multi-Zr with catalog Wh/km then powerKw",
+    "Never average; leave nil if ambiguous or year outside 2017–2025"
+  ],
+  "fills": [
+    {
+      "id": "bmw-i5-2023",
+      "result": "fill",
+      "wltpRangeKm": 557,
+      "eea_brand": "BMW",
+      "eea_model": "I5EDRIVE40,I5M60XDRIVE",
+      "eea_cn_raws": [
+        "I5 EDRIVE40",
+        "I5 M60 XDRIVE"
+      ],
+      "eea_year": 2023,
+      "status": "F",
+      "n": 1.0,
+      "catalog_wh": 166.0,
+      "catalog_kw": 253.7,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:34.547289+00:00"
+    },
+    {
+      "id": "bmw-ix3-2025",
+      "result": "fill",
+      "wltpRangeKm": 461,
+      "eea_brand": "BMW",
+      "eea_model": "IX3",
+      "eea_cn_raws": [
+        "IX3"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 1.0,
+      "catalog_wh": 184.70000000000002,
+      "catalog_kw": 205.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:34.547289+00:00"
+    },
+    {
+      "id": "byd-atto-3-2024",
+      "result": "fill",
+      "wltpRangeKm": 420,
+      "eea_brand": "BYD",
+      "eea_model": "ATTO3",
+      "eea_cn_raws": [
+        "ATTO 3"
+      ],
+      "eea_year": 2024,
+      "status": "F",
+      "n": 172.0,
+      "catalog_wh": 155.4,
+      "catalog_kw": 138.7,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:35.053012+00:00"
+    },
+    {
+      "id": "byd-atto-3-2025",
+      "result": "fill",
+      "wltpRangeKm": 420,
+      "eea_brand": "BYD",
+      "eea_model": "ATTO3",
+      "eea_cn_raws": [
+        "ATTO 3"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 931.0,
+      "catalog_wh": 155.0,
+      "catalog_kw": 146.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:35.053012+00:00"
+    },
+    {
+      "id": "byd-dolphin-2024",
+      "result": "fill",
+      "wltpRangeKm": 427,
+      "eea_brand": "BYD",
+      "eea_model": "DOLPHIN",
+      "eea_cn_raws": [
+        "BYD DOLPHIN"
+      ],
+      "eea_year": 2024,
+      "status": "F",
+      "n": 132.0,
+      "catalog_wh": 159.89999999999998,
+      "catalog_kw": 150.3,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:35.053012+00:00"
+    },
+    {
+      "id": "byd-dolphin-2025",
+      "result": "fill",
+      "wltpRangeKm": 427,
+      "eea_brand": "BYD",
+      "eea_model": "DOLPHIN",
+      "eea_cn_raws": [
+        "BYD DOLPHIN"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 845.0,
+      "catalog_wh": 160.0,
+      "catalog_kw": 149.1,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:35.053012+00:00"
+    },
+    {
+      "id": "byd-han-2024",
+      "result": "fill",
+      "wltpRangeKm": 521,
+      "eea_brand": "BYD",
+      "eea_model": "HAN",
+      "eea_cn_raws": [
+        "HAN"
+      ],
+      "eea_year": 2024,
+      "status": "F",
+      "n": 6.0,
+      "catalog_wh": 185.0,
+      "catalog_kw": 272.3,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:35.053012+00:00"
+    },
+    {
+      "id": "byd-tang-2025",
+      "result": "fill",
+      "wltpRangeKm": 530,
+      "eea_brand": "BYD",
+      "eea_model": "TANGEV",
+      "eea_cn_raws": [
+        "TANG EV"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 17.0,
+      "catalog_wh": 184.2,
+      "catalog_kw": 278.1,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:35.053012+00:00"
+    },
+    {
+      "id": "citroen-e-c4-2025",
+      "result": "fill",
+      "wltpRangeKm": 353,
+      "eea_brand": "CITROEN",
+      "eea_model": "EC4",
+      "eea_cn_raws": [
+        "E-C4"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 4.0,
+      "catalog_wh": 152.0,
+      "catalog_kw": 109.6,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:36.319104+00:00"
+    },
+    {
+      "id": "fiat-500e-2021",
+      "result": "fill",
+      "wltpRangeKm": 190,
+      "eea_brand": "FIAT",
+      "eea_model": "500",
+      "eea_cn_raws": [
+        "500"
+      ],
+      "eea_year": 2021,
+      "status": "F",
+      "n": 997.0,
+      "catalog_wh": 129.70000000000002,
+      "catalog_kw": 43.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:37.592616+00:00"
+    },
+    {
+      "id": "fiat-500e-2022",
+      "result": "fill",
+      "wltpRangeKm": 190,
+      "eea_brand": "FIAT",
+      "eea_model": "500",
+      "eea_cn_raws": [
+        "500"
+      ],
+      "eea_year": 2022,
+      "status": "F",
+      "n": 708.0,
+      "catalog_wh": 129.5,
+      "catalog_kw": 43.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:37.592616+00:00"
+    },
+    {
+      "id": "ford-mustang-mach-e-2020",
+      "result": "fill",
+      "wltpRangeKm": 540,
+      "eea_brand": "FORD",
+      "eea_model": "MUSTANGMACHE",
+      "eea_cn_raws": [
+        "MUSTANG MACH-E"
+      ],
+      "eea_year": 2020,
+      "status": "F",
+      "n": 2.0,
+      "catalog_wh": 193.8,
+      "catalog_kw": 240.5,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:38.147643+00:00"
+    },
+    {
+      "id": "ford-mustang-mach-e-2025",
+      "result": "fill",
+      "wltpRangeKm": 435,
+      "eea_brand": "FORD",
+      "eea_model": "MUSTANGMACHE",
+      "eea_cn_raws": [
+        "MUSTANG MACH-E"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 4.0,
+      "catalog_wh": 190.0,
+      "catalog_kw": 259.8,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:38.147643+00:00"
+    },
+    {
+      "id": "genesis-gv60-2025",
+      "result": "fill",
+      "wltpRangeKm": 501,
+      "eea_brand": "GENESIS",
+      "eea_model": "GV60GENESISGV60",
+      "eea_cn_raws": [
+        "GV60, GENESIS GV60"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 3.0,
+      "catalog_wh": 179.2,
+      "catalog_kw": 200.5,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:38.556239+00:00"
+    },
+    {
+      "id": "honda-e-2020",
+      "result": "fill",
+      "wltpRangeKm": 222,
+      "eea_brand": "HONDA",
+      "eea_model": "E",
+      "eea_cn_raws": [
+        "HONDA E"
+      ],
+      "eea_year": 2020,
+      "status": "F",
+      "n": 9.0,
+      "catalog_wh": 177.9,
+      "catalog_kw": 96.5,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:38.943460+00:00"
+    },
+    {
+      "id": "honda-e-2022",
+      "result": "fill",
+      "wltpRangeKm": 210,
+      "eea_brand": "HONDA",
+      "eea_model": "E",
+      "eea_cn_raws": [
+        "HONDA E"
+      ],
+      "eea_year": 2022,
+      "status": "F",
+      "n": 56.0,
+      "catalog_wh": 177.4,
+      "catalog_kw": 105.4,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:38.943460+00:00"
+    },
+    {
+      "id": "honda-e-2023",
+      "result": "fill",
+      "wltpRangeKm": 210,
+      "eea_brand": "HONDA",
+      "eea_model": "E",
+      "eea_cn_raws": [
+        "HONDA E"
+      ],
+      "eea_year": 2023,
+      "status": "F",
+      "n": 20.0,
+      "catalog_wh": 178.0,
+      "catalog_kw": 113.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:38.943460+00:00"
+    },
+    {
+      "id": "honda-eny1-2023",
+      "result": "fill",
+      "wltpRangeKm": 412,
+      "eea_brand": "HONDA",
+      "eea_model": "ENY1",
+      "eea_cn_raws": [
+        "E:NY1"
+      ],
+      "eea_year": 2023,
+      "status": "F",
+      "n": 47.0,
+      "catalog_wh": 180.0,
+      "catalog_kw": 150.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:38.943460+00:00"
+    },
+    {
+      "id": "hyundai-inster-2025",
+      "result": "fill",
+      "wltpRangeKm": 370,
+      "eea_brand": "HYUNDAI",
+      "eea_model": "INSTER",
+      "eea_cn_raws": [
+        "INSTER"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 568.0,
+      "catalog_wh": 148.0,
+      "catalog_kw": 78.4,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:39.474156+00:00"
+    },
+    {
+      "id": "hyundai-ioniq-5-2021",
+      "result": "fill",
+      "wltpRangeKm": 451,
+      "eea_brand": "HYUNDAI",
+      "eea_model": "IONIQ5",
+      "eea_cn_raws": [
+        "IONIQ5"
+      ],
+      "eea_year": 2021,
+      "status": "F",
+      "n": 62.0,
+      "catalog_wh": 179.9,
+      "catalog_kw": 180.1,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:39.474156+00:00"
+    },
+    {
+      "id": "hyundai-ioniq-5-n-2024",
+      "result": "fill",
+      "wltpRangeKm": 448,
+      "eea_brand": "HYUNDAI",
+      "eea_model": "IONIQ5N",
+      "eea_cn_raws": [
+        "IONIQ5 N"
+      ],
+      "eea_year": 2024,
+      "status": "F",
+      "n": 27.0,
+      "catalog_wh": 212.0,
+      "catalog_kw": 478.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:39.474156+00:00"
+    },
+    {
+      "id": "hyundai-ioniq-5-n-2025",
+      "result": "fill",
+      "wltpRangeKm": 448,
+      "eea_brand": "HYUNDAI",
+      "eea_model": "IONIQ5N",
+      "eea_cn_raws": [
+        "IONIQ5 N"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 17.0,
+      "catalog_wh": 212.0,
+      "catalog_kw": 478.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:39.474156+00:00"
+    },
+    {
+      "id": "hyundai-ioniq-6-2022",
+      "result": "fill",
+      "wltpRangeKm": 519,
+      "eea_brand": "HYUNDAI",
+      "eea_model": "IONIQ6",
+      "eea_cn_raws": [
+        "IONIQ6"
+      ],
+      "eea_year": 2022,
+      "status": "F",
+      "n": 2.0,
+      "catalog_wh": 169.0,
+      "catalog_kw": 160.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:39.474156+00:00"
+    },
+    {
+      "id": "hyundai-kona-electric-2020",
+      "result": "fill",
+      "wltpRangeKm": 289,
+      "eea_brand": "HYUNDAI",
+      "eea_model": "KONAKAUAI",
+      "eea_cn_raws": [
+        "KONA  KAUAI"
+      ],
+      "eea_year": 2020,
+      "status": "F",
+      "n": 99.0,
+      "catalog_wh": 149.4,
+      "catalog_kw": 75.8,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:39.474156+00:00"
+    },
+    {
+      "id": "hyundai-kona-electric-2021",
+      "result": "fill",
+      "wltpRangeKm": 484,
+      "eea_brand": "HYUNDAI",
+      "eea_model": "KONAKAUAI",
+      "eea_cn_raws": [
+        "KONA KAUAI",
+        "KONAKAUAI"
+      ],
+      "eea_year": 2021,
+      "status": "F",
+      "n": 1012.0,
+      "catalog_wh": 146.5,
+      "catalog_kw": 77.2,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:39.474156+00:00"
+    },
+    {
+      "id": "hyundai-kona-electric-2023",
+      "result": "fill",
+      "wltpRangeKm": 305,
+      "eea_brand": "HYUNDAI",
+      "eea_model": "KONAKAUAI",
+      "eea_cn_raws": [
+        "KONA KAUAI"
+      ],
+      "eea_year": 2023,
+      "status": "F",
+      "n": 457.0,
+      "catalog_wh": 148.60000000000002,
+      "catalog_kw": 99.8,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:39.474156+00:00"
+    },
+    {
+      "id": "hyundai-kona-electric-2025",
+      "result": "fill",
+      "wltpRangeKm": 380,
+      "eea_brand": "HYUNDAI",
+      "eea_model": "KONAKAUAI",
+      "eea_cn_raws": [
+        "KONA, KAUAI"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 21.0,
+      "catalog_wh": 150.0,
+      "catalog_kw": 97.3,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:39.474156+00:00"
+    },
+    {
+      "id": "jaguar-i-pace-2021",
+      "result": "fill",
+      "wltpRangeKm": 248,
+      "eea_brand": "JAGUAR",
+      "eea_model": "IPACE",
+      "eea_cn_raws": [
+        "JAGUAR I-PACE"
+      ],
+      "eea_year": 2021,
+      "status": "F",
+      "n": 95.0,
+      "catalog_wh": 172.0,
+      "catalog_kw": 294.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:39.931827+00:00"
+    },
+    {
+      "id": "jaguar-i-pace-2025",
+      "result": "fill",
+      "wltpRangeKm": 448,
+      "eea_brand": "JAGUAR",
+      "eea_model": "IPACE",
+      "eea_cn_raws": [
+        "JAGUAR I-PACE"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 1.0,
+      "catalog_wh": 247.0,
+      "catalog_kw": 294.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:39.931827+00:00"
+    },
+    {
+      "id": "kia-ev9-2024",
+      "result": "fill",
+      "wltpRangeKm": 505,
+      "eea_brand": "KIA",
+      "eea_model": "EV9",
+      "eea_cn_raws": [
+        "EV9"
+      ],
+      "eea_year": 2024,
+      "status": "F",
+      "n": 109.0,
+      "catalog_wh": 223.89999999999998,
+      "catalog_kw": 262.9,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:40.975919+00:00"
+    },
+    {
+      "id": "kia-ev9-2025",
+      "result": "fill",
+      "wltpRangeKm": 505,
+      "eea_brand": "KIA",
+      "eea_model": "EV9",
+      "eea_cn_raws": [
+        "EV9"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 74.0,
+      "catalog_wh": 227.0,
+      "catalog_kw": 258.5,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:40.975919+00:00"
+    },
+    {
+      "id": "kia-soul-ev-2020",
+      "result": "fill",
+      "wltpRangeKm": 452,
+      "eea_brand": "KIA",
+      "eea_model": "SOUL",
+      "eea_cn_raws": [
+        "SOUL"
+      ],
+      "eea_year": 2020,
+      "status": "P",
+      "n": 72.0,
+      "catalog_wh": 157.0,
+      "catalog_kw": 98.8,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:40.975919+00:00"
+    },
+    {
+      "id": "kia-soul-ev-2022",
+      "result": "fill",
+      "wltpRangeKm": 452,
+      "eea_brand": "KIA",
+      "eea_model": "SOUL",
+      "eea_cn_raws": [
+        "SOUL"
+      ],
+      "eea_year": 2022,
+      "status": "F",
+      "n": 57.0,
+      "catalog_wh": 156.9,
+      "catalog_kw": 137.2,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:40.975919+00:00"
+    },
+    {
+      "id": "kia-e-niro-2021",
+      "result": "fill",
+      "wltpRangeKm": 455,
+      "eea_brand": "KIA",
+      "eea_model": "NIRO",
+      "eea_cn_raws": [
+        "NIRO"
+      ],
+      "eea_year": 2021,
+      "status": "F",
+      "n": 445.0,
+      "catalog_wh": 159.0,
+      "catalog_kw": 29.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:40.975919+00:00"
+    },
+    {
+      "id": "kia-e-niro-2022",
+      "result": "fill",
+      "wltpRangeKm": 460,
+      "eea_brand": "KIA",
+      "eea_model": "NIRO",
+      "eea_cn_raws": [
+        "NIRO"
+      ],
+      "eea_year": 2022,
+      "status": "F",
+      "n": 149.0,
+      "catalog_wh": 162.0,
+      "catalog_kw": 150.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:40.975919+00:00"
+    },
+    {
+      "id": "lexus-ux-300e-2020",
+      "result": "fill",
+      "wltpRangeKm": 309,
+      "eea_brand": "LEXUS",
+      "eea_model": "UX300E",
+      "eea_cn_raws": [
+        "LEXUS UX300E"
+      ],
+      "eea_year": 2020,
+      "status": "F",
+      "n": 4.0,
+      "catalog_wh": 170.0,
+      "catalog_kw": 103.5,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:41.385674+00:00"
+    },
+    {
+      "id": "lexus-ux-300e-2022",
+      "result": "fill",
+      "wltpRangeKm": 309,
+      "eea_brand": "LEXUS",
+      "eea_model": "UX300E",
+      "eea_cn_raws": [
+        "LEXUS UX300E"
+      ],
+      "eea_year": 2022,
+      "status": "F",
+      "n": 37.0,
+      "catalog_wh": 170.1,
+      "catalog_kw": 146.8,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:41.385674+00:00"
+    },
+    {
+      "id": "lexus-ux-300e-2024",
+      "result": "fill",
+      "wltpRangeKm": 448,
+      "eea_brand": "LEXUS",
+      "eea_model": "UX300E",
+      "eea_cn_raws": [
+        "LEXUS UX300E"
+      ],
+      "eea_year": 2024,
+      "status": "F",
+      "n": 16.0,
+      "catalog_wh": 168.3,
+      "catalog_kw": 150.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:41.385674+00:00"
+    },
+    {
+      "id": "lexus-ux-300e-2025",
+      "result": "fill",
+      "wltpRangeKm": 448,
+      "eea_brand": "LEXUS",
+      "eea_model": "UX300E",
+      "eea_cn_raws": [
+        "LEXUS UX300E"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 17.0,
+      "catalog_wh": 168.0,
+      "catalog_kw": 150.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:41.385674+00:00"
+    },
+    {
+      "id": "mg-mg-zs-ev-2021",
+      "result": "fill",
+      "wltpRangeKm": 263,
+      "eea_brand": "MG",
+      "eea_model": "ZSEV",
+      "eea_cn_raws": [
+        "MG ZS EV"
+      ],
+      "eea_year": 2021,
+      "status": "F",
+      "n": 122.0,
+      "catalog_wh": 186.0,
+      "catalog_kw": 105.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:43.585165+00:00"
+    },
+    {
+      "id": "mg-mg-zs-ev-2023",
+      "result": "fill",
+      "wltpRangeKm": 320,
+      "eea_brand": "MG",
+      "eea_model": "ZSEV",
+      "eea_cn_raws": [
+        "MG ZS EV"
+      ],
+      "eea_year": 2023,
+      "status": "F",
+      "n": 47.0,
+      "catalog_wh": 173.0,
+      "catalog_kw": 75.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:43.585165+00:00"
+    },
+    {
+      "id": "mg-mg-zs-ev-2024",
+      "result": "fill",
+      "wltpRangeKm": 440,
+      "eea_brand": "MG",
+      "eea_model": "ZSEV",
+      "eea_cn_raws": [
+        "MG ZS EV"
+      ],
+      "eea_year": 2024,
+      "status": "F",
+      "n": 58.0,
+      "catalog_wh": 178.0,
+      "catalog_kw": 73.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:43.585165+00:00"
+    },
+    {
+      "id": "mg-mg-zs-ev-2025",
+      "result": "fill",
+      "wltpRangeKm": 440,
+      "eea_brand": "MG",
+      "eea_model": "ZSEV",
+      "eea_cn_raws": [
+        "MG ZS EV"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 2.0,
+      "catalog_wh": 169.5,
+      "catalog_kw": 118.9,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:43.585165+00:00"
+    },
+    {
+      "id": "mg-marvel-r-2023",
+      "result": "fill",
+      "wltpRangeKm": 402,
+      "eea_brand": "MG",
+      "eea_model": "MARVELRELECTRIC",
+      "eea_cn_raws": [
+        "MG MARVEL R ELECTRIC"
+      ],
+      "eea_year": 2023,
+      "status": "F",
+      "n": 342.0,
+      "catalog_wh": 194.0,
+      "catalog_kw": 132.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:43.585165+00:00"
+    },
+    {
+      "id": "mg-marvel-r-2024",
+      "result": "fill",
+      "wltpRangeKm": 402,
+      "eea_brand": "MG",
+      "eea_model": "MARVELRELECTRIC",
+      "eea_cn_raws": [
+        "MG MARVEL R ELECTRIC"
+      ],
+      "eea_year": 2024,
+      "status": "F",
+      "n": 47.0,
+      "catalog_wh": 194.0,
+      "catalog_kw": 65.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:43.585165+00:00"
+    },
+    {
+      "id": "mg-marvel-r-2025",
+      "result": "fill",
+      "wltpRangeKm": 402,
+      "eea_brand": "MG",
+      "eea_model": "MARVELRELECTRIC",
+      "eea_cn_raws": [
+        "MG MARVEL R ELECTRIC"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 5.0,
+      "catalog_wh": 194.8,
+      "catalog_kw": 200.6,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:43.585165+00:00"
+    },
+    {
+      "id": "mazda-6e-2025",
+      "result": "fill",
+      "wltpRangeKm": 479,
+      "eea_brand": "MAZDA",
+      "eea_model": "6E",
+      "eea_cn_raws": [
+        "MAZDA 6E"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 178.0,
+      "catalog_wh": 166.0,
+      "catalog_kw": 188.2,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:42.225980+00:00"
+    },
+    {
+      "id": "mazda-mx-30-2020",
+      "result": "fill",
+      "wltpRangeKm": 237,
+      "eea_brand": "MAZDA",
+      "eea_model": "MX30",
+      "eea_cn_raws": [
+        "MAZDA MX-30"
+      ],
+      "eea_year": 2020,
+      "status": "F",
+      "n": 349.0,
+      "catalog_wh": 182.0,
+      "catalog_kw": 90.9,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:42.225980+00:00"
+    },
+    {
+      "id": "mazda-mx-30-2021",
+      "result": "fill",
+      "wltpRangeKm": 200,
+      "eea_brand": "MAZDA",
+      "eea_model": "MX30",
+      "eea_cn_raws": [
+        "MAZDA MX-30"
+      ],
+      "eea_year": 2021,
+      "status": "F",
+      "n": 392.0,
+      "catalog_wh": 189.5,
+      "catalog_kw": 97.2,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:42.225980+00:00"
+    },
+    {
+      "id": "mazda-mx-30-2022",
+      "result": "fill",
+      "wltpRangeKm": 200,
+      "eea_brand": "MAZDA",
+      "eea_model": "MX30",
+      "eea_cn_raws": [
+        "MAZDA MX-30"
+      ],
+      "eea_year": 2022,
+      "status": "F",
+      "n": 150.0,
+      "catalog_wh": 184.70000000000002,
+      "catalog_kw": 105.2,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:42.225980+00:00"
+    },
+    {
+      "id": "mazda-mx-30-2023",
+      "result": "fill",
+      "wltpRangeKm": 200,
+      "eea_brand": "MAZDA",
+      "eea_model": "MX30",
+      "eea_cn_raws": [
+        "MAZDA MX-30"
+      ],
+      "eea_year": 2023,
+      "status": "F",
+      "n": 155.0,
+      "catalog_wh": 178.79999999999998,
+      "catalog_kw": 106.3,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:42.225980+00:00"
+    },
+    {
+      "id": "mazda-mx-30-2024",
+      "result": "fill",
+      "wltpRangeKm": 200,
+      "eea_brand": "MAZDA",
+      "eea_model": "MX30",
+      "eea_cn_raws": [
+        "MAZDA MX-30"
+      ],
+      "eea_year": 2024,
+      "status": "F",
+      "n": 67.0,
+      "catalog_wh": 177.5,
+      "catalog_kw": 87.3,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:42.225980+00:00"
+    },
+    {
+      "id": "mazda-mx-30-2025",
+      "result": "fill",
+      "wltpRangeKm": 200,
+      "eea_brand": "MAZDA",
+      "eea_model": "MX30",
+      "eea_cn_raws": [
+        "MAZDA MX-30"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 1.0,
+      "catalog_wh": 179.2,
+      "catalog_kw": 79.2,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:42.225980+00:00"
+    },
+    {
+      "id": "mercedes-benz-eqb-2021",
+      "result": "fill",
+      "wltpRangeKm": 411,
+      "eea_brand": "MERCEDES-BENZ",
+      "eea_model": "EQB3004MATIC",
+      "eea_cn_raws": [
+        "EQB 300 4MATIC"
+      ],
+      "eea_year": 2021,
+      "status": "F",
+      "n": 1.0,
+      "catalog_wh": 187.29999999999998,
+      "catalog_kw": 139.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:43.074232+00:00"
+    },
+    {
+      "id": "mercedes-benz-g-580-eq-2024",
+      "result": "fill",
+      "wltpRangeKm": 455,
+      "eea_brand": "MERCEDES-BENZ",
+      "eea_model": "G580",
+      "eea_cn_raws": [
+        "G 580"
+      ],
+      "eea_year": 2024,
+      "status": "F",
+      "n": 9.0,
+      "catalog_wh": 281.6,
+      "catalog_kw": 402.7,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:43.074232+00:00"
+    },
+    {
+      "id": "nissan-leaf-2023",
+      "result": "fill",
+      "wltpRangeKm": 270,
+      "eea_brand": "NISSAN",
+      "eea_model": "LEAF40KWH",
+      "eea_cn_raws": [
+        "NISSAN LEAF 40KWH"
+      ],
+      "eea_year": 2023,
+      "status": "F",
+      "n": 6.0,
+      "catalog_wh": 171.6,
+      "catalog_kw": 132.6,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:45.147723+00:00"
+    },
+    {
+      "id": "opel-astra-electric-2023",
+      "result": "fill",
+      "wltpRangeKm": 412,
+      "eea_brand": "OPEL",
+      "eea_model": "ASTRA",
+      "eea_cn_raws": [
+        "ASTRA"
+      ],
+      "eea_year": 2023,
+      "status": "F",
+      "n": 47.0,
+      "catalog_wh": 145.1,
+      "catalog_kw": 97.5,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:45.729950+00:00"
+    },
+    {
+      "id": "opel-corsa-electric-2025",
+      "result": "fill",
+      "wltpRangeKm": 356,
+      "eea_brand": "OPEL",
+      "eea_model": "CORSA",
+      "eea_cn_raws": [
+        "CORSA"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 1.0,
+      "catalog_wh": 155.0,
+      "catalog_kw": 77.2,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:45.729950+00:00"
+    },
+    {
+      "id": "opel-mokka-electric-2023",
+      "result": "fill",
+      "wltpRangeKm": 329,
+      "eea_brand": "OPEL",
+      "eea_model": "MOKKA",
+      "eea_cn_raws": [
+        "MOKKA"
+      ],
+      "eea_year": 2023,
+      "status": "F",
+      "n": 6.0,
+      "catalog_wh": 160.5,
+      "catalog_kw": 100.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:45.729950+00:00"
+    },
+    {
+      "id": "opel-mokka-electric-2024",
+      "result": "fill",
+      "wltpRangeKm": 338,
+      "eea_brand": "OPEL",
+      "eea_model": "MOKKA",
+      "eea_cn_raws": [
+        "MOKKA"
+      ],
+      "eea_year": 2024,
+      "status": "F",
+      "n": 4.0,
+      "catalog_wh": 160.39999999999998,
+      "catalog_kw": 57.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:45.729950+00:00"
+    },
+    {
+      "id": "peugeot-e-2008-2023",
+      "result": "fill",
+      "wltpRangeKm": 337,
+      "eea_brand": "PEUGEOT",
+      "eea_model": "2008",
+      "eea_cn_raws": [
+        "2008"
+      ],
+      "eea_year": 2023,
+      "status": "F",
+      "n": 34.0,
+      "catalog_wh": 156.79999999999998,
+      "catalog_kw": 106.5,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:46.319549+00:00"
+    },
+    {
+      "id": "peugeot-e-208-2022",
+      "result": "fill",
+      "wltpRangeKm": 353,
+      "eea_brand": "PEUGEOT",
+      "eea_model": "208",
+      "eea_cn_raws": [
+        "208"
+      ],
+      "eea_year": 2022,
+      "status": "F",
+      "n": 27.0,
+      "catalog_wh": 157.29999999999998,
+      "catalog_kw": 73.3,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:46.319549+00:00"
+    },
+    {
+      "id": "peugeot-e-208-2025",
+      "result": "fill",
+      "wltpRangeKm": 351,
+      "eea_brand": "PEUGEOT",
+      "eea_model": "208",
+      "eea_cn_raws": [
+        "208"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 1.0,
+      "catalog_wh": 159.3,
+      "catalog_kw": 114.3,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:46.319549+00:00"
+    },
+    {
+      "id": "polestar-2-2023",
+      "result": "fill",
+      "wltpRangeKm": 533,
+      "eea_brand": "POLESTAR",
+      "eea_model": "2",
+      "eea_cn_raws": [
+        "POLESTAR 2"
+      ],
+      "eea_year": 2023,
+      "status": "F",
+      "n": 1.0,
+      "catalog_wh": 175.8,
+      "catalog_kw": 202.7,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:46.783028+00:00"
+    },
+    {
+      "id": "polestar-4-2024",
+      "result": "fill",
+      "wltpRangeKm": 620,
+      "eea_brand": "POLESTAR",
+      "eea_model": "4",
+      "eea_cn_raws": [
+        "POLESTAR 4"
+      ],
+      "eea_year": 2024,
+      "status": "F",
+      "n": 28.0,
+      "catalog_wh": 177.7,
+      "catalog_kw": 363.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:46.783028+00:00"
+    },
+    {
+      "id": "polestar-4-2025",
+      "result": "fill",
+      "wltpRangeKm": 620,
+      "eea_brand": "POLESTAR",
+      "eea_model": "4",
+      "eea_cn_raws": [
+        "POLESTAR 4"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 134.0,
+      "catalog_wh": 178.0,
+      "catalog_kw": 354.6,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:46.783028+00:00"
+    },
+    {
+      "id": "porsche-taycan-2024",
+      "result": "fill",
+      "wltpRangeKm": 602,
+      "eea_brand": "PORSCHE",
+      "eea_model": "TAYCAN",
+      "eea_cn_raws": [
+        "TAYCAN"
+      ],
+      "eea_year": 2024,
+      "status": "F",
+      "n": 1.0,
+      "catalog_wh": 194.0,
+      "catalog_kw": 130.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:47.604472+00:00"
+    },
+    {
+      "id": "renault-megane-e-tech-2025",
+      "result": "fill",
+      "wltpRangeKm": 452,
+      "eea_brand": "RENAULT",
+      "eea_model": "MEGANEETECHELECTRIC",
+      "eea_cn_raws": [
+        "MEGANE E-TECH ELECTRIC"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 35.0,
+      "catalog_wh": 156.20000000000002,
+      "catalog_kw": 55.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:48.341456+00:00"
+    },
+    {
+      "id": "seat-mii-electric-2020",
+      "result": "fill",
+      "wltpRangeKm": 251,
+      "eea_brand": "SEAT",
+      "eea_model": "MII",
+      "eea_cn_raws": [
+        "MII"
+      ],
+      "eea_year": 2020,
+      "status": "F",
+      "n": 120.0,
+      "catalog_wh": 139.8,
+      "catalog_kw": 59.9,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:49.187745+00:00"
+    },
+    {
+      "id": "seat-mii-electric-2021",
+      "result": "fill",
+      "wltpRangeKm": 251,
+      "eea_brand": "SEAT",
+      "eea_model": "MII",
+      "eea_cn_raws": [
+        "MII"
+      ],
+      "eea_year": 2021,
+      "status": "F",
+      "n": 38.0,
+      "catalog_wh": 138.6,
+      "catalog_kw": 61.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:49.187745+00:00"
+    },
+    {
+      "id": "skoda-citigo-e-iv-2021",
+      "result": "fill",
+      "wltpRangeKm": 254,
+      "eea_brand": "SKODA",
+      "eea_model": "CITIGO",
+      "eea_cn_raws": [
+        "CITIGO"
+      ],
+      "eea_year": 2021,
+      "status": "F",
+      "n": 6.0,
+      "catalog_wh": 130.89999999999998,
+      "catalog_kw": 61.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:49.819022+00:00"
+    },
+    {
+      "id": "skoda-enyaq-2023",
+      "result": "fill",
+      "wltpRangeKm": 522,
+      "eea_brand": "SKODA",
+      "eea_model": "ENYAQRS",
+      "eea_cn_raws": [
+        "ENYAQ RS"
+      ],
+      "eea_year": 2023,
+      "status": "F",
+      "n": 3.0,
+      "catalog_wh": 166.2,
+      "catalog_kw": 165.1,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:49.819022+00:00"
+    },
+    {
+      "id": "skoda-enyaq-2024",
+      "result": "fill",
+      "wltpRangeKm": 538,
+      "eea_brand": "SKODA",
+      "eea_model": "ENYAQ80",
+      "eea_cn_raws": [
+        "ENYAQ 80"
+      ],
+      "eea_year": 2024,
+      "status": "F",
+      "n": 1.0,
+      "catalog_wh": 159.6,
+      "catalog_kw": 188.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:49.819022+00:00"
+    },
+    {
+      "id": "smart-1-2023",
+      "result": "fill",
+      "wltpRangeKm": 420,
+      "eea_brand": "SMART",
+      "eea_model": "1",
+      "eea_cn_raws": [
+        "#1"
+      ],
+      "eea_year": 2023,
+      "status": "F",
+      "n": 355.0,
+      "catalog_wh": 174.3,
+      "catalog_kw": 205.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:50.426806+00:00"
+    },
+    {
+      "id": "smart-3-2024",
+      "result": "fill",
+      "wltpRangeKm": 435,
+      "eea_brand": "SMART",
+      "eea_model": "3",
+      "eea_cn_raws": [
+        "#3"
+      ],
+      "eea_year": 2024,
+      "status": "F",
+      "n": 228.0,
+      "catalog_wh": 167.1,
+      "catalog_kw": 209.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:50.426806+00:00"
+    },
+    {
+      "id": "smart-3-2025",
+      "result": "fill",
+      "wltpRangeKm": 435,
+      "eea_brand": "SMART",
+      "eea_model": "3",
+      "eea_cn_raws": [
+        "#3"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 99.0,
+      "catalog_wh": 168.2,
+      "catalog_kw": 125.9,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:50.426806+00:00"
+    },
+    {
+      "id": "tesla-model-3-2024",
+      "result": "fill",
+      "wltpRangeKm": 640,
+      "eea_brand": "TESLA",
+      "eea_model": "MODEL3",
+      "eea_cn_raws": [
+        "MODEL 3"
+      ],
+      "eea_year": 2024,
+      "status": "F",
+      "n": 5.0,
+      "catalog_wh": 136.4,
+      "catalog_kw": 249.6,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:50.920623+00:00"
+    },
+    {
+      "id": "tesla-model-s-2023",
+      "result": "fill",
+      "wltpRangeKm": 634,
+      "eea_brand": "TESLA",
+      "eea_model": "MODELS",
+      "eea_cn_raws": [
+        "MODEL S"
+      ],
+      "eea_year": 2023,
+      "status": "F",
+      "n": 61.0,
+      "catalog_wh": 179.79999999999998,
+      "catalog_kw": 505.7,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:50.920623+00:00"
+    },
+    {
+      "id": "tesla-model-s-2025",
+      "result": "fill",
+      "wltpRangeKm": 611,
+      "eea_brand": "TESLA",
+      "eea_model": "MODELS",
+      "eea_cn_raws": [
+        "MODEL S"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 16.0,
+      "catalog_wh": 181.0,
+      "catalog_kw": 678.8,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:50.920623+00:00"
+    },
+    {
+      "id": "tesla-model-y-2025",
+      "result": "fill",
+      "wltpRangeKm": 534,
+      "eea_brand": "TESLA",
+      "eea_model": "MODELY",
+      "eea_cn_raws": [
+        "MODEL Y"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 389.0,
+      "catalog_wh": 131.0,
+      "catalog_kw": 268.7,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:50.920623+00:00"
+    },
+    {
+      "id": "toyota-proace-electric-2023",
+      "result": "fill",
+      "wltpRangeKm": 315,
+      "eea_brand": "TOYOTA",
+      "eea_model": "PROACE",
+      "eea_cn_raws": [
+        "PROACE"
+      ],
+      "eea_year": 2023,
+      "status": "F",
+      "n": 27.0,
+      "catalog_wh": 268.8,
+      "catalog_kw": 100.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:51.518715+00:00"
+    },
+    {
+      "id": "volkswagen-id3-2024",
+      "result": "fill",
+      "wltpRangeKm": 424,
+      "eea_brand": "VOLKSWAGEN",
+      "eea_model": "ID3PRO150KW",
+      "eea_cn_raws": [
+        "ID.3 PRO 150 KW"
+      ],
+      "eea_year": 2024,
+      "status": "F",
+      "n": 6.0,
+      "catalog_wh": 153.9,
+      "catalog_kw": 163.5,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:52.318448+00:00"
+    },
+    {
+      "id": "volkswagen-id5-2024",
+      "result": "fill",
+      "wltpRangeKm": 512,
+      "eea_brand": "VOLKSWAGEN",
+      "eea_model": "ID5GTX220KW",
+      "eea_cn_raws": [
+        "ID.5 GTX 220 KW"
+      ],
+      "eea_year": 2024,
+      "status": "F",
+      "n": 1.0,
+      "catalog_wh": 162.20000000000002,
+      "catalog_kw": 210.7,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:52.318448+00:00"
+    },
+    {
+      "id": "volkswagen-id7-2023",
+      "result": "fill",
+      "wltpRangeKm": 588,
+      "eea_brand": "VOLKSWAGEN",
+      "eea_model": "ID7PRO210KW",
+      "eea_cn_raws": [
+        "ID7 PRO 210 KW"
+      ],
+      "eea_year": 2023,
+      "status": "F",
+      "n": 3.0,
+      "catalog_wh": 147.2,
+      "catalog_kw": 210.0,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:52.318448+00:00"
+    },
+    {
+      "id": "volvo-ex30-2024",
+      "result": "fill",
+      "wltpRangeKm": 337,
+      "eea_brand": "VOLVO",
+      "eea_model": "EX30",
+      "eea_cn_raws": [
+        "EX30"
+      ],
+      "eea_year": 2024,
+      "status": "F",
+      "n": 1293.0,
+      "catalog_wh": 171.4,
+      "catalog_kw": 216.6,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:52.972028+00:00"
+    },
+    {
+      "id": "volvo-ex30-2025",
+      "result": "fill",
+      "wltpRangeKm": 335,
+      "eea_brand": "VOLVO",
+      "eea_model": "EX30",
+      "eea_cn_raws": [
+        "EX30"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 7.0,
+      "catalog_wh": 173.0,
+      "catalog_kw": 209.2,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:52.972028+00:00"
+    },
+    {
+      "id": "volvo-xc40-recharge-2020",
+      "result": "fill",
+      "wltpRangeKm": 411,
+      "eea_brand": "VOLVO",
+      "eea_model": "XC40",
+      "eea_cn_raws": [
+        "XC40"
+      ],
+      "eea_year": 2020,
+      "status": "F",
+      "n": 1.0,
+      "catalog_wh": 166.7,
+      "catalog_kw": 118.7,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:52.972028+00:00"
+    },
+    {
+      "id": "volvo-xc40-recharge-2023",
+      "result": "fill",
+      "wltpRangeKm": 536,
+      "eea_brand": "VOLVO",
+      "eea_model": "XC40",
+      "eea_cn_raws": [
+        "XC40"
+      ],
+      "eea_year": 2023,
+      "status": "F",
+      "n": 14.0,
+      "catalog_wh": 175.2,
+      "catalog_kw": 156.7,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:52.972028+00:00"
+    },
+    {
+      "id": "xpeng-g6-2025",
+      "result": "fill",
+      "wltpRangeKm": 435,
+      "eea_brand": "XPENG",
+      "eea_model": "G6",
+      "eea_cn_raws": [
+        "G6"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 67.0,
+      "catalog_wh": 176.0,
+      "catalog_kw": 241.9,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:53.404516+00:00"
+    },
+    {
+      "id": "xpeng-g9-2025",
+      "result": "fill",
+      "wltpRangeKm": 540,
+      "eea_brand": "XPENG",
+      "eea_model": "G9",
+      "eea_cn_raws": [
+        "G9"
+      ],
+      "eea_year": 2025,
+      "status": "P",
+      "n": 5.0,
+      "catalog_wh": 200.0,
+      "catalog_kw": 310.1,
+      "source": "EEA co2cars IT Zr",
+      "fetched_note": "Status F preferred; P only if F has no Zr for this Cn/year",
+      "eea_data_fetched_at": "2026-10-25T12:22:53.404516+00:00"
+    }
+  ],
+  "skips": [
+    {
+      "id": "audi-q4-e-tron-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "ETRON",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        363,
+        364
+      ],
+      "cn_raws": [
+        "AUDI E-TRON"
+      ],
+      "catalog_wh": 176.0,
+      "catalog_kw": 173.3
+    },
+    {
+      "id": "audi-q4-e-tron-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Q4 e-tron",
+      "year": 2022
+    },
+    {
+      "id": "audi-q4-e-tron-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Q4 e-tron",
+      "year": 2023
+    },
+    {
+      "id": "audi-q4-e-tron-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Q4 e-tron",
+      "year": 2024
+    },
+    {
+      "id": "audi-q4-e-tron-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Q4 e-tron",
+      "year": 2025
+    },
+    {
+      "id": "audi-q4-e-tron-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "audi-q6-e-tron-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Q6 e-tron",
+      "year": 2024
+    },
+    {
+      "id": "audi-q6-e-tron-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Q6 e-tron",
+      "year": 2025
+    },
+    {
+      "id": "audi-q6-e-tron-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "audi-q8-e-tron-2018",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Q8 e-tron",
+      "year": 2018
+    },
+    {
+      "id": "audi-q8-e-tron-2019",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Q8 e-tron",
+      "year": 2019
+    },
+    {
+      "id": "audi-q8-e-tron-2020",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "ETRON",
+      "year": 2020,
+      "status": "F",
+      "candidate_zr": [
+        362,
+        363,
+        364,
+        365,
+        366,
+        367,
+        368,
+        369,
+        374,
+        381,
+        386,
+        387
+      ],
+      "cn_raws": [
+        "AUDI E-TRON"
+      ],
+      "catalog_wh": 263.29999999999995,
+      "catalog_kw": 147.7
+    },
+    {
+      "id": "audi-q8-e-tron-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "ETRON",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        363,
+        364
+      ],
+      "cn_raws": [
+        "AUDI E-TRON"
+      ],
+      "catalog_wh": 235.0,
+      "catalog_kw": 282.5
+    },
+    {
+      "id": "audi-q8-e-tron-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Q8 e-tron",
+      "year": 2022
+    },
+    {
+      "id": "audi-q8-e-tron-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Q8 e-tron",
+      "year": 2023
+    },
+    {
+      "id": "audi-q8-e-tron-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Q8 e-tron",
+      "year": 2024
+    },
+    {
+      "id": "audi-q8-e-tron-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Q8 e-tron",
+      "year": 2025
+    },
+    {
+      "id": "audi-q8-e-tron-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "audi-e-tron-gt-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "ETRONGT",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        454,
+        457,
+        459,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        470,
+        471,
+        472,
+        473,
+        475,
+        476,
+        477,
+        478,
+        479,
+        480,
+        481,
+        482
+      ],
+      "cn_raws": [
+        "E-TRON GT"
+      ],
+      "catalog_wh": 205.5,
+      "catalog_kw": 320.0
+    },
+    {
+      "id": "audi-e-tron-gt-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "ETRONGT",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        452,
+        455,
+        456,
+        457,
+        458,
+        459,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        467,
+        468,
+        469,
+        470,
+        472,
+        474,
+        475,
+        476,
+        477,
+        478,
+        479,
+        481,
+        483,
+        488,
+        492
+      ],
+      "cn_raws": [
+        "E-TRON GT"
+      ],
+      "catalog_wh": 207.6,
+      "catalog_kw": 175.0
+    },
+    {
+      "id": "audi-e-tron-gt-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "ETRONGT",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        473,
+        475,
+        476
+      ],
+      "cn_raws": [
+        "E-TRON GT"
+      ],
+      "catalog_wh": 205.3,
+      "catalog_kw": 184.2
+    },
+    {
+      "id": "audi-e-tron-gt-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "e-tron GT",
+      "year": 2024
+    },
+    {
+      "id": "audi-e-tron-gt-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "e-tron GT",
+      "year": 2025
+    },
+    {
+      "id": "audi-e-tron-gt-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "bmw-i3-2016",
+      "result": "skip",
+      "reason": "year 2016 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "bmw-i3-2017",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "i3",
+      "year": 2017
+    },
+    {
+      "id": "bmw-i3-2018",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "i3",
+      "year": 2018
+    },
+    {
+      "id": "bmw-i3-2019",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "i3",
+      "year": 2019
+    },
+    {
+      "id": "bmw-i3-2020",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "I3",
+      "year": 2020,
+      "status": "P",
+      "candidate_zr": [
+        286,
+        287,
+        289,
+        290,
+        291,
+        294,
+        295,
+        296,
+        297,
+        298,
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308
+      ],
+      "cn_raws": [
+        "I3"
+      ],
+      "catalog_wh": 151.2,
+      "catalog_kw": 121.8
+    },
+    {
+      "id": "bmw-i3-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "I3",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        298,
+        299,
+        300,
+        301,
+        302
+      ],
+      "cn_raws": [
+        "I3",
+        "i3"
+      ],
+      "catalog_wh": 156.29999999999998,
+      "catalog_kw": 112.6
+    },
+    {
+      "id": "bmw-i3-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "I3",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        296,
+        297,
+        298,
+        300
+      ],
+      "cn_raws": [
+        "I3",
+        "i3"
+      ],
+      "catalog_wh": 157.79999999999998,
+      "catalog_kw": 123.1
+    },
+    {
+      "id": "bmw-i4-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "I4EDRIVE40,I4M50",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        423,
+        424,
+        532,
+        563,
+        566
+      ],
+      "cn_raws": [
+        "I4 EDRIVE40",
+        "I4 M50",
+        "i4 M50",
+        "i4 eDrive40"
+      ],
+      "catalog_wh": 204.0,
+      "catalog_kw": 400.0
+    },
+    {
+      "id": "bmw-i4-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "I4EDRIVE40,I4M50",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        501,
+        503,
+        504,
+        505,
+        506,
+        507,
+        508
+      ],
+      "cn_raws": [
+        "I4 EDRIVE40",
+        "I4 M50",
+        "i4 M50",
+        "i4 eDrive40"
+      ],
+      "catalog_wh": 187.0,
+      "catalog_kw": null
+    },
+    {
+      "id": "bmw-i4-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "I4EDRIVE35,I4EDRIVE40,I4M50",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        415,
+        416,
+        421,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        429,
+        430,
+        431,
+        432,
+        433,
+        454,
+        455,
+        456,
+        457,
+        458,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        467,
+        468,
+        469,
+        470,
+        471,
+        472,
+        473,
+        475,
+        478,
+        479,
+        480,
+        481,
+        482,
+        483,
+        484,
+        485,
+        486,
+        502,
+        503,
+        504,
+        505,
+        506,
+        507,
+        508,
+        509,
+        510,
+        511,
+        512,
+        515,
+        526,
+        527,
+        539,
+        542,
+        553,
+        555,
+        556,
+        557,
+        558,
+        559,
+        560,
+        561,
+        562,
+        563,
+        564,
+        566,
+        567,
+        568,
+        569,
+        570,
+        571,
+        572,
+        573,
+        574,
+        575,
+        576,
+        577,
+        578,
+        579,
+        580,
+        581,
+        583,
+        584,
+        585,
+        588,
+        589,
+        590
+      ],
+      "cn_raws": [
+        "I4 EDRIVE35",
+        "I4 EDRIVE40",
+        "I4 M50"
+      ],
+      "catalog_wh": 173.4,
+      "catalog_kw": 291.9
+    },
+    {
+      "id": "bmw-i4-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "I4EDRIVE35,I4EDRIVE40,I4M50,I4M50XDRIVE,I4XDRIVE40",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        526,
+        527,
+        528,
+        530
+      ],
+      "cn_raws": [
+        "I4 EDRIVE35",
+        "I4 EDRIVE40",
+        "I4 M50",
+        "I4 M50 XDRIVE",
+        "I4 XDRIVE40"
+      ],
+      "catalog_wh": 173.7,
+      "catalog_kw": 313.9
+    },
+    {
+      "id": "bmw-i4-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "I4EDRIVE35,I4EDRIVE40,I4M50,I4M50XDRIVE,I4M60XDRIVE,I4XDRIVE40",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        525,
+        526,
+        527,
+        528,
+        529,
+        530,
+        533,
+        534
+      ],
+      "cn_raws": [
+        "I4 EDRIVE35",
+        "I4 EDRIVE40",
+        "I4 M50",
+        "I4 M50 XDRIVE",
+        "I4 M60 XDRIVE",
+        "I4 XDRIVE40"
+      ],
+      "catalog_wh": 174.0,
+      "catalog_kw": 285.8
+    },
+    {
+      "id": "bmw-i4-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "bmw-i5-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "I5EDRIVE40,I5M60XDRIVE,I5XDRIVE40",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        545,
+        546,
+        559
+      ],
+      "cn_raws": [
+        "I5 EDRIVE40",
+        "I5 M60 XDRIVE",
+        "I5 XDRIVE40"
+      ],
+      "catalog_wh": 169.4,
+      "catalog_kw": 255.4
+    },
+    {
+      "id": "bmw-i5-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "I5EDRIVE40,I5M60XDRIVE,I5XDRIVE40",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        545,
+        546,
+        547,
+        548,
+        549,
+        560
+      ],
+      "cn_raws": [
+        "I5 EDRIVE40",
+        "I5 M60 XDRIVE",
+        "I5 XDRIVE40"
+      ],
+      "catalog_wh": 169.0,
+      "catalog_kw": 254.6
+    },
+    {
+      "id": "bmw-i5-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "bmw-i7-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "I7XDRIVE60",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        594,
+        596,
+        597,
+        600,
+        602
+      ],
+      "cn_raws": [
+        "I7 XDRIVE60",
+        "i7 xDrive60"
+      ],
+      "catalog_wh": 184.70000000000002,
+      "catalog_kw": null
+    },
+    {
+      "id": "bmw-i7-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "I7XDRIVE60",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        595,
+        597,
+        598,
+        602,
+        603,
+        604,
+        605,
+        606,
+        607,
+        609,
+        610,
+        613,
+        618,
+        620
+      ],
+      "cn_raws": [
+        "I7 XDRIVE60"
+      ],
+      "catalog_wh": 184.0,
+      "catalog_kw": 384.9
+    },
+    {
+      "id": "bmw-i7-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "I7EDRIVE50,I7M70XDRIVE,I7XDRIVE60",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        544,
+        559,
+        587,
+        594,
+        596,
+        598,
+        599,
+        602,
+        603,
+        604,
+        605,
+        606,
+        608,
+        609,
+        611,
+        612,
+        613,
+        618
+      ],
+      "cn_raws": [
+        "I7 EDRIVE50",
+        "I7 M70 XDRIVE",
+        "I7 XDRIVE60"
+      ],
+      "catalog_wh": 183.2,
+      "catalog_kw": 348.4
+    },
+    {
+      "id": "bmw-i7-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "I7EDRIVE50,I7M70XDRIVE,I7XDRIVE60",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        582,
+        590,
+        592,
+        593,
+        597,
+        601
+      ],
+      "cn_raws": [
+        "I7 EDRIVE50",
+        "I7 M70 XDRIVE",
+        "I7 XDRIVE60"
+      ],
+      "catalog_wh": 182.5,
+      "catalog_kw": 343.2
+    },
+    {
+      "id": "bmw-i7-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "bmw-ix-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IXXDRIVE40,IXXDRIVE50",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        403,
+        404,
+        405,
+        612
+      ],
+      "cn_raws": [
+        "IX XDRIVE40",
+        "IX XDRIVE50",
+        "iX xDrive40",
+        "iX xDrive50"
+      ],
+      "catalog_wh": 205.7,
+      "catalog_kw": 277.1
+    },
+    {
+      "id": "bmw-ix-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IXM60,IXXDRIVE40,IXXDRIVE50",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        399,
+        400,
+        402,
+        403,
+        404,
+        405,
+        406,
+        407,
+        408,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        416,
+        418,
+        419,
+        420,
+        421,
+        422,
+        423,
+        424,
+        425,
+        426,
+        428,
+        431,
+        432,
+        434,
+        503,
+        515,
+        545,
+        549,
+        551,
+        552,
+        556,
+        557,
+        559,
+        560,
+        588,
+        589,
+        590,
+        592,
+        593,
+        594,
+        595,
+        597,
+        598,
+        599,
+        600,
+        601,
+        602,
+        603,
+        604,
+        605,
+        606,
+        607,
+        608,
+        609,
+        610,
+        611,
+        612,
+        613,
+        614,
+        615,
+        616,
+        617,
+        618,
+        619,
+        620,
+        622,
+        623,
+        626,
+        627,
+        629,
+        631,
+        632
+      ],
+      "cn_raws": [
+        "IX M60",
+        "IX XDRIVE40",
+        "IX XDRIVE50",
+        "iX M60",
+        "iX xDrive40",
+        "iX xDrive50"
+      ],
+      "catalog_wh": 183.0,
+      "catalog_kw": null
+    },
+    {
+      "id": "bmw-ix-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IXM60,IXXDRIVE40,IXXDRIVE50",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        411,
+        412,
+        413,
+        418,
+        419,
+        600,
+        601,
+        602,
+        603,
+        604,
+        605,
+        606,
+        607,
+        608,
+        609,
+        610,
+        611,
+        612,
+        613
+      ],
+      "cn_raws": [
+        "IX M60",
+        "IX XDRIVE40",
+        "IX XDRIVE50"
+      ],
+      "catalog_wh": 205.5,
+      "catalog_kw": 270.0
+    },
+    {
+      "id": "bmw-ix-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IXM60,IXXDRIVE40,IXXDRIVE50",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        403,
+        407,
+        411,
+        414,
+        415,
+        416,
+        598,
+        599,
+        600,
+        601,
+        602,
+        603,
+        604,
+        605,
+        606,
+        608,
+        609,
+        610
+      ],
+      "cn_raws": [
+        "IX M60",
+        "IX XDRIVE40",
+        "IX XDRIVE50"
+      ],
+      "catalog_wh": 207.0,
+      "catalog_kw": 316.3
+    },
+    {
+      "id": "bmw-ix-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IXM60,IXM70XDRIVE,IXXDRIVE40,IXXDRIVE45,IXXDRIVE50,IXXDRIVE60",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        600,
+        602,
+        603,
+        604,
+        605,
+        606,
+        607,
+        608,
+        609,
+        610,
+        611,
+        613,
+        614,
+        616,
+        617,
+        618,
+        623,
+        629
+      ],
+      "cn_raws": [
+        "IX M60",
+        "IX M70 XDRIVE",
+        "IX XDRIVE40",
+        "IX XDRIVE45",
+        "IX XDRIVE50",
+        "IX XDRIVE60"
+      ],
+      "catalog_wh": 180.7,
+      "catalog_kw": 379.2
+    },
+    {
+      "id": "bmw-ix-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "bmw-ix1-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IX1XDRIVE30",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        424,
+        425,
+        430,
+        431,
+        432
+      ],
+      "cn_raws": [
+        "IX1 XDRIVE30",
+        "iX1 xDrive30"
+      ],
+      "catalog_wh": 175.0,
+      "catalog_kw": null
+    },
+    {
+      "id": "bmw-ix1-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IX1EDRIVE20,IX1XDRIVE30",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        427,
+        428,
+        429,
+        430,
+        431,
+        432,
+        433,
+        434,
+        436,
+        437,
+        438,
+        439
+      ],
+      "cn_raws": [
+        "IX1 EDRIVE20",
+        "IX1 XDRIVE30"
+      ],
+      "catalog_wh": 172.5,
+      "catalog_kw": 200.3
+    },
+    {
+      "id": "bmw-ix1-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IX1EDRIVE20,IX1XDRIVE30",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        444,
+        445,
+        446,
+        447,
+        448,
+        449,
+        452,
+        453,
+        454,
+        455,
+        456,
+        457
+      ],
+      "cn_raws": [
+        "IX1 EDRIVE20",
+        "IX1 XDRIVE30"
+      ],
+      "catalog_wh": 163.8,
+      "catalog_kw": 171.9
+    },
+    {
+      "id": "bmw-ix1-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IX1EDRIVE20,IX1XDRIVE30",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        441,
+        442,
+        443,
+        444,
+        445,
+        446,
+        447,
+        448,
+        449,
+        450,
+        451,
+        452,
+        453,
+        454,
+        455,
+        456,
+        457
+      ],
+      "cn_raws": [
+        "IX1 EDRIVE20",
+        "IX1 XDRIVE30"
+      ],
+      "catalog_wh": 164.0,
+      "catalog_kw": 165.7
+    },
+    {
+      "id": "bmw-ix1-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "bmw-ix3-2020",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "iX3",
+      "year": 2020
+    },
+    {
+      "id": "bmw-ix3-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IX3",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        452,
+        455,
+        456
+      ],
+      "cn_raws": [
+        "IX3",
+        "iX3"
+      ],
+      "catalog_wh": 188.79999999999998,
+      "catalog_kw": 209.5
+    },
+    {
+      "id": "bmw-ix3-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IX3",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        455,
+        456
+      ],
+      "cn_raws": [
+        "IX3",
+        "iX3"
+      ],
+      "catalog_wh": 187.79999999999998,
+      "catalog_kw": 209.8
+    },
+    {
+      "id": "bmw-ix3-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IX3",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        455,
+        456
+      ],
+      "cn_raws": [
+        "IX3"
+      ],
+      "catalog_wh": 187.0,
+      "catalog_kw": 208.7
+    },
+    {
+      "id": "bmw-ix3-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IX3",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        453,
+        455,
+        456,
+        461,
+        465,
+        471
+      ],
+      "cn_raws": [
+        "IX3"
+      ],
+      "catalog_wh": 181.60000000000002,
+      "catalog_kw": 207.7
+    },
+    {
+      "id": "bmw-ix3-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "byd-atto-3-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Atto 3",
+      "year": 2022
+    },
+    {
+      "id": "byd-atto-3-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Atto 3",
+      "year": 2023
+    },
+    {
+      "id": "byd-atto-3-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "byd-dolphin-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Dolphin",
+      "year": 2023
+    },
+    {
+      "id": "byd-dolphin-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "byd-han-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Han",
+      "year": 2021
+    },
+    {
+      "id": "byd-han-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Han",
+      "year": 2022
+    },
+    {
+      "id": "byd-han-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Han",
+      "year": 2023
+    },
+    {
+      "id": "byd-han-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Han",
+      "year": 2025
+    },
+    {
+      "id": "byd-han-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "byd-seal-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Seal",
+      "year": 2023
+    },
+    {
+      "id": "byd-seal-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "SEAL",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        520,
+        570
+      ],
+      "cn_raws": [
+        "BYD SEAL"
+      ],
+      "catalog_wh": 177.7,
+      "catalog_kw": 317.1
+    },
+    {
+      "id": "byd-seal-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "SEAL",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        520,
+        570
+      ],
+      "cn_raws": [
+        "BYD SEAL"
+      ],
+      "catalog_wh": 180.7,
+      "catalog_kw": 311.3
+    },
+    {
+      "id": "byd-seal-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "byd-seal-u-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "SEALU",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        420,
+        500
+      ],
+      "cn_raws": [
+        "BYD SEAL U"
+      ],
+      "catalog_wh": 194.8,
+      "catalog_kw": 157.9
+    },
+    {
+      "id": "byd-seal-u-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "SEALU",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        420,
+        500
+      ],
+      "cn_raws": [
+        "BYD SEAL U"
+      ],
+      "catalog_wh": 191.3,
+      "catalog_kw": 165.7
+    },
+    {
+      "id": "byd-seal-u-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "byd-tang-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Tang",
+      "year": 2021
+    },
+    {
+      "id": "byd-tang-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Tang",
+      "year": 2022
+    },
+    {
+      "id": "byd-tang-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Tang",
+      "year": 2023
+    },
+    {
+      "id": "byd-tang-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Tang",
+      "year": 2024
+    },
+    {
+      "id": "byd-tang-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "chevrolet-bolt-euv-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Bolt EUV",
+      "year": 2021
+    },
+    {
+      "id": "chevrolet-bolt-euv-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Bolt EUV",
+      "year": 2022
+    },
+    {
+      "id": "chevrolet-bolt-euv-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Bolt EUV",
+      "year": 2023
+    },
+    {
+      "id": "chevrolet-bolt-ev-2017",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Bolt EV",
+      "year": 2017
+    },
+    {
+      "id": "chevrolet-bolt-ev-2018",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Bolt EV",
+      "year": 2018
+    },
+    {
+      "id": "chevrolet-bolt-ev-2019",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Bolt EV",
+      "year": 2019
+    },
+    {
+      "id": "chevrolet-bolt-ev-2020",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Bolt EV",
+      "year": 2020
+    },
+    {
+      "id": "chevrolet-bolt-ev-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Bolt EV",
+      "year": 2021
+    },
+    {
+      "id": "chevrolet-bolt-ev-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Bolt EV",
+      "year": 2022
+    },
+    {
+      "id": "chevrolet-bolt-ev-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Bolt EV",
+      "year": 2023
+    },
+    {
+      "id": "chevrolet-equinox-ev-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Equinox EV",
+      "year": 2023
+    },
+    {
+      "id": "chevrolet-equinox-ev-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Equinox EV",
+      "year": 2024
+    },
+    {
+      "id": "chevrolet-equinox-ev-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Equinox EV",
+      "year": 2025
+    },
+    {
+      "id": "chevrolet-equinox-ev-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "citroen-e-c4-2020",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EC4",
+      "year": 2020,
+      "status": "F",
+      "candidate_zr": [
+        351,
+        352
+      ],
+      "cn_raws": [
+        "E-C4"
+      ],
+      "catalog_wh": 160.3,
+      "catalog_kw": 100.0
+    },
+    {
+      "id": "citroen-e-c4-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EC4",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        350,
+        351,
+        352
+      ],
+      "cn_raws": [
+        "E-C4"
+      ],
+      "catalog_wh": 159.1,
+      "catalog_kw": 100.0
+    },
+    {
+      "id": "citroen-e-c4-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EC4",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        351,
+        352,
+        353,
+        354
+      ],
+      "cn_raws": [
+        "E-C4"
+      ],
+      "catalog_wh": 153.6,
+      "catalog_kw": 100.0
+    },
+    {
+      "id": "citroen-e-c4-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EC4",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        348,
+        349,
+        353,
+        354,
+        355
+      ],
+      "cn_raws": [
+        "E-C4"
+      ],
+      "catalog_wh": 152.9,
+      "catalog_kw": 100.6
+    },
+    {
+      "id": "citroen-e-c4-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EC4",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        348,
+        349,
+        355,
+        356
+      ],
+      "cn_raws": [
+        "E-C4"
+      ],
+      "catalog_wh": 151.60000000000002,
+      "catalog_kw": 102.0
+    },
+    {
+      "id": "citroen-e-c4-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "cupra-tavascan-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Tavascan",
+      "year": 2024
+    },
+    {
+      "id": "cupra-tavascan-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Tavascan",
+      "year": 2025
+    },
+    {
+      "id": "cupra-tavascan-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "fiat-500e-2020",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "500",
+      "year": 2020,
+      "status": "F",
+      "candidate_zr": [
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        306,
+        308,
+        311,
+        312,
+        313,
+        314,
+        316,
+        317,
+        318,
+        319,
+        320,
+        322,
+        323
+      ],
+      "cn_raws": [
+        "500",
+        "FIAT 500"
+      ],
+      "catalog_wh": 141.0,
+      "catalog_kw": null
+    },
+    {
+      "id": "fiat-500e-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "500",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        312,
+        313,
+        314,
+        315,
+        316,
+        317
+      ],
+      "cn_raws": [
+        "500"
+      ],
+      "catalog_wh": 142.3,
+      "catalog_kw": 87.0
+    },
+    {
+      "id": "fiat-500e-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "500",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        322,
+        323,
+        325,
+        326,
+        327,
+        328,
+        329
+      ],
+      "cn_raws": [
+        "500"
+      ],
+      "catalog_wh": 138.0,
+      "catalog_kw": 87.0
+    },
+    {
+      "id": "fiat-500e-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "500",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        311,
+        321
+      ],
+      "cn_raws": [
+        "500"
+      ],
+      "catalog_wh": 137.2,
+      "catalog_kw": 43.0
+    },
+    {
+      "id": "fiat-500e-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "ford-capri-ev-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "CAPRI",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        556,
+        588,
+        595,
+        604
+      ],
+      "cn_raws": [
+        "CAPRI"
+      ],
+      "catalog_wh": 180.5,
+      "catalog_kw": null
+    },
+    {
+      "id": "ford-capri-ev-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "CAPRI",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        373,
+        374,
+        378,
+        381,
+        389,
+        391,
+        393,
+        553,
+        554,
+        556,
+        557,
+        558,
+        560,
+        588,
+        591,
+        592,
+        594,
+        595,
+        596,
+        598,
+        602,
+        604,
+        606,
+        623,
+        627
+      ],
+      "cn_raws": [
+        "CAPRI"
+      ],
+      "catalog_wh": 179.7,
+      "catalog_kw": null
+    },
+    {
+      "id": "ford-capri-ev-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "ford-explorer-ev-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EXPLORER",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        516,
+        518,
+        522,
+        525,
+        528,
+        529,
+        532,
+        539,
+        544,
+        555,
+        559,
+        561,
+        566,
+        568,
+        570,
+        571,
+        572,
+        581,
+        599,
+        602
+      ],
+      "cn_raws": [
+        "EXPLORER"
+      ],
+      "catalog_wh": 191.5,
+      "catalog_kw": null
+    },
+    {
+      "id": "ford-explorer-ev-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EXPLORER",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        356,
+        357,
+        360,
+        365,
+        375,
+        378,
+        505,
+        509,
+        516,
+        519,
+        520,
+        522,
+        525,
+        528,
+        529,
+        532,
+        534,
+        536,
+        539,
+        544,
+        555,
+        559,
+        561,
+        563,
+        566,
+        568,
+        570,
+        571,
+        572,
+        574,
+        576,
+        581,
+        586,
+        599,
+        602
+      ],
+      "cn_raws": [
+        "EXPLORER"
+      ],
+      "catalog_wh": 190.8,
+      "catalog_kw": null
+    },
+    {
+      "id": "ford-explorer-ev-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "ford-mustang-mach-e-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "MUSTANGMACHE",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        400,
+        440,
+        500,
+        540,
+        610
+      ],
+      "cn_raws": [
+        "MUSTANG MACH-E"
+      ],
+      "catalog_wh": 178.9,
+      "catalog_kw": 259.6
+    },
+    {
+      "id": "ford-mustang-mach-e-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "MUSTANGMACHE",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        400,
+        440,
+        500,
+        540,
+        610
+      ],
+      "cn_raws": [
+        "MUSTANG MACH-E"
+      ],
+      "catalog_wh": 182.5,
+      "catalog_kw": 278.3
+    },
+    {
+      "id": "ford-mustang-mach-e-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "MUSTANGMACHE",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        400,
+        540
+      ],
+      "cn_raws": [
+        "MUSTANG MACH-E"
+      ],
+      "catalog_wh": 184.10000000000002,
+      "catalog_kw": 266.9
+    },
+    {
+      "id": "ford-mustang-mach-e-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "MUSTANGMACHE",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        400,
+        428,
+        435,
+        440,
+        470,
+        490,
+        500,
+        510,
+        540,
+        550,
+        600,
+        610
+      ],
+      "cn_raws": [
+        "MUSTANG MACH-E"
+      ],
+      "catalog_wh": 184.2,
+      "catalog_kw": 257.4
+    },
+    {
+      "id": "ford-mustang-mach-e-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "ford-puma-gen-e-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Puma Gen-E",
+      "year": 2024
+    },
+    {
+      "id": "ford-puma-gen-e-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "PUMA",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        350,
+        353,
+        357,
+        358,
+        359,
+        360,
+        361,
+        362,
+        364,
+        373,
+        374,
+        376
+      ],
+      "cn_raws": [
+        "PUMA"
+      ],
+      "catalog_wh": 182.7,
+      "catalog_kw": 111.5
+    },
+    {
+      "id": "ford-puma-gen-e-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "genesis-electrified-g80-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Electrified G80",
+      "year": 2021
+    },
+    {
+      "id": "genesis-electrified-g80-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Electrified G80",
+      "year": 2022
+    },
+    {
+      "id": "genesis-electrified-g80-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Electrified G80",
+      "year": 2023
+    },
+    {
+      "id": "genesis-electrified-g80-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Electrified G80",
+      "year": 2024
+    },
+    {
+      "id": "genesis-electrified-g80-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Electrified G80",
+      "year": 2025
+    },
+    {
+      "id": "genesis-electrified-g80-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "genesis-electrified-gv70-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Electrified GV70",
+      "year": 2021
+    },
+    {
+      "id": "genesis-electrified-gv70-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Electrified GV70",
+      "year": 2022
+    },
+    {
+      "id": "genesis-electrified-gv70-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Electrified GV70",
+      "year": 2023
+    },
+    {
+      "id": "genesis-electrified-gv70-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Electrified GV70",
+      "year": 2024
+    },
+    {
+      "id": "genesis-electrified-gv70-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Electrified GV70",
+      "year": 2025
+    },
+    {
+      "id": "genesis-electrified-gv70-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "genesis-gv60-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "GV60",
+      "year": 2021
+    },
+    {
+      "id": "genesis-gv60-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "GV60",
+      "year": 2022
+    },
+    {
+      "id": "genesis-gv60-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "GV60",
+      "year": 2023
+    },
+    {
+      "id": "genesis-gv60-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "GV60",
+      "year": 2024
+    },
+    {
+      "id": "genesis-gv60-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "honda-e-2019",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "e",
+      "year": 2019
+    },
+    {
+      "id": "honda-e-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "E",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        210,
+        222
+      ],
+      "cn_raws": [
+        "HONDA E"
+      ],
+      "catalog_wh": 174.5,
+      "catalog_kw": 112.8
+    },
+    {
+      "id": "honda-eny1-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "e:Ny1",
+      "year": 2024
+    },
+    {
+      "id": "honda-eny1-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "e:Ny1",
+      "year": 2025
+    },
+    {
+      "id": "honda-eny1-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "hyundai-equus-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Equus",
+      "year": 2022
+    },
+    {
+      "id": "hyundai-equus-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Equus",
+      "year": 2023
+    },
+    {
+      "id": "hyundai-equus-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Equus",
+      "year": 2024
+    },
+    {
+      "id": "hyundai-equus-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Equus",
+      "year": 2025
+    },
+    {
+      "id": "hyundai-equus-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "hyundai-inster-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Inster",
+      "year": 2024
+    },
+    {
+      "id": "hyundai-inster-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "hyundai-ioniq-5-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IONIQ5",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        384,
+        430,
+        451,
+        454,
+        476,
+        481,
+        507
+      ],
+      "cn_raws": [
+        "IONIQ5"
+      ],
+      "catalog_wh": 176.2,
+      "catalog_kw": 145.6
+    },
+    {
+      "id": "hyundai-ioniq-5-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IONIQ5",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        384,
+        454,
+        476,
+        481,
+        507
+      ],
+      "cn_raws": [
+        "IONIQ5"
+      ],
+      "catalog_wh": 172.1,
+      "catalog_kw": 173.7
+    },
+    {
+      "id": "hyundai-ioniq-5-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IONIQ5",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        440,
+        454,
+        476,
+        481,
+        495,
+        507,
+        570
+      ],
+      "cn_raws": [
+        "IONIQ5"
+      ],
+      "catalog_wh": 174.2,
+      "catalog_kw": 192.3
+    },
+    {
+      "id": "hyundai-ioniq-5-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IONIQ5",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        440,
+        476,
+        495,
+        507,
+        570
+      ],
+      "cn_raws": [
+        "IONIQ5"
+      ],
+      "catalog_wh": 164.70000000000002,
+      "catalog_kw": 181.0
+    },
+    {
+      "id": "hyundai-ioniq-5-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "hyundai-ioniq-5-n-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IONIQ5",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        384,
+        454,
+        476,
+        481,
+        507
+      ],
+      "cn_raws": [
+        "IONIQ5"
+      ],
+      "catalog_wh": 177.1,
+      "catalog_kw": 110.0
+    },
+    {
+      "id": "hyundai-ioniq-5-n-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "hyundai-ioniq-6-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IONIQ6",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        519,
+        545,
+        614
+      ],
+      "cn_raws": [
+        "IONIQ6"
+      ],
+      "catalog_wh": 154.6,
+      "catalog_kw": 179.1
+    },
+    {
+      "id": "hyundai-ioniq-6-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IONIQ6",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        519,
+        545,
+        614
+      ],
+      "cn_raws": [
+        "IONIQ6"
+      ],
+      "catalog_wh": 151.10000000000002,
+      "catalog_kw": 179.9
+    },
+    {
+      "id": "hyundai-ioniq-6-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IONIQ6",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        519,
+        545
+      ],
+      "cn_raws": [
+        "IONIQ6"
+      ],
+      "catalog_wh": 151.0,
+      "catalog_kw": 175.9
+    },
+    {
+      "id": "hyundai-ioniq-6-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "hyundai-kona-electric-2018",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Kona Electric",
+      "year": 2018
+    },
+    {
+      "id": "hyundai-kona-electric-2019",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Kona Electric",
+      "year": 2019
+    },
+    {
+      "id": "hyundai-kona-electric-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "KONAKAUAI",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        305,
+        484
+      ],
+      "cn_raws": [
+        "KONA  KAUAI"
+      ],
+      "catalog_wh": 145.3,
+      "catalog_kw": 85.8
+    },
+    {
+      "id": "hyundai-kona-electric-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "KONAKAUAI",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        305,
+        380
+      ],
+      "cn_raws": [
+        "KONA KAUAI"
+      ],
+      "catalog_wh": 149.60000000000002,
+      "catalog_kw": 102.3
+    },
+    {
+      "id": "hyundai-kona-electric-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "jaguar-i-pace-2018",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "I-Pace",
+      "year": 2018
+    },
+    {
+      "id": "jaguar-i-pace-2019",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "I-Pace",
+      "year": 2019
+    },
+    {
+      "id": "jaguar-i-pace-2020",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IPACE",
+      "year": 2020,
+      "status": "F",
+      "candidate_zr": [
+        413,
+        415,
+        416,
+        417,
+        429,
+        431,
+        432,
+        434,
+        435,
+        436,
+        437,
+        438,
+        439,
+        441,
+        442,
+        453,
+        454,
+        455,
+        457,
+        467,
+        468,
+        470
+      ],
+      "cn_raws": [
+        "JAGUAR I-PACE"
+      ],
+      "catalog_wh": 190.29999999999998,
+      "catalog_kw": 294.0
+    },
+    {
+      "id": "jaguar-i-pace-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IPACE",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        446,
+        447
+      ],
+      "cn_raws": [
+        "JAGUAR I-PACE"
+      ],
+      "catalog_wh": 232.3,
+      "catalog_kw": 294.0
+    },
+    {
+      "id": "jaguar-i-pace-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IPACE",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        447,
+        448,
+        449,
+        450,
+        453
+      ],
+      "cn_raws": [
+        "JAGUAR I-PACE"
+      ],
+      "catalog_wh": 230.0,
+      "catalog_kw": 294.0
+    },
+    {
+      "id": "jaguar-i-pace-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "IPACE",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        420,
+        423,
+        424,
+        444,
+        445,
+        446,
+        447,
+        448,
+        449,
+        451
+      ],
+      "cn_raws": [
+        "JAGUAR I-PACE"
+      ],
+      "catalog_wh": 240.0,
+      "catalog_kw": 294.0
+    },
+    {
+      "id": "jaguar-i-pace-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "jeep-wagoneer-s-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Wagoneer S",
+      "year": 2024
+    },
+    {
+      "id": "jeep-wagoneer-s-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Wagoneer S",
+      "year": 2025
+    },
+    {
+      "id": "jeep-wagoneer-s-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "kia-ev3-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EV3",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        590,
+        592
+      ],
+      "cn_raws": [
+        "EV3"
+      ],
+      "catalog_wh": 153.10000000000002,
+      "catalog_kw": 147.6
+    },
+    {
+      "id": "kia-ev3-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EV3",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        590,
+        592
+      ],
+      "cn_raws": [
+        "EV3"
+      ],
+      "catalog_wh": 153.0,
+      "catalog_kw": 146.3
+    },
+    {
+      "id": "kia-ev3-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "kia-ev9-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EV9",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        505,
+        563
+      ],
+      "cn_raws": [
+        "EV9"
+      ],
+      "catalog_wh": 226.39999999999998,
+      "catalog_kw": 270.6
+    },
+    {
+      "id": "kia-ev9-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "kia-soul-ev-2017",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Soul EV",
+      "year": 2017
+    },
+    {
+      "id": "kia-soul-ev-2018",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Soul EV",
+      "year": 2018
+    },
+    {
+      "id": "kia-soul-ev-2019",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Soul EV",
+      "year": 2019
+    },
+    {
+      "id": "kia-soul-ev-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "SOUL",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        276,
+        452
+      ],
+      "cn_raws": [
+        "SOUL"
+      ],
+      "catalog_wh": 157.0,
+      "catalog_kw": 150.0
+    },
+    {
+      "id": "kia-soul-ev-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Soul EV",
+      "year": 2023
+    },
+    {
+      "id": "kia-soul-ev-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Soul EV",
+      "year": 2024
+    },
+    {
+      "id": "kia-soul-ev-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Soul EV",
+      "year": 2025
+    },
+    {
+      "id": "kia-soul-ev-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "kia-e-niro-2018",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "e-Niro",
+      "year": 2018
+    },
+    {
+      "id": "kia-e-niro-2019",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "e-Niro",
+      "year": 2019
+    },
+    {
+      "id": "kia-e-niro-2020",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "NIRO",
+      "year": 2020,
+      "status": "P",
+      "candidate_zr": [
+        289,
+        455
+      ],
+      "cn_raws": [
+        "NIRO"
+      ],
+      "catalog_wh": 159.0,
+      "catalog_kw": 150.0
+    },
+    {
+      "id": "lexus-rz-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "RZ",
+      "year": 2022
+    },
+    {
+      "id": "lexus-rz-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "RZ",
+      "year": 2023
+    },
+    {
+      "id": "lexus-rz-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "RZ",
+      "year": 2024
+    },
+    {
+      "id": "lexus-rz-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "RZ",
+      "year": 2025
+    },
+    {
+      "id": "lexus-rz-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "lexus-ux-300e-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "UX300E",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        309,
+        313
+      ],
+      "cn_raws": [
+        "LEXUS UX300E"
+      ],
+      "catalog_wh": 169.2,
+      "catalog_kw": 119.7
+    },
+    {
+      "id": "lexus-ux-300e-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "UX300E",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        309,
+        313
+      ],
+      "cn_raws": [
+        "LEXUS UX300E"
+      ],
+      "catalog_wh": 169.9,
+      "catalog_kw": 150.0
+    },
+    {
+      "id": "lexus-ux-300e-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "lucid-air-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Air",
+      "year": 2022
+    },
+    {
+      "id": "lucid-air-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Air",
+      "year": 2023
+    },
+    {
+      "id": "lucid-air-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Air",
+      "year": 2024
+    },
+    {
+      "id": "lucid-air-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Air",
+      "year": 2025
+    },
+    {
+      "id": "lucid-air-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "lucid-gravity-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Gravity",
+      "year": 2022
+    },
+    {
+      "id": "lucid-gravity-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Gravity",
+      "year": 2023
+    },
+    {
+      "id": "lucid-gravity-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Gravity",
+      "year": 2024
+    },
+    {
+      "id": "lucid-gravity-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Gravity",
+      "year": 2025
+    },
+    {
+      "id": "lucid-gravity-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "mg-mg-zs-ev-2019",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "MG ZS EV",
+      "year": 2019
+    },
+    {
+      "id": "mg-mg-zs-ev-2020",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "MG ZS EV",
+      "year": 2020
+    },
+    {
+      "id": "mg-mg-zs-ev-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "ZSEV",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        440,
+        445
+      ],
+      "cn_raws": [
+        "MG ZS EV"
+      ],
+      "catalog_wh": 176.1,
+      "catalog_kw": 115.7
+    },
+    {
+      "id": "mg-mg-zs-ev-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "mg-mg4-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "MG4",
+      "year": 2022
+    },
+    {
+      "id": "mg-mg4-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "MG4",
+      "year": 2023
+    },
+    {
+      "id": "mg-mg4-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "MG4",
+      "year": 2024
+    },
+    {
+      "id": "mg-mg4-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "MG4",
+      "year": 2025
+    },
+    {
+      "id": "mg-mg4-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "mg-mg5-2020",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "MG5",
+      "year": 2020
+    },
+    {
+      "id": "mg-mg5-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "MG5",
+      "year": 2021
+    },
+    {
+      "id": "mg-mg5-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "MG5",
+      "year": 2022
+    },
+    {
+      "id": "mg-mg5-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "MG5",
+      "year": 2023
+    },
+    {
+      "id": "mg-mg5-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "MG5",
+      "year": 2024
+    },
+    {
+      "id": "mg-mg5-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "MG5",
+      "year": 2025
+    },
+    {
+      "id": "mg-mg5-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "mg-marvel-r-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "MARVELRELECTRIC",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        370,
+        402
+      ],
+      "cn_raws": [
+        "MG MARVEL R ELECTRIC"
+      ],
+      "catalog_wh": 199.5,
+      "catalog_kw": 161.5
+    },
+    {
+      "id": "mg-marvel-r-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "mini-electric-hatch-2019",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Electric Hatch",
+      "year": 2019
+    },
+    {
+      "id": "mini-electric-hatch-2020",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Electric Hatch",
+      "year": 2020
+    },
+    {
+      "id": "mini-electric-hatch-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Electric Hatch",
+      "year": 2021
+    },
+    {
+      "id": "mini-electric-hatch-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Electric Hatch",
+      "year": 2022
+    },
+    {
+      "id": "mini-electric-hatch-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Electric Hatch",
+      "year": 2023
+    },
+    {
+      "id": "mini-electric-hatch-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Electric Hatch",
+      "year": 2024
+    },
+    {
+      "id": "mini-electric-hatch-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Electric Hatch",
+      "year": 2025
+    },
+    {
+      "id": "mini-electric-hatch-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "mazda-6e-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "6e",
+      "year": 2024
+    },
+    {
+      "id": "mazda-6e-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "mazda-mx-30-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "mercedes-benz-eqa-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EQA250",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        416
+      ],
+      "cn_raws": [
+        "EQA 250"
+      ],
+      "catalog_wh": 184.0,
+      "catalog_kw": 82.6
+    },
+    {
+      "id": "mercedes-benz-eqa-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EQA250",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        422,
+        423,
+        424,
+        425,
+        426,
+        427
+      ],
+      "cn_raws": [
+        "EQA 250",
+        "EQA 250+"
+      ],
+      "catalog_wh": 178.0,
+      "catalog_kw": null
+    },
+    {
+      "id": "mercedes-benz-eqa-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EQA250",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        472,
+        473,
+        475,
+        476,
+        477,
+        501,
+        502,
+        503,
+        506,
+        507
+      ],
+      "cn_raws": [
+        "EQA 250",
+        "EQA 250+"
+      ],
+      "catalog_wh": 162.3,
+      "catalog_kw": 150.0
+    },
+    {
+      "id": "mercedes-benz-eqa-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EQA250",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        527,
+        528,
+        529,
+        530,
+        531
+      ],
+      "cn_raws": [
+        "EQA 250",
+        "EQA 250+"
+      ],
+      "catalog_wh": 153.79999999999998,
+      "catalog_kw": 158.1
+    },
+    {
+      "id": "mercedes-benz-eqa-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EQA250",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        527,
+        528,
+        529,
+        530,
+        531
+      ],
+      "cn_raws": [
+        "EQA 250+"
+      ],
+      "catalog_wh": 154.0,
+      "catalog_kw": 142.3
+    },
+    {
+      "id": "mercedes-benz-eqa-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "mercedes-benz-eqb-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EQB250",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        427,
+        436,
+        442,
+        443,
+        448,
+        450,
+        451,
+        452,
+        454,
+        455,
+        456,
+        457,
+        458,
+        459,
+        460,
+        462,
+        463,
+        464,
+        465,
+        466,
+        467,
+        468,
+        469
+      ],
+      "cn_raws": [
+        "EQB 250"
+      ],
+      "catalog_wh": 190.5,
+      "catalog_kw": null
+    },
+    {
+      "id": "mercedes-benz-eqb-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EQB250",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        447,
+        448,
+        449,
+        450,
+        451,
+        473,
+        475,
+        478
+      ],
+      "cn_raws": [
+        "EQB 250",
+        "EQB 250+"
+      ],
+      "catalog_wh": 172.8,
+      "catalog_kw": 151.7
+    },
+    {
+      "id": "mercedes-benz-eqb-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EQB250",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        503,
+        504,
+        505,
+        506,
+        507
+      ],
+      "cn_raws": [
+        "EQB 250",
+        "EQB 250+"
+      ],
+      "catalog_wh": 161.5,
+      "catalog_kw": 153.0
+    },
+    {
+      "id": "mercedes-benz-eqb-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EQB250",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        499,
+        500,
+        501,
+        502,
+        503,
+        504,
+        505,
+        506,
+        507,
+        508
+      ],
+      "cn_raws": [
+        "EQB 250+"
+      ],
+      "catalog_wh": 162.0,
+      "catalog_kw": 144.1
+    },
+    {
+      "id": "mercedes-benz-eqb-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "mercedes-benz-eqe-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EQE350",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        577,
+        612,
+        618,
+        624,
+        626,
+        628,
+        629,
+        634,
+        635
+      ],
+      "cn_raws": [
+        "EQE 350",
+        "EQE 350+"
+      ],
+      "catalog_wh": 188.29999999999998,
+      "catalog_kw": 109.0
+    },
+    {
+      "id": "mercedes-benz-eqe-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EQE350",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        526,
+        549,
+        550,
+        551,
+        553,
+        554,
+        555,
+        556,
+        558,
+        572,
+        600,
+        603,
+        605,
+        606,
+        610,
+        613,
+        614,
+        619,
+        622,
+        623,
+        624,
+        626,
+        628,
+        629,
+        634,
+        658,
+        660,
+        661,
+        662,
+        667,
+        669,
+        671
+      ],
+      "cn_raws": [
+        "EQE 350",
+        "EQE 350+"
+      ],
+      "catalog_wh": 177.2,
+      "catalog_kw": 219.2
+    },
+    {
+      "id": "mercedes-benz-eqe-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EQE350",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        526,
+        545,
+        548,
+        549,
+        550,
+        551,
+        555,
+        556,
+        558,
+        561,
+        571,
+        597,
+        599,
+        600,
+        602,
+        605,
+        606,
+        607,
+        614,
+        661,
+        672,
+        674
+      ],
+      "cn_raws": [
+        "EQE 350+"
+      ],
+      "catalog_wh": 179.79999999999998,
+      "catalog_kw": 216.5
+    },
+    {
+      "id": "mercedes-benz-eqe-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EQE350",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        597,
+        598
+      ],
+      "cn_raws": [
+        "EQE 350+"
+      ],
+      "catalog_wh": 186.0,
+      "catalog_kw": 220.9
+    },
+    {
+      "id": "mercedes-benz-eqe-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "mercedes-benz-eqs-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EQS450",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        706,
+        708
+      ],
+      "cn_raws": [
+        "EQS 450+"
+      ],
+      "catalog_wh": 186.70000000000002,
+      "catalog_kw": 127.6
+    },
+    {
+      "id": "mercedes-benz-eqs-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EQS450",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        661,
+        706,
+        708,
+        709,
+        711,
+        712,
+        713,
+        714,
+        715,
+        718,
+        721,
+        725
+      ],
+      "cn_raws": [
+        "EQS 450+"
+      ],
+      "catalog_wh": 191.8,
+      "catalog_kw": 135.0
+    },
+    {
+      "id": "mercedes-benz-eqs-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EQS450",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        619,
+        699,
+        700,
+        704,
+        705,
+        707,
+        708,
+        709,
+        715,
+        716,
+        719,
+        721,
+        728,
+        739
+      ],
+      "cn_raws": [
+        "EQS 450+"
+      ],
+      "catalog_wh": 205.1,
+      "catalog_kw": 298.7
+    },
+    {
+      "id": "mercedes-benz-eqs-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EQS450",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        564,
+        630,
+        697,
+        701,
+        703,
+        704,
+        705,
+        709,
+        710,
+        727,
+        739
+      ],
+      "cn_raws": [
+        "EQS 450+"
+      ],
+      "catalog_wh": 206.5,
+      "catalog_kw": 332.3
+    },
+    {
+      "id": "mercedes-benz-eqs-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EQS450",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        698,
+        701,
+        703,
+        705,
+        708,
+        721,
+        732,
+        784
+      ],
+      "cn_raws": [
+        "EQS 450+"
+      ],
+      "catalog_wh": 189.5,
+      "catalog_kw": 303.1
+    },
+    {
+      "id": "mercedes-benz-eqs-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "mercedes-benz-g-580-eq-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "G 580 EQ",
+      "year": 2025
+    },
+    {
+      "id": "mercedes-benz-g-580-eq-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "nio-el6-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "EL6",
+      "year": 2021
+    },
+    {
+      "id": "nio-el6-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "EL6",
+      "year": 2022
+    },
+    {
+      "id": "nio-el6-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "EL6",
+      "year": 2023
+    },
+    {
+      "id": "nio-el6-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "EL6",
+      "year": 2024
+    },
+    {
+      "id": "nio-el6-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "EL6",
+      "year": 2025
+    },
+    {
+      "id": "nio-el6-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "nio-el8-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "EL8",
+      "year": 2021
+    },
+    {
+      "id": "nio-el8-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "EL8",
+      "year": 2022
+    },
+    {
+      "id": "nio-el8-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "EL8",
+      "year": 2023
+    },
+    {
+      "id": "nio-el8-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "EL8",
+      "year": 2024
+    },
+    {
+      "id": "nio-el8-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "EL8",
+      "year": 2025
+    },
+    {
+      "id": "nio-el8-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "nio-et5-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ET5",
+      "year": 2021
+    },
+    {
+      "id": "nio-et5-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ET5",
+      "year": 2022
+    },
+    {
+      "id": "nio-et5-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ET5",
+      "year": 2023
+    },
+    {
+      "id": "nio-et5-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ET5",
+      "year": 2024
+    },
+    {
+      "id": "nio-et5-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ET5",
+      "year": 2025
+    },
+    {
+      "id": "nio-et5-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "nio-et5-touring-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ET5 Touring",
+      "year": 2021
+    },
+    {
+      "id": "nio-et5-touring-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ET5 Touring",
+      "year": 2022
+    },
+    {
+      "id": "nio-et5-touring-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ET5 Touring",
+      "year": 2023
+    },
+    {
+      "id": "nio-et5-touring-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ET5 Touring",
+      "year": 2024
+    },
+    {
+      "id": "nio-et5-touring-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ET5 Touring",
+      "year": 2025
+    },
+    {
+      "id": "nio-et5-touring-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "nio-et7-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ET7",
+      "year": 2021
+    },
+    {
+      "id": "nio-et7-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ET7",
+      "year": 2022
+    },
+    {
+      "id": "nio-et7-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ET7",
+      "year": 2023
+    },
+    {
+      "id": "nio-et7-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ET7",
+      "year": 2024
+    },
+    {
+      "id": "nio-et7-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ET7",
+      "year": 2025
+    },
+    {
+      "id": "nio-et7-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "nissan-altra-ev-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Altra-EV",
+      "year": 2022
+    },
+    {
+      "id": "nissan-altra-ev-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Altra-EV",
+      "year": 2023
+    },
+    {
+      "id": "nissan-altra-ev-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Altra-EV",
+      "year": 2024
+    },
+    {
+      "id": "nissan-altra-ev-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Altra-EV",
+      "year": 2025
+    },
+    {
+      "id": "nissan-altra-ev-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "nissan-leaf-2010",
+      "result": "skip",
+      "reason": "year 2010 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "nissan-leaf-2011",
+      "result": "skip",
+      "reason": "year 2011 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "nissan-leaf-2012",
+      "result": "skip",
+      "reason": "year 2012 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "nissan-leaf-2013",
+      "result": "skip",
+      "reason": "year 2013 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "nissan-leaf-2014",
+      "result": "skip",
+      "reason": "year 2014 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "nissan-leaf-2015",
+      "result": "skip",
+      "reason": "year 2015 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "nissan-leaf-2016",
+      "result": "skip",
+      "reason": "year 2016 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "nissan-leaf-2017",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Leaf",
+      "year": 2017
+    },
+    {
+      "id": "nissan-leaf-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "LEAF40KWH",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        276,
+        282
+      ],
+      "cn_raws": [
+        "NISSAN LEAF 40KWH"
+      ],
+      "catalog_wh": 171.9,
+      "catalog_kw": 134.5
+    },
+    {
+      "id": "nissan-leaf-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "LEAF40KWH",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        276,
+        282
+      ],
+      "cn_raws": [
+        "NISSAN LEAF 40KWH"
+      ],
+      "catalog_wh": 164.70000000000002,
+      "catalog_kw": 160.0
+    },
+    {
+      "id": "nissan-leaf-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "opel-astra-electric-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "ASTRA",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        412,
+        417
+      ],
+      "cn_raws": [
+        "ASTRA"
+      ],
+      "catalog_wh": 152.79999999999998,
+      "catalog_kw": 96.2
+    },
+    {
+      "id": "opel-astra-electric-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Astra Electric",
+      "year": 2025
+    },
+    {
+      "id": "opel-astra-electric-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "opel-corsa-electric-2020",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "CORSA",
+      "year": 2020,
+      "status": "F",
+      "candidate_zr": [
+        334,
+        335,
+        336,
+        337
+      ],
+      "cn_raws": [
+        "CORSA"
+      ],
+      "catalog_wh": 165.1,
+      "catalog_kw": 67.7
+    },
+    {
+      "id": "opel-corsa-electric-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "CORSA",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        335,
+        336,
+        337
+      ],
+      "cn_raws": [
+        "CORSA"
+      ],
+      "catalog_wh": 164.89999999999998,
+      "catalog_kw": 66.8
+    },
+    {
+      "id": "opel-corsa-electric-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "CORSA",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        351,
+        352
+      ],
+      "cn_raws": [
+        "CORSA"
+      ],
+      "catalog_wh": 159.1,
+      "catalog_kw": 70.4
+    },
+    {
+      "id": "opel-corsa-electric-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "CORSA",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        354,
+        356
+      ],
+      "cn_raws": [
+        "CORSA"
+      ],
+      "catalog_wh": 157.5,
+      "catalog_kw": 74.3
+    },
+    {
+      "id": "opel-corsa-electric-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "CORSA",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        360,
+        361,
+        362
+      ],
+      "cn_raws": [
+        "CORSA"
+      ],
+      "catalog_wh": 154.79999999999998,
+      "catalog_kw": 71.0
+    },
+    {
+      "id": "opel-corsa-electric-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "opel-frontera-electric-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Frontera Electric",
+      "year": 2024
+    },
+    {
+      "id": "opel-frontera-electric-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Frontera Electric",
+      "year": 2025
+    },
+    {
+      "id": "opel-frontera-electric-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "opel-grandland-electric-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "GRANDLAND",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        513,
+        520
+      ],
+      "cn_raws": [
+        "GRANDLAND"
+      ],
+      "catalog_wh": 168.5,
+      "catalog_kw": 99.6
+    },
+    {
+      "id": "opel-grandland-electric-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Grandland Electric",
+      "year": 2025
+    },
+    {
+      "id": "opel-grandland-electric-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "opel-mokka-electric-2020",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Mokka Electric",
+      "year": 2020
+    },
+    {
+      "id": "opel-mokka-electric-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "MOKKA",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        318,
+        319,
+        320,
+        324,
+        328,
+        335,
+        338,
+        339
+      ],
+      "cn_raws": [
+        "MOKKA"
+      ],
+      "catalog_wh": 169.7,
+      "catalog_kw": 84.9
+    },
+    {
+      "id": "opel-mokka-electric-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "MOKKA",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        328,
+        329
+      ],
+      "cn_raws": [
+        "MOKKA"
+      ],
+      "catalog_wh": 161.20000000000002,
+      "catalog_kw": 88.2
+    },
+    {
+      "id": "opel-mokka-electric-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Mokka Electric",
+      "year": 2025
+    },
+    {
+      "id": "opel-mokka-electric-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "peugeot-e-2008-2019",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "e-2008",
+      "year": 2019
+    },
+    {
+      "id": "peugeot-e-2008-2020",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "2008",
+      "year": 2020,
+      "status": "F",
+      "candidate_zr": [
+        318,
+        319,
+        321
+      ],
+      "cn_raws": [
+        "2008"
+      ],
+      "catalog_wh": 176.1,
+      "catalog_kw": 88.6
+    },
+    {
+      "id": "peugeot-e-2008-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "2008",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        320,
+        321,
+        322,
+        323
+      ],
+      "cn_raws": [
+        "2008"
+      ],
+      "catalog_wh": 175.7,
+      "catalog_kw": 86.9
+    },
+    {
+      "id": "peugeot-e-2008-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "2008",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        329,
+        330,
+        331
+      ],
+      "cn_raws": [
+        "2008"
+      ],
+      "catalog_wh": 161.3,
+      "catalog_kw": 89.9
+    },
+    {
+      "id": "peugeot-e-2008-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "2008",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        336,
+        337,
+        342,
+        343,
+        344,
+        345,
+        346
+      ],
+      "cn_raws": [
+        "2008"
+      ],
+      "catalog_wh": 157.0,
+      "catalog_kw": 105.0
+    },
+    {
+      "id": "peugeot-e-2008-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "e-2008",
+      "year": 2025
+    },
+    {
+      "id": "peugeot-e-2008-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "peugeot-e-208-2019",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "e-208",
+      "year": 2019
+    },
+    {
+      "id": "peugeot-e-208-2020",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "208",
+      "year": 2020,
+      "status": "F",
+      "candidate_zr": [
+        335,
+        336,
+        338,
+        339
+      ],
+      "cn_raws": [
+        "208"
+      ],
+      "catalog_wh": 164.5,
+      "catalog_kw": 70.3
+    },
+    {
+      "id": "peugeot-e-208-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "208",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        335,
+        336,
+        337,
+        338,
+        339,
+        340
+      ],
+      "cn_raws": [
+        "208"
+      ],
+      "catalog_wh": 164.0,
+      "catalog_kw": 69.6
+    },
+    {
+      "id": "peugeot-e-208-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "208",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        351,
+        352,
+        353
+      ],
+      "cn_raws": [
+        "208"
+      ],
+      "catalog_wh": 158.20000000000002,
+      "catalog_kw": 100.0
+    },
+    {
+      "id": "peugeot-e-208-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "208",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        350,
+        351,
+        352
+      ],
+      "cn_raws": [
+        "208"
+      ],
+      "catalog_wh": 159.1,
+      "catalog_kw": 100.1
+    },
+    {
+      "id": "peugeot-e-208-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "peugeot-e-3008-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "e-3008",
+      "year": 2023
+    },
+    {
+      "id": "peugeot-e-3008-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "3008",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        518,
+        519,
+        520,
+        521,
+        522
+      ],
+      "cn_raws": [
+        "3008"
+      ],
+      "catalog_wh": 170.6,
+      "catalog_kw": 157.0
+    },
+    {
+      "id": "peugeot-e-3008-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "e-3008",
+      "year": 2025
+    },
+    {
+      "id": "peugeot-e-3008-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "peugeot-e-308-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "e-308",
+      "year": 2022
+    },
+    {
+      "id": "peugeot-e-308-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "308",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        411,
+        412,
+        415
+      ],
+      "cn_raws": [
+        "308"
+      ],
+      "catalog_wh": 178.5,
+      "catalog_kw": 62.0
+    },
+    {
+      "id": "peugeot-e-308-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "308",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        410,
+        411,
+        412
+      ],
+      "cn_raws": [
+        "308"
+      ],
+      "catalog_wh": 150.29999999999998,
+      "catalog_kw": 115.0
+    },
+    {
+      "id": "peugeot-e-308-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "e-308",
+      "year": 2025
+    },
+    {
+      "id": "peugeot-e-308-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "peugeot-e-5008-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "5008",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        491,
+        493
+      ],
+      "cn_raws": [
+        "5008"
+      ],
+      "catalog_wh": 181.7,
+      "catalog_kw": 157.0
+    },
+    {
+      "id": "peugeot-e-5008-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "e-5008",
+      "year": 2025
+    },
+    {
+      "id": "peugeot-e-5008-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "polestar-2-2020",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "2",
+      "year": 2020
+    },
+    {
+      "id": "polestar-2-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "2",
+      "year": 2021
+    },
+    {
+      "id": "polestar-2-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "2",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        460,
+        462,
+        463,
+        464
+      ],
+      "cn_raws": [
+        "POLESTAR 2"
+      ],
+      "catalog_wh": 199.9,
+      "catalog_kw": 20.0
+    },
+    {
+      "id": "polestar-2-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "2",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        641,
+        645,
+        647,
+        648,
+        651
+      ],
+      "cn_raws": [
+        "POLESTAR 2"
+      ],
+      "catalog_wh": 160.89999999999998,
+      "catalog_kw": 225.3
+    },
+    {
+      "id": "polestar-2-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "2",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        583,
+        584,
+        585,
+        586,
+        589,
+        590
+      ],
+      "cn_raws": [
+        "POLESTAR 2"
+      ],
+      "catalog_wh": 161.0,
+      "catalog_kw": 241.2
+    },
+    {
+      "id": "polestar-2-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "polestar-3-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "3",
+      "year": 2023
+    },
+    {
+      "id": "polestar-3-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "3",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        552,
+        553,
+        556,
+        557,
+        568,
+        584,
+        585,
+        586,
+        619,
+        622,
+        623,
+        624,
+        635,
+        638
+      ],
+      "cn_raws": [
+        "POLESTAR 3"
+      ],
+      "catalog_wh": 215.29999999999998,
+      "catalog_kw": 239.1
+    },
+    {
+      "id": "polestar-3-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "3",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        585,
+        620,
+        621,
+        622,
+        624,
+        626,
+        632,
+        634,
+        635
+      ],
+      "cn_raws": [
+        "POLESTAR 3"
+      ],
+      "catalog_wh": 192.3,
+      "catalog_kw": 362.7
+    },
+    {
+      "id": "polestar-3-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "polestar-4-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "4",
+      "year": 2023
+    },
+    {
+      "id": "polestar-4-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "porsche-macan-electric-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "MACAN",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        602,
+        605,
+        606
+      ],
+      "cn_raws": [
+        "MACAN"
+      ],
+      "catalog_wh": 180.10000000000002,
+      "catalog_kw": 195.6
+    },
+    {
+      "id": "porsche-macan-electric-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "MACAN",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        583,
+        584,
+        585,
+        586,
+        587,
+        588,
+        589,
+        590,
+        591,
+        592,
+        594,
+        600,
+        601,
+        602,
+        603,
+        604,
+        605,
+        606,
+        607,
+        608,
+        609,
+        620,
+        621,
+        622,
+        624,
+        625,
+        629,
+        630,
+        632,
+        635,
+        636,
+        637,
+        638,
+        640,
+        641,
+        642,
+        646,
+        647,
+        648,
+        652
+      ],
+      "cn_raws": [
+        "MACAN"
+      ],
+      "catalog_wh": 187.79999999999998,
+      "catalog_kw": 239.7
+    },
+    {
+      "id": "porsche-macan-electric-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "porsche-taycan-2019",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Taycan",
+      "year": 2019
+    },
+    {
+      "id": "porsche-taycan-2020",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "TAYCANTURBO,TAYCANTURBOS",
+      "year": 2020,
+      "status": "F",
+      "candidate_zr": [
+        401,
+        402,
+        404,
+        405,
+        406,
+        407,
+        408,
+        409,
+        410,
+        411,
+        412,
+        438,
+        441,
+        442,
+        443,
+        444,
+        445,
+        447
+      ],
+      "cn_raws": [
+        "TAYCAN TURBO",
+        "TAYCAN TURBO S"
+      ],
+      "catalog_wh": 259.29999999999995,
+      "catalog_kw": 363.4
+    },
+    {
+      "id": "porsche-taycan-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "TAYCAN",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        391,
+        394,
+        395,
+        397,
+        398,
+        425,
+        427,
+        428,
+        430,
+        431,
+        432,
+        433,
+        434,
+        435,
+        436,
+        437,
+        438,
+        439,
+        440,
+        441,
+        442,
+        443,
+        444,
+        445,
+        446,
+        447,
+        473,
+        475,
+        476,
+        477,
+        478,
+        479,
+        480,
+        481,
+        482,
+        483,
+        484,
+        485,
+        486,
+        487
+      ],
+      "cn_raws": [
+        "TAYCAN"
+      ],
+      "catalog_wh": 165.0,
+      "catalog_kw": 253.3
+    },
+    {
+      "id": "porsche-taycan-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "TAYCAN",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        467,
+        468,
+        469,
+        470
+      ],
+      "cn_raws": [
+        "TAYCAN"
+      ],
+      "catalog_wh": 221.70000000000002,
+      "catalog_kw": 272.0
+    },
+    {
+      "id": "porsche-taycan-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "TAYCAN",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        443,
+        445,
+        446,
+        447,
+        449,
+        450,
+        451,
+        452,
+        453,
+        455,
+        458,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        468,
+        469,
+        483,
+        484,
+        485,
+        486,
+        487,
+        488,
+        498,
+        499,
+        500,
+        501,
+        502,
+        503,
+        504,
+        505,
+        506,
+        507
+      ],
+      "cn_raws": [
+        "TAYCAN"
+      ],
+      "catalog_wh": 186.20000000000002,
+      "catalog_kw": 280.0
+    },
+    {
+      "id": "porsche-taycan-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "TAYCAN",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        518,
+        547,
+        552,
+        555,
+        564,
+        565,
+        568,
+        579,
+        588,
+        589
+      ],
+      "cn_raws": [
+        "TAYCAN"
+      ],
+      "catalog_wh": 184.70000000000002,
+      "catalog_kw": 302.6
+    },
+    {
+      "id": "porsche-taycan-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "renault-megane-e-tech-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Megane E-Tech",
+      "year": 2021
+    },
+    {
+      "id": "renault-megane-e-tech-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "MEGANEETECHELECTRIC",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        292,
+        294,
+        297,
+        298,
+        428,
+        429,
+        430,
+        431,
+        433,
+        434,
+        435,
+        436,
+        438,
+        444,
+        446,
+        452,
+        453,
+        458,
+        459,
+        460
+      ],
+      "cn_raws": [
+        "MEGANE E-TECH ELECTRIC"
+      ],
+      "catalog_wh": 151.0,
+      "catalog_kw": 69.0
+    },
+    {
+      "id": "renault-megane-e-tech-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "MEGANEETECHELECTRIC",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        289,
+        290,
+        292,
+        293,
+        294,
+        297,
+        298,
+        428,
+        429,
+        430,
+        431,
+        432,
+        433,
+        434,
+        435,
+        436,
+        444,
+        451,
+        452,
+        453,
+        458,
+        459,
+        460
+      ],
+      "cn_raws": [
+        "MEGANE E-TECH ELECTRIC"
+      ],
+      "catalog_wh": 149.7,
+      "catalog_kw": 69.0
+    },
+    {
+      "id": "renault-megane-e-tech-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "MEGANEETECHELECTRIC",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        429,
+        430,
+        431,
+        433,
+        434,
+        435,
+        436,
+        437
+      ],
+      "cn_raws": [
+        "MEGANE E-TECH ELECTRIC"
+      ],
+      "catalog_wh": 162.0,
+      "catalog_kw": 55.0
+    },
+    {
+      "id": "renault-megane-e-tech-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "renault-scenic-e-tech-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Scenic E-Tech",
+      "year": 2023
+    },
+    {
+      "id": "renault-scenic-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "SCENICETECHELECTRIC",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        603,
+        604,
+        605,
+        606,
+        607,
+        608
+      ],
+      "cn_raws": [
+        "SCENIC E-TECH ELECTRIC"
+      ],
+      "catalog_wh": 173.7,
+      "catalog_kw": 148.9
+    },
+    {
+      "id": "renault-scenic-e-tech-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "SCENICETECHELECTRIC",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        609,
+        610,
+        613,
+        614
+      ],
+      "cn_raws": [
+        "SCENIC E-TECH ELECTRIC"
+      ],
+      "catalog_wh": 171.6,
+      "catalog_kw": 153.3
+    },
+    {
+      "id": "renault-scenic-e-tech-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "SCENICETECHELECTRIC",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        622,
+        623
+      ],
+      "cn_raws": [
+        "SCENIC E-TECH ELECTRIC"
+      ],
+      "catalog_wh": 167.7,
+      "catalog_kw": 150.6
+    },
+    {
+      "id": "renault-scenic-e-tech-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "renault-twingo-electric-2020",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "TWINGO",
+      "year": 2020,
+      "status": "F",
+      "candidate_zr": [
+        185,
+        186,
+        187,
+        188
+      ],
+      "cn_raws": [
+        "TWINGO"
+      ],
+      "catalog_wh": 161.5,
+      "catalog_kw": 56.9
+    },
+    {
+      "id": "renault-twingo-electric-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "TWINGO",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        184,
+        185,
+        186,
+        187,
+        188,
+        189
+      ],
+      "cn_raws": [
+        "TWINGO"
+      ],
+      "catalog_wh": 161.3,
+      "catalog_kw": 42.1
+    },
+    {
+      "id": "renault-twingo-electric-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "TWINGO",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        184,
+        185,
+        186,
+        187,
+        188,
+        189
+      ],
+      "cn_raws": [
+        "TWINGO"
+      ],
+      "catalog_wh": 161.20000000000002,
+      "catalog_kw": 49.8
+    },
+    {
+      "id": "renault-twingo-electric-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "TWINGO",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189
+      ],
+      "cn_raws": [
+        "TWINGO"
+      ],
+      "catalog_wh": 157.29999999999998,
+      "catalog_kw": 54.1
+    },
+    {
+      "id": "renault-twingo-electric-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "TWINGO",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        184,
+        185,
+        186,
+        187,
+        188
+      ],
+      "cn_raws": [
+        "TWINGO"
+      ],
+      "catalog_wh": 152.10000000000002,
+      "catalog_kw": 54.6
+    },
+    {
+      "id": "renault-zoe-2015",
+      "result": "skip",
+      "reason": "year 2015 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "renault-zoe-2016",
+      "result": "skip",
+      "reason": "year 2016 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "rivian-r1s-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "R1S",
+      "year": 2023
+    },
+    {
+      "id": "rivian-r1s-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "R1S",
+      "year": 2024
+    },
+    {
+      "id": "rivian-r1s-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "R1S",
+      "year": 2025
+    },
+    {
+      "id": "rivian-r1s-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "rivian-r1t-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "R1T",
+      "year": 2023
+    },
+    {
+      "id": "rivian-r1t-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "R1T",
+      "year": 2024
+    },
+    {
+      "id": "rivian-r1t-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "R1T",
+      "year": 2025
+    },
+    {
+      "id": "rivian-r1t-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "seat-mii-electric-2019",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Mii electric",
+      "year": 2019
+    },
+    {
+      "id": "skoda-citigo-e-iv-2019",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Citigo-e iV",
+      "year": 2019
+    },
+    {
+      "id": "skoda-citigo-e-iv-2020",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "CITIGO",
+      "year": 2020,
+      "status": "F",
+      "candidate_zr": [
+        252,
+        253,
+        254,
+        255
+      ],
+      "cn_raws": [
+        "CITIGO"
+      ],
+      "catalog_wh": 144.8,
+      "catalog_kw": 60.5
+    },
+    {
+      "id": "skoda-elroq-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Elroq",
+      "year": 2024
+    },
+    {
+      "id": "skoda-elroq-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Elroq",
+      "year": 2025
+    },
+    {
+      "id": "skoda-elroq-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "skoda-enyaq-2020",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Enyaq",
+      "year": 2020
+    },
+    {
+      "id": "skoda-enyaq-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "ENYAQ80",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        501,
+        505,
+        507,
+        508,
+        509,
+        510,
+        511,
+        512,
+        513,
+        514,
+        515,
+        516,
+        517,
+        518,
+        519,
+        520,
+        521,
+        522,
+        523,
+        524,
+        525,
+        526,
+        527,
+        528,
+        529,
+        530,
+        531,
+        532,
+        533,
+        534,
+        536
+      ],
+      "cn_raws": [
+        "ENYAQ 80"
+      ],
+      "catalog_wh": 168.1,
+      "catalog_kw": 144.2
+    },
+    {
+      "id": "skoda-enyaq-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "ENYAQRS",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        489,
+        500,
+        501,
+        516,
+        517
+      ],
+      "cn_raws": [
+        "ENYAQ RS"
+      ],
+      "catalog_wh": 160.1,
+      "catalog_kw": 139.9
+    },
+    {
+      "id": "skoda-enyaq-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Enyaq",
+      "year": 2025
+    },
+    {
+      "id": "skoda-enyaq-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "smart-1-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "#1",
+      "year": 2022
+    },
+    {
+      "id": "smart-1-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "1",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        310,
+        400,
+        420,
+        440
+      ],
+      "cn_raws": [
+        "#1"
+      ],
+      "catalog_wh": 177.9,
+      "catalog_kw": 210.2
+    },
+    {
+      "id": "smart-1-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "1",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        310,
+        400,
+        420,
+        440
+      ],
+      "cn_raws": [
+        "#1"
+      ],
+      "catalog_wh": 172.7,
+      "catalog_kw": 167.2
+    },
+    {
+      "id": "smart-1-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "smart-3-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "#3",
+      "year": 2023
+    },
+    {
+      "id": "smart-3-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "tesla-model-3-2019",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Model 3",
+      "year": 2019
+    },
+    {
+      "id": "tesla-model-3-2020",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Model 3",
+      "year": 2020
+    },
+    {
+      "id": "tesla-model-3-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Model 3",
+      "year": 2021
+    },
+    {
+      "id": "tesla-model-3-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Model 3",
+      "year": 2022
+    },
+    {
+      "id": "tesla-model-3-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "MODEL3",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        491,
+        513,
+        638
+      ],
+      "cn_raws": [
+        "MODEL 3"
+      ],
+      "catalog_wh": 147.0,
+      "catalog_kw": 208.0
+    },
+    {
+      "id": "tesla-model-3-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "MODEL3",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        640,
+        691,
+        702,
+        750
+      ],
+      "cn_raws": [
+        "MODEL 3"
+      ],
+      "catalog_wh": 132.0,
+      "catalog_kw": 236.5
+    },
+    {
+      "id": "tesla-model-3-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "tesla-model-s-2017",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Model S",
+      "year": 2017
+    },
+    {
+      "id": "tesla-model-s-2018",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Model S",
+      "year": 2018
+    },
+    {
+      "id": "tesla-model-s-2019",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Model S",
+      "year": 2019
+    },
+    {
+      "id": "tesla-model-s-2020",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Model S",
+      "year": 2020
+    },
+    {
+      "id": "tesla-model-s-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Model S",
+      "year": 2021
+    },
+    {
+      "id": "tesla-model-s-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Model S",
+      "year": 2022
+    },
+    {
+      "id": "tesla-model-s-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "MODELS",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        600,
+        634
+      ],
+      "cn_raws": [
+        "MODEL S"
+      ],
+      "catalog_wh": 180.5,
+      "catalog_kw": 578.2
+    },
+    {
+      "id": "tesla-model-s-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "tesla-model-x-2016",
+      "result": "skip",
+      "reason": "year 2016 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "tesla-model-x-2017",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Model X",
+      "year": 2017
+    },
+    {
+      "id": "tesla-model-x-2018",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Model X",
+      "year": 2018
+    },
+    {
+      "id": "tesla-model-x-2019",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Model X",
+      "year": 2019
+    },
+    {
+      "id": "tesla-model-x-2020",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Model X",
+      "year": 2020
+    },
+    {
+      "id": "tesla-model-x-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Model X",
+      "year": 2021
+    },
+    {
+      "id": "tesla-model-x-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Model X",
+      "year": 2022
+    },
+    {
+      "id": "tesla-model-x-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "MODELX",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        543,
+        576
+      ],
+      "cn_raws": [
+        "MODEL X"
+      ],
+      "catalog_wh": 196.20000000000002,
+      "catalog_kw": 473.0
+    },
+    {
+      "id": "tesla-model-x-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "MODELX",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        543,
+        576
+      ],
+      "cn_raws": [
+        "MODEL X"
+      ],
+      "catalog_wh": 196.6,
+      "catalog_kw": 535.1
+    },
+    {
+      "id": "tesla-model-x-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "MODELX",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        543,
+        567,
+        576,
+        600
+      ],
+      "cn_raws": [
+        "MODEL X"
+      ],
+      "catalog_wh": 186.20000000000002,
+      "catalog_kw": 613.6
+    },
+    {
+      "id": "tesla-model-x-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "tesla-model-y-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Model Y",
+      "year": 2021
+    },
+    {
+      "id": "tesla-model-y-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Model Y",
+      "year": 2022
+    },
+    {
+      "id": "tesla-model-y-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "MODELY",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        430,
+        455,
+        514,
+        533
+      ],
+      "cn_raws": [
+        "MODEL Y"
+      ],
+      "catalog_wh": 166.7,
+      "catalog_kw": 249.3
+    },
+    {
+      "id": "tesla-model-y-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "MODELY",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        430,
+        455,
+        514,
+        533,
+        565,
+        600
+      ],
+      "cn_raws": [
+        "MODEL Y"
+      ],
+      "catalog_wh": 162.0,
+      "catalog_kw": 277.3
+    },
+    {
+      "id": "tesla-model-y-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "toyota-proace-electric-2020",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "Proace Electric",
+      "year": 2020
+    },
+    {
+      "id": "toyota-proace-electric-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "PROACE",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        216,
+        220,
+        222,
+        306,
+        310,
+        312,
+        314
+      ],
+      "cn_raws": [
+        "PROACE"
+      ],
+      "catalog_wh": 190.8,
+      "catalog_kw": null
+    },
+    {
+      "id": "toyota-proace-electric-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "PROACE",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        213,
+        216,
+        218,
+        219,
+        220,
+        221,
+        222,
+        305,
+        309,
+        312,
+        313,
+        314,
+        315
+      ],
+      "cn_raws": [
+        "PROACE"
+      ],
+      "catalog_wh": 201.5,
+      "catalog_kw": 90.4
+    },
+    {
+      "id": "toyota-proace-electric-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "PROACE",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        218,
+        312,
+        315,
+        340,
+        341
+      ],
+      "cn_raws": [
+        "PROACE"
+      ],
+      "catalog_wh": 197.9,
+      "catalog_kw": 99.0
+    },
+    {
+      "id": "toyota-proace-electric-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "PROACE",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        217,
+        218,
+        222,
+        312,
+        315,
+        337,
+        339,
+        340,
+        341,
+        342,
+        343,
+        344
+      ],
+      "cn_raws": [
+        "PROACE"
+      ],
+      "catalog_wh": 187.79999999999998,
+      "catalog_kw": 98.7
+    },
+    {
+      "id": "toyota-proace-electric-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "volkswagen-id3-2020",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "ID3PRO150KW",
+      "year": 2020,
+      "status": "F",
+      "candidate_zr": [
+        393,
+        395,
+        396,
+        397,
+        398,
+        401,
+        405,
+        407,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        416,
+        417,
+        418,
+        419,
+        420,
+        421,
+        422,
+        423,
+        424,
+        425
+      ],
+      "cn_raws": [
+        "ID3 PRO 150 KW"
+      ],
+      "catalog_wh": 183.0,
+      "catalog_kw": 84.5
+    },
+    {
+      "id": "volkswagen-id3-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "ID3PRO150KW,ID3PROS150KW,ID3PURE110KW",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        398,
+        399,
+        400,
+        401,
+        402,
+        403,
+        404,
+        405
+      ],
+      "cn_raws": [
+        "ID.3 PRO 150 KW",
+        "ID.3 PRO S 150 KW",
+        "ID.3 PURE 110 KW"
+      ],
+      "catalog_wh": 155.4,
+      "catalog_kw": 129.1
+    },
+    {
+      "id": "volkswagen-id3-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "ID3PRO150KW,ID3PROS150KW,ID3PURE110KW",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        337,
+        340,
+        414,
+        415,
+        416,
+        417,
+        418,
+        420,
+        421,
+        422,
+        423,
+        424,
+        425
+      ],
+      "cn_raws": [
+        "ID.3 PRO 150 KW",
+        "ID.3 PRO S 150 KW",
+        "ID.3 PURE 110 KW"
+      ],
+      "catalog_wh": 155.5,
+      "catalog_kw": 70.0
+    },
+    {
+      "id": "volkswagen-id3-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "ID3PRO150KW,ID3PROS150KW,ID3PURE110KW",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        417,
+        420,
+        421,
+        422,
+        423,
+        424,
+        425,
+        552,
+        554,
+        555,
+        556,
+        557,
+        558
+      ],
+      "cn_raws": [
+        "ID3 PRO 150 KW",
+        "ID3 PRO S 150 KW",
+        "ID3 PURE 110 KW"
+      ],
+      "catalog_wh": 154.70000000000002,
+      "catalog_kw": 149.7
+    },
+    {
+      "id": "volkswagen-id3-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ID.3",
+      "year": 2025
+    },
+    {
+      "id": "volkswagen-id3-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "volkswagen-id4-2020",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ID.4",
+      "year": 2020
+    },
+    {
+      "id": "volkswagen-id4-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "ID4GTX220KW,ID4PRO150KW,ID4PURE125KW",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        331,
+        332,
+        336,
+        339,
+        341,
+        342,
+        343,
+        344,
+        464,
+        466,
+        467,
+        468,
+        469,
+        470,
+        471,
+        472,
+        473,
+        474,
+        475,
+        476,
+        477,
+        478,
+        479,
+        480,
+        481,
+        483,
+        484,
+        485,
+        486,
+        487,
+        488,
+        489,
+        490,
+        491,
+        492,
+        493,
+        494,
+        495,
+        496,
+        497,
+        498,
+        499,
+        500,
+        501,
+        502,
+        503,
+        504,
+        505,
+        506,
+        507,
+        508,
+        509,
+        510,
+        511,
+        512,
+        513,
+        514,
+        515,
+        516,
+        517,
+        518,
+        519,
+        520
+      ],
+      "cn_raws": [
+        "ID.4 GTX 220 KW",
+        "ID.4 PRO 150 KW",
+        "ID.4 PURE 125 KW"
+      ],
+      "catalog_wh": 178.29999999999998,
+      "catalog_kw": 152.3
+    },
+    {
+      "id": "volkswagen-id4-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "ID4GTX220KW,ID4PRO150KW,ID4PURE125KW",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        336,
+        504,
+        505,
+        506,
+        507,
+        508,
+        509,
+        510,
+        511,
+        512,
+        513,
+        514,
+        515,
+        516,
+        517,
+        518,
+        519,
+        520
+      ],
+      "cn_raws": [
+        "ID.4 GTX 220 KW",
+        "ID.4 PRO 150 KW",
+        "ID.4 PURE 125 KW"
+      ],
+      "catalog_wh": 173.0,
+      "catalog_kw": 150.0
+    },
+    {
+      "id": "volkswagen-id4-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "ID4GTX220KW,ID4PRO150KW,ID4PRO4MOTION195KW",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        515,
+        516,
+        517,
+        518,
+        519,
+        520,
+        521,
+        522
+      ],
+      "cn_raws": [
+        "ID4 GTX 220 KW",
+        "ID4 PRO 150 KW",
+        "ID4 PRO 4MOTION 195 KW"
+      ],
+      "catalog_wh": 169.5,
+      "catalog_kw": 150.0
+    },
+    {
+      "id": "volkswagen-id4-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ID.4",
+      "year": 2024
+    },
+    {
+      "id": "volkswagen-id4-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ID.4",
+      "year": 2025
+    },
+    {
+      "id": "volkswagen-id4-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "volkswagen-id5-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ID.5",
+      "year": 2021
+    },
+    {
+      "id": "volkswagen-id5-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "ID5GTX220KW,ID5PRO150KW",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        508,
+        509,
+        510,
+        511,
+        512,
+        513
+      ],
+      "cn_raws": [
+        "ID.5 GTX 220 KW",
+        "ID.5 PRO 150 KW"
+      ],
+      "catalog_wh": 171.9,
+      "catalog_kw": 125.9
+    },
+    {
+      "id": "volkswagen-id5-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "ID5GTX220KW,ID5PRO150KW",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        516,
+        517,
+        519,
+        522,
+        523,
+        524
+      ],
+      "cn_raws": [
+        "ID5 GTX 220 KW",
+        "ID5 PRO 150 KW"
+      ],
+      "catalog_wh": 168.2,
+      "catalog_kw": 158.4
+    },
+    {
+      "id": "volkswagen-id5-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ID.5",
+      "year": 2025
+    },
+    {
+      "id": "volkswagen-id5-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "volkswagen-id7-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ID.7",
+      "year": 2024
+    },
+    {
+      "id": "volkswagen-id7-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "ID.7",
+      "year": 2025
+    },
+    {
+      "id": "volkswagen-id7-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "volkswagen-e-golf-2014",
+      "result": "skip",
+      "reason": "year 2014 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "volkswagen-e-golf-2015",
+      "result": "skip",
+      "reason": "year 2015 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "volkswagen-e-golf-2016",
+      "result": "skip",
+      "reason": "year 2016 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "volkswagen-e-up!-2013",
+      "result": "skip",
+      "reason": "year 2013 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "volkswagen-e-up!-2014",
+      "result": "skip",
+      "reason": "year 2014 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "volkswagen-e-up!-2015",
+      "result": "skip",
+      "reason": "year 2015 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "volkswagen-e-up!-2016",
+      "result": "skip",
+      "reason": "year 2016 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "volkswagen-e-up!-2017",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "e-up!",
+      "year": 2017
+    },
+    {
+      "id": "volkswagen-e-up!-2018",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "e-up!",
+      "year": 2018
+    },
+    {
+      "id": "volvo-c40-recharge-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "C40",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        439,
+        440
+      ],
+      "cn_raws": [
+        "C40"
+      ],
+      "catalog_wh": 209.79999999999998,
+      "catalog_kw": 183.8
+    },
+    {
+      "id": "volvo-c40-recharge-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "C40",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        431,
+        432,
+        433,
+        434,
+        435,
+        436,
+        439,
+        440,
+        441,
+        442,
+        444,
+        445,
+        446,
+        447,
+        448
+      ],
+      "cn_raws": [
+        "C40"
+      ],
+      "catalog_wh": 197.2,
+      "catalog_kw": 178.9
+    },
+    {
+      "id": "volvo-c40-recharge-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "C40",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        433,
+        434,
+        435,
+        436,
+        440,
+        444,
+        445,
+        446,
+        447,
+        448,
+        484,
+        487,
+        537,
+        540,
+        541,
+        542,
+        543,
+        546,
+        547,
+        548,
+        567,
+        571,
+        573,
+        576,
+        577,
+        578,
+        579,
+        580,
+        581
+      ],
+      "cn_raws": [
+        "C40"
+      ],
+      "catalog_wh": 179.2,
+      "catalog_kw": 206.2
+    },
+    {
+      "id": "volvo-c40-recharge-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "C40",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        435,
+        436,
+        446,
+        448,
+        478,
+        480,
+        484,
+        486,
+        487,
+        539,
+        540,
+        541,
+        542,
+        546,
+        548,
+        569,
+        573,
+        574,
+        575,
+        576,
+        577,
+        578,
+        579,
+        580,
+        581
+      ],
+      "cn_raws": [
+        "C40"
+      ],
+      "catalog_wh": 168.2,
+      "catalog_kw": 199.3
+    },
+    {
+      "id": "volvo-c40-recharge-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "C40",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        433,
+        484,
+        486,
+        487,
+        540,
+        571,
+        573,
+        576,
+        578,
+        579,
+        580,
+        581
+      ],
+      "cn_raws": [
+        "C40"
+      ],
+      "catalog_wh": 168.7,
+      "catalog_kw": 203.4
+    },
+    {
+      "id": "volvo-c40-recharge-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "volvo-ec40-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "C40",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        431,
+        432,
+        433,
+        434,
+        435,
+        436,
+        439,
+        440,
+        441,
+        442,
+        444,
+        445,
+        446,
+        447,
+        448
+      ],
+      "cn_raws": [
+        "C40"
+      ],
+      "catalog_wh": 176.7,
+      "catalog_kw": null
+    },
+    {
+      "id": "volvo-ec40-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "C40",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        540,
+        541,
+        542,
+        543,
+        546,
+        547
+      ],
+      "cn_raws": [
+        "C40"
+      ],
+      "catalog_wh": 176.0,
+      "catalog_kw": null
+    },
+    {
+      "id": "volvo-ec40-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EC40",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        485,
+        486,
+        536,
+        540,
+        541,
+        550,
+        551,
+        569,
+        570,
+        573,
+        576,
+        579,
+        580,
+        581,
+        582,
+        583,
+        584
+      ],
+      "cn_raws": [
+        "EC40"
+      ],
+      "catalog_wh": 169.1,
+      "catalog_kw": 222.7
+    },
+    {
+      "id": "volvo-ec40-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EC40",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        547,
+        549
+      ],
+      "cn_raws": [
+        "EC40"
+      ],
+      "catalog_wh": 174.5,
+      "catalog_kw": 220.3
+    },
+    {
+      "id": "volvo-ec40-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "volvo-ex30-2023",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EX30",
+      "year": 2023,
+      "status": "F",
+      "candidate_zr": [
+        450,
+        474,
+        475
+      ],
+      "cn_raws": [
+        "EX30"
+      ],
+      "catalog_wh": 172.2,
+      "catalog_kw": 243.9
+    },
+    {
+      "id": "volvo-ex30-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "volvo-ex40-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EX40",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        475,
+        556,
+        557,
+        558
+      ],
+      "cn_raws": [
+        "EX40"
+      ],
+      "catalog_wh": 172.8,
+      "catalog_kw": 216.3
+    },
+    {
+      "id": "volvo-ex40-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EX40",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        476,
+        477,
+        478,
+        479,
+        556,
+        558
+      ],
+      "cn_raws": [
+        "EX40"
+      ],
+      "catalog_wh": 171.7,
+      "catalog_kw": 212.7
+    },
+    {
+      "id": "volvo-ex40-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "volvo-ex90-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EX90",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        602,
+        603
+      ],
+      "cn_raws": [
+        "EX90"
+      ],
+      "catalog_wh": 210.5,
+      "catalog_kw": 345.0
+    },
+    {
+      "id": "volvo-ex90-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "EX90",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        600,
+        601,
+        602,
+        603,
+        604,
+        606,
+        607,
+        608,
+        609,
+        610,
+        611,
+        612,
+        613,
+        614,
+        615,
+        618
+      ],
+      "cn_raws": [
+        "EX90"
+      ],
+      "catalog_wh": 200.8,
+      "catalog_kw": 283.5
+    },
+    {
+      "id": "volvo-ex90-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "volvo-xc40-recharge-2021",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "XC40",
+      "year": 2021,
+      "status": "F",
+      "candidate_zr": [
+        411,
+        412,
+        413,
+        414,
+        415,
+        416,
+        417
+      ],
+      "cn_raws": [
+        "XC40"
+      ],
+      "catalog_wh": 171.2,
+      "catalog_kw": 122.6
+    },
+    {
+      "id": "volvo-xc40-recharge-2022",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "XC40",
+      "year": 2022,
+      "status": "F",
+      "candidate_zr": [
+        413,
+        414,
+        416,
+        417,
+        418,
+        419,
+        420,
+        421,
+        422,
+        423,
+        424,
+        425,
+        431,
+        433,
+        434,
+        436
+      ],
+      "cn_raws": [
+        "XC40"
+      ],
+      "catalog_wh": 178.2,
+      "catalog_kw": 130.0
+    },
+    {
+      "id": "volvo-xc40-recharge-2024",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "XC40",
+      "year": 2024,
+      "status": "F",
+      "candidate_zr": [
+        465,
+        560,
+        562,
+        563
+      ],
+      "cn_raws": [
+        "XC40"
+      ],
+      "catalog_wh": 170.9,
+      "catalog_kw": 143.6
+    },
+    {
+      "id": "volvo-xc40-recharge-2025",
+      "result": "skip",
+      "reason": "ambiguous Zr (multiple versions; cannot uniquely match)",
+      "eea_model": "XC40",
+      "year": 2025,
+      "status": "P",
+      "candidate_zr": [
+        465,
+        560,
+        561,
+        562
+      ],
+      "cn_raws": [
+        "XC40"
+      ],
+      "catalog_wh": 170.5,
+      "catalog_kw": 124.6
+    },
+    {
+      "id": "volvo-xc40-recharge-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "xpeng-g6-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "G6",
+      "year": 2021
+    },
+    {
+      "id": "xpeng-g6-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "G6",
+      "year": 2022
+    },
+    {
+      "id": "xpeng-g6-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "G6",
+      "year": 2023
+    },
+    {
+      "id": "xpeng-g6-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "G6",
+      "year": 2024
+    },
+    {
+      "id": "xpeng-g6-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "xpeng-g9-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "G9",
+      "year": 2021
+    },
+    {
+      "id": "xpeng-g9-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "G9",
+      "year": 2022
+    },
+    {
+      "id": "xpeng-g9-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "G9",
+      "year": 2023
+    },
+    {
+      "id": "xpeng-g9-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "G9",
+      "year": 2024
+    },
+    {
+      "id": "xpeng-g9-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "xpeng-p7-2021",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "P7",
+      "year": 2021
+    },
+    {
+      "id": "xpeng-p7-2022",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "P7",
+      "year": 2022
+    },
+    {
+      "id": "xpeng-p7-2023",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "P7",
+      "year": 2023
+    },
+    {
+      "id": "xpeng-p7-2024",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "P7",
+      "year": 2024
+    },
+    {
+      "id": "xpeng-p7-2025",
+      "result": "skip",
+      "reason": "no EEA Cn match for model/year",
+      "model": "P7",
+      "year": 2025
+    },
+    {
+      "id": "xpeng-p7-2026",
+      "result": "skip",
+      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    }
+  ]
+}

@@ -2,11 +2,11 @@
   "url": "",
   "publishedUrl": "https://files.catbox.moe/3i0nro.json",
   "rows": 5654,
-  "bytes": 2848666,
+  "bytes": 2848576,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-24T20:28:26.598309+00:00",
+  "updatedAt": "2026-10-25T12:44:20.014931+00:00",
   "policy": "offline-first",
-  "seedVersion": 54,
-  "note": "seedVersion 54: every EEA n= from Status F (sum F across Mk aliases+Cn strip+casefold+brand-prefix and Ft casing; P only if no F / thin incomplete F); empty/absent Mk only when Cn carries brand — label-only."
+  "seedVersion": 55,
+  "note": "seedVersion 55: BEV wltpRangeKm from EEA IT Zr (F preferred; unique match via Cn + Wh/km and/or kW; no averages)."
 }

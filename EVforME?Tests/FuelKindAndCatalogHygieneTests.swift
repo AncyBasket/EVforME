@@ -217,10 +217,11 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             ?? VehicleCatalogService.shared.vehicle(by: "tesla-model-3-2024")
         XCTAssertNotNil(m3)
         // Interpolated +N km/year ranges are cleared (nil); never keep flat 350.
+        // Upper bound covers EEA IT Zr Long Range / Highland figures (up to ~750 km WLTP).
         if let range = m3?.wltpRangeKm {
             XCTAssertNotEqual(range, 350)
             XCTAssertGreaterThanOrEqual(range, 450)
-            XCTAssertLessThanOrEqual(range, 580)
+            XCTAssertLessThanOrEqual(range, 750)
         }
     }
 
