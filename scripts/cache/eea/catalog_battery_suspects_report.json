@@ -1,0 +1,4406 @@
+{
+  "tol": 0.15,
+  "suspect_count": 176,
+  "suspects": [
+    {
+      "id": "audi-q6-e-tron-2025",
+      "brand": "Audi",
+      "model": "Q6 e-tron",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 91.1,
+      "energyConsumptionKWhPerKm": 0.182,
+      "wh_per_km": 182.0,
+      "powerKw": 225.5,
+      "wltpRangeKm": null,
+      "implied_range_km": 500.5,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 495,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(495km→90.1kWh)"
+      ]
+    },
+    {
+      "id": "audi-q6-e-tron-2026",
+      "brand": "Audi",
+      "model": "Q6 e-tron",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 91.9,
+      "energyConsumptionKWhPerKm": 0.182,
+      "wh_per_km": 182.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 504.9,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 495,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(495km→90.1kWh)"
+      ]
+    },
+    {
+      "id": "bmw-i3-2018",
+      "brand": "BMW",
+      "model": "i3",
+      "year": 2018,
+      "powertrain": "ev",
+      "batteryKWh": 66.6,
+      "energyConsumptionKWhPerKm": 0.1365,
+      "wh_per_km": 136.5,
+      "powerKw": 114.7,
+      "wltpRangeKm": null,
+      "implied_range_km": 487.9,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 308,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(308km→42.0kWh)"
+      ]
+    },
+    {
+      "id": "bmw-i3-2019",
+      "brand": "BMW",
+      "model": "i3",
+      "year": 2019,
+      "powertrain": "ev",
+      "batteryKWh": 76.7,
+      "energyConsumptionKWhPerKm": 0.1553,
+      "wh_per_km": 155.29999999999998,
+      "powerKw": 121.4,
+      "wltpRangeKm": null,
+      "implied_range_km": 493.9,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 308,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(308km→47.8kWh)"
+      ]
+    },
+    {
+      "id": "bmw-i3-2020",
+      "brand": "BMW",
+      "model": "i3",
+      "year": 2020,
+      "powertrain": "ev",
+      "batteryKWh": 75.6,
+      "energyConsumptionKWhPerKm": 0.1512,
+      "wh_per_km": 151.2,
+      "powerKw": 121.8,
+      "wltpRangeKm": null,
+      "implied_range_km": 500.0,
+      "eea_zr_km": [
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        286,
+        287,
+        289,
+        290,
+        291,
+        294,
+        295,
+        296,
+        297,
+        298,
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308
+      ],
+      "eea_model_keys": [
+        "I3",
+        "I3S"
+      ],
+      "max_eea_zr_model": 308,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(308km→46.6kWh)"
+      ]
+    },
+    {
+      "id": "bmw-i3-2021",
+      "brand": "BMW",
+      "model": "i3",
+      "year": 2021,
+      "powertrain": "ev",
+      "batteryKWh": 79.1,
+      "energyConsumptionKWhPerKm": 0.1563,
+      "wh_per_km": 156.29999999999998,
+      "powerKw": 112.6,
+      "wltpRangeKm": null,
+      "implied_range_km": 506.1,
+      "eea_zr_km": [],
+      "eea_model_keys": [
+        "I3",
+        "I3S"
+      ],
+      "max_eea_zr_model": 308,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(308km→48.1kWh)"
+      ]
+    },
+    {
+      "id": "bmw-i3-2022",
+      "brand": "BMW",
+      "model": "i3",
+      "year": 2022,
+      "powertrain": "ev",
+      "batteryKWh": 80.8,
+      "energyConsumptionKWhPerKm": 0.1578,
+      "wh_per_km": 157.79999999999998,
+      "powerKw": 123.1,
+      "wltpRangeKm": null,
+      "implied_range_km": 512.0,
+      "eea_zr_km": [],
+      "eea_model_keys": [
+        "I3",
+        "I3S"
+      ],
+      "max_eea_zr_model": 308,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(308km→48.6kWh)"
+      ]
+    },
+    {
+      "id": "bmw-ix1-2025",
+      "brand": "BMW",
+      "model": "iX1",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 84.6,
+      "energyConsumptionKWhPerKm": 0.164,
+      "wh_per_km": 164.0,
+      "powerKw": 165.7,
+      "wltpRangeKm": null,
+      "implied_range_km": 515.9,
+      "eea_zr_km": [
+        418,
+        419,
+        420,
+        421,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        429,
+        430,
+        431,
+        432,
+        433,
+        434,
+        435,
+        436,
+        437,
+        438,
+        439,
+        440,
+        441,
+        442,
+        443,
+        444,
+        445,
+        446,
+        447,
+        448,
+        449,
+        450,
+        451,
+        452,
+        453,
+        454,
+        455,
+        456,
+        457,
+        458,
+        459,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        467,
+        468,
+        469,
+        470,
+        471,
+        472,
+        473,
+        474
+      ],
+      "eea_model_keys": [
+        "IX1EDRIVE20",
+        "IX1XDRIVE30"
+      ],
+      "max_eea_zr_model": 474,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(474km→77.7kWh)"
+      ]
+    },
+    {
+      "id": "bmw-ix1-2026",
+      "brand": "BMW",
+      "model": "iX1",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 85.3,
+      "energyConsumptionKWhPerKm": 0.164,
+      "wh_per_km": 164.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 520.1,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 474,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(474km→77.7kWh)"
+      ]
+    },
+    {
+      "id": "byd-atto-3-2024",
+      "brand": "BYD",
+      "model": "Atto 3",
+      "year": 2024,
+      "powertrain": "ev",
+      "batteryKWh": 75.2,
+      "energyConsumptionKWhPerKm": 0.1554,
+      "wh_per_km": 155.4,
+      "powerKw": 138.7,
+      "wltpRangeKm": null,
+      "implied_range_km": 483.9,
+      "eea_zr_km": [
+        420
+      ],
+      "eea_model_keys": [
+        "ATTO3"
+      ],
+      "max_eea_zr_model": 420,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(420km→65.3kWh)"
+      ]
+    },
+    {
+      "id": "byd-atto-3-2025",
+      "brand": "BYD",
+      "model": "Atto 3",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 84.6,
+      "energyConsumptionKWhPerKm": 0.155,
+      "wh_per_km": 155.0,
+      "powerKw": 146.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 545.8,
+      "eea_zr_km": [
+        420
+      ],
+      "eea_model_keys": [
+        "ATTO3"
+      ],
+      "max_eea_zr_model": 420,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(420km→65.1kWh)"
+      ]
+    },
+    {
+      "id": "byd-atto-3-2026",
+      "brand": "BYD",
+      "model": "Atto 3",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 85.3,
+      "energyConsumptionKWhPerKm": 0.155,
+      "wh_per_km": 155.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 550.3,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 420,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(420km→65.1kWh)"
+      ]
+    },
+    {
+      "id": "byd-dolphin-2023",
+      "brand": "BYD",
+      "model": "Dolphin",
+      "year": 2023,
+      "powertrain": "ev",
+      "batteryKWh": 82.4,
+      "energyConsumptionKWhPerKm": 0.159,
+      "wh_per_km": 159.0,
+      "powerKw": 150.2,
+      "wltpRangeKm": null,
+      "implied_range_km": 518.2,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 427,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(427km→67.9kWh)"
+      ]
+    },
+    {
+      "id": "byd-dolphin-2025",
+      "brand": "BYD",
+      "model": "Dolphin",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 89.4,
+      "energyConsumptionKWhPerKm": 0.16,
+      "wh_per_km": 160.0,
+      "powerKw": 149.1,
+      "wltpRangeKm": 427,
+      "implied_range_km": 558.8,
+      "eea_zr_km": [
+        427
+      ],
+      "eea_model_keys": [
+        "DOLPHIN"
+      ],
+      "max_eea_zr_model": 427,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(427km→68.3kWh)"
+      ]
+    },
+    {
+      "id": "byd-dolphin-2026",
+      "brand": "BYD",
+      "model": "Dolphin",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 90.0,
+      "energyConsumptionKWhPerKm": 0.16,
+      "wh_per_km": 160.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 562.5,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 427,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(427km→68.3kWh)"
+      ]
+    },
+    {
+      "id": "citroen-e-berlingo-2021",
+      "brand": "Citroen",
+      "model": "e-Berlingo",
+      "year": 2021,
+      "powertrain": "ev",
+      "batteryKWh": 71.7,
+      "energyConsumptionKWhPerKm": 0.2048,
+      "wh_per_km": 204.8,
+      "powerKw": 100.0,
+      "wltpRangeKm": 350,
+      "implied_range_km": 350.1,
+      "eea_zr_km": [
+        279,
+        281
+      ],
+      "eea_model_keys": [
+        "EBERLINGO"
+      ],
+      "max_eea_zr_model": 345,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(345km→70.7kWh)"
+      ]
+    },
+    {
+      "id": "citroen-e-berlingo-2022",
+      "brand": "Citroen",
+      "model": "e-Berlingo",
+      "year": 2022,
+      "powertrain": "ev",
+      "batteryKWh": 69.6,
+      "energyConsumptionKWhPerKm": 0.1989,
+      "wh_per_km": 198.9,
+      "powerKw": 100.0,
+      "wltpRangeKm": 350,
+      "implied_range_km": 349.9,
+      "eea_zr_km": [
+        271,
+        277,
+        278,
+        279,
+        280,
+        281,
+        283,
+        285
+      ],
+      "eea_model_keys": [
+        "EBERLINGO"
+      ],
+      "max_eea_zr_model": 345,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(345km→68.6kWh)"
+      ]
+    },
+    {
+      "id": "citroen-e-berlingo-2023",
+      "brand": "Citroen",
+      "model": "e-Berlingo",
+      "year": 2023,
+      "powertrain": "ev",
+      "batteryKWh": 69.2,
+      "energyConsumptionKWhPerKm": 0.1978,
+      "wh_per_km": 197.8,
+      "powerKw": 100.0,
+      "wltpRangeKm": 350,
+      "implied_range_km": 349.8,
+      "eea_zr_km": [
+        270,
+        276,
+        277,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284,
+        285
+      ],
+      "eea_model_keys": [
+        "EBERLINGO"
+      ],
+      "max_eea_zr_model": 345,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(345km→68.2kWh)"
+      ]
+    },
+    {
+      "id": "citroen-e-berlingo-2024",
+      "brand": "Citroen",
+      "model": "e-Berlingo",
+      "year": 2024,
+      "powertrain": "ev",
+      "batteryKWh": 68.7,
+      "energyConsumptionKWhPerKm": 0.1962,
+      "wh_per_km": 196.20000000000002,
+      "powerKw": 98.6,
+      "wltpRangeKm": 350,
+      "implied_range_km": 350.2,
+      "eea_zr_km": [
+        280,
+        281,
+        282,
+        283,
+        337,
+        338,
+        339,
+        340,
+        343,
+        345
+      ],
+      "eea_model_keys": [
+        "EBERLINGO"
+      ],
+      "max_eea_zr_model": 345,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(345km→67.7kWh)"
+      ]
+    },
+    {
+      "id": "citroen-e-c4-2025",
+      "brand": "Citroen",
+      "model": "e-C4",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 80.7,
+      "energyConsumptionKWhPerKm": 0.152,
+      "wh_per_km": 152.0,
+      "powerKw": 109.6,
+      "wltpRangeKm": null,
+      "implied_range_km": 530.9,
+      "eea_zr_km": [
+        350,
+        353,
+        354
+      ],
+      "eea_model_keys": [
+        "EC4",
+        "EC4X"
+      ],
+      "max_eea_zr_model": 420,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(420km→63.8kWh)"
+      ]
+    },
+    {
+      "id": "citroen-e-c4-2026",
+      "brand": "Citroen",
+      "model": "e-C4",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 81.3,
+      "energyConsumptionKWhPerKm": 0.152,
+      "wh_per_km": 152.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 534.9,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 420,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(420km→63.8kWh)"
+      ]
+    },
+    {
+      "id": "dacia-spring-2021",
+      "brand": "Dacia",
+      "model": "Spring",
+      "year": 2021,
+      "powertrain": "ev",
+      "batteryKWh": 46.9,
+      "energyConsumptionKWhPerKm": 0.1396,
+      "wh_per_km": 139.6,
+      "powerKw": 19.0,
+      "wltpRangeKm": 230,
+      "implied_range_km": 336.0,
+      "eea_zr_km": [
+        227,
+        230,
+        236
+      ],
+      "eea_model_keys": [
+        "SPRING"
+      ],
+      "max_eea_zr_model": 236,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(236km→32.9kWh)"
+      ]
+    },
+    {
+      "id": "dacia-spring-2022",
+      "brand": "Dacia",
+      "model": "Spring",
+      "year": 2022,
+      "powertrain": "ev",
+      "batteryKWh": 47.5,
+      "energyConsumptionKWhPerKm": 0.139,
+      "wh_per_km": 139.0,
+      "powerKw": 19.0,
+      "wltpRangeKm": 230,
+      "implied_range_km": 341.7,
+      "eea_zr_km": [
+        227,
+        230,
+        236
+      ],
+      "eea_model_keys": [
+        "SPRING"
+      ],
+      "max_eea_zr_model": 236,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(236km→32.8kWh)"
+      ]
+    },
+    {
+      "id": "fiat-500e-2026",
+      "brand": "Fiat",
+      "model": "500e",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 45.9,
+      "energyConsumptionKWhPerKm": 0.1365,
+      "wh_per_km": 136.5,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 336.3,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 332,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(332km→45.3kWh)"
+      ]
+    },
+    {
+      "id": "fiat-600e-2023",
+      "brand": "Fiat",
+      "model": "600e",
+      "year": 2023,
+      "powertrain": "ev",
+      "batteryKWh": 54.0,
+      "energyConsumptionKWhPerKm": 0.158,
+      "wh_per_km": 158.0,
+      "powerKw": null,
+      "wltpRangeKm": 400,
+      "implied_range_km": 341.8,
+      "eea_zr_km": [
+        406,
+        409
+      ],
+      "eea_model_keys": [
+        "600"
+      ],
+      "max_eea_zr_model": 409,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr"
+      ]
+    },
+    {
+      "id": "fiat-600e-2024",
+      "brand": "Fiat",
+      "model": "600e",
+      "year": 2024,
+      "powertrain": "ev",
+      "batteryKWh": 54.0,
+      "energyConsumptionKWhPerKm": 0.158,
+      "wh_per_km": 158.0,
+      "powerKw": null,
+      "wltpRangeKm": 400,
+      "implied_range_km": 341.8,
+      "eea_zr_km": [
+        405,
+        406,
+        407,
+        408,
+        409
+      ],
+      "eea_model_keys": [
+        "600"
+      ],
+      "max_eea_zr_model": 409,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr"
+      ]
+    },
+    {
+      "id": "ford-puma-gen-e-2024",
+      "brand": "Ford",
+      "model": "Puma Gen-E",
+      "year": 2024,
+      "powertrain": "ev",
+      "batteryKWh": 96.2,
+      "energyConsumptionKWhPerKm": 0.1835,
+      "wh_per_km": 183.5,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 524.3,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 376,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(376km→69.0kWh)"
+      ]
+    },
+    {
+      "id": "ford-puma-gen-e-2025",
+      "brand": "Ford",
+      "model": "Puma Gen-E",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 96.8,
+      "energyConsumptionKWhPerKm": 0.1827,
+      "wh_per_km": 182.7,
+      "powerKw": 111.5,
+      "wltpRangeKm": null,
+      "implied_range_km": 529.8,
+      "eea_zr_km": [
+        350,
+        353,
+        357,
+        358,
+        359,
+        360,
+        361,
+        362,
+        364,
+        373,
+        374,
+        376
+      ],
+      "eea_model_keys": [
+        "PUMA"
+      ],
+      "max_eea_zr_model": 376,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(376km→68.7kWh)"
+      ]
+    },
+    {
+      "id": "ford-puma-gen-e-2026",
+      "brand": "Ford",
+      "model": "Puma Gen-E",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 97.6,
+      "energyConsumptionKWhPerKm": 0.182,
+      "wh_per_km": 182.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 536.3,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 376,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(376km→68.4kWh)"
+      ]
+    },
+    {
+      "id": "honda-e-2019",
+      "brand": "Honda",
+      "model": "e",
+      "year": 2019,
+      "powertrain": "ev",
+      "batteryKWh": 54.1,
+      "energyConsumptionKWhPerKm": 0.167,
+      "wh_per_km": 167.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 324.0,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 222,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(222km→37.1kWh)"
+      ]
+    },
+    {
+      "id": "honda-e-2020",
+      "brand": "Honda",
+      "model": "e",
+      "year": 2020,
+      "powertrain": "ev",
+      "batteryKWh": 58.7,
+      "energyConsumptionKWhPerKm": 0.1779,
+      "wh_per_km": 177.9,
+      "powerKw": 96.5,
+      "wltpRangeKm": null,
+      "implied_range_km": 330.0,
+      "eea_zr_km": [],
+      "eea_model_keys": [
+        "E"
+      ],
+      "max_eea_zr_model": 222,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(222km→39.5kWh)"
+      ]
+    },
+    {
+      "id": "honda-e-2021",
+      "brand": "Honda",
+      "model": "e",
+      "year": 2021,
+      "powertrain": "ev",
+      "batteryKWh": 58.6,
+      "energyConsumptionKWhPerKm": 0.1745,
+      "wh_per_km": 174.5,
+      "powerKw": 112.8,
+      "wltpRangeKm": null,
+      "implied_range_km": 335.8,
+      "eea_zr_km": [
+        210,
+        222
+      ],
+      "eea_model_keys": [
+        "E"
+      ],
+      "max_eea_zr_model": 222,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(222km→38.7kWh)"
+      ]
+    },
+    {
+      "id": "honda-e-2022",
+      "brand": "Honda",
+      "model": "e",
+      "year": 2022,
+      "powertrain": "ev",
+      "batteryKWh": 60.7,
+      "energyConsumptionKWhPerKm": 0.1774,
+      "wh_per_km": 177.4,
+      "powerKw": 105.4,
+      "wltpRangeKm": null,
+      "implied_range_km": 342.2,
+      "eea_zr_km": [
+        210,
+        222
+      ],
+      "eea_model_keys": [
+        "E"
+      ],
+      "max_eea_zr_model": 222,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(222km→39.4kWh)"
+      ]
+    },
+    {
+      "id": "honda-e-2023",
+      "brand": "Honda",
+      "model": "e",
+      "year": 2023,
+      "powertrain": "ev",
+      "batteryKWh": 61.9,
+      "energyConsumptionKWhPerKm": 0.178,
+      "wh_per_km": 178.0,
+      "powerKw": 113.0,
+      "wltpRangeKm": 210,
+      "implied_range_km": 347.8,
+      "eea_zr_km": [
+        210,
+        222
+      ],
+      "eea_model_keys": [
+        "E"
+      ],
+      "max_eea_zr_model": 222,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(222km→39.5kWh)"
+      ]
+    },
+    {
+      "id": "honda-eny1-2025",
+      "brand": "Honda",
+      "model": "e:Ny1",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 82.2,
+      "energyConsumptionKWhPerKm": 0.1677,
+      "wh_per_km": 167.7,
+      "powerKw": 94.7,
+      "wltpRangeKm": null,
+      "implied_range_km": 490.2,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 412,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(412km→69.1kWh)"
+      ]
+    },
+    {
+      "id": "honda-eny1-2026",
+      "brand": "Honda",
+      "model": "e:Ny1",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 82.8,
+      "energyConsumptionKWhPerKm": 0.167,
+      "wh_per_km": 167.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 495.8,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 412,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(412km→68.8kWh)"
+      ]
+    },
+    {
+      "id": "hyundai-inster-2025",
+      "brand": "Hyundai",
+      "model": "Inster",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 61.8,
+      "energyConsumptionKWhPerKm": 0.148,
+      "wh_per_km": 148.0,
+      "powerKw": 78.4,
+      "wltpRangeKm": null,
+      "implied_range_km": 417.6,
+      "eea_zr_km": [
+        293,
+        327,
+        359,
+        360,
+        370
+      ],
+      "eea_model_keys": [
+        "INSTER"
+      ],
+      "max_eea_zr_model": 370,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(370km→54.8kWh)"
+      ]
+    },
+    {
+      "id": "hyundai-inster-2026",
+      "brand": "Hyundai",
+      "model": "Inster",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 62.6,
+      "energyConsumptionKWhPerKm": 0.148,
+      "wh_per_km": 148.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 423.0,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 370,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(370km→54.8kWh)"
+      ]
+    },
+    {
+      "id": "hyundai-ioniq-electric-2016",
+      "brand": "Hyundai",
+      "model": "Ioniq Electric",
+      "year": 2016,
+      "powertrain": "ev",
+      "batteryKWh": 73.2,
+      "energyConsumptionKWhPerKm": 0.135,
+      "wh_per_km": 135.0,
+      "powerKw": 73.4,
+      "wltpRangeKm": 280,
+      "implied_range_km": 542.2,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 311,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(311km→42.0kWh)"
+      ]
+    },
+    {
+      "id": "hyundai-ioniq-electric-2017",
+      "brand": "Hyundai",
+      "model": "Ioniq Electric",
+      "year": 2017,
+      "powertrain": "ev",
+      "batteryKWh": 74.3,
+      "energyConsumptionKWhPerKm": 0.135,
+      "wh_per_km": 135.0,
+      "powerKw": 58.0,
+      "wltpRangeKm": 280,
+      "implied_range_km": 550.4,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 311,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(311km→42.0kWh)"
+      ]
+    },
+    {
+      "id": "hyundai-ioniq-electric-2018",
+      "brand": "Hyundai",
+      "model": "Ioniq Electric",
+      "year": 2018,
+      "powertrain": "ev",
+      "batteryKWh": 75.3,
+      "energyConsumptionKWhPerKm": 0.135,
+      "wh_per_km": 135.0,
+      "powerKw": 70.8,
+      "wltpRangeKm": 280,
+      "implied_range_km": 557.8,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 311,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(311km→42.0kWh)"
+      ]
+    },
+    {
+      "id": "hyundai-ioniq-electric-2019",
+      "brand": "Hyundai",
+      "model": "Ioniq Electric",
+      "year": 2019,
+      "powertrain": "ev",
+      "batteryKWh": 76.3,
+      "energyConsumptionKWhPerKm": 0.135,
+      "wh_per_km": 135.0,
+      "powerKw": 73.2,
+      "wltpRangeKm": 280,
+      "implied_range_km": 565.2,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 311,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(311km→42.0kWh)"
+      ]
+    },
+    {
+      "id": "hyundai-ioniq-phev-2022",
+      "brand": "Hyundai",
+      "model": "Ioniq PHEV",
+      "year": 2022,
+      "powertrain": "phev",
+      "batteryKWh": 8.9,
+      "energyConsumptionKWhPerKm": 0.174,
+      "wh_per_km": 174.0,
+      "powerKw": null,
+      "wltpRangeKm": 47,
+      "implied_range_km": 51.1,
+      "eea_zr_km": [
+        384,
+        430,
+        451,
+        454,
+        476,
+        481,
+        507
+      ],
+      "eea_model_keys": [
+        "IONIQ5"
+      ],
+      "max_eea_zr_model": 311,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr"
+      ]
+    },
+    {
+      "id": "hyundai-kona-electric-2022",
+      "brand": "Hyundai",
+      "model": "Kona Electric",
+      "year": 2022,
+      "powertrain": "ev",
+      "batteryKWh": 74.4,
+      "energyConsumptionKWhPerKm": 0.1453,
+      "wh_per_km": 145.3,
+      "powerKw": 85.8,
+      "wltpRangeKm": null,
+      "implied_range_km": 512.0,
+      "eea_zr_km": [
+        305,
+        484
+      ],
+      "eea_model_keys": [
+        "KONAKAUAI"
+      ],
+      "max_eea_zr_model": 509,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(509km→74.0kWh)"
+      ]
+    },
+    {
+      "id": "hyundai-kona-electric-2023",
+      "brand": "Hyundai",
+      "model": "Kona Electric",
+      "year": 2023,
+      "powertrain": "ev",
+      "batteryKWh": 77.0,
+      "energyConsumptionKWhPerKm": 0.1486,
+      "wh_per_km": 148.60000000000002,
+      "powerKw": 99.8,
+      "wltpRangeKm": null,
+      "implied_range_km": 518.2,
+      "eea_zr_km": [
+        305,
+        377,
+        406,
+        417,
+        468,
+        472,
+        484,
+        506
+      ],
+      "eea_model_keys": [
+        "KONAKAUAI"
+      ],
+      "max_eea_zr_model": 509,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(509km→75.6kWh)"
+      ]
+    },
+    {
+      "id": "hyundai-kona-electric-2024",
+      "brand": "Hyundai",
+      "model": "Kona Electric",
+      "year": 2024,
+      "powertrain": "ev",
+      "batteryKWh": 78.4,
+      "energyConsumptionKWhPerKm": 0.1496,
+      "wh_per_km": 149.60000000000002,
+      "powerKw": 102.3,
+      "wltpRangeKm": null,
+      "implied_range_km": 524.1,
+      "eea_zr_km": [
+        305,
+        377,
+        380,
+        406,
+        449,
+        463,
+        464,
+        466,
+        468,
+        469,
+        470,
+        471,
+        472,
+        484,
+        508,
+        509
+      ],
+      "eea_model_keys": [
+        "KONAKAUAI"
+      ],
+      "max_eea_zr_model": 509,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(509km→76.1kWh)"
+      ]
+    },
+    {
+      "id": "hyundai-kona-electric-2025",
+      "brand": "Hyundai",
+      "model": "Kona Electric",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 84.4,
+      "energyConsumptionKWhPerKm": 0.15,
+      "wh_per_km": 150.0,
+      "powerKw": 97.3,
+      "wltpRangeKm": null,
+      "implied_range_km": 562.7,
+      "eea_zr_km": [
+        377,
+        380,
+        463,
+        469,
+        471,
+        508,
+        509
+      ],
+      "eea_model_keys": [
+        "KONAKAUAI"
+      ],
+      "max_eea_zr_model": 509,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(509km→76.3kWh)"
+      ]
+    },
+    {
+      "id": "hyundai-kona-electric-2026",
+      "brand": "Hyundai",
+      "model": "Kona Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 85.0,
+      "energyConsumptionKWhPerKm": 0.15,
+      "wh_per_km": 150.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 566.7,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 509,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(509km→76.3kWh)"
+      ]
+    },
+    {
+      "id": "jaguar-i-pace-2025",
+      "brand": "Jaguar",
+      "model": "I-Pace",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 91.4,
+      "energyConsumptionKWhPerKm": 0.247,
+      "wh_per_km": 247.0,
+      "powerKw": 294.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 370.0,
+      "eea_zr_km": [
+        448
+      ],
+      "eea_model_keys": [
+        "IPACE"
+      ],
+      "max_eea_zr_model": 470,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr"
+      ]
+    },
+    {
+      "id": "kia-ev3-2026",
+      "brand": "Kia",
+      "model": "EV3",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 95.9,
+      "energyConsumptionKWhPerKm": 0.153,
+      "wh_per_km": 153.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 626.8,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 604,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(604km→92.4kWh)"
+      ]
+    },
+    {
+      "id": "kia-soul-ev-2018",
+      "brand": "Kia",
+      "model": "Soul EV",
+      "year": 2018,
+      "powertrain": "ev",
+      "batteryKWh": 69.8,
+      "energyConsumptionKWhPerKm": 0.143,
+      "wh_per_km": 143.0,
+      "powerKw": 81.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 488.1,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 452,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(452km→64.6kWh)"
+      ]
+    },
+    {
+      "id": "kia-soul-ev-2019",
+      "brand": "Kia",
+      "model": "Soul EV",
+      "year": 2019,
+      "powertrain": "ev",
+      "batteryKWh": 77.6,
+      "energyConsumptionKWhPerKm": 0.157,
+      "wh_per_km": 157.0,
+      "powerKw": 81.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 494.3,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 452,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(452km→71.0kWh)"
+      ]
+    },
+    {
+      "id": "kia-soul-ev-2020",
+      "brand": "Kia",
+      "model": "Soul EV",
+      "year": 2020,
+      "powertrain": "ev",
+      "batteryKWh": 78.5,
+      "energyConsumptionKWhPerKm": 0.157,
+      "wh_per_km": 157.0,
+      "powerKw": 98.8,
+      "wltpRangeKm": null,
+      "implied_range_km": 500.0,
+      "eea_zr_km": [],
+      "eea_model_keys": [
+        "SOUL"
+      ],
+      "max_eea_zr_model": 452,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(452km→71.0kWh)"
+      ]
+    },
+    {
+      "id": "kia-soul-ev-2021",
+      "brand": "Kia",
+      "model": "Soul EV",
+      "year": 2021,
+      "powertrain": "ev",
+      "batteryKWh": 79.4,
+      "energyConsumptionKWhPerKm": 0.157,
+      "wh_per_km": 157.0,
+      "powerKw": 150.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 505.7,
+      "eea_zr_km": [
+        276,
+        452
+      ],
+      "eea_model_keys": [
+        "SOUL"
+      ],
+      "max_eea_zr_model": 452,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(452km→71.0kWh)"
+      ]
+    },
+    {
+      "id": "kia-soul-ev-2022",
+      "brand": "Kia",
+      "model": "Soul EV",
+      "year": 2022,
+      "powertrain": "ev",
+      "batteryKWh": 80.3,
+      "energyConsumptionKWhPerKm": 0.1569,
+      "wh_per_km": 156.9,
+      "powerKw": 137.2,
+      "wltpRangeKm": null,
+      "implied_range_km": 511.8,
+      "eea_zr_km": [
+        452
+      ],
+      "eea_model_keys": [
+        "SOUL"
+      ],
+      "max_eea_zr_model": 452,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(452km→70.9kWh)"
+      ]
+    },
+    {
+      "id": "kia-soul-ev-2023",
+      "brand": "Kia",
+      "model": "Soul EV",
+      "year": 2023,
+      "powertrain": "ev",
+      "batteryKWh": 81.3,
+      "energyConsumptionKWhPerKm": 0.1569,
+      "wh_per_km": 156.9,
+      "powerKw": 146.1,
+      "wltpRangeKm": null,
+      "implied_range_km": 518.2,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 452,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(452km→70.9kWh)"
+      ]
+    },
+    {
+      "id": "kia-soul-ev-2024",
+      "brand": "Kia",
+      "model": "Soul EV",
+      "year": 2024,
+      "powertrain": "ev",
+      "batteryKWh": 82.3,
+      "energyConsumptionKWhPerKm": 0.157,
+      "wh_per_km": 157.0,
+      "powerKw": 149.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 524.2,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 452,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(452km→71.0kWh)"
+      ]
+    },
+    {
+      "id": "kia-soul-ev-2025",
+      "brand": "Kia",
+      "model": "Soul EV",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 85.3,
+      "energyConsumptionKWhPerKm": 0.161,
+      "wh_per_km": 161.0,
+      "powerKw": 149.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 529.8,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 452,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(452km→72.8kWh)"
+      ]
+    },
+    {
+      "id": "kia-soul-ev-2026",
+      "brand": "Kia",
+      "model": "Soul EV",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 85.9,
+      "energyConsumptionKWhPerKm": 0.1603,
+      "wh_per_km": 160.3,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 535.9,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 452,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(452km→72.5kWh)"
+      ]
+    },
+    {
+      "id": "lancia-ypsilon-ev-2024",
+      "brand": "Lancia",
+      "model": "Ypsilon",
+      "year": 2024,
+      "powertrain": "ev",
+      "batteryKWh": 51.0,
+      "energyConsumptionKWhPerKm": 0.152,
+      "wh_per_km": 152.0,
+      "powerKw": 55.2,
+      "wltpRangeKm": 400,
+      "implied_range_km": 335.5,
+      "eea_zr_km": [
+        395,
+        396,
+        397,
+        398,
+        399,
+        400,
+        401,
+        402,
+        403
+      ],
+      "eea_model_keys": [
+        "YPSILON"
+      ],
+      "max_eea_zr_model": 403,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr"
+      ]
+    },
+    {
+      "id": "lexus-ux-300e-2024",
+      "brand": "Lexus",
+      "model": "UX 300e",
+      "year": 2024,
+      "powertrain": "ev",
+      "batteryKWh": 81.5,
+      "energyConsumptionKWhPerKm": 0.1683,
+      "wh_per_km": 168.3,
+      "powerKw": 150.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 484.3,
+      "eea_zr_km": [
+        448
+      ],
+      "eea_model_keys": [
+        "UX300E"
+      ],
+      "max_eea_zr_model": 451,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(451km→75.9kWh)"
+      ]
+    },
+    {
+      "id": "lexus-ux-300e-2025",
+      "brand": "Lexus",
+      "model": "UX 300e",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 86.7,
+      "energyConsumptionKWhPerKm": 0.168,
+      "wh_per_km": 168.0,
+      "powerKw": 150.0,
+      "wltpRangeKm": 448,
+      "implied_range_km": 516.1,
+      "eea_zr_km": [
+        448,
+        451
+      ],
+      "eea_model_keys": [
+        "UX300E"
+      ],
+      "max_eea_zr_model": 451,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(451km→75.8kWh)"
+      ]
+    },
+    {
+      "id": "lexus-ux-300e-2026",
+      "brand": "Lexus",
+      "model": "UX 300e",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 87.4,
+      "energyConsumptionKWhPerKm": 0.168,
+      "wh_per_km": 168.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 520.2,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 451,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(451km→75.8kWh)"
+      ]
+    },
+    {
+      "id": "mazda-mx-30-2025",
+      "brand": "Mazda",
+      "model": "MX-30",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 87.8,
+      "energyConsumptionKWhPerKm": 0.1792,
+      "wh_per_km": 179.2,
+      "powerKw": 79.2,
+      "wltpRangeKm": null,
+      "implied_range_km": 490.0,
+      "eea_zr_km": [
+        200
+      ],
+      "eea_model_keys": [
+        "MX30"
+      ],
+      "max_eea_zr_model": 237,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(237km→42.5kWh)"
+      ]
+    },
+    {
+      "id": "mazda-mx-30-2026",
+      "brand": "Mazda",
+      "model": "MX-30",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 88.5,
+      "energyConsumptionKWhPerKm": 0.1785,
+      "wh_per_km": 178.5,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 495.8,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 237,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(237km→42.3kWh)"
+      ]
+    },
+    {
+      "id": "mercedes-benz-eqa-2026",
+      "brand": "Mercedes-Benz",
+      "model": "EQA",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 86.8,
+      "energyConsumptionKWhPerKm": 0.154,
+      "wh_per_km": 154.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 563.6,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 560,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(560km→86.2kWh)"
+      ]
+    },
+    {
+      "id": "mercedes-benz-eqb-2025",
+      "brand": "Mercedes-Benz",
+      "model": "EQB",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 92.3,
+      "energyConsumptionKWhPerKm": 0.162,
+      "wh_per_km": 162.0,
+      "powerKw": 144.1,
+      "wltpRangeKm": null,
+      "implied_range_km": 569.8,
+      "eea_zr_km": [
+        473,
+        479,
+        480,
+        481,
+        484,
+        488,
+        489,
+        490,
+        491,
+        493,
+        494,
+        495,
+        496,
+        497,
+        498,
+        499,
+        500,
+        501,
+        502,
+        503,
+        504,
+        505,
+        506,
+        507,
+        508,
+        513,
+        515,
+        519,
+        523,
+        524,
+        526,
+        527,
+        528,
+        529,
+        530,
+        531,
+        532,
+        533,
+        534,
+        535
+      ],
+      "eea_model_keys": [
+        "EQB250"
+      ],
+      "max_eea_zr_model": 535,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(535km→86.7kWh)"
+      ]
+    },
+    {
+      "id": "mercedes-benz-eqb-2026",
+      "brand": "Mercedes-Benz",
+      "model": "EQB",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 93.0,
+      "energyConsumptionKWhPerKm": 0.162,
+      "wh_per_km": 162.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 574.1,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 535,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(535km→86.7kWh)"
+      ]
+    },
+    {
+      "id": "mercedes-benz-eqe-2022",
+      "brand": "Mercedes-Benz",
+      "model": "EQE",
+      "year": 2022,
+      "powertrain": "ev",
+      "batteryKWh": 85.1,
+      "energyConsumptionKWhPerKm": 0.1883,
+      "wh_per_km": 188.29999999999998,
+      "powerKw": 109.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 451.9,
+      "eea_zr_km": [
+        604,
+        617,
+        618,
+        620,
+        626,
+        627
+      ],
+      "eea_model_keys": [
+        "EQE300"
+      ],
+      "max_eea_zr_model": 658,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr"
+      ]
+    },
+    {
+      "id": "mercedes-benz-eqs-2021",
+      "brand": "Mercedes-Benz",
+      "model": "EQS",
+      "year": 2021,
+      "powertrain": "ev",
+      "batteryKWh": 83.3,
+      "energyConsumptionKWhPerKm": 0.1867,
+      "wh_per_km": 186.70000000000002,
+      "powerKw": 127.6,
+      "wltpRangeKm": null,
+      "implied_range_km": 446.2,
+      "eea_zr_km": [
+        706,
+        708
+      ],
+      "eea_model_keys": [
+        "EQS450"
+      ],
+      "max_eea_zr_model": 586,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr"
+      ]
+    },
+    {
+      "id": "mercedes-benz-eqs-2022",
+      "brand": "Mercedes-Benz",
+      "model": "EQS",
+      "year": 2022,
+      "powertrain": "ev",
+      "batteryKWh": 86.7,
+      "energyConsumptionKWhPerKm": 0.1918,
+      "wh_per_km": 191.8,
+      "powerKw": 135.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 452.0,
+      "eea_zr_km": [
+        661,
+        706,
+        708,
+        709,
+        711,
+        712,
+        713,
+        714,
+        715,
+        718,
+        721,
+        725
+      ],
+      "eea_model_keys": [
+        "EQS450"
+      ],
+      "max_eea_zr_model": 586,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr"
+      ]
+    },
+    {
+      "id": "mg-marvel-r-2025",
+      "brand": "MG",
+      "model": "Marvel R",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 95.5,
+      "energyConsumptionKWhPerKm": 0.1948,
+      "wh_per_km": 194.8,
+      "powerKw": 200.6,
+      "wltpRangeKm": null,
+      "implied_range_km": 490.2,
+      "eea_zr_km": [
+        370,
+        402
+      ],
+      "eea_model_keys": [
+        "MARVELRELECTRIC"
+      ],
+      "max_eea_zr_model": 402,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(402km→78.3kWh)"
+      ]
+    },
+    {
+      "id": "mg-marvel-r-2026",
+      "brand": "MG",
+      "model": "Marvel R",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 96.2,
+      "energyConsumptionKWhPerKm": 0.194,
+      "wh_per_km": 194.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 495.9,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 402,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(402km→78.0kWh)"
+      ]
+    },
+    {
+      "id": "mg-mg-zs-ev-2019",
+      "brand": "MG",
+      "model": "MG ZS EV",
+      "year": 2019,
+      "powertrain": "ev",
+      "batteryKWh": 91.4,
+      "energyConsumptionKWhPerKm": 0.185,
+      "wh_per_km": 185.0,
+      "powerKw": 68.6,
+      "wltpRangeKm": null,
+      "implied_range_km": 494.1,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 445,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(445km→82.3kWh)"
+      ]
+    },
+    {
+      "id": "mg-mg-zs-ev-2020",
+      "brand": "MG",
+      "model": "MG ZS EV",
+      "year": 2020,
+      "powertrain": "ev",
+      "batteryKWh": 93.0,
+      "energyConsumptionKWhPerKm": 0.186,
+      "wh_per_km": 186.0,
+      "powerKw": 89.8,
+      "wltpRangeKm": null,
+      "implied_range_km": 500.0,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 445,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(445km→82.8kWh)"
+      ]
+    },
+    {
+      "id": "mg-mg-zs-ev-2021",
+      "brand": "MG",
+      "model": "MG ZS EV",
+      "year": 2021,
+      "powertrain": "ev",
+      "batteryKWh": 94.1,
+      "energyConsumptionKWhPerKm": 0.186,
+      "wh_per_km": 186.0,
+      "powerKw": 105.0,
+      "wltpRangeKm": 263,
+      "implied_range_km": 505.9,
+      "eea_zr_km": [
+        263,
+        440
+      ],
+      "eea_model_keys": [
+        "ZSEV"
+      ],
+      "max_eea_zr_model": 445,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(445km→82.8kWh)"
+      ]
+    },
+    {
+      "id": "mg-mg-zs-ev-2022",
+      "brand": "MG",
+      "model": "MG ZS EV",
+      "year": 2022,
+      "powertrain": "ev",
+      "batteryKWh": 90.2,
+      "energyConsumptionKWhPerKm": 0.1761,
+      "wh_per_km": 176.1,
+      "powerKw": 115.7,
+      "wltpRangeKm": null,
+      "implied_range_km": 512.2,
+      "eea_zr_km": [
+        267,
+        320,
+        440,
+        445
+      ],
+      "eea_model_keys": [
+        "ZSEV"
+      ],
+      "max_eea_zr_model": 445,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(445km→78.4kWh)"
+      ]
+    },
+    {
+      "id": "mg-mg-zs-ev-2023",
+      "brand": "MG",
+      "model": "MG ZS EV",
+      "year": 2023,
+      "powertrain": "ev",
+      "batteryKWh": 89.6,
+      "energyConsumptionKWhPerKm": 0.173,
+      "wh_per_km": 173.0,
+      "powerKw": 75.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 517.9,
+      "eea_zr_km": [
+        320,
+        440
+      ],
+      "eea_model_keys": [
+        "ZSEV"
+      ],
+      "max_eea_zr_model": 445,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(445km→77.0kWh)"
+      ]
+    },
+    {
+      "id": "mg-mg-zs-ev-2024",
+      "brand": "MG",
+      "model": "MG ZS EV",
+      "year": 2024,
+      "powertrain": "ev",
+      "batteryKWh": 93.3,
+      "energyConsumptionKWhPerKm": 0.178,
+      "wh_per_km": 178.0,
+      "powerKw": 73.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 524.2,
+      "eea_zr_km": [
+        320,
+        440
+      ],
+      "eea_model_keys": [
+        "ZSEV"
+      ],
+      "max_eea_zr_model": 445,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(445km→79.2kWh)"
+      ]
+    },
+    {
+      "id": "mg-mg-zs-ev-2025",
+      "brand": "MG",
+      "model": "MG ZS EV",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 89.8,
+      "energyConsumptionKWhPerKm": 0.1695,
+      "wh_per_km": 169.5,
+      "powerKw": 118.9,
+      "wltpRangeKm": null,
+      "implied_range_km": 529.8,
+      "eea_zr_km": [
+        320,
+        440
+      ],
+      "eea_model_keys": [
+        "ZSEV"
+      ],
+      "max_eea_zr_model": 445,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(445km→75.4kWh)"
+      ]
+    },
+    {
+      "id": "mg-mg-zs-ev-2026",
+      "brand": "MG",
+      "model": "MG ZS EV",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 90.4,
+      "energyConsumptionKWhPerKm": 0.1687,
+      "wh_per_km": 168.7,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 535.9,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 445,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(445km→75.1kWh)"
+      ]
+    },
+    {
+      "id": "nissan-ariya-2024",
+      "brand": "Nissan",
+      "model": "Ariya",
+      "year": 2024,
+      "powertrain": "ev",
+      "batteryKWh": 96.4,
+      "energyConsumptionKWhPerKm": 0.175,
+      "wh_per_km": 175.0,
+      "powerKw": 80.0,
+      "wltpRangeKm": 500,
+      "implied_range_km": 550.9,
+      "eea_zr_km": [
+        396,
+        398,
+        403,
+        404,
+        498,
+        507,
+        516,
+        518,
+        522,
+        523,
+        525,
+        531,
+        533
+      ],
+      "eea_model_keys": [
+        "ARIYA"
+      ],
+      "max_eea_zr_model": 533,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(533km→93.3kWh)"
+      ]
+    },
+    {
+      "id": "nissan-leaf-2010",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2010,
+      "powertrain": "ev",
+      "batteryKWh": 52.1,
+      "energyConsumptionKWhPerKm": 0.176,
+      "wh_per_km": 176.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 296.0,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 270,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(270km→47.5kWh)"
+      ]
+    },
+    {
+      "id": "nissan-leaf-2011",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2011,
+      "powertrain": "ev",
+      "batteryKWh": 51.9,
+      "energyConsumptionKWhPerKm": 0.1752,
+      "wh_per_km": 175.2,
+      "powerKw": 80.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 296.2,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 270,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(270km→47.3kWh)"
+      ]
+    },
+    {
+      "id": "nissan-leaf-2012",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2012,
+      "powertrain": "ev",
+      "batteryKWh": 51.7,
+      "energyConsumptionKWhPerKm": 0.1745,
+      "wh_per_km": 174.5,
+      "powerKw": 80.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 296.3,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 270,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(270km→47.1kWh)"
+      ]
+    },
+    {
+      "id": "nissan-leaf-2013",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2013,
+      "powertrain": "ev",
+      "batteryKWh": 49.8,
+      "energyConsumptionKWhPerKm": 0.1684,
+      "wh_per_km": 168.4,
+      "powerKw": 80.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 295.7,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 270,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(270km→45.5kWh)"
+      ]
+    },
+    {
+      "id": "nissan-leaf-2014",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2014,
+      "powertrain": "ev",
+      "batteryKWh": 44.4,
+      "energyConsumptionKWhPerKm": 0.15,
+      "wh_per_km": 150.0,
+      "powerKw": 80.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 296.0,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 270,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(270km→40.5kWh)"
+      ]
+    },
+    {
+      "id": "nissan-leaf-2015",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2015,
+      "powertrain": "ev",
+      "batteryKWh": 44.4,
+      "energyConsumptionKWhPerKm": 0.15,
+      "wh_per_km": 150.0,
+      "powerKw": 80.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 296.0,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 270,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(270km→40.5kWh)"
+      ]
+    },
+    {
+      "id": "nissan-leaf-2016",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2016,
+      "powertrain": "ev",
+      "batteryKWh": 44.6,
+      "energyConsumptionKWhPerKm": 0.1507,
+      "wh_per_km": 150.7,
+      "powerKw": 80.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 296.0,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 270,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(270km→40.7kWh)"
+      ]
+    },
+    {
+      "id": "nissan-leaf-2017",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2017,
+      "powertrain": "ev",
+      "batteryKWh": 45.3,
+      "energyConsumptionKWhPerKm": 0.15,
+      "wh_per_km": 150.0,
+      "powerKw": 115.6,
+      "wltpRangeKm": null,
+      "implied_range_km": 302.0,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 270,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(270km→40.5kWh)"
+      ]
+    },
+    {
+      "id": "nissan-leaf-2018",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2018,
+      "powertrain": "ev",
+      "batteryKWh": 60.4,
+      "energyConsumptionKWhPerKm": 0.196,
+      "wh_per_km": 196.0,
+      "powerKw": 103.6,
+      "wltpRangeKm": 270,
+      "implied_range_km": 308.2,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 270,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(270km→52.9kWh)"
+      ]
+    },
+    {
+      "id": "nissan-leaf-2019",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2019,
+      "powertrain": "ev",
+      "batteryKWh": 64.5,
+      "energyConsumptionKWhPerKm": 0.2054,
+      "wh_per_km": 205.4,
+      "powerKw": 109.6,
+      "wltpRangeKm": 270,
+      "implied_range_km": 314.0,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 270,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(270km→55.5kWh)"
+      ]
+    },
+    {
+      "id": "nissan-leaf-2020",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2020,
+      "powertrain": "ev",
+      "batteryKWh": 64.2,
+      "energyConsumptionKWhPerKm": 0.2005,
+      "wh_per_km": 200.5,
+      "powerKw": 118.4,
+      "wltpRangeKm": 270,
+      "implied_range_km": 320.2,
+      "eea_zr_km": [
+        270
+      ],
+      "eea_model_keys": [
+        "LEAF40KWH"
+      ],
+      "max_eea_zr_model": 270,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(270km→54.1kWh)"
+      ]
+    },
+    {
+      "id": "nissan-leaf-2021",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2021,
+      "powertrain": "ev",
+      "batteryKWh": 60.0,
+      "energyConsumptionKWhPerKm": 0.1841,
+      "wh_per_km": 184.10000000000002,
+      "powerKw": 133.3,
+      "wltpRangeKm": 270,
+      "implied_range_km": 325.9,
+      "eea_zr_km": [
+        270
+      ],
+      "eea_model_keys": [
+        "LEAF"
+      ],
+      "max_eea_zr_model": 270,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(270km→49.7kWh)"
+      ]
+    },
+    {
+      "id": "nissan-leaf-2022",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2022,
+      "powertrain": "ev",
+      "batteryKWh": 57.1,
+      "energyConsumptionKWhPerKm": 0.1721,
+      "wh_per_km": 172.1,
+      "powerKw": 120.7,
+      "wltpRangeKm": 270,
+      "implied_range_km": 331.8,
+      "eea_zr_km": [
+        270,
+        276,
+        282
+      ],
+      "eea_model_keys": [
+        "LEAF40KWH"
+      ],
+      "max_eea_zr_model": 270,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(270km→46.5kWh)"
+      ]
+    },
+    {
+      "id": "nissan-leaf-2023",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2023,
+      "powertrain": "ev",
+      "batteryKWh": 58.0,
+      "energyConsumptionKWhPerKm": 0.1716,
+      "wh_per_km": 171.6,
+      "powerKw": 132.6,
+      "wltpRangeKm": null,
+      "implied_range_km": 338.0,
+      "eea_zr_km": [
+        270,
+        276,
+        282
+      ],
+      "eea_model_keys": [
+        "LEAF40KWH"
+      ],
+      "max_eea_zr_model": 270,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(270km→46.3kWh)"
+      ]
+    },
+    {
+      "id": "nissan-leaf-2024",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2024,
+      "powertrain": "ev",
+      "batteryKWh": 59.1,
+      "energyConsumptionKWhPerKm": 0.1719,
+      "wh_per_km": 171.9,
+      "powerKw": 134.5,
+      "wltpRangeKm": null,
+      "implied_range_km": 343.8,
+      "eea_zr_km": [
+        276,
+        282
+      ],
+      "eea_model_keys": [
+        "LEAF40KWH"
+      ],
+      "max_eea_zr_model": 270,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(270km→46.4kWh)"
+      ]
+    },
+    {
+      "id": "nissan-leaf-2025",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 56.8,
+      "energyConsumptionKWhPerKm": 0.1647,
+      "wh_per_km": 164.70000000000002,
+      "powerKw": 160.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 344.9,
+      "eea_zr_km": [
+        276,
+        282
+      ],
+      "eea_model_keys": [
+        "LEAF40KWH"
+      ],
+      "max_eea_zr_model": 270,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(270km→44.5kWh)"
+      ]
+    },
+    {
+      "id": "nissan-leaf-2026",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 58.4,
+      "energyConsumptionKWhPerKm": 0.164,
+      "wh_per_km": 164.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 356.1,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 270,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(270km→44.3kWh)"
+      ]
+    },
+    {
+      "id": "opel-astra-electric-2025",
+      "brand": "Opel",
+      "model": "Astra Electric",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 86.1,
+      "energyConsumptionKWhPerKm": 0.153,
+      "wh_per_km": 153.0,
+      "powerKw": 97.9,
+      "wltpRangeKm": null,
+      "implied_range_km": 562.7,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 417,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(417km→63.8kWh)"
+      ]
+    },
+    {
+      "id": "opel-astra-electric-2026",
+      "brand": "Opel",
+      "model": "Astra Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 86.8,
+      "energyConsumptionKWhPerKm": 0.153,
+      "wh_per_km": 153.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 567.3,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 417,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(417km→63.8kWh)"
+      ]
+    },
+    {
+      "id": "opel-corsa-electric-2020",
+      "brand": "Opel",
+      "model": "Corsa Electric",
+      "year": 2020,
+      "powertrain": "ev",
+      "batteryKWh": 82.5,
+      "energyConsumptionKWhPerKm": 0.1651,
+      "wh_per_km": 165.1,
+      "powerKw": 67.7,
+      "wltpRangeKm": null,
+      "implied_range_km": 499.7,
+      "eea_zr_km": [
+        334,
+        335,
+        336,
+        337
+      ],
+      "eea_model_keys": [
+        "CORSA"
+      ],
+      "max_eea_zr_model": 405,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(405km→66.9kWh)"
+      ]
+    },
+    {
+      "id": "opel-corsa-electric-2021",
+      "brand": "Opel",
+      "model": "Corsa Electric",
+      "year": 2021,
+      "powertrain": "ev",
+      "batteryKWh": 83.4,
+      "energyConsumptionKWhPerKm": 0.1649,
+      "wh_per_km": 164.89999999999998,
+      "powerKw": 66.8,
+      "wltpRangeKm": null,
+      "implied_range_km": 505.8,
+      "eea_zr_km": [
+        332,
+        333,
+        334,
+        335,
+        336,
+        337,
+        351,
+        356
+      ],
+      "eea_model_keys": [
+        "CORSA"
+      ],
+      "max_eea_zr_model": 405,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(405km→66.8kWh)"
+      ]
+    },
+    {
+      "id": "opel-corsa-electric-2022",
+      "brand": "Opel",
+      "model": "Corsa Electric",
+      "year": 2022,
+      "powertrain": "ev",
+      "batteryKWh": 81.5,
+      "energyConsumptionKWhPerKm": 0.1591,
+      "wh_per_km": 159.1,
+      "powerKw": 70.4,
+      "wltpRangeKm": null,
+      "implied_range_km": 512.3,
+      "eea_zr_km": [
+        333,
+        334,
+        335,
+        336,
+        337,
+        351,
+        352,
+        356,
+        357,
+        358,
+        359,
+        360,
+        361
+      ],
+      "eea_model_keys": [
+        "CORSA"
+      ],
+      "max_eea_zr_model": 405,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(405km→64.4kWh)"
+      ]
+    },
+    {
+      "id": "opel-corsa-electric-2023",
+      "brand": "Opel",
+      "model": "Corsa Electric",
+      "year": 2023,
+      "powertrain": "ev",
+      "batteryKWh": 81.6,
+      "energyConsumptionKWhPerKm": 0.1575,
+      "wh_per_km": 157.5,
+      "powerKw": 74.3,
+      "wltpRangeKm": null,
+      "implied_range_km": 518.1,
+      "eea_zr_km": [
+        350,
+        351,
+        352,
+        354,
+        356,
+        358,
+        359,
+        360,
+        361,
+        362,
+        397
+      ],
+      "eea_model_keys": [
+        "CORSA"
+      ],
+      "max_eea_zr_model": 405,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(405km→63.8kWh)"
+      ]
+    },
+    {
+      "id": "opel-corsa-electric-2024",
+      "brand": "Opel",
+      "model": "Corsa Electric",
+      "year": 2024,
+      "powertrain": "ev",
+      "batteryKWh": 81.1,
+      "energyConsumptionKWhPerKm": 0.1548,
+      "wh_per_km": 154.79999999999998,
+      "powerKw": 71.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 523.9,
+      "eea_zr_km": [
+        351,
+        352,
+        354,
+        356,
+        357,
+        358,
+        359,
+        360,
+        361,
+        362,
+        397,
+        403,
+        405
+      ],
+      "eea_model_keys": [
+        "CORSA"
+      ],
+      "max_eea_zr_model": 405,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(405km→62.7kWh)"
+      ]
+    },
+    {
+      "id": "opel-corsa-electric-2025",
+      "brand": "Opel",
+      "model": "Corsa Electric",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 88.0,
+      "energyConsumptionKWhPerKm": 0.155,
+      "wh_per_km": 155.0,
+      "powerKw": 77.2,
+      "wltpRangeKm": null,
+      "implied_range_km": 567.7,
+      "eea_zr_km": [
+        356
+      ],
+      "eea_model_keys": [
+        "CORSA"
+      ],
+      "max_eea_zr_model": 405,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(405km→62.8kWh)"
+      ]
+    },
+    {
+      "id": "opel-corsa-electric-2026",
+      "brand": "Opel",
+      "model": "Corsa Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 88.6,
+      "energyConsumptionKWhPerKm": 0.155,
+      "wh_per_km": 155.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 571.6,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 405,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(405km→62.8kWh)"
+      ]
+    },
+    {
+      "id": "opel-mokka-electric-2020",
+      "brand": "Opel",
+      "model": "Mokka Electric",
+      "year": 2020,
+      "powertrain": "ev",
+      "batteryKWh": 88.7,
+      "energyConsumptionKWhPerKm": 0.1773,
+      "wh_per_km": 177.3,
+      "powerKw": 79.5,
+      "wltpRangeKm": null,
+      "implied_range_km": 500.3,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 408,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(408km→72.3kWh)"
+      ]
+    },
+    {
+      "id": "opel-mokka-electric-2021",
+      "brand": "Opel",
+      "model": "Mokka Electric",
+      "year": 2021,
+      "powertrain": "ev",
+      "batteryKWh": 85.9,
+      "energyConsumptionKWhPerKm": 0.1697,
+      "wh_per_km": 169.7,
+      "powerKw": 84.9,
+      "wltpRangeKm": null,
+      "implied_range_km": 506.2,
+      "eea_zr_km": [
+        318,
+        319,
+        320,
+        324,
+        328,
+        335,
+        338,
+        339
+      ],
+      "eea_model_keys": [
+        "MOKKA"
+      ],
+      "max_eea_zr_model": 408,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(408km→69.2kWh)"
+      ]
+    },
+    {
+      "id": "opel-mokka-electric-2022",
+      "brand": "Opel",
+      "model": "Mokka Electric",
+      "year": 2022,
+      "powertrain": "ev",
+      "batteryKWh": 82.5,
+      "energyConsumptionKWhPerKm": 0.1612,
+      "wh_per_km": 161.20000000000002,
+      "powerKw": 88.2,
+      "wltpRangeKm": null,
+      "implied_range_km": 511.8,
+      "eea_zr_km": [
+        318,
+        319,
+        320,
+        324,
+        328,
+        329,
+        335,
+        337,
+        338,
+        339,
+        341,
+        342
+      ],
+      "eea_model_keys": [
+        "MOKKA"
+      ],
+      "max_eea_zr_model": 408,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(408km→65.8kWh)"
+      ]
+    },
+    {
+      "id": "opel-mokka-electric-2023",
+      "brand": "Opel",
+      "model": "Mokka Electric",
+      "year": 2023,
+      "powertrain": "ev",
+      "batteryKWh": 83.1,
+      "energyConsumptionKWhPerKm": 0.1605,
+      "wh_per_km": 160.5,
+      "powerKw": 100.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 517.8,
+      "eea_zr_km": [
+        327,
+        328,
+        329,
+        334,
+        335,
+        338,
+        340,
+        341,
+        342
+      ],
+      "eea_model_keys": [
+        "MOKKA"
+      ],
+      "max_eea_zr_model": 408,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(408km→65.5kWh)"
+      ]
+    },
+    {
+      "id": "opel-mokka-electric-2024",
+      "brand": "Opel",
+      "model": "Mokka Electric",
+      "year": 2024,
+      "powertrain": "ev",
+      "batteryKWh": 84.0,
+      "energyConsumptionKWhPerKm": 0.1604,
+      "wh_per_km": 160.39999999999998,
+      "powerKw": 57.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 523.7,
+      "eea_zr_km": [
+        327,
+        328,
+        334,
+        338,
+        341,
+        342,
+        400,
+        405,
+        407,
+        408
+      ],
+      "eea_model_keys": [
+        "MOKKA"
+      ],
+      "max_eea_zr_model": 408,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(408km→65.4kWh)"
+      ]
+    },
+    {
+      "id": "opel-mokka-electric-2025",
+      "brand": "Opel",
+      "model": "Mokka Electric",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 85.0,
+      "energyConsumptionKWhPerKm": 0.1603,
+      "wh_per_km": 160.3,
+      "powerKw": 57.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 530.3,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 408,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(408km→65.4kWh)"
+      ]
+    },
+    {
+      "id": "opel-mokka-electric-2026",
+      "brand": "Opel",
+      "model": "Mokka Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 85.5,
+      "energyConsumptionKWhPerKm": 0.1595,
+      "wh_per_km": 159.5,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 536.1,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 408,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(408km→65.1kWh)"
+      ]
+    },
+    {
+      "id": "peugeot-e-2008-2019",
+      "brand": "Peugeot",
+      "model": "e-2008",
+      "year": 2019,
+      "powertrain": "ev",
+      "batteryKWh": 90.4,
+      "energyConsumptionKWhPerKm": 0.183,
+      "wh_per_km": 183.0,
+      "powerKw": 79.5,
+      "wltpRangeKm": null,
+      "implied_range_km": 494.0,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 406,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(406km→74.3kWh)"
+      ]
+    },
+    {
+      "id": "peugeot-e-2008-2020",
+      "brand": "Peugeot",
+      "model": "e-2008",
+      "year": 2020,
+      "powertrain": "ev",
+      "batteryKWh": 88.0,
+      "energyConsumptionKWhPerKm": 0.1761,
+      "wh_per_km": 176.1,
+      "powerKw": 88.6,
+      "wltpRangeKm": null,
+      "implied_range_km": 499.7,
+      "eea_zr_km": [
+        318,
+        319,
+        321,
+        322,
+        323,
+        324,
+        325
+      ],
+      "eea_model_keys": [
+        "2008"
+      ],
+      "max_eea_zr_model": 406,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(406km→71.5kWh)"
+      ]
+    },
+    {
+      "id": "peugeot-e-2008-2021",
+      "brand": "Peugeot",
+      "model": "e-2008",
+      "year": 2021,
+      "powertrain": "ev",
+      "batteryKWh": 88.9,
+      "energyConsumptionKWhPerKm": 0.1757,
+      "wh_per_km": 175.7,
+      "powerKw": 86.9,
+      "wltpRangeKm": null,
+      "implied_range_km": 506.0,
+      "eea_zr_km": [
+        318,
+        319,
+        320,
+        321,
+        322,
+        323,
+        324,
+        325,
+        326,
+        340,
+        341,
+        342
+      ],
+      "eea_model_keys": [
+        "2008"
+      ],
+      "max_eea_zr_model": 406,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(406km→71.3kWh)"
+      ]
+    },
+    {
+      "id": "peugeot-e-2008-2022",
+      "brand": "Peugeot",
+      "model": "e-2008",
+      "year": 2022,
+      "powertrain": "ev",
+      "batteryKWh": 82.6,
+      "energyConsumptionKWhPerKm": 0.1613,
+      "wh_per_km": 161.3,
+      "powerKw": 89.9,
+      "wltpRangeKm": null,
+      "implied_range_km": 512.1,
+      "eea_zr_km": [
+        318,
+        319,
+        320,
+        321,
+        322,
+        324,
+        325,
+        326,
+        329,
+        330,
+        331,
+        332,
+        335,
+        336,
+        337,
+        340,
+        341,
+        342
+      ],
+      "eea_model_keys": [
+        "2008"
+      ],
+      "max_eea_zr_model": 406,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(406km→65.5kWh)"
+      ]
+    },
+    {
+      "id": "peugeot-e-2008-2023",
+      "brand": "Peugeot",
+      "model": "e-2008",
+      "year": 2023,
+      "powertrain": "ev",
+      "batteryKWh": 81.2,
+      "energyConsumptionKWhPerKm": 0.1568,
+      "wh_per_km": 156.79999999999998,
+      "powerKw": 106.5,
+      "wltpRangeKm": null,
+      "implied_range_km": 517.9,
+      "eea_zr_km": [
+        320,
+        330,
+        331,
+        332,
+        333,
+        336,
+        337,
+        340,
+        341,
+        399,
+        400,
+        401,
+        402,
+        403,
+        404,
+        406
+      ],
+      "eea_model_keys": [
+        "2008"
+      ],
+      "max_eea_zr_model": 406,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(406km→63.7kWh)"
+      ]
+    },
+    {
+      "id": "peugeot-e-2008-2024",
+      "brand": "Peugeot",
+      "model": "e-2008",
+      "year": 2024,
+      "powertrain": "ev",
+      "batteryKWh": 82.3,
+      "energyConsumptionKWhPerKm": 0.157,
+      "wh_per_km": 157.0,
+      "powerKw": 105.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 524.2,
+      "eea_zr_km": [
+        331,
+        332,
+        333,
+        334,
+        336,
+        337,
+        340,
+        341,
+        342,
+        343,
+        344,
+        345,
+        346,
+        399,
+        400,
+        401,
+        402,
+        403,
+        404,
+        405,
+        406
+      ],
+      "eea_model_keys": [
+        "2008"
+      ],
+      "max_eea_zr_model": 406,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(406km→63.7kWh)"
+      ]
+    },
+    {
+      "id": "peugeot-e-2008-2025",
+      "brand": "Peugeot",
+      "model": "e-2008",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 92.0,
+      "energyConsumptionKWhPerKm": 0.157,
+      "wh_per_km": 157.0,
+      "powerKw": 115.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 586.0,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 406,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(406km→63.7kWh)"
+      ]
+    },
+    {
+      "id": "peugeot-e-2008-2026",
+      "brand": "Peugeot",
+      "model": "e-2008",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 92.6,
+      "energyConsumptionKWhPerKm": 0.157,
+      "wh_per_km": 157.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 589.8,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 406,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(406km→63.7kWh)"
+      ]
+    },
+    {
+      "id": "peugeot-e-208-2019",
+      "brand": "Peugeot",
+      "model": "e-208",
+      "year": 2019,
+      "powertrain": "ev",
+      "batteryKWh": 86.9,
+      "energyConsumptionKWhPerKm": 0.176,
+      "wh_per_km": 176.0,
+      "powerKw": 67.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 493.8,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 410,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(410km→72.2kWh)"
+      ]
+    },
+    {
+      "id": "peugeot-e-208-2020",
+      "brand": "Peugeot",
+      "model": "e-208",
+      "year": 2020,
+      "powertrain": "ev",
+      "batteryKWh": 82.2,
+      "energyConsumptionKWhPerKm": 0.1645,
+      "wh_per_km": 164.5,
+      "powerKw": 70.3,
+      "wltpRangeKm": null,
+      "implied_range_km": 499.7,
+      "eea_zr_km": [
+        335,
+        336,
+        338,
+        339,
+        340
+      ],
+      "eea_model_keys": [
+        "208"
+      ],
+      "max_eea_zr_model": 410,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(410km→67.4kWh)"
+      ]
+    },
+    {
+      "id": "peugeot-e-208-2021",
+      "brand": "Peugeot",
+      "model": "e-208",
+      "year": 2021,
+      "powertrain": "ev",
+      "batteryKWh": 83.0,
+      "energyConsumptionKWhPerKm": 0.164,
+      "wh_per_km": 164.0,
+      "powerKw": 69.6,
+      "wltpRangeKm": null,
+      "implied_range_km": 506.1,
+      "eea_zr_km": [
+        335,
+        336,
+        337,
+        338,
+        339,
+        340,
+        350,
+        351,
+        353,
+        361,
+        362
+      ],
+      "eea_model_keys": [
+        "208"
+      ],
+      "max_eea_zr_model": 410,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(410km→67.2kWh)"
+      ]
+    },
+    {
+      "id": "peugeot-e-208-2022",
+      "brand": "Peugeot",
+      "model": "e-208",
+      "year": 2022,
+      "powertrain": "ev",
+      "batteryKWh": 80.5,
+      "energyConsumptionKWhPerKm": 0.1573,
+      "wh_per_km": 157.29999999999998,
+      "powerKw": 73.3,
+      "wltpRangeKm": null,
+      "implied_range_km": 511.8,
+      "eea_zr_km": [
+        335,
+        336,
+        338,
+        339,
+        340,
+        350,
+        351,
+        352,
+        353,
+        361,
+        362
+      ],
+      "eea_model_keys": [
+        "208"
+      ],
+      "max_eea_zr_model": 410,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(410km→64.5kWh)"
+      ]
+    },
+    {
+      "id": "peugeot-e-208-2023",
+      "brand": "Peugeot",
+      "model": "e-208",
+      "year": 2023,
+      "powertrain": "ev",
+      "batteryKWh": 81.9,
+      "energyConsumptionKWhPerKm": 0.1582,
+      "wh_per_km": 158.20000000000002,
+      "powerKw": 100.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 517.7,
+      "eea_zr_km": [
+        350,
+        351,
+        352,
+        353,
+        361,
+        362,
+        400
+      ],
+      "eea_model_keys": [
+        "208"
+      ],
+      "max_eea_zr_model": 410,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(410km→64.9kWh)"
+      ]
+    },
+    {
+      "id": "peugeot-e-208-2025",
+      "brand": "Peugeot",
+      "model": "e-208",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 84.4,
+      "energyConsumptionKWhPerKm": 0.1593,
+      "wh_per_km": 159.3,
+      "powerKw": 114.3,
+      "wltpRangeKm": null,
+      "implied_range_km": 529.8,
+      "eea_zr_km": [
+        351,
+        362
+      ],
+      "eea_model_keys": [
+        "208"
+      ],
+      "max_eea_zr_model": 410,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(410km→65.3kWh)"
+      ]
+    },
+    {
+      "id": "peugeot-e-208-2026",
+      "brand": "Peugeot",
+      "model": "e-208",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 85.0,
+      "energyConsumptionKWhPerKm": 0.1585,
+      "wh_per_km": 158.5,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 536.3,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 410,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(410km→65.0kWh)"
+      ]
+    },
+    {
+      "id": "peugeot-e-308-2025",
+      "brand": "Peugeot",
+      "model": "e-308",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 86.7,
+      "energyConsumptionKWhPerKm": 0.15,
+      "wh_per_km": 150.0,
+      "powerKw": 115.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 578.0,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 416,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(416km→62.4kWh)"
+      ]
+    },
+    {
+      "id": "peugeot-e-308-2026",
+      "brand": "Peugeot",
+      "model": "e-308",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 87.4,
+      "energyConsumptionKWhPerKm": 0.15,
+      "wh_per_km": 150.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 582.7,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 416,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(416km→62.4kWh)"
+      ]
+    },
+    {
+      "id": "peugeot-e-5008-2025",
+      "brand": "Peugeot",
+      "model": "e-5008",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 92.0,
+      "energyConsumptionKWhPerKm": 0.182,
+      "wh_per_km": 182.0,
+      "powerKw": 157.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 505.5,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 501,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(501km→91.2kWh)"
+      ]
+    },
+    {
+      "id": "peugeot-e-5008-2026",
+      "brand": "Peugeot",
+      "model": "e-5008",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 92.8,
+      "energyConsumptionKWhPerKm": 0.182,
+      "wh_per_km": 182.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 509.9,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 501,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(501km→91.2kWh)"
+      ]
+    },
+    {
+      "id": "renault-megane-e-tech-2021",
+      "brand": "Renault",
+      "model": "Megane E-Tech",
+      "year": 2021,
+      "powertrain": "ev",
+      "batteryKWh": 82.6,
+      "energyConsumptionKWhPerKm": 0.1632,
+      "wh_per_km": 163.20000000000002,
+      "powerKw": 67.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 506.1,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 470,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(470km→76.7kWh)"
+      ]
+    },
+    {
+      "id": "renault-megane-e-tech-2022",
+      "brand": "Renault",
+      "model": "Megane E-Tech",
+      "year": 2022,
+      "powertrain": "ev",
+      "batteryKWh": 77.3,
+      "energyConsumptionKWhPerKm": 0.151,
+      "wh_per_km": 151.0,
+      "powerKw": 69.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 511.9,
+      "eea_zr_km": [
+        292,
+        294,
+        297,
+        298,
+        428,
+        429,
+        430,
+        431,
+        433,
+        434,
+        435,
+        436,
+        438,
+        444,
+        446,
+        452,
+        453,
+        458,
+        459,
+        460
+      ],
+      "eea_model_keys": [
+        "MEGANEETECHELECTRIC"
+      ],
+      "max_eea_zr_model": 470,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(470km→71.0kWh)"
+      ]
+    },
+    {
+      "id": "renault-megane-e-tech-2023",
+      "brand": "Renault",
+      "model": "Megane E-Tech",
+      "year": 2023,
+      "powertrain": "ev",
+      "batteryKWh": 77.5,
+      "energyConsumptionKWhPerKm": 0.1497,
+      "wh_per_km": 149.7,
+      "powerKw": 69.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 517.7,
+      "eea_zr_km": [
+        289,
+        290,
+        292,
+        293,
+        294,
+        297,
+        298,
+        428,
+        429,
+        430,
+        431,
+        432,
+        433,
+        434,
+        435,
+        436,
+        444,
+        451,
+        452,
+        453,
+        458,
+        459,
+        460
+      ],
+      "eea_model_keys": [
+        "MEGANEETECHELECTRIC"
+      ],
+      "max_eea_zr_model": 470,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(470km→70.4kWh)"
+      ]
+    },
+    {
+      "id": "renault-megane-e-tech-2024",
+      "brand": "Renault",
+      "model": "Megane E-Tech",
+      "year": 2024,
+      "powertrain": "ev",
+      "batteryKWh": 84.9,
+      "energyConsumptionKWhPerKm": 0.162,
+      "wh_per_km": 162.0,
+      "powerKw": 55.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 524.1,
+      "eea_zr_km": [
+        297,
+        298,
+        428,
+        429,
+        430,
+        431,
+        433,
+        434,
+        435,
+        436,
+        437,
+        452,
+        458,
+        459,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        467,
+        468,
+        469,
+        470
+      ],
+      "eea_model_keys": [
+        "MEGANEETECHELECTRIC"
+      ],
+      "max_eea_zr_model": 470,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(470km→76.1kWh)"
+      ]
+    },
+    {
+      "id": "renault-megane-e-tech-2025",
+      "brand": "Renault",
+      "model": "Megane E-Tech",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 82.8,
+      "energyConsumptionKWhPerKm": 0.1562,
+      "wh_per_km": 156.20000000000002,
+      "powerKw": 55.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 530.1,
+      "eea_zr_km": [
+        429,
+        430,
+        434,
+        435,
+        437,
+        452,
+        454,
+        456,
+        457,
+        458,
+        459,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        467,
+        468,
+        469,
+        470
+      ],
+      "eea_model_keys": [
+        "MEGANEETECHELECTRIC"
+      ],
+      "max_eea_zr_model": 470,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(470km→73.4kWh)"
+      ]
+    },
+    {
+      "id": "renault-megane-e-tech-2026",
+      "brand": "Renault",
+      "model": "Megane E-Tech",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 83.3,
+      "energyConsumptionKWhPerKm": 0.1555,
+      "wh_per_km": 155.5,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 535.7,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 470,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(470km→73.1kWh)"
+      ]
+    },
+    {
+      "id": "renault-twingo-electric-2020",
+      "brand": "Renault",
+      "model": "Twingo Electric",
+      "year": 2020,
+      "powertrain": "ev",
+      "batteryKWh": 53.3,
+      "energyConsumptionKWhPerKm": 0.1615,
+      "wh_per_km": 161.5,
+      "powerKw": 56.9,
+      "wltpRangeKm": null,
+      "implied_range_km": 330.0,
+      "eea_zr_km": [
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188
+      ],
+      "eea_model_keys": [
+        "TWINGO"
+      ],
+      "max_eea_zr_model": 189,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(189km→30.5kWh)"
+      ]
+    },
+    {
+      "id": "renault-twingo-electric-2021",
+      "brand": "Renault",
+      "model": "Twingo Electric",
+      "year": 2021,
+      "powertrain": "ev",
+      "batteryKWh": 54.2,
+      "energyConsumptionKWhPerKm": 0.1613,
+      "wh_per_km": 161.3,
+      "powerKw": 42.1,
+      "wltpRangeKm": null,
+      "implied_range_km": 336.0,
+      "eea_zr_km": [
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189
+      ],
+      "eea_model_keys": [
+        "TWINGO"
+      ],
+      "max_eea_zr_model": 189,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(189km→30.5kWh)"
+      ]
+    },
+    {
+      "id": "renault-twingo-electric-2022",
+      "brand": "Renault",
+      "model": "Twingo Electric",
+      "year": 2022,
+      "powertrain": "ev",
+      "batteryKWh": 55.1,
+      "energyConsumptionKWhPerKm": 0.1612,
+      "wh_per_km": 161.20000000000002,
+      "powerKw": 49.8,
+      "wltpRangeKm": null,
+      "implied_range_km": 341.8,
+      "eea_zr_km": [
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189
+      ],
+      "eea_model_keys": [
+        "TWINGO"
+      ],
+      "max_eea_zr_model": 189,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(189km→30.5kWh)"
+      ]
+    },
+    {
+      "id": "renault-twingo-electric-2023",
+      "brand": "Renault",
+      "model": "Twingo Electric",
+      "year": 2023,
+      "powertrain": "ev",
+      "batteryKWh": 54.7,
+      "energyConsumptionKWhPerKm": 0.1573,
+      "wh_per_km": 157.29999999999998,
+      "powerKw": 54.1,
+      "wltpRangeKm": null,
+      "implied_range_km": 347.7,
+      "eea_zr_km": [
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189
+      ],
+      "eea_model_keys": [
+        "TWINGO"
+      ],
+      "max_eea_zr_model": 189,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(189km→29.7kWh)"
+      ]
+    },
+    {
+      "id": "renault-twingo-electric-2024",
+      "brand": "Renault",
+      "model": "Twingo Electric",
+      "year": 2024,
+      "powertrain": "ev",
+      "batteryKWh": 53.8,
+      "energyConsumptionKWhPerKm": 0.1521,
+      "wh_per_km": 152.10000000000002,
+      "powerKw": 54.6,
+      "wltpRangeKm": null,
+      "implied_range_km": 353.7,
+      "eea_zr_km": [
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189
+      ],
+      "eea_model_keys": [
+        "TWINGO"
+      ],
+      "max_eea_zr_model": 189,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(189km→28.7kWh)"
+      ]
+    },
+    {
+      "id": "renault-zoe-2019",
+      "brand": "Renault",
+      "model": "Zoe",
+      "year": 2019,
+      "powertrain": "ev",
+      "batteryKWh": 58.5,
+      "energyConsumptionKWhPerKm": 0.137,
+      "wh_per_km": 137.0,
+      "powerKw": 54.3,
+      "wltpRangeKm": 300,
+      "implied_range_km": 427.0,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 395,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(395km→54.1kWh)"
+      ]
+    },
+    {
+      "id": "seat-mii-electric-2019",
+      "brand": "SEAT",
+      "model": "Mii electric",
+      "year": 2019,
+      "powertrain": "ev",
+      "batteryKWh": 41.8,
+      "energyConsumptionKWhPerKm": 0.129,
+      "wh_per_km": 129.0,
+      "powerKw": 47.9,
+      "wltpRangeKm": null,
+      "implied_range_km": 324.0,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 251,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(251km→32.4kWh)"
+      ]
+    },
+    {
+      "id": "seat-mii-electric-2020",
+      "brand": "SEAT",
+      "model": "Mii electric",
+      "year": 2020,
+      "powertrain": "ev",
+      "batteryKWh": 46.1,
+      "energyConsumptionKWhPerKm": 0.1398,
+      "wh_per_km": 139.8,
+      "powerKw": 59.9,
+      "wltpRangeKm": null,
+      "implied_range_km": 329.8,
+      "eea_zr_km": [
+        251
+      ],
+      "eea_model_keys": [
+        "MII"
+      ],
+      "max_eea_zr_model": 251,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(251km→35.1kWh)"
+      ]
+    },
+    {
+      "id": "seat-mii-electric-2021",
+      "brand": "SEAT",
+      "model": "Mii electric",
+      "year": 2021,
+      "powertrain": "ev",
+      "batteryKWh": 46.6,
+      "energyConsumptionKWhPerKm": 0.1386,
+      "wh_per_km": 138.6,
+      "powerKw": 61.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 336.2,
+      "eea_zr_km": [],
+      "eea_model_keys": [
+        "MII"
+      ],
+      "max_eea_zr_model": 251,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(251km→34.8kWh)"
+      ]
+    },
+    {
+      "id": "skoda-citigo-e-iv-2019",
+      "brand": "Skoda",
+      "model": "Citigo-e iV",
+      "year": 2019,
+      "powertrain": "ev",
+      "batteryKWh": 41.8,
+      "energyConsumptionKWhPerKm": 0.129,
+      "wh_per_km": 129.0,
+      "powerKw": 47.3,
+      "wltpRangeKm": null,
+      "implied_range_km": 324.0,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 255,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(255km→32.9kWh)"
+      ]
+    },
+    {
+      "id": "skoda-citigo-e-iv-2020",
+      "brand": "Skoda",
+      "model": "Citigo-e iV",
+      "year": 2020,
+      "powertrain": "ev",
+      "batteryKWh": 47.8,
+      "energyConsumptionKWhPerKm": 0.1448,
+      "wh_per_km": 144.8,
+      "powerKw": 60.5,
+      "wltpRangeKm": null,
+      "implied_range_km": 330.1,
+      "eea_zr_km": [
+        252,
+        253,
+        254,
+        255
+      ],
+      "eea_model_keys": [
+        "CITIGO"
+      ],
+      "max_eea_zr_model": 255,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(255km→36.9kWh)"
+      ]
+    },
+    {
+      "id": "skoda-citigo-e-iv-2021",
+      "brand": "Skoda",
+      "model": "Citigo-e iV",
+      "year": 2021,
+      "powertrain": "ev",
+      "batteryKWh": 44.0,
+      "energyConsumptionKWhPerKm": 0.1309,
+      "wh_per_km": 130.89999999999998,
+      "powerKw": 61.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 336.1,
+      "eea_zr_km": [
+        254
+      ],
+      "eea_model_keys": [
+        "CITIGO"
+      ],
+      "max_eea_zr_model": 255,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(255km→33.4kWh)"
+      ]
+    },
+    {
+      "id": "skoda-enyaq-2020",
+      "brand": "Skoda",
+      "model": "Enyaq",
+      "year": 2020,
+      "powertrain": "ev",
+      "batteryKWh": 83.0,
+      "energyConsumptionKWhPerKm": 0.1845,
+      "wh_per_km": 184.5,
+      "powerKw": 70.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 449.9,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 362,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(362km→66.8kWh)"
+      ]
+    },
+    {
+      "id": "skoda-enyaq-2025",
+      "brand": "Skoda",
+      "model": "Enyaq",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 86.7,
+      "energyConsumptionKWhPerKm": 0.16,
+      "wh_per_km": 160.0,
+      "powerKw": 171.4,
+      "wltpRangeKm": null,
+      "implied_range_km": 541.9,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 362,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(362km→57.9kWh)"
+      ]
+    },
+    {
+      "id": "skoda-enyaq-2026",
+      "brand": "Skoda",
+      "model": "Enyaq",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 87.5,
+      "energyConsumptionKWhPerKm": 0.16,
+      "wh_per_km": 160.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 546.9,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 362,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(362km→57.9kWh)"
+      ]
+    },
+    {
+      "id": "smart-1-2022",
+      "brand": "Smart",
+      "model": "#1",
+      "year": 2022,
+      "powertrain": "ev",
+      "batteryKWh": 91.6,
+      "energyConsumptionKWhPerKm": 0.179,
+      "wh_per_km": 179.0,
+      "powerKw": 116.0,
+      "wltpRangeKm": null,
+      "implied_range_km": 511.7,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 440,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(440km→78.8kWh)"
+      ]
+    },
+    {
+      "id": "smart-1-2023",
+      "brand": "Smart",
+      "model": "#1",
+      "year": 2023,
+      "powertrain": "ev",
+      "batteryKWh": 90.3,
+      "energyConsumptionKWhPerKm": 0.1743,
+      "wh_per_km": 174.3,
+      "powerKw": 205.0,
+      "wltpRangeKm": 420,
+      "implied_range_km": 518.1,
+      "eea_zr_km": [
+        400,
+        420,
+        440
+      ],
+      "eea_model_keys": [
+        "1"
+      ],
+      "max_eea_zr_model": 440,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(440km→76.7kWh)"
+      ]
+    },
+    {
+      "id": "smart-1-2024",
+      "brand": "Smart",
+      "model": "#1",
+      "year": 2024,
+      "powertrain": "ev",
+      "batteryKWh": 93.2,
+      "energyConsumptionKWhPerKm": 0.1779,
+      "wh_per_km": 177.9,
+      "powerKw": 210.2,
+      "wltpRangeKm": null,
+      "implied_range_km": 523.9,
+      "eea_zr_km": [
+        310,
+        400,
+        420,
+        440
+      ],
+      "eea_model_keys": [
+        "1"
+      ],
+      "max_eea_zr_model": 440,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(440km→78.3kWh)"
+      ]
+    },
+    {
+      "id": "smart-1-2025",
+      "brand": "Smart",
+      "model": "#1",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 91.5,
+      "energyConsumptionKWhPerKm": 0.1727,
+      "wh_per_km": 172.7,
+      "powerKw": 167.2,
+      "wltpRangeKm": null,
+      "implied_range_km": 529.8,
+      "eea_zr_km": [
+        310,
+        400,
+        420,
+        440
+      ],
+      "eea_model_keys": [
+        "1"
+      ],
+      "max_eea_zr_model": 440,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(440km→76.0kWh)"
+      ]
+    },
+    {
+      "id": "smart-1-2026",
+      "brand": "Smart",
+      "model": "#1",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 92.2,
+      "energyConsumptionKWhPerKm": 0.172,
+      "wh_per_km": 172.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 536.0,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 440,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(440km→75.7kWh)"
+      ]
+    },
+    {
+      "id": "smart-3-2025",
+      "brand": "Smart",
+      "model": "#3",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 82.4,
+      "energyConsumptionKWhPerKm": 0.1682,
+      "wh_per_km": 168.2,
+      "powerKw": 125.9,
+      "wltpRangeKm": null,
+      "implied_range_km": 489.9,
+      "eea_zr_km": [
+        325,
+        415,
+        435,
+        455
+      ],
+      "eea_model_keys": [
+        "3"
+      ],
+      "max_eea_zr_model": 455,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(455km→76.5kWh)"
+      ]
+    },
+    {
+      "id": "smart-3-2026",
+      "brand": "Smart",
+      "model": "#3",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 83.1,
+      "energyConsumptionKWhPerKm": 0.1675,
+      "wh_per_km": 167.5,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 496.1,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 455,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(455km→76.2kWh)"
+      ]
+    },
+    {
+      "id": "subaru-solterra-2025",
+      "brand": "Subaru",
+      "model": "Solterra",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 89.3,
+      "energyConsumptionKWhPerKm": 0.173,
+      "wh_per_km": 173.0,
+      "powerKw": 148.6,
+      "wltpRangeKm": 460,
+      "implied_range_km": 516.2,
+      "eea_zr_km": [
+        416,
+        466
+      ],
+      "eea_model_keys": [
+        "SOLTERRA"
+      ],
+      "max_eea_zr_model": 466,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(466km→80.6kWh)"
+      ]
+    },
+    {
+      "id": "subaru-solterra-2026",
+      "brand": "Subaru",
+      "model": "Solterra",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 90.1,
+      "energyConsumptionKWhPerKm": 0.173,
+      "wh_per_km": 173.0,
+      "powerKw": null,
+      "wltpRangeKm": 460,
+      "implied_range_km": 520.8,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 466,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(466km→80.6kWh)"
+      ]
+    },
+    {
+      "id": "toyota-proace-electric-2020",
+      "brand": "Toyota",
+      "model": "Proace Electric",
+      "year": 2020,
+      "powertrain": "ev",
+      "batteryKWh": 84.3,
+      "energyConsumptionKWhPerKm": 0.1915,
+      "wh_per_km": 191.5,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 440.2,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 344,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(344km→65.9kWh)"
+      ]
+    },
+    {
+      "id": "toyota-proace-electric-2021",
+      "brand": "Toyota",
+      "model": "Proace Electric",
+      "year": 2021,
+      "powertrain": "ev",
+      "batteryKWh": 85.1,
+      "energyConsumptionKWhPerKm": 0.1908,
+      "wh_per_km": 190.8,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 446.0,
+      "eea_zr_km": [
+        216,
+        220,
+        222,
+        306,
+        310,
+        312,
+        314
+      ],
+      "eea_model_keys": [
+        "PROACE"
+      ],
+      "max_eea_zr_model": 344,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(344km→65.6kWh)"
+      ]
+    },
+    {
+      "id": "toyota-proace-electric-2022",
+      "brand": "Toyota",
+      "model": "Proace Electric",
+      "year": 2022,
+      "powertrain": "ev",
+      "batteryKWh": 91.1,
+      "energyConsumptionKWhPerKm": 0.2015,
+      "wh_per_km": 201.5,
+      "powerKw": 90.4,
+      "wltpRangeKm": null,
+      "implied_range_km": 452.1,
+      "eea_zr_km": [
+        213,
+        216,
+        217,
+        218,
+        219,
+        220,
+        221,
+        222,
+        305,
+        309,
+        312,
+        313,
+        314,
+        315
+      ],
+      "eea_model_keys": [
+        "PROACE"
+      ],
+      "max_eea_zr_model": 344,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(344km→69.3kWh)"
+      ]
+    },
+    {
+      "id": "volkswagen-e-golf-2018",
+      "brand": "Volkswagen",
+      "model": "e-Golf",
+      "year": 2018,
+      "powertrain": "ev",
+      "batteryKWh": 62.0,
+      "energyConsumptionKWhPerKm": 0.127,
+      "wh_per_km": 127.0,
+      "powerKw": 100.0,
+      "wltpRangeKm": 230,
+      "implied_range_km": 488.2,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 232,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(232km→29.5kWh)"
+      ]
+    },
+    {
+      "id": "volkswagen-e-golf-2019",
+      "brand": "Volkswagen",
+      "model": "e-Golf",
+      "year": 2019,
+      "powertrain": "ev",
+      "batteryKWh": 76.6,
+      "energyConsumptionKWhPerKm": 0.155,
+      "wh_per_km": 155.0,
+      "powerKw": 100.0,
+      "wltpRangeKm": 230,
+      "implied_range_km": 494.2,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 232,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(232km→36.0kWh)"
+      ]
+    },
+    {
+      "id": "volkswagen-e-golf-2020",
+      "brand": "Volkswagen",
+      "model": "e-Golf",
+      "year": 2020,
+      "powertrain": "ev",
+      "batteryKWh": 77.3,
+      "energyConsumptionKWhPerKm": 0.1546,
+      "wh_per_km": 154.6,
+      "powerKw": 100.0,
+      "wltpRangeKm": 230,
+      "implied_range_km": 500.0,
+      "eea_zr_km": [
+        230,
+        231,
+        232
+      ],
+      "eea_model_keys": [
+        "GOLF"
+      ],
+      "max_eea_zr_model": 232,
+      "reasons": [
+        "implied_range_gt_15pct_from_all_eea_zr",
+        "battery_exceeds_max_implied_by_eea_zr(232km→35.9kWh)"
+      ]
+    },
+    {
+      "id": "volkswagen-id7-2025",
+      "brand": "Volkswagen",
+      "model": "ID.7",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 92.6,
+      "energyConsumptionKWhPerKm": 0.145,
+      "wh_per_km": 145.0,
+      "powerKw": 215.7,
+      "wltpRangeKm": null,
+      "implied_range_km": 638.6,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 588,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(588km→85.3kWh)"
+      ]
+    },
+    {
+      "id": "volkswagen-id7-2026",
+      "brand": "Volkswagen",
+      "model": "ID.7",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 93.4,
+      "energyConsumptionKWhPerKm": 0.145,
+      "wh_per_km": 145.0,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 644.1,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 588,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(588km→85.3kWh)"
+      ]
+    },
+    {
+      "id": "volvo-ex30-2023",
+      "brand": "Volvo",
+      "model": "EX30",
+      "year": 2023,
+      "powertrain": "ev",
+      "batteryKWh": 89.2,
+      "energyConsumptionKWhPerKm": 0.1722,
+      "wh_per_km": 172.2,
+      "powerKw": 243.9,
+      "wltpRangeKm": null,
+      "implied_range_km": 518.0,
+      "eea_zr_km": [
+        450,
+        474,
+        475
+      ],
+      "eea_model_keys": [
+        "EX30"
+      ],
+      "max_eea_zr_model": 476,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(476km→82.0kWh)"
+      ]
+    },
+    {
+      "id": "volvo-ex30-2024",
+      "brand": "Volvo",
+      "model": "EX30",
+      "year": 2024,
+      "powertrain": "ev",
+      "batteryKWh": 89.8,
+      "energyConsumptionKWhPerKm": 0.1714,
+      "wh_per_km": 171.4,
+      "powerKw": 216.6,
+      "wltpRangeKm": null,
+      "implied_range_km": 523.9,
+      "eea_zr_km": [
+        337,
+        449,
+        450,
+        474,
+        475,
+        476
+      ],
+      "eea_model_keys": [
+        "EX30"
+      ],
+      "max_eea_zr_model": 476,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(476km→81.6kWh)"
+      ]
+    },
+    {
+      "id": "volvo-ex30-2025",
+      "brand": "Volvo",
+      "model": "EX30",
+      "year": 2025,
+      "powertrain": "ev",
+      "batteryKWh": 91.7,
+      "energyConsumptionKWhPerKm": 0.173,
+      "wh_per_km": 173.0,
+      "powerKw": 209.2,
+      "wltpRangeKm": null,
+      "implied_range_km": 530.1,
+      "eea_zr_km": [
+        335,
+        337,
+        339,
+        427,
+        436,
+        448,
+        449,
+        450,
+        473,
+        474,
+        475,
+        476
+      ],
+      "eea_model_keys": [
+        "EX30",
+        "EX30CROSSCOUNTRY"
+      ],
+      "max_eea_zr_model": 476,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(476km→82.3kWh)"
+      ]
+    },
+    {
+      "id": "volvo-ex30-2026",
+      "brand": "Volvo",
+      "model": "EX30",
+      "year": 2026,
+      "powertrain": "ev",
+      "batteryKWh": 92.3,
+      "energyConsumptionKWhPerKm": 0.1722,
+      "wh_per_km": 172.2,
+      "powerKw": null,
+      "wltpRangeKm": null,
+      "implied_range_km": 536.0,
+      "eea_zr_km": [],
+      "eea_model_keys": [],
+      "max_eea_zr_model": 476,
+      "reasons": [
+        "battery_exceeds_max_implied_by_eea_zr(476km→82.0kWh)"
+      ]
+    }
+  ],
+  "note": "inventory before apply_catalog_battery_fixes.py"
+}

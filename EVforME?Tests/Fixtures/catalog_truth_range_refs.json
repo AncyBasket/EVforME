@@ -1,5 +1,5 @@
 {
-  "seedVersion": 55,
+  "seedVersion": 56,
   "generatedAt": "2026-10-25T14:58:44.361324+00:00",
   "source": "EEA co2cars IT field Zr (Electric range km)",
   "rules": [
@@ -109,56 +109,6 @@
       "source": "EEA co2cars IT Zr",
       "fetched_note": "Status F preferred; P only if F has no Zr; joint Wh×kW match required; F/P Zr conflict or Zr==Wh → nil",
       "eea_data_fetched_at": "2026-10-25T14:58:19.628341+00:00"
-    },
-    {
-      "id": "fiat-500e-2021",
-      "result": "fill",
-      "wltpRangeKm": 190,
-      "eea_brand": "FIAT",
-      "eea_model": "500",
-      "eea_cn_raws": [
-        "500"
-      ],
-      "eea_year": 2021,
-      "status": "F",
-      "n": 997.0,
-      "catalog_wh": 129.70000000000002,
-      "catalog_kw": 43.0,
-      "matched_versions": [
-        {
-          "wh": 130.0,
-          "kw": 43.0,
-          "n": 997.0
-        }
-      ],
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr; joint Wh×kW match required; F/P Zr conflict or Zr==Wh → nil",
-      "eea_data_fetched_at": "2026-10-25T14:58:22.333264+00:00"
-    },
-    {
-      "id": "fiat-500e-2022",
-      "result": "fill",
-      "wltpRangeKm": 190,
-      "eea_brand": "FIAT",
-      "eea_model": "500",
-      "eea_cn_raws": [
-        "500"
-      ],
-      "eea_year": 2022,
-      "status": "F",
-      "n": 708.0,
-      "catalog_wh": 129.5,
-      "catalog_kw": 43.0,
-      "matched_versions": [
-        {
-          "wh": 130.0,
-          "kw": 43.0,
-          "n": 708.0
-        }
-      ],
-      "source": "EEA co2cars IT Zr",
-      "fetched_note": "Status F preferred; P only if F has no Zr; joint Wh×kW match required; F/P Zr conflict or Zr==Wh → nil",
-      "eea_data_fetched_at": "2026-10-25T14:58:22.333264+00:00"
     },
     {
       "id": "honda-e-2023",
@@ -9741,6 +9691,21 @@
       "id": "xpeng-p7-2026",
       "result": "skip",
       "reason": "year 2026 outside EEA IT Zr window 2017–2025"
+    },
+    {
+      "id": "fiat-500e-2021",
+      "result": "skip",
+      "reason": "cleared with batteryKWh: Fiat 500e 2021/2022 ambiguous 24 kWh (~190 km) vs ~42 kWh pack — both range and battery set nil",
+      "previous_wltpRangeKm": 190,
+      "clearedAt": "2026-10-25T15:56:46.419655+00:00"
+    },
+    {
+      "id": "fiat-500e-2022",
+      "result": "skip",
+      "reason": "cleared with batteryKWh: Fiat 500e 2021/2022 ambiguous 24 kWh (~190 km) vs ~42 kWh pack — both range and battery set nil",
+      "previous_wltpRangeKm": 190,
+      "clearedAt": "2026-10-25T15:56:46.419659+00:00"
     }
-  ]
+  ],
+  "battery_coherence_note": "500e 2021/2022 fills removed — see catalog_truth_battery_refs.json"
 }
