@@ -58,12 +58,6 @@ enum AreaType: String, CaseIterable, Identifiable {
         }
     }
 
-    var kmPerChargeFactor: Double {
-        switch self {
-        case .urban: return 1.05
-        case .mixed: return 0.95
-        }
-    }
 }
 
 /// Profilo di guida tipico (oltre al selettore urbano/misto).
@@ -105,15 +99,6 @@ enum TripProfile: String, CaseIterable, Identifiable {
         case .custom: return 12_000
         case .commuter: return 18_000
         case .weekendHighway: return 14_000
-        }
-    }
-
-    /// Extra severità ricarica (autostrada → più energie / cariche).
-    var chargeSeverityFactor: Double {
-        switch self {
-        case .custom: return 1.0
-        case .commuter: return 1.02
-        case .weekendHighway: return 0.88
         }
     }
 

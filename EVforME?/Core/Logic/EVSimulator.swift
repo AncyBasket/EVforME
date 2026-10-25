@@ -563,12 +563,24 @@ final class EVSimulator {
             targetVehicle: targetVehicle
         )
         
+        let yearlyKm = Double(input.dailyKm)
+        let electricShare: Double
+        switch targetVehicle.powertrain {
+        case .phev:
+            electricShare = targetVehicle.phevElectricKmShare(
+                hasHomeCharging: input.hasHomeCharging,
+                yearlyKm: yearlyKm
+            )
+        case .ev:
+            electricShare = 1.0
+        case .ice, .hev:
+            electricShare = 0
+        }
         let weeklyCharges = WeeklyChargeEstimator.weeklyCharges(
-            yearlyKm: Double(input.dailyKm),
+            yearlyKm: yearlyKm,
             powertrain: targetVehicle.powertrain,
             rangeKm: WeeklyChargeEstimator.declaredRangeKm(for: targetVehicle),
-            areaType: input.areaType,
-            tripProfile: input.tripProfile
+            electricKmShare: electricShare
         )
         
         let yearlySavings = result.yearlyIceCost - result.yearlyEvCost
@@ -645,10 +657,10 @@ final class EVSimulator {
         }
 
         var fears: [FearRealityItem] = []
-        if let weeklyCharges, weeklyCharges > 2 {
+        if let chargingReality = ChargingFearCopy.reality(for: weeklyCharges) {
             fears.append(FearRealityItem(
                 fear: L10n.fearRunOutBattery,
-                reality: L10n.realityChargingFewTimes
+                reality: chargingReality
             ))
         }
         if !input.hasHomeCharging {

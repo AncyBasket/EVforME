@@ -287,6 +287,7 @@
 "public_charging_manageable" = "La ricarica pubblica è gestibile";
 "fear_run_out_battery" = "Finirò la batteria.";
 "reality_charging_few_times" = "Con il tuo uso, ricaricare poche volte a settimana basta.";
+"reality_charging_about_times" = "Con il tuo uso servono circa %d ricariche a settimana.";
 "fear_charging_complicated" = "Ricaricare sarà complicato.";
 "reality_public_charging" = "I prezzi variano molto (0,25–0,90 €/kWh): controlla il tuo operatore.";
 "fear_evs_unreliable" = "Le EV non sono affidabili.";

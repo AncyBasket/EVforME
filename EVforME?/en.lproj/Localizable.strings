@@ -268,6 +268,7 @@
 "public_charging_manageable" = "Public charging would be manageable";
 "fear_run_out_battery" = "I'll run out of battery.";
 "reality_charging_few_times" = "Even with your usage, charging only a few times a week is enough.";
+"reality_charging_about_times" = "With your usage you need about %d charges a week.";
 "fear_charging_complicated" = "Charging will be complicated.";
 "reality_public_charging" = "Prices vary a lot (€0.25–€0.90/kWh): check your operator.";
 "fear_evs_unreliable" = "EVs aren't reliable.";

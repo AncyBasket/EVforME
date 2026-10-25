@@ -478,6 +478,9 @@ enum L10n {
     static var publicChargingManageable: String { string("public_charging_manageable") }
     static var fearRunOutBattery: String { string("fear_run_out_battery") }
     static var realityChargingFewTimes: String { string("reality_charging_few_times") }
+    static func realityChargingAboutTimes(_ n: Int) -> String {
+        String.localizedStringWithFormat(string("reality_charging_about_times"), n)
+    }
     static var fearChargingComplicated: String { string("fear_charging_complicated") }
     static var realityPublicCharging: String { string("reality_public_charging") }
     static var fearEvsUnreliable: String { string("fear_evs_unreliable") }
@@ -499,9 +502,16 @@ enum L10n {
     static var shareSignature: String { string("share_signature") }
 
     // MARK: - Shell & guides
+    /// Anno a due cifre per il badge “Lab ’YY” — sempre calendario gregoriano.
+    static func shellEditionYearYY(
+        from date: Date = Date(),
+        calendar: Calendar = Calendar(identifier: .gregorian)
+    ) -> Int {
+        calendar.component(.year, from: date) % 100
+    }
+
     static var shellEditionMark: String {
-        let year = Calendar.current.component(.year, from: Date()) % 100
-        return format("shell_edition_mark", year)
+        format("shell_edition_mark", shellEditionYearYY())
     }
     static var shellTaglineWorkshop: String { string("shell_tagline_workshop") }
     static var shellTaglineGuides: String { string("shell_tagline_guides") }

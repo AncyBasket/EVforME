@@ -3,7 +3,7 @@
 //  EVforME?
 //
 //  Stima ricariche/settimana dall'autonomia dichiarata (WLTP o batteria÷consumo).
-//  Niente baseline fissa da 300 km.
+//  km per ricarica = autonomia esatta; quota PHEV = stessa del costo energia.
 //
 
 import Foundation
@@ -24,12 +24,12 @@ enum WeeklyChargeEstimator {
 
     /// `nil` = EV/PHEV senza autonomia in catalogo (non inventare 300 km).
     /// `0` = termica/HEV, oppure km settimanali a zero.
+    /// - Parameter electricKmShare: quota km elettrici (1 per EV; `phevElectricKmShare` per PHEV).
     static func weeklyCharges(
         yearlyKm: Double,
         powertrain: Powertrain,
         rangeKm: Int?,
-        areaType: AreaType,
-        tripProfile: TripProfile
+        electricKmShare: Double
     ) -> Int? {
         switch powertrain {
         case .ice, .hev:
@@ -39,11 +39,23 @@ enum WeeklyChargeEstimator {
             let weeklyKm = yearlyKm / 52.0
             if weeklyKm <= 0 { return 0 }
             let kmPerCharge = Double(rangeKm)
-                * areaType.kmPerChargeFactor
-                * tripProfile.chargeSeverityFactor
             guard kmPerCharge > 0 else { return nil }
-            let electricWeeklyKm = powertrain == .phev ? weeklyKm * 0.55 : weeklyKm
+            let share = min(1, max(0, electricKmShare))
+            let electricWeeklyKm = weeklyKm * share
+            if electricWeeklyKm <= 0 { return 0 }
             return max(1, Int(ceil(electricWeeklyKm / kmPerCharge)))
         }
+    }
+}
+
+/// Copy paura/realtà sulle ricariche: coerente col numero mostrato.
+enum ChargingFearCopy {
+    /// `nil` = non mostrare la coppia fear/reality (n/d o zero).
+    static func reality(for weeklyCharges: Int?) -> String? {
+        guard let weeklyCharges, weeklyCharges >= 1 else { return nil }
+        if weeklyCharges <= 2 {
+            return L10n.realityChargingFewTimes
+        }
+        return L10n.realityChargingAboutTimes(weeklyCharges)
     }
 }
