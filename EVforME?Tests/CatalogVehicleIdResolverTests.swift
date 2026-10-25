@@ -10,11 +10,11 @@ final class CatalogVehicleIdResolverTests: XCTestCase {
     override func setUp() {
         super.setUp()
         VehicleCatalogService.shared.reloadFromBundledSeedIgnoringUserCacheForTesting()
-        CatalogVehicleIdResolver.aliases = [:]
+        CatalogVehicleIdResolver.resetAliasesForTesting()
     }
 
     override func tearDown() {
-        CatalogVehicleIdResolver.aliases = [:]
+        CatalogVehicleIdResolver.resetAliasesForTesting()
         super.tearDown()
     }
 
@@ -179,5 +179,43 @@ final class CatalogVehicleIdResolverTests: XCTestCase {
         XCTAssertNotNil(VehicleCatalogService.shared.vehicle(by: "volvo-c40-recharge-2025"))
         XCTAssertNotNil(VehicleCatalogService.shared.vehicle(by: "volvo-xc40-recharge-2025"))
         XCTAssertNil(VehicleCatalogService.shared.vehicle(by: "volvo-c40-recharge-2026"))
+    }
+
+    func testLegacyModel3_2026MigratesToTrazionePosteriore() {
+        CatalogVehicleIdResolver.resetAliasesForTesting()
+        XCTAssertEqual(
+            CatalogVehicleIdResolver.resolveId("tesla-model-3-2026"),
+            "tesla-model-3-trazione-posteriore-2026"
+        )
+        XCTAssertEqual(Defaults.starterTargetVehicleId, "tesla-model-3-trazione-posteriore-2026")
+        let rwd = VehicleCatalogService.shared.vehicle(by: "tesla-model-3-trazione-posteriore-2026")
+        XCTAssertNotNil(rwd)
+        XCTAssertEqual(rwd?.trim, "Trazione posteriore")
+        XCTAssertEqual(rwd?.wltpRangeKm, 572)
+        XCTAssertEqual(rwd?.lengthM, 4.720, accuracy: 0.001)
+        XCTAssertEqual(rwd?.widthM, 1.850, accuracy: 0.001)
+        XCTAssertEqual(rwd?.heightM, 1.440, accuracy: 0.001)
+        let range = WeeklyChargeEstimator.declaredRangeKm(for: rwd!)
+        XCTAssertEqual(range, 572)
+        let charges = WeeklyChargeEstimator.weeklyCharges(
+            yearlyKm: 12_000,
+            powertrain: .ev,
+            rangeKm: range,
+            electricKmShare: 1.0
+        )
+        XCTAssertNotNil(charges)
+        XCTAssertGreaterThanOrEqual(charges ?? 0, 1)
+        XCTAssertNotNil(ChargingFearCopy.reality(for: charges), "Default RWD must not show n/d charges")
+
+        let awd = VehicleCatalogService.shared.vehicle(by: "tesla-model-3-premium-long-range-2026")
+        XCTAssertEqual(awd?.trim, "Premium Long Range a trazione integrale")
+        XCTAssertEqual(awd?.wltpRangeKm, 660)
+        XCTAssertEqual(awd?.widthM, 1.933, accuracy: 0.001)
+        XCTAssertEqual(awd?.heightM, 1.441, accuracy: 0.001)
+
+        let perf = VehicleCatalogService.shared.vehicle(by: "tesla-model-3-performance-2026")
+        XCTAssertEqual(perf?.trim, "Performance a trazione integrale")
+        XCTAssertEqual(perf?.wltpRangeKm, 600)
+        XCTAssertEqual(perf?.heightM, 1.431, accuracy: 0.001)
     }
 }

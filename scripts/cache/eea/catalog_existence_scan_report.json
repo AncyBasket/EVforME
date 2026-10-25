@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-10-26T01:10:26.767640+00:00",
+  "generatedAt": "2026-10-26T01:30:37.123767+00:00",
   "scope": "EEA CO2 monitoring Electric Zr — all MS (not IT-only)",
-  "flagged_count": 243,
+  "flagged_count": 246,
   "flagged_ids": [
     "audi-a3-e-tron-ultra-phev-2016",
     "audi-e-tron-gt-2026",
@@ -200,7 +200,10 @@
     "smart-3-2026",
     "subaru-solterra-2026",
     "tesla-model-3-2019",
-    "tesla-model-3-2026",
+    "tesla-model-3-performance-2026",
+    "tesla-model-3-premium-long-range-2026",
+    "tesla-model-3-premium-trazione-posteriore-2026",
+    "tesla-model-3-trazione-posteriore-2026",
     "tesla-model-s-2017",
     "tesla-model-s-2018",
     "tesla-model-s-2019",
@@ -3318,7 +3321,70 @@
       ]
     },
     {
-      "id": "tesla-model-3-2026",
+      "id": "tesla-model-3-performance-2026",
+      "brand": "Tesla",
+      "model": "Model 3",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_eu_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODEL3",
+        "MODEL3PERFORMANCE",
+        "MODEL3RWD"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-3-premium-long-range-2026",
+      "brand": "Tesla",
+      "model": "Model 3",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_eu_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODEL3",
+        "MODEL3PERFORMANCE",
+        "MODEL3RWD"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-3-premium-trazione-posteriore-2026",
+      "brand": "Tesla",
+      "model": "Model 3",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_eu_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODEL3",
+        "MODEL3PERFORMANCE",
+        "MODEL3RWD"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-3-trazione-posteriore-2026",
       "brand": "Tesla",
       "model": "Model 3",
       "year": 2026,

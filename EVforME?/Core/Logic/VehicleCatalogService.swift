@@ -23,7 +23,7 @@ final class VehicleCatalogService {
 
     private let defaults = UserDefaults.standard
     /// Bundled quality-seed revision (not the App Store marketing version).
-    static let bundledSeedVersion = 57
+    static let bundledSeedVersion = 58
     private var seedVersion: Int { Self.bundledSeedVersion }
     private var remoteDisabledForTesting = false
     private let remoteSession: URLSession = {
@@ -297,7 +297,7 @@ final class VehicleCatalogService {
         // Pre-cache frequently accessed vehicles
         let popularIds = [
             "volkswagen-golf-2026",
-            "tesla-model-3-2026",
+            "tesla-model-3-trazione-posteriore-2026",
             "fiat-panda-2024",
             "renault-zoe-2024"
         ]

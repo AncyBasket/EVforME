@@ -360,13 +360,15 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
     }
 
     func testCatalog_Model3_2026_WltpNearOfficial() {
-        let m3 = VehicleCatalogService.shared.vehicle(by: "tesla-model-3-2026")
+        XCTAssertNil(VehicleCatalogService.shared.vehicle(by: "tesla-model-3-2026"))
+        let m3 = VehicleCatalogService.shared.vehicle(by: "tesla-model-3-trazione-posteriore-2026")
         XCTAssertNotNil(m3)
+        XCTAssertEqual(m3?.wltpRangeKm, 572)
         let kwh100 = m3?.wltpConsumptionKWh100km
             ?? m3.flatMap { $0.energyConsumptionKWhPerKm.map { $0 * 100 } }
         XCTAssertNotNil(kwh100)
-        XCTAssertGreaterThanOrEqual(kwh100!, 12.5)
-        XCTAssertLessThanOrEqual(kwh100!, 14.5)
+        // Tesla Italia: 12,2 kWh/100 km (Trazione posteriore).
+        XCTAssertEqual(kwh100!, 12.2, accuracy: 0.05)
     }
 
     func testCatalog_NoSynthetic100kWhBatteryShownAsKnown() {
