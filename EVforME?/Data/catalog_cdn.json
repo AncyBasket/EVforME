@@ -2,11 +2,11 @@
   "url": "",
   "publishedUrl": "https://files.catbox.moe/3i0nro.json",
   "rows": 5654,
-  "bytes": 2848695,
+  "bytes": 2848702,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-25T20:04:06.415836+00:00",
+  "updatedAt": "2026-10-25T20:36:29.584184+00:00",
   "policy": "offline-first",
   "seedVersion": 56,
-  "note": "seedVersion 56: batteryKWh only if EEA-verified (±15% Zr) or same-year OEM sheet (net/gross); else nil. Synthetic pack patterns cleared."
+  "note": "seedVersion 56: batteryKWh only with official OEM URL (same source_year + matching kW; net|gross); else nil."
 }
