@@ -113,7 +113,8 @@ enum WidgetSnapshotStore {
             return override
         }
         let catalog = VehicleCatalogService.shared
-        if let vehicle = catalog.vehicle(by: input.sourceVehicleId),
+        let sourceId = CatalogVehicleIdResolver.resolveSourceId(input.sourceVehicleId, catalog: catalog)
+        if let vehicle = catalog.vehicle(by: sourceId),
            let lPerKm = vehicle.fuelConsumptionLPerKm {
             return lPerKm * 100.0
         }

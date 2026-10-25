@@ -528,8 +528,10 @@ final class EVSimulator {
         }
         
         let catalog = VehicleCatalogService.shared
-        guard let sourceVehicle = catalog.vehicle(by: input.sourceVehicleId),
-              let targetVehicle = catalog.vehicle(by: input.targetVehicleId) else {
+        let sourceId = CatalogVehicleIdResolver.resolveSourceId(input.sourceVehicleId, catalog: catalog)
+        let targetId = CatalogVehicleIdResolver.resolveTargetId(input.targetVehicleId, catalog: catalog)
+        guard let sourceVehicle = catalog.vehicle(by: sourceId),
+              let targetVehicle = catalog.vehicle(by: targetId) else {
             AppLogger.shared.error("Failed to find vehicles for simulation", category: .simulation)
             return nil
         }

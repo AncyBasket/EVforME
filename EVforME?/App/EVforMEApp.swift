@@ -240,6 +240,7 @@ struct EVforMEApp: App {
                     reopenLastComparison()
                     return
                 }
+                CatalogVehicleIdResolver.sanitizeUserInput(&userInput)
                 if userInput.sourceVehicleId.isEmpty {
                     userInput.sourceVehicleId = VehicleCatalogService.shared.sourceVehicles().first?.id
                         ?? "alfa-romeo-147-2005"

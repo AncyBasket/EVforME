@@ -155,12 +155,22 @@ struct QuickStartView: View {
     }
 
     private func ensureDefaults() {
-        if userInput.sourceVehicleId.isEmpty || VehicleCatalogService.shared.vehicle(by: userInput.sourceVehicleId) == nil {
-            userInput.sourceVehicleId = sourceList.first?.id ?? Defaults.starterSourceVehicleId
+        let catalog = VehicleCatalogService.shared
+        if userInput.sourceVehicleId.isEmpty || catalog.vehicle(by: userInput.sourceVehicleId) == nil {
+            userInput.sourceVehicleId = CatalogVehicleIdResolver.resolveSourceId(
+                userInput.sourceVehicleId,
+                catalog: catalog
+            )
+            if userInput.sourceVehicleId.isEmpty {
+                userInput.sourceVehicleId = sourceList.first?.id ?? Defaults.starterSourceVehicleId
+            }
         }
-        // Non sovrascrivere un target già scelto dall’utente.
-        if userInput.targetVehicleId.isEmpty || VehicleCatalogService.shared.vehicle(by: userInput.targetVehicleId) == nil {
-            userInput.targetVehicleId = ""
+        // Target assente / rimosso dal catalogo → default EV (o vuoto se catalogo non pronto).
+        if userInput.targetVehicleId.isEmpty || catalog.vehicle(by: userInput.targetVehicleId) == nil {
+            userInput.targetVehicleId = CatalogVehicleIdResolver.resolveTargetId(
+                userInput.targetVehicleId,
+                catalog: catalog
+            )
         }
         // Non resettare scenario / ricarica già scelti dall’utente.
         if userInput.ownershipYears <= 0 {

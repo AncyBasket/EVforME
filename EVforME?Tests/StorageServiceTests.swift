@@ -55,8 +55,8 @@ final class StorageServiceTests: XCTestCase {
             fuelPrice: 1.75,
             ownershipYears: 5,
             electricityPricePerKWh: 0.28,
-            sourceVehicleId: "test-source",
-            targetVehicleId: "test-target",
+            sourceVehicleId: Defaults.starterSourceVehicleId,
+            targetVehicleId: Defaults.starterTargetVehicleId,
             scenario: .realistic
         )
 

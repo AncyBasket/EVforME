@@ -1,12 +1,12 @@
 {
   "url": "",
   "publishedUrl": "https://files.catbox.moe/3i0nro.json",
-  "rows": 5654,
-  "bytes": 2848702,
+  "rows": 5620,
+  "bytes": 2831705,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-25T20:36:29.584184+00:00",
+  "updatedAt": "2026-10-25T21:42:38.286370+00:00",
   "policy": "offline-first",
-  "seedVersion": 56,
-  "note": "seedVersion 56: batteryKWh only with official OEM URL (same source_year + matching kW; net|gross); else nil."
+  "seedVersion": 57,
+  "note": "seedVersion 57: removed nonexistent / duplicate EV rows (existence audit); kept jaguar-i-pace-2025 (EEA), lexus-rz-2022 (OEM)."
 }

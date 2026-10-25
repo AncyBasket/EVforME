@@ -1,5 +1,5 @@
 {
-  "seedVersion": 56,
+  "seedVersion": 57,
   "generatedAt": "2026-10-25T20:36:29.639036+00:00",
   "consulted_date": "2026-10-25",
   "rules": [
@@ -90,12 +90,6 @@
       "id": "lexus-rz-2026",
       "action": "nil_battery",
       "old_batteryKWh": 71.4,
-      "reason": "no_official_oem_url_same_year_kw"
-    },
-    {
-      "id": "mini-electric-hatch-2019",
-      "action": "nil_battery",
-      "old_batteryKWh": 28.9,
       "reason": "no_official_oem_url_same_year_kw"
     },
     {
@@ -251,41 +245,7 @@
   "synthetic_ids_after": [],
   "suspects_after": [],
   "dubious_models_no_delete": [
-    "chevrolet-bolt-euv-2021",
-    "honda-e-2019",
-    "hyundai-equus-2022",
-    "hyundai-equus-2023",
-    "hyundai-equus-2024",
-    "hyundai-equus-2025",
-    "hyundai-equus-2026",
     "jaguar-i-pace-2025",
-    "jaguar-i-pace-2026",
-    "kia-soul-ev-2024",
-    "kia-soul-ev-2025",
-    "kia-soul-ev-2026",
-    "lexus-rz-2022",
-    "lucid-gravity-2022",
-    "lucid-gravity-2023",
-    "mini-electric-hatch-2019",
-    "nio-el6-2021",
-    "nio-el6-2022",
-    "nio-el8-2021",
-    "nio-el8-2022",
-    "nio-et5-2021",
-    "nio-et5-touring-2021",
-    "nio-et5-touring-2022",
-    "nissan-altra-ev-2022",
-    "nissan-altra-ev-2023",
-    "nissan-altra-ev-2024",
-    "nissan-altra-ev-2025",
-    "nissan-altra-ev-2026",
-    "renault-scenic-2024",
-    "volvo-c40-recharge-2025",
-    "volvo-c40-recharge-2026",
-    "volvo-xc40-recharge-2025",
-    "volvo-xc40-recharge-2026",
-    "xpeng-g6-2021",
-    "xpeng-g6-2022",
-    "xpeng-g9-2021"
+    "lexus-rz-2022"
   ]
 }

@@ -1,0 +1,5136 @@
+{
+  "generatedAt": "2026-10-25T21:42:55.320654+00:00",
+  "flagged_count": 367,
+  "flagged": [
+    {
+      "id": "audi-a3-e-tron-ultra-phev-2016",
+      "brand": "Audi",
+      "model": "A3 PHEV",
+      "year": 2016,
+      "powertrain": "phev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "audi-e-tron-gt-2024",
+      "brand": "Audi",
+      "model": "e-tron GT",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ETRONGT"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "audi-e-tron-gt-2025",
+      "brand": "Audi",
+      "model": "e-tron GT",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ETRONGT"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "audi-e-tron-gt-2026",
+      "brand": "Audi",
+      "model": "e-tron GT",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ETRONGT"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "audi-q4-e-tron-2022",
+      "brand": "Audi",
+      "model": "Q4 e-tron",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ETRON",
+        "ETRONGT",
+        "ETRONS"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "audi-q4-e-tron-2023",
+      "brand": "Audi",
+      "model": "Q4 e-tron",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ETRON",
+        "ETRONGT",
+        "ETRONS"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "audi-q4-e-tron-2024",
+      "brand": "Audi",
+      "model": "Q4 e-tron",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ETRON",
+        "ETRONGT",
+        "ETRONS"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "audi-q4-e-tron-2025",
+      "brand": "Audi",
+      "model": "Q4 e-tron",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ETRON",
+        "ETRONGT",
+        "ETRONS"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "audi-q4-e-tron-2026",
+      "brand": "Audi",
+      "model": "Q4 e-tron",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ETRON",
+        "ETRONGT",
+        "ETRONS"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "audi-q6-e-tron-2024",
+      "brand": "Audi",
+      "model": "Q6 e-tron",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ETRON",
+        "ETRONGT",
+        "ETRONS"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "audi-q6-e-tron-2025",
+      "brand": "Audi",
+      "model": "Q6 e-tron",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ETRON",
+        "ETRONGT",
+        "ETRONS"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "audi-q6-e-tron-2026",
+      "brand": "Audi",
+      "model": "Q6 e-tron",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ETRON",
+        "ETRONGT",
+        "ETRONS"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "audi-q8-e-tron-2018",
+      "brand": "Audi",
+      "model": "Q8 e-tron",
+      "year": 2018,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ETRON",
+        "ETRONGT",
+        "ETRONS"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "audi-q8-e-tron-2019",
+      "brand": "Audi",
+      "model": "Q8 e-tron",
+      "year": 2019,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ETRON",
+        "ETRONGT",
+        "ETRONS"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "audi-q8-e-tron-2022",
+      "brand": "Audi",
+      "model": "Q8 e-tron",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ETRON",
+        "ETRONGT",
+        "ETRONS"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "audi-q8-e-tron-2023",
+      "brand": "Audi",
+      "model": "Q8 e-tron",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ETRON",
+        "ETRONGT",
+        "ETRONS"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "audi-q8-e-tron-2024",
+      "brand": "Audi",
+      "model": "Q8 e-tron",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ETRON",
+        "ETRONGT",
+        "ETRONS"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "audi-q8-e-tron-2025",
+      "brand": "Audi",
+      "model": "Q8 e-tron",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ETRON",
+        "ETRONGT",
+        "ETRONS"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "audi-q8-e-tron-2026",
+      "brand": "Audi",
+      "model": "Q8 e-tron",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ETRON",
+        "ETRONGT",
+        "ETRONS"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "bmw-330e-phev-2024",
+      "brand": "BMW",
+      "model": "330e",
+      "year": 2024,
+      "powertrain": "phev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "bmw-i3-2016",
+      "brand": "BMW",
+      "model": "i3",
+      "year": 2016,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "I3",
+        "I3S"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "bmw-i3-2017",
+      "brand": "BMW",
+      "model": "i3",
+      "year": 2017,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "I3",
+        "I3S"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "bmw-i3-2018",
+      "brand": "BMW",
+      "model": "i3",
+      "year": 2018,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "I3",
+        "I3S"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "bmw-i3-2019",
+      "brand": "BMW",
+      "model": "i3",
+      "year": 2019,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "I3",
+        "I3S"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "bmw-i4-2026",
+      "brand": "BMW",
+      "model": "i4",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "I4EDRIVE35",
+        "I4EDRIVE40",
+        "I4M50",
+        "I4XDRIVE40"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "bmw-i5-2026",
+      "brand": "BMW",
+      "model": "i5",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "I5EDRIVE40",
+        "I5XDRIVE40"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "bmw-i7-2026",
+      "brand": "BMW",
+      "model": "i7",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "I7EDRIVE50",
+        "I7XDRIVE60"
+      ],
+      "eea_years_for_model": [
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "bmw-ix-2026",
+      "brand": "BMW",
+      "model": "iX",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "IXM60",
+        "IXXDRIVE40",
+        "IXXDRIVE45",
+        "IXXDRIVE50",
+        "IXXDRIVE60"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "bmw-ix1-2026",
+      "brand": "BMW",
+      "model": "iX1",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "IX1EDRIVE20",
+        "IX1XDRIVE30"
+      ],
+      "eea_years_for_model": [
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "bmw-ix3-2020",
+      "brand": "BMW",
+      "model": "iX3",
+      "year": 2020,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "IX3"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "bmw-ix3-2026",
+      "brand": "BMW",
+      "model": "iX3",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "IX3"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "byd-atto-3-2022",
+      "brand": "BYD",
+      "model": "Atto 3",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ATTO3"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "byd-atto-3-2023",
+      "brand": "BYD",
+      "model": "Atto 3",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ATTO3"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "byd-atto-3-2026",
+      "brand": "BYD",
+      "model": "Atto 3",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ATTO3"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "byd-dolphin-2023",
+      "brand": "BYD",
+      "model": "Dolphin",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "DOLPHIN"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "byd-dolphin-2026",
+      "brand": "BYD",
+      "model": "Dolphin",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "DOLPHIN"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "byd-dolphin-surf-2026",
+      "brand": "BYD",
+      "model": "Dolphin Surf",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "DOLPHINSURF"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "byd-han-2021",
+      "brand": "BYD",
+      "model": "Han",
+      "year": 2021,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "HAN"
+      ],
+      "eea_years_for_model": [
+        2024
+      ]
+    },
+    {
+      "id": "byd-han-2022",
+      "brand": "BYD",
+      "model": "Han",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "HAN"
+      ],
+      "eea_years_for_model": [
+        2024
+      ]
+    },
+    {
+      "id": "byd-han-2023",
+      "brand": "BYD",
+      "model": "Han",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "HAN"
+      ],
+      "eea_years_for_model": [
+        2024
+      ]
+    },
+    {
+      "id": "byd-han-2025",
+      "brand": "BYD",
+      "model": "Han",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "HAN"
+      ],
+      "eea_years_for_model": [
+        2024
+      ]
+    },
+    {
+      "id": "byd-han-2026",
+      "brand": "BYD",
+      "model": "Han",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "HAN"
+      ],
+      "eea_years_for_model": [
+        2024
+      ]
+    },
+    {
+      "id": "byd-seal-2023",
+      "brand": "BYD",
+      "model": "Seal",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "SEAL"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "byd-seal-2026",
+      "brand": "BYD",
+      "model": "Seal",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "SEAL"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "byd-seal-u-2026",
+      "brand": "BYD",
+      "model": "Seal U",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "SEALU"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "byd-tang-2021",
+      "brand": "BYD",
+      "model": "Tang",
+      "year": 2021,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "TANGEV"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "byd-tang-2022",
+      "brand": "BYD",
+      "model": "Tang",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "TANGEV"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "byd-tang-2023",
+      "brand": "BYD",
+      "model": "Tang",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "TANGEV"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "byd-tang-2024",
+      "brand": "BYD",
+      "model": "Tang",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "TANGEV"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "byd-tang-2026",
+      "brand": "BYD",
+      "model": "Tang",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "TANGEV"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "chevrolet-bolt-euv-2022",
+      "brand": "Chevrolet",
+      "model": "Bolt EUV",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "chevrolet-bolt-euv-2023",
+      "brand": "Chevrolet",
+      "model": "Bolt EUV",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "chevrolet-bolt-ev-2017",
+      "brand": "Chevrolet",
+      "model": "Bolt EV",
+      "year": 2017,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "chevrolet-bolt-ev-2018",
+      "brand": "Chevrolet",
+      "model": "Bolt EV",
+      "year": 2018,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "chevrolet-bolt-ev-2019",
+      "brand": "Chevrolet",
+      "model": "Bolt EV",
+      "year": 2019,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "chevrolet-bolt-ev-2020",
+      "brand": "Chevrolet",
+      "model": "Bolt EV",
+      "year": 2020,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "chevrolet-bolt-ev-2021",
+      "brand": "Chevrolet",
+      "model": "Bolt EV",
+      "year": 2021,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "chevrolet-bolt-ev-2022",
+      "brand": "Chevrolet",
+      "model": "Bolt EV",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "chevrolet-bolt-ev-2023",
+      "brand": "Chevrolet",
+      "model": "Bolt EV",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "chevrolet-equinox-ev-2023",
+      "brand": "Chevrolet",
+      "model": "Equinox EV",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "chevrolet-equinox-ev-2024",
+      "brand": "Chevrolet",
+      "model": "Equinox EV",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "chevrolet-equinox-ev-2025",
+      "brand": "Chevrolet",
+      "model": "Equinox EV",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "chevrolet-equinox-ev-2026",
+      "brand": "Chevrolet",
+      "model": "Equinox EV",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "chevrolet-volt-phev-2019",
+      "brand": "Chevrolet",
+      "model": "Volt PHEV",
+      "year": 2019,
+      "powertrain": "phev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "citroen-e-berlingo-2025",
+      "brand": "Citroen",
+      "model": "e-Berlingo",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "EBERLINGO"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023,
+        2024
+      ]
+    },
+    {
+      "id": "citroen-e-berlingo-2026",
+      "brand": "Citroen",
+      "model": "e-Berlingo",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "EBERLINGO"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023,
+        2024
+      ]
+    },
+    {
+      "id": "citroen-e-c3-2024",
+      "brand": "Citroën",
+      "model": "ë-C3",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "citroen-e-c3-2025",
+      "brand": "Citroën",
+      "model": "ë-C3",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "citroen-e-c3-2026",
+      "brand": "Citroën",
+      "model": "ë-C3",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "citroen-e-c4-2026",
+      "brand": "Citroen",
+      "model": "e-C4",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "EC4",
+        "EC4X"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "cupra-born-2025",
+      "brand": "Cupra",
+      "model": "Born",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "BORN"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022
+      ]
+    },
+    {
+      "id": "cupra-born-2026",
+      "brand": "Cupra",
+      "model": "Born",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "BORN"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022
+      ]
+    },
+    {
+      "id": "cupra-tavascan-2024",
+      "brand": "Cupra",
+      "model": "Tavascan",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "cupra-tavascan-2025",
+      "brand": "Cupra",
+      "model": "Tavascan",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "cupra-tavascan-2026",
+      "brand": "Cupra",
+      "model": "Tavascan",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "dacia-spring-2026",
+      "brand": "Dacia",
+      "model": "Spring",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "SPRING"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "fiat-500e-2026",
+      "brand": "Fiat",
+      "model": "500e",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "500"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "fiat-600e-2025",
+      "brand": "Fiat",
+      "model": "600e",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "600"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024
+      ]
+    },
+    {
+      "id": "fiat-600e-2026",
+      "brand": "Fiat",
+      "model": "600e",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "600"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024
+      ]
+    },
+    {
+      "id": "fiat-grande-panda-ev-2025",
+      "brand": "Fiat",
+      "model": "Grande Panda",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "PANDA"
+      ],
+      "eea_years_for_model": [
+        2024
+      ]
+    },
+    {
+      "id": "fiat-grande-panda-ev-2026",
+      "brand": "Fiat",
+      "model": "Grande Panda",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "PANDA"
+      ],
+      "eea_years_for_model": [
+        2024
+      ]
+    },
+    {
+      "id": "ford-c-max-energi-plug-in-hybrid-phev-2016",
+      "brand": "Ford",
+      "model": "C-MAX Energi Plug-in Hybrid",
+      "year": 2016,
+      "powertrain": "phev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "ford-capri-ev-2026",
+      "brand": "Ford",
+      "model": "Capri EV",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "CAPRI"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "ford-escape-fwd-phev-phev-2026",
+      "brand": "Ford",
+      "model": "Escape FWD PHEV",
+      "year": 2026,
+      "powertrain": "phev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "ford-explorer-ev-2026",
+      "brand": "Ford",
+      "model": "Explorer EV",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "EXPLORER"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "ford-mustang-mach-e-2026",
+      "brand": "Ford",
+      "model": "Mustang Mach-E",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MUSTANGMACHE"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "ford-puma-gen-e-2024",
+      "brand": "Ford",
+      "model": "Puma Gen-E",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "PUMA"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "ford-puma-gen-e-2026",
+      "brand": "Ford",
+      "model": "Puma Gen-E",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "PUMA"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "genesis-electrified-g80-2021",
+      "brand": "Genesis",
+      "model": "Electrified G80",
+      "year": 2021,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "genesis-electrified-g80-2022",
+      "brand": "Genesis",
+      "model": "Electrified G80",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "genesis-electrified-g80-2023",
+      "brand": "Genesis",
+      "model": "Electrified G80",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "genesis-electrified-g80-2024",
+      "brand": "Genesis",
+      "model": "Electrified G80",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "genesis-electrified-g80-2025",
+      "brand": "Genesis",
+      "model": "Electrified G80",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "genesis-electrified-g80-2026",
+      "brand": "Genesis",
+      "model": "Electrified G80",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "genesis-electrified-gv70-2021",
+      "brand": "Genesis",
+      "model": "Electrified GV70",
+      "year": 2021,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "genesis-electrified-gv70-2022",
+      "brand": "Genesis",
+      "model": "Electrified GV70",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "genesis-electrified-gv70-2023",
+      "brand": "Genesis",
+      "model": "Electrified GV70",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "genesis-electrified-gv70-2024",
+      "brand": "Genesis",
+      "model": "Electrified GV70",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "genesis-electrified-gv70-2025",
+      "brand": "Genesis",
+      "model": "Electrified GV70",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "genesis-electrified-gv70-2026",
+      "brand": "Genesis",
+      "model": "Electrified GV70",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "genesis-gv60-2021",
+      "brand": "Genesis",
+      "model": "GV60",
+      "year": 2021,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "GV60GENESISGV60"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "genesis-gv60-2022",
+      "brand": "Genesis",
+      "model": "GV60",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "GV60GENESISGV60"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "genesis-gv60-2023",
+      "brand": "Genesis",
+      "model": "GV60",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "GV60GENESISGV60"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "genesis-gv60-2024",
+      "brand": "Genesis",
+      "model": "GV60",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "GV60GENESISGV60"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "genesis-gv60-2026",
+      "brand": "Genesis",
+      "model": "GV60",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "GV60GENESISGV60"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "honda-accord-phev-2014",
+      "brand": "Honda",
+      "model": "Accord PHEV",
+      "year": 2014,
+      "powertrain": "phev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "honda-eny1-2024",
+      "brand": "Honda",
+      "model": "e:Ny1",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ENY1"
+      ],
+      "eea_years_for_model": [
+        2023
+      ]
+    },
+    {
+      "id": "honda-eny1-2025",
+      "brand": "Honda",
+      "model": "e:Ny1",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ENY1"
+      ],
+      "eea_years_for_model": [
+        2023
+      ]
+    },
+    {
+      "id": "honda-eny1-2026",
+      "brand": "Honda",
+      "model": "e:Ny1",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ENY1"
+      ],
+      "eea_years_for_model": [
+        2023
+      ]
+    },
+    {
+      "id": "hyundai-inster-2024",
+      "brand": "Hyundai",
+      "model": "Inster",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "INSTER"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "hyundai-inster-2026",
+      "brand": "Hyundai",
+      "model": "Inster",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "INSTER"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "hyundai-ioniq-5-2026",
+      "brand": "Hyundai",
+      "model": "Ioniq 5",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "IONIQ5"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "hyundai-ioniq-5-n-2026",
+      "brand": "Hyundai",
+      "model": "Ioniq 5 N",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "IONIQ5N"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "hyundai-ioniq-6-2026",
+      "brand": "Hyundai",
+      "model": "Ioniq 6",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "IONIQ6"
+      ],
+      "eea_years_for_model": [
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "hyundai-ioniq-electric-2016",
+      "brand": "Hyundai",
+      "model": "Ioniq Electric",
+      "year": 2016,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "IONIQ"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021
+      ]
+    },
+    {
+      "id": "hyundai-ioniq-electric-2017",
+      "brand": "Hyundai",
+      "model": "Ioniq Electric",
+      "year": 2017,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "IONIQ"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021
+      ]
+    },
+    {
+      "id": "hyundai-ioniq-electric-2018",
+      "brand": "Hyundai",
+      "model": "Ioniq Electric",
+      "year": 2018,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "IONIQ"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021
+      ]
+    },
+    {
+      "id": "hyundai-ioniq-electric-2019",
+      "brand": "Hyundai",
+      "model": "Ioniq Electric",
+      "year": 2019,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "IONIQ"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021
+      ]
+    },
+    {
+      "id": "hyundai-kona-electric-2018",
+      "brand": "Hyundai",
+      "model": "Kona Electric",
+      "year": 2018,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "KONAKAUAI"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "hyundai-kona-electric-2019",
+      "brand": "Hyundai",
+      "model": "Kona Electric",
+      "year": 2019,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "KONAKAUAI"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "hyundai-kona-electric-2026",
+      "brand": "Hyundai",
+      "model": "Kona Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "KONAKAUAI"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "jaguar-i-pace-2018",
+      "brand": "Jaguar",
+      "model": "I-Pace",
+      "year": 2018,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "IPACE"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "jaguar-i-pace-2019",
+      "brand": "Jaguar",
+      "model": "I-Pace",
+      "year": 2019,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "IPACE"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "jeep-avenger-electric-2025",
+      "brand": "Jeep",
+      "model": "Avenger Electric",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "AVENGER"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024
+      ]
+    },
+    {
+      "id": "jeep-avenger-electric-2026",
+      "brand": "Jeep",
+      "model": "Avenger Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "AVENGER"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024
+      ]
+    },
+    {
+      "id": "jeep-wagoneer-s-2024",
+      "brand": "Jeep",
+      "model": "Wagoneer S",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "jeep-wagoneer-s-2025",
+      "brand": "Jeep",
+      "model": "Wagoneer S",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "jeep-wagoneer-s-2026",
+      "brand": "Jeep",
+      "model": "Wagoneer S",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "kia-e-niro-2018",
+      "brand": "Kia",
+      "model": "e-Niro",
+      "year": 2018,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "NIRO"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "kia-e-niro-2019",
+      "brand": "Kia",
+      "model": "e-Niro",
+      "year": 2019,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "NIRO"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "kia-ev3-2026",
+      "brand": "Kia",
+      "model": "EV3",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "EV3"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "kia-ev4-2026",
+      "brand": "Kia",
+      "model": "EV4",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "EV4"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "kia-ev6-2026",
+      "brand": "Kia",
+      "model": "EV6",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "EV6",
+        "EV6GT"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "kia-ev9-2026",
+      "brand": "Kia",
+      "model": "EV9",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "EV9",
+        "EV9GT"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "kia-soul-ev-2017",
+      "brand": "Kia",
+      "model": "Soul EV",
+      "year": 2017,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "SOUL"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "id": "kia-soul-ev-2018",
+      "brand": "Kia",
+      "model": "Soul EV",
+      "year": 2018,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "SOUL"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "id": "kia-soul-ev-2019",
+      "brand": "Kia",
+      "model": "Soul EV",
+      "year": 2019,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "SOUL"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "id": "kia-soul-ev-2023",
+      "brand": "Kia",
+      "model": "Soul EV",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "SOUL"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022
+      ]
+    },
+    {
+      "id": "lancia-ypsilon-ev-2025",
+      "brand": "Lancia",
+      "model": "Ypsilon",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "YPSILON"
+      ],
+      "eea_years_for_model": [
+        2024
+      ]
+    },
+    {
+      "id": "lancia-ypsilon-ev-2026",
+      "brand": "Lancia",
+      "model": "Ypsilon",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "YPSILON"
+      ],
+      "eea_years_for_model": [
+        2024
+      ]
+    },
+    {
+      "id": "leapmotor-t03-2024",
+      "brand": "Leapmotor",
+      "model": "T03",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "leapmotor-t03-2025",
+      "brand": "Leapmotor",
+      "model": "T03",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "leapmotor-t03-2026",
+      "brand": "Leapmotor",
+      "model": "T03",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "lexus-rz-2022",
+      "brand": "Lexus",
+      "model": "RZ",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "lexus-rz-2023",
+      "brand": "Lexus",
+      "model": "RZ",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "lexus-rz-2024",
+      "brand": "Lexus",
+      "model": "RZ",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "lexus-rz-2025",
+      "brand": "Lexus",
+      "model": "RZ",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "lexus-rz-2026",
+      "brand": "Lexus",
+      "model": "RZ",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "lexus-ux-300e-2026",
+      "brand": "Lexus",
+      "model": "UX 300e",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "UX300E"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "lucid-air-2022",
+      "brand": "Lucid",
+      "model": "Air",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "lucid-air-2023",
+      "brand": "Lucid",
+      "model": "Air",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "lucid-air-2024",
+      "brand": "Lucid",
+      "model": "Air",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "lucid-air-2025",
+      "brand": "Lucid",
+      "model": "Air",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "lucid-air-2026",
+      "brand": "Lucid",
+      "model": "Air",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "lucid-gravity-2024",
+      "brand": "Lucid",
+      "model": "Gravity",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "lucid-gravity-2025",
+      "brand": "Lucid",
+      "model": "Gravity",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "lucid-gravity-2026",
+      "brand": "Lucid",
+      "model": "Gravity",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "mazda-6e-2024",
+      "brand": "Mazda",
+      "model": "6e",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "6E"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "mazda-6e-2026",
+      "brand": "Mazda",
+      "model": "6e",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "6E"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "mazda-cx-60-phev-2024",
+      "brand": "Mazda",
+      "model": "CX-60 PHEV",
+      "year": 2024,
+      "powertrain": "phev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "mazda-mx-30-2026",
+      "brand": "Mazda",
+      "model": "MX-30",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MX30"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "mercedes-benz-eqa-2026",
+      "brand": "Mercedes-Benz",
+      "model": "EQA",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "EQA250"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "mercedes-benz-eqb-2026",
+      "brand": "Mercedes-Benz",
+      "model": "EQB",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "EQB250"
+      ],
+      "eea_years_for_model": [
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "mercedes-benz-eqe-2026",
+      "brand": "Mercedes-Benz",
+      "model": "EQE",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "EQE300"
+      ],
+      "eea_years_for_model": [
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "mercedes-benz-eqs-2026",
+      "brand": "Mercedes-Benz",
+      "model": "EQS",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "EQS350"
+      ],
+      "eea_years_for_model": [
+        2023
+      ]
+    },
+    {
+      "id": "mercedes-benz-eqv-2026",
+      "brand": "Mercedes-Benz",
+      "model": "EQV",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "EQV"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "mercedes-benz-g-580-eq-2025",
+      "brand": "Mercedes-Benz",
+      "model": "G 580 EQ",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "G580"
+      ],
+      "eea_years_for_model": [
+        2024
+      ]
+    },
+    {
+      "id": "mercedes-benz-g-580-eq-2026",
+      "brand": "Mercedes-Benz",
+      "model": "G 580 EQ",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "G580"
+      ],
+      "eea_years_for_model": [
+        2024
+      ]
+    },
+    {
+      "id": "mg-marvel-r-2026",
+      "brand": "MG",
+      "model": "Marvel R",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MARVELRELECTRIC"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "mg-mg-zs-ev-2019",
+      "brand": "MG",
+      "model": "MG ZS EV",
+      "year": 2019,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ZSEV"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "mg-mg-zs-ev-2020",
+      "brand": "MG",
+      "model": "MG ZS EV",
+      "year": 2020,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ZSEV"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "mg-mg-zs-ev-2026",
+      "brand": "MG",
+      "model": "MG ZS EV",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ZSEV"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "mg-mg4-2022",
+      "brand": "MG",
+      "model": "MG4",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "mg-mg4-2023",
+      "brand": "MG",
+      "model": "MG4",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "mg-mg4-2024",
+      "brand": "MG",
+      "model": "MG4",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "mg-mg4-2025",
+      "brand": "MG",
+      "model": "MG4",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "mg-mg4-2026",
+      "brand": "MG",
+      "model": "MG4",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "mg-mg5-2020",
+      "brand": "MG",
+      "model": "MG5",
+      "year": 2020,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "mg-mg5-2021",
+      "brand": "MG",
+      "model": "MG5",
+      "year": 2021,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "mg-mg5-2022",
+      "brand": "MG",
+      "model": "MG5",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "mg-mg5-2023",
+      "brand": "MG",
+      "model": "MG5",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "mg-mg5-2024",
+      "brand": "MG",
+      "model": "MG5",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "mg-mg5-2025",
+      "brand": "MG",
+      "model": "MG5",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "mg-mg5-2026",
+      "brand": "MG",
+      "model": "MG5",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "mini-electric-hatch-2020",
+      "brand": "MINI",
+      "model": "Electric Hatch",
+      "year": 2020,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "mini-electric-hatch-2021",
+      "brand": "MINI",
+      "model": "Electric Hatch",
+      "year": 2021,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "mini-electric-hatch-2022",
+      "brand": "MINI",
+      "model": "Electric Hatch",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "mini-electric-hatch-2023",
+      "brand": "MINI",
+      "model": "Electric Hatch",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "mini-electric-hatch-2024",
+      "brand": "MINI",
+      "model": "Electric Hatch",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "mini-electric-hatch-2025",
+      "brand": "MINI",
+      "model": "Electric Hatch",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "mini-electric-hatch-2026",
+      "brand": "MINI",
+      "model": "Electric Hatch",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-el6-2023",
+      "brand": "NIO",
+      "model": "EL6",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-el6-2024",
+      "brand": "NIO",
+      "model": "EL6",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-el6-2025",
+      "brand": "NIO",
+      "model": "EL6",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-el6-2026",
+      "brand": "NIO",
+      "model": "EL6",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-el8-2023",
+      "brand": "NIO",
+      "model": "EL8",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-el8-2024",
+      "brand": "NIO",
+      "model": "EL8",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-el8-2025",
+      "brand": "NIO",
+      "model": "EL8",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-el8-2026",
+      "brand": "NIO",
+      "model": "EL8",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-et5-2022",
+      "brand": "NIO",
+      "model": "ET5",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-et5-2023",
+      "brand": "NIO",
+      "model": "ET5",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-et5-2024",
+      "brand": "NIO",
+      "model": "ET5",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-et5-2025",
+      "brand": "NIO",
+      "model": "ET5",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-et5-2026",
+      "brand": "NIO",
+      "model": "ET5",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-et5-touring-2023",
+      "brand": "NIO",
+      "model": "ET5 Touring",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-et5-touring-2024",
+      "brand": "NIO",
+      "model": "ET5 Touring",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-et5-touring-2025",
+      "brand": "NIO",
+      "model": "ET5 Touring",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-et5-touring-2026",
+      "brand": "NIO",
+      "model": "ET5 Touring",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-et7-2021",
+      "brand": "NIO",
+      "model": "ET7",
+      "year": 2021,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-et7-2022",
+      "brand": "NIO",
+      "model": "ET7",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-et7-2023",
+      "brand": "NIO",
+      "model": "ET7",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-et7-2024",
+      "brand": "NIO",
+      "model": "ET7",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-et7-2025",
+      "brand": "NIO",
+      "model": "ET7",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nio-et7-2026",
+      "brand": "NIO",
+      "model": "ET7",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "nissan-ariya-2021",
+      "brand": "Nissan",
+      "model": "Ariya",
+      "year": 2021,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ARIYA"
+      ],
+      "eea_years_for_model": [
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "nissan-ariya-2026",
+      "brand": "Nissan",
+      "model": "Ariya",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ARIYA"
+      ],
+      "eea_years_for_model": [
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "nissan-leaf-2010",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2010,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "LEAF"
+      ],
+      "eea_years_for_model": [
+        2021
+      ]
+    },
+    {
+      "id": "nissan-leaf-2011",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2011,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "LEAF"
+      ],
+      "eea_years_for_model": [
+        2021
+      ]
+    },
+    {
+      "id": "nissan-leaf-2012",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2012,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "LEAF"
+      ],
+      "eea_years_for_model": [
+        2021
+      ]
+    },
+    {
+      "id": "nissan-leaf-2013",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2013,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "LEAF"
+      ],
+      "eea_years_for_model": [
+        2021
+      ]
+    },
+    {
+      "id": "nissan-leaf-2014",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2014,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "LEAF"
+      ],
+      "eea_years_for_model": [
+        2021
+      ]
+    },
+    {
+      "id": "nissan-leaf-2015",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2015,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "LEAF"
+      ],
+      "eea_years_for_model": [
+        2021
+      ]
+    },
+    {
+      "id": "nissan-leaf-2016",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2016,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "LEAF"
+      ],
+      "eea_years_for_model": [
+        2021
+      ]
+    },
+    {
+      "id": "nissan-leaf-2017",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2017,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "LEAF"
+      ],
+      "eea_years_for_model": [
+        2021
+      ]
+    },
+    {
+      "id": "nissan-leaf-2018",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2018,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "LEAF"
+      ],
+      "eea_years_for_model": [
+        2021
+      ]
+    },
+    {
+      "id": "nissan-leaf-2019",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2019,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "LEAF"
+      ],
+      "eea_years_for_model": [
+        2021
+      ]
+    },
+    {
+      "id": "nissan-leaf-2026",
+      "brand": "Nissan",
+      "model": "Leaf",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "LEAF"
+      ],
+      "eea_years_for_model": [
+        2021
+      ]
+    },
+    {
+      "id": "opel-astra-electric-2025",
+      "brand": "Opel",
+      "model": "Astra Electric",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ASTRA"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024
+      ]
+    },
+    {
+      "id": "opel-astra-electric-2026",
+      "brand": "Opel",
+      "model": "Astra Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ASTRA"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024
+      ]
+    },
+    {
+      "id": "opel-corsa-electric-2026",
+      "brand": "Opel",
+      "model": "Corsa Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "CORSA"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "opel-frontera-electric-2024",
+      "brand": "Opel",
+      "model": "Frontera Electric",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "opel-frontera-electric-2025",
+      "brand": "Opel",
+      "model": "Frontera Electric",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "opel-frontera-electric-2026",
+      "brand": "Opel",
+      "model": "Frontera Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "opel-grandland-electric-2025",
+      "brand": "Opel",
+      "model": "Grandland Electric",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "GRANDLAND"
+      ],
+      "eea_years_for_model": [
+        2024
+      ]
+    },
+    {
+      "id": "opel-grandland-electric-2026",
+      "brand": "Opel",
+      "model": "Grandland Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "GRANDLAND"
+      ],
+      "eea_years_for_model": [
+        2024
+      ]
+    },
+    {
+      "id": "opel-mokka-electric-2020",
+      "brand": "Opel",
+      "model": "Mokka Electric",
+      "year": 2020,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MOKKA"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023,
+        2024
+      ]
+    },
+    {
+      "id": "opel-mokka-electric-2025",
+      "brand": "Opel",
+      "model": "Mokka Electric",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MOKKA"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023,
+        2024
+      ]
+    },
+    {
+      "id": "opel-mokka-electric-2026",
+      "brand": "Opel",
+      "model": "Mokka Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MOKKA"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023,
+        2024
+      ]
+    },
+    {
+      "id": "peugeot-e-2008-2019",
+      "brand": "Peugeot",
+      "model": "e-2008",
+      "year": 2019,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "2008"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ]
+    },
+    {
+      "id": "peugeot-e-2008-2025",
+      "brand": "Peugeot",
+      "model": "e-2008",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "2008"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ]
+    },
+    {
+      "id": "peugeot-e-2008-2026",
+      "brand": "Peugeot",
+      "model": "e-2008",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "2008"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ]
+    },
+    {
+      "id": "peugeot-e-208-2019",
+      "brand": "Peugeot",
+      "model": "e-208",
+      "year": 2019,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "208"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "peugeot-e-208-2026",
+      "brand": "Peugeot",
+      "model": "e-208",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "208"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "peugeot-e-3008-2023",
+      "brand": "Peugeot",
+      "model": "e-3008",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "3008"
+      ],
+      "eea_years_for_model": [
+        2024
+      ]
+    },
+    {
+      "id": "peugeot-e-3008-2025",
+      "brand": "Peugeot",
+      "model": "e-3008",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "3008"
+      ],
+      "eea_years_for_model": [
+        2024
+      ]
+    },
+    {
+      "id": "peugeot-e-3008-2026",
+      "brand": "Peugeot",
+      "model": "e-3008",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "3008"
+      ],
+      "eea_years_for_model": [
+        2024
+      ]
+    },
+    {
+      "id": "peugeot-e-308-2022",
+      "brand": "Peugeot",
+      "model": "e-308",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "308"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024
+      ]
+    },
+    {
+      "id": "peugeot-e-308-2025",
+      "brand": "Peugeot",
+      "model": "e-308",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "308"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024
+      ]
+    },
+    {
+      "id": "peugeot-e-308-2026",
+      "brand": "Peugeot",
+      "model": "e-308",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "308"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024
+      ]
+    },
+    {
+      "id": "peugeot-e-5008-2025",
+      "brand": "Peugeot",
+      "model": "e-5008",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "5008"
+      ],
+      "eea_years_for_model": [
+        2024
+      ]
+    },
+    {
+      "id": "peugeot-e-5008-2026",
+      "brand": "Peugeot",
+      "model": "e-5008",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "5008"
+      ],
+      "eea_years_for_model": [
+        2024
+      ]
+    },
+    {
+      "id": "polestar-2-2020",
+      "brand": "Polestar",
+      "model": "2",
+      "year": 2020,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "2"
+      ],
+      "eea_years_for_model": [
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "polestar-2-2021",
+      "brand": "Polestar",
+      "model": "2",
+      "year": 2021,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "2"
+      ],
+      "eea_years_for_model": [
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "polestar-2-2026",
+      "brand": "Polestar",
+      "model": "2",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "2"
+      ],
+      "eea_years_for_model": [
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "polestar-3-2023",
+      "brand": "Polestar",
+      "model": "3",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "3"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "polestar-3-2026",
+      "brand": "Polestar",
+      "model": "3",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "3"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "polestar-4-2023",
+      "brand": "Polestar",
+      "model": "4",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "4"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "polestar-4-2026",
+      "brand": "Polestar",
+      "model": "4",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "4"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "porsche-macan-electric-2026",
+      "brand": "Porsche",
+      "model": "Macan Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MACAN",
+        "MACAN4S",
+        "MACANTURBO"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "porsche-taycan-2019",
+      "brand": "Porsche",
+      "model": "Taycan",
+      "year": 2019,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "TAYCAN",
+        "TAYCAN4S",
+        "TAYCANGTS",
+        "TAYCANTURBO",
+        "TAYCANTURBOS"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "porsche-taycan-2026",
+      "brand": "Porsche",
+      "model": "Taycan",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "TAYCAN",
+        "TAYCAN4S",
+        "TAYCANGTS",
+        "TAYCANTURBO",
+        "TAYCANTURBOS"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "renault-5-e-tech-2026",
+      "brand": "Renault",
+      "model": "5 E-Tech",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "5ETECHELECTRIC"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "renault-megane-e-tech-2021",
+      "brand": "Renault",
+      "model": "Megane E-Tech",
+      "year": 2021,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MEGANEETECHELECTRIC"
+      ],
+      "eea_years_for_model": [
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "renault-megane-e-tech-2026",
+      "brand": "Renault",
+      "model": "Megane E-Tech",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MEGANEETECHELECTRIC"
+      ],
+      "eea_years_for_model": [
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "renault-scenic-e-tech-2023",
+      "brand": "Renault",
+      "model": "Scenic E-Tech",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "SCENICETECHELECTRIC"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "renault-scenic-e-tech-2026",
+      "brand": "Renault",
+      "model": "Scenic E-Tech",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "SCENICETECHELECTRIC"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "renault-zoe-2015",
+      "brand": "Renault",
+      "model": "Zoe",
+      "year": 2015,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ZOE"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "renault-zoe-2016",
+      "brand": "Renault",
+      "model": "Zoe",
+      "year": 2016,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ZOE"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "renault-zoe-2017",
+      "brand": "Renault",
+      "model": "Zoe",
+      "year": 2017,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ZOE"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "renault-zoe-2018",
+      "brand": "Renault",
+      "model": "Zoe",
+      "year": 2018,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ZOE"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "renault-zoe-2019",
+      "brand": "Renault",
+      "model": "Zoe",
+      "year": 2019,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ZOE"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "rivian-r1s-2023",
+      "brand": "Rivian",
+      "model": "R1S",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "rivian-r1s-2024",
+      "brand": "Rivian",
+      "model": "R1S",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "rivian-r1s-2025",
+      "brand": "Rivian",
+      "model": "R1S",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "rivian-r1s-2026",
+      "brand": "Rivian",
+      "model": "R1S",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "rivian-r1t-2023",
+      "brand": "Rivian",
+      "model": "R1T",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "rivian-r1t-2024",
+      "brand": "Rivian",
+      "model": "R1T",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "rivian-r1t-2025",
+      "brand": "Rivian",
+      "model": "R1T",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "rivian-r1t-2026",
+      "brand": "Rivian",
+      "model": "R1T",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "seat-mii-electric-2019",
+      "brand": "SEAT",
+      "model": "Mii electric",
+      "year": 2019,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MII"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021
+      ]
+    },
+    {
+      "id": "skoda-citigo-e-iv-2019",
+      "brand": "Skoda",
+      "model": "Citigo-e iV",
+      "year": 2019,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "CITIGO"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021
+      ]
+    },
+    {
+      "id": "skoda-elroq-2024",
+      "brand": "Skoda",
+      "model": "Elroq",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "skoda-elroq-2025",
+      "brand": "Skoda",
+      "model": "Elroq",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "skoda-elroq-2026",
+      "brand": "Skoda",
+      "model": "Elroq",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "skoda-enyaq-2020",
+      "brand": "Skoda",
+      "model": "Enyaq",
+      "year": 2020,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ENYAQ50"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "skoda-enyaq-2025",
+      "brand": "Skoda",
+      "model": "Enyaq",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ENYAQ50"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "skoda-enyaq-2026",
+      "brand": "Skoda",
+      "model": "Enyaq",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ENYAQ50"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "smart-1-2022",
+      "brand": "Smart",
+      "model": "#1",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "1"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "smart-1-2026",
+      "brand": "Smart",
+      "model": "#1",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "1"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "smart-3-2023",
+      "brand": "Smart",
+      "model": "#3",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "3"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "smart-3-2026",
+      "brand": "Smart",
+      "model": "#3",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "3"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "subaru-solterra-2026",
+      "brand": "Subaru",
+      "model": "Solterra",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "SOLTERRA"
+      ],
+      "eea_years_for_model": [
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-3-2019",
+      "brand": "Tesla",
+      "model": "Model 3",
+      "year": 2019,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODEL3"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-3-2020",
+      "brand": "Tesla",
+      "model": "Model 3",
+      "year": 2020,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODEL3"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-3-2021",
+      "brand": "Tesla",
+      "model": "Model 3",
+      "year": 2021,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODEL3"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-3-2022",
+      "brand": "Tesla",
+      "model": "Model 3",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODEL3"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-3-2026",
+      "brand": "Tesla",
+      "model": "Model 3",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODEL3"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-s-2017",
+      "brand": "Tesla",
+      "model": "Model S",
+      "year": 2017,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODELS"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-s-2018",
+      "brand": "Tesla",
+      "model": "Model S",
+      "year": 2018,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODELS"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-s-2019",
+      "brand": "Tesla",
+      "model": "Model S",
+      "year": 2019,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODELS"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-s-2020",
+      "brand": "Tesla",
+      "model": "Model S",
+      "year": 2020,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODELS"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-s-2021",
+      "brand": "Tesla",
+      "model": "Model S",
+      "year": 2021,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODELS"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-s-2022",
+      "brand": "Tesla",
+      "model": "Model S",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODELS"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-s-2026",
+      "brand": "Tesla",
+      "model": "Model S",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODELS"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-x-2016",
+      "brand": "Tesla",
+      "model": "Model X",
+      "year": 2016,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODELX"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-x-2017",
+      "brand": "Tesla",
+      "model": "Model X",
+      "year": 2017,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODELX"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-x-2018",
+      "brand": "Tesla",
+      "model": "Model X",
+      "year": 2018,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODELX"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-x-2019",
+      "brand": "Tesla",
+      "model": "Model X",
+      "year": 2019,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODELX"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-x-2020",
+      "brand": "Tesla",
+      "model": "Model X",
+      "year": 2020,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODELX"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-x-2021",
+      "brand": "Tesla",
+      "model": "Model X",
+      "year": 2021,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODELX"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-x-2022",
+      "brand": "Tesla",
+      "model": "Model X",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODELX"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-x-2026",
+      "brand": "Tesla",
+      "model": "Model X",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODELX"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-y-2021",
+      "brand": "Tesla",
+      "model": "Model Y",
+      "year": 2021,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODELY"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-y-2022",
+      "brand": "Tesla",
+      "model": "Model Y",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODELY"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "tesla-model-y-2026",
+      "brand": "Tesla",
+      "model": "Model Y",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "MODELY"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "toyota-bz4x-2026",
+      "brand": "Toyota",
+      "model": "bZ4X",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "BZ4X"
+      ],
+      "eea_years_for_model": [
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "toyota-proace-electric-2020",
+      "brand": "Toyota",
+      "model": "Proace Electric",
+      "year": 2020,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "PROACE"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "toyota-proace-electric-2026",
+      "brand": "Toyota",
+      "model": "Proace Electric",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "PROACE"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "volkswagen-e-golf-2014",
+      "brand": "Volkswagen",
+      "model": "e-Golf",
+      "year": 2014,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "GOLF"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021
+      ]
+    },
+    {
+      "id": "volkswagen-e-golf-2015",
+      "brand": "Volkswagen",
+      "model": "e-Golf",
+      "year": 2015,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "GOLF"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021
+      ]
+    },
+    {
+      "id": "volkswagen-e-golf-2016",
+      "brand": "Volkswagen",
+      "model": "e-Golf",
+      "year": 2016,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "GOLF"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021
+      ]
+    },
+    {
+      "id": "volkswagen-e-golf-2017",
+      "brand": "Volkswagen",
+      "model": "e-Golf",
+      "year": 2017,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "GOLF"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021
+      ]
+    },
+    {
+      "id": "volkswagen-e-golf-2018",
+      "brand": "Volkswagen",
+      "model": "e-Golf",
+      "year": 2018,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "GOLF"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021
+      ]
+    },
+    {
+      "id": "volkswagen-e-golf-2019",
+      "brand": "Volkswagen",
+      "model": "e-Golf",
+      "year": 2019,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "GOLF"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021
+      ]
+    },
+    {
+      "id": "volkswagen-e-up!-2013",
+      "brand": "Volkswagen",
+      "model": "e-up!",
+      "year": 2013,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "volkswagen-e-up!-2014",
+      "brand": "Volkswagen",
+      "model": "e-up!",
+      "year": 2014,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "volkswagen-e-up!-2015",
+      "brand": "Volkswagen",
+      "model": "e-up!",
+      "year": 2015,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "volkswagen-e-up!-2016",
+      "brand": "Volkswagen",
+      "model": "e-up!",
+      "year": 2016,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "volkswagen-e-up!-2017",
+      "brand": "Volkswagen",
+      "model": "e-up!",
+      "year": 2017,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "volkswagen-e-up!-2018",
+      "brand": "Volkswagen",
+      "model": "e-up!",
+      "year": 2018,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "volkswagen-e-up!-2019",
+      "brand": "Volkswagen",
+      "model": "e-up!",
+      "year": 2019,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "volkswagen-e-up!-2020",
+      "brand": "Volkswagen",
+      "model": "e-up!",
+      "year": 2020,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "volkswagen-e-up!-2021",
+      "brand": "Volkswagen",
+      "model": "e-up!",
+      "year": 2021,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "volkswagen-e-up!-2022",
+      "brand": "Volkswagen",
+      "model": "e-up!",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "volkswagen-e-up!-2023",
+      "brand": "Volkswagen",
+      "model": "e-up!",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "volkswagen-golf-gte-phev-2024",
+      "brand": "Volkswagen",
+      "model": "Golf GTE",
+      "year": 2024,
+      "powertrain": "phev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "GOLF"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021
+      ]
+    },
+    {
+      "id": "volkswagen-id-buzz-2025",
+      "brand": "Volkswagen",
+      "model": "ID. Buzz",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "IDBUZZPRO150KW"
+      ],
+      "eea_years_for_model": [
+        2022,
+        2023,
+        2024
+      ]
+    },
+    {
+      "id": "volkswagen-id-buzz-2026",
+      "brand": "Volkswagen",
+      "model": "ID. Buzz",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "IDBUZZPRO150KW"
+      ],
+      "eea_years_for_model": [
+        2022,
+        2023,
+        2024
+      ]
+    },
+    {
+      "id": "volkswagen-id3-2025",
+      "brand": "Volkswagen",
+      "model": "ID.3",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ID3PRO150KW",
+        "ID3PROS150KW",
+        "ID3PURE110KW"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ]
+    },
+    {
+      "id": "volkswagen-id3-2026",
+      "brand": "Volkswagen",
+      "model": "ID.3",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ID3PRO150KW",
+        "ID3PROS150KW",
+        "ID3PURE110KW"
+      ],
+      "eea_years_for_model": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ]
+    },
+    {
+      "id": "volkswagen-id4-2020",
+      "brand": "Volkswagen",
+      "model": "ID.4",
+      "year": 2020,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ID4PRO150KW",
+        "ID4PURE125KW"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "volkswagen-id4-2024",
+      "brand": "Volkswagen",
+      "model": "ID.4",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ID4PRO150KW",
+        "ID4PURE125KW"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "volkswagen-id4-2025",
+      "brand": "Volkswagen",
+      "model": "ID.4",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ID4PRO150KW",
+        "ID4PURE125KW"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "volkswagen-id4-2026",
+      "brand": "Volkswagen",
+      "model": "ID.4",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ID4PRO150KW",
+        "ID4PURE125KW"
+      ],
+      "eea_years_for_model": [
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "volkswagen-id5-2021",
+      "brand": "Volkswagen",
+      "model": "ID.5",
+      "year": 2021,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ID5PRO150KW"
+      ],
+      "eea_years_for_model": [
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "volkswagen-id5-2025",
+      "brand": "Volkswagen",
+      "model": "ID.5",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ID5PRO150KW"
+      ],
+      "eea_years_for_model": [
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "volkswagen-id5-2026",
+      "brand": "Volkswagen",
+      "model": "ID.5",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ID5PRO150KW"
+      ],
+      "eea_years_for_model": [
+        2022,
+        2023
+      ]
+    },
+    {
+      "id": "volkswagen-id7-2024",
+      "brand": "Volkswagen",
+      "model": "ID.7",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ID7PRO210KW"
+      ],
+      "eea_years_for_model": [
+        2023
+      ]
+    },
+    {
+      "id": "volkswagen-id7-2025",
+      "brand": "Volkswagen",
+      "model": "ID.7",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ID7PRO210KW"
+      ],
+      "eea_years_for_model": [
+        2023
+      ]
+    },
+    {
+      "id": "volkswagen-id7-2026",
+      "brand": "Volkswagen",
+      "model": "ID.7",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "ID7PRO210KW"
+      ],
+      "eea_years_for_model": [
+        2023
+      ]
+    },
+    {
+      "id": "volvo-ec40-2026",
+      "brand": "Volvo",
+      "model": "EC40",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "EC40"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "volvo-ex30-2026",
+      "brand": "Volvo",
+      "model": "EX30",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "EX30",
+        "EX30CROSSCOUNTRY"
+      ],
+      "eea_years_for_model": [
+        2023,
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "volvo-ex40-2026",
+      "brand": "Volvo",
+      "model": "EX40",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "EX40"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "volvo-ex90-2026",
+      "brand": "Volvo",
+      "model": "EX90",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "EX90"
+      ],
+      "eea_years_for_model": [
+        2024,
+        2025
+      ]
+    },
+    {
+      "id": "xpeng-g6-2023",
+      "brand": "XPeng",
+      "model": "G6",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "G6"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "xpeng-g6-2024",
+      "brand": "XPeng",
+      "model": "G6",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "G6"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "xpeng-g6-2026",
+      "brand": "XPeng",
+      "model": "G6",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "G6"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "xpeng-g9-2022",
+      "brand": "XPeng",
+      "model": "G9",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "G9"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "xpeng-g9-2023",
+      "brand": "XPeng",
+      "model": "G9",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "G9"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "xpeng-g9-2024",
+      "brand": "XPeng",
+      "model": "G9",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "G9"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "xpeng-g9-2026",
+      "brand": "XPeng",
+      "model": "G9",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [
+        "G9"
+      ],
+      "eea_years_for_model": [
+        2025
+      ]
+    },
+    {
+      "id": "xpeng-p7-2021",
+      "brand": "XPeng",
+      "model": "P7",
+      "year": 2021,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "xpeng-p7-2022",
+      "brand": "XPeng",
+      "model": "P7",
+      "year": 2022,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "xpeng-p7-2023",
+      "brand": "XPeng",
+      "model": "P7",
+      "year": 2023,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "xpeng-p7-2024",
+      "brand": "XPeng",
+      "model": "P7",
+      "year": 2024,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "xpeng-p7-2025",
+      "brand": "XPeng",
+      "model": "P7",
+      "year": 2025,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    },
+    {
+      "id": "xpeng-p7-2026",
+      "brand": "XPeng",
+      "model": "P7",
+      "year": 2026,
+      "powertrain": "ev",
+      "reason": "no_eea_zr_for_model_year",
+      "eea_model_keys_any_year": [],
+      "eea_years_for_model": []
+    }
+  ],
+  "note": "Review only — do not auto-delete"
+}

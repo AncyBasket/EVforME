@@ -1,0 +1,374 @@
+{
+  "seedVersion": 57,
+  "generatedAt": "2026-10-25T21:42:38.318000+00:00",
+  "consulted_date": "2026-10-25",
+  "counts": {
+    "rows_before": 5654,
+    "rows_after": 5620,
+    "removed": 34,
+    "kept_from_candidates": 2
+  },
+  "kept": [
+    {
+      "id": "jaguar-i-pace-2025",
+      "reason": "EEA IT Zr model year IPACE 2025 (provisional)",
+      "source": "EEA IT CO2 monitoring Zr cache IT_JAGUAR_bev_Zr.json",
+      "kind": "eea"
+    },
+    {
+      "id": "lexus-rz-2022",
+      "reason": "Lexus EU: first deliveries from end of 2022",
+      "source": "https://newsroom.lexus.eu/world-premiere-of-the-all-new-lexus-rz/",
+      "kind": "oem",
+      "consulted": "2026-10-25"
+    }
+  ],
+  "removed": [
+    {
+      "id": "hyundai-equus-2022",
+      "reason": "no EEA EV Equus; Hyundai never sold Equus EV in Europe",
+      "snapshot": {
+        "brand": "Hyundai",
+        "model": "Equus",
+        "year": 2022,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "hyundai-equus-2023",
+      "reason": "no EEA EV Equus; Hyundai never sold Equus EV in Europe",
+      "snapshot": {
+        "brand": "Hyundai",
+        "model": "Equus",
+        "year": 2023,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "hyundai-equus-2024",
+      "reason": "no EEA EV Equus; Hyundai never sold Equus EV in Europe",
+      "snapshot": {
+        "brand": "Hyundai",
+        "model": "Equus",
+        "year": 2024,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "hyundai-equus-2025",
+      "reason": "no EEA EV Equus; Hyundai never sold Equus EV in Europe",
+      "snapshot": {
+        "brand": "Hyundai",
+        "model": "Equus",
+        "year": 2025,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "hyundai-equus-2026",
+      "reason": "no EEA EV Equus; Hyundai never sold Equus EV in Europe",
+      "snapshot": {
+        "brand": "Hyundai",
+        "model": "Equus",
+        "year": 2026,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "nissan-altra-ev-2022",
+      "reason": "no EEA; Altra EV was 1990s Japan/US concept era, not EU catalog year",
+      "snapshot": {
+        "brand": "Nissan",
+        "model": "Altra-EV",
+        "year": 2022,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "nissan-altra-ev-2023",
+      "reason": "no EEA; Altra EV was 1990s Japan/US concept era, not EU catalog year",
+      "snapshot": {
+        "brand": "Nissan",
+        "model": "Altra-EV",
+        "year": 2023,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "nissan-altra-ev-2024",
+      "reason": "no EEA; Altra EV was 1990s Japan/US concept era, not EU catalog year",
+      "snapshot": {
+        "brand": "Nissan",
+        "model": "Altra-EV",
+        "year": 2024,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "nissan-altra-ev-2025",
+      "reason": "no EEA; Altra EV was 1990s Japan/US concept era, not EU catalog year",
+      "snapshot": {
+        "brand": "Nissan",
+        "model": "Altra-EV",
+        "year": 2025,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "nissan-altra-ev-2026",
+      "reason": "no EEA; Altra EV was 1990s Japan/US concept era, not EU catalog year",
+      "snapshot": {
+        "brand": "Nissan",
+        "model": "Altra-EV",
+        "year": 2026,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "lucid-gravity-2022",
+      "reason": "no EEA Lucid; Gravity EU sales not in 2022",
+      "snapshot": {
+        "brand": "Lucid",
+        "model": "Gravity",
+        "year": 2022,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "lucid-gravity-2023",
+      "reason": "no EEA Lucid; Gravity not sold EU 2023 in EEA IT",
+      "snapshot": {
+        "brand": "Lucid",
+        "model": "Gravity",
+        "year": 2023,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "nio-el8-2021",
+      "reason": "no EEA NIO brand cache; EL8 not in EEA IT for 2021",
+      "snapshot": {
+        "brand": "NIO",
+        "model": "EL8",
+        "year": 2021,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "nio-el8-2022",
+      "reason": "no EEA NIO brand cache; EL8 not in EEA IT for 2022",
+      "snapshot": {
+        "brand": "NIO",
+        "model": "EL8",
+        "year": 2022,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "nio-et5-2021",
+      "reason": "no EEA NIO; ET5 not in EEA IT for 2021",
+      "snapshot": {
+        "brand": "NIO",
+        "model": "ET5",
+        "year": 2021,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "nio-et5-touring-2021",
+      "reason": "no EEA NIO; ET5 Touring not in EEA IT for 2021",
+      "snapshot": {
+        "brand": "NIO",
+        "model": "ET5 Touring",
+        "year": 2021,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "nio-et5-touring-2022",
+      "reason": "no EEA NIO; ET5 Touring not in EEA IT for 2022",
+      "snapshot": {
+        "brand": "NIO",
+        "model": "ET5 Touring",
+        "year": 2022,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "nio-el6-2021",
+      "reason": "no EEA NIO; EL6 not in EEA IT for 2021",
+      "snapshot": {
+        "brand": "NIO",
+        "model": "EL6",
+        "year": 2021,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "nio-el6-2022",
+      "reason": "no EEA NIO; EL6 not in EEA IT for 2022",
+      "snapshot": {
+        "brand": "NIO",
+        "model": "EL6",
+        "year": 2022,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "xpeng-g6-2021",
+      "reason": "EEA XPeng G6 only from 2025; no 2021 model year",
+      "snapshot": {
+        "brand": "XPeng",
+        "model": "G6",
+        "year": 2021,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "xpeng-g6-2022",
+      "reason": "EEA XPeng G6 only from 2025; no 2022 model year",
+      "snapshot": {
+        "brand": "XPeng",
+        "model": "G6",
+        "year": 2022,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "xpeng-g9-2021",
+      "reason": "EEA XPeng G9 only from 2025; no 2021 model year",
+      "snapshot": {
+        "brand": "XPeng",
+        "model": "G9",
+        "year": 2021,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "chevrolet-bolt-euv-2021",
+      "reason": "no EEA Chevrolet BEV cache; Bolt EUV not EU type-approved in EEA IT",
+      "snapshot": {
+        "brand": "Chevrolet",
+        "model": "Bolt EUV",
+        "year": 2021,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "jaguar-i-pace-2026",
+      "reason": "EEA IPACE years through 2025 only; no 2026 Zr",
+      "snapshot": {
+        "brand": "Jaguar",
+        "model": "I-Pace",
+        "year": 2026,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "honda-e-2019",
+      "reason": "Honda EU: first deliveries summer 2020 (not 2019 sales year)",
+      "snapshot": {
+        "brand": "Honda",
+        "model": "e",
+        "year": 2019,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "mini-electric-hatch-2019",
+      "reason": "BMW/MINI press: orders 2019, first deliveries March 2020 — no 2019 delivery year",
+      "snapshot": {
+        "brand": "MINI",
+        "model": "Electric Hatch",
+        "year": 2019,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "kia-soul-ev-2024",
+      "reason": "EEA SOUL EV years 2020–2022 only",
+      "snapshot": {
+        "brand": "Kia",
+        "model": "Soul EV",
+        "year": 2024,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "kia-soul-ev-2025",
+      "reason": "EEA SOUL EV years 2020–2022 only",
+      "snapshot": {
+        "brand": "Kia",
+        "model": "Soul EV",
+        "year": 2025,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "kia-soul-ev-2026",
+      "reason": "EEA SOUL EV years 2020–2022 only",
+      "snapshot": {
+        "brand": "Kia",
+        "model": "Soul EV",
+        "year": 2026,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "volvo-c40-recharge-2025",
+      "reason": "rename duplicate: catalog already has volvo-ec40-2025 (EEA EC40 2025)",
+      "snapshot": {
+        "brand": "Volvo",
+        "model": "C40 Recharge",
+        "year": 2025,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "volvo-c40-recharge-2026",
+      "reason": "no EEA C40 2026; renamed to EC40 (volvo-ec40-2026 present)",
+      "snapshot": {
+        "brand": "Volvo",
+        "model": "C40 Recharge",
+        "year": 2026,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "volvo-xc40-recharge-2025",
+      "reason": "rename duplicate: catalog already has volvo-ex40-2025 (EEA EX40 2025)",
+      "snapshot": {
+        "brand": "Volvo",
+        "model": "XC40 Recharge",
+        "year": 2025,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "volvo-xc40-recharge-2026",
+      "reason": "no EEA XC40 EV 2026; renamed to EX40 (volvo-ex40-2026 present)",
+      "snapshot": {
+        "brand": "Volvo",
+        "model": "XC40 Recharge",
+        "year": 2026,
+        "powertrain": "ev"
+      }
+    },
+    {
+      "id": "renault-scenic-2024",
+      "reason": "exact duplicate of renault-scenic-e-tech-2024 (same brand/model/year)",
+      "snapshot": {
+        "brand": "Renault",
+        "model": "Scenic E-Tech",
+        "year": 2024,
+        "powertrain": "ev"
+      }
+    }
+  ],
+  "missing_candidates": [],
+  "ref_strip": {
+    "battery_nilled_dropped": 1,
+    "range_fills_dropped": 0,
+    "eea_refs_dropped": 0
+  }
+}

@@ -32,9 +32,11 @@ final class StorageService {
     // MARK: - User Input
     
     func saveUserInput(_ input: UserInput) {
-        updateCustomizationFlags(for: input)
+        var sanitized = input
+        CatalogVehicleIdResolver.sanitizeUserInput(&sanitized)
+        updateCustomizationFlags(for: sanitized)
         do {
-            let data = try JSONEncoder().encode(CodableUserInput(from: input))
+            let data = try JSONEncoder().encode(CodableUserInput(from: sanitized))
             defaults.set(data, forKey: Keys.lastUserInput)
         } catch {
             ErrorHandler.shared.handle(
@@ -56,7 +58,13 @@ final class StorageService {
         
         do {
             let codable = try JSONDecoder().decode(CodableUserInput.self, from: data)
-            return codable.toUserInput()
+            var input = codable.toUserInput()
+            if CatalogVehicleIdResolver.sanitizeUserInput(&input) {
+                // Persist remapped / defaulted ids so removed catalog rows do not stick.
+                let encoded = try JSONEncoder().encode(CodableUserInput(from: input))
+                defaults.set(encoded, forKey: Keys.lastUserInput)
+            }
+            return input
         } catch {
             ErrorHandler.shared.handle(
                 error,
