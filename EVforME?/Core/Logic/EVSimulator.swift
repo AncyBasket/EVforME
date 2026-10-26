@@ -528,11 +528,15 @@ final class EVSimulator {
         }
         
         let catalog = VehicleCatalogService.shared
-        let sourceId = CatalogVehicleIdResolver.resolveSourceId(input.sourceVehicleId, catalog: catalog)
-        let targetId = CatalogVehicleIdResolver.resolveTargetId(input.targetVehicleId, catalog: catalog)
-        guard let sourceVehicle = catalog.vehicle(by: sourceId),
+        // Never fall back to starter Golf/Model 3 — empty or removed ids → nil.
+        guard let sourceId = CatalogVehicleIdResolver.resolveId(input.sourceVehicleId, catalog: catalog),
+              let targetId = CatalogVehicleIdResolver.resolveId(input.targetVehicleId, catalog: catalog),
+              let sourceVehicle = catalog.vehicle(by: sourceId),
               let targetVehicle = catalog.vehicle(by: targetId) else {
-            AppLogger.shared.error("Failed to find vehicles for simulation", category: .simulation)
+            AppLogger.shared.error(
+                "Failed to find vehicles for simulation (empty or removed catalog id)",
+                category: .simulation
+            )
             return nil
         }
 

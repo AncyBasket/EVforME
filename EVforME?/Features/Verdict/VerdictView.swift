@@ -35,6 +35,10 @@ struct VerdictView: View {
     @Environment(\.accessibilityReduceMotion) private var accessibilityReduceMotion
     @Environment(\.requestReview) private var requestReview
 
+    private var catalogPairValid: Bool {
+        CatalogVehicleIdResolver.hasResolvableVehiclePair(userInput)
+    }
+
     private var showsModalChrome: Bool { onDismiss != nil }
 
     init(result: SimulationResult, userInput: Binding<UserInput>, onDismiss: (() -> Void)? = nil) {
@@ -780,14 +784,11 @@ struct VerdictView: View {
                         .foregroundColor(.secondaryText)
                     ForEach(items) { item in
                         Button {
-                            let restored = item.restoredUserInput()
-                            userInput = restored
-                            selectedScenario = restored.scenario
-                            aiExplanation = nil
-                            UISelectionFeedbackGenerator().selectionChanged()
-                            if item.hasUnavailableCatalogVehicle
-                                || restored.sourceVehicleId.isEmpty
-                                || restored.targetVehicleId.isEmpty {
+                            // Check existence BEFORE mutating userInput / scenario / result.
+                            if item.hasUnavailableCatalogVehicle {
+                                UISelectionFeedbackGenerator().selectionChanged()
+                                // Clear verdict (no stale numbers); do not touch userInput/scenario.
+                                closeVerdict()
                                 ErrorHandler.shared.handleAppError(
                                     .dataNotFound,
                                     context: .catalog,
@@ -795,13 +796,29 @@ struct VerdictView: View {
                                 )
                                 return
                             }
-                            if let simulated = EVSimulator.simulate(input: restored) {
-                                currentResult = simulated
-                                StorageService.shared.saveUserInput(restored)
-                                WidgetSnapshotStore.save(from: simulated, input: restored)
-                                VerdictLiveActivityController.publish(from: simulated, input: restored)
-                                shareCard = VerdictShareCardRenderer.makeCard(result: simulated, input: restored)
+                            let restored = item.restoredUserInput()
+                            guard CatalogVehicleIdResolver.hasResolvableVehiclePair(restored) else {
+                                UISelectionFeedbackGenerator().selectionChanged()
+                                closeVerdict()
+                                ErrorHandler.shared.handleAppError(
+                                    .dataNotFound,
+                                    context: .catalog,
+                                    userMessage: L10n.catalogVehiclePickAnother
+                                )
+                                return
                             }
+                            userInput = restored
+                            selectedScenario = restored.scenario
+                            aiExplanation = nil
+                            UISelectionFeedbackGenerator().selectionChanged()
+                            guard let simulated = EVSimulator.simulate(input: restored) else {
+                                return
+                            }
+                            currentResult = simulated
+                            StorageService.shared.saveUserInput(restored)
+                            WidgetSnapshotStore.save(from: simulated, input: restored)
+                            VerdictLiveActivityController.publish(from: simulated, input: restored)
+                            shareCard = VerdictShareCardRenderer.makeCard(result: simulated, input: restored)
                         } label: {
                             HStack(alignment: .top) {
                                 VStack(alignment: .leading, spacing: 2) {
@@ -882,6 +899,7 @@ struct VerdictView: View {
                             .foregroundColor(selected ? Color.ctaLabel : Color.ink)
                     }
                     .buttonStyle(.plain)
+                    .disabled(!catalogPairValid)
                     .accessibilityLabel(scenario.title)
                     .accessibilityHint(L10n.scenarioChipA11yHint)
                     .accessibilityAddTraits(selected ? .isSelected : [])
@@ -896,6 +914,7 @@ struct VerdictView: View {
     }
 
     private func updateResultForScenario(_ scenario: Scenario) {
+        guard catalogPairValid else { return }
         userInput.scenario = scenario
         guard let simulated = EVSimulator.simulate(input: userInput, scenario: scenario) else { return }
         currentResult = simulated

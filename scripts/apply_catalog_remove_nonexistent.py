@@ -72,7 +72,7 @@ REMOVE: dict[str, str] = {
     "lucid-gravity-2022": "EEA EU Lucid Gravity only from 2025; no 2022",
     "lucid-gravity-2023": "EEA EU Lucid Gravity only from 2025; no 2023",
     "nio-el8-2021": "EEA EU NIO ES8/EL8: no EL8/ES8.EL8 match for 2021 at catalog kW; ES8 2021 exists but EL8 nameplate EU later",
-    "nio-et5-2021": "EEA EU Cn ET5 year 2021 is Mk SKYWELL (not NIO); NIO ET5 EEA from 2023",
+    "nio-et5-2021": "la NIO ET5 compare in EEA dal 2022; la ET5 del 2021 è una Skywell",
     "nio-et5-touring-2021": "no EEA EU NIO ET5 Touring in 2021 (NIO Touring from 2023)",
     "nio-et5-touring-2022": "no EEA EU NIO ET5 Touring in 2022 (NIO Touring from 2023)",
     "nio-el6-2021": "EEA EU NIO EL6 from 2023; no 2021",

@@ -165,6 +165,10 @@ struct MainShellView: View {
         }
 #endif
         .withErrorHandling()
+        .onReceive(NotificationCenter.default.publisher(for: .catalogVehicleSelectionRequested)) { _ in
+            simulationResult = nil
+            selectedTab = .workshop
+        }
     }
 
     private func tabEnter(_ insertEdge: Edge, exit removalEdge: Edge) -> AnyTransition {

@@ -653,6 +653,7 @@ enum L10n {
     }
 
     static var catalogVehiclePickAnother: String { string("catalog_vehicle_pick_another") }
+    static var catalogVehicleChooseAction: String { string("catalog_vehicle_choose_action") }
     static var lastComparisonReopen: String { string("last_comparison_reopen") }
     static var lastComparisonRecalculate: String { string("last_comparison_recalculate") }
     static var lastComparisonRestoreForm: String { string("last_comparison_restore_form") }

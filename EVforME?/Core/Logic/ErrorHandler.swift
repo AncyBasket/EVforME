@@ -19,6 +19,16 @@ final class ErrorHandler {
     private let maxRecentErrors = 50
     
     private init() {}
+
+    /// Test helper: wipe in-memory error log.
+    func clearRecentErrorsForTesting() {
+        errorQueue.sync { recentErrors.removeAll() }
+    }
+
+    /// Test helper: snapshot of recent errors (waits for the handler queue).
+    func recentErrorsForTesting() -> [ErrorLog] {
+        errorQueue.sync { recentErrors }
+    }
     
     // MARK: - Public Interface
     
@@ -184,6 +194,10 @@ struct ErrorStatistics {
 
 extension Notification.Name {
     static let errorOccurred = Notification.Name("com.evforme.errorOccurred")
+    /// User tapped “pick another vehicle” after a removed catalog id warning.
+    static let catalogVehicleSelectionRequested = Notification.Name(
+        "com.evforme.catalogVehicleSelectionRequested"
+    )
 }
 
 // MARK: - Convenience Extensions

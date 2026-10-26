@@ -586,6 +586,9 @@ struct InputView: View {
         .onReceive(NotificationCenter.default.publisher(for: .evScenarioHistoryDidChange)) { _ in
             refreshHistoryState()
         }
+        .onReceive(NotificationCenter.default.publisher(for: .catalogVehicleSelectionRequested)) { _ in
+            showTargetVehiclePicker = true
+        }
         .task {
             await VehicleCatalogService.shared.refreshFromRemoteIfPossible()
             loadCatalog()
@@ -696,12 +699,29 @@ struct InputView: View {
     }
 
     private func restoreFormOnly(_ item: SavedScenarioSnapshot) {
-        let restored = item.restoredUserInput()
-        userInput = restored
-        selectedScenario = restored.scenario
         if item.hasUnavailableCatalogVehicle {
             stickerStatus = L10n.catalogVehiclePickAnother
+            ErrorHandler.shared.handleAppError(
+                .dataNotFound,
+                context: .catalog,
+                userMessage: L10n.catalogVehiclePickAnother
+            )
+            UISelectionFeedbackGenerator().selectionChanged()
+            return
         }
+        let restored = item.restoredUserInput()
+        guard CatalogVehicleIdResolver.hasResolvableVehiclePair(restored) else {
+            stickerStatus = L10n.catalogVehiclePickAnother
+            ErrorHandler.shared.handleAppError(
+                .dataNotFound,
+                context: .catalog,
+                userMessage: L10n.catalogVehiclePickAnother
+            )
+            UISelectionFeedbackGenerator().selectionChanged()
+            return
+        }
+        userInput = restored
+        selectedScenario = restored.scenario
         UISelectionFeedbackGenerator().selectionChanged()
     }
 
@@ -727,16 +747,30 @@ struct InputView: View {
     }
 
     private func restoreHistory(_ item: SavedScenarioSnapshot) {
+        if item.hasUnavailableCatalogVehicle {
+            stickerStatus = L10n.catalogVehiclePickAnother
+            ErrorHandler.shared.handleAppError(
+                .dataNotFound,
+                context: .catalog,
+                userMessage: L10n.catalogVehiclePickAnother
+            )
+            UISelectionFeedbackGenerator().selectionChanged()
+            return
+        }
         let restored = item.restoredUserInput()
+        guard CatalogVehicleIdResolver.hasResolvableVehiclePair(restored) else {
+            stickerStatus = L10n.catalogVehiclePickAnother
+            ErrorHandler.shared.handleAppError(
+                .dataNotFound,
+                context: .catalog,
+                userMessage: L10n.catalogVehiclePickAnother
+            )
+            UISelectionFeedbackGenerator().selectionChanged()
+            return
+        }
         userInput = restored
         selectedScenario = restored.scenario
         UISelectionFeedbackGenerator().selectionChanged()
-        if item.hasUnavailableCatalogVehicle
-            || restored.sourceVehicleId.isEmpty
-            || restored.targetVehicleId.isEmpty {
-            stickerStatus = L10n.catalogVehiclePickAnother
-            return
-        }
         onSimulate(restored.scenario)
     }
 

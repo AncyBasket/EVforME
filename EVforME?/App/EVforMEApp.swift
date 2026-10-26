@@ -126,6 +126,14 @@ struct EVforMEApp: App {
         var updated = userInput
         if StorageService.shared.applyOfficialCostsIfNeeded(costs, to: &updated) {
             userInput = updated
+            // Invalid / removed ids: update in-memory prices only — no save, no widget, no simulate.
+            guard CatalogVehicleIdResolver.hasResolvableVehiclePair(updated) else {
+                AppLogger.shared.warning(
+                    "Official costs applied in memory only — catalog vehicle ids not resolvable",
+                    category: .network
+                )
+                return
+            }
             StorageService.shared.saveUserInput(updated)
             if let result = EVSimulator.simulate(input: updated) {
                 WidgetSnapshotStore.save(from: result, input: updated)
@@ -161,6 +169,16 @@ struct EVforMEApp: App {
             input.scenario = scenario
             input.chargingConfiguration = input.resolvedChargingConfiguration()
             userInput = input
+            guard CatalogVehicleIdResolver.hasResolvableVehiclePair(input) else {
+                simulationResult = nil
+                isLoading = false
+                ErrorHandler.shared.handleAppError(
+                    .dataNotFound,
+                    context: .catalog,
+                    userMessage: L10n.catalogVehiclePickAnother
+                )
+                return
+            }
             StorageService.shared.saveUserInput(input)
             guard let result = EVSimulator.simulate(input: input, scenario: scenario) else {
                 simulationResult = nil
@@ -185,12 +203,7 @@ struct EVforMEApp: App {
             let ready = await VehicleCatalogService.shared.waitUntilLoaded()
             guard ready else { return }
             await MainActor.run {
-                let input = snap.restoredUserInput()
-                userInput = input
-                StorageService.shared.saveUserInput(input)
-                if snap.hasUnavailableCatalogVehicle
-                    || input.sourceVehicleId.isEmpty
-                    || input.targetVehicleId.isEmpty {
+                if snap.hasUnavailableCatalogVehicle {
                     simulationResult = nil
                     ErrorHandler.shared.handleAppError(
                         .dataNotFound,
@@ -199,8 +212,21 @@ struct EVforMEApp: App {
                     )
                     return
                 }
+                let input = snap.restoredUserInput()
+                guard CatalogVehicleIdResolver.hasResolvableVehiclePair(input) else {
+                    simulationResult = nil
+                    ErrorHandler.shared.handleAppError(
+                        .dataNotFound,
+                        context: .catalog,
+                        userMessage: L10n.catalogVehiclePickAnother
+                    )
+                    return
+                }
+                userInput = input
+                StorageService.shared.saveUserInput(input)
                 guard let result = EVSimulator.simulate(input: input) else {
                     AppLogger.shared.warning("Reopen last comparison skipped — catalog/input not ready", category: .simulation)
+                    simulationResult = nil
                     return
                 }
                 simulationResult = result
@@ -222,18 +248,7 @@ struct EVforMEApp: App {
         _ = await ItalianIncentivesService.shared.refresh()
         let costs = await OfficialCostService.shared.fetchLatest()
 
-        var input = snap.restoredUserInput()
-        // Stessa logica di StorageService: non sovrascrivere prezzi cambiati a mano.
-        if let costs {
-            _ = StorageService.shared.applyOfficialCostsIfNeeded(costs, to: &input)
-        }
-        input.chargingConfiguration = input.resolvedChargingConfiguration()
-        userInput = input
-        StorageService.shared.saveUserInput(input)
-
-        if snap.hasUnavailableCatalogVehicle
-            || input.sourceVehicleId.isEmpty
-            || input.targetVehicleId.isEmpty {
+        if snap.hasUnavailableCatalogVehicle {
             simulationResult = nil
             ErrorHandler.shared.handleAppError(
                 .dataNotFound,
@@ -243,8 +258,27 @@ struct EVforMEApp: App {
             return
         }
 
+        var input = snap.restoredUserInput()
+        guard CatalogVehicleIdResolver.hasResolvableVehiclePair(input) else {
+            simulationResult = nil
+            ErrorHandler.shared.handleAppError(
+                .dataNotFound,
+                context: .catalog,
+                userMessage: L10n.catalogVehiclePickAnother
+            )
+            return
+        }
+        // Stessa logica di StorageService: non sovrascrivere prezzi cambiati a mano.
+        if let costs {
+            _ = StorageService.shared.applyOfficialCostsIfNeeded(costs, to: &input)
+        }
+        input.chargingConfiguration = input.resolvedChargingConfiguration()
+        userInput = input
+        StorageService.shared.saveUserInput(input)
+
         guard let result = EVSimulator.simulate(input: input) else {
             AppLogger.shared.warning("Recalculate skipped — catalog/input not ready", category: .simulation)
+            simulationResult = nil
             return
         }
         simulationResult = result

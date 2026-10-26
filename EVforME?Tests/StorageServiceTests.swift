@@ -78,8 +78,8 @@ final class StorageServiceTests: XCTestCase {
         XCTAssertEqual(loadedInput?.market, originalInput.market)
     }
 
-    /// Persisted removed catalog id must sanitize to a live id — label and numbers stay the same car.
-    func testLoadLastUserInput_RewritesRemovedCatalogIdToLiveVehicle() {
+    /// Persisted removed catalog id must NOT silently become the starter EV.
+    func testLoadLastUserInput_RemovedIdBecomesEmptyWithoutSilentStarter() {
         VehicleCatalogService.shared.reloadFromBundledSeedIgnoringUserCacheForTesting()
         CatalogVehicleIdResolver.resetAliasesForTesting()
         XCTAssertNil(VehicleCatalogService.shared.vehicle(by: "lexus-rz-2022"))
@@ -106,18 +106,9 @@ final class StorageServiceTests: XCTestCase {
 
         let loaded = StorageService.shared.loadLastUserInput()
         XCTAssertNotNil(loaded)
-        XCTAssertNotEqual(loaded?.targetVehicleId, "lexus-rz-2022")
-        XCTAssertFalse(loaded?.targetVehicleId.isEmpty ?? true)
-        guard let targetId = loaded?.targetVehicleId,
-              let live = VehicleCatalogService.shared.vehicle(by: targetId) else {
-            XCTFail("sanitized target must exist in catalog")
-            return
-        }
-        // Same car for label and simulation numbers (no silent swap to a different EV).
-        let result = EVSimulator.simulate(input: loaded!)
-        XCTAssertNotNil(result)
-        XCTAssertEqual(live.id, targetId)
-        XCTAssertEqual(loaded?.targetVehicleId, live.id)
+        XCTAssertTrue(loaded?.targetVehicleId.isEmpty == true)
+        XCTAssertNotEqual(loaded?.targetVehicleId, Defaults.starterTargetVehicleId)
+        XCTAssertNil(EVSimulator.simulate(input: loaded!))
     }
 
     func testLoadUserInput_WhenNoData_ReturnsNil() {

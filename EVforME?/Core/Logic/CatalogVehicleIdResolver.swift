@@ -47,6 +47,15 @@ enum CatalogVehicleIdResolver {
         return true
     }
 
+    /// Both source and target resolve to live catalog rows (aliases OK; no starter fallback).
+    static func hasResolvableVehiclePair(
+        _ input: UserInput,
+        catalog: VehicleCatalogService = .shared
+    ) -> Bool {
+        resolveId(input.sourceVehicleId, catalog: catalog) != nil
+            && resolveId(input.targetVehicleId, catalog: catalog) != nil
+    }
+
     static func resolveSourceId(
         _ rawId: String,
         catalog: VehicleCatalogService = .shared,
