@@ -269,7 +269,14 @@ struct CostsComparisonView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
 
-                Text(L10n.calculationChargingNote(weeklyCharges))
+                Text(
+                    L10n.calculationChargingNote(
+                        weeklyCharges,
+                        needsVersionChoice: CatalogVehicleIdResolver.needsExplicitVersionChoice(
+                            userInput.targetVehicleId
+                        )
+                    )
+                )
                     .font(Typography.readingCaption)
                     .foregroundColor(.secondaryText)
             }

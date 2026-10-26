@@ -1,12 +1,12 @@
 {
   "url": "",
-  "publishedUrl": "https://files.catbox.moe/3i0nro.json",
-  "rows": 5627,
-  "bytes": 2836263,
+  "publishedUrl": "",
+  "rows": 12204,
+  "bytes": 5148481,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-26T01:29:40.128703+00:00",
+  "updatedAt": "2026-10-26T19:21:59.938517+00:00",
   "policy": "offline-first",
-  "seedVersion": 58,
-  "note": "seedVersion 58: Tesla Model 3 2026 IT trims — exact Tesla IT names, official dims, Performance WLTP 600 (page=configurator)"
+  "seedVersion": 59,
+  "note": "seedVersion 59: BEV EEA EU versions (min 10 F/P regs; F preferred; Zr==Wh dropped; F/P conflict \u2192 no variants; Tesla Model 3 2026 IT trims preserved)."
 }

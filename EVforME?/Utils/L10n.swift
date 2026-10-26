@@ -121,6 +121,11 @@ enum L10n {
     static var vehiclePickerClear: String { string("vehicle_picker_clear") }
     static var vehiclePickerPopularBrands: String { string("vehicle_picker_popular_brands") }
     static var vehiclePickerChooseYear: String { string("vehicle_picker_choose_year") }
+    static var vehiclePickerChooseYearOrVersion: String { string("vehicle_picker_choose_year_or_version") }
+    static var vehiclePickerChooseVersion: String { string("vehicle_picker_choose_version") }
+    static var vehiclePickerPickVersionForRange: String { string("vehicle_picker_pick_version_for_range") }
+    static var vehiclePickerVersionA11yHint: String { string("vehicle_picker_version_a11y_hint") }
+    static func pickerVersionMany(_ n: Int) -> String { format("picker_version_many", n) }
     static var vehiclePickerResultsCapped: String { string("vehicle_picker_results_capped") }
     static var vehiclePairSectionTitle: String { string("vehicle_pair_section_title") }
     static var vehiclePairTapToChoose: String { string("vehicle_pair_tap_to_choose") }
@@ -284,12 +289,19 @@ enum L10n {
         format("calculation_ev_formula", km, kWhPerKm, pricePerKWh, energyCost, yearlyCost)
     }
     static func calculationEvTotal(_ years: Int, _ total: Int) -> String { format("calculation_ev_total", years, total) }
-    static func calculationChargingNote(_ weeklyCharges: Int?) -> String {
-        guard let weeklyCharges else { return string("calculation_charging_note_unavailable") }
-        return format("calculation_charging_note", weeklyCharges)
+    static func calculationChargingNote(_ weeklyCharges: Int?, needsVersionChoice: Bool = false) -> String {
+        if let weeklyCharges {
+            return format("calculation_charging_note", weeklyCharges)
+        }
+        if needsVersionChoice {
+            return string("calculation_charging_note_pick_version")
+        }
+        return string("calculation_charging_note_unavailable")
     }
 
     static var chargesUnavailableShort: String { string("charges_unavailable_short") }
+    static var chargesUnavailableCaption: String { string("charges_unavailable_caption") }
+    static var chargesPickVersionCaption: String { string("charges_pick_version_caption") }
     static func calculationSavings(_ years: Int, _ savings: Int) -> String { format("calculation_savings", years, savings) }
     static var savings: String { string("savings") }
     static var gasLabel: String { string("gas_label") }
@@ -653,6 +665,7 @@ enum L10n {
     }
 
     static var catalogVehiclePickAnother: String { string("catalog_vehicle_pick_another") }
+    static var catalogVehiclePickVersion: String { string("catalog_vehicle_pick_version") }
     static var catalogVehicleChooseAction: String { string("catalog_vehicle_choose_action") }
     static var lastComparisonReopen: String { string("last_comparison_reopen") }
     static var lastComparisonRecalculate: String { string("last_comparison_recalculate") }

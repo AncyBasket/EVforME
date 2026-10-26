@@ -97,12 +97,20 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
     let powerKw: Double?
     /// `true` se `energyConsumptionKWhPerKm` / WLTP kWh è il valore **ponderato** (non solo elettrico).
     let energyIsWeighted: Bool?
+    /// Riga versione EEA: punta alla riga modello/anno genitore.
+    let parentId: String?
 
     var displayName: String {
         if let trim, !trim.isEmpty {
             return "\(brand) \(model) \(trim) (\(year))"
         }
         return "\(brand) \(model) (\(year))"
+    }
+
+    /// True se questa riga è una versione EEA figlia.
+    var isEEAVariantChild: Bool {
+        guard let parentId, !parentId.isEmpty else { return false }
+        return true
     }
 
     var dimensionsText: String {
@@ -122,6 +130,12 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         }
         if let wltpRangeKm {
             parts.append("\(wltpRangeKm) km")
+        }
+        if let powerKw, powerKw > 0 {
+            parts.append(String(format: "%.0f kW", powerKw))
+        }
+        if let energy = resolvedEnergyKWhPerKm {
+            parts.append(String(format: "%.1f kWh/100", energy * 100.0))
         }
         return parts.isEmpty ? nil : parts.joined(separator: " · ")
     }
@@ -282,7 +296,8 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         confidenceScore: Double? = nil,
         fuelKind: FuelKind? = nil,
         powerKw: Double? = nil,
-        energyIsWeighted: Bool? = nil
+        energyIsWeighted: Bool? = nil,
+        parentId: String? = nil
     ) {
         self.id = id
         self.brand = brand
@@ -309,5 +324,6 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         self.fuelKind = fuelKind
         self.powerKw = powerKw
         self.energyIsWeighted = energyIsWeighted
+        self.parentId = parentId
     }
 }

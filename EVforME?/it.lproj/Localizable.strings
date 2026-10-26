@@ -60,6 +60,11 @@
 "vehicle_picker_min_chars_hint" = "Scrivi marca o modello (es. Golf, Tesla, 500). I risultati sono raggruppati per modello.";
 "vehicle_picker_popular_brands" = "Marche popolari";
 "vehicle_picker_choose_year" = "Scegli l’anno";
+"vehicle_picker_choose_year_or_version" = "Scegli anno e versione";
+"vehicle_picker_choose_version" = "Scegli la versione";
+"vehicle_picker_pick_version_for_range" = "Scegli la versione per vedere autonomia e ricariche";
+"vehicle_picker_version_a11y_hint" = "Mostra le versioni di questo anno.";
+"picker_version_many" = "%d versioni";
 "vehicle_picker_results_capped" = "Risultati limitati: aggiungi una parola per restringere.";
 "vehicle_pair_section_title" = "Le tue auto";
 "vehicle_pair_tap_to_choose" = "Cambia auto";
@@ -516,8 +521,11 @@
 
 "calculation_opex_breakdown" = "Energia €%.0f + Manutenzione €%.0f + Bollo €%.0f + Assicurazione €%.0f = €%.0f/anno";
 "calculation_charging_note" = "Ricariche stimate: %d× / settimana (stima sull’autonomia dichiarata; mix casa/pubblico nel totale energia).";
-"calculation_charging_note_unavailable" = "Ricariche a settimana: non disponibili (manca l’autonomia dichiarata in catalogo).";
+"calculation_charging_note_unavailable" = "Ricariche a settimana: non disponibili (manca l’autonomia WLTP in catalogo).";
+"calculation_charging_note_pick_version" = "Scegli la versione per vedere autonomia e ricariche.";
 "charges_unavailable_short" = "n/d";
+"charges_unavailable_caption" = "Autonomia WLTP assente in catalogo";
+"charges_pick_version_caption" = "Scegli la versione per vedere autonomia e ricariche";
 "charge_per_week_unavailable" = "Ricariche a settimana: non disponibili (manca autonomia dichiarata)";
 "share_weekly_charges_unavailable" = "Ricariche a settimana: non disponibili";
 "impact_charge_per_week_unavailable" = "• Ricariche a settimana: non disponibili (manca autonomia dichiarata).";
@@ -529,6 +537,7 @@
 "last_comparison_title" = "Ultimo confronto";
 "catalog_vehicle_no_longer_available" = "%@ (non più in catalogo)";
 "catalog_vehicle_pick_another" = "L’auto salvata non è più nel catalogo: apri EVforME e scegline un’altra.";
+"catalog_vehicle_pick_version" = "Questo modello ha più versioni: scegli quella con l’autonomia giusta.";
 "catalog_vehicle_choose_action" = "Scegli un’auto";
 "last_comparison_reopen" = "Riapri verdetto";
 "last_comparison_recalculate" = "Ricalcola con dati di oggi";

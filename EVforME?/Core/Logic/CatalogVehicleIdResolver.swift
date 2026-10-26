@@ -11,10 +11,21 @@ import Foundation
 
 enum CatalogVehicleIdResolver {
     /// Explicit remaps (old id → new id). Extended by later catalog PRs.
-    static let defaultAliases: [String: String] = [
-        // Seed v58: generic Model 3 2026 → Trazione posteriore (Tesla Italia).
-        "tesla-model-3-2026": "tesla-model-3-trazione-posteriore-2026",
-    ]
+    static let defaultAliases: [String: String] = {
+        var map: [String: String] = [
+            // Seed v58: generic Model 3 2026 → Trazione posteriore (Tesla Italia).
+            "tesla-model-3-2026": "tesla-model-3-trazione-posteriore-2026",
+        ]
+        // Seed v59: parents with exactly one EEA version → that child.
+        if let url = Bundle.main.url(forResource: "ev_variant_single_aliases", withExtension: "json"),
+           let data = try? Data(contentsOf: url),
+           let decoded = try? JSONDecoder().decode([String: String].self, from: data) {
+            for (k, v) in decoded {
+                map[k] = v
+            }
+        }
+        return map
+    }()
 
     static var aliases: [String: String] = defaultAliases
 
@@ -57,6 +68,21 @@ enum CatalogVehicleIdResolver {
     ) -> Bool {
         resolveId(input.sourceVehicleId, catalog: catalog) != nil
             && resolveId(input.targetVehicleId, catalog: catalog) != nil
+    }
+
+    /// Parent EV with 2+ EEA children still in catalog — user must pick a version for range.
+    static func needsExplicitVersionChoice(
+        _ rawId: String,
+        catalog: VehicleCatalogService = .shared
+    ) -> Bool {
+        guard let resolved = resolveId(rawId, catalog: catalog),
+              let vehicle = catalog.vehicle(by: resolved),
+              vehicle.powertrain == .ev,
+              vehicle.parentId == nil else {
+            return false
+        }
+        let children = catalog.targetEVVehicles().filter { $0.parentId == vehicle.id }
+        return children.count >= 2 && (vehicle.wltpRangeKm == nil || vehicle.wltpRangeKm == 0)
     }
 
     static func resolveSourceId(

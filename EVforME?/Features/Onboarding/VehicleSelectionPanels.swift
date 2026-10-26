@@ -154,5 +154,6 @@ struct VehiclePickPairSection: View {
         .buttonStyle(.plain)
         .accessibilityLabel("\(title). \(vehicle?.displayName ?? L10n.vehicleNotSelected). \(badge.text)")
         .accessibilityHint(L10n.vehiclePairTapToChoose)
+        .accessibilityIdentifier(role == .target ? "vehicle_pair_target" : "vehicle_pair_source")
     }
 }

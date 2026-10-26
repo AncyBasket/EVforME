@@ -226,6 +226,104 @@ final class EVforME_UITests: XCTestCase {
         }
     }
 
+    /// Marca → modello → anno → versione → verdetto con ricariche visibili.
+    @MainActor
+    func testEVVersionPickerToVerdictShowsCharges() throws {
+        let app = XCUIApplication()
+        app.launchEnvironment["UITEST_PRESET_VEHICLES"] = "1"
+        app.launch()
+
+        dismissQuickStartIfNeeded(app)
+
+        let startersReady =
+            app.buttons["Dimmi la verità"].waitForExistence(timeout: 12)
+            || app.buttons["Tell me the truth"].waitForExistence(timeout: 2)
+        XCTAssertTrue(startersReady, "Input bench should load")
+
+        // Open EV catalog — ViewThatFits can expose duplicate ids; tap the hittable one.
+        let evCards = app.descendants(matching: .any).matching(identifier: "vehicle_pair_target")
+        XCTAssertTrue(evCards.firstMatch.waitForExistence(timeout: 8), "EV pair card should exist")
+        var opened = false
+        for _ in 0..<4 {
+            let count = evCards.count
+            for i in 0..<count {
+                let card = evCards.element(boundBy: i)
+                guard card.exists else { continue }
+                if card.isHittable {
+                    card.tap()
+                    opened = true
+                    break
+                }
+            }
+            if opened { break }
+            app.swipeDown()
+            RunLoop.current.run(until: Date().addingTimeInterval(0.15))
+        }
+        if !opened {
+            evCards.firstMatch.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.4)).tap()
+        }
+
+        let sheetTitleIT = app.navigationBars["Veicolo elettrificato"]
+        let sheetTitleEN = app.navigationBars["Electrified vehicle"]
+        let closeIT = app.buttons["Chiudi"]
+        let closeEN = app.buttons["Close"]
+        XCTAssertTrue(
+            sheetTitleIT.waitForExistence(timeout: 6)
+                || sheetTitleEN.waitForExistence(timeout: 2)
+                || closeIT.waitForExistence(timeout: 2)
+                || closeEN.waitForExistence(timeout: 1),
+            "Target vehicle catalog sheet should open"
+        )
+
+        // Search → model → year → version.
+        let search = app.descendants(matching: .any)["vehicle_catalog_search"]
+        XCTAssertTrue(search.waitForExistence(timeout: 6), "Catalog search field")
+        search.tap()
+        search.typeText("Fiat 500e")
+
+        let model500e = app.buttons.matching(
+            NSPredicate(format: "label CONTAINS[c] %@", "500e")
+        ).firstMatch
+        XCTAssertTrue(model500e.waitForExistence(timeout: 8), "Fiat 500e search hit")
+        model500e.tap()
+
+        let year2021 = app.buttons.matching(
+            NSPredicate(format: "label CONTAINS[c] %@", "2021")
+        ).firstMatch
+        XCTAssertTrue(year2021.waitForExistence(timeout: 6), "Year 2021 for 500e")
+        year2021.tap()
+
+        let versionRow = app.buttons.matching(
+            NSPredicate(format: "label CONTAINS[c] %@", "WLTP")
+        ).firstMatch
+        if versionRow.waitForExistence(timeout: 4) {
+            versionRow.tap()
+        }
+
+        let tellMeEN = app.buttons["Tell me the truth"]
+        let tellMeIT = app.buttons["Dimmi la verità"]
+        XCTAssertTrue(
+            tellMeEN.waitForExistence(timeout: 8) || tellMeIT.waitForExistence(timeout: 2),
+            "Back on bench after version pick"
+        )
+        if tellMeEN.exists { tellMeEN.tap() } else { tellMeIT.tap() }
+
+        let modifyEN = app.buttons["Change inputs"]
+        let modifyIT = app.buttons["Modifica dati"]
+        XCTAssertTrue(
+            modifyEN.waitForExistence(timeout: 15) || modifyIT.waitForExistence(timeout: 2),
+            "Verdict should open"
+        )
+
+        // Weekly charges metric should be numeric (e.g. "1×"), not n/a / n/d.
+        let chargesOK =
+            app.staticTexts.matching(NSPredicate(format: "label MATCHES %@", #".*[0-9]+×.*"#)).firstMatch
+                .waitForExistence(timeout: 6)
+            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS %@", "×")).firstMatch
+                .waitForExistence(timeout: 2)
+        XCTAssertTrue(chargesOK, "Chosen version should show weekly charges on verdict")
+    }
+
     @MainActor
     func testLaunchPerformance() throws {
         measure(metrics: [XCTApplicationLaunchMetric()]) {

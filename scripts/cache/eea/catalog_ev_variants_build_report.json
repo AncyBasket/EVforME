@@ -1,0 +1,104 @@
+{
+  "seedVersion": 59,
+  "stats": {
+    "bev_before": 701,
+    "bev_with_range_before": 129,
+    "bev_after": 7278,
+    "bev_with_range_after": 6667,
+    "variant_rows": 6577,
+    "parents_single": 25,
+    "parents_multi": 228,
+    "parents_no_variant": 444,
+    "catalog_rows_before": 5627,
+    "catalog_rows_after": 12204,
+    "result_ok": 253,
+    "result_multi": 228,
+    "result_no_cn": 235,
+    "result_fp_conflict": 165,
+    "result_single": 25,
+    "result_none_after_filters": 44,
+    "result_skip_protected": 4
+  },
+  "topParentsByVariantCount": [
+    {
+      "parentId": "bmw-i4-2024",
+      "n": 179
+    },
+    {
+      "parentId": "volkswagen-id4-2024",
+      "n": 171
+    },
+    {
+      "parentId": "volkswagen-id3-2024",
+      "n": 164
+    },
+    {
+      "parentId": "bmw-i4-2025",
+      "n": 146
+    },
+    {
+      "parentId": "volkswagen-id3-2025",
+      "n": 136
+    },
+    {
+      "parentId": "bmw-ix1-2024",
+      "n": 130
+    },
+    {
+      "parentId": "bmw-ix-2025",
+      "n": 130
+    },
+    {
+      "parentId": "volkswagen-id4-2022",
+      "n": 129
+    },
+    {
+      "parentId": "porsche-macan-electric-2025",
+      "n": 125
+    },
+    {
+      "parentId": "bmw-i5-2025",
+      "n": 118
+    },
+    {
+      "parentId": "volkswagen-id3-2021",
+      "n": 110
+    },
+    {
+      "parentId": "volkswagen-id3-2022",
+      "n": 110
+    },
+    {
+      "parentId": "bmw-ix1-2025",
+      "n": 109
+    },
+    {
+      "parentId": "volvo-ex90-2025",
+      "n": 102
+    },
+    {
+      "parentId": "porsche-taycan-2025",
+      "n": 101
+    },
+    {
+      "parentId": "volkswagen-id4-2025",
+      "n": 99
+    },
+    {
+      "parentId": "porsche-taycan-2022",
+      "n": 99
+    },
+    {
+      "parentId": "volkswagen-id7-2024",
+      "n": 97
+    },
+    {
+      "parentId": "volkswagen-id5-2023",
+      "n": 97
+    },
+    {
+      "parentId": "porsche-taycan-2021",
+      "n": 95
+    }
+  ]
+}

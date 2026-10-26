@@ -60,6 +60,11 @@
 "vehicle_picker_min_chars_hint" = "Type a make or model (e.g. Golf, Tesla, 500). Results are grouped by model.";
 "vehicle_picker_popular_brands" = "Popular brands";
 "vehicle_picker_choose_year" = "Pick a year";
+"vehicle_picker_choose_year_or_version" = "Pick year and version";
+"vehicle_picker_choose_version" = "Pick a version";
+"vehicle_picker_pick_version_for_range" = "Pick a version to see range and weekly charges";
+"vehicle_picker_version_a11y_hint" = "Shows the versions for this year.";
+"picker_version_many" = "%d versions";
 "vehicle_picker_results_capped" = "Results capped — add another word to narrow the list.";
 "vehicle_pair_section_title" = "Your vehicles";
 "vehicle_pair_tap_to_choose" = "Change car";
@@ -518,8 +523,11 @@
 
 "calculation_opex_breakdown" = "Energy €%.0f + Maintenance €%.0f + Tax €%.0f + Insurance €%.0f = €%.0f/year";
 "calculation_charging_note" = "Estimated charges: %d× / week (based on declared range; home/public mix in energy total).";
-"calculation_charging_note_unavailable" = "Weekly charges: not available (declared range missing from catalog).";
+"calculation_charging_note_unavailable" = "Weekly charges: not available (WLTP range missing from catalog).";
+"calculation_charging_note_pick_version" = "Pick a version to see range and weekly charges.";
 "charges_unavailable_short" = "n/a";
+"charges_unavailable_caption" = "WLTP range missing from catalog";
+"charges_pick_version_caption" = "Pick a version to see range and weekly charges";
 "charge_per_week_unavailable" = "Weekly charges: not available (declared range missing)";
 "share_weekly_charges_unavailable" = "Weekly charges: not available";
 "impact_charge_per_week_unavailable" = "• Weekly charges: not available (declared range missing).";
@@ -531,6 +539,7 @@
 "last_comparison_title" = "Last comparison";
 "catalog_vehicle_no_longer_available" = "%@ (no longer in catalog)";
 "catalog_vehicle_pick_another" = "The saved vehicle is no longer in the catalog: open EVforME and pick another.";
+"catalog_vehicle_pick_version" = "This model has multiple versions: pick one to see range and charges.";
 "catalog_vehicle_choose_action" = "Pick a vehicle";
 "last_comparison_reopen" = "Reopen verdict";
 "last_comparison_recalculate" = "Recalculate with today’s data";

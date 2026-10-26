@@ -14,7 +14,8 @@ final class EVSimulatorTests: XCTestCase {
 
     /// ID noti nel seed (ICE + EV con autonomia dichiarata per la stima ricariche).
     private let testSourceVehicleId = "alfa-romeo-147-2005"
-    private let testTargetVehicleId = "byd-dolphin-surf-2025"
+    /// Explicit EEA version row (parent multi-version rows have no range until chosen).
+    private let testTargetVehicleId = "byd-dolphin-surf-2025-v150kw-427km"
 
     override func setUp() {
         super.setUp()

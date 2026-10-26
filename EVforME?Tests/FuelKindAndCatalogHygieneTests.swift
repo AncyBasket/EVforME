@@ -121,8 +121,11 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
                 continue
             }
             let k100 = kWh * 100
-            XCTAssertGreaterThanOrEqual(k100, 12, "\(ev.id) too low (\(k100))")
-            XCTAssertLessThanOrEqual(k100, 30, "\(ev.id) too high (\(k100))")
+            // EEA version rows: official Wh band up to 35 kWh/100 (SUV/performance).
+            let hi = ev.isEEAVariantChild ? 35.0 : 30.0
+            let lo = ev.isEEAVariantChild ? 9.0 : 12.0
+            XCTAssertGreaterThanOrEqual(k100, lo, "\(ev.id) too low (\(k100))")
+            XCTAssertLessThanOrEqual(k100, hi, "\(ev.id) too high (\(k100))")
         }
     }
 
@@ -281,7 +284,10 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
     }
 
     func testCatalog_NoMonotonicConstantStepEVRanges() {
-        let evs = VehicleCatalogService.shared.vehicles.filter { $0.powertrain == .ev && $0.wltpRangeKm != nil }
+        // Only model/year parents — EEA version children share year and break the year series.
+        let evs = VehicleCatalogService.shared.vehicles.filter {
+            $0.powertrain == .ev && $0.wltpRangeKm != nil && !$0.isEEAVariantChild
+        }
         let grouped = Dictionary(grouping: evs) { "\($0.brand.lowercased())|\($0.model.lowercased())" }
         for (_, rows) in grouped {
             let sorted = rows.sorted { $0.year < $1.year }
@@ -314,7 +320,10 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
     }
 
     func testCatalog_PassengerEVsNotMajorityPlaceholder350() {
-        let evs = VehicleCatalogService.shared.vehicles.filter { $0.powertrain == .ev }
+        // Parent rows only — a real EEA Zr of 350 km on a version is not a placeholder.
+        let evs = VehicleCatalogService.shared.vehicles.filter {
+            $0.powertrain == .ev && !$0.isEEAVariantChild
+        }
         XCTAssertFalse(evs.isEmpty)
         let vanNeedles = ["eqv", "e-transit", "e-crafter", "e-berlingo", "e-partner", "e-vivaro", "id. buzz", "id buzz", "transporter", "vito"]
         let passenger = evs.filter { ev in
@@ -354,8 +363,11 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
                 XCTAssertLessThanOrEqual(kwh100, 32.0, "\(ev.id) heavy cap")
                 continue
             }
-            XCTAssertGreaterThanOrEqual(kwh100, 11.0, "\(ev.id) WLTP \(kwh100) < 11")
-            XCTAssertLessThanOrEqual(kwh100, 25.0, "\(ev.id) WLTP \(kwh100) > 25")
+            // EEA EU version rows: official Wh can exceed the old 25 cap (heavy SUV).
+            let hi = ev.isEEAVariantChild ? 35.0 : 25.0
+            let lo = ev.isEEAVariantChild ? 9.0 : 11.0
+            XCTAssertGreaterThanOrEqual(kwh100, lo, "\(ev.id) WLTP \(kwh100) < \(lo)")
+            XCTAssertLessThanOrEqual(kwh100, hi, "\(ev.id) WLTP \(kwh100) > \(hi)")
         }
     }
 
@@ -589,6 +601,8 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
 
         let eeaLowN = catalog.filter { v in
             guard let sn = v.sourceName, sn.hasPrefix("EEA co2cars") else { return false }
+            // EU Zr version rows store n in refs, not in sourceName.
+            if v.isEEAVariantChild || sn.contains("(variant)") { return false }
             guard let range = sn.range(of: #"n=(\d+)"#, options: .regularExpression) else { return true }
             let digits = sn[range].dropFirst(2)
             let n = Int(digits) ?? 0

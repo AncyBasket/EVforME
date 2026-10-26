@@ -39,6 +39,7 @@ struct ErrorHandlingViewModifier: ViewModifier {
     private var isCatalogPickPrompt: Bool {
         guard currentContext == .catalog else { return false }
         if currentUserMessage == L10n.catalogVehiclePickAnother { return true }
+        if currentUserMessage == L10n.catalogVehiclePickVersion { return true }
         if currentError == .dataNotFound { return true }
         if case .vehicleNotFound = currentError { return true }
         return false
