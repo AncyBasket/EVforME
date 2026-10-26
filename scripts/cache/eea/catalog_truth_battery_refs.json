@@ -75,12 +75,6 @@
       "reason": "no_official_oem_url_same_year_kw"
     },
     {
-      "id": "lexus-rz-2022",
-      "action": "nil_battery",
-      "old_batteryKWh": 71.4,
-      "reason": "no_official_oem_url_same_year_kw"
-    },
-    {
       "id": "lexus-rz-2025",
       "action": "nil_battery",
       "old_batteryKWh": 71.4,
@@ -245,7 +239,6 @@
   "synthetic_ids_after": [],
   "suspects_after": [],
   "dubious_models_no_delete": [
-    "jaguar-i-pace-2025",
-    "lexus-rz-2022"
+    "jaguar-i-pace-2025"
   ]
 }

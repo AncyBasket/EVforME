@@ -646,6 +646,13 @@ enum L10n {
 
     // MARK: - Retention 1.1 — ultimo confronto
     static var lastComparisonTitle: String { string("last_comparison_title") }
+
+    /// History / reopen: saved vehicle id no longer in catalog.
+    static func catalogVehicleNoLongerAvailable(_ name: String) -> String {
+        format("catalog_vehicle_no_longer_available", name)
+    }
+
+    static var catalogVehiclePickAnother: String { string("catalog_vehicle_pick_another") }
     static var lastComparisonReopen: String { string("last_comparison_reopen") }
     static var lastComparisonRecalculate: String { string("last_comparison_recalculate") }
     static var lastComparisonRestoreForm: String { string("last_comparison_restore_form") }

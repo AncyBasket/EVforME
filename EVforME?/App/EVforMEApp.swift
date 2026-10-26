@@ -188,6 +188,17 @@ struct EVforMEApp: App {
                 let input = snap.restoredUserInput()
                 userInput = input
                 StorageService.shared.saveUserInput(input)
+                if snap.hasUnavailableCatalogVehicle
+                    || input.sourceVehicleId.isEmpty
+                    || input.targetVehicleId.isEmpty {
+                    simulationResult = nil
+                    ErrorHandler.shared.handleAppError(
+                        .dataNotFound,
+                        context: .catalog,
+                        userMessage: L10n.catalogVehiclePickAnother
+                    )
+                    return
+                }
                 guard let result = EVSimulator.simulate(input: input) else {
                     AppLogger.shared.warning("Reopen last comparison skipped — catalog/input not ready", category: .simulation)
                     return
@@ -219,6 +230,18 @@ struct EVforMEApp: App {
         input.chargingConfiguration = input.resolvedChargingConfiguration()
         userInput = input
         StorageService.shared.saveUserInput(input)
+
+        if snap.hasUnavailableCatalogVehicle
+            || input.sourceVehicleId.isEmpty
+            || input.targetVehicleId.isEmpty {
+            simulationResult = nil
+            ErrorHandler.shared.handleAppError(
+                .dataNotFound,
+                context: .catalog,
+                userMessage: L10n.catalogVehiclePickAnother
+            )
+            return
+        }
 
         guard let result = EVSimulator.simulate(input: input) else {
             AppLogger.shared.warning("Recalculate skipped — catalog/input not ready", category: .simulation)

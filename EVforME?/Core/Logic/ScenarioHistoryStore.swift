@@ -184,34 +184,48 @@ struct SavedScenarioSnapshot: Codable, Identifiable, Equatable {
     var createdDate: Date { Date(timeIntervalSince1970: createdAt) }
 
     var pairLabel: String {
-        let from = sourceDisplayName
-            ?? VehicleCatalogService.shared.vehicle(by: sourceVehicleId)?.displayName
-            ?? sourceVehicleId
-        let to = targetDisplayName
-            ?? VehicleCatalogService.shared.vehicle(by: targetVehicleId)?.displayName
-            ?? targetVehicleId
+        let from = CatalogVehicleIdResolver.historyLabel(
+            rawId: sourceVehicleId,
+            savedDisplayName: sourceDisplayName
+        )
+        let to = CatalogVehicleIdResolver.historyLabel(
+            rawId: targetVehicleId,
+            savedDisplayName: targetDisplayName
+        )
         return "\(from) → \(to)"
     }
 
+    /// True if a saved vehicle id is gone (no catalog row and no alias).
+    var hasUnavailableCatalogVehicle: Bool {
+        CatalogVehicleIdResolver.isUnavailable(sourceVehicleId)
+            || CatalogVehicleIdResolver.isUnavailable(targetVehicleId)
+    }
+
     /// Ricostruisce l’input da ripristinare (full payload o fallback legacy).
+    /// Always sanitizes ids: aliases remap; unavailable ids become empty (user must pick).
     func restoredUserInput() -> UserInput {
+        var input: UserInput
         if let persistedInput {
-            return persistedInput.toUserInput()
+            input = persistedInput.toUserInput()
+        } else {
+            let scenario = Scenario.allCases.first { $0.rawValue == scenarioRaw } ?? .realistic
+            let trip = TripProfile(rawValue: tripProfileRaw) ?? .custom
+            input = UserInput(
+                dailyKm: yearlyKm,
+                hasHomeCharging: hasHomeCharging,
+                areaType: trip.suggestedAreaType,
+                fuelPrice: fuelPriceAtSave ?? OfficialEnergyCosts.Fallback.petrolPerLiter,
+                ownershipYears: 5,
+                electricityPricePerKWh: electricityPriceAtSave ?? 0.31,
+                sourceVehicleId: sourceVehicleId,
+                targetVehicleId: targetVehicleId,
+                scenario: scenario,
+                tripProfile: trip
+            )
         }
-        let scenario = Scenario.allCases.first { $0.rawValue == scenarioRaw } ?? .realistic
-        let trip = TripProfile(rawValue: tripProfileRaw) ?? .custom
-        return UserInput(
-            dailyKm: yearlyKm,
-            hasHomeCharging: hasHomeCharging,
-            areaType: trip.suggestedAreaType,
-            fuelPrice: fuelPriceAtSave ?? OfficialEnergyCosts.Fallback.petrolPerLiter,
-            ownershipYears: 5,
-            electricityPricePerKWh: electricityPriceAtSave ?? 0.31,
-            sourceVehicleId: sourceVehicleId,
-            targetVehicleId: targetVehicleId,
-            scenario: scenario,
-            tripProfile: trip
-        )
+        // Do not silently substitute the starter EV for a removed id — empty forces re-pick.
+        CatalogVehicleIdResolver.sanitizeUserInput(&input, fallbackToStarter: false)
+        return input
     }
 }
 

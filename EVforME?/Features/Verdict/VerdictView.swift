@@ -783,6 +783,18 @@ struct VerdictView: View {
                             let restored = item.restoredUserInput()
                             userInput = restored
                             selectedScenario = restored.scenario
+                            aiExplanation = nil
+                            UISelectionFeedbackGenerator().selectionChanged()
+                            if item.hasUnavailableCatalogVehicle
+                                || restored.sourceVehicleId.isEmpty
+                                || restored.targetVehicleId.isEmpty {
+                                ErrorHandler.shared.handleAppError(
+                                    .dataNotFound,
+                                    context: .catalog,
+                                    userMessage: L10n.catalogVehiclePickAnother
+                                )
+                                return
+                            }
                             if let simulated = EVSimulator.simulate(input: restored) {
                                 currentResult = simulated
                                 StorageService.shared.saveUserInput(restored)
@@ -790,8 +802,6 @@ struct VerdictView: View {
                                 VerdictLiveActivityController.publish(from: simulated, input: restored)
                                 shareCard = VerdictShareCardRenderer.makeCard(result: simulated, input: restored)
                             }
-                            aiExplanation = nil
-                            UISelectionFeedbackGenerator().selectionChanged()
                         } label: {
                             HStack(alignment: .top) {
                                 VStack(alignment: .leading, spacing: 2) {

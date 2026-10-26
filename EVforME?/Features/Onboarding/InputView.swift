@@ -666,6 +666,9 @@ struct InputView: View {
 
     private func makeDeltaBadge(for snapshot: SavedScenarioSnapshot?) -> String? {
         guard let snapshot else { return nil }
+        if snapshot.hasUnavailableCatalogVehicle {
+            return L10n.catalogVehiclePickAnother
+        }
         var input = snapshot.restoredUserInput()
         let fuelKind = VehicleCatalogService.shared.vehicle(by: input.sourceVehicleId)?.resolvedFuelKind ?? .petrol
         let liveFuel = ScenarioLiveDelta.liveFuelPrice(fallback: input.fuelPrice, fuelKind: fuelKind)
@@ -696,6 +699,9 @@ struct InputView: View {
         let restored = item.restoredUserInput()
         userInput = restored
         selectedScenario = restored.scenario
+        if item.hasUnavailableCatalogVehicle {
+            stickerStatus = L10n.catalogVehiclePickAnother
+        }
         UISelectionFeedbackGenerator().selectionChanged()
     }
 
@@ -725,6 +731,12 @@ struct InputView: View {
         userInput = restored
         selectedScenario = restored.scenario
         UISelectionFeedbackGenerator().selectionChanged()
+        if item.hasUnavailableCatalogVehicle
+            || restored.sourceVehicleId.isEmpty
+            || restored.targetVehicleId.isEmpty {
+            stickerStatus = L10n.catalogVehiclePickAnother
+            return
+        }
         onSimulate(restored.scenario)
     }
 

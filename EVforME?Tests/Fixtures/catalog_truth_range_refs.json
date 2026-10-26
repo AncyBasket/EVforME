@@ -3726,13 +3726,6 @@
       "year": 2023
     },
     {
-      "id": "lexus-rz-2022",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "RZ",
-      "year": 2022
-    },
-    {
       "id": "lexus-rz-2023",
       "result": "skip",
       "reason": "no EEA Cn match for model/year",

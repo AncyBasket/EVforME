@@ -529,6 +529,8 @@
 
 /* Retention 1.1 */
 "last_comparison_title" = "Last comparison";
+"catalog_vehicle_no_longer_available" = "%@ (no longer in catalog)";
+"catalog_vehicle_pick_another" = "A saved vehicle is no longer in the catalog. Pick another to continue.";
 "last_comparison_reopen" = "Reopen verdict";
 "last_comparison_recalculate" = "Recalculate with today’s data";
 "last_comparison_restore_form" = "Restore in form";

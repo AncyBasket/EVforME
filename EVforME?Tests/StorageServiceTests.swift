@@ -78,6 +78,48 @@ final class StorageServiceTests: XCTestCase {
         XCTAssertEqual(loadedInput?.market, originalInput.market)
     }
 
+    /// Persisted removed catalog id must sanitize to a live id — label and numbers stay the same car.
+    func testLoadLastUserInput_RewritesRemovedCatalogIdToLiveVehicle() {
+        VehicleCatalogService.shared.reloadFromBundledSeedIgnoringUserCacheForTesting()
+        CatalogVehicleIdResolver.resetAliasesForTesting()
+        XCTAssertNil(VehicleCatalogService.shared.vehicle(by: "lexus-rz-2022"))
+
+        let payload: [String: Any] = [
+            "dailyKm": 12_000,
+            "hasHomeCharging": true,
+            "areaTypeRaw": 0,
+            "fuelPrice": 1.8,
+            "ownershipYears": 5,
+            "electricityPricePerKWh": 0.31,
+            "sourceVehicleId": Defaults.starterSourceVehicleId,
+            "targetVehicleId": "lexus-rz-2022",
+            "scenarioRaw": Scenario.realistic.rawValue,
+            "sourcePurchasePrice": 12_000.0,
+            "targetPurchasePrice": 32_000.0,
+            "includeIncentives": false,
+            "comparisonIntentRaw": ComparisonIntent.alreadyOwned.rawValue,
+            "tripProfileRaw": TripProfile.custom.rawValue,
+            "includeKaskoTheft": false
+        ]
+        let data = try! JSONSerialization.data(withJSONObject: payload)
+        UserDefaults.standard.set(data, forKey: "evforme.lastUserInput")
+
+        let loaded = StorageService.shared.loadLastUserInput()
+        XCTAssertNotNil(loaded)
+        XCTAssertNotEqual(loaded?.targetVehicleId, "lexus-rz-2022")
+        XCTAssertFalse(loaded?.targetVehicleId.isEmpty ?? true)
+        guard let targetId = loaded?.targetVehicleId,
+              let live = VehicleCatalogService.shared.vehicle(by: targetId) else {
+            XCTFail("sanitized target must exist in catalog")
+            return
+        }
+        // Same car for label and simulation numbers (no silent swap to a different EV).
+        let result = EVSimulator.simulate(input: loaded!)
+        XCTAssertNotNil(result)
+        XCTAssertEqual(live.id, targetId)
+        XCTAssertEqual(loaded?.targetVehicleId, live.id)
+    }
+
     func testLoadUserInput_WhenNoData_ReturnsNil() {
         // Given
         let service = StorageService.shared
