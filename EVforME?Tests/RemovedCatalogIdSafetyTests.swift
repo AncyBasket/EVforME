@@ -162,7 +162,7 @@ final class RemovedCatalogIdSafetyTests: XCTestCase {
     func testHistoryRestoreRemovedId_NoResultNoWidgetNoSave() {
         XCTAssertNil(VehicleCatalogService.shared.vehicle(by: removedTarget))
 
-        var goodInput = UserInput(
+        let goodInput = UserInput(
             dailyKm: 12_000,
             hasHomeCharging: true,
             areaType: .urban,
