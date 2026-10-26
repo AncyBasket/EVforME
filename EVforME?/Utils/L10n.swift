@@ -289,9 +289,17 @@ enum L10n {
         format("calculation_ev_formula", km, kWhPerKm, pricePerKWh, energyCost, yearlyCost)
     }
     static func calculationEvTotal(_ years: Int, _ total: Int) -> String { format("calculation_ev_total", years, total) }
-    static func calculationChargingNote(_ weeklyCharges: Int?, needsVersionChoice: Bool = false) -> String {
+    static func calculationChargingNote(
+        _ weeklyCharges: Int?,
+        needsVersionChoice: Bool = false,
+        usesPrudentVariantBounds: Bool = false
+    ) -> String {
         if let weeklyCharges {
-            return format("calculation_charging_note", weeklyCharges)
+            let base = format("calculation_charging_note", weeklyCharges)
+            if usesPrudentVariantBounds {
+                return base + " " + variantPrudentCalcNote
+            }
+            return base
         }
         if needsVersionChoice {
             return string("calculation_charging_note_pick_version")
@@ -302,6 +310,7 @@ enum L10n {
     static var chargesUnavailableShort: String { string("charges_unavailable_short") }
     static var chargesUnavailableCaption: String { string("charges_unavailable_caption") }
     static var chargesPickVersionCaption: String { string("charges_pick_version_caption") }
+    static var variantPrudentCalcNote: String { string("variant_prudent_calc_note") }
     static func calculationSavings(_ years: Int, _ savings: Int) -> String { format("calculation_savings", years, savings) }
     static var savings: String { string("savings") }
     static var gasLabel: String { string("gas_label") }

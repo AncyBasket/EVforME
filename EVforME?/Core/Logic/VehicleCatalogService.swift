@@ -461,7 +461,11 @@ final class VehicleCatalogService {
                     fuelKind: item.fuelKind,
                     powerKw: item.powerKw,
                     energyIsWeighted: item.energyIsWeighted,
-                    parentId: item.parentId
+                    parentId: item.parentId,
+                    wltpRangeKmMax: item.wltpRangeKmMax,
+                    energyConsumptionKWhPerKmMin: item.energyConsumptionKWhPerKmMin,
+                    variantRangeCaption: item.variantRangeCaption,
+                    usesPrudentVariantBounds: item.usesPrudentVariantBounds
                 )
                 expanded.append(generated)
             }

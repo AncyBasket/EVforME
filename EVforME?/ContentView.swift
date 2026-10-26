@@ -52,6 +52,20 @@ struct ContentView: View {
                 userInput.targetVehicleId = "audi-q4-e-tron-2021"
             }
         }
+#if DEBUG
+        .onChange(of: userInput.targetVehicleId) { _, newId in
+            // UITEST version picker: open verdict after an EEA version id is chosen
+            // (avoids flaky bottom-CTA taps under the catalog sheet).
+            guard ProcessInfo.processInfo.environment["UITEST_OPEN_TARGET_PICKER"] == "1",
+                  newId.range(of: #"-v\d"#, options: .regularExpression) != nil else { return }
+            isLoading = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+                let input = userInput
+                simulationResult = EVSimulator.simulate(input: input, scenario: input.scenario)
+                isLoading = false
+            }
+        }
+#endif
     }
 }
 

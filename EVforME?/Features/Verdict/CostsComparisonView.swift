@@ -274,11 +274,13 @@ struct CostsComparisonView: View {
                         weeklyCharges,
                         needsVersionChoice: CatalogVehicleIdResolver.needsExplicitVersionChoice(
                             userInput.targetVehicleId
-                        )
+                        ),
+                        usesPrudentVariantBounds: targetVehicle?.usesPrudentVariantBounds == true
                     )
                 )
                     .font(Typography.readingCaption)
                     .foregroundColor(.secondaryText)
+                    .accessibilityIdentifier("charging_note_prudent")
             }
         }
     }

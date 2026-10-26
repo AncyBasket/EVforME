@@ -1,12 +1,12 @@
 {
   "url": "",
   "publishedUrl": "",
-  "rows": 12204,
-  "bytes": 5148481,
+  "rows": 7140,
+  "bytes": 3024026,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-26T19:21:59.938517+00:00",
+  "updatedAt": "2026-10-26T19:55:53.330344+00:00",
   "policy": "offline-first",
   "seedVersion": 59,
-  "note": "seedVersion 59: BEV EEA EU versions (min 10 F/P regs; F preferred; Zr==Wh dropped; F/P conflict \u2192 no variants; Tesla Model 3 2026 IT trims preserved)."
+  "note": "seedVersion 59: BEV EEA EU version groups (kW\u00b15+traction; Zr/Wh min\u2013max; prudent minZr/maxWh; min 10 regs; F/P conflict drops pair only; Tesla Model 3 2026 IT trims preserved)."
 }

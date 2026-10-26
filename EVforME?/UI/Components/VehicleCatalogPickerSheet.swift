@@ -521,10 +521,13 @@ struct VehicleCatalogPickerSheet: View {
                         .font(Typography.readingCardTitle)
                         .foregroundColor(.ink)
                         .lineLimit(2)
+                    if let caption = vehicle.variantRangeCaption, !caption.isEmpty {
+                        Text(caption)
+                            .font(Typography.readingCaption)
+                            .foregroundColor(.secondaryText)
+                            .lineLimit(2)
+                    }
                     HStack(spacing: 8) {
-                        if let range = vehicle.wltpRangeKm {
-                            Text("\(range) km WLTP")
-                        }
                         if let kw = vehicle.powerKw, kw > 0 {
                             Text(String(format: "%.0f kW", kw))
                         }
@@ -535,6 +538,12 @@ struct VehicleCatalogPickerSheet: View {
                     .font(Typography.readingCaption)
                     .foregroundColor(.secondaryText)
                     .lineLimit(1)
+                    if vehicle.usesPrudentVariantBounds == true {
+                        Text(L10n.variantPrudentCalcNote)
+                            .font(Typography.readingCaption)
+                            .foregroundColor(.secondaryText)
+                            .lineLimit(1)
+                    }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 

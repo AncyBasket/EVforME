@@ -526,6 +526,7 @@
 "charges_unavailable_short" = "n/d";
 "charges_unavailable_caption" = "Autonomia WLTP assente in catalogo";
 "charges_pick_version_caption" = "Scegli la versione per vedere autonomia e ricariche";
+"variant_prudent_calc_note" = "Calcolato sul valore più prudente";
 "charge_per_week_unavailable" = "Ricariche a settimana: non disponibili (manca autonomia dichiarata)";
 "share_weekly_charges_unavailable" = "Ricariche a settimana: non disponibili";
 "impact_charge_per_week_unavailable" = "• Ricariche a settimana: non disponibili (manca autonomia dichiarata).";

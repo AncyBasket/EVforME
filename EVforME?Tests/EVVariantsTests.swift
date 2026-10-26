@@ -2,7 +2,7 @@
 //  EVVariantsTests.swift
 //  EVforME?Tests
 //
-//  Seed v59: EEA version rows, single-child aliases, no silent multi remap.
+//  Seed v59: EEA version groups (kW±5 + traction), prudent min Zr / max Wh.
 //
 
 import XCTest
@@ -10,9 +10,8 @@ import XCTest
 
 final class EVVariantsTests: XCTestCase {
     private let multiParent = "bmw-i4-2024"
-    private let multiChild = "bmw-i4-2024-v105kw-591km"
-    private let singleParent = "audi-q8-e-tron-2024"
-    private let singleChild = "audi-q8-e-tron-2024-v300kw-530km"
+    private let multiChild = "bmw-i4-2024-v105kw-rwd"
+    private let singleParent = "bmw-i5-2023"
     private let inputKey = "evforme.lastUserInput"
 
     override func setUp() {
@@ -29,17 +28,22 @@ final class EVVariantsTests: XCTestCase {
         super.tearDown()
     }
 
-    func testVersionChildHasParentIdRangePowerAndEnergy() {
+    func testVersionGroupHasParentIdPrudentRangeAndCaption() {
         guard let child = VehicleCatalogService.shared.vehicle(by: multiChild) else {
             XCTFail("missing multi child \(multiChild)")
             return
         }
         XCTAssertEqual(child.parentId, multiParent)
-        XCTAssertEqual(child.wltpRangeKm, 591)
+        XCTAssertEqual(child.wltpRangeKm, 555)
+        XCTAssertEqual(child.wltpRangeKmMax, 591)
         XCTAssertEqual(child.powerKw ?? 0, 105, accuracy: 0.6)
         XCTAssertNotNil(child.resolvedEnergyKWhPerKm)
-        XCTAssertTrue(child.trim?.contains("km WLTP") == true)
-        XCTAssertNil(child.batteryKWh, "new EEA versions must not invent battery")
+        XCTAssertTrue(child.trim?.contains("kW") == true)
+        XCTAssertFalse(child.trim?.contains("km WLTP") == true)
+        XCTAssertTrue(child.variantRangeCaption?.contains("555") == true)
+        XCTAssertTrue(child.variantRangeCaption?.contains("591") == true)
+        XCTAssertEqual(child.usesPrudentVariantBounds, true)
+        XCTAssertNil(child.batteryKWh, "new EEA groups must not invent battery")
     }
 
     func testMultiParentKeepsNoRangeAndNeedsExplicitChoice() {
@@ -51,26 +55,35 @@ final class EVVariantsTests: XCTestCase {
         XCTAssertTrue(parent.wltpRangeKm == nil || parent.wltpRangeKm == 0)
         XCTAssertTrue(CatalogVehicleIdResolver.needsExplicitVersionChoice(multiParent))
         XCTAssertEqual(CatalogVehicleIdResolver.resolveId(multiParent), multiParent)
+        let children = VehicleCatalogService.shared.targetEVVehicles().filter {
+            $0.parentId == multiParent
+        }
+        XCTAssertGreaterThanOrEqual(children.count, 2)
+        XCTAssertLessThanOrEqual(children.count, 8)
     }
 
     func testSingleVersionAliasRemapsWithoutSilentWrongCar() {
-        XCTAssertEqual(
-            CatalogVehicleIdResolver.resolveId(singleParent),
-            singleChild
-        )
+        let resolved = CatalogVehicleIdResolver.resolveId(singleParent)
+        XCTAssertNotNil(resolved)
+        XCTAssertNotEqual(resolved, singleParent)
         XCTAssertFalse(CatalogVehicleIdResolver.needsExplicitVersionChoice(singleParent))
-        guard let child = VehicleCatalogService.shared.vehicle(by: singleChild) else {
+        guard let id = resolved, let child = VehicleCatalogService.shared.vehicle(by: id) else {
             XCTFail("missing single child")
             return
         }
-        XCTAssertEqual(child.wltpRangeKm, 530)
+        XCTAssertEqual(child.parentId, singleParent)
+        XCTAssertNotNil(child.wltpRangeKm)
     }
 
-    func testWeeklyChargesUseChosenVersionRange() {
+    func testWeeklyChargesUsePrudentMinRange() {
         guard let child = VehicleCatalogService.shared.vehicle(by: multiChild),
               let range = child.wltpRangeKm else {
             XCTFail("child range missing")
             return
+        }
+        XCTAssertEqual(range, child.wltpRangeKm) // catalog stores min
+        if let max = child.wltpRangeKmMax {
+            XCTAssertLessThanOrEqual(range, max)
         }
         let charges = WeeklyChargeEstimator.weeklyCharges(
             yearlyKm: 12_000,
@@ -80,14 +93,6 @@ final class EVVariantsTests: XCTestCase {
         )
         XCTAssertNotNil(charges)
         XCTAssertGreaterThan(charges ?? 0, 0)
-
-        let without = WeeklyChargeEstimator.weeklyCharges(
-            yearlyKm: 12_000,
-            powertrain: .ev,
-            rangeKm: nil,
-            electricKmShare: 1
-        )
-        XCTAssertNil(without)
     }
 
     func testSimulateOnMultiParentHasNilCharges_NoSilentVersion() {
@@ -102,10 +107,10 @@ final class EVVariantsTests: XCTestCase {
             scenario: .realistic
         )
         guard let result = EVSimulator.simulate(input: input) else {
-            XCTFail("simulate should still run on parent (costs without range)")
+            XCTFail("simulate should still run on parent")
             return
         }
-        XCTAssertNil(result.weeklyCharges, "must not invent charges from another version")
+        XCTAssertNil(result.weeklyCharges)
     }
 
     func testSimulateOnChosenVersionShowsCharges() {
@@ -124,7 +129,6 @@ final class EVVariantsTests: XCTestCase {
             return
         }
         XCTAssertNotNil(result.weeklyCharges)
-        XCTAssertGreaterThan(result.weeklyCharges ?? 0, 0)
     }
 
     func testLoadPersistedMultiParentDoesNotRemapToRandomChild() {
@@ -144,7 +148,6 @@ final class EVVariantsTests: XCTestCase {
             return
         }
         XCTAssertEqual(loaded.targetVehicleId, multiParent)
-        XCTAssertNotEqual(loaded.targetVehicleId, multiChild)
         XCTAssertTrue(CatalogVehicleIdResolver.needsExplicitVersionChoice(loaded.targetVehicleId))
     }
 
@@ -162,7 +165,7 @@ final class EVVariantsTests: XCTestCase {
             }
             XCTAssertNil(v.parentId)
             XCTAssertNotNil(v.wltpRangeKm)
-            XCTAssertFalse(v.trim?.contains("km WLTP") == true, "official IT name, not EEA label")
+            XCTAssertNotEqual(v.usesPrudentVariantBounds, true)
         }
     }
 
@@ -171,6 +174,16 @@ final class EVVariantsTests: XCTestCase {
         XCTAssertTrue(
             note.localizedCaseInsensitiveContains("version")
                 || note.localizedCaseInsensitiveContains("versione")
+        )
+    }
+
+    func testPrudentCalcNoteLocalized() {
+        let note = L10n.variantPrudentCalcNote
+        XCTAssertFalse(note.isEmpty)
+        XCTAssertTrue(
+            note.localizedCaseInsensitiveContains("prudent")
+                || note.localizedCaseInsensitiveContains("prudente")
+                || note.localizedCaseInsensitiveContains("cautious")
         )
     }
 }

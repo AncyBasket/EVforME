@@ -99,6 +99,14 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
     let energyIsWeighted: Bool?
     /// Riga versione EEA: punta alla riga modello/anno genitore.
     let parentId: String?
+    /// Autonomia WLTP massima del gruppo versione (min è `wltpRangeKm`, caso prudente).
+    let wltpRangeKmMax: Int?
+    /// Consumo minimo del gruppo (kWh/km); il catalogo usa `energyConsumptionKWhPerKm` = max (prudente).
+    let energyConsumptionKWhPerKmMin: Double?
+    /// Testo autonomia min–max (cerchi/optional), solo versioni EEA raggruppate.
+    let variantRangeCaption: String?
+    /// `true` se autonomia/consumo in catalogo sono il bound prudente (min Zr / max Wh).
+    let usesPrudentVariantBounds: Bool?
 
     var displayName: String {
         if let trim, !trim.isEmpty {
@@ -128,14 +136,23 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         if let batteryKWh {
             parts.append(String(format: "%.0f kWh", batteryKWh))
         }
-        if let wltpRangeKm {
-            parts.append("\(wltpRangeKm) km")
+        if let caption = variantRangeCaption, !caption.isEmpty {
+            parts.append(caption)
+        } else if let wltpRangeKm {
+            if let wltpRangeKmMax, wltpRangeKmMax != wltpRangeKm {
+                parts.append("\(wltpRangeKm)–\(wltpRangeKmMax) km")
+            } else {
+                parts.append("\(wltpRangeKm) km")
+            }
         }
         if let powerKw, powerKw > 0 {
             parts.append(String(format: "%.0f kW", powerKw))
         }
         if let energy = resolvedEnergyKWhPerKm {
             parts.append(String(format: "%.1f kWh/100", energy * 100.0))
+        }
+        if usesPrudentVariantBounds == true {
+            parts.append(L10n.variantPrudentCalcNote)
         }
         return parts.isEmpty ? nil : parts.joined(separator: " · ")
     }
@@ -297,7 +314,11 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         fuelKind: FuelKind? = nil,
         powerKw: Double? = nil,
         energyIsWeighted: Bool? = nil,
-        parentId: String? = nil
+        parentId: String? = nil,
+        wltpRangeKmMax: Int? = nil,
+        energyConsumptionKWhPerKmMin: Double? = nil,
+        variantRangeCaption: String? = nil,
+        usesPrudentVariantBounds: Bool? = nil
     ) {
         self.id = id
         self.brand = brand
@@ -325,5 +346,9 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         self.powerKw = powerKw
         self.energyIsWeighted = energyIsWeighted
         self.parentId = parentId
+        self.wltpRangeKmMax = wltpRangeKmMax
+        self.energyConsumptionKWhPerKmMin = energyConsumptionKWhPerKmMin
+        self.variantRangeCaption = variantRangeCaption
+        self.usesPrudentVariantBounds = usesPrudentVariantBounds
     }
 }

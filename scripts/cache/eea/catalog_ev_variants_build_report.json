@@ -1,104 +1,291 @@
 {
   "seedVersion": 59,
   "stats": {
-    "bev_before": 701,
-    "bev_with_range_before": 129,
-    "bev_after": 7278,
-    "bev_with_range_after": 6667,
-    "variant_rows": 6577,
-    "parents_single": 25,
-    "parents_multi": 228,
-    "parents_no_variant": 444,
+    "bev_model_years_before": 701,
+    "bev_model_years_with_range_before": 129,
+    "bev_model_years_after": 701,
+    "bev_model_years_with_range_after": 460,
+    "bev_rows_after_including_versions": 2214,
+    "variant_groups": 1513,
+    "parents_single": 71,
+    "parents_multi": 346,
+    "parents_no_variant": 280,
+    "no_variant_reasons": {
+      "no_cn": 235,
+      "none_after_filters": 45
+    },
     "catalog_rows_before": 5627,
-    "catalog_rows_after": 12204,
-    "result_ok": 253,
-    "result_multi": 228,
+    "catalog_rows_after": 7140,
+    "groups_per_parent_distribution": {
+      "1": 71,
+      "2": 121,
+      "3": 72,
+      "4": 41,
+      "5": 26,
+      "6": 22,
+      "7": 24,
+      "8": 16,
+      "9": 6,
+      "10": 7,
+      "11": 6,
+      "12": 1,
+      "13": 1,
+      "15": 2,
+      "17": 1
+    },
+    "parents_over_8_groups": 24,
+    "fp_pair_conflicts_dropped": 386,
+    "result_ok": 417,
+    "result_multi": 346,
+    "result_single": 71,
     "result_no_cn": 235,
-    "result_fp_conflict": 165,
-    "result_single": 25,
-    "result_none_after_filters": 44,
+    "result_none_after_filters": 45,
     "result_skip_protected": 4
   },
   "topParentsByVariantCount": [
     {
-      "parentId": "bmw-i4-2024",
-      "n": 179
+      "parentId": "tesla-model-y-2023",
+      "n": 17,
+      "brand": "Tesla",
+      "model": "Model Y",
+      "year": 2023
     },
     {
-      "parentId": "volkswagen-id4-2024",
-      "n": 171
+      "parentId": "polestar-2-2023",
+      "n": 15,
+      "brand": "Polestar",
+      "model": "2",
+      "year": 2023
     },
     {
-      "parentId": "volkswagen-id3-2024",
-      "n": 164
+      "parentId": "tesla-model-y-2025",
+      "n": 15,
+      "brand": "Tesla",
+      "model": "Model Y",
+      "year": 2025
     },
     {
-      "parentId": "bmw-i4-2025",
-      "n": 146
+      "parentId": "ford-mustang-mach-e-2024",
+      "n": 13,
+      "brand": "Ford",
+      "model": "Mustang Mach-E",
+      "year": 2024
     },
     {
-      "parentId": "volkswagen-id3-2025",
-      "n": 136
+      "parentId": "polestar-2-2024",
+      "n": 12,
+      "brand": "Polestar",
+      "model": "2",
+      "year": 2024
     },
     {
-      "parentId": "bmw-ix1-2024",
-      "n": 130
+      "parentId": "dacia-spring-2023",
+      "n": 11,
+      "brand": "Dacia",
+      "model": "Spring",
+      "year": 2023
+    },
+    {
+      "parentId": "ford-mustang-mach-e-2025",
+      "n": 11,
+      "brand": "Ford",
+      "model": "Mustang Mach-E",
+      "year": 2025
+    },
+    {
+      "parentId": "hyundai-ioniq-5-2023",
+      "n": 11,
+      "brand": "Hyundai",
+      "model": "Ioniq 5",
+      "year": 2023
+    },
+    {
+      "parentId": "hyundai-ioniq-5-n-2023",
+      "n": 11,
+      "brand": "Hyundai",
+      "model": "Ioniq 5 N",
+      "year": 2023
+    },
+    {
+      "parentId": "tesla-model-3-2021",
+      "n": 11,
+      "brand": "Tesla",
+      "model": "Model 3",
+      "year": 2021
+    }
+  ],
+  "parentsOver8Groups": [
+    {
+      "parentId": "tesla-model-y-2023",
+      "n": 17,
+      "brand": "Tesla",
+      "model": "Model Y",
+      "year": 2023
+    },
+    {
+      "parentId": "polestar-2-2023",
+      "n": 15,
+      "brand": "Polestar",
+      "model": "2",
+      "year": 2023
+    },
+    {
+      "parentId": "tesla-model-y-2025",
+      "n": 15,
+      "brand": "Tesla",
+      "model": "Model Y",
+      "year": 2025
+    },
+    {
+      "parentId": "ford-mustang-mach-e-2024",
+      "n": 13,
+      "brand": "Ford",
+      "model": "Mustang Mach-E",
+      "year": 2024
+    },
+    {
+      "parentId": "polestar-2-2024",
+      "n": 12,
+      "brand": "Polestar",
+      "model": "2",
+      "year": 2024
+    },
+    {
+      "parentId": "dacia-spring-2023",
+      "n": 11,
+      "brand": "Dacia",
+      "model": "Spring",
+      "year": 2023
+    },
+    {
+      "parentId": "ford-mustang-mach-e-2025",
+      "n": 11,
+      "brand": "Ford",
+      "model": "Mustang Mach-E",
+      "year": 2025
+    },
+    {
+      "parentId": "hyundai-ioniq-5-2023",
+      "n": 11,
+      "brand": "Hyundai",
+      "model": "Ioniq 5",
+      "year": 2023
+    },
+    {
+      "parentId": "hyundai-ioniq-5-n-2023",
+      "n": 11,
+      "brand": "Hyundai",
+      "model": "Ioniq 5 N",
+      "year": 2023
+    },
+    {
+      "parentId": "tesla-model-3-2021",
+      "n": 11,
+      "brand": "Tesla",
+      "model": "Model 3",
+      "year": 2021
+    },
+    {
+      "parentId": "tesla-model-s-2020",
+      "n": 11,
+      "brand": "Tesla",
+      "model": "Model S",
+      "year": 2020
     },
     {
       "parentId": "bmw-ix-2025",
-      "n": 130
+      "n": 10,
+      "brand": "BMW",
+      "model": "iX",
+      "year": 2025
     },
     {
-      "parentId": "volkswagen-id4-2022",
-      "n": 129
+      "parentId": "hyundai-ioniq-5-2022",
+      "n": 10,
+      "brand": "Hyundai",
+      "model": "Ioniq 5",
+      "year": 2022
     },
     {
-      "parentId": "porsche-macan-electric-2025",
-      "n": 125
+      "parentId": "kia-ev6-2022",
+      "n": 10,
+      "brand": "Kia",
+      "model": "EV6",
+      "year": 2022
     },
     {
-      "parentId": "bmw-i5-2025",
-      "n": 118
+      "parentId": "kia-ev6-2023",
+      "n": 10,
+      "brand": "Kia",
+      "model": "EV6",
+      "year": 2023
     },
     {
-      "parentId": "volkswagen-id3-2021",
-      "n": 110
+      "parentId": "tesla-model-3-2023",
+      "n": 10,
+      "brand": "Tesla",
+      "model": "Model 3",
+      "year": 2023
     },
     {
-      "parentId": "volkswagen-id3-2022",
-      "n": 110
+      "parentId": "tesla-model-y-2024",
+      "n": 10,
+      "brand": "Tesla",
+      "model": "Model Y",
+      "year": 2024
     },
     {
-      "parentId": "bmw-ix1-2025",
-      "n": 109
+      "parentId": "volvo-ec40-2023",
+      "n": 10,
+      "brand": "Volvo",
+      "model": "EC40",
+      "year": 2023
     },
     {
-      "parentId": "volvo-ex90-2025",
-      "n": 102
+      "parentId": "bmw-ix1-2024",
+      "n": 9,
+      "brand": "BMW",
+      "model": "iX1",
+      "year": 2024
     },
     {
-      "parentId": "porsche-taycan-2025",
-      "n": 101
+      "parentId": "hyundai-ioniq-5-2025",
+      "n": 9,
+      "brand": "Hyundai",
+      "model": "Ioniq 5",
+      "year": 2025
     },
     {
-      "parentId": "volkswagen-id4-2025",
-      "n": 99
+      "parentId": "kia-ev6-2024",
+      "n": 9,
+      "brand": "Kia",
+      "model": "EV6",
+      "year": 2024
     },
     {
-      "parentId": "porsche-taycan-2022",
-      "n": 99
+      "parentId": "porsche-taycan-2024",
+      "n": 9,
+      "brand": "Porsche",
+      "model": "Taycan",
+      "year": 2024
     },
     {
-      "parentId": "volkswagen-id7-2024",
-      "n": 97
+      "parentId": "tesla-model-3-2020",
+      "n": 9,
+      "brand": "Tesla",
+      "model": "Model 3",
+      "year": 2020
     },
     {
-      "parentId": "volkswagen-id5-2023",
-      "n": 97
-    },
-    {
-      "parentId": "porsche-taycan-2021",
-      "n": 95
+      "parentId": "tesla-model-3-2024",
+      "n": 9,
+      "brand": "Tesla",
+      "model": "Model 3",
+      "year": 2024
     }
-  ]
+  ],
+  "noVariantReasons": {
+    "no_cn": 235,
+    "none_after_filters": 45
+  }
 }

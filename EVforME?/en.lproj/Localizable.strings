@@ -528,6 +528,7 @@
 "charges_unavailable_short" = "n/a";
 "charges_unavailable_caption" = "WLTP range missing from catalog";
 "charges_pick_version_caption" = "Pick a version to see range and weekly charges";
+"variant_prudent_calc_note" = "Calculated on the most cautious value";
 "charge_per_week_unavailable" = "Weekly charges: not available (declared range missing)";
 "share_weekly_charges_unavailable" = "Weekly charges: not available";
 "impact_charge_per_week_unavailable" = "• Weekly charges: not available (declared range missing).";
