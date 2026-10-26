@@ -1,5 +1,5 @@
 {
-  "seedVersion": 56,
+  "seedVersion": 57,
   "generatedAt": "2026-10-25T14:58:44.361324+00:00",
   "source": "EEA co2cars IT field Zr (Electric range km)",
   "rules": [
@@ -2134,13 +2134,6 @@
       "reason": "year 2026 outside EEA IT Zr window 2017–2025"
     },
     {
-      "id": "chevrolet-bolt-euv-2021",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "Bolt EUV",
-      "year": 2021
-    },
-    {
       "id": "chevrolet-bolt-euv-2022",
       "result": "skip",
       "reason": "no EEA Cn match for model/year",
@@ -2964,13 +2957,6 @@
       "reason": "year 2026 outside EEA IT Zr window 2017–2025"
     },
     {
-      "id": "honda-e-2019",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "e",
-      "year": 2019
-    },
-    {
       "id": "honda-e-2020",
       "result": "skip",
       "reason": "Zr equals Wh/km on EEA record(s) or no joint Wh×kW versions",
@@ -3035,39 +3021,6 @@
     },
     {
       "id": "honda-eny1-2026",
-      "result": "skip",
-      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
-    },
-    {
-      "id": "hyundai-equus-2022",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "Equus",
-      "year": 2022
-    },
-    {
-      "id": "hyundai-equus-2023",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "Equus",
-      "year": 2023
-    },
-    {
-      "id": "hyundai-equus-2024",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "Equus",
-      "year": 2024
-    },
-    {
-      "id": "hyundai-equus-2025",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "Equus",
-      "year": 2025
-    },
-    {
-      "id": "hyundai-equus-2026",
       "result": "skip",
       "reason": "year 2026 outside EEA IT Zr window 2017–2025"
     },
@@ -3578,11 +3531,6 @@
       ]
     },
     {
-      "id": "jaguar-i-pace-2026",
-      "result": "skip",
-      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
-    },
-    {
       "id": "jeep-wagoneer-s-2024",
       "result": "skip",
       "reason": "no EEA Cn match for model/year",
@@ -3778,32 +3726,6 @@
       "year": 2023
     },
     {
-      "id": "kia-soul-ev-2024",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "Soul EV",
-      "year": 2024
-    },
-    {
-      "id": "kia-soul-ev-2025",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "Soul EV",
-      "year": 2025
-    },
-    {
-      "id": "kia-soul-ev-2026",
-      "result": "skip",
-      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
-    },
-    {
-      "id": "lexus-rz-2022",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "RZ",
-      "year": 2022
-    },
-    {
       "id": "lexus-rz-2023",
       "result": "skip",
       "reason": "no EEA Cn match for model/year",
@@ -3918,20 +3840,6 @@
       "id": "lucid-air-2026",
       "result": "skip",
       "reason": "year 2026 outside EEA IT Zr window 2017–2025"
-    },
-    {
-      "id": "lucid-gravity-2022",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "Gravity",
-      "year": 2022
-    },
-    {
-      "id": "lucid-gravity-2023",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "Gravity",
-      "year": 2023
     },
     {
       "id": "lucid-gravity-2024",
@@ -4955,13 +4863,6 @@
       "reason": "year 2026 outside EEA IT Zr window 2017–2025"
     },
     {
-      "id": "mini-electric-hatch-2019",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "Electric Hatch",
-      "year": 2019
-    },
-    {
       "id": "mini-electric-hatch-2020",
       "result": "skip",
       "reason": "no EEA Cn match for model/year",
@@ -5009,20 +4910,6 @@
       "reason": "year 2026 outside EEA IT Zr window 2017–2025"
     },
     {
-      "id": "nio-el6-2021",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "EL6",
-      "year": 2021
-    },
-    {
-      "id": "nio-el6-2022",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "EL6",
-      "year": 2022
-    },
-    {
       "id": "nio-el6-2023",
       "result": "skip",
       "reason": "no EEA Cn match for model/year",
@@ -5049,20 +4936,6 @@
       "reason": "year 2026 outside EEA IT Zr window 2017–2025"
     },
     {
-      "id": "nio-el8-2021",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "EL8",
-      "year": 2021
-    },
-    {
-      "id": "nio-el8-2022",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "EL8",
-      "year": 2022
-    },
-    {
       "id": "nio-el8-2023",
       "result": "skip",
       "reason": "no EEA Cn match for model/year",
@@ -5087,13 +4960,6 @@
       "id": "nio-el8-2026",
       "result": "skip",
       "reason": "year 2026 outside EEA IT Zr window 2017–2025"
-    },
-    {
-      "id": "nio-et5-2021",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "ET5",
-      "year": 2021
     },
     {
       "id": "nio-et5-2022",
@@ -5127,20 +4993,6 @@
       "id": "nio-et5-2026",
       "result": "skip",
       "reason": "year 2026 outside EEA IT Zr window 2017–2025"
-    },
-    {
-      "id": "nio-et5-touring-2021",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "ET5 Touring",
-      "year": 2021
-    },
-    {
-      "id": "nio-et5-touring-2022",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "ET5 Touring",
-      "year": 2022
     },
     {
       "id": "nio-et5-touring-2023",
@@ -5205,39 +5057,6 @@
     },
     {
       "id": "nio-et7-2026",
-      "result": "skip",
-      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
-    },
-    {
-      "id": "nissan-altra-ev-2022",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "Altra-EV",
-      "year": 2022
-    },
-    {
-      "id": "nissan-altra-ev-2023",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "Altra-EV",
-      "year": 2023
-    },
-    {
-      "id": "nissan-altra-ev-2024",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "Altra-EV",
-      "year": 2024
-    },
-    {
-      "id": "nissan-altra-ev-2025",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "Altra-EV",
-      "year": 2025
-    },
-    {
-      "id": "nissan-altra-ev-2026",
       "result": "skip",
       "reason": "year 2026 outside EEA IT Zr window 2017–2025"
     },
@@ -7242,42 +7061,6 @@
       "reason": "year 2026 outside EEA IT Zr window 2017–2025"
     },
     {
-      "id": "renault-scenic-2024",
-      "result": "skip",
-      "reason": "no EEA version jointly matches catalog kW (±5) and Wh/km (±1)",
-      "eea_model": "SCENICETECHELECTRIC",
-      "year": 2024,
-      "status": "F",
-      "catalog_wh": 173.7,
-      "catalog_kw": 148.9,
-      "candidate_zr": [
-        420,
-        426,
-        427,
-        428,
-        429,
-        430,
-        590,
-        594,
-        603,
-        604,
-        605,
-        606,
-        607,
-        608,
-        609,
-        610,
-        613,
-        614,
-        616,
-        617,
-        618,
-        620,
-        622,
-        623
-      ]
-    },
-    {
       "id": "renault-scenic-e-tech-2023",
       "result": "skip",
       "reason": "no EEA Cn match for model/year",
@@ -9014,35 +8797,6 @@
       ]
     },
     {
-      "id": "volvo-c40-recharge-2025",
-      "result": "skip",
-      "reason": "no EEA version jointly matches catalog kW (±5) and Wh/km (±1)",
-      "eea_model": "C40",
-      "year": 2025,
-      "status": "P",
-      "catalog_wh": 168.7,
-      "catalog_kw": 203.4,
-      "candidate_zr": [
-        433,
-        484,
-        486,
-        487,
-        540,
-        571,
-        573,
-        576,
-        578,
-        579,
-        580,
-        581
-      ]
-    },
-    {
-      "id": "volvo-c40-recharge-2026",
-      "result": "skip",
-      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
-    },
-    {
       "id": "volvo-ec40-2022",
       "result": "skip",
       "reason": "missing catalog powerKw and/or Wh/km; cannot jointly match EEA version",
@@ -9518,56 +9272,6 @@
       ]
     },
     {
-      "id": "volvo-xc40-recharge-2025",
-      "result": "skip",
-      "reason": "no EEA version jointly matches catalog kW (±5) and Wh/km (±1)",
-      "eea_model": "XC40",
-      "year": 2025,
-      "status": "P",
-      "catalog_wh": 170.5,
-      "catalog_kw": 124.6,
-      "candidate_zr": [
-        465,
-        474,
-        475,
-        476,
-        525,
-        527,
-        536,
-        555,
-        556,
-        560,
-        561,
-        562,
-        564,
-        565,
-        569,
-        570,
-        571,
-        572,
-        573
-      ]
-    },
-    {
-      "id": "volvo-xc40-recharge-2026",
-      "result": "skip",
-      "reason": "year 2026 outside EEA IT Zr window 2017–2025"
-    },
-    {
-      "id": "xpeng-g6-2021",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "G6",
-      "year": 2021
-    },
-    {
-      "id": "xpeng-g6-2022",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "G6",
-      "year": 2022
-    },
-    {
       "id": "xpeng-g6-2023",
       "result": "skip",
       "reason": "no EEA Cn match for model/year",
@@ -9601,13 +9305,6 @@
       "id": "xpeng-g6-2026",
       "result": "skip",
       "reason": "year 2026 outside EEA IT Zr window 2017–2025"
-    },
-    {
-      "id": "xpeng-g9-2021",
-      "result": "skip",
-      "reason": "no EEA Cn match for model/year",
-      "model": "G9",
-      "year": 2021
     },
     {
       "id": "xpeng-g9-2022",

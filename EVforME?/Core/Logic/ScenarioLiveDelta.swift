@@ -91,7 +91,15 @@ enum ScenarioLiveDelta {
 
     /// True se i prezzi live si sono mossi oltre soglia rispetto allo snapshot (per reminder).
     static func liveDataMoved(versus snapshot: SavedScenarioSnapshot) -> Bool {
+        // Never compare live deltas when a saved id is gone — restoredUserInput clears
+        // those ids; simulating would mix stale labels with another car's numbers.
+        if snapshot.hasUnavailableCatalogVehicle {
+            return false
+        }
         let restored = snapshot.restoredUserInput()
+        guard !restored.sourceVehicleId.isEmpty, !restored.targetVehicleId.isEmpty else {
+            return false
+        }
         let fuelKind = VehicleCatalogService.shared.vehicle(by: restored.sourceVehicleId)?.resolvedFuelKind ?? .petrol
         let liveFuel = liveFuelPrice(
             fallback: snapshot.fuelPriceAtSave ?? restored.fuelPrice,
@@ -100,7 +108,7 @@ enum ScenarioLiveDelta {
         let liveElec = liveElectricityPrice(
             fallback: snapshot.electricityPriceAtSave ?? restored.electricityPricePerKWh
         )
-        let liveIncentive = snapshot.restoredUserInput().estimatedPurchaseIncentiveEUR
+        let liveIncentive = restored.estimatedPurchaseIncentiveEUR
         let report = evaluate(
             snapshot: snapshot,
             liveFuel: liveFuel,

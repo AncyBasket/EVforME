@@ -22,8 +22,41 @@ struct SimulateEVIntent: AppIntent {
 
     @MainActor
     func perform() async throws -> some IntentResult & ProvidesDialog & ReturnsValue<String> {
-        var input = StorageService.shared.loadLastUserInput() ?? UserInput(
-            dailyKm: yearlyKm,
+        let outcome = SimulateEVIntentRunner.run(
+            yearlyKm: yearlyKm,
+            hasHomeCharging: hasHomeCharging
+        )
+        return .result(value: outcome.message, dialog: IntentDialog(stringLiteral: outcome.message))
+    }
+}
+
+/// Logica testabile dell’intent: niente starter silent se l’auto salvata è stata rimossa.
+enum SimulateEVIntentRunner {
+    struct Outcome: Equatable {
+        let message: String
+        let didSimulate: Bool
+    }
+
+    @MainActor
+    static func run(yearlyKm: Int, hasHomeCharging: Bool) -> Outcome {
+        let clampedKm = max(1000, min(120_000, yearlyKm))
+        let saved = StorageService.shared.loadLastUserInput()
+
+        if let saved {
+            var input = saved
+            input.dailyKm = clampedKm
+            input.hasHomeCharging = hasHomeCharging
+            // loadLastUserInput already emptied removed ids (no starter). Do not refill.
+            guard CatalogVehicleIdResolver.hasResolvableVehiclePair(input),
+                  let result = EVSimulator.simulate(input: input) else {
+                return Outcome(message: L10n.catalogVehiclePickAnother, didSimulate: false)
+            }
+            return persistAndSummarize(input: input, result: result)
+        }
+
+        // First run (nothing saved): starters are OK.
+        var input = UserInput(
+            dailyKm: clampedKm,
             hasHomeCharging: hasHomeCharging,
             areaType: .urban,
             fuelPrice: OfficialEnergyCosts.Fallback.petrolPerLiter,
@@ -33,34 +66,31 @@ struct SimulateEVIntent: AppIntent {
             targetVehicleId: Defaults.starterTargetVehicleId,
             scenario: .realistic
         )
-        input.dailyKm = max(1000, min(120_000, yearlyKm))
-        input.hasHomeCharging = hasHomeCharging
-        if input.sourceVehicleId.isEmpty {
-            input.sourceVehicleId = Defaults.starterSourceVehicleId
+        guard CatalogVehicleIdResolver.hasResolvableVehiclePair(input),
+              let result = EVSimulator.simulate(input: input) else {
+            return Outcome(message: L10n.catalogVehiclePickAnother, didSimulate: false)
         }
-        if input.targetVehicleId.isEmpty {
-            input.targetVehicleId = Defaults.starterTargetVehicleId
-        }
+        return persistAndSummarize(input: input, result: result)
+    }
 
-        let result = EVSimulator.simulate(input: input)
+    @MainActor
+    private static func persistAndSummarize(input: UserInput, result: SimulationResult) -> Outcome {
         StorageService.shared.saveUserInput(input)
-        guard let result else {
-            return .result(
-                value: L10n.checkInputValues,
-                dialog: IntentDialog(stringLiteral: L10n.checkInputValues)
-            )
-        }
         ScenarioHistoryStore.save(result: result, input: input)
         WidgetSnapshotStore.save(from: result, input: input)
 
+        let sourceName = VehicleCatalogService.shared.vehicle(by: input.sourceVehicleId)?.displayName
+            ?? input.sourceVehicleId
+        let targetName = VehicleCatalogService.shared.vehicle(by: input.targetVehicleId)?.displayName
+            ?? input.targetVehicleId
         let savingsBit: String
         if result.yearlySavingsRange.upperBound > 0 {
             savingsBit = L10n.impactSaveBetween(result.yearlySavingsRange.lowerBound, result.yearlySavingsRange.upperBound)
         } else {
             savingsBit = L10n.impactCurrentCheaper()
         }
-        let summary = "\(result.verdict.title). \(savingsBit) · \(L10n.impactChargePerWeek(result.weeklyCharges))"
-        return .result(value: summary, dialog: IntentDialog(stringLiteral: summary))
+        let summary = "\(result.verdict.title). \(sourceName) → \(targetName). \(savingsBit) · \(L10n.impactChargePerWeek(result.weeklyCharges))"
+        return Outcome(message: summary, didSimulate: true)
     }
 }
 

@@ -527,6 +527,9 @@
 
 /* Retention 1.1 */
 "last_comparison_title" = "Ultimo confronto";
+"catalog_vehicle_no_longer_available" = "%@ (non più in catalogo)";
+"catalog_vehicle_pick_another" = "L’auto salvata non è più nel catalogo: apri EVforME e scegline un’altra.";
+"catalog_vehicle_choose_action" = "Scegli un’auto";
 "last_comparison_reopen" = "Riapri verdetto";
 "last_comparison_recalculate" = "Ricalcola con dati di oggi";
 "last_comparison_restore_form" = "Ripristina nel form";

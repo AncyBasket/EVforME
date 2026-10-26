@@ -32,9 +32,12 @@ final class StorageService {
     // MARK: - User Input
     
     func saveUserInput(_ input: UserInput) {
-        updateCustomizationFlags(for: input)
+        var sanitized = input
+        // Aliases only — never silently write the starter Golf/Model 3 over a removed id.
+        CatalogVehicleIdResolver.sanitizeUserInput(&sanitized, fallbackToStarter: false)
+        updateCustomizationFlags(for: sanitized)
         do {
-            let data = try JSONEncoder().encode(CodableUserInput(from: input))
+            let data = try JSONEncoder().encode(CodableUserInput(from: sanitized))
             defaults.set(data, forKey: Keys.lastUserInput)
         } catch {
             ErrorHandler.shared.handle(
@@ -56,7 +59,32 @@ final class StorageService {
         
         do {
             let codable = try JSONDecoder().decode(CodableUserInput.self, from: data)
-            return codable.toUserInput()
+            var input = codable.toUserInput()
+            let rawSource = input.sourceVehicleId
+            let rawTarget = input.targetVehicleId
+            let hadUnavailable = CatalogVehicleIdResolver.isUnavailable(rawSource)
+                || CatalogVehicleIdResolver.isUnavailable(rawTarget)
+            // Aliases remap; removed ids become empty — never substitute the starter EV.
+            let changed = CatalogVehicleIdResolver.sanitizeUserInput(&input, fallbackToStarter: false)
+            if hadUnavailable
+                || input.sourceVehicleId.isEmpty
+                || input.targetVehicleId.isEmpty {
+                if changed {
+                    let encoded = try JSONEncoder().encode(CodableUserInput(from: input))
+                    defaults.set(encoded, forKey: Keys.lastUserInput)
+                }
+                ErrorHandler.shared.handleAppError(
+                    .dataNotFound,
+                    context: .catalog,
+                    userMessage: L10n.catalogVehiclePickAnother
+                )
+                return input
+            }
+            if changed {
+                let encoded = try JSONEncoder().encode(CodableUserInput(from: input))
+                defaults.set(encoded, forKey: Keys.lastUserInput)
+            }
+            return input
         } catch {
             ErrorHandler.shared.handle(
                 error,

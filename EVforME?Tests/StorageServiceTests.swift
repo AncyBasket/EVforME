@@ -55,8 +55,8 @@ final class StorageServiceTests: XCTestCase {
             fuelPrice: 1.75,
             ownershipYears: 5,
             electricityPricePerKWh: 0.28,
-            sourceVehicleId: "test-source",
-            targetVehicleId: "test-target",
+            sourceVehicleId: Defaults.starterSourceVehicleId,
+            targetVehicleId: Defaults.starterTargetVehicleId,
             scenario: .realistic
         )
 
@@ -76,6 +76,39 @@ final class StorageServiceTests: XCTestCase {
         XCTAssertEqual(loadedInput?.targetVehicleId, originalInput.targetVehicleId)
         XCTAssertEqual(loadedInput?.scenario, originalInput.scenario)
         XCTAssertEqual(loadedInput?.market, originalInput.market)
+    }
+
+    /// Persisted removed catalog id must NOT silently become the starter EV.
+    func testLoadLastUserInput_RemovedIdBecomesEmptyWithoutSilentStarter() {
+        VehicleCatalogService.shared.reloadFromBundledSeedIgnoringUserCacheForTesting()
+        CatalogVehicleIdResolver.resetAliasesForTesting()
+        XCTAssertNil(VehicleCatalogService.shared.vehicle(by: "lexus-rz-2022"))
+
+        let payload: [String: Any] = [
+            "dailyKm": 12_000,
+            "hasHomeCharging": true,
+            "areaTypeRaw": 0,
+            "fuelPrice": 1.8,
+            "ownershipYears": 5,
+            "electricityPricePerKWh": 0.31,
+            "sourceVehicleId": Defaults.starterSourceVehicleId,
+            "targetVehicleId": "lexus-rz-2022",
+            "scenarioRaw": Scenario.realistic.rawValue,
+            "sourcePurchasePrice": 12_000.0,
+            "targetPurchasePrice": 32_000.0,
+            "includeIncentives": false,
+            "comparisonIntentRaw": ComparisonIntent.alreadyOwned.rawValue,
+            "tripProfileRaw": TripProfile.custom.rawValue,
+            "includeKaskoTheft": false
+        ]
+        let data = try! JSONSerialization.data(withJSONObject: payload)
+        UserDefaults.standard.set(data, forKey: "evforme.lastUserInput")
+
+        let loaded = StorageService.shared.loadLastUserInput()
+        XCTAssertNotNil(loaded)
+        XCTAssertTrue(loaded?.targetVehicleId.isEmpty == true)
+        XCTAssertNotEqual(loaded?.targetVehicleId, Defaults.starterTargetVehicleId)
+        XCTAssertNil(EVSimulator.simulate(input: loaded!))
     }
 
     func testLoadUserInput_WhenNoData_ReturnsNil() {

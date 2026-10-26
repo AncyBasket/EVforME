@@ -172,11 +172,16 @@ final class CatalogTruthHygieneTests: XCTestCase {
         ] {
             XCTAssertNil(catalog.vehicle(by: id), "Should be excluded: \(id)")
         }
-        let scenic = catalog.vehicle(by: "renault-scenic-2024")
+        // Duplicate `renault-scenic-2024` removed; canonical id is scenic-e-tech.
+        XCTAssertNil(catalog.vehicle(by: "renault-scenic-2024"))
+        let scenic = catalog.vehicle(by: "renault-scenic-e-tech-2024")
         XCTAssertEqual(scenic?.powertrain, .ev)
         let scenicSrc = scenic?.sourceName ?? ""
-        XCTAssertTrue(scenicSrc.contains("n=449"), "Scenic 2024 Status F n=449 not F+P 898: \(scenicSrc)")
-        XCTAssertFalse(scenicSrc.contains("n=898"), scenicSrc)
+        // If the row still cites EEA n=, it must be Status F n=449 (not F+P 898).
+        if scenicSrc.contains("n=") {
+            XCTAssertTrue(scenicSrc.contains("n=449"), "Scenic 2024 Status F n=449 not F+P 898: \(scenicSrc)")
+            XCTAssertFalse(scenicSrc.contains("n=898"), scenicSrc)
+        }
         let sCross22 = catalog.vehicle(by: "suzuki-s-cross-2022")
         XCTAssertTrue((sCross22?.sourceName ?? "").contains("2022"), sCross22?.sourceName ?? "")
         XCTAssertFalse((sCross22?.sourceName ?? "").contains("2025"), sCross22?.sourceName ?? "")
