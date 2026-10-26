@@ -226,6 +226,117 @@ final class EVforME_UITests: XCTestCase {
         }
     }
 
+    /// Marca → modello → anno → versione (BMW i4 2024) → verdetto con ricariche + nota prudente.
+    @MainActor
+    func testEVVersionPickerToVerdictShowsCharges() throws {
+        let app = XCUIApplication()
+        app.launchEnvironment["UITEST_PRESET_VEHICLES"] = "1"
+        app.launchEnvironment["UITEST_OPEN_TARGET_PICKER"] = "1"
+        app.launch()
+
+        dismissQuickStartIfNeeded(app)
+
+        let search = app.descendants(matching: .any)["vehicle_catalog_search"]
+        XCTAssertTrue(
+            search.waitForExistence(timeout: 14),
+            "Target vehicle catalog sheet should open (UITEST_OPEN_TARGET_PICKER)"
+        )
+        search.tap()
+        search.typeText("BMW i4")
+
+        let modeli4 = app.buttons.matching(
+            NSPredicate(format: "label CONTAINS[c] %@", "i4")
+        ).firstMatch
+        XCTAssertTrue(modeli4.waitForExistence(timeout: 8), "BMW i4 search hit")
+        modeli4.tap()
+
+        let year2024 = app.buttons.matching(
+            NSPredicate(format: "label CONTAINS[c] %@ AND label CONTAINS[c] %@", "i4", "2024")
+        ).firstMatch
+        XCTAssertTrue(year2024.waitForExistence(timeout: 6), "Year 2024 for i4")
+        year2024.tap()
+
+        // Version list: WLTP min–max interval + prudent note on the sheet (before pick).
+        let wltpCaption = app.staticTexts.matching(
+            NSPredicate(format: "label CONTAINS[c] %@", "Autonomia WLTP")
+        ).firstMatch
+        XCTAssertTrue(wltpCaption.waitForExistence(timeout: 6), "WLTP min–max caption on version rows")
+        let prudentOnSheet = app.staticTexts.matching(
+            NSPredicate(
+                format: "label CONTAINS[c] %@ OR label CONTAINS[c] %@ OR label CONTAINS[c] %@",
+                "prudente", "cautious", "prudent"
+            )
+        ).firstMatch
+        XCTAssertTrue(prudentOnSheet.waitForExistence(timeout: 4), "Prudent calc note on version list")
+
+        let versionRow = app.buttons.matching(
+            NSPredicate(
+                format: "label CONTAINS[c] %@ AND NOT label CONTAINS[c] %@ AND NOT label CONTAINS[c] %@",
+                "kW", "bollo", "Regione"
+            )
+        ).firstMatch
+        XCTAssertTrue(versionRow.waitForExistence(timeout: 4), "Version row with kW")
+        versionRow.tap()
+
+        // Sheet must dismiss; ContentView UITEST auto-simulates after a `-v` version id.
+        let searchGone = XCTNSPredicateExpectation(
+            predicate: NSPredicate(format: "exists == false"),
+            object: search
+        )
+        _ = XCTWaiter.wait(for: [searchGone], timeout: 10)
+
+        func verdictChromeVisible() -> Bool {
+            app.buttons["Change inputs"].exists
+                || app.buttons["Modifica dati"].exists
+                || app.buttons["Modify input"].exists
+                || app.staticTexts.matching(NSPredicate(format: "label CONTAINS %@", "×")).firstMatch.exists
+                || app.staticTexts.matching(
+                    NSPredicate(format: "label CONTAINS[c] %@", "ricariche")
+                ).firstMatch.exists
+                || app.staticTexts.matching(
+                    NSPredicate(format: "label CONTAINS[c] %@", "charges")
+                ).firstMatch.exists
+        }
+
+        var verdictOpen = false
+        for _ in 0..<20 {
+            if verdictChromeVisible() {
+                verdictOpen = true
+                break
+            }
+            RunLoop.current.run(until: Date().addingTimeInterval(0.45))
+        }
+        if !verdictOpen {
+            let tellMeEN = app.buttons["Tell me the truth"]
+            let tellMeIT = app.buttons["Dimmi la verità"]
+            if tellMeIT.waitForExistence(timeout: 2), tellMeIT.isHittable {
+                tellMeIT.tap()
+            } else if tellMeEN.exists, tellMeEN.isHittable {
+                tellMeEN.tap()
+            } else {
+                app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.92)).tap()
+            }
+            for _ in 0..<16 {
+                if verdictChromeVisible() {
+                    verdictOpen = true
+                    break
+                }
+                RunLoop.current.run(until: Date().addingTimeInterval(0.4))
+            }
+        }
+        XCTAssertTrue(verdictOpen, "Verdict should open")
+
+        let chargesOK =
+            app.staticTexts.matching(NSPredicate(format: "label MATCHES %@", #".*[0-9]+×.*"#)).firstMatch
+                .waitForExistence(timeout: 6)
+            || app.staticTexts.matching(NSPredicate(format: "label CONTAINS %@", "×")).firstMatch
+                .waitForExistence(timeout: 2)
+            || app.staticTexts.matching(
+                NSPredicate(format: "label CONTAINS[c] %@", "ricariche")
+            ).firstMatch.waitForExistence(timeout: 2)
+        XCTAssertTrue(chargesOK, "Chosen version should show weekly charges on verdict")
+    }
+
     @MainActor
     func testLaunchPerformance() throws {
         measure(metrics: [XCTApplicationLaunchMetric()]) {

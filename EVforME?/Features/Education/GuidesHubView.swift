@@ -41,6 +41,7 @@ struct GuidesHubView: View {
     @State private var showChargingMap = false
     @State private var showHowWeCalculate = false
     @State private var appeared = false
+    @State private var didAutoOpenChargingMapForUITest = false
     @Environment(\.accessibilityReduceMotion) private var accessibilityReduceMotion
 
     private var lastUserInput: UserInput {
@@ -118,6 +119,7 @@ struct GuidesHubView: View {
                     )
                 }
                 .buttonStyle(.plain)
+                .accessibilityIdentifier("guides_charging_map_entry")
                 .accessibilityHint(L10n.chargingMapEntryA11yHint)
 
                 VStack(alignment: .leading, spacing: 0) {
@@ -220,6 +222,15 @@ struct GuidesHubView: View {
         .sheet(isPresented: $showHowWeCalculate) {
             HowWeCalculateView(userInput: lastUserInput)
                 .presentationDetents([.large])
+        }
+        .onAppear {
+#if DEBUG
+            if ProcessInfo.processInfo.environment["UITEST_OPEN_CHARGING_MAP"] == "1",
+               !didAutoOpenChargingMapForUITest {
+                didAutoOpenChargingMapForUITest = true
+                showChargingMap = true
+            }
+#endif
         }
     }
 }

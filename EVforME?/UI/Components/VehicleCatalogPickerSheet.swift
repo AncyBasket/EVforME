@@ -25,21 +25,34 @@ struct VehicleCatalogPickerSheet: View {
         }
 
         var yearLabel: String {
-            let years = variants.map(\.year)
+            let years = Set(leafVariants.map(\.year))
             guard let minY = years.min(), let maxY = years.max() else { return "" }
             if minY == maxY { return "\(minY)" }
             return "\(minY)–\(maxY)"
         }
 
+        /// Selectable leaves only (hide parents that already have EEA children).
+        var leafVariants: [VehicleCatalogItem] {
+            let parentsWithChildren = Set(variants.compactMap(\.parentId).filter { !$0.isEmpty })
+            return variants.filter { item in
+                if let parentId = item.parentId, !parentId.isEmpty { return true }
+                return !parentsWithChildren.contains(item.id)
+            }
+        }
+
         var countLabel: String {
-            variants.count == 1 ? L10n.pickerYearOne : L10n.pickerYearMany(variants.count)
+            let years = Set(leafVariants.map(\.year)).count
+            return years == 1 ? L10n.pickerYearOne : L10n.pickerYearMany(years)
         }
     }
 
     private enum BrowseLevel: Equatable {
         case brands
         case models(brand: String)
-        case variants(brand: String, model: String)
+        /// Year list after model (ICE/HEV flat rows + EV years).
+        case years(brand: String, model: String)
+        /// EEA versions for one model year (2+ children).
+        case versions(brand: String, model: String, year: Int)
     }
 
     private enum FuelFilter: String, CaseIterable, Identifiable {
@@ -169,6 +182,7 @@ struct VehicleCatalogPickerSheet: View {
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
                 .submitLabel(.search)
+                .accessibilityIdentifier("vehicle_catalog_search")
             if !searchText.isEmpty {
                 Button {
                     searchText = ""
@@ -195,9 +209,15 @@ struct VehicleCatalogPickerSheet: View {
             brandListSurface
         case .models(let brand):
             modelListSurface(brand: brand)
-        case .variants(let brand, let model):
+        case .years(let brand, let model):
             if let group = modelGroup(brand: brand, model: model) {
-                variantListSurface(group)
+                yearListSurface(group)
+            } else {
+                brandListSurface
+            }
+        case .versions(let brand, let model, let year):
+            if let group = modelGroup(brand: brand, model: model) {
+                versionListSurface(group, year: year)
             } else {
                 brandListSurface
             }
@@ -274,7 +294,7 @@ struct VehicleCatalogPickerSheet: View {
                         Button {
                             UISelectionFeedbackGenerator().selectionChanged()
                             withAnimation(catalogAnimation) {
-                                level = .variants(brand: hit.brand, model: hit.model)
+                                level = .years(brand: hit.brand, model: hit.model)
                             }
                         } label: {
                             HStack(spacing: 14) {
@@ -317,8 +337,9 @@ struct VehicleCatalogPickerSheet: View {
         }
     }
 
-    private func variantListSurface(_ group: ModelGroup) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
+    private func yearListSurface(_ group: ModelGroup) -> some View {
+        let years = yearBuckets(from: group.variants)
+        return VStack(alignment: .leading, spacing: 0) {
             backBar(title: L10n.vehiclePickerBackBrands) {
                 level = .models(brand: group.brand)
             }
@@ -337,8 +358,8 @@ struct VehicleCatalogPickerSheet: View {
 
             ScrollView {
                 LazyVStack(spacing: 0) {
-                    ForEach(group.variants) { vehicle in
-                        variantRow(vehicle)
+                    ForEach(years, id: \.year) { bucket in
+                        yearRow(group: group, bucket: bucket)
                     }
                 }
                 .padding(.bottom, 28)
@@ -346,30 +367,183 @@ struct VehicleCatalogPickerSheet: View {
         }
     }
 
-    private func variantRow(_ vehicle: VehicleCatalogItem) -> some View {
+    private func versionListSurface(_ group: ModelGroup, year: Int) -> some View {
+        let options = selectableForYear(group.variants, year: year)
+        return VStack(alignment: .leading, spacing: 0) {
+            backBar(title: L10n.vehiclePickerBackBrands) {
+                level = .years(brand: group.brand, model: group.model)
+            }
+
+            Text("\(group.brand) \(group.model) · \(year)")
+                .font(Typography.readingCardTitle)
+                .foregroundColor(.primaryText)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 4)
+
+            Text(L10n.vehiclePickerChooseVersion)
+                .font(Typography.readingCaption)
+                .foregroundColor(.secondaryText)
+                .padding(.horizontal, 20)
+                .padding(.bottom, 8)
+
+            ScrollView {
+                LazyVStack(spacing: 0) {
+                    ForEach(sortedByRange(options)) { vehicle in
+                        versionRow(vehicle)
+                    }
+                }
+                .padding(.bottom, 28)
+            }
+        }
+    }
+
+    private struct YearBucket {
+        let year: Int
+        let options: [VehicleCatalogItem]
+    }
+
+    /// Parents with EEA children are hidden; children (or lone parents) are selectable.
+    private func leafVehicles(from variants: [VehicleCatalogItem]) -> [VehicleCatalogItem] {
+        let parentsWithChildren = Set(variants.compactMap(\.parentId).filter { !$0.isEmpty })
+        return variants.filter { item in
+            if let parentId = item.parentId, !parentId.isEmpty {
+                return true
+            }
+            return !parentsWithChildren.contains(item.id)
+        }
+    }
+
+    private func yearBuckets(from variants: [VehicleCatalogItem]) -> [YearBucket] {
+        let leaves = leafVehicles(from: variants)
+        let byYear = Dictionary(grouping: leaves, by: \.year)
+        return byYear.keys.sorted(by: >).map { year in
+            YearBucket(year: year, options: sortedByRange(byYear[year] ?? []))
+        }
+    }
+
+    private func selectableForYear(_ variants: [VehicleCatalogItem], year: Int) -> [VehicleCatalogItem] {
+        leafVehicles(from: variants).filter { $0.year == year }
+    }
+
+    /// WLTP range desc, then power, then label.
+    private func sortedByRange(_ variants: [VehicleCatalogItem]) -> [VehicleCatalogItem] {
+        variants.sorted { a, b in
+            let ar = a.wltpRangeKm ?? -1
+            let br = b.wltpRangeKm ?? -1
+            if ar != br { return ar > br }
+            let ap = a.powerKw ?? -1
+            let bp = b.powerKw ?? -1
+            if ap != bp { return ap > bp }
+            return (a.trim ?? a.displayName) < (b.trim ?? b.displayName)
+        }
+    }
+
+    private func yearRow(group: ModelGroup, bucket: YearBucket) -> some View {
         Button {
-            pick(vehicle)
+            UISelectionFeedbackGenerator().selectionChanged()
+            if bucket.options.count == 1, let only = bucket.options.first {
+                pick(only)
+            } else if bucket.options.count >= 2 {
+                withAnimation(catalogAnimation) {
+                    level = .versions(brand: group.brand, model: group.model, year: bucket.year)
+                }
+            }
         } label: {
             HStack(alignment: .firstTextBaseline, spacing: 12) {
-                Text(String(vehicle.year))
+                Text(String(bucket.year))
                     .font(Typography.metric)
                     .foregroundColor(.ink)
                     .frame(width: 64, alignment: .leading)
 
                 VStack(alignment: .leading, spacing: 3) {
-                    Text(vehicle.catalogFuelLabel)
+                    if bucket.options.count == 1, let only = bucket.options.first {
+                        Text(only.catalogFuelLabel)
+                            .font(Typography.readingCardTitle)
+                            .foregroundColor(.ink)
+                        if let trim = only.trim, !trim.isEmpty {
+                            Text(trim)
+                                .font(Typography.readingCaption)
+                                .foregroundColor(.secondaryText)
+                                .lineLimit(2)
+                        }
+                        if let subtitle = only.qualitySubtitle {
+                            Text(subtitle)
+                                .font(Typography.readingCaption)
+                                .foregroundColor(.secondaryText)
+                                .lineLimit(1)
+                        }
+                    } else {
+                        Text(L10n.pickerVersionMany(bucket.options.count))
+                            .font(Typography.readingCardTitle)
+                            .foregroundColor(.ink)
+                        Text(L10n.vehiclePickerChooseVersion)
+                            .font(Typography.readingCaption)
+                            .foregroundColor(.secondaryText)
+                            .lineLimit(2)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+                if bucket.options.count >= 2 {
+                    Text("→")
+                        .foregroundColor(.secondaryText)
+                } else if bucket.options.count == 1, selectedId == bucket.options[0].id {
+                    Text("✓")
+                        .font(.system(size: 18, weight: .bold, design: .serif))
+                        .foregroundStyle(Color.ink)
+                }
+            }
+            .padding(.vertical, 14)
+            .padding(.horizontal, 20)
+            .overlay(alignment: .bottom) {
+                Rectangle()
+                    .fill(Color.hairlineBorder)
+                    .frame(height: 1)
+                    .padding(.horizontal, 20)
+            }
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("\(group.brand) \(group.model) \(bucket.year)")
+        .accessibilityHint(
+            bucket.options.count >= 2
+                ? L10n.vehiclePickerVersionA11yHint
+                : L10n.vehiclePickerSelectA11yHint
+        )
+    }
+
+    private func versionRow(_ vehicle: VehicleCatalogItem) -> some View {
+        Button {
+            pick(vehicle)
+        } label: {
+            HStack(alignment: .firstTextBaseline, spacing: 12) {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(vehicle.trim ?? vehicle.catalogFuelLabel)
                         .font(Typography.readingCardTitle)
                         .foregroundColor(.ink)
-                    if let trim = vehicle.trim, !trim.isEmpty {
-                        Text(trim)
+                        .lineLimit(2)
+                    if let caption = vehicle.variantRangeCaption, !caption.isEmpty {
+                        Text(caption)
+                            .font(Typography.readingCaption)
+                            .foregroundColor(.secondaryText)
+                            .lineLimit(2)
+                    }
+                    HStack(spacing: 8) {
+                        if let kw = vehicle.powerKw, kw > 0 {
+                            Text(String(format: "%.0f kW", kw))
+                        }
+                        if let energy = vehicle.resolvedEnergyKWhPerKm {
+                            Text(String(format: "%.1f kWh/100", energy * 100.0))
+                        }
+                    }
+                    .font(Typography.readingCaption)
+                    .foregroundColor(.secondaryText)
+                    .lineLimit(1)
+                    if vehicle.usesPrudentVariantBounds == true {
+                        Text(L10n.variantPrudentCalcNote)
                             .font(Typography.readingCaption)
                             .foregroundColor(.secondaryText)
                             .lineLimit(1)
                     }
-                    Text(vehicle.dimensionsText)
-                        .font(Typography.readingCaption)
-                        .foregroundColor(.secondaryText)
-                        .lineLimit(1)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -390,6 +564,7 @@ struct VehicleCatalogPickerSheet: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel("\(vehicle.displayName), \(vehicle.catalogFuelLabel)")
+        .accessibilityHint(L10n.vehiclePickerSelectA11yHint)
     }
 
     // MARK: - Text (grouped by brand)
@@ -421,7 +596,7 @@ struct VehicleCatalogPickerSheet: View {
                                         UISelectionFeedbackGenerator().selectionChanged()
                                         searchText = ""
                                         withAnimation(catalogAnimation) {
-                                            level = .variants(brand: hit.brand, model: hit.model)
+                                            level = .years(brand: hit.brand, model: hit.model)
                                         }
                                     } label: {
                                         HStack {

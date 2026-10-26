@@ -80,6 +80,14 @@ final class StorageService {
                 )
                 return input
             }
+            // Multi-version parent kept as-is (no silent remap) — ask for an explicit version.
+            if CatalogVehicleIdResolver.needsExplicitVersionChoice(input.targetVehicleId) {
+                ErrorHandler.shared.handleAppError(
+                    .dataNotFound,
+                    context: .catalog,
+                    userMessage: L10n.catalogVehiclePickVersion
+                )
+            }
             if changed {
                 let encoded = try JSONEncoder().encode(CodableUserInput(from: input))
                 defaults.set(encoded, forKey: Keys.lastUserInput)

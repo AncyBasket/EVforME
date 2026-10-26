@@ -27,6 +27,8 @@ struct InputView: View {
     @State private var targetVehicles: [VehicleCatalogItem] = []
     @State private var showSourceVehiclePicker = false
     @State private var showTargetVehiclePicker = false
+    /// UITEST_OPEN_TARGET_PICKER: open once; never re-open after the tester dismisses the sheet.
+    @State private var didAutoOpenTargetPickerForUITest = false
     @State private var stickerItem: PhotosPickerItem?
     @State private var stickerStatus: String?
     @State private var stickerBusy = false
@@ -566,6 +568,11 @@ struct InputView: View {
             if ProcessInfo.processInfo.environment["UITEST_EXPAND_ADVANCED"] == "1" {
                 showAdvancedDetails = true
             }
+            if ProcessInfo.processInfo.environment["UITEST_OPEN_TARGET_PICKER"] == "1",
+               !didAutoOpenTargetPickerForUITest {
+                didAutoOpenTargetPickerForUITest = true
+                showTargetVehiclePicker = true
+            }
             // UI test: ripristina prezzo forzato anche senza onChange del veicolo.
             if let raw = ProcessInfo.processInfo.environment["UITEST_FUEL_PRICE"],
                let price = Double(raw.replacingOccurrences(of: ",", with: ".")) {
@@ -592,6 +599,15 @@ struct InputView: View {
         .task {
             await VehicleCatalogService.shared.refreshFromRemoteIfPossible()
             loadCatalog()
+#if DEBUG
+            // Only the first auto-open; a late refresh must not re-cover the bench CTA.
+            if ProcessInfo.processInfo.environment["UITEST_OPEN_TARGET_PICKER"] == "1",
+               !didAutoOpenTargetPickerForUITest {
+                didAutoOpenTargetPickerForUITest = true
+                try? await Task.sleep(nanoseconds: 600_000_000)
+                showTargetVehiclePicker = true
+            }
+#endif
         }
         .sheet(isPresented: $showSourceVehiclePicker) {
             VehicleCatalogPickerSheet(
@@ -619,9 +635,26 @@ struct InputView: View {
             }
         }
         .onChange(of: userInput.targetVehicleId) { _, newId in
-            guard let vehicle = targetVehicles.first(where: { $0.id == newId }) else { return }
+            guard let vehicle = targetVehicles.first(where: { $0.id == newId })
+                    ?? VehicleCatalogService.shared.vehicle(by: newId) else { return }
             userInput.targetPurchasePrice = Defaults.suggestedPurchasePrice(for: vehicle)
             applySuggestedComparisonIntent()
+        }
+        .onChange(of: showTargetVehiclePicker) { _, isShowing in
+#if DEBUG
+            // After the forced UITEST picker dismisses on a version pick, open verdict
+            // without relying on a hittable bottom CTA under modal/safe-area flakes.
+            guard !isShowing,
+                  ProcessInfo.processInfo.environment["UITEST_OPEN_TARGET_PICKER"] == "1" else { return }
+            let id = userInput.targetVehicleId
+            let picked = targetVehicles.first(where: { $0.id == id })
+                ?? VehicleCatalogService.shared.vehicle(by: id)
+            guard let picked, picked.isEEAVariantChild || id.contains("-v") else { return }
+            Task { @MainActor in
+                try? await Task.sleep(nanoseconds: 550_000_000)
+                validateAndSimulate()
+            }
+#endif
         }
     }
 

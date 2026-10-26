@@ -32,7 +32,8 @@ final class OperatingCostCalculatorTests: XCTestCase {
         }
         let pairs: [Pair] = [
             .init(name: "Ateca diesel → Model 3", sourceId: "seat-ateca-2016", targetId: "tesla-model-3-2024", fuelPrice: 1.75, sourcePrice: 14_000, targetPrice: 42_000),
-            .init(name: "Panda GPL → Grande Panda EV", sourceId: "fiat-panda-gpl-2022", targetId: "fiat-grande-panda-ev-2024", fuelPrice: 0.85, sourcePrice: 8_000, targetPrice: 28_000),
+            // Explicit EEA version group (parent aliases to the sole child — picker must use same id as simulate).
+            .init(name: "Panda GPL → Grande Panda EV", sourceId: "fiat-panda-gpl-2022", targetId: "fiat-grande-panda-ev-2024-v83kw-rwd", fuelPrice: 0.85, sourcePrice: 8_000, targetPrice: 28_000),
             .init(name: "Yaris HEV → MG4", sourceId: "toyota-yaris-2022", targetId: "mg-mg4-2024", fuelPrice: 1.80, sourcePrice: 14_000, targetPrice: 32_000),
         ]
 

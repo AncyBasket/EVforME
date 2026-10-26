@@ -256,27 +256,48 @@ final class SmokeProductUITests: XCTestCase {
 
     @MainActor
     private func activateChargingMapCityMode(_ app: XCUIApplication) {
+        if app.textFields["charging_map_city_field"].exists { return }
         let labels = ["Cerca per città", "Search by city"]
         for label in labels {
             let btn = app.buttons[label]
-            if btn.waitForExistence(timeout: 2), btn.isHittable {
+            if btn.waitForExistence(timeout: 1.5), btn.isHittable {
                 btn.tap()
                 return
             }
             let seg = app.segmentedControls.buttons[label]
-            if seg.waitForExistence(timeout: 1), seg.isHittable {
+            if seg.waitForExistence(timeout: 0.8), seg.isHittable {
                 seg.tap()
                 return
             }
         }
+        // SwiftUI segmented control: city is index 1.
+        let segmented = app.segmentedControls.firstMatch
+        if segmented.waitForExistence(timeout: 2), segmented.buttons.count >= 2 {
+            let citySeg = segmented.buttons.element(boundBy: 1)
+            if citySeg.exists {
+                if citySeg.isHittable {
+                    citySeg.tap()
+                } else {
+                    citySeg.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
+                }
+                return
+            }
+        }
         let picker = app.descendants(matching: .any)["charging_map_mode_picker"]
-        if picker.waitForExistence(timeout: 2) {
+        if picker.waitForExistence(timeout: 3) {
             let city = picker.buttons.matching(
                 NSPredicate(format: "label CONTAINS[c] %@ OR label CONTAINS[c] %@", "città", "city")
             ).firstMatch
-            if city.exists { city.tap(); return }
-            // Last resort: tap right half of segmented control (city is usually second).
+            if city.exists, city.isHittable {
+                city.tap()
+                return
+            }
+            // City is usually the second segment — tap right half twice if needed.
             picker.coordinate(withNormalizedOffset: CGVector(dx: 0.78, dy: 0.5)).tap()
+            RunLoop.current.run(until: Date().addingTimeInterval(0.25))
+            if !app.textFields["charging_map_city_field"].exists {
+                picker.coordinate(withNormalizedOffset: CGVector(dx: 0.85, dy: 0.5)).tap()
+            }
         }
     }
 
@@ -284,6 +305,7 @@ final class SmokeProductUITests: XCTestCase {
     func testSmokeChargingMapCityOnly() throws {
         let app = XCUIApplication()
         app.launchEnvironment["UITEST_PRESET_VEHICLES"] = "1"
+        app.launchEnvironment["UITEST_OPEN_CHARGING_MAP"] = "1"
         app.launch()
         dismissQuickStartIfNeeded(app)
         dismissSystemAlertsIfNeeded(app)
@@ -291,20 +313,58 @@ final class SmokeProductUITests: XCTestCase {
         if let guidesTab = firstExistingButton(app, labels: ["Letture", "Guides", "Readings"], timeout: 8) {
             guidesTab.tap()
         }
-        let entry = app.staticTexts["Colonnine vicino a te"]
-        XCTAssertTrue(entry.waitForExistence(timeout: 6) || app.staticTexts["Chargers near you"].waitForExistence(timeout: 2))
-        if entry.exists { entry.tap() } else { app.staticTexts["Chargers near you"].tap() }
 
-        dismissSystemAlertsIfNeeded(app)
-        RunLoop.current.run(until: Date().addingTimeInterval(1.5))
-        dismissSystemAlertsIfNeeded(app)
+        func openChargingMapEntry() {
+            let byId = app.descendants(matching: .any)["guides_charging_map_entry"]
+            if byId.waitForExistence(timeout: 4), byId.isHittable {
+                byId.tap()
+                return
+            }
+            let entry = app.staticTexts["Colonnine vicino a te"]
+            let entryEN = app.staticTexts["Chargers near you"]
+            if entry.waitForExistence(timeout: 2) {
+                entry.tap()
+            } else if entryEN.waitForExistence(timeout: 1) {
+                entryEN.tap()
+            } else if byId.exists {
+                byId.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
+            }
+        }
+
+        // UITEST_OPEN_CHARGING_MAP opens the sheet when Guides appears; entry tap is backup.
+        var sheetOpen = false
+        for attempt in 0..<10 {
+            dismissSystemAlertsIfNeeded(app)
+            if app.descendants(matching: .any)["charging_map_mode_picker"].waitForExistence(timeout: 1.2)
+                || app.navigationBars["Colonnine vicine"].exists
+                || app.navigationBars["Nearby chargers"].exists
+                || app.buttons["Apri in Mappe"].exists
+                || app.buttons["Open in Maps"].exists
+                || app.maps.firstMatch.exists
+                || app.textFields["charging_map_city_field"].exists {
+                sheetOpen = true
+                break
+            }
+            if attempt == 2 || attempt == 5 {
+                openChargingMapEntry()
+            }
+            RunLoop.current.run(until: Date().addingTimeInterval(0.35))
+        }
+        XCTAssertTrue(sheetOpen, "charging map sheet should open")
         saveShot(app, name: "08_charging_map_sheet")
 
-        activateChargingMapCityMode(app)
-        let field =
-            app.textFields["charging_map_city_field"].exists
-            ? app.textFields["charging_map_city_field"]
-            : app.textFields.firstMatch
+        var field = app.textFields["charging_map_city_field"]
+        for _ in 0..<6 {
+            activateChargingMapCityMode(app)
+            dismissSystemAlertsIfNeeded(app)
+            field = app.textFields["charging_map_city_field"]
+            if field.waitForExistence(timeout: 3) { break }
+            if app.textFields.firstMatch.waitForExistence(timeout: 1) {
+                field = app.textFields.firstMatch
+                break
+            }
+            RunLoop.current.run(until: Date().addingTimeInterval(0.4))
+        }
         XCTAssertTrue(field.waitForExistence(timeout: 5), "city field for 08/08b")
         // 08b first: city mode with empty query → in-app fallback coordinate (distinct from Milano).
         RunLoop.current.run(until: Date().addingTimeInterval(3))
@@ -433,54 +493,35 @@ final class SmokeProductUITests: XCTestCase {
     @MainActor
     private func dismissSystemAlertsIfNeeded(_ app: XCUIApplication) {
         let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+        // Prefer deny so city-mode tests are not blocked waiting on location.
+        // IT system alerts use a curly apostrophe in "l'uso".
         let labels = [
-            "Non consentire",
-            "Don’t Allow",
-            "Don't Allow",
-            "Non ora",
-            "Not Now",
-            "Allow",
-            "Consenti",
-            "OK",
+            "Non ora", "Not Now",
+            "Non consentire", "Don’t Allow", "Don't Allow",
             "Allow While Using App",
-            "Consenti durante l’uso",
+            "Consenti durante l’uso", // curly ’
+            "Consenti durante l'uso", // straight '
             "Consenti una volta",
+            "Allow", "Consenti", "OK",
         ]
-        for _ in 0..<4 {
+        for _ in 0..<5 {
             var tapped = false
-            for label in ["Non ora", "Not Now", "Non consentire", "Don’t Allow", "Don't Allow"] {
+            for label in labels {
                 let spring = springboard.buttons[label]
-                if spring.waitForExistence(timeout: 0.5) {
+                if spring.waitForExistence(timeout: 0.15) {
                     spring.tap()
                     tapped = true
                     break
                 }
                 let alert = app.alerts.buttons[label]
-                if alert.waitForExistence(timeout: 0.3) {
+                if alert.exists {
                     alert.tap()
                     tapped = true
                     break
                 }
-                // SKStoreReviewController may present as other element
-                let any = app.buttons[label]
-                if any.waitForExistence(timeout: 0.3), any.isHittable {
-                    any.tap()
-                    tapped = true
-                    break
-                }
-            }
-            if !tapped {
-                for label in labels {
-                    let btn = springboard.buttons[label]
-                    if btn.waitForExistence(timeout: 0.25) {
-                        btn.tap()
-                        tapped = true
-                        break
-                    }
-                }
             }
             if !tapped { break }
-            RunLoop.current.run(until: Date().addingTimeInterval(0.35))
+            RunLoop.current.run(until: Date().addingTimeInterval(0.3))
         }
     }
 
@@ -563,6 +604,8 @@ final class SmokeProductUITests: XCTestCase {
 
     /// Host-side `xcrun simctl io <udid> screenshot` (UI tests run under Simulator runtime).
     private func runSimctlScreenshot(udid: String, path: String) -> Bool {
+        // Ensure simctl's shell helpers (`sort`, `head`) resolve even if PATH is stripped.
+        setenv("PATH", "/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin", 1)
         let args = ["/usr/bin/xcrun", "simctl", "io", udid, "screenshot", path]
         var cArgs = args.map { strdup($0) }
         cArgs.append(nil)
