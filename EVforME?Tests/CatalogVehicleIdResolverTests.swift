@@ -192,9 +192,9 @@ final class CatalogVehicleIdResolverTests: XCTestCase {
         XCTAssertNotNil(rwd)
         XCTAssertEqual(rwd?.trim, "Trazione posteriore")
         XCTAssertEqual(rwd?.wltpRangeKm, 572)
-        XCTAssertEqual(rwd?.lengthM, 4.720, accuracy: 0.001)
-        XCTAssertEqual(rwd?.widthM, 1.850, accuracy: 0.001)
-        XCTAssertEqual(rwd?.heightM, 1.440, accuracy: 0.001)
+        XCTAssertEqual(rwd?.lengthM ?? -1, 4.720, accuracy: 0.001)
+        XCTAssertEqual(rwd?.widthM ?? -1, 1.850, accuracy: 0.001)
+        XCTAssertEqual(rwd?.heightM ?? -1, 1.440, accuracy: 0.001)
         let range = WeeklyChargeEstimator.declaredRangeKm(for: rwd!)
         XCTAssertEqual(range, 572)
         let charges = WeeklyChargeEstimator.weeklyCharges(
@@ -210,12 +210,12 @@ final class CatalogVehicleIdResolverTests: XCTestCase {
         let awd = VehicleCatalogService.shared.vehicle(by: "tesla-model-3-premium-long-range-2026")
         XCTAssertEqual(awd?.trim, "Premium Long Range a trazione integrale")
         XCTAssertEqual(awd?.wltpRangeKm, 660)
-        XCTAssertEqual(awd?.widthM, 1.933, accuracy: 0.001)
-        XCTAssertEqual(awd?.heightM, 1.441, accuracy: 0.001)
+        XCTAssertEqual(awd?.widthM ?? -1, 1.933, accuracy: 0.001)
+        XCTAssertEqual(awd?.heightM ?? -1, 1.441, accuracy: 0.001)
 
         let perf = VehicleCatalogService.shared.vehicle(by: "tesla-model-3-performance-2026")
         XCTAssertEqual(perf?.trim, "Performance a trazione integrale")
         XCTAssertEqual(perf?.wltpRangeKm, 600)
-        XCTAssertEqual(perf?.heightM, 1.431, accuracy: 0.001)
+        XCTAssertEqual(perf?.heightM ?? -1, 1.431, accuracy: 0.001)
     }
 }
