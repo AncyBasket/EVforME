@@ -230,4 +230,95 @@ final class RemovedCatalogIdSafetyTests: XCTestCase {
                 || snap.pairLabel.contains("no longer in catalog")
         )
     }
+
+    // MARK: - App Intent (Shortcuts / Siri)
+
+    @MainActor
+    func testSimulateEVIntent_RemovedSavedId_NoStarterNoSimulateNoPersist() {
+        XCTAssertNil(VehicleCatalogService.shared.vehicle(by: removedTarget))
+
+        let goodInput = UserInput(
+            dailyKm: 12_000,
+            hasHomeCharging: true,
+            areaType: .urban,
+            fuelPrice: 1.8,
+            ownershipYears: 5,
+            sourceVehicleId: Defaults.starterSourceVehicleId,
+            targetVehicleId: Defaults.starterTargetVehicleId,
+            scenario: .realistic
+        )
+        StorageService.shared.saveUserInput(goodInput)
+        guard let goodResult = EVSimulator.simulate(input: goodInput) else {
+            XCTFail("baseline simulate failed")
+            return
+        }
+        WidgetSnapshotStore.save(from: goodResult, input: goodInput)
+        ScenarioHistoryStore.save(result: goodResult, input: goodInput)
+        let widgetBefore = WidgetSnapshotStore.load()?.updatedAt
+        let historyBefore = ScenarioHistoryStore.all().count
+
+        // Persist a removed EV id the way a prior install would have left it.
+        let payload: [String: Any] = [
+            "dailyKm": 12_000,
+            "hasHomeCharging": true,
+            "areaTypeRaw": 0,
+            "fuelPrice": 1.8,
+            "ownershipYears": 5,
+            "electricityPricePerKWh": 0.31,
+            "sourceVehicleId": Defaults.starterSourceVehicleId,
+            "targetVehicleId": removedTarget,
+            "scenarioRaw": Scenario.realistic.rawValue,
+            "sourcePurchasePrice": 12_000.0,
+            "targetPurchasePrice": 32_000.0,
+            "includeIncentives": false,
+            "comparisonIntentRaw": ComparisonIntent.alreadyOwned.rawValue,
+            "tripProfileRaw": TripProfile.custom.rawValue,
+            "includeKaskoTheft": false
+        ]
+        UserDefaults.standard.set(try! JSONSerialization.data(withJSONObject: payload), forKey: inputKey)
+
+        let outcome = SimulateEVIntentRunner.run(yearlyKm: 15_000, hasHomeCharging: false)
+
+        XCTAssertFalse(outcome.didSimulate)
+        XCTAssertEqual(outcome.message, L10n.catalogVehiclePickAnother)
+        XCTAssertTrue(
+            outcome.message.contains("catalogo") || outcome.message.contains("catalog"),
+            "Message must tell the user to pick another car in the app"
+        )
+
+        let after = StorageService.shared.loadLastUserInput()
+        XCTAssertEqual(after?.sourceVehicleId, Defaults.starterSourceVehicleId)
+        XCTAssertTrue(after?.targetVehicleId.isEmpty == true)
+        XCTAssertNotEqual(after?.targetVehicleId, Defaults.starterTargetVehicleId)
+        XCTAssertNotEqual(after?.dailyKm, 15_000, "Must not save intent overrides when simulation is refused")
+        XCTAssertEqual(WidgetSnapshotStore.load()?.updatedAt, widgetBefore)
+        XCTAssertEqual(ScenarioHistoryStore.all().count, historyBefore)
+    }
+
+    @MainActor
+    func testSimulateEVIntent_ValidPair_SummaryIncludesBothVehicleNames() {
+        let sourceId = Defaults.starterSourceVehicleId
+        let targetId = Defaults.starterTargetVehicleId
+        guard let source = VehicleCatalogService.shared.vehicle(by: sourceId),
+              let target = VehicleCatalogService.shared.vehicle(by: targetId) else {
+            XCTFail("starter vehicles missing")
+            return
+        }
+        let input = UserInput(
+            dailyKm: 12_000,
+            hasHomeCharging: true,
+            areaType: .urban,
+            fuelPrice: 1.8,
+            ownershipYears: 5,
+            sourceVehicleId: sourceId,
+            targetVehicleId: targetId,
+            scenario: .realistic
+        )
+        StorageService.shared.saveUserInput(input)
+
+        let outcome = SimulateEVIntentRunner.run(yearlyKm: 12_000, hasHomeCharging: true)
+        XCTAssertTrue(outcome.didSimulate)
+        XCTAssertTrue(outcome.message.contains(source.displayName), outcome.message)
+        XCTAssertTrue(outcome.message.contains(target.displayName), outcome.message)
+    }
 }

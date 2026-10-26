@@ -530,7 +530,7 @@
 /* Retention 1.1 */
 "last_comparison_title" = "Last comparison";
 "catalog_vehicle_no_longer_available" = "%@ (no longer in catalog)";
-"catalog_vehicle_pick_another" = "The saved vehicle is no longer in the catalog — pick another.";
+"catalog_vehicle_pick_another" = "The saved vehicle is no longer in the catalog: open EVforME and pick another.";
 "catalog_vehicle_choose_action" = "Pick a vehicle";
 "last_comparison_reopen" = "Reopen verdict";
 "last_comparison_recalculate" = "Recalculate with today’s data";
