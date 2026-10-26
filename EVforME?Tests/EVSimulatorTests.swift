@@ -768,7 +768,7 @@ final class EVSimulatorTests: XCTestCase {
             ownershipYears: 5,
             electricityPricePerKWh: 0.90,
             sourceVehicleId: "toyota-prius-2018",
-            targetVehicleId: "tesla-model-3-2026",
+            targetVehicleId: Defaults.starterTargetVehicleId,
             scenario: .realistic
         )
         input.sourceConsumptionOverrideLPer100Km = 3.8
@@ -803,7 +803,7 @@ final class EVSimulatorTests: XCTestCase {
             ownershipYears: 5,
             electricityPricePerKWh: 0.90,
             sourceVehicleId: "toyota-prius-2018",
-            targetVehicleId: "tesla-model-3-2026",
+            targetVehicleId: Defaults.starterTargetVehicleId,
             scenario: .realistic
         )
         // Forza opex EV peggiore dell’attuale senza inventare catalogo.

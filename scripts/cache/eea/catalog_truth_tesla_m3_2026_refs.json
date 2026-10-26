@@ -1,0 +1,84 @@
+{
+  "seedVersion": 58,
+  "consulted_date": "2026-10-26",
+  "sources": {
+    "model_page": "https://www.tesla.com/it_it/model3",
+    "configurator": "https://www.tesla.com/it_it/model3/design"
+  },
+  "notes": [
+    "Performance WLTP 600 km: fonte ufficiale https://www.tesla.com/it_IT/model3 (Specifiche di Model 3 Performance — Autonomia WLTP 600 km). Configuratore https://www.tesla.com/it_it/model3/design aperto in browser Cursor il 2026-10-26: con Performance selezionata mostrava «600 km Autonomia (WLTP)» e «Autonomia certificata (WLTP): 600 km» — coerente con la pagina modello.",
+    "maintenancePerYear 404: same catalog stima rule as other 2026 EV rows without EEA IT (tesla-model-3-2025 was 403); NOT a Tesla-published figure",
+    "widthM = mirrors folded (specchietti ripiegati) from Tesla IT specs"
+  ],
+  "removed_id": "tesla-model-3-2026",
+  "alias": {
+    "tesla-model-3-2026": "tesla-model-3-trazione-posteriore-2026"
+  },
+  "trims": [
+    {
+      "id": "tesla-model-3-trazione-posteriore-2026",
+      "trim": "Trazione posteriore",
+      "trim_name_source": "https://www.tesla.com/it_it/model3 + configurator label \"Trazione posteriore\" (https://www.tesla.com/it_it/model3/design) consulted 2026-10-26",
+      "wltpRangeKm": 572,
+      "range_source": "WLTP 572 km on model page specs + configurator certified range",
+      "wltpConsumptionKWh100km": 12.2,
+      "energyConsumptionKWhPerKm": 0.122,
+      "batteryKWh": null,
+      "lengthM": 4.72,
+      "widthM": 1.85,
+      "heightM": 1.44,
+      "dims_source": "https://www.tesla.com/it_it/model3 specs (lunghezza/altezza/larghezza specchietti ripiegati) consulted 2026-10-26",
+      "maintenancePerYear": 404,
+      "maintenance_source": "catalog stima (ultimo EEA IT non copre 2026) — same rule as peer 2026 rows; not Tesla"
+    },
+    {
+      "id": "tesla-model-3-premium-trazione-posteriore-2026",
+      "trim": "Premium Long Range a trazione posteriore",
+      "trim_name_source": "https://www.tesla.com/it_it/model3/design under Model 3 Premium: \"Long Range a trazione posteriore\"; full trim with Premium + drive type consulted 2026-10-26",
+      "wltpRangeKm": 750,
+      "range_source": "WLTP 750 km (cerchi 18\") model page Premium RWD specs + configurator",
+      "wltpConsumptionKWh100km": 13.6,
+      "energyConsumptionKWhPerKm": 0.136,
+      "batteryKWh": null,
+      "lengthM": 4.72,
+      "widthM": 1.933,
+      "heightM": 1.441,
+      "dims_source": "https://www.tesla.com/it_it/model3 specs (lunghezza/altezza/larghezza specchietti ripiegati) consulted 2026-10-26",
+      "maintenancePerYear": 404,
+      "maintenance_source": "catalog stima (ultimo EEA IT non copre 2026) — same rule as peer 2026 rows; not Tesla"
+    },
+    {
+      "id": "tesla-model-3-premium-long-range-2026",
+      "trim": "Premium Long Range a trazione integrale",
+      "trim_name_source": "https://www.tesla.com/it_it/model3/design \"Long Range a trazione integrale\" under Premium; model page \"Long Range a trazione integrale\" consulted 2026-10-26",
+      "wltpRangeKm": 660,
+      "range_source": "WLTP 660 km model page Premium AWD + configurator",
+      "wltpConsumptionKWh100km": 14.3,
+      "energyConsumptionKWhPerKm": 0.143,
+      "batteryKWh": null,
+      "lengthM": 4.72,
+      "widthM": 1.933,
+      "heightM": 1.441,
+      "dims_source": "https://www.tesla.com/it_it/model3 specs (lunghezza/altezza/larghezza specchietti ripiegati) consulted 2026-10-26",
+      "maintenancePerYear": 404,
+      "maintenance_source": "catalog stima (ultimo EEA IT non copre 2026) — same rule as peer 2026 rows; not Tesla"
+    },
+    {
+      "id": "tesla-model-3-performance-2026",
+      "trim": "Performance a trazione integrale",
+      "trim_name_source": "https://www.tesla.com/it_it/model3/design \"Model 3 Performance\" / \"Trazione integrale\"; model page Performance consulted 2026-10-26",
+      "wltpRangeKm": 600,
+      "range_source": "Fonte primaria: https://www.tesla.com/it_IT/model3 — Specifiche Model 3 Performance, Autonomia (WLTP) 600 km. Conferma configuratore 2026-10-26: Performance selezionata → hero 600 km + «Autonomia certificata (WLTP): 600 km».",
+      "wltpConsumptionKWh100km": 15.8,
+      "energyConsumptionKWhPerKm": 0.158,
+      "batteryKWh": null,
+      "lengthM": 4.72,
+      "widthM": 1.933,
+      "heightM": 1.431,
+      "dims_source": "https://www.tesla.com/it_it/model3 specs (lunghezza/altezza/larghezza specchietti ripiegati) consulted 2026-10-26",
+      "maintenancePerYear": 404,
+      "maintenance_source": "catalog stima (ultimo EEA IT non copre 2026) — same rule as peer 2026 rows; not Tesla",
+      "wltpRangeKm_source_url": "https://www.tesla.com/it_IT/model3"
+    }
+  ]
+}

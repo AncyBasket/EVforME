@@ -11,7 +11,10 @@ import Foundation
 
 enum CatalogVehicleIdResolver {
     /// Explicit remaps (old id → new id). Extended by later catalog PRs.
-    static let defaultAliases: [String: String] = [:]
+    static let defaultAliases: [String: String] = [
+        // Seed v58: generic Model 3 2026 → Trazione posteriore (Tesla Italia).
+        "tesla-model-3-2026": "tesla-model-3-trazione-posteriore-2026",
+    ]
 
     static var aliases: [String: String] = defaultAliases
 

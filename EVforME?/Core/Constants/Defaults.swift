@@ -11,7 +11,7 @@ enum Defaults {
 
     /// Coppia di partenza (con foto) per non lasciare i picker vuoti.
     static let starterSourceVehicleId = "volkswagen-golf-2026"
-    static let starterTargetVehicleId = "tesla-model-3-2026"
+    static let starterTargetVehicleId = "tesla-model-3-trazione-posteriore-2026"
 
     /// Anno di riferimento (età veicolo, bollo, listino). Iniettabile nei test.
     static var referenceCalendarYearProvider: () -> Int = {
