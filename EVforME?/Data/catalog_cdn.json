@@ -2,11 +2,11 @@
   "url": "",
   "publishedUrl": "",
   "rows": 6777,
-  "bytes": 2930388,
+  "bytes": 2930114,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-27T14:01:43.815084+00:00",
+  "updatedAt": "2026-10-27T14:22:52.976259+00:00",
   "policy": "offline-first",
   "seedVersion": 63,
-  "note": "seedVersion 63: IT wave-1 \u2014 missing \u22655k regs/year models + PHEV \u2265500/year with same-MY EU OEM CS\u22653 L/100 energy sheets; IT commercial names."
+  "note": "seedVersion 63: IT wave-1 + Jeep source fix (Stellantis same-MY PDFs only; no third-party mirrors)."
 }

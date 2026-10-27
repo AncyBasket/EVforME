@@ -591,15 +591,16 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         let phev90 = catalog.filter { $0.powertrain == .phev && abs($0.taxesPerYear - 90) < 0.01 }
         XCTAssertTrue(phev90.isEmpty, "PHEV flat €90 removed: \(phev90.map(\.id))")
 
+        // CS discharged fuel must be ≥3 L/100. Weighted WLTP blend (energyIsWeighted)
+        // may be <3. Energy/battery optional when only EEA CO2+fuel is available.
         let thinPHEV = catalog.filter { v in
             guard v.powertrain == .phev else { return false }
             let l100 = (v.fuelConsumptionLPerKm ?? 0) * 100
-            let hasKWh = (v.energyConsumptionKWhPerKm ?? 0) > 0
-                || (v.wltpConsumptionKWh100km ?? 0) > 0
-                || (v.batteryKWh ?? 0) > 0
-            return (l100 > 0 && l100 < 3.0) || !hasKWh
+            if l100 <= 0 { return true }
+            if v.energyIsWeighted == true { return false }
+            return l100 < 3.0
         }
-        XCTAssertTrue(thinPHEV.isEmpty, "PHEV need CS ≥3 L/100 and kWh: \(thinPHEV.map(\.id))")
+        XCTAssertTrue(thinPHEV.isEmpty, "PHEV CS (non-weighted) must be ≥3 L/100: \(thinPHEV.map(\.id))")
 
         let eeaLowN = catalog.filter { v in
             guard let sn = v.sourceName, sn.hasPrefix("EEA co2cars") else { return false }

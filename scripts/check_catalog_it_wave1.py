@@ -6,6 +6,9 @@ Fails when:
 - a new wave-1 row lacks sourceName/sourceUpdatedAt
 - an homologation alias lacks sourceUrl/sourceName/sourceUpdatedAt
 - wltpRangeKm or batteryKWh is set without an EEA or same-year OEM http source
+- non-OEM third-party domains appear in energy/range/battery sources
+- a row's source cites a different commercial model
+- an alias merges two distinct commercial models (e.g. Fortwo+Forfour)
 - Tesla Model 3 2026 rows were altered
 - seedVersion / row counts disagree with catalog_cdn.json
 
@@ -15,8 +18,10 @@ PYTHONHASHSEED-stable (sorted iteration only).
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
+from urllib.parse import urlparse
 
 REPO = Path(__file__).resolve().parents[1]
 SEED = REPO / "EVforME?" / "Data" / "vehicles.seed.quality.json"
@@ -41,6 +46,80 @@ WAVE1_ID_PREFIXES = (
     "jeep-grand-cherokee-4xe-",
 )
 
+# Domains allowed for OEM / official EU regulatory cites (substring match on host).
+OFFICIAL_HOST_SUFFIXES = (
+    "media.stellantis.com",
+    "stellantis.com",
+    "jeep.de",
+    "jeep.it",
+    "jeep.com",
+    "press.bmwgroup.com",
+    "bmw.it",
+    "bmwgroup.com",
+    "cupraofficial.com",
+    "cupraofficial.it",
+    "mitsubishi-motors.nl",
+    "mitsubishi-motors.com",
+    "smart.com",
+    "mercedes-benz.it",
+    "mercedes-benz.de",
+    "toyota.it",
+    "toyota-europe.com",
+    "ford.it",
+    "ford.eu",
+    "renault.it",
+    "renault.com",
+    "lexus.eu",
+    "lexus.it",
+    "mini.it",
+    "mini.com",
+    "alfaromeo.it",
+    "alfaromeo.com",
+    "suzuki.it",
+    "suzuki.com",
+    "dacia.it",
+    "dacia.com",
+    "maserati.com",
+    "maserati.it",
+    "honda.it",
+    "honda.com",
+    "volkswagen.it",
+    "volkswagen.com",
+    "eea.europa.eu",
+    "web.archive.org",  # dated snapshots of OEM pages only; still check path
+)
+
+THIRD_PARTY_BLOCKLIST = (
+    "autocatalogarchive.com",
+    "wikipedia.org",
+    "ev-database.org",
+    "ev-database.",
+    "autocar.co.uk",
+    "insideevs.com",
+    "electrek.co",
+    "carwow.",
+    "motor1.com",
+    "quattroruote.it",
+)
+
+
+def urls_in(text: str) -> list[str]:
+    return re.findall(r"https?://[^\s\]\)\"'<>]+", text or "")
+
+
+def host_of(url: str) -> str:
+    try:
+        return (urlparse(url).hostname or "").lower()
+    except Exception:
+        return ""
+
+
+def is_official_host(host: str) -> bool:
+    h = host.lower().lstrip(".")
+    if any(bad in h for bad in THIRD_PARTY_BLOCKLIST):
+        return False
+    return any(h == s or h.endswith("." + s) for s in OFFICIAL_HOST_SUFFIXES)
+
 
 def has_range_or_battery_source(source_name: str) -> bool:
     sn = source_name or ""
@@ -48,14 +127,33 @@ def has_range_or_battery_source(source_name: str) -> bool:
 
 
 def validate_row(row: dict) -> tuple[bool, str]:
-    rid = str(row.get("id") or "")
     if not row.get("sourceName") or not row.get("sourceUpdatedAt"):
         return False, "row_without_source"
+    sn = str(row.get("sourceName") or "")
     rng = row.get("wltpRangeKm")
     bat = row.get("batteryKWh")
-    if rng not in (None, "", 0) or bat not in (None, "", 0):
-        if not has_range_or_battery_source(str(row.get("sourceName") or "")):
-            return False, "range_or_battery_without_same_year_source"
+    energy = row.get("energyConsumptionKWhPerKm")
+    needs_official = (
+        rng not in (None, "", 0)
+        or bat not in (None, "", 0)
+        or energy not in (None, "", 0)
+    )
+    if needs_official and not has_range_or_battery_source(sn):
+        return False, "range_or_battery_without_same_year_source"
+    if needs_official:
+        for url in urls_in(sn):
+            host = host_of(url)
+            if host and not is_official_host(host):
+                return False, "unofficial_source_domain"
+            if any(bad in url.lower() for bad in THIRD_PARTY_BLOCKLIST):
+                return False, "unofficial_source_domain"
+    # Wrong-model cite: Wrangler source must not be Grand Cherokee pack, and vice versa
+    model = str(row.get("model") or "").lower()
+    sn_l = sn.lower()
+    if "wrangler" in model and "grand cherokee" in sn_l:
+        return False, "source_wrong_model"
+    if "grand cherokee" in model and "wrangler" in sn_l and "grand cherokee" not in sn_l:
+        return False, "source_wrong_model"
     return True, "ok"
 
 
@@ -66,16 +164,32 @@ def validate_alias(alias: dict) -> tuple[bool, str]:
         return False, "alias_without_source"
     if not alias.get("commercialName") or not alias.get("eeaKeys"):
         return False, "alias_incomplete"
+    host = host_of(str(alias.get("sourceUrl") or ""))
+    if host and not is_official_host(host):
+        return False, "unofficial_source_domain"
+    # Distinct commercial models must not share one alias
+    name = str(alias.get("commercialName") or "").lower()
+    keys = " ".join(str(k) for k in (alias.get("eeaKeys") or [])).upper()
+    if name == "fortwo" and "FORFOUR" in keys:
+        return False, "alias_merges_distinct_models"
+    if name == "forfour" and "FORTWO" in keys:
+        return False, "alias_merges_distinct_models"
+    # Over-generic homologation tokens
+    for k in alias.get("eeaKeys") or []:
+        if str(k).strip().upper() in {"120", "X1", "A", "B", "C"}:
+            return False, "alias_over_generic_key"
     return True, "ok"
 
 
 def must_fail_cases() -> list[tuple[str, object, bool, str]]:
     good_row = {
         "id": "demo-ok",
+        "model": "Demo",
         "sourceName": "EEA co2cars IT 2024 DEMO n=10",
         "sourceUpdatedAt": "2026-10-27",
         "wltpRangeKm": None,
         "batteryKWh": None,
+        "energyConsumptionKWhPerKm": None,
     }
     good_alias = {
         "brand": "BMW",
@@ -113,12 +227,61 @@ def must_fail_cases() -> list[tuple[str, object, bool, str]]:
             False,
             "range_or_battery_without_same_year_source",
         ),
+        (
+            "fail_unofficial_source_domain",
+            {
+                **good_row,
+                "model": "Wrangler",
+                "wltpRangeKm": 45,
+                "batteryKWh": 17.3,
+                "sourceName": (
+                    "mirror PDF — https://autocatalogarchive.com/wp-content/uploads/"
+                    "2023/10/Jeep-Grand-Cherokee-4Xe-2023-GER.pdf"
+                ),
+            },
+            False,
+            "unofficial_source_domain",
+        ),
+        (
+            "fail_source_wrong_model",
+            {
+                **good_row,
+                "model": "Wrangler",
+                "wltpRangeKm": 45,
+                "batteryKWh": 17.3,
+                "sourceName": (
+                    "Grand Cherokee 4xe MJ23 pack — "
+                    "https://www.media.stellantis.com/uploads/de/model-pricelist/"
+                    "preisliste_grand_cherokee_4xe_januar_20234-6486c171a11d8.pdf"
+                ),
+            },
+            False,
+            "source_wrong_model",
+        ),
         ("ok_alias", good_alias, True, "ok"),
         (
             "fail_alias_without_source",
             {**good_alias, "sourceUrl": None},
             False,
             "alias_without_source",
+        ),
+        (
+            "fail_alias_merges_distinct_models",
+            {
+                **good_alias,
+                "brand": "Smart",
+                "commercialName": "Fortwo",
+                "eeaKeys": ["EQ FORTWO COUPE", "EQ FORFOUR"],
+                "sourceUrl": "https://www.smart.com/it/it/models/eq-fortwo",
+            },
+            False,
+            "alias_merges_distinct_models",
+        ),
+        (
+            "fail_alias_over_generic_key",
+            {**good_alias, "eeaKeys": ["120", "118D"]},
+            False,
+            "alias_over_generic_key",
         ),
     ]
 
@@ -157,9 +320,7 @@ def main() -> int:
             failures.append(f"alias:{a.get('commercialName')}:{detail}")
 
     wave_ids = sorted(
-        rid
-        for rid in rows
-        if any(rid.startswith(p) for p in WAVE1_ID_PREFIXES)
+        rid for rid in rows if any(rid.startswith(p) for p in WAVE1_ID_PREFIXES)
     )
     if not wave_ids:
         failures.append("no_wave1_ids_in_seed")
@@ -167,8 +328,10 @@ def main() -> int:
         ok, detail = validate_row(rows[rid])
         if not ok:
             failures.append(f"{rid}:{detail}")
+        sn = str(rows[rid].get("sourceName") or "")
+        if "autocatalogarchive" in sn.lower():
+            failures.append(f"{rid}:third_party_autocatalogarchive")
 
-    # Tesla M3 2026 untouched fingerprint
     m3 = sorted(
         rid
         for rid in rows
@@ -181,7 +344,6 @@ def main() -> int:
         if "wave-1" in sn.lower() or "IT wave" in sn:
             failures.append(f"{rid}:altered_by_wave1")
 
-    # Commercial renames present
     serie1 = [
         r
         for r in seed

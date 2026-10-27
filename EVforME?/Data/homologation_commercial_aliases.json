@@ -1,9 +1,9 @@
 {
-  "_comment": "EEA commercial-name / type-approval code → Italian retail model name. Every alias requires a cited OEM/EU source. If unsure, omit.",
+  "_comment": "EEA commercial-name / type-approval code → Italian retail model name. Every alias requires a cited OEM/EU source. If unsure, omit. Never merge distinct commercial models (e.g. Fortwo≠Forfour).",
   "aliases": [
     {
       "brand": "BMW",
-      "eeaKeys": ["118D", "118d", "116D", "116d", "118I", "118i", "116I", "116i", "120", "120I"],
+      "eeaKeys": ["118D", "118d", "116D", "116d", "118I", "118i", "116I", "116i", "120I", "120i", "120D", "120d", "120D XDRIVE", "120d xDrive"],
       "commercialName": "Serie 1",
       "sourceName": "BMW Italia — gamma Serie 1 (denominazione commerciale)",
       "sourceUrl": "https://www.bmw.it/it/tutti-i-modelli/bmw-serie/serie-1.html",
@@ -54,10 +54,18 @@
     },
     {
       "brand": "Smart",
-      "eeaKeys": ["EQ FORTWO COUPE", "EQ FORTWO CABRIO", "EQ FORFOUR"],
+      "eeaKeys": ["EQ FORTWO COUPE", "EQ FORTWO CABRIO", "FORTWO COUPE", "FORTWO CABRIO"],
       "commercialName": "Fortwo",
       "sourceName": "smart — EQ fortwo (denominazione commerciale EU)",
       "sourceUrl": "https://www.smart.com/it/it/models/eq-fortwo",
+      "sourceUpdatedAt": "2026-10-27"
+    },
+    {
+      "brand": "Smart",
+      "eeaKeys": ["EQ FORFOUR", "FORFOUR", "SMART FORFOUR 1.1"],
+      "commercialName": "Forfour",
+      "sourceName": "smart — EQ forfour (denominazione commerciale EU; modello distinto dal Fortwo)",
+      "sourceUrl": "https://www.smart.com/it/it/models/eq-forfour",
       "sourceUpdatedAt": "2026-10-27"
     },
     {
