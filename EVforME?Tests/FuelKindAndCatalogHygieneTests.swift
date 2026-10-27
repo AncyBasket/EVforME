@@ -895,7 +895,6 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             "jeep-compass-phev-4xe-2022",
             "jeep-compass-phev-4xe-2023",
             "jeep-renegade-phev-4xe-2023",
-            "ford-kuga-phev-2023",
             "cupra-formentor-phev-e-hybrid-2023",
             "volvo-xc40-phev-recharge-2023",
             "bmw-x1-phev-xdrive25e-2023",
@@ -905,6 +904,16 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             XCTAssertEqual(v?.powertrain, .phev, id)
             XCTAssertEqual(v?.catalogDataIncomplete, true, id)
         }
+        // Kuga 2023 completed via identical EEA homologation copy from MY2024 OEM DE.
+        let kuga23 = VehicleCatalogService.shared.vehicle(by: "ford-kuga-phev-2023")
+        XCTAssertNotNil(kuga23)
+        XCTAssertEqual(kuga23?.powertrain, .phev)
+        XCTAssertEqual(kuga23?.catalogDataIncomplete, false)
+        XCTAssertEqual(kuga23?.energyIsWeighted, false)
+        XCTAssertGreaterThanOrEqual((kuga23?.fuelConsumptionLPerKm ?? 0) * 100, 3.0)
+        let kugaSrc = (kuga23?.sourceName ?? "").lowercased()
+        XCTAssertTrue(kugaSrc.contains("stessa omologazione eea"))
+        XCTAssertTrue(kugaSrc.contains(".pdf") || kugaSrc.contains("technische"))
     }
 
     func testCatalog_AurisHybrid2018ConfidenceIsStimaLevel() {

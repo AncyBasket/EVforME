@@ -1,0 +1,285 @@
+{
+  "seedVersion": 68,
+  "fingerprint": "38c2e103972ec7b7bea01b556e10494f25161664811879a79e938111d2e3083e",
+  "phev_complete_total": 10,
+  "phev_incomplete_total": 109,
+  "phev_complete_same_my": 9,
+  "phev_complete_derived": 1,
+  "top30_complete": 2,
+  "top30_still_incomplete": [
+    {
+      "id": "jeep-compass-phev-4xe-2022",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "jeep-renegade-phev-4xe-2022",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "cupra-formentor-phev-e-hybrid-2024",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "jeep-renegade-phev-4xe-2023",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "mini-countryman-cooper-se-all4-2023",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "volvo-xc40-phev-recharge-2022",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "cupra-formentor-phev-e-hybrid-2023",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "volvo-xc40-phev-recharge-2023",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "volvo-xc60-phev-recharge-2024",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "bmw-x1-phev-xdrive25e-2024",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "bmw-x1-phev-xdrive25e-2022",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "jeep-renegade-phev-4xe-2024",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "alfa-romeo-tonale-phev-2023",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "ford-kuga-phev-2022",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh",
+        "no_identical_EEA_homologation_with_complete_year"
+      ]
+    },
+    {
+      "id": "volvo-xc60-phev-recharge-2023",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "mercedes-benz-glc-phev-300-de-2024",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "toyota-c-hr-phev-2024",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "peugeot-3008-phev-2022",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "renault-captur-phev-e-tech-phev-2022",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "bmw-x1-phev-xdrive25e-2023",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "mercedes-benz-gle-phev-350-de-2022",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "peugeot-3008-phev-2023",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "mini-countryman-cooper-se-all4-2022",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "audi-q3-sportback-phev-45-tfsi-e-2024",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "audi-q3-sportback-phev-45-tfsi-e-2023",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "mercedes-benz-gla-phev-250-e-2023",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "mercedes-benz-gle-coupe-phev-350-de-2022",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    },
+    {
+      "id": "mercedes-benz-gla-phev-250-e-2022",
+      "missing": [
+        "fuelConsumptionLPerKm(CS>=3)",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ]
+    }
+  ],
+  "same_my_completed": [],
+  "derived_completed": [
+    {
+      "id": "ford-kuga-phev-2023",
+      "host": "ford.de",
+      "year": 2023,
+      "url": "https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/Technische_Daten_des_Ford_Kuga.pdf",
+      "TAN": "E13*2007/46*2188*13",
+      "Va": "BGDA1FX",
+      "Ve": "566DANA51AS",
+      "ep": 112,
+      "derivedFromYear": 2024,
+      "sourceId": "ford-kuga-phev-2024"
+    }
+  ],
+  "complete_before": 9,
+  "complete_after": 10,
+  "same_my_before": 9,
+  "same_my_after": 9,
+  "derived_before": 0,
+  "derived_after": 1
+}
