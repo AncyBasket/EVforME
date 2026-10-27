@@ -11,6 +11,7 @@ Usage:
 from __future__ import annotations
 
 import json
+import re
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -42,8 +43,11 @@ def _validate_group_bounds(v: dict) -> tuple[bool, str]:
     if abs(wh_min - min(whs)) > 0.15 or abs(wh_max - max(whs)) > 0.15:
         return False, "minmax_outside_eea_records"
     mean_kw = float(v["kw"])
-    if any(abs(k - mean_kw) > build.KW_TOL_ABS + 0.05 for k in kws):
-        return False, "kw_spread_over_tol"
+    # Official OEM match may merge axle + system EEA filings under one trim
+    # (Tesla rule A); label kw is system max, so skip spread-vs-label check.
+    if not v.get("official_matched"):
+        if any(abs(k - mean_kw) > build.KW_TOL_ABS + 0.05 for k in kws):
+            return False, "kw_spread_over_tol"
     if int(v.get("wltpRangeKm")) != zr_min:
         return False, "calc_not_prudent_min_range"
     if abs(float(v.get("wh_per_km")) - wh_max) > 0.15:
@@ -254,10 +258,32 @@ def main() -> int:
             failures.append(f"{v.get('id')}: parent_mismatch")
         if not row.get("usesPrudentVariantBounds"):
             failures.append(f"{v.get('id')}: missing_prudent_flag")
-        if "kW" not in str(row.get("trim") or ""):
-            failures.append(f"{v.get('id')}: label_missing_kw")
+        trim = str(row.get("trim") or "")
+        matched = bool(v.get("official_matched"))
+        if matched:
+            if " · " not in trim or "kW" not in trim:
+                failures.append(f"{v.get('id')}: matched_label_format")
+            if not v.get("official_url") and not v.get("commercial_url"):
+                failures.append(f"{v.get('id')}: matched_missing_url")
+            if abs(float(v.get("official_power_kw") or v["kw"]) - float(row.get("powerKw") or 0)) > 0.6:
+                failures.append(f"{v.get('id')}: matched_kw_not_official")
+        else:
+            if not trim.startswith("Versione "):
+                failures.append(f"{v.get('id')}: unmatched_label_not_versione")
+            # EEA kW must not appear in the title for unmatched versions
+            if re.search(r"\b\d+\s*kW\b", trim):
+                failures.append(f"{v.get('id')}: unmatched_title_has_eea_kw")
+            if not v.get("eeaHomologationNote") and not row.get("eeaHomologationNote"):
+                failures.append(f"{v.get('id')}: unmatched_missing_homologation_note")
         if v.get("commercial_name") and not v.get("commercial_url"):
             failures.append(f"{v.get('id')}: commercial_no_url")
+        if v.get("official_name") and not (v.get("official_url") or v.get("commercial_url")):
+            failures.append(f"{v.get('id')}: official_name_without_url")
+        url = str(v.get("official_url") or v.get("commercial_url") or "")
+        if url and re.search(
+            r"(ev-database|wikipedia|autocar|insideevs|electrek|carwow)", url, re.I
+        ):
+            failures.append(f"{v.get('id')}: third_party_url")
         if not v.get("eea_records"):
             failures.append(f"{v.get('id')}: missing_eea_records_list")
 
@@ -316,6 +342,40 @@ def main() -> int:
         print(f"must-fail FAIL: dacia-spring-2023 groups={len(spring)}")
     else:
         print(f"must-fail OK: dacia-spring-2023_groups={len(spring)}")
+        must_ok += 1
+
+    # Label pass gates (seed v61+)
+    stats = refs.get("stats") or {}
+    top40_src = int(stats.get("top40_with_official_source") or 0)
+    if top40_src < 30:
+        failures.append(f"top40_official_sources:{top40_src}<30")
+        print(f"must-fail FAIL: top40_with_official_source={top40_src}")
+    else:
+        print(f"must-fail OK: top40_with_official_source={top40_src}")
+        must_ok += 1
+
+    mach = [v for v in variants if v.get("parentId") == "ford-mustang-mach-e-2025"]
+    if any(float(v.get("eea_kw") or v.get("kw") or 0) > 358 + 5 for v in mach):
+        failures.append("mach-e-2025_kept_over_official_max")
+        print("must-fail FAIL: mach-e over-max group kept")
+    else:
+        print("must-fail OK: mach-e-2025_no_over_max")
+        must_ok += 1
+
+    ioniq_42 = [
+        v
+        for v in variants
+        if v.get("parentId") == "hyundai-ioniq-5-2021"
+        and abs(float(v.get("eea_kw") or v.get("kw") or 0) - 42) < 0.6
+    ]
+    if ioniq_42 and any(v.get("official_matched") for v in ioniq_42):
+        failures.append("ioniq-5-2021_42kw_falsely_matched")
+        print("must-fail FAIL: ioniq 42 kW matched")
+    elif ioniq_42 and not all(str(v.get("label") or "").startswith("Versione") for v in ioniq_42):
+        failures.append("ioniq-5-2021_42kw_not_versione")
+        print("must-fail FAIL: ioniq 42 kW not Versione")
+    else:
+        print("must-fail OK: ioniq-5-2021_42kw_unmatched_versione")
         must_ok += 1
 
     min_share = float(refs.get("minShareOfParent") or build.MIN_SHARE_OF_PARENT)

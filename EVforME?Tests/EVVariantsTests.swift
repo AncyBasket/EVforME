@@ -2,7 +2,7 @@
 //  EVVariantsTests.swift
 //  EVforME?Tests
 //
-//  Seed v60: EEA version groups + exclusive Cn / noise / official kW.
+//  Seed v61: EEA version groups + official OEM labels (matched / Versione n).
 //
 
 import XCTest
@@ -38,12 +38,52 @@ final class EVVariantsTests: XCTestCase {
         XCTAssertEqual(child.wltpRangeKmMax, 591)
         XCTAssertEqual(child.powerKw ?? 0, 105, accuracy: 0.6)
         XCTAssertNotNil(child.resolvedEnergyKWhPerKm)
-        XCTAssertTrue(child.trim?.contains("kW") == true)
+        // Unmatched official → "Versione n" (no EEA kW in title)
+        XCTAssertTrue(child.trim?.hasPrefix("Versione ") == true)
+        XCTAssertFalse(child.trim?.contains("kW") == true)
+        XCTAssertEqual(child.officialMatched, false)
+        XCTAssertNotNil(child.eeaHomologationNote)
         XCTAssertFalse(child.trim?.contains("km WLTP") == true)
         XCTAssertTrue(child.variantRangeCaption?.contains("555") == true)
         XCTAssertTrue(child.variantRangeCaption?.contains("591") == true)
         XCTAssertEqual(child.usesPrudentVariantBounds, true)
         XCTAssertNil(child.batteryKWh, "new EEA groups must not invent battery")
+    }
+
+    func testMatchedOfficialLabelUsesSystemKwNotEeaTitle() {
+        // Tesla Model Y 2023 Long Range AWD — official system 378 kW (rule A)
+        let kids = VehicleCatalogService.shared.targetEVVehicles().filter {
+            $0.parentId == "tesla-model-y-2023"
+        }
+        let matched = kids.filter { $0.officialMatched == true }
+        XCTAssertFalse(matched.isEmpty)
+        XCTAssertTrue(matched.contains { ($0.trim ?? "").contains("378 kW") })
+        for child in matched {
+            XCTAssertTrue(child.trim?.contains(" · ") == true)
+            XCTAssertTrue(child.trim?.contains("kW") == true)
+            XCTAssertNil(child.eeaHomologationNote)
+        }
+        let unmatched = kids.filter { $0.officialMatched == false }
+        for child in unmatched {
+            XCTAssertTrue(child.trim?.hasPrefix("Versione ") == true)
+            XCTAssertFalse(child.trim?.contains("kW") == true)
+        }
+    }
+
+    func testPickerHidesEeaKwForUnmatchedVersion() {
+        guard let child = VehicleCatalogService.shared.vehicle(by: multiChild) else {
+            XCTFail("missing multi child")
+            return
+        }
+        XCTAssertEqual(child.officialMatched, false)
+        // Title must not look like a commercial "105 kW" trim; note may cite EEA kW.
+        XCTAssertFalse(child.trim?.contains("105 kW") == true)
+        XCTAssertTrue(child.trim?.hasPrefix("Versione ") == true)
+        let note = child.eeaHomologationNote ?? ""
+        XCTAssertTrue(note.contains("EEA"))
+        XCTAssertTrue(note.contains("105"))
+        let sub = child.qualitySubtitle ?? ""
+        XCTAssertTrue(sub.localizedCaseInsensitiveContains("omologat") || sub.contains("EEA"))
     }
 
     func testMultiParentKeepsNoRangeAndNeedsExplicitChoice() {

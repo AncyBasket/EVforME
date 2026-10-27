@@ -107,6 +107,10 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
     let variantRangeCaption: String?
     /// `true` se autonomia/consumo in catalogo sono il bound prudente (min Zr / max Wh).
     let usesPrudentVariantBounds: Bool?
+    /// `true` se il titolo versione è un allestimento ufficiale OEM (nome · kW).
+    let officialMatched: Bool?
+    /// Nota piccola per versioni non matchate (potenza omologata EEA ≠ potenza max).
+    let eeaHomologationNote: String?
 
     var displayName: String {
         if let trim, !trim.isEmpty {
@@ -145,7 +149,11 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
                 parts.append("\(wltpRangeKm) km")
             }
         }
-        if let powerKw, powerKw > 0 {
+        if let note = eeaHomologationNote, !note.isEmpty {
+            parts.append(note)
+        } else if officialMatched == true, let powerKw, powerKw > 0 {
+            parts.append(String(format: "%.0f kW", powerKw))
+        } else if officialMatched != false, let powerKw, powerKw > 0, parentId == nil {
             parts.append(String(format: "%.0f kW", powerKw))
         }
         if let energy = resolvedEnergyKWhPerKm {
@@ -318,7 +326,9 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         wltpRangeKmMax: Int? = nil,
         energyConsumptionKWhPerKmMin: Double? = nil,
         variantRangeCaption: String? = nil,
-        usesPrudentVariantBounds: Bool? = nil
+        usesPrudentVariantBounds: Bool? = nil,
+        officialMatched: Bool? = nil,
+        eeaHomologationNote: String? = nil
     ) {
         self.id = id
         self.brand = brand
@@ -350,5 +360,7 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         self.energyConsumptionKWhPerKmMin = energyConsumptionKWhPerKmMin
         self.variantRangeCaption = variantRangeCaption
         self.usesPrudentVariantBounds = usesPrudentVariantBounds
+        self.officialMatched = officialMatched
+        self.eeaHomologationNote = eeaHomologationNote
     }
 }
