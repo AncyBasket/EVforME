@@ -1,6 +1,6 @@
 {
-  "seedVersion": 61,
-  "generatedAt": "2026-10-27T10:36:16.861904+00:00",
+  "seedVersion": 62,
+  "generatedAt": "2026-10-27T11:22:06.738420+00:00",
   "rules": [
     "Official sources: manufacturer / press kit / tech PDF only",
     "Match 1:1 via WLTP \u00b13% or kW \u00b15 (+ traction when known)",
@@ -13,22 +13,22 @@
     "bev_model_years_with_range_before": 442,
     "bev_model_years_with_range_after": 442,
     "variant_groups_before": 1129,
-    "variant_groups_after": 1105,
-    "matched_groups": 80,
-    "unmatched_groups": 1025,
-    "dropped_groups": 2,
-    "top40_with_official_source": 31,
+    "variant_groups_after": 1123,
+    "matched_groups": 34,
+    "unmatched_groups": 1089,
+    "dropped_groups": 3,
+    "top40_with_official_source": 15,
     "top40_total": 40,
-    "catalog_rows_after": 6732,
+    "catalog_rows_after": 6750,
     "groups_per_parent_distribution": {
-      "1": 85,
-      "2": 125,
-      "3": 85,
-      "4": 45,
-      "5": 29,
-      "6": 22,
-      "7": 6,
-      "8": 2
+      "1": 84,
+      "2": 126,
+      "3": 80,
+      "4": 46,
+      "5": 31,
+      "6": 20,
+      "7": 8,
+      "8": 4
     }
   },
   "variants": [
@@ -400,6 +400,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 1
     },
     {
@@ -637,6 +639,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 2
     },
     {
@@ -1140,6 +1144,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 1
     },
     {
@@ -1472,6 +1478,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 2
     },
     {
@@ -1633,6 +1641,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 3
     },
     {
@@ -2404,6 +2414,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 1
     },
     {
@@ -2491,6 +2503,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 2
     },
     {
@@ -2955,6 +2969,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 1
     },
     {
@@ -3153,6 +3169,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 2
     },
     {
@@ -3217,6 +3235,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 1
     },
     {
@@ -3328,6 +3348,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 1
     },
     {
@@ -3401,6 +3423,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 2
     },
     {
@@ -3567,6 +3591,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 1
     },
     {
@@ -3714,6 +3740,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 2
     },
     {
@@ -3804,6 +3832,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 3
     },
     {
@@ -4476,6 +4506,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 1
     },
     {
@@ -5280,6 +5312,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 1
     },
     {
@@ -5932,6 +5966,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 1
     },
     {
@@ -6299,6 +6335,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 1
     },
     {
@@ -6647,6 +6685,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 2
     },
     {
@@ -7129,6 +7169,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 1
     },
     {
@@ -7326,6 +7368,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 2
     },
     {
@@ -7485,6 +7529,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 3
     },
     {
@@ -7744,6 +7790,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 1
     },
     {
@@ -7889,6 +7937,8 @@
       "official_name": null,
       "official_power_kw": null,
       "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 2
     },
     {
@@ -7925,7 +7975,7 @@
       "batteryKWh": null,
       "battery_source": null,
       "commercial_name": "i4 eDrive40",
-      "commercial_url": "https://www.press.bmwgroup.com/latin-america-caribbean/article/detail/T0334110EN/the-first-ever-bmw-i4?language=en",
+      "commercial_url": "https://www.press.bmwgroup.com/deutschland/article/attachment/T0442767DE/617123",
       "source": "EEA co2cars EU Zr",
       "eea_records": [
         {
@@ -8773,7 +8823,9 @@
       "official_matched": true,
       "official_name": "i4 eDrive40",
       "official_power_kw": 250.0,
-      "official_url": "https://www.press.bmwgroup.com/latin-america-caribbean/article/detail/T0334110EN/the-first-ever-bmw-i4?language=en",
+      "official_url": "https://www.press.bmwgroup.com/deutschland/article/attachment/T0442767DE/617123",
+      "source_year": 2024,
+      "source_market": "DE",
       "variantVersionIndex": null,
       "mergedFromIds": null
     },
@@ -8811,7 +8863,7 @@
       "batteryKWh": null,
       "battery_source": null,
       "commercial_name": "i4 M50",
-      "commercial_url": "https://www.press.bmwgroup.com/latin-america-caribbean/article/detail/T0334110EN/the-first-ever-bmw-i4?language=en",
+      "commercial_url": "https://www.press.bmwgroup.com/deutschland/article/attachment/T0442767DE/617123",
       "source": "EEA co2cars EU Zr",
       "eea_records": [
         {
@@ -9716,7 +9768,9 @@
       "official_matched": true,
       "official_name": "i4 M50",
       "official_power_kw": 400.0,
-      "official_url": "https://www.press.bmwgroup.com/latin-america-caribbean/article/detail/T0334110EN/the-first-ever-bmw-i4?language=en",
+      "official_url": "https://www.press.bmwgroup.com/deutschland/article/attachment/T0442767DE/617123",
+      "source_year": 2024,
+      "source_market": "DE",
       "variantVersionIndex": null,
       "mergedFromIds": null
     },
@@ -10698,7 +10752,9 @@
       "official_matched": false,
       "official_name": null,
       "official_power_kw": null,
-      "official_url": "https://www.press.bmwgroup.com/latin-america-caribbean/article/detail/T0334110EN/the-first-ever-bmw-i4?language=en",
+      "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 1
     },
     {
@@ -11204,7 +11260,9 @@
       "official_matched": false,
       "official_name": null,
       "official_power_kw": null,
-      "official_url": "https://www.press.bmwgroup.com/latin-america-caribbean/article/detail/T0334110EN/the-first-ever-bmw-i4?language=en",
+      "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 2
     },
     {
@@ -11691,7 +11749,9 @@
       "official_matched": false,
       "official_name": null,
       "official_power_kw": null,
-      "official_url": "https://www.press.bmwgroup.com/latin-america-caribbean/article/detail/T0334110EN/the-first-ever-bmw-i4?language=en",
+      "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 3
     },
     {
@@ -11760,7 +11820,9 @@
       "official_matched": false,
       "official_name": null,
       "official_power_kw": null,
-      "official_url": "https://www.press.bmwgroup.com/latin-america-caribbean/article/detail/T0334110EN/the-first-ever-bmw-i4?language=en",
+      "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 4
     },
     {
@@ -11863,6 +11925,8 @@
       "official_name": "Electric 45",
       "official_power_kw": 33.0,
       "official_url": "https://media.dacia.com/dacia-spring-a-new-extreme-trim-and-brand-new-electric-65-engine/?lang=eng",
+      "source_year": 2023,
+      "source_market": "EU",
       "variantVersionIndex": null,
       "mergedFromIds": null
     },
@@ -11928,11 +11992,13 @@
       "official_name": "Electric 65",
       "official_power_kw": 48.0,
       "official_url": "https://media.dacia.com/dacia-spring-a-new-extreme-trim-and-brand-new-electric-65-engine/?lang=eng",
+      "source_year": 2023,
+      "source_market": "EU",
       "variantVersionIndex": null,
       "mergedFromIds": null
     },
     {
-      "id": "ford-mustang-mach-e-2025-v-select-premium-er-eawd-276kw",
+      "id": "ford-mustang-mach-e-2025-v-extended-range-awd-276kw",
       "parentId": "ford-mustang-mach-e-2025",
       "brand": "Ford",
       "model": "Mustang Mach-E",
@@ -11956,13 +12022,13 @@
         "MUSTANG MACH-E GT",
         "MUSTANG-MACH-E"
       ],
-      "label": "Select Premium ER eAWD \u00b7 276 kW",
+      "label": "Extended Range AWD \u00b7 276 kW",
       "rangeCaption": "Autonomia WLTP 400\u2013550 km (dipende da cerchi e optional)",
       "awd_from_cn": false,
-      "batteryKWh": null,
-      "battery_source": null,
-      "commercial_name": "Select Premium ER eAWD",
-      "commercial_url": "https://www.fromtheroad.ford.com/content/dam/fordmediasite/us/en/library/2025/specs/2025%20Ford-Mustang-Mach-E-Technical-Specifications.pdf",
+      "batteryKWh": 88,
+      "battery_source": "oem_official_same_year",
+      "commercial_name": "Extended Range AWD",
+      "commercial_url": "https://www.ford.at/content/dam/guxeu/at/de_at/documents/technical-data/TD-ford-CX727-mach-e.pdf",
       "source": "EEA co2cars EU Zr",
       "eea_records": [
         {
@@ -12029,9 +12095,11 @@
       },
       "eea_kw": 274.7,
       "official_matched": true,
-      "official_name": "Select Premium ER eAWD",
+      "official_name": "Extended Range AWD",
       "official_power_kw": 276.0,
-      "official_url": "https://www.fromtheroad.ford.com/content/dam/fordmediasite/us/en/library/2025/specs/2025%20Ford-Mustang-Mach-E-Technical-Specifications.pdf",
+      "official_url": "https://www.ford.at/content/dam/guxeu/at/de_at/documents/technical-data/TD-ford-CX727-mach-e.pdf",
+      "source_year": 2025,
+      "source_market": "AT",
       "variantVersionIndex": null,
       "mergedFromIds": null
     },
@@ -12155,7 +12223,9 @@
       "official_matched": false,
       "official_name": null,
       "official_power_kw": null,
-      "official_url": "https://www.fromtheroad.ford.com/content/dam/fordmediasite/us/en/library/2025/specs/2025%20Ford-Mustang-Mach-E-Technical-Specifications.pdf",
+      "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 1
     },
     {
@@ -12259,7 +12329,9 @@
       "official_matched": false,
       "official_name": null,
       "official_power_kw": null,
-      "official_url": "https://www.fromtheroad.ford.com/content/dam/fordmediasite/us/en/library/2025/specs/2025%20Ford-Mustang-Mach-E-Technical-Specifications.pdf",
+      "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 2
     },
     {
@@ -12344,7 +12416,9 @@
       "official_matched": false,
       "official_name": null,
       "official_power_kw": null,
-      "official_url": "https://www.fromtheroad.ford.com/content/dam/fordmediasite/us/en/library/2025/specs/2025%20Ford-Mustang-Mach-E-Technical-Specifications.pdf",
+      "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 3
     },
     {
@@ -12410,7 +12484,9 @@
       "official_matched": false,
       "official_name": null,
       "official_power_kw": null,
-      "official_url": "https://www.fromtheroad.ford.com/content/dam/fordmediasite/us/en/library/2025/specs/2025%20Ford-Mustang-Mach-E-Technical-Specifications.pdf",
+      "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 4
     },
     {
@@ -12495,257 +12571,13 @@
       "official_matched": false,
       "official_name": null,
       "official_power_kw": null,
-      "official_url": "https://www.fromtheroad.ford.com/content/dam/fordmediasite/us/en/library/2025/specs/2025%20Ford-Mustang-Mach-E-Technical-Specifications.pdf",
+      "official_url": null,
+      "source_year": null,
+      "source_market": null,
       "variantVersionIndex": 5
     },
     {
-      "id": "hyundai-ioniq-5-2021-v-long-range-awd-239kw",
-      "parentId": "hyundai-ioniq-5-2021",
-      "brand": "Hyundai",
-      "model": "Ioniq 5",
-      "year": 2021,
-      "kw": 239.0,
-      "awd": false,
-      "wh_per_km": 190.0,
-      "wh_per_km_min": 177.0,
-      "wh_per_km_max": 190.0,
-      "wltpRangeKm": 430,
-      "wltpRangeKmMin": 430,
-      "wltpRangeKmMax": 460,
-      "status": "F",
-      "registrations": 3131.0,
-      "countries": [
-        "EU-wide"
-      ],
-      "cn_raws": [
-        "IONIQ5"
-      ],
-      "label": "Long Range AWD \u00b7 239 kW",
-      "rangeCaption": "Autonomia WLTP 430\u2013460 km (dipende da cerchi e optional)",
-      "awd_from_cn": false,
-      "batteryKWh": 84,
-      "battery_source": "oem_official_same_year",
-      "commercial_name": "Long Range AWD",
-      "commercial_url": "https://www.hyundai.com/eu/en/models/ioniq5/performance.html",
-      "source": "EEA co2cars EU Zr",
-      "eea_records": [
-        {
-          "kw": 76.0,
-          "wh_per_km": 190.0,
-          "wltpRangeKm": 430,
-          "n": 1959.0,
-          "status": "F",
-          "eea_model_key": "IONIQ5",
-          "awd": false,
-          "year": 2021,
-          "fingerprint": [
-            2021,
-            "IONIQ5",
-            76.0,
-            190.0,
-            430,
-            false,
-            "F"
-          ]
-        },
-        {
-          "kw": 76.0,
-          "wh_per_km": 177.0,
-          "wltpRangeKm": 460,
-          "n": 1172.0,
-          "status": "F",
-          "eea_model_key": "IONIQ5",
-          "awd": false,
-          "year": 2021,
-          "fingerprint": [
-            2021,
-            "IONIQ5",
-            76.0,
-            177.0,
-            460,
-            false,
-            "F"
-          ]
-        }
-      ],
-      "prudent": {
-        "wltpRangeKm": 430,
-        "wh_per_km": 190.0
-      },
-      "eea_kw": 76.0,
-      "official_matched": true,
-      "official_name": "Long Range AWD",
-      "official_power_kw": 239.0,
-      "official_url": "https://www.hyundai.com/eu/en/models/ioniq5/performance.html",
-      "variantVersionIndex": null,
-      "mergedFromIds": null
-    },
-    {
-      "id": "hyundai-ioniq-5-2021-v-standard-range-rwd-125kw",
-      "parentId": "hyundai-ioniq-5-2021",
-      "brand": "Hyundai",
-      "model": "Ioniq 5",
-      "year": 2021,
-      "kw": 125.0,
-      "awd": false,
-      "wh_per_km": 167.0,
-      "wh_per_km_min": 167.0,
-      "wh_per_km_max": 167.0,
-      "wltpRangeKm": 384,
-      "wltpRangeKmMin": 384,
-      "wltpRangeKmMax": 384,
-      "status": "F",
-      "registrations": 386.0,
-      "countries": [
-        "EU-wide"
-      ],
-      "cn_raws": [
-        "IONIQ5"
-      ],
-      "label": "Standard Range RWD \u00b7 125 kW",
-      "rangeCaption": "Autonomia WLTP 384 km (dipende da cerchi e optional)",
-      "awd_from_cn": false,
-      "batteryKWh": 63,
-      "battery_source": "oem_official_same_year",
-      "commercial_name": "Standard Range RWD",
-      "commercial_url": "https://www.hyundai.com/eu/en/models/ioniq5/performance.html",
-      "source": "EEA co2cars EU Zr",
-      "eea_records": [
-        {
-          "kw": 125.0,
-          "wh_per_km": 167.0,
-          "wltpRangeKm": 384,
-          "n": 305.0,
-          "status": "F",
-          "eea_model_key": "IONIQ5",
-          "awd": false,
-          "year": 2021,
-          "fingerprint": [
-            2021,
-            "IONIQ5",
-            125.0,
-            167.0,
-            384,
-            false,
-            "F"
-          ]
-        },
-        {
-          "kw": 124.0,
-          "wh_per_km": 167.0,
-          "wltpRangeKm": 384,
-          "n": 81.0,
-          "status": "F",
-          "eea_model_key": "IONIQ5",
-          "awd": false,
-          "year": 2021,
-          "fingerprint": [
-            2021,
-            "IONIQ5",
-            124.0,
-            167.0,
-            384,
-            false,
-            "F"
-          ]
-        }
-      ],
-      "prudent": {
-        "wltpRangeKm": 384,
-        "wh_per_km": 167.0
-      },
-      "eea_kw": 124.8,
-      "official_matched": true,
-      "official_name": "Standard Range RWD",
-      "official_power_kw": 125.0,
-      "official_url": "https://www.hyundai.com/eu/en/models/ioniq5/performance.html",
-      "variantVersionIndex": null,
-      "mergedFromIds": null
-    },
-    {
-      "id": "hyundai-ioniq-5-2021-v53kw-rwd",
-      "parentId": "hyundai-ioniq-5-2021",
-      "brand": "Hyundai",
-      "model": "Ioniq 5",
-      "year": 2021,
-      "kw": 53.0,
-      "awd": false,
-      "wh_per_km": 179.0,
-      "wh_per_km_min": 168.0,
-      "wh_per_km_max": 179.0,
-      "wltpRangeKm": 451,
-      "wltpRangeKmMin": 451,
-      "wltpRangeKmMax": 481,
-      "status": "F",
-      "registrations": 5331.0,
-      "countries": [
-        "EU-wide"
-      ],
-      "cn_raws": [
-        "IONIQ5"
-      ],
-      "label": "Versione 1",
-      "rangeCaption": "Autonomia WLTP 451\u2013481 km (dipende da cerchi e optional)",
-      "awd_from_cn": false,
-      "batteryKWh": null,
-      "battery_source": null,
-      "commercial_name": null,
-      "commercial_url": null,
-      "source": "EEA co2cars EU Zr",
-      "eea_records": [
-        {
-          "kw": 53.0,
-          "wh_per_km": 168.0,
-          "wltpRangeKm": 481,
-          "n": 3328.0,
-          "status": "F",
-          "eea_model_key": "IONIQ5",
-          "awd": false,
-          "year": 2021,
-          "fingerprint": [
-            2021,
-            "IONIQ5",
-            53.0,
-            168.0,
-            481,
-            false,
-            "F"
-          ]
-        },
-        {
-          "kw": 53.0,
-          "wh_per_km": 179.0,
-          "wltpRangeKm": 451,
-          "n": 2003.0,
-          "status": "F",
-          "eea_model_key": "IONIQ5",
-          "awd": false,
-          "year": 2021,
-          "fingerprint": [
-            2021,
-            "IONIQ5",
-            53.0,
-            179.0,
-            451,
-            false,
-            "F"
-          ]
-        }
-      ],
-      "prudent": {
-        "wltpRangeKm": 451,
-        "wh_per_km": 179.0
-      },
-      "eea_kw": 53.0,
-      "eeaHomologationNote": "Potenza omologata EEA 53 kW (pu\u00f2 differire dalla potenza massima)",
-      "official_matched": false,
-      "official_name": null,
-      "official_power_kw": null,
-      "official_url": "https://www.hyundai.com/eu/en/models/ioniq5/performance.html",
-      "variantVersionIndex": 1
-    },
-    {
-      "id": "hyundai-ioniq-5-2021-v160kw-rwd",
+      "id": "hyundai-ioniq-5-2021-v-long-range-rwd-160kw",
       "parentId": "hyundai-ioniq-5-2021",
       "brand": "Hyundai",
       "model": "Ioniq 5",
@@ -12766,13 +12598,13 @@
       "cn_raws": [
         "IONIQ5"
       ],
-      "label": "Versione 2",
+      "label": "Long Range RWD \u00b7 160 kW",
       "rangeCaption": "Autonomia WLTP 451\u2013481 km (dipende da cerchi e optional)",
       "awd_from_cn": false,
-      "batteryKWh": null,
-      "battery_source": null,
-      "commercial_name": null,
-      "commercial_url": null,
+      "batteryKWh": 72.6,
+      "battery_source": "oem_official_same_year",
+      "commercial_name": "Long Range RWD",
+      "commercial_url": "https://www.hyundai.news/newsroom/dam/de/Pressemappen/IONIQ_5/Hyundai_IONIQ_5_2_Ausstattung_und_Preise_0521.pdf",
       "source": "EEA co2cars EU Zr",
       "eea_records": [
         {
@@ -12819,165 +12651,22 @@
         "wh_per_km": 179.0
       },
       "eea_kw": 160.0,
-      "eeaHomologationNote": "Potenza omologata EEA 160 kW (pu\u00f2 differire dalla potenza massima)",
-      "official_matched": false,
-      "official_name": null,
-      "official_power_kw": null,
-      "official_url": "https://www.hyundai.com/eu/en/models/ioniq5/performance.html",
-      "variantVersionIndex": 2
+      "official_matched": true,
+      "official_name": "Long Range RWD",
+      "official_power_kw": 160.0,
+      "official_url": "https://www.hyundai.news/newsroom/dam/de/Pressemappen/IONIQ_5/Hyundai_IONIQ_5_2_Ausstattung_und_Preise_0521.pdf",
+      "source_year": 2021,
+      "source_market": "DE",
+      "variantVersionIndex": null,
+      "mergedFromIds": null
     },
     {
-      "id": "hyundai-ioniq-5-2021-v154kw-rwd",
+      "id": "hyundai-ioniq-5-2021-v-long-range-awd-225kw",
       "parentId": "hyundai-ioniq-5-2021",
       "brand": "Hyundai",
       "model": "Ioniq 5",
       "year": 2021,
-      "kw": 154.0,
-      "awd": false,
-      "wh_per_km": 190.0,
-      "wh_per_km_min": 177.0,
-      "wh_per_km_max": 190.0,
-      "wltpRangeKm": 430,
-      "wltpRangeKmMin": 430,
-      "wltpRangeKmMax": 460,
-      "status": "F",
-      "registrations": 2421.0,
-      "countries": [
-        "EU-wide"
-      ],
-      "cn_raws": [
-        "IONIQ5"
-      ],
-      "label": "Versione 3",
-      "rangeCaption": "Autonomia WLTP 430\u2013460 km (dipende da cerchi e optional)",
-      "awd_from_cn": false,
-      "batteryKWh": null,
-      "battery_source": null,
-      "commercial_name": null,
-      "commercial_url": null,
-      "source": "EEA co2cars EU Zr",
-      "eea_records": [
-        {
-          "kw": 154.0,
-          "wh_per_km": 190.0,
-          "wltpRangeKm": 430,
-          "n": 1956.0,
-          "status": "F",
-          "eea_model_key": "IONIQ5",
-          "awd": false,
-          "year": 2021,
-          "fingerprint": [
-            2021,
-            "IONIQ5",
-            154.0,
-            190.0,
-            430,
-            false,
-            "F"
-          ]
-        },
-        {
-          "kw": 154.0,
-          "wh_per_km": 177.0,
-          "wltpRangeKm": 460,
-          "n": 465.0,
-          "status": "F",
-          "eea_model_key": "IONIQ5",
-          "awd": false,
-          "year": 2021,
-          "fingerprint": [
-            2021,
-            "IONIQ5",
-            154.0,
-            177.0,
-            460,
-            false,
-            "F"
-          ]
-        }
-      ],
-      "prudent": {
-        "wltpRangeKm": 430,
-        "wh_per_km": 190.0
-      },
-      "eea_kw": 154.0,
-      "eeaHomologationNote": "Potenza omologata EEA 154 kW (pu\u00f2 differire dalla potenza massima)",
-      "official_matched": false,
-      "official_name": null,
-      "official_power_kw": null,
-      "official_url": "https://www.hyundai.com/eu/en/models/ioniq5/performance.html",
-      "variantVersionIndex": 3
-    },
-    {
-      "id": "hyundai-ioniq-5-2021-v42kw-rwd",
-      "parentId": "hyundai-ioniq-5-2021",
-      "brand": "Hyundai",
-      "model": "Ioniq 5",
-      "year": 2021,
-      "kw": 42.0,
-      "awd": false,
-      "wh_per_km": 167.0,
-      "wh_per_km_min": 167.0,
-      "wh_per_km_max": 167.0,
-      "wltpRangeKm": 384,
-      "wltpRangeKmMin": 384,
-      "wltpRangeKmMax": 384,
-      "status": "F",
-      "registrations": 1508.0,
-      "countries": [
-        "EU-wide"
-      ],
-      "cn_raws": [
-        "IONIQ5"
-      ],
-      "label": "Versione 4",
-      "rangeCaption": "Autonomia WLTP 384 km (dipende da cerchi e optional)",
-      "awd_from_cn": false,
-      "batteryKWh": null,
-      "battery_source": null,
-      "commercial_name": null,
-      "commercial_url": null,
-      "source": "EEA co2cars EU Zr",
-      "eea_records": [
-        {
-          "kw": 42.0,
-          "wh_per_km": 167.0,
-          "wltpRangeKm": 384,
-          "n": 1508.0,
-          "status": "F",
-          "eea_model_key": "IONIQ5",
-          "awd": false,
-          "year": 2021,
-          "fingerprint": [
-            2021,
-            "IONIQ5",
-            42.0,
-            167.0,
-            384,
-            false,
-            "F"
-          ]
-        }
-      ],
-      "prudent": {
-        "wltpRangeKm": 384,
-        "wh_per_km": 167.0
-      },
-      "eea_kw": 42.0,
-      "eeaHomologationNote": "Potenza omologata EEA 42 kW (pu\u00f2 differire dalla potenza massima)",
-      "official_matched": false,
-      "official_name": null,
-      "official_power_kw": null,
-      "official_url": "https://www.hyundai.com/eu/en/models/ioniq5/performance.html",
-      "variantVersionIndex": 4
-    },
-    {
-      "id": "hyundai-ioniq-5-2021-v225kw-rwd",
-      "parentId": "hyundai-ioniq-5-2021",
-      "brand": "Hyundai",
-      "model": "Ioniq 5",
-      "year": 2021,
-      "kw": 224.6,
+      "kw": 225.0,
       "awd": false,
       "wh_per_km": 190.0,
       "wh_per_km_min": 176.0,
@@ -12986,22 +12675,60 @@
       "wltpRangeKmMin": 430,
       "wltpRangeKmMax": 462,
       "status": "F",
-      "registrations": 514.0,
+      "registrations": 3645.0,
       "countries": [
         "EU-wide"
       ],
       "cn_raws": [
         "IONIQ5"
       ],
-      "label": "Versione 5",
+      "label": "Long Range AWD \u00b7 225 kW",
       "rangeCaption": "Autonomia WLTP 430\u2013462 km (dipende da cerchi e optional)",
       "awd_from_cn": false,
-      "batteryKWh": null,
-      "battery_source": null,
-      "commercial_name": null,
-      "commercial_url": null,
+      "batteryKWh": 72.6,
+      "battery_source": "oem_official_same_year",
+      "commercial_name": "Long Range AWD",
+      "commercial_url": "https://www.hyundai.news/newsroom/dam/de/Pressemappen/IONIQ_5/Hyundai_IONIQ_5_2_Ausstattung_und_Preise_0521.pdf",
       "source": "EEA co2cars EU Zr",
       "eea_records": [
+        {
+          "kw": 76.0,
+          "wh_per_km": 190.0,
+          "wltpRangeKm": 430,
+          "n": 1959.0,
+          "status": "F",
+          "eea_model_key": "IONIQ5",
+          "awd": false,
+          "year": 2021,
+          "fingerprint": [
+            2021,
+            "IONIQ5",
+            76.0,
+            190.0,
+            430,
+            false,
+            "F"
+          ]
+        },
+        {
+          "kw": 76.0,
+          "wh_per_km": 177.0,
+          "wltpRangeKm": 460,
+          "n": 1172.0,
+          "status": "F",
+          "eea_model_key": "IONIQ5",
+          "awd": false,
+          "year": 2021,
+          "fingerprint": [
+            2021,
+            "IONIQ5",
+            76.0,
+            177.0,
+            460,
+            false,
+            "F"
+          ]
+        },
         {
           "kw": 225.0,
           "wh_per_km": 190.0,
@@ -13102,13 +12829,335 @@
         "wltpRangeKm": 430,
         "wh_per_km": 190.0
       },
-      "eea_kw": 224.6,
-      "eeaHomologationNote": "Potenza omologata EEA 225 kW (pu\u00f2 differire dalla potenza massima)",
+      "eea_kw": 97.0,
+      "official_matched": true,
+      "official_name": "Long Range AWD",
+      "official_power_kw": 225.0,
+      "official_url": "https://www.hyundai.news/newsroom/dam/de/Pressemappen/IONIQ_5/Hyundai_IONIQ_5_2_Ausstattung_und_Preise_0521.pdf",
+      "source_year": 2021,
+      "source_market": "DE",
+      "variantVersionIndex": null,
+      "mergedFromIds": [
+        "hyundai-ioniq-5-2021-v76kw-rwd",
+        "hyundai-ioniq-5-2021-v225kw-rwd"
+      ]
+    },
+    {
+      "id": "hyundai-ioniq-5-2021-v-standard-range-rwd-125kw",
+      "parentId": "hyundai-ioniq-5-2021",
+      "brand": "Hyundai",
+      "model": "Ioniq 5",
+      "year": 2021,
+      "kw": 125.0,
+      "awd": false,
+      "wh_per_km": 167.0,
+      "wh_per_km_min": 167.0,
+      "wh_per_km_max": 167.0,
+      "wltpRangeKm": 384,
+      "wltpRangeKmMin": 384,
+      "wltpRangeKmMax": 384,
+      "status": "F",
+      "registrations": 386.0,
+      "countries": [
+        "EU-wide"
+      ],
+      "cn_raws": [
+        "IONIQ5"
+      ],
+      "label": "Standard Range RWD \u00b7 125 kW",
+      "rangeCaption": "Autonomia WLTP 384 km (dipende da cerchi e optional)",
+      "awd_from_cn": false,
+      "batteryKWh": 58.0,
+      "battery_source": "oem_official_same_year",
+      "commercial_name": "Standard Range RWD",
+      "commercial_url": "https://www.hyundai.news/newsroom/dam/de/Pressemappen/IONIQ_5/Hyundai_IONIQ_5_2_Ausstattung_und_Preise_0521.pdf",
+      "source": "EEA co2cars EU Zr",
+      "eea_records": [
+        {
+          "kw": 125.0,
+          "wh_per_km": 167.0,
+          "wltpRangeKm": 384,
+          "n": 305.0,
+          "status": "F",
+          "eea_model_key": "IONIQ5",
+          "awd": false,
+          "year": 2021,
+          "fingerprint": [
+            2021,
+            "IONIQ5",
+            125.0,
+            167.0,
+            384,
+            false,
+            "F"
+          ]
+        },
+        {
+          "kw": 124.0,
+          "wh_per_km": 167.0,
+          "wltpRangeKm": 384,
+          "n": 81.0,
+          "status": "F",
+          "eea_model_key": "IONIQ5",
+          "awd": false,
+          "year": 2021,
+          "fingerprint": [
+            2021,
+            "IONIQ5",
+            124.0,
+            167.0,
+            384,
+            false,
+            "F"
+          ]
+        }
+      ],
+      "prudent": {
+        "wltpRangeKm": 384,
+        "wh_per_km": 167.0
+      },
+      "eea_kw": 124.8,
+      "official_matched": true,
+      "official_name": "Standard Range RWD",
+      "official_power_kw": 125.0,
+      "official_url": "https://www.hyundai.news/newsroom/dam/de/Pressemappen/IONIQ_5/Hyundai_IONIQ_5_2_Ausstattung_und_Preise_0521.pdf",
+      "source_year": 2021,
+      "source_market": "DE",
+      "variantVersionIndex": null,
+      "mergedFromIds": null
+    },
+    {
+      "id": "hyundai-ioniq-5-2021-v53kw-rwd",
+      "parentId": "hyundai-ioniq-5-2021",
+      "brand": "Hyundai",
+      "model": "Ioniq 5",
+      "year": 2021,
+      "kw": 53.0,
+      "awd": false,
+      "wh_per_km": 179.0,
+      "wh_per_km_min": 168.0,
+      "wh_per_km_max": 179.0,
+      "wltpRangeKm": 451,
+      "wltpRangeKmMin": 451,
+      "wltpRangeKmMax": 481,
+      "status": "F",
+      "registrations": 5331.0,
+      "countries": [
+        "EU-wide"
+      ],
+      "cn_raws": [
+        "IONIQ5"
+      ],
+      "label": "Versione 1",
+      "rangeCaption": "Autonomia WLTP 451\u2013481 km (dipende da cerchi e optional)",
+      "awd_from_cn": false,
+      "batteryKWh": null,
+      "battery_source": null,
+      "commercial_name": null,
+      "commercial_url": null,
+      "source": "EEA co2cars EU Zr",
+      "eea_records": [
+        {
+          "kw": 53.0,
+          "wh_per_km": 168.0,
+          "wltpRangeKm": 481,
+          "n": 3328.0,
+          "status": "F",
+          "eea_model_key": "IONIQ5",
+          "awd": false,
+          "year": 2021,
+          "fingerprint": [
+            2021,
+            "IONIQ5",
+            53.0,
+            168.0,
+            481,
+            false,
+            "F"
+          ]
+        },
+        {
+          "kw": 53.0,
+          "wh_per_km": 179.0,
+          "wltpRangeKm": 451,
+          "n": 2003.0,
+          "status": "F",
+          "eea_model_key": "IONIQ5",
+          "awd": false,
+          "year": 2021,
+          "fingerprint": [
+            2021,
+            "IONIQ5",
+            53.0,
+            179.0,
+            451,
+            false,
+            "F"
+          ]
+        }
+      ],
+      "prudent": {
+        "wltpRangeKm": 451,
+        "wh_per_km": 179.0
+      },
+      "eea_kw": 53.0,
+      "eeaHomologationNote": "Potenza omologata EEA 53 kW (pu\u00f2 differire dalla potenza massima)",
       "official_matched": false,
       "official_name": null,
       "official_power_kw": null,
-      "official_url": "https://www.hyundai.com/eu/en/models/ioniq5/performance.html",
-      "variantVersionIndex": 5
+      "official_url": null,
+      "source_year": null,
+      "source_market": null,
+      "variantVersionIndex": 1
+    },
+    {
+      "id": "hyundai-ioniq-5-2021-v154kw-rwd",
+      "parentId": "hyundai-ioniq-5-2021",
+      "brand": "Hyundai",
+      "model": "Ioniq 5",
+      "year": 2021,
+      "kw": 154.0,
+      "awd": false,
+      "wh_per_km": 190.0,
+      "wh_per_km_min": 177.0,
+      "wh_per_km_max": 190.0,
+      "wltpRangeKm": 430,
+      "wltpRangeKmMin": 430,
+      "wltpRangeKmMax": 460,
+      "status": "F",
+      "registrations": 2421.0,
+      "countries": [
+        "EU-wide"
+      ],
+      "cn_raws": [
+        "IONIQ5"
+      ],
+      "label": "Versione 2",
+      "rangeCaption": "Autonomia WLTP 430\u2013460 km (dipende da cerchi e optional)",
+      "awd_from_cn": false,
+      "batteryKWh": null,
+      "battery_source": null,
+      "commercial_name": null,
+      "commercial_url": null,
+      "source": "EEA co2cars EU Zr",
+      "eea_records": [
+        {
+          "kw": 154.0,
+          "wh_per_km": 190.0,
+          "wltpRangeKm": 430,
+          "n": 1956.0,
+          "status": "F",
+          "eea_model_key": "IONIQ5",
+          "awd": false,
+          "year": 2021,
+          "fingerprint": [
+            2021,
+            "IONIQ5",
+            154.0,
+            190.0,
+            430,
+            false,
+            "F"
+          ]
+        },
+        {
+          "kw": 154.0,
+          "wh_per_km": 177.0,
+          "wltpRangeKm": 460,
+          "n": 465.0,
+          "status": "F",
+          "eea_model_key": "IONIQ5",
+          "awd": false,
+          "year": 2021,
+          "fingerprint": [
+            2021,
+            "IONIQ5",
+            154.0,
+            177.0,
+            460,
+            false,
+            "F"
+          ]
+        }
+      ],
+      "prudent": {
+        "wltpRangeKm": 430,
+        "wh_per_km": 190.0
+      },
+      "eea_kw": 154.0,
+      "eeaHomologationNote": "Potenza omologata EEA 154 kW (pu\u00f2 differire dalla potenza massima)",
+      "official_matched": false,
+      "official_name": null,
+      "official_power_kw": null,
+      "official_url": null,
+      "source_year": null,
+      "source_market": null,
+      "variantVersionIndex": 2
+    },
+    {
+      "id": "hyundai-ioniq-5-2021-v42kw-rwd",
+      "parentId": "hyundai-ioniq-5-2021",
+      "brand": "Hyundai",
+      "model": "Ioniq 5",
+      "year": 2021,
+      "kw": 42.0,
+      "awd": false,
+      "wh_per_km": 167.0,
+      "wh_per_km_min": 167.0,
+      "wh_per_km_max": 167.0,
+      "wltpRangeKm": 384,
+      "wltpRangeKmMin": 384,
+      "wltpRangeKmMax": 384,
+      "status": "F",
+      "registrations": 1508.0,
+      "countries": [
+        "EU-wide"
+      ],
+      "cn_raws": [
+        "IONIQ5"
+      ],
+      "label": "Versione 3",
+      "rangeCaption": "Autonomia WLTP 384 km (dipende da cerchi e optional)",
+      "awd_from_cn": false,
+      "batteryKWh": null,
+      "battery_source": null,
+      "commercial_name": null,
+      "commercial_url": null,
+      "source": "EEA co2cars EU Zr",
+      "eea_records": [
+        {
+          "kw": 42.0,
+          "wh_per_km": 167.0,
+          "wltpRangeKm": 384,
+          "n": 1508.0,
+          "status": "F",
+          "eea_model_key": "IONIQ5",
+          "awd": false,
+          "year": 2021,
+          "fingerprint": [
+            2021,
+            "IONIQ5",
+            42.0,
+            167.0,
+            384,
+            false,
+            "F"
+          ]
+        }
+      ],
+      "prudent": {
+        "wltpRangeKm": 384,
+        "wh_per_km": 167.0
+      },
+      "eea_kw": 42.0,
+      "eeaHomologationNote": "Potenza omologata EEA 42 kW (pu\u00f2 differire dalla potenza massima)",
+      "official_matched": false,
+      "official_name": null,
+      "official_power_kw": null,
+      "official_url": null,
+      "source_year": null,
+      "source_market": null,
+      "variantVersionIndex": 3
     }
   ],
   "note": "Slim fixture; full refs in scripts/cache/eea/"

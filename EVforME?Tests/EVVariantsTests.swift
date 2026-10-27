@@ -51,22 +51,54 @@ final class EVVariantsTests: XCTestCase {
     }
 
     func testMatchedOfficialLabelUsesSystemKwNotEeaTitle() {
-        // Tesla Model Y 2023 Long Range AWD — official system 378 kW (rule A)
+        // Ioniq 5 2021 — DE listino MY21 (58 / 72.6 kWh, AWD 225 — not restyle 63/84/239)
         let kids = VehicleCatalogService.shared.targetEVVehicles().filter {
-            $0.parentId == "tesla-model-y-2023"
+            $0.parentId == "hyundai-ioniq-5-2021"
         }
         let matched = kids.filter { $0.officialMatched == true }
         XCTAssertFalse(matched.isEmpty)
-        XCTAssertTrue(matched.contains { ($0.trim ?? "").contains("378 kW") })
+        XCTAssertTrue(matched.contains { ($0.trim ?? "").contains("225 kW") || ($0.trim ?? "").contains("160 kW") || ($0.trim ?? "").contains("125 kW") })
         for child in matched {
             XCTAssertTrue(child.trim?.contains(" · ") == true)
             XCTAssertTrue(child.trim?.contains("kW") == true)
             XCTAssertNil(child.eeaHomologationNote)
+            if let bat = child.batteryKWh {
+                XCTAssertFalse(abs(bat - 63) < 0.05)
+                XCTAssertFalse(abs(bat - 84) < 0.05)
+            }
+            XCTAssertNotEqual(child.powerKw ?? 0, 239, accuracy: 0.6)
         }
         let unmatched = kids.filter { $0.officialMatched == false }
         for child in unmatched {
             XCTAssertTrue(child.trim?.hasPrefix("Versione ") == true)
             XCTAssertFalse(child.trim?.contains("kW") == true)
+        }
+    }
+
+    func testIoniq5_2021_2022_NoRestyleBatteryOrAwd239() {
+        for parent in ["hyundai-ioniq-5-2021", "hyundai-ioniq-5-2022"] {
+            let kids = VehicleCatalogService.shared.targetEVVehicles().filter {
+                $0.parentId == parent && $0.officialMatched == true
+            }
+            for child in kids {
+                if let bat = child.batteryKWh {
+                    XCTAssertNotEqual(bat, 63, accuracy: 0.05, "\(parent) must not use restyle 63 kWh")
+                    XCTAssertNotEqual(bat, 84, accuracy: 0.05, "\(parent) must not use restyle 84 kWh")
+                }
+                XCTAssertNotEqual(child.powerKw ?? 0, 239, accuracy: 0.6, "\(parent) AWD must not be 239 pre-MY23")
+            }
+        }
+    }
+
+    func testDemotedTeslaModelYIsVersioneNotOfficialName() {
+        let kids = VehicleCatalogService.shared.targetEVVehicles().filter {
+            $0.parentId == "tesla-model-y-2023"
+        }
+        XCTAssertFalse(kids.isEmpty)
+        for child in kids {
+            XCTAssertEqual(child.officialMatched, false)
+            XCTAssertTrue(child.trim?.hasPrefix("Versione ") == true)
+            XCTAssertFalse(child.trim?.contains("Long Range") == true)
         }
     }
 
