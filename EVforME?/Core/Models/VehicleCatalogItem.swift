@@ -97,6 +97,12 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
     let powerKw: Double?
     /// `true` se `energyConsumptionKWhPerKm` / WLTP kWh è il valore **ponderato** (non solo elettrico).
     let energyIsWeighted: Bool?
+    /// `true` se mancano CS fuel e/o kWh charge-depleting usabili nei calcoli — niente verdetto senza override utente.
+    let catalogDataIncomplete: Bool?
+    /// Consumo carburante WLTP **ponderato** (solo informativo; mai nei calcoli).
+    let weightedFuelConsumptionLPerKm: Double?
+    /// Consumo elettrico WLTP **ponderato** (solo informativo; mai nei calcoli).
+    let weightedEnergyConsumptionKWhPerKm: Double?
     /// Riga versione EEA: punta alla riga modello/anno genitore.
     let parentId: String?
     /// Autonomia WLTP massima del gruppo versione (min è `wltpRangeKm`, caso prudente).
@@ -186,6 +192,22 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
 
     /// Energia catalogo dichiarata come WLTP ponderato (non charge-depleting / solo elettrico).
     var usesWeightedElectricEnergy: Bool { energyIsWeighted == true }
+
+    /// Dati catalogo insufficienti per un verdetto automatico (PHEV senza CS+CD, BEV senza kWh).
+    var hasIncompleteCatalogData: Bool { catalogDataIncomplete == true }
+
+    /// Consumo benzina charge-sustaining usabile nei calcoli (≥ 3 L/100, non ponderato).
+    var usableChargeSustainingFuelLPerKm: Double? {
+        guard let fuel = fuelConsumptionLPerKm, fuel > 0 else { return nil }
+        if powertrain == .phev, fuel * 100.0 < 3.0 { return nil }
+        return fuel
+    }
+
+    /// Consumo elettrico charge-depleting usabile nei calcoli (non ponderato).
+    var usableChargeDepletingEnergyKWhPerKm: Double? {
+        if usesWeightedElectricEnergy { return nil }
+        return resolvedEnergyKWhPerKm
+    }
 
     /// Quota km elettrici stimata per PHEV (0…1).
     ///
@@ -322,6 +344,9 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         fuelKind: FuelKind? = nil,
         powerKw: Double? = nil,
         energyIsWeighted: Bool? = nil,
+        catalogDataIncomplete: Bool? = nil,
+        weightedFuelConsumptionLPerKm: Double? = nil,
+        weightedEnergyConsumptionKWhPerKm: Double? = nil,
         parentId: String? = nil,
         wltpRangeKmMax: Int? = nil,
         energyConsumptionKWhPerKmMin: Double? = nil,
@@ -355,6 +380,9 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         self.fuelKind = fuelKind
         self.powerKw = powerKw
         self.energyIsWeighted = energyIsWeighted
+        self.catalogDataIncomplete = catalogDataIncomplete
+        self.weightedFuelConsumptionLPerKm = weightedFuelConsumptionLPerKm
+        self.weightedEnergyConsumptionKWhPerKm = weightedEnergyConsumptionKWhPerKm
         self.parentId = parentId
         self.wltpRangeKmMax = wltpRangeKmMax
         self.energyConsumptionKWhPerKmMin = energyConsumptionKWhPerKmMin

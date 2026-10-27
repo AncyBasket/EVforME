@@ -104,6 +104,10 @@ struct MainShellView: View {
             if ProcessInfo.processInfo.environment["UITEST_SOURCE_FUEL"] == "lpg" {
                 userInput.sourceVehicleId = "dacia-sandero-eco-g-2022"
             }
+            if ProcessInfo.processInfo.environment["UITEST_INCOMPLETE_PHEV"] == "1" {
+                // PHEV con dati incompleti (fuel/energy ponderati EEA) → chiede consumi, niente verdetto.
+                userInput.targetVehicleId = "bmw-serie-2-active-tourer-225e-xdrive-2023"
+            }
             if let raw = ProcessInfo.processInfo.environment["UITEST_FUEL_PRICE"],
                let price = Double(raw.replacingOccurrences(of: ",", with: ".")) {
                 userInput.fuelPrice = price

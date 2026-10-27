@@ -518,6 +518,14 @@
 /* Correctness validation */
 "validation_missing_fuel_consumption" = "Fuel consumption is missing for the selected vehicle.";
 "validation_missing_energy_consumption" = "Electric consumption is missing for the selected vehicle.";
+"validation_incomplete_catalog_enter_fuel" = "Incomplete data: enter charge-sustaining fuel use (L/100 km).";
+"validation_incomplete_catalog_enter_energy" = "Incomplete data: enter electric consumption (kWh/100 km).";
+"validation_phev_fuel_too_low_for_calc" = "EEA weighted fuel (< 3 L/100) cannot be used in calculations: enter charge-sustaining fuel use.";
+"incomplete_catalog_data_title" = "Incomplete data";
+"incomplete_catalog_data_body_phev" = "For this plug-in hybrid we lack official same-year charge-sustaining fuel and/or charge-depleting kWh. Enter them here — we will not compute a verdict without them (EEA weighted figures are not enough).";
+"incomplete_catalog_data_body_bev" = "For this EV we lack official same-year kWh/100. Enter it here — we will not invent a verdict without it.";
+"incomplete_catalog_fuel_field" = "Fuel with empty battery (L/100 km)";
+"incomplete_catalog_energy_field" = "Electric consumption (kWh/100 km)";
 "validation_unknown_source_vehicle" = "Current vehicle not found in the catalog.";
 "validation_unknown_target_vehicle" = "Electrified vehicle not found in the catalog.";
 

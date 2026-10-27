@@ -516,6 +516,14 @@
 /* Correctness validation */
 "validation_missing_fuel_consumption" = "Consumo carburante mancante per il veicolo selezionato.";
 "validation_missing_energy_consumption" = "Consumo elettrico mancante per il veicolo selezionato.";
+"validation_incomplete_catalog_enter_fuel" = "Dati incompleti: inserisci il consumo a batteria scarica (L/100 km).";
+"validation_incomplete_catalog_enter_energy" = "Dati incompleti: inserisci il consumo elettrico (kWh/100 km).";
+"validation_phev_fuel_too_low_for_calc" = "Il consumo ponderato EEA (< 3 L/100) non si può usare nei calcoli: inserisci il consumo a batteria scarica.";
+"incomplete_catalog_data_title" = "Dati incompleti";
+"incomplete_catalog_data_body_phev" = "Per questa plug-in hybrid non abbiamo il consumo a batteria scarica e/o i kWh in elettrico da fonte ufficiale. Inseriscili qui — senza questi valori non calcoliamo il verdetto (il consumo «ponderato» EEA non basta).";
+"incomplete_catalog_data_body_bev" = "Per questa elettrica non abbiamo il consumo kWh/100 da fonte ufficiale dello stesso anno. Inseriscilo qui — senza questo valore non calcoliamo il verdetto.";
+"incomplete_catalog_fuel_field" = "Benzina a batteria scarica (L/100 km)";
+"incomplete_catalog_energy_field" = "Consumo elettrico (kWh/100 km)";
 "validation_unknown_source_vehicle" = "Veicolo attuale non trovato nel catalogo.";
 "validation_unknown_target_vehicle" = "Veicolo elettrificato non trovato nel catalogo.";
 

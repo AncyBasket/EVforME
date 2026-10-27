@@ -411,6 +411,76 @@ final class EVforME_UITests: XCTestCase {
         XCTAssertTrue(chargesOK, "Chosen version should show weekly charges on verdict")
     }
 
+    /// PHEV con catalogDataIncomplete: chiede consumi e non apre un verdetto inventato.
+    @MainActor
+    func testIncompletePHEVAsksForConsumptionInsteadOfVerdict() throws {
+        let app = XCUIApplication()
+        app.launchEnvironment["UITEST_PRESET_VEHICLES"] = "1"
+        app.launchEnvironment["UITEST_INCOMPLETE_PHEV"] = "1"
+        app.launchArguments += ["-UITesting", "-DisableAnimations"]
+        app.launch()
+
+        dismissQuickStartIfNeeded(app)
+
+        let incompleteCard = app.descendants(matching: .any)["incomplete_catalog_data_card"]
+        let titleById = app.descendants(matching: .any)["incomplete_catalog_data_title"]
+        let titleIT = app.staticTexts["Dati incompleti"]
+        let titleEN = app.staticTexts["Incomplete data"]
+        let promptVisible =
+            incompleteCard.waitForExistence(timeout: 12)
+            || titleById.waitForExistence(timeout: 2)
+            || titleIT.waitForExistence(timeout: 2)
+            || titleEN.waitForExistence(timeout: 1)
+        XCTAssertTrue(promptVisible, "Incomplete PHEV must show the consumption prompt")
+        XCTAssertTrue(
+            app.descendants(matching: .any)["incomplete_catalog_fuel_field"].exists
+                || app.descendants(matching: .any)["incomplete_catalog_energy_field"].exists
+                || app.staticTexts.matching(
+                    NSPredicate(format: "label CONTAINS[c] %@", "batteria scarica")
+                ).firstMatch.exists
+                || app.staticTexts.matching(
+                    NSPredicate(format: "label CONTAINS[c] %@", "empty battery")
+                ).firstMatch.exists
+                || app.staticTexts.matching(
+                    NSPredicate(format: "label CONTAINS[c] %@", "kWh/100")
+                ).firstMatch.exists,
+            "Must show fuel and/or energy entry fields"
+        )
+
+        let tellMeEN = app.buttons["Tell me the truth"]
+        let tellMeIT = app.buttons["Dimmi la verità"]
+        XCTAssertTrue(
+            tellMeEN.waitForExistence(timeout: 3) || tellMeIT.waitForExistence(timeout: 1),
+            "Simulate CTA should exist"
+        )
+        if tellMeEN.exists { tellMeEN.tap() } else { tellMeIT.tap() }
+
+        let modifyEN = app.buttons["Change inputs"]
+        let modifyIT = app.buttons["Modifica dati"]
+        let modifyLegacy = app.buttons["Modify input"]
+        let verdictOpened =
+            modifyEN.waitForExistence(timeout: 4)
+            || modifyIT.waitForExistence(timeout: 2)
+            || modifyLegacy.waitForExistence(timeout: 1)
+        XCTAssertFalse(
+            verdictOpened,
+            "Incomplete PHEV must not open a verdict without user consumption"
+        )
+        // Prompt still on bench after failed simulate.
+        XCTAssertTrue(
+            incompleteCard.exists
+                || titleIT.exists
+                || titleEN.exists
+                || app.staticTexts.matching(
+                    NSPredicate(format: "label CONTAINS[c] %@", "Dati incompleti")
+                ).firstMatch.exists
+                || app.staticTexts.matching(
+                    NSPredicate(format: "label CONTAINS[c] %@", "Incomplete data")
+                ).firstMatch.exists,
+            "Incomplete prompt should remain after blocked simulate"
+        )
+    }
+
     @MainActor
     func testLaunchPerformance() throws {
         measure(metrics: [XCTApplicationLaunchMetric()]) {

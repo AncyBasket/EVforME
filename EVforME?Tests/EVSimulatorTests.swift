@@ -682,11 +682,11 @@ final class EVSimulatorTests: XCTestCase {
             .init(name: "Ateca→Model3", source: "seat-ateca-2016", target: "tesla-model-3-2023", intent: .alreadyOwned, home: true, km: 16_000, sourcePrice: 14_000, targetPrice: 40_000, stickerFuel: nil, stickerEnergy: nil),
             // Premium ICE → EV purchase
             .init(name: "Serie3→Model3 buy", source: "bmw-3-series-2018", target: "tesla-model-3-2024", intent: .consideringPurchase, home: true, km: 20_000, sourcePrice: 22_000, targetPrice: 42_000, stickerFuel: nil, stickerEnergy: nil),
-            // ICE → PHEV (EU WLTP CS)
-            .init(name: "Corsa→330ePHEV", source: "opel-corsa-2018", target: "bmw-330e-phev-2024", intent: .consideringPurchase, home: true, km: 15_000, sourcePrice: 8_000, targetPrice: 34_000, stickerFuel: nil, stickerEnergy: nil),
-            // ICE → PHEV (EU WLTP CS Golf GTE)
-            .init(name: "Golf→GolfGTE", source: "volkswagen-golf-2016", target: "volkswagen-golf-gte-phev-2024", intent: .alreadyOwned, home: true, km: 14_000, sourcePrice: 10_000, targetPrice: 36_000, stickerFuel: nil, stickerEnergy: nil),
-            // PHEV → EV
+            // ICE → PHEV (CS fuel in catalog; CD kWh was weighted → user override)
+            .init(name: "Corsa→330ePHEV", source: "opel-corsa-2018", target: "bmw-330e-phev-2024", intent: .consideringPurchase, home: true, km: 15_000, sourcePrice: 8_000, targetPrice: 34_000, stickerFuel: nil, stickerEnergy: 22.0),
+            // ICE → PHEV (CS fuel in catalog; CD kWh override)
+            .init(name: "Golf→GolfGTE", source: "volkswagen-golf-2016", target: "volkswagen-golf-gte-phev-2024", intent: .alreadyOwned, home: true, km: 14_000, sourcePrice: 10_000, targetPrice: 36_000, stickerFuel: nil, stickerEnergy: 16.0),
+            // PHEV → EV (source PHEV incomplete CD → needs source energy override; set after init)
             .init(name: "CX60PHEV→ID.3", source: "mazda-cx-60-phev-2024", target: "volkswagen-id3-2024", intent: .alreadyOwned, home: true, km: 18_000, sourcePrice: 28_000, targetPrice: 36_000, stickerFuel: nil, stickerEnergy: nil),
             // City → Leaf
             .init(name: "208→Leaf", source: "peugeot-208-2018", target: "nissan-leaf-2023", intent: .alreadyOwned, home: false, km: 10_000, sourcePrice: 9_000, targetPrice: 24_000, stickerFuel: nil, stickerEnergy: nil),
@@ -726,6 +726,11 @@ final class EVSimulatorTests: XCTestCase {
                 sourceConsumptionOverrideLPer100Km: pair.stickerFuel,
                 targetEnergyOverrideKWhPer100Km: pair.stickerEnergy
             )
+            // Incomplete PHEV as source: CS fuel may be present; CD kWh needs override.
+            if pair.source.contains("phev"),
+               VehicleCatalogService.shared.vehicle(by: pair.source)?.hasIncompleteCatalogData == true {
+                input.sourceEnergyOverrideKWhPer100Km = 22.0
+            }
             if pair.km == 0 {
                 // Explicit edge: premium still 0 when owned; simulation uses clamped km via validator or fails closed.
                 XCTAssertEqual(input.netPurchasePremiumEUR, 0)
@@ -834,6 +839,86 @@ final class EVSimulatorTests: XCTestCase {
             L10n.verdictTrustStrip.contains("MIMIT") || L10n.verdictTrustStrip.contains("Eurostat"),
             L10n.verdictTrustStrip
         )
+    }
+
+    func testIncompletePHEV_WithoutOverrides_NoVerdict() {
+        let incompleteId = "bmw-serie-2-active-tourer-225e-xdrive-2023"
+        let vehicle = VehicleCatalogService.shared.vehicle(by: incompleteId)
+        XCTAssertNotNil(vehicle)
+        XCTAssertEqual(vehicle?.catalogDataIncomplete, true)
+        XCTAssertNil(vehicle?.usableChargeSustainingFuelLPerKm)
+        XCTAssertNil(vehicle?.usableChargeDepletingEnergyKWhPerKm)
+
+        let input = UserInput(
+            dailyKm: 15_000,
+            hasHomeCharging: true,
+            areaType: .mixed,
+            fuelPrice: 1.8,
+            ownershipYears: 5,
+            electricityPricePerKWh: 0.30,
+            sourceVehicleId: testSourceVehicleId,
+            targetVehicleId: incompleteId,
+            scenario: .realistic
+        )
+        XCTAssertNil(EVSimulator.simulate(input: input, scenario: .realistic))
+        let errors = InputValidator.validate(input)
+        XCTAssertTrue(
+            errors.contains(where: {
+                $0 == L10n.validationIncompleteCatalogEnterFuel
+                    || $0 == L10n.validationIncompleteCatalogEnterEnergy
+                    || $0 == L10n.validationMissingFuelConsumption
+                    || $0 == L10n.validationMissingEnergyConsumption
+            }),
+            "Expected incomplete-data validation, got: \(errors)"
+        )
+    }
+
+    func testIncompletePHEV_ThinFuelNeverUsedInCalc_EvenWithOverrideBelow3() {
+        let incompleteId = "bmw-serie-2-active-tourer-225e-xdrive-2023"
+        var input = UserInput(
+            dailyKm: 15_000,
+            hasHomeCharging: true,
+            areaType: .mixed,
+            fuelPrice: 1.8,
+            ownershipYears: 5,
+            electricityPricePerKWh: 0.30,
+            sourceVehicleId: testSourceVehicleId,
+            targetVehicleId: incompleteId,
+            scenario: .realistic,
+            targetEnergyOverrideKWhPer100Km: 18,
+            targetFuelConsumptionOverrideLPer100Km: 0.69
+        )
+        // Override < 3 L/100 must not unlock a verdict.
+        XCTAssertNil(EVSimulator.simulate(input: input, scenario: .realistic))
+        let errors = InputValidator.validate(input)
+        XCTAssertTrue(
+            errors.contains(L10n.validationPHEVFuelTooLowForCalc)
+                || errors.contains(L10n.validationStickerFuelRange),
+            "Thin fuel override must fail validation, got: \(errors)"
+        )
+
+        input.targetFuelConsumptionOverrideLPer100Km = 6.5
+        XCTAssertNotNil(EVSimulator.simulate(input: input, scenario: .realistic))
+    }
+
+    func testIncompleteBEV_WithoutEnergy_NoVerdict() {
+        let id = "alfa-romeo-junior-elettrica-2025"
+        let vehicle = VehicleCatalogService.shared.vehicle(by: id)
+        XCTAssertEqual(vehicle?.catalogDataIncomplete, true)
+        XCTAssertNil(vehicle?.usableChargeDepletingEnergyKWhPerKm)
+
+        let input = UserInput(
+            dailyKm: 12_000,
+            hasHomeCharging: true,
+            areaType: .urban,
+            fuelPrice: 1.8,
+            ownershipYears: 5,
+            electricityPricePerKWh: 0.30,
+            sourceVehicleId: testSourceVehicleId,
+            targetVehicleId: id,
+            scenario: .realistic
+        )
+        XCTAssertNil(EVSimulator.simulate(input: input, scenario: .realistic))
     }
 
     private func verdictRank(_ verdict: EVVerdict) -> Int {

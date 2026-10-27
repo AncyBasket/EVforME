@@ -174,10 +174,14 @@ struct UserInput {
     var comparisonIntent: ComparisonIntent
     /// Profilo tragitti tipici.
     var tripProfile: TripProfile
-    /// Override consumi ICE da OCR sticker (L/100 km). `nil` = usa catalogo.
+    /// Override consumi ICE/PHEV CS da OCR o input manuale (L/100 km). `nil` = usa catalogo.
     var sourceConsumptionOverrideLPer100Km: Double?
-    /// Override energia EV da OCR (kWh/100 km). `nil` = usa catalogo.
+    /// Override energia EV/PHEV CD da OCR o input manuale (kWh/100 km). `nil` = usa catalogo.
     var targetEnergyOverrideKWhPer100Km: Double?
+    /// Override energia PHEV CD quando la PHEV è l’auto attuale (kWh/100).
+    var sourceEnergyOverrideKWhPer100Km: Double?
+    /// Override benzina CS quando la PHEV è il target (L/100).
+    var targetFuelConsumptionOverrideLPer100Km: Double?
     /// Configurazione ricarica personalizzata
     var chargingConfiguration: ChargingConfiguration
     /// Paese per tariffe manutenzione / contesto costi (ISO → AppMarket).
@@ -214,6 +218,8 @@ struct UserInput {
         tripProfile: TripProfile = .custom,
         sourceConsumptionOverrideLPer100Km: Double? = nil,
         targetEnergyOverrideKWhPer100Km: Double? = nil,
+        sourceEnergyOverrideKWhPer100Km: Double? = nil,
+        targetFuelConsumptionOverrideLPer100Km: Double? = nil,
         chargingConfiguration: ChargingConfiguration = ChargingConfiguration(),
         market: AppMarket = AppMarket.fromDeviceLocale(),
         annualInsuranceOverrideEUR: Double? = nil,
@@ -240,6 +246,8 @@ struct UserInput {
         self.tripProfile = tripProfile
         self.sourceConsumptionOverrideLPer100Km = sourceConsumptionOverrideLPer100Km
         self.targetEnergyOverrideKWhPer100Km = targetEnergyOverrideKWhPer100Km
+        self.sourceEnergyOverrideKWhPer100Km = sourceEnergyOverrideKWhPer100Km
+        self.targetFuelConsumptionOverrideLPer100Km = targetFuelConsumptionOverrideLPer100Km
         self.chargingConfiguration = chargingConfiguration
         self.market = market
         self.annualInsuranceOverrideEUR = annualInsuranceOverrideEUR

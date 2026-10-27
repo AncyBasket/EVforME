@@ -34,8 +34,12 @@ enum OperatingCostCalculator {
             vehicle: vehicle,
             input: simInput,
             scenario: scenario,
-            fuelOverrideLPerKm: asSource ? simInput.iceFuelLPerKmOverride : nil,
-            energyOverrideKWhPerKm: asSource ? nil : simInput.evKWhPerKmOverride,
+            fuelOverrideLPerKm: asSource
+                ? simInput.iceFuelLPerKmOverride
+                : simInput.targetFuelLPerKmOverride,
+            energyOverrideKWhPerKm: asSource
+                ? simInput.sourceEnergyKWhPerKmOverride
+                : simInput.evKWhPerKmOverride,
             asSource: asSource
         )
 
@@ -162,6 +166,8 @@ enum OperatingCostCalculator {
     static func makeSimulationInput(from input: UserInput) -> EVSimulationInput {
         let iceOverride = input.sourceConsumptionOverrideLPer100Km.map { $0 / 100.0 }
         let evOverride = input.targetEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
+        let sourceEnergyOverride = input.sourceEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
+        let targetFuelOverride = input.targetFuelConsumptionOverrideLPer100Km.map { $0 / 100.0 }
         var sim = EVSimulationInput(
             yearlyKm: Double(input.dailyKm),
             years: input.ownershipYears,
@@ -175,6 +181,8 @@ enum OperatingCostCalculator {
             comparisonIntent: input.comparisonIntent,
             iceFuelLPerKmOverride: iceOverride,
             evKWhPerKmOverride: evOverride,
+            sourceEnergyKWhPerKmOverride: sourceEnergyOverride,
+            targetFuelLPerKmOverride: targetFuelOverride,
             chargingConfiguration: input.resolvedChargingConfiguration()
         )
         sim.petrolPricePerLiter = resolvePetrolPricePerLiter(for: input)

@@ -29,7 +29,7 @@ CDN = REPO / "EVforME?" / "Data" / "catalog_cdn.json"
 ALIAS = REPO / "EVforME?" / "Data" / "homologation_commercial_aliases.json"
 MANIFEST = REPO / "scripts" / "cache" / "eea" / "catalog_it_wave2_manifest.json"
 
-EXPECTED_SEED_VERSION = 64
+EXPECTED_SEED_VERSION = 65
 WAVE2_ID_PREFIXES = (
     "alfa-romeo-junior-elettrica-",
     "audi-rs3-sportback-",
@@ -407,6 +407,49 @@ def main() -> int:
         for rid in sorted(man.get("added") or []):
             if rid not in rows:
                 failures.append(f"manifest_added_missing:{rid}")
+
+    # PHEV/BEV calc hygiene: never keep weighted thin fuel in fuelConsumptionLPerKm;
+    # incomplete rows must be flagged; complete PHEVs need CS≥3 + non-weighted energy.
+    phev_complete = 0
+    phev_incomplete = 0
+    bev_incomplete = 0
+    for rid in sorted(rows):
+        r = rows[rid]
+        if r.get("parentId"):
+            continue
+        pt = r.get("powertrain")
+        fuel = r.get("fuelConsumptionLPerKm")
+        energy = r.get("energyConsumptionKWhPerKm")
+        incomplete = r.get("catalogDataIncomplete") is True
+        if pt == "phev":
+            if fuel is not None and float(fuel) * 100.0 < 3.0:
+                failures.append(f"{rid}:phev_thin_fuel_in_calc_field")
+            weighted_energy = r.get("energyIsWeighted") is True and energy is not None
+            if weighted_energy:
+                failures.append(f"{rid}:phev_weighted_energy_in_calc_field")
+            cs_ok = fuel is not None and float(fuel) * 100.0 >= 3.0
+            cd_ok = energy is not None and float(energy) > 0 and r.get("energyIsWeighted") is not True
+            if cs_ok and cd_ok:
+                if incomplete:
+                    failures.append(f"{rid}:phev_complete_but_flagged_incomplete")
+                phev_complete += 1
+            else:
+                if not incomplete:
+                    failures.append(f"{rid}:phev_incomplete_missing_flag")
+                phev_incomplete += 1
+        elif pt == "ev":
+            e = energy
+            if e is None and r.get("wltpConsumptionKWh100km") is not None:
+                e = float(r["wltpConsumptionKWh100km"]) / 100.0
+            if e is None or float(e) <= 0:
+                if not incomplete:
+                    failures.append(f"{rid}:bev_incomplete_missing_flag")
+                bev_incomplete += 1
+
+    print(
+        f"phev_complete={phev_complete} phev_incomplete={phev_incomplete} "
+        f"bev_incomplete={bev_incomplete}"
+    )
 
     print(f"wave2_rows_checked={len(wave_ids)} must_ok={must_ok} failures={len(failures)}")
     if failures:

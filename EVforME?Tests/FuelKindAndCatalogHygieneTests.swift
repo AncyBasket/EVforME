@@ -154,14 +154,24 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
                 XCTAssertNotNil(v.resolvedEnergyKWhPerKm, v.id)
                 XCTAssertGreaterThan(v.resolvedEnergyKWhPerKm ?? 0, 0, v.id)
             case .phev:
-                // Fuel from EEA always required; electric kWh/range/battery may be nil
-                // when same-MY OEM/EEA energy source is missing (documented in sourceName).
-                XCTAssertNotNil(v.fuelConsumptionLPerKm, v.id)
-                if v.resolvedEnergyKWhPerKm == nil {
+                // Calc fields must be CS fuel (≥3) + CD energy, or catalogDataIncomplete.
+                if v.hasIncompleteCatalogData {
+                    if let fuel = v.fuelConsumptionLPerKm {
+                        XCTAssertGreaterThanOrEqual(
+                            fuel * 100,
+                            3.0,
+                            "Incomplete PHEV \(v.id) must not keep thin/weighted fuel in calc field"
+                        )
+                    }
                     XCTAssertTrue(
-                        allowsNilElectricEnergy(v),
-                        "PHEV \(v.id) missing energy without documented EEA/OEM nil"
+                        v.usableChargeSustainingFuelLPerKm == nil
+                            || v.usableChargeDepletingEnergyKWhPerKm == nil,
+                        "Incomplete PHEV \(v.id) should still miss CS or CD for calc"
                     )
+                } else {
+                    XCTAssertNotNil(v.usableChargeSustainingFuelLPerKm, v.id)
+                    XCTAssertNotNil(v.usableChargeDepletingEnergyKWhPerKm, v.id)
+                    XCTAssertGreaterThanOrEqual((v.fuelConsumptionLPerKm ?? 0) * 100, 3.0, v.id)
                 }
             }
         }
@@ -613,16 +623,12 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         let phev90 = catalog.filter { $0.powertrain == .phev && abs($0.taxesPerYear - 90) < 0.01 }
         XCTAssertTrue(phev90.isEmpty, "PHEV flat €90 removed: \(phev90.map(\.id))")
 
-        // CS discharged fuel must be ≥3 L/100. Weighted WLTP blend (energyIsWeighted)
-        // may be <3. Energy/battery optional when only EEA CO2+fuel is available.
+        // Calc field must never hold EEA weighted blend (<3 L/100). Nil is OK when incomplete.
         let thinPHEV = catalog.filter { v in
-            guard v.powertrain == .phev else { return false }
-            let l100 = (v.fuelConsumptionLPerKm ?? 0) * 100
-            if l100 <= 0 { return true }
-            if v.energyIsWeighted == true { return false }
-            return l100 < 3.0
+            guard v.powertrain == .phev, let fuel = v.fuelConsumptionLPerKm else { return false }
+            return fuel * 100.0 < 3.0
         }
-        XCTAssertTrue(thinPHEV.isEmpty, "PHEV CS (non-weighted) must be ≥3 L/100: \(thinPHEV.map(\.id))")
+        XCTAssertTrue(thinPHEV.isEmpty, "PHEV calc fuel must be CS ≥3 L/100 or nil: \(thinPHEV.map(\.id))")
 
         let eeaLowN = catalog.filter { v in
             guard let sn = v.sourceName, sn.hasPrefix("EEA co2cars") else { return false }
