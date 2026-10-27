@@ -1,0 +1,166 @@
+{
+  "_comment": "Official manufacturer power figures (kW) for EV variant audit. No invented values. powers_kw may include per-motor and combined system figures when the OEM sheet lists them.",
+  "byParentId": {
+    "hyundai-ioniq-5-n-2023": {
+      "powers_kw": [
+        448,
+        478
+      ],
+      "url": "https://www.hyundai.news/eu/models/performance/ioniq-5-n/press-kit/press-information.html",
+      "note": "448 kW normal / 478 kW with N Grin Boost (Hyundai EU press kit)"
+    },
+    "hyundai-ioniq-5-n-2024": {
+      "powers_kw": [
+        448,
+        478
+      ],
+      "url": "https://www.hyundai.news/newsroom/dam/eu/press-kits/20240325_ioniq_5_n/hyundai-ioniq-5-n-technical-data-0324.pdf",
+      "note": "448 / 478 kW N Grin Boost (Hyundai technical data March 2024)"
+    },
+    "hyundai-ioniq-5-n-2025": {
+      "powers_kw": [
+        448,
+        478
+      ],
+      "url": "https://www.hyundai.news/eu/models/performance/ioniq-5-n/press-kit/press-information.html",
+      "note": "448 / 478 kW N Grin Boost"
+    },
+    "dacia-spring-2023": {
+      "powers_kw": [
+        33,
+        48
+      ],
+      "url": "https://media.dacia.com/dacia-spring-a-new-extreme-trim-and-brand-new-electric-65-engine/?lang=eng",
+      "note": "Electric 45 = 33 kW; Electric 65 = 48 kW (Dacia media)"
+    },
+    "tesla-model-y-2023": {
+      "powers_kw": [
+        158,
+        220,
+        235,
+        255,
+        303,
+        378,
+        393,
+        461
+      ],
+      "url": "https://www.tesla.com/en_gb/support/power-consumption",
+      "note": "Tesla UK WLTP table: per-axle kW and F+R sums (158+220=378, 158+235=393, 158+303=461)"
+    },
+    "tesla-model-y-2024": {
+      "powers_kw": [
+        158,
+        220,
+        235,
+        255,
+        303,
+        378,
+        393,
+        461
+      ],
+      "url": "https://www.tesla.com/en_gb/support/power-consumption",
+      "note": "Tesla UK WLTP power table (axle + F+R sums)"
+    },
+    "tesla-model-y-2025": {
+      "powers_kw": [
+        158,
+        220,
+        235,
+        255,
+        303,
+        378,
+        393,
+        461
+      ],
+      "url": "https://www.tesla.com/en_gb/support/power-consumption",
+      "note": "Tesla UK WLTP power table (axle + F+R sums)"
+    },
+    "tesla-model-3-2020": {
+      "powers_kw": [
+        158,
+        194,
+        202,
+        220,
+        235,
+        239,
+        255,
+        258,
+        303,
+        331,
+        346,
+        375,
+        393,
+        450,
+        461
+      ],
+      "url": "https://www.tesla.com/en_gb/support/power-consumption",
+      "note": "Tesla UK WLTP power table (axle + F+R sums)"
+    },
+    "tesla-model-3-2021": {
+      "powers_kw": [
+        158,
+        194,
+        202,
+        220,
+        235,
+        239,
+        255,
+        258,
+        303,
+        331,
+        346,
+        375,
+        393,
+        450,
+        461
+      ],
+      "url": "https://www.tesla.com/en_gb/support/power-consumption",
+      "note": "Tesla UK WLTP power table (axle + F+R sums)"
+    },
+    "tesla-model-3-2024": {
+      "powers_kw": [
+        158,
+        194,
+        202,
+        220,
+        235,
+        239,
+        255,
+        258,
+        303,
+        331,
+        346,
+        375,
+        393,
+        450,
+        461
+      ],
+      "url": "https://www.tesla.com/en_gb/support/power-consumption",
+      "note": "Tesla UK WLTP power table (axle + F+R sums)"
+    },
+    "hyundai-ioniq-5-2022": {
+      "powers_kw": [
+        74,
+        125,
+        160,
+        165,
+        168,
+        239
+      ],
+      "url": "https://www.hyundai.com/eu/en/models/ioniq5/performance.html",
+      "note": "Hyundai EU Ioniq 5 performance: 125 / 168 RWD; AWD 74+165=239 kW"
+    },
+    "hyundai-ioniq-5-2023": {
+      "powers_kw": [
+        74,
+        125,
+        160,
+        165,
+        168,
+        239
+      ],
+      "url": "https://www.hyundai.com/eu/en/models/ioniq5/performance.html",
+      "note": "Hyundai EU Ioniq 5 performance: 125 / 168 RWD; AWD 74+165=239 kW"
+    }
+  }
+}

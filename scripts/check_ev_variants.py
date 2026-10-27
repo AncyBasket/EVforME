@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import json
 import sys
+from collections import defaultdict
 from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -300,6 +301,73 @@ def main() -> int:
             # May be no_cn / none_after_filters — not an fp whole wipe.
             print(f"must-fail OK: focus_not_fp_wiped_{pid}")
             must_ok += 1
+
+    ioniq_n = [v for v in variants if v.get("parentId") == "hyundai-ioniq-5-n-2023"]
+    if len(ioniq_n) > 1:
+        failures.append(f"ioniq-5-n-2023_too_many_groups:{len(ioniq_n)}")
+        print(f"must-fail FAIL: ioniq-5-n-2023 groups={len(ioniq_n)}")
+    else:
+        print(f"must-fail OK: ioniq-5-n-2023_groups={len(ioniq_n)}")
+        must_ok += 1
+
+    spring = [v for v in variants if v.get("parentId") == "dacia-spring-2023"]
+    if len(spring) > 2:
+        failures.append(f"dacia-spring-2023_too_many_groups:{len(spring)}")
+        print(f"must-fail FAIL: dacia-spring-2023 groups={len(spring)}")
+    else:
+        print(f"must-fail OK: dacia-spring-2023_groups={len(spring)}")
+        must_ok += 1
+
+    min_share = float(refs.get("minShareOfParent") or build.MIN_SHARE_OF_PARENT)
+    min_abs = float(refs.get("minAbsoluteRegistrations") or build.MIN_ABS_REGISTRATIONS)
+    by_parent_regs: dict[str, float] = defaultdict(float)
+    for v in variants:
+        by_parent_regs[str(v.get("parentId") or "")] += float(v.get("registrations") or 0)
+    for v in variants:
+        n = float(v.get("registrations") or 0)
+        total = by_parent_regs.get(str(v.get("parentId") or ""), 0.0) or 0.0
+        share = (n / total) if total > 0 else 0.0
+        if n < min_abs and share < min_share:
+            failures.append(f"{v.get('id')}: below_registration_threshold")
+    else:
+        # for-else: no break — still print OK if no failures appended for this check
+        pass
+    if not any("below_registration_threshold" in f for f in failures):
+        print("must-fail OK: no_group_below_registration_threshold")
+        must_ok += 1
+    else:
+        print("must-fail FAIL: group_below_registration_threshold")
+
+    # EEA record fingerprint must not appear under two parents.
+    fp_owners: dict[tuple, str] = {}
+    shared = 0
+    for v in variants:
+        pid = str(v.get("parentId") or "")
+        for rec in v.get("eea_records") or []:
+            fp = rec.get("fingerprint")
+            if fp is None:
+                fp = (
+                    int(rec.get("year") or v.get("year") or 0),
+                    str(rec.get("eea_model_key") or ""),
+                    round(float(rec["kw"]), 1),
+                    round(float(rec["wh_per_km"]), 1),
+                    int(rec["wltpRangeKm"]),
+                    bool(rec.get("awd")),
+                    str(rec.get("status") or ""),
+                )
+            else:
+                fp = tuple(fp)
+            prev = fp_owners.get(fp)
+            if prev is None:
+                fp_owners[fp] = pid
+            elif prev != pid:
+                shared += 1
+                failures.append(f"shared_eea_record:{fp}:parents={prev},{pid}")
+    if shared == 0:
+        print("must-fail OK: no_eea_record_shared_across_parents")
+        must_ok += 1
+    else:
+        print(f"must-fail FAIL: shared_eea_records={shared}")
 
     print(
         f"checked_variants={checked} must_fail_ok={must_ok} failures={len(failures)}"
