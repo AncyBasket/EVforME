@@ -23,9 +23,14 @@ if str(SCRIPT_DIR) not in sys.path:
 
 import fill_catalog_fuels_from_eea as eea
 
-NEW_SEED_VERSION = 61
+NEW_SEED_VERSION = 62
 KW_TOL = 5.0
 RANGE_TOL = 0.03
+EU_MARKETS = {
+    "EU", "DE", "AT", "FR", "IT", "ES", "NL", "BE", "PT", "SE", "PL", "IE",
+    "UK", "GB", "FI", "DK", "CZ", "RO", "HU", "GR", "LU", "SK", "SI", "HR",
+    "BG", "EE", "LT", "LV", "MT", "CY",
+}
 
 REFS_PATH = eea.CACHE_DIR / "catalog_truth_ev_variants_refs.json"
 FIXTURE_REFS = eea.REPO / "EVforME?Tests" / "Fixtures" / "catalog_truth_ev_variants_refs.json"
@@ -90,11 +95,38 @@ def range_hit(official_range: float | None, zr_min: int, zr_max: int) -> bool:
     return lo <= float(official_range) <= hi
 
 
+def group_eea_kw(group: dict) -> float:
+    """Prefer original EEA kW when re-labelling a prior matched group."""
+    if group.get("eea_kw") is not None:
+        return float(group["eea_kw"])
+    return float(group["kw"])
+
+
+def parent_model_year(parent_id: str) -> int | None:
+    m = re.search(r"-(\d{4})$", parent_id)
+    return int(m.group(1)) if m else None
+
+
+def validate_official_entry(pid: str, entry: dict) -> None:
+    url = str(entry.get("url") or "")
+    if not url or is_forbidden_url(url):
+        raise SystemExit(f"forbidden or missing URL for {pid}: {url!r}")
+    sy = entry.get("source_year")
+    sm = str(entry.get("source_market") or "").upper()
+    my = parent_model_year(pid)
+    if sy is None or my is None or int(sy) != my:
+        raise SystemExit(
+            f"source_year mismatch for {pid}: source_year={sy!r} model_year={my!r}"
+        )
+    if sm not in EU_MARKETS:
+        raise SystemExit(f"source_market not EU for {pid}: {sm!r}")
+
+
 def match_trim(group: dict, trims: list[dict]) -> dict | None:
     """1:1 official match. Prefer kW (±5); else unique WLTP (±3%). Never mix both
     into one candidate set — wide EEA Zr bands would false-match sibling trims.
     """
-    eea_kw = float(group["kw"])
+    eea_kw = group_eea_kw(group)
     zr_min = int(group["wltpRangeKmMin"])
     zr_max = int(group["wltpRangeKmMax"])
     kw_hits: list[dict] = []
@@ -123,7 +155,9 @@ def merge_groups(groups: list[dict]) -> dict:
     n = sum(float(g.get("registrations") or 0) for g in groups)
     # representative kw = registration-weighted of old groups
     tw = n or 1.0
-    mean_kw = sum(float(g["kw"]) * float(g.get("registrations") or 0) for g in groups) / tw
+    mean_kw = sum(
+        group_eea_kw(g) * float(g.get("registrations") or 0) for g in groups
+    ) / tw
     awd = any(bool(g.get("awd")) for g in groups)
     statuses = {str(g.get("status")) for g in groups}
     status = "F" if "F" in statuses else "P"
@@ -160,8 +194,8 @@ def bump_cdn(rows: list[dict]) -> None:
         "policy": "offline-first",
         "seedVersion": NEW_SEED_VERSION,
         "note": (
-            f"seedVersion {NEW_SEED_VERSION}: EV version labels from official OEM sheets "
-            "(matched name·kW; unmatched Versione n; drop EEA kW > official max+5)."
+            f"seedVersion {NEW_SEED_VERSION}: EV version labels from same-MY EU OEM sheets "
+            "(source_year/source_market required; unmatched Versione n)."
         ),
     }
     payload = json.dumps(
@@ -185,9 +219,7 @@ def main() -> int:
     audit_ids = set(audit["auditParentIds"])
 
     for pid, entry in by_official.items():
-        url = str(entry.get("url") or "")
-        if not url or is_forbidden_url(url):
-            raise SystemExit(f"forbidden or missing URL for {pid}: {url!r}")
+        validate_official_entry(pid, entry)
 
     refs = json.loads(REFS_PATH.read_text(encoding="utf-8"))
     old_variants = list(refs.get("variants") or [])
@@ -219,17 +251,19 @@ def main() -> int:
     for pid in sorted(by_parent.keys()):
         groups = sorted(
             by_parent[pid],
-            key=lambda g: (-float(g.get("registrations") or 0), float(g["kw"])),
+            key=lambda g: (-float(g.get("registrations") or 0), group_eea_kw(g)),
         )
         entry = by_official.get(pid) if pid in audit_ids else None
         model_max = float(entry["model_max_kw"]) if entry else None
         trims = list(entry.get("trims") or []) if entry else []
         url = entry.get("url") if entry else None
+        source_year = entry.get("source_year") if entry else None
+        source_market = entry.get("source_market") if entry else None
 
         # Drop over-max
         kept: list[dict] = []
         for g in groups:
-            if model_max is not None and float(g["kw"]) > model_max + KW_TOL:
+            if model_max is not None and group_eea_kw(g) > model_max + KW_TOL:
                 discarded.append(
                     {
                         "parentId": pid,
@@ -287,12 +321,14 @@ def main() -> int:
                     "id": new_id,
                     "label": label,
                     "kw": off_kw,
-                    "eea_kw": round(float(g["kw"]), 1),
+                    "eea_kw": round(group_eea_kw(g), 1),
                     "rangeCaption": caption,
                     "official_matched": True,
                     "official_name": t["name"],
                     "official_power_kw": off_kw,
                     "official_url": url,
+                    "source_year": source_year,
+                    "source_market": source_market,
                     "batteryKWh": t.get("battery_kwh"),
                     "battery_source": (
                         "oem_official_same_year" if t.get("battery_kwh") is not None else None
@@ -320,7 +356,7 @@ def main() -> int:
             unmatched_n += 1
             idx = version_n
             version_n += 1
-            eea_kw = float(g["kw"])
+            eea_kw = group_eea_kw(g)
             zr_min = int(g["wltpRangeKmMin"])
             zr_max = int(g["wltpRangeKmMax"])
             caption = range_caption(zr_min, zr_max)
@@ -329,8 +365,8 @@ def main() -> int:
             new_id = version_id(
                 pid, eea_kw, bool(g.get("awd")), matched=False, slug=f"ver{idx}"
             )
+            # Demoted/renamed: alias only 1:1 rename of same EEA set — never cross-trim.
             if g["id"] != new_id:
-                # only alias if same EEA fingerprint set (renamed id) — keep alias for rename
                 id_aliases[g["id"]] = new_id
             ref = dict(g)
             ref.update(
@@ -344,7 +380,9 @@ def main() -> int:
                     "official_matched": False,
                     "official_name": None,
                     "official_power_kw": None,
-                    "official_url": url if entry else None,
+                    "official_url": None,
+                    "source_year": None,
+                    "source_market": None,
                     "batteryKWh": None,
                     "battery_source": None,
                     "commercial_name": None,

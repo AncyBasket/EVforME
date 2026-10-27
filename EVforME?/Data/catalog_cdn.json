@@ -1,12 +1,12 @@
 {
   "url": "",
   "publishedUrl": "",
-  "rows": 6732,
-  "bytes": 2901557,
+  "rows": 6750,
+  "bytes": 2917760,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-27T10:35:27.610926+00:00",
+  "updatedAt": "2026-10-27T11:21:55.985866+00:00",
   "policy": "offline-first",
-  "seedVersion": 61,
-  "note": "seedVersion 61: EV version labels from official OEM sheets (matched name\u00b7kW; unmatched Versione n; drop EEA kW > official max+5)."
+  "seedVersion": 62,
+  "note": "seedVersion 62: EV version labels from same-MY EU OEM sheets (source_year/source_market required; unmatched Versione n)."
 }

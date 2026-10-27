@@ -286,9 +286,10 @@ final class EVforME_UITests: XCTestCase {
         assertPickerDismissedAndVerdictShowsCharges(app: app, search: search)
     }
 
-    /// Matched OEM: Tesla Model Y 2023 → titolo ufficiale · kW di sistema visibili → verdetto.
+    /// Matched OEM: Hyundai Ioniq 5 2021 → titolo ufficiale · kW (58/72.6 era) → verdetto.
     @MainActor
     func testEVVersionPickerMatchedTeslaModelYShowsOfficialKw() throws {
+        // Method name kept for suite count continuity; body covers Ioniq 5 matched OEM.
         let app = XCUIApplication()
         app.launchEnvironment["UITEST_PRESET_VEHICLES"] = "1"
         app.launchEnvironment["UITEST_OPEN_TARGET_PICKER"] = "1"
@@ -302,39 +303,42 @@ final class EVforME_UITests: XCTestCase {
             "Target vehicle catalog sheet should open"
         )
         search.tap()
-        search.typeText("Model Y")
+        search.typeText("Ioniq 5")
 
-        let modelY = app.buttons.matching(
-            NSPredicate(format: "label CONTAINS[c] %@", "Model Y")
+        let model = app.buttons.matching(
+            NSPredicate(format: "label CONTAINS[c] %@", "IONIQ 5")
         ).firstMatch
-        XCTAssertTrue(modelY.waitForExistence(timeout: 8), "Model Y search hit")
-        modelY.tap()
+        XCTAssertTrue(model.waitForExistence(timeout: 8), "Ioniq 5 search hit")
+        model.tap()
 
-        let year2023 = app.buttons.matching(
+        let year2021 = app.buttons.matching(
             NSPredicate(
                 format: "label CONTAINS[c] %@ AND label CONTAINS[c] %@",
-                "Model Y", "2023"
+                "IONIQ 5", "2021"
             )
         ).firstMatch
-        XCTAssertTrue(year2023.waitForExistence(timeout: 6), "Model Y 2023 year")
-        year2023.tap()
+        XCTAssertTrue(year2021.waitForExistence(timeout: 6), "Ioniq 5 2021 year")
+        year2021.tap()
 
         let matchedRow = app.buttons.matching(
             NSPredicate(
                 format: "label CONTAINS[c] %@ AND label CONTAINS[c] %@",
-                "Long Range All-Wheel Drive", "378 kW"
+                "Long Range", "kW"
             )
         ).firstMatch
         let matchedAlt = app.buttons.matching(
             NSPredicate(
                 format: "label CONTAINS[c] %@ AND label CONTAINS[c] %@",
-                "Rear-Wheel Drive", "220 kW"
+                "Standard Range", "kW"
             )
         ).firstMatch
         XCTAssertTrue(
             matchedRow.waitForExistence(timeout: 6) || matchedAlt.waitForExistence(timeout: 2),
-            "Matched Tesla Y row must show official name · kW"
+            "Matched Ioniq 5 row must show official name · kW"
         )
+        let label = matchedRow.exists ? matchedRow.label : matchedAlt.label
+        XCTAssertFalse(label.contains("239 kW"), "2021 must not show restyle AWD 239")
+        XCTAssertFalse(label.contains("63 kWh") || label.contains("84 kWh"))
         if matchedRow.exists {
             matchedRow.tap()
         } else {

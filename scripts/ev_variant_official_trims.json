@@ -1,369 +1,204 @@
 {
-  "_comment": "Official OEM trims only (manufacturer / press kit / tech PDF). No third-party sites. power_kw_max = system max when listed; match_kw may include axle powers for matching only (Tesla rule A).",
+  "_comment": "Official OEM trims only. Each parent requires source_year==MY and source_market in EU/UK. Demoted parents omitted.",
+  "eu_markets": [
+    "AT",
+    "BE",
+    "DE",
+    "ES",
+    "EU",
+    "FR",
+    "GB",
+    "IE",
+    "IT",
+    "NL",
+    "PL",
+    "PT",
+    "SE",
+    "UK"
+  ],
   "byParentId": {
-    "tesla-model-y-2023": {
-      "url": "https://www.tesla.com/en_gb/support/power-consumption",
-      "model_max_kw": 393,
+    "hyundai-ioniq-5-2021": {
+      "url": "https://www.hyundai.news/newsroom/dam/de/Pressemappen/IONIQ_5/Hyundai_IONIQ_5_2_Ausstattung_und_Preise_0521.pdf",
+      "source_year": 2021,
+      "source_market": "DE",
+      "model_max_kw": 225,
       "trims": [
         {
-          "name": "Rear-Wheel Drive",
-          "power_kw_max": 220,
+          "name": "Standard Range RWD",
+          "power_kw_max": 125,
           "match_kw": [
-            220
-          ],
-          "awd": false
-        },
-        {
-          "name": "Long Range Rear-Wheel Drive",
-          "power_kw_max": 255,
-          "match_kw": [
-            255
-          ],
-          "awd": false
-        },
-        {
-          "name": "Long Range All-Wheel Drive",
-          "power_kw_max": 378,
-          "match_kw": [
-            158,
-            378
-          ],
-          "awd": true
-        },
-        {
-          "name": "Performance",
-          "power_kw_max": 393,
-          "match_kw": [
-            235,
-            393
-          ],
-          "awd": true
-        }
-      ]
-    },
-    "tesla-model-y-2024": {
-      "url": "https://www.tesla.com/en_gb/support/power-consumption",
-      "model_max_kw": 393,
-      "trims": [
-        {
-          "name": "Rear-Wheel Drive",
-          "power_kw_max": 220,
-          "match_kw": [
-            220
-          ],
-          "awd": false
-        },
-        {
-          "name": "Long Range Rear-Wheel Drive",
-          "power_kw_max": 255,
-          "match_kw": [
-            255
-          ],
-          "awd": false
-        },
-        {
-          "name": "Long Range All-Wheel Drive",
-          "power_kw_max": 378,
-          "match_kw": [
-            158,
-            378
-          ],
-          "awd": true
-        },
-        {
-          "name": "Performance",
-          "power_kw_max": 393,
-          "match_kw": [
-            235,
-            393
-          ],
-          "awd": true
-        }
-      ]
-    },
-    "tesla-model-y-2025": {
-      "url": "https://www.tesla.com/en_gb/support/power-consumption",
-      "model_max_kw": 461,
-      "trims": [
-        {
-          "name": "Rear-Wheel Drive",
-          "power_kw_max": 220,
-          "match_kw": [
-            220
-          ],
-          "awd": false
-        },
-        {
-          "name": "Long Range Rear-Wheel Drive",
-          "power_kw_max": 255,
-          "match_kw": [
-            255
-          ],
-          "awd": false
-        },
-        {
-          "name": "Premium Long Range All-Wheel Drive",
-          "power_kw_max": 378,
-          "match_kw": [
-            158,
-            378
-          ],
-          "awd": true
-        },
-        {
-          "name": "Performance All-Wheel Drive",
-          "power_kw_max": 461,
-          "match_kw": [
-            303,
-            461
-          ],
-          "awd": true
-        }
-      ]
-    },
-    "tesla-model-y-2022": {
-      "url": "https://www.tesla.com/en_gb/support/power-consumption",
-      "model_max_kw": 393,
-      "trims": [
-        {
-          "name": "Rear-Wheel Drive",
-          "power_kw_max": 220,
-          "match_kw": [
-            220
-          ],
-          "awd": false
-        },
-        {
-          "name": "Long Range All-Wheel Drive",
-          "power_kw_max": 378,
-          "match_kw": [
-            158,
-            378
-          ],
-          "awd": true
-        },
-        {
-          "name": "Performance",
-          "power_kw_max": 393,
-          "match_kw": [
-            235,
-            393
-          ],
-          "awd": true
-        }
-      ]
-    },
-    "tesla-model-3-2023": {
-      "url": "https://www.tesla.com/en_gb/support/power-consumption",
-      "model_max_kw": 393,
-      "trims": [
-        {
-          "name": "Rear-Wheel Drive",
-          "power_kw_max": 208,
-          "match_kw": [
-            208
-          ],
-          "awd": false
-        },
-        {
-          "name": "Long Range",
-          "power_kw_max": 366,
-          "match_kw": [
-            366
-          ],
-          "awd": true
-        },
-        {
-          "name": "Performance",
-          "power_kw_max": 393,
-          "match_kw": [
-            235,
-            393
-          ],
-          "awd": true
-        }
-      ]
-    },
-    "tesla-model-3-2025": {
-      "url": "https://www.tesla.com/en_gb/support/power-consumption",
-      "model_max_kw": 461,
-      "trims": [
-        {
-          "name": "Rear-Wheel Drive",
-          "power_kw_max": 208,
-          "match_kw": [
-            208
-          ],
-          "awd": false
-        },
-        {
-          "name": "Premium Long Range Rear-Wheel Drive",
-          "power_kw_max": 235,
-          "match_kw": [
-            235
-          ],
-          "awd": false
-        },
-        {
-          "name": "Premium Long Range All-Wheel Drive",
-          "power_kw_max": 366,
-          "match_kw": [
-            158,
-            366
-          ],
-          "awd": true
-        },
-        {
-          "name": "Performance All-Wheel Drive",
-          "power_kw_max": 461,
-          "match_kw": [
-            303,
-            461
-          ],
-          "awd": true
-        }
-      ]
-    },
-    "tesla-model-3-2022": {
-      "url": "https://www.tesla.com/en_gb/support/power-consumption",
-      "model_max_kw": 393,
-      "trims": [
-        {
-          "name": "Rear-Wheel Drive",
-          "power_kw_max": 208,
-          "match_kw": [
-            208
-          ],
-          "awd": false
-        },
-        {
-          "name": "Long Range",
-          "power_kw_max": 366,
-          "match_kw": [
-            366
-          ],
-          "awd": true
-        },
-        {
-          "name": "Performance",
-          "power_kw_max": 393,
-          "match_kw": [
-            235,
-            393
-          ],
-          "awd": true
-        }
-      ]
-    },
-    "tesla-model-3-2024": {
-      "url": "https://www.tesla.com/en_gb/support/power-consumption",
-      "model_max_kw": 461,
-      "trims": [
-        {
-          "name": "Rear-Wheel Drive",
-          "power_kw_max": 220,
-          "match_kw": [
-            220
-          ],
-          "awd": false
-        },
-        {
-          "name": "Long Range Rear-Wheel Drive",
-          "power_kw_max": 235,
-          "match_kw": [
-            235
-          ],
-          "awd": false
-        },
-        {
-          "name": "Performance All-Wheel Drive",
-          "power_kw_max": 461,
-          "match_kw": [
-            303,
-            461
-          ],
-          "awd": true
-        }
-      ]
-    },
-    "renault-zoe-2020": {
-      "url": "https://cdn.group.renault.com/ren/gb/renault-new-cars/editorial/global-range/new-zoe/Renault-ZOE-eBrochure-2020.pdf.asset.pdf/1577096953471.pdf",
-      "model_max_kw": 100,
-      "trims": [
-        {
-          "name": "R110",
-          "power_kw_max": 80,
-          "match_kw": [
-            80
+            125
           ],
           "awd": false,
-          "battery_kwh": 52
+          "battery_kwh": 58.0
         },
         {
-          "name": "R135",
-          "power_kw_max": 100,
+          "name": "Standard Range AWD",
+          "power_kw_max": 173,
           "match_kw": [
-            100
+            173
+          ],
+          "awd": true,
+          "battery_kwh": 58.0
+        },
+        {
+          "name": "Long Range RWD",
+          "power_kw_max": 160,
+          "match_kw": [
+            160
           ],
           "awd": false,
-          "battery_kwh": 52
+          "battery_kwh": 72.6
+        },
+        {
+          "name": "Long Range AWD",
+          "power_kw_max": 225,
+          "match_kw": [
+            74,
+            225
+          ],
+          "awd": true,
+          "battery_kwh": 72.6
         }
-      ]
+      ],
+      "audit_status": "corrected",
+      "audit_note": "Was current hyundai.com performance page (63/84/239)"
     },
-    "renault-zoe-2021": {
-      "url": "https://cdn.group.renault.com/ren/ie/transversal-assets/brochures/car-ebrochures/ZOE-eBrochure.pdf",
-      "model_max_kw": 100,
+    "hyundai-ioniq-5-2022": {
+      "url": "https://www.hyundai.news/eu/articles/press-releases/updated-ioniq-5-with-new-battery-and-digital-mirrors.html",
+      "source_year": 2022,
+      "source_market": "EU",
+      "model_max_kw": 225,
       "trims": [
         {
-          "name": "R110",
-          "power_kw_max": 80,
+          "name": "Standard Range RWD",
+          "power_kw_max": 125,
           "match_kw": [
-            80
+            125
           ],
           "awd": false,
-          "battery_kwh": 52,
-          "wltp_range_km": 395
+          "battery_kwh": 58.0
         },
         {
-          "name": "R135",
-          "power_kw_max": 100,
+          "name": "Standard Range AWD",
+          "power_kw_max": 173,
           "match_kw": [
-            100
+            173
+          ],
+          "awd": true,
+          "battery_kwh": 58.0
+        },
+        {
+          "name": "Long Range RWD",
+          "power_kw_max": 160,
+          "match_kw": [
+            160
           ],
           "awd": false,
-          "battery_kwh": 52,
-          "wltp_range_km": 385
+          "battery_kwh": 72.6
+        },
+        {
+          "name": "Long Range AWD",
+          "power_kw_max": 225,
+          "match_kw": [
+            74,
+            225
+          ],
+          "awd": true,
+          "battery_kwh": 72.6
         }
-      ]
+      ],
+      "audit_status": "corrected",
+      "audit_note": "2022-02-10 EU press: MY23 77.4 announced; sold MY still 58/72.6 (powers as DE 05/2021 listino)"
     },
-    "renault-zoe-2022": {
-      "url": "https://cdn.group.renault.com/ren/pt/catalogos/zoe/catalogo-zoe-04112022.pdf",
-      "model_max_kw": 100,
+    "hyundai-ioniq-5-2023": {
+      "url": "https://www.hyundai.news/newsroom/dam/uk/models/20220422_ioniq_5_product_enhancements_2023_model_year/hyundai-ioniq-5-product-enhancements-2023-specs.pdf",
+      "source_year": 2023,
+      "source_market": "UK",
+      "model_max_kw": 239,
       "trims": [
         {
-          "name": "R110",
-          "power_kw_max": 80,
+          "name": "Standard Range RWD",
+          "power_kw_max": 125,
           "match_kw": [
-            80
+            125
           ],
           "awd": false,
-          "battery_kwh": 52,
-          "wltp_range_km": 395
+          "battery_kwh": 58.0
         },
         {
-          "name": "R135",
-          "power_kw_max": 100,
+          "name": "Long Range RWD",
+          "power_kw_max": 168,
           "match_kw": [
-            100
+            168
           ],
           "awd": false,
-          "battery_kwh": 52,
-          "wltp_range_km": 389
+          "battery_kwh": 77.4
+        },
+        {
+          "name": "Long Range AWD",
+          "power_kw_max": 239,
+          "match_kw": [
+            74,
+            239
+          ],
+          "awd": true,
+          "battery_kwh": 77.4
         }
-      ]
+      ],
+      "audit_status": "corrected",
+      "audit_note": "MY23 UK specs PDF (77.4 / 239 AWD)"
+    },
+    "ford-mustang-mach-e-2025": {
+      "url": "https://www.ford.at/content/dam/guxeu/at/de_at/documents/technical-data/TD-ford-CX727-mach-e.pdf",
+      "source_year": 2025,
+      "source_market": "AT",
+      "model_max_kw": 358,
+      "trims": [
+        {
+          "name": "Standard Range RWD",
+          "power_kw_max": 197,
+          "match_kw": [
+            197
+          ],
+          "awd": false,
+          "battery_kwh": 73
+        },
+        {
+          "name": "Extended Range RWD",
+          "power_kw_max": 203,
+          "match_kw": [
+            203
+          ],
+          "awd": false,
+          "battery_kwh": 88
+        },
+        {
+          "name": "Extended Range AWD",
+          "power_kw_max": 276,
+          "match_kw": [
+            276
+          ],
+          "awd": true,
+          "battery_kwh": 88
+        },
+        {
+          "name": "GT AWD",
+          "power_kw_max": 358,
+          "match_kw": [
+            358
+          ],
+          "awd": true,
+          "battery_kwh": 91
+        }
+      ],
+      "audit_status": "corrected",
+      "audit_note": "Was US fromtheroad.ford.com; now Ford AT MY2025 tech data"
     },
     "dacia-spring-2021": {
-      "url": "https://media.dacia.com/dacia-spring-a-new-extreme-trim-and-brand-new-electric-65-engine/?lang=eng",
+      "url": "https://presse.dacia.de/dacia-spring-startet-ab-20490-euro-nur-10920-euro-mit-dacia-umweltbonus/",
+      "source_year": 2021,
+      "source_market": "DE",
       "model_max_kw": 33,
       "trims": [
         {
@@ -372,12 +207,17 @@
           "match_kw": [
             33
           ],
-          "awd": false
+          "awd": false,
+          "battery_kwh": 27.4
         }
-      ]
+      ],
+      "audit_status": "corrected",
+      "audit_note": "Was Electric 65 launch article"
     },
     "dacia-spring-2022": {
-      "url": "https://media.dacia.com/dacia-spring-a-new-extreme-trim-and-brand-new-electric-65-engine/?lang=eng",
+      "url": "https://cdn.group.renault.com/dac/nl/brochures-en-prijslijsten/prijslijst/archief/prijslijst-spring-maart-2022.pdf",
+      "source_year": 2022,
+      "source_market": "NL",
       "model_max_kw": 33,
       "trims": [
         {
@@ -386,12 +226,16 @@
           "match_kw": [
             33
           ],
-          "awd": false
+          "awd": false,
+          "battery_kwh": 27.4
         }
-      ]
+      ],
+      "audit_status": "corrected"
     },
     "dacia-spring-2023": {
       "url": "https://media.dacia.com/dacia-spring-a-new-extreme-trim-and-brand-new-electric-65-engine/?lang=eng",
+      "source_year": 2023,
+      "source_market": "EU",
       "model_max_kw": 48,
       "trims": [
         {
@@ -408,84 +252,211 @@
           "match_kw": [
             48
           ],
-          "awd": false,
-          "wltp_range_km": 220
+          "awd": false
         }
-      ]
+      ],
+      "audit_status": "ok"
     },
-    "volvo-ex30-2024": {
-      "url": "https://www.volvocars.com/images/cs/v3/assets/blt84e01a6904dbd2e8/bltdc4437137eec679e/681332dd924f57737f7a3d4b/EX30_Model_Year_25.5.pdf?branch=prod_alias",
-      "model_max_kw": 315,
+    "peugeot-e-208-2020": {
+      "url": "https://www.media.stellantis.com/it-it/peugeot/press/sostenibilita-qualita-della-vita-e-veicoli-elettrificati-la-mobilita-nelle-citta-secondo-peugeot",
+      "source_year": 2020,
+      "source_market": "IT",
+      "model_max_kw": 100,
       "trims": [
         {
-          "name": "Single Motor",
-          "power_kw_max": 200,
+          "name": "e-208",
+          "power_kw_max": 100,
           "match_kw": [
-            200
+            100
           ],
           "awd": false,
-          "battery_kwh": 51,
-          "wltp_range_km": 337
-        },
-        {
-          "name": "Single Motor Extended Range",
-          "power_kw_max": 200,
-          "match_kw": [
-            200
-          ],
-          "awd": false,
-          "battery_kwh": 69,
-          "wltp_range_km": 476
-        },
-        {
-          "name": "Twin Motor Performance",
-          "power_kw_max": 315,
-          "match_kw": [
-            115,
-            315
-          ],
-          "awd": true,
-          "battery_kwh": 69,
-          "wltp_range_km": 450
+          "battery_kwh": 50
         }
-      ]
+      ],
+      "audit_status": "corrected",
+      "audit_note": "Was bhr.peugeot.com (non-EU)"
     },
-    "volvo-ex30-2025": {
-      "url": "https://www.volvocars.com/images/cs/v3/assets/blt84e01a6904dbd2e8/bltdc4437137eec679e/681332dd924f57737f7a3d4b/EX30_Model_Year_25.5.pdf?branch=prod_alias",
-      "model_max_kw": 315,
+    "peugeot-e-208-2021": {
+      "url": "https://www.media.stellantis.com/em-en/peugeot/press/eco-mobility-according-to-peugeot-the-power-of-choice-strategy",
+      "source_year": 2021,
+      "source_market": "EU",
+      "model_max_kw": 100,
       "trims": [
         {
-          "name": "Single Motor",
-          "power_kw_max": 200,
+          "name": "e-208",
+          "power_kw_max": 100,
           "match_kw": [
-            200
+            100
           ],
           "awd": false,
-          "battery_kwh": 51
+          "battery_kwh": 50
+        }
+      ],
+      "audit_status": "corrected"
+    },
+    "bmw-i4-2024": {
+      "url": "https://www.press.bmwgroup.com/deutschland/article/attachment/T0442767DE/617123",
+      "source_year": 2024,
+      "source_market": "DE",
+      "model_max_kw": 400,
+      "trims": [
+        {
+          "name": "i4 eDrive40",
+          "power_kw_max": 250,
+          "match_kw": [
+            250
+          ],
+          "awd": false
         },
         {
-          "name": "Single Motor Extended Range",
-          "power_kw_max": 200,
+          "name": "i4 M50",
+          "power_kw_max": 400,
           "match_kw": [
-            200
+            400
+          ],
+          "awd": true
+        }
+      ],
+      "audit_status": "corrected",
+      "audit_note": "Was latin-america-caribbean press"
+    },
+    "bmw-ix1-2024": {
+      "url": "https://www.press.bmwgroup.com/deutschland/article/attachment/T0322775DE/649857",
+      "source_year": 2024,
+      "source_market": "DE",
+      "model_max_kw": 225,
+      "trims": [
+        {
+          "name": "iX1 eDrive20",
+          "power_kw_max": 150,
+          "match_kw": [
+            150
           ],
           "awd": false,
-          "battery_kwh": 69
+          "battery_kwh": 65.2
         },
         {
-          "name": "Twin Motor Performance",
-          "power_kw_max": 315,
+          "name": "iX1 xDrive30",
+          "power_kw_max": 225,
           "match_kw": [
-            115,
-            315
+            225
           ],
           "awd": true,
-          "battery_kwh": 69
+          "battery_kwh": 65
         }
-      ]
+      ],
+      "audit_status": "ok"
+    },
+    "renault-zoe-2020": {
+      "url": "https://cdn.group.renault.com/ren/nl/brochures-en-prijslijsten/prijzenarchief/zoe/zoe-prijslijst-01-2020.pdf",
+      "source_year": 2020,
+      "source_market": "NL",
+      "model_max_kw": 100,
+      "trims": [
+        {
+          "name": "R110",
+          "power_kw_max": 80,
+          "match_kw": [
+            80
+          ],
+          "awd": false,
+          "battery_kwh": 52
+        },
+        {
+          "name": "R135",
+          "power_kw_max": 100,
+          "match_kw": [
+            100
+          ],
+          "awd": false,
+          "battery_kwh": 52
+        }
+      ],
+      "audit_status": "corrected"
+    },
+    "renault-zoe-2021": {
+      "url": "https://cdn.group.renault.com/ren/nl/brochures-en-prijslijsten/prijzenarchief/zoe/zoe-prijslijst-05-2021.pdf",
+      "source_year": 2021,
+      "source_market": "NL",
+      "model_max_kw": 100,
+      "trims": [
+        {
+          "name": "R110",
+          "power_kw_max": 80,
+          "match_kw": [
+            80
+          ],
+          "awd": false,
+          "battery_kwh": 52
+        },
+        {
+          "name": "R135",
+          "power_kw_max": 100,
+          "match_kw": [
+            100
+          ],
+          "awd": false,
+          "battery_kwh": 52
+        }
+      ],
+      "audit_status": "corrected"
+    },
+    "renault-zoe-2022": {
+      "url": "https://cdn.group.renault.com/ren/pt/catalogos/zoe/catalogo-zoe-04112022.pdf",
+      "source_year": 2022,
+      "source_market": "PT",
+      "model_max_kw": 100,
+      "trims": [
+        {
+          "name": "R110",
+          "power_kw_max": 80,
+          "match_kw": [
+            80
+          ],
+          "awd": false,
+          "battery_kwh": 52
+        },
+        {
+          "name": "R135",
+          "power_kw_max": 100,
+          "match_kw": [
+            100
+          ],
+          "awd": false,
+          "battery_kwh": 52
+        }
+      ],
+      "audit_status": "ok"
+    },
+    "volkswagen-id3-2023": {
+      "url": "https://www.volkswagen-newsroom.com/en/press-releases/major-upgrade-for-the-id3-pre-sales-launch-with-pro-s-model-18359",
+      "source_year": 2023,
+      "source_market": "EU",
+      "model_max_kw": 150,
+      "trims": [
+        {
+          "name": "ID.3 Pure",
+          "power_kw_max": 107,
+          "match_kw": [
+            107
+          ],
+          "awd": false
+        },
+        {
+          "name": "ID.3 Pro",
+          "power_kw_max": 150,
+          "match_kw": [
+            150
+          ],
+          "awd": false
+        }
+      ],
+      "audit_status": "ok"
     },
     "volkswagen-id3-2025": {
-      "url": "https://www.volkswagen-newsroom.com/en/press-releases/world-premiere-of-the-id3-neo-new-name-new-design-new-interior-and-new-technologies-20320",
+      "url": "https://www.volkswagen-newsroom.com/en/press-releases/world-premiere-of-the-id3-neo-new-name-new-look-new-price-18686",
+      "source_year": 2025,
+      "source_market": "EU",
       "model_max_kw": 170,
       "trims": [
         {
@@ -515,101 +486,38 @@
           "awd": false,
           "battery_kwh": 79
         }
-      ]
-    },
-    "volkswagen-id3-2024": {
-      "url": "https://www.volkswagen-newsroom.com/en/press-releases/major-upgrade-for-the-id3-pre-sales-launch-with-pro-s-model-18359",
-      "model_max_kw": 170,
-      "trims": [
-        {
-          "name": "ID.3 Pro",
-          "power_kw_max": 150,
-          "match_kw": [
-            150
-          ],
-          "awd": false
-        },
-        {
-          "name": "ID.3 Pro S",
-          "power_kw_max": 170,
-          "match_kw": [
-            170
-          ],
-          "awd": false,
-          "battery_kwh": 77,
-          "wltp_range_km": 559
-        }
-      ]
-    },
-    "volkswagen-id3-2023": {
-      "url": "https://www.volkswagen-newsroom.com/en/press-releases/major-upgrade-for-the-id3-pre-sales-launch-with-pro-s-model-18359",
-      "model_max_kw": 150,
-      "trims": [
-        {
-          "name": "ID.3 Pure",
-          "power_kw_max": 107,
-          "match_kw": [
-            107
-          ],
-          "awd": false
-        },
-        {
-          "name": "ID.3 Pro",
-          "power_kw_max": 150,
-          "match_kw": [
-            150
-          ],
-          "awd": false
-        }
-      ]
-    },
-    "volkswagen-id3-2020": {
-      "url": "https://www.volkswagen-newsroom.com/en/press-releases/major-upgrade-for-the-id3-pre-sales-launch-with-pro-s-model-18359",
-      "model_max_kw": 150,
-      "trims": [
-        {
-          "name": "ID.3 Pure",
-          "power_kw_max": 107,
-          "match_kw": [
-            70,
-            107
-          ],
-          "awd": false
-        },
-        {
-          "name": "ID.3 Pro",
-          "power_kw_max": 150,
-          "match_kw": [
-            150
-          ],
-          "awd": false
-        }
-      ]
+      ],
+      "audit_status": "ok"
     },
     "volkswagen-id4-2023": {
-      "url": "https://www.volkswagen-newsroom.com/en/press-releases/well-balanced-and-sporty-at-the-same-time-the-new-id4-chassis-6618",
-      "model_max_kw": 150,
+      "url": "https://www.volkswagen-newsroom.com/en/press-releases/well-balanced-and-sporty-at-the-same-time-the-updated-id4-gtx-16320",
+      "source_year": 2023,
+      "source_market": "EU",
+      "model_max_kw": 220,
       "trims": [
         {
-          "name": "ID.4 109 kW",
-          "power_kw_max": 109,
-          "match_kw": [
-            109
-          ],
-          "awd": false
-        },
-        {
-          "name": "ID.4 150 kW",
+          "name": "ID.4 Pro",
           "power_kw_max": 150,
           "match_kw": [
             150
           ],
           "awd": false
+        },
+        {
+          "name": "ID.4 GTX",
+          "power_kw_max": 220,
+          "match_kw": [
+            220
+          ],
+          "awd": true
         }
-      ]
+      ],
+      "audit_status": "ok"
     },
     "volkswagen-id4-2024": {
-      "url": "https://www.volkswagen-newsroom.com/en/the-new-id4-and-id5-17756/the-new-high-efficiency-drive-all-the-details-17757",
+      "url": "https://www.volkswagen-newsroom.com/en/the-new-id4-and-id5-17756/the-new-high-efficiency-drive-and-battery-systems-of-the-id4-and-id5-17764",
+      "source_year": 2024,
+      "source_market": "EU",
       "model_max_kw": 250,
       "trims": [
         {
@@ -628,8 +536,7 @@
             210
           ],
           "awd": false,
-          "battery_kwh": 77,
-          "wltp_range_km": 550
+          "battery_kwh": 77
         },
         {
           "name": "ID.4 GTX",
@@ -639,383 +546,28 @@
           ],
           "awd": true
         }
-      ]
-    },
-    "volkswagen-id4-2025": {
-      "url": "https://www.volkswagen-newsroom.com/en/the-new-id4-and-id5-17756/the-new-high-efficiency-drive-all-the-details-17757",
-      "model_max_kw": 250,
-      "trims": [
-        {
-          "name": "ID.4 Pure",
-          "power_kw_max": 125,
-          "match_kw": [
-            125
-          ],
-          "awd": false
-        },
-        {
-          "name": "ID.4 Pro",
-          "power_kw_max": 210,
-          "match_kw": [
-            210
-          ],
-          "awd": false
-        },
-        {
-          "name": "ID.4 GTX",
-          "power_kw_max": 250,
-          "match_kw": [
-            250
-          ],
-          "awd": true
-        }
-      ]
-    },
-    "bmw-ix1-2024": {
-      "url": "https://www.press.bmwgroup.com/deutschland/article/attachment/T0322775DE/649857",
-      "model_max_kw": 225,
-      "trims": [
-        {
-          "name": "iX1 eDrive20",
-          "power_kw_max": 150,
-          "match_kw": [
-            150
-          ],
-          "awd": false,
-          "battery_kwh": 65.2
-        },
-        {
-          "name": "iX1 xDrive30",
-          "power_kw_max": 225,
-          "match_kw": [
-            225
-          ],
-          "awd": true,
-          "battery_kwh": 65
-        }
-      ]
-    },
-    "bmw-ix1-2025": {
-      "url": "https://www.press.bmwgroup.com/deutschland/article/attachment/T0322775DE/649857",
-      "model_max_kw": 225,
-      "trims": [
-        {
-          "name": "iX1 eDrive20",
-          "power_kw_max": 150,
-          "match_kw": [
-            150
-          ],
-          "awd": false,
-          "battery_kwh": 65.2
-        },
-        {
-          "name": "iX1 xDrive30",
-          "power_kw_max": 225,
-          "match_kw": [
-            225
-          ],
-          "awd": true,
-          "battery_kwh": 65
-        }
-      ]
-    },
-    "bmw-ix1-2023": {
-      "url": "https://www.press.bmwgroup.com/global/article/attachment/T0404224EN/567437",
-      "model_max_kw": 230,
-      "trims": [
-        {
-          "name": "iX1 xDrive30",
-          "power_kw_max": 230,
-          "match_kw": [
-            225,
-            230
-          ],
-          "awd": true,
-          "battery_kwh": 64.7
-        }
-      ]
-    },
-    "bmw-i4-2023": {
-      "url": "https://www.press.bmwgroup.com/latin-america-caribbean/article/detail/T0334110EN/the-first-ever-bmw-i4?language=en",
-      "model_max_kw": 400,
-      "trims": [
-        {
-          "name": "i4 eDrive40",
-          "power_kw_max": 250,
-          "match_kw": [
-            250
-          ],
-          "awd": false,
-          "wltp_range_km": 590
-        },
-        {
-          "name": "i4 M50",
-          "power_kw_max": 400,
-          "match_kw": [
-            400
-          ],
-          "awd": true,
-          "wltp_range_km": 510
-        }
-      ]
-    },
-    "bmw-i4-2024": {
-      "url": "https://www.press.bmwgroup.com/latin-america-caribbean/article/detail/T0334110EN/the-first-ever-bmw-i4?language=en",
-      "model_max_kw": 400,
-      "trims": [
-        {
-          "name": "i4 eDrive40",
-          "power_kw_max": 250,
-          "match_kw": [
-            250
-          ],
-          "awd": false
-        },
-        {
-          "name": "i4 M50",
-          "power_kw_max": 400,
-          "match_kw": [
-            400
-          ],
-          "awd": true
-        }
-      ]
-    },
-    "peugeot-e-208-2020": {
-      "url": "https://bhr.peugeot.com/en/electric-hybrid/why-choose-electric/technology-electric.html",
-      "model_max_kw": 100,
-      "trims": [
-        {
-          "name": "e-208",
-          "power_kw_max": 100,
-          "match_kw": [
-            100
-          ],
-          "awd": false,
-          "battery_kwh": 50,
-          "wltp_range_km": 340
-        }
-      ]
-    },
-    "peugeot-e-208-2021": {
-      "url": "https://bhr.peugeot.com/en/electric-hybrid/why-choose-electric/technology-electric.html",
-      "model_max_kw": 100,
-      "trims": [
-        {
-          "name": "e-208",
-          "power_kw_max": 100,
-          "match_kw": [
-            100
-          ],
-          "awd": false,
-          "battery_kwh": 50
-        }
-      ]
-    },
-    "kia-ev6-2022": {
-      "url": "https://www.kia.com/content/dam/kwcms/kme/de/de/assets/vehicles/ev6-gt/Preisliste_Kia_EV6_GT_MJ_2023.pdf",
-      "model_max_kw": 430,
-      "trims": [
-        {
-          "name": "EV6 RWD",
-          "power_kw_max": 168,
-          "match_kw": [
-            125,
-            168
-          ],
-          "awd": false
-        },
-        {
-          "name": "EV6 AWD",
-          "power_kw_max": 239,
-          "match_kw": [
-            239
-          ],
-          "awd": true
-        },
-        {
-          "name": "EV6 GT",
-          "power_kw_max": 430,
-          "match_kw": [
-            430
-          ],
-          "awd": true,
-          "battery_kwh": 77.4
-        }
-      ]
-    },
-    "kia-ev6-2023": {
-      "url": "https://www.kia.com/content/dam/kwcms/kme/de/de/assets/vehicles/ev6-gt/Preisliste_Kia_EV6_GT_MJ_2023.pdf",
-      "model_max_kw": 430,
-      "trims": [
-        {
-          "name": "EV6 RWD",
-          "power_kw_max": 168,
-          "match_kw": [
-            125,
-            168
-          ],
-          "awd": false
-        },
-        {
-          "name": "EV6 AWD",
-          "power_kw_max": 239,
-          "match_kw": [
-            239
-          ],
-          "awd": true
-        },
-        {
-          "name": "EV6 GT",
-          "power_kw_max": 430,
-          "match_kw": [
-            430
-          ],
-          "awd": true,
-          "battery_kwh": 77.4
-        }
-      ]
-    },
-    "hyundai-ioniq-5-2021": {
-      "url": "https://www.hyundai.com/eu/en/models/ioniq5/performance.html",
-      "model_max_kw": 239,
-      "trims": [
-        {
-          "name": "Standard Range RWD",
-          "power_kw_max": 125,
-          "match_kw": [
-            125
-          ],
-          "awd": false,
-          "battery_kwh": 63
-        },
-        {
-          "name": "Long Range RWD",
-          "power_kw_max": 168,
-          "match_kw": [
-            168
-          ],
-          "awd": false,
-          "battery_kwh": 84
-        },
-        {
-          "name": "Long Range AWD",
-          "power_kw_max": 239,
-          "match_kw": [
-            74,
-            239
-          ],
-          "awd": true,
-          "battery_kwh": 84
-        }
-      ]
-    },
-    "hyundai-ioniq-5-2022": {
-      "url": "https://www.hyundai.com/eu/en/models/ioniq5/performance.html",
-      "model_max_kw": 239,
-      "trims": [
-        {
-          "name": "Standard Range RWD",
-          "power_kw_max": 125,
-          "match_kw": [
-            125
-          ],
-          "awd": false,
-          "battery_kwh": 63
-        },
-        {
-          "name": "Long Range RWD",
-          "power_kw_max": 168,
-          "match_kw": [
-            160,
-            168
-          ],
-          "awd": false,
-          "battery_kwh": 84
-        },
-        {
-          "name": "Long Range AWD",
-          "power_kw_max": 239,
-          "match_kw": [
-            74,
-            239
-          ],
-          "awd": true,
-          "battery_kwh": 84
-        }
-      ]
-    },
-    "hyundai-ioniq-5-2023": {
-      "url": "https://www.hyundai.com/eu/en/models/ioniq5/performance.html",
-      "model_max_kw": 239,
-      "trims": [
-        {
-          "name": "Standard Range RWD",
-          "power_kw_max": 125,
-          "match_kw": [
-            125
-          ],
-          "awd": false,
-          "battery_kwh": 63
-        },
-        {
-          "name": "Long Range RWD",
-          "power_kw_max": 168,
-          "match_kw": [
-            168
-          ],
-          "awd": false,
-          "battery_kwh": 84
-        },
-        {
-          "name": "Long Range AWD",
-          "power_kw_max": 239,
-          "match_kw": [
-            74,
-            239
-          ],
-          "awd": true,
-          "battery_kwh": 84
-        }
-      ]
-    },
-    "ford-mustang-mach-e-2025": {
-      "url": "https://www.fromtheroad.ford.com/content/dam/fordmediasite/us/en/library/2025/specs/2025%20Ford-Mustang-Mach-E-Technical-Specifications.pdf",
-      "model_max_kw": 358,
-      "trims": [
-        {
-          "name": "Select Premium SR RWD",
-          "power_kw_max": 197,
-          "match_kw": [
-            197
-          ],
-          "awd": false
-        },
-        {
-          "name": "Select Premium SR eAWD",
-          "power_kw_max": 242,
-          "match_kw": [
-            242
-          ],
-          "awd": true
-        },
-        {
-          "name": "Select Premium ER eAWD",
-          "power_kw_max": 276,
-          "match_kw": [
-            276
-          ],
-          "awd": true
-        },
-        {
-          "name": "GT eAWD",
-          "power_kw_max": 358,
-          "match_kw": [
-            358
-          ],
-          "awd": true
-        }
-      ]
+      ],
+      "audit_status": "ok"
     }
+  },
+  "demotedParentIds": {
+    "volvo-ex30-2024": "MY25.5 PDF was wrong year; media.volvocars MY24 docs return 503 \u2014 declassato",
+    "volvo-ex30-2025": "Only MY25.5/current PDF; year not independently verified \u2014 declassato",
+    "bmw-i4-2023": "Source was latin-america-caribbean (non-EU) \u2014 declassato",
+    "bmw-ix1-2023": "Global attachment year/market unclear \u2014 declassato",
+    "bmw-ix1-2025": "Reused 2024 DE attachment without MY25 stamp \u2014 declassato",
+    "volkswagen-id3-2020": "URL was Pro S upgrade article (later MY) \u2014 declassato",
+    "volkswagen-id3-2024": "Same 2023 Pro S article reused; year not unique \u2014 declassato",
+    "volkswagen-id4-2025": "Reused 2024 high-efficiency article \u2014 declassato",
+    "kia-ev6-2022": "DE Preisliste year stamp ambiguous \u2014 declassato",
+    "kia-ev6-2023": "Same Preisliste reused \u2014 declassato",
+    "tesla-model-y-2022": "tesla.com/en_gb/support/power-consumption living page, no MY stamp \u2014 declassato",
+    "tesla-model-y-2023": "living page \u2014 declassato",
+    "tesla-model-y-2024": "living page \u2014 declassato",
+    "tesla-model-y-2025": "living page \u2014 declassato",
+    "tesla-model-3-2022": "living page \u2014 declassato",
+    "tesla-model-3-2023": "living page \u2014 declassato",
+    "tesla-model-3-2024": "living page \u2014 declassato",
+    "tesla-model-3-2025": "living page \u2014 declassato"
   }
 }

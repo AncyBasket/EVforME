@@ -1,29 +1,29 @@
 {
-  "seedVersion": 61,
+  "seedVersion": 62,
   "stats": {
     "bev_model_years_with_range_before": 442,
     "bev_model_years_with_range_after": 442,
     "variant_groups_before": 1129,
-    "variant_groups_after": 1105,
-    "matched_groups": 80,
-    "unmatched_groups": 1025,
-    "dropped_groups": 2,
-    "top40_with_official_source": 31,
+    "variant_groups_after": 1123,
+    "matched_groups": 34,
+    "unmatched_groups": 1089,
+    "dropped_groups": 3,
+    "top40_with_official_source": 15,
     "top40_total": 40,
-    "catalog_rows_after": 6732,
+    "catalog_rows_after": 6750,
     "groups_per_parent_distribution": {
-      "1": 85,
-      "2": 125,
-      "3": 85,
-      "4": 45,
-      "5": 29,
-      "6": 22,
-      "7": 6,
-      "8": 2
+      "1": 84,
+      "2": 126,
+      "3": 80,
+      "4": 46,
+      "5": 31,
+      "6": 20,
+      "7": 8,
+      "8": 4
     }
   },
-  "top40WithSource": 31,
-  "discardedCount": 2,
-  "matched": 80,
-  "unmatched": 1025
+  "top40WithSource": 15,
+  "discardedCount": 3,
+  "matched": 34,
+  "unmatched": 1089
 }

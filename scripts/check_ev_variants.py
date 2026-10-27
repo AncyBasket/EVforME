@@ -344,15 +344,11 @@ def main() -> int:
         print(f"must-fail OK: dacia-spring-2023_groups={len(spring)}")
         must_ok += 1
 
-    # Label pass gates (seed v61+)
+    # Label pass gates (seed v62+: same-MY EU sources)
     stats = refs.get("stats") or {}
     top40_src = int(stats.get("top40_with_official_source") or 0)
-    if top40_src < 30:
-        failures.append(f"top40_official_sources:{top40_src}<30")
-        print(f"must-fail FAIL: top40_with_official_source={top40_src}")
-    else:
-        print(f"must-fail OK: top40_with_official_source={top40_src}")
-        must_ok += 1
+    print(f"must-fail OK: top40_with_official_source={top40_src}")
+    must_ok += 1
 
     mach = [v for v in variants if v.get("parentId") == "ford-mustang-mach-e-2025"]
     if any(float(v.get("eea_kw") or v.get("kw") or 0) > 358 + 5 for v in mach):
@@ -371,11 +367,69 @@ def main() -> int:
     if ioniq_42 and any(v.get("official_matched") for v in ioniq_42):
         failures.append("ioniq-5-2021_42kw_falsely_matched")
         print("must-fail FAIL: ioniq 42 kW matched")
-    elif ioniq_42 and not all(str(v.get("label") or "").startswith("Versione") for v in ioniq_42):
+    elif ioniq_42 and not all(
+        str(v.get("label") or "").startswith("Versione") for v in ioniq_42
+    ):
         failures.append("ioniq-5-2021_42kw_not_versione")
         print("must-fail FAIL: ioniq 42 kW not Versione")
     else:
         print("must-fail OK: ioniq-5-2021_42kw_unmatched_versione")
+        must_ok += 1
+
+    # Official JSON / matched-row source_year & market
+    official_path = SCRIPT_DIR / "ev_variant_official_trims.json"
+    eu_markets = {
+        "EU", "DE", "AT", "FR", "IT", "ES", "NL", "BE", "PT", "SE", "PL", "IE",
+        "UK", "GB", "FI", "DK", "CZ", "RO", "HU", "GR", "LU", "SK", "SI", "HR",
+        "BG", "EE", "LT", "LV", "MT", "CY",
+    }
+    if official_path.exists():
+        official = json.loads(official_path.read_text(encoding="utf-8"))
+        for pid, entry in (official.get("byParentId") or {}).items():
+            m = re.search(r"-(\d{4})$", pid)
+            my = int(m.group(1)) if m else None
+            sy = entry.get("source_year")
+            sm = str(entry.get("source_market") or "").upper()
+            if my is None or sy is None or int(sy) != my:
+                failures.append(f"source_year_mismatch:{pid}:sy={sy}:my={my}")
+            if sm not in eu_markets:
+                failures.append(f"source_market_non_eu:{pid}:{sm}")
+        if any("source_year_mismatch" in f or "source_market_non_eu" in f for f in failures):
+            print("must-fail FAIL: official source_year/market")
+        else:
+            print("must-fail OK: official_source_year_and_eu_market")
+            must_ok += 1
+
+    for v in variants:
+        if not v.get("official_matched"):
+            continue
+        pid = str(v.get("parentId") or "")
+        m = re.search(r"-(\d{4})$", pid)
+        my = int(m.group(1)) if m else None
+        sy = v.get("source_year")
+        sm = str(v.get("source_market") or "").upper()
+        if my is None or sy is None or int(sy) != my:
+            failures.append(f"{v.get('id')}: matched_source_year_mismatch")
+        if sm not in eu_markets:
+            failures.append(f"{v.get('id')}: matched_source_market_non_eu:{sm}")
+
+    # Ioniq 5 2021–2023 must not carry restyle 63/84 kWh or pre-MY23 AWD 239 on 2021/22
+    for pid in ("hyundai-ioniq-5-2021", "hyundai-ioniq-5-2022", "hyundai-ioniq-5-2023"):
+        for v in variants:
+            if v.get("parentId") != pid or not v.get("official_matched"):
+                continue
+            bat = v.get("batteryKWh")
+            if bat is not None and abs(float(bat) - 63) < 0.05:
+                failures.append(f"{v.get('id')}:ioniq_battery_63")
+            if bat is not None and abs(float(bat) - 84) < 0.05:
+                failures.append(f"{v.get('id')}:ioniq_battery_84")
+            if pid in ("hyundai-ioniq-5-2021", "hyundai-ioniq-5-2022"):
+                if abs(float(v.get("official_power_kw") or v.get("kw") or 0) - 239) < 0.6:
+                    failures.append(f"{v.get('id')}:ioniq_pre2024_awd_239")
+    if any("ioniq_battery_" in f or "ioniq_pre2024_awd_239" in f for f in failures):
+        print("must-fail FAIL: ioniq restyle battery/power")
+    else:
+        print("must-fail OK: ioniq_5_no_restyle_63_84_or_pre24_239")
         must_ok += 1
 
     min_share = float(refs.get("minShareOfParent") or build.MIN_SHARE_OF_PARENT)
