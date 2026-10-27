@@ -206,8 +206,14 @@ final class CatalogTruthHygieneTests: XCTestCase {
         }
         XCTAssertTrue(hasBrandModel("Volkswagen", "Golf"), "Golf")
         XCTAssertTrue(hasBrandModel("Fiat", "Panda"), "Panda")
-        XCTAssertTrue(hasBrandModel("BMW", "3 Series"), "Serie 3")
-        XCTAssertTrue(hasBrandModel("Mercedes", "C-Class"), "Classe C")
+        XCTAssertTrue(
+            hasBrandModel("BMW", "Serie 3") || hasBrandModel("BMW", "3 Series"),
+            "Serie 3"
+        )
+        XCTAssertTrue(
+            hasBrandModel("Mercedes", "Classe C") || hasBrandModel("Mercedes", "C-Class"),
+            "Classe C"
+        )
         XCTAssertTrue(
             hasBrandModel("Mercedes", "Classe A") || hasBrandModel("Mercedes", "A-Class"),
             "Classe A"
@@ -225,7 +231,10 @@ final class CatalogTruthHygieneTests: XCTestCase {
         let series2AT = catalog.first {
             $0.id.hasPrefix("bmw-2-series-") && $0.year >= 2022
         }
-        XCTAssertEqual(series2AT?.model, "2 Series Active Tourer")
+        XCTAssertTrue(
+            series2AT?.model == "Serie 2 Active Tourer"
+                || series2AT?.model == "2 Series Active Tourer"
+        )
     }
 
     func testCatalog_NoEEALabelBefore2010() {

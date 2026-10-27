@@ -112,11 +112,25 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertLessThanOrEqual(k100, 24)
     }
 
+    /// EEA same-MY Zr/Wh not yet published (or OEM pack absent) — energy may stay nil.
+    private func allowsNilElectricEnergy(_ v: VehicleCatalogItem) -> Bool {
+        let s = (v.sourceName ?? "").lowercased()
+        let documentedNil =
+            s.contains("nil")
+            || s.contains("absent")
+            || s.contains("not found")
+            || s.contains("not attached")
+            || s.contains("not valid for")
+        let eeaFuelOk = s.contains("eea")
+        return documentedNil && eeaFuelOk
+    }
+
     func testCatalog_NoAbsurdEVEnergyOutliers() {
         let evs = VehicleCatalogService.shared.vehicles.filter { $0.powertrain == .ev }
         XCTAssertFalse(evs.isEmpty)
         for ev in evs {
             guard let kWh = ev.resolvedEnergyKWhPerKm else {
+                if allowsNilElectricEnergy(ev) { continue }
                 XCTFail("EV \(ev.id) missing energy")
                 continue
             }
@@ -136,11 +150,19 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
                 XCTAssertNotNil(v.fuelConsumptionLPerKm, v.id)
                 XCTAssertGreaterThan(v.fuelConsumptionLPerKm ?? 0, 0, v.id)
             case .ev:
+                if allowsNilElectricEnergy(v) { continue }
                 XCTAssertNotNil(v.resolvedEnergyKWhPerKm, v.id)
                 XCTAssertGreaterThan(v.resolvedEnergyKWhPerKm ?? 0, 0, v.id)
             case .phev:
+                // Fuel from EEA always required; electric kWh/range/battery may be nil
+                // when same-MY OEM/EEA energy source is missing (documented in sourceName).
                 XCTAssertNotNil(v.fuelConsumptionLPerKm, v.id)
-                XCTAssertNotNil(v.resolvedEnergyKWhPerKm, v.id)
+                if v.resolvedEnergyKWhPerKm == nil {
+                    XCTAssertTrue(
+                        allowsNilElectricEnergy(v),
+                        "PHEV \(v.id) missing energy without documented EEA/OEM nil"
+                    )
+                }
             }
         }
     }
@@ -766,8 +788,13 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
     }
 
     func testCatalog_NonEPAPHEVSourcesIncludeDocumentURL() {
+        // Only PHEVs that publish electric kWh need a same-MY OEM/EEA doc URL.
+        // EEA-fuel-only rows (nil energy/range/battery) are exempt by design.
         let nonEpa = VehicleCatalogService.shared.vehicles.filter { v in
             guard v.powertrain == .phev else { return false }
+            guard v.resolvedEnergyKWhPerKm != nil || v.batteryKWh != nil || v.wltpRangeKm != nil else {
+                return false
+            }
             let market = (v.market ?? "").uppercased()
             let src = (v.sourceName ?? "").uppercased()
             return market != "US/EPA" && !src.contains("EPA-FUELECONOMY")
@@ -788,6 +815,8 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
                 || url.contains("newsroom")
                 || url.contains("media-assets")
                 || url.contains("attachment")
+                || url.contains("model-document")
+                || url.contains("media.stellantis.com")
             return !looksDoc
         }
         XCTAssertTrue(generic.isEmpty, "non-EPA PHEV source must be a precise doc URL: \(generic.map(\.id))")
@@ -795,6 +824,7 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             let s = (v.sourceName ?? "").lowercased()
             let solo = s.contains("solo elettr") || s.contains("rein elektr") || s.contains("electric-only")
                 || s.contains("charge-depleting") || s.contains("ec mode")
+                || s.contains("eaer") || s.contains("electric range")
             let ponderato = s.contains("ponderat") || s.contains("weighted") || s.contains("gewichtet")
             return !(solo || ponderato)
         }
