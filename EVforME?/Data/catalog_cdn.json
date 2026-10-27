@@ -1,12 +1,12 @@
 {
   "url": "",
   "publishedUrl": "",
-  "rows": 6750,
-  "bytes": 2917760,
+  "rows": 6777,
+  "bytes": 2930388,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-27T11:21:55.985866+00:00",
+  "updatedAt": "2026-10-27T14:01:43.815084+00:00",
   "policy": "offline-first",
-  "seedVersion": 62,
-  "note": "seedVersion 62: EV version labels from same-MY EU OEM sheets (source_year/source_market required; unmatched Versione n)."
+  "seedVersion": 63,
+  "note": "seedVersion 63: IT wave-1 \u2014 missing \u22655k regs/year models + PHEV \u2265500/year with same-MY EU OEM CS\u22653 L/100 energy sheets; IT commercial names."
 }

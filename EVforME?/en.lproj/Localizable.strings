@@ -356,9 +356,9 @@
 "trip_profile_commuter_subtitle" = "~18,000 km/year, mostly urban stop-and-go.";
 "trip_profile_weekend_subtitle" = "~14,000 km/year with longer highway legs.";
 "purchase_prices_title" = "Purchase prices";
-"purchase_prices_verdict_note" = "Does not decide yes/no: the verdict stays on energy, road tax and maintenance (older cars cost more to run). List price is only a payback estimate if you are buying.";
-"source_purchase_price_label" = "Current car (€)";
-"target_purchase_price_label" = "EV target (€)";
+"purchase_prices_verdict_note" = "Prefill values are an estimate (not an official list price): enter the real purchase price. They do not decide yes/no — the verdict stays on energy, road tax and maintenance.";
+"source_purchase_price_label" = "Current car (€) — enter the real price";
+"target_purchase_price_label" = "EV target (€) — enter the real price";
 "include_incentives_toggle" = "Include IT incentive estimate (off by default)";
 "include_incentives_hint" = "Off by default: 2025 MASE/PNRR rules (ISEE, scrappage, FUA) are not fully modellable here. Verify on the official site before enabling. Not legal advice.";
 "comparison_intent_section_title" = "What are you comparing?";

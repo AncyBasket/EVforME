@@ -22,7 +22,8 @@ enum Defaults {
         referenceCalendarYearProvider()
     }
 
-    /// Stima listino grezza quando l’utente cambia veicolo.
+    /// Stima grezza (non listino ufficiale) quando l’utente cambia veicolo.
+    /// In UI va etichettata come stima e l’utente deve inserire il prezzo reale.
     static func suggestedPurchasePrice(for vehicle: VehicleCatalogItem) -> Double {
         let age = max(0, referenceCalendarYear - vehicle.year)
         switch vehicle.powertrain {

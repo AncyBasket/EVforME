@@ -373,9 +373,9 @@
 "trip_profile_commuter_subtitle" = "~18.000 km/anno, soprattutto urbano.";
 "trip_profile_weekend_subtitle" = "~14.000 km/anno con tratti autostradali.";
 "purchase_prices_title" = "Prezzi d’acquisto";
-"purchase_prices_verdict_note" = "Non decide il sì/no: il verdetto resta su energia, bollo e manutenzione (l’usata pesa di più). Qui solo stima payback se stai comprando.";
-"source_purchase_price_label" = "Auto attuale (€)";
-"target_purchase_price_label" = "EV di destinazione (€)";
+"purchase_prices_verdict_note" = "I valori precompilati sono una stima (non un listino ufficiale): inserisci il prezzo reale di acquisto. Non decidono il sì/no — il verdetto resta su energia, bollo e manutenzione.";
+"source_purchase_price_label" = "Auto attuale (€) — inserisci il prezzo vero";
+"target_purchase_price_label" = "EV di destinazione (€) — inserisci il prezzo vero";
 "include_incentives_toggle" = "Includi stima incentivi IT (disattivata di default)";
 "include_incentives_hint" = "Disattivata di default: le regole 2025 MASE/PNRR (ISEE, rottamazione, FUA) non sono modellabili in modo affidabile qui. Verifica sul sito ufficiale prima di attivarla. Non è consulenza.";
 "comparison_intent_section_title" = "Cosa stai confrontando?";

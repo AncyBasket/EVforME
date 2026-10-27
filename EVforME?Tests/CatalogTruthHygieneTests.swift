@@ -208,7 +208,10 @@ final class CatalogTruthHygieneTests: XCTestCase {
         XCTAssertTrue(hasBrandModel("Fiat", "Panda"), "Panda")
         XCTAssertTrue(hasBrandModel("BMW", "3 Series"), "Serie 3")
         XCTAssertTrue(hasBrandModel("Mercedes", "C-Class"), "Classe C")
-        XCTAssertTrue(hasBrandModel("Mercedes", "A-Class"), "Classe A")
+        XCTAssertTrue(
+            hasBrandModel("Mercedes", "Classe A") || hasBrandModel("Mercedes", "A-Class"),
+            "Classe A"
+        )
         XCTAssertTrue(
             catalog.contains {
                 $0.brand.localizedCaseInsensitiveContains("MINI")

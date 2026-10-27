@@ -573,7 +573,9 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertTrue(hasDiesel("Volkswagen", "T-Roc"))
         XCTAssertTrue(hasDiesel("Fiat", "500X"))
         XCTAssertTrue(hasDiesel("Fiat", "Tipo"))
-        XCTAssertTrue(hasDiesel("Mercedes-Benz", "A-Class"))
+        XCTAssertTrue(
+            hasDiesel("Mercedes-Benz", "Classe A") || hasDiesel("Mercedes-Benz", "A-Class")
+        )
     }
 
     func testCatalog_LPGAndCNGPresentForKeyITModels() {
