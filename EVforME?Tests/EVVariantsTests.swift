@@ -2,7 +2,7 @@
 //  EVVariantsTests.swift
 //  EVforME?Tests
 //
-//  Seed v59: EEA version groups (kW±5 + traction), prudent min Zr / max Wh.
+//  Seed v60: EEA version groups + exclusive Cn / noise / official kW.
 //
 
 import XCTest
@@ -185,5 +185,14 @@ final class EVVariantsTests: XCTestCase {
                 || note.localizedCaseInsensitiveContains("prudente")
                 || note.localizedCaseInsensitiveContains("cautious")
         )
+    }
+
+    func testRemovedVersionIdIsNotSilentlyAliased() {
+        // Dropped by noise/official-kW cleanup — must force re-pick (PR #21 rule).
+        let gone = "tesla-model-y-2023-v61kw-rwd"
+        XCTAssertNil(VehicleCatalogService.shared.vehicle(by: gone))
+        XCTAssertNil(CatalogVehicleIdResolver.resolveId(gone))
+        XCTAssertTrue(CatalogVehicleIdResolver.isUnavailable(gone))
+        XCTAssertNil(CatalogVehicleIdResolver.aliases[gone])
     }
 }

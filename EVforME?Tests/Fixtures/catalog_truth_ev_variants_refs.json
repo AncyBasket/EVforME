@@ -1,61 +1,56 @@
 {
-  "seedVersion": 59,
-  "generatedAt": "2026-10-26T19:55:53.282621+00:00",
+  "seedVersion": 60,
+  "generatedAt": "2026-10-27T09:41:17.942222+00:00",
   "source": "EEA co2cars EU field Zr (Electric range km)",
   "rules": [
     "Min registrations per atomic EEA record: 10",
     "Version group = kW\u00b15 + traction (AWD from Cn/key)",
+    "Exclusive Cn/records across base vs sport siblings; sport without Cn \u2192 rule B",
+    "Noise: keep if n\u2265200 OR share\u22650.02",
+    "Official kW audit for top-30 BEV MY + parents with >6 groups",
     "Zr/Wh min\u2013max from group EEA records only; calc uses min Zr + max Wh",
-    "F preferred; P-only (kW,Zr) kept; F/P same (kW,Zr) different Wh \u2192 drop pair only",
-    "Drop Zr == Wh/km on same record",
-    "Drop Wh/km outside [90, 350]",
-    "Label: '<kW> kW' (+ AWD); range caption separate",
-    "batteryKWh nil unless OEM-verified parent pack matches",
+    "F preferred; P-only (kW,Zr) kept; F/P Wh conflict drops pair only",
     "Tesla Model 3 2026 IT trims preserved"
   ],
   "minRegistrations": 10,
+  "minShareOfParent": 0.02,
+  "minAbsoluteRegistrations": 200.0,
   "kwToleranceAbs": 5.0,
   "stats": {
     "bev_model_years_before": 701,
-    "bev_model_years_with_range_before": 129,
+    "bev_model_years_with_range_before": 460,
     "bev_model_years_after": 701,
-    "bev_model_years_with_range_after": 460,
-    "bev_rows_after_including_versions": 2214,
-    "variant_groups": 1513,
-    "parents_single": 71,
-    "parents_multi": 346,
-    "parents_no_variant": 280,
+    "bev_model_years_with_range_after": 442,
+    "bev_rows_after_including_versions": 1830,
+    "variant_groups": 1129,
+    "variant_groups_before": 1513,
+    "parents_single": 84,
+    "parents_multi": 315,
+    "parents_no_variant": 298,
     "no_variant_reasons": {
-      "no_cn": 235,
-      "none_after_filters": 45
+      "no_cn": 250,
+      "none_after_filters": 48
     },
     "catalog_rows_before": 5627,
-    "catalog_rows_after": 7140,
+    "catalog_rows_after": 6756,
     "groups_per_parent_distribution": {
-      "1": 71,
-      "2": 121,
-      "3": 72,
-      "4": 41,
-      "5": 26,
-      "6": 22,
-      "7": 24,
-      "8": 16,
-      "9": 6,
-      "10": 7,
-      "11": 6,
-      "12": 1,
-      "13": 1,
-      "15": 2,
-      "17": 1
+      "1": 84,
+      "2": 126,
+      "3": 79,
+      "4": 46,
+      "5": 32,
+      "6": 17,
+      "7": 10,
+      "8": 5
     },
-    "parents_over_8_groups": 24,
+    "parents_over_8_groups": 0,
     "fp_pair_conflicts_dropped": 386,
-    "result_ok": 417,
-    "result_multi": 346,
-    "result_single": 71,
-    "result_no_cn": 235,
-    "result_none_after_filters": 45,
-    "result_skip_protected": 4
+    "result_no_cn": 250,
+    "result_ok": 399,
+    "result_none_after_filters": 48,
+    "result_skip_protected": 4,
+    "result_multi": 315,
+    "result_single": 84
   },
   "singleVersionAliases": {
     "audi-q4-e-tron-2023": "audi-q4-e-tron-2023-v150kw-rwd",
@@ -65,6 +60,9 @@
     "audi-e-tron-gt-2025": "audi-e-tron-gt-2025-v370kw-rwd",
     "bmw-i5-2023": "bmw-i5-2023-v250kw-rwd",
     "bmw-ix3-2020": "bmw-ix3-2020-v80kw-rwd",
+    "bmw-ix3-2023": "bmw-ix3-2023-v210kw-rwd",
+    "bmw-ix3-2024": "bmw-ix3-2024-v210kw-rwd",
+    "bmw-ix3-2025": "bmw-ix3-2025-v210kw-rwd",
     "byd-tang-2022": "byd-tang-2022-v380kw-rwd",
     "byd-tang-2023": "byd-tang-2023-v180kw-rwd",
     "citroen-e-berlingo-2025": "citroen-e-berlingo-2025-v100kw-rwd",
@@ -75,8 +73,15 @@
     "fiat-grande-panda-ev-2025": "fiat-grande-panda-ev-2025-v83kw-rwd",
     "ford-puma-gen-e-2025": "ford-puma-gen-e-2025-v52kw-rwd",
     "honda-eny1-2023": "honda-eny1-2023-v150kw-rwd",
+    "honda-eny1-2024": "honda-eny1-2024-v150kw-rwd",
+    "hyundai-ioniq-5-n-2024": "hyundai-ioniq-5-n-2024-v478kw-rwd",
+    "hyundai-ioniq-5-n-2025": "hyundai-ioniq-5-n-2025-v478kw-rwd",
     "hyundai-ioniq-electric-2022": "hyundai-ioniq-electric-2022-v100kw-rwd",
     "jaguar-i-pace-2025": "jaguar-i-pace-2025-v294kw-rwd",
+    "jeep-avenger-electric-2024": "jeep-avenger-electric-2024-v115kw-rwd",
+    "jeep-avenger-electric-2025": "jeep-avenger-electric-2025-v115kw-rwd",
+    "kia-ev4-2025": "kia-ev4-2025-v150kw-rwd",
+    "kia-soul-ev-2024": "kia-soul-ev-2024-v150kw-rwd",
     "kia-soul-ev-2025": "kia-soul-ev-2025-v150kw-rwd",
     "kia-e-niro-2021": "kia-e-niro-2021-v29kw-rwd",
     "lancia-ypsilon-ev-2024": "lancia-ypsilon-ev-2024-v115kw-rwd",
@@ -88,11 +93,14 @@
     "mg-mg4-2022": "mg-mg4-2022-v150kw-rwd",
     "mg-mg5-2022": "mg-mg5-2022-v115kw-rwd",
     "mg-mg5-2024": "mg-mg5-2024-v130kw-rwd",
+    "mazda-mx-30-2023": "mazda-mx-30-2023-v107kw-rwd",
+    "mazda-mx-30-2024": "mazda-mx-30-2024-v107kw-rwd",
     "mazda-mx-30-2025": "mazda-mx-30-2025-v107kw-rwd",
     "mercedes-benz-eqa-2021": "mercedes-benz-eqa-2021-v80kw-rwd",
     "mercedes-benz-eqa-2025": "mercedes-benz-eqa-2025-v140kw-rwd",
     "mercedes-benz-eqb-2025": "mercedes-benz-eqb-2025-v140kw-rwd",
     "mercedes-benz-eqe-2022": "mercedes-benz-eqe-2022-v180kw-rwd",
+    "mercedes-benz-eqe-2023": "mercedes-benz-eqe-2023-v215kw-rwd",
     "mercedes-benz-eqe-2024": "mercedes-benz-eqe-2024-v215kw-rwd",
     "mercedes-benz-eqs-2023": "mercedes-benz-eqs-2023-v265kw-rwd",
     "nissan-leaf-2024": "nissan-leaf-2024-v110kw-rwd",
@@ -116,446 +124,22 @@
     "renault-scenic-e-tech-2023": "renault-scenic-e-tech-2023-v160kw-rwd",
     "seat-mii-electric-2020": "seat-mii-electric-2020-v61kw-rwd",
     "seat-mii-electric-2021": "seat-mii-electric-2021-v61kw-rwd",
-    "skoda-citigo-e-iv-2020": "skoda-citigo-e-iv-2020-v61kw-rwd",
-    "skoda-citigo-e-iv-2021": "skoda-citigo-e-iv-2021-v61kw-rwd",
     "skoda-enyaq-2024": "skoda-enyaq-2024-v210kw-rwd",
+    "smart-1-2023": "smart-1-2023-v200kw-rwd",
     "tesla-model-s-2021": "tesla-model-s-2021-v186kw-rwd",
     "tesla-model-x-2021": "tesla-model-x-2021-v96kw-rwd",
     "toyota-proace-electric-2024": "toyota-proace-electric-2024-v100kw-rwd",
     "volkswagen-id-buzz-2025": "volkswagen-id-buzz-2025-v150kw-rwd",
     "volkswagen-id4-2020": "volkswagen-id4-2020-v70kw-rwd",
+    "volkswagen-id7-2025": "volkswagen-id7-2025-v210kw-rwd",
     "volkswagen-e-golf-2020": "volkswagen-e-golf-2020-v100kw-rwd",
     "volkswagen-e-up!-2020": "volkswagen-e-up!-2020-v61kw-rwd",
     "volkswagen-e-up!-2023": "volkswagen-e-up!-2023-v61kw-rwd",
     "xpeng-p7-2021": "xpeng-p7-2021-v196kw-rwd",
     "xpeng-p7-2025": "xpeng-p7-2025-v203kw-rwd"
   },
-  "clearedParentRangeIds": [
-    "bmw-i5-2023",
-    "bmw-ix3-2025",
-    "byd-dolphin-2024",
-    "byd-dolphin-2025",
-    "byd-dolphin-surf-2025",
-    "citroen-e-berlingo-2021",
-    "citroen-e-berlingo-2022",
-    "citroen-e-berlingo-2023",
-    "citroen-e-berlingo-2024",
-    "citroen-e-berlingo-2025",
-    "cupra-born-2021",
-    "cupra-born-2022",
-    "cupra-born-2023",
-    "cupra-born-2024",
-    "cupra-born-2025",
-    "dacia-spring-2021",
-    "dacia-spring-2022",
-    "dacia-spring-2023",
-    "dacia-spring-2024",
-    "dacia-spring-2025",
-    "fiat-600e-2023",
-    "fiat-600e-2024",
-    "fiat-grande-panda-ev-2024",
-    "fiat-grande-panda-ev-2025",
-    "honda-e-2023",
-    "hyundai-ioniq-5-n-2024",
-    "hyundai-ioniq-5-n-2025",
-    "hyundai-ioniq-electric-2020",
-    "hyundai-ioniq-electric-2021",
-    "hyundai-ioniq-electric-2022",
-    "jeep-avenger-electric-2023",
-    "jeep-avenger-electric-2024",
-    "jeep-avenger-electric-2025",
-    "kia-e-niro-2021",
-    "kia-ev4-2025",
-    "kia-ev6-2021",
-    "kia-ev6-2022",
-    "kia-ev6-2023",
-    "kia-ev6-2024",
-    "kia-ev6-2025",
-    "lancia-ypsilon-ev-2024",
-    "lancia-ypsilon-ev-2025",
-    "leapmotor-t03-2024",
-    "leapmotor-t03-2025",
-    "lexus-ux-300e-2022",
-    "lexus-ux-300e-2025",
-    "mazda-6e-2025",
-    "mazda-mx-30-2023",
-    "mercedes-benz-eqv-2020",
-    "mercedes-benz-eqv-2021",
-    "mercedes-benz-eqv-2022",
-    "mercedes-benz-eqv-2023",
-    "mercedes-benz-eqv-2024",
-    "mercedes-benz-eqv-2025",
-    "mg-marvel-r-2023",
-    "mg-mg-zs-ev-2021",
-    "nissan-ariya-2022",
-    "nissan-ariya-2023",
-    "nissan-ariya-2024",
-    "nissan-ariya-2025",
-    "nissan-leaf-2020",
-    "nissan-leaf-2021",
-    "nissan-leaf-2022",
-    "renault-5-e-tech-2025",
-    "renault-zoe-2020",
-    "renault-zoe-2021",
-    "renault-zoe-2022",
-    "renault-zoe-2023",
-    "renault-zoe-2024",
-    "smart-1-2023",
-    "subaru-solterra-2022",
-    "subaru-solterra-2023",
-    "subaru-solterra-2024",
-    "subaru-solterra-2025",
-    "toyota-bz4x-2022",
-    "toyota-bz4x-2023",
-    "toyota-bz4x-2024",
-    "toyota-bz4x-2025",
-    "toyota-proace-electric-2023",
-    "volkswagen-e-golf-2020",
-    "volkswagen-e-up!-2020",
-    "volkswagen-e-up!-2023",
-    "volkswagen-id-buzz-2022",
-    "volkswagen-id-buzz-2023",
-    "volkswagen-id-buzz-2024",
-    "volkswagen-id-buzz-2025"
-  ],
+  "clearedParentRangeIds": [],
   "variants": [
-    {
-      "id": "audi-q4-e-tron-2021-v350kw-rwd",
-      "parentId": "audi-q4-e-tron-2021",
-      "brand": "Audi",
-      "model": "Q4 e-tron",
-      "year": 2021,
-      "kw": 350.0,
-      "awd": false,
-      "wh_per_km": 214.0,
-      "wh_per_km_min": 201.0,
-      "wh_per_km_max": 214.0,
-      "wltpRangeKm": 456,
-      "wltpRangeKmMin": 456,
-      "wltpRangeKmMax": 483,
-      "status": "F",
-      "registrations": 381.0,
-      "countries": [
-        "EU-wide"
-      ],
-      "cn_raws": [
-        "AUDI E-TRON",
-        "Audi e-tron",
-        "E TRON GT",
-        "E TRON S",
-        "E-TRON",
-        "E-TRON GT",
-        "E-TRON GT / /",
-        "E-TRON S",
-        "E-TRON SPORTBACK",
-        "e-tron GT",
-        "e-tron S"
-      ],
-      "label": "350 kW",
-      "rangeCaption": "Autonomia WLTP 456\u2013483 km (dipende da cerchi e optional)",
-      "awd_from_cn": false,
-      "batteryKWh": null,
-      "battery_source": null,
-      "commercial_name": null,
-      "commercial_url": null,
-      "source": "EEA co2cars EU Zr",
-      "eea_records": [
-        {
-          "kw": 350.0,
-          "wh_per_km": 211.0,
-          "wltpRangeKm": 463,
-          "n": 72.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 213.0,
-          "wltpRangeKm": 458,
-          "n": 71.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 205.0,
-          "wltpRangeKm": 475,
-          "n": 26.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 204.0,
-          "wltpRangeKm": 477,
-          "n": 26.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 214.0,
-          "wltpRangeKm": 456,
-          "n": 21.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 203.0,
-          "wltpRangeKm": 479,
-          "n": 20.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 202.0,
-          "wltpRangeKm": 480,
-          "n": 17.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 208.0,
-          "wltpRangeKm": 468,
-          "n": 16.0,
-          "status": "F",
-          "eea_model_key": "ETRON",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 212.0,
-          "wltpRangeKm": 460,
-          "n": 15.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 210.0,
-          "wltpRangeKm": 465,
-          "n": 15.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 206.0,
-          "wltpRangeKm": 473,
-          "n": 13.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 201.0,
-          "wltpRangeKm": 483,
-          "n": 13.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 212.0,
-          "wltpRangeKm": 461,
-          "n": 12.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 209.0,
-          "wltpRangeKm": 466,
-          "n": 12.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 208.0,
-          "wltpRangeKm": 469,
-          "n": 11.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 203.0,
-          "wltpRangeKm": 478,
-          "n": 11.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 202.0,
-          "wltpRangeKm": 481,
-          "n": 10.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        }
-      ],
-      "prudent": {
-        "wltpRangeKm": 456,
-        "wh_per_km": 214.0
-      }
-    },
-    {
-      "id": "audi-q4-e-tron-2021-v140kw-rwd",
-      "parentId": "audi-q4-e-tron-2021",
-      "brand": "Audi",
-      "model": "Q4 e-tron",
-      "year": 2021,
-      "kw": 140.0,
-      "awd": false,
-      "wh_per_km": 215.0,
-      "wh_per_km_min": 202.0,
-      "wh_per_km_max": 215.0,
-      "wltpRangeKm": 454,
-      "wltpRangeKmMin": 454,
-      "wltpRangeKmMax": 481,
-      "status": "F",
-      "registrations": 193.0,
-      "countries": [
-        "EU-wide"
-      ],
-      "cn_raws": [
-        "AUDI E-TRON",
-        "Audi e-tron",
-        "E TRON GT",
-        "E TRON S",
-        "E-TRON",
-        "E-TRON GT",
-        "E-TRON GT / /",
-        "E-TRON S",
-        "E-TRON SPORTBACK",
-        "e-tron GT",
-        "e-tron S"
-      ],
-      "label": "140 kW",
-      "rangeCaption": "Autonomia WLTP 454\u2013481 km (dipende da cerchi e optional)",
-      "awd_from_cn": false,
-      "batteryKWh": null,
-      "battery_source": null,
-      "commercial_name": null,
-      "commercial_url": null,
-      "source": "EEA co2cars EU Zr",
-      "eea_records": [
-        {
-          "kw": 140.0,
-          "wh_per_km": 211.0,
-          "wltpRangeKm": 463,
-          "n": 67.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 215.0,
-          "wltpRangeKm": 454,
-          "n": 28.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 202.0,
-          "wltpRangeKm": 481,
-          "n": 17.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 214.0,
-          "wltpRangeKm": 457,
-          "n": 14.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 209.0,
-          "wltpRangeKm": 467,
-          "n": 13.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 205.0,
-          "wltpRangeKm": 475,
-          "n": 12.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 212.0,
-          "wltpRangeKm": 460,
-          "n": 11.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 202.0,
-          "wltpRangeKm": 480,
-          "n": 11.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 213.0,
-          "wltpRangeKm": 458,
-          "n": 10.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 203.0,
-          "wltpRangeKm": 478,
-          "n": 10.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        }
-      ],
-      "prudent": {
-        "wltpRangeKm": 454,
-        "wh_per_km": 215.0
-      }
-    },
     {
       "id": "audi-q4-e-tron-2021-v370kw-rwd",
       "parentId": "audi-q4-e-tron-2021",
@@ -604,7 +188,17 @@
           "n": 17.0,
           "status": "F",
           "eea_model_key": "ETRONS",
-          "awd": false
+          "awd": false,
+          "year": 2021,
+          "fingerprint": [
+            2021,
+            "ETRONS",
+            370.0,
+            277.0,
+            352,
+            false,
+            "F"
+          ]
         }
       ],
       "prudent": {
@@ -660,7 +254,17 @@
           "n": 30.0,
           "status": "F",
           "eea_model_key": "ETRONS",
-          "awd": false
+          "awd": false,
+          "year": 2021,
+          "fingerprint": [
+            2021,
+            "ETRONS",
+            226.0,
+            278.0,
+            351,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 226.0,
@@ -669,7 +273,17 @@
           "n": 14.0,
           "status": "F",
           "eea_model_key": "ETRONS",
-          "awd": false
+          "awd": false,
+          "year": 2021,
+          "fingerprint": [
+            2021,
+            "ETRONS",
+            226.0,
+            277.0,
+            352,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 226.0,
@@ -678,552 +292,22 @@
           "n": 10.0,
           "status": "F",
           "eea_model_key": "ETRONS",
-          "awd": false
+          "awd": false,
+          "year": 2021,
+          "fingerprint": [
+            2021,
+            "ETRONS",
+            226.0,
+            276.0,
+            354,
+            false,
+            "F"
+          ]
         }
       ],
       "prudent": {
         "wltpRangeKm": 351,
         "wh_per_km": 278.0
-      }
-    },
-    {
-      "id": "audi-q4-e-tron-2022-v140kw-rwd",
-      "parentId": "audi-q4-e-tron-2022",
-      "brand": "Audi",
-      "model": "Q4 e-tron",
-      "year": 2022,
-      "kw": 140.0,
-      "awd": false,
-      "wh_per_km": 215.0,
-      "wh_per_km_min": 200.0,
-      "wh_per_km_max": 215.0,
-      "wltpRangeKm": 454,
-      "wltpRangeKmMin": 454,
-      "wltpRangeKmMax": 485,
-      "status": "F",
-      "registrations": 342.0,
-      "countries": [
-        "EU-wide"
-      ],
-      "cn_raws": [
-        "E TRON GT",
-        "E TRON S",
-        "E-TRON",
-        "E-TRON GT",
-        "E-TRON GT / /",
-        "E-TRON S",
-        "E-TRON S / /",
-        "e-tron GT",
-        "e-tron S"
-      ],
-      "label": "140 kW",
-      "rangeCaption": "Autonomia WLTP 454\u2013485 km (dipende da cerchi e optional)",
-      "awd_from_cn": false,
-      "batteryKWh": null,
-      "battery_source": null,
-      "commercial_name": null,
-      "commercial_url": null,
-      "source": "EEA co2cars EU Zr",
-      "eea_records": [
-        {
-          "kw": 140.0,
-          "wh_per_km": 211.0,
-          "wltpRangeKm": 463,
-          "n": 42.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 209.0,
-          "wltpRangeKm": 466,
-          "n": 40.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 205.0,
-          "wltpRangeKm": 475,
-          "n": 27.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 215.0,
-          "wltpRangeKm": 454,
-          "n": 24.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 210.0,
-          "wltpRangeKm": 464,
-          "n": 24.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 204.0,
-          "wltpRangeKm": 478,
-          "n": 22.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 202.0,
-          "wltpRangeKm": 481,
-          "n": 22.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 214.0,
-          "wltpRangeKm": 457,
-          "n": 21.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 210.0,
-          "wltpRangeKm": 465,
-          "n": 21.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 212.0,
-          "wltpRangeKm": 461,
-          "n": 20.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 212.0,
-          "wltpRangeKm": 460,
-          "n": 19.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 203.0,
-          "wltpRangeKm": 479,
-          "n": 18.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 209.0,
-          "wltpRangeKm": 467,
-          "n": 16.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 205.0,
-          "wltpRangeKm": 474,
-          "n": 16.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 140.0,
-          "wh_per_km": 200.0,
-          "wltpRangeKm": 485,
-          "n": 10.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        }
-      ],
-      "prudent": {
-        "wltpRangeKm": 454,
-        "wh_per_km": 215.0
-      }
-    },
-    {
-      "id": "audi-q4-e-tron-2022-v350kw-rwd",
-      "parentId": "audi-q4-e-tron-2022",
-      "brand": "Audi",
-      "model": "Q4 e-tron",
-      "year": 2022,
-      "kw": 350.0,
-      "awd": false,
-      "wh_per_km": 215.0,
-      "wh_per_km_min": 202.0,
-      "wh_per_km_max": 215.0,
-      "wltpRangeKm": 454,
-      "wltpRangeKmMin": 454,
-      "wltpRangeKmMax": 481,
-      "status": "F",
-      "registrations": 569.0,
-      "countries": [
-        "EU-wide"
-      ],
-      "cn_raws": [
-        "E TRON GT",
-        "E TRON S",
-        "E-TRON",
-        "E-TRON GT",
-        "E-TRON GT / /",
-        "E-TRON S",
-        "E-TRON S / /",
-        "e-tron GT",
-        "e-tron S"
-      ],
-      "label": "350 kW",
-      "rangeCaption": "Autonomia WLTP 454\u2013481 km (dipende da cerchi e optional)",
-      "awd_from_cn": false,
-      "batteryKWh": null,
-      "battery_source": null,
-      "commercial_name": null,
-      "commercial_url": null,
-      "source": "EEA co2cars EU Zr",
-      "eea_records": [
-        {
-          "kw": 350.0,
-          "wh_per_km": 205.0,
-          "wltpRangeKm": 475,
-          "n": 50.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 211.0,
-          "wltpRangeKm": 463,
-          "n": 40.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 204.0,
-          "wltpRangeKm": 477,
-          "n": 39.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 203.0,
-          "wltpRangeKm": 479,
-          "n": 39.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 214.0,
-          "wltpRangeKm": 457,
-          "n": 34.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 213.0,
-          "wltpRangeKm": 458,
-          "n": 32.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 210.0,
-          "wltpRangeKm": 465,
-          "n": 32.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 202.0,
-          "wltpRangeKm": 481,
-          "n": 32.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 212.0,
-          "wltpRangeKm": 460,
-          "n": 28.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 215.0,
-          "wltpRangeKm": 454,
-          "n": 27.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 211.0,
-          "wltpRangeKm": 462,
-          "n": 24.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 209.0,
-          "wltpRangeKm": 466,
-          "n": 23.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 206.0,
-          "wltpRangeKm": 473,
-          "n": 20.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 204.0,
-          "wltpRangeKm": 476,
-          "n": 18.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 203.0,
-          "wltpRangeKm": 478,
-          "n": 16.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 214.0,
-          "wltpRangeKm": 456,
-          "n": 15.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 212.0,
-          "wltpRangeKm": 461,
-          "n": 15.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 209.0,
-          "wltpRangeKm": 467,
-          "n": 15.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 205.0,
-          "wltpRangeKm": 474,
-          "n": 15.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 206.0,
-          "wltpRangeKm": 472,
-          "n": 12.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 215.0,
-          "wltpRangeKm": 455,
-          "n": 11.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 210.0,
-          "wltpRangeKm": 464,
-          "n": 11.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 208.0,
-          "wltpRangeKm": 468,
-          "n": 11.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 350.0,
-          "wh_per_km": 207.0,
-          "wltpRangeKm": 471,
-          "n": 10.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        }
-      ],
-      "prudent": {
-        "wltpRangeKm": 454,
-        "wh_per_km": 215.0
-      }
-    },
-    {
-      "id": "audi-q4-e-tron-2022-v175kw-rwd",
-      "parentId": "audi-q4-e-tron-2022",
-      "brand": "Audi",
-      "model": "Q4 e-tron",
-      "year": 2022,
-      "kw": 175.0,
-      "awd": false,
-      "wh_per_km": 247.0,
-      "wh_per_km_min": 203.0,
-      "wh_per_km_max": 247.0,
-      "wltpRangeKm": 388,
-      "wltpRangeKmMin": 388,
-      "wltpRangeKmMax": 478,
-      "status": "F",
-      "registrations": 136.0,
-      "countries": [
-        "EU-wide"
-      ],
-      "cn_raws": [
-        "E TRON GT",
-        "E TRON S",
-        "E-TRON",
-        "E-TRON GT",
-        "E-TRON GT / /",
-        "E-TRON S",
-        "E-TRON S / /",
-        "e-tron GT",
-        "e-tron S"
-      ],
-      "label": "175 kW",
-      "rangeCaption": "Autonomia WLTP 388\u2013478 km (dipende da cerchi e optional)",
-      "awd_from_cn": false,
-      "batteryKWh": null,
-      "battery_source": null,
-      "commercial_name": null,
-      "commercial_url": null,
-      "source": "EEA co2cars EU Zr",
-      "eea_records": [
-        {
-          "kw": 175.0,
-          "wh_per_km": 247.0,
-          "wltpRangeKm": 388,
-          "n": 67.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 175.0,
-          "wh_per_km": 209.0,
-          "wltpRangeKm": 465,
-          "n": 16.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 175.0,
-          "wh_per_km": 203.0,
-          "wltpRangeKm": 478,
-          "n": 15.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 175.0,
-          "wh_per_km": 208.0,
-          "wltpRangeKm": 468,
-          "n": 14.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 175.0,
-          "wh_per_km": 213.0,
-          "wltpRangeKm": 458,
-          "n": 12.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        },
-        {
-          "kw": 175.0,
-          "wh_per_km": 210.0,
-          "wltpRangeKm": 463,
-          "n": 12.0,
-          "status": "F",
-          "eea_model_key": "ETRONGT",
-          "awd": false
-        }
-      ],
-      "prudent": {
-        "wltpRangeKm": 388,
-        "wh_per_km": 247.0
       }
     },
     {
@@ -1272,7 +356,17 @@
           "n": 14.0,
           "status": "F",
           "eea_model_key": "ETRONS",
-          "awd": false
+          "awd": false,
+          "year": 2022,
+          "fingerprint": [
+            2022,
+            "ETRONS",
+            226.0,
+            279.0,
+            351,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 226.0,
@@ -1281,7 +375,17 @@
           "n": 12.0,
           "status": "F",
           "eea_model_key": "ETRONS",
-          "awd": false
+          "awd": false,
+          "year": 2022,
+          "fingerprint": [
+            2022,
+            "ETRONS",
+            226.0,
+            279.0,
+            350,
+            false,
+            "F"
+          ]
         }
       ],
       "prudent": {
@@ -1335,7 +439,17 @@
           "n": 25.0,
           "status": "F",
           "eea_model_key": "ETRONS",
-          "awd": false
+          "awd": false,
+          "year": 2022,
+          "fingerprint": [
+            2022,
+            "ETRONS",
+            370.0,
+            277.0,
+            353,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 370.0,
@@ -1344,7 +458,17 @@
           "n": 23.0,
           "status": "F",
           "eea_model_key": "ETRONS",
-          "awd": false
+          "awd": false,
+          "year": 2022,
+          "fingerprint": [
+            2022,
+            "ETRONS",
+            370.0,
+            278.0,
+            351,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 370.0,
@@ -1353,7 +477,17 @@
           "n": 17.0,
           "status": "F",
           "eea_model_key": "ETRONS",
-          "awd": false
+          "awd": false,
+          "year": 2022,
+          "fingerprint": [
+            2022,
+            "ETRONS",
+            370.0,
+            276.0,
+            354,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 370.0,
@@ -1362,7 +496,17 @@
           "n": 13.0,
           "status": "F",
           "eea_model_key": "ETRONS",
-          "awd": false
+          "awd": false,
+          "year": 2022,
+          "fingerprint": [
+            2022,
+            "ETRONS",
+            370.0,
+            279.0,
+            350,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 370.0,
@@ -1371,7 +515,17 @@
           "n": 12.0,
           "status": "F",
           "eea_model_key": "ETRONS",
-          "awd": false
+          "awd": false,
+          "year": 2022,
+          "fingerprint": [
+            2022,
+            "ETRONS",
+            370.0,
+            278.0,
+            352,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 370.0,
@@ -1380,7 +534,17 @@
           "n": 10.0,
           "status": "F",
           "eea_model_key": "ETRONS",
-          "awd": false
+          "awd": false,
+          "year": 2022,
+          "fingerprint": [
+            2022,
+            "ETRONS",
+            370.0,
+            266.0,
+            367,
+            false,
+            "F"
+          ]
         }
       ],
       "prudent": {
@@ -1434,7 +598,17 @@
           "n": 18.0,
           "status": "F",
           "eea_model_key": "ETRONS",
-          "awd": false
+          "awd": false,
+          "year": 2022,
+          "fingerprint": [
+            2022,
+            "ETRONS",
+            157.0,
+            280.0,
+            348,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 157.0,
@@ -1443,7 +617,17 @@
           "n": 14.0,
           "status": "F",
           "eea_model_key": "ETRONS",
-          "awd": false
+          "awd": false,
+          "year": 2022,
+          "fingerprint": [
+            2022,
+            "ETRONS",
+            157.0,
+            279.0,
+            349,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 157.0,
@@ -1452,7 +636,17 @@
           "n": 12.0,
           "status": "F",
           "eea_model_key": "ETRONS",
-          "awd": false
+          "awd": false,
+          "year": 2022,
+          "fingerprint": [
+            2022,
+            "ETRONS",
+            157.0,
+            278.0,
+            351,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 157.0,
@@ -1461,7 +655,17 @@
           "n": 12.0,
           "status": "F",
           "eea_model_key": "ETRONS",
-          "awd": false
+          "awd": false,
+          "year": 2022,
+          "fingerprint": [
+            2022,
+            "ETRONS",
+            157.0,
+            277.0,
+            352,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 157.0,
@@ -1470,7 +674,17 @@
           "n": 10.0,
           "status": "F",
           "eea_model_key": "ETRONS",
-          "awd": false
+          "awd": false,
+          "year": 2022,
+          "fingerprint": [
+            2022,
+            "ETRONS",
+            157.0,
+            276.0,
+            353,
+            false,
+            "F"
+          ]
         }
       ],
       "prudent": {
@@ -1517,7 +731,17 @@
           "n": 213.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            171.0,
+            516,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1526,7 +750,17 @@
           "n": 131.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            172.0,
+            512,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1535,7 +769,17 @@
           "n": 115.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            172.0,
+            513,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1544,7 +788,17 @@
           "n": 114.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            178.0,
+            497,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1553,7 +807,17 @@
           "n": 114.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            171.0,
+            515,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1562,7 +826,17 @@
           "n": 89.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            173.0,
+            510,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1571,7 +845,17 @@
           "n": 76.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            171.0,
+            514,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1580,7 +864,17 @@
           "n": 70.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            172.0,
+            511,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1589,7 +883,17 @@
           "n": 53.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            170.0,
+            517,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1598,7 +902,17 @@
           "n": 46.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            173.0,
+            509,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1607,7 +921,17 @@
           "n": 45.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            177.0,
+            499,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1616,7 +940,17 @@
           "n": 42.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            178.0,
+            496,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1625,7 +959,17 @@
           "n": 40.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            179.0,
+            493,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1634,7 +978,17 @@
           "n": 39.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            174.0,
+            508,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1643,7 +997,17 @@
           "n": 38.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            177.0,
+            498,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1652,7 +1016,17 @@
           "n": 37.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            180.0,
+            491,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1661,7 +1035,17 @@
           "n": 31.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            179.0,
+            494,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1670,7 +1054,17 @@
           "n": 31.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            174.0,
+            507,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1679,7 +1073,17 @@
           "n": 30.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            178.0,
+            495,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1688,7 +1092,17 @@
           "n": 28.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            170.0,
+            518,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1697,7 +1111,17 @@
           "n": 27.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            176.0,
+            501,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1706,7 +1130,17 @@
           "n": 22.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            176.0,
+            502,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1715,7 +1149,17 @@
           "n": 21.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            175.0,
+            503,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1724,7 +1168,17 @@
           "n": 21.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            174.0,
+            506,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1733,7 +1187,17 @@
           "n": 20.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            179.0,
+            492,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1742,7 +1206,17 @@
           "n": 20.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            177.0,
+            500,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1751,7 +1225,17 @@
           "n": 15.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            181.0,
+            487,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1760,7 +1244,17 @@
           "n": 15.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            175.0,
+            505,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1769,7 +1263,17 @@
           "n": 14.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            180.0,
+            490,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1778,7 +1282,17 @@
           "n": 14.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            170.0,
+            519,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1787,7 +1301,17 @@
           "n": 12.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            175.0,
+            504,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1796,7 +1320,17 @@
           "n": 11.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            181.0,
+            488,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 150.0,
@@ -1805,7 +1339,17 @@
           "n": 10.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q4ETRON",
+            150.0,
+            169.0,
+            520,
+            false,
+            "F"
+          ]
         }
       ],
       "prudent": {
@@ -1851,7 +1395,17 @@
           "n": 316.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            169.0,
+            525,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -1860,7 +1414,17 @@
           "n": 274.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            173.0,
+            513,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -1869,7 +1433,17 @@
           "n": 253.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            166.0,
+            546,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -1878,7 +1452,17 @@
           "n": 252.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            175.0,
+            508,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -1887,7 +1471,17 @@
           "n": 229.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            167.0,
+            530,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -1896,7 +1490,17 @@
           "n": 204.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            168.0,
+            541,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -1905,7 +1509,17 @@
           "n": 187.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            165.0,
+            551,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -1914,7 +1528,17 @@
           "n": 161.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            173.0,
+            514,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -1923,7 +1547,17 @@
           "n": 152.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            167.0,
+            529,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -1932,7 +1566,17 @@
           "n": 139.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            166.0,
+            547,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -1941,7 +1585,17 @@
           "n": 134.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            175.0,
+            507,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -1950,7 +1604,17 @@
           "n": 128.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            167.0,
+            545,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -1959,7 +1623,17 @@
           "n": 125.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            171.0,
+            518,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -1968,7 +1642,17 @@
           "n": 108.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            173.0,
+            512,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -1977,7 +1661,17 @@
           "n": 100.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            169.0,
+            524,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -1986,7 +1680,17 @@
           "n": 98.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            168.0,
+            526,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -1995,7 +1699,17 @@
           "n": 97.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            167.0,
+            531,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2004,7 +1718,17 @@
           "n": 94.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            171.0,
+            519,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2013,7 +1737,17 @@
           "n": 88.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            168.0,
+            527,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2022,7 +1756,17 @@
           "n": 73.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            175.0,
+            506,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2031,7 +1775,17 @@
           "n": 72.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            170.0,
+            522,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2040,7 +1794,17 @@
           "n": 67.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            168.0,
+            528,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2049,7 +1813,17 @@
           "n": 58.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            168.0,
+            540,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2058,7 +1832,17 @@
           "n": 54.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            169.0,
+            523,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2067,7 +1851,17 @@
           "n": 54.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            167.0,
+            544,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2076,7 +1870,17 @@
           "n": 49.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            169.0,
+            539,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2085,7 +1889,17 @@
           "n": 47.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            167.0,
+            543,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2094,7 +1908,17 @@
           "n": 46.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            174.0,
+            511,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2103,7 +1927,17 @@
           "n": 46.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            170.0,
+            521,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2112,7 +1946,17 @@
           "n": 41.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            174.0,
+            510,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2121,7 +1965,17 @@
           "n": 37.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            177.0,
+            502,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2130,7 +1984,17 @@
           "n": 34.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            172.0,
+            516,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2139,7 +2003,17 @@
           "n": 34.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            165.0,
+            550,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2148,7 +2022,17 @@
           "n": 33.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            170.0,
+            535,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2157,7 +2041,17 @@
           "n": 32.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            170.0,
+            536,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2166,7 +2060,17 @@
           "n": 30.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            177.0,
+            501,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2175,7 +2079,17 @@
           "n": 28.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            177.0,
+            500,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2184,7 +2098,17 @@
           "n": 26.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            172.0,
+            517,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2193,7 +2117,17 @@
           "n": 25.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            176.0,
+            505,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 210.0,
@@ -2202,7 +2136,17 @@
           "n": 21.0,
           "status": "F",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q4ETRON",
+            210.0,
+            170.0,
+            520,
+            false,
+            "F"
+          ]
         }
       ],
       "prudent": {
@@ -2248,7 +2192,17 @@
           "n": 379.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            167.0,
+            535,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2257,7 +2211,17 @@
           "n": 374.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            168.0,
+            530,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2266,7 +2230,17 @@
           "n": 333.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            166.0,
+            546,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2275,7 +2249,17 @@
           "n": 331.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            165.0,
+            551,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2284,7 +2268,17 @@
           "n": 244.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            166.0,
+            547,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2293,7 +2287,17 @@
           "n": 212.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            167.0,
+            545,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2302,7 +2306,17 @@
           "n": 184.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            169.0,
+            525,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2311,7 +2325,17 @@
           "n": 165.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            169.0,
+            529,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2320,7 +2344,17 @@
           "n": 131.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            168.0,
+            541,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2329,7 +2363,17 @@
           "n": 125.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            167.0,
+            534,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2338,7 +2382,17 @@
           "n": 95.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            168.0,
+            540,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2347,7 +2401,17 @@
           "n": 90.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            170.0,
+            527,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2356,7 +2420,17 @@
           "n": 87.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            169.0,
+            528,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2365,7 +2439,17 @@
           "n": 69.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            171.0,
+            520,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2374,7 +2458,17 @@
           "n": 67.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            167.0,
+            544,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2383,7 +2477,17 @@
           "n": 63.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            165.0,
+            550,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2392,7 +2496,17 @@
           "n": 62.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            170.0,
+            526,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2401,7 +2515,17 @@
           "n": 46.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            168.0,
+            531,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2410,7 +2534,17 @@
           "n": 44.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            169.0,
+            539,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2419,7 +2553,17 @@
           "n": 42.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            167.0,
+            543,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2428,7 +2572,17 @@
           "n": 40.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            165.0,
+            549,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2437,7 +2591,17 @@
           "n": 39.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            170.0,
+            536,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2446,7 +2610,17 @@
           "n": 39.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            168.0,
+            542,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2455,7 +2629,17 @@
           "n": 36.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            166.0,
+            533,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2464,7 +2648,17 @@
           "n": 34.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            168.0,
+            532,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2473,7 +2667,17 @@
           "n": 22.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            171.0,
+            519,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2482,7 +2686,17 @@
           "n": 22.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            169.0,
+            538,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2491,7 +2705,17 @@
           "n": 15.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            169.0,
+            537,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2500,7 +2724,17 @@
           "n": 13.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            170.0,
+            522,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2509,7 +2743,17 @@
           "n": 13.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            171.0,
+            523,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2518,7 +2762,17 @@
           "n": 11.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            170.0,
+            521,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 210.0,
@@ -2527,7 +2781,17 @@
           "n": 11.0,
           "status": "P",
           "eea_model_key": "Q4ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q4ETRON",
+            210.0,
+            170.0,
+            524,
+            false,
+            "P"
+          ]
         }
       ],
       "prudent": {
@@ -2573,7 +2837,17 @@
           "n": 41.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            225.0,
+            184.0,
+            580,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 225.0,
@@ -2582,7 +2856,17 @@
           "n": 40.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            225.0,
+            183.0,
+            583,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 225.0,
@@ -2591,7 +2875,17 @@
           "n": 33.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            225.0,
+            168.0,
+            634,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 225.0,
@@ -2600,7 +2894,17 @@
           "n": 33.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            225.0,
+            166.0,
+            640,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 225.0,
@@ -2609,7 +2913,17 @@
           "n": 28.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            225.0,
+            184.0,
+            578,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 225.0,
@@ -2618,7 +2932,17 @@
           "n": 28.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            225.0,
+            182.0,
+            586,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 225.0,
@@ -2627,7 +2951,17 @@
           "n": 19.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            225.0,
+            185.0,
+            575,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 225.0,
@@ -2636,7 +2970,17 @@
           "n": 17.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            225.0,
+            185.0,
+            577,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 225.0,
@@ -2645,7 +2989,17 @@
           "n": 17.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            225.0,
+            181.0,
+            589,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 225.0,
@@ -2654,7 +3008,17 @@
           "n": 16.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            225.0,
+            186.0,
+            572,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 225.0,
@@ -2663,7 +3027,17 @@
           "n": 14.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            225.0,
+            184.0,
+            581,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 225.0,
@@ -2672,7 +3046,17 @@
           "n": 13.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            225.0,
+            168.0,
+            632,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 225.0,
@@ -2681,7 +3065,17 @@
           "n": 12.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            225.0,
+            185.0,
+            576,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 225.0,
@@ -2690,7 +3084,17 @@
           "n": 12.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            225.0,
+            183.0,
+            582,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 225.0,
@@ -2699,7 +3103,17 @@
           "n": 12.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            225.0,
+            169.0,
+            628,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 225.0,
@@ -2708,7 +3122,17 @@
           "n": 12.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            225.0,
+            168.0,
+            633,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 225.0,
@@ -2717,7 +3141,17 @@
           "n": 10.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            225.0,
+            186.0,
+            573,
+            false,
+            "F"
+          ]
         }
       ],
       "prudent": {
@@ -2763,7 +3197,17 @@
           "n": 47.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            285.0,
+            189.0,
+            563,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 285.0,
@@ -2772,7 +3216,17 @@
           "n": 42.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            285.0,
+            191.0,
+            557,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 285.0,
@@ -2781,7 +3235,17 @@
           "n": 29.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            285.0,
+            172.0,
+            618,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 285.0,
@@ -2790,7 +3254,17 @@
           "n": 27.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            285.0,
+            191.0,
+            555,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 285.0,
@@ -2799,7 +3273,17 @@
           "n": 25.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            285.0,
+            189.0,
+            561,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 285.0,
@@ -2808,7 +3292,17 @@
           "n": 21.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            285.0,
+            190.0,
+            560,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 285.0,
@@ -2817,7 +3311,17 @@
           "n": 16.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            285.0,
+            191.0,
+            556,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 285.0,
@@ -2826,7 +3330,17 @@
           "n": 16.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            285.0,
+            188.0,
+            566,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 285.0,
@@ -2835,7 +3349,17 @@
           "n": 13.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            285.0,
+            172.0,
+            616,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 285.0,
@@ -2844,7 +3368,17 @@
           "n": 11.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            285.0,
+            193.0,
+            549,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 285.0,
@@ -2853,7 +3387,17 @@
           "n": 11.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            285.0,
+            192.0,
+            554,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 285.0,
@@ -2862,7 +3406,17 @@
           "n": 11.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            285.0,
+            190.0,
+            558,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 285.0,
@@ -2871,7 +3425,17 @@
           "n": 11.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            285.0,
+            174.0,
+            612,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 285.0,
@@ -2880,7 +3444,17 @@
           "n": 10.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            285.0,
+            188.0,
+            565,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 285.0,
@@ -2889,7 +3463,17 @@
           "n": 10.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            285.0,
+            172.0,
+            617,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 285.0,
@@ -2898,7 +3482,17 @@
           "n": 10.0,
           "status": "F",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q6ETRON",
+            285.0,
+            170.0,
+            623,
+            false,
+            "F"
+          ]
         }
       ],
       "prudent": {
@@ -2921,7 +3515,7 @@
       "wltpRangeKmMin": 566,
       "wltpRangeKmMax": 640,
       "status": "P",
-      "registrations": 853.0,
+      "registrations": 844.0,
       "countries": [
         "EU-wide"
       ],
@@ -2942,28 +3536,58 @@
           "kw": 225.0,
           "wh_per_km": 184.0,
           "wltpRangeKm": 580,
-          "n": 118.0,
+          "n": 117.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            184.0,
+            580,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 225.0,
           "wh_per_km": 183.0,
           "wltpRangeKm": 581,
-          "n": 97.0,
+          "n": 96.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            183.0,
+            581,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 225.0,
           "wh_per_km": 168.0,
           "wltpRangeKm": 632,
-          "n": 58.0,
+          "n": 55.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            168.0,
+            632,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 225.0,
@@ -2972,7 +3596,17 @@
           "n": 48.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            185.0,
+            575,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 225.0,
@@ -2981,7 +3615,17 @@
           "n": 48.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            183.0,
+            583,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 225.0,
@@ -2990,16 +3634,36 @@
           "n": 45.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            184.0,
+            578,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 225.0,
           "wh_per_km": 186.0,
           "wltpRangeKm": 573,
-          "n": 44.0,
+          "n": 43.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            186.0,
+            573,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 225.0,
@@ -3008,7 +3672,17 @@
           "n": 39.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            168.0,
+            634,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 225.0,
@@ -3017,7 +3691,17 @@
           "n": 38.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            182.0,
+            586,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 225.0,
@@ -3026,7 +3710,17 @@
           "n": 35.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            186.0,
+            574,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 225.0,
@@ -3035,16 +3729,36 @@
           "n": 33.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            186.0,
+            572,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 225.0,
           "wh_per_km": 182.0,
           "wltpRangeKm": 587,
-          "n": 33.0,
+          "n": 32.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            182.0,
+            587,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 225.0,
@@ -3053,7 +3767,17 @@
           "n": 29.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            181.0,
+            589,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 225.0,
@@ -3062,7 +3786,17 @@
           "n": 28.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            185.0,
+            576,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 225.0,
@@ -3071,7 +3805,17 @@
           "n": 25.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            184.0,
+            579,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 225.0,
@@ -3080,7 +3824,17 @@
           "n": 24.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            188.0,
+            566,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 225.0,
@@ -3089,16 +3843,36 @@
           "n": 20.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            185.0,
+            577,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 225.0,
           "wh_per_km": 170.0,
           "wltpRangeKm": 627,
-          "n": 20.0,
+          "n": 19.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            170.0,
+            627,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 225.0,
@@ -3107,7 +3881,17 @@
           "n": 17.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            166.0,
+            640,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 225.0,
@@ -3116,16 +3900,17 @@
           "n": 16.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
-        },
-        {
-          "kw": 225.0,
-          "wh_per_km": 170.0,
-          "wltpRangeKm": 626,
-          "n": 14.0,
-          "status": "P",
-          "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            183.0,
+            584,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 225.0,
@@ -3134,7 +3919,36 @@
           "n": 14.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            166.0,
+            638,
+            false,
+            "P"
+          ]
+        },
+        {
+          "kw": 225.0,
+          "wh_per_km": 170.0,
+          "wltpRangeKm": 626,
+          "n": 13.0,
+          "status": "P",
+          "eea_model_key": "Q6ETRON",
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            170.0,
+            626,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 225.0,
@@ -3143,7 +3957,17 @@
           "n": 10.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            225.0,
+            186.0,
+            571,
+            false,
+            "P"
+          ]
         }
       ],
       "prudent": {
@@ -3190,7 +4014,17 @@
           "n": 49.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            285.0,
+            189.0,
+            561,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 285.0,
@@ -3199,7 +4033,17 @@
           "n": 20.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            285.0,
+            192.0,
+            554,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 285.0,
@@ -3208,7 +4052,17 @@
           "n": 20.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            285.0,
+            191.0,
+            555,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 285.0,
@@ -3217,7 +4071,17 @@
           "n": 18.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            285.0,
+            191.0,
+            556,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 285.0,
@@ -3226,7 +4090,17 @@
           "n": 18.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            285.0,
+            190.0,
+            558,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 285.0,
@@ -3235,7 +4109,17 @@
           "n": 16.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            285.0,
+            191.0,
+            557,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 285.0,
@@ -3244,7 +4128,17 @@
           "n": 15.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            285.0,
+            193.0,
+            549,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 285.0,
@@ -3253,7 +4147,17 @@
           "n": 14.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            285.0,
+            188.0,
+            566,
+            false,
+            "P"
+          ]
         }
       ],
       "prudent": {
@@ -3300,7 +4204,17 @@
           "n": 26.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            185.0,
+            163.0,
+            525,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 185.0,
@@ -3309,7 +4223,17 @@
           "n": 22.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            185.0,
+            162.0,
+            527,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 185.0,
@@ -3318,7 +4242,17 @@
           "n": 19.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            185.0,
+            161.0,
+            530,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 185.0,
@@ -3327,7 +4261,17 @@
           "n": 15.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            185.0,
+            164.0,
+            521,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 185.0,
@@ -3336,7 +4280,17 @@
           "n": 14.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            185.0,
+            165.0,
+            520,
+            false,
+            "P"
+          ]
         },
         {
           "kw": 185.0,
@@ -3345,7 +4299,17 @@
           "n": 14.0,
           "status": "P",
           "eea_model_key": "Q6ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2025,
+          "fingerprint": [
+            2025,
+            "Q6ETRON",
+            185.0,
+            161.0,
+            531,
+            false,
+            "P"
+          ]
         }
       ],
       "prudent": {
@@ -3397,7 +4361,17 @@
           "n": 102.0,
           "status": "F",
           "eea_model_key": "ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2020,
+          "fingerprint": [
+            2020,
+            "ETRON",
+            158.0,
+            255.0,
+            366,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 158.0,
@@ -3406,7 +4380,17 @@
           "n": 30.0,
           "status": "F",
           "eea_model_key": "ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2020,
+          "fingerprint": [
+            2020,
+            "ETRON",
+            158.0,
+            257.0,
+            364,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 158.0,
@@ -3415,7 +4399,17 @@
           "n": 19.0,
           "status": "F",
           "eea_model_key": "ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2020,
+          "fingerprint": [
+            2020,
+            "ETRON",
+            158.0,
+            259.0,
+            362,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 158.0,
@@ -3424,7 +4418,17 @@
           "n": 19.0,
           "status": "F",
           "eea_model_key": "ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2020,
+          "fingerprint": [
+            2020,
+            "ETRON",
+            158.0,
+            258.0,
+            363,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 158.0,
@@ -3433,7 +4437,17 @@
           "n": 13.0,
           "status": "F",
           "eea_model_key": "ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2020,
+          "fingerprint": [
+            2020,
+            "ETRON",
+            158.0,
+            260.0,
+            361,
+            false,
+            "F"
+          ]
         }
       ],
       "prudent": {
@@ -3485,7 +4499,17 @@
           "n": 59.0,
           "status": "F",
           "eea_model_key": "ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2020,
+          "fingerprint": [
+            2020,
+            "ETRON",
+            300.0,
+            257.0,
+            365,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 300.0,
@@ -3494,7 +4518,17 @@
           "n": 42.0,
           "status": "F",
           "eea_model_key": "ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2020,
+          "fingerprint": [
+            2020,
+            "ETRON",
+            300.0,
+            259.0,
+            362,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 300.0,
@@ -3503,7 +4537,17 @@
           "n": 31.0,
           "status": "F",
           "eea_model_key": "ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2020,
+          "fingerprint": [
+            2020,
+            "ETRON",
+            300.0,
+            258.0,
+            363,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 300.0,
@@ -3512,7 +4556,17 @@
           "n": 25.0,
           "status": "F",
           "eea_model_key": "ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2020,
+          "fingerprint": [
+            2020,
+            "ETRON",
+            300.0,
+            250.0,
+            374,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 300.0,
@@ -3521,7 +4575,17 @@
           "n": 23.0,
           "status": "F",
           "eea_model_key": "ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2020,
+          "fingerprint": [
+            2020,
+            "ETRON",
+            300.0,
+            249.0,
+            376,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 300.0,
@@ -3530,7 +4594,17 @@
           "n": 21.0,
           "status": "F",
           "eea_model_key": "ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2020,
+          "fingerprint": [
+            2020,
+            "ETRON",
+            300.0,
+            258.0,
+            364,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 300.0,
@@ -3539,7 +4613,17 @@
           "n": 17.0,
           "status": "F",
           "eea_model_key": "ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2020,
+          "fingerprint": [
+            2020,
+            "ETRON",
+            300.0,
+            256.0,
+            366,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 300.0,
@@ -3548,7 +4632,17 @@
           "n": 14.0,
           "status": "F",
           "eea_model_key": "ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2020,
+          "fingerprint": [
+            2020,
+            "ETRON",
+            300.0,
+            246.0,
+            381,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 300.0,
@@ -3557,7 +4651,17 @@
           "n": 13.0,
           "status": "F",
           "eea_model_key": "ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2020,
+          "fingerprint": [
+            2020,
+            "ETRON",
+            300.0,
+            260.0,
+            361,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 300.0,
@@ -3566,7 +4670,17 @@
           "n": 13.0,
           "status": "F",
           "eea_model_key": "ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2020,
+          "fingerprint": [
+            2020,
+            "ETRON",
+            300.0,
+            247.0,
+            379,
+            false,
+            "F"
+          ]
         },
         {
           "kw": 300.0,
@@ -3575,12 +4689,454 @@
           "n": 11.0,
           "status": "F",
           "eea_model_key": "ETRON",
-          "awd": false
+          "awd": false,
+          "year": 2020,
+          "fingerprint": [
+            2020,
+            "ETRON",
+            300.0,
+            246.0,
+            394,
+            false,
+            "F"
+          ]
         }
       ],
       "prudent": {
         "wltpRangeKm": 361,
         "wh_per_km": 260.0
+      }
+    },
+    {
+      "id": "audi-q8-e-tron-2020-v226kw-rwd",
+      "parentId": "audi-q8-e-tron-2020",
+      "brand": "Audi",
+      "model": "Q8 e-tron",
+      "year": 2020,
+      "kw": 226.0,
+      "awd": false,
+      "wh_per_km": 277.0,
+      "wh_per_km_min": 277.0,
+      "wh_per_km_max": 277.0,
+      "wltpRangeKm": 352,
+      "wltpRangeKmMin": 352,
+      "wltpRangeKmMax": 352,
+      "status": "F",
+      "registrations": 30.0,
+      "countries": [
+        "EU-wide"
+      ],
+      "cn_raws": [
+        "AUDI E TRON",
+        "AUDI E-TRON",
+        "Audi e-tron",
+        "E-TRON",
+        "E-TRON S",
+        "e-tron",
+        "e-tron S"
+      ],
+      "label": "226 kW",
+      "rangeCaption": "Autonomia WLTP 352 km (dipende da cerchi e optional)",
+      "awd_from_cn": false,
+      "batteryKWh": null,
+      "battery_source": null,
+      "commercial_name": null,
+      "commercial_url": null,
+      "source": "EEA co2cars EU Zr",
+      "eea_records": [
+        {
+          "kw": 226.0,
+          "wh_per_km": 277.0,
+          "wltpRangeKm": 352,
+          "n": 30.0,
+          "status": "F",
+          "eea_model_key": "ETRONS",
+          "awd": false,
+          "year": 2020,
+          "fingerprint": [
+            2020,
+            "ETRONS",
+            226.0,
+            277.0,
+            352,
+            false,
+            "F"
+          ]
+        }
+      ],
+      "prudent": {
+        "wltpRangeKm": 352,
+        "wh_per_km": 277.0
+      }
+    },
+    {
+      "id": "audi-q8-e-tron-2020-v40kw-rwd",
+      "parentId": "audi-q8-e-tron-2020",
+      "brand": "Audi",
+      "model": "Q8 e-tron",
+      "year": 2020,
+      "kw": 40.0,
+      "awd": false,
+      "wh_per_km": 281.0,
+      "wh_per_km_min": 250.0,
+      "wh_per_km_max": 281.0,
+      "wltpRangeKm": 333,
+      "wltpRangeKmMin": 333,
+      "wltpRangeKmMax": 374,
+      "status": "F",
+      "registrations": 45.0,
+      "countries": [
+        "EU-wide"
+      ],
+      "cn_raws": [
+        "AUDI E TRON",
+        "AUDI E-TRON",
+        "Audi e-tron",
+        "E-TRON",
+        "E-TRON S",
+        "e-tron",
+        "e-tron S"
+      ],
+      "label": "40 kW",
+      "rangeCaption": "Autonomia WLTP 333\u2013374 km (dipende da cerchi e optional)",
+      "awd_from_cn": false,
+      "batteryKWh": null,
+      "battery_source": null,
+      "commercial_name": null,
+      "commercial_url": null,
+      "source": "EEA co2cars EU Zr",
+      "eea_records": [
+        {
+          "kw": 40.0,
+          "wh_per_km": 250.0,
+          "wltpRangeKm": 374,
+          "n": 31.0,
+          "status": "F",
+          "eea_model_key": "ETRON",
+          "awd": false,
+          "year": 2020,
+          "fingerprint": [
+            2020,
+            "ETRON",
+            40.0,
+            250.0,
+            374,
+            false,
+            "F"
+          ]
+        },
+        {
+          "kw": 40.0,
+          "wh_per_km": 281.0,
+          "wltpRangeKm": 333,
+          "n": 14.0,
+          "status": "F",
+          "eea_model_key": "ETRON",
+          "awd": false,
+          "year": 2020,
+          "fingerprint": [
+            2020,
+            "ETRON",
+            40.0,
+            281.0,
+            333,
+            false,
+            "F"
+          ]
+        }
+      ],
+      "prudent": {
+        "wltpRangeKm": 333,
+        "wh_per_km": 281.0
+      }
+    },
+    {
+      "id": "audi-q8-e-tron-2023-v300kw-rwd",
+      "parentId": "audi-q8-e-tron-2023",
+      "brand": "Audi",
+      "model": "Q8 e-tron",
+      "year": 2023,
+      "kw": 300.0,
+      "awd": false,
+      "wh_per_km": 229.0,
+      "wh_per_km_min": 222.0,
+      "wh_per_km_max": 229.0,
+      "wltpRangeKm": 517,
+      "wltpRangeKmMin": 517,
+      "wltpRangeKmMax": 535,
+      "status": "F",
+      "registrations": 81.0,
+      "countries": [
+        "EU-wide"
+      ],
+      "cn_raws": [
+        "Q8 E-TRON",
+        "Q8 E-TRON SPORTBACK",
+        "Q8 e-tron",
+        "Q8 e-tron Sportback"
+      ],
+      "label": "300 kW",
+      "rangeCaption": "Autonomia WLTP 517\u2013535 km (dipende da cerchi e optional)",
+      "awd_from_cn": false,
+      "batteryKWh": null,
+      "battery_source": null,
+      "commercial_name": null,
+      "commercial_url": null,
+      "source": "EEA co2cars EU Zr",
+      "eea_records": [
+        {
+          "kw": 300.0,
+          "wh_per_km": 228.0,
+          "wltpRangeKm": 519,
+          "n": 25.0,
+          "status": "F",
+          "eea_model_key": "Q8ETRON",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q8ETRON",
+            300.0,
+            228.0,
+            519,
+            false,
+            "F"
+          ]
+        },
+        {
+          "kw": 300.0,
+          "wh_per_km": 222.0,
+          "wltpRangeKm": 535,
+          "n": 13.0,
+          "status": "F",
+          "eea_model_key": "Q8ETRON",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q8ETRON",
+            300.0,
+            222.0,
+            535,
+            false,
+            "F"
+          ]
+        },
+        {
+          "kw": 300.0,
+          "wh_per_km": 227.0,
+          "wltpRangeKm": 523,
+          "n": 12.0,
+          "status": "F",
+          "eea_model_key": "Q8ETRON",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q8ETRON",
+            300.0,
+            227.0,
+            523,
+            false,
+            "F"
+          ]
+        },
+        {
+          "kw": 300.0,
+          "wh_per_km": 226.0,
+          "wltpRangeKm": 524,
+          "n": 11.0,
+          "status": "F",
+          "eea_model_key": "Q8ETRON",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q8ETRON",
+            300.0,
+            226.0,
+            524,
+            false,
+            "F"
+          ]
+        },
+        {
+          "kw": 300.0,
+          "wh_per_km": 229.0,
+          "wltpRangeKm": 517,
+          "n": 10.0,
+          "status": "F",
+          "eea_model_key": "Q8ETRON",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q8ETRON",
+            300.0,
+            229.0,
+            517,
+            false,
+            "F"
+          ]
+        },
+        {
+          "kw": 300.0,
+          "wh_per_km": 225.0,
+          "wltpRangeKm": 527,
+          "n": 10.0,
+          "status": "F",
+          "eea_model_key": "Q8ETRON",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q8ETRON",
+            300.0,
+            225.0,
+            527,
+            false,
+            "F"
+          ]
+        }
+      ],
+      "prudent": {
+        "wltpRangeKm": 517,
+        "wh_per_km": 229.0
+      }
+    },
+    {
+      "id": "audi-q8-e-tron-2023-v250kw-rwd",
+      "parentId": "audi-q8-e-tron-2023",
+      "brand": "Audi",
+      "model": "Q8 e-tron",
+      "year": 2023,
+      "kw": 250.0,
+      "awd": false,
+      "wh_per_km": 206.0,
+      "wh_per_km_min": 205.0,
+      "wh_per_km_max": 206.0,
+      "wltpRangeKm": 481,
+      "wltpRangeKmMin": 481,
+      "wltpRangeKmMax": 484,
+      "status": "F",
+      "registrations": 36.0,
+      "countries": [
+        "EU-wide"
+      ],
+      "cn_raws": [
+        "Q8 E-TRON",
+        "Q8 E-TRON SPORTBACK",
+        "Q8 e-tron",
+        "Q8 e-tron Sportback"
+      ],
+      "label": "250 kW",
+      "rangeCaption": "Autonomia WLTP 481\u2013484 km (dipende da cerchi e optional)",
+      "awd_from_cn": false,
+      "batteryKWh": null,
+      "battery_source": null,
+      "commercial_name": null,
+      "commercial_url": null,
+      "source": "EEA co2cars EU Zr",
+      "eea_records": [
+        {
+          "kw": 250.0,
+          "wh_per_km": 205.0,
+          "wltpRangeKm": 484,
+          "n": 26.0,
+          "status": "F",
+          "eea_model_key": "Q8ETRON",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q8ETRON",
+            250.0,
+            205.0,
+            484,
+            false,
+            "F"
+          ]
+        },
+        {
+          "kw": 250.0,
+          "wh_per_km": 206.0,
+          "wltpRangeKm": 481,
+          "n": 10.0,
+          "status": "F",
+          "eea_model_key": "Q8ETRON",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "Q8ETRON",
+            250.0,
+            206.0,
+            481,
+            false,
+            "F"
+          ]
+        }
+      ],
+      "prudent": {
+        "wltpRangeKm": 481,
+        "wh_per_km": 206.0
+      }
+    },
+    {
+      "id": "audi-q8-e-tron-2024-v300kw-rwd",
+      "parentId": "audi-q8-e-tron-2024",
+      "brand": "Audi",
+      "model": "Q8 e-tron",
+      "year": 2024,
+      "kw": 300.0,
+      "awd": false,
+      "wh_per_km": 224.0,
+      "wh_per_km_min": 224.0,
+      "wh_per_km_max": 224.0,
+      "wltpRangeKm": 530,
+      "wltpRangeKmMin": 530,
+      "wltpRangeKmMax": 530,
+      "status": "F",
+      "registrations": 19.0,
+      "countries": [
+        "EU-wide"
+      ],
+      "cn_raws": [
+        "Q8 E-TRON",
+        "Q8 E-TRON SPORTBACK"
+      ],
+      "label": "300 kW",
+      "rangeCaption": "Autonomia WLTP 530 km (dipende da cerchi e optional)",
+      "awd_from_cn": false,
+      "batteryKWh": null,
+      "battery_source": null,
+      "commercial_name": null,
+      "commercial_url": null,
+      "source": "EEA co2cars EU Zr",
+      "eea_records": [
+        {
+          "kw": 300.0,
+          "wh_per_km": 224.0,
+          "wltpRangeKm": 530,
+          "n": 19.0,
+          "status": "F",
+          "eea_model_key": "Q8ETRON",
+          "awd": false,
+          "year": 2024,
+          "fingerprint": [
+            2024,
+            "Q8ETRON",
+            300.0,
+            224.0,
+            530,
+            false,
+            "F"
+          ]
+        }
+      ],
+      "prudent": {
+        "wltpRangeKm": 530,
+        "wh_per_km": 224.0
       }
     },
     {
@@ -3623,7 +5179,17 @@
           "n": 852.0,
           "status": "F",
           "eea_model_key": "DOLPHIN",
-          "awd": false
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "DOLPHIN",
+            150.0,
+            159.0,
+            427,
+            false,
+            "F"
+          ]
         }
       ],
       "prudent": {
@@ -3672,12 +5238,599 @@
           "n": 10983.0,
           "status": "F",
           "eea_model_key": "ZSEV",
-          "awd": false
+          "awd": false,
+          "year": 2021,
+          "fingerprint": [
+            2021,
+            "ZSEV",
+            105.0,
+            186.0,
+            263,
+            false,
+            "F"
+          ]
         }
       ],
       "prudent": {
         "wltpRangeKm": 263,
         "wh_per_km": 186.0
+      }
+    },
+    {
+      "id": "dacia-spring-2023-v33kw-rwd",
+      "parentId": "dacia-spring-2023",
+      "brand": "Dacia",
+      "model": "Spring",
+      "year": 2023,
+      "kw": 33.0,
+      "awd": false,
+      "wh_per_km": 152.0,
+      "wh_per_km_min": 139.0,
+      "wh_per_km_max": 152.0,
+      "wltpRangeKm": 227,
+      "wltpRangeKmMin": 227,
+      "wltpRangeKmMax": 314,
+      "status": "F",
+      "registrations": 38544.0,
+      "countries": [
+        "EU-wide"
+      ],
+      "cn_raws": [
+        "SPRING",
+        "SPRING / /",
+        "Spring"
+      ],
+      "label": "33 kW",
+      "rangeCaption": "Autonomia WLTP 227\u2013314 km (dipende da cerchi e optional)",
+      "awd_from_cn": false,
+      "batteryKWh": null,
+      "battery_source": null,
+      "commercial_name": null,
+      "commercial_url": null,
+      "source": "EEA co2cars EU Zr",
+      "eea_records": [
+        {
+          "kw": 33.0,
+          "wh_per_km": 139.0,
+          "wltpRangeKm": 230,
+          "n": 38421.0,
+          "status": "F",
+          "eea_model_key": "SPRING",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "SPRING",
+            33.0,
+            139.0,
+            230,
+            false,
+            "F"
+          ]
+        },
+        {
+          "kw": 33.0,
+          "wh_per_km": 152.0,
+          "wltpRangeKm": 227,
+          "n": 107.0,
+          "status": "F",
+          "eea_model_key": "SPRING",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "SPRING",
+            33.0,
+            152.0,
+            227,
+            false,
+            "F"
+          ]
+        },
+        {
+          "kw": 33.0,
+          "wh_per_km": 139.0,
+          "wltpRangeKm": 314,
+          "n": 16.0,
+          "status": "P",
+          "eea_model_key": "SPRING",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "SPRING",
+            33.0,
+            139.0,
+            314,
+            false,
+            "P"
+          ]
+        }
+      ],
+      "prudent": {
+        "wltpRangeKm": 227,
+        "wh_per_km": 152.0
+      }
+    },
+    {
+      "id": "dacia-spring-2023-v48kw-rwd",
+      "parentId": "dacia-spring-2023",
+      "brand": "Dacia",
+      "model": "Spring",
+      "year": 2023,
+      "kw": 48.0,
+      "awd": false,
+      "wh_per_km": 145.0,
+      "wh_per_km_min": 145.0,
+      "wh_per_km_max": 145.0,
+      "wltpRangeKm": 220,
+      "wltpRangeKmMin": 220,
+      "wltpRangeKmMax": 220,
+      "status": "F",
+      "registrations": 20944.0,
+      "countries": [
+        "EU-wide"
+      ],
+      "cn_raws": [
+        "SPRING",
+        "SPRING / /",
+        "Spring"
+      ],
+      "label": "48 kW",
+      "rangeCaption": "Autonomia WLTP 220 km (dipende da cerchi e optional)",
+      "awd_from_cn": false,
+      "batteryKWh": null,
+      "battery_source": null,
+      "commercial_name": null,
+      "commercial_url": null,
+      "source": "EEA co2cars EU Zr",
+      "eea_records": [
+        {
+          "kw": 48.0,
+          "wh_per_km": 145.0,
+          "wltpRangeKm": 220,
+          "n": 20944.0,
+          "status": "F",
+          "eea_model_key": "SPRING",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "SPRING",
+            48.0,
+            145.0,
+            220,
+            false,
+            "F"
+          ]
+        }
+      ],
+      "prudent": {
+        "wltpRangeKm": 220,
+        "wh_per_km": 145.0
+      }
+    },
+    {
+      "id": "tesla-model-y-2023-v378kw-rwd",
+      "parentId": "tesla-model-y-2023",
+      "brand": "Tesla",
+      "model": "Model Y",
+      "year": 2023,
+      "kw": 378.0,
+      "awd": false,
+      "wh_per_km": 169.0,
+      "wh_per_km_min": 169.0,
+      "wh_per_km_max": 169.0,
+      "wltpRangeKm": 533,
+      "wltpRangeKmMin": 533,
+      "wltpRangeKmMax": 533,
+      "status": "F",
+      "registrations": 41336.0,
+      "countries": [
+        "EU-wide"
+      ],
+      "cn_raws": [
+        "MODEL Y",
+        "MODEL Y / / RWD",
+        "Model Y"
+      ],
+      "label": "378 kW",
+      "rangeCaption": "Autonomia WLTP 533 km (dipende da cerchi e optional)",
+      "awd_from_cn": false,
+      "batteryKWh": null,
+      "battery_source": null,
+      "commercial_name": null,
+      "commercial_url": null,
+      "source": "EEA co2cars EU Zr",
+      "eea_records": [
+        {
+          "kw": 378.0,
+          "wh_per_km": 169.0,
+          "wltpRangeKm": 533,
+          "n": 41336.0,
+          "status": "F",
+          "eea_model_key": "MODELY",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "MODELY",
+            378.0,
+            169.0,
+            533,
+            false,
+            "F"
+          ]
+        }
+      ],
+      "prudent": {
+        "wltpRangeKm": 533,
+        "wh_per_km": 169.0
+      }
+    },
+    {
+      "id": "tesla-model-y-2023-v158kw-rwd",
+      "parentId": "tesla-model-y-2023",
+      "brand": "Tesla",
+      "model": "Model Y",
+      "year": 2023,
+      "kw": 157.7,
+      "awd": false,
+      "wh_per_km": 173.0,
+      "wh_per_km_min": 169.0,
+      "wh_per_km_max": 173.0,
+      "wltpRangeKm": 514,
+      "wltpRangeKmMin": 514,
+      "wltpRangeKmMax": 533,
+      "status": "F",
+      "registrations": 29681.0,
+      "countries": [
+        "EU-wide"
+      ],
+      "cn_raws": [
+        "MODEL Y",
+        "MODEL Y / / RWD",
+        "Model Y"
+      ],
+      "label": "158 kW",
+      "rangeCaption": "Autonomia WLTP 514\u2013533 km (dipende da cerchi e optional)",
+      "awd_from_cn": false,
+      "batteryKWh": null,
+      "battery_source": null,
+      "commercial_name": null,
+      "commercial_url": null,
+      "source": "EEA co2cars EU Zr",
+      "eea_records": [
+        {
+          "kw": 158.0,
+          "wh_per_km": 169.0,
+          "wltpRangeKm": 533,
+          "n": 23894.0,
+          "status": "F",
+          "eea_model_key": "MODELY",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "MODELY",
+            158.0,
+            169.0,
+            533,
+            false,
+            "F"
+          ]
+        },
+        {
+          "kw": 158.0,
+          "wh_per_km": 173.0,
+          "wltpRangeKm": 514,
+          "n": 3805.0,
+          "status": "F",
+          "eea_model_key": "MODELY",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "MODELY",
+            158.0,
+            173.0,
+            514,
+            false,
+            "F"
+          ]
+        },
+        {
+          "kw": 153.0,
+          "wh_per_km": 169.0,
+          "wltpRangeKm": 533,
+          "n": 1790.0,
+          "status": "F",
+          "eea_model_key": "MODELY",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "MODELY",
+            153.0,
+            169.0,
+            533,
+            false,
+            "F"
+          ]
+        },
+        {
+          "kw": 155.0,
+          "wh_per_km": 173.0,
+          "wltpRangeKm": 514,
+          "n": 192.0,
+          "status": "F",
+          "eea_model_key": "MODELY",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "MODELY",
+            155.0,
+            173.0,
+            514,
+            false,
+            "F"
+          ]
+        }
+      ],
+      "prudent": {
+        "wltpRangeKm": 514,
+        "wh_per_km": 173.0
+      }
+    },
+    {
+      "id": "tesla-model-y-2023-v393kw-rwd",
+      "parentId": "tesla-model-y-2023",
+      "brand": "Tesla",
+      "model": "Model Y",
+      "year": 2023,
+      "kw": 393.0,
+      "awd": false,
+      "wh_per_km": 173.0,
+      "wh_per_km_min": 173.0,
+      "wh_per_km_max": 173.0,
+      "wltpRangeKm": 514,
+      "wltpRangeKmMin": 514,
+      "wltpRangeKmMax": 514,
+      "status": "F",
+      "registrations": 12679.0,
+      "countries": [
+        "EU-wide"
+      ],
+      "cn_raws": [
+        "MODEL Y",
+        "MODEL Y / / RWD",
+        "Model Y"
+      ],
+      "label": "393 kW",
+      "rangeCaption": "Autonomia WLTP 514 km (dipende da cerchi e optional)",
+      "awd_from_cn": false,
+      "batteryKWh": null,
+      "battery_source": null,
+      "commercial_name": null,
+      "commercial_url": null,
+      "source": "EEA co2cars EU Zr",
+      "eea_records": [
+        {
+          "kw": 393.0,
+          "wh_per_km": 173.0,
+          "wltpRangeKm": 514,
+          "n": 12679.0,
+          "status": "F",
+          "eea_model_key": "MODELY",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "MODELY",
+            393.0,
+            173.0,
+            514,
+            false,
+            "F"
+          ]
+        }
+      ],
+      "prudent": {
+        "wltpRangeKm": 514,
+        "wh_per_km": 173.0
+      }
+    },
+    {
+      "id": "tesla-model-y-2023-v220kw-rwd",
+      "parentId": "tesla-model-y-2023",
+      "brand": "Tesla",
+      "model": "Model Y",
+      "year": 2023,
+      "kw": 220.0,
+      "awd": false,
+      "wh_per_km": 169.0,
+      "wh_per_km_min": 157.0,
+      "wh_per_km_max": 169.0,
+      "wltpRangeKm": 430,
+      "wltpRangeKmMin": 430,
+      "wltpRangeKmMax": 533,
+      "status": "F",
+      "registrations": 90067.0,
+      "countries": [
+        "EU-wide"
+      ],
+      "cn_raws": [
+        "MODEL Y",
+        "MODEL Y / / RWD",
+        "Model Y"
+      ],
+      "label": "220 kW",
+      "rangeCaption": "Autonomia WLTP 430\u2013533 km (dipende da cerchi e optional)",
+      "awd_from_cn": false,
+      "batteryKWh": null,
+      "battery_source": null,
+      "commercial_name": null,
+      "commercial_url": null,
+      "source": "EEA co2cars EU Zr",
+      "eea_records": [
+        {
+          "kw": 220.0,
+          "wh_per_km": 157.0,
+          "wltpRangeKm": 455,
+          "n": 53449.0,
+          "status": "F",
+          "eea_model_key": "MODELY",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "MODELY",
+            220.0,
+            157.0,
+            455,
+            false,
+            "F"
+          ]
+        },
+        {
+          "kw": 220.0,
+          "wh_per_km": 169.0,
+          "wltpRangeKm": 533,
+          "n": 27171.0,
+          "status": "F",
+          "eea_model_key": "MODELY",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "MODELY",
+            220.0,
+            169.0,
+            533,
+            false,
+            "F"
+          ]
+        },
+        {
+          "kw": 220.0,
+          "wh_per_km": 157.0,
+          "wltpRangeKm": 430,
+          "n": 9447.0,
+          "status": "F",
+          "eea_model_key": "MODELY",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "MODELY",
+            220.0,
+            157.0,
+            430,
+            false,
+            "F"
+          ]
+        }
+      ],
+      "prudent": {
+        "wltpRangeKm": 430,
+        "wh_per_km": 169.0
+      }
+    },
+    {
+      "id": "tesla-model-y-2023-v235kw-rwd",
+      "parentId": "tesla-model-y-2023",
+      "brand": "Tesla",
+      "model": "Model Y",
+      "year": 2023,
+      "kw": 235.0,
+      "awd": false,
+      "wh_per_km": 173.0,
+      "wh_per_km_min": 157.0,
+      "wh_per_km_max": 173.0,
+      "wltpRangeKm": 430,
+      "wltpRangeKmMin": 430,
+      "wltpRangeKmMax": 514,
+      "status": "F",
+      "registrations": 11635.0,
+      "countries": [
+        "EU-wide"
+      ],
+      "cn_raws": [
+        "MODEL Y",
+        "MODEL Y / / RWD",
+        "Model Y"
+      ],
+      "label": "235 kW",
+      "rangeCaption": "Autonomia WLTP 430\u2013514 km (dipende da cerchi e optional)",
+      "awd_from_cn": false,
+      "batteryKWh": null,
+      "battery_source": null,
+      "commercial_name": null,
+      "commercial_url": null,
+      "source": "EEA co2cars EU Zr",
+      "eea_records": [
+        {
+          "kw": 235.0,
+          "wh_per_km": 157.0,
+          "wltpRangeKm": 455,
+          "n": 7134.0,
+          "status": "F",
+          "eea_model_key": "MODELY",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "MODELY",
+            235.0,
+            157.0,
+            455,
+            false,
+            "F"
+          ]
+        },
+        {
+          "kw": 235.0,
+          "wh_per_km": 173.0,
+          "wltpRangeKm": 514,
+          "n": 3221.0,
+          "status": "F",
+          "eea_model_key": "MODELY",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "MODELY",
+            235.0,
+            173.0,
+            514,
+            false,
+            "F"
+          ]
+        },
+        {
+          "kw": 235.0,
+          "wh_per_km": 157.0,
+          "wltpRangeKm": 430,
+          "n": 1280.0,
+          "status": "F",
+          "eea_model_key": "MODELY",
+          "awd": false,
+          "year": 2023,
+          "fingerprint": [
+            2023,
+            "MODELY",
+            235.0,
+            157.0,
+            430,
+            false,
+            "F"
+          ]
+        }
+      ],
+      "prudent": {
+        "wltpRangeKm": 430,
+        "wh_per_km": 173.0
       }
     }
   ],
@@ -3712,6 +5865,22 @@
       "model": "Q8 e-tron",
       "year": 2019,
       "reason": "no_cn",
+      "had_wltpRangeKm": null
+    },
+    {
+      "id": "audi-q8-e-tron-2021",
+      "brand": "Audi",
+      "model": "Q8 e-tron",
+      "year": 2021,
+      "reason": "none_after_filters",
+      "had_wltpRangeKm": null
+    },
+    {
+      "id": "audi-q8-e-tron-2022",
+      "brand": "Audi",
+      "model": "Q8 e-tron",
+      "year": 2022,
+      "reason": "none_after_filters",
       "had_wltpRangeKm": null
     },
     {
@@ -4065,99 +6234,664 @@
       "year": 2026,
       "reason": "no_cn",
       "had_wltpRangeKm": null
-    },
-    {
-      "id": "dacia-spring-2026",
-      "brand": "Dacia",
-      "model": "Spring",
-      "year": 2026,
-      "reason": "no_cn",
-      "had_wltpRangeKm": 220
-    },
-    {
-      "id": "fiat-500e-2021",
-      "brand": "Fiat",
-      "model": "500e",
-      "year": 2021,
-      "reason": "none_after_filters",
-      "had_wltpRangeKm": null
     }
   ],
-  "noVariantParentsCount": 280,
+  "noVariantParentsCount": 298,
   "noVariantReasons": {
-    "no_cn": 235,
-    "none_after_filters": 45
+    "no_cn": 250,
+    "none_after_filters": 48
   },
   "topParentsByVariantCount": [
     {
-      "parentId": "tesla-model-y-2023",
-      "n": 17,
-      "brand": "Tesla",
-      "model": "Model Y",
-      "year": 2023
+      "parentId": "ford-mustang-mach-e-2025",
+      "n": 8,
+      "brand": "Ford",
+      "model": "Mustang Mach-E",
+      "year": 2025,
+      "group_kw": [
+        92.0,
+        212.1,
+        223.5,
+        274.7,
+        290.0,
+        303.0,
+        434.0,
+        442.0
+      ],
+      "official": null
     },
     {
       "parentId": "polestar-2-2023",
-      "n": 15,
+      "n": 8,
       "brand": "Polestar",
       "model": "2",
-      "year": 2023
-    },
-    {
-      "parentId": "tesla-model-y-2025",
-      "n": 15,
-      "brand": "Tesla",
-      "model": "Model Y",
-      "year": 2025
-    },
-    {
-      "parentId": "ford-mustang-mach-e-2024",
-      "n": 13,
-      "brand": "Ford",
-      "model": "Mustang Mach-E",
-      "year": 2024
+      "year": 2023,
+      "group_kw": [
+        80.0,
+        150.0,
+        169.6,
+        200.0,
+        219.8,
+        300.0,
+        310.0,
+        350.0
+      ],
+      "official": null
     },
     {
       "parentId": "polestar-2-2024",
-      "n": 12,
+      "n": 8,
       "brand": "Polestar",
       "model": "2",
-      "year": 2024
+      "year": 2024,
+      "group_kw": [
+        110.0,
+        141.0,
+        170.0,
+        192.0,
+        200.0,
+        220.0,
+        310.0,
+        350.0
+      ],
+      "official": null
     },
     {
-      "parentId": "dacia-spring-2023",
-      "n": 11,
-      "brand": "Dacia",
-      "model": "Spring",
-      "year": 2023
+      "parentId": "tesla-model-3-2025",
+      "n": 8,
+      "brand": "Tesla",
+      "model": "Model 3",
+      "year": 2025,
+      "group_kw": [
+        88.7,
+        155.8,
+        190.0,
+        208.0,
+        235.0,
+        303.0,
+        366.0,
+        461.0
+      ],
+      "official": null
     },
     {
-      "parentId": "ford-mustang-mach-e-2025",
-      "n": 11,
+      "parentId": "tesla-model-y-2025",
+      "n": 8,
+      "brand": "Tesla",
+      "model": "Model Y",
+      "year": 2025,
+      "group_kw": [
+        158.1,
+        220.0,
+        235.0,
+        255.0,
+        303.0,
+        378.0,
+        393.0,
+        461.0
+      ],
+      "official": {
+        "powers_kw": [
+          158,
+          220,
+          235,
+          255,
+          303,
+          378,
+          393,
+          461
+        ],
+        "url": "https://www.tesla.com/en_gb/support/power-consumption",
+        "note": "Tesla UK WLTP power table (axle + F+R sums)"
+      }
+    },
+    {
+      "parentId": "bmw-ix1-2024",
+      "n": 7,
+      "brand": "BMW",
+      "model": "iX1",
+      "year": 2024,
+      "group_kw": [
+        68.0,
+        104.0,
+        140.0,
+        150.0,
+        200.0,
+        225.0
+      ],
+      "official": null
+    },
+    {
+      "parentId": "byd-seal-2024",
+      "n": 7,
+      "brand": "BYD",
+      "model": "Seal",
+      "year": 2024,
+      "group_kw": [
+        70.0,
+        145.0,
+        160.0,
+        230.0,
+        380.0,
+        390.0
+      ],
+      "official": null
+    },
+    {
+      "parentId": "ford-mustang-mach-e-2022",
+      "n": 7,
       "brand": "Ford",
       "model": "Mustang Mach-E",
-      "year": 2025
+      "year": 2022,
+      "group_kw": [
+        100.0,
+        124.0,
+        200.0,
+        221.0,
+        273.0,
+        442.0
+      ],
+      "official": null
     },
     {
-      "parentId": "hyundai-ioniq-5-2023",
-      "n": 11,
+      "parentId": "hyundai-ioniq-5-2021",
+      "n": 7,
       "brand": "Hyundai",
       "model": "Ioniq 5",
-      "year": 2023
+      "year": 2021,
+      "group_kw": [
+        42.0,
+        53.0,
+        76.0,
+        124.8,
+        154.0,
+        160.0,
+        224.6
+      ],
+      "official": null
+    },
+    {
+      "parentId": "kia-ev6-2022",
+      "n": 7,
+      "brand": "Kia",
+      "model": "EV6",
+      "year": 2022,
+      "group_kw": [
+        56.0,
+        73.0,
+        81.0,
+        125.0,
+        168.0,
+        239.0,
+        430.0
+      ],
+      "official": null
+    }
+  ],
+  "sportTrimOutcomes": [
+    {
+      "parentId": "byd-seal-u-2024",
+      "baseId": "byd-seal-2024",
+      "outcome": "one_or_more_own_cn",
+      "reason": "own_cn_exclusive",
+      "n_groups": 2
+    },
+    {
+      "parentId": "byd-dolphin-surf-2025",
+      "baseId": "byd-dolphin-2025",
+      "outcome": "one_or_more_own_cn",
+      "reason": "own_cn_exclusive",
+      "n_groups": 4
+    },
+    {
+      "parentId": "byd-seal-u-2025",
+      "baseId": "byd-seal-2025",
+      "outcome": "one_or_more_own_cn",
+      "reason": "own_cn_exclusive",
+      "n_groups": 2
+    },
+    {
+      "parentId": "byd-dolphin-surf-2026",
+      "baseId": "byd-dolphin-2026",
+      "outcome": "zero",
+      "reason": "no_official_source",
+      "official_url": null,
+      "official_powers_kw": [],
+      "matched_kw": null
+    },
+    {
+      "parentId": "byd-seal-u-2026",
+      "baseId": "byd-seal-2026",
+      "outcome": "zero",
+      "reason": "no_official_source",
+      "official_url": null,
+      "official_powers_kw": [],
+      "matched_kw": null
     },
     {
       "parentId": "hyundai-ioniq-5-n-2023",
-      "n": 11,
-      "brand": "Hyundai",
-      "model": "Ioniq 5 N",
-      "year": 2023
+      "baseId": "hyundai-ioniq-5-2023",
+      "outcome": "zero",
+      "reason": "no_eea_kw_within_tol_of_official",
+      "official_url": "https://www.hyundai.news/eu/models/performance/ioniq-5-n/press-kit/press-information.html",
+      "official_powers_kw": [
+        448.0,
+        478.0
+      ],
+      "matched_kw": null
     },
     {
-      "parentId": "tesla-model-3-2021",
-      "n": 11,
-      "brand": "Tesla",
-      "model": "Model 3",
-      "year": 2021
+      "parentId": "hyundai-ioniq-5-n-2024",
+      "baseId": "hyundai-ioniq-5-2024",
+      "outcome": "one_or_more_own_cn",
+      "reason": "own_cn_exclusive",
+      "n_groups": 3
+    },
+    {
+      "parentId": "hyundai-ioniq-5-n-2025",
+      "baseId": "hyundai-ioniq-5-2025",
+      "outcome": "one_or_more_own_cn",
+      "reason": "own_cn_exclusive",
+      "n_groups": 2
+    },
+    {
+      "parentId": "hyundai-ioniq-5-n-2026",
+      "baseId": "hyundai-ioniq-5-2026",
+      "outcome": "zero",
+      "reason": "no_official_source",
+      "official_url": null,
+      "official_powers_kw": [],
+      "matched_kw": null
+    }
+  ],
+  "dualClaimResolutions": [
+    {
+      "sportId": "byd-seal-u-2024",
+      "baseId": "byd-seal-2024",
+      "resolution": "own_cn_exclusive",
+      "n_groups": 2
+    },
+    {
+      "sportId": "byd-dolphin-surf-2025",
+      "baseId": "byd-dolphin-2025",
+      "resolution": "own_cn_exclusive",
+      "n_groups": 4
+    },
+    {
+      "sportId": "byd-seal-u-2025",
+      "baseId": "byd-seal-2025",
+      "resolution": "own_cn_exclusive",
+      "n_groups": 2
+    },
+    {
+      "sportId": "byd-dolphin-surf-2026",
+      "baseId": "byd-dolphin-2026",
+      "resolution": "sport_rule_b",
+      "outcome": "zero",
+      "reason": "no_official_source",
+      "matched_kw": null,
+      "official_url": null
+    },
+    {
+      "sportId": "byd-seal-u-2026",
+      "baseId": "byd-seal-2026",
+      "resolution": "sport_rule_b",
+      "outcome": "zero",
+      "reason": "no_official_source",
+      "matched_kw": null,
+      "official_url": null
+    },
+    {
+      "sportId": "hyundai-ioniq-5-n-2023",
+      "baseId": "hyundai-ioniq-5-2023",
+      "resolution": "sport_rule_b",
+      "outcome": "zero",
+      "reason": "no_eea_kw_within_tol_of_official",
+      "matched_kw": null,
+      "official_url": "https://www.hyundai.news/eu/models/performance/ioniq-5-n/press-kit/press-information.html"
+    },
+    {
+      "sportId": "hyundai-ioniq-5-n-2024",
+      "baseId": "hyundai-ioniq-5-2024",
+      "resolution": "own_cn_exclusive",
+      "n_groups": 3
+    },
+    {
+      "sportId": "hyundai-ioniq-5-n-2025",
+      "baseId": "hyundai-ioniq-5-2025",
+      "resolution": "own_cn_exclusive",
+      "n_groups": 2
+    },
+    {
+      "sportId": "hyundai-ioniq-5-n-2026",
+      "baseId": "hyundai-ioniq-5-2026",
+      "resolution": "sport_rule_b",
+      "outcome": "zero",
+      "reason": "no_official_source",
+      "matched_kw": null,
+      "official_url": null
+    }
+  ],
+  "discardedGroupsSample": [
+    {
+      "parentId": "audi-e-tron-gt-2023",
+      "kw": 140.0,
+      "awd": false,
+      "n": 10.0,
+      "share": 0.0066,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-ix3-2021",
+      "kw": 73.0,
+      "awd": false,
+      "n": 96.0,
+      "share": 0.0119,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-ix3-2022",
+      "kw": 73.0,
+      "awd": false,
+      "n": 55.0,
+      "share": 0.0065,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-ix-2022",
+      "kw": 140.0,
+      "awd": true,
+      "n": 82.0,
+      "share": 0.0082,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-ix-2022",
+      "kw": 140.0,
+      "awd": false,
+      "n": 29.0,
+      "share": 0.0029,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-ix-2022",
+      "kw": 397.0,
+      "awd": false,
+      "n": 34.0,
+      "share": 0.0034,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-ix3-2023",
+      "kw": 80.0,
+      "awd": false,
+      "n": 143.0,
+      "share": 0.0088,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-i4-2023",
+      "kw": 105.0,
+      "awd": false,
+      "n": 77.0,
+      "share": 0.0026,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-i4-2023",
+      "kw": 125.0,
+      "awd": false,
+      "n": 21.0,
+      "share": 0.0007,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-i4-2023",
+      "kw": 80.0,
+      "awd": false,
+      "n": 11.0,
+      "share": 0.0004,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-i7-2023",
+      "kw": 190.0,
+      "awd": true,
+      "n": 22.0,
+      "share": 0.0197,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-ix-2023",
+      "kw": 385.0,
+      "awd": false,
+      "n": 53.0,
+      "share": 0.0071,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-ix-2023",
+      "kw": 140.0,
+      "awd": true,
+      "n": 17.0,
+      "share": 0.0023,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-ix-2023",
+      "kw": 190.0,
+      "awd": false,
+      "n": 52.0,
+      "share": 0.007,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-ix1-2024",
+      "kw": 94.0,
+      "awd": true,
+      "n": 85.0,
+      "share": 0.0025,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-ix1-2024",
+      "kw": 200.0,
+      "awd": false,
+      "n": 60.0,
+      "share": 0.0018,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-ix3-2024",
+      "kw": 80.0,
+      "awd": false,
+      "n": 139.0,
+      "share": 0.0131,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-i4-2024",
+      "kw": 125.0,
+      "awd": false,
+      "n": 12.0,
+      "share": 0.0007,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-i4-2024",
+      "kw": 80.0,
+      "awd": false,
+      "n": 173.0,
+      "share": 0.0104,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-i5-2024",
+      "kw": 105.0,
+      "awd": false,
+      "n": 58.0,
+      "share": 0.0064,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-i5-2024",
+      "kw": 190.0,
+      "awd": true,
+      "n": 60.0,
+      "share": 0.0066,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-i7-2024",
+      "kw": 125.0,
+      "awd": false,
+      "n": 11.0,
+      "share": 0.0095,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-ix-2024",
+      "kw": 140.0,
+      "awd": true,
+      "n": 60.0,
+      "share": 0.0115,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-ix-2024",
+      "kw": 102.0,
+      "awd": true,
+      "n": 11.0,
+      "share": 0.0021,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-ix-2024",
+      "kw": 190.0,
+      "awd": true,
+      "n": 76.0,
+      "share": 0.0145,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-ix1-2025",
+      "kw": 140.0,
+      "awd": true,
+      "n": 128.0,
+      "share": 0.0029,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-ix3-2025",
+      "kw": 80.0,
+      "awd": false,
+      "n": 43.0,
+      "share": 0.0151,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-i4-2025",
+      "kw": 442.0,
+      "awd": false,
+      "n": 51.0,
+      "share": 0.0035,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-i4-2025",
+      "kw": 400.0,
+      "awd": false,
+      "n": 147.0,
+      "share": 0.0101,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-i4-2025",
+      "kw": 80.0,
+      "awd": false,
+      "n": 101.0,
+      "share": 0.0069,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-i5-2025",
+      "kw": 105.0,
+      "awd": false,
+      "n": 37.0,
+      "share": 0.0034,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-i5-2025",
+      "kw": 190.0,
+      "awd": true,
+      "n": 20.0,
+      "share": 0.0018,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-ix-2025",
+      "kw": 150.0,
+      "awd": true,
+      "n": 40.0,
+      "share": 0.0051,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-ix-2025",
+      "kw": 385.0,
+      "awd": false,
+      "n": 15.0,
+      "share": 0.0019,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-ix-2025",
+      "kw": 135.0,
+      "awd": true,
+      "n": 16.0,
+      "share": 0.002,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-ix-2025",
+      "kw": 300.0,
+      "awd": false,
+      "n": 39.0,
+      "share": 0.005,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "bmw-ix-2025",
+      "kw": 190.0,
+      "awd": true,
+      "n": 49.0,
+      "share": 0.0063,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "byd-dolphin-2024",
+      "kw": 380.0,
+      "awd": false,
+      "n": 88.0,
+      "share": 0.0109,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "byd-han-2024",
+      "kw": 130.0,
+      "awd": false,
+      "n": 13.0,
+      "share": 0.0158,
+      "reason": "below_registration_threshold"
+    },
+    {
+      "parentId": "byd-seal-2025",
+      "kw": 70.0,
+      "awd": false,
+      "n": 132.0,
+      "share": 0.0136,
+      "reason": "below_registration_threshold"
     }
   ],
   "note": "Slim fixture; full refs in scripts/cache/eea/catalog_truth_ev_variants_refs.json"
