@@ -112,11 +112,25 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertLessThanOrEqual(k100, 24)
     }
 
+    /// EEA same-MY Zr/Wh not yet published (or OEM pack absent) — energy may stay nil.
+    private func allowsNilElectricEnergy(_ v: VehicleCatalogItem) -> Bool {
+        let s = (v.sourceName ?? "").lowercased()
+        let documentedNil =
+            s.contains("nil")
+            || s.contains("absent")
+            || s.contains("not found")
+            || s.contains("not attached")
+            || s.contains("not valid for")
+        let eeaFuelOk = s.contains("eea")
+        return documentedNil && eeaFuelOk
+    }
+
     func testCatalog_NoAbsurdEVEnergyOutliers() {
         let evs = VehicleCatalogService.shared.vehicles.filter { $0.powertrain == .ev }
         XCTAssertFalse(evs.isEmpty)
         for ev in evs {
             guard let kWh = ev.resolvedEnergyKWhPerKm else {
+                if allowsNilElectricEnergy(ev) { continue }
                 XCTFail("EV \(ev.id) missing energy")
                 continue
             }
@@ -136,11 +150,29 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
                 XCTAssertNotNil(v.fuelConsumptionLPerKm, v.id)
                 XCTAssertGreaterThan(v.fuelConsumptionLPerKm ?? 0, 0, v.id)
             case .ev:
+                if allowsNilElectricEnergy(v) { continue }
                 XCTAssertNotNil(v.resolvedEnergyKWhPerKm, v.id)
                 XCTAssertGreaterThan(v.resolvedEnergyKWhPerKm ?? 0, 0, v.id)
             case .phev:
-                XCTAssertNotNil(v.fuelConsumptionLPerKm, v.id)
-                XCTAssertNotNil(v.resolvedEnergyKWhPerKm, v.id)
+                // Calc fields must be CS fuel (≥3) + CD energy, or catalogDataIncomplete.
+                if v.hasIncompleteCatalogData {
+                    if let fuel = v.fuelConsumptionLPerKm {
+                        XCTAssertGreaterThanOrEqual(
+                            fuel * 100,
+                            3.0,
+                            "Incomplete PHEV \(v.id) must not keep thin/weighted fuel in calc field"
+                        )
+                    }
+                    XCTAssertTrue(
+                        v.usableChargeSustainingFuelLPerKm == nil
+                            || v.usableChargeDepletingEnergyKWhPerKm == nil,
+                        "Incomplete PHEV \(v.id) should still miss CS or CD for calc"
+                    )
+                } else {
+                    XCTAssertNotNil(v.usableChargeSustainingFuelLPerKm, v.id)
+                    XCTAssertNotNil(v.usableChargeDepletingEnergyKWhPerKm, v.id)
+                    XCTAssertGreaterThanOrEqual((v.fuelConsumptionLPerKm ?? 0) * 100, 3.0, v.id)
+                }
             }
         }
     }
@@ -573,7 +605,9 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertTrue(hasDiesel("Volkswagen", "T-Roc"))
         XCTAssertTrue(hasDiesel("Fiat", "500X"))
         XCTAssertTrue(hasDiesel("Fiat", "Tipo"))
-        XCTAssertTrue(hasDiesel("Mercedes-Benz", "A-Class"))
+        XCTAssertTrue(
+            hasDiesel("Mercedes-Benz", "Classe A") || hasDiesel("Mercedes-Benz", "A-Class")
+        )
     }
 
     func testCatalog_LPGAndCNGPresentForKeyITModels() {
@@ -589,15 +623,12 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         let phev90 = catalog.filter { $0.powertrain == .phev && abs($0.taxesPerYear - 90) < 0.01 }
         XCTAssertTrue(phev90.isEmpty, "PHEV flat €90 removed: \(phev90.map(\.id))")
 
+        // Calc field must never hold EEA weighted blend (<3 L/100). Nil is OK when incomplete.
         let thinPHEV = catalog.filter { v in
-            guard v.powertrain == .phev else { return false }
-            let l100 = (v.fuelConsumptionLPerKm ?? 0) * 100
-            let hasKWh = (v.energyConsumptionKWhPerKm ?? 0) > 0
-                || (v.wltpConsumptionKWh100km ?? 0) > 0
-                || (v.batteryKWh ?? 0) > 0
-            return (l100 > 0 && l100 < 3.0) || !hasKWh
+            guard v.powertrain == .phev, let fuel = v.fuelConsumptionLPerKm else { return false }
+            return fuel * 100.0 < 3.0
         }
-        XCTAssertTrue(thinPHEV.isEmpty, "PHEV need CS ≥3 L/100 and kWh: \(thinPHEV.map(\.id))")
+        XCTAssertTrue(thinPHEV.isEmpty, "PHEV calc fuel must be CS ≥3 L/100 or nil: \(thinPHEV.map(\.id))")
 
         let eeaLowN = catalog.filter { v in
             guard let sn = v.sourceName, sn.hasPrefix("EEA co2cars") else { return false }
@@ -763,8 +794,13 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
     }
 
     func testCatalog_NonEPAPHEVSourcesIncludeDocumentURL() {
+        // Only PHEVs that publish electric kWh need a same-MY OEM/EEA doc URL.
+        // EEA-fuel-only rows (nil energy/range/battery) are exempt by design.
         let nonEpa = VehicleCatalogService.shared.vehicles.filter { v in
             guard v.powertrain == .phev else { return false }
+            guard v.resolvedEnergyKWhPerKm != nil || v.batteryKWh != nil || v.wltpRangeKm != nil else {
+                return false
+            }
             let market = (v.market ?? "").uppercased()
             let src = (v.sourceName ?? "").uppercased()
             return market != "US/EPA" && !src.contains("EPA-FUELECONOMY")
@@ -785,6 +821,8 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
                 || url.contains("newsroom")
                 || url.contains("media-assets")
                 || url.contains("attachment")
+                || url.contains("model-document")
+                || url.contains("media.stellantis.com")
             return !looksDoc
         }
         XCTAssertTrue(generic.isEmpty, "non-EPA PHEV source must be a precise doc URL: \(generic.map(\.id))")
@@ -792,6 +830,7 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             let s = (v.sourceName ?? "").lowercased()
             let solo = s.contains("solo elettr") || s.contains("rein elektr") || s.contains("electric-only")
                 || s.contains("charge-depleting") || s.contains("ec mode")
+                || s.contains("eaer") || s.contains("electric range")
             let ponderato = s.contains("ponderat") || s.contains("weighted") || s.contains("gewichtet")
             return !(solo || ponderato)
         }

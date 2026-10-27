@@ -1,12 +1,12 @@
 {
   "url": "",
   "publishedUrl": "",
-  "rows": 6750,
-  "bytes": 2917760,
+  "rows": 6878,
+  "bytes": 2972235,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-27T11:21:55.985866+00:00",
+  "updatedAt": "2026-10-27T14:47:08.286716+00:00",
   "policy": "offline-first",
-  "seedVersion": 62,
-  "note": "seedVersion 62: EV version labels from same-MY EU OEM sheets (source_year/source_market required; unmatched Versione n)."
+  "seedVersion": 65,
+  "note": "seedVersion 64: IT wave-2 \u2014 aliases/renames + missing \u2265500 families (EEA fuels; PHEV/BEV energy nil without same-MY OEM)."
 }

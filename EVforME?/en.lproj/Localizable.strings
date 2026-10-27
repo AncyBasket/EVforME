@@ -356,9 +356,9 @@
 "trip_profile_commuter_subtitle" = "~18,000 km/year, mostly urban stop-and-go.";
 "trip_profile_weekend_subtitle" = "~14,000 km/year with longer highway legs.";
 "purchase_prices_title" = "Purchase prices";
-"purchase_prices_verdict_note" = "Does not decide yes/no: the verdict stays on energy, road tax and maintenance (older cars cost more to run). List price is only a payback estimate if you are buying.";
-"source_purchase_price_label" = "Current car (€)";
-"target_purchase_price_label" = "EV target (€)";
+"purchase_prices_verdict_note" = "Prefill values are an estimate (not an official list price): enter the real purchase price. They do not decide yes/no — the verdict stays on energy, road tax and maintenance.";
+"source_purchase_price_label" = "Current car (€) — enter the real price";
+"target_purchase_price_label" = "EV target (€) — enter the real price";
 "include_incentives_toggle" = "Include IT incentive estimate (off by default)";
 "include_incentives_hint" = "Off by default: 2025 MASE/PNRR rules (ISEE, scrappage, FUA) are not fully modellable here. Verify on the official site before enabling. Not legal advice.";
 "comparison_intent_section_title" = "What are you comparing?";
@@ -518,6 +518,14 @@
 /* Correctness validation */
 "validation_missing_fuel_consumption" = "Fuel consumption is missing for the selected vehicle.";
 "validation_missing_energy_consumption" = "Electric consumption is missing for the selected vehicle.";
+"validation_incomplete_catalog_enter_fuel" = "Incomplete data: enter charge-sustaining fuel use (L/100 km).";
+"validation_incomplete_catalog_enter_energy" = "Incomplete data: enter electric consumption (kWh/100 km).";
+"validation_phev_fuel_too_low_for_calc" = "EEA weighted fuel (< 3 L/100) cannot be used in calculations: enter charge-sustaining fuel use.";
+"incomplete_catalog_data_title" = "Incomplete data";
+"incomplete_catalog_data_body_phev" = "For this plug-in hybrid we lack official same-year charge-sustaining fuel and/or charge-depleting kWh. Enter them here — we will not compute a verdict without them (EEA weighted figures are not enough).";
+"incomplete_catalog_data_body_bev" = "For this EV we lack official same-year kWh/100. Enter it here — we will not invent a verdict without it.";
+"incomplete_catalog_fuel_field" = "Fuel with empty battery (L/100 km)";
+"incomplete_catalog_energy_field" = "Electric consumption (kWh/100 km)";
 "validation_unknown_source_vehicle" = "Current vehicle not found in the catalog.";
 "validation_unknown_target_vehicle" = "Electrified vehicle not found in the catalog.";
 

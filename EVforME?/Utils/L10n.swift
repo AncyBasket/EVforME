@@ -475,6 +475,14 @@ enum L10n {
     static var validationElectricityHigh: String { string("validation_electricity_high") }
     static var validationMissingFuelConsumption: String { string("validation_missing_fuel_consumption") }
     static var validationMissingEnergyConsumption: String { string("validation_missing_energy_consumption") }
+    static var validationIncompleteCatalogEnterFuel: String { string("validation_incomplete_catalog_enter_fuel") }
+    static var validationIncompleteCatalogEnterEnergy: String { string("validation_incomplete_catalog_enter_energy") }
+    static var validationPHEVFuelTooLowForCalc: String { string("validation_phev_fuel_too_low_for_calc") }
+    static var incompleteCatalogDataTitle: String { string("incomplete_catalog_data_title") }
+    static var incompleteCatalogDataBodyPHEV: String { string("incomplete_catalog_data_body_phev") }
+    static var incompleteCatalogDataBodyBEV: String { string("incomplete_catalog_data_body_bev") }
+    static var incompleteCatalogFuelField: String { string("incomplete_catalog_fuel_field") }
+    static var incompleteCatalogEnergyField: String { string("incomplete_catalog_energy_field") }
     static var validationUnknownSourceVehicle: String { string("validation_unknown_source_vehicle") }
     static var validationUnknownTargetVehicle: String { string("validation_unknown_target_vehicle") }
     static var validationMinYears: String { string("validation_min_years") }

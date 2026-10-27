@@ -16,10 +16,14 @@ struct EVSimulationInput {
     var sourcePurchasePrice: Double = 12_000
     var targetPurchasePrice: Double = 32_000
     var comparisonIntent: ComparisonIntent = .alreadyOwned
-    /// L/km override (già convertito da L/100 km).
+    /// L/km override auto attuale (già convertito da L/100 km) — ICE/HEV/PHEV CS.
     var iceFuelLPerKmOverride: Double? = nil
-    /// kWh/km override (già convertito da kWh/100 km).
+    /// kWh/km override EV/PHEV target (già convertito da kWh/100 km).
     var evKWhPerKmOverride: Double? = nil
+    /// kWh/km override PHEV CD quando la PHEV è l’auto attuale.
+    var sourceEnergyKWhPerKmOverride: Double? = nil
+    /// L/km override PHEV CS quando la PHEV è il target.
+    var targetFuelLPerKmOverride: Double? = nil
     /// Configurazione ricarica personalizzata
     var chargingConfiguration: ChargingConfiguration = ChargingConfiguration()
     /// Prezzo benzina (€/L) per la quota termica delle PHEV (mai il carburante dell’auto attuale).
@@ -320,14 +324,14 @@ final class EVSimulator {
             input: input,
             scenario: scenario,
             fuelOverrideLPerKm: input.iceFuelLPerKmOverride,
-            energyOverrideKWhPerKm: nil,
+            energyOverrideKWhPerKm: input.sourceEnergyKWhPerKmOverride,
             asSource: true
         )
         let targetEnergy = energyCostPerYear(
             vehicle: targetVehicle,
             input: input,
             scenario: scenario,
-            fuelOverrideLPerKm: nil,
+            fuelOverrideLPerKm: input.targetFuelLPerKmOverride,
             energyOverrideKWhPerKm: input.evKWhPerKmOverride,
             asSource: false
         )
@@ -456,7 +460,9 @@ final class EVSimulator {
 
         switch vehicle.powertrain {
         case .ice, .hev:
-            guard let lPerKm = fuelOverrideLPerKm ?? vehicle.fuelConsumptionLPerKm, lPerKm > 0 else {
+            guard let lPerKm = fuelOverrideLPerKm ?? vehicle.usableChargeSustainingFuelLPerKm
+                    ?? vehicle.fuelConsumptionLPerKm,
+                  lPerKm > 0 else {
                 return 0
             }
             // Per CNG, fuelConsumptionLPerKm è in kg/km e fuelPricePerLiter è €/kg.
@@ -468,7 +474,8 @@ final class EVSimulator {
                 * fuelMult
 
         case .ev:
-            guard let kWhPerKm = energyOverrideKWhPerKm ?? vehicle.resolvedEnergyKWhPerKm, kWhPerKm > 0 else {
+            guard let kWhPerKm = energyOverrideKWhPerKm ?? vehicle.usableChargeDepletingEnergyKWhPerKm,
+                  kWhPerKm > 0 else {
                 return 0
             }
             let annual = ChargingCostCalculator.calculateAnnualEnergyCost(
@@ -487,10 +494,13 @@ final class EVSimulator {
                 hasHomeCharging: input.hasHomeCharging,
                 yearlyKm: yearlyKm
             )
-            guard let lPerKm = fuelOverrideLPerKm ?? vehicle.fuelConsumptionLPerKm, lPerKm > 0 else {
+            // Mai usare ponderato EEA / fuel < 3 L/100 nei calcoli.
+            guard let lPerKm = fuelOverrideLPerKm ?? vehicle.usableChargeSustainingFuelLPerKm,
+                  lPerKm > 0 else {
                 return 0
             }
-            guard let kWhPerKm = energyOverrideKWhPerKm ?? vehicle.resolvedEnergyKWhPerKm, kWhPerKm > 0 else {
+            guard let kWhPerKm = energyOverrideKWhPerKm ?? vehicle.usableChargeDepletingEnergyKWhPerKm,
+                  kWhPerKm > 0 else {
                 return 0
             }
             // PHEV: sempre benzina (o fuelKind della PHEV), mai il carburante dell’auto attuale.
@@ -541,14 +551,16 @@ final class EVSimulator {
         }
 
         let iceOverride = input.sourceConsumptionOverrideLPer100Km.map { $0 / 100.0 }
+        let sourceEnergyOverride = input.sourceEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
         let evOverride = input.targetEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
+        let targetFuelOverride = input.targetFuelConsumptionOverrideLPer100Km.map { $0 / 100.0 }
         guard Self.hasUsableConsumption(
             vehicle: sourceVehicle,
             fuelOverrideLPerKm: iceOverride,
-            energyOverrideKWhPerKm: nil
+            energyOverrideKWhPerKm: sourceEnergyOverride
         ), Self.hasUsableConsumption(
             vehicle: targetVehicle,
-            fuelOverrideLPerKm: nil,
+            fuelOverrideLPerKm: targetFuelOverride,
             energyOverrideKWhPerKm: evOverride
         ) else {
             AppLogger.shared.warning("Missing consumption data for selected vehicles", category: .simulation)
@@ -717,12 +729,15 @@ final class EVSimulator {
             let lPerKm = fuelOverrideLPerKm ?? vehicle.fuelConsumptionLPerKm
             return (lPerKm ?? 0) > 0
         case .ev:
-            let kWhPerKm = energyOverrideKWhPerKm ?? vehicle.resolvedEnergyKWhPerKm
+            let kWhPerKm = energyOverrideKWhPerKm ?? vehicle.usableChargeDepletingEnergyKWhPerKm
             return (kWhPerKm ?? 0) > 0
         case .phev:
-            let lPerKm = fuelOverrideLPerKm ?? vehicle.fuelConsumptionLPerKm
-            let kWhPerKm = energyOverrideKWhPerKm ?? vehicle.resolvedEnergyKWhPerKm
-            return (lPerKm ?? 0) > 0 && (kWhPerKm ?? 0) > 0
+            let lPerKm = fuelOverrideLPerKm ?? vehicle.usableChargeSustainingFuelLPerKm
+            let kWhPerKm = energyOverrideKWhPerKm ?? vehicle.usableChargeDepletingEnergyKWhPerKm
+            guard (lPerKm ?? 0) > 0, (kWhPerKm ?? 0) > 0 else { return false }
+            // Fail-closed: fuel used in calc must be CS (≥3 L/100), never EEA weighted blend.
+            if let l = lPerKm, l * 100.0 < 3.0 { return false }
+            return true
         }
     }
 }

@@ -165,7 +165,13 @@ struct InputValidator {
         if let ice = input.sourceConsumptionOverrideLPer100Km, (ice < 2 || ice > 25) {
             errors.append(L10n.validationStickerFuelRange)
         }
+        if let fuel = input.targetFuelConsumptionOverrideLPer100Km, (fuel < 2 || fuel > 25) {
+            errors.append(L10n.validationStickerFuelRange)
+        }
         if let ev = input.targetEnergyOverrideKWhPer100Km, (ev < 8 || ev > 40) {
+            errors.append(L10n.validationStickerEnergyRange)
+        }
+        if let se = input.sourceEnergyOverrideKWhPer100Km, (se < 8 || se > 40) {
             errors.append(L10n.validationStickerEnergyRange)
         }
 
@@ -180,15 +186,27 @@ struct InputValidator {
         if !input.sourceVehicleId.isEmpty {
             if let source = catalog.vehicle(by: input.sourceVehicleId) {
                 let iceOverride = input.sourceConsumptionOverrideLPer100Km.map { $0 / 100.0 }
+                let energyOverride = input.sourceEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
                 if source.powertrain == .ice || source.powertrain == .hev || source.powertrain == .phev {
-                    let liters = iceOverride ?? source.fuelConsumptionLPerKm
+                    let liters = iceOverride ?? source.usableChargeSustainingFuelLPerKm
                     if (liters ?? 0) <= 0 {
-                        errors.append(L10n.validationMissingFuelConsumption)
+                        errors.append(
+                            source.hasIncompleteCatalogData
+                                ? L10n.validationIncompleteCatalogEnterFuel
+                                : L10n.validationMissingFuelConsumption
+                        )
+                    } else if let liters, source.powertrain == .phev, liters * 100.0 < 3.0 {
+                        errors.append(L10n.validationPHEVFuelTooLowForCalc)
                     }
                 }
                 if source.powertrain == .phev {
-                    if (source.resolvedEnergyKWhPerKm ?? 0) <= 0 {
-                        errors.append(L10n.validationMissingEnergyConsumption)
+                    let kWh = energyOverride ?? source.usableChargeDepletingEnergyKWhPerKm
+                    if (kWh ?? 0) <= 0 {
+                        errors.append(
+                            source.hasIncompleteCatalogData
+                                ? L10n.validationIncompleteCatalogEnterEnergy
+                                : L10n.validationMissingEnergyConsumption
+                        )
                     }
                 }
             } else {
@@ -198,15 +216,27 @@ struct InputValidator {
         if !input.targetVehicleId.isEmpty {
             if let target = catalog.vehicle(by: input.targetVehicleId) {
                 let evOverride = input.targetEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
+                let fuelOverride = input.targetFuelConsumptionOverrideLPer100Km.map { $0 / 100.0 }
                 if target.powertrain == .ev || target.powertrain == .phev {
-                    let kWh = evOverride ?? target.resolvedEnergyKWhPerKm
+                    let kWh = evOverride ?? target.usableChargeDepletingEnergyKWhPerKm
                     if (kWh ?? 0) <= 0 {
-                        errors.append(L10n.validationMissingEnergyConsumption)
+                        errors.append(
+                            target.hasIncompleteCatalogData
+                                ? L10n.validationIncompleteCatalogEnterEnergy
+                                : L10n.validationMissingEnergyConsumption
+                        )
                     }
                 }
                 if target.powertrain == .phev {
-                    if (target.fuelConsumptionLPerKm ?? 0) <= 0 {
-                        errors.append(L10n.validationMissingFuelConsumption)
+                    let liters = fuelOverride ?? target.usableChargeSustainingFuelLPerKm
+                    if (liters ?? 0) <= 0 {
+                        errors.append(
+                            target.hasIncompleteCatalogData
+                                ? L10n.validationIncompleteCatalogEnterFuel
+                                : L10n.validationMissingFuelConsumption
+                        )
+                    } else if let liters, liters * 100.0 < 3.0 {
+                        errors.append(L10n.validationPHEVFuelTooLowForCalc)
                     }
                 }
             } else {

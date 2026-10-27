@@ -23,6 +23,8 @@ struct PersistedScenarioInput: Equatable {
     var tripProfileRaw: String
     var sourceConsumptionOverrideLPer100Km: Double?
     var targetEnergyOverrideKWhPer100Km: Double?
+    var sourceEnergyOverrideKWhPer100Km: Double?
+    var targetFuelConsumptionOverrideLPer100Km: Double?
     var marketRaw: String?
     var sourceBookletPowerKwP2: Double?
     var targetBookletPowerKwP2: Double?
@@ -45,6 +47,8 @@ struct PersistedScenarioInput: Equatable {
         tripProfileRaw = input.tripProfile.rawValue
         sourceConsumptionOverrideLPer100Km = input.sourceConsumptionOverrideLPer100Km
         targetEnergyOverrideKWhPer100Km = input.targetEnergyOverrideKWhPer100Km
+        sourceEnergyOverrideKWhPer100Km = input.sourceEnergyOverrideKWhPer100Km
+        targetFuelConsumptionOverrideLPer100Km = input.targetFuelConsumptionOverrideLPer100Km
         marketRaw = input.market.rawValue
         sourceBookletPowerKwP2 = input.sourceBookletPowerKwP2
         targetBookletPowerKwP2 = input.targetBookletPowerKwP2
@@ -73,6 +77,8 @@ struct PersistedScenarioInput: Equatable {
             tripProfile: trip,
             sourceConsumptionOverrideLPer100Km: sourceConsumptionOverrideLPer100Km,
             targetEnergyOverrideKWhPer100Km: targetEnergyOverrideKWhPer100Km,
+            sourceEnergyOverrideKWhPer100Km: sourceEnergyOverrideKWhPer100Km,
+            targetFuelConsumptionOverrideLPer100Km: targetFuelConsumptionOverrideLPer100Km,
             market: market,
             sourceBookletPowerKwP2: sourceBookletPowerKwP2,
             targetBookletPowerKwP2: targetBookletPowerKwP2,
@@ -88,6 +94,7 @@ extension PersistedScenarioInput: Codable {
         case sourcePurchasePrice, targetPurchasePrice, includeIncentives
         case comparisonIntentRaw, tripProfileRaw
         case sourceConsumptionOverrideLPer100Km, targetEnergyOverrideKWhPer100Km
+        case sourceEnergyOverrideKWhPer100Km, targetFuelConsumptionOverrideLPer100Km
         case marketRaw
         case sourceBookletPowerKwP2
         case targetBookletPowerKwP2
@@ -114,6 +121,8 @@ extension PersistedScenarioInput: Codable {
         tripProfileRaw = try c.decodeIfPresent(String.self, forKey: .tripProfileRaw) ?? TripProfile.custom.rawValue
         sourceConsumptionOverrideLPer100Km = try c.decodeIfPresent(Double.self, forKey: .sourceConsumptionOverrideLPer100Km)
         targetEnergyOverrideKWhPer100Km = try c.decodeIfPresent(Double.self, forKey: .targetEnergyOverrideKWhPer100Km)
+        sourceEnergyOverrideKWhPer100Km = try c.decodeIfPresent(Double.self, forKey: .sourceEnergyOverrideKWhPer100Km)
+        targetFuelConsumptionOverrideLPer100Km = try c.decodeIfPresent(Double.self, forKey: .targetFuelConsumptionOverrideLPer100Km)
         marketRaw = try c.decodeIfPresent(String.self, forKey: .marketRaw)
         sourceBookletPowerKwP2 = try c.decodeIfPresent(Double.self, forKey: .sourceBookletPowerKwP2)
         let targetP2 = try c.decodeIfPresent(Double.self, forKey: .targetBookletPowerKwP2)
@@ -140,6 +149,8 @@ extension PersistedScenarioInput: Codable {
         try c.encode(tripProfileRaw, forKey: .tripProfileRaw)
         try c.encodeIfPresent(sourceConsumptionOverrideLPer100Km, forKey: .sourceConsumptionOverrideLPer100Km)
         try c.encodeIfPresent(targetEnergyOverrideKWhPer100Km, forKey: .targetEnergyOverrideKWhPer100Km)
+        try c.encodeIfPresent(sourceEnergyOverrideKWhPer100Km, forKey: .sourceEnergyOverrideKWhPer100Km)
+        try c.encodeIfPresent(targetFuelConsumptionOverrideLPer100Km, forKey: .targetFuelConsumptionOverrideLPer100Km)
         try c.encodeIfPresent(marketRaw, forKey: .marketRaw)
         try c.encodeIfPresent(sourceBookletPowerKwP2, forKey: .sourceBookletPowerKwP2)
         try c.encodeIfPresent(targetBookletPowerKwP2, forKey: .targetBookletPowerKwP2)

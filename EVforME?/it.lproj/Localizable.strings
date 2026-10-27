@@ -373,9 +373,9 @@
 "trip_profile_commuter_subtitle" = "~18.000 km/anno, soprattutto urbano.";
 "trip_profile_weekend_subtitle" = "~14.000 km/anno con tratti autostradali.";
 "purchase_prices_title" = "Prezzi d’acquisto";
-"purchase_prices_verdict_note" = "Non decide il sì/no: il verdetto resta su energia, bollo e manutenzione (l’usata pesa di più). Qui solo stima payback se stai comprando.";
-"source_purchase_price_label" = "Auto attuale (€)";
-"target_purchase_price_label" = "EV di destinazione (€)";
+"purchase_prices_verdict_note" = "I valori precompilati sono una stima (non un listino ufficiale): inserisci il prezzo reale di acquisto. Non decidono il sì/no — il verdetto resta su energia, bollo e manutenzione.";
+"source_purchase_price_label" = "Auto attuale (€) — inserisci il prezzo vero";
+"target_purchase_price_label" = "EV di destinazione (€) — inserisci il prezzo vero";
 "include_incentives_toggle" = "Includi stima incentivi IT (disattivata di default)";
 "include_incentives_hint" = "Disattivata di default: le regole 2025 MASE/PNRR (ISEE, rottamazione, FUA) non sono modellabili in modo affidabile qui. Verifica sul sito ufficiale prima di attivarla. Non è consulenza.";
 "comparison_intent_section_title" = "Cosa stai confrontando?";
@@ -516,6 +516,14 @@
 /* Correctness validation */
 "validation_missing_fuel_consumption" = "Consumo carburante mancante per il veicolo selezionato.";
 "validation_missing_energy_consumption" = "Consumo elettrico mancante per il veicolo selezionato.";
+"validation_incomplete_catalog_enter_fuel" = "Dati incompleti: inserisci il consumo a batteria scarica (L/100 km).";
+"validation_incomplete_catalog_enter_energy" = "Dati incompleti: inserisci il consumo elettrico (kWh/100 km).";
+"validation_phev_fuel_too_low_for_calc" = "Il consumo ponderato EEA (< 3 L/100) non si può usare nei calcoli: inserisci il consumo a batteria scarica.";
+"incomplete_catalog_data_title" = "Dati incompleti";
+"incomplete_catalog_data_body_phev" = "Per questa plug-in hybrid non abbiamo il consumo a batteria scarica e/o i kWh in elettrico da fonte ufficiale. Inseriscili qui — senza questi valori non calcoliamo il verdetto (il consumo «ponderato» EEA non basta).";
+"incomplete_catalog_data_body_bev" = "Per questa elettrica non abbiamo il consumo kWh/100 da fonte ufficiale dello stesso anno. Inseriscilo qui — senza questo valore non calcoliamo il verdetto.";
+"incomplete_catalog_fuel_field" = "Benzina a batteria scarica (L/100 km)";
+"incomplete_catalog_energy_field" = "Consumo elettrico (kWh/100 km)";
 "validation_unknown_source_vehicle" = "Veicolo attuale non trovato nel catalogo.";
 "validation_unknown_target_vehicle" = "Veicolo elettrificato non trovato nel catalogo.";
 

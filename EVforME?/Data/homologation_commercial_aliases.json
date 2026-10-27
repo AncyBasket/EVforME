@@ -1,0 +1,285 @@
+{
+  "_comment": "EEA commercial-name / type-approval code → Italian retail model name. Every alias requires a cited OEM/EU source. If unsure, omit. Never merge distinct commercial models (e.g. Fortwo≠Forfour).",
+  "aliases": [
+    {
+      "brand": "BMW",
+      "eeaKeys": [
+        "118D",
+        "118d",
+        "116D",
+        "116d",
+        "118I",
+        "118i",
+        "116I",
+        "116i",
+        "120I",
+        "120i",
+        "120D",
+        "120d",
+        "120D XDRIVE",
+        "120d xDrive",
+        "128TI",
+        "128ti"
+      ],
+      "commercialName": "Serie 1",
+      "sourceName": "BMW Italia — gamma Serie 1 (denominazione commerciale)",
+      "sourceUrl": "https://www.bmw.it/it/tutti-i-modelli/bmw-serie/serie-1.html",
+      "sourceUpdatedAt": "2026-10-27"
+    },
+    {
+      "brand": "BMW",
+      "eeaKeys": [
+        "X4 XDRIVE20D",
+        "X4 xDrive20d",
+        "X4 XDRIVE30D",
+        "X4 xDrive30d"
+      ],
+      "commercialName": "X4",
+      "sourceName": "BMW Italia — gamma X4",
+      "sourceUrl": "https://www.bmw.it/it/tutti-i-modelli/bmw-x/x4.html",
+      "sourceUpdatedAt": "2026-10-27"
+    },
+    {
+      "brand": "BMW",
+      "eeaKeys": [
+        "225E XDRIVE ACTIVE TOURER",
+        "225e xDrive Active Tourer",
+        "225E XDRIVE",
+        "230E XDRIVE ACTIVE TOURER",
+        "218D ACTIVE TOURER",
+        "218d Active Tourer",
+        "220I ACTIVE TOURER",
+        "218I ACTIVE TOURER",
+        "220D",
+        "220d"
+      ],
+      "commercialName": "Serie 2 Active Tourer",
+      "sourceName": "BMW Group press — new BMW 2 Series Active Tourer PHEV (summer 2022)",
+      "sourceUrl": "https://www.press.bmwgroup.com/global/article/detail/T0390613EN/bmw-model-update-measures-as-of-summer-2022?language=en",
+      "sourceUpdatedAt": "2026-10-27"
+    },
+    {
+      "brand": "BMW",
+      "eeaKeys": [
+        "320E",
+        "320e",
+        "330E",
+        "330e",
+        "320E XDRIVE",
+        "330E XDRIVE",
+        "320D",
+        "320d",
+        "320D XDRIVE",
+        "320d xDrive",
+        "318D",
+        "318d",
+        "316D",
+        "316d"
+      ],
+      "commercialName": "Serie 3",
+      "sourceName": "BMW Italia — gamma Serie 3",
+      "sourceUrl": "https://www.bmw.it/it/tutti-i-modelli/bmw-serie/serie-3/berlina.html",
+      "sourceUpdatedAt": "2026-10-27"
+    },
+    {
+      "brand": "Suzuki",
+      "eeaKeys": [
+        "SX4 SUZUKI SX4 S-C",
+        "SX4 SUZUKI SX4 S C",
+        "SX4  SUZUKI SX4  S-C",
+        "SX4, SUZUKI SX4",
+        "SX4"
+      ],
+      "commercialName": "S-Cross",
+      "sourceName": "Suzuki Italia — S-Cross (ex SX4 S-Cross)",
+      "sourceUrl": "https://www.suzuki.it/auto/s-cross",
+      "sourceUpdatedAt": "2026-10-27"
+    },
+    {
+      "brand": "Smart",
+      "eeaKeys": [
+        "EQ FORTWO COUPE",
+        "EQ FORTWO CABRIO",
+        "FORTWO COUPE",
+        "FORTWO CABRIO"
+      ],
+      "commercialName": "Fortwo",
+      "sourceName": "smart — EQ fortwo (denominazione commerciale EU)",
+      "sourceUrl": "https://www.smart.com/it/it/models/eq-fortwo",
+      "sourceUpdatedAt": "2026-10-27"
+    },
+    {
+      "brand": "Smart",
+      "eeaKeys": [
+        "EQ FORFOUR",
+        "FORFOUR",
+        "SMART FORFOUR 1.1"
+      ],
+      "commercialName": "Forfour",
+      "sourceName": "smart — EQ forfour (denominazione commerciale EU; modello distinto dal Fortwo)",
+      "sourceUrl": "https://www.smart.com/it/it/models/eq-forfour",
+      "sourceUpdatedAt": "2026-10-27"
+    },
+    {
+      "brand": "Mercedes-Benz",
+      "eeaKeys": [
+        "A 180 D",
+        "A 180",
+        "A 200",
+        "A 200 D",
+        "A 250 E",
+        "A 250 e",
+        "A 160",
+        "AMG A 35 4MATIC",
+        "AMG A 35"
+      ],
+      "commercialName": "Classe A",
+      "sourceName": "Mercedes-Benz Italia — Classe A",
+      "sourceUrl": "https://www.mercedes-benz.it/passengercars/models/hatchback/a-class/overview.html",
+      "sourceUpdatedAt": "2026-10-27"
+    },
+    {
+      "brand": "Mercedes-Benz",
+      "eeaKeys": [
+        "GLA 180 D",
+        "GLA 180",
+        "GLA 200",
+        "GLA 200 D",
+        "GLA 250 E"
+      ],
+      "commercialName": "GLA",
+      "sourceName": "Mercedes-Benz Italia — GLA",
+      "sourceUrl": "https://www.mercedes-benz.it/passengercars/models/suv/gla/overview.html",
+      "sourceUpdatedAt": "2026-10-27"
+    },
+    {
+      "brand": "BMW",
+      "eeaKeys": [
+        "520D",
+        "520d",
+        "520D XDRIVE",
+        "520d xDrive",
+        "540D XDRIVE"
+      ],
+      "commercialName": "Serie 5",
+      "sourceName": "BMW Italia — gamma Serie 5",
+      "sourceUrl": "https://www.bmw.it/it/tutti-i-modelli/bmw-serie/serie-5/berlina.html",
+      "sourceUpdatedAt": "2026-10-27"
+    },
+    {
+      "brand": "BMW",
+      "eeaKeys": [
+        "420D",
+        "420d",
+        "420D XDRIVE",
+        "420d xDrive",
+        "430D XDRIVE",
+        "430d xDrive"
+      ],
+      "commercialName": "Serie 4",
+      "sourceName": "BMW Italia — gamma Serie 4",
+      "sourceUrl": "https://www.bmw.it/it/tutti-i-modelli/bmw-serie/serie-4/coupe.html",
+      "sourceUpdatedAt": "2026-10-27"
+    },
+    {
+      "brand": "BMW",
+      "eeaKeys": [
+        "X6 XDRIVE30D",
+        "X6 xDrive30d",
+        "X6 XDRIVE30D M SPORT",
+        "X6 XDRIVE40D M SPORT"
+      ],
+      "commercialName": "X6",
+      "sourceName": "BMW Italia — gamma X6",
+      "sourceUrl": "https://www.bmw.it/it/tutti-i-modelli/bmw-x/x6.html",
+      "sourceUpdatedAt": "2026-10-27"
+    },
+    {
+      "brand": "Mercedes-Benz",
+      "eeaKeys": [
+        "B 180 D",
+        "B 180",
+        "B 250 E",
+        "B 250 e"
+      ],
+      "commercialName": "Classe B",
+      "sourceName": "Mercedes-Benz Italia — Classe B",
+      "sourceUrl": "https://www.mercedes-benz.it/passengercars/models/hatchback/b-class/overview.html",
+      "sourceUpdatedAt": "2026-10-27"
+    },
+    {
+      "brand": "Mercedes-Benz",
+      "eeaKeys": [
+        "C 220 D",
+        "C 200 D",
+        "C 220 D 4MATIC",
+        "C 220D 4MATIC ALL TERRAIN",
+        "C 300 D"
+      ],
+      "commercialName": "Classe C",
+      "sourceName": "Mercedes-Benz Italia — Classe C",
+      "sourceUrl": "https://www.mercedes-benz.it/passengercars/models/saloon/c-class/overview.html",
+      "sourceUpdatedAt": "2026-10-27"
+    },
+    {
+      "brand": "Mercedes-Benz",
+      "eeaKeys": [
+        "E 220 D",
+        "E 220 D 4MATIC",
+        "E 220D"
+      ],
+      "commercialName": "Classe E",
+      "sourceName": "Mercedes-Benz Italia — Classe E",
+      "sourceUrl": "https://www.mercedes-benz.it/passengercars/models/saloon/e-class/overview.html",
+      "sourceUpdatedAt": "2026-10-27"
+    },
+    {
+      "brand": "Mercedes-Benz",
+      "eeaKeys": [
+        "V KLASSE",
+        "V-Klasse",
+        "VITO TOURER"
+      ],
+      "commercialName": "Classe V",
+      "sourceName": "Mercedes-Benz Italia — Classe V",
+      "sourceUrl": "https://www.mercedes-benz.it/passengercars/models/van/v-class/overview.html",
+      "sourceUpdatedAt": "2026-10-27"
+    },
+    {
+      "brand": "Mercedes-Benz",
+      "eeaKeys": [
+        "CLE 220D",
+        "CLE 220 D"
+      ],
+      "commercialName": "CLE",
+      "sourceName": "Mercedes-Benz Italia — CLE",
+      "sourceUrl": "https://www.mercedes-benz.it/passengercars/models/coupes/cle/overview.html",
+      "sourceUpdatedAt": "2026-10-27"
+    },
+    {
+      "brand": "Audi",
+      "eeaKeys": [
+        "Q4 40 E TRON",
+        "Q4 45 E TRON",
+        "Q4 SPORTBACK 40 E TRON",
+        "Q4 SPORTBACK 45 E TRON"
+      ],
+      "commercialName": "Q4 e-tron",
+      "sourceName": "Audi Italia — Q4 e-tron",
+      "sourceUrl": "https://www.audi.it/it/modelli/q4-e-tron/q4-e-tron.html",
+      "sourceUpdatedAt": "2026-10-27"
+    },
+    {
+      "brand": "Honda",
+      "eeaKeys": [
+        "ZR V",
+        "ZR-V",
+        "ZRV"
+      ],
+      "commercialName": "ZR-V",
+      "sourceName": "Honda Italia — ZR-V",
+      "sourceUrl": "https://www.honda.it/cars/new/zr-v.html",
+      "sourceUpdatedAt": "2026-10-27"
+    }
+  ]
+}
