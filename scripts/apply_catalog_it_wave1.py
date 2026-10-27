@@ -107,8 +107,8 @@ def phev_row(
     model: str,
     year: int,
     fuel_l100: float,
-    energy_kwh100: float,
-    range_km: int,
+    energy_kwh100: float | None,
+    range_km: int | None,
     battery_kwh: float | None,
     co2_eea: float,
     kw: float | None,
@@ -132,11 +132,15 @@ def phev_row(
         "heightM": height_m,
         "fuelKind": "petrol",
         "fuelConsumptionLPerKm": round(fuel_l100 / 100.0, 5),
-        "energyConsumptionKWhPerKm": round(energy_kwh100 / 100.0, 4),
+        "energyConsumptionKWhPerKm": (
+            round(energy_kwh100 / 100.0, 4) if energy_kwh100 is not None else None
+        ),
         "energyIsWeighted": energy_is_weighted,
         "wltpRangeKm": range_km,
         "batteryKWh": battery_kwh,
-        "wltpConsumptionKWh100km": round(energy_kwh100, 1),
+        "wltpConsumptionKWh100km": (
+            round(energy_kwh100, 1) if energy_kwh100 is not None else None
+        ),
         "co2gKm": round(co2_eea),
         "powerKw": round(kw, 1) if kw is not None else None,
         "taxesPerYear": 0.0,
@@ -466,39 +470,56 @@ def build_new_rows() -> list[dict]:
         )
     )
 
-    jeep_w_src = (
-        "Jeep DE Plug-in-Hybrid Wrangler 4xe: charge-depleting / discharged fuel 10.6–11.8 L/100; "
-        "charge-depleting electric 23.1–26.6 kWh/100; battery 17.3 kWh; electric range 45 km — "
-        "https://www.jeep.de/elektrifizierung/plug-in-hybrid; "
-        "Stellantis model document + DE MJ23 pack PDF — "
-        "https://autocatalogarchive.com/wp-content/uploads/2023/10/Jeep-Grand-Cherokee-4Xe-2023-GER.pdf"
-    )
-    for year, co2_eea, kw in [
-        (2022, 86.2196261682243, 200.0),
-        (2023, 86.12401055408971, 200.0),
-    ]:
-        rows.append(
-            phev_row(
-                id_=f"jeep-wrangler-4xe-{year}",
-                brand="Jeep",
-                model="Wrangler",
-                year=year,
-                fuel_l100=11.8,
-                energy_kwh100=26.6,
-                range_km=45,
-                battery_kwh=17.3,
-                co2_eea=co2_eea,
-                kw=kw,
-                oem_note=jeep_w_src + f"; EEA IT co2 avg {co2_eea:.1f}",
-                energy_is_weighted=False,
-                trim="4xe",
-            )
+    # Wrangler 2022: Stellantis Technisches Datenblatt 25.01.2022 (same-MY DE/EU)
+    # for battery/range only; fuel/CO2 from EEA. Wrangler 2023: no same-MY OEM →
+    # EEA fuel/CO2, nil range/battery/kWh. Grand Cherokee uses its own MJ23 Preisliste
+    # (never the Wrangler sheet).
+    rows.append(
+        phev_row(
+            id_="jeep-wrangler-4xe-2022",
+            brand="Jeep",
+            model="Wrangler",
+            year=2022,
+            fuel_l100=3.81,
+            energy_kwh100=None,
+            range_km=45,
+            battery_kwh=17.3,
+            co2_eea=86.2196261682243,
+            kw=200.0,
+            oem_note=(
+                "Stellantis Media DE Technisches Datenblatt Jeep Wrangler Unlimited 4xe "
+                "Stand 25.01.2022: battery 17.3 kWh; EAER City electric range 45 km "
+                "(Sahara) / 53 km (Rubicon) — "
+                "https://www.media.stellantis.com/uploads/de/model-document/"
+                "220101_j_wrangler_jl_td_01012022-61dd98f991688.pdf "
+                "(also https://www.media.stellantis.com/de-de/download-model-document/87); "
+                "fuel/CO2 from EEA IT PETROL/ELECTRIC (no CS L/100 or Wh on that sheet); "
+                "EEA IT co2 avg 86.2"
+            ),
+            energy_is_weighted=True,
+            trim="4xe",
         )
-
-    jeep_gc_src = (
-        "Jeep Grand Cherokee 4xe MJ23 DE: charge-depleting / discharged fuel 10.3–10.8 L/100; "
-        "charge-depleting electric 32.7–30.2 kWh/100; range 44–48 km; battery 17.3 kWh — "
-        "https://autocatalogarchive.com/wp-content/uploads/2023/10/Jeep-Grand-Cherokee-4Xe-2023-GER.pdf"
+    )
+    rows.append(
+        phev_row(
+            id_="jeep-wrangler-4xe-2023",
+            brand="Jeep",
+            model="Wrangler",
+            year=2023,
+            fuel_l100=3.806,
+            energy_kwh100=None,
+            range_km=None,
+            battery_kwh=None,
+            co2_eea=86.12401055408971,
+            kw=200.0,
+            oem_note=(
+                "EEA co2cars IT 2023 WRANGLER UNLIMITED PETROL/ELECTRIC n=758; "
+                "OEM same-MY EU range/battery/kWh not found (living jeep.de MJ25 pages "
+                "not valid for 2023); EEA IT co2 avg 86.1"
+            ),
+            energy_is_weighted=True,
+            trim="4xe",
+        )
     )
     rows.append(
         phev_row(
@@ -506,14 +527,21 @@ def build_new_rows() -> list[dict]:
             brand="Jeep",
             model="Grand Cherokee",
             year=2023,
-            fuel_l100=10.8,
+            fuel_l100=2.9,
             energy_kwh100=32.7,
             range_km=44,
             battery_kwh=17.3,
             co2_eea=61.409677419354836,
             kw=200.0,
-            oem_note=jeep_gc_src + "; EEA IT PETROL/ELECTRIC co2 avg 61.4",
-            energy_is_weighted=False,
+            oem_note=(
+                "Stellantis Media DE Spezifikationen und Preise Jeep Grand Cherokee 4xe "
+                "MJ23 gültig ab 01/2023: weighted fuel 2.9–2.6 L/100; electric 32.7–30.2 "
+                "kWh/100; range 44–48 km; battery 17.3 kWh — "
+                "https://www.media.stellantis.com/uploads/de/model-pricelist/"
+                "preisliste_grand_cherokee_4xe_januar_20234-6486c171a11d8.pdf; "
+                "EEA IT PETROL/ELECTRIC co2 avg 61.4"
+            ),
+            energy_is_weighted=True,
             trim="4xe",
         )
     )
