@@ -1,0 +1,936 @@
+{
+  "missing": [
+    {
+      "brand": "JEEP",
+      "model": "COMPASS",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 10348.0,
+      "co2": 45.00154634193486,
+      "kw": 100.84615384615384
+    },
+    {
+      "brand": "JEEP",
+      "model": "RENEGADE",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 7514.0,
+      "co2": 42.745940910300774,
+      "kw": 102.75059888208678
+    },
+    {
+      "brand": "FORD",
+      "model": "KUGA",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 6176.0,
+      "co2": 22.973283678756477,
+      "kw": 112.0
+    },
+    {
+      "brand": "JEEP",
+      "model": "COMPASS",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 6080.0,
+      "co2": 44.59769736842105,
+      "kw": 106.95986842105263
+    },
+    {
+      "brand": "CUPRA",
+      "model": "FORMENTOR E-HYBRID",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 3467.0,
+      "co2": 26.59994231323911,
+      "kw": 110.62301701759446
+    },
+    {
+      "brand": "JEEP",
+      "model": "RENEGADE",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 3409.0,
+      "co2": 42.05749486652977,
+      "kw": 101.10061601642711
+    },
+    {
+      "brand": "VOLVO",
+      "model": "XC40",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 3323.0,
+      "co2": 48.0448390009028,
+      "kw": 106.46855251278964
+    },
+    {
+      "brand": "CUPRA",
+      "model": "FORMENTOR E-HYBRID",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 3005.0,
+      "co2": 28.513477537437605,
+      "kw": 110.0
+    },
+    {
+      "brand": "VOLVO",
+      "model": "XC40",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 2589.0,
+      "co2": 47.76361529548088,
+      "kw": 106.59018926226342
+    },
+    {
+      "brand": "FORD",
+      "model": "KUGA",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 2577.0,
+      "co2": 21.803647652308886,
+      "kw": 111.40628637951106
+    },
+    {
+      "brand": "VOLVO",
+      "model": "XC60",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 2520.0,
+      "co2": 23.242857142857144,
+      "kw": 190.95
+    },
+    {
+      "brand": "BMW",
+      "model": "X1 XDRIVE25E",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 2475.0,
+      "co2": 17.12242424242424,
+      "kw": 100.0
+    },
+    {
+      "brand": "BMW",
+      "model": "X1 xDrive25e",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 2436.0,
+      "co2": 39.860426929392446,
+      "kw": 92.10837438423646
+    },
+    {
+      "brand": "JEEP",
+      "model": "RENEGADE",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 2092.0,
+      "co2": 43.37093690248566,
+      "kw": 99.97514340344168
+    },
+    {
+      "brand": "ALFA ROMEO",
+      "model": "TONALE",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1986.0,
+      "co2": 30.72759315206445,
+      "kw": 132.0
+    },
+    {
+      "brand": "FORD",
+      "model": "KUGA",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1923.0,
+      "co2": 23.35517420696828,
+      "kw": 112.0
+    },
+    {
+      "brand": "MERCEDES-BENZ",
+      "model": "GLC 300 DE 4MATIC",
+      "year": 2024,
+      "ft": "DIESEL/ELECTRIC",
+      "n": 1863.0,
+      "co2": 11.073537305421363,
+      "kw": 144.9946323134729
+    },
+    {
+      "brand": "VOLVO",
+      "model": "XC60",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1863.0,
+      "co2": 23.404403866809883,
+      "kw": 190.32850241545893
+    },
+    {
+      "brand": "TOYOTA",
+      "model": "TOYOTA C-HR",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1805.0,
+      "co2": 19.0,
+      "kw": 111.0
+    },
+    {
+      "brand": "PEUGEOT",
+      "model": "3008",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1749.0,
+      "co2": 30.994282447112635,
+      "kw": 135.28130360205833
+    },
+    {
+      "brand": "RENAULT",
+      "model": "CAPTUR E-TECH PLUG-IN HYBRID",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1661.0,
+      "co2": 30.16435881998796,
+      "kw": 68.0
+    },
+    {
+      "brand": "BMW",
+      "model": "X1 XDRIVE25E",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1629.0,
+      "co2": 16.734806629834253,
+      "kw": 99.94597912829957
+    },
+    {
+      "brand": "MERCEDES-BENZ",
+      "model": "GLE 350 DE 4MATIC",
+      "year": 2022,
+      "ft": "DIESEL/ELECTRIC",
+      "n": 1606.0,
+      "co2": 22.412204234122044,
+      "kw": 143.0
+    },
+    {
+      "brand": "PEUGEOT",
+      "model": "3008",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1604.0,
+      "co2": 28.128428927680797,
+      "kw": 138.54862842892769
+    },
+    {
+      "brand": "JEEP",
+      "model": "COMPASS",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1519.0,
+      "co2": 45.03028308097433,
+      "kw": 105.0533245556287
+    },
+    {
+      "brand": "AUDI",
+      "model": "Q3 SPORTBACK E-TRON",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1487.0,
+      "co2": 34.351714862138536,
+      "kw": 110.0
+    },
+    {
+      "brand": "AUDI",
+      "model": "Q3 SPORTBACK E-TRON",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1482.0,
+      "co2": 36.012145748987855,
+      "kw": 110.0
+    },
+    {
+      "brand": "MERCEDES-BENZ",
+      "model": "GLA 250 E",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1382.0,
+      "co2": 28.439218523878438,
+      "kw": 119.09406657018813
+    },
+    {
+      "brand": "MERCEDES-BENZ",
+      "model": "GLE 350 DE 4MATIC COUPE",
+      "year": 2022,
+      "ft": "DIESEL/ELECTRIC",
+      "n": 1274.0,
+      "co2": 23.463108320251177,
+      "kw": 143.0
+    },
+    {
+      "brand": "MERCEDES-BENZ",
+      "model": "GLA 250 E",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1270.0,
+      "co2": 31.103937007874016,
+      "kw": 118.0
+    },
+    {
+      "brand": "BMW",
+      "model": "X3 xDrive30e",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1246.0,
+      "co2": 46.3330658105939,
+      "kw": 135.0
+    },
+    {
+      "brand": "CUPRA",
+      "model": "FORMENTOR E-HYBRID",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1241.0,
+      "co2": 27.922643029814665,
+      "kw": 110.0
+    },
+    {
+      "brand": "BMW",
+      "model": "X3 XDRIVE30E",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1220.0,
+      "co2": 46.399180327868855,
+      "kw": 135.0
+    },
+    {
+      "brand": "PORSCHE",
+      "model": "CAYENNE E-HYBRID",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1219.0,
+      "co2": 35.55865463494668,
+      "kw": 224.149302707137
+    },
+    {
+      "brand": "MERCEDES-BENZ",
+      "model": "GLC 300 DE 4MATIC",
+      "year": 2023,
+      "ft": "DIESEL/ELECTRIC",
+      "n": 1192.0,
+      "co2": 20.746644295302012,
+      "kw": 144.53859060402684
+    },
+    {
+      "brand": "BYD",
+      "model": "BYD SEAL U DM-I",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1174.0,
+      "co2": 22.345826235093696,
+      "kw": 76.25212947189097
+    },
+    {
+      "brand": "RENAULT",
+      "model": "CAPTUR E-TECH PLUG-IN HYBRID",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1112.0,
+      "co2": 30.274280575539567,
+      "kw": 68.0
+    },
+    {
+      "brand": "MERCEDES-BENZ",
+      "model": "GLA 250 E",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1087.0,
+      "co2": 25.831646734130636,
+      "kw": 119.99264029438822
+    },
+    {
+      "brand": "MG",
+      "model": "MG EHS PLUG-IN HYBRID",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1035.0,
+      "co2": 43.0,
+      "kw": 119.0
+    },
+    {
+      "brand": "AUDI",
+      "model": "Q5 SPORTBACK 50 TFSI E",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1027.0,
+      "co2": 38.859785783836415,
+      "kw": 195.0
+    },
+    {
+      "brand": "MERCEDES-BENZ",
+      "model": "A 250 E",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1008.0,
+      "co2": 21.047619047619047,
+      "kw": 119.80753968253968
+    },
+    {
+      "brand": "LEXUS",
+      "model": "LEXUS NX450H+",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1005.0,
+      "co2": 24.123383084577114,
+      "kw": 136.0
+    },
+    {
+      "brand": "AUDI",
+      "model": "Q3 SPORTBACK E-TRON",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1004.0,
+      "co2": 40.48055832502492,
+      "kw": 110.0
+    },
+    {
+      "brand": "TOYOTA",
+      "model": "TOYOTA RAV4",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 997.0,
+      "co2": 22.0,
+      "kw": 136.0
+    },
+    {
+      "brand": "AUDI",
+      "model": "A3 40 TFSIE",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 981.0,
+      "co2": 27.654434250764528,
+      "kw": 110.0
+    },
+    {
+      "brand": "BMW",
+      "model": "X2 XDRIVE25E",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 940.0,
+      "co2": 37.23085106382979,
+      "kw": 92.0
+    },
+    {
+      "brand": "PORSCHE",
+      "model": "CAYENNE E-HYBRID",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 936.0,
+      "co2": 74.36538461538461,
+      "kw": 250.0
+    },
+    {
+      "brand": "AUDI",
+      "model": "Q3 E-TRON",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 935.0,
+      "co2": 32.83422459893048,
+      "kw": 110.0
+    },
+    {
+      "brand": "DS",
+      "model": "DS 7 CROSSBACK",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 932.0,
+      "co2": 32.26394849785408,
+      "kw": 138.5579399141631
+    },
+    {
+      "brand": "MG",
+      "model": "MG EHS PLUG-IN HYBRID",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 918.0,
+      "co2": 43.0,
+      "kw": 119.0
+    },
+    {
+      "brand": "MAZDA",
+      "model": "MAZDA CX-60",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 894.0,
+      "co2": 33.0,
+      "kw": 141.0
+    },
+    {
+      "brand": "MERCEDES-BENZ",
+      "model": "GLC 300 DE 4MATIC",
+      "year": 2022,
+      "ft": "DIESEL/ELECTRIC",
+      "n": 889.0,
+      "co2": 50.98200224971878,
+      "kw": 143.0
+    },
+    {
+      "brand": "AUDI",
+      "model": "A3 40 TFSIE",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 888.0,
+      "co2": 27.20945945945946,
+      "kw": 110.0
+    },
+    {
+      "brand": "AUDI",
+      "model": "Q5 SPORTBACK 50 TFSI E",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 866.0,
+      "co2": 37.86720554272517,
+      "kw": 195.0
+    },
+    {
+      "brand": "BMW",
+      "model": "X2 xDrive25e",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 865.0,
+      "co2": 38.38150289017341,
+      "kw": 92.0
+    },
+    {
+      "brand": "OPEL",
+      "model": "GRANDLAND",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 861.0,
+      "co2": 27.62369337979094,
+      "kw": 141.78048780487805
+    },
+    {
+      "brand": "HYUNDAI",
+      "model": "TUCSON IX35",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 856.0,
+      "co2": 31.0,
+      "kw": 132.0
+    },
+    {
+      "brand": "PORSCHE",
+      "model": "CAYENNE E-HYBRID",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 852.0,
+      "co2": 58.26525821596244,
+      "kw": 239.07511737089203
+    },
+    {
+      "brand": "AUDI",
+      "model": "Q5 50 TFSI E",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 846.0,
+      "co2": 36.95744680851064,
+      "kw": 195.0
+    },
+    {
+      "brand": "DS",
+      "model": "DS7",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 845.0,
+      "co2": 29.018934911242603,
+      "kw": 137.55621301775147
+    },
+    {
+      "brand": "LEXUS",
+      "model": "LEXUS NX450H+",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 843.0,
+      "co2": 25.020166073546857,
+      "kw": 136.0
+    },
+    {
+      "brand": "CITROEN",
+      "model": "C5 AIRCROSS",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 841.0,
+      "co2": 31.966666666666665,
+      "kw": 133.0
+    },
+    {
+      "brand": "AUDI",
+      "model": "Q3 E-TRON",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 819.0,
+      "co2": 37.78388278388278,
+      "kw": 110.0
+    },
+    {
+      "brand": "ALFA ROMEO",
+      "model": "TONALE",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 806.0,
+      "co2": 29.962779156327542,
+      "kw": 132.0
+    },
+    {
+      "brand": "LEXUS",
+      "model": "LEXUS NX450H+",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 800.0,
+      "co2": 24.08625,
+      "kw": 136.0
+    },
+    {
+      "brand": "VOLKSWAGEN",
+      "model": "TIGUAN",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 776.0,
+      "co2": 11.466494845360824,
+      "kw": 112.19072164948453
+    },
+    {
+      "brand": "CUPRA",
+      "model": "FORMENTOR VZ E-HYBRID",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 733.0,
+      "co2": 32.83083219645293,
+      "kw": 110.0
+    },
+    {
+      "brand": "MERCEDES-BENZ",
+      "model": "GLE 350 DE 4MATIC COUPE",
+      "year": 2024,
+      "ft": "DIESEL/ELECTRIC",
+      "n": 727.0,
+      "co2": 18.383768913342504,
+      "kw": 144.99724896836312
+    },
+    {
+      "brand": "HYUNDAI",
+      "model": "TUCSON IX35",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 726.0,
+      "co2": 31.0,
+      "kw": 132.0
+    },
+    {
+      "brand": "MERCEDES-BENZ",
+      "model": "A 250 E",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 726.0,
+      "co2": 23.34710743801653,
+      "kw": 118.0
+    },
+    {
+      "brand": "AUDI",
+      "model": "Q3 E-TRON",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 723.0,
+      "co2": 34.93084370677732,
+      "kw": 110.0
+    },
+    {
+      "brand": "BMW",
+      "model": "X3 XDRIVE30E",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 718.0,
+      "co2": 46.82172701949861,
+      "kw": 135.0
+    },
+    {
+      "brand": "AUDI",
+      "model": "A3 40 TFSIE",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 704.0,
+      "co2": 26.62784090909091,
+      "kw": 110.0
+    },
+    {
+      "brand": "TOYOTA",
+      "model": "TOYOTA RAV4",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 703.0,
+      "co2": 22.0,
+      "kw": 136.0
+    },
+    {
+      "brand": "PEUGEOT",
+      "model": "308",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 701.0,
+      "co2": 25.66904422253923,
+      "kw": 115.93152639087019
+    },
+    {
+      "brand": "MERCEDES-BENZ",
+      "model": "GLE 350 DE 4MATIC",
+      "year": 2023,
+      "ft": "DIESEL/ELECTRIC",
+      "n": 690.0,
+      "co2": 21.763768115942028,
+      "kw": 143.57101449275362
+    },
+    {
+      "brand": "VOLKSWAGEN",
+      "model": "TIGUAN",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 682.0,
+      "co2": 36.14222873900293,
+      "kw": 110.0
+    },
+    {
+      "brand": "BMW",
+      "model": "X5 XDRIVE50E",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 673.0,
+      "co2": 20.644873699851413,
+      "kw": 230.0
+    },
+    {
+      "brand": "VOLVO",
+      "model": "XC60",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 673.0,
+      "co2": 25.2704309063893,
+      "kw": 190.31352154531947
+    },
+    {
+      "brand": "BMW",
+      "model": "X1 XDRIVE30E",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 670.0,
+      "co2": 18.132835820895522,
+      "kw": 110.0
+    },
+    {
+      "brand": "AUDI",
+      "model": "Q5 50 TFSI E",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 666.0,
+      "co2": 36.63963963963964,
+      "kw": 195.0
+    },
+    {
+      "brand": "TOYOTA",
+      "model": "TOYOTA RAV4",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 660.0,
+      "co2": 22.0,
+      "kw": 136.0
+    },
+    {
+      "brand": "VOLKSWAGEN",
+      "model": "TIGUAN",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 645.0,
+      "co2": 33.90077519379845,
+      "kw": 110.0
+    },
+    {
+      "brand": "KIA",
+      "model": "SPORTAGE",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 641.0,
+      "co2": 25.778471138845553,
+      "kw": 124.46489859594384
+    },
+    {
+      "brand": "MERCEDES-BENZ",
+      "model": "GLE 350 DE 4MATIC",
+      "year": 2024,
+      "ft": "DIESEL/ELECTRIC",
+      "n": 629.0,
+      "co2": 20.543720190779013,
+      "kw": 144.99682034976152
+    },
+    {
+      "brand": "PEUGEOT",
+      "model": "308",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 617.0,
+      "co2": 23.758508914100485,
+      "kw": 112.6029173419773
+    },
+    {
+      "brand": "HYUNDAI",
+      "model": "TUCSON IX35",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 614.0,
+      "co2": 29.67100977198697,
+      "kw": 128.16938110749186
+    },
+    {
+      "brand": "MG",
+      "model": "MG EHS PLUG-IN HYBRID",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 600.0,
+      "co2": 43.0,
+      "kw": 119.0
+    },
+    {
+      "brand": "CITROEN",
+      "model": "C5 AIRCROSS",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 587.0,
+      "co2": 30.87563884156729,
+      "kw": 128.84667802385007
+    },
+    {
+      "brand": "MERCEDES-BENZ",
+      "model": "GLE 350 DE 4MATIC COUPE",
+      "year": 2023,
+      "ft": "DIESEL/ELECTRIC",
+      "n": 569.0,
+      "co2": 19.532513181019333,
+      "kw": 144.45869947275924
+    },
+    {
+      "brand": "LAND ROVER",
+      "model": "RANGE ROVER EVOQUE",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 566.0,
+      "co2": 33.07597173144876,
+      "kw": 147.0
+    },
+    {
+      "brand": "LAND ROVER",
+      "model": "RANGE ROVER EVOQUE",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 534.0,
+      "co2": 40.02247191011236,
+      "kw": 147.0
+    },
+    {
+      "brand": "DS",
+      "model": "DS7",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 530.0,
+      "co2": 32.19245283018868,
+      "kw": 139.8679245283019
+    },
+    {
+      "brand": "AUDI",
+      "model": "A3 45 TFSIE",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 528.0,
+      "co2": 29.960227272727273,
+      "kw": 110.0
+    },
+    {
+      "brand": "MERCEDES-BENZ",
+      "model": "A 250 E",
+      "year": 2024,
+      "ft": "PETROL/ELECTRIC",
+      "n": 518.0,
+      "co2": 20.7027027027027,
+      "kw": 119.98455598455598
+    },
+    {
+      "brand": "BMW",
+      "model": "X1 XDRIVE30E",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 511.0,
+      "co2": 18.201565557729943,
+      "kw": 110.0
+    },
+    {
+      "brand": "KIA",
+      "model": "SPORTAGE",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 510.0,
+      "co2": 25.0,
+      "kw": 132.0
+    }
+  ],
+  "present_incomplete": [
+    {
+      "brand": "MINI",
+      "model": "COUNTRYMAN COOPER SE ALL4",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1704.0,
+      "co2": 41.61854460093897,
+      "kw": 92.0,
+      "id": "mini-countryman-cooper-se-all4-2023",
+      "incomplete": true
+    },
+    {
+      "brand": "MINI",
+      "model": "Countryman Cooper SE ALL4",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 1492.0,
+      "co2": 41.070375335120644,
+      "kw": 92.0,
+      "id": "mini-countryman-cooper-se-all4-2022",
+      "incomplete": true
+    },
+    {
+      "brand": "JEEP",
+      "model": "WRANGLER UNLIMITED",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 859.0,
+      "co2": 86.21187427240977,
+      "kw": 200.0,
+      "id": "jeep-wrangler-4xe-2022",
+      "incomplete": true
+    },
+    {
+      "brand": "BMW",
+      "model": "225e xDrive Active Tourer",
+      "year": 2022,
+      "ft": "PETROL/ELECTRIC",
+      "n": 631.0,
+      "co2": 15.62757527733756,
+      "kw": 100.0,
+      "id": "bmw-serie-2-active-tourer-225e-xdrive-2022",
+      "incomplete": true
+    },
+    {
+      "brand": "BMW",
+      "model": "225E XDRIVE ACTIVE TOURER",
+      "year": 2023,
+      "ft": "PETROL/ELECTRIC",
+      "n": 552.0,
+      "co2": 15.365942028985508,
+      "kw": 100.0,
+      "id": "bmw-serie-2-active-tourer-225e-xdrive-2023",
+      "incomplete": true
+    }
+  ],
+  "present_complete": [],
+  "missing_families": 42
+}

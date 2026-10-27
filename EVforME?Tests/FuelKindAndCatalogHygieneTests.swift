@@ -868,6 +868,45 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertTrue(ok, "weighted-energy note should warn about understated electricity cost: \(it)")
     }
 
+    func testCatalog_EPAPhevExposesCycleNote() {
+        let epa = VehicleCatalogService.shared.vehicles.filter {
+            $0.powertrain == .phev && $0.usesEPACatalogSource
+        }
+        XCTAssertGreaterThanOrEqual(epa.count, 7, "EPA PHEV rows must remain")
+        let note = L10n.phevCatalogEpaVehicleNote + " " + L10n.phevCatalogUsaNote
+        let ok =
+            note.localizedCaseInsensitiveContains("EPA")
+            && (
+                note.localizedCaseInsensitiveContains("WLTP")
+                || note.localizedCaseInsensitiveContains("ciclo diverso")
+                || note.localizedCaseInsensitiveContains("different cycle")
+            )
+        XCTAssertTrue(ok, "EPA PHEV UI must say EPA (USA) cycle differs from WLTP: \(note)")
+        let volt = VehicleCatalogService.shared.vehicle(by: "chevrolet-volt-phev-2019")
+        XCTAssertEqual(volt?.usesEPACatalogSource, true)
+        let compass = VehicleCatalogService.shared.vehicle(by: "jeep-compass-phev-4xe-2023")
+        XCTAssertNotNil(compass)
+        XCTAssertEqual(compass?.usesEPACatalogSource, false)
+        XCTAssertEqual(compass?.catalogDataIncomplete, true)
+    }
+
+    func testCatalog_ITPHEVWaveCoversCompassKugaFormentor() {
+        for id in [
+            "jeep-compass-phev-4xe-2022",
+            "jeep-compass-phev-4xe-2023",
+            "jeep-renegade-phev-4xe-2023",
+            "ford-kuga-phev-2023",
+            "cupra-formentor-phev-e-hybrid-2023",
+            "volvo-xc40-phev-recharge-2023",
+            "bmw-x1-phev-xdrive25e-2023",
+        ] {
+            let v = VehicleCatalogService.shared.vehicle(by: id)
+            XCTAssertNotNil(v, id)
+            XCTAssertEqual(v?.powertrain, .phev, id)
+            XCTAssertEqual(v?.catalogDataIncomplete, true, id)
+        }
+    }
+
     func testCatalog_AurisHybrid2018ConfidenceIsStimaLevel() {
         let hev = VehicleCatalogService.shared.vehicle(by: "toyota-auris-hybrid-2018")
         XCTAssertNotNil(hev)

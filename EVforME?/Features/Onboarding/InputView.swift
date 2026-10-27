@@ -1043,11 +1043,15 @@ struct InputView: View {
                     .font(Typography.readingCaption)
                     .foregroundColor(.secondaryText)
             }
-            if source.powertrain == .phev || target.powertrain == .phev {
-                Text(L10n.phevCatalogUsaNote)
-                    .font(Typography.readingCaption)
-                    .foregroundColor(.secondaryText)
-                    .accessibilityIdentifier("phev_catalog_usa_note")
+            if source.usesEPACatalogSource || target.usesEPACatalogSource {
+                Text(
+                    source.usesEPACatalogSource && target.usesEPACatalogSource
+                        ? L10n.phevCatalogUsaNote
+                        : L10n.phevCatalogEpaVehicleNote
+                )
+                .font(Typography.readingCaption)
+                .foregroundColor(.secondaryText)
+                .accessibilityIdentifier("phev_catalog_usa_note")
             }
             if source.usesWeightedElectricEnergy || target.usesWeightedElectricEnergy {
                 Text(L10n.phevWeightedEnergyNote)
