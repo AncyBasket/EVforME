@@ -527,8 +527,16 @@ struct VehicleCatalogPickerSheet: View {
                             .foregroundColor(.secondaryText)
                             .lineLimit(2)
                     }
+                    if let note = vehicle.eeaHomologationNote, !note.isEmpty {
+                        Text(note)
+                            .font(Typography.readingCaption)
+                            .foregroundColor(.secondaryText)
+                            .lineLimit(2)
+                    }
                     HStack(spacing: 8) {
-                        if let kw = vehicle.powerKw, kw > 0 {
+                        // Matched titles already include official kW; unmatched must not
+                        // show EEA kW as if it were commercial max power.
+                        if vehicle.officialMatched == true, let kw = vehicle.powerKw, kw > 0 {
                             Text(String(format: "%.0f kW", kw))
                         }
                         if let energy = vehicle.resolvedEnergyKWhPerKm {

@@ -56,8 +56,9 @@ struct ContentView: View {
         .onChange(of: userInput.targetVehicleId) { _, newId in
             // UITEST version picker: open verdict after an EEA version id is chosen
             // (avoids flaky bottom-CTA taps under the catalog sheet).
+            // Matched OEM ids: `…-v-slug-378kw`; unmatched: `…-v105kw-rwd`.
             guard ProcessInfo.processInfo.environment["UITEST_OPEN_TARGET_PICKER"] == "1",
-                  newId.range(of: #"-v\d"#, options: .regularExpression) != nil else { return }
+                  newId.contains("-v") else { return }
             isLoading = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
                 let input = userInput

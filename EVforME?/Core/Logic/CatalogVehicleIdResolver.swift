@@ -24,6 +24,14 @@ enum CatalogVehicleIdResolver {
                 map[k] = v
             }
         }
+        // Seed v61: version id renames / merges where old EEA records ⊆ new group.
+        if let url = Bundle.main.url(forResource: "ev_variant_migration_aliases", withExtension: "json"),
+           let data = try? Data(contentsOf: url),
+           let decoded = try? JSONDecoder().decode([String: String].self, from: data) {
+            for (k, v) in decoded {
+                map[k] = v
+            }
+        }
         return map
     }()
 

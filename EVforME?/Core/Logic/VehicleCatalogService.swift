@@ -465,7 +465,9 @@ final class VehicleCatalogService {
                     wltpRangeKmMax: item.wltpRangeKmMax,
                     energyConsumptionKWhPerKmMin: item.energyConsumptionKWhPerKmMin,
                     variantRangeCaption: item.variantRangeCaption,
-                    usesPrudentVariantBounds: item.usesPrudentVariantBounds
+                    usesPrudentVariantBounds: item.usesPrudentVariantBounds,
+                    officialMatched: item.officialMatched,
+                    eeaHomologationNote: item.eeaHomologationNote
                 )
                 expanded.append(generated)
             }

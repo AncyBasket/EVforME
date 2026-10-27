@@ -226,7 +226,7 @@ final class EVforME_UITests: XCTestCase {
         }
     }
 
-    /// Marca → modello → anno → versione (BMW i4 2024) → verdetto con ricariche + nota prudente.
+    /// Unmatched OEM: BMW i4 2024 → "Versione n" + nota EEA (no kW EEA nel titolo) → verdetto.
     @MainActor
     func testEVVersionPickerToVerdictShowsCharges() throws {
         let app = XCUIApplication()
@@ -256,29 +256,99 @@ final class EVforME_UITests: XCTestCase {
         XCTAssertTrue(year2024.waitForExistence(timeout: 6), "Year 2024 for i4")
         year2024.tap()
 
-        // Version list: WLTP min–max interval + prudent note on the sheet (before pick).
         let wltpCaption = app.staticTexts.matching(
             NSPredicate(format: "label CONTAINS[c] %@", "Autonomia WLTP")
         ).firstMatch
         XCTAssertTrue(wltpCaption.waitForExistence(timeout: 6), "WLTP min–max caption on version rows")
-        let prudentOnSheet = app.staticTexts.matching(
+
+        let eeaNote = app.staticTexts.matching(
             NSPredicate(
-                format: "label CONTAINS[c] %@ OR label CONTAINS[c] %@ OR label CONTAINS[c] %@",
-                "prudente", "cautious", "prudent"
+                format: "label CONTAINS[c] %@ AND label CONTAINS[c] %@",
+                "omologat", "EEA"
             )
         ).firstMatch
-        XCTAssertTrue(prudentOnSheet.waitForExistence(timeout: 4), "Prudent calc note on version list")
+        XCTAssertTrue(
+            eeaNote.waitForExistence(timeout: 6),
+            "Unmatched versions show EEA homologation note"
+        )
 
-        let versionRow = app.buttons.matching(
+        let versioneRow = app.buttons.matching(
+            NSPredicate(format: "label CONTAINS[c] %@", "Versione")
+        ).firstMatch
+        XCTAssertTrue(versioneRow.waitForExistence(timeout: 4), "Unmatched Versione n row")
+        let versioneLabel = versioneRow.label
+        XCTAssertFalse(
+            versioneLabel.range(of: #"\d+\s*kW"#, options: .regularExpression) != nil,
+            "Unmatched title must not embed EEA kW: \(versioneLabel)"
+        )
+        versioneRow.tap()
+
+        assertPickerDismissedAndVerdictShowsCharges(app: app, search: search)
+    }
+
+    /// Matched OEM: Tesla Model Y 2023 → titolo ufficiale · kW di sistema visibili → verdetto.
+    @MainActor
+    func testEVVersionPickerMatchedTeslaModelYShowsOfficialKw() throws {
+        let app = XCUIApplication()
+        app.launchEnvironment["UITEST_PRESET_VEHICLES"] = "1"
+        app.launchEnvironment["UITEST_OPEN_TARGET_PICKER"] = "1"
+        app.launch()
+
+        dismissQuickStartIfNeeded(app)
+
+        let search = app.descendants(matching: .any)["vehicle_catalog_search"]
+        XCTAssertTrue(
+            search.waitForExistence(timeout: 14),
+            "Target vehicle catalog sheet should open"
+        )
+        search.tap()
+        search.typeText("Model Y")
+
+        let modelY = app.buttons.matching(
+            NSPredicate(format: "label CONTAINS[c] %@", "Model Y")
+        ).firstMatch
+        XCTAssertTrue(modelY.waitForExistence(timeout: 8), "Model Y search hit")
+        modelY.tap()
+
+        let year2023 = app.buttons.matching(
             NSPredicate(
-                format: "label CONTAINS[c] %@ AND NOT label CONTAINS[c] %@ AND NOT label CONTAINS[c] %@",
-                "kW", "bollo", "Regione"
+                format: "label CONTAINS[c] %@ AND label CONTAINS[c] %@",
+                "Model Y", "2023"
             )
         ).firstMatch
-        XCTAssertTrue(versionRow.waitForExistence(timeout: 4), "Version row with kW")
-        versionRow.tap()
+        XCTAssertTrue(year2023.waitForExistence(timeout: 6), "Model Y 2023 year")
+        year2023.tap()
 
-        // Sheet must dismiss; ContentView UITEST auto-simulates after a `-v` version id.
+        let matchedRow = app.buttons.matching(
+            NSPredicate(
+                format: "label CONTAINS[c] %@ AND label CONTAINS[c] %@",
+                "Long Range All-Wheel Drive", "378 kW"
+            )
+        ).firstMatch
+        let matchedAlt = app.buttons.matching(
+            NSPredicate(
+                format: "label CONTAINS[c] %@ AND label CONTAINS[c] %@",
+                "Rear-Wheel Drive", "220 kW"
+            )
+        ).firstMatch
+        XCTAssertTrue(
+            matchedRow.waitForExistence(timeout: 6) || matchedAlt.waitForExistence(timeout: 2),
+            "Matched Tesla Y row must show official name · kW"
+        )
+        if matchedRow.exists {
+            matchedRow.tap()
+        } else {
+            matchedAlt.tap()
+        }
+
+        assertPickerDismissedAndVerdictShowsCharges(app: app, search: search)
+    }
+
+    @MainActor
+    private func assertPickerDismissedAndVerdictShowsCharges(
+        app: XCUIApplication,
+        search: XCUIElement
+    ) {
         let searchGone = XCTNSPredicateExpectation(
             predicate: NSPredicate(format: "exists == false"),
             object: search

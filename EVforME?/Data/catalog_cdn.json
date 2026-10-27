@@ -1,12 +1,12 @@
 {
   "url": "",
   "publishedUrl": "",
-  "rows": 6756,
-  "bytes": 2785028,
+  "rows": 6732,
+  "bytes": 2901557,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-27T09:41:17.967059+00:00",
+  "updatedAt": "2026-10-27T10:35:27.610926+00:00",
   "policy": "offline-first",
-  "seedVersion": 60,
-  "note": "seedVersion 60: BEV EEA EU version groups (exclusive Cn; noise \u22652%/\u2265200; official kW audit; kW\u00b15+traction; prudent minZr/maxWh; Tesla Model 3 2026 IT trims preserved)."
+  "seedVersion": 61,
+  "note": "seedVersion 61: EV version labels from official OEM sheets (matched name\u00b7kW; unmatched Versione n; drop EEA kW > official max+5)."
 }
