@@ -106,7 +106,7 @@ struct MainShellView: View {
             }
             if ProcessInfo.processInfo.environment["UITEST_PARTIAL_PHEV_KWH_ONLY"] == "1" {
                 // PHEV con CS/range/batteria ufficiali: chiede solo kWh, poi verdetto.
-                userInput.targetVehicleId = "bmw-x1-phev-xdrive25e-2024"
+                userInput.targetVehicleId = "volvo-xc60-phev-recharge-2024"
             } else if ProcessInfo.processInfo.environment["UITEST_INCOMPLETE_PHEV"] == "1" {
                 // PHEV ancora senza CS/CD ufficiali → chiede consumi, niente verdetto.
                 userInput.targetVehicleId = "jeep-compass-phev-4xe-2022"

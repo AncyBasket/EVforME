@@ -937,13 +937,24 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             return false
         }
         XCTAssertTrue(bad.isEmpty, "weighted kWh must not sit in calc fields: \(bad.map(\.id))")
+        // X1 2024: EnVKV archive CS only (live preisliste rejected) → multi-missing.
+        // Volvo XC60 2024: dated press → kWh-only partial (UI test fixture).
+        let xc60 = VehicleCatalogService.shared.vehicle(by: "volvo-xc60-phev-recharge-2024")
+        XCTAssertNotNil(xc60)
+        XCTAssertEqual(xc60?.catalogDataIncomplete, true)
+        XCTAssertNotNil(xc60?.usableChargeSustainingFuelLPerKm)
+        XCTAssertNil(xc60?.usableChargeDepletingEnergyKWhPerKm)
+        XCTAssertEqual(xc60?.resolvedMissingCalcFields, ["energyConsumptionKWhPerKm"])
+        XCTAssertNotNil(xc60?.fieldSource(for: "fuelConsumptionLPerKm"))
+        XCTAssertNotNil(xc60?.fieldSourceDate(for: "fuelConsumptionLPerKm"))
         let x1 = VehicleCatalogService.shared.vehicle(by: "bmw-x1-phev-xdrive25e-2024")
         XCTAssertNotNil(x1)
         XCTAssertEqual(x1?.catalogDataIncomplete, true)
         XCTAssertNotNil(x1?.usableChargeSustainingFuelLPerKm)
-        XCTAssertNil(x1?.usableChargeDepletingEnergyKWhPerKm)
-        XCTAssertEqual(x1?.resolvedMissingCalcFields, ["energyConsumptionKWhPerKm"])
-        XCTAssertNotNil(x1?.fieldSource(for: "fuelConsumptionLPerKm"))
+        XCTAssertNil(x1?.wltpRangeKm)
+        XCTAssertNil(x1?.batteryKWh)
+        XCTAssertTrue((x1?.resolvedMissingCalcFields ?? []).contains("wltpRangeKm"))
+        XCTAssertTrue((x1?.resolvedMissingCalcFields ?? []).contains("batteryKWh"))
     }
 
     func testCatalog_AurisHybrid2018ConfidenceIsStimaLevel() {

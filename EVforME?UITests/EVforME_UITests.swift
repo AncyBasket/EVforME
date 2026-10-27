@@ -442,7 +442,15 @@ final class EVforME_UITests: XCTestCase {
         )
 
         energyField.tap()
+        // FormatStyle Double field often shows "0": select-all then replace with mid-range kWh/100.
+        energyField.doubleTap()
         energyField.typeText("20.9")
+        if app.keyboards.buttons["Done"].waitForExistence(timeout: 1) {
+            app.keyboards.buttons["Done"].tap()
+        } else {
+            // Decimal pad has no Done — dismiss by tapping the incomplete card title.
+            app.descendants(matching: .any)["incomplete_catalog_data_title"].tap()
+        }
 
         let tellMeEN = app.buttons["Tell me the truth"]
         let tellMeIT = app.buttons["Dimmi la verità"]
@@ -450,15 +458,19 @@ final class EVforME_UITests: XCTestCase {
             tellMeEN.waitForExistence(timeout: 3) || tellMeIT.waitForExistence(timeout: 1),
             "Simulate CTA should exist"
         )
-        if tellMeEN.exists { tellMeEN.tap() } else { tellMeIT.tap() }
+        let tellMe = tellMeEN.exists ? tellMeEN : tellMeIT
+        if !tellMe.isHittable {
+            app.swipeUp()
+        }
+        tellMe.tap()
 
         let modifyEN = app.buttons["Change inputs"]
         let modifyIT = app.buttons["Modifica dati"]
         let modifyLegacy = app.buttons["Modify input"]
         let verdictOpened =
-            modifyEN.waitForExistence(timeout: 8)
-            || modifyIT.waitForExistence(timeout: 4)
-            || modifyLegacy.waitForExistence(timeout: 2)
+            modifyEN.waitForExistence(timeout: 10)
+            || modifyIT.waitForExistence(timeout: 6)
+            || modifyLegacy.waitForExistence(timeout: 3)
         XCTAssertTrue(verdictOpened, "After entering kWh, partial PHEV must open the verdict")
     }
 

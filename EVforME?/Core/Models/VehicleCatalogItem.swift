@@ -103,6 +103,8 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
     let missingCalcFields: [String]?
     /// Provenienza per campo ufficiale salvato (dominio anno URL).
     let fieldSources: [String: String]?
+    /// Data del documento o dello snapshot archive.org per campo salvato (`YYYY-MM-DD`).
+    let fieldSourceDates: [String: String]?
     /// Consumo carburante WLTP **ponderato** (solo informativo; mai nei calcoli).
     let weightedFuelConsumptionLPerKm: Double?
     /// Consumo elettrico WLTP **ponderato** (solo informativo; mai nei calcoli).
@@ -220,6 +222,12 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
     /// Fonte ufficiale per un campo catalogo, se presente.
     func fieldSource(for key: String) -> String? {
         guard let fieldSources, let s = fieldSources[key], !s.isEmpty else { return nil }
+        return s
+    }
+
+    /// Data documento/snapshot della fonte ufficiale per un campo, se presente.
+    func fieldSourceDate(for key: String) -> String? {
+        guard let fieldSourceDates, let s = fieldSourceDates[key], !s.isEmpty else { return nil }
         return s
     }
 
@@ -380,6 +388,7 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         catalogDataIncomplete: Bool? = nil,
         missingCalcFields: [String]? = nil,
         fieldSources: [String: String]? = nil,
+        fieldSourceDates: [String: String]? = nil,
         weightedFuelConsumptionLPerKm: Double? = nil,
         weightedEnergyConsumptionKWhPerKm: Double? = nil,
         parentId: String? = nil,
@@ -418,6 +427,7 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         self.catalogDataIncomplete = catalogDataIncomplete
         self.missingCalcFields = missingCalcFields
         self.fieldSources = fieldSources
+        self.fieldSourceDates = fieldSourceDates
         self.weightedFuelConsumptionLPerKm = weightedFuelConsumptionLPerKm
         self.weightedEnergyConsumptionKWhPerKm = weightedEnergyConsumptionKWhPerKm
         self.parentId = parentId

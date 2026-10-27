@@ -663,7 +663,7 @@ struct InputView: View {
                 showAdvancedDetails = true
             }
             if ProcessInfo.processInfo.environment["UITEST_PARTIAL_PHEV_KWH_ONLY"] == "1" {
-                userInput.targetVehicleId = "bmw-x1-phev-xdrive25e-2024"
+                userInput.targetVehicleId = "volvo-xc60-phev-recharge-2024"
             } else if ProcessInfo.processInfo.environment["UITEST_INCOMPLETE_PHEV"] == "1" {
                 userInput.targetVehicleId = "jeep-compass-phev-4xe-2022"
             }
@@ -1384,7 +1384,7 @@ struct InputView: View {
             || !targetVehicles.contains(where: { $0.id == userInput.targetVehicleId }) {
             // Preserve UITEST incomplete / partial-PHEV presets even if list timing races.
             if ProcessInfo.processInfo.environment["UITEST_PARTIAL_PHEV_KWH_ONLY"] == "1",
-               let forced = VehicleCatalogService.shared.vehicle(by: "bmw-x1-phev-xdrive25e-2024") {
+               let forced = VehicleCatalogService.shared.vehicle(by: "volvo-xc60-phev-recharge-2024") {
                 userInput.targetVehicleId = forced.id
             } else if ProcessInfo.processInfo.environment["UITEST_INCOMPLETE_PHEV"] == "1",
                let forced = VehicleCatalogService.shared.vehicle(by: "jeep-compass-phev-4xe-2022") {
