@@ -29,7 +29,7 @@ CDN = REPO / "EVforME?" / "Data" / "catalog_cdn.json"
 ALIAS = REPO / "EVforME?" / "Data" / "homologation_commercial_aliases.json"
 MANIFEST = REPO / "scripts" / "cache" / "eea" / "catalog_it_wave2_manifest.json"
 
-EXPECTED_SEED_VERSION = 65
+EXPECTED_SEED_VERSION = 66
 WAVE2_ID_PREFIXES = (
     "alfa-romeo-junior-elettrica-",
     "audi-rs3-sportback-",

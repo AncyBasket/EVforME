@@ -360,13 +360,16 @@ final class EVSimulatorTests: XCTestCase {
 
     func testSimulate_PHEVTarget_IncludesBlendReasonAndFiniteCosts() {
         let catalog = VehicleCatalogService.shared
-        let phevId = "toyota-prius-plug-in-phev-2024"
-        guard catalog.vehicle(by: phevId) != nil || catalog.targetEVVehicles().contains(where: { $0.powertrain == .phev }) else {
-            XCTFail("Bundled catalog must include at least one PHEV target")
+        // Prefer a complete PHEV (CS+CD); incomplete IT shells must not be the fallback.
+        let phevId = "hyundai-ioniq-phev-2022"
+        let completeTarget = catalog.targetEVVehicles().first {
+            $0.powertrain == .phev && !$0.hasIncompleteCatalogData
+        }
+        guard catalog.vehicle(by: phevId) != nil || completeTarget != nil else {
+            XCTFail("Bundled catalog must include at least one complete PHEV target")
             return
         }
-        let targetId = catalog.vehicle(by: phevId)?.id
-            ?? catalog.targetEVVehicles().first(where: { $0.powertrain == .phev })!.id
+        let targetId = catalog.vehicle(by: phevId)?.id ?? completeTarget!.id
 
         let input = UserInput(
             dailyKm: 15_000,
@@ -392,10 +395,12 @@ final class EVSimulatorTests: XCTestCase {
 
     func testSimulate_PHEVHomeCharging_ProducesFiniteYearlyCosts() {
         let catalog = VehicleCatalogService.shared
-        guard let phev = catalog.vehicle(by: "toyota-prius-plug-in-phev-2024")
-                ?? catalog.targetEVVehicles().first(where: { $0.powertrain == .phev })
+        guard let phev = catalog.vehicle(by: "hyundai-ioniq-phev-2022")
+                ?? catalog.targetEVVehicles().first(where: {
+                    $0.powertrain == .phev && !$0.hasIncompleteCatalogData
+                })
         else {
-            XCTFail("Need a PHEV in catalog")
+            XCTFail("Need a complete PHEV in catalog")
             return
         }
 

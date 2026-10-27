@@ -196,6 +196,12 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
     /// Dati catalogo insufficienti per un verdetto automatico (PHEV senza CS+CD, BEV senza kWh).
     var hasIncompleteCatalogData: Bool { catalogDataIncomplete == true }
 
+    /// Fonte consumi EPA USA (ciclo diverso dal WLTP) — mostrare nota esplicita in UI.
+    var usesEPACatalogSource: Bool {
+        if (market ?? "").uppercased() == "US/EPA" { return true }
+        return HowWeCalculateExplainer.looksLikeEPASource(sourceName ?? "")
+    }
+
     /// Consumo benzina charge-sustaining usabile nei calcoli (≥ 3 L/100, non ponderato).
     var usableChargeSustainingFuelLPerKm: Double? {
         guard let fuel = fuelConsumptionLPerKm, fuel > 0 else { return nil }

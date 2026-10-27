@@ -73,8 +73,10 @@ final class OperatingCostCalculatorTests: XCTestCase {
 
     func testPHEV_UsesPetrolNotSourceDieselPrice() {
         guard let phev = VehicleCatalogService.shared.vehicle(by: "volkswagen-golf-gte-phev-2024")
-                ?? VehicleCatalogService.shared.targetEVVehicles().first(where: { $0.powertrain == .phev }) else {
-            XCTFail("No PHEV in catalog")
+                ?? VehicleCatalogService.shared.targetEVVehicles().first(where: {
+                    $0.powertrain == .phev && !$0.hasIncompleteCatalogData
+                }) else {
+            XCTFail("No usable PHEV in catalog")
             return
         }
         var dieselInput = UserInput(
@@ -134,7 +136,9 @@ final class OperatingCostCalculatorTests: XCTestCase {
 
     func testPHEV_UsesCustomPetrolWhenSourceIsPetrol() {
         guard let phev = VehicleCatalogService.shared.vehicle(by: "volkswagen-golf-gte-phev-2024")
-                ?? VehicleCatalogService.shared.targetEVVehicles().first(where: { $0.powertrain == .phev }),
+                ?? VehicleCatalogService.shared.targetEVVehicles().first(where: {
+                    $0.powertrain == .phev && !$0.hasIncompleteCatalogData
+                }),
               let petrolSource = VehicleCatalogService.shared.vehicle(by: "fiat-panda-2018") else {
             XCTFail("Missing fixtures")
             return
