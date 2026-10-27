@@ -411,6 +411,57 @@ final class EVforME_UITests: XCTestCase {
         XCTAssertTrue(chargesOK, "Chosen version should show weekly charges on verdict")
     }
 
+    /// PHEV con solo kWh mancante: chiede solo energia, poi apre il verdetto dopo l'inserimento.
+    @MainActor
+    func testPartialPHEVAsksOnlyKWhThenShowsVerdict() throws {
+        let app = XCUIApplication()
+        app.launchEnvironment["UITEST_PRESET_VEHICLES"] = "1"
+        app.launchEnvironment["UITEST_PARTIAL_PHEV_KWH_ONLY"] = "1"
+        app.launchArguments += ["-UITesting", "-DisableAnimations"]
+        app.launch()
+
+        dismissQuickStartIfNeeded(app)
+
+        let incompleteCard = app.descendants(matching: .any)["incomplete_catalog_data_card"]
+        XCTAssertTrue(incompleteCard.waitForExistence(timeout: 12), "Partial PHEV must show incomplete card")
+        let energyField = app.descendants(matching: .any)["incomplete_catalog_energy_field"]
+        XCTAssertTrue(energyField.waitForExistence(timeout: 4), "Must ask for electric kWh")
+        XCTAssertFalse(
+            app.descendants(matching: .any)["incomplete_catalog_fuel_field"].exists,
+            "Must not ask for CS fuel when official CS is already present"
+        )
+        XCTAssertTrue(
+            app.descendants(matching: .any)["incomplete_catalog_weighted_honesty"].exists
+                || app.staticTexts.matching(
+                    NSPredicate(format: "label CONTAINS[c] %@", "ponderato")
+                ).firstMatch.exists
+                || app.staticTexts.matching(
+                    NSPredicate(format: "label CONTAINS[c] %@", "weighted")
+                ).firstMatch.exists,
+            "Must show honest note about weighted-only OEM kWh"
+        )
+
+        energyField.tap()
+        energyField.typeText("20.9")
+
+        let tellMeEN = app.buttons["Tell me the truth"]
+        let tellMeIT = app.buttons["Dimmi la verità"]
+        XCTAssertTrue(
+            tellMeEN.waitForExistence(timeout: 3) || tellMeIT.waitForExistence(timeout: 1),
+            "Simulate CTA should exist"
+        )
+        if tellMeEN.exists { tellMeEN.tap() } else { tellMeIT.tap() }
+
+        let modifyEN = app.buttons["Change inputs"]
+        let modifyIT = app.buttons["Modifica dati"]
+        let modifyLegacy = app.buttons["Modify input"]
+        let verdictOpened =
+            modifyEN.waitForExistence(timeout: 8)
+            || modifyIT.waitForExistence(timeout: 4)
+            || modifyLegacy.waitForExistence(timeout: 2)
+        XCTAssertTrue(verdictOpened, "After entering kWh, partial PHEV must open the verdict")
+    }
+
     /// PHEV con catalogDataIncomplete: chiede consumi e non apre un verdetto inventato.
     @MainActor
     func testIncompletePHEVAsksForConsumptionInsteadOfVerdict() throws {

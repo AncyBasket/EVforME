@@ -847,7 +847,7 @@ final class EVSimulatorTests: XCTestCase {
     }
 
     func testIncompletePHEV_WithoutOverrides_NoVerdict() {
-        let incompleteId = "bmw-serie-2-active-tourer-225e-xdrive-2023"
+        let incompleteId = "jeep-compass-phev-4xe-2022"
         let vehicle = VehicleCatalogService.shared.vehicle(by: incompleteId)
         XCTAssertNotNil(vehicle)
         XCTAssertEqual(vehicle?.catalogDataIncomplete, true)
@@ -879,7 +879,7 @@ final class EVSimulatorTests: XCTestCase {
     }
 
     func testIncompletePHEV_ThinFuelNeverUsedInCalc_EvenWithOverrideBelow3() {
-        let incompleteId = "bmw-serie-2-active-tourer-225e-xdrive-2023"
+        let incompleteId = "jeep-compass-phev-4xe-2022"
         var input = UserInput(
             dailyKm: 15_000,
             hasHomeCharging: true,

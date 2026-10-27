@@ -818,15 +818,23 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             let looksDoc =
                 url.contains(".pdf")
                 || url.contains("press.")
+                || url.contains("/press")
+                || url.contains("press-releases")
                 || url.contains("newsroom")
                 || url.contains("media-assets")
                 || url.contains("attachment")
                 || url.contains("model-document")
                 || url.contains("media.stellantis.com")
+                || url.contains("pricelists")
+                || url.contains("produktkatalog")
             return !looksDoc
         }
         XCTAssertTrue(generic.isEmpty, "non-EPA PHEV source must be a precise doc URL: \(generic.map(\.id))")
         let energyKind = nonEpa.filter { v in
+            // Incomplete partial rows may publish CS/range/battery without a usable CD figure yet.
+            if v.catalogDataIncomplete == true, v.usableChargeDepletingEnergyKWhPerKm == nil {
+                return false
+            }
             let s = (v.sourceName ?? "").lowercased()
             let solo = s.contains("solo elettr") || s.contains("rein elektr") || s.contains("electric-only")
                 || s.contains("charge-depleting") || s.contains("ec mode")
@@ -842,6 +850,10 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             let s = (v.sourceName ?? "").lowercased()
             let claimsWeighted = s.contains("ponderat") || s.contains("weighted") || s.contains("gewichtet")
             let claimsSolo = s.contains("solo elettr") || s.contains("rein elektr") || s.contains("electric-only")
+            // Partial incomplete: weighted OEM figures live only in weighted* fields; calc CD stays nil.
+            if v.catalogDataIncomplete == true, v.energyConsumptionKWhPerKm == nil {
+                return false
+            }
             if claimsWeighted && !claimsSolo { return v.energyIsWeighted != true }
             if claimsSolo && !claimsWeighted { return v.energyIsWeighted == true }
             return false
@@ -914,6 +926,24 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         let kugaSrc = (kuga23?.sourceName ?? "").lowercased()
         XCTAssertTrue(kugaSrc.contains("stessa omologazione eea"))
         XCTAssertTrue(kugaSrc.contains(".pdf") || kugaSrc.contains("technische"))
+    }
+
+    func testCatalog_NoWeightedEnergyUsedInCalcFields() {
+        let bad = VehicleCatalogService.shared.vehicles.filter { v in
+            guard v.powertrain == .phev else { return false }
+            if v.energyIsWeighted == true, v.energyConsumptionKWhPerKm != nil { return true }
+            // usable CD must never come from weighted-only rows
+            if v.usesWeightedElectricEnergy, v.usableChargeDepletingEnergyKWhPerKm != nil { return true }
+            return false
+        }
+        XCTAssertTrue(bad.isEmpty, "weighted kWh must not sit in calc fields: \(bad.map(\.id))")
+        let x1 = VehicleCatalogService.shared.vehicle(by: "bmw-x1-phev-xdrive25e-2024")
+        XCTAssertNotNil(x1)
+        XCTAssertEqual(x1?.catalogDataIncomplete, true)
+        XCTAssertNotNil(x1?.usableChargeSustainingFuelLPerKm)
+        XCTAssertNil(x1?.usableChargeDepletingEnergyKWhPerKm)
+        XCTAssertEqual(x1?.resolvedMissingCalcFields, ["energyConsumptionKWhPerKm"])
+        XCTAssertNotNil(x1?.fieldSource(for: "fuelConsumptionLPerKm"))
     }
 
     func testCatalog_AurisHybrid2018ConfidenceIsStimaLevel() {

@@ -480,9 +480,13 @@ enum L10n {
     static var validationPHEVFuelTooLowForCalc: String { string("validation_phev_fuel_too_low_for_calc") }
     static var incompleteCatalogDataTitle: String { string("incomplete_catalog_data_title") }
     static var incompleteCatalogDataBodyPHEV: String { string("incomplete_catalog_data_body_phev") }
+    static var incompleteCatalogDataBodyPHEVEnergyOnly: String { string("incomplete_catalog_data_body_phev_energy_only") }
     static var incompleteCatalogDataBodyBEV: String { string("incomplete_catalog_data_body_bev") }
     static var incompleteCatalogFuelField: String { string("incomplete_catalog_fuel_field") }
     static var incompleteCatalogEnergyField: String { string("incomplete_catalog_energy_field") }
+    static var incompleteCatalogRangeField: String { string("incomplete_catalog_range_field") }
+    static var incompleteCatalogBatteryField: String { string("incomplete_catalog_battery_field") }
+    static var incompleteCatalogWeightedEnergyHonesty: String { string("incomplete_catalog_weighted_energy_honesty") }
     static var validationUnknownSourceVehicle: String { string("validation_unknown_source_vehicle") }
     static var validationUnknownTargetVehicle: String { string("validation_unknown_target_vehicle") }
     static var validationMinYears: String { string("validation_min_years") }

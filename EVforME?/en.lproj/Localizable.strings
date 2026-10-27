@@ -523,9 +523,13 @@
 "validation_phev_fuel_too_low_for_calc" = "EEA weighted fuel (< 3 L/100) cannot be used in calculations: enter charge-sustaining fuel use.";
 "incomplete_catalog_data_title" = "Incomplete data";
 "incomplete_catalog_data_body_phev" = "For this plug-in hybrid we lack official same-year charge-sustaining fuel and/or charge-depleting kWh. Enter them here — we will not compute a verdict without them (EEA weighted figures are not enough).";
+"incomplete_catalog_data_body_phev_energy_only" = "We already have the official figures available; the unweighted electric consumption is still missing for the calculation. Enter it here — we will not compute a verdict without it.";
 "incomplete_catalog_data_body_bev" = "For this EV we lack official same-year kWh/100. Enter it here — we will not invent a verdict without it.";
 "incomplete_catalog_fuel_field" = "Fuel with empty battery (L/100 km)";
 "incomplete_catalog_energy_field" = "Electric consumption (kWh/100 km)";
+"incomplete_catalog_range_field" = "WLTP electric range (km)";
+"incomplete_catalog_battery_field" = "Battery (kWh)";
+"incomplete_catalog_weighted_energy_honesty" = "The manufacturer only publishes weighted electric consumption, which is not suitable for the calculation. Enter yours (from the car app or the charge point).";
 "validation_unknown_source_vehicle" = "Current vehicle not found in the catalog.";
 "validation_unknown_target_vehicle" = "Electrified vehicle not found in the catalog.";
 
