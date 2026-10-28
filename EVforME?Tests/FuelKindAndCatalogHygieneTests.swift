@@ -973,10 +973,13 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertNotNil(x1)
         XCTAssertEqual(x1?.catalogDataIncomplete, true)
         XCTAssertNotNil(x1?.usableChargeSustainingFuelLPerKm)
-        XCTAssertNil(x1?.wltpRangeKm)
-        XCTAssertNil(x1?.batteryKWh)
-        XCTAssertTrue((x1?.resolvedMissingCalcFields ?? []).contains("wltpRangeKm"))
-        XCTAssertTrue((x1?.resolvedMissingCalcFields ?? []).contains("batteryKWh"))
+        // Wave top30: EAER 71 + battery 14.2 from Nov-2023 Preisliste via EEA 2023∩2024;
+        // CD energy still nil (Strom 22–18.2 is weighted).
+        XCTAssertEqual(x1?.wltpRangeKm, 71)
+        XCTAssertEqual(x1?.batteryKWh ?? -1, 14.2, accuracy: 0.001)
+        XCTAssertEqual(x1?.resolvedMissingCalcFields, ["energyConsumptionKWhPerKm"])
+        XCTAssertNotNil(x1?.fieldSource(for: "wltpRangeKm"))
+        XCTAssertNotNil(x1?.fieldSourceDate(for: "wltpRangeKm"))
     }
 
     func testCatalog_AurisHybrid2018ConfidenceIsStimaLevel() {

@@ -847,7 +847,8 @@ final class EVSimulatorTests: XCTestCase {
     }
 
     func testIncompletePHEV_WithoutOverrides_NoVerdict() {
-        let incompleteId = "jeep-compass-phev-4xe-2022"
+        // Still multi-missing after top30 wave2 (no dated OEM CS/CD/range/battery).
+        let incompleteId = "cupra-formentor-phev-e-hybrid-2024"
         let vehicle = VehicleCatalogService.shared.vehicle(by: incompleteId)
         XCTAssertNotNil(vehicle)
         XCTAssertEqual(vehicle?.catalogDataIncomplete, true)
