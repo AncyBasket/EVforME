@@ -292,7 +292,7 @@ def main() -> None:
     apply_field(
         r,
         "fuelConsumptionLPerKm",
-        0.074,  # 6,9–7,5 archive (avoid placeholder 0.075)
+        0.075,  # 6,9–7,5 archive → max (prudente CS)
         "jeep.de",
         jeep_hyb,
         jeep_hyb_date,

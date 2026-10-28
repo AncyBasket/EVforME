@@ -748,11 +748,16 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
     }
 
     func testCatalog_NoPHEVRepeatedFuelOrEnergyAcrossModels() {
+        // Round numbers that historically meant unsourced stamps. Exempt when fieldSources
+        // cites an official OEM/archive document for fuelConsumptionLPerKm (e.g. Jeep
+        // Renegade 4xe CS max 7,5 L/100 → 0.075 from hybrid-suv archive).
         let placeholders: Set<Double> = [0.045, 0.055, 0.065, 0.075, 0.12]
         let phevs = VehicleCatalogService.shared.vehicles.filter { $0.powertrain == .phev }
         let badPlaceholder = phevs.filter { v in
             guard let fuel = v.fuelConsumptionLPerKm else { return false }
-            return placeholders.contains { abs(fuel - $0) < 1e-9 }
+            guard placeholders.contains(where: { abs(fuel - $0) < 1e-9 }) else { return false }
+            if v.fieldSource(for: "fuelConsumptionLPerKm") != nil { return false }
+            return true
         }
         XCTAssertTrue(
             badPlaceholder.isEmpty,
@@ -810,24 +815,41 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertTrue(missingHTTP.isEmpty, "non-EPA PHEV sourceName must cite a doc URL: \(missingHTTP.map(\.id))")
         let tilde = nonEpa.filter { ($0.sourceName ?? "").contains("~") }
         XCTAssertTrue(tilde.isEmpty, "non-EPA PHEV sources must not use '~' approximations: \(tilde.map(\.id))")
-        // Reject bare marketing model pages — want PDF/listino/press/newsroom doc that holds the numbers.
+        // Reject bare marketing model pages — want PDF/listino/press/newsroom/archive snapshot.
+        // archive.org nests the original URL (`…/web/YYYYMMDD…/https://…`), so do not take only
+        // the last `http` fragment — collect every URL token / fieldSource cite.
+        func looksPreciseDoc(_ url: String) -> Bool {
+            let u = url.lowercased()
+            return u.contains(".pdf")
+                || u.contains("press.")
+                || u.contains("/press")
+                || u.contains("press-releases")
+                || u.contains("newsroom")
+                || u.contains("media-assets")
+                || u.contains("attachment")
+                || u.contains("model-document")
+                || u.contains("media.stellantis.com")
+                || u.contains("pricelists")
+                || u.contains("produktkatalog")
+                || u.contains("web.archive.org/web/")
+        }
+        func urls(in text: String) -> [String] {
+            var out: [String] = []
+            var rest = text.lowercased()
+            while let r = rest.range(of: "http") {
+                rest = String(rest[r.lowerBound...])
+                let token = rest.split(whereSeparator: { $0.isWhitespace || $0 == "—" || $0 == "|" || $0 == ";" || $0 == ")" }).first.map(String.init) ?? ""
+                if token.hasPrefix("http") { out.append(token) }
+                if rest.count > 4 { rest = String(rest.dropFirst(4)) } else { break }
+            }
+            return out
+        }
         let generic = nonEpa.filter { v in
-            let s = (v.sourceName ?? "").lowercased()
-            guard let urlPart = s.split(separator: "http").last.map({ "http" + $0 }) else { return true }
-            let url = urlPart.split(whereSeparator: { $0.isWhitespace || $0 == "—" || $0 == "|" }).first.map(String.init) ?? ""
-            let looksDoc =
-                url.contains(".pdf")
-                || url.contains("press.")
-                || url.contains("/press")
-                || url.contains("press-releases")
-                || url.contains("newsroom")
-                || url.contains("media-assets")
-                || url.contains("attachment")
-                || url.contains("model-document")
-                || url.contains("media.stellantis.com")
-                || url.contains("pricelists")
-                || url.contains("produktkatalog")
-            return !looksDoc
+            var candidates = urls(in: v.sourceName ?? "")
+            for key in ["fuelConsumptionLPerKm", "wltpRangeKm", "batteryKWh", "energyConsumptionKWhPerKm"] {
+                if let s = v.fieldSource(for: key) { candidates.append(contentsOf: urls(in: s)) }
+            }
+            return !candidates.contains(where: looksPreciseDoc)
         }
         XCTAssertTrue(generic.isEmpty, "non-EPA PHEV source must be a precise doc URL: \(generic.map(\.id))")
         let energyKind = nonEpa.filter { v in
