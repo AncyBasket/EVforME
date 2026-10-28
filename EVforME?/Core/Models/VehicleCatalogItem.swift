@@ -99,6 +99,12 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
     let energyIsWeighted: Bool?
     /// `true` se mancano CS fuel e/o kWh charge-depleting usabili nei calcoli — niente verdetto senza override utente.
     let catalogDataIncomplete: Bool?
+    /// Campi ancora mancanti per il calcolo (es. `energyConsumptionKWhPerKm`). Vuoto ⇒ completo.
+    let missingCalcFields: [String]?
+    /// Provenienza per campo ufficiale salvato (dominio anno URL).
+    let fieldSources: [String: String]?
+    /// Data del documento o dello snapshot archive.org per campo salvato (`YYYY-MM-DD`).
+    let fieldSourceDates: [String: String]?
     /// Consumo carburante WLTP **ponderato** (solo informativo; mai nei calcoli).
     let weightedFuelConsumptionLPerKm: Double?
     /// Consumo elettrico WLTP **ponderato** (solo informativo; mai nei calcoli).
@@ -195,6 +201,35 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
 
     /// Dati catalogo insufficienti per un verdetto automatico (PHEV senza CS+CD, BEV senza kWh).
     var hasIncompleteCatalogData: Bool { catalogDataIncomplete == true }
+
+    /// Campi di calcolo ancora assenti (da `missingCalcFields` o euristica sui valori usabili).
+    var resolvedMissingCalcFields: [String] {
+        if let missingCalcFields { return missingCalcFields }
+        var miss: [String] = []
+        if usableChargeSustainingFuelLPerKm == nil, powertrain == .phev || powertrain == .ice || powertrain == .hev {
+            miss.append("fuelConsumptionLPerKm")
+        }
+        if usableChargeDepletingEnergyKWhPerKm == nil, powertrain == .phev || powertrain == .ev {
+            miss.append("energyConsumptionKWhPerKm")
+        }
+        if powertrain == .phev {
+            if wltpRangeKm == nil { miss.append("wltpRangeKm") }
+            if batteryKWh == nil { miss.append("batteryKWh") }
+        }
+        return miss
+    }
+
+    /// Fonte ufficiale per un campo catalogo, se presente.
+    func fieldSource(for key: String) -> String? {
+        guard let fieldSources, let s = fieldSources[key], !s.isEmpty else { return nil }
+        return s
+    }
+
+    /// Data documento/snapshot della fonte ufficiale per un campo, se presente.
+    func fieldSourceDate(for key: String) -> String? {
+        guard let fieldSourceDates, let s = fieldSourceDates[key], !s.isEmpty else { return nil }
+        return s
+    }
 
     /// Fonte consumi EPA USA (ciclo diverso dal WLTP) — mostrare nota esplicita in UI.
     var usesEPACatalogSource: Bool {
@@ -351,6 +386,9 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         powerKw: Double? = nil,
         energyIsWeighted: Bool? = nil,
         catalogDataIncomplete: Bool? = nil,
+        missingCalcFields: [String]? = nil,
+        fieldSources: [String: String]? = nil,
+        fieldSourceDates: [String: String]? = nil,
         weightedFuelConsumptionLPerKm: Double? = nil,
         weightedEnergyConsumptionKWhPerKm: Double? = nil,
         parentId: String? = nil,
@@ -387,6 +425,9 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         self.powerKw = powerKw
         self.energyIsWeighted = energyIsWeighted
         self.catalogDataIncomplete = catalogDataIncomplete
+        self.missingCalcFields = missingCalcFields
+        self.fieldSources = fieldSources
+        self.fieldSourceDates = fieldSourceDates
         self.weightedFuelConsumptionLPerKm = weightedFuelConsumptionLPerKm
         self.weightedEnergyConsumptionKWhPerKm = weightedEnergyConsumptionKWhPerKm
         self.parentId = parentId

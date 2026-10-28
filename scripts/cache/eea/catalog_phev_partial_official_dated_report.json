@@ -1,0 +1,406 @@
+{
+  "seedVersion": 70,
+  "fingerprint": "6f6ea98df21db03d497b182c59b85b2e57776860adf09655f3ca17c735fc47aa",
+  "phev_complete_before": 10,
+  "phev_complete_after": 10,
+  "phev_only_kwh_before": 7,
+  "phev_only_kwh_after": 4,
+  "phev_multi_missing_before": 102,
+  "phev_multi_missing_after": 105,
+  "top30_complete_after": 2,
+  "top30_only_kwh_after": 2,
+  "top30_multi_missing_after": 26,
+  "fields_saved": [
+    {
+      "id": "volvo-xc60-phev-recharge-2024",
+      "field": "fuelConsumptionLPerKm",
+      "host": "volvocars.com",
+      "year": 2024,
+      "url": "https://www.volvocars.com/de/media/press-releases/8C5F873BBE0D5162/",
+      "sourceDate": "2024-06-01",
+      "value": 0.082,
+      "via": "same_my"
+    },
+    {
+      "id": "volvo-xc60-phev-recharge-2024",
+      "field": "wltpRangeKm",
+      "host": "volvocars.com",
+      "year": 2024,
+      "url": "https://www.volvocars.com/de/media/press-releases/8C5F873BBE0D5162/",
+      "sourceDate": "2024-06-01",
+      "value": 80,
+      "via": "same_my"
+    },
+    {
+      "id": "volvo-xc60-phev-recharge-2024",
+      "field": "batteryKWh",
+      "host": "volvocars.com",
+      "year": 2024,
+      "url": "https://www.volvocars.com/de/media/press-releases/8C5F873BBE0D5162/",
+      "sourceDate": "2024-06-01",
+      "value": 18.8,
+      "via": "same_my"
+    },
+    {
+      "id": "toyota-c-hr-phev-2024",
+      "field": "fuelConsumptionLPerKm",
+      "host": "toyota.de",
+      "year": 2024,
+      "url": "https://www.toyota.de/content/dam/toyota/nmsc/germany/downloads/toyota-c-hr/Toyota_C-HR_PL_07_24_j.pdf",
+      "sourceDate": "2024-07-01",
+      "value": 0.049,
+      "via": "same_my"
+    },
+    {
+      "id": "toyota-c-hr-phev-2024",
+      "field": "wltpRangeKm",
+      "host": "toyota.de",
+      "year": 2024,
+      "url": "https://www.toyota.de/content/dam/toyota/nmsc/germany/downloads/toyota-c-hr/Toyota_C-HR_PL_07_24_j.pdf",
+      "sourceDate": "2024-07-01",
+      "value": 66,
+      "via": "same_my"
+    },
+    {
+      "id": "jeep-renegade-phev-4xe-2024",
+      "field": "fuelConsumptionLPerKm",
+      "host": "jeep.de",
+      "year": 2024,
+      "url": "https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv",
+      "sourceDate": "2024-06-20",
+      "value": 0.074,
+      "via": "same_my"
+    },
+    {
+      "id": "jeep-compass-phev-4xe-2024",
+      "field": "fuelConsumptionLPerKm",
+      "host": "jeep.de",
+      "year": 2024,
+      "url": "https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv",
+      "sourceDate": "2024-06-20",
+      "value": 0.076,
+      "via": "same_my"
+    },
+    {
+      "id": "jeep-compass-phev-4xe-2024",
+      "field": "wltpRangeKm",
+      "host": "media.stellantis.com",
+      "year": 2024,
+      "url": "https://www.media.stellantis.com/uploads/fr/attachment/7783/tarifpublicjeeprcompassmy242023e19decembre2023-65820ebe62db4.pdf",
+      "sourceDate": "2023-12-19",
+      "value": 48,
+      "via": "same_my"
+    },
+    {
+      "id": "jeep-compass-phev-4xe-2024",
+      "field": "batteryKWh",
+      "host": "media.stellantis.com",
+      "year": 2024,
+      "url": "https://www.media.stellantis.com/uploads/fr/attachment/7783/tarifpublicjeeprcompassmy242023e19decembre2023-65820ebe62db4.pdf",
+      "sourceDate": "2023-12-19",
+      "value": 11.4,
+      "via": "same_my"
+    },
+    {
+      "id": "bmw-x1-phev-xdrive25e-2024",
+      "field": "fuelConsumptionLPerKm",
+      "host": "bmw.de",
+      "year": 2024,
+      "url": "https://web.archive.org/web/20240604155829/https://www.bmw.de/content/dam/bmw/marketDE/bmw_de/mybmw/bmw-efficientdynamics/SP-1619_CO2_A4_Vergleich_Emissionswerte_05_2024_X4_05.pdf.coredownload.inline.pdf",
+      "sourceDate": "2024-05-01",
+      "value": 0.068,
+      "via": "same_my"
+    },
+    {
+      "id": "bmw-x1-phev-xdrive25e-2023",
+      "field": "fuelConsumptionLPerKm",
+      "host": "eea+oem",
+      "year": 2023,
+      "url": "bmw.de 2024 https://web.archive.org/web/20240604155829/https://www.bmw.de/content/dam/bmw/marketDE/bmw_de/mybmw/bmw-efficientdynamics/SP-1619_CO2_A4_Vergleich_Emissionswerte_05_2024_X4_05.pdf.coredownload.inline.pdf",
+      "sourceDate": "2024-05-01",
+      "value": 0.068,
+      "via": "homologation",
+      "TAN": "E1*2018/858*00153*04"
+    },
+    {
+      "id": "volvo-xc60-phev-recharge-2023",
+      "field": "fuelConsumptionLPerKm",
+      "host": "eea+oem",
+      "year": 2023,
+      "url": "volvocars.com 2024 https://www.volvocars.com/de/media/press-releases/8C5F873BBE0D5162/",
+      "sourceDate": "2024-06-01",
+      "value": 0.082,
+      "via": "homologation",
+      "TAN": "E4*2007/46*1220*18"
+    },
+    {
+      "id": "volvo-xc60-phev-recharge-2023",
+      "field": "wltpRangeKm",
+      "host": "eea+oem",
+      "year": 2023,
+      "url": "volvocars.com 2024 https://www.volvocars.com/de/media/press-releases/8C5F873BBE0D5162/",
+      "sourceDate": "2024-06-01",
+      "value": 80,
+      "via": "homologation",
+      "TAN": "E4*2007/46*1220*18"
+    },
+    {
+      "id": "volvo-xc60-phev-recharge-2023",
+      "field": "batteryKWh",
+      "host": "eea+oem",
+      "year": 2023,
+      "url": "volvocars.com 2024 https://www.volvocars.com/de/media/press-releases/8C5F873BBE0D5162/",
+      "sourceDate": "2024-06-01",
+      "value": 18.8,
+      "via": "homologation",
+      "TAN": "E4*2007/46*1220*18"
+    },
+    {
+      "id": "jeep-renegade-phev-4xe-2023",
+      "field": "fuelConsumptionLPerKm",
+      "host": "eea+oem",
+      "year": 2023,
+      "url": "jeep.de 2024 https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv",
+      "sourceDate": "2024-06-20",
+      "value": 0.074,
+      "via": "homologation",
+      "TAN": "E3*2007/46*0300*39"
+    },
+    {
+      "id": "jeep-compass-phev-4xe-2023",
+      "field": "fuelConsumptionLPerKm",
+      "host": "eea+oem",
+      "year": 2023,
+      "url": "jeep.de 2024 https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv",
+      "sourceDate": "2024-06-20",
+      "value": 0.076,
+      "via": "homologation",
+      "TAN": "E3*2007/46*0508*15"
+    },
+    {
+      "id": "jeep-compass-phev-4xe-2023",
+      "field": "wltpRangeKm",
+      "host": "eea+oem",
+      "year": 2023,
+      "url": "media.stellantis.com 2024 https://www.media.stellantis.com/uploads/fr/attachment/7783/tarifpublicjeeprcompassmy242023e19decembre2023-65820ebe62db4.pdf",
+      "sourceDate": "2023-12-19",
+      "value": 48,
+      "via": "homologation",
+      "TAN": "E3*2007/46*0508*15"
+    },
+    {
+      "id": "jeep-compass-phev-4xe-2023",
+      "field": "batteryKWh",
+      "host": "eea+oem",
+      "year": 2023,
+      "url": "media.stellantis.com 2024 https://www.media.stellantis.com/uploads/fr/attachment/7783/tarifpublicjeeprcompassmy242023e19decembre2023-65820ebe62db4.pdf",
+      "sourceDate": "2023-12-19",
+      "value": 11.4,
+      "via": "homologation",
+      "TAN": "E3*2007/46*0508*15"
+    }
+  ],
+  "derived": [
+    {
+      "id": "bmw-x1-phev-xdrive25e-2023",
+      "sourceId": "bmw-x1-phev-xdrive25e-2024",
+      "TAN": "E1*2018/858*00153*04",
+      "Va": "21EF",
+      "Ve": "EAW50000",
+      "ep": 100,
+      "fields": [
+        "fuelConsumptionLPerKm"
+      ],
+      "derivedFromYear": 2024
+    },
+    {
+      "id": "volvo-xc60-phev-recharge-2023",
+      "sourceId": "volvo-xc60-phev-recharge-2024",
+      "TAN": "E4*2007/46*1220*18",
+      "Va": "UZH1",
+      "Ve": "UZH1VD0",
+      "ep": 186,
+      "fields": [
+        "fuelConsumptionLPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ],
+      "derivedFromYear": 2024
+    },
+    {
+      "id": "jeep-renegade-phev-4xe-2023",
+      "sourceId": "jeep-renegade-phev-4xe-2024",
+      "TAN": "E3*2007/46*0300*39",
+      "Va": "AXT23",
+      "Ve": "19M",
+      "ep": 96,
+      "fields": [
+        "fuelConsumptionLPerKm"
+      ],
+      "derivedFromYear": 2024
+    },
+    {
+      "id": "jeep-compass-phev-4xe-2023",
+      "sourceId": "jeep-compass-phev-4xe-2024",
+      "TAN": "E3*2007/46*0508*15",
+      "Va": "JHPFP",
+      "Ve": "ML1BBH1",
+      "ep": 96,
+      "fields": [
+        "fuelConsumptionLPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ],
+      "derivedFromYear": 2024
+    }
+  ],
+  "removed": [
+    {
+      "id": "bmw-x1-phev-xdrive25e-2024",
+      "removedFields": [
+        "fuelConsumptionLPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ],
+      "reason": "rebuild_dated_sources"
+    },
+    {
+      "id": "bmw-x1-phev-xdrive25e-2023",
+      "removedFields": [
+        "fuelConsumptionLPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ],
+      "reason": "rebuild_dated_sources"
+    },
+    {
+      "id": "volvo-xc60-phev-recharge-2024",
+      "removedFields": [
+        "fuelConsumptionLPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ],
+      "reason": "rebuild_dated_sources"
+    },
+    {
+      "id": "volvo-xc60-phev-recharge-2023",
+      "removedFields": [
+        "fuelConsumptionLPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ],
+      "reason": "rebuild_dated_sources"
+    },
+    {
+      "id": "toyota-c-hr-phev-2024",
+      "removedFields": [
+        "fuelConsumptionLPerKm",
+        "wltpRangeKm"
+      ],
+      "reason": "rebuild_dated_sources"
+    },
+    {
+      "id": "jeep-renegade-phev-4xe-2024",
+      "removedFields": [
+        "fuelConsumptionLPerKm"
+      ],
+      "reason": "rebuild_dated_sources"
+    },
+    {
+      "id": "jeep-renegade-phev-4xe-2023",
+      "removedFields": [
+        "fuelConsumptionLPerKm"
+      ],
+      "reason": "rebuild_dated_sources"
+    },
+    {
+      "id": "jeep-compass-phev-4xe-2024",
+      "removedFields": [
+        "fuelConsumptionLPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ],
+      "reason": "rebuild_dated_sources"
+    },
+    {
+      "id": "jeep-compass-phev-4xe-2023",
+      "removedFields": [
+        "fuelConsumptionLPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ],
+      "reason": "rebuild_dated_sources"
+    },
+    {
+      "id": "cupra-formentor-phev-e-hybrid-2024",
+      "removedFields": [
+        "fuelConsumptionLPerKm"
+      ],
+      "reason": "rebuild_dated_sources"
+    },
+    {
+      "id": "audi-q3-sportback-phev-45-tfsi-e-2024",
+      "removedFields": [
+        "fuelConsumptionLPerKm"
+      ],
+      "reason": "rebuild_dated_sources"
+    },
+    {
+      "id": "audi-q3-sportback-phev-45-tfsi-e-2023",
+      "removedFields": [
+        "fuelConsumptionLPerKm"
+      ],
+      "reason": "rebuild_dated_sources"
+    },
+    {
+      "id": "bmw-serie-2-active-tourer-225e-xdrive-2023",
+      "removedFields": [
+        "fuelConsumptionLPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ],
+      "reason": "rebuild_dated_sources"
+    },
+    {
+      "id": "cupra-formentor-phev-e-hybrid-2024",
+      "removedFields": [
+        "fuelConsumptionLPerKm",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ],
+      "reason": "live_produktkatalog_no_2024_archive"
+    },
+    {
+      "id": "audi-q3-sportback-phev-45-tfsi-e-2024",
+      "removedFields": [
+        "fuelConsumptionLPerKm",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ],
+      "reason": "generic_model_list_url"
+    },
+    {
+      "id": "audi-q3-sportback-phev-45-tfsi-e-2023",
+      "removedFields": [
+        "fuelConsumptionLPerKm",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ],
+      "reason": "derived_from_invalid_2024"
+    },
+    {
+      "id": "bmw-serie-2-active-tourer-225e-xdrive-2023",
+      "removedFields": [
+        "fuelConsumptionLPerKm",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ],
+      "reason": "envkv_052024_without_identical_EEA_homologation_2023_2024"
+    }
+  ],
+  "uitest_partial_kwh_id": "volvo-xc60-phev-recharge-2024"
+}

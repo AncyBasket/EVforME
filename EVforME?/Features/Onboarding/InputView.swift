@@ -135,16 +135,45 @@ struct InputView: View {
                     }
                 }
 
-                // Sempre visibile (non nel disclosure): senza CS/CD non si calcola il verdetto.
+                // Sempre visibile (non nel disclosure): senza i campi mancanti non si calcola il verdetto.
                 if let incompleteCard = incompleteCatalogPrompt {
                     VStack(alignment: .leading, spacing: 10) {
                         Text(L10n.incompleteCatalogDataTitle)
                             .font(Typography.readingCardTitle)
                             .foregroundColor(.primaryText)
+                            .accessibilityIdentifier("incomplete_catalog_data_title")
                         Text(incompleteCard.body)
                             .font(Typography.readingCaption)
                             .foregroundColor(.secondaryText)
                             .fixedSize(horizontal: false, vertical: true)
+                        ForEach(incompleteCard.officialRows, id: \.key) { row in
+                            VStack(alignment: .leading, spacing: 4) {
+                                HStack {
+                                    Text(row.label)
+                                        .font(Typography.readingCaption)
+                                    Spacer()
+                                    TextField(
+                                        row.placeholder,
+                                        value: incompleteOfficialBinding(
+                                            key: row.key,
+                                            isTarget: incompleteCard.isTarget,
+                                            catalogValuePer100: row.valuePer100
+                                        ),
+                                        format: .number.precision(.fractionLength(0...2))
+                                    )
+                                    .keyboardType(.decimalPad)
+                                    .multilineTextAlignment(.trailing)
+                                    .frame(width: 88)
+                                    .accessibilityIdentifier("incomplete_catalog_official_\(row.key)")
+                                }
+                                if let src = row.source, !src.isEmpty {
+                                    Text(src)
+                                        .font(Typography.readingCaption)
+                                        .foregroundColor(.secondaryText)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                }
+                            }
+                        }
                         if incompleteCard.needsFuel {
                             HStack {
                                 Text(L10n.incompleteCatalogFuelField)
@@ -162,19 +191,28 @@ struct InputView: View {
                             }
                         }
                         if incompleteCard.needsEnergy {
-                            HStack {
-                                Text(L10n.incompleteCatalogEnergyField)
-                                    .font(Typography.readingCaption)
-                                Spacer()
-                                TextField(
-                                    "18",
-                                    value: incompleteEnergyBinding(forTarget: incompleteCard.isTarget),
-                                    format: .number.precision(.fractionLength(1...2))
-                                )
-                                .keyboardType(.decimalPad)
-                                .multilineTextAlignment(.trailing)
-                                .frame(width: 88)
-                                .accessibilityIdentifier("incomplete_catalog_energy_field")
+                            VStack(alignment: .leading, spacing: 4) {
+                                HStack {
+                                    Text(L10n.incompleteCatalogEnergyField)
+                                        .font(Typography.readingCaption)
+                                    Spacer()
+                                    TextField(
+                                        "18",
+                                        value: incompleteEnergyBinding(forTarget: incompleteCard.isTarget),
+                                        format: .number.precision(.fractionLength(1...2))
+                                    )
+                                    .keyboardType(.decimalPad)
+                                    .multilineTextAlignment(.trailing)
+                                    .frame(width: 88)
+                                    .accessibilityIdentifier("incomplete_catalog_energy_field")
+                                }
+                                if incompleteCard.showWeightedEnergyHonesty {
+                                    Text(L10n.incompleteCatalogWeightedEnergyHonesty)
+                                        .font(Typography.readingCaption)
+                                        .foregroundColor(.secondaryText)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                        .accessibilityIdentifier("incomplete_catalog_weighted_honesty")
+                                }
                             }
                         }
                     }
@@ -620,11 +658,14 @@ struct InputView: View {
             loadCatalog()
 #if DEBUG
             if ProcessInfo.processInfo.environment["UITEST_EXPAND_ADVANCED"] == "1"
-                || ProcessInfo.processInfo.environment["UITEST_INCOMPLETE_PHEV"] == "1" {
+                || ProcessInfo.processInfo.environment["UITEST_INCOMPLETE_PHEV"] == "1"
+                || ProcessInfo.processInfo.environment["UITEST_PARTIAL_PHEV_KWH_ONLY"] == "1" {
                 showAdvancedDetails = true
             }
-            if ProcessInfo.processInfo.environment["UITEST_INCOMPLETE_PHEV"] == "1" {
-                userInput.targetVehicleId = "bmw-serie-2-active-tourer-225e-xdrive-2023"
+            if ProcessInfo.processInfo.environment["UITEST_PARTIAL_PHEV_KWH_ONLY"] == "1" {
+                userInput.targetVehicleId = "volvo-xc60-phev-recharge-2024"
+            } else if ProcessInfo.processInfo.environment["UITEST_INCOMPLETE_PHEV"] == "1" {
+                userInput.targetVehicleId = "jeep-compass-phev-4xe-2022"
             }
             if ProcessInfo.processInfo.environment["UITEST_OPEN_TARGET_PICKER"] == "1",
                !didAutoOpenTargetPickerForUITest {
@@ -1081,11 +1122,22 @@ struct InputView: View {
         }
     }
 
+    private struct IncompleteOfficialRow: Equatable {
+        let key: String
+        let label: String
+        let placeholder: String
+        /// Valore catalogo già in unità UI (L/100 o kWh/100 o km o kWh).
+        let valuePer100: Double
+        let source: String?
+    }
+
     private struct IncompleteCatalogPrompt {
         let isTarget: Bool
         let body: String
         let needsFuel: Bool
         let needsEnergy: Bool
+        let showWeightedEnergyHonesty: Bool
+        let officialRows: [IncompleteOfficialRow]
     }
 
     /// Prefer target if incomplete (usual compare path); else source.
@@ -1105,36 +1157,122 @@ struct InputView: View {
     private func prompt(for vehicle: VehicleCatalogItem, isTarget: Bool) -> IncompleteCatalogPrompt {
         switch vehicle.powertrain {
         case .phev:
-            let needsFuel = (isTarget
-                ? userInput.targetFuelConsumptionOverrideLPer100Km
-                : userInput.sourceConsumptionOverrideLPer100Km) == nil
-                && vehicle.usableChargeSustainingFuelLPerKm == nil
-            let needsEnergy = (isTarget
-                ? userInput.targetEnergyOverrideKWhPer100Km
-                : userInput.sourceEnergyOverrideKWhPer100Km) == nil
-                && vehicle.usableChargeDepletingEnergyKWhPerKm == nil
-            // Always show both fields for incomplete PHEV so the user can fill what's missing.
+            let needsFuel = vehicle.usableChargeSustainingFuelLPerKm == nil
+            let needsEnergy = vehicle.usableChargeDepletingEnergyKWhPerKm == nil
+            let onlyEnergy = needsEnergy && !needsFuel
+            let body = onlyEnergy
+                ? L10n.incompleteCatalogDataBodyPHEVEnergyOnly
+                : L10n.incompleteCatalogDataBodyPHEV
+            var official: [IncompleteOfficialRow] = []
+            if let cs = vehicle.usableChargeSustainingFuelLPerKm {
+                official.append(
+                    IncompleteOfficialRow(
+                        key: "fuelConsumptionLPerKm",
+                        label: L10n.incompleteCatalogFuelField,
+                        placeholder: "6.5",
+                        valuePer100: cs * 100.0,
+                        source: vehicle.fieldSource(for: "fuelConsumptionLPerKm")
+                    )
+                )
+            }
+            if let range = vehicle.wltpRangeKm {
+                official.append(
+                    IncompleteOfficialRow(
+                        key: "wltpRangeKm",
+                        label: L10n.incompleteCatalogRangeField,
+                        placeholder: "60",
+                        valuePer100: Double(range),
+                        source: vehicle.fieldSource(for: "wltpRangeKm")
+                    )
+                )
+            }
+            if let bat = vehicle.batteryKWh {
+                official.append(
+                    IncompleteOfficialRow(
+                        key: "batteryKWh",
+                        label: L10n.incompleteCatalogBatteryField,
+                        placeholder: "14",
+                        valuePer100: bat,
+                        source: vehicle.fieldSource(for: "batteryKWh")
+                    )
+                )
+            }
+            let honesty = needsEnergy && (
+                vehicle.weightedEnergyConsumptionKWhPerKm != nil
+                    || (vehicle.sourceName ?? "").localizedCaseInsensitiveContains("gewichtet")
+                    || (vehicle.sourceName ?? "").localizedCaseInsensitiveContains("ponderat")
+            )
             return IncompleteCatalogPrompt(
                 isTarget: isTarget,
-                body: L10n.incompleteCatalogDataBodyPHEV,
-                needsFuel: needsFuel || vehicle.usableChargeSustainingFuelLPerKm == nil,
-                needsEnergy: needsEnergy || vehicle.usableChargeDepletingEnergyKWhPerKm == nil
+                body: body,
+                needsFuel: needsFuel,
+                needsEnergy: needsEnergy,
+                showWeightedEnergyHonesty: honesty,
+                officialRows: official
             )
         case .ev:
             return IncompleteCatalogPrompt(
                 isTarget: isTarget,
                 body: L10n.incompleteCatalogDataBodyBEV,
                 needsFuel: false,
-                needsEnergy: true
+                needsEnergy: true,
+                showWeightedEnergyHonesty: false,
+                officialRows: []
             )
         case .ice, .hev:
             return IncompleteCatalogPrompt(
                 isTarget: isTarget,
                 body: L10n.incompleteCatalogDataBodyPHEV,
                 needsFuel: true,
-                needsEnergy: false
+                needsEnergy: false,
+                showWeightedEnergyHonesty: false,
+                officialRows: []
             )
         }
+    }
+
+    private func incompleteOfficialBinding(
+        key: String,
+        isTarget: Bool,
+        catalogValuePer100: Double
+    ) -> Binding<Double> {
+        Binding(
+            get: {
+                switch key {
+                case "fuelConsumptionLPerKm":
+                    let override = isTarget
+                        ? userInput.targetFuelConsumptionOverrideLPer100Km
+                        : userInput.sourceConsumptionOverrideLPer100Km
+                    return override ?? catalogValuePer100
+                case "energyConsumptionKWhPerKm":
+                    let override = isTarget
+                        ? userInput.targetEnergyOverrideKWhPer100Km
+                        : userInput.sourceEnergyOverrideKWhPer100Km
+                    return override ?? catalogValuePer100
+                default:
+                    return catalogValuePer100
+                }
+            },
+            set: { newValue in
+                guard newValue > 0 else { return }
+                switch key {
+                case "fuelConsumptionLPerKm":
+                    if isTarget {
+                        userInput.targetFuelConsumptionOverrideLPer100Km = newValue
+                    } else {
+                        userInput.sourceConsumptionOverrideLPer100Km = newValue
+                    }
+                case "energyConsumptionKWhPerKm":
+                    if isTarget {
+                        userInput.targetEnergyOverrideKWhPer100Km = newValue
+                    } else {
+                        userInput.sourceEnergyOverrideKWhPer100Km = newValue
+                    }
+                default:
+                    break
+                }
+            }
+        )
     }
 
     private func incompleteFuelBinding(forTarget: Bool) -> Binding<Double> {
@@ -1244,11 +1382,12 @@ struct InputView: View {
         }
         if userInput.targetVehicleId.isEmpty
             || !targetVehicles.contains(where: { $0.id == userInput.targetVehicleId }) {
-            // Preserve UITEST incomplete-PHEV preset even if list timing races.
-            if ProcessInfo.processInfo.environment["UITEST_INCOMPLETE_PHEV"] == "1",
-               let forced = VehicleCatalogService.shared.vehicle(
-                by: "bmw-serie-2-active-tourer-225e-xdrive-2023"
-               ) {
+            // Preserve UITEST incomplete / partial-PHEV presets even if list timing races.
+            if ProcessInfo.processInfo.environment["UITEST_PARTIAL_PHEV_KWH_ONLY"] == "1",
+               let forced = VehicleCatalogService.shared.vehicle(by: "volvo-xc60-phev-recharge-2024") {
+                userInput.targetVehicleId = forced.id
+            } else if ProcessInfo.processInfo.environment["UITEST_INCOMPLETE_PHEV"] == "1",
+               let forced = VehicleCatalogService.shared.vehicle(by: "jeep-compass-phev-4xe-2022") {
                 userInput.targetVehicleId = forced.id
             } else {
                 userInput.targetVehicleId = preferredId(

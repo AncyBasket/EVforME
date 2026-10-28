@@ -1,0 +1,123 @@
+{
+  "seedVersion": 71,
+  "fingerprint": "e679cac4858f762c5c16d3e7bbc1a1bb73471b37f3833fddb9e32bbfbcd36971",
+  "phev_complete_before": 10,
+  "phev_complete_after": 10,
+  "phev_only_kwh_before": 4,
+  "phev_only_kwh_after": 6,
+  "phev_multi_missing_before": 105,
+  "phev_multi_missing_after": 105,
+  "top30_complete_after": 2,
+  "top30_only_kwh_after": 2,
+  "top30_multi_missing_after": 26,
+  "fields_changed": [
+    {
+      "id": "jeep-renegade-phev-4xe-2024",
+      "field": "fuelConsumptionLPerKm",
+      "value": 0.075,
+      "url": "https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv",
+      "sourceDate": "2024-06-20",
+      "via": "same_my"
+    },
+    {
+      "id": "jeep-renegade-phev-4xe-2023",
+      "field": "fuelConsumptionLPerKm",
+      "value": 0.075,
+      "url": "https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv",
+      "sourceDate": "2024-06-20",
+      "via": "homologation",
+      "TAN": "E3*2007/46*0300*39"
+    },
+    {
+      "id": "jeep-wrangler-4xe-2024",
+      "field": "fuelConsumptionLPerKm",
+      "value": 0.118,
+      "url": "https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv",
+      "sourceDate": "2024-06-20",
+      "via": "same_my"
+    },
+    {
+      "id": "jeep-grand-cherokee-4xe-2024",
+      "field": "fuelConsumptionLPerKm",
+      "value": 0.106,
+      "url": "https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv",
+      "sourceDate": "2024-06-20",
+      "via": "same_my"
+    },
+    {
+      "id": "jeep-wrangler-4xe-2023",
+      "field": "fuelConsumptionLPerKm",
+      "value": 0.118,
+      "url": "https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv",
+      "sourceDate": "2024-06-20",
+      "via": "homologation",
+      "TAN": "E4*2001/116*0116*42"
+    },
+    {
+      "id": "jeep-wrangler-4xe-2022",
+      "field": "fuelConsumptionLPerKm",
+      "value": 0.118,
+      "url": "https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv",
+      "sourceDate": "2024-06-20",
+      "via": "homologation",
+      "TAN": "E4*2001/116*0116*42"
+    },
+    {
+      "id": "jeep-grand-cherokee-4xe-2023",
+      "field": "fuelConsumptionLPerKm",
+      "value": 0.106,
+      "url": "https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv",
+      "sourceDate": "2024-06-20",
+      "via": "homologation",
+      "TAN": "E9*2018/858*11257*01"
+    }
+  ],
+  "derived": [
+    {
+      "id": "jeep-wrangler-4xe-2023",
+      "sourceId": "jeep-wrangler-4xe-2024",
+      "TAN": "E4*2001/116*0116*42",
+      "Va": "JTAFG",
+      "Ve": "P5H62A",
+      "ep": 200,
+      "Ew": 79,
+      "Fc": 3.5,
+      "fields": [
+        "fuelConsumptionLPerKm"
+      ],
+      "derivedFromYear": 2024
+    },
+    {
+      "id": "jeep-wrangler-4xe-2022",
+      "sourceId": "jeep-wrangler-4xe-2024",
+      "TAN": "E4*2001/116*0116*42",
+      "Va": "JTAFG",
+      "Ve": "P5H62A",
+      "ep": 200,
+      "Ew": 79,
+      "Fc": 3.5,
+      "fields": [
+        "fuelConsumptionLPerKm"
+      ],
+      "derivedFromYear": 2024
+    },
+    {
+      "id": "jeep-grand-cherokee-4xe-2023",
+      "sourceId": "jeep-grand-cherokee-4xe-2024",
+      "TAN": "E9*2018/858*11257*01",
+      "Va": "JCACG",
+      "Ve": "5HP1S",
+      "ep": 200,
+      "Ew": 60,
+      "Fc": 2.5,
+      "fields": [
+        "fuelConsumptionLPerKm"
+      ],
+      "derivedFromYear": 2024
+    }
+  ],
+  "added_rows": [
+    "jeep-wrangler-4xe-2024",
+    "jeep-grand-cherokee-4xe-2024"
+  ]
+}

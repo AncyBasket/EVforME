@@ -1,0 +1,75 @@
+{
+  "seedVersion": 72,
+  "fingerprint": "5606a9bf8c239ef2f4e238b53ded40c21378f39f64338a8cf90ec17e50954499",
+  "phev_complete_before": 10,
+  "phev_complete_after": 10,
+  "phev_only_kwh_before": 6,
+  "phev_only_kwh_after": 6,
+  "phev_multi_missing_before": 105,
+  "phev_multi_missing_after": 105,
+  "top30_complete_after": 2,
+  "top30_only_kwh_after": 2,
+  "top30_multi_missing_after": 26,
+  "fields_changed": [
+    {
+      "id": "jeep-wrangler-4xe-2022",
+      "field": "wltpRangeKm",
+      "value": null,
+      "old": 45,
+      "url": "https://www.media.stellantis.com/uploads/de/model-document/220101_j_wrangler_jl_td_01012022-61dd98f991688.pdf",
+      "sourceDate": "2022-01-25",
+      "via": "reject_eaer_city",
+      "reason": "PDF only lists Elektrische Reichweite EAER City (45/53); no combined EAER"
+    },
+    {
+      "id": "jeep-wrangler-4xe-2022",
+      "field": "batteryKWh",
+      "value": 17.3,
+      "url": "https://www.media.stellantis.com/uploads/de/model-document/220101_j_wrangler_jl_td_01012022-61dd98f991688.pdf",
+      "sourceDate": "2022-01-25",
+      "via": "same_my_doc"
+    },
+    {
+      "id": "jeep-grand-cherokee-4xe-2024",
+      "field": "wltpRangeKm",
+      "value": 44,
+      "url": "https://www.media.stellantis.com/uploads/de/model-pricelist/preisliste_grand_cherokee_4xe_januar_20234-6486c171a11d8.pdf",
+      "sourceDate": "2023-01-01",
+      "via": "homologation",
+      "TAN": "E9*2018/858*11257*01",
+      "Va": "JCACG",
+      "Ve": "5HP1S",
+      "derivedFromYear": 2023
+    },
+    {
+      "id": "jeep-grand-cherokee-4xe-2024",
+      "field": "batteryKWh",
+      "value": 17.3,
+      "url": "https://www.media.stellantis.com/uploads/de/model-pricelist/preisliste_grand_cherokee_4xe_januar_20234-6486c171a11d8.pdf",
+      "sourceDate": "2023-01-01",
+      "via": "homologation",
+      "TAN": "E9*2018/858*11257*01",
+      "Va": "JCACG",
+      "Ve": "5HP1S",
+      "derivedFromYear": 2023
+    }
+  ],
+  "wrangler_pdf_eaer": {
+    "url": "https://www.media.stellantis.com/uploads/de/model-document/220101_j_wrangler_jl_td_01012022-61dd98f991688.pdf",
+    "sourceDate": "2022-01-25",
+    "combined_eaer_found": false,
+    "city_only": [
+      45,
+      53
+    ],
+    "action": "wltpRangeKm_nil"
+  },
+  "gc_homolog": {
+    "TAN": "E9*2018/858*11257*01",
+    "Va": "JCACG",
+    "Ve": "5HP1S",
+    "derivedFromYear": 2023,
+    "url": "https://www.media.stellantis.com/uploads/de/model-pricelist/preisliste_grand_cherokee_4xe_januar_20234-6486c171a11d8.pdf",
+    "sourceDate": "2023-01-01"
+  }
+}
