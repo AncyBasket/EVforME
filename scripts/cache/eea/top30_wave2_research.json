@@ -1,0 +1,383 @@
+{
+  "generatedAt": "2026-10-28",
+  "wave": "top30_wave2",
+  "rules_applied": {
+    "fuelConsumptionLPerKm": "CS L/100 MAX of published range / 100; reject weighted/pondéré/gewichtet combined",
+    "energyConsumptionKWhPerKm": "CD electric kWh/100 MAX / 100; never from weighted",
+    "wltpRangeKm": "MIN combined EAER only (never City)",
+    "batteryKWh": "MAX published pack capacity in dated OEM doc",
+    "dating": "printed date in model year OR archive.org snapshot timestamp in model year; no live generic model pages for past years"
+  },
+  "homologation_bridges_checked": {
+    "jeep-compass": {"2022∩2023": 0, "2022∩2024": 0, "2023∩2024": 10},
+    "jeep-renegade": {"2022∩2023": 0, "2022∩2024": 0, "2023∩2024": 11},
+    "cupra-formentor-e": {"2022∩2023": 0, "2022∩2024": 0, "2023∩2024": 4, "note": "shared fps are prior-gen ~110 kW; dic-2024 25.8 kWh/150 kW facelift likely different → do not bridge new-battery 2024 values back to 2023"},
+    "bmw-x1-25e": {"2022∩2023": 0, "2022∩2024": 0, "2023∩2024": 4, "note": "U11 gen; 2022 catalog maps to bmw-x1-25e-b (F48) with no cross-year fps"},
+    "bmw-x1-25e-b": {"2022 only": true},
+    "ford-kuga": {"2022∩2023": 0, "2022∩2024": 0, "2023∩2024": 1},
+    "audi-q3-sb": {"2022∩2023": 0, "2022∩2024": 0, "2023∩2024": 11},
+    "mercedes-glc-300de": {"2023∩2024": 28},
+    "toyota-c-hr": {"2024∩2025": 0},
+    "volvo-xc40-phev": "family absent from homologation_map families keys checked",
+    "mini-countryman / alfa-tonale / peugeot-3008 / renault-captur / mercedes-gla / mercedes-gle": "no matching family keys with usable year overlaps for these IDs in map scan"
+  },
+  "jeep_renegade_my24_fr_uploads": {
+    "download_endpoint": "https://www.media.stellantis.com/fr-fr/download-price-lists/184",
+    "content_disposition_filename": "tarifpublicjeeprrenegademy242024c3avril2024-66334a53de22c.pdf",
+    "inferred_direct_uploads_url": "https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicjeeprrenegademy242024c3avril2024-66334a53de22c.pdf",
+    "inferred_url_status_this_wave": "HTTP 403 Akamai from this environment; filename confirmed via Content-Disposition on /download-price-lists/184 (HTTP 200, application/pdf)",
+    "local_cache": "scripts/cache/oem/jeep_renegade_my24_tarif_fr_20240403.pdf",
+    "printed_ref": "Tarif Public réf : Renegade MY24 2024-C au 3 avril 2024",
+    "uk_alternate_working": {
+      "url": "https://www.media.stellantis.com/uploads/uk/model-document/renegadepricelist-66cee5a96fac2.pdf",
+      "sourceDate": "2024-04-01",
+      "title": "Jeep Renegade MY24 Price List (UK) — MSRP from 01/04/2024; PDF titled July 2024",
+      "fields_seen": {
+        "wltpRangeKm": 48,
+        "batteryKWh": 11.4
+      },
+      "notes": "Fuel 2–2.4 l/100 is weighted PHEV figure — rejected as CS. Energy kWh not listed. Range 48–50 → MIN 48. Battery 11.4 kWh."
+    }
+  },
+  "vehicles": {
+    "jeep-compass-phev-4xe-2022": {
+      "tried_urls": [
+        "https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicnouvellejeeprcompassmy224xe2022a4jan2022-61d48676cf80a.pdf",
+        "https://web.archive.org/web/20220630164442/https://www.jeep.de/hybrid-suv",
+        "https://web.archive.org/web/20221208192815/https://www.jeep.de/hybrid-suv"
+      ],
+      "valid_sources": [
+        {
+          "url": "https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicnouvellejeeprcompassmy224xe2022a4jan2022-61d48676cf80a.pdf",
+          "sourceDate": "2022-01-04",
+          "title": "Tarif Public Jeep Compass 4xe MY22 2022-A du 4 janvier 2022",
+          "fields_extractable": {
+            "energyConsumptionKWhPerKm": 0.168,
+            "wltpRangeKm": 46,
+            "batteryKWh": 11.4
+          },
+          "notes": "Memo/tech: énergie électrique 16,8–16,1 / 16,7–16,6 → MAX 16.8 kWh/100. Autonomie WLTP 47–46 / 49–46 → MIN combined 46 (city ignored). Batterie 11,4 kWh. Consommations mixtes 2,1–1,8 / 2,0–1,9 are pondérées — rejected as CS. jeep.de 2022 archives lack numeric CS tables."
+        }
+      ],
+      "homologation": "No 2022∩2023/2024 identical fps — cannot derive from 2024 Compass OEM fills.",
+      "reason_if_incomplete": "CS fuel not present as charge-sustaining in dated 2022 OEM (only weighted)."
+    },
+    "jeep-renegade-phev-4xe-2022": {
+      "tried_urls": [
+        "https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicjeeprrenegademy222022e1erjuin2022-62ac25f07f521.pdf",
+        "https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicjeeprrenegade4xemy222022a4janvier2022-61d48736d06cb.pdf",
+        "https://web.archive.org/web/20220630164442/https://www.jeep.de/hybrid-suv",
+        "https://web.archive.org/web/20221208192815/https://www.jeep.de/hybrid-suv"
+      ],
+      "valid_sources": [
+        {
+          "url": "https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicjeeprrenegademy222022e1erjuin2022-62ac25f07f521.pdf",
+          "sourceDate": "2022-06-01",
+          "title": "Tarif Public Jeep Renegade MY22 2022-E au 1er juin 2022",
+          "fields_extractable": {
+            "energyConsumptionKWhPerKm": 0.163,
+            "wltpRangeKm": 45,
+            "batteryKWh": 11.4
+          },
+          "notes": "Tech block: énergie 16,3–15,6 / 16,0–15,5 → MAX 16.3. Autonomie 49–48 / 48–45 → MIN 45. Batterie 11,4. Fuel 1,9–1,8 / 2,1–1,8 weighted — rejected as CS."
+        },
+        {
+          "url": "https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicjeeprrenegade4xemy222022a4janvier2022-61d48736d06cb.pdf",
+          "sourceDate": "2022-01-04",
+          "title": "Tarif Public Renegade MY22 4xe 2022-A au 4 janvier 2022",
+          "fields_extractable": {
+            "wltpRangeKm": 45
+          },
+          "notes": "Ranges 49–48 / 49–45 → MIN 45. Fuel weighted. Energy/battery not in memo table (prefer June PDF for those)."
+        }
+      ],
+      "homologation": "No 2022∩2024 identical fps.",
+      "reason_if_incomplete": "CS fuel missing (weighted-only in FR tarifs; 2022 jeep.de hybrid-suv archives have no CS numeric table)."
+    },
+    "cupra-formentor-phev-e-hybrid-2024": {
+      "tried_urls": [
+        "https://www.cupraofficial.com/content/dam/public/cupra-website/generic/pdf/cupra-formentor-catalogue-dic-2024.pdf",
+        "https://www.cupra.com/content/dam/public/cupra-website/generic/pdf/cupra-formentor-catalogue-dic-2024.pdf",
+        "https://www.seat-mediacenter.com/content/global/smc-website/new-en/CUPRA-Brand/presskits/new-cupra-formentor/technical-data",
+        "https://www.cupraofficial.com/content/dam/countries/gb/cupra-website/download-documents/2023/v1_cars_models_cupra_formentor-pricelist-KM7-11-2023.pdf"
+      ],
+      "valid_sources": [
+        {
+          "url": "https://www.cupra.com/content/dam/public/cupra-website/generic/pdf/cupra-formentor-catalogue-dic-2024.pdf",
+          "sourceDate": "2024-12-04",
+          "title": "CUPRA Formentor catalogue dic-2024 (Last-Modified 2024-12-04)",
+          "fields_extractable": {
+            "fuelConsumptionLPerKm": 0.061,
+            "energyConsumptionKWhPerKm": 0.183,
+            "wltpRangeKm": 108,
+            "batteryKWh": 25.8
+          },
+          "notes": "1.5 e-HYBRID tables: CS 5.4–5.8 and 5.6–6.1 → MAX 6.1 L/100. Electric consumption 16.1–17.2 and 16.9–18.3 → MAX 18.3. Electric range WLTP 125–115 and 119–108 → MIN combined 108. Battery capacity 25,8 kWh. This is the 25.8 kWh / higher-power facelift — confirm Italian seed variant matches before applying."
+        }
+      ]
+    },
+    "mini-countryman-cooper-se-all4-2023": {
+      "tried_urls": [
+        "https://www.press.bmwgroup.com/global/article/detail/T0429778EN/postcard-story-the-mini-cooper-se-countryman-all4?language=en",
+        "https://www.press.bmwgroup.com/global/article/attachment/T0429778EN/596763"
+      ],
+      "valid_sources": [
+        {
+          "url": "https://www.press.bmwgroup.com/global/article/detail/T0429778EN/postcard-story-the-mini-cooper-se-countryman-all4?language=en",
+          "sourceDate": "2023-08-22",
+          "title": "Postcard Story. The MINI Cooper SE Countryman ALL4.",
+          "fields_extractable": {
+            "fuelConsumptionLPerKm": 0.021,
+            "energyConsumptionKWhPerKm": 0.161
+          },
+          "notes": "Fuel combined 2.1–1.8 WLTP → MAX 2.1. Power consumption 16.1–15.3 → MAX 16.1. No EAER/battery in this postcard release."
+        }
+      ],
+      "reason_if_incomplete": "Range and battery not in 2023-dated MINI press item found this wave."
+    },
+    "volvo-xc40-phev-recharge-2022": {
+      "tried_urls": [
+        "https://www.media.volvocars.com/global/en-gb/media/documenttext/282978",
+        "https://www.media.volvocars.com/uk/en-gb/media/documentfile/286926/kr20-wws-spec-sheet-volvo-xc40-recharge-plug-in-hybrid-t5-fwd-r-design-pro",
+        "https://www.media.volvocars.com/uk/en-gb/media/pressreleases/257183/volvo-becomes-first-car-manufacturer-to-offer-plug-in-hybrid-versions-of-its-entire-model-range-with",
+        "https://www.media.volvocars.com/global/en-gb/media/documentfile/280513/2022-volvo-xc40-recharge-technical-specifications"
+      ],
+      "valid_sources": [],
+      "reason": "Media hits are mostly BEV 'XC40 Recharge' or pre-2022 Twin Engine launch; MY2022 documenttext 282978 mentions T5 Recharge but without extractable WLTP CS/energy/EAER/kWh in reachable text. Spec sheet 286926 is a documentfile landing page without verified numeric body this wave. documenttext 282978 DNS/unavailable on fetch."
+    },
+    "cupra-formentor-phev-e-hybrid-2023": {
+      "tried_urls": [
+        "https://www.cupraofficial.com/content/dam/countries/gb/cupra-website/download-documents/2023/v1_cars_models_cupra_formentor-pricelist-KM7-11-2023.pdf",
+        "https://www.cupra.com/content/dam/public/cupra-website/generic/pdf/cupra-formentor-catalogue-dic-2024.pdf"
+      ],
+      "valid_sources": [],
+      "homologation": "2023∩2024 fps exist for prior-gen e-Hybrid, but dic-2024 25.8 kWh values must NOT be chained to 2023 (different battery/powertrain).",
+      "reason": "UK Nov-2023 pricelist (dated in filename KM7-11-2023) has mpg/CO2 and 'up to 37 miles' marketing range — no L/100 CS, no kWh/100, no pack kWh, no clear MIN EAER km table suitable under rules."
+    },
+    "volvo-xc40-phev-recharge-2023": {
+      "tried_urls": [
+        "https://www.media.volvocars.com/global/en-gb/media/documenttext/301376",
+        "https://www.media.volvocars.com/global/en-gb/media/documentfile/293983/2023-volvo-xc40-recharge-technical-specifications"
+      ],
+      "valid_sources": [],
+      "reason": "2023 'XC40 Recharge' media docs retrieved are BEV-focused; no verified 2023-dated PHEV T5/T4 Recharge PDF/press with CS/energy/EAER/battery this wave."
+    },
+    "bmw-x1-phev-xdrive25e-2024": {
+      "tried_urls": [
+        "https://www.press.bmwgroup.com/global/article/detail/T0404062EN/bmw-model-update-measures-as-of-autumn-2022?language=en",
+        "https://www.press.bmwgroup.com/global/article/attachment/T0404062EN/567378",
+        "https://web.archive.org/web/20240604155829/https://www.bmw.de/content/dam/bmw/marketDE/bmw_de/mybmw/bmw-efficientdynamics/SP-1619_CO2_A4_Vergleich_Emissionswerte_05_2024_X4_05.pdf.coredownload.inline.pdf"
+      ],
+      "valid_sources": [],
+      "homologation": "bmw-x1-25e 2023∩2024 = 4 fps — usable once a 2023 or 2024 same-MY OEM source fills energy/range/battery.",
+      "notes": "CS already filled from EnVKV May-2024 archive in prior wave. Autumn-2022 press has energy MAX 16.8, EAER MIN 77, usable battery 14.2 but printed date 2022-09-28 is NOT in MY2024 — rejected for this id.",
+      "reason": "No 2024-dated OEM PDF/press verified this wave for energy/range/battery (live preisliste rejected by dating rule)."
+    },
+    "bmw-x1-phev-xdrive25e-2022": {
+      "tried_urls": [
+        "https://www.press.bmwgroup.com/global/article/detail/T0314292EN/specifications-of-the-bmw-x1-xdrive25e-valid-from-01/2020?language=en",
+        "https://www.press.bmwgroup.com/global/article/attachment/T0314292EN/457889",
+        "https://www.press.bmwgroup.com/global/article/detail/T0404062EN/bmw-model-update-measures-as-of-autumn-2022?language=en"
+      ],
+      "valid_sources": [],
+      "notes": "Catalog 2022 maps to F48 (bmw-x1-25e-b). Spec sheet valid from 01/2020 is dated 2020 — not in MY2022. Autumn-2022 press describes NEW U11 X1 — wrong generation for this id.",
+      "reason": "No OEM document with printed date in 2022 verified for F48 xDrive25e CS/energy/EAER/battery."
+    },
+    "alfa-romeo-tonale-phev-2023": {
+      "tried_urls": [
+        "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonale15_06_2023-650c0a36cddcf.pdf",
+        "https://www.media.stellantis.com/uploads/uk/model-pricelist/317278alfaromeotonale_price_list_my22_june23-650ad0374a260.pdf",
+        "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy24-6544e1a3b2070.pdf"
+      ],
+      "valid_sources": [],
+      "reason": "IT listino 15/06/2023 and UK MY22 June-2023 price list show PHEV pricing and weighted 1.3–1.4 l/100 / 29–33 g CO2 — no CS, no kWh/100, no EAER km, no pack kWh extractable under rules."
+    },
+    "ford-kuga-phev-2022": {
+      "tried_urls": [
+        "https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/Technische_Daten_des_Ford_Kuga.pdf",
+        "https://media.ford.com/content/dam/fordmedia/Europe/documents/productReleases/Kuga/Kuga_Euro_TechSpec.pdf",
+        "https://media.ford.com/content/fordmedia/feu/de/en/news/2022/10/10/ford-kuga-plug-in-hybrid-is-europes-best-selling-phev--now-avail.html",
+        "https://media.ford.com/content/fordmedia/feu/de/de/news/2022/08/19/ford-bietet-den-kuga-phev-auch-nach-ablauf-der-plug-in-hybridfoe.html"
+      ],
+      "valid_sources": [],
+      "homologation": "Only 2023∩2024 fps (1); no 2022∩ later bridge.",
+      "reason": "ford.de Technische_Daten PDF 404 this wave; Euro TechSpec is older NEDC-era (range 56 km) without verified 2022 print date; 2022 press pages require registration / no full extractable dated PDF body verified."
+    },
+    "mercedes-benz-glc-phev-300-de-2024": {
+      "tried_urls": [
+        "https://media.mercedes-benz.com/article/99adc489-2c3c-4115-8233-ea9ca12265a3",
+        "https://media.mercedes-benz.com/en/article/7b3a7e1d-eb70-4bb9-a872-4cfbb414280e",
+        "https://media.mercedes-benz.com/article/b34700b9-7a6f-41be-a10e-841fbf979a44",
+        "https://media.mercedes-benz.com/article/795bffa0-830f-4df5-9bb8-bb8dae8f7e40"
+      ],
+      "valid_sources": [],
+      "homologation": "mercedes-glc-300de 2023∩2024 = 28 fps. June-2023 GLC Coupé press has battery 31.2 and EAER 113–130 (MIN 113) but printed date 2023 — usable for a 2023 sibling then derive to 2024; fuel/energy there are gewichtet (rejected). Oct-2024 sales press gives CS 6.2–5.6 for GLC 300 de Coupé only (MAX 6.2) but no EAER/battery/CD energy in that article.",
+      "reason": "No single 2024-dated OEM source verified with non-weighted energy + EAER + battery for GLC 300 de SUV; Coupé Oct-2024 CS alone insufficient."
+    },
+    "toyota-c-hr-phev-2024": {
+      "tried_urls": [
+        "https://www.toyota.de/content/dam/toyota/nmsc/germany/downloads/toyota-c-hr/Toyota_C-HR_PL_01_24_d.pdf",
+        "https://www.toyota.de/content/dam/toyota/nmsc/germany/downloads/toyota-c-hr/Toyota_C-HR_PL_07_24_j.pdf",
+        "https://www.toyota.de/content/dam/toyota/nmsc/germany/downloads/toyota-c-hr/Toyota_C-HR_PL_04_24_m.pdf",
+        "https://www.toyota.de/content/dam/toyota/nmsc/germany/downloads/update_100524/Toyota_C-HR_PL_04_24_l.pdf"
+      ],
+      "valid_sources": [
+        {
+          "url": "https://www.toyota.de/content/dam/toyota/nmsc/germany/downloads/toyota-c-hr/Toyota_C-HR_PL_01_24_d.pdf",
+          "sourceDate": "2024-01-01",
+          "title": "TOYOTA C-HR Preise und Fakten PL_01_24_d",
+          "fields_extractable": {
+            "energyConsumptionKWhPerKm": 0.153,
+            "batteryKWh": 13.6
+          },
+          "notes": "Content verified via OEM PDF text extraction earlier this wave (Stromverbrauch 15,3–14,9 → MAX 15.3; Batteriekapazität 13,6 kWh). Live HEAD now 404 — prefer archive.org capture of same path if re-fetch fails. Weighted fuel ignored (CS+range already exist in seed). EAER 62–66 also present (MIN 62) but range already filled."
+        },
+        {
+          "url": "https://www.toyota.de/content/dam/toyota/nmsc/germany/downloads/toyota-c-hr/Toyota_C-HR_PL_04_24_m.pdf",
+          "sourceDate": "2024-04-01",
+          "title": "TOYOTA C-HR PL_04_24_m",
+          "fields_extractable": {
+            "energyConsumptionKWhPerKm": 0.153,
+            "batteryKWh": 13.6
+          },
+          "notes": "Text extracted this wave: Strom 15,1–15,3 → MAX 15.3; Batterie 13,6. Live URL currently 404."
+        }
+      ]
+    },
+    "peugeot-3008-phev-2022": {
+      "tried_urls": [
+        "https://www.media.stellantis.com/uploads/uk/model-pricelist/peugeot3008pricespecapr23-6455a65377d74.pdf",
+        "https://www.media.stellantis.com/uploads/it/attachment/13449/20230503listinopeugeot3008-6451298d30471.pdf"
+      ],
+      "valid_sources": [],
+      "reason": "No 2022-dated OEM PDF verified. Apr-2023 UK price/spec is MY2023 dating."
+    },
+    "renault-captur-phev-e-tech-phev-2022": {
+      "tried_urls": [
+        "https://nl.media.renaultgroup.com/prijzen-nieuwe-renault-clio-e-tech-hybrid-en-captur-e-tech-plug-in-hybrid-bekend/",
+        "https://nl.media.renaultgroup.com/persintroductie-nieuwe-renault-clio-e-tech-hybrid-captur-e-tech-plug-in-hybrid-en-megane-e-tech-plug-in-hybrid/",
+        "https://media.renaultgroup.com/download/?aid=251060&vid=1"
+      ],
+      "valid_sources": [],
+      "reason": "Reachable Captur E-TECH PHEV media items are 2020 launch-era (not printed date in 2022) and lack full WLTP CS/energy/EAER tables; no 2022-dated PDF verified."
+    },
+    "bmw-x1-phev-xdrive25e-2023": {
+      "tried_urls": [
+        "https://www.press.bmwgroup.com/global/article/detail/T0404062EN/bmw-model-update-measures-as-of-autumn-2022?language=en",
+        "https://www.press.bmwgroup.com/global/article/attachment/T0404062EN/567378"
+      ],
+      "valid_sources": [],
+      "homologation": "2023∩2024 fps exist; CS previously derived from 2024 EnVKV. Energy/range/battery still blocked until a same-MY (2023 or 2024) OEM source exists.",
+      "reason": "Autumn-2022 press (energy 16.8, range 77, battery 14.2 usable) is dated 2022 — not in MY2023."
+    },
+    "mercedes-benz-gle-phev-350-de-2022": {
+      "tried_urls": [
+        "https://media.mercedes-benz.com/article/8d4ac5ae-6684-4c8c-b1ee-383721a634c2"
+      ],
+      "valid_sources": [],
+      "reason": "GLE facelift press has battery 31.2 and EAER bands but article is post-2022 product update (values for newer gen); publication dating not confirmed as 2022 print for this wave — fuel/energy gewichtet rejected. No clear 2022-dated OEM PDF verified."
+    },
+    "peugeot-3008-phev-2023": {
+      "tried_urls": [
+        "https://www.media.stellantis.com/uploads/uk/model-pricelist/peugeot3008pricespecapr23-6455a65377d74.pdf",
+        "https://www.media.stellantis.com/uploads/it/attachment/13449/20230503listinopeugeot3008-6451298d30471.pdf"
+      ],
+      "valid_sources": [
+        {
+          "url": "https://www.media.stellantis.com/uploads/uk/model-pricelist/peugeot3008pricespecapr23-6455a65377d74.pdf",
+          "sourceDate": "2023-04-01",
+          "title": "PEUGEOT 3008 Pricelist — Effective from 1st April 2023",
+          "fields_extractable": {
+            "wltpRangeKm": 48,
+            "batteryKWh": 14.2
+          },
+          "notes": "Tech table: Electric Range Combined miles 29.8–39.1 / 35.4–42.9 / 37.9–41.6 → MIN 29.8 mi ≈ 48 km. Battery Capacity (kWh) 12.4 / 14.2 / 14.2 → MAX 14.2. Fuel combined 1.1–2.0 l/100 bands are weighted — rejected as CS. No CD electric kWh/100 row found. IT listino 03/05/2023 is prices-only."
+        }
+      ],
+      "reason_if_incomplete": "CS and energy still missing from dated 2023 OEM."
+    },
+    "mini-countryman-cooper-se-all4-2022": {
+      "tried_urls": [
+        "https://www.press.bmwgroup.com/global/article/detail/T0429778EN/postcard-story-the-mini-cooper-se-countryman-all4?language=en",
+        "https://www.press.bmwgroup.com/global/article/attachment/T0429778EN/596763"
+      ],
+      "valid_sources": [],
+      "reason": "Only verified MINI Cooper SE Countryman ALL4 press with numbers is dated 2023-08-22 — not usable for MY2022."
+    },
+    "audi-q3-sportback-phev-45-tfsi-e-2024": {
+      "tried_urls": [
+        "https://www.audi-mediacenter.com/en/press-releases/high-efficiency-and-outstanding-driving-pleasurethe-audi-q3-as-a-plug-in-hybrid-13447",
+        "https://www.audi-mediacenter.com/de/pressemitteilungen/hohe-effizienz-und-grosser-fahrspass-der-audi-q3-als-plug-in-hybrid-13447/download"
+      ],
+      "valid_sources": [],
+      "homologation": "audi-q3-sb 2023∩2024 = 11 fps — blocked until a 2023 or 2024 same-MY OEM fill exists.",
+      "reason": "Launch press is Dec-2020 (not in MY2023/2024). No 2024-dated Q3 Sportback 45 TFSI e tech PDF verified."
+    },
+    "audi-q3-sportback-phev-45-tfsi-e-2023": {
+      "tried_urls": [
+        "https://www.audi-mediacenter.com/en/press-releases/high-efficiency-and-outstanding-driving-pleasurethe-audi-q3-as-a-plug-in-hybrid-13447",
+        "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_230718.pdf?1698933920="
+      ],
+      "valid_sources": [],
+      "homologation": "Can derive from 2024 once 2024 has valid OEM fields (11 shared fps).",
+      "reason": "No 2023-dated Q3 Sportback PHEV OEM PDF verified; A3 eTD is wrong model."
+    },
+    "mercedes-benz-gla-phev-250-e-2023": {
+      "tried_urls": [
+        "https://media.mercedes-benz.com/article/df476918-d4c0-4677-bd4c-4c18daffe317"
+      ],
+      "valid_sources": [],
+      "notes": "16 Mar 2023 GLA press lists provisional weighted fuel 1.4–1.1, weighted Strom 23.8–21.1, battery 11.5, electric range 62–70 — values marked vorläufig; fuel/energy gewichtet rejected. Battery 11.5 and range MIN 62 could be usable if treating provisional as acceptable — left out for honesty (explicitly provisional / no EG-type approval yet at publication).",
+      "reason": "Provisional-only WLTP figures in 2023 press; weighted fuel/energy unusable; no confirmed final 2023 tech-data PDF verified."
+    },
+    "mercedes-benz-gle-coupe-phev-350-de-2022": {
+      "tried_urls": [
+        "https://media.mercedes-benz.com/article/8d4ac5ae-6684-4c8c-b1ee-383721a634c2"
+      ],
+      "valid_sources": [],
+      "reason": "No 2022-dated GLE Coupé 350 de OEM PDF/press with confirmed print date and non-weighted extractable quartet verified this wave."
+    },
+    "mercedes-benz-gla-phev-250-e-2022": {
+      "tried_urls": [
+        "https://media.mercedes-benz.com/article/df476918-d4c0-4677-bd4c-4c18daffe317"
+      ],
+      "valid_sources": [],
+      "reason": "Mar-2023 GLA refresh press is not MY2022-dated; no 2022-dated GLA 250 e OEM source verified."
+    }
+  },
+  "summary": {
+    "ids_with_any_valid_fields": [
+      "jeep-compass-phev-4xe-2022",
+      "jeep-renegade-phev-4xe-2022",
+      "cupra-formentor-phev-e-hybrid-2024",
+      "mini-countryman-cooper-se-all4-2023",
+      "toyota-c-hr-phev-2024",
+      "peugeot-3008-phev-2023"
+    ],
+    "ids_fully_empty": [
+      "volvo-xc40-phev-recharge-2022",
+      "cupra-formentor-phev-e-hybrid-2023",
+      "volvo-xc40-phev-recharge-2023",
+      "bmw-x1-phev-xdrive25e-2024",
+      "bmw-x1-phev-xdrive25e-2022",
+      "alfa-romeo-tonale-phev-2023",
+      "ford-kuga-phev-2022",
+      "mercedes-benz-glc-phev-300-de-2024",
+      "peugeot-3008-phev-2022",
+      "renault-captur-phev-e-tech-phev-2022",
+      "bmw-x1-phev-xdrive25e-2023",
+      "mercedes-benz-gle-phev-350-de-2022",
+      "mini-countryman-cooper-se-all4-2022",
+      "audi-q3-sportback-phev-45-tfsi-e-2024",
+      "audi-q3-sportback-phev-45-tfsi-e-2023",
+      "mercedes-benz-gla-phev-250-e-2023",
+      "mercedes-benz-gle-coupe-phev-350-de-2022",
+      "mercedes-benz-gla-phev-250-e-2022"
+    ],
+    "strongest_fills": {
+      "cupra-formentor-phev-e-hybrid-2024": "all 4 from dic-2024 catalogue (facelift 25.8 kWh — confirm seed match)",
+      "jeep-compass/renegade-2022": "energy+range+battery from FR MY22 tarifs; CS still open",
+      "toyota-c-hr-phev-2024": "energy 0.153 + battery 13.6 from PL_01_24 / PL_04_24 text (URLs flaky live)"
+    }
+  }
+}

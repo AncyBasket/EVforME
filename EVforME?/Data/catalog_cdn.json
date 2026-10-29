@@ -2,11 +2,11 @@
   "url": "",
   "publishedUrl": "",
   "rows": 6977,
-  "bytes": 3058148,
+  "bytes": 3072185,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-28T09:07:53.855588+00:00",
+  "updatedAt": "2026-10-29T10:22:17.984498+00:00",
   "policy": "offline-first",
-  "seedVersion": 72,
+  "seedVersion": 75,
   "note": "seedVersion 64: IT wave-2 \u2014 aliases/renames + missing \u2265500 families (EEA fuels; PHEV/BEV energy nil without same-MY OEM)."
 }

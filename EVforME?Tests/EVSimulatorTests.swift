@@ -360,16 +360,28 @@ final class EVSimulatorTests: XCTestCase {
 
     func testSimulate_PHEVTarget_IncludesBlendReasonAndFiniteCosts() {
         let catalog = VehicleCatalogService.shared
-        // Prefer a complete PHEV (CS+CD); incomplete IT shells must not be the fallback.
-        let phevId = "hyundai-ioniq-phev-2022"
+        // Prefer a truly complete PHEV (CS+CD+range+battery). EPA shells missing battery are incomplete.
+        let preferred = catalog.vehicle(by: "ford-kuga-phev-2024")
         let completeTarget = catalog.targetEVVehicles().first {
-            $0.powertrain == .phev && !$0.hasIncompleteCatalogData
+            $0.powertrain == .phev
+                && !$0.hasIncompleteCatalogData
+                && $0.usableChargeSustainingFuelLPerKm != nil
+                && $0.usableChargeDepletingEnergyKWhPerKm != nil
+                && $0.batteryKWh != nil
+                && $0.wltpRangeKm != nil
         }
-        guard catalog.vehicle(by: phevId) != nil || completeTarget != nil else {
+        let target: VehicleCatalogItem?
+        if let preferred, !preferred.hasIncompleteCatalogData {
+            target = preferred
+        } else {
+            target = completeTarget
+        }
+        guard let target else {
             XCTFail("Bundled catalog must include at least one complete PHEV target")
             return
         }
-        let targetId = catalog.vehicle(by: phevId)?.id ?? completeTarget!.id
+        XCTAssertFalse(target.hasIncompleteCatalogData, target.id)
+        XCTAssertNotNil(target.batteryKWh, target.id)
 
         let input = UserInput(
             dailyKm: 15_000,
@@ -379,7 +391,7 @@ final class EVSimulatorTests: XCTestCase {
             ownershipYears: 5,
             electricityPricePerKWh: 0.28,
             sourceVehicleId: testSourceVehicleId,
-            targetVehicleId: targetId,
+            targetVehicleId: target.id,
             scenario: .realistic
         )
 
@@ -395,9 +407,14 @@ final class EVSimulatorTests: XCTestCase {
 
     func testSimulate_PHEVHomeCharging_ProducesFiniteYearlyCosts() {
         let catalog = VehicleCatalogService.shared
-        guard let phev = catalog.vehicle(by: "hyundai-ioniq-phev-2022")
+        guard let phev = catalog.vehicle(by: "ford-kuga-phev-2024").flatMap({ v -> VehicleCatalogItem? in
+                v.hasIncompleteCatalogData ? nil : v
+            })
                 ?? catalog.targetEVVehicles().first(where: {
-                    $0.powertrain == .phev && !$0.hasIncompleteCatalogData
+                    $0.powertrain == .phev
+                        && !$0.hasIncompleteCatalogData
+                        && $0.batteryKWh != nil
+                        && $0.wltpRangeKm != nil
                 })
         else {
             XCTFail("Need a complete PHEV in catalog")
@@ -847,7 +864,8 @@ final class EVSimulatorTests: XCTestCase {
     }
 
     func testIncompletePHEV_WithoutOverrides_NoVerdict() {
-        let incompleteId = "jeep-compass-phev-4xe-2022"
+        // Still multi-missing after top30 wave2 (no dated OEM CS/CD/range/battery).
+        let incompleteId = "cupra-formentor-phev-e-hybrid-2024"
         let vehicle = VehicleCatalogService.shared.vehicle(by: incompleteId)
         XCTAssertNotNil(vehicle)
         XCTAssertEqual(vehicle?.catalogDataIncomplete, true)
