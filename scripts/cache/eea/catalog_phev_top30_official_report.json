@@ -1,6 +1,6 @@
 {
-  "seedVersion": 74,
-  "fingerprint": "23e88a053f170c2eb762e917e5ab413120251bec7786aa72ca532836e9260eb7",
+  "seedVersion": 75,
+  "fingerprint": "ce896152a6347ec4d2449193805034900c2acd05e2357e4bee74d02bee9c33a9",
   "count_explanation": {
     "pr31_reported_complete_only_kwh_multi": [
       10,
@@ -82,17 +82,17 @@
     "archiveTimestamp": "20250326070148",
     "note": "No 2024 CDX snapshot of download page; document itself dated 03/04/2024; filename from Content-Disposition"
   },
-  "phev_complete_before": 3,
-  "phev_complete_after": 4,
-  "phev_only_kwh_before": 8,
-  "phev_only_kwh_after": 10,
-  "phev_multi_missing_before": 110,
+  "phev_complete_before": 4,
+  "phev_complete_after": 3,
+  "phev_only_kwh_before": 10,
+  "phev_only_kwh_after": 11,
+  "phev_multi_missing_before": 107,
   "phev_multi_missing_after": 107,
-  "top30_complete_before": 2,
+  "top30_complete_before": 1,
   "top30_only_kwh_before": 4,
-  "top30_multi_missing_before": 24,
-  "top30_complete_after": 3,
-  "top30_only_kwh_after": 6,
+  "top30_multi_missing_before": 21,
+  "top30_complete_after": 0,
+  "top30_only_kwh_after": 5,
   "top30_multi_missing_after": 21,
   "fields_saved": [
     {
@@ -276,6 +276,281 @@
       "via": "same_my"
     }
   ],
+  "wave3_fields_changed": [
+    {
+      "id": "jeep-compass-phev-4xe-2022",
+      "field": "energyConsumptionKWhPerKm\u2192weightedEnergyConsumptionKWhPerKm",
+      "before": 0.168,
+      "after": 0.168,
+      "sourceDate": "2022-01-04",
+      "url": "https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicnouvellejeeprcompassmy224xe2022a4jan2022-61d48676cf80a.pdf",
+      "via": "same_my",
+      "TAN": null,
+      "note": "demoted: no pure-electric label in document"
+    },
+    {
+      "id": "jeep-renegade-phev-4xe-2022",
+      "field": "energyConsumptionKWhPerKm\u2192weightedEnergyConsumptionKWhPerKm",
+      "before": 0.163,
+      "after": 0.163,
+      "sourceDate": "2022-06-01",
+      "url": "https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicjeeprrenegademy222022e1erjuin2022-62ac25f07f521.pdf",
+      "via": "same_my",
+      "TAN": null,
+      "note": "demoted: no pure-electric label in document"
+    },
+    {
+      "id": "bmw-x1-phev-xdrive25e-2022",
+      "field": "energyConsumptionKWhPerKm\u2192weightedEnergyConsumptionKWhPerKm",
+      "before": 0.154,
+      "after": 0.154,
+      "sourceDate": "2022-01-26",
+      "url": "https://www.press.bmwgroup.com/italy/article/attachment/T0321361IT/520251",
+      "via": "same_my",
+      "TAN": null,
+      "note": "demoted: no pure-electric label in document"
+    },
+    {
+      "id": "toyota-c-hr-phev-2024",
+      "field": "energyConsumptionKWhPerKm\u2192weightedEnergyConsumptionKWhPerKm",
+      "before": 0.153,
+      "after": 0.153,
+      "sourceDate": "2024-07-01",
+      "url": "https://web.archive.org/web/20240725090934id_/https://www.toyota.de/content/dam/toyota/nmsc/germany/downloads/toyota-c-hr/Toyota_C-HR_PL_07_24_j.pdf",
+      "via": "same_my",
+      "TAN": null,
+      "note": "demoted: no pure-electric label in document"
+    }
+  ],
+  "wave3_energy_demotions": [
+    {
+      "id": "jeep-compass-phev-4xe-2022",
+      "before": {
+        "energyConsumptionKWhPerKm": 0.168,
+        "weightedEnergyConsumptionKWhPerKm": null,
+        "energyIsWeighted": false,
+        "catalogDataIncomplete": true,
+        "missingCalcFields": [
+          "fuelConsumptionLPerKm"
+        ]
+      },
+      "after": {
+        "energyConsumptionKWhPerKm": null,
+        "weightedEnergyConsumptionKWhPerKm": 0.168,
+        "energyIsWeighted": true,
+        "catalogDataIncomplete": true,
+        "missingCalcFields": [
+          "fuelConsumptionLPerKm",
+          "energyConsumptionKWhPerKm"
+        ]
+      }
+    },
+    {
+      "id": "jeep-renegade-phev-4xe-2022",
+      "before": {
+        "energyConsumptionKWhPerKm": 0.163,
+        "weightedEnergyConsumptionKWhPerKm": null,
+        "energyIsWeighted": false,
+        "catalogDataIncomplete": true,
+        "missingCalcFields": [
+          "fuelConsumptionLPerKm"
+        ]
+      },
+      "after": {
+        "energyConsumptionKWhPerKm": null,
+        "weightedEnergyConsumptionKWhPerKm": 0.163,
+        "energyIsWeighted": true,
+        "catalogDataIncomplete": true,
+        "missingCalcFields": [
+          "fuelConsumptionLPerKm",
+          "energyConsumptionKWhPerKm"
+        ]
+      }
+    },
+    {
+      "id": "bmw-x1-phev-xdrive25e-2022",
+      "before": {
+        "energyConsumptionKWhPerKm": 0.154,
+        "weightedEnergyConsumptionKWhPerKm": null,
+        "energyIsWeighted": false,
+        "catalogDataIncomplete": true,
+        "missingCalcFields": [
+          "fuelConsumptionLPerKm"
+        ]
+      },
+      "after": {
+        "energyConsumptionKWhPerKm": null,
+        "weightedEnergyConsumptionKWhPerKm": 0.154,
+        "energyIsWeighted": true,
+        "catalogDataIncomplete": true,
+        "missingCalcFields": [
+          "fuelConsumptionLPerKm",
+          "energyConsumptionKWhPerKm"
+        ]
+      }
+    },
+    {
+      "id": "toyota-c-hr-phev-2024",
+      "before": {
+        "energyConsumptionKWhPerKm": 0.153,
+        "weightedEnergyConsumptionKWhPerKm": 0.153,
+        "energyIsWeighted": false,
+        "catalogDataIncomplete": false,
+        "missingCalcFields": []
+      },
+      "after": {
+        "energyConsumptionKWhPerKm": null,
+        "weightedEnergyConsumptionKWhPerKm": 0.153,
+        "energyIsWeighted": true,
+        "catalogDataIncomplete": true,
+        "missingCalcFields": [
+          "energyConsumptionKWhPerKm"
+        ]
+      }
+    }
+  ],
+  "wave3_epa_hygiene": [
+    {
+      "id": "audi-a3-e-tron-ultra-phev-2016",
+      "before": {
+        "catalogDataIncomplete": false,
+        "missingCalcFields": null,
+        "batteryKWh": null
+      },
+      "after": {
+        "catalogDataIncomplete": true,
+        "missingCalcFields": [
+          "batteryKWh"
+        ],
+        "batteryKWh": null
+      }
+    },
+    {
+      "id": "bmw-i3s-with-range-extender-phev-2021",
+      "before": {
+        "catalogDataIncomplete": false,
+        "missingCalcFields": null,
+        "batteryKWh": null
+      },
+      "after": {
+        "catalogDataIncomplete": true,
+        "missingCalcFields": [
+          "batteryKWh"
+        ],
+        "batteryKWh": null
+      }
+    },
+    {
+      "id": "chevrolet-volt-phev-2019",
+      "before": {
+        "catalogDataIncomplete": false,
+        "missingCalcFields": null,
+        "batteryKWh": null
+      },
+      "after": {
+        "catalogDataIncomplete": true,
+        "missingCalcFields": [
+          "batteryKWh"
+        ],
+        "batteryKWh": null
+      }
+    },
+    {
+      "id": "ford-c-max-energi-plug-in-hybrid-phev-2016",
+      "before": {
+        "catalogDataIncomplete": false,
+        "missingCalcFields": null,
+        "batteryKWh": null
+      },
+      "after": {
+        "catalogDataIncomplete": true,
+        "missingCalcFields": [
+          "batteryKWh"
+        ],
+        "batteryKWh": null
+      }
+    },
+    {
+      "id": "ford-escape-fwd-phev-phev-2026",
+      "before": {
+        "catalogDataIncomplete": false,
+        "missingCalcFields": null,
+        "batteryKWh": null
+      },
+      "after": {
+        "catalogDataIncomplete": true,
+        "missingCalcFields": [
+          "batteryKWh"
+        ],
+        "batteryKWh": null
+      }
+    },
+    {
+      "id": "honda-accord-phev-2014",
+      "before": {
+        "catalogDataIncomplete": false,
+        "missingCalcFields": null,
+        "batteryKWh": null
+      },
+      "after": {
+        "catalogDataIncomplete": true,
+        "missingCalcFields": [
+          "batteryKWh"
+        ],
+        "batteryKWh": null
+      }
+    },
+    {
+      "id": "hyundai-ioniq-phev-2022",
+      "before": {
+        "catalogDataIncomplete": false,
+        "missingCalcFields": null,
+        "batteryKWh": null
+      },
+      "after": {
+        "catalogDataIncomplete": true,
+        "missingCalcFields": [
+          "batteryKWh"
+        ],
+        "batteryKWh": null
+      }
+    }
+  ],
+  "wave3_cupra_note": {
+    "seed_id": "cupra-formentor-phev-e-hybrid-2024",
+    "seed_powerKw": 110.6,
+    "seed_batteryKWh": null,
+    "seed_status": "incomplete (EEA prior-gen ~110.6 kW registrations)",
+    "catalogue_2024_12": {
+      "url": "https://www.cupra.com/content/dam/public/cupra-website/generic/pdf/cupra-formentor-catalogue-dic-2024.pdf",
+      "variants": [
+        {
+          "name": "1.5 e-HYBRID 150 kW",
+          "system_kW": 150,
+          "battery_kWh": 25.8
+        },
+        {
+          "name": "1.5 e-HYBRID 200 kW",
+          "system_kW": 200,
+          "battery_kWh": 25.8
+        }
+      ],
+      "cite_lines": "ENGINE SPECS \u00ab1.5 e-HYBRID 150 KW 6-SPEED DSG\u00bb Max. power 150 (204); Battery capacity (kWh) 25,8; Charge sustaining 5.4\u20135.8; Electric consumption combined WLTP 16.1\u201317.2; Electric range 125\u2013115"
+    },
+    "decision": "TWO versions: seed row matches EEA IT 2024 FORMENTOR E-HYBRID ~110.6 kW (prior-gen still registered). Dic-2024 catalogue documents the facelift 150/200 kW + 25.8 kWh. Do NOT overwrite the 110.6 row. Proceed by adding a new variant id (e.g. cupra-formentor-phev-e-hybrid-150kw-2024) in a later wave \u2014 no row removals this wave.",
+    "action": "left_incomplete_no_overwrite"
+  },
+  "wave3_peugeot_verify": {
+    "id": "peugeot-3008-phev-2023",
+    "model": "3008",
+    "year": 2023,
+    "market": "IT",
+    "sourceDate": "2023-04-01",
+    "url": "https://www.media.stellantis.com/uploads/uk/model-pricelist/peugeot3008pricespecapr23-6455a65377d74.pdf",
+    "doc_title": "PEUGEOT 3008 Pricelist \u2014 Effective from 1st April 2023",
+    "doc_model_year": "2023.25 Model Year (G2)",
+    "action": "kept"
+  },
   "derived": [
     {
       "id": "jeep-renegade-phev-4xe-2023",

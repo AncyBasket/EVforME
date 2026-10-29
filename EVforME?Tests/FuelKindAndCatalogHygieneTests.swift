@@ -154,7 +154,8 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
                 XCTAssertNotNil(v.resolvedEnergyKWhPerKm, v.id)
                 XCTAssertGreaterThan(v.resolvedEnergyKWhPerKm ?? 0, 0, v.id)
             case .phev:
-                // Calc fields must be CS fuel (≥3) + CD energy, or catalogDataIncomplete.
+                // Calc fields: CS (≥3) + CD + range + battery, or catalogDataIncomplete.
+                let miss = v.resolvedMissingCalcFields
                 if v.hasIncompleteCatalogData {
                     if let fuel = v.fuelConsumptionLPerKm {
                         XCTAssertGreaterThanOrEqual(
@@ -163,14 +164,27 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
                             "Incomplete PHEV \(v.id) must not keep thin/weighted fuel in calc field"
                         )
                     }
-                    XCTAssertTrue(
-                        v.usableChargeSustainingFuelLPerKm == nil
-                            || v.usableChargeDepletingEnergyKWhPerKm == nil,
-                        "Incomplete PHEV \(v.id) should still miss CS or CD for calc"
+                    XCTAssertFalse(
+                        miss.isEmpty,
+                        "Incomplete PHEV \(v.id) must declare at least one missing calc field"
                     )
+                    // CS+CD both usable still requires range/battery (or other) miss — never "complete".
+                    if v.usableChargeSustainingFuelLPerKm != nil,
+                       v.usableChargeDepletingEnergyKWhPerKm != nil {
+                        XCTAssertTrue(
+                            miss.contains("batteryKWh") || miss.contains("wltpRangeKm"),
+                            "Incomplete PHEV \(v.id) with CS+CD must miss battery/range: \(miss)"
+                        )
+                    }
                 } else {
+                    XCTAssertTrue(
+                        miss.isEmpty,
+                        "Complete PHEV \(v.id) must not carry missing calc fields: \(miss)"
+                    )
                     XCTAssertNotNil(v.usableChargeSustainingFuelLPerKm, v.id)
                     XCTAssertNotNil(v.usableChargeDepletingEnergyKWhPerKm, v.id)
+                    XCTAssertNotNil(v.wltpRangeKm, "Complete PHEV \(v.id) needs wltpRangeKm")
+                    XCTAssertNotNil(v.batteryKWh, "Complete PHEV \(v.id) needs batteryKWh")
                     XCTAssertGreaterThanOrEqual((v.fuelConsumptionLPerKm ?? 0) * 100, 3.0, v.id)
                 }
             }
@@ -922,6 +936,38 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertNotNil(compass)
         XCTAssertEqual(compass?.usesEPACatalogSource, false)
         XCTAssertEqual(compass?.catalogDataIncomplete, true)
+        // Wave3: legacy EPA rows with batteryKWh nil must not look "complete".
+        for id in [
+            "audi-a3-e-tron-ultra-phev-2016",
+            "bmw-i3s-with-range-extender-phev-2021",
+            "chevrolet-volt-phev-2019",
+            "ford-c-max-energi-plug-in-hybrid-phev-2016",
+            "ford-escape-fwd-phev-phev-2026",
+            "honda-accord-phev-2014",
+            "hyundai-ioniq-phev-2022",
+        ] {
+            let v = VehicleCatalogService.shared.vehicle(by: id)
+            XCTAssertNotNil(v, id)
+            XCTAssertEqual(v?.catalogDataIncomplete, true, id)
+            XCTAssertNil(v?.batteryKWh, id)
+            XCTAssertEqual(v?.resolvedMissingCalcFields, ["batteryKWh"], id)
+        }
+    }
+
+    func testCatalog_CompletePHEVNeverHasNilCalcField() {
+        // Must-fail invariant: catalogDataIncomplete=false ⇒ all calc fields present.
+        let bad = VehicleCatalogService.shared.vehicles.filter { v in
+            guard v.powertrain == .phev, !v.hasIncompleteCatalogData else { return false }
+            return !v.resolvedMissingCalcFields.isEmpty
+                || v.usableChargeSustainingFuelLPerKm == nil
+                || v.usableChargeDepletingEnergyKWhPerKm == nil
+                || v.wltpRangeKm == nil
+                || v.batteryKWh == nil
+        }
+        XCTAssertTrue(
+            bad.isEmpty,
+            "Complete PHEV with nil calc field (must fail): \(bad.map(\.id))"
+        )
     }
 
     func testCatalog_ITPHEVWaveCoversCompassKugaFormentor() {
