@@ -419,6 +419,9 @@
 "validation_sticker_energy_range" = "Il consumo sticker deve essere tra 8 e 40 kWh/100 km.";
 "yearly_km_value" = "%d km/anno";
 "phev_blend_reason" = "PHEV modellata come mix km elettrici + carburante (più elettrico con ricarica casa).";
+"phev_range_missing_note" = "Autonomia PHEV non disponibile: per prudenza il calcolo attribuisce alla guida elettrica solo il 10% dei km; non è un dato WLTP del costruttore.";
+"catalog_low_confidence_note" = "Uno o più dati dei veicoli scelti hanno un indice di qualità basso: verifica consumi e specifiche sulla scheda del tuo veicolo. L’indice non è una probabilità.";
+"catalog_quality_score_format" = "Qualità dati %d/100";
 "insurance_included_reason" = "I costi annui includono assicurazione (stima): RC media IVASS, uguale per entrambe le auto (salvo override).";
 "tco_extras_title" = "Assicurazione e residuo";
 "tco_extras_closed" = "Stime semplificate oltre carburante e manutenzione.";
@@ -496,8 +499,8 @@
 
 /* Privacy */
 "privacy_policy_title" = "Privacy";
-"privacy_policy_updated" = "Aggiornata: 20 ottobre 2026";
-"privacy_policy_body" = "EVforME? calcola sul dispositivo se un’auto elettrica o plug-in può avere senso per te.\n\nTitolare: Andrea Ancellotti — andrea.ancellotti@gmail.com.\n\nCosa resta sul telefono: km, prezzi, veicoli scelti, paese selezionato, storico scenari, snapshot widget/Live Activity.\n\nFoto sticker: usate solo on-device per leggere consumi; non vengono caricate per quella funzione.\n\nPosizione (opzionale): Durante l’uso dell’app, solo quando apri Colonnine vicine, per centrare la ricerca Apple MapKit. Il paese per le stime di costo viene dalla regione del dispositivo o dal selettore paese — non dal GPS. Le coordinate non vengono salvate né inviate a un backend EVforME. Niente tracking in background.\n\nRete (opzionale): catalogo veicoli incluso nell’app (fonti EEA/costruttori), prezzi MIMIT + Eurostat, risultati ricerca Apple Mappe, analytics o webhook lead solo se configurati. Nella build tipica analytics/lead restano locali se gli URL sono vuoti.\n\nNon vendiamo dati e non usiamo tracker pubblicitari.\n\nModulo consulente: nome/email/città solo se li invii con consenso.\n\nPuoi revocare foto/posizione in Impostazioni iOS, evitare il form lead, o cancellare l’app per rimuovere i dati locali. Policy completa: pulsante sotto.";
+"privacy_policy_updated" = "Aggiornata: 3 novembre 2026";
+"privacy_policy_body" = "EVforME? calcola sul dispositivo se un’auto elettrica o plug-in può avere senso per te.\n\nTitolare: Andrea Ancellotti — andrea.ancellotti@gmail.com.\n\nCosa resta sul telefono: km, prezzi, veicoli scelti, paese selezionato, storico scenari, snapshot widget/Live Activity.\n\nFoto sticker: usate solo on-device per leggere consumi; non vengono caricate per quella funzione.\n\nPosizione (opzionale): Durante l’uso dell’app, solo quando apri Colonnine vicine, per centrare la ricerca Apple MapKit. Il paese per le stime di costo viene dalla regione del dispositivo o dal selettore paese — non dal GPS. Le coordinate non vengono salvate né inviate a un backend EVforME. Niente tracking in background.\n\nRete (opzionale): catalogo veicoli incluso nell’app (fonti EEA/costruttori), prezzi MIMIT + Eurostat, risultati ricerca Apple Mappe, analytics o webhook lead solo se configurati. Nella build tipica analytics/lead restano locali se gli URL sono vuoti.\n\nAPI EVforME self-hosted (se configurata): lead ed eventi vengono cancellati dopo 180 giorni per impostazione predefinita. L’accesso ai dati salvati e alle sincronizzazioni è riservato all’amministratore; l’invio dei lead richiede consenso. I servizi esterni configurati applicano la propria retention.\n\nNon vendiamo dati e non usiamo tracker pubblicitari.\n\nModulo consulente: nome/email/città solo se li invii con consenso.\n\nPuoi revocare foto/posizione in Impostazioni iOS, evitare il form lead, o cancellare l’app per rimuovere i dati locali. Policy completa: pulsante sotto.";
 "privacy_policy_open_web" = "Apri policy sul web";
 
 /* Reference quality */
@@ -608,7 +611,7 @@
 "charging_map_open_settings" = "Apri Impostazioni";
 
 "how_we_calculate_title" = "Come calcoliamo";
-"how_we_calculate_intro" = "Stesse costanti e formule del simulatore: niente numeri inventati solo per questa schermata. Controlla fonti, confidenza e tariffe bollo per entrambe le auto scelte.";
+"how_we_calculate_intro" = "Stesse costanti e formule del simulatore: niente numeri inventati solo per questa schermata. Controlla fonti, qualità dei dati e tariffe bollo per entrambe le auto scelte.";
 "how_we_calculate_model_estimates_note" = "Moltiplicatori area/tragitto, tassi di svalutazione e buffer di manutenzione (minimi annui) sono stime del modello, non tariffe ufficiali.";
 "how_we_calculate_entry_title" = "Come calcoliamo";
 "how_we_calculate_entry_subtitle" = "Fonti dei consumi, CO₂→L/100, bollo e prezzi — stessi numeri del verdetto.";
@@ -624,7 +627,7 @@
 "how_we_calculate_source_category_estimate" = "Stima";
 "how_we_calculate_source_category_unknown" = "Non indicata";
 "how_we_calculate_open_source" = "Apri fonte";
-"how_we_calculate_confidence_format" = "Confidenza: %@";
+"how_we_calculate_confidence_format" = "Qualità del dato: %@";
 "how_we_calculate_confidence_high" = "Alta";
 "how_we_calculate_confidence_medium" = "Media";
 "how_we_calculate_confidence_low" = "Bassa";

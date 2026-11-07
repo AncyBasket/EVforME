@@ -35,4 +35,30 @@ final class CatalogLoadPerformanceTests: XCTestCase {
         VehicleCatalogService.shared.reloadFromBundledSeedIgnoringUserCacheForTesting()
         XCTAssertGreaterThan(VehicleCatalogService.shared.vehicles.count, 5000)
     }
+
+    func testBundledSeedVersionAndRowCountMatchManifest() throws {
+        let manifestURL = try XCTUnwrap(
+            Bundle.main.url(forResource: "catalog_cdn", withExtension: "json"),
+            "catalog_cdn.json must be included with the bundled seed"
+        )
+        let manifestData = try Data(contentsOf: manifestURL)
+        let manifest = try XCTUnwrap(
+            try JSONSerialization.jsonObject(with: manifestData) as? [String: Any]
+        )
+        let manifestVersion = try XCTUnwrap(manifest["seedVersion"] as? Int)
+        let manifestRows = try XCTUnwrap(manifest["rows"] as? Int)
+        let manifestBytes = try XCTUnwrap(manifest["bytes"] as? Int)
+        let seedURL = try XCTUnwrap(
+            Bundle.main.url(forResource: "vehicles.seed.quality", withExtension: "json")
+        )
+        let seedData = try Data(contentsOf: seedURL)
+        let seed = try JSONDecoder().decode(
+            [VehicleCatalogItem].self,
+            from: seedData
+        )
+
+        XCTAssertEqual(VehicleCatalogService.bundledSeedVersion, manifestVersion)
+        XCTAssertEqual(seed.count, manifestRows)
+        XCTAssertEqual(seedData.count, manifestBytes)
+    }
 }

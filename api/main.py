@@ -1,11 +1,18 @@
 from __future__ import annotations
 
 from fastapi import FastAPI, Query, Request
+from fastapi import HTTPException
 from fastapi.staticfiles import StaticFiles
 from typing import Optional
 import json
+import hmac
+import math
+import os
+import re
 import subprocess
 import sys
+import threading
+import time
 from pathlib import Path
 
 from database import (
@@ -16,7 +23,9 @@ from database import (
     insert_lead,
     list_events,
     list_leads,
+    purge_expired_data,
     refresh_from_seed,
+    seed_is_current,
 )
 
 
@@ -28,6 +37,13 @@ STATIC_DIR = Path(__file__).resolve().parent / "static"
 STATIC_DIR.mkdir(parents=True, exist_ok=True)
 
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+
+MAX_BODY_BYTES = 16 * 1024
+DEFAULT_RETENTION_DAYS = 180
+EMAIL_RE = re.compile(r"^[^@\s]{1,64}@[^@\s.]+(?:\.[^@\s.]+)+$")
+EVENT_KEY_RE = re.compile(r"^[A-Za-z][A-Za-z0-9_.-]{0,63}$")
+_rate_buckets: dict[tuple[str, str], list[float]] = {}
+_rate_lock = threading.Lock()
 
 
 def refresh_official_costs_if_possible() -> bool:
@@ -46,13 +62,80 @@ def refresh_official_costs_if_possible() -> bool:
         return False
 
 
+def _retention_days() -> int:
+    try:
+        configured = int(os.environ.get("EVFORME_RETENTION_DAYS", DEFAULT_RETENTION_DAYS))
+        return min(3650, max(1, configured))
+    except (TypeError, ValueError):
+        return DEFAULT_RETENTION_DAYS
+
+
+def _require_admin(request: Request) -> None:
+    expected = os.environ.get("EVFORME_ADMIN_TOKEN", "").strip()
+    if len(expected) < 32:
+        raise HTTPException(status_code=503, detail="Admin read access is not configured")
+    scheme, _, supplied = request.headers.get("authorization", "").partition(" ")
+    if scheme.lower() != "bearer" or not hmac.compare_digest(supplied, expected):
+        raise HTTPException(
+            status_code=401,
+            detail="Valid bearer token required",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+
+def _enforce_rate_limit(request: Request, route: str, limit: int) -> None:
+    host = request.client.host if request.client else "unknown"
+    key = (route, host)
+    now = time.monotonic()
+    with _rate_lock:
+        recent = [stamp for stamp in _rate_buckets.get(key, []) if now - stamp < 60]
+        if len(recent) >= limit:
+            raise HTTPException(status_code=429, detail="Too many requests; retry in a minute")
+        recent.append(now)
+        _rate_buckets[key] = recent
+
+
+async def _read_json_object(request: Request) -> dict:
+    content_length = request.headers.get("content-length")
+    if content_length:
+        try:
+            if int(content_length) > MAX_BODY_BYTES:
+                raise HTTPException(status_code=413, detail="Request body too large")
+        except ValueError:
+            raise HTTPException(status_code=400, detail="Invalid Content-Length")
+    body = bytearray()
+    async for chunk in request.stream():
+        body.extend(chunk)
+        if len(body) > MAX_BODY_BYTES:
+            raise HTTPException(status_code=413, detail="Request body too large")
+    try:
+        payload = json.loads(bytes(body))
+    except (json.JSONDecodeError, UnicodeDecodeError):
+        raise HTTPException(status_code=400, detail="Invalid JSON")
+    if not isinstance(payload, dict):
+        raise HTTPException(status_code=422, detail="JSON object required")
+    return payload
+
+
+def _clean_optional_text(value, field: str, max_length: int, required: bool = False) -> str | None:
+    if value is None and not required:
+        return None
+    if not isinstance(value, str):
+        raise HTTPException(status_code=422, detail=f"{field} must be text")
+    cleaned = " ".join(value.split()).strip()
+    if required and not cleaned:
+        raise HTTPException(status_code=422, detail=f"{field} is required")
+    if len(cleaned) > max_length:
+        raise HTTPException(status_code=422, detail=f"{field} is too long")
+    return cleaned or None
+
+
 @app.on_event("startup")
 def startup() -> None:
     init_db()
+    purge_expired_data(_retention_days())
     refresh_official_costs_if_possible()
-    with get_conn() as conn:
-        count = conn.execute("SELECT COUNT(*) AS c FROM vehicles").fetchone()["c"]
-    if count == 0:
+    if not seed_is_current():
         refresh_from_seed()
 
 
@@ -83,14 +166,16 @@ def energy_default_costs() -> dict:
 
 
 @app.post("/energy/sync")
-def energy_sync() -> dict:
+def energy_sync(request: Request) -> dict:
+    _require_admin(request)
     refreshed = refresh_official_costs_if_possible()
     payload = energy_default_costs()
     return {"ok": True, "refreshed": refreshed, **payload}
 
 
 @app.post("/catalog/sync")
-def catalog_sync() -> dict:
+def catalog_sync(request: Request) -> dict:
+    _require_admin(request)
     state = refresh_from_seed()
     return {"ok": True, **state}
 
@@ -107,7 +192,8 @@ def catalog_export() -> list[dict]:
                 fuel_consumption_l_per_km, energy_consumption_kwh_per_km,
                 maintenance_per_year, taxes_per_year, image_url,
                 trim, battery_kwh, wltp_range_km, wltp_consumption_kwh_100km,
-                co2_g_km, market, source_name, source_updated_at, confidence_score
+                co2_g_km, market, source_name, source_updated_at, confidence_score,
+                confidence_score_legacy, confidence_policy_version, confidence_evidence_json
             FROM vehicles
             ORDER BY brand, model, year
             """
@@ -137,6 +223,11 @@ def catalog_export() -> list[dict]:
             "sourceName": r["source_name"],
             "sourceUpdatedAt": r["source_updated_at"],
             "confidenceScore": r["confidence_score"],
+            "confidenceScoreLegacy": r["confidence_score_legacy"],
+            "confidencePolicyVersion": r["confidence_policy_version"],
+            "confidenceEvidence": json.loads(r["confidence_evidence_json"])
+            if r["confidence_evidence_json"]
+            else None,
         }
         for r in rows
     ]
@@ -144,28 +235,71 @@ def catalog_export() -> list[dict]:
 
 @app.post("/events")
 async def post_event(request: Request) -> dict:
-    body = await request.json()
-    event = str(body.get("event") or body.get("name") or "unknown")
-    params = body.get("params") if isinstance(body.get("params"), dict) else {}
-    timestamp = body.get("timestamp")
-    insert_event(event, params, float(timestamp) if timestamp is not None else None)
+    _enforce_rate_limit(request, "events", 120)
+    body = await _read_json_object(request)
+    event = _clean_optional_text(body.get("event") or body.get("name") or "unknown", "event", 80, True)
+    raw_params = body.get("params", {})
+    if not isinstance(raw_params, dict) or len(raw_params) > 32:
+        raise HTTPException(status_code=422, detail="params must be an object with at most 32 fields")
+    params: dict[str, str] = {}
+    forbidden_fields = {"name", "email", "phone", "address", "city", "latitude", "longitude"}
+    for key, value in raw_params.items():
+        if not isinstance(key, str) or not EVENT_KEY_RE.fullmatch(key):
+            raise HTTPException(status_code=422, detail="Invalid event parameter name")
+        if key.lower() in forbidden_fields:
+            raise HTTPException(status_code=422, detail="Personal fields are not accepted in analytics")
+        if isinstance(value, bool):
+            normalized = str(value).lower()
+        elif isinstance(value, (str, int, float)) and (not isinstance(value, float) or math.isfinite(value)):
+            normalized = str(value)
+        else:
+            raise HTTPException(status_code=422, detail="Event values must be short scalar values")
+        if len(normalized) > 256:
+            raise HTTPException(status_code=422, detail="Event value is too long")
+        params[key] = normalized
+    raw_timestamp = body.get("timestamp")
+    timestamp = None
+    if raw_timestamp is not None:
+        if isinstance(raw_timestamp, bool):
+            raise HTTPException(status_code=422, detail="Invalid event timestamp")
+        try:
+            timestamp = float(raw_timestamp)
+        except (TypeError, ValueError):
+            raise HTTPException(status_code=422, detail="Invalid event timestamp")
+        if not math.isfinite(timestamp):
+            raise HTTPException(status_code=422, detail="Invalid event timestamp")
+    purge_expired_data(_retention_days())
+    insert_event(event, params, timestamp)
     return {"ok": True}
 
 
 @app.get("/events")
-def get_events(limit: int = Query(100, ge=1, le=1000)) -> dict:
+def get_events(request: Request, limit: int = Query(100, ge=1, le=1000)) -> dict:
+    _require_admin(request)
+    purge_expired_data(_retention_days())
     return {"items": list_events(limit)}
 
 
 @app.post("/leads")
 async def post_lead(request: Request) -> dict:
-    body = await request.json()
-    insert_lead(body if isinstance(body, dict) else {})
+    _enforce_rate_limit(request, "leads", 5)
+    body = await _read_json_object(request)
+    if body.get("consent") is not True:
+        raise HTTPException(status_code=422, detail="Explicit consent is required")
+    name = _clean_optional_text(body.get("name"), "name", 120)
+    email = _clean_optional_text(body.get("email"), "email", 254, True)
+    city = _clean_optional_text(body.get("city"), "city", 120)
+    if not EMAIL_RE.fullmatch(email or ""):
+        raise HTTPException(status_code=422, detail="A valid email address is required")
+    purge_expired_data(_retention_days())
+    insert_lead({"name": name, "email": email, "city": city, "consent": True})
     return {"ok": True}
 
 
 @app.get("/leads")
-def get_leads(limit: int = Query(100, ge=1, le=1000)) -> dict:
+def get_leads(request: Request, limit: int = Query(100, ge=1, le=1000)) -> dict:
+    _require_admin(request)
+    purge_expired_data(_retention_days())
     return {"items": list_leads(limit)}
 
 

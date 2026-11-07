@@ -1,0 +1,496 @@
+{
+  "date": "2026-11-03",
+  "previous_seed_version": 75,
+  "seed_version": 76,
+  "seed_rows": 6977,
+  "reviewed_families": 10,
+  "reviewed_catalog_records": 30,
+  "updated_catalog_records": 11,
+  "source_field_entries": 31,
+  "changed_or_corroborated_fields": [
+    {
+      "id": "bmw-serie-2-active-tourer-225e-xdrive-2022",
+      "field": "batteryKWh",
+      "before": null,
+      "value": 14.2,
+      "source": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2022/Listini/Listino-BMWSerie2-ActiveTourer-U06.pdf.asset.1656074029722.pdf"
+    },
+    {
+      "id": "bmw-serie-2-active-tourer-225e-xdrive-2022",
+      "field": "wltpRangeKm",
+      "before": null,
+      "value": 83,
+      "source": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2022/Listini/Listino-BMWSerie2-ActiveTourer-U06.pdf.asset.1656074029722.pdf"
+    },
+    {
+      "id": "bmw-serie-2-active-tourer-225e-xdrive-2022",
+      "field": "wltpRangeKmMax",
+      "before": null,
+      "value": 92,
+      "source": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2022/Listini/Listino-BMWSerie2-ActiveTourer-U06.pdf.asset.1656074029722.pdf"
+    },
+    {
+      "id": "bmw-serie-2-active-tourer-225e-xdrive-2023",
+      "field": "batteryKWh",
+      "before": null,
+      "value": 14.2,
+      "source": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2023/Listini2023/Listino_BMW-Serie2-Active-Tourer_U06_produzione-dal-01.03.2023.pdf.asset.1675070620611.pdf"
+    },
+    {
+      "id": "bmw-serie-2-active-tourer-225e-xdrive-2023",
+      "field": "wltpRangeKm",
+      "before": null,
+      "value": 83,
+      "source": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2023/Listini2023/Listino_BMW-Serie2-Active-Tourer_U06_produzione-dal-01.03.2023.pdf.asset.1675070620611.pdf"
+    },
+    {
+      "id": "bmw-serie-2-active-tourer-225e-xdrive-2023",
+      "field": "wltpRangeKmMax",
+      "before": null,
+      "value": 92,
+      "source": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2023/Listini2023/Listino_BMW-Serie2-Active-Tourer_U06_produzione-dal-01.03.2023.pdf.asset.1675070620611.pdf"
+    },
+    {
+      "id": "bmw-serie-2-active-tourer-225e-xdrive-2024",
+      "field": "batteryKWh",
+      "before": null,
+      "value": 14.2,
+      "source": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2024/aprile/Listino%20BMW%20Serie%202%20Active%20Tourer%20(U06)%20da%20prod.%2001.07.2024.pdf.asset.1713250994104.pdf"
+    },
+    {
+      "id": "bmw-serie-2-active-tourer-225e-xdrive-2024",
+      "field": "wltpRangeKm",
+      "before": null,
+      "value": 78,
+      "source": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2024/aprile/Listino%20BMW%20Serie%202%20Active%20Tourer%20(U06)%20da%20prod.%2001.07.2024.pdf.asset.1713250994104.pdf"
+    },
+    {
+      "id": "bmw-serie-2-active-tourer-225e-xdrive-2024",
+      "field": "wltpRangeKmMax",
+      "before": null,
+      "value": 88,
+      "source": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2024/aprile/Listino%20BMW%20Serie%202%20Active%20Tourer%20(U06)%20da%20prod.%2001.07.2024.pdf.asset.1713250994104.pdf"
+    },
+    {
+      "id": "bmw-x3-phev-xdrive30e-2022",
+      "field": "batteryKWh",
+      "before": null,
+      "value": 11.15,
+      "source": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2022/Listini/Listino-Nuova-BMW-X3-G01.pdf.asset.1656075290702.pdf"
+    },
+    {
+      "id": "bmw-x3-phev-xdrive30e-2022",
+      "field": "wltpRangeKm",
+      "before": null,
+      "value": 45,
+      "source": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2022/Listini/Listino-Nuova-BMW-X3-G01.pdf.asset.1656075290702.pdf"
+    },
+    {
+      "id": "bmw-x3-phev-xdrive30e-2022",
+      "field": "wltpRangeKmMax",
+      "before": null,
+      "value": 51,
+      "source": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2022/Listini/Listino-Nuova-BMW-X3-G01.pdf.asset.1656075290702.pdf"
+    },
+    {
+      "id": "bmw-x3-phev-xdrive30e-2023",
+      "field": "batteryKWh",
+      "before": null,
+      "value": 11.15,
+      "source": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2023/listini-0423/Listino-BMW-X3-G01-valido-da-prod.01.04.2023.pdf.asset.1676901178092.pdf"
+    },
+    {
+      "id": "bmw-x3-phev-xdrive30e-2023",
+      "field": "wltpRangeKm",
+      "before": null,
+      "value": 45,
+      "source": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2023/listini-0423/Listino-BMW-X3-G01-valido-da-prod.01.04.2023.pdf.asset.1676901178092.pdf"
+    },
+    {
+      "id": "bmw-x3-phev-xdrive30e-2023",
+      "field": "wltpRangeKmMax",
+      "before": null,
+      "value": 51,
+      "source": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2023/listini-0423/Listino-BMW-X3-G01-valido-da-prod.01.04.2023.pdf.asset.1676901178092.pdf"
+    },
+    {
+      "id": "bmw-x3-phev-xdrive30e-2024",
+      "field": "batteryKWh",
+      "before": null,
+      "value": 11.15,
+      "source": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2024/gennaio/Listino%20BMW%20X3%20(G01)%20valido%20da%20prod.%2001.04.2024.pdf.asset.1706715697138.pdf"
+    },
+    {
+      "id": "bmw-x3-phev-xdrive30e-2024",
+      "field": "wltpRangeKm",
+      "before": null,
+      "value": 45,
+      "source": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2024/gennaio/Listino%20BMW%20X3%20(G01)%20valido%20da%20prod.%2001.04.2024.pdf.asset.1706715697138.pdf"
+    },
+    {
+      "id": "bmw-x3-phev-xdrive30e-2024",
+      "field": "wltpRangeKmMax",
+      "before": null,
+      "value": 51,
+      "source": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2024/gennaio/Listino%20BMW%20X3%20(G01)%20valido%20da%20prod.%2001.04.2024.pdf.asset.1706715697138.pdf"
+    },
+    {
+      "id": "hyundai-tucson-phev-2023",
+      "field": "batteryKWh",
+      "before": null,
+      "value": 13.8,
+      "source": "https://hyundai-cyprus.com/wp-content/uploads/admin/2022/07/New-Hyundai-Tucson-FULL-HYBRID-PLUG-IN-HYBRID-AUGUST-22.pdf"
+    },
+    {
+      "id": "hyundai-tucson-phev-2023",
+      "field": "wltpRangeKm",
+      "before": null,
+      "value": 62,
+      "source": "https://hyundai-cyprus.com/wp-content/uploads/admin/2022/07/New-Hyundai-Tucson-FULL-HYBRID-PLUG-IN-HYBRID-AUGUST-22.pdf"
+    },
+    {
+      "id": "hyundai-tucson-phev-2023",
+      "field": "weightedFuelConsumptionLPerKm",
+      "before": 0.01336,
+      "value": 0.014,
+      "source": "https://hyundai-cyprus.com/wp-content/uploads/admin/2022/07/New-Hyundai-Tucson-FULL-HYBRID-PLUG-IN-HYBRID-AUGUST-22.pdf"
+    },
+    {
+      "id": "hyundai-tucson-phev-2023",
+      "field": "co2gKm",
+      "before": 31,
+      "value": 31,
+      "source": "https://hyundai-cyprus.com/wp-content/uploads/admin/2022/07/New-Hyundai-Tucson-FULL-HYBRID-PLUG-IN-HYBRID-AUGUST-22.pdf",
+      "provenance_only": true
+    },
+    {
+      "id": "toyota-rav4-phev-2023",
+      "field": "batteryKWh",
+      "before": null,
+      "value": 18.1,
+      "source": "https://newsroom.toyota.it/download/1316286/20230101rav4plug-inhybridmy23schedatecnica.pdf"
+    },
+    {
+      "id": "toyota-rav4-phev-2023",
+      "field": "weightedFuelConsumptionLPerKm",
+      "before": 0.00948,
+      "value": 0.01,
+      "source": "https://newsroom.toyota.it/download/1316286/20230101rav4plug-inhybridmy23schedatecnica.pdf"
+    },
+    {
+      "id": "toyota-rav4-phev-2023",
+      "field": "co2gKm",
+      "before": 22,
+      "value": 22,
+      "source": "https://newsroom.toyota.it/download/1316286/20230101rav4plug-inhybridmy23schedatecnica.pdf",
+      "provenance_only": true
+    },
+    {
+      "id": "toyota-rav4-phev-2024",
+      "field": "batteryKWh",
+      "before": null,
+      "value": 18.1,
+      "source": "https://www.toyota.it/content/dam/toyota/nmsc/italy/gamma/pdf/scheda-tecnica/RAV4_Plug-in_Hybrid_Scheda_tecnica.pdf"
+    },
+    {
+      "id": "toyota-rav4-phev-2024",
+      "field": "weightedFuelConsumptionLPerKm",
+      "before": 0.00948,
+      "value": 0.01,
+      "source": "https://www.toyota.it/content/dam/toyota/nmsc/italy/gamma/pdf/scheda-tecnica/RAV4_Plug-in_Hybrid_Scheda_tecnica.pdf"
+    },
+    {
+      "id": "toyota-rav4-phev-2024",
+      "field": "co2gKm",
+      "before": 22,
+      "value": 22,
+      "source": "https://www.toyota.it/content/dam/toyota/nmsc/italy/gamma/pdf/scheda-tecnica/RAV4_Plug-in_Hybrid_Scheda_tecnica.pdf",
+      "provenance_only": true
+    },
+    {
+      "id": "cupra-formentor-phev-e-hybrid-2024",
+      "field": "batteryKWh",
+      "before": null,
+      "value": 12.8,
+      "source": "https://www.cupra.com/content/dam/countries/ie/cupra-website/product-guide/formentor/cars-models-info-KM7-product-guide-Jan-2024.pdf"
+    },
+    {
+      "id": "cupra-formentor-phev-e-hybrid-2024",
+      "field": "co2gKm",
+      "before": 27,
+      "value": 27,
+      "source": "https://www.cupra.com/content/dam/countries/ie/cupra-website/product-guide/formentor/cars-models-info-KM7-product-guide-Jan-2024.pdf",
+      "provenance_only": true
+    },
+    {
+      "id": "volkswagen-tiguan-phev-ehybrid-2024",
+      "field": "batteryKWh",
+      "before": null,
+      "value": 19.7,
+      "source": "https://www.volkswagen-newsroom.com/en/press-releases/now-available-to-order-long-range-plug-in-hybrid-drives-for-the-tiguan-from-48655-euro-18182"
+    }
+  ],
+  "updated_records": [
+    {
+      "id": "bmw-serie-2-active-tourer-225e-xdrive-2022",
+      "year": 2022,
+      "fields": {
+        "batteryKWh": 14.2,
+        "wltpRangeKm": 83,
+        "wltpRangeKmMax": 92
+      },
+      "corroborated": {},
+      "source": {
+        "url": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2022/Listini/Listino-BMWSerie2-ActiveTourer-U06.pdf.asset.1656074029722.pdf",
+        "title": "Nuova BMW Serie 2 Active Tourer (U06) — listino valido dal 01.06.2022, produzione dal 01.07.2022",
+        "date": "2022-06-01",
+        "battery": 14.2,
+        "range_min": 83,
+        "range_max": 92,
+        "excerpt": "225e xDrive; batteria 16,3 kWh lorda / 14,2 kWh netta; autonomia elettrica 83–92 km."
+      },
+      "source_fields": [
+        "batteryKWh",
+        "wltpRangeKm",
+        "wltpRangeKmMax"
+      ],
+      "note": "Dati BMW Italia per 225e xDrive; batteria netta 14,2 kWh (16,3 lorda); autonomia min–max WLTP trascritta senza mediare."
+    },
+    {
+      "id": "bmw-serie-2-active-tourer-225e-xdrive-2023",
+      "year": 2023,
+      "fields": {
+        "batteryKWh": 14.2,
+        "wltpRangeKm": 83,
+        "wltpRangeKmMax": 92
+      },
+      "corroborated": {},
+      "source": {
+        "url": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2023/Listini2023/Listino_BMW-Serie2-Active-Tourer_U06_produzione-dal-01.03.2023.pdf.asset.1675070620611.pdf",
+        "title": "BMW Serie 2 Active Tourer (U06) — listino valido dal 25.01.2023, produzione dal 01.03.2023",
+        "date": "2023-01-25",
+        "battery": 14.2,
+        "range_min": 83,
+        "range_max": 92,
+        "excerpt": "225e xDrive; batteria 16,3 kWh lorda / 14,2 kWh netta; autonomia elettrica 83–92 km."
+      },
+      "source_fields": [
+        "batteryKWh",
+        "wltpRangeKm",
+        "wltpRangeKmMax"
+      ],
+      "note": "Dati BMW Italia per 225e xDrive; batteria netta 14,2 kWh (16,3 lorda); autonomia min–max WLTP trascritta senza mediare."
+    },
+    {
+      "id": "bmw-serie-2-active-tourer-225e-xdrive-2024",
+      "year": 2024,
+      "fields": {
+        "batteryKWh": 14.2,
+        "wltpRangeKm": 78,
+        "wltpRangeKmMax": 88
+      },
+      "corroborated": {},
+      "source": {
+        "url": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2024/aprile/Listino%20BMW%20Serie%202%20Active%20Tourer%20(U06)%20da%20prod.%2001.07.2024.pdf.asset.1713250994104.pdf",
+        "title": "BMW Serie 2 Active Tourer (U06) — listino valido dal 15.04.2024, produzione dal 01.07.2024",
+        "date": "2024-04-15",
+        "battery": 14.2,
+        "range_min": 78,
+        "range_max": 88,
+        "excerpt": "225e xDrive; batteria 16,3 kWh lorda / 14,2 kWh netta; autonomia elettrica 78–88 km."
+      },
+      "source_fields": [
+        "batteryKWh",
+        "wltpRangeKm",
+        "wltpRangeKmMax"
+      ],
+      "note": "Dati BMW Italia per 225e xDrive; batteria netta 14,2 kWh (16,3 lorda); autonomia min–max WLTP trascritta senza mediare."
+    },
+    {
+      "id": "bmw-x3-phev-xdrive30e-2022",
+      "year": 2022,
+      "fields": {
+        "batteryKWh": 11.15,
+        "wltpRangeKm": 45,
+        "wltpRangeKmMax": 51
+      },
+      "corroborated": {},
+      "source": {
+        "url": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2022/Listini/Listino-Nuova-BMW-X3-G01.pdf.asset.1656075290702.pdf",
+        "title": "Nuova BMW X3 (G01) — listino valido dal 18.05.2022",
+        "date": "2022-05-18",
+        "battery": 11.15,
+        "range_min": 45,
+        "range_max": 51,
+        "excerpt": "xDrive30e; batteria 12 kWh lorda / 11,15 kWh netta; autonomia elettrica WLTP 45–51 km."
+      },
+      "source_fields": [
+        "batteryKWh",
+        "wltpRangeKm",
+        "wltpRangeKmMax"
+      ],
+      "note": "Dati BMW Italia per xDrive30e; batteria netta 11,15 kWh (12 lorda); autonomia min–max WLTP trascritta senza mediare."
+    },
+    {
+      "id": "bmw-x3-phev-xdrive30e-2023",
+      "year": 2023,
+      "fields": {
+        "batteryKWh": 11.15,
+        "wltpRangeKm": 45,
+        "wltpRangeKmMax": 51
+      },
+      "corroborated": {},
+      "source": {
+        "url": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2023/listini-0423/Listino-BMW-X3-G01-valido-da-prod.01.04.2023.pdf.asset.1676901178092.pdf",
+        "title": "BMW X3 (G01) — listino valido dal 16.02.2023, produzione dal 01.04.2023",
+        "date": "2023-02-16",
+        "battery": 11.15,
+        "range_min": 45,
+        "range_max": 51,
+        "excerpt": "xDrive30e; batteria 12 kWh lorda / 11,15 kWh netta; autonomia elettrica WLTP 45–51 km."
+      },
+      "source_fields": [
+        "batteryKWh",
+        "wltpRangeKm",
+        "wltpRangeKmMax"
+      ],
+      "note": "Dati BMW Italia per xDrive30e; batteria netta 11,15 kWh (12 lorda); autonomia min–max WLTP trascritta senza mediare."
+    },
+    {
+      "id": "bmw-x3-phev-xdrive30e-2024",
+      "year": 2024,
+      "fields": {
+        "batteryKWh": 11.15,
+        "wltpRangeKm": 45,
+        "wltpRangeKmMax": 51
+      },
+      "corroborated": {},
+      "source": {
+        "url": "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2024/gennaio/Listino%20BMW%20X3%20(G01)%20valido%20da%20prod.%2001.04.2024.pdf.asset.1706715697138.pdf",
+        "title": "BMW X3 (G01) — listino valido dal 31.01.2024, produzione dal 01.04.2024",
+        "date": "2024-01-31",
+        "battery": 11.15,
+        "range_min": 45,
+        "range_max": 51,
+        "excerpt": "xDrive30e; batteria 12 kWh lorda / 11,15 kWh netta; autonomia elettrica WLTP 45–51 km."
+      },
+      "source_fields": [
+        "batteryKWh",
+        "wltpRangeKm",
+        "wltpRangeKmMax"
+      ],
+      "note": "Dati BMW Italia per xDrive30e; batteria netta 11,15 kWh (12 lorda); autonomia min–max WLTP trascritta senza mediare."
+    },
+    {
+      "id": "hyundai-tucson-phev-2023",
+      "year": 2023,
+      "fields": {
+        "batteryKWh": 13.8,
+        "wltpRangeKm": 62,
+        "weightedFuelConsumptionLPerKm": 0.014
+      },
+      "corroborated": {
+        "co2gKm": 31
+      },
+      "source": {
+        "url": "https://hyundai-cyprus.com/wp-content/uploads/admin/2022/07/New-Hyundai-Tucson-FULL-HYBRID-PLUG-IN-HYBRID-AUGUST-22.pdf",
+        "title": "Hyundai Tucson MY23 Hybrid & Plug-in Hybrid — scheda tecnica, agosto 2022",
+        "date": null,
+        "excerpt": "1.6 T-GDi 4x4 Plug-in Hybrid 265 PS; batteria 13,8 kWh; autonomia elettrica WLTP 62 km; Combined WLTP 1,4 l/100 km; CO2 31 g/km."
+      },
+      "source_fields": [
+        "batteryKWh",
+        "wltpRangeKm",
+        "weightedFuelConsumptionLPerKm",
+        "co2gKm"
+      ],
+      "note": "Hyundai Cyprus (UE), scheda ufficiale MY23 1.6 T-GDi 4x4 PHEV 265 PS; capacità 13,8 kWh senza base netta/lorda dichiarata. 1,4 l/100 km è Combined WLTP, solo informativo e mai CS."
+    },
+    {
+      "id": "toyota-rav4-phev-2023",
+      "year": 2023,
+      "fields": {
+        "batteryKWh": 18.1,
+        "weightedFuelConsumptionLPerKm": 0.01
+      },
+      "corroborated": {
+        "co2gKm": 22
+      },
+      "source": {
+        "url": "https://newsroom.toyota.it/download/1316286/20230101rav4plug-inhybridmy23schedatecnica.pdf",
+        "title": "Toyota Italia — Scheda Tecnica RAV4 Plug-in Hybrid MY23",
+        "date": "2023-01-03",
+        "excerpt": "Batteria agli ioni di litio 18,1 kWh; ciclo combinato WLTP 1,00 l/100 km e 22 g/km CO2. Autonomia 75 km solo per GR SPORT, non assegnata al record generico."
+      },
+      "source_fields": [
+        "batteryKWh",
+        "weightedFuelConsumptionLPerKm",
+        "co2gKm"
+      ],
+      "note": "Toyota Italia MY23; capacità 18,1 kWh senza base netta/lorda esplicitata. Consumo 1,00 l/100 km è ciclo combinato WLTP, non charge-sustaining. Autonomia di 75 km solo GR SPORT non assegnata al record generico."
+    },
+    {
+      "id": "toyota-rav4-phev-2024",
+      "year": 2024,
+      "fields": {
+        "batteryKWh": 18.1,
+        "weightedFuelConsumptionLPerKm": 0.01
+      },
+      "corroborated": {
+        "co2gKm": 22
+      },
+      "source": {
+        "url": "https://www.toyota.it/content/dam/toyota/nmsc/italy/gamma/pdf/scheda-tecnica/RAV4_Plug-in_Hybrid_Scheda_tecnica.pdf",
+        "title": "Toyota Italia — RAV4 Plug-in Hybrid, scheda tecnica MY24",
+        "date": "2023-06-26",
+        "excerpt": "Batteria agli ioni di litio 18,1 kWh; ciclo combinato WLTP 1,00 l/100 km e 22 g/km CO2."
+      },
+      "source_fields": [
+        "batteryKWh",
+        "weightedFuelConsumptionLPerKm",
+        "co2gKm"
+      ],
+      "note": "Toyota Italia MY24; capacità 18,1 kWh senza base netta/lorda esplicitata. Consumo 1,00 l/100 km è ciclo combinato WLTP, non charge-sustaining; la scheda non riporta un'autonomia attribuibile al record generico."
+    },
+    {
+      "id": "cupra-formentor-phev-e-hybrid-2024",
+      "year": 2024,
+      "fields": {
+        "batteryKWh": 12.8
+      },
+      "corroborated": {
+        "co2gKm": 27
+      },
+      "source": {
+        "url": "https://www.cupra.com/content/dam/countries/ie/cupra-website/product-guide/formentor/cars-models-info-KM7-product-guide-Jan-2024.pdf",
+        "title": "CUPRA Ireland — Formentor Product Guide, gennaio 2024",
+        "date": null,
+        "excerpt": "Formentor e-HYBRID 204 hp DSG, codice KM7BUYE: batteria 12,8 kWh e CO2 WLTP 27 g/km. La variante VZ 245 hp è distinta (32 g/km)."
+      },
+      "source_fields": [
+        "batteryKWh",
+        "co2gKm"
+      ],
+      "note": "CUPRA Ireland (UE), Product Guide gennaio 2024; battery 12,8 kWh per e-HYBRID 204 hp DSG. CO2 27 g/km confermato per 204 hp; VZ 245 hp ha CO2 diverso (32). Base netta/lorda non dichiarata."
+    },
+    {
+      "id": "volkswagen-tiguan-phev-ehybrid-2024",
+      "year": 2024,
+      "fields": {
+        "batteryKWh": 19.7
+      },
+      "corroborated": {},
+      "source": {
+        "url": "https://www.volkswagen-newsroom.com/en/press-releases/now-available-to-order-long-range-plug-in-hybrid-drives-for-the-tiguan-from-48655-euro-18182",
+        "title": "Volkswagen Newsroom — Now available to order: long-range plug-in hybrid drives for the Tiguan",
+        "date": null,
+        "excerpt": "Nuova Tiguan eHybrid: batteria netta 19,7 kWh; comunicato europeo include due potenze. Range fino a circa 120 km non assegnato al record non disambiguato."
+      },
+      "source_fields": [
+        "batteryKWh"
+      ],
+      "note": "Volkswagen Newsroom, lancio europeo nuova generazione: capacità netta 19,7 kWh. Il dato ‘fino a circa 120 km’ non è assegnato perché il comunicato include due potenze e il record non distingue la variante."
+    }
+  ],
+  "selection_policy": "Only exact year/variant primary-source matches were applied; intervals were represented as min/max only when schema supports it; no midpoint or weighted-to-CS conversion."
+}

@@ -402,6 +402,9 @@
 "validation_sticker_energy_range" = "Sticker energy figure should be between 8 and 40 kWh/100 km.";
 "yearly_km_value" = "%d km/year";
 "phev_blend_reason" = "PHEV modeled as a mix of electric + fuel km (higher electric share with home charging).";
+"phev_range_missing_note" = "PHEV electric range unavailable: the estimate conservatively counts only 10% of km as electric; this is not an OEM WLTP figure.";
+"catalog_low_confidence_note" = "One or more selected vehicle data points have a low data-quality index; verify consumption and specifications against your vehicle’s official data. This index is not a probability.";
+"catalog_quality_score_format" = "Data quality %d/100";
 "insurance_included_reason" = "Yearly costs include insurance (estimate): IVASS average liability, same for both cars (unless you override).";
 "lead_saved_locally" = "Request kept on this device only — it was not sent (no contact channel configured).";
 "lead_send_unavailable" = "Contact form is not available right now — nothing was sent.";
@@ -486,8 +489,8 @@
 
 /* Privacy */
 "privacy_policy_title" = "Privacy";
-"privacy_policy_updated" = "Updated: 20 October 2026";
-"privacy_policy_body" = "EVforME? estimates on-device whether an electric or plug-in hybrid car may fit you.\n\nController: Andrea Ancellotti — andrea.ancellotti@gmail.com.\n\nKept on your phone: km, prices, chosen vehicles, country selection, scenario history, widget/Live Activity snapshots.\n\nSticker photos: used on-device only to read consumption figures; not uploaded for that feature.\n\nLocation (optional): While Using the App, only when you open Nearby chargers, to center an Apple MapKit search. Country for cost estimates comes from your device region or the country picker — not from GPS. Coordinates are not stored or sent to an EVforME backend. No background tracking.\n\nNetwork (optional): bundled vehicle catalog (EEA/manufacturer sources), public energy prices (MIMIT + Eurostat), Apple Maps search results, analytics or lead webhook only if configured. In a typical build, analytics/leads stay local when those URLs are empty.\n\nWe do not sell data and do not use advertising trackers.\n\nAdvisor form: name/email/city only if you submit them with consent.\n\nYou can revoke photo/location access in iOS Settings, skip the lead form, or delete the app to remove local data. Full policy: open the button below.";
+"privacy_policy_updated" = "Updated: 3 November 2026";
+"privacy_policy_body" = "EVforME? estimates on-device whether an electric or plug-in hybrid car may fit you.\n\nController: Andrea Ancellotti — andrea.ancellotti@gmail.com.\n\nKept on your phone: km, prices, chosen vehicles, country selection, scenario history, widget/Live Activity snapshots.\n\nSticker photos: used on-device only to read consumption figures; not uploaded for that feature.\n\nLocation (optional): While Using the App, only when you open Nearby chargers, to center an Apple MapKit search. Country for cost estimates comes from your device region or the country picker — not from GPS. Coordinates are not stored or sent to an EVforME backend. No background tracking.\n\nNetwork (optional): bundled vehicle catalog (EEA/manufacturer sources), public energy prices (MIMIT + Eurostat), Apple Maps search results, analytics or lead webhook only if configured. In a typical build, analytics/leads stay local when those URLs are empty.\n\nSelf-hosted EVforME API (if configured): leads and events are deleted after 180 days by default. Access to stored records and sync operations is restricted to an administrator; lead submission requires consent. Configured third-party endpoints apply their own retention.\n\nWe do not sell data and do not use advertising trackers.\n\nAdvisor form: name/email/city only if you submit them with consent.\n\nYou can revoke photo/location access in iOS Settings, skip the lead form, or delete the app to remove local data. Full policy: open the button below.";
 "privacy_policy_open_web" = "Open policy on the web";
 
 /* Polish extras */
@@ -610,7 +613,7 @@
 "charging_map_open_settings" = "Open Settings";
 
 "how_we_calculate_title" = "How we calculate";
-"how_we_calculate_intro" = "Same constants and formulas as the simulator — no display-only numbers. Check sources, confidence, and road-tax rates for both cars you selected.";
+"how_we_calculate_intro" = "Same constants and formulas as the simulator — no display-only numbers. Check sources, data quality, and road-tax rates for both cars you selected.";
 "how_we_calculate_model_estimates_note" = "Area/trip multipliers, residual-value rates and maintenance floors are model estimates, not official tariffs.";
 "how_we_calculate_entry_title" = "How we calculate";
 "how_we_calculate_entry_subtitle" = "Consumption sources, CO₂→L/100, road tax, and prices — the same numbers as the verdict.";
@@ -626,7 +629,7 @@
 "how_we_calculate_source_category_estimate" = "Estimate";
 "how_we_calculate_source_category_unknown" = "Not stated";
 "how_we_calculate_open_source" = "Open source";
-"how_we_calculate_confidence_format" = "Confidence: %@";
+"how_we_calculate_confidence_format" = "Data quality: %@";
 "how_we_calculate_confidence_high" = "High";
 "how_we_calculate_confidence_medium" = "Medium";
 "how_we_calculate_confidence_low" = "Low";

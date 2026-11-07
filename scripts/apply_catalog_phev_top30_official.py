@@ -15,6 +15,7 @@ from __future__ import annotations
 import json
 from datetime import datetime, timezone
 from pathlib import Path
+from catalog_confidence import apply_confidence
 
 REPO = Path(__file__).resolve().parents[1]
 SEED = REPO / "EVforME?" / "Data" / "vehicles.seed.quality.json"
@@ -300,8 +301,7 @@ def finalize(row: dict) -> None:
     miss = missing_calc_fields(row)
     row["missingCalcFields"] = miss
     row["catalogDataIncomplete"] = bool(miss)
-    if miss and row.get("confidenceScore") is None:
-        row["confidenceScore"] = 0.7
+    apply_confidence(row, preserve_legacy=True)
 
 
 def counts(rows):

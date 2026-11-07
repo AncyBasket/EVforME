@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 
@@ -59,6 +59,9 @@ def init_db() -> None:
             ("source_name", "source_name TEXT"),
             ("source_updated_at", "source_updated_at TEXT"),
             ("confidence_score", "confidence_score REAL"),
+            ("confidence_score_legacy", "confidence_score_legacy REAL"),
+            ("confidence_policy_version", "confidence_policy_version INTEGER"),
+            ("confidence_evidence_json", "confidence_evidence_json TEXT"),
         ]:
             _ensure_column(conn, name, ddl)
 
@@ -88,16 +91,56 @@ def init_db() -> None:
         )
         conn.execute("CREATE INDEX IF NOT EXISTS idx_vehicles_brand_model ON vehicles(brand, model)")
         conn.execute("CREATE INDEX IF NOT EXISTS idx_vehicles_year ON vehicles(year)")
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_growth_events_received_at ON growth_events(received_at)")
+        conn.execute("CREATE INDEX IF NOT EXISTS idx_leads_received_at ON leads(received_at)")
+
+
+def purge_expired_data(retention_days: int = 180) -> dict[str, int]:
+    """Delete analytics and lead records beyond the configured retention window."""
+    init_db()
+    days = min(3650, max(1, int(retention_days)))
+    cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
+    with get_conn() as conn:
+        events = conn.execute(
+            "DELETE FROM growth_events WHERE received_at < ?", (cutoff,)
+        ).rowcount
+        leads = conn.execute(
+            "DELETE FROM leads WHERE received_at < ?", (cutoff,)
+        ).rowcount
+    return {"events": max(0, events), "leads": max(0, leads)}
 
 
 def load_seed_path() -> Path:
     return next((p for p in SEED_PREFERRED if p.exists()), SEED_PREFERRED[-1])
 
 
+def seed_is_current() -> bool:
+    """Return true only when local DB state matches the bundled seed manifest."""
+    seed_path = load_seed_path()
+    manifest_path = seed_path.parent / "catalog_cdn.json"
+    try:
+        state = json.loads(STATE_PATH.read_text(encoding="utf-8"))
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        version = int(manifest["seedVersion"])
+        rows = int(manifest["rows"])
+    except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError):
+        return False
+    return (
+        state.get("source") == seed_path.name
+        and state.get("seedVersion") == version
+        and state.get("rows") == rows
+    )
+
+
 def refresh_from_seed() -> dict:
     init_db()
     seed_path = load_seed_path()
     records = json.loads(seed_path.read_text(encoding="utf-8"))
+    manifest_path = seed_path.parent / "catalog_cdn.json"
+    try:
+        seed_version = int(json.loads(manifest_path.read_text(encoding="utf-8"))["seedVersion"])
+    except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError):
+        seed_version = None
 
     with get_conn() as conn:
         conn.execute("DELETE FROM vehicles")
@@ -108,8 +151,9 @@ def refresh_from_seed() -> dict:
                 fuel_consumption_l_per_km, energy_consumption_kwh_per_km,
                 maintenance_per_year, taxes_per_year, image_url,
                 trim, battery_kwh, wltp_range_km, wltp_consumption_kwh_100km,
-                co2_g_km, market, source_name, source_updated_at, confidence_score
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                co2_g_km, market, source_name, source_updated_at, confidence_score,
+                confidence_score_legacy, confidence_policy_version, confidence_evidence_json
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             [
                 (
@@ -135,6 +179,11 @@ def refresh_from_seed() -> dict:
                     r.get("sourceName"),
                     r.get("sourceUpdatedAt"),
                     r.get("confidenceScore"),
+                    r.get("confidenceScoreLegacy"),
+                    r.get("confidencePolicyVersion"),
+                    json.dumps(r.get("confidenceEvidence"), ensure_ascii=False)
+                    if isinstance(r.get("confidenceEvidence"), dict)
+                    else None,
                 )
                 for r in records
             ],
@@ -143,8 +192,10 @@ def refresh_from_seed() -> dict:
     state = {
         "source": str(seed_path.name),
         "rows": len(records),
+        "seedVersion": seed_version,
         "syncedAt": datetime.now(timezone.utc).isoformat(),
     }
+    STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
     STATE_PATH.write_text(json.dumps(state, indent=2), encoding="utf-8")
     return state
 

@@ -706,6 +706,9 @@ enum L10n {
     static var validationStickerEnergyRange: String { string("validation_sticker_energy_range") }
     static func yearlyKmValue(_ km: Int) -> String { format("yearly_km_value", km) }
     static var phevBlendReason: String { string("phev_blend_reason") }
+    static var phevRangeMissingNote: String { string("phev_range_missing_note") }
+    static var catalogLowConfidenceNote: String { string("catalog_low_confidence_note") }
+    static func catalogQualityScore(_ score: Int) -> String { format("catalog_quality_score_format", score) }
     static var insuranceIncludedReason: String { string("insurance_included_reason") }
     static var insuranceAnnualOptionalLabel: String { string("insurance_annual_optional_label") }
     static var insuranceAnnualOptionalPlaceholder: String { string("insurance_annual_optional_placeholder") }

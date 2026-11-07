@@ -47,6 +47,25 @@ enum FuelKind: String, Codable {
     case unknown
 }
 
+/// Evidence snapshot used by the deterministic ordinal catalog-quality policy.
+struct ConfidenceEvidence: Codable, Equatable {
+    let policyVersion: Int
+    let scoreKind: String
+    let reasonCode: String
+    let sourceClass: String
+    let sourceYear: Int?
+    let modelYear: Int?
+    let yearRelation: String
+    let variantMatch: String
+    let sampleSize: Int?
+    let provisional: Bool
+    let requiredCalculationFields: [String]
+    let fieldSourceCoveredFields: [String]
+    let fieldSourceDatedFields: [String]
+    let fieldSourceCoverage: Double
+    let evidenceScope: String
+}
+
 extension Powertrain {
     /// Etichetta IT per picker (benzina/diesel/GPL/metano/ibrida).
     func catalogFuelLabel(fuelKind: FuelKind) -> String {
@@ -90,7 +109,11 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
     let market: String?
     let sourceName: String?
     let sourceUpdatedAt: String?
+    /// Ordinal data-quality index (0–1), not a calibrated probability.
     let confidenceScore: Double?
+    let confidenceScoreLegacy: Double?
+    let confidencePolicyVersion: Int?
+    let confidenceEvidence: ConfidenceEvidence?
     /// `petrol` / `diesel` se noto; `nil` → `resolvedFuelKind` euristica.
     let fuelKind: FuelKind?
     /// Potenza kW da EEA (`ep__KW_`, spesso picco). Solo informativa — il bollo EV usa P.2 a libretto dall’utente.
@@ -144,7 +167,7 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
     var qualitySubtitle: String? {
         var parts: [String] = []
         if let confidenceScore {
-            parts.append(String(format: "%.0f%%", confidenceScore * 100))
+            parts.append(L10n.catalogQualityScore(Int((confidenceScore * 100).rounded())))
         }
         if let sourceName, !sourceName.isEmpty {
             parts.append(sourceName)
@@ -250,16 +273,26 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         return resolvedEnergyKWhPerKm
     }
 
+    /// Autonomia PHEV da WLTP o derivabile da batteria e consumo charge-depleting.
+    var resolvedPHEVElectricRangeKm: Double? {
+        if let range = wltpRangeKm, range > 0 { return Double(range) }
+        guard let battery = batteryKWh, battery > 0,
+              let consumption = usableChargeDepletingEnergyKWhPerKm, consumption > 0 else {
+            return nil
+        }
+        return battery / consumption
+    }
+
     /// Quota km elettrici stimata per PHEV (0…1).
     ///
     /// `share = clamp(autonomiaEV × 0.8 × giorniRicarica / kmAnnui, 0.1, 0.6)`.
+    /// Senza autonomia disponibile usa solo il minimo prudenziale (10%), mai un range inventato.
     /// Tetto 0,6 senza dati utente (ICCT). Con ricarica a casa ≈ quotidiana; senza, ~settimanale.
     func phevElectricKmShare(hasHomeCharging: Bool, yearlyKm: Double = 15_000) -> Double {
         guard powertrain == .phev else { return powertrain == .ev ? 1 : 0 }
-        let electricRangeKm = Double(wltpRangeKm ?? 50)
         let chargeDays = hasHomeCharging ? 300.0 : 52.0
         let km = max(1.0, yearlyKm)
-        let raw = electricRangeKm * 0.8 * chargeDays / km
+        let raw = (resolvedPHEVElectricRangeKm ?? 0) * 0.8 * chargeDays / km
         return min(0.6, max(0.1, raw))
     }
 
@@ -382,6 +415,9 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         sourceName: String? = nil,
         sourceUpdatedAt: String? = nil,
         confidenceScore: Double? = nil,
+        confidenceScoreLegacy: Double? = nil,
+        confidencePolicyVersion: Int? = nil,
+        confidenceEvidence: ConfidenceEvidence? = nil,
         fuelKind: FuelKind? = nil,
         powerKw: Double? = nil,
         energyIsWeighted: Bool? = nil,
@@ -421,6 +457,9 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         self.sourceName = sourceName
         self.sourceUpdatedAt = sourceUpdatedAt
         self.confidenceScore = confidenceScore
+        self.confidenceScoreLegacy = confidenceScoreLegacy
+        self.confidencePolicyVersion = confidencePolicyVersion
+        self.confidenceEvidence = confidenceEvidence
         self.fuelKind = fuelKind
         self.powerKw = powerKw
         self.energyIsWeighted = energyIsWeighted

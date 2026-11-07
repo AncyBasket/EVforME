@@ -1,5 +1,7 @@
 # Launch gap report — EVforME?
 
+> **Nota aggiornamento 2026-11-03:** questo report resta uno snapshot storico del 2026-10-27 (seed v62). Il seed corrente è v75; per correzioni e stato aggiornato vedere [`docs/audit/AUDIT_2026-11-03_FOLLOWUP.md`](audit/AUDIT_2026-11-03_FOLLOWUP.md). I conteggi qui sotto non descrivono il bundle corrente.
+
 **Branch:** `audit/launch-gap`  
 **Data verifica:** 2026-10-27  
 **Scope:** solo audit (nessuna modifica a codice/seed). App al lancio **gratis**. Catalogo **completo** (non si tolgono auto).  
