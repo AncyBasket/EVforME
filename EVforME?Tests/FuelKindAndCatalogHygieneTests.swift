@@ -227,7 +227,8 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
         XCTAssertGreaterThan(costs.pricePerLiter(for: .lpg), 0.4)
         XCTAssertLessThan(costs.pricePerLiter(for: .lpg), 1.5)
         XCTAssertGreaterThan(costs.pricePerLiter(for: .cng), 0.8)
-        XCTAssertLessThan(costs.pricePerLiter(for: .cng), 2.0)
+        // CNG is €/kg; live MIMIT cache can sit just above 2.0 (e.g. 2.099).
+        XCTAssertLessThan(costs.pricePerLiter(for: .cng), 2.5)
     }
 
     func testCatalog_NoTeslaICEOrNonEUToys() {

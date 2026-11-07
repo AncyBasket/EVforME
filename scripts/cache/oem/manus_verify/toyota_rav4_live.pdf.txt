@@ -1,0 +1,135 @@
+Scheda Tecnica
+DIMENSIONI
+Lunghezza max (mm)
+Larghezza (mm)
+Altezza max (mm)
+Passo (mm)
+Carreggiata ant. (mm) 18"/19"
+Carreggiata post. (mm) 18"/19"
+Capacità serbatoio carb. (litri)
+Altezza minima da terra (mm)
+Numero posti
+BAGAGLIAIO
+Capacità bagagliaio (fondo abbassato) (litri)
+PESI
+Massa in ordine di marcia (kg)
+Massa complessiva (kg)
+Massa rimorchiabile (kg)
+MOTORE TERMICO
+N° cilindri/disposizione
+Distribuzione
+Cilindrata (cc)
+Alesaggio x corsa (mm)
+Rapporto di compressione
+Potenza max kW (cv) @giri/min
+Coppia max @ giri/min (Nm)
+Potenza max sistema Ibrido kW (CV)
+Filtro antiparticolato
+MOTORE ELETTRICO (Sincrono a magneti permanenti)
+Potenza max kW (CV) anteriore/posteriore
+Coppia max (Nm) anteriore/posteriore
+HYBRID SYNERGY DRIVE
+Potenza max kW (CV)
+Classe antinquinamento
+BATTERIE HV 
+Litio - Capacità (kWh)
+Tensione (V)
+On Board Charger (OBC) (kW)
+SOSPENSIONI
+Anteriori
+Posteriori
+STERZO
+Servosterzo
+Diametro minimo di sterzata tra marciapiedi (m)
+TRASMISSIONE
+Cambio
+PRESTAZIONI
+Velocità max (km/h)
+Accelerazione 0-100 Km/h (sec)
+CONSUMI ED EMISSIONI WLTP (ai sensi del Regolamento UE 2017/1151)*
+Range consumi (Km/l)
+Range consumi (l/100km)
+Emissioni CO2 g/km (range)**
+Emissioni NOx g/km
+EMISSIONI ACUSTICHE*
+Livello sonoro a veicolo fermo dB(A)
+Livello sonoro a veicolo in movimento dB(A)
+RUOTE
+Cerchi
+Pneumatici
+Nota: Toyota Motor Italia si riserva il diritto di modificare senza preavviso le caratteristiche riportate in base allo sviluppo del prodotto
+*Valori non definitivi, soggetti ad omologazione finale
+355
+0,004
+18''Lega
+19''Lega
+225/60 R18
+235/55 R19
+6,6
+100,00
+22
+Indipendenti a 2 bracci oscillanti
+Elettrico
+11
+E-CVT
+Indipendenti Mc Pherson
+1500
+4 in linea
+2487
+180
+6
+1,00
+270/121
+225 (306)
+EURO 6d - ISC - FCM
+18.1
+GPF
+PLUG-IN HYBRID
+2.5 VVT-iE
+4600
+1855
+1690
+RAV4 Plug-in Hybrid
+2510
+1640/1630
+87 x 103
+14:1
+AWD-i
+136 (185) @ 6000
+227 @ 3200-3700
+225 (306)
+55
+180
+5
+16 valvole DOHC con VVT-iE
+La Scheda Tecnica e la Scheda Equipaggiamenti di Toyota sono progettate per offrire indicazioni sulle specifiche dei veicoli , nella loro versione 
+ recente . Facciamo tutto il 
+possibile 
+ questi dati rispecchino fedelmente i prodotti che offriamo ai nostri clienti . 
+ nonostante , le specifiche possono variare senza preavviso e non possiamo 
+garantire che le informazioni correnti e le 
+ di ogni prodotto mostrato siano aggiornate , complete ed in tempo reale . Qualora fossi interessato a visionare o ad 
+acquistare un veicolo , visita il Concessionario Toyota 
+ vicino per ulteriori chiarimenti e /o dettagli . Tutti gli ordini sui veicoli sono soggetti ai termini e condizioni di vendita 
+standard del Concessionario Toyota .
+**Livello di emissioni euro EURO 6D - ISC- FCM
+2690
+1610/1600
+520
+1985-2005
+70
+64
+134 (182) /40 (55)
+
+ALLEGATO Consumi ed Emissioni
+Modello MY Trazione Motore Transmission Porte Grade Pack Accessori Emissioni CO2** Consumi (l/100km) Consumi (km/l)
+RAV4 Plug-in MY24 4WD 2.5L PHEV CVT 5 More Dynamic 22 1,00 100,00
+RAV4 Plug-in MY24 4WD 2.5L PHEV CVT 5 More Dynamic Suv Pack 22 1,00 100,00
+RAV4 Plug-in MY24 4WD 2.5L PHEV CVT 5 More Style 22 1,00 100,00
+RAV4 Plug-in MY24 4WD 2.5L PHEV CVT 5 More Style Suv Pack 22 1,00 100,00
+RAV4 Plug-in MY24 4WD 2.5L PHEV CVT 5 GR SPORT 22 1,00 100,00
+RAV4 Plug-in MY24 4WD 2.5L PHEV CVT 5 GR SPORT Suv Pack 22 1,00 100,00
+Nota: Toyota Motor Italia si riserva il diritto di modificare senza preavviso le caratteristiche riportate in base allo sviluppo del prodotto
+*Valori non definitivi, soggetti ad omologazione finale
+WLTP (Ciclo Combinato)*
+**Livello di emissioni euro EURO 6D - ISC- FCM
