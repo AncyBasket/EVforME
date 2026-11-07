@@ -6990,7 +6990,7 @@
     {
       "id": "toyota-rav4-phev-2023",
       "field": "batteryKWh",
-      "before": null,
+      "before": 18.1,
       "after": 18.1,
       "decision": "accepted",
       "url": "https://newsroom.toyota.it/download/1316286/20230101rav4plug-inhybridmy23schedatecnica.pdf",
@@ -6998,12 +6998,13 @@
       "label": "BATTERIE HV / Litio - Capacit\u00e0 (kWh) = 18.1",
       "page": "scheda tecnica p.1; PDF CreationDate 2023-01-03",
       "note": "net/gross base not stated; value used as capacity as printed",
-      "evidence": "document_reopened"
+      "evidence": "document_reopened",
+      "validation": "ok_import"
     },
     {
       "id": "cupra-formentor-phev-e-hybrid-2024",
       "field": "batteryKWh",
-      "before": null,
+      "before": 12.8,
       "after": 12.8,
       "decision": "accepted",
       "url": "https://www.cupra.com/content/dam/countries/ie/cupra-website/product-guide/formentor/cars-models-info-KM7-product-guide-Jan-2024.pdf",
@@ -7011,23 +7012,26 @@
       "label": "Battery Capacity [kWh] 12.8 for e-Hybrid 204hp DSG (KM7BUY) and VZ 245hp",
       "page": "JANUARY 2024 Product Guide; tech table; Information valid as of 01.01.2024",
       "note": "Matches prior-gen 204 hp / system 150 kW / ICE thermal 110 kW; seed powerKw 110.6 is thermal; CO2 27 g/km matches 204 hp row; NOT facelift 25.8 kWh",
-      "evidence": "document_reopened"
-    },
+      "evidence": "document_reopened",
+      "validation": "ok_import"
+    }
+  ],
+  "rejected": [
     {
       "id": "bmw-serie-2-active-tourer-225e-xdrive-2022",
       "field": "wltpRangeKm",
       "before": null,
-      "after": 83,
-      "decision": "accepted",
-      "url": "https://www.press.bmwgroup.com/italy/article/detail/T0396153IT/misure-di-aggiornamento-dei-modelli-bmw-a-partire-dall-estate-2022?language=it",
-      "sourceDate": "2022-06-01",
-      "label": "autonomia elettrica 83\u201392 km secondo WLTP (225e xDrive Active Tourer)",
-      "page": "Comunicato Stampa 01.06.2022",
-      "note": "min of combined EAER interval; battery capacity not in this press \u2192 not imported",
-      "evidence": "document_reopened"
-    }
-  ],
-  "rejected": [
+      "after": null,
+      "proposed": 83,
+      "decision": "rejected",
+      "reason": "claimed press cache was HTML of 2026 listino (not a PDF); IT press URL redirects to newsroom home; DE live page dated 18.05.2022 shows 83\u201392 km but live pages are not admissible for past years and archive.org has no 2022 snapshot \u2014 restore main nil",
+      "tried": [
+        "scripts/cache/oem/manus_verify/bmw_2at_press_652064.html (was .pdf; HTML listino 2026)",
+        "https://www.press.bmwgroup.com/italy/article/detail/T0396153IT/\u2026 \u2192 redirect newsroom home",
+        "https://www.press.bmwgroup.com/deutschland/article/detail/T0390613DE/\u2026 live 2026, date badge 18.05.2022, no Wayback 2022"
+      ],
+      "evidence": "verification_failed_or_insufficient"
+    },
     {
       "id": "bmw-serie-2-active-tourer-225e-xdrive-2022",
       "field": "batteryKWh",
@@ -7035,10 +7039,9 @@
       "after": null,
       "proposed": 14.2,
       "decision": "rejected",
-      "reason": "Manus listino PDF unreachable (HTTP/2 reset); archive.org has no snapshot; summer-2022 press states 14.2\u201315.8 as kWh/100 consumption, not capacity; 2026 live listino confirms 16.3/14.2 but cannot date a 2022 row",
+      "reason": "listino PDF unreachable; summer-2022 press treats 14.2\u201315.8 as kWh/100 consumption not capacity; live 2026 listino cannot date a 2022 row",
       "tried": [
-        "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2022/Listini/Listino-BMWSerie2-ActiveTourer-U06.pdf.asset.1656074029722.pdf",
-        "https://archive.org/wayback/available?url=\u2026Listino-BMWSerie2-ActiveTourer-U06\u2026"
+        "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2022/Listini/Listino-BMWSerie2-ActiveTourer-U06.pdf.asset.1656074029722.pdf"
       ],
       "evidence": "verification_failed_or_insufficient"
     },
@@ -7182,5 +7185,6 @@
       "evidence": "verification_failed_or_insufficient"
     }
   ],
+  "bmw_225e_2022_range": "reverted_to_main_nil",
   "new_rows": []
 }

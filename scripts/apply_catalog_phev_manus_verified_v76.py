@@ -5,24 +5,34 @@ Selective recovery of Manus PHEV supplement (PR #33) → seed v75→v76.
 Only fields re-verified against reopened OEM documents are imported.
 Rejected proposals keep main values. No confidence / Core / API changes.
 No row removals. M3 2026 untouched.
+
+BMW 225e 2022 range: NOT imported — cached “PDF” was HTML listino 2026;
+live press pages are not admissible for past years without a 2022 archive snapshot.
 """
 
 from __future__ import annotations
 
 import json
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(REPO / "scripts"))
+from lib.phev_manus_v76_validate import (  # noqa: E402
+    missing_calc_fields,
+    validate_field_import,
+)
+
 SEED = REPO / "EVforME?" / "Data" / "vehicles.seed.quality.json"
 CDN = REPO / "EVforME?" / "Data" / "catalog_cdn.json"
 CACHE = REPO / "scripts" / "cache" / "eea"
+OEM = REPO / "scripts" / "cache" / "oem" / "manus_verify"
 MANIFEST = CACHE / "catalog_phev_manus_verified_v76_manifest.json"
 AUDIT = REPO / "docs" / "audit" / "PHEV_MANUS_VERIFIED_V76.json"
 
 SOURCE_DAY = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
-# Decisions after reopening sources (not Manus report alone).
 ACCEPTED = {
     "toyota-rav4-phev-2023": [
         {
@@ -33,8 +43,9 @@ ACCEPTED = {
             "label": "BATTERIE HV / Litio - Capacità (kWh) = 18.1",
             "page": "scheda tecnica p.1; PDF CreationDate 2023-01-03",
             "note": "net/gross base not stated; value used as capacity as printed",
+            "download": OEM / "toyota_rav4_my23.pdf",
+            "row_year": 2023,
         },
-        # weightedFuel already present on main (0.00948 EEA); do not overwrite valid main data.
     ],
     "cupra-formentor-phev-e-hybrid-2024": [
         {
@@ -49,17 +60,8 @@ ACCEPTED = {
                 "seed powerKw 110.6 is thermal; CO2 27 g/km matches 204 hp row; "
                 "NOT facelift 25.8 kWh"
             ),
-        },
-    ],
-    "bmw-serie-2-active-tourer-225e-xdrive-2022": [
-        {
-            "field": "wltpRangeKm",
-            "value": 83,
-            "url": "https://www.press.bmwgroup.com/italy/article/detail/T0396153IT/misure-di-aggiornamento-dei-modelli-bmw-a-partire-dall-estate-2022?language=it",
-            "date": "2022-06-01",
-            "label": "autonomia elettrica 83–92 km secondo WLTP (225e xDrive Active Tourer)",
-            "page": "Comunicato Stampa 01.06.2022",
-            "note": "min of combined EAER interval; battery capacity not in this press → not imported",
+            "download": OEM / "cupra_ie_jan2024.pdf",
+            "row_year": 2024,
         },
     ],
 }
@@ -67,16 +69,30 @@ ACCEPTED = {
 REJECTED = [
     {
         "id": "bmw-serie-2-active-tourer-225e-xdrive-2022",
+        "field": "wltpRangeKm",
+        "proposed": 83,
+        "reason": (
+            "claimed press cache was HTML of 2026 listino (not a PDF); "
+            "IT press URL redirects to newsroom home; DE live page dated 18.05.2022 "
+            "shows 83–92 km but live pages are not admissible for past years and "
+            "archive.org has no 2022 snapshot — restore main nil"
+        ),
+        "tried": [
+            "scripts/cache/oem/manus_verify/bmw_2at_press_652064.html (was .pdf; HTML listino 2026)",
+            "https://www.press.bmwgroup.com/italy/article/detail/T0396153IT/… → redirect newsroom home",
+            "https://www.press.bmwgroup.com/deutschland/article/detail/T0390613DE/… live 2026, date badge 18.05.2022, no Wayback 2022",
+        ],
+    },
+    {
+        "id": "bmw-serie-2-active-tourer-225e-xdrive-2022",
         "field": "batteryKWh",
         "proposed": 14.2,
         "reason": (
-            "Manus listino PDF unreachable (HTTP/2 reset); archive.org has no snapshot; "
-            "summer-2022 press states 14.2–15.8 as kWh/100 consumption, not capacity; "
-            "2026 live listino confirms 16.3/14.2 but cannot date a 2022 row"
+            "listino PDF unreachable; summer-2022 press treats 14.2–15.8 as kWh/100 "
+            "consumption not capacity; live 2026 listino cannot date a 2022 row"
         ),
         "tried": [
             "https://www.bmw.it/content/dam/bmw/marketIT/bmw_it/Topics/Business/2022/Listini/Listino-BMWSerie2-ActiveTourer-U06.pdf.asset.1656074029722.pdf",
-            "https://archive.org/wayback/available?url=…Listino-BMWSerie2-ActiveTourer-U06…",
         ],
     },
     {
@@ -175,30 +191,10 @@ REJECTED = [
 ]
 
 
-def missing_calc_fields(r: dict) -> list[str]:
-    miss: list[str] = []
-    cs = r.get("fuelConsumptionLPerKm")
-    if cs is None or float(cs) * 100 < 3.0:
-        miss.append("fuelConsumptionLPerKm")
-    e = r.get("energyConsumptionKWhPerKm")
-    if e is None or r.get("energyIsWeighted") is True:
-        miss.append("energyConsumptionKWhPerKm")
-    if r.get("wltpRangeKm") is None:
-        miss.append("wltpRangeKm")
-    if r.get("batteryKWh") is None:
-        miss.append("batteryKWh")
-    return miss
-
-
 def finalize(row: dict) -> None:
-    if row.get("energyConsumptionKWhPerKm") is None and row.get(
-        "weightedEnergyConsumptionKWhPerKm"
-    ) is not None:
-        row["energyIsWeighted"] = True
     miss = missing_calc_fields(row)
     row["missingCalcFields"] = miss
     row["catalogDataIncomplete"] = bool(miss)
-    # No confidence recalculation (v76 data-only).
 
 
 def counts(rows):
@@ -212,6 +208,32 @@ def counts(rows):
         else:
             m += 1
     return c, k, m
+
+
+def strip_bmw_range_provenance(row: dict, *, main_source_updated_at: str | None = None) -> None:
+    """Restore main nil for undemonstrated BMW 2022 range and drop added provenance only."""
+    row["wltpRangeKm"] = None
+    fs = dict(row.get("fieldSources") or {})
+    fd = dict(row.get("fieldSourceDates") or {})
+    fs.pop("wltpRangeKm", None)
+    fd.pop("wltpRangeKm", None)
+    if fs:
+        row["fieldSources"] = fs
+    else:
+        row.pop("fieldSources", None)
+    if fd:
+        row["fieldSourceDates"] = fd
+    else:
+        row.pop("fieldSourceDates", None)
+    sn = row.get("sourceName") or ""
+    # remove only manus-verified range note
+    parts = [p.strip() for p in sn.split(";") if p.strip()]
+    parts = [p for p in parts if "manus-verified v76: wltpRangeKm" not in p]
+    row["sourceName"] = "; ".join(parts) if parts else sn
+    if main_source_updated_at is not None and "manus-verified v76:" not in (row.get("sourceName") or ""):
+        # no remaining manus fields on this row → restore main consultation stamp
+        row["sourceUpdatedAt"] = main_source_updated_at
+    finalize(row)
 
 
 def main() -> None:
@@ -228,18 +250,34 @@ def main() -> None:
     parents = [r for r in seed if r.get("powertrain") == "phev" and not r.get("parentId")]
     before = counts(parents)
 
+    # Always strip undemonstrated BMW range if present (idempotent fix for v76 review).
+    if "bmw-serie-2-active-tourer-225e-xdrive-2022" in by_id:
+        strip_bmw_range_provenance(
+            by_id["bmw-serie-2-active-tourer-225e-xdrive-2022"],
+            main_source_updated_at="2026-10-27",
+        )
+
     changed: list[dict] = []
     for rid, fields in ACCEPTED.items():
         row = by_id[rid]
         for spec in fields:
+            v = validate_field_import(
+                row_year=int(spec["row_year"]),
+                field=spec["field"],
+                value=spec["value"],
+                url=spec["url"],
+                source_date=spec["date"],
+                label=f"{spec['label']}; {spec['page']}",
+                download_path=spec.get("download"),
+            )
+            if not v.ok:
+                raise SystemExit(f"accepted import failed validation {rid}.{spec['field']}: {v.reason}")
             field = spec["field"]
             before_val = row.get(field)
             row[field] = spec["value"]
             fs = dict(row.get("fieldSources") or {})
             fd = dict(row.get("fieldSourceDates") or {})
-            fs[field] = (
-                f"{spec['label']}; {spec['page']}; {spec['note']}; {spec['url']}"
-            )
+            fs[field] = f"{spec['label']}; {spec['page']}; {spec['note']}; {spec['url']}"
             fd[field] = spec["date"]
             row["fieldSources"] = fs
             row["fieldSourceDates"] = fd
@@ -261,6 +299,7 @@ def main() -> None:
                     "page": spec["page"],
                     "note": spec["note"],
                     "evidence": "document_reopened",
+                    "validation": v.reason,
                 }
             )
         finalize(row)
@@ -297,8 +336,9 @@ def main() -> None:
         raise SystemExit(f"complete_with_nil_calc: {bad}")
 
     ver = int(cdn.get("seedVersion") or 0)
-    if ver != 75:
-        raise SystemExit(f"expected base seedVersion 75, got {ver}")
+    if ver not in (75, 76):
+        raise SystemExit(f"expected base seedVersion 75 or in-review 76, got {ver}")
+    # Keep v76 for same-wave review (do not bump again).
     cdn["seedVersion"] = 76
     cdn["rows"] = len(seed)
     payload = json.dumps(
@@ -309,8 +349,8 @@ def main() -> None:
     cdn["bytes"] = len(payload.encode())
     cdn["updatedAt"] = datetime.now(timezone.utc).isoformat()
     cdn["note"] = (
-        "seedVersion 76: selective Manus PHEV recovery (verified fields only); "
-        "no confidence recalculation"
+        "seedVersion 76: selective Manus PHEV recovery (Toyota/Cupra verified); "
+        "BMW 225e 2022 range reverted — no admissible 2022 proof"
     )
     SEED.write_text(json.dumps(seed, ensure_ascii=False, separators=(",", ":")) + "\n")
     CDN.write_text(json.dumps(cdn, indent=2) + "\n")
@@ -327,13 +367,26 @@ def main() -> None:
         "phev_multi_missing_after": after[2],
         "fields_changed": [c for c in changed if c["decision"] == "accepted"],
         "rejected": [c for c in changed if c["decision"] == "rejected"],
+        "bmw_225e_2022_range": "reverted_to_main_nil",
         "new_rows": [],
     }
     CACHE.mkdir(parents=True, exist_ok=True)
     MANIFEST.write_text(json.dumps(man, indent=2) + "\n")
     AUDIT.parent.mkdir(parents=True, exist_ok=True)
     AUDIT.write_text(json.dumps({"decisions": changed, "manifest": man}, indent=2) + "\n")
-    print(json.dumps({"seedVersion": 76, "before": before, "after": after, "accepted": len(man["fields_changed"]), "rejected": len(man["rejected"])}, indent=2))
+    print(
+        json.dumps(
+            {
+                "seedVersion": 76,
+                "before": before,
+                "after": after,
+                "accepted": len(man["fields_changed"]),
+                "rejected": len(man["rejected"]),
+                "bmw_range": "nil",
+            },
+            indent=2,
+        )
+    )
 
 
 if __name__ == "__main__":
