@@ -46,7 +46,7 @@ def seed_fp(path: Path = SEED) -> str:
     return hashlib.sha256(blob.encode()).hexdigest()
 
 
-def must_fail_fixtures() -> list[str]:
+def must_fail_fixtures() -> tuple[list[str], int]:
     """Fixtures go through the same validators used on real imports/downloads."""
     cases: list[tuple[str, bool, str, object]] = []
 
@@ -161,12 +161,12 @@ def must_fail_fixtures() -> list[str]:
     summary = f"must-fail fixtures: {len(cases)}/{len(cases)} via shared validators"
     print(summary)
     lines.append(summary)
-    return lines
+    return lines, len(cases)
 
 
 def run_core_checks() -> dict:
     """Full shared verification: fixtures, OEM docs, imports, completeness, rejects, integrity."""
-    fixture_lines = must_fail_fixtures()
+    _fixture_lines, fixture_n = must_fail_fixtures()
 
     seed = json.loads(SEED.read_text(encoding="utf-8"))
     cdn = json.loads(CDN.read_text(encoding="utf-8"))
@@ -324,7 +324,7 @@ def run_core_checks() -> dict:
         "bmw_range": b22.get("wltpRangeKm"),
         "bmw_missing": bmw_miss,
         "m3": m3,
-        "fixture_count": len(fixture_lines),
+        "fixture_count": fixture_n,
         "status": "OK",
     }
     print(json.dumps(report, indent=2, sort_keys=True))
