@@ -1032,7 +1032,8 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
     func testCatalog_AurisHybrid2018ConfidenceIsStimaLevel() {
         let hev = VehicleCatalogService.shared.vehicle(by: "toyota-auris-hybrid-2018")
         XCTAssertNotNil(hev)
-        XCTAssertEqual(hev?.confidenceScore ?? -1, 0.5, accuracy: 0.001)
+        // Policy v2: stima/unmatched IT data → 0.40 ordinal coverage (not probability).
+        XCTAssertEqual(hev?.confidenceScore ?? -1, 0.4, accuracy: 0.001)
     }
 
     func testCatalog_NoCorollaCrossICEOrCorollaIMInItaly() {

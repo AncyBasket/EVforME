@@ -1,12 +1,12 @@
 {
   "url": "",
   "publishedUrl": "https://files.catbox.moe/3i0nro.json",
-  "rows": 6301,
-  "bytes": 3119756,
+  "rows": 6977,
+  "bytes": 8908918,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-10-22T11:21:31.302114+00:00",
+  "updatedAt": "2026-11-07T13:09:19+00:00",
   "policy": "offline-first",
-  "seedVersion": 42,
-  "note": "seedVersion 42: keep only verified EU PHEV docs (330e/GTE/CX-60) + energyIsWeighted; EPA co2 g/mi fix; drop unsourced PHEVs."
+  "seedVersion": 77,
+  "note": "seedVersion 77: confidenceScore policy v2 (ordinal coverage/quality index, not probability; no retroactive documentary verification)"
 }

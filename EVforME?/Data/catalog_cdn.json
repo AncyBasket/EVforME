@@ -2,11 +2,11 @@
   "url": "",
   "publishedUrl": "",
   "rows": 6977,
-  "bytes": 3073365,
+  "bytes": 8908918,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-11-07T10:38:26.867966+00:00",
+  "updatedAt": "2026-11-07T13:09:19+00:00",
   "policy": "offline-first",
-  "seedVersion": 76,
-  "note": "seedVersion 76: selective Manus PHEV recovery (Toyota/Cupra verified); BMW 225e 2022 range reverted \u2014 no admissible 2022 proof"
+  "seedVersion": 77,
+  "note": "seedVersion 77: confidenceScore policy v2 (ordinal coverage/quality index, not probability; no retroactive documentary verification)"
 }
