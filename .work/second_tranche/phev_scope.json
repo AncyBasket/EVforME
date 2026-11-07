@@ -1,0 +1,2910 @@
+{
+  "sourceSeedVersion": 76,
+  "families": [
+    {
+      "brand": "Alfa Romeo",
+      "model": "Tonale",
+      "records": [
+        {
+          "id": "alfa-romeo-tonale-phev-2023",
+          "year": 2023,
+          "trim": "PHEV",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01324,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 31
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 TONALE PETROL/ELECTRIC n=1986; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 132.0
+        },
+        {
+          "id": "alfa-romeo-tonale-phev-2024",
+          "year": 2024,
+          "trim": "PHEV",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01291,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 30
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2024 TONALE PETROL/ELECTRIC n=806; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 132.0
+        }
+      ]
+    },
+    {
+      "brand": "Audi",
+      "model": "A3 PHEV",
+      "records": [
+        {
+          "id": "audi-a3-e-tron-ultra-phev-2016",
+          "year": 2016,
+          "trim": "A3 e-tron ultra",
+          "missingCalcFields": [
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": 27,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": 23.6,
+            "energyConsumptionKWhPerKm": 0.2361,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.0603,
+            "weightedFuelConsumptionLPerKm": null,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 85.7
+          },
+          "fieldSources": {
+            "energyConsumptionKWhPerKm": "EPA-FuelEconomy charge-depleting (solo elettrico / CD) electricity → 0.2361 kWh/km; batteryKWh absent in this EPA extract"
+          },
+          "fieldSourceDates": {
+            "energyConsumptionKWhPerKm": "2016"
+          },
+          "sourceName": "EPA-FuelEconomy",
+          "market": "US/EPA",
+          "powerKw": null
+        }
+      ]
+    },
+    {
+      "brand": "Audi",
+      "model": "Q3 Sportback",
+      "records": [
+        {
+          "id": "audi-q3-sportback-phev-45-tfsi-e-2022",
+          "year": 2022,
+          "trim": "45 TFSI e",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01745,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 40
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2022 Q3 SPORTBACK E-TRON PETROL/ELECTRIC n=1004; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 110.0
+        },
+        {
+          "id": "audi-q3-sportback-phev-45-tfsi-e-2023",
+          "year": 2023,
+          "trim": "45 TFSI e",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01481,
+            "weightedEnergyConsumptionKWhPerKm": 0.179,
+            "co2gKm": 36
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 Q3 SPORTBACK E-TRON PETROL/ELECTRIC n=1482; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm; generic neuwagen.html / derived invalid → fields nil",
+          "market": "IT",
+          "powerKw": 110.0
+        },
+        {
+          "id": "audi-q3-sportback-phev-45-tfsi-e-2024",
+          "year": 2024,
+          "trim": "45 TFSI e",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01481,
+            "weightedEnergyConsumptionKWhPerKm": 0.179,
+            "co2gKm": 34
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2024 Q3 SPORTBACK E-TRON PETROL/ELECTRIC n=1487; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm; Strom nur gewichtet; generic neuwagen.html / derived invalid → fields nil",
+          "market": "IT",
+          "powerKw": 110.0
+        }
+      ]
+    },
+    {
+      "brand": "Audi",
+      "model": "Q5",
+      "records": [
+        {
+          "id": "audi-q5-phev-50-tfsi-e-2023",
+          "year": 2023,
+          "trim": "50 TFSI e",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01579,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 37
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 Q5 50 TFSI E PETROL/ELECTRIC n=666; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 195.0
+        },
+        {
+          "id": "audi-q5-phev-50-tfsi-e-2024",
+          "year": 2024,
+          "trim": "50 TFSI e",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01593,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 37
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2024 Q5 50 TFSI E PETROL/ELECTRIC n=846; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 195.0
+        }
+      ]
+    },
+    {
+      "brand": "Audi",
+      "model": "Q5 Sportback",
+      "records": [
+        {
+          "id": "audi-q5-sportback-phev-50-tfsi-e-2023",
+          "year": 2023,
+          "trim": "50 TFSI e",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01632,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 38
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 Q5 SPORTBACK 50 TFSI E PETROL/ELECTRIC n=866; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 195.0
+        },
+        {
+          "id": "audi-q5-sportback-phev-50-tfsi-e-2024",
+          "year": 2024,
+          "trim": "50 TFSI e",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01675,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 39
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2024 Q5 SPORTBACK 50 TFSI E PETROL/ELECTRIC n=1027; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 195.0
+        }
+      ]
+    },
+    {
+      "brand": "BMW",
+      "model": "330e",
+      "records": [
+        {
+          "id": "bmw-330e-phev-2024",
+          "year": 2024,
+          "trim": "PHEV",
+          "missingCalcFields": [
+            "energyConsumptionKWhPerKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": 93,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.079,
+            "weightedFuelConsumptionLPerKm": null,
+            "weightedEnergyConsumptionKWhPerKm": 0.22,
+            "co2gKm": 22
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "BMW press tech data 330e Sedan ab 05/2024: Kraftstoff bei entladener Batterie 7.9-7.1 L/100; Stromverbrauch WLTP gewichtet/ponderato 23.4-20.7 kWh/100; batteria netto 19.5 kWh — https://www.press.bmwgroup.com/global/article/attachment/T0442333EN/620071",
+          "market": "IT",
+          "powerKw": null
+        }
+      ]
+    },
+    {
+      "brand": "BMW",
+      "model": "Serie 3",
+      "records": [
+        {
+          "id": "bmw-serie-3-320e-2023",
+          "year": 2023,
+          "trim": "320e",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01463,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 33
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 320E PETROL/ELECTRIC n=798; OEM same-MY range/battery/kWh not attached (nil)",
+          "market": "IT",
+          "powerKw": 120.0
+        },
+        {
+          "id": "bmw-serie-3-320e-2024",
+          "year": 2024,
+          "trim": "320e",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01461,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 33
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2024 320E PETROL/ELECTRIC n=538; OEM same-MY range/battery/kWh not attached (nil)",
+          "market": "IT",
+          "powerKw": 120.0
+        }
+      ]
+    },
+    {
+      "brand": "BMW",
+      "model": "X1",
+      "records": [
+        {
+          "id": "bmw-x1-phev-xdrive25e-2022",
+          "year": 2022,
+          "trim": "xDrive25e",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm"
+          ],
+          "current": {
+            "batteryKWh": 10.0,
+            "wltpRangeKm": 49,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01718,
+            "weightedEnergyConsumptionKWhPerKm": 0.154,
+            "co2gKm": 40
+          },
+          "fieldSources": {
+            "wltpRangeKm": "press.bmwgroup.com BMW X1 LISTINO PREZZI (F48) Valido a partire dal 26.01.2022 EAER 49–52 → 49 https://www.press.bmwgroup.com/italy/article/attachment/T0321361IT/520251",
+            "batteryKWh": "press.bmwgroup.com BMW X1 LISTINO PREZZI (F48) Valido a partire dal 26.01.2022 batteria lorda/netta 10/8.82 → 10 https://www.press.bmwgroup.com/italy/article/attachment/T0321361IT/520251",
+            "weightedEnergyConsumptionKWhPerKm": "press.bmwgroup.com BMW X1 LISTINO PREZZI (F48) Valido a partire dal 26.01.2022 «Consumo elettrico» 15,0–15,4 next to Combinato 1,7–1,9 / CO2 40–44 → weightedEnergy 0.154 (not CD / no batteria carica) https://www.press.bmwgroup.com/italy/article/attachment/T0321361IT/520251"
+          },
+          "fieldSourceDates": {
+            "wltpRangeKm": "2022-01-26",
+            "batteryKWh": "2022-01-26",
+            "weightedEnergyConsumptionKWhPerKm": "2022-01-26"
+          },
+          "sourceName": "EEA co2cars IT 2022 X1 xDrive25e PETROL/ELECTRIC n=2436; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm; BMW X1 LISTINO PREZZI (F48) Valido a partire dal 26.01.2022: EAER 49, batteria 10 kWh, consumo elettrico CD 15,0–15,4 → 0.154 (not pure-CD); CS listino 1,7–1,9 lasciato nei weighted* — https://www.press.bmwgroup.com/italy/article/attachment/T0321361IT/520251; wave3: kWh 0.154 demoted to weightedEnergyConsumptionKWhPerKm (doc places énergie/Strom with ponderati / gewichtet, no pure-CD label) — https://www.press.bmwgroup.com/italy/article/attachment/T0321361IT/520251",
+          "market": "IT",
+          "powerKw": 92.1
+        },
+        {
+          "id": "bmw-x1-phev-xdrive25e-2023",
+          "year": 2023,
+          "trim": "xDrive25e",
+          "missingCalcFields": [
+            "energyConsumptionKWhPerKm"
+          ],
+          "current": {
+            "batteryKWh": 14.2,
+            "wltpRangeKm": 71,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.068,
+            "weightedFuelConsumptionLPerKm": 0.011,
+            "weightedEnergyConsumptionKWhPerKm": 0.193,
+            "co2gKm": 17
+          },
+          "fieldSources": {
+            "fuelConsumptionLPerKm": "bmw.de 2024 https://web.archive.org/web/20240604155829/https://www.bmw.de/content/dam/bmw/marketDE/bmw_de/mybmw/bmw-efficientdynamics/SP-1619_CO2_A4_Vergleich_Emissionswerte_05_2024_X4_05.pdf.coredownload.inline.pdf; stessa omologazione EEA E1*2018/858*00153*04 21EF/EAW50000, anni 2023 e 2024",
+            "wltpRangeKm": "press.bmwgroup.com BMW X1 Preisliste November 2023 (Ausgabe 1, 27.09.2023) EAER kombiniert 71–86 → 71 https://www.press.bmwgroup.com/deutschland/article/attachment/T0322775DE/609585",
+            "batteryKWh": "press.bmwgroup.com BMW X1 Preisliste November 2023 (Ausgabe 1, 27.09.2023) Netto Batterieinhalt 14,2 kWh https://www.press.bmwgroup.com/deutschland/article/attachment/T0322775DE/609585"
+          },
+          "fieldSourceDates": {
+            "fuelConsumptionLPerKm": "2024-05-01",
+            "wltpRangeKm": "2023-09-27",
+            "batteryKWh": "2023-09-27"
+          },
+          "sourceName": "EEA co2cars IT 2023 X1 XDRIVE25E PETROL/ELECTRIC n=1629; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm; stessa omologazione EEA E1*2018/858*00153*04 21EF/EAW50000, anni 2023 e 2024; BMW X1 Preisliste November 2023 (Ausgabe 1, 27.09.2023): EAER 71, battery 14.2; Strom 22–18.2 weighted → CD nil — https://www.press.bmwgroup.com/deutschland/article/attachment/T0322775DE/609585",
+          "market": "IT",
+          "powerKw": 99.9
+        },
+        {
+          "id": "bmw-x1-phev-xdrive30e-2023",
+          "year": 2023,
+          "trim": "xDrive30e",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.00785,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 18
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 X1 XDRIVE30E PETROL/ELECTRIC n=511; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 110.0
+        },
+        {
+          "id": "bmw-x1-phev-xdrive25e-2024",
+          "year": 2024,
+          "trim": "xDrive25e",
+          "missingCalcFields": [
+            "energyConsumptionKWhPerKm"
+          ],
+          "current": {
+            "batteryKWh": 14.2,
+            "wltpRangeKm": 71,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.068,
+            "weightedFuelConsumptionLPerKm": 0.011,
+            "weightedEnergyConsumptionKWhPerKm": 0.193,
+            "co2gKm": 17
+          },
+          "fieldSources": {
+            "fuelConsumptionLPerKm": "bmw.de 2024 https://web.archive.org/web/20240604155829/https://www.bmw.de/content/dam/bmw/marketDE/bmw_de/mybmw/bmw-efficientdynamics/SP-1619_CO2_A4_Vergleich_Emissionswerte_05_2024_X4_05.pdf.coredownload.inline.pdf",
+            "wltpRangeKm": "press.bmwgroup.com BMW X1 Preisliste November 2023 (Ausgabe 1, 27.09.2023); stessa omologazione EEA E1*2018/858*00153*04 21EF/EAW50000, anni 2023 e 2024 https://www.press.bmwgroup.com/deutschland/article/attachment/T0322775DE/609585",
+            "batteryKWh": "press.bmwgroup.com BMW X1 Preisliste November 2023 (Ausgabe 1, 27.09.2023); stessa omologazione EEA E1*2018/858*00153*04 21EF/EAW50000, anni 2023 e 2024 https://www.press.bmwgroup.com/deutschland/article/attachment/T0322775DE/609585"
+          },
+          "fieldSourceDates": {
+            "fuelConsumptionLPerKm": "2024-05-01",
+            "wltpRangeKm": "2023-09-27",
+            "batteryKWh": "2023-09-27"
+          },
+          "sourceName": "EEA co2cars IT 2024 X1 XDRIVE25E PETROL/ELECTRIC n=2475; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm; EAER; Batterie netto; Stromverbrauch nur gewichtet; BMW X1 xDrive25e EnVKV 05/2024 (archive 20240604) CS only — https://web.archive.org/web/20240604155829/https://www.bmw.de/content/dam/bmw/marketDE/bmw_de/mybmw/bmw-efficientdynamics/SP-1619_CO2_A4_Vergleich_Emissionswerte_05_2024_X4_05.pdf.coredownload.inline.pdf (2024-05-01); live preisliste range/battery rejected; EAER/batteria via EEA E1*2018/858*00153*04 21EF/EAW50000 + Preisliste 2023 — https://www.press.bmwgroup.com/deutschland/article/attachment/T0322775DE/609585",
+          "market": "IT",
+          "powerKw": 100.0
+        },
+        {
+          "id": "bmw-x1-phev-xdrive30e-2024",
+          "year": 2024,
+          "trim": "xDrive30e",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.00782,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 18
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2024 X1 XDRIVE30E PETROL/ELECTRIC n=670; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 110.0
+        }
+      ]
+    },
+    {
+      "brand": "BMW",
+      "model": "X2",
+      "records": [
+        {
+          "id": "bmw-x2-phev-xdrive25e-2022",
+          "year": 2022,
+          "trim": "xDrive25e",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01654,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 38
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2022 X2 xDrive25e PETROL/ELECTRIC n=865; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 92.0
+        },
+        {
+          "id": "bmw-x2-phev-xdrive25e-2023",
+          "year": 2023,
+          "trim": "xDrive25e",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01605,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 37
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 X2 XDRIVE25E PETROL/ELECTRIC n=940; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 92.0
+        }
+      ]
+    },
+    {
+      "brand": "BMW",
+      "model": "X5",
+      "records": [
+        {
+          "id": "bmw-x5-phev-xdrive50e-2024",
+          "year": 2024,
+          "trim": "xDrive50e",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.0089,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 21
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2024 X5 XDRIVE50E PETROL/ELECTRIC n=673; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 230.0
+        }
+      ]
+    },
+    {
+      "brand": "BMW",
+      "model": "i3 PHEV",
+      "records": [
+        {
+          "id": "bmw-i3s-with-range-extender-phev-2021",
+          "year": 2021,
+          "trim": "i3s with Range Extender",
+          "missingCalcFields": [
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": 203,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": 19.9,
+            "energyConsumptionKWhPerKm": 0.1988,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.0759,
+            "weightedFuelConsumptionLPerKm": null,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 13.7
+          },
+          "fieldSources": {
+            "energyConsumptionKWhPerKm": "EPA-FuelEconomy charge-depleting (solo elettrico / CD) electricity → 0.1988 kWh/km; batteryKWh absent in this EPA extract"
+          },
+          "fieldSourceDates": {
+            "energyConsumptionKWhPerKm": "2021"
+          },
+          "sourceName": "EPA-FuelEconomy",
+          "market": "US/EPA",
+          "powerKw": null
+        }
+      ]
+    },
+    {
+      "brand": "BYD",
+      "model": "Seal U",
+      "records": [
+        {
+          "id": "byd-seal-u-phev-dm-i-2024",
+          "year": 2024,
+          "trim": "DM-i",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.00963,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 22
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2024 BYD SEAL U DM-I PETROL/ELECTRIC n=1174; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 76.3
+        }
+      ]
+    },
+    {
+      "brand": "CUPRA",
+      "model": "Terramar",
+      "records": [
+        {
+          "id": "cupra-terramar-e-hybrid-2025",
+          "year": 2025,
+          "trim": "e-HYBRID",
+          "missingCalcFields": [],
+          "current": {
+            "batteryKWh": 19.7,
+            "wltpRangeKm": 113,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": 19.0,
+            "energyConsumptionKWhPerKm": 0.19,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.063,
+            "weightedFuelConsumptionLPerKm": null,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 13
+          },
+          "fieldSources": {
+            "energyConsumptionKWhPerKm": "CUPRA Terramar catalogue June 2025: charge-depleting electric 17.6–19.0 → 0.19 (solo elettrico / charge-depleting) https://www.cupraofficial.com/content/dam/public/cupra-website/cars/terramar/broachure/cupra-terramar-catalogue-june-2025.pdf"
+          },
+          "fieldSourceDates": {
+            "energyConsumptionKWhPerKm": "2025-06-01"
+          },
+          "sourceName": "CUPRA Terramar catalogue June 2025: charge-sustaining CS 5.8–6.3 L/100; charge-depleting electric 17.6–19.0 kWh/100; range 113–123 km — https://www.cupraofficial.com/content/dam/public/cupra-website/cars/terramar/broachure/cupra-terramar-catalogue-june-2025.pdf; battery 19.7 kWh net — https://www.cupraofficial.it/newsroom/cupra-terramar-e-hybrid; EEA IT PETROL/ELECTRIC co2 avg 12.8",
+          "market": "IT",
+          "powerKw": 113.5
+        }
+      ]
+    },
+    {
+      "brand": "Chevrolet",
+      "model": "Volt PHEV",
+      "records": [
+        {
+          "id": "chevrolet-volt-phev-2019",
+          "year": 2019,
+          "trim": "Volt",
+          "missingCalcFields": [
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": 85,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": 19.3,
+            "energyConsumptionKWhPerKm": 0.1926,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.056,
+            "weightedFuelConsumptionLPerKm": null,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 31.7
+          },
+          "fieldSources": {
+            "energyConsumptionKWhPerKm": "EPA-FuelEconomy charge-depleting (solo elettrico / CD) electricity → 0.1926 kWh/km; batteryKWh absent in this EPA extract"
+          },
+          "fieldSourceDates": {
+            "energyConsumptionKWhPerKm": "2019"
+          },
+          "sourceName": "EPA-FuelEconomy",
+          "market": "US/EPA",
+          "powerKw": null
+        }
+      ]
+    },
+    {
+      "brand": "Citroën",
+      "model": "C5 Aircross",
+      "records": [
+        {
+          "id": "citroen-c5-aircross-phev-2022",
+          "year": 2022,
+          "trim": "PHEV",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01378,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 32
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2022 C5 AIRCROSS PETROL/ELECTRIC n=841; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 133.0
+        },
+        {
+          "id": "citroen-c5-aircross-phev-2023",
+          "year": 2023,
+          "trim": "PHEV",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01331,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 31
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 C5 AIRCROSS PETROL/ELECTRIC n=587; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 128.8
+        }
+      ]
+    },
+    {
+      "brand": "DS",
+      "model": "7",
+      "records": [
+        {
+          "id": "ds-7-phev-e-tense-2022",
+          "year": 2022,
+          "trim": "E-TENSE",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01391,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 32
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2022 DS 7 CROSSBACK PETROL/ELECTRIC n=932; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 138.6
+        },
+        {
+          "id": "ds-7-phev-e-tense-2023",
+          "year": 2023,
+          "trim": "E-TENSE",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01251,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 29
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 DS7 PETROL/ELECTRIC n=845; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 137.6
+        },
+        {
+          "id": "ds-7-phev-e-tense-2024",
+          "year": 2024,
+          "trim": "E-TENSE",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01388,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 32
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2024 DS7 PETROL/ELECTRIC n=530; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 139.9
+        }
+      ]
+    },
+    {
+      "brand": "Ford",
+      "model": "C-MAX Energi Plug-in Hybrid",
+      "records": [
+        {
+          "id": "ford-c-max-energi-plug-in-hybrid-phev-2016",
+          "year": 2016,
+          "trim": "C-MAX Energi Plug-in Hybrid",
+          "missingCalcFields": [
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": 32,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": 23.0,
+            "energyConsumptionKWhPerKm": 0.2299,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.0619,
+            "weightedFuelConsumptionLPerKm": null,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 80.2
+          },
+          "fieldSources": {
+            "energyConsumptionKWhPerKm": "EPA-FuelEconomy charge-depleting (solo elettrico / CD) electricity → 0.2299 kWh/km; batteryKWh absent in this EPA extract"
+          },
+          "fieldSourceDates": {
+            "energyConsumptionKWhPerKm": "2016"
+          },
+          "sourceName": "EPA-FuelEconomy",
+          "market": "US/EPA",
+          "powerKw": null
+        }
+      ]
+    },
+    {
+      "brand": "Ford",
+      "model": "Escape FWD PHEV",
+      "records": [
+        {
+          "id": "ford-escape-fwd-phev-phev-2026",
+          "year": 2026,
+          "trim": "Escape FWD PHEV",
+          "missingCalcFields": [
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": 60,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": 20.5,
+            "energyConsumptionKWhPerKm": 0.2051,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.0588,
+            "weightedFuelConsumptionLPerKm": null,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": null
+          },
+          "fieldSources": {
+            "energyConsumptionKWhPerKm": "EPA-FuelEconomy charge-depleting (solo elettrico / CD) electricity → 0.2051 kWh/km; batteryKWh absent in this EPA extract"
+          },
+          "fieldSourceDates": {
+            "energyConsumptionKWhPerKm": "2026"
+          },
+          "sourceName": "EPA-FuelEconomy",
+          "market": "US/EPA",
+          "powerKw": null
+        }
+      ]
+    },
+    {
+      "brand": "Ford",
+      "model": "Kuga",
+      "records": [
+        {
+          "id": "ford-kuga-phev-2022",
+          "year": 2022,
+          "trim": "PHEV",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01007,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 23
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2022 KUGA PETROL/ELECTRIC n=1923; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 112.0
+        },
+        {
+          "id": "ford-kuga-phev-2023",
+          "year": 2023,
+          "trim": "PHEV",
+          "missingCalcFields": [],
+          "current": {
+            "batteryKWh": 14.4,
+            "wltpRangeKm": 60,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": 0.209,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.061,
+            "weightedFuelConsumptionLPerKm": 0.012,
+            "weightedEnergyConsumptionKWhPerKm": 0.175,
+            "co2gKm": 23
+          },
+          "fieldSources": {
+            "energyConsumptionKWhPerKm": "ford.de Technische Daten Kuga via stessa omologazione EEA: Stromverbrauch bei rein elektrischem Betrieb kombiniert 20,9–18,4 → 0.209 (solo elettrico / charge-depleting) https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/Technische_Daten_des_Ford_Kuga.pdf"
+          },
+          "fieldSourceDates": {
+            "energyConsumptionKWhPerKm": "2024-05-01"
+          },
+          "sourceName": "Ford DE EnVKV Kuga 2,5 l Duratec PHEV 178 kW (ICE 112 kW): Kraftstoffverbrauch bei entladener Batterie 6,1–5,2 L/100; Stromverbrauch bei rein elektrischem Betrieb kombiniert 20,9–18,4 kWh/100; EAER 60–68 km — https://www.ford.de/hybrid-elektrisch/energie; Preisliste MY24.5 gültig ab 01.05.2024 (CS + weighted) — https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/der-Ford-Kuga_gültig_ab_01_05_2024.pdf; Technische Daten Ford Kuga: Batterie 14,4 kWh installiert; rein elektrisch 20,9–18,4; CS 6,1–5,2; range 60–68 — https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/Technische_Daten_des_Ford_Kuga.pdf; stessa omologazione EEA E13*2007/46*2188*13 BGDA1FX/566DANA51AS, anni 2023 e 2024 (CS/CD/range/bat da MY2024 OEM ford.de: https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/Technische_Daten_des_Ford_Kuga.pdf)",
+          "market": "IT",
+          "powerKw": 112.0
+        },
+        {
+          "id": "ford-kuga-phev-2024",
+          "year": 2024,
+          "trim": "PHEV",
+          "missingCalcFields": [],
+          "current": {
+            "batteryKWh": 14.4,
+            "wltpRangeKm": 60,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": 0.209,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.061,
+            "weightedFuelConsumptionLPerKm": 0.012,
+            "weightedEnergyConsumptionKWhPerKm": 0.175,
+            "co2gKm": 22
+          },
+          "fieldSources": {
+            "energyConsumptionKWhPerKm": "ford.de Technische Daten Kuga: Stromverbrauch bei rein elektrischem Betrieb kombiniert 20,9–18,4 → 0.209 (solo elettrico / charge-depleting) https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/Technische_Daten_des_Ford_Kuga.pdf"
+          },
+          "fieldSourceDates": {
+            "energyConsumptionKWhPerKm": "2024-05-01"
+          },
+          "sourceName": "Ford DE EnVKV Kuga 2,5 l Duratec PHEV 178 kW (ICE 112 kW): Kraftstoffverbrauch bei entladener Batterie 6,1–5,2 L/100; Stromverbrauch bei rein elektrischem Betrieb kombiniert 20,9–18,4 kWh/100; EAER 60–68 km — https://www.ford.de/hybrid-elektrisch/energie; Preisliste MY24.5 gültig ab 01.05.2024 (CS + weighted) — https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/der-Ford-Kuga_gültig_ab_01_05_2024.pdf; Technische Daten Ford Kuga: Batterie 14,4 kWh installiert; rein elektrisch 20,9–18,4; CS 6,1–5,2; range 60–68 — https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/Technische_Daten_des_Ford_Kuga.pdf",
+          "market": "IT",
+          "powerKw": 111.4
+        }
+      ]
+    },
+    {
+      "brand": "Honda",
+      "model": "Accord PHEV",
+      "records": [
+        {
+          "id": "honda-accord-phev-2014",
+          "year": 2014,
+          "trim": "Accord Plug-in Hybrid",
+          "missingCalcFields": [
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": 21,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": 18.0,
+            "energyConsumptionKWhPerKm": 0.1802,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.0511,
+            "weightedFuelConsumptionLPerKm": null,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 80.8
+          },
+          "fieldSources": {
+            "energyConsumptionKWhPerKm": "EPA-FuelEconomy charge-depleting (solo elettrico / CD) electricity → 0.1802 kWh/km; batteryKWh absent in this EPA extract"
+          },
+          "fieldSourceDates": {
+            "energyConsumptionKWhPerKm": "2014"
+          },
+          "sourceName": "EPA-FuelEconomy",
+          "market": "US/EPA",
+          "powerKw": null
+        }
+      ]
+    },
+    {
+      "brand": "Hyundai",
+      "model": "Ioniq PHEV",
+      "records": [
+        {
+          "id": "hyundai-ioniq-phev-2022",
+          "year": 2022,
+          "trim": "Ioniq Plug-in Hybrid",
+          "missingCalcFields": [
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": 47,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": 17.4,
+            "energyConsumptionKWhPerKm": 0.174,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.0452,
+            "weightedFuelConsumptionLPerKm": null,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 46.0
+          },
+          "fieldSources": {
+            "energyConsumptionKWhPerKm": "EPA-FuelEconomy charge-depleting (solo elettrico / CD) electricity → 0.174 kWh/km; batteryKWh absent in this EPA extract"
+          },
+          "fieldSourceDates": {
+            "energyConsumptionKWhPerKm": "2022"
+          },
+          "sourceName": "EPA-FuelEconomy",
+          "market": "US/EPA",
+          "powerKw": null
+        }
+      ]
+    },
+    {
+      "brand": "Jeep",
+      "model": "Compass",
+      "records": [
+        {
+          "id": "jeep-compass-phev-4xe-2022",
+          "year": 2022,
+          "trim": "4xe",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm"
+          ],
+          "current": {
+            "batteryKWh": 11.4,
+            "wltpRangeKm": 46,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.0194,
+            "weightedEnergyConsumptionKWhPerKm": 0.168,
+            "co2gKm": 45
+          },
+          "fieldSources": {
+            "wltpRangeKm": "media.stellantis.com Tarif Public Nouveau Compass 4xe MY22 2022-A du 4 janvier 2022 EAER 47–46/49–46 → 46 https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicnouvellejeeprcompassmy224xe2022a4jan2022-61d48676cf80a.pdf",
+            "batteryKWh": "media.stellantis.com Tarif Public Nouveau Compass 4xe MY22 2022-A du 4 janvier 2022 batterie 11,4 kWh https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicnouvellejeeprcompassmy224xe2022a4jan2022-61d48676cf80a.pdf",
+            "weightedEnergyConsumptionKWhPerKm": "media.stellantis.com Tarif Public Nouveau Compass 4xe MY22 2022-A du 4 janvier 2022 «Consommations d'énergie électrique» 16,8–16,1 next to CO2/L/100 pondérés → weightedEnergy 0.168 (not CD) https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicnouvellejeeprcompassmy224xe2022a4jan2022-61d48676cf80a.pdf"
+          },
+          "fieldSourceDates": {
+            "wltpRangeKm": "2022-01-04",
+            "batteryKWh": "2022-01-04",
+            "weightedEnergyConsumptionKWhPerKm": "2022-01-04"
+          },
+          "sourceName": "EEA co2cars IT 2022 COMPASS PETROL/ELECTRIC n=10348; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm; Tarif Public Nouveau Compass 4xe MY22 2022-A du 4 janvier 2022: range 46, bat 11.4, consumo elettrico CD 16.8 (not pure-CD); CS listino lasciato nei weighted* — https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicnouvellejeeprcompassmy224xe2022a4jan2022-61d48676cf80a.pdf; wave3: kWh 0.168 demoted to weightedEnergyConsumptionKWhPerKm (doc places énergie/Strom with ponderati / gewichtet, no pure-CD label) — https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicnouvellejeeprcompassmy224xe2022a4jan2022-61d48676cf80a.pdf",
+          "market": "IT",
+          "powerKw": 100.8
+        },
+        {
+          "id": "jeep-compass-phev-4xe-2023",
+          "year": 2023,
+          "trim": "4xe",
+          "missingCalcFields": [
+            "energyConsumptionKWhPerKm"
+          ],
+          "current": {
+            "batteryKWh": 11.4,
+            "wltpRangeKm": 48,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.076,
+            "weightedFuelConsumptionLPerKm": 0.021,
+            "weightedEnergyConsumptionKWhPerKm": 0.167,
+            "co2gKm": 45
+          },
+          "fieldSources": {
+            "fuelConsumptionLPerKm": "jeep.de 2024 https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv; stessa omologazione EEA E3*2007/46*0508*15 JHPFP/ML1BBH1, anni 2023 e 2024",
+            "wltpRangeKm": "media.stellantis.com 2024 https://www.media.stellantis.com/uploads/fr/attachment/7783/tarifpublicjeeprcompassmy242023e19decembre2023-65820ebe62db4.pdf; stessa omologazione EEA E3*2007/46*0508*15 JHPFP/ML1BBH1, anni 2023 e 2024",
+            "batteryKWh": "media.stellantis.com 2024 https://www.media.stellantis.com/uploads/fr/attachment/7783/tarifpublicjeeprcompassmy242023e19decembre2023-65820ebe62db4.pdf; stessa omologazione EEA E3*2007/46*0508*15 JHPFP/ML1BBH1, anni 2023 e 2024"
+          },
+          "fieldSourceDates": {
+            "fuelConsumptionLPerKm": "2024-06-20",
+            "wltpRangeKm": "2023-12-19",
+            "batteryKWh": "2023-12-19"
+          },
+          "sourceName": "CS L/100 and CD kWh not on that sheet → incomplete; EEA weighted fuel only in weightedFuelConsumptionLPerKm; EEA IT COMPASS PETROL/ELECTRIC 2023; stessa omologazione EEA E3*2007/46*0508*15 JHPFP/ML1BBH1, anni 2023 e 2024; EAER prudente 48 km (MY24 listino 48–52); MY24 listino FR via omologazione EEA — https://www.media.stellantis.com/uploads/fr/attachment/7783/tarifpublicjeeprcompassmy242023e19decembre2023-65820ebe62db4.pdf",
+          "market": "IT",
+          "powerKw": 107.0
+        },
+        {
+          "id": "jeep-compass-phev-4xe-2024",
+          "year": 2024,
+          "trim": "4xe",
+          "missingCalcFields": [
+            "energyConsumptionKWhPerKm"
+          ],
+          "current": {
+            "batteryKWh": 11.4,
+            "wltpRangeKm": 48,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.076,
+            "weightedFuelConsumptionLPerKm": 0.021,
+            "weightedEnergyConsumptionKWhPerKm": 0.167,
+            "co2gKm": 45
+          },
+          "fieldSources": {
+            "fuelConsumptionLPerKm": "jeep.de 2024 https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv",
+            "wltpRangeKm": "media.stellantis.com 2024 https://www.media.stellantis.com/uploads/fr/attachment/7783/tarifpublicjeeprcompassmy242023e19decembre2023-65820ebe62db4.pdf",
+            "batteryKWh": "media.stellantis.com 2024 https://www.media.stellantis.com/uploads/fr/attachment/7783/tarifpublicjeeprcompassmy242023e19decembre2023-65820ebe62db4.pdf"
+          },
+          "fieldSourceDates": {
+            "fuelConsumptionLPerKm": "2024-06-20",
+            "wltpRangeKm": "2023-12-19",
+            "batteryKWh": "2023-12-19"
+          },
+          "sourceName": "CS L/100 and CD kWh not on that sheet → incomplete; EEA weighted fuel only in weightedFuelConsumptionLPerKm; EEA IT COMPASS PETROL/ELECTRIC 2024 Strom nur gewichtet; Jeep Compass 4xe archive CS + MY24 listino EAER 48 / 11,4 kWh — https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv (2024-06-20); https://www.media.stellantis.com/uploads/fr/attachment/7783/tarifpublicjeeprcompassmy242023e19decembre2023-65820ebe62db4.pdf (2023-12-19)",
+          "market": "IT",
+          "powerKw": 105.1
+        }
+      ]
+    },
+    {
+      "brand": "Jeep",
+      "model": "Grand Cherokee",
+      "records": [
+        {
+          "id": "jeep-grand-cherokee-4xe-2023",
+          "year": 2023,
+          "trim": "4xe",
+          "missingCalcFields": [
+            "energyConsumptionKWhPerKm"
+          ],
+          "current": {
+            "batteryKWh": 17.3,
+            "wltpRangeKm": 44,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.106,
+            "weightedFuelConsumptionLPerKm": 0.029,
+            "weightedEnergyConsumptionKWhPerKm": 0.327,
+            "co2gKm": 61
+          },
+          "fieldSources": {
+            "fuelConsumptionLPerKm": "jeep.de 2024 https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv; stessa omologazione EEA E9*2018/858*11257*01 JCACG/5HP1S, anni 2023 e 2024",
+            "wltpRangeKm": "media.stellantis.com 2023 https://www.media.stellantis.com/uploads/de/model-pricelist/preisliste_grand_cherokee_4xe_januar_20234-6486c171a11d8.pdf",
+            "batteryKWh": "media.stellantis.com 2023 https://www.media.stellantis.com/uploads/de/model-pricelist/preisliste_grand_cherokee_4xe_januar_20234-6486c171a11d8.pdf"
+          },
+          "fieldSourceDates": {
+            "fuelConsumptionLPerKm": "2024-06-20",
+            "wltpRangeKm": "2023-01-01",
+            "batteryKWh": "2023-01-01"
+          },
+          "sourceName": "Stellantis Media DE Spezifikationen und Preise Jeep Grand Cherokee 4xe MJ23 gültig ab 01/2023: weighted fuel 2.9–2.6 L/100; weighted electric 32.7–30.2 kWh/100; electric range 44–48 km; battery 17.3 kWh — https://www.media.stellantis.com/uploads/de/model-pricelist/preisliste_grand_cherokee_4xe_januar_20234-6486c171a11d8.pdf; EEA IT PETROL/ELECTRIC co2 avg 61.4; stessa omologazione EEA E9*2018/858*11257*01 JCACG/5HP1S, anni 2023 e 2024 — https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv",
+          "market": "IT",
+          "powerKw": 200.0
+        },
+        {
+          "id": "jeep-grand-cherokee-4xe-2024",
+          "year": 2024,
+          "trim": "4xe",
+          "missingCalcFields": [
+            "energyConsumptionKWhPerKm"
+          ],
+          "current": {
+            "batteryKWh": 17.3,
+            "wltpRangeKm": 44,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.106,
+            "weightedFuelConsumptionLPerKm": 0.029,
+            "weightedEnergyConsumptionKWhPerKm": 0.327,
+            "co2gKm": 61
+          },
+          "fieldSources": {
+            "fuelConsumptionLPerKm": "jeep.de 2024 https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv",
+            "wltpRangeKm": "media.stellantis.com 2023 https://www.media.stellantis.com/uploads/de/model-pricelist/preisliste_grand_cherokee_4xe_januar_20234-6486c171a11d8.pdf; stessa omologazione EEA E9*2018/858*11257*01 JCACG/5HP1S, anni 2024 e 2023",
+            "batteryKWh": "media.stellantis.com 2023 https://www.media.stellantis.com/uploads/de/model-pricelist/preisliste_grand_cherokee_4xe_januar_20234-6486c171a11d8.pdf; stessa omologazione EEA E9*2018/858*11257*01 JCACG/5HP1S, anni 2024 e 2023"
+          },
+          "fieldSourceDates": {
+            "fuelConsumptionLPerKm": "2024-06-20",
+            "wltpRangeKm": "2023-01-01",
+            "batteryKWh": "2023-01-01"
+          },
+          "sourceName": "EEA co2cars IT 2024 GRAND CHEROKEE PETROL/ELECTRIC n=174; shell PHEV 4xe (powerKw 200) — CS from jeep.de hybrid-suv archive 20240620; Jeep Grand Cherokee 4xe archive.org 20240620 hybrid-suv CS bei entladener Batterie 10,2–10,6 → 0.106 — https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv (2024-06-20); EAER 44 km (min 44–48) + battery 17,3 kWh from MJ23 listino via stessa omologazione EEA E9*2018/858*11257*01 JCACG/5HP1S, anni 2024 e 2023 — https://www.media.stellantis.com/uploads/de/model-pricelist/preisliste_grand_cherokee_4xe_januar_20234-6486c171a11d8.pdf (2023-01-01)",
+          "market": "IT",
+          "powerKw": 200.0
+        }
+      ]
+    },
+    {
+      "brand": "Jeep",
+      "model": "Renegade",
+      "records": [
+        {
+          "id": "jeep-renegade-phev-4xe-2022",
+          "year": 2022,
+          "trim": "4xe",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm"
+          ],
+          "current": {
+            "batteryKWh": 11.4,
+            "wltpRangeKm": 45,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01842,
+            "weightedEnergyConsumptionKWhPerKm": 0.163,
+            "co2gKm": 43
+          },
+          "fieldSources": {
+            "wltpRangeKm": "media.stellantis.com Tarif Public Renegade MY22 2022-E au 1er juin 2022 EAER 49–48/48–45 → 45 https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicjeeprrenegademy222022e1erjuin2022-62ac25f07f521.pdf",
+            "batteryKWh": "media.stellantis.com Tarif Public Renegade MY22 2022-E au 1er juin 2022 batterie 11,4 kWh https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicjeeprrenegademy222022e1erjuin2022-62ac25f07f521.pdf",
+            "weightedEnergyConsumptionKWhPerKm": "media.stellantis.com Tarif Public Renegade MY22 2022-E au 1er juin 2022 «Consommation d'énergie électrique» 16,3–15,6 next to CO2/L/100 pondérés → weightedEnergy 0.163 (not CD) https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicjeeprrenegademy222022e1erjuin2022-62ac25f07f521.pdf"
+          },
+          "fieldSourceDates": {
+            "wltpRangeKm": "2022-06-01",
+            "batteryKWh": "2022-06-01",
+            "weightedEnergyConsumptionKWhPerKm": "2022-06-01"
+          },
+          "sourceName": "EEA co2cars IT 2022 RENEGADE PETROL/ELECTRIC n=7514; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm; Tarif Public Renegade MY22 2022-E au 1er juin 2022: range 45, bat 11.4, consumo elettrico CD 16.3 (not pure-CD); CS listino lasciato nei weighted* — https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicjeeprrenegademy222022e1erjuin2022-62ac25f07f521.pdf; wave3: kWh 0.163 demoted to weightedEnergyConsumptionKWhPerKm (doc places énergie/Strom with ponderati / gewichtet, no pure-CD label) — https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicjeeprrenegademy222022e1erjuin2022-62ac25f07f521.pdf",
+          "market": "IT",
+          "powerKw": 102.8
+        },
+        {
+          "id": "jeep-renegade-phev-4xe-2023",
+          "year": 2023,
+          "trim": "4xe",
+          "missingCalcFields": [
+            "energyConsumptionKWhPerKm"
+          ],
+          "current": {
+            "batteryKWh": 11.4,
+            "wltpRangeKm": 48,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.075,
+            "weightedFuelConsumptionLPerKm": 0.02,
+            "weightedEnergyConsumptionKWhPerKm": 0.22,
+            "co2gKm": 42
+          },
+          "fieldSources": {
+            "fuelConsumptionLPerKm": "jeep.de 2024 https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv; stessa omologazione EEA E3*2007/46*0300*39 AXT23/19M, anni 2023 e 2024",
+            "wltpRangeKm": "media.stellantis.com Tarif Public réf : Renegade MY24 2024-C au 3 avril 2024 https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicjeeprrenegademy242024c3avril2024-66334a53de22c.pdf; stessa omologazione EEA E3*2007/46*0300*39 AXT23/19M, anni 2023 e 2024; archive https://web.archive.org/web/20250326070148id_/https://www.media.stellantis.com/fr-fr/download-price-lists/184",
+            "batteryKWh": "media.stellantis.com Tarif Public réf : Renegade MY24 2024-C au 3 avril 2024 https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicjeeprrenegademy242024c3avril2024-66334a53de22c.pdf; stessa omologazione EEA E3*2007/46*0300*39 AXT23/19M, anni 2023 e 2024; archive https://web.archive.org/web/20250326070148id_/https://www.media.stellantis.com/fr-fr/download-price-lists/184"
+          },
+          "fieldSourceDates": {
+            "fuelConsumptionLPerKm": "2024-06-20",
+            "wltpRangeKm": "2024-04-03",
+            "batteryKWh": "2024-04-03"
+          },
+          "sourceName": "EEA co2cars IT 2023 RENEGADE PETROL/ELECTRIC n=3409; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm; stessa omologazione EEA E3*2007/46*0300*39 AXT23/19M, anni 2023 e 2024; Jeep Renegade 4xe archive.org 20240620 hybrid-suv CS bei entladener Batterie 6,9–7,5 → 0.075 — https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv (2024-06-20); EAER/batterie MY24 via stessa omologazione EEA E3*2007/46*0300*39 AXT23/19M, anni 2023 e 2024 — https://www.media.stellantis.com/fr-fr/download-price-lists/184; Tarif Public réf : Renegade MY24 2024-C au 3 avril 2024; PDF https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicjeeprrenegademy242024c3avril2024-66334a53de22c.pdf; archive verify https://web.archive.org/web/20250326070148id_/https://www.media.stellantis.com/fr-fr/download-price-lists/184",
+          "market": "IT",
+          "powerKw": 101.1
+        },
+        {
+          "id": "jeep-renegade-phev-4xe-2024",
+          "year": 2024,
+          "trim": "4xe",
+          "missingCalcFields": [
+            "energyConsumptionKWhPerKm"
+          ],
+          "current": {
+            "batteryKWh": 11.4,
+            "wltpRangeKm": 48,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.075,
+            "weightedFuelConsumptionLPerKm": 0.02,
+            "weightedEnergyConsumptionKWhPerKm": 0.22,
+            "co2gKm": 43
+          },
+          "fieldSources": {
+            "fuelConsumptionLPerKm": "jeep.de 2024 https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv",
+            "wltpRangeKm": "media.stellantis.com Tarif Public réf : Renegade MY24 2024-C au 3 avril 2024 https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicjeeprrenegademy242024c3avril2024-66334a53de22c.pdf (verified via https://web.archive.org/web/20250326070148id_/https://www.media.stellantis.com/fr-fr/download-price-lists/184; Content-Disposition tarifpublicjeeprrenegademy242024c3avril2024-66334a53de22c.pdf)",
+            "batteryKWh": "media.stellantis.com Tarif Public réf : Renegade MY24 2024-C au 3 avril 2024 https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicjeeprrenegademy242024c3avril2024-66334a53de22c.pdf (verified via https://web.archive.org/web/20250326070148id_/https://www.media.stellantis.com/fr-fr/download-price-lists/184; Content-Disposition tarifpublicjeeprrenegademy242024c3avril2024-66334a53de22c.pdf)"
+          },
+          "fieldSourceDates": {
+            "fuelConsumptionLPerKm": "2024-06-20",
+            "wltpRangeKm": "2024-04-03",
+            "batteryKWh": "2024-04-03"
+          },
+          "sourceName": "EEA co2cars IT 2024 RENEGADE PETROL/ELECTRIC n=2092; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm; Strom nur gewichtet; Jeep Renegade 4xe archive.org 20240620 hybrid-suv CS — https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv (2024-06-20); Jeep Renegade 4xe archive.org 20240620 hybrid-suv CS bei entladener Batterie 6,9–7,5 → 0.075 — https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv (2024-06-20); Jeep Renegade MY24 Tarif FR 03/04/2024 EAER combiné 50–48 → 48; batterie 11,4 kWh (pas City) — https://www.media.stellantis.com/fr-fr/download-price-lists/184 (2024-04-03); Tarif Public réf : Renegade MY24 2024-C au 3 avril 2024; PDF https://www.media.stellantis.com/uploads/fr/model-document/tarifpublicjeeprrenegademy242024c3avril2024-66334a53de22c.pdf; archive verify https://web.archive.org/web/20250326070148id_/https://www.media.stellantis.com/fr-fr/download-price-lists/184",
+          "market": "IT",
+          "powerKw": 100.0
+        }
+      ]
+    },
+    {
+      "brand": "Jeep",
+      "model": "Wrangler",
+      "records": [
+        {
+          "id": "jeep-wrangler-4xe-2022",
+          "year": 2022,
+          "trim": "4xe",
+          "missingCalcFields": [
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm"
+          ],
+          "current": {
+            "batteryKWh": 17.3,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.118,
+            "weightedFuelConsumptionLPerKm": 0.0381,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 86
+          },
+          "fieldSources": {
+            "fuelConsumptionLPerKm": "jeep.de 2024 https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv; stessa omologazione EEA E4*2001/116*0116*42 JTAFG/P5H62A, anni 2022 e 2024",
+            "batteryKWh": "media.stellantis.com 2022 https://www.media.stellantis.com/uploads/de/model-document/220101_j_wrangler_jl_td_01012022-61dd98f991688.pdf"
+          },
+          "fieldSourceDates": {
+            "fuelConsumptionLPerKm": "2024-06-20",
+            "batteryKWh": "2022-01-25"
+          },
+          "sourceName": "Stellantis Media DE Technisches Datenblatt Jeep Wrangler Unlimited 4xe Stand 25.01.2022: battery 17.3 kWh; fuel/CO2 from EEA IT PETROL/ELECTRIC (no CS L/100 or Wh on that sheet); EEA IT co2 avg 86.2; energy kWh nil (no Wh on that sheet); stessa omologazione EEA E4*2001/116*0116*42 JTAFG/P5H62A, anni 2022 e 2024 — https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv; EAER City 45/53 km (Sahara/Rubicon) rejected — not combined EAER → wltpRangeKm nil; battery 17,3 kWh kept — https://www.media.stellantis.com/uploads/de/model-document/220101_j_wrangler_jl_td_01012022-61dd98f991688.pdf (2022-01-25)",
+          "market": "IT",
+          "powerKw": 200.0
+        },
+        {
+          "id": "jeep-wrangler-4xe-2023",
+          "year": 2023,
+          "trim": "4xe",
+          "missingCalcFields": [
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.118,
+            "weightedFuelConsumptionLPerKm": 0.03806,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 86
+          },
+          "fieldSources": {
+            "fuelConsumptionLPerKm": "jeep.de 2024 https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv; stessa omologazione EEA E4*2001/116*0116*42 JTAFG/P5H62A, anni 2023 e 2024"
+          },
+          "fieldSourceDates": {
+            "fuelConsumptionLPerKm": "2024-06-20"
+          },
+          "sourceName": "EEA co2cars IT 2023 WRANGLER UNLIMITED PETROL/ELECTRIC n=758; OEM same-MY EU range/battery/kWh not found (living jeep.de MJ25 pages not valid for 2023); EEA IT co2 avg 86.1; stessa omologazione EEA E4*2001/116*0116*42 JTAFG/P5H62A, anni 2023 e 2024 — https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv",
+          "market": "IT",
+          "powerKw": 200.0
+        },
+        {
+          "id": "jeep-wrangler-4xe-2024",
+          "year": 2024,
+          "trim": "4xe",
+          "missingCalcFields": [
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.118,
+            "weightedFuelConsumptionLPerKm": 0.03806,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 86
+          },
+          "fieldSources": {
+            "fuelConsumptionLPerKm": "jeep.de 2024 https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv"
+          },
+          "fieldSourceDates": {
+            "fuelConsumptionLPerKm": "2024-06-20"
+          },
+          "sourceName": "EEA co2cars IT 2024 WRANGLER UNLIMITED PETROL/ELECTRIC n=179; shell PHEV 4xe (powerKw 200) — CS from jeep.de hybrid-suv archive 20240620; Jeep Wrangler 4xe archive.org 20240620 hybrid-suv CS bei entladener Batterie 10,6–11,8 → 0.118 — https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv (2024-06-20)",
+          "market": "IT",
+          "powerKw": 200.0
+        }
+      ]
+    },
+    {
+      "brand": "Land Rover",
+      "model": "Range Rover Evoque",
+      "records": [
+        {
+          "id": "land-rover-range-rover-evoque-phev-2022",
+          "year": 2022,
+          "trim": "PHEV",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01725,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 40
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2022 RANGE ROVER EVOQUE PETROL/ELECTRIC n=534; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 147.0
+        },
+        {
+          "id": "land-rover-range-rover-evoque-phev-2023",
+          "year": 2023,
+          "trim": "PHEV",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01426,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 33
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 RANGE ROVER EVOQUE PETROL/ELECTRIC n=566; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 147.0
+        }
+      ]
+    },
+    {
+      "brand": "Lexus",
+      "model": "NX",
+      "records": [
+        {
+          "id": "lexus-nx-phev-450h-2022",
+          "year": 2022,
+          "trim": "450h+",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01038,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 24
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2022 LEXUS NX450H+ PETROL/ELECTRIC n=800; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 136.0
+        },
+        {
+          "id": "lexus-nx-phev-450h-2023",
+          "year": 2023,
+          "trim": "450h+",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.0104,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 24
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 LEXUS NX450H+ PETROL/ELECTRIC n=1005; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 136.0
+        },
+        {
+          "id": "lexus-nx-phev-450h-2024",
+          "year": 2024,
+          "trim": "450h+",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01078,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 25
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2024 LEXUS NX450H+ PETROL/ELECTRIC n=843; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 136.0
+        }
+      ]
+    },
+    {
+      "brand": "MG",
+      "model": "HS",
+      "records": [
+        {
+          "id": "mg-hs-phev-2022",
+          "year": 2022,
+          "trim": "PHEV",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01853,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 43
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2022 MG EHS PLUG-IN HYBRID PETROL/ELECTRIC n=1035; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 119.0
+        },
+        {
+          "id": "mg-hs-phev-2023",
+          "year": 2023,
+          "trim": "PHEV",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01853,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 43
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 MG EHS PLUG-IN HYBRID PETROL/ELECTRIC n=918; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 119.0
+        },
+        {
+          "id": "mg-hs-phev-2024",
+          "year": 2024,
+          "trim": "PHEV",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01853,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 43
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2024 MG EHS PLUG-IN HYBRID PETROL/ELECTRIC n=600; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 119.0
+        }
+      ]
+    },
+    {
+      "brand": "MINI",
+      "model": "Countryman",
+      "records": [
+        {
+          "id": "mini-countryman-cooper-se-all4-2022",
+          "year": 2022,
+          "trim": "Cooper SE ALL4",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01815,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 41
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2022 COUNTRYMAN COOPER SE ALL4 PETROL/ELECTRIC n=1492; OEM same-MY range/battery/kWh not attached (nil)",
+          "market": "IT",
+          "powerKw": 92.0
+        },
+        {
+          "id": "mini-countryman-cooper-se-all4-2023",
+          "year": 2023,
+          "trim": "Cooper SE ALL4",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01839,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 42
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 COUNTRYMAN COOPER SE ALL4 PETROL/ELECTRIC n=3408; OEM same-MY range/battery/kWh not attached (nil)",
+          "market": "IT",
+          "powerKw": 92.0
+        }
+      ]
+    },
+    {
+      "brand": "Mazda",
+      "model": "CX-60",
+      "records": [
+        {
+          "id": "mazda-cx-60-phev-2023",
+          "year": 2023,
+          "trim": "PHEV",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01422,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 33
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 MAZDA CX-60 PETROL/ELECTRIC n=894; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 141.0
+        }
+      ]
+    },
+    {
+      "brand": "Mazda",
+      "model": "CX-60 PHEV",
+      "records": [
+        {
+          "id": "mazda-cx-60-phev-2024",
+          "year": 2024,
+          "trim": "PHEV",
+          "missingCalcFields": [
+            "energyConsumptionKWhPerKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": 63,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.078,
+            "weightedFuelConsumptionLPerKm": null,
+            "weightedEnergyConsumptionKWhPerKm": 0.229,
+            "co2gKm": 33
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "Mazda CX-60 e-Skyactiv PHEV Preisliste DE: Kraftstoff bei entladener Batterie 7.7-7.8 L/100; Stromverbrauch WLTP gewichtet/ponderato 22.7-23.1 kWh/100 — https://media-assets.mazda.eu/raw/upload/mazdade/globalassets/pdfs/brochure/cx-60/21-07-2025_preisliste_2025_mazda-cx-60.pdf",
+          "market": "IT",
+          "powerKw": null
+        }
+      ]
+    },
+    {
+      "brand": "Mercedes-Benz",
+      "model": "Classe A",
+      "records": [
+        {
+          "id": "mercedes-benz-classe-a-phev-a-250-e-2022",
+          "year": 2022,
+          "trim": "A 250 e",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01006,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 23
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2022 A 250 E PETROL/ELECTRIC n=726; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 118.0
+        },
+        {
+          "id": "mercedes-benz-classe-a-phev-a-250-e-2023",
+          "year": 2023,
+          "trim": "A 250 e",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.00907,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 21
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 A 250 E PETROL/ELECTRIC n=1008; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 119.8
+        },
+        {
+          "id": "mercedes-benz-classe-a-phev-a-250-e-2024",
+          "year": 2024,
+          "trim": "A 250 e",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.00892,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 21
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2024 A 250 E PETROL/ELECTRIC n=518; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 120.0
+        }
+      ]
+    },
+    {
+      "brand": "Mercedes-Benz",
+      "model": "GLA",
+      "records": [
+        {
+          "id": "mercedes-benz-gla-phev-250-e-2022",
+          "year": 2022,
+          "trim": "250 e",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01341,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 31
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2022 GLA 250 E PETROL/ELECTRIC n=1270; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 118.0
+        },
+        {
+          "id": "mercedes-benz-gla-phev-250-e-2023",
+          "year": 2023,
+          "trim": "250 e",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01226,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 28
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 GLA 250 E PETROL/ELECTRIC n=1382; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 119.1
+        },
+        {
+          "id": "mercedes-benz-gla-phev-250-e-2024",
+          "year": 2024,
+          "trim": "250 e",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01113,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 26
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2024 GLA 250 E PETROL/ELECTRIC n=1087; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 120.0
+        }
+      ]
+    },
+    {
+      "brand": "Mercedes-Benz",
+      "model": "GLC",
+      "records": [
+        {
+          "id": "mercedes-benz-glc-phev-300-de-2022",
+          "year": 2022,
+          "trim": "300 de",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01924,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 51
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2022 GLC 300 DE 4MATIC DIESEL/ELECTRIC n=889; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 143.0
+        },
+        {
+          "id": "mercedes-benz-glc-phev-300-de-2023",
+          "year": 2023,
+          "trim": "300 de",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.00783,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 21
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 GLC 300 DE 4MATIC DIESEL/ELECTRIC n=1192; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 144.5
+        },
+        {
+          "id": "mercedes-benz-glc-phev-300-de-2024",
+          "year": 2024,
+          "trim": "300 de",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.00418,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 11
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2024 GLC 300 DE 4MATIC DIESEL/ELECTRIC n=1863; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 145.0
+        }
+      ]
+    },
+    {
+      "brand": "Mercedes-Benz",
+      "model": "GLE",
+      "records": [
+        {
+          "id": "mercedes-benz-gle-phev-350-de-2022",
+          "year": 2022,
+          "trim": "350 de",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.00846,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 22
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2022 GLE 350 DE 4MATIC DIESEL/ELECTRIC n=1606; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 143.0
+        },
+        {
+          "id": "mercedes-benz-gle-phev-350-de-2023",
+          "year": 2023,
+          "trim": "350 de",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.00821,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 22
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 GLE 350 DE 4MATIC DIESEL/ELECTRIC n=690; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 143.6
+        },
+        {
+          "id": "mercedes-benz-gle-phev-350-de-2024",
+          "year": 2024,
+          "trim": "350 de",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.00775,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 21
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2024 GLE 350 DE 4MATIC DIESEL/ELECTRIC n=629; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 145.0
+        }
+      ]
+    },
+    {
+      "brand": "Mercedes-Benz",
+      "model": "GLE Coupé",
+      "records": [
+        {
+          "id": "mercedes-benz-gle-coupe-phev-350-de-2022",
+          "year": 2022,
+          "trim": "350 de",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.00885,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 23
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2022 GLE 350 DE 4MATIC COUPE DIESEL/ELECTRIC n=1274; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 143.0
+        },
+        {
+          "id": "mercedes-benz-gle-coupe-phev-350-de-2023",
+          "year": 2023,
+          "trim": "350 de",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.00737,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 20
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 GLE 350 DE 4MATIC COUPE DIESEL/ELECTRIC n=569; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 144.5
+        },
+        {
+          "id": "mercedes-benz-gle-coupe-phev-350-de-2024",
+          "year": 2024,
+          "trim": "350 de",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.00694,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 18
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2024 GLE 350 DE 4MATIC COUPE DIESEL/ELECTRIC n=727; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 145.0
+        }
+      ]
+    },
+    {
+      "brand": "Mitsubishi",
+      "model": "Eclipse Cross",
+      "records": [
+        {
+          "id": "mitsubishi-eclipse-cross-phev-2023",
+          "year": 2023,
+          "trim": "PHEV",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.02033,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 46
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 MITSUBISHI ECLIPSE CROSS petrol/electric n=678; OEM energy nil",
+          "market": "IT",
+          "powerKw": 72.0
+        }
+      ]
+    },
+    {
+      "brand": "Opel",
+      "model": "Grandland",
+      "records": [
+        {
+          "id": "opel-grandland-phev-2023",
+          "year": 2023,
+          "trim": "PHEV",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01191,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 28
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 GRANDLAND PETROL/ELECTRIC n=861; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 141.8
+        }
+      ]
+    },
+    {
+      "brand": "Peugeot",
+      "model": "3008",
+      "records": [
+        {
+          "id": "peugeot-3008-phev-2022",
+          "year": 2022,
+          "trim": "PHEV",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01336,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 31
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2022 3008 PETROL/ELECTRIC n=1749; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 135.3
+        },
+        {
+          "id": "peugeot-3008-phev-2023",
+          "year": 2023,
+          "trim": "PHEV",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm"
+          ],
+          "current": {
+            "batteryKWh": 14.2,
+            "wltpRangeKm": 48,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01212,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 28
+          },
+          "fieldSources": {
+            "wltpRangeKm": "media.stellantis.com PEUGEOT 3008 Pricelist — Effective from 1st April 2023 EAER miles 29.8–39.1 → MIN 48 km https://www.media.stellantis.com/uploads/uk/model-pricelist/peugeot3008pricespecapr23-6455a65377d74.pdf",
+            "batteryKWh": "media.stellantis.com PEUGEOT 3008 Pricelist — Effective from 1st April 2023 Battery Capacity 12.4/14.2 → MAX 14.2 https://www.media.stellantis.com/uploads/uk/model-pricelist/peugeot3008pricespecapr23-6455a65377d74.pdf"
+          },
+          "fieldSourceDates": {
+            "wltpRangeKm": "2023-04-01",
+            "batteryKWh": "2023-04-01"
+          },
+          "sourceName": "EEA co2cars IT 2023 3008 PETROL/ELECTRIC n=1604; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm; PEUGEOT 3008 Pricelist — Effective from 1st April 2023: range 48 km, bat 14.2; CS/energy weighted/absent → nil — https://www.media.stellantis.com/uploads/uk/model-pricelist/peugeot3008pricespecapr23-6455a65377d74.pdf",
+          "market": "IT",
+          "powerKw": 138.5
+        }
+      ]
+    },
+    {
+      "brand": "Peugeot",
+      "model": "308",
+      "records": [
+        {
+          "id": "peugeot-308-phev-2022",
+          "year": 2022,
+          "trim": "PHEV",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01106,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 26
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2022 308 PETROL/ELECTRIC n=701; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 115.9
+        },
+        {
+          "id": "peugeot-308-phev-2023",
+          "year": 2023,
+          "trim": "PHEV",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01024,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 24
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 308 PETROL/ELECTRIC n=617; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 112.6
+        }
+      ]
+    },
+    {
+      "brand": "Porsche",
+      "model": "Cayenne",
+      "records": [
+        {
+          "id": "porsche-cayenne-phev-e-hybrid-2022",
+          "year": 2022,
+          "trim": "E-Hybrid",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.03205,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 74
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2022 CAYENNE E-HYBRID PETROL/ELECTRIC n=936; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 250.0
+        },
+        {
+          "id": "porsche-cayenne-phev-e-hybrid-2023",
+          "year": 2023,
+          "trim": "E-Hybrid",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.02511,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 58
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 CAYENNE E-HYBRID PETROL/ELECTRIC n=852; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 239.1
+        },
+        {
+          "id": "porsche-cayenne-phev-e-hybrid-2024",
+          "year": 2024,
+          "trim": "E-Hybrid",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01533,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 36
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2024 CAYENNE E-HYBRID PETROL/ELECTRIC n=1219; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 224.1
+        }
+      ]
+    },
+    {
+      "brand": "Renault",
+      "model": "Captur",
+      "records": [
+        {
+          "id": "renault-captur-phev-e-tech-phev-2022",
+          "year": 2022,
+          "trim": "E-Tech PHEV",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.013,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 30
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2022 CAPTUR E-TECH PLUG-IN HYBRID PETROL/ELECTRIC n=1661; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 68.0
+        },
+        {
+          "id": "renault-captur-phev-e-tech-phev-2023",
+          "year": 2023,
+          "trim": "E-Tech PHEV",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01305,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 30
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2023 CAPTUR E-TECH PLUG-IN HYBRID PETROL/ELECTRIC n=1112; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 68.0
+        }
+      ]
+    },
+    {
+      "brand": "Toyota",
+      "model": "C-HR",
+      "records": [
+        {
+          "id": "toyota-c-hr-phev-2024",
+          "year": 2024,
+          "trim": "PHEV",
+          "missingCalcFields": [
+            "energyConsumptionKWhPerKm"
+          ],
+          "current": {
+            "batteryKWh": 13.6,
+            "wltpRangeKm": 66,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.049,
+            "weightedFuelConsumptionLPerKm": 0.009,
+            "weightedEnergyConsumptionKWhPerKm": 0.153,
+            "co2gKm": 19
+          },
+          "fieldSources": {
+            "fuelConsumptionLPerKm": "toyota.de 2024 https://www.toyota.de/content/dam/toyota/nmsc/germany/downloads/toyota-c-hr/Toyota_C-HR_PL_07_24_j.pdf",
+            "wltpRangeKm": "toyota.de 2024 https://www.toyota.de/content/dam/toyota/nmsc/germany/downloads/toyota-c-hr/Toyota_C-HR_PL_07_24_j.pdf",
+            "batteryKWh": "toyota.de archive TOYOTA C-HR Preise und Fakten PL_07_24 Batteriekapazität 13,6 kWh https://web.archive.org/web/20240725090934id_/https://www.toyota.de/content/dam/toyota/nmsc/germany/downloads/toyota-c-hr/Toyota_C-HR_PL_07_24_j.pdf",
+            "weightedEnergyConsumptionKWhPerKm": "toyota.de archive TOYOTA C-HR Preise und Fakten PL_07_24 footnote 2: «gewichtet, kombiniert: 0,8–0,9 l/100 km und 15,1–15,3 kWh/100 km» → weightedEnergy 0.153 (explicitly gewichtet, not CD) https://web.archive.org/web/20240725090934id_/https://www.toyota.de/content/dam/toyota/nmsc/germany/downloads/toyota-c-hr/Toyota_C-HR_PL_07_24_j.pdf"
+          },
+          "fieldSourceDates": {
+            "fuelConsumptionLPerKm": "2024-07-01",
+            "wltpRangeKm": "2024-07-01",
+            "batteryKWh": "2024-07-01",
+            "weightedEnergyConsumptionKWhPerKm": "2024-07-01"
+          },
+          "sourceName": "OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm; EAER; Strom nur gewichtet; Toyota C-HR PHEV Preisliste 07/2024 — https://www.toyota.de/content/dam/toyota/nmsc/germany/downloads/toyota-c-hr/Toyota_C-HR_PL_07_24_j.pdf (2024-07-01); TOYOTA C-HR Preise und Fakten PL_07_24: battery 13.6, consumo elettrico CD 15.3 (not pure-CD); archive 20240725 — https://web.archive.org/web/20240725090934id_/https://www.toyota.de/content/dam/toyota/nmsc/germany/downloads/toyota-c-hr/Toyota_C-HR_PL_07_24_j.pdf; wave3: kWh 0.153 demoted to weightedEnergyConsumptionKWhPerKm (doc places énergie/Strom with ponderati / gewichtet, no pure-CD label) — https://web.archive.org/web/20240725090934id_/https://www.toyota.de/content/dam/toyota/nmsc/germany/downloads/toyota-c-hr/Toyota_C-HR_PL_07_24_j.pdf",
+          "market": "IT",
+          "powerKw": 111.0
+        }
+      ]
+    },
+    {
+      "brand": "Volkswagen",
+      "model": "Golf GTE",
+      "records": [
+        {
+          "id": "volkswagen-golf-gte-phev-2024",
+          "year": 2024,
+          "trim": "PHEV",
+          "missingCalcFields": [
+            "energyConsumptionKWhPerKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": 131,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.0535,
+            "weightedFuelConsumptionLPerKm": null,
+            "weightedEnergyConsumptionKWhPerKm": 0.159,
+            "co2gKm": 8
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "VW Newsroom Golf GTE 2024: fuel battery-discharged 5.3-5.4 L/100; power consumption WLTP weighted/ponderato 15.9-16.2 kWh/100 — https://www.volkswagen-newsroom.com/en/press-releases/dynamic-and-with-a-long-range-golf-gte-and-golf-ehybrid-now-available-to-order-18398",
+          "market": "IT",
+          "powerKw": null
+        }
+      ]
+    },
+    {
+      "brand": "Volvo",
+      "model": "XC60",
+      "records": [
+        {
+          "id": "volvo-xc60-phev-recharge-2022",
+          "year": 2022,
+          "trim": "Recharge",
+          "missingCalcFields": [
+            "fuelConsumptionLPerKm",
+            "energyConsumptionKWhPerKm",
+            "wltpRangeKm",
+            "batteryKWh"
+          ],
+          "current": {
+            "batteryKWh": null,
+            "wltpRangeKm": null,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": null,
+            "weightedFuelConsumptionLPerKm": 0.01089,
+            "weightedEnergyConsumptionKWhPerKm": null,
+            "co2gKm": 25
+          },
+          "fieldSources": {},
+          "fieldSourceDates": {},
+          "sourceName": "EEA co2cars IT 2022 XC60 PETROL/ELECTRIC n=673; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm",
+          "market": "IT",
+          "powerKw": 190.3
+        },
+        {
+          "id": "volvo-xc60-phev-recharge-2023",
+          "year": 2023,
+          "trim": "Recharge",
+          "missingCalcFields": [
+            "energyConsumptionKWhPerKm"
+          ],
+          "current": {
+            "batteryKWh": 18.8,
+            "wltpRangeKm": 80,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.082,
+            "weightedFuelConsumptionLPerKm": 0.014,
+            "weightedEnergyConsumptionKWhPerKm": 0.209,
+            "co2gKm": 23
+          },
+          "fieldSources": {
+            "fuelConsumptionLPerKm": "volvocars.com 2024 https://www.volvocars.com/de/media/press-releases/8C5F873BBE0D5162/; stessa omologazione EEA E4*2007/46*1220*18 UZH1/UZH1VD0, anni 2023 e 2024",
+            "wltpRangeKm": "volvocars.com 2024 https://www.volvocars.com/de/media/press-releases/8C5F873BBE0D5162/; stessa omologazione EEA E4*2007/46*1220*18 UZH1/UZH1VD0, anni 2023 e 2024",
+            "batteryKWh": "volvocars.com 2024 https://www.volvocars.com/de/media/press-releases/8C5F873BBE0D5162/; stessa omologazione EEA E4*2007/46*1220*18 UZH1/UZH1VD0, anni 2023 e 2024"
+          },
+          "fieldSourceDates": {
+            "fuelConsumptionLPerKm": "2024-06-01",
+            "wltpRangeKm": "2024-06-01",
+            "batteryKWh": "2024-06-01"
+          },
+          "sourceName": "EEA co2cars IT 2023 XC60 PETROL/ELECTRIC n=1863; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm; stessa omologazione EEA E4*2007/46*1220*18 UZH1/UZH1VD0, anni 2023 e 2024; Volvo press 01.06.2024 via omologazione EEA — https://www.volvocars.com/de/media/press-releases/8C5F873BBE0D5162/",
+          "market": "IT",
+          "powerKw": 190.3
+        },
+        {
+          "id": "volvo-xc60-phev-recharge-2024",
+          "year": 2024,
+          "trim": "Recharge",
+          "missingCalcFields": [
+            "energyConsumptionKWhPerKm"
+          ],
+          "current": {
+            "batteryKWh": 18.8,
+            "wltpRangeKm": 80,
+            "wltpRangeKmMax": null,
+            "wltpConsumptionKWh100km": null,
+            "energyConsumptionKWhPerKm": null,
+            "energyConsumptionKWhPerKmMin": null,
+            "fuelConsumptionLPerKm": 0.082,
+            "weightedFuelConsumptionLPerKm": 0.014,
+            "weightedEnergyConsumptionKWhPerKm": 0.209,
+            "co2gKm": 23
+          },
+          "fieldSources": {
+            "fuelConsumptionLPerKm": "volvocars.com 2024 https://www.volvocars.com/de/media/press-releases/8C5F873BBE0D5162/",
+            "wltpRangeKm": "volvocars.com 2024 https://www.volvocars.com/de/media/press-releases/8C5F873BBE0D5162/",
+            "batteryKWh": "volvocars.com 2024 https://www.volvocars.com/de/media/press-releases/8C5F873BBE0D5162/"
+          },
+          "fieldSourceDates": {
+            "fuelConsumptionLPerKm": "2024-06-01",
+            "wltpRangeKm": "2024-06-01",
+            "batteryKWh": "2024-06-01"
+          },
+          "sourceName": "EEA co2cars IT 2024 XC60 PETROL/ELECTRIC n=2520; OEM same-MY EU CS L/100 + CD kWh/range/battery not attached → catalogDataIncomplete; weighted EEA fuel only in weightedFuelConsumptionLPerKm; bis 80 km; 18,8 kWh; Strom nur gewichtet; Volvo XC60 PHEV press 01.06.2024 CS/range/battery — https://www.volvocars.com/de/media/press-releases/8C5F873BBE0D5162/ (2024-06-01)",
+          "market": "IT",
+          "powerKw": 190.9
+        }
+      ]
+    }
+  ]
+}

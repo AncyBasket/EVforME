@@ -15,6 +15,13 @@ Finché l’app resta free senza Car2DB/EVOX:
 3. L’app preferisce `vehicles.seed.quality` in bundle; in Debug può fare refresh da `GET /catalog/export`
 4. I campi `confidenceScore` / `sourceName` / `batteryKWh` / `wltp*` sono **derivati** (non scheda ufficiale a pagamento)
 
+### Confidence / qualità dell’evidenza
+
+- `confidenceScore` usa la policy deterministica `scripts/catalog_confidence.py` (v1) ed è un indice ordinale di qualità dati, **non una probabilità**.
+- Ogni record deve includere `confidencePolicyVersion` e `confidenceEvidence`; `confidenceScoreLegacy` conserva lo score precedente per audit.
+- La policy valuta fonte, anno, match, provvisorietà, campione e provenance di campo disponibile. Non deduce fonti o date che non sono presenti.
+- Per ricalcolare e sincronizzare seed/mirror: `python3 scripts/recalculate_catalog_confidence.py --write`; per la rubrica completa vedere `docs/audit/CONFIDENCE_SCORE_POLICY_V1.md`.
+
 ## 1) Target data model (quello che serve all'app)
 
 Campi necessari per `VehicleCatalogItem`:

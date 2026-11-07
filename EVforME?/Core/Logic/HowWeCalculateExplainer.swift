@@ -14,7 +14,7 @@ enum ConfidenceBand: Equatable {
     case low
     case unknown
 
-    /// Soglie allineate all’uso catalogo (≥0.8 alta, ≥0.5 media).
+    /// Bande dell’indice ordinale qualità dati v1 (≥0.8 alta, ≥0.5 media); non percentuali di probabilità.
     static func from(score: Double?) -> ConfidenceBand {
         guard let score else { return .unknown }
         if score >= 0.8 { return .high }

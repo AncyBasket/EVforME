@@ -45,12 +45,20 @@ xcodebuild test -scheme 'EVforME?' \
   -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=18.6' \
   -only-testing:'EVforME?Tests' \
   -parallel-testing-enabled NO
+
+# API (backend, senza usare il DB locale reale)
+python3 -m unittest discover -s api -p 'test_*.py'
+
+# Policy qualità catalogo e riproducibilità confidenceScore
+python3 -m unittest scripts.test_catalog_confidence -v
 ```
 
 ## Notes
 
 - Input field `dailyKm` is **kilometers per year** (historical name).
 - `areaType` adjusts ICE/EV consumption multipliers and charge frequency.
-- Catalog expansion to 4000+ synthetic rows runs only in **DEBUG**.
+- Seed bundlato: 6.977 record, revisione nel manifest `catalog_cdn.json`; la cache usa la stessa revisione.
+- `confidenceScore` è un indice ordinale di qualità dati, non una probabilità; la policy v1 è versionata e riproducibile da `scripts/catalog_confidence.py`. Il punteggio precedente resta in `confidenceScoreLegacy`.
+- Espansione sintetica in **DEBUG** solo se il seed scende sotto 4.000 righe (fixture test, non dati di produzione).
 - Liquid Glass / on-device AI explanation require iOS 26+; on iOS 17–25 the app uses elevated surfaces and L10n fallback explanations.
 - 1.0 ships **placeholder** vehicle heroes only (no remote photos).

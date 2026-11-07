@@ -37,6 +37,7 @@ if str(SCRIPT_DIR) not in sys.path:
 import check_catalog_existence as existence
 import fill_catalog_bev_range_from_eea as fill
 import fill_catalog_fuels_from_eea as eea
+from catalog_confidence import apply_confidence
 
 NEW_SEED_VERSION = 60
 MIN_F_REGISTRATIONS = 10
@@ -566,7 +567,13 @@ def build_child_row(
     child["batteryKWh"] = batt
     child["sourceName"] = "EEA co2cars EU Zr (variant group)"
     child["sourceUpdatedAt"] = datetime.now(timezone.utc).date().isoformat()
+    # The prior score was not source-evidence reproducible. Keep the old build's
+    # assigned tier as legacy history, then compute the current policy from evidence.
+    child.pop("confidenceScoreLegacy", None)
+    child.pop("confidencePolicyVersion", None)
+    child.pop("confidenceEvidence", None)
     child["confidenceScore"] = 0.85 if group.get("status") == "F" else 0.7
+    apply_confidence(child, preserve_legacy=True)
 
     ref = {
         "id": child_id,

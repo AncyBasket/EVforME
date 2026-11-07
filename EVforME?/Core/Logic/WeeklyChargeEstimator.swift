@@ -11,6 +11,10 @@ import Foundation
 enum WeeklyChargeEstimator {
     /// Autonomia usabile per la stima: `wltpRangeKm`, altrimenti batteria ÷ consumo.
     static func declaredRangeKm(for vehicle: VehicleCatalogItem) -> Int? {
+        if vehicle.powertrain == .phev {
+            guard let range = vehicle.resolvedPHEVElectricRangeKm, range > 0 else { return nil }
+            return Int(range.rounded())
+        }
         if let range = vehicle.wltpRangeKm, range > 0 {
             return range
         }

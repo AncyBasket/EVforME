@@ -645,6 +645,17 @@ final class EVSimulator {
         if targetVehicle.powertrain == .phev {
             reasons.append(L10n.phevBlendReason)
         }
+        if [sourceVehicle, targetVehicle].contains(where: {
+            $0.powertrain == .phev && $0.resolvedPHEVElectricRangeKm == nil
+        }) {
+            reasons.append(L10n.phevRangeMissingNote)
+        }
+        if [sourceVehicle, targetVehicle].contains(where: {
+            guard let confidence = $0.confidenceScore else { return false }
+            return confidence < 0.5
+        }) {
+            reasons.append(L10n.catalogLowConfidenceNote)
+        }
         reasons.append(L10n.insuranceIncludedReason)
         switch input.comparisonIntent {
         case .alreadyOwned:

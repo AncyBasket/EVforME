@@ -22,8 +22,18 @@ final class VehicleCatalogService {
     }
 
     private let defaults = UserDefaults.standard
-    /// Bundled quality-seed revision (not the App Store marketing version).
-    static let bundledSeedVersion = 65
+    /// Bundled quality-seed revision, read from the same manifest as the seed.
+    /// A missing/invalid manifest forces a bundled reload instead of trusting stale cache.
+    static let bundledSeedVersion: Int = {
+        guard let url = Bundle.main.url(forResource: "catalog_cdn", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let manifest = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let version = manifest["seedVersion"] as? Int,
+              version > 0 else {
+            return -1
+        }
+        return version
+    }()
     private var seedVersion: Int { Self.bundledSeedVersion }
     private var remoteDisabledForTesting = false
     private let remoteSession: URLSession = {
@@ -458,6 +468,9 @@ final class VehicleCatalogService {
                     sourceName: item.sourceName,
                     sourceUpdatedAt: item.sourceUpdatedAt,
                     confidenceScore: item.confidenceScore,
+                    confidenceScoreLegacy: item.confidenceScoreLegacy,
+                    confidencePolicyVersion: item.confidencePolicyVersion,
+                    confidenceEvidence: item.confidenceEvidence,
                     fuelKind: item.fuelKind,
                     powerKw: item.powerKw,
                     energyIsWeighted: item.energyIsWeighted,

@@ -1,6 +1,7 @@
 # Privacy Policy — EVforME?
 
-**Last updated:** 8 October 2026  
+**Last updated:** 3 November 2026
+
 **App:** EVforME? (iOS)
 
 This policy describes how the EVforME? app handles information. It is written for App Store review and for people using the app in Italy and the EU.
@@ -41,6 +42,7 @@ When configured by the developer, the app may contact:
 - An optional **lead webhook** if you submit the advisor contact form with consent
 
 If those URLs are empty (typical production default for analytics/leads), related data stays on device or is not sent.
+If the optional EVforME self-hosted API is configured, lead submissions require explicit consent; analytics and lead writes are rate-limited and validated. Access to stored lead/event records and administrative sync operations requires a server-side admin token.
 
 ## Data we may collect (App Privacy labels)
 
@@ -60,7 +62,8 @@ As declared in the app’s privacy manifest:
 
 - Local inputs and history remain until you delete the app or clear app data
 - Location is not retained by EVforME beyond the map session
-- Lead/analytics payloads retained by any configured webhook/ingest follow that service’s retention; if none is configured, nothing is sent
+- Lead/analytics payloads retained by any third-party configured webhook/ingest follow that service’s retention; if none is configured, nothing is sent
+- The optional EVforME self-hosted API deletes stored leads and analytics events after 180 days by default (configurable by its operator); this does not apply to third-party endpoints
 
 ## Your choices
 

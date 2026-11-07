@@ -2,7 +2,7 @@
 //  EVVariantsTests.swift
 //  EVforME?Tests
 //
-//  Seed v61: EEA version groups + official OEM labels (matched / Versione n).
+//  Coverage for EEA version groups, official OEM labels, and PHEV estimates.
 //
 
 import XCTest
@@ -165,6 +165,45 @@ final class EVVariantsTests: XCTestCase {
         )
         XCTAssertNotNil(charges)
         XCTAssertGreaterThan(charges ?? 0, 0)
+    }
+
+    func testPHEVMissingRangeUsesOnlyPrudentMinimumShare() {
+        guard let vehicle = VehicleCatalogService.shared.vehicles.first(where: {
+            $0.powertrain == .phev && $0.resolvedPHEVElectricRangeKm == nil
+        }) else {
+            XCTFail("seed should include an incomplete PHEV without range or derivable battery range")
+            return
+        }
+
+        XCTAssertNil(WeeklyChargeEstimator.declaredRangeKm(for: vehicle))
+        XCTAssertEqual(
+            vehicle.phevElectricKmShare(hasHomeCharging: true, yearlyKm: 15_000),
+            0.1,
+            accuracy: 0.0001
+        )
+        XCTAssertEqual(
+            vehicle.phevElectricKmShare(hasHomeCharging: false, yearlyKm: 15_000),
+            0.1,
+            accuracy: 0.0001
+        )
+    }
+
+    func testLowConfidenceVehiclesShowCatalogWarningInVerdict() {
+        let input = UserInput(
+            dailyKm: 12_000,
+            hasHomeCharging: true,
+            areaType: .urban,
+            fuelPrice: 1.8,
+            ownershipYears: 5,
+            sourceVehicleId: "alfa-romeo-147-2005",
+            targetVehicleId: "tesla-model-y-2026",
+            scenario: .realistic
+        )
+        guard let result = EVSimulator.simulate(input: input) else {
+            XCTFail("simulation should work with low-confidence catalog estimates")
+            return
+        }
+        XCTAssertTrue(result.keyReasons.contains(L10n.catalogLowConfidenceNote))
     }
 
     func testSimulateOnMultiParentHasNilCharges_NoSilentVersion() {

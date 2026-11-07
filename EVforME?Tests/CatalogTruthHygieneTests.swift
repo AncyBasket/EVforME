@@ -256,6 +256,23 @@ final class CatalogTruthHygieneTests: XCTestCase {
         }
     }
 
+    func testCatalog_ConfidencePolicyIsVersionedAndEvidenceDecodes() {
+        let vehicles = VehicleCatalogService.shared.vehicles
+        XCTAssertGreaterThan(vehicles.count, 6_000)
+        for vehicle in vehicles {
+            XCTAssertEqual(vehicle.confidencePolicyVersion, 1, vehicle.id)
+            XCTAssertEqual(vehicle.confidenceEvidence?.policyVersion, 1, vehicle.id)
+            XCTAssertEqual(vehicle.confidenceEvidence?.scoreKind, "ordinal_data_quality", vehicle.id)
+            XCTAssertNotNil(vehicle.confidenceScoreLegacy, vehicle.id)
+            if let score = vehicle.confidenceScore {
+                XCTAssertGreaterThanOrEqual(score, 0, vehicle.id)
+                XCTAssertLessThanOrEqual(score, 1, vehicle.id)
+            } else {
+                XCTFail("Missing confidenceScore: \(vehicle.id)")
+            }
+        }
+    }
+
     func testCatalog_Estimate2026Within20PercentOfEEA2025Sibling() {
         var failures: [String] = []
         var checked = 0

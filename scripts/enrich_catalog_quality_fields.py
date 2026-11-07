@@ -19,21 +19,11 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
+from catalog_confidence import apply_confidence, assess_confidence
 
 def confidence_for(row: dict) -> float:
-    score = 0.35
-    if row.get("powertrain") in {"ice", "ev", "phev"}:
-        score += 0.1
-    if row.get("lengthM") and row.get("widthM") and row.get("heightM"):
-        score += 0.15
-    pt = row.get("powertrain")
-    if pt == "ice" and row.get("fuelConsumptionLPerKm"):
-        score += 0.25
-    if pt in {"ev", "phev"} and row.get("energyConsumptionKWhPerKm"):
-        score += 0.25
-    if row.get("imageURL"):
-        score += 0.1
-    return round(min(0.98, score), 2)
+    """Backward-compatible wrapper around the source-evidence policy v1."""
+    return assess_confidence(row)[0]
 
 
 def estimate_battery_kwh(row: dict) -> float | None:
@@ -55,7 +45,7 @@ def enrich(row: dict, source_name: str, updated_at: str) -> dict:
     out.setdefault("market", "IT")
     out["sourceName"] = source_name
     out["sourceUpdatedAt"] = updated_at
-    out["confidenceScore"] = confidence_for(out)
+    apply_confidence(out, preserve_legacy=True)
 
     energy = out.get("energyConsumptionKWhPerKm")
     if energy:
