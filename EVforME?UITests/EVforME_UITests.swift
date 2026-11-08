@@ -441,21 +441,9 @@ final class EVforME_UITests: XCTestCase {
             "Must show honest note about weighted-only OEM kWh"
         )
 
-        energyField.tap()
-        // FormatStyle Double field often shows "0": select-all then replace with mid-range kWh/100.
-        energyField.doubleTap()
-        energyField.typeText("20.9")
-        if app.keyboards.buttons["Done"].waitForExistence(timeout: 1) {
-            app.keyboards.buttons["Done"].tap()
-        } else {
-            // Decimal pad has no Done. After a valid kWh the incomplete card may disappear —
-            // dismiss keyboard without requiring the title to still exist.
-            if app.descendants(matching: .any)["incomplete_catalog_data_title"].waitForExistence(timeout: 1) {
-                app.descendants(matching: .any)["incomplete_catalog_data_title"].tap()
-            } else {
-                app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.15)).tap()
-            }
-        }
+        // FormatStyle Double field often shows "0,0": doubleTap select-all then replace (proven path).
+        replaceZeroFormattedNumberField(energyField, with: "20.9")
+        dismissDecimalPadKeyboard(in: app, fallbackTitleId: "incomplete_catalog_data_title")
 
         let tellMeEN = app.buttons["Tell me the truth"]
         let tellMeIT = app.buttons["Dimmi la verità"]
@@ -495,14 +483,14 @@ final class EVforME_UITests: XCTestCase {
         let energyField = app.descendants(matching: .any)["incomplete_catalog_energy_field"]
         XCTAssertTrue(energyField.waitForExistence(timeout: 4), "Must ask for electric kWh")
 
-        energyField.tap()
-        energyField.doubleTap()
-        energyField.typeText("1")
-        if app.keyboards.buttons["Done"].waitForExistence(timeout: 1) {
-            app.keyboards.buttons["Done"].tap()
-        } else {
-            app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.15)).tap()
-        }
+        // "0,0" → "1": doubleTap select-all works on the zero placeholder.
+        replaceZeroFormattedNumberField(energyField, with: "1")
+        dismissDecimalPadKeyboard(in: app, fallbackTitleId: nil)
+        assertFormattedNumberField(
+            energyField,
+            approximates: 1,
+            message: "Invalid energy entry must commit as 1 kWh/100"
+        )
 
         // Invalid positive value must NOT dismiss the energy field.
         XCTAssertTrue(
@@ -537,13 +525,27 @@ final class EVforME_UITests: XCTestCase {
             )
         }
 
-        energyField.tap()
-        energyField.doubleTap()
-        energyField.typeText("20.9")
-        if app.keyboards.buttons["Done"].waitForExistence(timeout: 1) {
-            app.keyboards.buttons["Done"].tap()
+        // Regression: doubleTap alone on "1,0" left the caret at the start, so typeText("20.9")
+        // produced "20.91,0" → 2091 (outside 8…40) and the verdict stayed locked.
+        // Binding get returns `?? 0`, so backspace back to the zero placeholder, then use the
+        // proven doubleTap replace path.
+        resetFormattedNumberFieldToZeroPlaceholder(energyField)
+        replaceZeroFormattedNumberField(energyField, with: "20.9")
+        // Valid mid-range kWh dismisses the incomplete energy prompt (gate satisfied).
+        // Read AX while the field still exists; if it already vanished, that is the success signal
+        // (post-merge bug left "2091,0" and kept the field visible).
+        if energyField.waitForExistence(timeout: 1) {
+            assertFormattedNumberField(
+                energyField,
+                approximates: 20.9,
+                message: "Corrected energy must commit as 20.9 kWh/100, not a prepended mangling"
+            )
+            dismissDecimalPadKeyboard(in: app, fallbackTitleId: nil)
         } else {
-            app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.15)).tap()
+            XCTAssertFalse(
+                app.descendants(matching: .any)["incomplete_catalog_energy_field"].exists,
+                "Valid 20.9 must either show 20.9 in the field or dismiss the energy prompt"
+            )
         }
 
         XCTAssertTrue(
@@ -660,5 +662,63 @@ final class EVforME_UITests: XCTestCase {
                 return
             }
         }
+    }
+
+    /// FormatStyle `.number` + `Binding` get `?? 0` always redisplays a zero placeholder
+    /// ("0,0"). On that placeholder, doubleTap select-all + typeText is reliable (happy path).
+    @MainActor
+    private func replaceZeroFormattedNumberField(_ field: XCUIElement, with text: String) {
+        XCTAssertTrue(field.waitForExistence(timeout: 3), "Number field must exist before typing")
+        field.tap()
+        field.doubleTap()
+        field.typeText(text)
+    }
+
+    /// Backspace a non-zero FormatStyle value until the binding falls back to the zero
+    /// placeholder. Needed because doubleTap on "1,0" does not select-all reliably —
+    /// typeText("20.9") then prepends and commits 2091.
+    @MainActor
+    private func resetFormattedNumberFieldToZeroPlaceholder(_ field: XCUIElement) {
+        XCTAssertTrue(field.waitForExistence(timeout: 3), "Number field must exist before reset")
+        field.tap()
+        field.coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.5)).tap()
+        let current = (field.value as? String) ?? ""
+        let deleteCount = max(current.count + 4, 8)
+        field.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: deleteCount))
+    }
+
+    @MainActor
+    private func dismissDecimalPadKeyboard(in app: XCUIApplication, fallbackTitleId: String?) {
+        if app.keyboards.buttons["Done"].waitForExistence(timeout: 1) {
+            app.keyboards.buttons["Done"].tap()
+            return
+        }
+        // Decimal pad has no Done. After a valid kWh the incomplete card may disappear —
+        // dismiss without requiring the title to still exist.
+        if let titleId = fallbackTitleId,
+           app.descendants(matching: .any)[titleId].waitForExistence(timeout: 1) {
+            app.descendants(matching: .any)[titleId].tap()
+            return
+        }
+        app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.15)).tap()
+    }
+
+    @MainActor
+    private func assertFormattedNumberField(
+        _ field: XCUIElement,
+        approximates expected: Double,
+        message: String
+    ) {
+        let raw = (field.value as? String) ?? ""
+        let normalized = raw
+            .replacingOccurrences(of: " ", with: "")
+            .replacingOccurrences(of: ",", with: ".")
+        let parsed = Double(normalized)
+        XCTAssertEqual(
+            parsed ?? -1,
+            expected,
+            accuracy: 0.05,
+            "\(message) (AX value was '\(raw)')"
+        )
     }
 }
