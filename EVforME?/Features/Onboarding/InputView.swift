@@ -1112,6 +1112,13 @@ struct InputView: View {
                 Text(L10n.operatingCostEnterKmHint)
                     .font(Typography.readingCaption)
                     .foregroundColor(.secondaryText)
+                    .accessibilityIdentifier("operating_cost_enter_km_hint")
+            } else if operatingCostPerKm(for: source) == nil || operatingCostPerKm(for: target) == nil {
+                Text(L10n.operatingCostIncompleteDataHint)
+                    .font(Typography.readingCaption)
+                    .foregroundColor(.secondaryText)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityIdentifier("operating_cost_incomplete_data_hint")
             }
             if source.usesEPACatalogSource || target.usesEPACatalogSource {
                 Text(
@@ -1144,10 +1151,11 @@ struct InputView: View {
                 .foregroundColor(.secondaryText)
                 .lineLimit(1)
             Spacer()
-            Text(value.map { String(format: "€%.3f/km", $0) } ?? "—")
+            Text(value.map { String(format: "€%.3f/km", $0) } ?? L10n.operatingCostUnavailableShort)
                 .font(Typography.readingCardTitle)
                 .foregroundColor(color)
                 .monospacedDigit()
+                .accessibilityIdentifier(value == nil ? "operating_cost_row_unavailable" : "operating_cost_row_value")
         }
     }
 
@@ -1188,18 +1196,28 @@ struct InputView: View {
     private func promptIfNeeded(for vehicle: VehicleCatalogItem, isTarget: Bool) -> IncompleteCatalogPrompt? {
         switch vehicle.powertrain {
         case .phev:
-            let fuelOverride = isTarget
-                ? userInput.targetFuelConsumptionOverrideLPer100Km.map { $0 / 100.0 }
-                : userInput.sourceConsumptionOverrideLPer100Km.map { $0 / 100.0 }
-            let energyOverride = isTarget
-                ? userInput.targetEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
-                : userInput.sourceEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
-            let rangeOverride = isTarget
-                ? EVSimulator.validElectricRangeKm(userInput.targetElectricRangeOverrideKm)
-                : EVSimulator.validElectricRangeKm(userInput.sourceElectricRangeOverrideKm)
-            let needsFuel = (fuelOverride ?? vehicle.usableChargeSustainingFuelLPerKm) == nil
-            let needsEnergy = (energyOverride ?? vehicle.usableChargeDepletingEnergyKWhPerKm) == nil
-            let needsRange = (rangeOverride ?? vehicle.catalogPHEVElectricRangeKm) == nil
+            let fuelOverrideLPer100 = isTarget
+                ? userInput.targetFuelConsumptionOverrideLPer100Km
+                : userInput.sourceConsumptionOverrideLPer100Km
+            let energyOverrideKWhPer100 = isTarget
+                ? userInput.targetEnergyOverrideKWhPer100Km
+                : userInput.sourceEnergyOverrideKWhPer100Km
+            let rangeOverrideKm = isTarget
+                ? userInput.targetElectricRangeOverrideKm
+                : userInput.sourceElectricRangeOverrideKm
+            // Override non-nil ma fuori intervallo resta editabile (stessa validazione del gate).
+            let needsFuel = VehicleCalcDataGate.needsFuel(
+                vehicle: vehicle,
+                overrideLPer100: fuelOverrideLPer100
+            )
+            let needsEnergy = VehicleCalcDataGate.needsEnergy(
+                vehicle: vehicle,
+                overrideKWhPer100: energyOverrideKWhPer100
+            )
+            let needsRange = VehicleCalcDataGate.needsRange(
+                vehicle: vehicle,
+                overrideKm: rangeOverrideKm
+            )
             guard needsFuel || needsEnergy || needsRange else { return nil }
             let body: String
             switch (needsFuel, needsEnergy, needsRange) {
@@ -1262,11 +1280,13 @@ struct InputView: View {
                 officialRows: official
             )
         case .ev:
-            let energyOverride = isTarget
-                ? userInput.targetEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
-                : userInput.sourceEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
-            let needsEnergy = (energyOverride ?? vehicle.usableChargeDepletingEnergyKWhPerKm) == nil
-            guard needsEnergy || vehicle.hasIncompleteCatalogData else { return nil }
+            let energyOverrideKWhPer100 = isTarget
+                ? userInput.targetEnergyOverrideKWhPer100Km
+                : userInput.sourceEnergyOverrideKWhPer100Km
+            let needsEnergy = VehicleCalcDataGate.needsEnergy(
+                vehicle: vehicle,
+                overrideKWhPer100: energyOverrideKWhPer100
+            )
             guard needsEnergy else { return nil }
             return IncompleteCatalogPrompt(
                 isTarget: isTarget,
@@ -1279,10 +1299,13 @@ struct InputView: View {
                 officialRows: []
             )
         case .ice, .hev:
-            let fuelOverride = isTarget
-                ? userInput.targetFuelConsumptionOverrideLPer100Km.map { $0 / 100.0 }
-                : userInput.sourceConsumptionOverrideLPer100Km.map { $0 / 100.0 }
-            let needsFuel = (fuelOverride ?? vehicle.usableChargeSustainingFuelLPerKm) == nil
+            let fuelOverrideLPer100 = isTarget
+                ? userInput.targetFuelConsumptionOverrideLPer100Km
+                : userInput.sourceConsumptionOverrideLPer100Km
+            let needsFuel = VehicleCalcDataGate.needsFuel(
+                vehicle: vehicle,
+                overrideLPer100: fuelOverrideLPer100
+            )
             guard needsFuel else { return nil }
             return IncompleteCatalogPrompt(
                 isTarget: isTarget,

@@ -40,3 +40,8 @@ Base: main `71d6f5d` (seed **v77**). WIP reference: `05c22b9` / PR **#33** (pres
 4. No verdict / conclusive savings until required data are present and valid.
 5. Electric share depends on explicit range + habits; no artificial minimum.
 6. Intermediate derived range (battery÷CD) may be shown as **estimate** only — never written to seed, never used to bypass the gate.
+
+## Follow-up on #36 head `8de92ae`
+
+- Invalid but positive overrides (e.g. 1 kWh/100, 2.5 L/100 CS) must keep the field editable (`VehicleCalcDataGate`).
+- Shared sufficiency gate for prompt, €/km preview, and verdict — incomplete/invalid PHEV preview is **n/d**, not a partial total.

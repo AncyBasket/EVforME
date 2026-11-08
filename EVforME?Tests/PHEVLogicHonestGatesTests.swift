@@ -229,4 +229,83 @@ final class PHEVLogicHonestGatesTests: XCTestCase {
         let input = baseInput(targetId: id)
         XCTAssertNotNil(EVSimulator.simulate(input: input, scenario: .realistic))
     }
+
+    func testInvalidPositiveEnergy_RemainsNeeded_XC60() throws {
+        let id = "volvo-xc60-phev-recharge-2024"
+        let vehicle = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: id))
+        XCTAssertNotNil(vehicle.usableChargeSustainingFuelLPerKm)
+        XCTAssertNil(vehicle.usableChargeDepletingEnergyKWhPerKm)
+
+        var input = baseInput(targetId: id)
+        input.targetEnergyOverrideKWhPer100Km = 1 // positive but below 8…40 band
+        XCTAssertTrue(
+            VehicleCalcDataGate.needsEnergy(vehicle: vehicle, overrideKWhPer100: 1),
+            "Invalid override must keep the energy field required"
+        )
+        XCTAssertFalse(VehicleCalcDataGate.hasSufficientCalcData(vehicle: vehicle, input: input, asSource: false))
+        XCTAssertNil(OperatingCostCalculator.operatingCostPerKm(vehicle: vehicle, input: input, asSource: false))
+        XCTAssertNil(EVSimulator.simulate(input: input, scenario: .realistic))
+        XCTAssertTrue(InputValidator.validate(input).contains(L10n.validationStickerEnergyRange))
+
+        // Fuel from catalog stays valid — do not re-ask.
+        XCTAssertFalse(VehicleCalcDataGate.needsFuel(vehicle: vehicle, overrideLPer100: nil))
+        XCTAssertNil(input.targetFuelConsumptionOverrideLPer100Km)
+
+        input.targetEnergyOverrideKWhPer100Km = 18
+        XCTAssertFalse(VehicleCalcDataGate.needsEnergy(vehicle: vehicle, overrideKWhPer100: 18))
+        XCTAssertNotNil(OperatingCostCalculator.operatingCostPerKm(vehicle: vehicle, input: input, asSource: false))
+        XCTAssertNotNil(EVSimulator.simulate(input: input, scenario: .realistic))
+        XCTAssertEqual(input.targetEnergyOverrideKWhPer100Km, 18)
+    }
+
+    func testInvalidPositiveFuel_RemainsNeeded_WithOtherFieldsValid() throws {
+        let id = "cupra-formentor-phev-e-hybrid-2024"
+        let vehicle = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: id))
+        var input = baseInput(targetId: id)
+        input.targetEnergyOverrideKWhPer100Km = 18
+        input.targetElectricRangeOverrideKm = 55
+        input.targetFuelConsumptionOverrideLPer100Km = 2.5 // in sticker band but < 3 L/100 for PHEV
+        XCTAssertTrue(VehicleCalcDataGate.needsFuel(vehicle: vehicle, overrideLPer100: 2.5))
+        XCTAssertFalse(VehicleCalcDataGate.needsEnergy(vehicle: vehicle, overrideKWhPer100: 18))
+        XCTAssertFalse(VehicleCalcDataGate.needsRange(vehicle: vehicle, overrideKm: 55))
+        XCTAssertNil(OperatingCostCalculator.operatingCostPerKm(vehicle: vehicle, input: input, asSource: false))
+        XCTAssertNil(EVSimulator.simulate(input: input, scenario: .realistic))
+        XCTAssertTrue(InputValidator.validate(input).contains(L10n.validationPHEVFuelTooLowForCalc))
+
+        input.targetFuelConsumptionOverrideLPer100Km = 6.5
+        XCTAssertEqual(input.targetEnergyOverrideKWhPer100Km, 18)
+        XCTAssertEqual(input.targetElectricRangeOverrideKm, 55)
+        XCTAssertNotNil(OperatingCostCalculator.operatingCostPerKm(vehicle: vehicle, input: input, asSource: false))
+        XCTAssertNotNil(EVSimulator.simulate(input: input, scenario: .realistic))
+    }
+
+    func testOperatingPreviewUnavailableUntilCS_CD_RangeValid() throws {
+        let id = "cupra-formentor-phev-e-hybrid-2024"
+        let vehicle = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: id))
+        var input = baseInput(targetId: id)
+        XCTAssertNil(OperatingCostCalculator.operatingCostPerYear(vehicle: vehicle, input: input, asSource: false))
+
+        input.targetFuelConsumptionOverrideLPer100Km = 6.5
+        XCTAssertNil(OperatingCostCalculator.operatingCostPerKm(vehicle: vehicle, input: input, asSource: false))
+        input.targetEnergyOverrideKWhPer100Km = 18
+        XCTAssertNil(OperatingCostCalculator.operatingCostPerKm(vehicle: vehicle, input: input, asSource: false))
+        input.targetElectricRangeOverrideKm = 50
+        let cost = try XCTUnwrap(
+            OperatingCostCalculator.operatingCostPerKm(vehicle: vehicle, input: input, asSource: false)
+        )
+        XCTAssertGreaterThan(cost, 0)
+        XCTAssertNotNil(EVSimulator.simulate(input: input, scenario: .realistic))
+    }
+
+    func testCompleteCarsPreviewUnchanged() throws {
+        let id = "ford-kuga-phev-2023"
+        let vehicle = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: id))
+        let input = baseInput(targetId: id)
+        let cost = try XCTUnwrap(
+            OperatingCostCalculator.operatingCostPerKm(vehicle: vehicle, input: input, asSource: false)
+        )
+        XCTAssertGreaterThan(cost, 0)
+        let ice = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: sourceId))
+        XCTAssertNotNil(OperatingCostCalculator.operatingCostPerKm(vehicle: ice, input: input, asSource: true))
+    }
 }

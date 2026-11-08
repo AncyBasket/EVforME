@@ -111,6 +111,8 @@ enum L10n {
     static var comparisonCardTitle: String { string("comparison_card_title") }
     static var comparisonOperatingPerKmCaption: String { string("comparison_operating_per_km_caption") }
     static var operatingCostEnterKmHint: String { string("operating_cost_enter_km_hint") }
+    static var operatingCostIncompleteDataHint: String { string("operating_cost_incomplete_data_hint") }
+    static var operatingCostUnavailableShort: String { string("operating_cost_unavailable_short") }
     static var vehicleSearchPlaceholder: String { string("vehicle_search_placeholder") }
     static var vehiclePickerButton: String { string("vehicle_picker_button") }
     static var vehiclePickerSearchTitle: String { string("vehicle_picker_search_title") }

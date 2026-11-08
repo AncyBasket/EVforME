@@ -71,10 +71,14 @@ final class OperatingCostCalculatorTests: XCTestCase {
         }
     }
 
-    func testPHEV_UsesPetrolNotSourceDieselPrice() {
-        guard let phev = VehicleCatalogService.shared.vehicle(by: "volkswagen-golf-gte-phev-2024")
+    func testPHEV_UsesPetrolNotSourceDieselPrice() throws {
+        // Prefer a complete PHEV (CS+CD+range). Golf GTE 2024 is incomplete/weighted-only.
+        guard let phev = VehicleCatalogService.shared.vehicle(by: "ford-kuga-phev-2023")
                 ?? VehicleCatalogService.shared.targetEVVehicles().first(where: {
-                    $0.powertrain == .phev && !$0.hasIncompleteCatalogData
+                    $0.powertrain == .phev
+                        && !$0.hasIncompleteCatalogData
+                        && $0.usableChargeDepletingEnergyKWhPerKm != nil
+                        && $0.catalogPHEVElectricRangeKm != nil
                 }) else {
             XCTFail("No usable PHEV in catalog")
             return
@@ -92,22 +96,22 @@ final class OperatingCostCalculatorTests: XCTestCase {
             sourcePurchasePrice: 14_000,
             targetPurchasePrice: 36_000
         )
-        let withDieselListed = OperatingCostCalculator.operatingCostPerYear(
+        let withDieselListed = try XCTUnwrap(OperatingCostCalculator.operatingCostPerYear(
             vehicle: phev,
             input: dieselInput,
             asSource: false
-        )
+        ))
         dieselInput.fuelPrice = 3.0 // absurd diesel — must NOT change PHEV fuel leg
-        let withAbsurdDiesel = OperatingCostCalculator.operatingCostPerYear(
+        let withAbsurdDiesel = try XCTUnwrap(OperatingCostCalculator.operatingCostPerYear(
             vehicle: phev,
             input: dieselInput,
             asSource: false
-        )
+        ))
         XCTAssertEqual(withDieselListed, withAbsurdDiesel, accuracy: 0.01,
                        "PHEV fuel leg must use petrol, not source diesel price")
     }
 
-    func testEdge_ZeroKm_PerKmIsNil_YearlyStillFinite() {
+    func testEdge_ZeroKm_PerKmIsNil_YearlyStillFinite() throws {
         guard let source = VehicleCatalogService.shared.vehicle(by: "fiat-panda-2018"),
               let target = VehicleCatalogService.shared.vehicle(by: "fiat-500e-2023") else {
             XCTFail("Missing fixtures")
@@ -125,8 +129,8 @@ final class OperatingCostCalculatorTests: XCTestCase {
             sourcePurchasePrice: 6_000,
             targetPurchasePrice: 28_000
         )
-        let sourceYear = OperatingCostCalculator.operatingCostPerYear(vehicle: source, input: input, asSource: true)
-        let targetYear = OperatingCostCalculator.operatingCostPerYear(vehicle: target, input: input, asSource: false)
+        let sourceYear = try XCTUnwrap(OperatingCostCalculator.operatingCostPerYear(vehicle: source, input: input, asSource: true))
+        let targetYear = try XCTUnwrap(OperatingCostCalculator.operatingCostPerYear(vehicle: target, input: input, asSource: false))
         let sourcePerKm = OperatingCostCalculator.operatingCostPerKm(vehicle: source, input: input, asSource: true)
         XCTAssertTrue(sourceYear.isFinite && sourceYear >= 0)
         XCTAssertTrue(targetYear.isFinite && targetYear >= 0)
@@ -221,7 +225,7 @@ final class OperatingCostCalculatorTests: XCTestCase {
         VehicleCatalogService.shared.reloadFromBundledSeedIgnoringUserCacheForTesting()
     }
 
-    func testEdge_HugeKm_IsFinite() {
+    func testEdge_HugeKm_IsFinite() throws {
         guard let source = VehicleCatalogService.shared.vehicle(by: "seat-ateca-2016"),
               let target = VehicleCatalogService.shared.vehicle(by: "tesla-model-3-2024") else {
             XCTFail("Missing fixtures")
@@ -239,12 +243,12 @@ final class OperatingCostCalculatorTests: XCTestCase {
             sourcePurchasePrice: 14_000,
             targetPurchasePrice: 40_000
         )
-        let year = OperatingCostCalculator.operatingCostPerYear(vehicle: source, input: input, asSource: true)
+        let year = try XCTUnwrap(OperatingCostCalculator.operatingCostPerYear(vehicle: source, input: input, asSource: true))
         XCTAssertTrue(year.isFinite)
         XCTAssertGreaterThan(year, 1_000)
     }
 
-    func testEdge_ZeroFuelPrice_IsFinite() {
+    func testEdge_ZeroFuelPrice_IsFinite() throws {
         guard let source = VehicleCatalogService.shared.vehicle(by: "fiat-panda-2018") else {
             XCTFail("Missing Panda")
             return
@@ -270,7 +274,7 @@ final class OperatingCostCalculatorTests: XCTestCase {
             asSource: true
         )
         XCTAssertEqual(energyOnly, 0, accuracy: 0.01)
-        let total = OperatingCostCalculator.operatingCostPerYear(vehicle: source, input: input, asSource: true)
+        let total = try XCTUnwrap(OperatingCostCalculator.operatingCostPerYear(vehicle: source, input: input, asSource: true))
         XCTAssertTrue(total.isFinite && total > 0)
     }
 
@@ -611,11 +615,11 @@ final class OperatingCostCalculatorTests: XCTestCase {
         XCTAssertEqual(firstYear.amount, 0, accuracy: 0.01, "Still in EV exemption in 2026")
         XCTAssertGreaterThan(horizon.amount / Double(years), 0)
 
-        let yearCost = OperatingCostCalculator.operatingCostPerYear(
+        let yearCost = try XCTUnwrap(OperatingCostCalculator.operatingCostPerYear(
             vehicle: target,
             input: input,
             asSource: false
-        )
+        ))
         let energy = EVSimulator().energyCostPerYear(
             vehicle: target,
             input: OperatingCostCalculator.makeSimulationInput(from: input),

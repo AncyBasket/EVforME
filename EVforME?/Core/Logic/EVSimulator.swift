@@ -560,22 +560,22 @@ final class EVSimulator {
             return nil
         }
 
-        let iceOverride = input.sourceConsumptionOverrideLPer100Km.map { $0 / 100.0 }
-        let sourceEnergyOverride = input.sourceEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
-        let evOverride = input.targetEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
-        let targetFuelOverride = input.targetFuelConsumptionOverrideLPer100Km.map { $0 / 100.0 }
-        let sourceRangeOverride = Self.validElectricRangeKm(input.sourceElectricRangeOverrideKm)
-        let targetRangeOverride = Self.validElectricRangeKm(input.targetElectricRangeOverrideKm)
-        guard Self.hasUsableConsumption(
+        let sourceRangeOverride = VehicleCalcDataGate.resolvedElectricRangeKm(
             vehicle: sourceVehicle,
-            fuelOverrideLPerKm: iceOverride,
-            energyOverrideKWhPerKm: sourceEnergyOverride,
-            electricRangeKmOverride: sourceRangeOverride
-        ), Self.hasUsableConsumption(
+            overrideKm: input.sourceElectricRangeOverrideKm
+        )
+        let targetRangeOverride = VehicleCalcDataGate.resolvedElectricRangeKm(
             vehicle: targetVehicle,
-            fuelOverrideLPerKm: targetFuelOverride,
-            energyOverrideKWhPerKm: evOverride,
-            electricRangeKmOverride: targetRangeOverride
+            overrideKm: input.targetElectricRangeOverrideKm
+        )
+        guard VehicleCalcDataGate.hasSufficientCalcData(
+            vehicle: sourceVehicle,
+            input: input,
+            asSource: true
+        ), VehicleCalcDataGate.hasSufficientCalcData(
+            vehicle: targetVehicle,
+            input: input,
+            asSource: false
         ) else {
             AppLogger.shared.warning("Missing consumption data for selected vehicles", category: .simulation)
             return nil

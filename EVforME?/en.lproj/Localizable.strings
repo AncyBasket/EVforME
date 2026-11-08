@@ -538,6 +538,8 @@
 "incomplete_catalog_weighted_energy_honesty" = "The manufacturer only publishes weighted electric consumption, which is not suitable for the calculation. Enter yours (from the car app or the charge point).";
 "incomplete_catalog_range_estimate_hint" = "Intermediate estimate from battery/consumption (not official, does not unlock the verdict): about %d km.";
 "phev_range_estimate_note" = "PHEV range estimated from battery and consumption: not an official catalog figure.";
+"operating_cost_incomplete_data_hint" = "Operating €/km unavailable: required calculation data are missing or invalid (consumption and, for PHEVs, electric range).";
+"operating_cost_unavailable_short" = "n/a";
 "validation_unknown_source_vehicle" = "Current vehicle not found in the catalog.";
 "validation_unknown_target_vehicle" = "Electrified vehicle not found in the catalog.";
 

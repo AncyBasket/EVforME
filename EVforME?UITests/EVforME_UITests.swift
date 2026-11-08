@@ -479,6 +479,90 @@ final class EVforME_UITests: XCTestCase {
         XCTAssertTrue(verdictOpened, "After entering kWh, partial PHEV must open the verdict")
     }
 
+    /// Energia positiva ma invalida (1 kWh/100): il campo resta editabile, niente verdetto.
+    @MainActor
+    func testPartialPHEVInvalidEnergyStaysEditableThenUnlocks() throws {
+        let app = XCUIApplication()
+        app.launchEnvironment["UITEST_PRESET_VEHICLES"] = "1"
+        app.launchEnvironment["UITEST_PARTIAL_PHEV_KWH_ONLY"] = "1"
+        app.launchArguments += ["-UITesting", "-DisableAnimations"]
+        app.launch()
+
+        dismissQuickStartIfNeeded(app)
+
+        let incompleteCard = app.descendants(matching: .any)["incomplete_catalog_data_card"]
+        XCTAssertTrue(incompleteCard.waitForExistence(timeout: 12), "Partial PHEV must show incomplete card")
+        let energyField = app.descendants(matching: .any)["incomplete_catalog_energy_field"]
+        XCTAssertTrue(energyField.waitForExistence(timeout: 4), "Must ask for electric kWh")
+
+        energyField.tap()
+        energyField.doubleTap()
+        energyField.typeText("1")
+        if app.keyboards.buttons["Done"].waitForExistence(timeout: 1) {
+            app.keyboards.buttons["Done"].tap()
+        } else {
+            app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.15)).tap()
+        }
+
+        // Invalid positive value must NOT dismiss the energy field.
+        XCTAssertTrue(
+            energyField.waitForExistence(timeout: 3),
+            "Invalid 1 kWh/100 must keep the energy field visible for correction"
+        )
+        XCTAssertTrue(
+            incompleteCard.exists
+                || app.descendants(matching: .any)["incomplete_catalog_data_title"].exists,
+            "Incomplete card must remain while energy is invalid"
+        )
+
+        // Preview must not present a fake complete €/km for the incomplete PHEV.
+        let unavailableHint = app.descendants(matching: .any)["operating_cost_incomplete_data_hint"]
+        let unavailableRow = app.descendants(matching: .any)["operating_cost_row_unavailable"]
+        XCTAssertTrue(
+            unavailableHint.waitForExistence(timeout: 3) || unavailableRow.waitForExistence(timeout: 2),
+            "Operating €/km must show unavailable while calc data are invalid"
+        )
+
+        let tellMeEN = app.buttons["Tell me the truth"]
+        let tellMeIT = app.buttons["Dimmi la verità"]
+        let tellMe = tellMeEN.exists ? tellMeEN : tellMeIT
+        if tellMe.waitForExistence(timeout: 2) {
+            if !tellMe.isHittable { app.swipeUp() }
+            tellMe.tap()
+            let modifyEN = app.buttons["Change inputs"]
+            let modifyIT = app.buttons["Modifica dati"]
+            XCTAssertFalse(
+                modifyEN.waitForExistence(timeout: 2) || modifyIT.waitForExistence(timeout: 1),
+                "Must not open verdict with invalid energy"
+            )
+        }
+
+        energyField.tap()
+        energyField.doubleTap()
+        energyField.typeText("20.9")
+        if app.keyboards.buttons["Done"].waitForExistence(timeout: 1) {
+            app.keyboards.buttons["Done"].tap()
+        } else {
+            app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.15)).tap()
+        }
+
+        XCTAssertTrue(
+            tellMeEN.waitForExistence(timeout: 3) || tellMeIT.waitForExistence(timeout: 1)
+        )
+        let tellMe2 = tellMeEN.exists ? tellMeEN : tellMeIT
+        if !tellMe2.isHittable { app.swipeUp() }
+        tellMe2.tap()
+        let modifyEN = app.buttons["Change inputs"]
+        let modifyIT = app.buttons["Modifica dati"]
+        let modifyLegacy = app.buttons["Modify input"]
+        XCTAssertTrue(
+            modifyEN.waitForExistence(timeout: 10)
+                || modifyIT.waitForExistence(timeout: 6)
+                || modifyLegacy.waitForExistence(timeout: 3),
+            "After correcting energy, verdict must unlock"
+        )
+    }
+
     /// PHEV con catalogDataIncomplete: chiede consumi e non apre un verdetto inventato.
     @MainActor
     func testIncompletePHEVAsksForConsumptionInsteadOfVerdict() throws {
