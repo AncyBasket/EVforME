@@ -215,6 +215,31 @@ struct InputView: View {
                                 }
                             }
                         }
+                        if incompleteCard.needsRange {
+                            VStack(alignment: .leading, spacing: 4) {
+                                HStack {
+                                    Text(L10n.incompleteCatalogRangeField)
+                                        .font(Typography.readingCaption)
+                                    Spacer()
+                                    TextField(
+                                        "60",
+                                        value: incompleteRangeBinding(forTarget: incompleteCard.isTarget),
+                                        format: .number.precision(.fractionLength(0...1))
+                                    )
+                                    .keyboardType(.decimalPad)
+                                    .multilineTextAlignment(.trailing)
+                                    .frame(width: 88)
+                                    .accessibilityIdentifier("incomplete_catalog_range_field")
+                                }
+                                if let estimateKm = incompleteCard.rangeEstimateKm {
+                                    Text(L10n.incompleteCatalogRangeEstimateHint(estimateKm))
+                                        .font(Typography.readingCaption)
+                                        .foregroundColor(.secondaryText)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                        .accessibilityIdentifier("incomplete_catalog_range_estimate_hint")
+                                }
+                            }
+                        }
                     }
                     .padding(12)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -558,12 +583,16 @@ struct InputView: View {
                                 if userInput.sourceConsumptionOverrideLPer100Km != nil
                                     || userInput.targetEnergyOverrideKWhPer100Km != nil
                                     || userInput.sourceEnergyOverrideKWhPer100Km != nil
-                                    || userInput.targetFuelConsumptionOverrideLPer100Km != nil {
+                                    || userInput.targetFuelConsumptionOverrideLPer100Km != nil
+                                    || userInput.sourceElectricRangeOverrideKm != nil
+                                    || userInput.targetElectricRangeOverrideKm != nil {
                                     Button(L10n.stickerClearOverride) {
                                         userInput.sourceConsumptionOverrideLPer100Km = nil
                                         userInput.targetEnergyOverrideKWhPer100Km = nil
                                         userInput.sourceEnergyOverrideKWhPer100Km = nil
                                         userInput.targetFuelConsumptionOverrideLPer100Km = nil
+                                        userInput.sourceElectricRangeOverrideKm = nil
+                                        userInput.targetElectricRangeOverrideKm = nil
                                         stickerStatus = nil
                                         stickerItem = nil
                                     }
@@ -1136,33 +1165,53 @@ struct InputView: View {
         let body: String
         let needsFuel: Bool
         let needsEnergy: Bool
+        let needsRange: Bool
+        let rangeEstimateKm: Int?
         let showWeightedEnergyHonesty: Bool
         let officialRows: [IncompleteOfficialRow]
     }
 
-    /// Prefer target if incomplete (usual compare path); else source.
+    /// Prefer target if calc fields missing; else source. Keep valid overrides.
     private var incompleteCatalogPrompt: IncompleteCatalogPrompt? {
         let catalog = VehicleCatalogService.shared
         let target = catalog.vehicle(by: userInput.targetVehicleId)
         let source = catalog.vehicle(by: userInput.sourceVehicleId)
-        if let target, target.hasIncompleteCatalogData {
-            return prompt(for: target, isTarget: true)
+        if let target, let prompt = promptIfNeeded(for: target, isTarget: true) {
+            return prompt
         }
-        if let source, source.hasIncompleteCatalogData {
-            return prompt(for: source, isTarget: false)
+        if let source, let prompt = promptIfNeeded(for: source, isTarget: false) {
+            return prompt
         }
         return nil
     }
 
-    private func prompt(for vehicle: VehicleCatalogItem, isTarget: Bool) -> IncompleteCatalogPrompt {
+    private func promptIfNeeded(for vehicle: VehicleCatalogItem, isTarget: Bool) -> IncompleteCatalogPrompt? {
         switch vehicle.powertrain {
         case .phev:
-            let needsFuel = vehicle.usableChargeSustainingFuelLPerKm == nil
-            let needsEnergy = vehicle.usableChargeDepletingEnergyKWhPerKm == nil
-            let onlyEnergy = needsEnergy && !needsFuel
-            let body = onlyEnergy
-                ? L10n.incompleteCatalogDataBodyPHEVEnergyOnly
-                : L10n.incompleteCatalogDataBodyPHEV
+            let fuelOverride = isTarget
+                ? userInput.targetFuelConsumptionOverrideLPer100Km.map { $0 / 100.0 }
+                : userInput.sourceConsumptionOverrideLPer100Km.map { $0 / 100.0 }
+            let energyOverride = isTarget
+                ? userInput.targetEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
+                : userInput.sourceEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
+            let rangeOverride = isTarget
+                ? EVSimulator.validElectricRangeKm(userInput.targetElectricRangeOverrideKm)
+                : EVSimulator.validElectricRangeKm(userInput.sourceElectricRangeOverrideKm)
+            let needsFuel = (fuelOverride ?? vehicle.usableChargeSustainingFuelLPerKm) == nil
+            let needsEnergy = (energyOverride ?? vehicle.usableChargeDepletingEnergyKWhPerKm) == nil
+            let needsRange = (rangeOverride ?? vehicle.catalogPHEVElectricRangeKm) == nil
+            guard needsFuel || needsEnergy || needsRange else { return nil }
+            let body: String
+            switch (needsFuel, needsEnergy, needsRange) {
+            case (false, true, false):
+                body = L10n.incompleteCatalogDataBodyPHEVEnergyOnly
+            case (true, false, false):
+                body = L10n.incompleteCatalogDataBodyPHEVFuelOnly
+            case (false, false, true):
+                body = L10n.incompleteCatalogDataBodyPHEVRangeOnly
+            default:
+                body = L10n.incompleteCatalogDataBodyPHEV
+            }
             var official: [IncompleteOfficialRow] = []
             if let cs = vehicle.usableChargeSustainingFuelLPerKm {
                 official.append(
@@ -1175,13 +1224,13 @@ struct InputView: View {
                     )
                 )
             }
-            if let range = vehicle.wltpRangeKm {
+            if let range = vehicle.catalogPHEVElectricRangeKm {
                 official.append(
                     IncompleteOfficialRow(
                         key: "wltpRangeKm",
                         label: L10n.incompleteCatalogRangeField,
                         placeholder: "60",
-                        valuePer100: Double(range),
+                        valuePer100: range,
                         source: vehicle.fieldSource(for: "wltpRangeKm")
                     )
                 )
@@ -1207,24 +1256,41 @@ struct InputView: View {
                 body: body,
                 needsFuel: needsFuel,
                 needsEnergy: needsEnergy,
+                needsRange: needsRange,
+                rangeEstimateKm: WeeklyChargeEstimator.estimatedPHEVRangeKm(for: vehicle),
                 showWeightedEnergyHonesty: honesty,
                 officialRows: official
             )
         case .ev:
+            let energyOverride = isTarget
+                ? userInput.targetEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
+                : userInput.sourceEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
+            let needsEnergy = (energyOverride ?? vehicle.usableChargeDepletingEnergyKWhPerKm) == nil
+            guard needsEnergy || vehicle.hasIncompleteCatalogData else { return nil }
+            guard needsEnergy else { return nil }
             return IncompleteCatalogPrompt(
                 isTarget: isTarget,
                 body: L10n.incompleteCatalogDataBodyBEV,
                 needsFuel: false,
                 needsEnergy: true,
+                needsRange: false,
+                rangeEstimateKm: nil,
                 showWeightedEnergyHonesty: false,
                 officialRows: []
             )
         case .ice, .hev:
+            let fuelOverride = isTarget
+                ? userInput.targetFuelConsumptionOverrideLPer100Km.map { $0 / 100.0 }
+                : userInput.sourceConsumptionOverrideLPer100Km.map { $0 / 100.0 }
+            let needsFuel = (fuelOverride ?? vehicle.usableChargeSustainingFuelLPerKm) == nil
+            guard needsFuel else { return nil }
             return IncompleteCatalogPrompt(
                 isTarget: isTarget,
                 body: L10n.incompleteCatalogDataBodyPHEV,
                 needsFuel: true,
                 needsEnergy: false,
+                needsRange: false,
+                rangeEstimateKm: nil,
                 showWeightedEnergyHonesty: false,
                 officialRows: []
             )
@@ -1308,6 +1374,25 @@ struct InputView: View {
                     userInput.targetEnergyOverrideKWhPer100Km = stored
                 } else {
                     userInput.sourceEnergyOverrideKWhPer100Km = stored
+                }
+            }
+        )
+    }
+
+    private func incompleteRangeBinding(forTarget: Bool) -> Binding<Double> {
+        Binding(
+            get: {
+                if forTarget {
+                    return userInput.targetElectricRangeOverrideKm ?? 0
+                }
+                return userInput.sourceElectricRangeOverrideKm ?? 0
+            },
+            set: { newValue in
+                let stored: Double? = newValue > 0 ? newValue : nil
+                if forTarget {
+                    userInput.targetElectricRangeOverrideKm = stored
+                } else {
+                    userInput.sourceElectricRangeOverrideKm = stored
                 }
             }
         )

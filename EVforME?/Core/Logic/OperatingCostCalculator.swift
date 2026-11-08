@@ -40,6 +40,9 @@ enum OperatingCostCalculator {
             energyOverrideKWhPerKm: asSource
                 ? simInput.sourceEnergyKWhPerKmOverride
                 : simInput.evKWhPerKmOverride,
+            electricRangeKmOverride: asSource
+                ? simInput.sourceElectricRangeKmOverride
+                : simInput.targetElectricRangeKmOverride,
             asSource: asSource
         )
 
@@ -183,6 +186,8 @@ enum OperatingCostCalculator {
             evKWhPerKmOverride: evOverride,
             sourceEnergyKWhPerKmOverride: sourceEnergyOverride,
             targetFuelLPerKmOverride: targetFuelOverride,
+            sourceElectricRangeKmOverride: EVSimulator.validElectricRangeKm(input.sourceElectricRangeOverrideKm),
+            targetElectricRangeKmOverride: EVSimulator.validElectricRangeKm(input.targetElectricRangeOverrideKm),
             chargingConfiguration: input.resolvedChargingConfiguration()
         )
         sim.petrolPricePerLiter = resolvePetrolPricePerLiter(for: input)

@@ -477,11 +477,18 @@ enum L10n {
     static var validationMissingEnergyConsumption: String { string("validation_missing_energy_consumption") }
     static var validationIncompleteCatalogEnterFuel: String { string("validation_incomplete_catalog_enter_fuel") }
     static var validationIncompleteCatalogEnterEnergy: String { string("validation_incomplete_catalog_enter_energy") }
+    static var validationIncompleteCatalogEnterRange: String { string("validation_incomplete_catalog_enter_range") }
+    static var validationElectricRangeInvalid: String { string("validation_electric_range_invalid") }
     static var validationPHEVFuelTooLowForCalc: String { string("validation_phev_fuel_too_low_for_calc") }
     static var incompleteCatalogDataTitle: String { string("incomplete_catalog_data_title") }
     static var incompleteCatalogDataBodyPHEV: String { string("incomplete_catalog_data_body_phev") }
     static var incompleteCatalogDataBodyPHEVEnergyOnly: String { string("incomplete_catalog_data_body_phev_energy_only") }
+    static var incompleteCatalogDataBodyPHEVFuelOnly: String { string("incomplete_catalog_data_body_phev_fuel_only") }
+    static var incompleteCatalogDataBodyPHEVRangeOnly: String { string("incomplete_catalog_data_body_phev_range_only") }
     static var incompleteCatalogDataBodyBEV: String { string("incomplete_catalog_data_body_bev") }
+    static func incompleteCatalogRangeEstimateHint(_ km: Int) -> String {
+        format("incomplete_catalog_range_estimate_hint", km)
+    }
     static var incompleteCatalogFuelField: String { string("incomplete_catalog_fuel_field") }
     static var incompleteCatalogEnergyField: String { string("incomplete_catalog_energy_field") }
     static var incompleteCatalogRangeField: String { string("incomplete_catalog_range_field") }
@@ -706,6 +713,7 @@ enum L10n {
     static var validationStickerEnergyRange: String { string("validation_sticker_energy_range") }
     static func yearlyKmValue(_ km: Int) -> String { format("yearly_km_value", km) }
     static var phevBlendReason: String { string("phev_blend_reason") }
+    static var phevRangeEstimateNote: String { string("phev_range_estimate_note") }
     static var catalogLowConfidenceNote: String { string("catalog_low_confidence_note") }
     static func catalogQualityScore(_ score: Int) -> String { format("catalog_quality_score_format", score) }
     static var insuranceIncludedReason: String { string("insurance_included_reason") }

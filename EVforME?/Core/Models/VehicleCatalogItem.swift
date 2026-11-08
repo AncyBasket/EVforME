@@ -232,6 +232,9 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
     var hasIncompleteCatalogData: Bool { catalogDataIncomplete == true }
 
     /// Campi di calcolo ancora assenti (da `missingCalcFields` o euristica sui valori usabili).
+    ///
+    /// Per il verdetto PHEV servono CS, CD non ponderato e autonomia elettrica catalogo.
+    /// `batteryKWh` da solo non sblocca il calcolo (la derivazione batteria÷consumo è solo stima).
     var resolvedMissingCalcFields: [String] {
         if let missingCalcFields { return missingCalcFields }
         var miss: [String] = []
@@ -241,11 +244,29 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         if usableChargeDepletingEnergyKWhPerKm == nil, powertrain == .phev || powertrain == .ev {
             miss.append("energyConsumptionKWhPerKm")
         }
-        if powertrain == .phev {
-            if wltpRangeKm == nil { miss.append("wltpRangeKm") }
-            if batteryKWh == nil { miss.append("batteryKWh") }
+        if powertrain == .phev, catalogPHEVElectricRangeKm == nil {
+            miss.append("wltpRangeKm")
         }
         return miss
+    }
+
+    /// Autonomia elettrica PHEV da catalogo (WLTP). Mai fallback convenzionale.
+    var catalogPHEVElectricRangeKm: Double? {
+        guard powertrain == .phev, let range = wltpRangeKm, range > 0 else { return nil }
+        return Double(range)
+    }
+
+    /// Stima intermedia batteria ÷ consumo charge-depleting (non ponderato).
+    /// Solo etichetta/UI: non è autonomia ufficiale e non sblocca il verdetto.
+    var estimatedPHEVElectricRangeKm: Double? {
+        guard powertrain == .phev else { return nil }
+        if catalogPHEVElectricRangeKm != nil { return nil }
+        guard let battery = batteryKWh, battery > 0,
+              let consumption = usableChargeDepletingEnergyKWhPerKm, consumption > 0 else {
+            return nil
+        }
+        let derived = battery / consumption
+        return derived > 0 ? derived : nil
     }
 
     /// Fonte ufficiale per un campo catalogo, se presente.
@@ -279,17 +300,25 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         return resolvedEnergyKWhPerKm
     }
 
-    /// Quota km elettrici stimata per PHEV (0…1).
+    /// Quota km elettrici stimata per PHEV (0…1), oppure `nil` se manca l’autonomia.
     ///
-    /// `share = clamp(autonomiaEV × 0.8 × giorniRicarica / kmAnnui, 0.1, 0.6)`.
-    /// Tetto 0,6 senza dati utente (ICCT). Con ricarica a casa ≈ quotidiana; senza, ~settimanale.
-    func phevElectricKmShare(hasHomeCharging: Bool, yearlyKm: Double = 15_000) -> Double {
+    /// `share = min(0.6, autonomiaEV × 0.8 × giorniRicarica / kmAnnui)`.
+    /// Nessun fallback a 50 km e nessun minimo artificiale al 10%: senza range esplicito
+    /// (catalogo o override utente) la quota non è calcolabile.
+    /// Tetto 0,6 (ICCT) quando i dati ci sono. Con ricarica a casa ≈ quotidiana; senza, ~settimanale.
+    func phevElectricKmShare(
+        hasHomeCharging: Bool,
+        yearlyKm: Double = 15_000,
+        electricRangeKm: Double? = nil
+    ) -> Double? {
         guard powertrain == .phev else { return powertrain == .ev ? 1 : 0 }
-        let electricRangeKm = Double(wltpRangeKm ?? 50)
+        guard let range = electricRangeKm ?? catalogPHEVElectricRangeKm, range > 0 else {
+            return nil
+        }
         let chargeDays = hasHomeCharging ? 300.0 : 52.0
         let km = max(1.0, yearlyKm)
-        let raw = electricRangeKm * 0.8 * chargeDays / km
-        return min(0.6, max(0.1, raw))
+        let raw = range * 0.8 * chargeDays / km
+        return min(0.6, max(0.0, raw))
     }
 
     /// Carburante effettivo per prezzi MIMIT e etichette picker.

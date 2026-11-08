@@ -448,8 +448,13 @@ final class EVforME_UITests: XCTestCase {
         if app.keyboards.buttons["Done"].waitForExistence(timeout: 1) {
             app.keyboards.buttons["Done"].tap()
         } else {
-            // Decimal pad has no Done — dismiss by tapping the incomplete card title.
-            app.descendants(matching: .any)["incomplete_catalog_data_title"].tap()
+            // Decimal pad has no Done. After a valid kWh the incomplete card may disappear —
+            // dismiss keyboard without requiring the title to still exist.
+            if app.descendants(matching: .any)["incomplete_catalog_data_title"].waitForExistence(timeout: 1) {
+                app.descendants(matching: .any)["incomplete_catalog_data_title"].tap()
+            } else {
+                app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.15)).tap()
+            }
         }
 
         let tellMeEN = app.buttons["Tell me the truth"]
@@ -498,6 +503,7 @@ final class EVforME_UITests: XCTestCase {
         XCTAssertTrue(
             app.descendants(matching: .any)["incomplete_catalog_fuel_field"].exists
                 || app.descendants(matching: .any)["incomplete_catalog_energy_field"].exists
+                || app.descendants(matching: .any)["incomplete_catalog_range_field"].exists
                 || app.staticTexts.matching(
                     NSPredicate(format: "label CONTAINS[c] %@", "batteria scarica")
                 ).firstMatch.exists
@@ -507,7 +513,7 @@ final class EVforME_UITests: XCTestCase {
                 || app.staticTexts.matching(
                     NSPredicate(format: "label CONTAINS[c] %@", "kWh/100")
                 ).firstMatch.exists,
-            "Must show fuel and/or energy entry fields"
+            "Must show fuel, energy, and/or range entry fields"
         )
 
         let tellMeEN = app.buttons["Tell me the truth"]

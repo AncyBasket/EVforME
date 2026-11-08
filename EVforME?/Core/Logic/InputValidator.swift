@@ -208,6 +208,13 @@ struct InputValidator {
                                 : L10n.validationMissingEnergyConsumption
                         )
                     }
+                    if let raw = input.sourceElectricRangeOverrideKm {
+                        if raw <= 0 || !raw.isFinite {
+                            errors.append(L10n.validationElectricRangeInvalid)
+                        }
+                    } else if source.catalogPHEVElectricRangeKm == nil {
+                        errors.append(L10n.validationIncompleteCatalogEnterRange)
+                    }
                 }
             } else {
                 errors.append(L10n.validationUnknownSourceVehicle)
@@ -237,6 +244,13 @@ struct InputValidator {
                         )
                     } else if let liters, liters * 100.0 < 3.0 {
                         errors.append(L10n.validationPHEVFuelTooLowForCalc)
+                    }
+                    if let raw = input.targetElectricRangeOverrideKm {
+                        if raw <= 0 || !raw.isFinite {
+                            errors.append(L10n.validationElectricRangeInvalid)
+                        }
+                    } else if target.catalogPHEVElectricRangeKm == nil {
+                        errors.append(L10n.validationIncompleteCatalogEnterRange)
                     }
                 }
             } else {

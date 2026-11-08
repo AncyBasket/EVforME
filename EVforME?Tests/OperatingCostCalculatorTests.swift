@@ -332,7 +332,7 @@ final class OperatingCostCalculatorTests: XCTestCase {
         XCTAssertGreaterThan(agePrice, 0)
     }
 
-    func testPHEVShare_ClampedAndDependsOnHomeCharging() {
+    func testPHEVShare_ClampedAndDependsOnHomeCharging() throws {
         let phev = VehicleCatalogItem(
             id: "test-phev",
             brand: "Test",
@@ -351,12 +351,12 @@ final class OperatingCostCalculatorTests: XCTestCase {
             wltpConsumptionKWh100km: 18,
             fuelKind: .petrol
         )
-        let home = phev.phevElectricKmShare(hasHomeCharging: true, yearlyKm: 15_000)
-        let publicOnly = phev.phevElectricKmShare(hasHomeCharging: false, yearlyKm: 15_000)
+        let home = try XCTUnwrap(phev.phevElectricKmShare(hasHomeCharging: true, yearlyKm: 15_000))
+        let publicOnly = try XCTUnwrap(phev.phevElectricKmShare(hasHomeCharging: false, yearlyKm: 15_000))
         XCTAssertGreaterThan(home, publicOnly)
-        XCTAssertGreaterThanOrEqual(home, 0.1)
+        XCTAssertGreaterThan(home, 0)
         XCTAssertLessThanOrEqual(home, 0.6)
-        XCTAssertGreaterThanOrEqual(publicOnly, 0.1)
+        XCTAssertGreaterThan(publicOnly, 0)
         XCTAssertLessThanOrEqual(publicOnly, 0.6)
         // Autonomia alta + ricarica casa non deve superare il tetto ICCT 0,6.
         let longRange = VehicleCatalogItem(
@@ -377,7 +377,37 @@ final class OperatingCostCalculatorTests: XCTestCase {
             wltpConsumptionKWh100km: 16,
             fuelKind: .petrol
         )
-        XCTAssertEqual(longRange.phevElectricKmShare(hasHomeCharging: true, yearlyKm: 10_000), 0.6, accuracy: 0.001)
+        XCTAssertEqual(
+            try XCTUnwrap(longRange.phevElectricKmShare(hasHomeCharging: true, yearlyKm: 10_000)),
+            0.6,
+            accuracy: 0.001
+        )
+        // Senza autonomia catalogo: nessuna quota artificiale.
+        let noRange = VehicleCatalogItem(
+            id: "test-phev-norange",
+            brand: "Test",
+            model: "PHEV",
+            year: 2024,
+            powertrain: .phev,
+            lengthM: 4.3,
+            widthM: 1.8,
+            heightM: 1.5,
+            fuelConsumptionLPerKm: 0.05,
+            energyConsumptionKWhPerKm: 0.18,
+            maintenancePerYear: 300,
+            taxesPerYear: 150,
+            imageURL: nil,
+            batteryKWh: 14,
+            wltpRangeKm: nil,
+            fuelKind: .petrol
+        )
+        XCTAssertNil(noRange.phevElectricKmShare(hasHomeCharging: true, yearlyKm: 15_000))
+        XCTAssertNil(noRange.phevElectricKmShare(hasHomeCharging: true, yearlyKm: 15_000, electricRangeKm: nil))
+        XCTAssertEqual(
+            try XCTUnwrap(noRange.phevElectricKmShare(hasHomeCharging: true, yearlyKm: 15_000, electricRangeKm: 60)),
+            try XCTUnwrap(phev.phevElectricKmShare(hasHomeCharging: true, yearlyKm: 15_000)),
+            accuracy: 0.001
+        )
     }
 
     /// 15k km, IT, misto, casa 85%, Model 3 2026 — assert sui totali (bundle MIMIT/Eurostat).

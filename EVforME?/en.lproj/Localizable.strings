@@ -522,16 +522,22 @@
 "validation_missing_energy_consumption" = "Electric consumption is missing for the selected vehicle.";
 "validation_incomplete_catalog_enter_fuel" = "Incomplete data: enter charge-sustaining fuel use (L/100 km).";
 "validation_incomplete_catalog_enter_energy" = "Incomplete data: enter electric consumption (kWh/100 km).";
+"validation_incomplete_catalog_enter_range" = "Incomplete data: enter electric range (km).";
+"validation_electric_range_invalid" = "Electric range must be a number greater than zero.";
 "validation_phev_fuel_too_low_for_calc" = "EEA weighted fuel (< 3 L/100) cannot be used in calculations: enter charge-sustaining fuel use.";
 "incomplete_catalog_data_title" = "Incomplete data";
-"incomplete_catalog_data_body_phev" = "For this plug-in hybrid we lack official same-year charge-sustaining fuel and/or charge-depleting kWh. Enter them here — we will not compute a verdict without them (EEA weighted figures are not enough).";
+"incomplete_catalog_data_body_phev" = "For this plug-in hybrid one or more calculation fields are missing (charge-sustaining fuel, unweighted electric kWh, and/or electric range). Enter only the missing fields — we will not compute a verdict without them.";
 "incomplete_catalog_data_body_phev_energy_only" = "We already have the official figures available; the unweighted electric consumption is still missing for the calculation. Enter it here — we will not compute a verdict without it.";
+"incomplete_catalog_data_body_phev_fuel_only" = "We already have the official figures available; charge-sustaining fuel use is still missing for the calculation. Enter it here — we will not compute a verdict without it.";
+"incomplete_catalog_data_body_phev_range_only" = "We already have consumption figures; electric range is still missing to estimate the electric-km share. Enter it here — we will not compute a verdict without it (no silent estimates).";
 "incomplete_catalog_data_body_bev" = "For this EV we lack official same-year kWh/100. Enter it here — we will not invent a verdict without it.";
 "incomplete_catalog_fuel_field" = "Fuel with empty battery (L/100 km)";
 "incomplete_catalog_energy_field" = "Electric consumption (kWh/100 km)";
 "incomplete_catalog_range_field" = "WLTP electric range (km)";
 "incomplete_catalog_battery_field" = "Battery (kWh)";
 "incomplete_catalog_weighted_energy_honesty" = "The manufacturer only publishes weighted electric consumption, which is not suitable for the calculation. Enter yours (from the car app or the charge point).";
+"incomplete_catalog_range_estimate_hint" = "Intermediate estimate from battery/consumption (not official, does not unlock the verdict): about %d km.";
+"phev_range_estimate_note" = "PHEV range estimated from battery and consumption: not an official catalog figure.";
 "validation_unknown_source_vehicle" = "Current vehicle not found in the catalog.";
 "validation_unknown_target_vehicle" = "Electrified vehicle not found in the catalog.";
 
