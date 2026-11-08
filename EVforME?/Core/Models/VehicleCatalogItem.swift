@@ -47,6 +47,31 @@ enum FuelKind: String, Codable {
     case unknown
 }
 
+/// Evidence snapshot for the ordinal catalog data-quality / coverage policy.
+/// Not a documentary verification certificate.
+struct ConfidenceEvidence: Codable, Equatable {
+    let policyVersion: Int?
+    let scoreKind: String?
+    let reasonCode: String?
+    let sourceClass: String?
+    let sourceYear: Int?
+    let modelYear: Int?
+    let yearRelation: String?
+    let variantMatch: String?
+    let sampleSize: Int?
+    let provisional: Bool?
+    let requiredCalculationFields: [String]?
+    let missingFields: [String]?
+    let provenanceUnverifiedFields: [String]?
+    let verifiedFields: [String]?
+    let rejectedProvenance: [String]?
+    let fieldSourceCoveredFields: [String]?
+    let fieldSourceDatedFields: [String]?
+    let fieldSourceCoverage: Double?
+    let evidenceScope: String?
+    let documentaryVerification: String?
+}
+
 extension Powertrain {
     /// Etichetta IT per picker (benzina/diesel/GPL/metano/ibrida).
     func catalogFuelLabel(fuelKind: FuelKind) -> String {
@@ -90,7 +115,11 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
     let market: String?
     let sourceName: String?
     let sourceUpdatedAt: String?
+    /// Ordinal data-quality / coverage index (0–1), not a calibrated probability.
     let confidenceScore: Double?
+    let confidenceScoreLegacy: Double?
+    let confidencePolicyVersion: Int?
+    let confidenceEvidence: ConfidenceEvidence?
     /// `petrol` / `diesel` se noto; `nil` → `resolvedFuelKind` euristica.
     let fuelKind: FuelKind?
     /// Potenza kW da EEA (`ep__KW_`, spesso picco). Solo informativa — il bollo EV usa P.2 a libretto dall’utente.
@@ -144,7 +173,7 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
     var qualitySubtitle: String? {
         var parts: [String] = []
         if let confidenceScore {
-            parts.append(String(format: "%.0f%%", confidenceScore * 100))
+            parts.append(L10n.catalogQualityScore(Int((confidenceScore * 100).rounded())))
         }
         if let sourceName, !sourceName.isEmpty {
             parts.append(sourceName)
@@ -382,6 +411,9 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         sourceName: String? = nil,
         sourceUpdatedAt: String? = nil,
         confidenceScore: Double? = nil,
+        confidenceScoreLegacy: Double? = nil,
+        confidencePolicyVersion: Int? = nil,
+        confidenceEvidence: ConfidenceEvidence? = nil,
         fuelKind: FuelKind? = nil,
         powerKw: Double? = nil,
         energyIsWeighted: Bool? = nil,
@@ -421,6 +453,9 @@ struct VehicleCatalogItem: Codable, Identifiable, Equatable {
         self.sourceName = sourceName
         self.sourceUpdatedAt = sourceUpdatedAt
         self.confidenceScore = confidenceScore
+        self.confidenceScoreLegacy = confidenceScoreLegacy
+        self.confidencePolicyVersion = confidencePolicyVersion
+        self.confidenceEvidence = confidenceEvidence
         self.fuelKind = fuelKind
         self.powerKw = powerKw
         self.energyIsWeighted = energyIsWeighted

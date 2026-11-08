@@ -419,6 +419,8 @@
 "validation_sticker_energy_range" = "Il consumo sticker deve essere tra 8 e 40 kWh/100 km.";
 "yearly_km_value" = "%d km/anno";
 "phev_blend_reason" = "PHEV modellata come mix km elettrici + carburante (più elettrico con ricarica casa).";
+"catalog_low_confidence_note" = "Uno o più veicoli selezionati hanno un indice di qualità dati basso: verifica i consumi sulle schede ufficiali. L’indice misura copertura/qualità della provenienza, non una probabilità di correttezza.";
+"catalog_quality_score_format" = "Qualità dati %d/100";
 "insurance_included_reason" = "I costi annui includono assicurazione (stima): RC media IVASS, uguale per entrambe le auto (salvo override).";
 "tco_extras_title" = "Assicurazione e residuo";
 "tco_extras_closed" = "Stime semplificate oltre carburante e manutenzione.";
@@ -608,7 +610,7 @@
 "charging_map_open_settings" = "Apri Impostazioni";
 
 "how_we_calculate_title" = "Come calcoliamo";
-"how_we_calculate_intro" = "Stesse costanti e formule del simulatore: niente numeri inventati solo per questa schermata. Controlla fonti, confidenza e tariffe bollo per entrambe le auto scelte.";
+"how_we_calculate_intro" = "Stesse costanti e formule del simulatore: niente numeri inventati solo per questa schermata. Controlla fonti, qualità dati e tariffe bollo per entrambe le auto scelte.";
 "how_we_calculate_model_estimates_note" = "Moltiplicatori area/tragitto, tassi di svalutazione e buffer di manutenzione (minimi annui) sono stime del modello, non tariffe ufficiali.";
 "how_we_calculate_entry_title" = "Come calcoliamo";
 "how_we_calculate_entry_subtitle" = "Fonti dei consumi, CO₂→L/100, bollo e prezzi — stessi numeri del verdetto.";
@@ -624,7 +626,7 @@
 "how_we_calculate_source_category_estimate" = "Stima";
 "how_we_calculate_source_category_unknown" = "Non indicata";
 "how_we_calculate_open_source" = "Apri fonte";
-"how_we_calculate_confidence_format" = "Confidenza: %@";
+"how_we_calculate_confidence_format" = "Qualità dati: %@";
 "how_we_calculate_confidence_high" = "Alta";
 "how_we_calculate_confidence_medium" = "Media";
 "how_we_calculate_confidence_low" = "Bassa";
