@@ -182,6 +182,10 @@ struct UserInput {
     var sourceEnergyOverrideKWhPer100Km: Double?
     /// Override benzina CS quando la PHEV è il target (L/100).
     var targetFuelConsumptionOverrideLPer100Km: Double?
+    /// Override autonomia elettrica PHEV (km) quando è l’auto attuale. `nil` = usa catalogo.
+    var sourceElectricRangeOverrideKm: Double?
+    /// Override autonomia elettrica PHEV (km) quando è il target. `nil` = usa catalogo.
+    var targetElectricRangeOverrideKm: Double?
     /// Configurazione ricarica personalizzata
     var chargingConfiguration: ChargingConfiguration
     /// Paese per tariffe manutenzione / contesto costi (ISO → AppMarket).
@@ -220,6 +224,8 @@ struct UserInput {
         targetEnergyOverrideKWhPer100Km: Double? = nil,
         sourceEnergyOverrideKWhPer100Km: Double? = nil,
         targetFuelConsumptionOverrideLPer100Km: Double? = nil,
+        sourceElectricRangeOverrideKm: Double? = nil,
+        targetElectricRangeOverrideKm: Double? = nil,
         chargingConfiguration: ChargingConfiguration = ChargingConfiguration(),
         market: AppMarket = AppMarket.fromDeviceLocale(),
         annualInsuranceOverrideEUR: Double? = nil,
@@ -248,6 +254,8 @@ struct UserInput {
         self.targetEnergyOverrideKWhPer100Km = targetEnergyOverrideKWhPer100Km
         self.sourceEnergyOverrideKWhPer100Km = sourceEnergyOverrideKWhPer100Km
         self.targetFuelConsumptionOverrideLPer100Km = targetFuelConsumptionOverrideLPer100Km
+        self.sourceElectricRangeOverrideKm = sourceElectricRangeOverrideKm
+        self.targetElectricRangeOverrideKm = targetElectricRangeOverrideKm
         self.chargingConfiguration = chargingConfiguration
         self.market = market
         self.annualInsuranceOverrideEUR = annualInsuranceOverrideEUR

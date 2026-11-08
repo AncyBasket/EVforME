@@ -8,38 +8,55 @@
 import Foundation
 
 enum OperatingCostCalculator {
-    /// €/km di gestione. `nil` se i km sono 0 / quasi zero (niente divisione per 1).
+    /// €/km di gestione. `nil` se km insufficienti o dati di calcolo mancanti/invalidi
+    /// (niente energia “gratis” / totale parziale spacciato per completo).
     static func operatingCostPerKm(
         vehicle: VehicleCatalogItem,
         input: UserInput,
         asSource: Bool
     ) -> Double? {
         guard input.dailyKm >= 100 else { return nil }
-        let yearly = operatingCostPerYear(vehicle: vehicle, input: input, asSource: asSource)
+        guard let yearly = operatingCostPerYear(vehicle: vehicle, input: input, asSource: asSource) else {
+            return nil
+        }
         return yearly / Double(input.dailyKm)
     }
 
-    /// €/anno di gestione (stessa base del verdetto).
+    /// €/anno di gestione (stessa base del verdetto). `nil` se i dati necessari non sono validi.
     static func operatingCostPerYear(
         vehicle: VehicleCatalogItem,
         input: UserInput,
         asSource: Bool
-    ) -> Double {
+    ) -> Double? {
+        guard VehicleCalcDataGate.hasSufficientCalcData(
+            vehicle: vehicle,
+            input: input,
+            asSource: asSource
+        ) else {
+            return nil
+        }
         let simInput = makeSimulationInput(from: input)
         let scenario = input.scenario
         let currentYear = Defaults.referenceCalendarYear
         let yearlyKm = max(0, Double(input.dailyKm))
+        let o = VehicleCalcDataGate.overrides(for: vehicle, input: input, asSource: asSource)
 
         let energy = EVSimulator().energyCostPerYear(
             vehicle: vehicle,
             input: simInput,
             scenario: scenario,
-            fuelOverrideLPerKm: asSource
-                ? simInput.iceFuelLPerKmOverride
-                : simInput.targetFuelLPerKmOverride,
-            energyOverrideKWhPerKm: asSource
-                ? simInput.sourceEnergyKWhPerKmOverride
-                : simInput.evKWhPerKmOverride,
+            fuelOverrideLPerKm: VehicleCalcDataGate.resolvedFuelLPerKm(
+                vehicle: vehicle,
+                overrideLPer100: o.fuelLPer100
+            ),
+            energyOverrideKWhPerKm: VehicleCalcDataGate.resolvedEnergyKWhPerKm(
+                vehicle: vehicle,
+                overrideKWhPer100: o.energyKWhPer100
+            ),
+            electricRangeKmOverride: VehicleCalcDataGate.resolvedElectricRangeKm(
+                vehicle: vehicle,
+                overrideKm: o.rangeKm
+            ),
             asSource: asSource
         )
 
@@ -164,10 +181,34 @@ enum OperatingCostCalculator {
     }
 
     static func makeSimulationInput(from input: UserInput) -> EVSimulationInput {
-        let iceOverride = input.sourceConsumptionOverrideLPer100Km.map { $0 / 100.0 }
-        let evOverride = input.targetEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
-        let sourceEnergyOverride = input.sourceEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
-        let targetFuelOverride = input.targetFuelConsumptionOverrideLPer100Km.map { $0 / 100.0 }
+        // Solo override che passano il gate condiviso: valori invalidi non entrano nei costi.
+        let catalog = VehicleCatalogService.shared
+        let source = catalog.vehicle(by: input.sourceVehicleId)
+        let target = catalog.vehicle(by: input.targetVehicleId)
+        let iceOverride = source.flatMap {
+            VehicleCalcDataGate.resolvedFuelLPerKm(
+                vehicle: $0,
+                overrideLPer100: input.sourceConsumptionOverrideLPer100Km
+            )
+        }
+        let evOverride = target.flatMap {
+            VehicleCalcDataGate.resolvedEnergyKWhPerKm(
+                vehicle: $0,
+                overrideKWhPer100: input.targetEnergyOverrideKWhPer100Km
+            )
+        }
+        let sourceEnergyOverride = source.flatMap {
+            VehicleCalcDataGate.resolvedEnergyKWhPerKm(
+                vehicle: $0,
+                overrideKWhPer100: input.sourceEnergyOverrideKWhPer100Km
+            )
+        }
+        let targetFuelOverride = target.flatMap {
+            VehicleCalcDataGate.resolvedFuelLPerKm(
+                vehicle: $0,
+                overrideLPer100: input.targetFuelConsumptionOverrideLPer100Km
+            )
+        }
         var sim = EVSimulationInput(
             yearlyKm: Double(input.dailyKm),
             years: input.ownershipYears,
@@ -183,6 +224,18 @@ enum OperatingCostCalculator {
             evKWhPerKmOverride: evOverride,
             sourceEnergyKWhPerKmOverride: sourceEnergyOverride,
             targetFuelLPerKmOverride: targetFuelOverride,
+            sourceElectricRangeKmOverride: source.flatMap {
+                VehicleCalcDataGate.resolvedElectricRangeKm(
+                    vehicle: $0,
+                    overrideKm: input.sourceElectricRangeOverrideKm
+                )
+            },
+            targetElectricRangeKmOverride: target.flatMap {
+                VehicleCalcDataGate.resolvedElectricRangeKm(
+                    vehicle: $0,
+                    overrideKm: input.targetElectricRangeOverrideKm
+                )
+            },
             chargingConfiguration: input.resolvedChargingConfiguration()
         )
         sim.petrolPricePerLiter = resolvePetrolPricePerLiter(for: input)

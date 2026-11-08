@@ -432,6 +432,8 @@ private struct CodableUserInput: Codable {
     let targetEnergyOverrideKWhPer100Km: Double?
     let sourceEnergyOverrideKWhPer100Km: Double?
     let targetFuelConsumptionOverrideLPer100Km: Double?
+    let sourceElectricRangeOverrideKm: Double?
+    let targetElectricRangeOverrideKm: Double?
     private var chargingConfigData: ChargingConfigData?
     let marketRaw: String?
     let annualInsuranceOverrideEUR: Double?
@@ -462,6 +464,8 @@ private struct CodableUserInput: Codable {
         case targetEnergyOverrideKWhPer100Km
         case sourceEnergyOverrideKWhPer100Km
         case targetFuelConsumptionOverrideLPer100Km
+        case sourceElectricRangeOverrideKm
+        case targetElectricRangeOverrideKm
         case chargingConfigData
         case marketRaw
         case annualInsuranceOverrideEUR
@@ -503,6 +507,8 @@ private struct CodableUserInput: Codable {
         targetEnergyOverrideKWhPer100Km = input.targetEnergyOverrideKWhPer100Km
         sourceEnergyOverrideKWhPer100Km = input.sourceEnergyOverrideKWhPer100Km
         targetFuelConsumptionOverrideLPer100Km = input.targetFuelConsumptionOverrideLPer100Km
+        sourceElectricRangeOverrideKm = input.sourceElectricRangeOverrideKm
+        targetElectricRangeOverrideKm = input.targetElectricRangeOverrideKm
         marketRaw = input.market.rawValue
         annualInsuranceOverrideEUR = input.annualInsuranceOverrideEUR
         includeKaskoTheft = input.includeKaskoTheft
@@ -549,6 +555,8 @@ private struct CodableUserInput: Codable {
         targetEnergyOverrideKWhPer100Km = try container.decodeIfPresent(Double.self, forKey: .targetEnergyOverrideKWhPer100Km)
         sourceEnergyOverrideKWhPer100Km = try container.decodeIfPresent(Double.self, forKey: .sourceEnergyOverrideKWhPer100Km)
         targetFuelConsumptionOverrideLPer100Km = try container.decodeIfPresent(Double.self, forKey: .targetFuelConsumptionOverrideLPer100Km)
+        sourceElectricRangeOverrideKm = try container.decodeIfPresent(Double.self, forKey: .sourceElectricRangeOverrideKm)
+        targetElectricRangeOverrideKm = try container.decodeIfPresent(Double.self, forKey: .targetElectricRangeOverrideKm)
         marketRaw = try container.decodeIfPresent(String.self, forKey: .marketRaw)
         annualInsuranceOverrideEUR = try container.decodeIfPresent(Double.self, forKey: .annualInsuranceOverrideEUR)
         includeKaskoTheft = try container.decodeIfPresent(Bool.self, forKey: .includeKaskoTheft) ?? false
@@ -583,6 +591,8 @@ private struct CodableUserInput: Codable {
         try container.encodeIfPresent(targetEnergyOverrideKWhPer100Km, forKey: .targetEnergyOverrideKWhPer100Km)
         try container.encodeIfPresent(sourceEnergyOverrideKWhPer100Km, forKey: .sourceEnergyOverrideKWhPer100Km)
         try container.encodeIfPresent(targetFuelConsumptionOverrideLPer100Km, forKey: .targetFuelConsumptionOverrideLPer100Km)
+        try container.encodeIfPresent(sourceElectricRangeOverrideKm, forKey: .sourceElectricRangeOverrideKm)
+        try container.encodeIfPresent(targetElectricRangeOverrideKm, forKey: .targetElectricRangeOverrideKm)
         try container.encodeIfPresent(chargingConfigData, forKey: .chargingConfigData)
         try container.encodeIfPresent(marketRaw, forKey: .marketRaw)
         try container.encodeIfPresent(annualInsuranceOverrideEUR, forKey: .annualInsuranceOverrideEUR)
@@ -637,6 +647,8 @@ private struct CodableUserInput: Codable {
             targetEnergyOverrideKWhPer100Km: targetEnergyOverrideKWhPer100Km,
             sourceEnergyOverrideKWhPer100Km: sourceEnergyOverrideKWhPer100Km,
             targetFuelConsumptionOverrideLPer100Km: targetFuelConsumptionOverrideLPer100Km,
+            sourceElectricRangeOverrideKm: sourceElectricRangeOverrideKm,
+            targetElectricRangeOverrideKm: targetElectricRangeOverrideKm,
             chargingConfiguration: chargingConfig,
             market: market,
             annualInsuranceOverrideEUR: annualInsuranceOverrideEUR,

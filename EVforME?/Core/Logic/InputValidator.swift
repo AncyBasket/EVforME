@@ -162,19 +162,6 @@ struct InputValidator {
             errors.append(message)
         }
 
-        if let ice = input.sourceConsumptionOverrideLPer100Km, (ice < 2 || ice > 25) {
-            errors.append(L10n.validationStickerFuelRange)
-        }
-        if let fuel = input.targetFuelConsumptionOverrideLPer100Km, (fuel < 2 || fuel > 25) {
-            errors.append(L10n.validationStickerFuelRange)
-        }
-        if let ev = input.targetEnergyOverrideKWhPer100Km, (ev < 8 || ev > 40) {
-            errors.append(L10n.validationStickerEnergyRange)
-        }
-        if let se = input.sourceEnergyOverrideKWhPer100Km, (se < 8 || se > 40) {
-            errors.append(L10n.validationStickerEnergyRange)
-        }
-
         if input.includeKaskoTheft {
             let kasko = input.annualKaskoEUR ?? 0
             if kasko <= 0 {
@@ -185,66 +172,78 @@ struct InputValidator {
         let catalog = VehicleCatalogService.shared
         if !input.sourceVehicleId.isEmpty {
             if let source = catalog.vehicle(by: input.sourceVehicleId) {
-                let iceOverride = input.sourceConsumptionOverrideLPer100Km.map { $0 / 100.0 }
-                let energyOverride = input.sourceEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
-                if source.powertrain == .ice || source.powertrain == .hev || source.powertrain == .phev {
-                    let liters = iceOverride ?? source.usableChargeSustainingFuelLPerKm
-                    if (liters ?? 0) <= 0 {
-                        errors.append(
-                            source.hasIncompleteCatalogData
-                                ? L10n.validationIncompleteCatalogEnterFuel
-                                : L10n.validationMissingFuelConsumption
-                        )
-                    } else if let liters, source.powertrain == .phev, liters * 100.0 < 3.0 {
-                        errors.append(L10n.validationPHEVFuelTooLowForCalc)
-                    }
-                }
-                if source.powertrain == .phev {
-                    let kWh = energyOverride ?? source.usableChargeDepletingEnergyKWhPerKm
-                    if (kWh ?? 0) <= 0 {
-                        errors.append(
-                            source.hasIncompleteCatalogData
-                                ? L10n.validationIncompleteCatalogEnterEnergy
-                                : L10n.validationMissingEnergyConsumption
-                        )
-                    }
-                }
+                appendCalcFieldErrors(
+                    to: &errors,
+                    vehicle: source,
+                    fuelOverrideLPer100: input.sourceConsumptionOverrideLPer100Km,
+                    energyOverrideKWhPer100: input.sourceEnergyOverrideKWhPer100Km,
+                    rangeOverrideKm: input.sourceElectricRangeOverrideKm
+                )
             } else {
                 errors.append(L10n.validationUnknownSourceVehicle)
             }
         }
         if !input.targetVehicleId.isEmpty {
             if let target = catalog.vehicle(by: input.targetVehicleId) {
-                let evOverride = input.targetEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
-                let fuelOverride = input.targetFuelConsumptionOverrideLPer100Km.map { $0 / 100.0 }
-                if target.powertrain == .ev || target.powertrain == .phev {
-                    let kWh = evOverride ?? target.usableChargeDepletingEnergyKWhPerKm
-                    if (kWh ?? 0) <= 0 {
-                        errors.append(
-                            target.hasIncompleteCatalogData
-                                ? L10n.validationIncompleteCatalogEnterEnergy
-                                : L10n.validationMissingEnergyConsumption
-                        )
-                    }
-                }
-                if target.powertrain == .phev {
-                    let liters = fuelOverride ?? target.usableChargeSustainingFuelLPerKm
-                    if (liters ?? 0) <= 0 {
-                        errors.append(
-                            target.hasIncompleteCatalogData
-                                ? L10n.validationIncompleteCatalogEnterFuel
-                                : L10n.validationMissingFuelConsumption
-                        )
-                    } else if let liters, liters * 100.0 < 3.0 {
-                        errors.append(L10n.validationPHEVFuelTooLowForCalc)
-                    }
-                }
+                appendCalcFieldErrors(
+                    to: &errors,
+                    vehicle: target,
+                    fuelOverrideLPer100: input.targetFuelConsumptionOverrideLPer100Km,
+                    energyOverrideKWhPer100: input.targetEnergyOverrideKWhPer100Km,
+                    rangeOverrideKm: input.targetElectricRangeOverrideKm
+                )
             } else {
                 errors.append(L10n.validationUnknownTargetVehicle)
             }
         }
         
         return errors
+    }
+
+    /// Errori di campo allineati a `VehicleCalcDataGate` (override invalido resta “mancante”).
+    private static func appendCalcFieldErrors(
+        to errors: inout [String],
+        vehicle: VehicleCatalogItem,
+        fuelOverrideLPer100: Double?,
+        energyOverrideKWhPer100: Double?,
+        rangeOverrideKm: Double?
+    ) {
+        if vehicle.powertrain == .ice || vehicle.powertrain == .hev || vehicle.powertrain == .phev {
+            if let raw = fuelOverrideLPer100, !VehicleCalcDataGate.isValidFuelLPer100(raw, powertrain: vehicle.powertrain) {
+                if vehicle.powertrain == .phev,
+                   raw.isFinite,
+                   raw > 0,
+                   raw < VehicleCalcDataGate.phevFuelLPer100Minimum {
+                    errors.append(L10n.validationPHEVFuelTooLowForCalc)
+                } else {
+                    errors.append(L10n.validationStickerFuelRange)
+                }
+            } else if VehicleCalcDataGate.needsFuel(vehicle: vehicle, overrideLPer100: fuelOverrideLPer100) {
+                errors.append(
+                    vehicle.hasIncompleteCatalogData
+                        ? L10n.validationIncompleteCatalogEnterFuel
+                        : L10n.validationMissingFuelConsumption
+                )
+            }
+        }
+        if vehicle.powertrain == .ev || vehicle.powertrain == .phev {
+            if let raw = energyOverrideKWhPer100, !VehicleCalcDataGate.isValidEnergyKWhPer100(raw) {
+                errors.append(L10n.validationStickerEnergyRange)
+            } else if VehicleCalcDataGate.needsEnergy(vehicle: vehicle, overrideKWhPer100: energyOverrideKWhPer100) {
+                errors.append(
+                    vehicle.hasIncompleteCatalogData
+                        ? L10n.validationIncompleteCatalogEnterEnergy
+                        : L10n.validationMissingEnergyConsumption
+                )
+            }
+        }
+        if vehicle.powertrain == .phev {
+            if let raw = rangeOverrideKm, !VehicleCalcDataGate.isValidElectricRangeKm(raw) {
+                errors.append(L10n.validationElectricRangeInvalid)
+            } else if VehicleCalcDataGate.needsRange(vehicle: vehicle, overrideKm: rangeOverrideKm) {
+                errors.append(L10n.validationIncompleteCatalogEnterRange)
+            }
+        }
     }
 }
 

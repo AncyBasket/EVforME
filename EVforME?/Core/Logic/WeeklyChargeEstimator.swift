@@ -2,15 +2,20 @@
 //  WeeklyChargeEstimator.swift
 //  EVforME?
 //
-//  Stima ricariche/settimana dall'autonomia dichiarata (WLTP o batteria÷consumo).
+//  Stima ricariche/settimana dall'autonomia dichiarata (catalogo / override).
 //  km per ricarica = autonomia esatta; quota PHEV = stessa del costo energia.
 //
 
 import Foundation
 
 enum WeeklyChargeEstimator {
-    /// Autonomia usabile per la stima: `wltpRangeKm`, altrimenti batteria ÷ consumo.
+    /// Autonomia usabile per la stima di verdetto: solo catalogo (o override passato dal caller).
+    /// Per PHEV non deriva da batteria÷consumo — quella resta stima etichettata altrove.
     static func declaredRangeKm(for vehicle: VehicleCatalogItem) -> Int? {
+        if vehicle.powertrain == .phev {
+            guard let range = vehicle.catalogPHEVElectricRangeKm, range > 0 else { return nil }
+            return Int(range.rounded())
+        }
         if let range = vehicle.wltpRangeKm, range > 0 {
             return range
         }
@@ -20,6 +25,12 @@ enum WeeklyChargeEstimator {
         }
         let derived = Int((battery / kwhPerKm).rounded())
         return derived > 0 ? derived : nil
+    }
+
+    /// Stima intermedia PHEV (batteria ÷ CD). Non è autonomia ufficiale e non sblocca il verdetto.
+    static func estimatedPHEVRangeKm(for vehicle: VehicleCatalogItem) -> Int? {
+        guard let range = vehicle.estimatedPHEVElectricRangeKm, range > 0 else { return nil }
+        return Int(range.rounded())
     }
 
     /// `nil` = EV/PHEV senza autonomia in catalogo (non inventare 300 km).

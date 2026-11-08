@@ -121,10 +121,10 @@ final class WeeklyChargeEstimatorTests: XCTestCase {
         XCTAssertEqual(charges, 0)
     }
 
-    func testWeeklyCharges_PHEV_UsesSameElectricShareAsCostModel() {
+    func testWeeklyCharges_PHEV_UsesSameElectricShareAsCostModel() throws {
         let phev = makeVehicle(powertrain: .phev, wltpRangeKm: 50, energyKWhPerKm: 0.18)
         let yearlyKm = 15_000.0
-        let share = phev.phevElectricKmShare(hasHomeCharging: true, yearlyKm: yearlyKm)
+        let share = try XCTUnwrap(phev.phevElectricKmShare(hasHomeCharging: true, yearlyKm: yearlyKm))
         XCTAssertGreaterThan(share, 0)
         XCTAssertLessThanOrEqual(share, 0.6)
 
@@ -139,7 +139,7 @@ final class WeeklyChargeEstimatorTests: XCTestCase {
         XCTAssertEqual(charges, expected)
 
         // Share home vs no-home can differ; charges must follow the same share as cost path.
-        let sharePublic = phev.phevElectricKmShare(hasHomeCharging: false, yearlyKm: yearlyKm)
+        let sharePublic = try XCTUnwrap(phev.phevElectricKmShare(hasHomeCharging: false, yearlyKm: yearlyKm))
         let chargesPublic = WeeklyChargeEstimator.weeklyCharges(
             yearlyKm: yearlyKm,
             powertrain: .phev,
@@ -148,6 +148,17 @@ final class WeeklyChargeEstimatorTests: XCTestCase {
         )
         let expectedPublic = max(1, Int(ceil((yearlyKm / 52.0) * sharePublic / 50.0)))
         XCTAssertEqual(chargesPublic, expectedPublic)
+    }
+
+    func testDeclaredRange_PHEV_DoesNotDeriveFromBattery() {
+        let phev = makeVehicle(
+            powertrain: .phev,
+            wltpRangeKm: nil,
+            batteryKWh: 18,
+            energyKWhPerKm: 0.18 // would be 100 km if derived
+        )
+        XCTAssertNil(WeeklyChargeEstimator.declaredRangeKm(for: phev))
+        XCTAssertEqual(WeeklyChargeEstimator.estimatedPHEVRangeKm(for: phev), 100)
     }
 
     func testChargingFearCopy_OneOrTwo_UsesFewTimes() {

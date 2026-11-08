@@ -24,6 +24,10 @@ struct EVSimulationInput {
     var sourceEnergyKWhPerKmOverride: Double? = nil
     /// L/km override PHEV CS quando la PHEV è il target.
     var targetFuelLPerKmOverride: Double? = nil
+    /// Override autonomia elettrica PHEV (km) — auto attuale.
+    var sourceElectricRangeKmOverride: Double? = nil
+    /// Override autonomia elettrica PHEV (km) — target.
+    var targetElectricRangeKmOverride: Double? = nil
     /// Configurazione ricarica personalizzata
     var chargingConfiguration: ChargingConfiguration = ChargingConfiguration()
     /// Prezzo benzina (€/L) per la quota termica delle PHEV (mai il carburante dell’auto attuale).
@@ -325,6 +329,7 @@ final class EVSimulator {
             scenario: scenario,
             fuelOverrideLPerKm: input.iceFuelLPerKmOverride,
             energyOverrideKWhPerKm: input.sourceEnergyKWhPerKmOverride,
+            electricRangeKmOverride: input.sourceElectricRangeKmOverride,
             asSource: true
         )
         let targetEnergy = energyCostPerYear(
@@ -333,6 +338,7 @@ final class EVSimulator {
             scenario: scenario,
             fuelOverrideLPerKm: input.targetFuelLPerKmOverride,
             energyOverrideKWhPerKm: input.evKWhPerKmOverride,
+            electricRangeKmOverride: input.targetElectricRangeKmOverride,
             asSource: false
         )
 
@@ -449,6 +455,7 @@ final class EVSimulator {
         scenario: Scenario,
         fuelOverrideLPerKm: Double?,
         energyOverrideKWhPerKm: Double?,
+        electricRangeKmOverride: Double? = nil,
         asSource: Bool
     ) -> Double {
         let yearlyKm = max(0, input.yearlyKm)
@@ -490,11 +497,14 @@ final class EVSimulator {
                 * elecMult
 
         case .phev:
-            let share = vehicle.phevElectricKmShare(
+            // Mai usare ponderato EEA / fuel < 3 L/100 / range inventato nei calcoli.
+            guard let share = vehicle.phevElectricKmShare(
                 hasHomeCharging: input.hasHomeCharging,
-                yearlyKm: yearlyKm
-            )
-            // Mai usare ponderato EEA / fuel < 3 L/100 nei calcoli.
+                yearlyKm: yearlyKm,
+                electricRangeKm: electricRangeKmOverride
+            ) else {
+                return 0
+            }
             guard let lPerKm = fuelOverrideLPerKm ?? vehicle.usableChargeSustainingFuelLPerKm,
                   lPerKm > 0 else {
                 return 0
@@ -550,18 +560,22 @@ final class EVSimulator {
             return nil
         }
 
-        let iceOverride = input.sourceConsumptionOverrideLPer100Km.map { $0 / 100.0 }
-        let sourceEnergyOverride = input.sourceEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
-        let evOverride = input.targetEnergyOverrideKWhPer100Km.map { $0 / 100.0 }
-        let targetFuelOverride = input.targetFuelConsumptionOverrideLPer100Km.map { $0 / 100.0 }
-        guard Self.hasUsableConsumption(
+        let sourceRangeOverride = VehicleCalcDataGate.resolvedElectricRangeKm(
             vehicle: sourceVehicle,
-            fuelOverrideLPerKm: iceOverride,
-            energyOverrideKWhPerKm: sourceEnergyOverride
-        ), Self.hasUsableConsumption(
+            overrideKm: input.sourceElectricRangeOverrideKm
+        )
+        let targetRangeOverride = VehicleCalcDataGate.resolvedElectricRangeKm(
             vehicle: targetVehicle,
-            fuelOverrideLPerKm: targetFuelOverride,
-            energyOverrideKWhPerKm: evOverride
+            overrideKm: input.targetElectricRangeOverrideKm
+        )
+        guard VehicleCalcDataGate.hasSufficientCalcData(
+            vehicle: sourceVehicle,
+            input: input,
+            asSource: true
+        ), VehicleCalcDataGate.hasSufficientCalcData(
+            vehicle: targetVehicle,
+            input: input,
+            asSource: false
         ) else {
             AppLogger.shared.warning("Missing consumption data for selected vehicles", category: .simulation)
             return nil
@@ -583,21 +597,33 @@ final class EVSimulator {
         
         let yearlyKm = Double(input.dailyKm)
         let electricShare: Double
+        let targetRangeForCharges: Int?
         switch targetVehicle.powertrain {
         case .phev:
-            electricShare = targetVehicle.phevElectricKmShare(
+            guard let share = targetVehicle.phevElectricKmShare(
                 hasHomeCharging: input.hasHomeCharging,
-                yearlyKm: yearlyKm
-            )
+                yearlyKm: yearlyKm,
+                electricRangeKm: targetRangeOverride
+            ) else {
+                return nil
+            }
+            electricShare = share
+            if let override = targetRangeOverride {
+                targetRangeForCharges = Int(override.rounded())
+            } else {
+                targetRangeForCharges = WeeklyChargeEstimator.declaredRangeKm(for: targetVehicle)
+            }
         case .ev:
             electricShare = 1.0
+            targetRangeForCharges = WeeklyChargeEstimator.declaredRangeKm(for: targetVehicle)
         case .ice, .hev:
             electricShare = 0
+            targetRangeForCharges = WeeklyChargeEstimator.declaredRangeKm(for: targetVehicle)
         }
         let weeklyCharges = WeeklyChargeEstimator.weeklyCharges(
             yearlyKm: yearlyKm,
             powertrain: targetVehicle.powertrain,
-            rangeKm: WeeklyChargeEstimator.declaredRangeKm(for: targetVehicle),
+            rangeKm: targetRangeForCharges,
             electricKmShare: electricShare
         )
         
@@ -722,7 +748,8 @@ final class EVSimulator {
     private static func hasUsableConsumption(
         vehicle: VehicleCatalogItem,
         fuelOverrideLPerKm: Double?,
-        energyOverrideKWhPerKm: Double?
+        energyOverrideKWhPerKm: Double?,
+        electricRangeKmOverride: Double? = nil
     ) -> Bool {
         switch vehicle.powertrain {
         case .ice, .hev:
@@ -737,7 +764,15 @@ final class EVSimulator {
             guard (lPerKm ?? 0) > 0, (kWhPerKm ?? 0) > 0 else { return false }
             // Fail-closed: fuel used in calc must be CS (≥3 L/100), never EEA weighted blend.
             if let l = lPerKm, l * 100.0 < 3.0 { return false }
-            return true
+            // Autonomia: catalogo o override utente — mai stima batteria÷consumo.
+            let range = electricRangeKmOverride ?? vehicle.catalogPHEVElectricRangeKm
+            return (range ?? 0) > 0
         }
+    }
+
+    /// Range utente valido (>0). Zero/negativo/non finito → assente.
+    static func validElectricRangeKm(_ raw: Double?) -> Double? {
+        guard let raw, raw.isFinite, raw > 0 else { return nil }
+        return raw
     }
 }
