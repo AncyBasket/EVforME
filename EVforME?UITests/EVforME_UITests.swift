@@ -441,9 +441,16 @@ final class EVforME_UITests: XCTestCase {
             "Must show honest note about weighted-only OEM kWh"
         )
 
-        // FormatStyle Double field often shows "0,0": doubleTap select-all then replace (proven path).
-        replaceZeroFormattedNumberField(energyField, with: "20.9")
-        dismissDecimalPadKeyboard(in: app, fallbackTitleId: "incomplete_catalog_data_title")
+        // it_IT FormatStyle rejects ASCII "20.9" (NumberFormatter → nil) and can leave AX "2,0".
+        // Enter with the locale decimal separator and assert the acquired value before simulate.
+        enterLocalizedFormattedNumber(energyField, value: 20.9, in: app)
+        commitFormattedNumberEntry(
+            energyField,
+            expected: 20.9,
+            in: app,
+            fallbackTitleId: "incomplete_catalog_data_title",
+            allowFieldDismissal: true
+        )
 
         let tellMeEN = app.buttons["Tell me the truth"]
         let tellMeIT = app.buttons["Dimmi la verità"]
@@ -483,13 +490,13 @@ final class EVforME_UITests: XCTestCase {
         let energyField = app.descendants(matching: .any)["incomplete_catalog_energy_field"]
         XCTAssertTrue(energyField.waitForExistence(timeout: 4), "Must ask for electric kWh")
 
-        // "0,0" → "1": doubleTap select-all works on the zero placeholder.
-        replaceZeroFormattedNumberField(energyField, with: "1")
-        dismissDecimalPadKeyboard(in: app, fallbackTitleId: nil)
-        assertFormattedNumberField(
+        enterLocalizedFormattedNumber(energyField, value: 1, in: app)
+        commitFormattedNumberEntry(
             energyField,
-            approximates: 1,
-            message: "Invalid energy entry must commit as 1 kWh/100"
+            expected: 1,
+            in: app,
+            fallbackTitleId: nil,
+            allowFieldDismissal: false
         )
 
         // Invalid positive value must NOT dismiss the energy field.
@@ -525,28 +532,15 @@ final class EVforME_UITests: XCTestCase {
             )
         }
 
-        // Regression: doubleTap alone on "1,0" left the caret at the start, so typeText("20.9")
-        // produced "20.91,0" → 2091 (outside 8…40) and the verdict stayed locked.
-        // Binding get returns `?? 0`, so backspace back to the zero placeholder, then use the
-        // proven doubleTap replace path.
-        resetFormattedNumberFieldToZeroPlaceholder(energyField)
-        replaceZeroFormattedNumberField(energyField, with: "20.9")
-        // Valid mid-range kWh dismisses the incomplete energy prompt (gate satisfied).
-        // Read AX while the field still exists; if it already vanished, that is the success signal
-        // (post-merge bug left "2091,0" and kept the field visible).
-        if energyField.waitForExistence(timeout: 1) {
-            assertFormattedNumberField(
-                energyField,
-                approximates: 20.9,
-                message: "Corrected energy must commit as 20.9 kWh/100, not a prepended mangling"
-            )
-            dismissDecimalPadKeyboard(in: app, fallbackTitleId: nil)
-        } else {
-            XCTAssertFalse(
-                app.descendants(matching: .any)["incomplete_catalog_energy_field"].exists,
-                "Valid 20.9 must either show 20.9 in the field or dismiss the energy prompt"
-            )
-        }
+        // Correct with locale decimals (not ASCII "20.9" → AX "2,0" under it_IT).
+        enterLocalizedFormattedNumber(energyField, value: 20.9, in: app)
+        commitFormattedNumberEntry(
+            energyField,
+            expected: 20.9,
+            in: app,
+            fallbackTitleId: nil,
+            allowFieldDismissal: true
+        )
 
         XCTAssertTrue(
             tellMeEN.waitForExistence(timeout: 3) || tellMeIT.waitForExistence(timeout: 1)
@@ -664,27 +658,129 @@ final class EVforME_UITests: XCTestCase {
         }
     }
 
-    /// FormatStyle `.number` + `Binding` get `?? 0` always redisplays a zero placeholder
-    /// ("0,0"). On that placeholder, doubleTap select-all + typeText is reliable (happy path).
+    /// Simulator is `it_IT`: FormatStyle `.number` uses `,` as decimal. ASCII `"20.9"` does not
+    /// parse (`NumberFormatter` → nil) and the field can commit a truncated AX value like `"2,0"`.
     @MainActor
-    private func replaceZeroFormattedNumberField(_ field: XCUIElement, with text: String) {
-        XCTAssertTrue(field.waitForExistence(timeout: 3), "Number field must exist before typing")
-        field.tap()
-        field.doubleTap()
-        field.typeText(text)
+    private func localizedDecimalTypeText(for value: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.numberStyle = .decimal
+        formatter.usesGroupingSeparator = false
+        let isWhole = value.rounded() == value
+        formatter.minimumFractionDigits = isWhole ? 0 : 1
+        formatter.maximumFractionDigits = 2
+        return formatter.string(from: NSNumber(value: value)) ?? "\(value)"
     }
 
-    /// Backspace a non-zero FormatStyle value until the binding falls back to the zero
-    /// placeholder. Needed because doubleTap on "1,0" does not select-all reliably —
-    /// typeText("20.9") then prepends and commits 2091.
     @MainActor
-    private func resetFormattedNumberFieldToZeroPlaceholder(_ field: XCUIElement) {
-        XCTAssertTrue(field.waitForExistence(timeout: 3), "Number field must exist before reset")
-        field.tap()
+    private func parseFormattedNumberAXValue(_ raw: String) -> Double? {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.numberStyle = .decimal
+        formatter.usesGroupingSeparator = true
+        if let number = formatter.number(from: raw) {
+            return number.doubleValue
+        }
+        // Fallback for mixed separators in AX dumps.
+        let normalized = raw
+            .replacingOccurrences(of: " ", with: "")
+            .replacingOccurrences(of: ",", with: ".")
+        return Double(normalized)
+    }
+
+    /// Clear via Select All (long-press) or trailing backspace — not a blind doubleTap-on-zero —
+    /// then type a locale-correct decimal string.
+    @MainActor
+    private func enterLocalizedFormattedNumber(
+        _ field: XCUIElement,
+        value: Double,
+        in app: XCUIApplication
+    ) {
+        XCTAssertTrue(field.waitForExistence(timeout: 3), "Number field must exist before typing")
+        let typed = localizedDecimalTypeText(for: value)
+        var lastAX = ""
+        for _ in 0..<3 {
+            guard field.exists else {
+                XCTFail("Energy field missing before typing \(value)")
+                return
+            }
+            field.tap()
+            clearFormattedNumberField(field, in: app)
+            field.typeText(typed)
+            // Valid mid-range kWh dismisses the incomplete prompt on commit — check exists
+            // before AX value, or snapshot queries throw "No matches found".
+            if !field.exists {
+                if (8.0...40.0).contains(value) { return }
+                XCTFail("Energy field vanished after typing \(typed), but \(value) is outside 8…40")
+                return
+            }
+            lastAX = (field.value as? String) ?? ""
+            if let parsed = parseFormattedNumberAXValue(lastAX), abs(parsed - value) <= 0.05 {
+                return
+            }
+        }
+        XCTFail(
+            "Failed to enter \(value) as '\(typed)' under \(Locale.current.identifier); last AX='\(lastAX)'"
+        )
+    }
+
+    @MainActor
+    private func clearFormattedNumberField(_ field: XCUIElement, in app: XCUIApplication) {
+        field.press(forDuration: 1.0)
+        let selectAll = app.menuItems["Select All"]
+        if selectAll.waitForExistence(timeout: 1.2) {
+            selectAll.tap()
+            field.typeText(XCUIKeyboardKey.delete.rawValue)
+            return
+        }
+        // Trailing caret + backspace until AX parses as ~0 (binding redisplays "0,0").
         field.coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.5)).tap()
-        let current = (field.value as? String) ?? ""
-        let deleteCount = max(current.count + 4, 8)
-        field.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: deleteCount))
+        for _ in 0..<12 {
+            guard field.exists else { return }
+            let raw = (field.value as? String) ?? ""
+            if let parsed = parseFormattedNumberAXValue(raw), abs(parsed) <= 0.05 {
+                break
+            }
+            field.typeText(XCUIKeyboardKey.delete.rawValue)
+        }
+        guard field.exists else { return }
+        // Must select the zero placeholder before typing, or digits prepend.
+        field.press(forDuration: 1.0)
+        if selectAll.waitForExistence(timeout: 1.0) {
+            selectAll.tap()
+        } else {
+            // Last resort only after clear, always followed by acquired-value verification.
+            field.doubleTap()
+        }
+    }
+
+    /// Dismiss the decimal pad and confirm the acquired value (or prompt dismissal for valid mid-range).
+    @MainActor
+    private func commitFormattedNumberEntry(
+        _ field: XCUIElement,
+        expected: Double,
+        in app: XCUIApplication,
+        fallbackTitleId: String?,
+        allowFieldDismissal: Bool
+    ) {
+        dismissDecimalPadKeyboard(in: app, fallbackTitleId: fallbackTitleId)
+        let stillThere = field.waitForExistence(timeout: 1)
+        if stillThere {
+            assertFormattedNumberField(
+                field,
+                approximates: expected,
+                message: "Acquired energy must be \(expected) kWh/100 (locale-aware entry)"
+            )
+            return
+        }
+        XCTAssertTrue(
+            allowFieldDismissal,
+            "Energy field vanished after entering \(expected), but dismissal was not allowed"
+        )
+        XCTAssertFalse(
+            app.descendants(matching: .any)["incomplete_catalog_energy_field"].exists,
+            "Valid \(expected) kWh/100 should dismiss the energy prompt once acquired"
+        )
     }
 
     @MainActor
@@ -710,10 +806,7 @@ final class EVforME_UITests: XCTestCase {
         message: String
     ) {
         let raw = (field.value as? String) ?? ""
-        let normalized = raw
-            .replacingOccurrences(of: " ", with: "")
-            .replacingOccurrences(of: ",", with: ".")
-        let parsed = Double(normalized)
+        let parsed = parseFormattedNumberAXValue(raw)
         XCTAssertEqual(
             parsed ?? -1,
             expected,
