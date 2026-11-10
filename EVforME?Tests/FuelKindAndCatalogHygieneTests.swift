@@ -985,16 +985,15 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             XCTAssertEqual(v?.powertrain, .phev, id)
             XCTAssertEqual(v?.catalogDataIncomplete, true, id)
         }
-        // Kuga 2023 completed via identical EEA homologation copy from MY2024 OEM DE.
-        let kuga23 = VehicleCatalogService.shared.vehicle(by: "ford-kuga-phev-2023")
-        XCTAssertNotNil(kuga23)
-        XCTAssertEqual(kuga23?.powertrain, .phev)
-        XCTAssertEqual(kuga23?.catalogDataIncomplete, false)
-        XCTAssertEqual(kuga23?.energyIsWeighted, false)
-        XCTAssertGreaterThanOrEqual((kuga23?.fuelConsumptionLPerKm ?? 0) * 100, 3.0)
-        let kugaSrc = (kuga23?.sourceName ?? "").lowercased()
-        XCTAssertTrue(kugaSrc.contains("stessa omologazione eea"))
-        XCTAssertTrue(kugaSrc.contains(".pdf") || kugaSrc.contains("technische"))
+        // Kuga 2023/2024: continuous undated Technische_Daten PDF is not a valid
+        // pure-CD source (wave2 review) — remain incomplete until a dated MY doc exists.
+        for id in ["ford-kuga-phev-2023", "ford-kuga-phev-2024"] {
+            let kuga = VehicleCatalogService.shared.vehicle(by: id)
+            XCTAssertNotNil(kuga, id)
+            XCTAssertEqual(kuga?.powertrain, .phev, id)
+            XCTAssertEqual(kuga?.catalogDataIncomplete, true, id)
+            XCTAssertNil(kuga?.usableChargeDepletingEnergyKWhPerKm, id)
+        }
     }
 
     func testCatalog_NoWeightedEnergyUsedInCalcFields() {

@@ -2,7 +2,7 @@
 //  PHEVWave2OfficialSourceTests.swift
 //  EVforME?Tests
 //
-//  Regression for PHEV official-source rules (wave2 batch1).
+//  Regression for PHEV official-source rules (wave2 batch1, review-corrected).
 //
 
 import XCTest
@@ -38,38 +38,47 @@ final class PHEVWave2OfficialSourceTests: XCTestCase {
             catalogDataIncomplete: false,
             missingCalcFields: ["energyConsumptionKWhPerKm"]
         )
-        XCTAssertFalse(
-            incomplete.resolvedMissingCalcFields.isEmpty,
-            "Missing CD must surface in resolvedMissingCalcFields"
-        )
+        XCTAssertFalse(incomplete.resolvedMissingCalcFields.isEmpty)
         XCTAssertTrue(
             incomplete.hasIncompleteCatalogData == false
-                && !incomplete.resolvedMissingCalcFields.isEmpty,
-            "Probe: catalogDataIncomplete=false with missing fields must be detectable"
+                && !incomplete.resolvedMissingCalcFields.isEmpty
         )
     }
 
-    func testFieldSourceDateRequiredForPastModelYearOfficialFill() throws {
-        let kuga = try XCTUnwrap(
-            VehicleCatalogService.shared.vehicle(by: "ford-kuga-phev-2022"),
-            "Kuga 2022 must exist after wave2 batch1"
-        )
+    func testKuga2022RemainsIncompleteWithoutDatedMY22Source() throws {
+        let kuga = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: "ford-kuga-phev-2022"))
         XCTAssertEqual(kuga.year, 2022)
-        XCTAssertFalse(kuga.hasIncompleteCatalogData)
-        XCTAssertNotNil(kuga.energyConsumptionKWhPerKm)
-        XCTAssertEqual(kuga.energyIsWeighted, false)
-        let cite = try XCTUnwrap(kuga.fieldSource(for: "energyConsumptionKWhPerKm"))
+        XCTAssertTrue(kuga.hasIncompleteCatalogData)
+        XCTAssertNil(kuga.energyConsumptionKWhPerKm)
+        XCTAssertEqual(kuga.weightedFuelConsumptionLPerKm ?? -1, 0.01007, accuracy: 1e-9)
+    }
+
+    func testBMW330e2024BatteryExtraKeepsPureEnergyNil() throws {
+        let row = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: "bmw-330e-phev-2024"))
+        XCTAssertEqual(row.batteryKWh ?? -1, 19.5, accuracy: 0.01)
+        let date = try XCTUnwrap(row.fieldSourceDate(for: "batteryKWh"))
+        XCTAssertTrue(date.hasPrefix("2024"))
+        XCTAssertNil(row.usableChargeDepletingEnergyKWhPerKm)
+        XCTAssertTrue(row.hasIncompleteCatalogData)
+    }
+
+    func testHomologReuseRequiresIdenticalPowerAndWeightedWLTP() throws {
+        // Jeep Compass 4xe 2022 vs 2024: weighted WLTP and/or power differ — must not share fills.
+        let my22 = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: "jeep-compass-phev-4xe-2022"))
+        let my24 = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: "jeep-compass-phev-4xe-2024"))
+        let powerDiffers = abs((my22.powerKw ?? -1) - (my24.powerKw ?? -2)) > 1e-9
+        let fuelDiffers = abs(
+            (my22.weightedFuelConsumptionLPerKm ?? -1) - (my24.weightedFuelConsumptionLPerKm ?? -2)
+        ) > 1e-9
+        let energyDiffers = abs(
+            (my22.weightedEnergyConsumptionKWhPerKm ?? -1) - (my24.weightedEnergyConsumptionKWhPerKm ?? -2)
+        ) > 1e-9
         XCTAssertTrue(
-            Self.looksLikePureElectricLabel(cite),
-            "CD cite must carry a pure-electric label"
+            powerDiffers || fuelDiffers || energyDiffers,
+            "donor/destination must differ so exact-homolog reuse stays blocked"
         )
-        let date = try XCTUnwrap(kuga.fieldSourceDate(for: "energyConsumptionKWhPerKm"))
-        XCTAssertFalse(date.isEmpty, "Every filled official field must have sourceDate")
-        let src = kuga.sourceName ?? ""
-        XCTAssertTrue(
-            src.contains("stessa omologazione EEA") || src.contains("wave2-batch1"),
-            "Homolog reuse must be cited in sourceName"
-        )
+        XCTAssertNil(my22.fuelConsumptionLPerKm)
+        XCTAssertTrue(my22.hasIncompleteCatalogData)
     }
 
     func testBundledManifestIsSeed78() throws {

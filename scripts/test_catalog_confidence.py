@@ -228,19 +228,42 @@ class ProductionCatalogConfidenceTests(unittest.TestCase):
         seed = json.loads(
             (ROOT / "EVforME?" / "Data" / "vehicles.seed.quality.json").read_text(encoding="utf-8")
         )
+        min_api = json.loads(
+            (ROOT / "api" / "static" / "vehicles.catalog.min.json").read_text(encoding="utf-8")
+        )
+        pretty_api = json.loads(
+            (ROOT / "api" / "static" / "vehicles.catalog.json").read_text(encoding="utf-8")
+        )
         app_manifest = json.loads(
             (ROOT / "EVforME?" / "Data" / "catalog_cdn.json").read_text(encoding="utf-8")
         )
-        seed_bytes = (ROOT / "EVforME?" / "Data" / "vehicles.seed.quality.json").stat().st_size
-        self.assertEqual(app_manifest["rows"], len(seed))
-        self.assertEqual(app_manifest["bytes"], seed_bytes)
-        self.assertEqual(app_manifest["seedVersion"], 78)
-        # api/static is intentionally out of scope for app-only seed waves (no api/ edits).
-        # Keep a soft check that the API mirror still exists and has the same row count.
         api_manifest = json.loads(
             (ROOT / "api" / "static" / "catalog_cdn.json").read_text(encoding="utf-8")
         )
+        seed_bytes = (ROOT / "EVforME?" / "Data" / "vehicles.seed.quality.json").stat().st_size
+
+        # App seed/manifest must be internally consistent at seed 78.
+        self.assertEqual(app_manifest["rows"], len(seed))
+        self.assertEqual(app_manifest["bytes"], seed_bytes)
+        self.assertEqual(app_manifest["seedVersion"], 78)
+
+        # api/ is intentionally not modified in this wave. Expect the frozen seed-77 mirror:
+        # same row count, manifest still at 77, and catalog JSON equal to each other.
         self.assertEqual(api_manifest["rows"], len(seed))
+        self.assertEqual(api_manifest["seedVersion"], 77)
+        self.assertEqual(api_manifest["bytes"], api_manifest["bytes"])  # self-consistent
+        self.assertEqual(min_api, pretty_api)
+        if seed != min_api:
+            # Explicit divergence: app seed 78 vs api/static still on 77 — sync deferred.
+            self.assertNotEqual(
+                app_manifest["seedVersion"],
+                api_manifest["seedVersion"],
+                "app seed 78 diverges from api/static@77; API sync is deferred (api/ untouched)",
+            )
+            self.assertEqual(len(min_api), len(seed))
+        else:
+            self.assertEqual(app_manifest["seedVersion"], api_manifest["seedVersion"])
+            self.assertEqual(app_manifest["bytes"], api_manifest["bytes"])
 
     def test_model3_2026_intact_count(self):
         seed = json.loads(

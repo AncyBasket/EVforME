@@ -7022,156 +7022,69 @@
     "audi-q5-phev-50-tfsi-e-2024",
     "audi-q5-phev-50-tfsi-e-2023"
   ],
-  "completed": [
-    {
-      "id": "ford-kuga-phev-2022",
-      "kind": "homolog_complete",
-      "fields": {
-        "fuelConsumptionLPerKm": 0.061,
-        "energyConsumptionKWhPerKm": 0.209,
-        "wltpRangeKm": 60,
-        "batteryKWh": 14.4
-      },
-      "sources": {
-        "fuelConsumptionLPerKm": "CS max 6,1 L/100 via stessa omologazione EEA E13*2007/46*2188*13 BGDA1FX/566DANA51AS; OEM MY2024 https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/Technische_Daten_des_Ford_Kuga.pdf",
-        "energyConsumptionKWhPerKm": "Stromverbrauch bei rein elektrischem Betrieb kombiniert 20,9–18,4 → 0.209 (solo elettrico / charge-depleting) via stessa omologazione EEA E13*2007/46*2188*13 BGDA1FX/566DANA51AS; OEM MY2024 https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/Technische_Daten_des_Ford_Kuga.pdf",
-        "wltpRangeKm": "EAER combinato MIN 60 km (60–68) via stessa omologazione EEA E13*2007/46*2188*13 BGDA1FX/566DANA51AS; OEM MY2024 https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/Technische_Daten_des_Ford_Kuga.pdf",
-        "batteryKWh": "Batterie 14,4 kWh installiert via stessa omologazione EEA E13*2007/46*2188*13 BGDA1FX/566DANA51AS; OEM MY2024 https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/Technische_Daten_des_Ford_Kuga.pdf"
-      },
-      "sourceDates": {
-        "fuelConsumptionLPerKm": "2024-05-01",
-        "energyConsumptionKWhPerKm": "2024-05-01",
-        "wltpRangeKm": "2024-05-01",
-        "batteryKWh": "2024-05-01"
-      },
-      "TAN": "E13*2007/46*2188*13",
-      "Va": "BGDA1FX",
-      "Ve": "566DANA51AS",
-      "derivedFromYear": 2024,
-      "sourceId": "ford-kuga-phev-2024",
-      "sourceName": "Ford DE EnVKV Kuga 2,5 l Duratec PHEV via stessa omologazione EEA E13*2007/46*2188*13 BGDA1FX/566DANA51AS, anni 2022 e 2024: Kraftstoffverbrauch bei entladener Batterie 6,1–5,2 L/100; Stromverbrauch bei rein elektrischem Betrieb kombiniert 20,9–18,4 kWh/100 (solo elettrico / charge-depleting); EAER 60–68 km; Batterie 14,4 kWh — https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/Technische_Daten_des_Ford_Kuga.pdf; Preisliste MY24.5 ab 01.05.2024 https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/der-Ford-Kuga_gültig_ab_01_05_2024.pdf"
-    }
-  ],
+  "completed": [],
   "partial": [
     {
       "id": "bmw-330e-phev-2024",
+      "note": "extra vs lotto — BMW press May 2024 usable battery; pure CD remains nil",
       "filled": {
         "batteryKWh": 19.5
       },
       "stillMissing": [
         "energyConsumptionKWhPerKm"
       ],
-      "reason_remaining": "OEM press labels Stromverbrauch as weighted only; no pure-electric kWh",
       "sources": {
-        "batteryKWh": "press.bmwgroup.com new BMW 330e: high-voltage battery with 19.5 kWh of usable energy (ab 05/2024) https://www.press.bmwgroup.com/global/article/attachment/T0442333EN/620071"
+        "batteryKWh": "press.bmwgroup.com new BMW 330e: high-voltage battery with 19.5 kWh of usable energy (datePublished 2024-05-29) https://www.press.bmwgroup.com/global/article/attachment/T0442333EN/620071"
       },
       "sourceDates": {
         "batteryKWh": "2024-05-29"
       }
-    },
-    {
-      "id": "jeep-compass-phev-4xe-2022",
-      "filled": {
-        "fuelConsumptionLPerKm": 0.076
-      },
-      "stillMissing": [
-        "energyConsumptionKWhPerKm"
-      ],
-      "reason_remaining": "OEM listini place kWh with weighted CO2/L/100 (no pure-CD label)",
-      "sources": {
-        "fuelConsumptionLPerKm": "jeep.de CS bei entladener Batterie 6,9–7,6 → 0.076 via stessa omologazione EEA E3*2007/46*0508*15 JHPFP/ML1BBH1, anni 2022 e 2024; https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv"
-      },
-      "sourceDates": {
-        "fuelConsumptionLPerKm": "2024-06-20"
-      },
-      "TAN": "E3*2007/46*0508*15",
-      "derivedFromYear": 2024
-    },
-    {
-      "id": "jeep-renegade-phev-4xe-2022",
-      "filled": {
-        "fuelConsumptionLPerKm": 0.075
-      },
-      "stillMissing": [
-        "energyConsumptionKWhPerKm"
-      ],
-      "reason_remaining": "OEM listini place kWh with weighted CO2/L/100 (no pure-CD label)",
-      "sources": {
-        "fuelConsumptionLPerKm": "jeep.de CS bei entladener Batterie 6,9–7,5 → 0.075 via stessa omologazione EEA E3*2007/46*0300*39 AXT23/19M, anni 2022 e 2024; https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv"
-      },
-      "sourceDates": {
-        "fuelConsumptionLPerKm": "2024-06-20"
-      },
-      "TAN": "E3*2007/46*0300*39",
-      "derivedFromYear": 2024
     }
   ],
-  "homolog_reuse": [
+  "extras": [
     {
-      "id": "ford-kuga-phev-2022",
-      "kind": "homolog_complete",
-      "fields": {
-        "fuelConsumptionLPerKm": 0.061,
-        "energyConsumptionKWhPerKm": 0.209,
-        "wltpRangeKm": 60,
-        "batteryKWh": 14.4
-      },
-      "sources": {
-        "fuelConsumptionLPerKm": "CS max 6,1 L/100 via stessa omologazione EEA E13*2007/46*2188*13 BGDA1FX/566DANA51AS; OEM MY2024 https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/Technische_Daten_des_Ford_Kuga.pdf",
-        "energyConsumptionKWhPerKm": "Stromverbrauch bei rein elektrischem Betrieb kombiniert 20,9–18,4 → 0.209 (solo elettrico / charge-depleting) via stessa omologazione EEA E13*2007/46*2188*13 BGDA1FX/566DANA51AS; OEM MY2024 https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/Technische_Daten_des_Ford_Kuga.pdf",
-        "wltpRangeKm": "EAER combinato MIN 60 km (60–68) via stessa omologazione EEA E13*2007/46*2188*13 BGDA1FX/566DANA51AS; OEM MY2024 https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/Technische_Daten_des_Ford_Kuga.pdf",
-        "batteryKWh": "Batterie 14,4 kWh installiert via stessa omologazione EEA E13*2007/46*2188*13 BGDA1FX/566DANA51AS; OEM MY2024 https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/Technische_Daten_des_Ford_Kuga.pdf"
-      },
-      "sourceDates": {
-        "fuelConsumptionLPerKm": "2024-05-01",
-        "energyConsumptionKWhPerKm": "2024-05-01",
-        "wltpRangeKm": "2024-05-01",
-        "batteryKWh": "2024-05-01"
-      },
-      "TAN": "E13*2007/46*2188*13",
-      "Va": "BGDA1FX",
-      "Ve": "566DANA51AS",
-      "derivedFromYear": 2024,
-      "sourceId": "ford-kuga-phev-2024"
-    },
-    {
-      "id": "jeep-compass-phev-4xe-2022",
+      "id": "bmw-330e-phev-2024",
+      "note": "extra vs lotto — BMW press May 2024 usable battery; pure CD remains nil",
       "filled": {
-        "fuelConsumptionLPerKm": 0.076
+        "batteryKWh": 19.5
       },
       "stillMissing": [
         "energyConsumptionKWhPerKm"
       ],
-      "reason_remaining": "OEM listini place kWh with weighted CO2/L/100 (no pure-CD label)",
       "sources": {
-        "fuelConsumptionLPerKm": "jeep.de CS bei entladener Batterie 6,9–7,6 → 0.076 via stessa omologazione EEA E3*2007/46*0508*15 JHPFP/ML1BBH1, anni 2022 e 2024; https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv"
+        "batteryKWh": "press.bmwgroup.com new BMW 330e: high-voltage battery with 19.5 kWh of usable energy (datePublished 2024-05-29) https://www.press.bmwgroup.com/global/article/attachment/T0442333EN/620071"
       },
       "sourceDates": {
-        "fuelConsumptionLPerKm": "2024-06-20"
-      },
-      "TAN": "E3*2007/46*0508*15",
-      "derivedFromYear": 2024
-    },
-    {
-      "id": "jeep-renegade-phev-4xe-2022",
-      "filled": {
-        "fuelConsumptionLPerKm": 0.075
-      },
-      "stillMissing": [
-        "energyConsumptionKWhPerKm"
-      ],
-      "reason_remaining": "OEM listini place kWh with weighted CO2/L/100 (no pure-CD label)",
-      "sources": {
-        "fuelConsumptionLPerKm": "jeep.de CS bei entladener Batterie 6,9–7,5 → 0.075 via stessa omologazione EEA E3*2007/46*0300*39 AXT23/19M, anni 2022 e 2024; https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv"
-      },
-      "sourceDates": {
-        "fuelConsumptionLPerKm": "2024-06-20"
-      },
-      "TAN": "E3*2007/46*0300*39",
-      "derivedFromYear": 2024
+        "batteryKWh": "2024-05-29"
+      }
     }
   ],
+  "homolog_reuse": [],
   "left_nil": [
+    {
+      "id": "jeep-compass-phev-4xe-2022",
+      "brand": "Jeep",
+      "model": "Compass",
+      "year": 2022,
+      "market": "IT",
+      "missing": [
+        "fuelConsumptionLPerKm",
+        "energyConsumptionKWhPerKm"
+      ],
+      "reason": "no MY2022-specific official CS/CD doc; jeep.de/hybrid-suv is a generic range page (archive 2024) — rejected; weighted WLTP/power not identical to 2024 donor"
+    },
+    {
+      "id": "jeep-renegade-phev-4xe-2022",
+      "brand": "Jeep",
+      "model": "Renegade",
+      "year": 2022,
+      "market": "IT",
+      "missing": [
+        "fuelConsumptionLPerKm",
+        "energyConsumptionKWhPerKm"
+      ],
+      "reason": "no MY2022-specific official CS/CD doc; jeep.de/hybrid-suv generic range page rejected; weighted WLTP not identical to 2024 donor"
+    },
     {
       "id": "cupra-formentor-phev-e-hybrid-2024",
       "brand": "CUPRA",
@@ -7183,7 +7096,7 @@
         "energyConsumptionKWhPerKm",
         "wltpRangeKm"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "jeep-renegade-phev-4xe-2023",
@@ -7192,9 +7105,10 @@
       "year": 2023,
       "market": "IT",
       "missing": [
+        "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "mini-countryman-cooper-se-all4-2023",
@@ -7208,7 +7122,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "volvo-xc40-phev-recharge-2022",
@@ -7222,7 +7136,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "cupra-formentor-phev-e-hybrid-2023",
@@ -7236,7 +7150,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "volvo-xc40-phev-recharge-2023",
@@ -7250,7 +7164,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "volvo-xc60-phev-recharge-2024",
@@ -7261,7 +7175,7 @@
       "missing": [
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "bmw-x1-phev-xdrive25e-2024",
@@ -7272,7 +7186,7 @@
       "missing": [
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "bmw-x1-phev-xdrive25e-2022",
@@ -7284,7 +7198,7 @@
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "jeep-renegade-phev-4xe-2024",
@@ -7293,9 +7207,10 @@
       "year": 2024,
       "market": "IT",
       "missing": [
+        "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "alfa-romeo-tonale-phev-2023",
@@ -7309,7 +7224,21 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+    },
+    {
+      "id": "ford-kuga-phev-2022",
+      "brand": "Ford",
+      "model": "Kuga",
+      "year": 2022,
+      "market": "IT",
+      "missing": [
+        "fuelConsumptionLPerKm",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ],
+      "reason": "no MY2022-dated OEM doc / 2022 archive snapshot; live Technische_Daten PDF is continuously updated (archive only 2026) — invalid for MY22 and as homolog donor source"
     },
     {
       "id": "mercedes-benz-glc-phev-300-de-2024",
@@ -7323,7 +7252,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "volvo-xc60-phev-recharge-2023",
@@ -7334,7 +7263,7 @@
       "missing": [
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "toyota-c-hr-phev-2024",
@@ -7345,7 +7274,7 @@
       "missing": [
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "peugeot-3008-phev-2022",
@@ -7359,7 +7288,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "renault-captur-phev-e-tech-phev-2022",
@@ -7373,7 +7302,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "bmw-x1-phev-xdrive25e-2023",
@@ -7384,7 +7313,7 @@
       "missing": [
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "mercedes-benz-gle-phev-350-de-2022",
@@ -7398,7 +7327,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "peugeot-3008-phev-2023",
@@ -7410,7 +7339,7 @@
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "mini-countryman-cooper-se-all4-2022",
@@ -7424,7 +7353,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "audi-q3-sportback-phev-45-tfsi-e-2024",
@@ -7438,7 +7367,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "audi-q3-sportback-phev-45-tfsi-e-2023",
@@ -7452,7 +7381,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "mercedes-benz-gla-phev-250-e-2023",
@@ -7466,7 +7395,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "mercedes-benz-gle-coupe-phev-350-de-2022",
@@ -7480,7 +7409,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "mercedes-benz-gla-phev-250-e-2022",
@@ -7494,7 +7423,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "alfa-romeo-tonale-phev-2024",
@@ -7508,7 +7437,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "audi-a3-phev-40-tfsi-e-2024",
@@ -7522,7 +7451,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "audi-a3-phev-45-tfsi-e-2024",
@@ -7536,7 +7465,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "audi-a3-phev-40-tfsi-e-2023",
@@ -7550,7 +7479,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "audi-a3-phev-40-tfsi-e-2022",
@@ -7564,7 +7493,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "audi-a3-e-tron-ultra-phev-2016",
@@ -7575,7 +7504,7 @@
       "missing": [
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "audi-q3-phev-45-tfsi-e-2024",
@@ -7589,7 +7518,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "audi-q3-phev-45-tfsi-e-2023",
@@ -7603,7 +7532,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "audi-q3-phev-45-tfsi-e-2022",
@@ -7617,7 +7546,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "audi-q3-sportback-phev-45-tfsi-e-2022",
@@ -7631,7 +7560,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "audi-q5-phev-50-tfsi-e-2024",
@@ -7645,7 +7574,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     },
     {
       "id": "audi-q5-phev-50-tfsi-e-2023",
@@ -7659,7 +7588,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY OEM document with dated pure-electric (rein elektrisch / charge-depleting) kWh and/or CS+EAER+battery verified this wave; weighted-only kWh kept in weighted* / left nil for CD"
+      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
     }
   ],
   "non_phev_tech_sha": "6b9038232bc51daabc9e259fc0dab170f787984d4dfb8f597e309fe50155b4dc",
@@ -7669,5 +7598,80 @@
     "tesla-model-3-premium-trazione-posteriore-2026",
     "tesla-model-3-trazione-posteriore-2026"
   ],
-  "sourceDay": "2026-11-10"
+  "sourceDay": "2026-11-10",
+  "reviewNotes": [
+    "Reverted ford-kuga-2022 completion (continuous undated Ford PDF / no 2022 archive).",
+    "Reverted Jeep Compass/Renegade 2022 CS from generic /hybrid-suv archive.",
+    "Restored homolog shared map to main (no unverified 2022 year injection).",
+    "BMW 330e 2024 battery 19.5 kept as extra vs lotto; pure CD nil.",
+    "Scrubbed generic/dating-invalid fieldSources on all PHEV rows under strengthened checker."
+  ],
+  "scrubbed_invalid_provenance": [
+    {
+      "id": "jeep-grand-cherokee-4xe-2023",
+      "cleared": [
+        "fuelConsumptionLPerKm"
+      ]
+    },
+    {
+      "id": "jeep-wrangler-4xe-2022",
+      "cleared": [
+        "fuelConsumptionLPerKm"
+      ]
+    },
+    {
+      "id": "jeep-wrangler-4xe-2023",
+      "cleared": [
+        "fuelConsumptionLPerKm"
+      ]
+    },
+    {
+      "id": "ford-kuga-phev-2023",
+      "cleared": [
+        "energyConsumptionKWhPerKm"
+      ]
+    },
+    {
+      "id": "jeep-compass-phev-4xe-2023",
+      "cleared": [
+        "fuelConsumptionLPerKm"
+      ]
+    },
+    {
+      "id": "jeep-renegade-phev-4xe-2023",
+      "cleared": [
+        "fuelConsumptionLPerKm"
+      ]
+    },
+    {
+      "id": "ford-kuga-phev-2024",
+      "cleared": [
+        "energyConsumptionKWhPerKm"
+      ]
+    },
+    {
+      "id": "jeep-renegade-phev-4xe-2024",
+      "cleared": [
+        "fuelConsumptionLPerKm"
+      ]
+    },
+    {
+      "id": "jeep-compass-phev-4xe-2024",
+      "cleared": [
+        "fuelConsumptionLPerKm"
+      ]
+    },
+    {
+      "id": "jeep-wrangler-4xe-2024",
+      "cleared": [
+        "fuelConsumptionLPerKm"
+      ]
+    },
+    {
+      "id": "jeep-grand-cherokee-4xe-2024",
+      "cleared": [
+        "fuelConsumptionLPerKm"
+      ]
+    }
+  ]
 }

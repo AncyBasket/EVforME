@@ -2,11 +2,11 @@
   "url": "",
   "publishedUrl": "",
   "rows": 6977,
-  "bytes": 8911840,
+  "bytes": 8910284,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-11-10T11:52:36.797488+00:00",
+  "updatedAt": "2026-11-10T18:59:06.873578+00:00",
   "policy": "offline-first",
   "seedVersion": 78,
-  "note": "seedVersion 78: PHEV wave2 batch1 \u2014 official/homolog fills on top-40 incomplete; confidence policy v2 unchanged"
+  "note": "seedVersion 78: PHEV wave2 batch1 (review-corrected) \u2014 BMW 330e battery extra; invalid Kuga/Jeep fills reverted; confidence policy v2 unchanged"
 }

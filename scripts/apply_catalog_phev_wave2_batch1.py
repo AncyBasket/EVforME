@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """
-PHEV wave2 batch1 (seed 77→78).
+PHEV wave2 batch1 (seed 77→78) — review-corrected.
 
-Batch = top ~40 incomplete IT/EU PHEV by EEA diffusion rank (see inventory).
-Only official OEM / identical-EEA homolog fills. No estimates. No api/ touches.
-M3 IT2026 + non-PHEV rows byte-identical. No chain derivation.
+Only official OEM fills with valid dating. Homolog reuse requires IDENTICAL
+TAN/Va/Ve/ep AND identical power + weighted WLTP between seed rows; donor
+source must itself be dated for the donor year (no continuous live PDFs).
+No ±kW tolerance, no frequency ranking, no chain derivation.
 """
 
 from __future__ import annotations
@@ -18,72 +19,25 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "scripts"))
 from catalog_confidence import POLICY_VERSION, assess_confidence  # noqa: E402
-from lib.phev_manus_v76_validate import (  # noqa: E402
-    has_pure_energy_label,
-    missing_calc_fields,
+from check_catalog_phev_wave2_batch1 import (  # noqa: E402
+    best_shared_exact,
+    cite_dating_ok,
+    exact_homolog_ok,
+    is_generic_url,
+    source_year_ok,
+    urls_in,
 )
+from lib.phev_manus_v76_validate import missing_calc_fields  # noqa: E402
 
 SEED = REPO / "EVforME?" / "Data" / "vehicles.seed.quality.json"
 CDN = REPO / "EVforME?" / "Data" / "catalog_cdn.json"
 CACHE = REPO / "scripts" / "cache" / "eea"
-HOMOLOG = CACHE / "catalog_phev_homologation_map.json"
 INVENTORY = CACHE / "catalog_phev_wave2_batch1_inventory.json"
 MANIFEST = CACHE / "catalog_phev_wave2_batch1_manifest.json"
+BASE_MAIN = "0f0919245dbd68bb10da67ca1f21fe18192c38c5"
 SOURCE_DAY = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
-FORD_TECH = (
-    "https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/"
-    "Technische_Daten_des_Ford_Kuga.pdf"
-)
-FORD_PREIS = (
-    "https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/"
-    "der-Ford-Kuga_gültig_ab_01_05_2024.pdf"
-)
 BMW_330E_PRESS = "https://www.press.bmwgroup.com/global/article/attachment/T0442333EN/620071"
-JEEP_HYBRID_ARCH = "https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv"
-
-COPY_FIELDS = (
-    "fuelConsumptionLPerKm",
-    "energyConsumptionKWhPerKm",
-    "energyIsWeighted",
-    "weightedFuelConsumptionLPerKm",
-    "weightedEnergyConsumptionKWhPerKm",
-    "wltpRangeKm",
-    "batteryKWh",
-)
-
-
-def fp_tuple(r: dict) -> tuple:
-    return (
-        (r.get("TAN") or "").upper(),
-        r.get("Va") or "",
-        r.get("Ve") or "",
-        r.get("ep"),
-        r.get("ec"),
-        r.get("m"),
-        r.get("Mt"),
-        r.get("Ew"),
-        r.get("Fc"),
-    )
-
-
-def best_shared(family: str, src_year: int, dst_year: int, dst_power_kw: float, shared: dict) -> dict | None:
-    cands = []
-    for sh in shared.get(family) or []:
-        years = {int(y): n for y, n in (sh.get("years") or {}).items()}
-        if src_year not in years or dst_year not in years:
-            continue
-        ep = sh.get("ep")
-        if ep is None or abs(float(ep) - float(dst_power_kw)) > 20.0:
-            continue
-        if not (sh.get("TAN") or "").strip():
-            continue
-        score = float(years[src_year]) + float(years[dst_year])
-        cands.append((score, sh))
-    if not cands:
-        return None
-    cands.sort(key=lambda x: -x[0])
-    return cands[0][1]
 
 
 def finalize(row: dict) -> None:
@@ -97,12 +51,62 @@ def finalize(row: dict) -> None:
 
 
 def set_field_source(row: dict, field: str, cite: str, date: str) -> None:
+    urls = urls_in(cite) or [cite]
+    if any(is_generic_url(u) for u in urls):
+        raise SystemExit(f"generic URL rejected: {cite}")
+    year = int(row["year"])
+    homolog = row.get("dataDerivedFromSameHomologationYear")
+    hy = int(homolog) if homolog is not None else None
+    if not cite_dating_ok(cite, date, year, homolog_year=hy):
+        raise SystemExit(f"dating rejected {row['id']}.{field}: {date} {cite}")
     fs = dict(row.get("fieldSources") or {})
     fd = dict(row.get("fieldSourceDates") or {})
     fs[field] = cite
     fd[field] = date
     row["fieldSources"] = fs
     row["fieldSourceDates"] = fd
+
+
+CLEARABLE_FIELDS = (
+    "fuelConsumptionLPerKm",
+    "energyConsumptionKWhPerKm",
+    "batteryKWh",
+    "wltpRangeKm",
+)
+
+
+def scrub_invalid_field_provenance(row: dict) -> list[str]:
+    """Drop field values whose cites fail generic/dating on real PHEV rows."""
+    cleared: list[str] = []
+    fs = dict(row.get("fieldSources") or {})
+    fd = dict(row.get("fieldSourceDates") or {})
+    hy_raw = row.get("dataDerivedFromSameHomologationYear")
+    hy = int(hy_raw) if hy_raw is not None else None
+    year = int(row.get("year") or 0)
+    for field in list(fs.keys()):
+        cite = fs.get(field) or ""
+        if not cite:
+            continue
+        date = fd.get(field) or ""
+        urls = urls_in(cite) or [cite]
+        bad_generic = any(is_generic_url(u) for u in urls)
+        bad_dating = not cite_dating_ok(cite, date, year, homolog_year=hy)
+        if not (bad_generic or bad_dating):
+            continue
+        cleared.append(field)
+        fs.pop(field, None)
+        fd.pop(field, None)
+        if field in CLEARABLE_FIELDS:
+            row[field] = None
+            if field == "energyConsumptionKWhPerKm":
+                row["energyIsWeighted"] = None
+    row["fieldSources"] = fs or None
+    row["fieldSourceDates"] = fd or None
+    # If no field cites remain that mention homolog, drop derivation flag.
+    remaining = " ".join((row.get("fieldSources") or {}).values())
+    if hy is not None and "stessa omologazione" not in remaining.lower() and "homolog" not in remaining.lower():
+        row.pop("dataDerivedFromSameHomologationYear", None)
+    return cleared
 
 
 def tech_blob(rows: list[dict]) -> str:
@@ -116,226 +120,130 @@ def tech_blob(rows: list[dict]) -> str:
     return json.dumps(cleaned, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
 
 
+def load_main_seed() -> dict[str, dict]:
+    import subprocess
+
+    raw = subprocess.check_output(["git", "show", f"{BASE_MAIN}:EVforME?/Data/vehicles.seed.quality.json"])
+    return {r["id"]: r for r in json.loads(raw)}
+
+
 def main() -> None:
     seed = json.loads(SEED.read_text(encoding="utf-8"))
     by_id = {r["id"]: r for r in seed}
     ids_before = [r["id"] for r in seed]
-    assert len(seed) == 6977, len(seed)
+    assert len(seed) == 6977
 
+    main_by = load_main_seed()
     m3_before = {
         r["id"]: json.dumps(r, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
         for r in seed
         if r["id"].startswith("tesla-model-3") and r.get("year") == 2026
     }
-    assert len(m3_before) == 4, len(m3_before)
-
+    assert len(m3_before) == 4
     non_phev_before = tech_blob([r for r in seed if r.get("powertrain") != "phev"])
     non_phev_sha_before = hashlib.sha256(non_phev_before.encode()).hexdigest()
 
     inv = json.loads(INVENTORY.read_text(encoding="utf-8"))
     batch1_ids = [x["id"] for x in inv["batch1_candidates"]]
-    assert len(batch1_ids) == 40, len(batch1_ids)
-
-    homolog = json.loads(HOMOLOG.read_text(encoding="utf-8"))
-    shared = homolog.get("shared") or {}
+    assert len(batch1_ids) == 40
 
     completed: list[dict] = []
     partial: list[dict] = []
     homolog_reuse: list[dict] = []
     left_nil: list[dict] = []
+    extras: list[dict] = []
 
-    # --- 1) Ford Kuga 2022 COMPLETE via identical EEA homolog from MY2024 (no chain) ---
-    src = by_id["ford-kuga-phev-2024"]
-    dst = by_id["ford-kuga-phev-2022"]
-    if src.get("catalogDataIncomplete"):
-        raise SystemExit("ford-kuga-2024 incomplete")
-    if src.get("dataDerivedFromSameHomologationYear") is not None:
-        raise SystemExit("chain: ford-kuga-2024 is derived")
-    if dst.get("dataDerivedFromSameHomologationYear") is not None:
-        raise SystemExit("dst already derived")
-    cd_cite = (src.get("fieldSources") or {}).get("energyConsumptionKWhPerKm") or ""
-    if not has_pure_energy_label(cd_cite):
-        raise SystemExit("donor CD cite lacks pure-electric label")
-    sh = best_shared("ford-kuga", 2024, 2022, float(dst.get("powerKw") or 0), shared)
-    if not sh:
-        raise SystemExit("no identical homolog ford-kuga 2024→2022")
-    for f in COPY_FIELDS:
-        dst[f] = src[f]
-    dst["energyIsWeighted"] = False
-    dst["dataDerivedFromSameHomologationYear"] = 2024
-    dst["sourceUpdatedAt"] = SOURCE_DAY
-    tan, va, ve = sh["TAN"], sh["Va"], sh["Ve"]
-    for field, value, note in (
-        (
-            "fuelConsumptionLPerKm",
-            dst["fuelConsumptionLPerKm"],
-            f"CS max 6,1 L/100 via stessa omologazione EEA {tan} {va}/{ve}; OEM MY2024 {FORD_TECH}",
-        ),
-        (
-            "energyConsumptionKWhPerKm",
-            dst["energyConsumptionKWhPerKm"],
-            f"Stromverbrauch bei rein elektrischem Betrieb kombiniert 20,9–18,4 → 0.209 "
-            f"(solo elettrico / charge-depleting) via stessa omologazione EEA {tan} {va}/{ve}; "
-            f"OEM MY2024 {FORD_TECH}",
-        ),
-        (
-            "wltpRangeKm",
-            dst["wltpRangeKm"],
-            f"EAER combinato MIN 60 km (60–68) via stessa omologazione EEA {tan} {va}/{ve}; "
-            f"OEM MY2024 {FORD_TECH}",
-        ),
-        (
-            "batteryKWh",
-            dst["batteryKWh"],
-            f"Batterie 14,4 kWh installiert via stessa omologazione EEA {tan} {va}/{ve}; "
-            f"OEM MY2024 {FORD_TECH}",
-        ),
+    # --- Restore previously invalid fills from main (Kuga 2022, Jeep CS) ---
+    for rid in (
+        "ford-kuga-phev-2022",
+        "jeep-compass-phev-4xe-2022",
+        "jeep-renegade-phev-4xe-2022",
     ):
-        set_field_source(dst, field, note, "2024-05-01")
-    dst["sourceName"] = (
-        f"Ford DE EnVKV Kuga 2,5 l Duratec PHEV via stessa omologazione EEA {tan} {va}/{ve}, "
-        f"anni 2022 e 2024: Kraftstoffverbrauch bei entladener Batterie 6,1–5,2 L/100; "
-        f"Stromverbrauch bei rein elektrischem Betrieb kombiniert 20,9–18,4 kWh/100 "
-        f"(solo elettrico / charge-depleting); EAER 60–68 km; Batterie 14,4 kWh — "
-        f"{FORD_TECH}; Preisliste MY24.5 ab 01.05.2024 {FORD_PREIS}"
+        by_id[rid].clear()
+        by_id[rid].update(json.loads(json.dumps(main_by[rid])))  # deep copy via JSON
+        finalize(by_id[rid])
+
+    # Sanity: kuga weighted fuel restored
+    kuga = by_id["ford-kuga-phev-2022"]
+    if abs(float(kuga.get("weightedFuelConsumptionLPerKm") or 0) - 0.01007) > 1e-9:
+        raise SystemExit("kuga weightedFuel restore failed")
+    if kuga.get("catalogDataIncomplete") is not True:
+        raise SystemExit("kuga must be incomplete after restore")
+    if kuga.get("dataDerivedFromSameHomologationYear") is not None:
+        raise SystemExit("kuga homolog flag must be cleared")
+
+    # Scrub invalid generic/dating cites on EVERY real PHEV row (honesty under
+    # strengthened checker). Prefer nil over hybrid-suv / continuous undated PDFs.
+    scrubbed_rows: list[dict] = []
+    for r in seed:
+        if r.get("powertrain") != "phev":
+            continue
+        cleared = scrub_invalid_field_provenance(r)
+        if cleared:
+            finalize(r)
+            scrubbed_rows.append({"id": r["id"], "cleared": cleared})
+
+    # --- Extra (outside strict lotto completion): BMW 330e 2024 battery ---
+    b330 = by_id["bmw-330e-phev-2024"]
+    if b330.get("batteryKWh") != 19.5:
+        b330["batteryKWh"] = 19.5
+    cite = (
+        "press.bmwgroup.com new BMW 330e: high-voltage battery with 19.5 kWh of usable energy "
+        f"(datePublished 2024-05-29) {BMW_330E_PRESS}"
     )
-    finalize(dst)
-    if dst["catalogDataIncomplete"]:
-        raise SystemExit(f"kuga 2022 still incomplete: {dst['missingCalcFields']}")
-    completed.append(
+    # Clear any stale derived flag; this is same-MY 2024 press (dated)
+    b330.pop("dataDerivedFromSameHomologationYear", None)
+    set_field_source(b330, "batteryKWh", cite, "2024-05-29")
+    b330["sourceUpdatedAt"] = SOURCE_DAY
+    prev = b330.get("sourceName") or ""
+    if "wave2-batch1: batteryKWh=19.5" not in prev and "wave2-batch1 extra: batteryKWh=19.5" not in prev:
+        b330["sourceName"] = (
+            f"{prev}; wave2-batch1 extra: batteryKWh=19.5 usable — {BMW_330E_PRESS}"
+        ).strip("; ")
+    finalize(b330)
+    extras.append(
         {
-            "id": dst["id"],
-            "kind": "homolog_complete",
-            "fields": {
-                "fuelConsumptionLPerKm": dst["fuelConsumptionLPerKm"],
-                "energyConsumptionKWhPerKm": dst["energyConsumptionKWhPerKm"],
-                "wltpRangeKm": dst["wltpRangeKm"],
-                "batteryKWh": dst["batteryKWh"],
-            },
-            "sources": dst["fieldSources"],
-            "sourceDates": dst["fieldSourceDates"],
-            "TAN": tan,
-            "Va": va,
-            "Ve": ve,
-            "derivedFromYear": 2024,
-            "sourceId": "ford-kuga-phev-2024",
+            "id": b330["id"],
+            "note": "extra vs lotto — BMW press May 2024 usable battery; pure CD remains nil",
+            "filled": {"batteryKWh": 19.5},
+            "stillMissing": b330["missingCalcFields"],
+            "sources": {"batteryKWh": cite},
+            "sourceDates": {"batteryKWh": "2024-05-29"},
         }
     )
-    homolog_reuse.append(completed[-1])
+    partial.append(extras[-1])
 
-    # --- 2) BMW 330e 2024: battery usable 19.5 kWh (press 2024-05-29); CD stays nil ---
-    b330 = by_id["bmw-330e-phev-2024"]
-    if b330.get("batteryKWh") is None:
-        b330["batteryKWh"] = 19.5
-        set_field_source(
-            b330,
-            "batteryKWh",
-            "press.bmwgroup.com new BMW 330e: high-voltage battery with 19.5 kWh of usable energy "
-            f"(ab 05/2024) {BMW_330E_PRESS}",
-            "2024-05-29",
-        )
-        b330["sourceUpdatedAt"] = SOURCE_DAY
-        b330["sourceName"] = (
-            f"{b330.get('sourceName')}; wave2-batch1: batteryKWh=19.5 usable — {BMW_330E_PRESS}"
-        )
-        finalize(b330)
-        partial.append(
-            {
-                "id": b330["id"],
-                "filled": {"batteryKWh": 19.5},
-                "stillMissing": b330["missingCalcFields"],
-                "reason_remaining": "OEM press labels Stromverbrauch as weighted only; no pure-electric kWh",
-                "sources": {"batteryKWh": b330["fieldSources"]["batteryKWh"]},
-                "sourceDates": {"batteryKWh": "2024-05-29"},
-            }
-        )
+    # --- Batch1 coverage: no additional official dated pure-CD sources verified ---
+    # Document nil reasons for every batch1 id except the BMW extra above.
+    nil_reasons = {
+        "ford-kuga-phev-2022": (
+            "no MY2022-dated OEM doc / 2022 archive snapshot; live Technische_Daten PDF is "
+            "continuously updated (archive only 2026) — invalid for MY22 and as homolog donor source"
+        ),
+        "jeep-compass-phev-4xe-2022": (
+            "no MY2022-specific official CS/CD doc; jeep.de/hybrid-suv is a generic range page "
+            "(archive 2024) — rejected; weighted WLTP/power not identical to 2024 donor"
+        ),
+        "jeep-renegade-phev-4xe-2022": (
+            "no MY2022-specific official CS/CD doc; jeep.de/hybrid-suv generic range page rejected; "
+            "weighted WLTP not identical to 2024 donor"
+        ),
+    }
+    default_nil = (
+        "no same-MY official OEM document with dated pure-electric (rein elektrisch / "
+        "charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / "
+        "EAER City-only / weighted-only kWh rejected"
+    )
 
-    # --- 3) Jeep Compass 2022: CS only via identical EEA from MY2024 (donor has CS, no pure CD) ---
-    c24 = by_id["jeep-compass-phev-4xe-2024"]
-    c22 = by_id["jeep-compass-phev-4xe-2022"]
-    if c24.get("fuelConsumptionLPerKm") is None:
-        raise SystemExit("compass 2024 missing CS donor")
-    if c24.get("dataDerivedFromSameHomologationYear") is not None:
-        raise SystemExit("chain: compass 2024 derived")
-    sh_c = best_shared("jeep-compass", 2024, 2022, float(c22.get("powerKw") or 0), shared)
-    if not sh_c:
-        raise SystemExit("no identical homolog jeep-compass 2024→2022")
-    if c22.get("fuelConsumptionLPerKm") is None:
-        c22["fuelConsumptionLPerKm"] = c24["fuelConsumptionLPerKm"]
-        c22["dataDerivedFromSameHomologationYear"] = 2024
-        set_field_source(
-            c22,
-            "fuelConsumptionLPerKm",
-            "jeep.de CS bei entladener Batterie 6,9–7,6 → 0.076 via stessa omologazione EEA "
-            f"{sh_c['TAN']} {sh_c['Va']}/{sh_c['Ve']}, anni 2022 e 2024; {JEEP_HYBRID_ARCH}",
-            "2024-06-20",
-        )
-        c22["sourceUpdatedAt"] = SOURCE_DAY
-        c22["sourceName"] = (
-            f"{c22.get('sourceName')}; wave2-batch1: CS via stessa omologazione EEA "
-            f"{sh_c['TAN']} {sh_c['Va']}/{sh_c['Ve']} da MY2024"
-        )
-        finalize(c22)
-        partial.append(
-            {
-                "id": c22["id"],
-                "filled": {"fuelConsumptionLPerKm": c22["fuelConsumptionLPerKm"]},
-                "stillMissing": c22["missingCalcFields"],
-                "reason_remaining": "OEM listini place kWh with weighted CO2/L/100 (no pure-CD label)",
-                "sources": {"fuelConsumptionLPerKm": c22["fieldSources"]["fuelConsumptionLPerKm"]},
-                "sourceDates": {"fuelConsumptionLPerKm": "2024-06-20"},
-                "TAN": sh_c["TAN"],
-                "derivedFromYear": 2024,
-            }
-        )
-        homolog_reuse.append(partial[-1])
-
-    # --- 4) Jeep Renegade 2022: CS only via identical EEA from MY2024 ---
-    r24 = by_id["jeep-renegade-phev-4xe-2024"]
-    r22 = by_id["jeep-renegade-phev-4xe-2022"]
-    if r24.get("fuelConsumptionLPerKm") is None:
-        raise SystemExit("renegade 2024 missing CS donor")
-    if r24.get("dataDerivedFromSameHomologationYear") is not None:
-        raise SystemExit("chain: renegade 2024 derived")
-    sh_r = best_shared("jeep-renegade", 2024, 2022, float(r22.get("powerKw") or 0), shared)
-    if not sh_r:
-        raise SystemExit("no identical homolog jeep-renegade 2024→2022")
-    if r22.get("fuelConsumptionLPerKm") is None:
-        r22["fuelConsumptionLPerKm"] = r24["fuelConsumptionLPerKm"]
-        r22["dataDerivedFromSameHomologationYear"] = 2024
-        set_field_source(
-            r22,
-            "fuelConsumptionLPerKm",
-            "jeep.de CS bei entladener Batterie 6,9–7,5 → 0.075 via stessa omologazione EEA "
-            f"{sh_r['TAN']} {sh_r['Va']}/{sh_r['Ve']}, anni 2022 e 2024; {JEEP_HYBRID_ARCH}",
-            "2024-06-20",
-        )
-        r22["sourceUpdatedAt"] = SOURCE_DAY
-        r22["sourceName"] = (
-            f"{r22.get('sourceName')}; wave2-batch1: CS via stessa omologazione EEA "
-            f"{sh_r['TAN']} {sh_r['Va']}/{sh_r['Ve']} da MY2024"
-        )
-        finalize(r22)
-        partial.append(
-            {
-                "id": r22["id"],
-                "filled": {"fuelConsumptionLPerKm": r22["fuelConsumptionLPerKm"]},
-                "stillMissing": r22["missingCalcFields"],
-                "reason_remaining": "OEM listini place kWh with weighted CO2/L/100 (no pure-CD label)",
-                "sources": {"fuelConsumptionLPerKm": r22["fieldSources"]["fuelConsumptionLPerKm"]},
-                "sourceDates": {"fuelConsumptionLPerKm": "2024-06-20"},
-                "TAN": sh_r["TAN"],
-                "derivedFromYear": 2024,
-            }
-        )
-        homolog_reuse.append(partial[-1])
-
-    touched = {c["id"] for c in completed} | {p["id"] for p in partial}
+    touched = {p["id"] for p in partial}
     for rid in batch1_ids:
-        if rid in touched:
-            continue
         row = by_id[rid]
         miss = missing_calc_fields(row)
+        if rid in touched and not miss:
+            continue
+        if rid in touched and miss:
+            # BMW extra already recorded as partial
+            continue
         left_nil.append(
             {
                 "id": rid,
@@ -344,15 +252,14 @@ def main() -> None:
                 "year": row.get("year"),
                 "market": row.get("market"),
                 "missing": miss,
-                "reason": (
-                    "no same-MY OEM document with dated pure-electric (rein elektrisch / "
-                    "charge-depleting) kWh and/or CS+EAER+battery verified this wave; "
-                    "weighted-only kWh kept in weighted* / left nil for CD"
-                ),
+                "reason": nil_reasons.get(rid, default_nil),
             }
         )
 
-    # invariants
+    # Export helpers used by unit tests / checkers
+    _ = best_shared_exact
+    _ = exact_homolog_ok
+
     if [r["id"] for r in seed] != ids_before:
         raise SystemExit("id list changed")
     for mid, blob in m3_before.items():
@@ -365,18 +272,18 @@ def main() -> None:
         raise SystemExit("non-PHEV tech blob changed")
 
     cdn = json.loads(CDN.read_text(encoding="utf-8"))
-    if int(cdn.get("seedVersion") or 0) != 77:
-        raise SystemExit(f"expected seed 77 base, got {cdn.get('seedVersion')}")
+    # Allow re-run on already-bumped seed 78
+    if int(cdn.get("seedVersion") or 0) not in (77, 78):
+        raise SystemExit(f"unexpected seedVersion {cdn.get('seedVersion')}")
     new_ver = 78
     cdn["seedVersion"] = new_ver
     cdn["rows"] = len(seed)
-    # Preserve explicit JSON nulls (same convention as seed 77 on main).
     payload = json.dumps(seed, separators=(",", ":"), ensure_ascii=False)
     cdn["bytes"] = len(payload.encode())
     cdn["updatedAt"] = datetime.now(timezone.utc).isoformat()
     cdn["note"] = (
-        "seedVersion 78: PHEV wave2 batch1 — official/homolog fills on top-40 incomplete; "
-        "confidence policy v2 unchanged"
+        "seedVersion 78: PHEV wave2 batch1 (review-corrected) — BMW 330e battery extra; "
+        "invalid Kuga/Jeep fills reverted; confidence policy v2 unchanged"
     )
 
     SEED.write_text(payload)
@@ -389,21 +296,37 @@ def main() -> None:
         "batch1_ids": batch1_ids,
         "completed": completed,
         "partial": partial,
+        "extras": extras,
         "homolog_reuse": homolog_reuse,
         "left_nil": left_nil,
         "non_phev_tech_sha": non_phev_sha_after,
         "m3_ids": sorted(m3_before),
         "sourceDay": SOURCE_DAY,
+        "reviewNotes": [
+            "Reverted ford-kuga-2022 completion (continuous undated Ford PDF / no 2022 archive).",
+            "Reverted Jeep Compass/Renegade 2022 CS from generic /hybrid-suv archive.",
+            "Restored homolog shared map to main (no unverified 2022 year injection).",
+            "BMW 330e 2024 battery 19.5 kept as extra vs lotto; pure CD nil.",
+            "Scrubbed generic/dating-invalid fieldSources on all PHEV rows under strengthened checker.",
+        ],
+        "scrubbed_invalid_provenance": scrubbed_rows,
     }
     MANIFEST.write_text(json.dumps(man, indent=2, ensure_ascii=False) + "\n")
-    print(json.dumps({
-        "seedVersion": new_ver,
-        "completed": len(completed),
-        "partial": len(partial),
-        "left_nil": len(left_nil),
-        "homolog_reuse": len(homolog_reuse),
-        "non_phev_tech_sha": non_phev_sha_after,
-    }, indent=2))
+    print(
+        json.dumps(
+            {
+                "seedVersion": new_ver,
+                "completed": len(completed),
+                "partial": len(partial),
+                "extras": len(extras),
+                "left_nil": len(left_nil),
+                "homolog_reuse": len(homolog_reuse),
+                "scrubbed": len(scrubbed_rows),
+                "non_phev_tech_sha": non_phev_sha_after,
+            },
+            indent=2,
+        )
+    )
 
 
 if __name__ == "__main__":
