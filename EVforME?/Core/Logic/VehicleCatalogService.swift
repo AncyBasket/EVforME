@@ -22,9 +22,37 @@ final class VehicleCatalogService {
     }
 
     private let defaults = UserDefaults.standard
-    /// Bundled quality-seed revision (not the App Store marketing version).
-    static let bundledSeedVersion = 65
+    /// Bundled quality-seed revision from `Data/catalog_cdn.json` (not the App Store marketing version).
+    /// Used to decide whether the on-disk catalog cache is still valid (`cacheSeedVersion == bundledSeedVersion`)
+    /// or must be re-seeded from `vehicles.seed.quality.json`. Also stamped when accepting a remote catalog
+    /// and surfaced in L10n catalog notes. Fallback `0` if the manifest is missing/unreadable: any positive
+    /// cached version then mismatches and forces a one-shot re-seed (no crash).
+    static let bundledSeedVersion: Int = readBundledSeedVersionFromManifest()
     private var seedVersion: Int { Self.bundledSeedVersion }
+
+    /// Reads `seedVersion` from the bundled `catalog_cdn.json` (single source of truth with the seed pipeline).
+    private static func readBundledSeedVersionFromManifest() -> Int {
+        guard let url = Bundle.main.url(forResource: "catalog_cdn", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let obj = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            AppLogger.shared.warning(
+                "catalog_cdn.json missing/unreadable — bundledSeedVersion fallback 0 (force re-seed vs stale cache)",
+                category: .catalog
+            )
+            return 0
+        }
+        if let number = obj["seedVersion"] as? NSNumber {
+            return number.intValue
+        }
+        if let intValue = obj["seedVersion"] as? Int {
+            return intValue
+        }
+        AppLogger.shared.warning(
+            "catalog_cdn.json has no usable seedVersion — bundledSeedVersion fallback 0",
+            category: .catalog
+        )
+        return 0
+    }
     private var remoteDisabledForTesting = false
     private let remoteSession: URLSession = {
         let config = URLSessionConfiguration.ephemeral
@@ -184,6 +212,28 @@ final class VehicleCatalogService {
         defaults.removeObject(forKey: Keys.lastUpdated)
         defaults.removeObject(forKey: Keys.migratedToFile)
         try? FileManager.default.removeItem(at: catalogCacheFileURL)
+        let catalog = expandForTestingIfNeeded(ensureBuiltInElectrifiedOptions(loadCachedOrDefault()))
+        onMainActor { applyCatalog(catalog) }
+    }
+
+    /// Test hook: plant an on-disk catalog cache at a given seed version (does not touch user input storage).
+    func plantCatalogCacheForTesting(version: Int, catalog: [VehicleCatalogItem]) {
+        persistCatalogToFile(catalog)
+        defaults.set(version, forKey: Keys.cacheSeedVersion)
+        defaults.set(Date().timeIntervalSince1970, forKey: Keys.lastUpdated)
+        defaults.set(true, forKey: Keys.migratedToFile)
+    }
+
+    /// Test hook: current `cacheSeedVersion` stamped in UserDefaults.
+    func cachedSeedVersionForTesting() -> Int {
+        defaults.integer(forKey: Keys.cacheSeedVersion)
+    }
+
+    /// Test hook: reload via `loadCachedOrDefault()` without wiping the cache first
+    /// (exercises seed-version mismatch → re-seed from bundle).
+    func reloadRespectingCatalogCacheForTesting() {
+        loadGeneration += 1
+        remoteDisabledForTesting = true
         let catalog = expandForTestingIfNeeded(ensureBuiltInElectrifiedOptions(loadCachedOrDefault()))
         onMainActor { applyCatalog(catalog) }
     }
