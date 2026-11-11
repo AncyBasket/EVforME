@@ -986,13 +986,16 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             XCTAssertEqual(v?.catalogDataIncomplete, true, id)
         }
         // Kuga 2023/2024: continuous undated Technische_Daten PDF is not a valid
-        // pure-CD source (wave2 review) — remain incomplete until a dated MY doc exists.
+        // source — CS/CD/range/battery must stay nil until a dated MY doc exists.
         for id in ["ford-kuga-phev-2023", "ford-kuga-phev-2024"] {
             let kuga = VehicleCatalogService.shared.vehicle(by: id)
             XCTAssertNotNil(kuga, id)
             XCTAssertEqual(kuga?.powertrain, .phev, id)
             XCTAssertEqual(kuga?.catalogDataIncomplete, true, id)
             XCTAssertNil(kuga?.usableChargeDepletingEnergyKWhPerKm, id)
+            XCTAssertNil(kuga?.usableChargeSustainingFuelLPerKm, id)
+            XCTAssertNil(kuga?.batteryKWh, id)
+            XCTAssertNil(kuga?.wltpRangeKm, id)
         }
     }
 

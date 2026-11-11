@@ -7067,11 +7067,12 @@
       "model": "Compass",
       "year": 2022,
       "market": "IT",
+      "n": 10348,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "no MY2022-specific official CS/CD doc; jeep.de/hybrid-suv is a generic range page (archive 2024) — rejected; weighted WLTP/power not identical to 2024 donor"
+      "reason": "CS still nil: jeep.de/hybrid-suv archive rejected as generic range page; 2022↔2024 homolog reuse blocked (weighted WLTP/power not identical)"
     },
     {
       "id": "jeep-renegade-phev-4xe-2022",
@@ -7079,11 +7080,12 @@
       "model": "Renegade",
       "year": 2022,
       "market": "IT",
+      "n": 7514,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "no MY2022-specific official CS/CD doc; jeep.de/hybrid-suv generic range page rejected; weighted WLTP not identical to 2024 donor"
+      "reason": "CS still nil: jeep.de/hybrid-suv generic landing rejected; 2022↔2024 donor weighted WLTP not identical"
     },
     {
       "id": "cupra-formentor-phev-e-hybrid-2024",
@@ -7091,12 +7093,13 @@
       "model": "Formentor",
       "year": 2024,
       "market": "IT",
+      "n": 3467,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "missing CS+CD+EAER combined; no dated CUPRA OEM sheet verified in this restore PR"
     },
     {
       "id": "jeep-renegade-phev-4xe-2023",
@@ -7104,11 +7107,12 @@
       "model": "Renegade",
       "year": 2023,
       "market": "IT",
+      "n": 3409,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CD puro nil; CS was hybrid-suv-only and scrubbed; no dated MY23 pure-electric OEM cite"
     },
     {
       "id": "mini-countryman-cooper-se-all4-2023",
@@ -7116,13 +7120,14 @@
       "model": "Countryman",
       "year": 2023,
       "market": "IT",
+      "n": 3408,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery all nil; no dated MINI OEM PHEV sheet attached in this PR"
     },
     {
       "id": "volvo-xc40-phev-recharge-2022",
@@ -7130,13 +7135,14 @@
       "model": "XC40",
       "year": 2022,
       "market": "IT",
+      "n": 3323,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no MY2022-dated Volvo OEM PHEV document in this restore pass"
     },
     {
       "id": "cupra-formentor-phev-e-hybrid-2023",
@@ -7144,13 +7150,14 @@
       "model": "Formentor",
       "year": 2023,
       "market": "IT",
+      "n": 3005,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no dated CUPRA Formentor MY23 OEM sheet in this PR"
     },
     {
       "id": "volvo-xc40-phev-recharge-2023",
@@ -7158,13 +7165,14 @@
       "model": "XC40",
       "year": 2023,
       "market": "IT",
+      "n": 2589,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no MY2023-dated Volvo XC40 PHEV OEM document verified here"
     },
     {
       "id": "volvo-xc60-phev-recharge-2024",
@@ -7172,10 +7180,11 @@
       "model": "XC60",
       "year": 2024,
       "market": "IT",
+      "n": 2520,
       "missing": [
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CD puro nil (CS present from prior wave); no dated pure-electric kWh label for MY24"
     },
     {
       "id": "bmw-x1-phev-xdrive25e-2024",
@@ -7183,10 +7192,11 @@
       "model": "X1",
       "year": 2024,
       "market": "IT",
+      "n": 2475,
       "missing": [
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CD puro nil; weighted-only Strom on EnVKV; no charge-depleting label for MY24"
     },
     {
       "id": "bmw-x1-phev-xdrive25e-2022",
@@ -7194,11 +7204,12 @@
       "model": "X1",
       "year": 2022,
       "market": "IT",
+      "n": 2436,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS+CD nil; no MY2022-dated BMW X1 PHEV OEM sheet verified in this restore PR"
     },
     {
       "id": "jeep-renegade-phev-4xe-2024",
@@ -7206,11 +7217,12 @@
       "model": "Renegade",
       "year": 2024,
       "market": "IT",
+      "n": 2092,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CD puro nil; CS from hybrid-suv scrubbed; no dated MY24 pure-electric OEM cite"
     },
     {
       "id": "alfa-romeo-tonale-phev-2023",
@@ -7218,13 +7230,14 @@
       "model": "Tonale",
       "year": 2023,
       "market": "IT",
+      "n": 1986,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no dated Stellantis Tonale MY23 PHEV sheet in this PR"
     },
     {
       "id": "ford-kuga-phev-2022",
@@ -7232,13 +7245,14 @@
       "model": "Kuga",
       "year": 2022,
       "market": "IT",
+      "n": 1923,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no MY2022-dated OEM doc / 2022 archive snapshot; live Technische_Daten PDF is continuously updated (archive only 2026) — invalid for MY22 and as homolog donor source"
+      "reason": "no MY2022-dated OEM typenblatt / 2022 archive; continuous Technische_Daten PDF (archive only 2026) invalid for MY22; weightedFuel 0.01007 kept from EEA IT n=1923"
     },
     {
       "id": "mercedes-benz-glc-phev-300-de-2024",
@@ -7246,13 +7260,14 @@
       "model": "GLC",
       "year": 2024,
       "market": "IT",
+      "n": 1863,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no dated Mercedes GLC 300 de MY24 OEM sheet here"
     },
     {
       "id": "volvo-xc60-phev-recharge-2023",
@@ -7260,10 +7275,11 @@
       "model": "XC60",
       "year": 2023,
       "market": "IT",
+      "n": 1863,
       "missing": [
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CD puro nil after provenance scrub of undated live press reuse; no MY23 pure-CD cite"
     },
     {
       "id": "toyota-c-hr-phev-2024",
@@ -7271,10 +7287,11 @@
       "model": "C-HR",
       "year": 2024,
       "market": "IT",
+      "n": 1805,
       "missing": [
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CD puro nil; no dated Toyota C-HR PHEV charge-depleting label verified in this PR"
     },
     {
       "id": "peugeot-3008-phev-2022",
@@ -7282,13 +7299,14 @@
       "model": "3008",
       "year": 2022,
       "market": "IT",
+      "n": 1749,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no MY2022-dated Peugeot 3008 PHEV OEM document here"
     },
     {
       "id": "renault-captur-phev-e-tech-phev-2022",
@@ -7296,13 +7314,14 @@
       "model": "Captur",
       "year": 2022,
       "market": "IT",
+      "n": 1661,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no MY2022-dated Renault Captur E-Tech OEM sheet here"
     },
     {
       "id": "bmw-x1-phev-xdrive25e-2023",
@@ -7310,10 +7329,11 @@
       "model": "X1",
       "year": 2023,
       "market": "IT",
+      "n": 1629,
       "missing": [
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CD puro nil; no dated pure-electric kWh label for X1 MY23 in this restore PR"
     },
     {
       "id": "mercedes-benz-gle-phev-350-de-2022",
@@ -7321,13 +7341,14 @@
       "model": "GLE",
       "year": 2022,
       "market": "IT",
+      "n": 1606,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no MY2022-dated Mercedes GLE 350 de OEM sheet here"
     },
     {
       "id": "peugeot-3008-phev-2023",
@@ -7335,11 +7356,12 @@
       "model": "3008",
       "year": 2023,
       "market": "IT",
+      "n": 1604,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS+CD nil; no dated Peugeot 3008 MY23 PHEV OEM sheet verified in this PR"
     },
     {
       "id": "mini-countryman-cooper-se-all4-2022",
@@ -7347,13 +7369,14 @@
       "model": "Countryman",
       "year": 2022,
       "market": "IT",
+      "n": 1492,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no MY2022-dated MINI Countryman SE ALL4 OEM sheet here"
     },
     {
       "id": "audi-q3-sportback-phev-45-tfsi-e-2024",
@@ -7361,13 +7384,14 @@
       "model": "Q3 Sportback",
       "year": 2024,
       "market": "IT",
+      "n": 1487,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no dated Audi Q3 Sportback TFSI e MY24 sheet in this PR"
     },
     {
       "id": "audi-q3-sportback-phev-45-tfsi-e-2023",
@@ -7375,13 +7399,14 @@
       "model": "Q3 Sportback",
       "year": 2023,
       "market": "IT",
+      "n": 1482,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no dated Audi Q3 Sportback TFSI e MY23 sheet in this PR"
     },
     {
       "id": "mercedes-benz-gla-phev-250-e-2023",
@@ -7389,13 +7414,14 @@
       "model": "GLA",
       "year": 2023,
       "market": "IT",
+      "n": 1382,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no MY2023-dated Mercedes GLA 250 e OEM sheet here"
     },
     {
       "id": "mercedes-benz-gle-coupe-phev-350-de-2022",
@@ -7403,13 +7429,14 @@
       "model": "GLE Coupé",
       "year": 2022,
       "market": "IT",
+      "n": 1274,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no MY2022-dated Mercedes GLE Coupé 350 de OEM sheet here"
     },
     {
       "id": "mercedes-benz-gla-phev-250-e-2022",
@@ -7417,13 +7444,14 @@
       "model": "GLA",
       "year": 2022,
       "market": "IT",
+      "n": 1270,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no MY2022-dated Mercedes GLA 250 e OEM sheet here"
     },
     {
       "id": "alfa-romeo-tonale-phev-2024",
@@ -7431,13 +7459,14 @@
       "model": "Tonale",
       "year": 2024,
       "market": "IT",
+      "n": 0,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no dated Tonale MY24 PHEV OEM sheet in this restore PR"
     },
     {
       "id": "audi-a3-phev-40-tfsi-e-2024",
@@ -7445,13 +7474,14 @@
       "model": "A3",
       "year": 2024,
       "market": "IT",
+      "n": 0,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no dated Audi A3 40 TFSI e MY24 OEM sheet here"
     },
     {
       "id": "audi-a3-phev-45-tfsi-e-2024",
@@ -7459,13 +7489,14 @@
       "model": "A3",
       "year": 2024,
       "market": "IT",
+      "n": 0,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no dated Audi A3 45 TFSI e MY24 OEM sheet here"
     },
     {
       "id": "audi-a3-phev-40-tfsi-e-2023",
@@ -7473,13 +7504,14 @@
       "model": "A3",
       "year": 2023,
       "market": "IT",
+      "n": 0,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no dated Audi A3 40 TFSI e MY23 OEM sheet here"
     },
     {
       "id": "audi-a3-phev-40-tfsi-e-2022",
@@ -7487,13 +7519,14 @@
       "model": "A3",
       "year": 2022,
       "market": "IT",
+      "n": 0,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no dated Audi A3 40 TFSI e MY22 OEM sheet here"
     },
     {
       "id": "audi-a3-e-tron-ultra-phev-2016",
@@ -7501,10 +7534,11 @@
       "model": "A3 PHEV",
       "year": 2016,
       "market": "US/EPA",
+      "n": 0,
       "missing": [
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "US/EPA shell; battery nil; no EU WLTP pure-CD package — not researched in this PR"
     },
     {
       "id": "audi-q3-phev-45-tfsi-e-2024",
@@ -7512,13 +7546,14 @@
       "model": "Q3",
       "year": 2024,
       "market": "IT",
+      "n": 0,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no dated Audi Q3 TFSI e MY24 OEM sheet here"
     },
     {
       "id": "audi-q3-phev-45-tfsi-e-2023",
@@ -7526,13 +7561,14 @@
       "model": "Q3",
       "year": 2023,
       "market": "IT",
+      "n": 0,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no dated Audi Q3 TFSI e MY23 OEM sheet here"
     },
     {
       "id": "audi-q3-phev-45-tfsi-e-2022",
@@ -7540,13 +7576,14 @@
       "model": "Q3",
       "year": 2022,
       "market": "IT",
+      "n": 0,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no dated Audi Q3 TFSI e MY22 OEM sheet here"
     },
     {
       "id": "audi-q3-sportback-phev-45-tfsi-e-2022",
@@ -7554,13 +7591,14 @@
       "model": "Q3 Sportback",
       "year": 2022,
       "market": "IT",
+      "n": 0,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no dated Audi Q3 Sportback TFSI e MY22 OEM sheet here"
     },
     {
       "id": "audi-q5-phev-50-tfsi-e-2024",
@@ -7568,13 +7606,14 @@
       "model": "Q5",
       "year": 2024,
       "market": "IT",
+      "n": 0,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no dated Audi Q5 50 TFSI e MY24 OEM sheet here"
     },
     {
       "id": "audi-q5-phev-50-tfsi-e-2023",
@@ -7582,13 +7621,14 @@
       "model": "Q5",
       "year": 2023,
       "market": "IT",
+      "n": 0,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no same-MY official OEM document with dated pure-electric (rein elektrisch / charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / EAER City-only / weighted-only kWh rejected"
+      "reason": "CS/CD/range/battery nil; no dated Audi Q5 50 TFSI e MY23 OEM sheet here"
     }
   ],
   "non_phev_tech_sha": "6b9038232bc51daabc9e259fc0dab170f787984d4dfb8f597e309fe50155b4dc",
@@ -7598,80 +7638,38 @@
     "tesla-model-3-premium-trazione-posteriore-2026",
     "tesla-model-3-trazione-posteriore-2026"
   ],
-  "sourceDay": "2026-11-10",
+  "sourceDay": "2026-11-11",
   "reviewNotes": [
+    "RESTORE/CONTROLS PR — not a researched fill of the 37 remaining lotto rows.",
     "Reverted ford-kuga-2022 completion (continuous undated Ford PDF / no 2022 archive).",
     "Reverted Jeep Compass/Renegade 2022 CS from generic /hybrid-suv archive.",
+    "Cleared ford-kuga-2023/2024 CS/battery/range/weighted orphans from continuous typenblatt.",
     "Restored homolog shared map to main (no unverified 2022 year injection).",
     "BMW 330e 2024 battery 19.5 kept as extra vs lotto; pure CD nil.",
-    "Scrubbed generic/dating-invalid fieldSources on all PHEV rows under strengthened checker."
+    "Scrubbed generic/dating-invalid fieldSources + rejected URLs from sourceName."
   ],
   "scrubbed_invalid_provenance": [
     {
-      "id": "jeep-grand-cherokee-4xe-2023",
-      "cleared": [
-        "fuelConsumptionLPerKm"
-      ]
-    },
-    {
-      "id": "jeep-wrangler-4xe-2022",
-      "cleared": [
-        "fuelConsumptionLPerKm"
-      ]
-    },
-    {
-      "id": "jeep-wrangler-4xe-2023",
-      "cleared": [
-        "fuelConsumptionLPerKm"
-      ]
-    },
-    {
       "id": "ford-kuga-phev-2023",
-      "cleared": [
-        "energyConsumptionKWhPerKm"
-      ]
-    },
-    {
-      "id": "jeep-compass-phev-4xe-2023",
-      "cleared": [
-        "fuelConsumptionLPerKm"
-      ]
-    },
-    {
-      "id": "jeep-renegade-phev-4xe-2023",
-      "cleared": [
-        "fuelConsumptionLPerKm"
-      ]
+      "cleared": [],
+      "sourceNameScrubbed": true
     },
     {
       "id": "ford-kuga-phev-2024",
-      "cleared": [
-        "energyConsumptionKWhPerKm"
-      ]
+      "cleared": [],
+      "sourceNameScrubbed": true
     },
     {
-      "id": "jeep-renegade-phev-4xe-2024",
-      "cleared": [
-        "fuelConsumptionLPerKm"
-      ]
+      "id": "ford-kuga-phev-2023",
+      "cleared": [],
+      "kugaContinuousOemCleared": true
     },
     {
-      "id": "jeep-compass-phev-4xe-2024",
-      "cleared": [
-        "fuelConsumptionLPerKm"
-      ]
-    },
-    {
-      "id": "jeep-wrangler-4xe-2024",
-      "cleared": [
-        "fuelConsumptionLPerKm"
-      ]
-    },
-    {
-      "id": "jeep-grand-cherokee-4xe-2024",
-      "cleared": [
-        "fuelConsumptionLPerKm"
-      ]
+      "id": "ford-kuga-phev-2024",
+      "cleared": [],
+      "kugaContinuousOemCleared": true
     }
-  ]
+  ],
+  "provenance_fixes": [],
+  "prKind": "restore_controls"
 }

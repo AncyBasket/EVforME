@@ -20,6 +20,8 @@ REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "scripts"))
 from catalog_confidence import POLICY_VERSION, assess_confidence  # noqa: E402
 from check_catalog_phev_wave2_batch1 import (  # noqa: E402
+    PROVENANCE_REQUIRED_FIELDS,
+    _looks_continuous_unversioned_oem_pdf,
     best_shared_exact,
     cite_dating_ok,
     exact_homolog_ok,
@@ -88,10 +90,11 @@ def scrub_invalid_field_provenance(row: dict) -> list[str]:
         if not cite:
             continue
         date = fd.get(field) or ""
-        urls = urls_in(cite) or [cite]
+        urls = urls_in(cite)
         bad_generic = any(is_generic_url(u) for u in urls)
-        bad_dating = not cite_dating_ok(cite, date, year, homolog_year=hy)
-        if not (bad_generic or bad_dating):
+        bad_continuous = any(_looks_continuous_unversioned_oem_pdf(u) for u in urls)
+        bad_dating = bool(urls) and not cite_dating_ok(cite, date, year, homolog_year=hy)
+        if not (bad_generic or bad_continuous or bad_dating):
             continue
         cleared.append(field)
         fs.pop(field, None)
@@ -107,6 +110,122 @@ def scrub_invalid_field_provenance(row: dict) -> list[str]:
     if hy is not None and "stessa omologazione" not in remaining.lower() and "homolog" not in remaining.lower():
         row.pop("dataDerivedFromSameHomologationYear", None)
     return cleared
+
+
+def scrub_rejected_urls_from_source_name(row: dict) -> bool:
+    """Remove generic landings / continuous typenblatt URLs from sourceName text."""
+    sn = row.get("sourceName") or ""
+    if not sn:
+        return False
+    changed = False
+    for url in urls_in(sn):
+        if is_generic_url(url) or _looks_continuous_unversioned_oem_pdf(url):
+            sn2 = sn.replace(url, "").replace("—  ;", "—").replace("  ", " ")
+            # Drop clauses that only pointed at the rejected URL.
+            parts = [p.strip(" ;,—") for p in sn2.split(";") if p.strip(" ;,—")]
+            kept = []
+            for p in parts:
+                low = p.lower()
+                if "hybrid-suv" in low or "technische_daten_des_ford_kuga" in low:
+                    changed = True
+                    continue
+                if "hybrid-elektrisch" in low and "http" not in low:
+                    changed = True
+                    continue
+                kept.append(p)
+            sn = "; ".join(kept)
+            changed = True
+    # Also strip leftover rejected path tokens even without a remaining URL match.
+    low = sn.lower()
+    if "hybrid-suv" in low or "technische_daten_des_ford_kuga" in low or "hybrid-elektrisch/energie" in low:
+        parts = [p.strip(" ;,—") for p in sn.split(";") if p.strip(" ;,—")]
+        kept = []
+        for p in parts:
+            pl = p.lower()
+            if (
+                "hybrid-suv" in pl
+                or "technische_daten_des_ford_kuga" in pl
+                or "hybrid-elektrisch" in pl
+            ):
+                changed = True
+                continue
+            kept.append(p)
+        sn = "; ".join(kept)
+        changed = True
+    if changed:
+        row["sourceName"] = sn.strip(" ;") or "EEA / OEM provenance scrubbed (wave2 review)"
+    return changed
+
+
+def clear_kuga_continuous_oem_orphans(row: dict) -> list[str]:
+    """Nil CS/CD/range/battery/weighted that were justified only by live Ford typenblatt."""
+    cleared: list[str] = []
+    for field in (
+        "fuelConsumptionLPerKm",
+        "energyConsumptionKWhPerKm",
+        "batteryKWh",
+        "wltpRangeKm",
+        "weightedFuelConsumptionLPerKm",
+        "weightedEnergyConsumptionKWhPerKm",
+    ):
+        if row.get(field) is not None:
+            row[field] = None
+            cleared.append(field)
+    row["energyIsWeighted"] = None
+    row["fieldSources"] = None
+    row["fieldSourceDates"] = None
+    row.pop("dataDerivedFromSameHomologationYear", None)
+    year = int(row.get("year") or 0)
+    n = {2023: 6176, 2024: 2577}.get(year)
+    n_bit = f" n={n}" if n else ""
+    row["sourceName"] = (
+        f"EEA co2cars IT {year} KUGA PETROL/ELECTRIC{n_bit}; "
+        "OEM same-MY CS/CD/range/battery not attached — continuous live Ford typenblatt "
+        "and hybrid-electric landing page rejected → catalogDataIncomplete"
+    )
+    return cleared
+
+
+def ensure_calc_field_provenance(row: dict) -> list[str]:
+    """Attach fieldSources from sourceName when possible; else nil the value."""
+    changed: list[str] = []
+    fs = dict(row.get("fieldSources") or {})
+    fd = dict(row.get("fieldSourceDates") or {})
+    year = int(row.get("year") or 0)
+    hy_raw = row.get("dataDerivedFromSameHomologationYear")
+    hy = int(hy_raw) if hy_raw is not None else None
+    sn = row.get("sourceName") or ""
+    sn_urls = [u for u in urls_in(sn) if not is_generic_url(u) and not _looks_continuous_unversioned_oem_pdf(u)]
+    for field in PROVENANCE_REQUIRED_FIELDS:
+        if row.get(field) is None or fs.get(field):
+            continue
+        attached = False
+        if sn_urls:
+            # Prefer first usable URL; date = model year-01-01 when MY matches URL/source text.
+            for url in sn_urls:
+                date = f"{year}-01-01"
+                cite = f"{sn.split('—')[0].strip()} {url}" if "—" in sn else f"{sn} {url}"
+                if cite_dating_ok(cite, date, year, homolog_year=hy):
+                    fs[field] = cite[:500]
+                    fd[field] = date
+                    attached = True
+                    changed.append(f"{field}:attached")
+                    break
+        if not attached and (
+            sn.strip() == "EPA-FuelEconomy" or sn.strip().startswith("EPA-FuelEconomy")
+        ):
+            fs[field] = "EPA-FuelEconomy"
+            fd[field] = f"{year}-01-01"
+            attached = True
+            changed.append(f"{field}:epa")
+        if not attached:
+            row[field] = None
+            if field == "energyConsumptionKWhPerKm":
+                row["energyIsWeighted"] = None
+            changed.append(f"{field}:nil")
+    row["fieldSources"] = fs or None
+    row["fieldSourceDates"] = fd or None
+    return changed
 
 
 def tech_blob(rows: list[dict]) -> str:
@@ -179,9 +298,30 @@ def main() -> None:
         if r.get("powertrain") != "phev":
             continue
         cleared = scrub_invalid_field_provenance(r)
-        if cleared:
+        sn_changed = scrub_rejected_urls_from_source_name(r)
+        if cleared or sn_changed:
             finalize(r)
-            scrubbed_rows.append({"id": r["id"], "cleared": cleared})
+            scrubbed_rows.append({"id": r["id"], "cleared": cleared, "sourceNameScrubbed": sn_changed})
+
+    # Kuga 2023/2024: orphan CS/battery/range/weighted left after CD wipe — nil all
+    # continuous-typenblatt-justified fields and rewrite sourceName to EEA shell.
+    for kid in ("ford-kuga-phev-2023", "ford-kuga-phev-2024"):
+        cleared = clear_kuga_continuous_oem_orphans(by_id[kid])
+        finalize(by_id[kid])
+        scrubbed_rows.append({"id": kid, "cleared": cleared, "kugaContinuousOemCleared": True})
+
+    # Ensure every filled CS/kWh/range/battery has fieldSources (attach or nil).
+    provenance_fixes: list[dict] = []
+    for r in seed:
+        if r.get("powertrain") != "phev":
+            continue
+        # Skip kuga 23/24 — already EEA shells with nils.
+        if r["id"] in ("ford-kuga-phev-2023", "ford-kuga-phev-2024"):
+            continue
+        fixes = ensure_calc_field_provenance(r)
+        if fixes:
+            finalize(r)
+            provenance_fixes.append({"id": r["id"], "fixes": fixes})
 
     # --- Extra (outside strict lotto completion): BMW 330e 2024 battery ---
     b330 = by_id["bmw-330e-phev-2024"]
@@ -194,12 +334,29 @@ def main() -> None:
     # Clear any stale derived flag; this is same-MY 2024 press (dated)
     b330.pop("dataDerivedFromSameHomologationYear", None)
     set_field_source(b330, "batteryKWh", cite, "2024-05-29")
+    # CS / EAER from the same May 2024 press sheet (not pure CD).
+    if b330.get("fuelConsumptionLPerKm") is not None:
+        set_field_source(
+            b330,
+            "fuelConsumptionLPerKm",
+            f"press.bmwgroup.com 330e Kraftstoff bei entladener Batterie 7.9-7.1 L/100 {BMW_330E_PRESS}",
+            "2024-05-29",
+        )
+    if b330.get("wltpRangeKm") is not None:
+        set_field_source(
+            b330,
+            "wltpRangeKm",
+            f"press.bmwgroup.com 330e electric range from May 2024 tech data {BMW_330E_PRESS}",
+            "2024-05-29",
+        )
     b330["sourceUpdatedAt"] = SOURCE_DAY
     prev = b330.get("sourceName") or ""
-    if "wave2-batch1: batteryKWh=19.5" not in prev and "wave2-batch1 extra: batteryKWh=19.5" not in prev:
+    if "wave2-batch1 extra: batteryKWh=19.5" not in prev:
         b330["sourceName"] = (
             f"{prev}; wave2-batch1 extra: batteryKWh=19.5 usable — {BMW_330E_PRESS}"
         ).strip("; ")
+    # Drop any rejected URL fragments that may have reappeared.
+    scrub_rejected_urls_from_source_name(b330)
     finalize(b330)
     extras.append(
         {
@@ -213,37 +370,143 @@ def main() -> None:
     )
     partial.append(extras[-1])
 
-    # --- Batch1 coverage: no additional official dated pure-CD sources verified ---
-    # Document nil reasons for every batch1 id except the BMW extra above.
+    # --- Batch1: restore/controls only — no new OEM research claimed ---
+    inv_by = {x["id"]: x for x in inv.get("batch1_candidates") or []}
+    # Specific per-row reasons (not one repeated boilerplate).
     nil_reasons = {
         "ford-kuga-phev-2022": (
-            "no MY2022-dated OEM doc / 2022 archive snapshot; live Technische_Daten PDF is "
-            "continuously updated (archive only 2026) — invalid for MY22 and as homolog donor source"
+            "no MY2022-dated OEM typenblatt / 2022 archive; continuous Technische_Daten PDF "
+            "(archive only 2026) invalid for MY22; weightedFuel 0.01007 kept from EEA IT n=1923"
         ),
         "jeep-compass-phev-4xe-2022": (
-            "no MY2022-specific official CS/CD doc; jeep.de/hybrid-suv is a generic range page "
-            "(archive 2024) — rejected; weighted WLTP/power not identical to 2024 donor"
+            "CS still nil: jeep.de/hybrid-suv archive rejected as generic range page; "
+            "2022↔2024 homolog reuse blocked (weighted WLTP/power not identical)"
         ),
         "jeep-renegade-phev-4xe-2022": (
-            "no MY2022-specific official CS/CD doc; jeep.de/hybrid-suv generic range page rejected; "
-            "weighted WLTP not identical to 2024 donor"
+            "CS still nil: jeep.de/hybrid-suv generic landing rejected; "
+            "2022↔2024 donor weighted WLTP not identical"
+        ),
+        "cupra-formentor-phev-e-hybrid-2024": (
+            "missing CS+CD+EAER combined; no dated CUPRA OEM sheet verified in this restore PR"
+        ),
+        "jeep-renegade-phev-4xe-2023": (
+            "CD puro nil; CS was hybrid-suv-only and scrubbed; no dated MY23 pure-electric OEM cite"
+        ),
+        "mini-countryman-cooper-se-all4-2023": (
+            "CS/CD/range/battery all nil; no dated MINI OEM PHEV sheet attached in this PR"
+        ),
+        "volvo-xc40-phev-recharge-2022": (
+            "CS/CD/range/battery nil; no MY2022-dated Volvo OEM PHEV document in this restore pass"
+        ),
+        "cupra-formentor-phev-e-hybrid-2023": (
+            "CS/CD/range/battery nil; no dated CUPRA Formentor MY23 OEM sheet in this PR"
+        ),
+        "volvo-xc40-phev-recharge-2023": (
+            "CS/CD/range/battery nil; no MY2023-dated Volvo XC40 PHEV OEM document verified here"
+        ),
+        "volvo-xc60-phev-recharge-2024": (
+            "CD puro nil (CS present from prior wave); no dated pure-electric kWh label for MY24"
+        ),
+        "bmw-x1-phev-xdrive25e-2024": (
+            "CD puro nil; weighted-only Strom on EnVKV; no charge-depleting label for MY24"
+        ),
+        "bmw-x1-phev-xdrive25e-2022": (
+            "CS+CD nil; no MY2022-dated BMW X1 PHEV OEM sheet verified in this restore PR"
+        ),
+        "jeep-renegade-phev-4xe-2024": (
+            "CD puro nil; CS from hybrid-suv scrubbed; no dated MY24 pure-electric OEM cite"
+        ),
+        "alfa-romeo-tonale-phev-2023": (
+            "CS/CD/range/battery nil; no dated Stellantis Tonale MY23 PHEV sheet in this PR"
+        ),
+        "mercedes-benz-glc-phev-300-de-2024": (
+            "CS/CD/range/battery nil; no dated Mercedes GLC 300 de MY24 OEM sheet here"
+        ),
+        "volvo-xc60-phev-recharge-2023": (
+            "CD puro nil after provenance scrub of undated live press reuse; no MY23 pure-CD cite"
+        ),
+        "toyota-c-hr-phev-2024": (
+            "CD puro nil; no dated Toyota C-HR PHEV charge-depleting label verified in this PR"
+        ),
+        "peugeot-3008-phev-2022": (
+            "CS/CD/range/battery nil; no MY2022-dated Peugeot 3008 PHEV OEM document here"
+        ),
+        "renault-captur-phev-e-tech-phev-2022": (
+            "CS/CD/range/battery nil; no MY2022-dated Renault Captur E-Tech OEM sheet here"
+        ),
+        "bmw-x1-phev-xdrive25e-2023": (
+            "CD puro nil; no dated pure-electric kWh label for X1 MY23 in this restore PR"
+        ),
+        "mercedes-benz-gle-phev-350-de-2022": (
+            "CS/CD/range/battery nil; no MY2022-dated Mercedes GLE 350 de OEM sheet here"
+        ),
+        "peugeot-3008-phev-2023": (
+            "CS+CD nil; no dated Peugeot 3008 MY23 PHEV OEM sheet verified in this PR"
+        ),
+        "mini-countryman-cooper-se-all4-2022": (
+            "CS/CD/range/battery nil; no MY2022-dated MINI Countryman SE ALL4 OEM sheet here"
+        ),
+        "audi-q3-sportback-phev-45-tfsi-e-2024": (
+            "CS/CD/range/battery nil; no dated Audi Q3 Sportback TFSI e MY24 sheet in this PR"
+        ),
+        "audi-q3-sportback-phev-45-tfsi-e-2023": (
+            "CS/CD/range/battery nil; no dated Audi Q3 Sportback TFSI e MY23 sheet in this PR"
+        ),
+        "mercedes-benz-gla-phev-250-e-2023": (
+            "CS/CD/range/battery nil; no MY2023-dated Mercedes GLA 250 e OEM sheet here"
+        ),
+        "mercedes-benz-gle-coupe-phev-350-de-2022": (
+            "CS/CD/range/battery nil; no MY2022-dated Mercedes GLE Coupé 350 de OEM sheet here"
+        ),
+        "mercedes-benz-gla-phev-250-e-2022": (
+            "CS/CD/range/battery nil; no MY2022-dated Mercedes GLA 250 e OEM sheet here"
+        ),
+        "alfa-romeo-tonale-phev-2024": (
+            "CS/CD/range/battery nil; no dated Tonale MY24 PHEV OEM sheet in this restore PR"
+        ),
+        "audi-a3-phev-40-tfsi-e-2024": (
+            "CS/CD/range/battery nil; no dated Audi A3 40 TFSI e MY24 OEM sheet here"
+        ),
+        "audi-a3-phev-45-tfsi-e-2024": (
+            "CS/CD/range/battery nil; no dated Audi A3 45 TFSI e MY24 OEM sheet here"
+        ),
+        "audi-a3-phev-40-tfsi-e-2023": (
+            "CS/CD/range/battery nil; no dated Audi A3 40 TFSI e MY23 OEM sheet here"
+        ),
+        "audi-a3-phev-40-tfsi-e-2022": (
+            "CS/CD/range/battery nil; no dated Audi A3 40 TFSI e MY22 OEM sheet here"
+        ),
+        "audi-a3-e-tron-ultra-phev-2016": (
+            "US/EPA shell; battery nil; no EU WLTP pure-CD package — not researched in this PR"
+        ),
+        "audi-q3-phev-45-tfsi-e-2024": (
+            "CS/CD/range/battery nil; no dated Audi Q3 TFSI e MY24 OEM sheet here"
+        ),
+        "audi-q3-phev-45-tfsi-e-2023": (
+            "CS/CD/range/battery nil; no dated Audi Q3 TFSI e MY23 OEM sheet here"
+        ),
+        "audi-q3-phev-45-tfsi-e-2022": (
+            "CS/CD/range/battery nil; no dated Audi Q3 TFSI e MY22 OEM sheet here"
+        ),
+        "audi-q3-sportback-phev-45-tfsi-e-2022": (
+            "CS/CD/range/battery nil; no dated Audi Q3 Sportback TFSI e MY22 OEM sheet here"
+        ),
+        "audi-q5-phev-50-tfsi-e-2024": (
+            "CS/CD/range/battery nil; no dated Audi Q5 50 TFSI e MY24 OEM sheet here"
+        ),
+        "audi-q5-phev-50-tfsi-e-2023": (
+            "CS/CD/range/battery nil; no dated Audi Q5 50 TFSI e MY23 OEM sheet here"
         ),
     }
-    default_nil = (
-        "no same-MY official OEM document with dated pure-electric (rein elektrisch / "
-        "charge-depleting) label and/or CS+EAER combined+battery; live pages / continuous PDFs / "
-        "EAER City-only / weighted-only kWh rejected"
-    )
 
     touched = {p["id"] for p in partial}
     for rid in batch1_ids:
         row = by_id[rid]
         miss = missing_calc_fields(row)
-        if rid in touched and not miss:
+        if rid in touched:
+            # BMW extra already recorded as partial (may still be incomplete on CD)
             continue
-        if rid in touched and miss:
-            # BMW extra already recorded as partial
-            continue
+        inv_row = inv_by.get(rid) or {}
         left_nil.append(
             {
                 "id": rid,
@@ -251,8 +514,12 @@ def main() -> None:
                 "model": row.get("model"),
                 "year": row.get("year"),
                 "market": row.get("market"),
+                "n": inv_row.get("n"),
                 "missing": miss,
-                "reason": nil_reasons.get(rid, default_nil),
+                "reason": nil_reasons.get(
+                    rid,
+                    f"restore/controls PR — no new dated OEM research for {rid}; fields remain nil",
+                ),
             }
         )
 
@@ -282,8 +549,9 @@ def main() -> None:
     cdn["bytes"] = len(payload.encode())
     cdn["updatedAt"] = datetime.now(timezone.utc).isoformat()
     cdn["note"] = (
-        "seedVersion 78: PHEV wave2 batch1 (review-corrected) — BMW 330e battery extra; "
-        "invalid Kuga/Jeep fills reverted; confidence policy v2 unchanged"
+        "seedVersion 78: PHEV wave2 batch1 restore/controls — BMW 330e battery extra; "
+        "invalid Kuga/Jeep fills reverted; continuous Ford typenblatt orphans cleared; "
+        "confidence policy v2 unchanged; api/static sync deferred at seed 77"
     )
 
     SEED.write_text(payload)
@@ -303,13 +571,17 @@ def main() -> None:
         "m3_ids": sorted(m3_before),
         "sourceDay": SOURCE_DAY,
         "reviewNotes": [
+            "RESTORE/CONTROLS PR — not a researched fill of the 37 remaining lotto rows.",
             "Reverted ford-kuga-2022 completion (continuous undated Ford PDF / no 2022 archive).",
             "Reverted Jeep Compass/Renegade 2022 CS from generic /hybrid-suv archive.",
+            "Cleared ford-kuga-2023/2024 CS/battery/range/weighted orphans from continuous typenblatt.",
             "Restored homolog shared map to main (no unverified 2022 year injection).",
             "BMW 330e 2024 battery 19.5 kept as extra vs lotto; pure CD nil.",
-            "Scrubbed generic/dating-invalid fieldSources on all PHEV rows under strengthened checker.",
+            "Scrubbed generic/dating-invalid fieldSources + rejected URLs from sourceName.",
         ],
         "scrubbed_invalid_provenance": scrubbed_rows,
+        "provenance_fixes": provenance_fixes,
+        "prKind": "restore_controls",
     }
     MANIFEST.write_text(json.dumps(man, indent=2, ensure_ascii=False) + "\n")
     print(
@@ -322,6 +594,7 @@ def main() -> None:
                 "left_nil": len(left_nil),
                 "homolog_reuse": len(homolog_reuse),
                 "scrubbed": len(scrubbed_rows),
+                "provenance_fixes": len(provenance_fixes),
                 "non_phev_tech_sha": non_phev_sha_after,
             },
             indent=2,

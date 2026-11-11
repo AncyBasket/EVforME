@@ -40,12 +40,20 @@ GENERIC_PATH_HINTS = (
     "/models.html",
     "/modelle",
     "/hybrid-suv",
+    "/hybrid-elektrisch",
     "/range",
     "/elettrificate",
     "/electrified",
     "/plugin-hybrid",
     "/plug-in-hybrid",
     "/neuwagen",
+)
+
+PROVENANCE_REQUIRED_FIELDS = (
+    "fuelConsumptionLPerKm",
+    "energyConsumptionKWhPerKm",
+    "wltpRangeKm",
+    "batteryKWh",
 )
 
 
@@ -140,6 +148,9 @@ def source_year_ok(
 
 def is_generic_url(url: str) -> bool:
     u = (url or "").lower().rstrip(";,.)")
+    # Bare source tokens (EPA-FuelEconomy, etc.) are not landing-page URLs.
+    if not u.startswith("http://") and not u.startswith("https://") and "web.archive.org" not in u:
+        return False
     path = urlparse(u).path.rstrip("/")
     # strip archive prefix to inspect original path
     m = re.search(r"web\.archive\.org/web/\d+(?:id_)?/(https?://\S+)", u)
@@ -239,6 +250,16 @@ def must_fail_probes() -> None:
         caught += 1
     else:
         raise SystemExit("probe: /hybrid-suv range page not rejected")
+    if is_generic_url("https://www.ford.de/hybrid-elektrisch/energie"):
+        caught += 1
+    else:
+        raise SystemExit("probe: /hybrid-elektrisch landing not rejected")
+    if _looks_continuous_unversioned_oem_pdf(
+        "https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/Technische_Daten_des_Ford_Kuga.pdf"
+    ):
+        caught += 1
+    else:
+        raise SystemExit("probe: continuous Ford typenblatt not flagged")
 
     if WEIGHTED_ONLY_HINT.search("ECAC gewichtet, kombiniert 16,0 kWh") and not has_pure_energy_label(
         "ECAC gewichtet, kombiniert 16,0 kWh"
@@ -268,7 +289,7 @@ def must_fail_probes() -> None:
     else:
         raise SystemExit("probe: best_shared_exact tolerance/ranking still loose")
 
-    if caught < 9:
+    if caught < 11:
         raise SystemExit(f"probes incomplete caught={caught}")
 
 
@@ -352,6 +373,18 @@ def main() -> None:
             f"ford-kuga-phev-2022 weightedFuel must stay EEA 0.01007, got {kuga.get('weightedFuelConsumptionLPerKm')}"
         )
 
+    # Kuga 2023/2024: continuous typenblatt values must not linger without dated fieldSources
+    for kid in ("ford-kuga-phev-2023", "ford-kuga-phev-2024"):
+        kr = by_id[kid]
+        if kr.get("catalogDataIncomplete") is not True:
+            raise SystemExit(f"{kid} must remain incomplete without dated OEM provenance")
+        for fld in PROVENANCE_REQUIRED_FIELDS:
+            if kr.get(fld) is not None and not (kr.get("fieldSources") or {}).get(fld):
+                raise SystemExit(f"{kid}.{fld} filled without fieldSources")
+        for url in urls_in(kr.get("sourceName") or ""):
+            if is_generic_url(url) or _looks_continuous_unversioned_oem_pdf(url):
+                raise SystemExit(f"{kid} sourceName still cites rejected Ford URL: {url}")
+
     # Scan EVERY real PHEV row (not only synthetic probes)
     for r in seed:
         if r.get("powertrain") != "phev":
@@ -373,6 +406,19 @@ def main() -> None:
         fd = r.get("fieldSourceDates") or {}
         homolog_year = r.get("dataDerivedFromSameHomologationYear")
         hy = int(homolog_year) if homolog_year is not None else None
+
+        # Filled CS / kWh / range / battery require fieldSources
+        for field in PROVENANCE_REQUIRED_FIELDS:
+            if r.get(field) is not None and not fs.get(field):
+                raise SystemExit(f"filled without fieldSources {r['id']}.{field}")
+
+        # sourceName must not retain generic landings or continuous typenblätter
+        for url in urls_in(r.get("sourceName") or ""):
+            if is_generic_url(url):
+                raise SystemExit(f"generic URL in sourceName {r['id']}: {url}")
+            if _looks_continuous_unversioned_oem_pdf(url):
+                raise SystemExit(f"continuous OEM PDF in sourceName {r['id']}: {url}")
+
         for field, cite in fs.items():
             if not cite:
                 continue
@@ -381,11 +427,16 @@ def main() -> None:
             for url in urls:
                 if is_generic_url(url):
                     raise SystemExit(f"generic URL on {r['id']}.{field}: {url}")
-            if not cite_dating_ok(cite, date, int(r.get("year") or 0), homolog_year=hy):
-                raise SystemExit(
-                    f"dating fail {r['id']}.{field} year={r.get('year')} "
-                    f"homolog={homolog_year} date={date} urls={urls}"
-                )
+                if _looks_continuous_unversioned_oem_pdf(url):
+                    raise SystemExit(f"continuous OEM PDF on {r['id']}.{field}: {url}")
+            # Non-URL cites (e.g. bare tokens) are only OK when they contain no http URL;
+            # dating still required when URLs are present.
+            if urls_in(cite):
+                if not cite_dating_ok(cite, date, int(r.get("year") or 0), homolog_year=hy):
+                    raise SystemExit(
+                        f"dating fail {r['id']}.{field} year={r.get('year')} "
+                        f"homolog={homolog_year} date={date} urls={urls}"
+                    )
 
         if homolog_year is not None:
             # donor must exist and be exact on power + weighted WLTP
