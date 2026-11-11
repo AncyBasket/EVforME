@@ -102,6 +102,10 @@ def _ok_for_year(
     u = (url or "").rstrip(";,.)")
     if _looks_continuous_unversioned_oem_pdf(u):
         return False
+    # A later calendar year in the URL/filename cannot date an earlier model year
+    # (e.g. …/21-07-2025_preisliste_2025_… for MY2024), regardless of sourceDate.
+    if _url_years_after(u, check_year):
+        return False
     m = re.search(r"web\.archive\.org/web/(\d{8})", u)
     if m and int(m.group(1)[:4]) == check_year:
         return True
@@ -136,7 +140,17 @@ def source_year_ok(
 
     Homolog does NOT skip dating: a cite may pass via vehicle-year dating OR via
     donor-year dating with a year token / matching archive snapshot.
+    A URL/filename year strictly after the vehicle year always fails (even with a
+    same-MY sourceDate).
     """
+    # Future-year URL tokens fail for the vehicle year before homolog fallback.
+    if _url_years_after(url, int(vehicle_year)):
+        # Homolog onto a later donor year may still accept a donor-year URL.
+        if homolog_year is None:
+            return False
+        if _url_years_after(url, int(homolog_year)):
+            return False
+        return _ok_for_year(url, source_date, int(homolog_year), require_year_token=True)
     if _ok_for_year(url, source_date, int(vehicle_year), require_year_token=False):
         return True
     if homolog_year is not None and _ok_for_year(
@@ -289,7 +303,32 @@ def must_fail_probes() -> None:
     else:
         raise SystemExit("probe: best_shared_exact tolerance/ranking still loose")
 
-    if caught < 11:
+    mazda_2025 = (
+        "https://media-assets.mazda.eu/raw/upload/mazdade/globalassets/pdfs/brochure/"
+        "cx-60/21-07-2025_preisliste_2025_mazda-cx-60.pdf"
+    )
+    # MY2024 must reject a 2025 listino URL even with a same-MY (or any 2024) sourceDate.
+    if not source_year_ok(mazda_2025, "2024-01-01", 2024, homolog_year=None):
+        caught += 1
+    else:
+        raise SystemExit("probe: Mazda 2025 URL accepted for MY2024 with sourceDate 2024-01-01")
+    if not source_year_ok(mazda_2025, "2024-06-15", 2024, homolog_year=None):
+        caught += 1
+    else:
+        raise SystemExit("probe: Mazda 2025 URL accepted for MY2024 with sourceDate 2024-06-15")
+    # Positive control: official January Stellantis listino dates as 2023-01-01.
+    stellantis_jan = (
+        "https://www.media.stellantis.com/uploads/de/model-pricelist/"
+        "preisliste_grand_cherokee_4xe_januar_20234-6486c171a11d8.pdf"
+    )
+    if extract_document_date(stellantis_jan) == "2023-01-01" and source_year_ok(
+        stellantis_jan, "2023-01-01", 2023, homolog_year=None
+    ):
+        caught += 1
+    else:
+        raise SystemExit("probe: Stellantis januar_2023 listino not dated/accepted as 2023-01-01")
+
+    if caught < 14:
         raise SystemExit(f"probes incomplete caught={caught}")
 
 
@@ -304,12 +343,22 @@ def extract_document_date(text: str) -> str | None:
     m = re.search(r"(20\d{2})-(\d{2})-(\d{2})", t)
     if m:
         return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
-    m = re.search(r"(20\d{2})(\d{2})(\d{2})", t)
-    if m and 1 <= int(m.group(2)) <= 12 and 1 <= int(m.group(3)) <= 31:
-        return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
+    # Explicit day.month.year / gültig ab 01/2023 / valid as of 01.01.2024
+    m = re.search(
+        r"(?:gültig\s+ab|valid\s+as\s+of|information\s+valid\s+as\s+of)\s*"
+        r"0?1(?:[./]0?1)?[./](20\d{2})",
+        t,
+        re.I,
+    )
+    if m:
+        return f"{m.group(1)}-01-01"
     m = re.search(r"(?<!\d)(\d{2})[-_/](\d{2})[-_/](20\d{2})(?!\d)", t)
     if m:
         return f"{m.group(3)}-{m.group(2)}-{m.group(1)}"
+    # Compact YYYYMMDD only when clearly 8 digits (avoid januar_20234 → false 2023-04-..)
+    m = re.search(r"(?<!\d)(20\d{2})(\d{2})(\d{2})(?!\d)", t)
+    if m and 1 <= int(m.group(2)) <= 12 and 1 <= int(m.group(3)) <= 31:
+        return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
     months = {
         "januar": 1, "january": 1, "gennaio": 1,
         "februar": 2, "february": 2, "febbraio": 2,
@@ -326,13 +375,47 @@ def extract_document_date(text: str) -> str | None:
     }
     low = t.lower()
     for name, mo in months.items():
-        m = re.search(rf"\b{name}\b[^\d]{{0,12}}(20\d{{2}})", low)
+        # Filenames use underscores (4xe_januar_20234): `_` is a word char, so `\b`
+        # before/after the month name fails. Allow non-letter delimiters instead.
+        m = re.search(
+            rf"(?<![a-zäöüß]){re.escape(name)}(?:[^a-zäöüß0-9]+)(20\d{{2}})",
+            low,
+        )
         if m:
             return f"{m.group(1)}-{mo:02d}-01"
-        m = re.search(rf"(20\d{{2}})[^\d]{{0,12}}\b{name}\b", low)
+        m = re.search(
+            rf"(20\d{{2}})(?:[^a-zäöüß0-9]+)(?![a-zäöüß]){re.escape(name)}(?![a-zäöüß])",
+            low,
+        )
         if m:
             return f"{m.group(1)}-{mo:02d}-01"
     return None
+
+
+def is_real_january_document_date(cite: str, date: str) -> bool:
+    """True when YYYY-01-01 is grounded in the cite (month name / gültig ab / valid as of).
+
+    Distinguishes official January listini from invented model-year-start stamps.
+    """
+    if not (date and date.endswith("-01-01") and len(date) >= 10 and date[:4].isdigit()):
+        return False
+    real = extract_document_date(cite or "")
+    return real == date
+
+
+def _url_years_after(url: str, year: int) -> list[int]:
+    """Calendar years appearing in URL/filename that are strictly after `year`."""
+    path = _url_path_for_dating(url)
+    blob = f"{(url or '').lower()} {path}"
+    # Strip archive.org /web/YYYYMMDDhhmmss/ stamps so snapshot years do not count
+    # as document years for future-year rejection.
+    blob = re.sub(r"web\.archive\.org/web/\d+(?:id_)?/", "web.archive.org/web/", blob)
+    found = []
+    for m in re.finditer(r"(?<!\d)(20\d{2})(?!\d)", blob):
+        y = int(m.group(1))
+        if y > int(year):
+            found.append(y)
+    return found
 
 
 def cite_dating_ok(
@@ -471,20 +554,25 @@ def main() -> None:
                     raise SystemExit(f"generic URL on {r['id']}.{field}: {url}")
                 if _looks_continuous_unversioned_oem_pdf(url):
                     raise SystemExit(f"continuous OEM PDF on {r['id']}.{field}: {url}")
-            # Reject invented New-Year placeholders when the cite encodes a real doc date,
-            # or when the URL year disagrees with a stamped MY-start date (Mazda 2025→2024).
+            # Reject invented New-Year placeholders when the cite encodes a *different*
+            # real doc date, or when a URL/filename year is after the vehicle year.
+            # Official January listini (januar_YYYY / gültig ab 01/YYYY / valid as of
+            # 01.01.YYYY) that extract to the same YYYY-01-01 are kept.
             if date.endswith("-01-01") and urls_in(cite):
                 real = extract_document_date(cite)
                 if real and real != date:
                     raise SystemExit(
                         f"invented placeholder date {r['id']}.{field}: {date} vs cite {real}"
                     )
-                path_years = re.findall(r"20\d{2}", " ".join(urls_in(cite)))
-                if date[:4] == str(r.get("year")) and any(y != date[:4] for y in path_years):
-                    raise SystemExit(
-                        f"invented MY-start date on mismatched-year URL {r['id']}.{field}: "
-                        f"date={date} url_years={path_years}"
-                    )
+                if real is None and not is_real_january_document_date(cite, date):
+                    # No extractable January signal — treat YYYY-01-01 as invented.
+                    # (URL-year>MY is also caught by cite_dating_ok below.)
+                    path_years = re.findall(r"(?<!\d)(20\d{2})(?!\d)", " ".join(urls_in(cite)))
+                    if path_years and date[:4] not in path_years:
+                        raise SystemExit(
+                            f"invented MY-start date on mismatched-year URL {r['id']}.{field}: "
+                            f"date={date} url_years={path_years}"
+                        )
             # Non-URL cites (e.g. bare tokens) are only OK when they contain no http URL;
             # dating still required when URLs are present.
             if urls_in(cite):

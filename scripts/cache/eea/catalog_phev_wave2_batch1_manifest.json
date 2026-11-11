@@ -7025,6 +7025,26 @@
   "completed": [],
   "partial": [
     {
+      "id": "jeep-grand-cherokee-4xe-2023",
+      "note": "restore — Stellantis DE januar_2023 / gültig ab 01/2023 listino: EAER 44 (min 44–48) + battery 17.3; CS remains nil (hybrid-suv rejected)",
+      "filled": {
+        "wltpRangeKm": 44,
+        "batteryKWh": 17.3
+      },
+      "stillMissing": [
+        "fuelConsumptionLPerKm",
+        "energyConsumptionKWhPerKm"
+      ],
+      "sources": {
+        "wltpRangeKm": "media.stellantis.com 2023 Spezifikationen und Preise Jeep Grand Cherokee 4xe MJ23 gültig ab 01/2023 https://www.media.stellantis.com/uploads/de/model-pricelist/preisliste_grand_cherokee_4xe_januar_20234-6486c171a11d8.pdf",
+        "batteryKWh": "media.stellantis.com 2023 Spezifikationen und Preise Jeep Grand Cherokee 4xe MJ23 gültig ab 01/2023 https://www.media.stellantis.com/uploads/de/model-pricelist/preisliste_grand_cherokee_4xe_januar_20234-6486c171a11d8.pdf"
+      },
+      "sourceDates": {
+        "wltpRangeKm": "2023-01-01",
+        "batteryKWh": "2023-01-01"
+      }
+    },
+    {
       "id": "bmw-330e-phev-2024",
       "note": "extra vs lotto — BMW press May 2024 usable battery only; EAER/range not claimed; pure CD nil",
       "filled": {
@@ -7044,6 +7064,26 @@
   ],
   "extras": [
     {
+      "id": "jeep-grand-cherokee-4xe-2023",
+      "note": "restore — Stellantis DE januar_2023 / gültig ab 01/2023 listino: EAER 44 (min 44–48) + battery 17.3; CS remains nil (hybrid-suv rejected)",
+      "filled": {
+        "wltpRangeKm": 44,
+        "batteryKWh": 17.3
+      },
+      "stillMissing": [
+        "fuelConsumptionLPerKm",
+        "energyConsumptionKWhPerKm"
+      ],
+      "sources": {
+        "wltpRangeKm": "media.stellantis.com 2023 Spezifikationen und Preise Jeep Grand Cherokee 4xe MJ23 gültig ab 01/2023 https://www.media.stellantis.com/uploads/de/model-pricelist/preisliste_grand_cherokee_4xe_januar_20234-6486c171a11d8.pdf",
+        "batteryKWh": "media.stellantis.com 2023 Spezifikationen und Preise Jeep Grand Cherokee 4xe MJ23 gültig ab 01/2023 https://www.media.stellantis.com/uploads/de/model-pricelist/preisliste_grand_cherokee_4xe_januar_20234-6486c171a11d8.pdf"
+      },
+      "sourceDates": {
+        "wltpRangeKm": "2023-01-01",
+        "batteryKWh": "2023-01-01"
+      }
+    },
+    {
       "id": "bmw-330e-phev-2024",
       "note": "extra vs lotto — BMW press May 2024 usable battery only; EAER/range not claimed; pure CD nil",
       "filled": {
@@ -7061,7 +7101,21 @@
       }
     }
   ],
-  "homolog_reuse": [],
+  "homolog_reuse": [
+    {
+      "id": "jeep-grand-cherokee-4xe-2024",
+      "sourceId": "jeep-grand-cherokee-4xe-2023",
+      "note": "exact homolog 2024←2023 Stellantis Jan 2023 listino for EAER+battery",
+      "filled": {
+        "wltpRangeKm": 44,
+        "batteryKWh": 17.3
+      },
+      "sourceDates": {
+        "wltpRangeKm": "2023-01-01",
+        "batteryKWh": "2023-01-01"
+      }
+    }
+  ],
   "left_nil": [
     {
       "id": "jeep-compass-phev-4xe-2022",
@@ -7647,10 +7701,23 @@
     "Reverted Jeep Compass/Renegade 2022 CS from generic /hybrid-suv archive.",
     "Cleared ford-kuga-2023/2024 CS/battery/range/weighted orphans from continuous typenblatt.",
     "Restored homolog shared map to main (no unverified 2022 year injection).",
-    "BMW 330e 2024 battery 19.5 kept as extra vs lotto; pure CD nil.",
-    "Scrubbed generic/dating-invalid fieldSources + rejected URLs from sourceName."
+    "BMW 330e 2024 battery 19.5 kept as extra vs lotto; pure CD nil; wltpRangeKm nil.",
+    "Restored jeep-grand-cherokee-4xe-2023 EAER 44 + battery 17.3 from Stellantis DE januar_2023 / gültig ab 01/2023 (real January doc date).",
+    "jeep-grand-cherokee-4xe-2024 keeps EAER/battery via exact homolog onto 2023 donor (dataDerivedFromSameHomologationYear=2023).",
+    "Scrubbed generic/dating-invalid fieldSources + future-year / rejected URLs from sourceName (Mazda 2025 listino).",
+    "EPA shells: CS/range fieldSources keep year-only sourceDates; confidence 0.7→0.8 is ordinal field-provenance coverage of the pre-existing EPA source."
   ],
   "scrubbed_invalid_provenance": [
+    {
+      "id": "mazda-cx-60-phev-2024",
+      "cleared": [],
+      "sourceNameScrubbed": true
+    },
+    {
+      "id": "jeep-renegade-phev-4xe-2023",
+      "cleared": [],
+      "sourceNameScrubbed": true
+    },
     {
       "id": "ford-kuga-phev-2023",
       "cleared": [],
@@ -7666,111 +7733,50 @@
     {
       "id": "audi-a3-e-tron-ultra-phev-2016",
       "fixes": [
-        "fuelConsumptionLPerKm:drop_invented_date",
-        "fuelConsumptionLPerKm:epa",
-        "wltpRangeKm:drop_invented_date",
-        "wltpRangeKm:epa"
+        "fuelConsumptionLPerKm:epa_year_only",
+        "wltpRangeKm:epa_year_only"
       ]
     },
     {
       "id": "bmw-i3s-with-range-extender-phev-2021",
       "fixes": [
-        "fuelConsumptionLPerKm:drop_invented_date",
-        "fuelConsumptionLPerKm:epa",
-        "wltpRangeKm:drop_invented_date",
-        "wltpRangeKm:epa"
+        "fuelConsumptionLPerKm:epa_year_only",
+        "wltpRangeKm:epa_year_only"
       ]
     },
     {
       "id": "chevrolet-volt-phev-2019",
       "fixes": [
-        "fuelConsumptionLPerKm:drop_invented_date",
-        "fuelConsumptionLPerKm:epa",
-        "wltpRangeKm:drop_invented_date",
-        "wltpRangeKm:epa"
+        "fuelConsumptionLPerKm:epa_year_only",
+        "wltpRangeKm:epa_year_only"
       ]
     },
     {
       "id": "ford-c-max-energi-plug-in-hybrid-phev-2016",
       "fixes": [
-        "fuelConsumptionLPerKm:drop_invented_date",
-        "fuelConsumptionLPerKm:epa",
-        "wltpRangeKm:drop_invented_date",
-        "wltpRangeKm:epa"
+        "fuelConsumptionLPerKm:epa_year_only",
+        "wltpRangeKm:epa_year_only"
       ]
     },
     {
       "id": "ford-escape-fwd-phev-phev-2026",
       "fixes": [
-        "fuelConsumptionLPerKm:drop_invented_date",
-        "fuelConsumptionLPerKm:epa",
-        "wltpRangeKm:drop_invented_date",
-        "wltpRangeKm:epa"
+        "fuelConsumptionLPerKm:epa_year_only",
+        "wltpRangeKm:epa_year_only"
       ]
     },
     {
       "id": "honda-accord-phev-2014",
       "fixes": [
-        "fuelConsumptionLPerKm:drop_invented_date",
-        "fuelConsumptionLPerKm:epa",
-        "wltpRangeKm:drop_invented_date",
-        "wltpRangeKm:epa"
+        "fuelConsumptionLPerKm:epa_year_only",
+        "wltpRangeKm:epa_year_only"
       ]
     },
     {
       "id": "hyundai-ioniq-phev-2022",
       "fixes": [
-        "fuelConsumptionLPerKm:drop_invented_date",
-        "fuelConsumptionLPerKm:epa",
-        "wltpRangeKm:drop_invented_date",
-        "wltpRangeKm:epa"
-      ]
-    },
-    {
-      "id": "mazda-cx-60-phev-2024",
-      "fixes": [
-        "fuelConsumptionLPerKm:drop_invented_date",
-        "fuelConsumptionLPerKm:nil",
-        "wltpRangeKm:drop_invented_date",
-        "wltpRangeKm:nil"
-      ]
-    },
-    {
-      "id": "volkswagen-golf-gte-phev-2024",
-      "fixes": [
-        "fuelConsumptionLPerKm:drop_invented_date",
-        "fuelConsumptionLPerKm:nil",
-        "wltpRangeKm:drop_invented_date",
-        "wltpRangeKm:nil"
-      ]
-    },
-    {
-      "id": "cupra-terramar-e-hybrid-2025",
-      "fixes": [
-        "fuelConsumptionLPerKm:drop_invented_date",
-        "fuelConsumptionLPerKm:attached:2025-06-01",
-        "wltpRangeKm:drop_invented_date",
-        "wltpRangeKm:attached:2025-06-01",
-        "batteryKWh:drop_invented_date",
-        "batteryKWh:attached:2025-06-01"
-      ]
-    },
-    {
-      "id": "jeep-grand-cherokee-4xe-2023",
-      "fixes": [
-        "wltpRangeKm:drop_invented_date",
-        "wltpRangeKm:nil",
-        "batteryKWh:drop_invented_date",
-        "batteryKWh:nil"
-      ]
-    },
-    {
-      "id": "jeep-grand-cherokee-4xe-2024",
-      "fixes": [
-        "wltpRangeKm:drop_invented_date",
-        "wltpRangeKm:attached:2023-01-01",
-        "batteryKWh:drop_invented_date",
-        "batteryKWh:attached:2023-01-01"
+        "fuelConsumptionLPerKm:epa_year_only",
+        "wltpRangeKm:epa_year_only"
       ]
     }
   ],

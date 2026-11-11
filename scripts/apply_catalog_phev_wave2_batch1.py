@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -22,11 +23,13 @@ from catalog_confidence import POLICY_VERSION, assess_confidence  # noqa: E402
 from check_catalog_phev_wave2_batch1 import (  # noqa: E402
     PROVENANCE_REQUIRED_FIELDS,
     _looks_continuous_unversioned_oem_pdf,
+    _url_years_after,
     best_shared_exact,
     cite_dating_ok,
     exact_homolog_ok,
     extract_document_date,
     is_generic_url,
+    is_real_january_document_date,
     source_year_ok,
     urls_in,
 )
@@ -41,6 +44,11 @@ BASE_MAIN = "0f0919245dbd68bb10da67ca1f21fe18192c38c5"
 SOURCE_DAY = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
 BMW_330E_PRESS = "https://www.press.bmwgroup.com/global/article/attachment/T0442333EN/620071"
+STELLANTIS_GC_JAN2023 = (
+    "https://www.media.stellantis.com/uploads/de/model-pricelist/"
+    "preisliste_grand_cherokee_4xe_januar_20234-6486c171a11d8.pdf"
+)
+GC_HOMOLOG = "stessa omologazione EEA E9*2018/858*11257*01 JCACG/5HP1S, anni 2024 e 2023"
 
 
 def finalize(row: dict) -> None:
@@ -114,13 +122,15 @@ def scrub_invalid_field_provenance(row: dict) -> list[str]:
 
 
 def scrub_rejected_urls_from_source_name(row: dict) -> bool:
-    """Remove generic landings / continuous typenblatt URLs from sourceName text."""
+    """Remove generic landings / continuous typenblatt / future-year URLs from sourceName."""
     sn = row.get("sourceName") or ""
     if not sn:
         return False
     changed = False
+    year = int(row.get("year") or 0)
     for url in urls_in(sn):
-        if is_generic_url(url) or _looks_continuous_unversioned_oem_pdf(url):
+        future = bool(year and _url_years_after(url, year))
+        if is_generic_url(url) or _looks_continuous_unversioned_oem_pdf(url) or future:
             sn2 = sn.replace(url, "").replace("—  ;", "—").replace("  ", " ")
             # Drop clauses that only pointed at the rejected URL.
             parts = [p.strip(" ;,—") for p in sn2.split(";") if p.strip(" ;,—")]
@@ -135,6 +145,9 @@ def scrub_rejected_urls_from_source_name(row: dict) -> bool:
                     continue
                 kept.append(p)
             sn = "; ".join(kept)
+            # Tidy dangling em-dashes left by URL removal.
+            sn = sn.replace("— ;", ";").replace("—;", ";")
+            sn = re.sub(r"\s*—\s*$", "", sn).strip(" ;")
             changed = True
     # Also strip leftover rejected path tokens even without a remaining URL match.
     low = sn.lower()
@@ -148,6 +161,18 @@ def scrub_rejected_urls_from_source_name(row: dict) -> bool:
                 or "technische_daten_des_ford_kuga" in pl
                 or "hybrid-elektrisch" in pl
             ):
+                changed = True
+                continue
+            kept.append(p)
+        sn = "; ".join(kept)
+        changed = True
+    # Mazda 2025 listino path token without a remaining URL.
+    if "21-07-2025_preisliste_2025" in sn.lower() or "preisliste_2025_mazda-cx-60" in sn.lower():
+        parts = [p.strip(" ;,—") for p in sn.split(";") if p.strip(" ;,—")]
+        kept = []
+        for p in parts:
+            pl = p.lower()
+            if "21-07-2025" in pl or "preisliste_2025_mazda" in pl:
                 changed = True
                 continue
             kept.append(p)
@@ -190,8 +215,9 @@ def clear_kuga_continuous_oem_orphans(row: dict) -> list[str]:
 def ensure_calc_field_provenance(row: dict) -> list[str]:
     """Attach fieldSources only with a real document date; else nil the value.
 
-    Never invents YYYY-01-01 placeholders. EPA shells may keep a non-URL cite
-    without fieldSourceDates.
+    Never invents YYYY-01-01 placeholders. Official January listini
+    (januar_YYYY / gültig ab 01/YYYY / valid as of 01.01.YYYY) keep YYYY-01-01.
+    EPA shells keep a non-URL cite with a year-only sourceDate (e.g. \"2016\").
     """
     changed: list[str] = []
     fs = dict(row.get("fieldSources") or {})
@@ -201,21 +227,25 @@ def ensure_calc_field_provenance(row: dict) -> list[str]:
     hy = int(hy_raw) if hy_raw is not None else None
     sn = row.get("sourceName") or ""
     sn_urls = [
-        u for u in urls_in(sn) if not is_generic_url(u) and not _looks_continuous_unversioned_oem_pdf(u)
+        u
+        for u in urls_in(sn)
+        if not is_generic_url(u)
+        and not _looks_continuous_unversioned_oem_pdf(u)
+        and not (year and _url_years_after(u, year))
     ]
     for field in PROVENANCE_REQUIRED_FIELDS:
         if row.get(field) is None:
             continue
-        # Drop previously invented New-Year placeholders and re-evaluate.
+        # Drop invented New-Year placeholders; keep real January document dates.
         existing_date = fd.get(field) or ""
         if existing_date.endswith("-01-01") and existing_date[:4].isdigit():
-            # Keep only if the cite itself encodes that month (e.g. "June 2025" → 2025-06-01).
             cite_now = fs.get(field) or sn
-            real = extract_document_date(cite_now)
-            if real != existing_date:
-                fs.pop(field, None)
-                fd.pop(field, None)
-                changed.append(f"{field}:drop_invented_date")
+            if not is_real_january_document_date(cite_now, existing_date):
+                real = extract_document_date(cite_now)
+                if real != existing_date:
+                    fs.pop(field, None)
+                    fd.pop(field, None)
+                    changed.append(f"{field}:drop_invented_date")
 
         if fs.get(field):
             # Re-validate dating; nil value if cite cannot be dated honestly.
@@ -224,7 +254,7 @@ def ensure_calc_field_provenance(row: dict) -> list[str]:
             urls = urls_in(cite)
             if urls:
                 if not date:
-                    date = extract_document_date(cite) or ""
+                    date = extract_document_date(cite) or extract_document_date(f"{sn} {cite}") or ""
                     if date:
                         fd[field] = date
                         changed.append(f"{field}:date_from_cite")
@@ -235,6 +265,12 @@ def ensure_calc_field_provenance(row: dict) -> list[str]:
                     if field == "energyConsumptionKWhPerKm":
                         row["energyIsWeighted"] = None
                     changed.append(f"{field}:nil_bad_cite")
+            elif cite.strip() == "EPA-FuelEconomy" or cite.strip().startswith("EPA-FuelEconomy"):
+                # Year-only date matching energyConsumptionKWhPerKm EPA shells on main.
+                if not date:
+                    fd[field] = str(year) if year else (fd.get("energyConsumptionKWhPerKm") or "")
+                    if fd[field]:
+                        changed.append(f"{field}:epa_year_only")
             continue
 
         attached = False
@@ -255,7 +291,7 @@ def ensure_calc_field_provenance(row: dict) -> list[str]:
             sn.strip() == "EPA-FuelEconomy" or sn.strip().startswith("EPA-FuelEconomy")
         ):
             fs[field] = "EPA-FuelEconomy"
-            fd.pop(field, None)  # no invented calendar date
+            fd[field] = str(year) if year else (fd.get("energyConsumptionKWhPerKm") or str(year))
             attached = True
             changed.append(f"{field}:epa")
         if not attached:
@@ -362,6 +398,85 @@ def main() -> None:
         if fixes:
             finalize(r)
             provenance_fixes.append({"id": r["id"], "fixes": fixes})
+
+    # --- Restore Grand Cherokee 4xe 2023 range/battery from official Jan 2023 listino ---
+    # Official Stellantis DE «gültig ab 01/2023» / januar_2023 PDF — not an invented MY-start.
+    # CS from /hybrid-suv stays nil (generic landing). Do not set homolog flag on the donor.
+    g23 = by_id["jeep-grand-cherokee-4xe-2023"]
+    g23_cite = (
+        f"media.stellantis.com 2023 Spezifikationen und Preise Jeep Grand Cherokee 4xe MJ23 "
+        f"gültig ab 01/2023 {STELLANTIS_GC_JAN2023}"
+    )
+    g23["wltpRangeKm"] = 44  # prudent min of official 44–48 km band
+    g23["batteryKWh"] = 17.3
+    g23["fuelConsumptionLPerKm"] = None  # hybrid-suv CS must stay nil
+    g23.pop("dataDerivedFromSameHomologationYear", None)
+    fs23 = dict(g23.get("fieldSources") or {})
+    fd23 = dict(g23.get("fieldSourceDates") or {})
+    fs23.pop("fuelConsumptionLPerKm", None)
+    fd23.pop("fuelConsumptionLPerKm", None)
+    g23["fieldSources"] = fs23 or None
+    g23["fieldSourceDates"] = fd23 or None
+    set_field_source(g23, "wltpRangeKm", g23_cite, "2023-01-01")
+    set_field_source(g23, "batteryKWh", g23_cite, "2023-01-01")
+    # Keep sourceName describing the listino figures; ensure URL present.
+    sn23 = g23.get("sourceName") or ""
+    if STELLANTIS_GC_JAN2023 not in sn23:
+        sn23 = (
+            f"Stellantis Media DE Spezifikationen und Preise Jeep Grand Cherokee 4xe MJ23 "
+            f"gültig ab 01/2023: weighted fuel 2.9–2.6 L/100; weighted electric 32.7–30.2 kWh/100; "
+            f"electric range 44–48 km; battery 17.3 kWh — {STELLANTIS_GC_JAN2023}; "
+            f"EEA IT PETROL/ELECTRIC; {GC_HOMOLOG}"
+        )
+        g23["sourceName"] = sn23
+    scrub_rejected_urls_from_source_name(g23)
+    finalize(g23)
+    extras.append(
+        {
+            "id": g23["id"],
+            "note": (
+                "restore — Stellantis DE januar_2023 / gültig ab 01/2023 listino: "
+                "EAER 44 (min 44–48) + battery 17.3; CS remains nil (hybrid-suv rejected)"
+            ),
+            "filled": {"wltpRangeKm": 44, "batteryKWh": 17.3},
+            "stillMissing": g23["missingCalcFields"],
+            "sources": {"wltpRangeKm": g23_cite, "batteryKWh": g23_cite},
+            "sourceDates": {"wltpRangeKm": "2023-01-01", "batteryKWh": "2023-01-01"},
+        }
+    )
+    partial.append(extras[-1])
+
+    # Grand Cherokee 2024: keep range/battery via exact homolog onto restored 2023 donor.
+    g24 = by_id["jeep-grand-cherokee-4xe-2024"]
+    if not exact_homolog_ok(g24, g23):
+        raise SystemExit("GC 2024↔2023 exact homolog failed after 2023 restore")
+    g24["wltpRangeKm"] = 44
+    g24["batteryKWh"] = 17.3
+    g24["dataDerivedFromSameHomologationYear"] = 2023
+    g24_cite = (
+        f"EEA co2cars IT 2024 GRAND CHEROKEE + MJ23 listino via {GC_HOMOLOG} "
+        f"{STELLANTIS_GC_JAN2023}"
+    )
+    set_field_source(g24, "wltpRangeKm", g24_cite, "2023-01-01")
+    set_field_source(g24, "batteryKWh", g24_cite, "2023-01-01")
+    sn24 = g24.get("sourceName") or ""
+    if STELLANTIS_GC_JAN2023 not in sn24 or "44" not in sn24:
+        g24["sourceName"] = (
+            f"EEA co2cars IT 2024 GRAND CHEROKEE PETROL/ELECTRIC n=174; "
+            f"EAER 44 km (min 44–48) + battery 17,3 kWh from MJ23 listino via {GC_HOMOLOG} "
+            f"— {STELLANTIS_GC_JAN2023} (2023-01-01)"
+        )
+    scrub_rejected_urls_from_source_name(g24)
+    finalize(g24)
+    homolog_reuse.append(
+        {
+            "id": g24["id"],
+            "sourceId": g23["id"],
+            "note": "exact homolog 2024←2023 Stellantis Jan 2023 listino for EAER+battery",
+            "filled": {"wltpRangeKm": 44, "batteryKWh": 17.3},
+            "sourceDates": {"wltpRangeKm": "2023-01-01", "batteryKWh": "2023-01-01"},
+        }
+    )
 
     # --- Extra (outside strict lotto completion): BMW 330e 2024 battery ONLY ---
     # Review: keep usable battery 19.5 from May 2024 press; do NOT claim EAER/range
@@ -546,12 +661,14 @@ def main() -> None:
         ),
     }
 
-    touched = {p["id"] for p in partial}
+    touched = {p["id"] for p in partial} | {h["id"] for h in homolog_reuse} | {
+        e["id"] for e in extras
+    }
     for rid in batch1_ids:
         row = by_id[rid]
         miss = missing_calc_fields(row)
         if rid in touched:
-            # BMW extra already recorded as partial (may still be incomplete on CD)
+            # Already recorded as partial / homolog / extra (may still be incomplete)
             continue
         inv_row = inv_by.get(rid) or {}
         left_nil.append(
@@ -623,8 +740,11 @@ def main() -> None:
             "Reverted Jeep Compass/Renegade 2022 CS from generic /hybrid-suv archive.",
             "Cleared ford-kuga-2023/2024 CS/battery/range/weighted orphans from continuous typenblatt.",
             "Restored homolog shared map to main (no unverified 2022 year injection).",
-            "BMW 330e 2024 battery 19.5 kept as extra vs lotto; pure CD nil.",
-            "Scrubbed generic/dating-invalid fieldSources + rejected URLs from sourceName.",
+            "BMW 330e 2024 battery 19.5 kept as extra vs lotto; pure CD nil; wltpRangeKm nil.",
+            "Restored jeep-grand-cherokee-4xe-2023 EAER 44 + battery 17.3 from Stellantis DE januar_2023 / gültig ab 01/2023 (real January doc date).",
+            "jeep-grand-cherokee-4xe-2024 keeps EAER/battery via exact homolog onto 2023 donor (dataDerivedFromSameHomologationYear=2023).",
+            "Scrubbed generic/dating-invalid fieldSources + future-year / rejected URLs from sourceName (Mazda 2025 listino).",
+            "EPA shells: CS/range fieldSources keep year-only sourceDates; confidence 0.7→0.8 is ordinal field-provenance coverage of the pre-existing EPA source.",
         ],
         "scrubbed_invalid_provenance": scrubbed_rows,
         "provenance_fixes": provenance_fixes,
