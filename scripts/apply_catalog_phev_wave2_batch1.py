@@ -25,6 +25,7 @@ from check_catalog_phev_wave2_batch1 import (  # noqa: E402
     best_shared_exact,
     cite_dating_ok,
     exact_homolog_ok,
+    extract_document_date,
     is_generic_url,
     source_year_ok,
     urls_in,
@@ -187,7 +188,11 @@ def clear_kuga_continuous_oem_orphans(row: dict) -> list[str]:
 
 
 def ensure_calc_field_provenance(row: dict) -> list[str]:
-    """Attach fieldSources from sourceName when possible; else nil the value."""
+    """Attach fieldSources only with a real document date; else nil the value.
+
+    Never invents YYYY-01-01 placeholders. EPA shells may keep a non-URL cite
+    without fieldSourceDates.
+    """
     changed: list[str] = []
     fs = dict(row.get("fieldSources") or {})
     fd = dict(row.get("fieldSourceDates") or {})
@@ -195,27 +200,62 @@ def ensure_calc_field_provenance(row: dict) -> list[str]:
     hy_raw = row.get("dataDerivedFromSameHomologationYear")
     hy = int(hy_raw) if hy_raw is not None else None
     sn = row.get("sourceName") or ""
-    sn_urls = [u for u in urls_in(sn) if not is_generic_url(u) and not _looks_continuous_unversioned_oem_pdf(u)]
+    sn_urls = [
+        u for u in urls_in(sn) if not is_generic_url(u) and not _looks_continuous_unversioned_oem_pdf(u)
+    ]
     for field in PROVENANCE_REQUIRED_FIELDS:
-        if row.get(field) is None or fs.get(field):
+        if row.get(field) is None:
             continue
+        # Drop previously invented New-Year placeholders and re-evaluate.
+        existing_date = fd.get(field) or ""
+        if existing_date.endswith("-01-01") and existing_date[:4].isdigit():
+            # Keep only if the cite itself encodes that month (e.g. "June 2025" → 2025-06-01).
+            cite_now = fs.get(field) or sn
+            real = extract_document_date(cite_now)
+            if real != existing_date:
+                fs.pop(field, None)
+                fd.pop(field, None)
+                changed.append(f"{field}:drop_invented_date")
+
+        if fs.get(field):
+            # Re-validate dating; nil value if cite cannot be dated honestly.
+            cite = fs[field]
+            date = fd.get(field) or ""
+            urls = urls_in(cite)
+            if urls:
+                if not date:
+                    date = extract_document_date(cite) or ""
+                    if date:
+                        fd[field] = date
+                        changed.append(f"{field}:date_from_cite")
+                if not date or not cite_dating_ok(cite, date, year, homolog_year=hy):
+                    fs.pop(field, None)
+                    fd.pop(field, None)
+                    row[field] = None
+                    if field == "energyConsumptionKWhPerKm":
+                        row["energyIsWeighted"] = None
+                    changed.append(f"{field}:nil_bad_cite")
+            continue
+
         attached = False
         if sn_urls:
-            # Prefer first usable URL; date = model year-01-01 when MY matches URL/source text.
             for url in sn_urls:
-                date = f"{year}-01-01"
+                blob = f"{sn} {url}"
+                date = extract_document_date(blob)
+                if not date:
+                    continue
                 cite = f"{sn.split('—')[0].strip()} {url}" if "—" in sn else f"{sn} {url}"
                 if cite_dating_ok(cite, date, year, homolog_year=hy):
                     fs[field] = cite[:500]
                     fd[field] = date
                     attached = True
-                    changed.append(f"{field}:attached")
+                    changed.append(f"{field}:attached:{date}")
                     break
         if not attached and (
             sn.strip() == "EPA-FuelEconomy" or sn.strip().startswith("EPA-FuelEconomy")
         ):
             fs[field] = "EPA-FuelEconomy"
-            fd[field] = f"{year}-01-01"
+            fd.pop(field, None)  # no invented calendar date
             attached = True
             changed.append(f"{field}:epa")
         if not attached:
@@ -323,18 +363,25 @@ def main() -> None:
             finalize(r)
             provenance_fixes.append({"id": r["id"], "fixes": fixes})
 
-    # --- Extra (outside strict lotto completion): BMW 330e 2024 battery ---
+    # --- Extra (outside strict lotto completion): BMW 330e 2024 battery ONLY ---
+    # Review: keep usable battery 19.5 from May 2024 press; do NOT claim EAER/range
+    # from that attachment without an explicit verified figure. Pure CD stays nil.
     b330 = by_id["bmw-330e-phev-2024"]
-    if b330.get("batteryKWh") != 19.5:
-        b330["batteryKWh"] = 19.5
+    b330["batteryKWh"] = 19.5
+    b330["wltpRangeKm"] = None  # autonomia not verified on the battery press cite
+    fs330 = dict(b330.get("fieldSources") or {})
+    fd330 = dict(b330.get("fieldSourceDates") or {})
+    fs330.pop("wltpRangeKm", None)
+    fd330.pop("wltpRangeKm", None)
+    # CS may remain if already present with a dated press cite; otherwise leave/nil via provenance.
+    b330["fieldSources"] = fs330 or None
+    b330["fieldSourceDates"] = fd330 or None
     cite = (
         "press.bmwgroup.com new BMW 330e: high-voltage battery with 19.5 kWh of usable energy "
         f"(datePublished 2024-05-29) {BMW_330E_PRESS}"
     )
-    # Clear any stale derived flag; this is same-MY 2024 press (dated)
     b330.pop("dataDerivedFromSameHomologationYear", None)
     set_field_source(b330, "batteryKWh", cite, "2024-05-29")
-    # CS / EAER from the same May 2024 press sheet (not pure CD).
     if b330.get("fuelConsumptionLPerKm") is not None:
         set_field_source(
             b330,
@@ -342,26 +389,26 @@ def main() -> None:
             f"press.bmwgroup.com 330e Kraftstoff bei entladener Batterie 7.9-7.1 L/100 {BMW_330E_PRESS}",
             "2024-05-29",
         )
-    if b330.get("wltpRangeKm") is not None:
-        set_field_source(
-            b330,
-            "wltpRangeKm",
-            f"press.bmwgroup.com 330e electric range from May 2024 tech data {BMW_330E_PRESS}",
-            "2024-05-29",
-        )
     b330["sourceUpdatedAt"] = SOURCE_DAY
     prev = b330.get("sourceName") or ""
+    # Strip any prior claim that the press filled EAER/range.
+    parts = [p.strip(" ;") for p in prev.split(";") if p.strip(" ;")]
+    kept = []
+    for p in parts:
+        pl = p.lower()
+        if "electric range" in pl or "wltprange" in pl or "autonomia" in pl:
+            continue
+        kept.append(p)
+    prev = "; ".join(kept)
     if "wave2-batch1 extra: batteryKWh=19.5" not in prev:
-        b330["sourceName"] = (
-            f"{prev}; wave2-batch1 extra: batteryKWh=19.5 usable — {BMW_330E_PRESS}"
-        ).strip("; ")
-    # Drop any rejected URL fragments that may have reappeared.
+        prev = f"{prev}; wave2-batch1 extra: batteryKWh=19.5 usable — {BMW_330E_PRESS}".strip("; ")
+    b330["sourceName"] = prev
     scrub_rejected_urls_from_source_name(b330)
     finalize(b330)
     extras.append(
         {
             "id": b330["id"],
-            "note": "extra vs lotto — BMW press May 2024 usable battery; pure CD remains nil",
+            "note": "extra vs lotto — BMW press May 2024 usable battery only; EAER/range not claimed; pure CD nil",
             "filled": {"batteryKWh": 19.5},
             "stillMissing": b330["missingCalcFields"],
             "sources": {"batteryKWh": cite},

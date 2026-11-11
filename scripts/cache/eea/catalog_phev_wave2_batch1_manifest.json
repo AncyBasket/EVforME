@@ -7026,12 +7026,13 @@
   "partial": [
     {
       "id": "bmw-330e-phev-2024",
-      "note": "extra vs lotto — BMW press May 2024 usable battery; pure CD remains nil",
+      "note": "extra vs lotto — BMW press May 2024 usable battery only; EAER/range not claimed; pure CD nil",
       "filled": {
         "batteryKWh": 19.5
       },
       "stillMissing": [
-        "energyConsumptionKWhPerKm"
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm"
       ],
       "sources": {
         "batteryKWh": "press.bmwgroup.com new BMW 330e: high-voltage battery with 19.5 kWh of usable energy (datePublished 2024-05-29) https://www.press.bmwgroup.com/global/article/attachment/T0442333EN/620071"
@@ -7044,12 +7045,13 @@
   "extras": [
     {
       "id": "bmw-330e-phev-2024",
-      "note": "extra vs lotto — BMW press May 2024 usable battery; pure CD remains nil",
+      "note": "extra vs lotto — BMW press May 2024 usable battery only; EAER/range not claimed; pure CD nil",
       "filled": {
         "batteryKWh": 19.5
       },
       "stillMissing": [
-        "energyConsumptionKWhPerKm"
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm"
       ],
       "sources": {
         "batteryKWh": "press.bmwgroup.com new BMW 330e: high-voltage battery with 19.5 kWh of usable energy (datePublished 2024-05-29) https://www.press.bmwgroup.com/global/article/attachment/T0442333EN/620071"
@@ -7652,16 +7654,6 @@
     {
       "id": "ford-kuga-phev-2023",
       "cleared": [],
-      "sourceNameScrubbed": true
-    },
-    {
-      "id": "ford-kuga-phev-2024",
-      "cleared": [],
-      "sourceNameScrubbed": true
-    },
-    {
-      "id": "ford-kuga-phev-2023",
-      "cleared": [],
       "kugaContinuousOemCleared": true
     },
     {
@@ -7670,6 +7662,117 @@
       "kugaContinuousOemCleared": true
     }
   ],
-  "provenance_fixes": [],
+  "provenance_fixes": [
+    {
+      "id": "audi-a3-e-tron-ultra-phev-2016",
+      "fixes": [
+        "fuelConsumptionLPerKm:drop_invented_date",
+        "fuelConsumptionLPerKm:epa",
+        "wltpRangeKm:drop_invented_date",
+        "wltpRangeKm:epa"
+      ]
+    },
+    {
+      "id": "bmw-i3s-with-range-extender-phev-2021",
+      "fixes": [
+        "fuelConsumptionLPerKm:drop_invented_date",
+        "fuelConsumptionLPerKm:epa",
+        "wltpRangeKm:drop_invented_date",
+        "wltpRangeKm:epa"
+      ]
+    },
+    {
+      "id": "chevrolet-volt-phev-2019",
+      "fixes": [
+        "fuelConsumptionLPerKm:drop_invented_date",
+        "fuelConsumptionLPerKm:epa",
+        "wltpRangeKm:drop_invented_date",
+        "wltpRangeKm:epa"
+      ]
+    },
+    {
+      "id": "ford-c-max-energi-plug-in-hybrid-phev-2016",
+      "fixes": [
+        "fuelConsumptionLPerKm:drop_invented_date",
+        "fuelConsumptionLPerKm:epa",
+        "wltpRangeKm:drop_invented_date",
+        "wltpRangeKm:epa"
+      ]
+    },
+    {
+      "id": "ford-escape-fwd-phev-phev-2026",
+      "fixes": [
+        "fuelConsumptionLPerKm:drop_invented_date",
+        "fuelConsumptionLPerKm:epa",
+        "wltpRangeKm:drop_invented_date",
+        "wltpRangeKm:epa"
+      ]
+    },
+    {
+      "id": "honda-accord-phev-2014",
+      "fixes": [
+        "fuelConsumptionLPerKm:drop_invented_date",
+        "fuelConsumptionLPerKm:epa",
+        "wltpRangeKm:drop_invented_date",
+        "wltpRangeKm:epa"
+      ]
+    },
+    {
+      "id": "hyundai-ioniq-phev-2022",
+      "fixes": [
+        "fuelConsumptionLPerKm:drop_invented_date",
+        "fuelConsumptionLPerKm:epa",
+        "wltpRangeKm:drop_invented_date",
+        "wltpRangeKm:epa"
+      ]
+    },
+    {
+      "id": "mazda-cx-60-phev-2024",
+      "fixes": [
+        "fuelConsumptionLPerKm:drop_invented_date",
+        "fuelConsumptionLPerKm:nil",
+        "wltpRangeKm:drop_invented_date",
+        "wltpRangeKm:nil"
+      ]
+    },
+    {
+      "id": "volkswagen-golf-gte-phev-2024",
+      "fixes": [
+        "fuelConsumptionLPerKm:drop_invented_date",
+        "fuelConsumptionLPerKm:nil",
+        "wltpRangeKm:drop_invented_date",
+        "wltpRangeKm:nil"
+      ]
+    },
+    {
+      "id": "cupra-terramar-e-hybrid-2025",
+      "fixes": [
+        "fuelConsumptionLPerKm:drop_invented_date",
+        "fuelConsumptionLPerKm:attached:2025-06-01",
+        "wltpRangeKm:drop_invented_date",
+        "wltpRangeKm:attached:2025-06-01",
+        "batteryKWh:drop_invented_date",
+        "batteryKWh:attached:2025-06-01"
+      ]
+    },
+    {
+      "id": "jeep-grand-cherokee-4xe-2023",
+      "fixes": [
+        "wltpRangeKm:drop_invented_date",
+        "wltpRangeKm:nil",
+        "batteryKWh:drop_invented_date",
+        "batteryKWh:nil"
+      ]
+    },
+    {
+      "id": "jeep-grand-cherokee-4xe-2024",
+      "fixes": [
+        "wltpRangeKm:drop_invented_date",
+        "wltpRangeKm:attached:2023-01-01",
+        "batteryKWh:drop_invented_date",
+        "batteryKWh:attached:2023-01-01"
+      ]
+    }
+  ],
   "prKind": "restore_controls"
 }

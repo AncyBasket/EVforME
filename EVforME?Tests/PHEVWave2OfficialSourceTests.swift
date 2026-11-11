@@ -59,6 +59,8 @@ final class PHEVWave2OfficialSourceTests: XCTestCase {
         let date = try XCTUnwrap(row.fieldSourceDate(for: "batteryKWh"))
         XCTAssertTrue(date.hasPrefix("2024"))
         XCTAssertNil(row.usableChargeDepletingEnergyKWhPerKm)
+        // Battery press extra must not invent EAER/range provenance.
+        XCTAssertNil(row.fieldSource(for: "wltpRangeKm"))
         XCTAssertTrue(row.hasIncompleteCatalogData)
     }
 

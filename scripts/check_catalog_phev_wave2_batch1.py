@@ -298,6 +298,43 @@ def urls_in(text: str) -> list[str]:
     return [u.rstrip(";,.)") for u in found]
 
 
+def extract_document_date(text: str) -> str | None:
+    """Parse a real document date from cite/URL text — never invent YYYY-01-01."""
+    t = text or ""
+    m = re.search(r"(20\d{2})-(\d{2})-(\d{2})", t)
+    if m:
+        return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
+    m = re.search(r"(20\d{2})(\d{2})(\d{2})", t)
+    if m and 1 <= int(m.group(2)) <= 12 and 1 <= int(m.group(3)) <= 31:
+        return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
+    m = re.search(r"(?<!\d)(\d{2})[-_/](\d{2})[-_/](20\d{2})(?!\d)", t)
+    if m:
+        return f"{m.group(3)}-{m.group(2)}-{m.group(1)}"
+    months = {
+        "januar": 1, "january": 1, "gennaio": 1,
+        "februar": 2, "february": 2, "febbraio": 2,
+        "märz": 3, "maerz": 3, "march": 3, "marzo": 3,
+        "april": 4, "aprile": 4,
+        "mai": 5, "may": 5, "maggio": 5,
+        "juni": 6, "june": 6, "giugno": 6,
+        "juli": 7, "july": 7, "luglio": 7,
+        "august": 8, "agosto": 8,
+        "september": 9, "septembre": 9, "settembre": 9,
+        "oktober": 10, "october": 10, "ottobre": 10,
+        "november": 11, "novembre": 11,
+        "dezember": 12, "december": 12, "dicembre": 12,
+    }
+    low = t.lower()
+    for name, mo in months.items():
+        m = re.search(rf"\b{name}\b[^\d]{{0,12}}(20\d{{2}})", low)
+        if m:
+            return f"{m.group(1)}-{mo:02d}-01"
+        m = re.search(rf"(20\d{{2}})[^\d]{{0,12}}\b{name}\b", low)
+        if m:
+            return f"{m.group(1)}-{mo:02d}-01"
+    return None
+
+
 def cite_dating_ok(
     cite: str,
     source_date: str,
@@ -359,6 +396,11 @@ def main() -> None:
     b330 = by_id["bmw-330e-phev-2024"]
     if b330.get("batteryKWh") != 19.5:
         raise SystemExit("bmw-330e-2024 batteryKWh expected 19.5")
+    if b330.get("wltpRangeKm") is not None:
+        # Battery press extra must not keep an unverified EAER/range figure.
+        raise SystemExit("bmw-330e-2024 wltpRangeKm must be nil without a dated EAER source")
+    if (b330.get("fieldSources") or {}).get("wltpRangeKm"):
+        raise SystemExit("bmw-330e-2024 must not claim wltpRangeKm fieldSources from battery press")
     if b330.get("energyConsumptionKWhPerKm") is not None and b330.get("energyIsWeighted") is not True:
         cite = (b330.get("fieldSources") or {}).get("energyConsumptionKWhPerKm") or ""
         if not has_pure_energy_label(cite):
@@ -429,9 +471,25 @@ def main() -> None:
                     raise SystemExit(f"generic URL on {r['id']}.{field}: {url}")
                 if _looks_continuous_unversioned_oem_pdf(url):
                     raise SystemExit(f"continuous OEM PDF on {r['id']}.{field}: {url}")
+            # Reject invented New-Year placeholders when the cite encodes a real doc date,
+            # or when the URL year disagrees with a stamped MY-start date (Mazda 2025→2024).
+            if date.endswith("-01-01") and urls_in(cite):
+                real = extract_document_date(cite)
+                if real and real != date:
+                    raise SystemExit(
+                        f"invented placeholder date {r['id']}.{field}: {date} vs cite {real}"
+                    )
+                path_years = re.findall(r"20\d{2}", " ".join(urls_in(cite)))
+                if date[:4] == str(r.get("year")) and any(y != date[:4] for y in path_years):
+                    raise SystemExit(
+                        f"invented MY-start date on mismatched-year URL {r['id']}.{field}: "
+                        f"date={date} url_years={path_years}"
+                    )
             # Non-URL cites (e.g. bare tokens) are only OK when they contain no http URL;
             # dating still required when URLs are present.
             if urls_in(cite):
+                if not date:
+                    raise SystemExit(f"URL cite without sourceDate {r['id']}.{field}")
                 if not cite_dating_ok(cite, date, int(r.get("year") or 0), homolog_year=hy):
                     raise SystemExit(
                         f"dating fail {r['id']}.{field} year={r.get('year')} "

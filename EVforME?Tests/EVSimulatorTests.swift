@@ -704,11 +704,11 @@ final class EVSimulatorTests: XCTestCase {
             .init(name: "Ateca→Model3", source: "seat-ateca-2016", target: "tesla-model-3-2023", intent: .alreadyOwned, home: true, km: 16_000, sourcePrice: 14_000, targetPrice: 40_000, stickerFuel: nil, stickerEnergy: nil),
             // Premium ICE → EV purchase
             .init(name: "Serie3→Model3 buy", source: "bmw-3-series-2018", target: "tesla-model-3-2024", intent: .consideringPurchase, home: true, km: 20_000, sourcePrice: 22_000, targetPrice: 42_000, stickerFuel: nil, stickerEnergy: nil),
-            // ICE → PHEV (CS fuel in catalog; CD kWh was weighted → user override)
+            // ICE → PHEV (CS may be present; CD + EAER need overrides — range not claimed from battery press)
             .init(name: "Corsa→330ePHEV", source: "opel-corsa-2018", target: "bmw-330e-phev-2024", intent: .consideringPurchase, home: true, km: 15_000, sourcePrice: 8_000, targetPrice: 34_000, stickerFuel: nil, stickerEnergy: 22.0),
-            // ICE → PHEV (CS fuel in catalog; CD kWh override)
-            .init(name: "Golf→GolfGTE", source: "volkswagen-golf-2016", target: "volkswagen-golf-gte-phev-2024", intent: .alreadyOwned, home: true, km: 14_000, sourcePrice: 10_000, targetPrice: 36_000, stickerFuel: nil, stickerEnergy: 16.0),
-            // PHEV → EV (source PHEV incomplete CD → needs source energy override; set after init)
+            // ICE → PHEV (Golf GTE CS/range cleared without dated OEM cite → full sticker overrides)
+            .init(name: "Golf→GolfGTE", source: "volkswagen-golf-2016", target: "volkswagen-golf-gte-phev-2024", intent: .alreadyOwned, home: true, km: 14_000, sourcePrice: 10_000, targetPrice: 36_000, stickerFuel: 5.4, stickerEnergy: 16.0),
+            // PHEV → EV (CX-60 CS/range cleared — 2025 pricelist invalid for MY24; source overrides)
             .init(name: "CX60PHEV→ID.3", source: "mazda-cx-60-phev-2024", target: "volkswagen-id3-2024", intent: .alreadyOwned, home: true, km: 18_000, sourcePrice: 28_000, targetPrice: 36_000, stickerFuel: nil, stickerEnergy: nil),
             // City → Leaf
             .init(name: "208→Leaf", source: "peugeot-208-2018", target: "nissan-leaf-2023", intent: .alreadyOwned, home: false, km: 10_000, sourcePrice: 9_000, targetPrice: 24_000, stickerFuel: nil, stickerEnergy: nil),
@@ -748,10 +748,28 @@ final class EVSimulatorTests: XCTestCase {
                 sourceConsumptionOverrideLPer100Km: pair.stickerFuel,
                 targetEnergyOverrideKWhPer100Km: pair.stickerEnergy
             )
-            // Incomplete PHEV as source: CS fuel may be present; CD kWh needs override.
-            if pair.source.contains("phev"),
-               VehicleCatalogService.shared.vehicle(by: pair.source)?.hasIncompleteCatalogData == true {
-                input.sourceEnergyOverrideKWhPer100Km = 22.0
+            // Incomplete PHEV as source/target: supply missing CS / CD / EAER via overrides.
+            if let src = catalog.vehicle(by: pair.source),
+               src.powertrain == .phev,
+               src.hasIncompleteCatalogData {
+                input.sourceEnergyOverrideKWhPer100Km = input.sourceEnergyOverrideKWhPer100Km ?? 22.0
+                if src.usableChargeSustainingFuelLPerKm == nil {
+                    input.sourceConsumptionOverrideLPer100Km = input.sourceConsumptionOverrideLPer100Km ?? 7.5
+                }
+                if src.catalogPHEVElectricRangeKm == nil {
+                    input.sourceElectricRangeOverrideKm = input.sourceElectricRangeOverrideKm ?? 55
+                }
+            }
+            if let tgt = catalog.vehicle(by: pair.target),
+               tgt.powertrain == .phev,
+               tgt.hasIncompleteCatalogData {
+                if tgt.usableChargeSustainingFuelLPerKm == nil {
+                    input.targetFuelConsumptionOverrideLPer100Km =
+                        input.targetFuelConsumptionOverrideLPer100Km ?? pair.stickerFuel ?? 6.5
+                }
+                if tgt.catalogPHEVElectricRangeKm == nil {
+                    input.targetElectricRangeOverrideKm = input.targetElectricRangeOverrideKm ?? 55
+                }
             }
             if pair.km == 0 {
                 // Explicit edge: premium still 0 when owned; simulation uses clamped km via validator or fails closed.
