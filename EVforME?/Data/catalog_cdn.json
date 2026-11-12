@@ -2,11 +2,11 @@
   "url": "",
   "publishedUrl": "",
   "rows": 6977,
-  "bytes": 8908918,
+  "bytes": 8909938,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-11-07T13:09:19+00:00",
+  "updatedAt": "2026-11-11T10:35:52.169987+00:00",
   "policy": "offline-first",
-  "seedVersion": 77,
-  "note": "seedVersion 77: confidenceScore policy v2 (ordinal coverage/quality index, not probability; no retroactive documentary verification)"
+  "seedVersion": 78,
+  "note": "seedVersion 78: PHEV wave2 batch1 restore/controls \u2014 BMW 330e battery extra; invalid Kuga/Jeep fills reverted; continuous Ford typenblatt orphans cleared; confidence policy v2 unchanged; api/static sync deferred at seed 77"
 }

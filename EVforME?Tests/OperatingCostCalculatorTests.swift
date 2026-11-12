@@ -72,8 +72,8 @@ final class OperatingCostCalculatorTests: XCTestCase {
     }
 
     func testPHEV_UsesPetrolNotSourceDieselPrice() throws {
-        // Prefer a complete PHEV (CS+CD+range). Golf GTE 2024 is incomplete/weighted-only.
-        guard let phev = VehicleCatalogService.shared.vehicle(by: "ford-kuga-phev-2023")
+        // Prefer a complete PHEV (CS+CD+range). Kuga CD cleared (continuous undated OEM PDF).
+        guard let phev = VehicleCatalogService.shared.vehicle(by: "cupra-terramar-e-hybrid-2025")
                 ?? VehicleCatalogService.shared.targetEVVehicles().first(where: {
                     $0.powertrain == .phev
                         && !$0.hasIncompleteCatalogData

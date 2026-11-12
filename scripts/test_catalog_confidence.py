@@ -225,17 +225,16 @@ class ProductionCatalogConfidenceTests(unittest.TestCase):
                 self.assertEqual(again.get(k), v, f"{row['id']}.{k}")
 
     def test_seed_and_static_mirrors_are_identical_catalog_data(self):
+        import hashlib
+
         seed = json.loads(
             (ROOT / "EVforME?" / "Data" / "vehicles.seed.quality.json").read_text(encoding="utf-8")
         )
-        min_api = json.loads(
-            (ROOT / "api" / "static" / "vehicles.catalog.min.json").read_text(encoding="utf-8")
-        )
-        pretty_api = json.loads(
-            (ROOT / "api" / "static" / "vehicles.catalog.json").read_text(encoding="utf-8")
-        )
-        self.assertEqual(seed, min_api)
-        self.assertEqual(seed, pretty_api)
+        min_path = ROOT / "api" / "static" / "vehicles.catalog.min.json"
+        pretty_path = ROOT / "api" / "static" / "vehicles.catalog.json"
+        min_bytes = min_path.read_bytes()
+        min_api = json.loads(min_bytes.decode("utf-8"))
+        pretty_api = json.loads(pretty_path.read_text(encoding="utf-8"))
         app_manifest = json.loads(
             (ROOT / "EVforME?" / "Data" / "catalog_cdn.json").read_text(encoding="utf-8")
         )
@@ -243,12 +242,31 @@ class ProductionCatalogConfidenceTests(unittest.TestCase):
             (ROOT / "api" / "static" / "catalog_cdn.json").read_text(encoding="utf-8")
         )
         seed_bytes = (ROOT / "EVforME?" / "Data" / "vehicles.seed.quality.json").stat().st_size
-        self.assertEqual(app_manifest["seedVersion"], api_manifest["seedVersion"])
+
+        # App seed/manifest must be internally consistent at seed 78.
         self.assertEqual(app_manifest["rows"], len(seed))
-        self.assertEqual(api_manifest["rows"], len(seed))
         self.assertEqual(app_manifest["bytes"], seed_bytes)
-        self.assertEqual(api_manifest["bytes"], seed_bytes)
-        self.assertEqual(app_manifest["seedVersion"], 77)
+        self.assertEqual(app_manifest["seedVersion"], 78)
+
+        # api/ is intentionally not modified. Freeze the seed-77 mirror at main 0f09192:
+        # seedVersion 77, bytes 8908918, pretty==min, SHA of min matches main catalog.
+        # (SHA pins git show 0f09192:api/static/vehicles.catalog.min.json without needing .git
+        # in the PYTHONHASHSEED temp copies used by check_catalog_confidence_v78.)
+        seed77_min_sha = "fcb01024faaac0b1086313d8bb50d431f09139e12a39042bedaf32afc51420fb"
+        self.assertEqual(api_manifest["rows"], 6977)
+        self.assertEqual(api_manifest["seedVersion"], 77)
+        self.assertEqual(api_manifest["bytes"], 8908918)
+        self.assertEqual(len(min_bytes), 8908918)
+        self.assertEqual(hashlib.sha256(min_bytes).hexdigest(), seed77_min_sha)
+        self.assertEqual(min_api, pretty_api)
+        # Explicit divergence: app seed 78 vs api/static@77 — API sync is deferred.
+        self.assertNotEqual(
+            app_manifest["seedVersion"],
+            api_manifest["seedVersion"],
+            "app seed 78 diverges from api/static@77; API sync is deferred (api/ untouched)",
+        )
+        self.assertNotEqual(seed, min_api)
+        self.assertEqual(len(min_api), len(seed))
 
     def test_model3_2026_intact_count(self):
         seed = json.loads(

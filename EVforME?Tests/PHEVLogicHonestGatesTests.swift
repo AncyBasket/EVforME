@@ -220,7 +220,8 @@ final class PHEVLogicHonestGatesTests: XCTestCase {
     }
 
     func testCompleteSeedPHEV_StillSimulatesWithoutOverrides() throws {
-        let id = "ford-kuga-phev-2023"
+        // Kuga PHEV CD was reverted (continuous undated OEM PDF). Use a still-complete seed PHEV.
+        let id = "cupra-terramar-e-hybrid-2025"
         let vehicle = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: id))
         XCTAssertEqual(vehicle.catalogDataIncomplete, false)
         XCTAssertNotNil(vehicle.usableChargeSustainingFuelLPerKm)
@@ -298,7 +299,7 @@ final class PHEVLogicHonestGatesTests: XCTestCase {
     }
 
     func testCompleteCarsPreviewUnchanged() throws {
-        let id = "ford-kuga-phev-2023"
+        let id = "cupra-terramar-e-hybrid-2025"
         let vehicle = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: id))
         let input = baseInput(targetId: id)
         let cost = try XCTUnwrap(
