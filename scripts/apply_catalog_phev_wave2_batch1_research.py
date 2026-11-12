@@ -124,10 +124,15 @@ def fill_partial(
         row[field] = val
     for field, (cite, date) in cites.items():
         set_field_source(row, field, cite, date)
-    # Never invent pure CD from weighted.
-    if "energyConsumptionKWhPerKm" not in values:
-        # leave existing nil
-        pass
+    # Hygiene: non-EPA PHEVs with battery/range must cite an http doc URL in sourceName.
+    urls = []
+    for cite, _date in cites.values():
+        urls.extend(urls_in(cite))
+    url = next((u for u in urls if u.startswith("http")), None)
+    if url:
+        sn = row.get("sourceName") or ""
+        if url not in sn:
+            row["sourceName"] = f"{sn}; wave2-batch1-research {note} — {url}".strip("; ")
     row["sourceUpdatedAt"] = SOURCE_DAY
     finalize(row)
     miss = row["missingCalcFields"]
@@ -272,6 +277,12 @@ def main() -> None:
     for field, val in q3sb23_vals.items():
         q3sb23[field] = val
         set_field_source(q3sb23, field, q3sb23_cite, q3sb24_date)
+    sn23 = q3sb23.get("sourceName") or ""
+    if AUDI_Q3SB_45_240314 not in sn23:
+        q3sb23["sourceName"] = (
+            f"{sn23}; wave2-batch1-research exact homolog 2023←2024 Q3 SB eTD — "
+            f"{AUDI_Q3SB_45_240314}"
+        ).strip("; ")
     q3sb23["sourceUpdatedAt"] = SOURCE_DAY
     finalize(q3sb23)
     homolog_reuse.append(

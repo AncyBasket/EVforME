@@ -2,10 +2,10 @@
   "url": "",
   "publishedUrl": "",
   "rows": 6977,
-  "bytes": 8917458,
+  "bytes": 8919329,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-11-12T10:01:38.206910+00:00",
+  "updatedAt": "2026-11-12T10:20:09.389154+00:00",
   "policy": "offline-first",
   "seedVersion": 79,
   "note": "seedVersion 79: PHEV wave2 batch1 research \u2014 Audi Q3/Q3 SB/A3/Q5 official eTD partial fills; remaining lotto rows stay nil with consulted/rejected OEM URLs; confidence policy v2 unchanged; api/static sync deferred at seed 77"
