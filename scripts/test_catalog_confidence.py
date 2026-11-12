@@ -243,15 +243,15 @@ class ProductionCatalogConfidenceTests(unittest.TestCase):
         )
         seed_bytes = (ROOT / "EVforME?" / "Data" / "vehicles.seed.quality.json").stat().st_size
 
-        # App seed/manifest must be internally consistent at seed 78.
+        # App seed/manifest must be internally consistent at seed 79.
         self.assertEqual(app_manifest["rows"], len(seed))
         self.assertEqual(app_manifest["bytes"], seed_bytes)
-        self.assertEqual(app_manifest["seedVersion"], 78)
+        self.assertEqual(app_manifest["seedVersion"], 79)
 
         # api/ is intentionally not modified. Freeze the seed-77 mirror at main 0f09192:
         # seedVersion 77, bytes 8908918, pretty==min, SHA of min matches main catalog.
         # (SHA pins git show 0f09192:api/static/vehicles.catalog.min.json without needing .git
-        # in the PYTHONHASHSEED temp copies used by check_catalog_confidence_v78.)
+        # in the PYTHONHASHSEED temp copies used by check_catalog_confidence_v79.)
         seed77_min_sha = "fcb01024faaac0b1086313d8bb50d431f09139e12a39042bedaf32afc51420fb"
         self.assertEqual(api_manifest["rows"], 6977)
         self.assertEqual(api_manifest["seedVersion"], 77)
@@ -259,11 +259,11 @@ class ProductionCatalogConfidenceTests(unittest.TestCase):
         self.assertEqual(len(min_bytes), 8908918)
         self.assertEqual(hashlib.sha256(min_bytes).hexdigest(), seed77_min_sha)
         self.assertEqual(min_api, pretty_api)
-        # Explicit divergence: app seed 78 vs api/static@77 — API sync is deferred.
+        # Explicit divergence: app seed 79 vs api/static@77 — API sync is deferred.
         self.assertNotEqual(
             app_manifest["seedVersion"],
             api_manifest["seedVersion"],
-            "app seed 78 diverges from api/static@77; API sync is deferred (api/ untouched)",
+            "app seed 79 diverges from api/static@77; API sync is deferred (api/ untouched)",
         )
         self.assertNotEqual(seed, min_api)
         self.assertEqual(len(min_api), len(seed))

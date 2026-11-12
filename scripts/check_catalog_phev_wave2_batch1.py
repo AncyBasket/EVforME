@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
-"""Must-fail probes + invariants for PHEV wave2 batch1 (seed 78).
+"""Must-fail probes + invariants for PHEV wave2 batch1 (seed 79).
 
 Dating and generic-URL checks run on every real PHEV row with fieldSources.
 Homolog fills do NOT bypass dating: sourceDate/archive year must match the
 donor year (dataDerivedFromSameHomologationYear), and weighted WLTP + power
 must be identical between donor and destination.
+
+Research pass: every filled calc field on a batch1 row must appear in the
+manifest; pure CD must not equal / be derived from weighted energy.
 """
 
 from __future__ import annotations
@@ -328,8 +331,106 @@ def must_fail_probes() -> None:
     else:
         raise SystemExit("probe: Stellantis januar_2023 listino not dated/accepted as 2023-01-01")
 
-    if caught < 14:
+    # Future-year Audi eTD (_240314 / Date 2024) must not date MY2022.
+    audi_2024 = (
+        "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1239/"
+        "file_en/a558808317b94f42ac509c09439d17b6612fc530/"
+        "eTD-Audi-Q3-Sportback-45-TFSIe-S_tronic-110kW_180kW_240314.pdf"
+    )
+    if not source_year_ok(audi_2024, "2024-03-14", 2022, homolog_year=None):
+        caught += 1
+    else:
+        raise SystemExit("probe: 2024 Audi eTD accepted for MY2022")
+
+    # Generic landing rejected.
+    if is_generic_url("https://www.audi.de/de/brand/de/modelle/q3.html") or is_generic_url(
+        "https://www.mercedes-benz.de/passengercars/models/suv/glc/overview.html"
+    ):
+        # /modelle is generic; overview may not match — count only when /modelle hits
+        pass
+    if is_generic_url("https://www.audi.de/de/brand/de/modelle/q3.html"):
+        caught += 1
+    else:
+        raise SystemExit("probe: /modelle landing not rejected")
+
+    # Pure CD must not equal weighted energy (derivation / copy).
+    if not pure_cd_equals_weighted(0.179, 0.179):
+        raise SystemExit("probe: equal pure/weighted not flagged")
+    caught += 1
+    if pure_cd_equals_weighted(0.209, 0.179):
+        raise SystemExit("probe: unequal pure/weighted falsely flagged")
+    caught += 1
+
+    # Manifest must list every filled calc field for researched batch1 rows.
+    fake_man = {
+        "batch1_ids": ["demo-phev-2024"],
+        "partial": [{"id": "demo-phev-2024", "filled": {"batteryKWh": 13.0}}],
+        "completed": [],
+        "homolog_reuse": [],
+        "left_nil": [],
+    }
+    fake_row = {
+        "id": "demo-phev-2024",
+        "fuelConsumptionLPerKm": 0.072,
+        "batteryKWh": 13.0,
+    }
+    if not manifest_covers_filled_fields(fake_row, fake_man):
+        caught += 1
+    else:
+        raise SystemExit("probe: fill without manifest entry not caught")
+    # Positive: alreadyPresent on left_nil covers pre-existing fields.
+    ok_man = {
+        "batch1_ids": ["demo-phev-2024"],
+        "partial": [],
+        "completed": [],
+        "homolog_reuse": [],
+        "left_nil": [
+            {
+                "id": "demo-phev-2024",
+                "alreadyPresent": {"batteryKWh": 13.0},
+            }
+        ],
+    }
+    ok_row = {"id": "demo-phev-2024", "batteryKWh": 13.0}
+    if manifest_covers_filled_fields(ok_row, ok_man):
+        caught += 1
+    else:
+        raise SystemExit("probe: alreadyPresent on left_nil not accepted")
+
+    if caught < 18:
         raise SystemExit(f"probes incomplete caught={caught}")
+
+
+def pure_cd_equals_weighted(pure: float | None, weighted: float | None) -> bool:
+    """True when a purported pure CD value is identical to weighted energy (illegal)."""
+    if pure is None or weighted is None:
+        return False
+    return abs(float(pure) - float(weighted)) <= 1e-12
+
+
+def manifest_covers_filled_fields(row: dict, man: dict) -> bool:
+    """Every non-nil calc field on a batch1 row must appear in a manifest fill entry
+    or in left_nil.alreadyPresent (pre-existing from earlier waves)."""
+    rid = row.get("id")
+    batch = set(man.get("batch1_ids") or [])
+    if rid not in batch:
+        return True
+    covered: set[str] = set()
+    for bucket in ("completed", "partial", "homolog_reuse"):
+        for entry in man.get(bucket) or []:
+            if entry.get("id") != rid:
+                continue
+            covered.update((entry.get("filled") or {}).keys())
+    for entry in man.get("left_nil") or []:
+        if entry.get("id") != rid:
+            continue
+        covered.update((entry.get("alreadyPresent") or {}).keys())
+    for field in PROVENANCE_REQUIRED_FIELDS:
+        if row.get(field) is None:
+            continue
+        if field not in covered:
+            return False
+    return True
 
 
 def urls_in(text: str) -> list[str]:
@@ -448,13 +549,25 @@ def main() -> None:
     man = json.loads(MANIFEST.read_text(encoding="utf-8"))
     inv = json.loads(INVENTORY.read_text(encoding="utf-8"))
 
-    if int(cdn.get("seedVersion") or 0) != 78:
-        raise SystemExit(f"seedVersion want 78 got {cdn.get('seedVersion')}")
+    if int(cdn.get("seedVersion") or 0) != 79:
+        raise SystemExit(f"seedVersion want 79 got {cdn.get('seedVersion')}")
+    if int(man.get("seedVersion") or 0) != 79:
+        raise SystemExit(f"manifest seedVersion want 79 got {man.get('seedVersion')}")
     if len(seed) != 6977:
         raise SystemExit(f"rows {len(seed)}")
     by_id = {r["id"]: r for r in seed}
     if [r["id"] for r in seed] != man["ids_before"]:
         raise SystemExit("id order/set drift vs manifest")
+    if len(man.get("batch1_ids") or []) != 40:
+        raise SystemExit("manifest batch1_ids != 40")
+    if len(man.get("left_nil") or []) + len(
+        {e["id"] for e in (man.get("partial") or []) + (man.get("completed") or []) + (man.get("homolog_reuse") or []) if e["id"] in set(man.get("batch1_ids") or [])}
+    ) < 40:
+        # Every batch1 id must appear in completed, partial, homolog_reuse, or left_nil
+        covered = {e["id"] for e in (man.get("partial") or []) + (man.get("completed") or []) + (man.get("homolog_reuse") or []) + (man.get("left_nil") or [])}
+        missing = [i for i in man["batch1_ids"] if i not in covered]
+        if missing:
+            raise SystemExit(f"batch1 ids missing from manifest outcomes: {missing[:5]}")
 
     m3 = [r for r in seed if r["id"].startswith("tesla-model-3") and r.get("year") == 2026]
     if len(m3) != 4:
@@ -526,6 +639,11 @@ def main() -> None:
             cite = (r.get("fieldSources") or {}).get("energyConsumptionKWhPerKm") or ""
             if cite and not has_pure_energy_label(cite):
                 raise SystemExit(f"pure kWh without label {r['id']}: {cite[:120]}")
+            if pure_cd_equals_weighted(e, r.get("weightedEnergyConsumptionKWhPerKm")):
+                raise SystemExit(
+                    f"pure CD equals weighted energy {r['id']}: {e} == "
+                    f"{r.get('weightedEnergyConsumptionKWhPerKm')}"
+                )
 
         fs = r.get("fieldSources") or {}
         fd = r.get("fieldSourceDates") or {}
@@ -536,6 +654,9 @@ def main() -> None:
         for field in PROVENANCE_REQUIRED_FIELDS:
             if r.get(field) is not None and not fs.get(field):
                 raise SystemExit(f"filled without fieldSources {r['id']}.{field}")
+
+        if not manifest_covers_filled_fields(r, man):
+            raise SystemExit(f"filled calc field without manifest entry {r['id']}")
 
         # sourceName must not retain generic landings or continuous typenblätter
         for url in urls_in(r.get("sourceName") or ""):
@@ -606,21 +727,68 @@ def main() -> None:
     if len(inv.get("batch1_candidates") or []) != 40:
         raise SystemExit("batch1 candidates != 40")
 
+    # Research spot-checks
+    q3sb = by_id["audi-q3-sportback-phev-45-tfsi-e-2024"]
+    if abs(float(q3sb.get("fuelConsumptionLPerKm") or 0) - 0.072) > 1e-9:
+        raise SystemExit("Q3 SB 2024 CS expected 0.072")
+    if int(q3sb.get("wltpRangeKm") or 0) != 52:
+        raise SystemExit("Q3 SB 2024 EAER expected 52")
+    if abs(float(q3sb.get("batteryKWh") or 0) - 13.0) > 1e-9:
+        raise SystemExit("Q3 SB 2024 battery expected 13.0")
+    if q3sb.get("energyConsumptionKWhPerKm") is not None:
+        raise SystemExit("Q3 SB 2024 pure CD must stay nil")
+    q3sb23 = by_id["audi-q3-sportback-phev-45-tfsi-e-2023"]
+    if q3sb23.get("dataDerivedFromSameHomologationYear") != 2024:
+        raise SystemExit("Q3 SB 2023 must set homolog year 2024")
+    if not exact_homolog_ok(q3sb23, q3sb):
+        raise SystemExit("Q3 SB 2023/2024 homolog pair broken")
+
+    report = {
+        "seedVersion": 79,
+        "rows": len(seed),
+        "completed": len(man.get("completed") or []),
+        "partial": len(man.get("partial") or []),
+        "left_nil": len(man.get("left_nil") or []),
+        "non_phev_tech_sha": sha,
+    }
     print("OK")
-    print(
-        json.dumps(
-            {
-                "seedVersion": 78,
-                "rows": len(seed),
-                "completed": len(man.get("completed") or []),
-                "partial": len(man.get("partial") or []),
-                "left_nil": len(man.get("left_nil") or []),
-                "non_phev_tech_sha": sha,
-            },
-            sort_keys=True,
+    print(json.dumps(report, sort_keys=True))
+    return report
+
+
+def _hashseed_parent() -> None:
+    """Run full check under PYTHONHASHSEED 0..5; require identical reports."""
+    import os
+    import subprocess
+
+    if os.environ.get("PHEV_WAVE2_HASHSEED_CHILD") == "1":
+        main()
+        return
+    digests = []
+    reports = []
+    for hs in range(6):
+        env = os.environ.copy()
+        env["PYTHONHASHSEED"] = str(hs)
+        env["PHEV_WAVE2_HASHSEED_CHILD"] = "1"
+        r = subprocess.run(
+            [sys.executable, str(Path(__file__).resolve())],
+            cwd=str(REPO),
+            env=env,
+            capture_output=True,
+            text=True,
         )
-    )
+        if r.returncode != 0:
+            raise SystemExit(
+                f"HASHSEED={hs} failed:\n{r.stdout}\n{r.stderr}"
+            )
+        out = (r.stdout or "").strip()
+        reports.append(out)
+        digests.append(hashlib.sha256(out.encode()).hexdigest())
+    if len(set(digests)) != 1:
+        raise SystemExit(f"PYTHONHASHSEED drift: {digests}")
+    print(reports[0])
+    print(f"PYTHONHASHSEED 0..5 identical: {digests[0]}")
 
 
 if __name__ == "__main__":
-    main()
+    _hashseed_parent()
