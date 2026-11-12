@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Must-fail probes + invariants for PHEV wave2 batch1 (seed 79).
+"""Must-fail probes + invariants for PHEV wave2 batch1 (seed 80).
 
 Dating and generic-URL checks run on every real PHEV row with fieldSources.
 Homolog fills do NOT bypass dating: sourceDate/archive year must match the
@@ -125,10 +125,9 @@ def _ok_for_year(
     if has_token:
         return True
     # Native same-MY press/PDF with explicit sourceDate: OK without path token.
-    # Homolog reuse may also use a dated press attachment without a year token in the
-    # URL — but continuous unversioned OEM PDFs are rejected above.
-    if not require_year_token:
-        return True
+    # Homolog reuse requires a year token / matching archive (require_year_token=True).
+    if require_year_token:
+        return False
     return True
 
 
@@ -397,7 +396,17 @@ def must_fail_probes() -> None:
     else:
         raise SystemExit("probe: alreadyPresent on left_nil not accepted")
 
-    if caught < 18:
+    # require_year_token must fail when donor-year dating has no year token / archive.
+    # Same calendar sourceDate alone is not enough for homolog reuse.
+    bare_press = "https://www.press.example.com/deutschland/article/attachment/T000/1"
+    if not source_year_ok(bare_press, "2023-09-27", 2024, homolog_year=2023):
+        caught += 1
+    else:
+        raise SystemExit(
+            "probe: require_year_token inert — homolog donor-year cite without year token accepted"
+        )
+
+    if caught < 19:
         raise SystemExit(f"probes incomplete caught={caught}")
 
 
@@ -549,10 +558,10 @@ def main() -> None:
     man = json.loads(MANIFEST.read_text(encoding="utf-8"))
     inv = json.loads(INVENTORY.read_text(encoding="utf-8"))
 
-    if int(cdn.get("seedVersion") or 0) != 79:
-        raise SystemExit(f"seedVersion want 79 got {cdn.get('seedVersion')}")
-    if int(man.get("seedVersion") or 0) != 79:
-        raise SystemExit(f"manifest seedVersion want 79 got {man.get('seedVersion')}")
+    if int(cdn.get("seedVersion") or 0) != 80:
+        raise SystemExit(f"seedVersion want 80 got {cdn.get('seedVersion')}")
+    if int(man.get("seedVersion") or 0) != 80:
+        raise SystemExit(f"manifest seedVersion want 80 got {man.get('seedVersion')}")
     if len(seed) != 6977:
         raise SystemExit(f"rows {len(seed)}")
     by_id = {r["id"]: r for r in seed}
@@ -733,18 +742,37 @@ def main() -> None:
         raise SystemExit("Q3 SB 2024 CS expected 0.072")
     if int(q3sb.get("wltpRangeKm") or 0) != 52:
         raise SystemExit("Q3 SB 2024 EAER expected 52")
-    if abs(float(q3sb.get("batteryKWh") or 0) - 13.0) > 1e-9:
-        raise SystemExit("Q3 SB 2024 battery expected 13.0")
+    if abs(float(q3sb.get("batteryKWh") or 0) - 10.4) > 1e-9:
+        raise SystemExit("Q3 SB 2024 battery expected 10.4 net")
     if q3sb.get("energyConsumptionKWhPerKm") is not None:
         raise SystemExit("Q3 SB 2024 pure CD must stay nil")
+    bat_cite = (q3sb.get("fieldSources") or {}).get("batteryKWh") or ""
+    if "net" not in bat_cite.lower():
+        raise SystemExit("Q3 SB 2024 battery cite must label net")
     q3sb23 = by_id["audi-q3-sportback-phev-45-tfsi-e-2023"]
     if q3sb23.get("dataDerivedFromSameHomologationYear") != 2024:
         raise SystemExit("Q3 SB 2023 must set homolog year 2024")
     if not exact_homolog_ok(q3sb23, q3sb):
         raise SystemExit("Q3 SB 2023/2024 homolog pair broken")
+    hcite = (q3sb23.get("fieldSources") or {}).get("batteryKWh") or ""
+    for token in ("E1*2007/46*1900*32", "SDGEAF1", "FD6FD6DD002RT51A184BIAHA7EM90B3", "ep 110"):
+        if token not in hcite:
+            raise SystemExit(f"Q3 SB 2023 homolog cite missing {token}")
+    if abs(float(q3sb23.get("batteryKWh") or 0) - 10.4) > 1e-9:
+        raise SystemExit("Q3 SB 2023 battery expected 10.4 net")
+    p22 = by_id["peugeot-3008-phev-2022"]
+    if abs(float(p22.get("batteryKWh") or 0) - 13.2) > 1e-9:
+        raise SystemExit("Peugeot 3008 2022 battery expected 13.2")
+    if int(p22.get("wltpRangeKm") or 0) != 55:
+        raise SystemExit("Peugeot 3008 2022 EAER expected 55")
+    if p22.get("fuelConsumptionLPerKm") is not None:
+        raise SystemExit("Peugeot 3008 2022 CS must stay nil (ponderato)")
+    q5 = by_id["audi-q5-phev-50-tfsi-e-2024"]
+    if abs(float(q5.get("batteryKWh") or 0) - 14.4) > 1e-9:
+        raise SystemExit("Q5 2024 battery expected 14.4 net")
 
     report = {
-        "seedVersion": 79,
+        "seedVersion": 80,
         "rows": len(seed),
         "completed": len(man.get("completed") or []),
         "partial": len(man.get("partial") or []),

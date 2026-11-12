@@ -83,54 +83,68 @@ final class PHEVWave2OfficialSourceTests: XCTestCase {
         XCTAssertTrue(my22.hasIncompleteCatalogData)
     }
 
-    func testBundledManifestIsSeed79() throws {
+    func testBundledManifestIsSeed80() throws {
         let url = try XCTUnwrap(Bundle.main.url(forResource: "catalog_cdn", withExtension: "json"))
         let obj = try XCTUnwrap(
             JSONSerialization.jsonObject(with: Data(contentsOf: url)) as? [String: Any]
         )
         let version = (obj["seedVersion"] as? NSNumber)?.intValue
             ?? (obj["seedVersion"] as? Int)
-        XCTAssertEqual(version, 79)
-        XCTAssertEqual(VehicleCatalogService.bundledSeedVersion, 79)
+        XCTAssertEqual(version, 80)
+        XCTAssertEqual(VehicleCatalogService.bundledSeedVersion, 80)
     }
 
-    func testAudiQ3Sportback2024OfficialETDFill() throws {
+    func testAudiQ3Sportback2024OfficialETDFillNetBattery() throws {
         let row = try XCTUnwrap(
             VehicleCatalogService.shared.vehicle(by: "audi-q3-sportback-phev-45-tfsi-e-2024")
         )
         XCTAssertEqual(row.fuelConsumptionLPerKm ?? -1, 0.072, accuracy: 1e-9)
         XCTAssertEqual(row.wltpRangeKm ?? -1, 52)
-        XCTAssertEqual(row.batteryKWh ?? -1, 13.0, accuracy: 0.01)
+        XCTAssertEqual(row.batteryKWh ?? -1, 10.4, accuracy: 0.01)
         XCTAssertNil(row.usableChargeDepletingEnergyKWhPerKm)
-        let csSrc = try XCTUnwrap(row.fieldSource(for: "fuelConsumptionLPerKm"))
-        XCTAssertTrue(csSrc.contains("audi-mediacenter.com"))
-        XCTAssertTrue(csSrc.contains("240314"))
+        let batSrc = try XCTUnwrap(row.fieldSource(for: "batteryKWh"))
+        XCTAssertTrue(batSrc.lowercased().contains("net"))
+        XCTAssertTrue(batSrc.contains("audi-mediacenter.com"))
+        XCTAssertTrue(batSrc.contains("240314"))
         XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "fuelConsumptionLPerKm")), "2024-03-14")
         XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "wltpRangeKm")), "2024-03-14")
         XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "batteryKWh")), "2024-03-14")
         XCTAssertTrue(row.hasIncompleteCatalogData)
     }
 
-    func testAudiQ5_2024OfficialETDFill() throws {
+    func testAudiQ5_2024OfficialETDFillNetBattery() throws {
         let row = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: "audi-q5-phev-50-tfsi-e-2024"))
         XCTAssertEqual(row.fuelConsumptionLPerKm ?? -1, 0.087, accuracy: 1e-9)
         XCTAssertEqual(row.wltpRangeKm ?? -1, 56)
-        XCTAssertEqual(row.batteryKWh ?? -1, 17.9, accuracy: 0.01)
+        XCTAssertEqual(row.batteryKWh ?? -1, 14.4, accuracy: 0.01)
         XCTAssertNil(row.usableChargeDepletingEnergyKWhPerKm)
         let src = try XCTUnwrap(row.fieldSource(for: "batteryKWh"))
+        XCTAssertTrue(src.lowercased().contains("net"))
         XCTAssertTrue(src.contains("audi-mediacenter.com"))
         XCTAssertTrue(src.contains("240604"))
         XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "batteryKWh")), "2024-06-04")
     }
 
-    func testAudiA3_45_2024OfficialETDFill() throws {
+    func testAudiA3_45_2024OfficialETDFillNetBattery() throws {
         let row = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: "audi-a3-phev-45-tfsi-e-2024"))
         XCTAssertEqual(row.fuelConsumptionLPerKm ?? -1, 0.066, accuracy: 1e-9)
         XCTAssertEqual(row.wltpRangeKm ?? -1, 58)
-        XCTAssertEqual(row.batteryKWh ?? -1, 13.0, accuracy: 0.01)
+        XCTAssertEqual(row.batteryKWh ?? -1, 10.4, accuracy: 0.01)
         let src = try XCTUnwrap(row.fieldSource(for: "fuelConsumptionLPerKm"))
         XCTAssertTrue(src.contains("A3-Sportback-45"))
         XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "fuelConsumptionLPerKm")), "2024-03-14")
+    }
+
+    func testPeugeot3008_2022OfficialTarifFill() throws {
+        let row = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: "peugeot-3008-phev-2022"))
+        XCTAssertEqual(row.batteryKWh ?? -1, 13.2, accuracy: 0.01)
+        XCTAssertEqual(row.wltpRangeKm ?? -1, 55)
+        XCTAssertNil(row.fuelConsumptionLPerKm)
+        XCTAssertNil(row.usableChargeDepletingEnergyKWhPerKm)
+        let bat = try XCTUnwrap(row.fieldSource(for: "batteryKWh"))
+        XCTAssertTrue(bat.contains("peugeot.fr") || bat.contains("novembre-2021"))
+        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "batteryKWh")), "2021-11-02")
+        XCTAssertTrue(row.hasIncompleteCatalogData)
     }
 
     func testAudiA3_40_2024RemainsNilWrongGenerationSheet() throws {
