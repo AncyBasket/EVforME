@@ -2,12 +2,12 @@
   "url": "",
   "publishedUrl": "",
   "rows": 6977,
-  "bytes": 8922025,
+  "bytes": 8920777,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-11-12T11:02:52.974207+00:00",
+  "updatedAt": "2026-11-13T11:40:16.899841+00:00",
   "policy": "offline-first",
-  "seedVersion": 80,
-  "note": "seedVersion 80: PHEV wave2 batch1 research corrections \u2014 Audi battery net/usable (10.4/14.4); Q3 SB 2023 homolog TAN/Va/Ve/ep; Peugeot 3008 2022 battery+EAER; honest nil reasons; require_year_token dating hygiene; api/static sync deferred at seed 77",
-  "prevSeedVersion": 79
+  "seedVersion": 81,
+  "note": "seedVersion 81: PHEV wave2 batch1 corr2 \u2014 Peugeot 3008 2022 scrub (FR-2021 invalid for MY22); BMW X1 2022 battery netta 8.82; Peugeot 3008 2023 battery usable 10.4; api/static sync deferred at seed 77",
+  "prevSeedVersion": 80
 }

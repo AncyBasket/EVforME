@@ -243,10 +243,10 @@ class ProductionCatalogConfidenceTests(unittest.TestCase):
         )
         seed_bytes = (ROOT / "EVforME?" / "Data" / "vehicles.seed.quality.json").stat().st_size
 
-        # App seed/manifest must be internally consistent at seed 80.
+        # App seed/manifest must be internally consistent at seed 81.
         self.assertEqual(app_manifest["rows"], len(seed))
         self.assertEqual(app_manifest["bytes"], seed_bytes)
-        self.assertEqual(app_manifest["seedVersion"], 80)
+        self.assertEqual(app_manifest["seedVersion"], 81)
 
         # api/ is intentionally not modified. Freeze the seed-77 mirror at main 0f09192:
         # seedVersion 77, bytes 8908918, pretty==min, SHA of min matches main catalog.
@@ -259,11 +259,11 @@ class ProductionCatalogConfidenceTests(unittest.TestCase):
         self.assertEqual(len(min_bytes), 8908918)
         self.assertEqual(hashlib.sha256(min_bytes).hexdigest(), seed77_min_sha)
         self.assertEqual(min_api, pretty_api)
-        # Explicit divergence: app seed 80 vs api/static@77 — API sync is deferred.
+        # Explicit divergence: app seed 81 vs api/static@77 — API sync is deferred.
         self.assertNotEqual(
             app_manifest["seedVersion"],
             api_manifest["seedVersion"],
-            "app seed 80 diverges from api/static@77; API sync is deferred (api/ untouched)",
+            "app seed 81 diverges from api/static@77; API sync is deferred (api/ untouched)",
         )
         self.assertNotEqual(seed, min_api)
         self.assertEqual(len(min_api), len(seed))

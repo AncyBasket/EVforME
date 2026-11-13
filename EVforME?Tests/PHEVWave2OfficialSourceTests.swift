@@ -83,15 +83,15 @@ final class PHEVWave2OfficialSourceTests: XCTestCase {
         XCTAssertTrue(my22.hasIncompleteCatalogData)
     }
 
-    func testBundledManifestIsSeed80() throws {
+    func testBundledManifestIsSeed81() throws {
         let url = try XCTUnwrap(Bundle.main.url(forResource: "catalog_cdn", withExtension: "json"))
         let obj = try XCTUnwrap(
             JSONSerialization.jsonObject(with: Data(contentsOf: url)) as? [String: Any]
         )
         let version = (obj["seedVersion"] as? NSNumber)?.intValue
             ?? (obj["seedVersion"] as? Int)
-        XCTAssertEqual(version, 80)
-        XCTAssertEqual(VehicleCatalogService.bundledSeedVersion, 80)
+        XCTAssertEqual(version, 81)
+        XCTAssertEqual(VehicleCatalogService.bundledSeedVersion, 81)
     }
 
     func testAudiQ3Sportback2024OfficialETDFillNetBattery() throws {
@@ -135,15 +135,35 @@ final class PHEVWave2OfficialSourceTests: XCTestCase {
         XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "fuelConsumptionLPerKm")), "2024-03-14")
     }
 
-    func testPeugeot3008_2022OfficialTarifFill() throws {
+    func testPeugeot3008_2022RemainsNilWithoutVerifiedMY22NetSource() throws {
         let row = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: "peugeot-3008-phev-2022"))
-        XCTAssertEqual(row.batteryKWh ?? -1, 13.2, accuracy: 0.01)
-        XCTAssertEqual(row.wltpRangeKm ?? -1, 55)
+        XCTAssertNil(row.batteryKWh)
+        XCTAssertNil(row.wltpRangeKm)
         XCTAssertNil(row.fuelConsumptionLPerKm)
         XCTAssertNil(row.usableChargeDepletingEnergyKWhPerKm)
-        let bat = try XCTUnwrap(row.fieldSource(for: "batteryKWh"))
-        XCTAssertTrue(bat.contains("peugeot.fr") || bat.contains("novembre-2021"))
-        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "batteryKWh")), "2021-11-02")
+        XCTAssertNil(row.fieldSource(for: "batteryKWh"))
+        XCTAssertNil(row.fieldSource(for: "wltpRangeKm"))
+        XCTAssertTrue(row.hasIncompleteCatalogData)
+    }
+
+    func testBMWX1_2022BatteryIsNettaNotGross() throws {
+        let row = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: "bmw-x1-phev-xdrive25e-2022"))
+        XCTAssertEqual(row.batteryKWh ?? -1, 8.82, accuracy: 0.01)
+        let src = try XCTUnwrap(row.fieldSource(for: "batteryKWh"))
+        XCTAssertTrue(src.lowercased().contains("netta") || src.lowercased().contains("net"))
+        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "batteryKWh")), "2022-01-26")
+        XCTAssertEqual(row.wltpRangeKm ?? -1, 49)
+        XCTAssertNil(row.fuelConsumptionLPerKm)
+        XCTAssertTrue(row.hasIncompleteCatalogData)
+    }
+
+    func testPeugeot3008_2023BatteryIsUsableNotGrossCapacity() throws {
+        let row = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: "peugeot-3008-phev-2023"))
+        XCTAssertEqual(row.batteryKWh ?? -1, 10.4, accuracy: 0.01)
+        let src = try XCTUnwrap(row.fieldSource(for: "batteryKWh"))
+        XCTAssertTrue(src.lowercased().contains("usable") || src.lowercased().contains("net"))
+        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "batteryKWh")), "2023-04-01")
+        XCTAssertNil(row.fuelConsumptionLPerKm)
         XCTAssertTrue(row.hasIncompleteCatalogData)
     }
 

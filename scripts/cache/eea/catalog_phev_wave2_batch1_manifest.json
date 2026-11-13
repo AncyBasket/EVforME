@@ -1,6 +1,6 @@
 {
-  "seedVersion": 80,
-  "prevSeedVersion": 79,
+  "seedVersion": 81,
+  "prevSeedVersion": 80,
   "ids_before": [
     "alfa-romeo-147-2005",
     "alfa-romeo-147-2006",
@@ -7167,31 +7167,6 @@
         "donorSourceDate": "2024-03-14"
       },
       "batteryConvention": "net"
-    },
-    {
-      "id": "peugeot-3008-phev-2022",
-      "note": "FR tarif 2021-11-02 HYBRID 225: battery 13.2; EAER WLTP combined MIN 55; mixte 1,3–1,4 L/100 ponderato → CS nil; no pure CD; UK archive for MY22 dating",
-      "filled": {
-        "batteryKWh": 13.2,
-        "wltpRangeKm": 55
-      },
-      "stillMissing": [
-        "fuelConsumptionLPerKm",
-        "energyConsumptionKWhPerKm"
-      ],
-      "sources": {
-        "batteryKWh": "Peugeot FR tarif CT-3008 applicable au 02 novembre 2021 — HYBRID 225 e-EAT8 Capacité batterie 13,2 kWh (single label, no gross/net split on sheet) https://www.peugeot.fr/content/dam/peugeot/france/b2c/documentation/tarifs/novembre-2021/ct-3008-applicable-au-02-novembre-2021.pdf archive https://web.archive.org/web/20211121114529/https://www.peugeot.fr/content/dam/peugeot/france/b2c/documentation/tarifs/novembre-2021/ct-3008-applicable-au-02-novembre-2021.pdf; MY2022-dated UK guide archive corroborates Battery Capacity 13.2 https://web.archive.org/web/20220628030021/https://business.peugeot.co.uk/content/dam/peugeot/uk/b2b/buy/price---spec/pdfs/3008-suv-price-spec-guide.pdf",
-        "wltpRangeKm": "Peugeot FR tarif CT-3008 applicable au 02 novembre 2021 — HYBRID 225 Autonomie électrique WLTP 55–56 km (combined; not City) → MIN 55 https://www.peugeot.fr/content/dam/peugeot/france/b2c/documentation/tarifs/novembre-2021/ct-3008-applicable-au-02-novembre-2021.pdf archive https://web.archive.org/web/20211121114529/https://www.peugeot.fr/content/dam/peugeot/france/b2c/documentation/tarifs/novembre-2021/ct-3008-applicable-au-02-novembre-2021.pdf; MY2022 UK archive for dating https://web.archive.org/web/20220628030021/https://business.peugeot.co.uk/content/dam/peugeot/uk/b2b/buy/price---spec/pdfs/3008-suv-price-spec-guide.pdf"
-      },
-      "sourceDates": {
-        "batteryKWh": "2021-11-02",
-        "wltpRangeKm": "2021-11-02"
-      },
-      "rejected": {
-        "fuelConsumptionLPerKm": "mixte 1,3–1,4 L/100 is ponderato/weighted — never CS",
-        "energyConsumptionKWhPerKm": "no pure-CD kWh label on FR tarif"
-      },
-      "batteryConvention": "unlabeled-single (FR Capacité batterie; not split net)"
     }
   ],
   "extras": [
@@ -7519,29 +7494,6 @@
       }
     },
     {
-      "id": "bmw-x1-phev-xdrive25e-2022",
-      "brand": "BMW",
-      "model": "X1",
-      "year": 2022,
-      "market": "IT",
-      "missing": [
-        "fuelConsumptionLPerKm",
-        "energyConsumptionKWhPerKm"
-      ],
-      "reason": "CS+CD nil: IT listino 2022-01-26 has range/battery; no discharged CS / pure CD",
-      "consulted": [
-        {
-          "url": "scripts/cache/oem/bmw_x1_listino_it_20220126.pdf",
-          "sourceDate": "2022-01-26",
-          "reject_for": "CS/CD — no discharged / rein-elektrisch labels"
-        }
-      ],
-      "alreadyPresent": {
-        "wltpRangeKm": 49,
-        "batteryKWh": 10.0
-      }
-    },
-    {
       "id": "jeep-renegade-phev-4xe-2024",
       "brand": "Jeep",
       "model": "Renegade",
@@ -7765,38 +7717,6 @@
           "reject": "facelift press: Kapazität 31,2 + EAER ranges + gewichtet Verbrauch — verify calendar date; treated as post-MY22 facelift wave, not used for MY22 fill"
         }
       ]
-    },
-    {
-      "id": "peugeot-3008-phev-2023",
-      "brand": "Peugeot",
-      "model": "3008",
-      "year": 2023,
-      "market": "IT",
-      "missing": [
-        "fuelConsumptionLPerKm",
-        "energyConsumptionKWhPerKm"
-      ],
-      "reason": "CS+CD nil: UK Apr 2023 price/spec (effective 1 Apr 2023) already backs battery 14.2 and EAER 48; Fuel Consumption Combined 1.6–1.1 L/100 and electric kWh are weighted (no discharged CS / pure CD). FR CT-3008 Applicable-au-3-Avril-2023 archive 20240422073256 returned 404 this pass",
-      "consulted": [
-        {
-          "url": "https://www.media.stellantis.com/uploads/uk/model-pricelist/peugeot3008pricespecapr23-6455a65377d74.pdf",
-          "sourceDate": "2023-04-01",
-          "reject_for": "CS/CD — Combined fuel/electric are weighted; battery/range alreadyPresent"
-        },
-        {
-          "url": "https://web.archive.org/web/20240422073256/https://www.peugeot.fr/content/dam/peugeot/france/b2c/documentation/tarifs/avril-2023/CT-3008-Applicable-au-3-Avril-2023.pdf",
-          "sourceDate": "2023-04-03",
-          "reject": "archive snapshot HTTP 404 — FR Apr 2023 tarif not retrieved"
-        }
-      ],
-      "fieldReasons": {
-        "fuelConsumptionLPerKm": "UK Apr 2023 Combined L/100 is weighted/pondéré",
-        "energyConsumptionKWhPerKm": "UK Apr 2023 electric Combined kWh weighted; no pure-CD label"
-      },
-      "alreadyPresent": {
-        "wltpRangeKm": 48,
-        "batteryKWh": 14.2
-      }
     },
     {
       "id": "mini-countryman-cooper-se-all4-2022",
@@ -8082,97 +8002,154 @@
           "reject": "future year; weightedFuel not identical"
         }
       ]
+    },
+    {
+      "id": "peugeot-3008-phev-2022",
+      "brand": "Peugeot",
+      "model": "3008",
+      "year": 2022,
+      "market": "IT",
+      "missing": [
+        "fuelConsumptionLPerKm",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ],
+      "reason": "battery+EAER nil: FR tarif CT-3008 applicable 02/11/2021 is calendar-2021 — fails MY2022 dating (need MY-year document date or archive.org snapshot from 2022). Official UK business.peugeot.co.uk price/spec guide has a 2022-06-28 archive.org capture, but PDF retrieval truncates at 1 MiB without %%EOF so Usable Battery / Electric Range (Combined) values from that snapshot cannot be verified this pass (never use the archive only to re-date FR-2021 figures). Live UK guide rejected (CDX digest differs from 2022 capture; continuous). Dealer mirrors rejected.",
+      "consulted": [
+        {
+          "url": "https://www.peugeot.fr/content/dam/peugeot/france/b2c/documentation/tarifs/novembre-2021/ct-3008-applicable-au-02-novembre-2021.pdf",
+          "sourceDate": "2021-11-02",
+          "reject": "document date 2021 — not valid for MY2022 dating rule"
+        },
+        {
+          "url": "https://web.archive.org/web/20220628030021/https://business.peugeot.co.uk/content/dam/peugeot/uk/b2b/buy/price---spec/pdfs/3008-suv-price-spec-guide.pdf",
+          "sourceDate": "2022-06-28",
+          "reject": "official Peugeot UK guide archived in 2022, but downloaded body truncated at 1048576 bytes (no %%EOF) — cannot honestly read Usable/EAER from snapshot"
+        },
+        {
+          "url": "https://business.peugeot.co.uk/content/dam/peugeot/uk/b2b/buy/price---spec/pdfs/3008-suv-price-spec-guide.pdf",
+          "reject": "live continuous PDF — CDX digest ≠ 20220628 capture; not used for MY22"
+        },
+        {
+          "url": "https://www.guyperry.co.uk/wp-content/uploads/2022/04/3008-suv-price-spec-guide-2.pdf",
+          "reject": "dealer/partner upload — not peugeot.com / media.stellantis OEM"
+        }
+      ],
+      "fieldReasons": {
+        "batteryKWh": "no verified MY2022 official sheet with labeled net/usable kWh (13.2 on FR tarif is unlabeled / likely gross; not stored)",
+        "wltpRangeKm": "no verified MY2022 official combined EAER from a readable 2022 snapshot",
+        "fuelConsumptionLPerKm": "FR mixte ponderato only; no discharged CS on consulted sheets",
+        "energyConsumptionKWhPerKm": "no pure-CD label on consulted sheets"
+      }
+    },
+    {
+      "id": "bmw-x1-phev-xdrive25e-2022",
+      "brand": "BMW",
+      "model": "X1",
+      "year": 2022,
+      "market": "IT",
+      "missing": [
+        "fuelConsumptionLPerKm",
+        "energyConsumptionKWhPerKm"
+      ],
+      "reason": "CS+CD nil: IT listino 2022-01-26 has EAER + battery netta; no discharged CS / pure CD. Battery corrected to netta 8.82.",
+      "consulted": [
+        {
+          "url": "https://www.press.bmwgroup.com/italy/article/attachment/T0321361IT/520251",
+          "sourceDate": "2022-01-26",
+          "reject_for": "CS/CD — no discharged / rein-elektrisch labels",
+          "accepted_for": "batteryKWh netta 8.82; wltpRangeKm alreadyPresent"
+        }
+      ],
+      "fieldReasons": {
+        "fuelConsumptionLPerKm": "no discharged-battery CS on IT listino",
+        "energyConsumptionKWhPerKm": "no rein-elektrisch / pure-CD label"
+      },
+      "alreadyPresent": {
+        "wltpRangeKm": 49,
+        "batteryKWh": 8.82
+      }
+    },
+    {
+      "id": "peugeot-3008-phev-2023",
+      "brand": "Peugeot",
+      "model": "3008",
+      "year": 2023,
+      "market": "IT",
+      "missing": [
+        "fuelConsumptionLPerKm",
+        "energyConsumptionKWhPerKm"
+      ],
+      "reason": "CS+CD nil: UK Apr 2023 price/spec backs Usable Battery 10.4 and EAER; Fuel Consumption Combined / electric Combined are weighted only",
+      "consulted": [
+        {
+          "url": "https://www.media.stellantis.com/uploads/uk/model-pricelist/peugeot3008pricespecapr23-6455a65377d74.pdf",
+          "sourceDate": "2023-04-01",
+          "reject_for": "CS/CD — Combined fuel/electric weighted",
+          "accepted_for": "batteryKWh Usable 10.4; wltpRangeKm alreadyPresent"
+        }
+      ],
+      "fieldReasons": {
+        "fuelConsumptionLPerKm": "UK Apr 2023 Combined L/100 is weighted",
+        "energyConsumptionKWhPerKm": "UK Apr 2023 electric Combined kWh weighted"
+      },
+      "alreadyPresent": {
+        "wltpRangeKm": 48,
+        "batteryKWh": 10.4
+      }
     }
   ],
   "changed_fields": [
     {
-      "id": "audi-q3-sportback-phev-45-tfsi-e-2024",
-      "field": "batteryKWh",
-      "value": 10.4,
-      "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1239/file_en/a558808317b94f42ac509c09439d17b6612fc530/eTD-Audi-Q3-Sportback-45-TFSIe-S_tronic-110kW_180kW_240314.pdf",
-      "sourceDate": "2024-03-14",
-      "prev": 13.0
-    },
-    {
-      "id": "audi-q3-phev-45-tfsi-e-2024",
-      "field": "batteryKWh",
-      "value": 10.4,
-      "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1238/file_en/3207de82c582b9eac73037fd1e233eb7b06f1637/eTD-Audi-Q3-45-TFSIe-S_tronic-110kW_180kW_240314.pdf",
-      "sourceDate": "2024-03-14",
-      "prev": 13.0
-    },
-    {
-      "id": "audi-a3-phev-45-tfsi-e-2024",
-      "field": "batteryKWh",
-      "value": 10.4,
-      "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_240314.pdf",
-      "sourceDate": "2024-03-14",
-      "prev": 13.0
-    },
-    {
-      "id": "audi-a3-phev-40-tfsi-e-2023",
-      "field": "batteryKWh",
-      "value": 10.4,
-      "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-40-TFSI-e-S_tronic-150kW_230718.pdf",
-      "sourceDate": "2023-07-18",
-      "prev": 13.0
-    },
-    {
-      "id": "audi-q5-phev-50-tfsi-e-2024",
-      "field": "batteryKWh",
-      "value": 14.4,
-      "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/976/file_en/ba4ac5716025d45aa954ac28860d4b98e579f75b/eTD-Audi-Q5-50-TFSIe-quattro-S_tronic-220kW_240604.pdf",
-      "sourceDate": "2024-06-04",
-      "prev": 17.9
-    },
-    {
-      "id": "audi-q3-sportback-phev-45-tfsi-e-2023",
-      "field": "batteryKWh",
-      "value": 10.4,
-      "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1239/file_en/a558808317b94f42ac509c09439d17b6612fc530/eTD-Audi-Q3-Sportback-45-TFSIe-S_tronic-110kW_180kW_240314.pdf",
-      "sourceDate": "2024-03-14",
-      "homolog": "TAN E1*2007/46*1900*32; Va SDGEAF1; Ve FD6FD6DD002RT51A184BIAHA7EM90B3; ep 110"
-    },
-    {
       "id": "peugeot-3008-phev-2022",
       "field": "batteryKWh",
-      "value": 13.2,
+      "value": null,
+      "prev": 13.2,
       "url": "https://www.peugeot.fr/content/dam/peugeot/france/b2c/documentation/tarifs/novembre-2021/ct-3008-applicable-au-02-novembre-2021.pdf",
-      "sourceDate": "2021-11-02"
+      "sourceDate": null,
+      "action": "scrub"
     },
     {
       "id": "peugeot-3008-phev-2022",
       "field": "wltpRangeKm",
-      "value": 55,
+      "value": null,
+      "prev": 55,
       "url": "https://www.peugeot.fr/content/dam/peugeot/france/b2c/documentation/tarifs/novembre-2021/ct-3008-applicable-au-02-novembre-2021.pdf",
-      "sourceDate": "2021-11-02"
+      "sourceDate": null,
+      "action": "scrub"
+    },
+    {
+      "id": "bmw-x1-phev-xdrive25e-2022",
+      "field": "batteryKWh",
+      "value": 8.82,
+      "prev": 10.0,
+      "url": "https://www.press.bmwgroup.com/italy/article/attachment/T0321361IT/520251",
+      "sourceDate": "2022-01-26",
+      "label": "netta"
+    },
+    {
+      "id": "peugeot-3008-phev-2023",
+      "field": "batteryKWh",
+      "value": 10.4,
+      "prev": 14.2,
+      "url": "https://www.media.stellantis.com/uploads/uk/model-pricelist/peugeot3008pricespecapr23-6455a65377d74.pdf",
+      "sourceDate": "2023-04-01",
+      "label": "usable"
     }
   ],
   "battery_convention": {
     "catalogConvention": "net/usable",
-    "evidence": [
-      "bmw-330e-phev-2024 batteryKWh=19.5 labeled usable energy",
-      "bmw-x1-phev-xdrive25e-2023 batteryKWh=14.2 labeled Netto Batterieinhalt",
-      "WeeklyChargeEstimator / catalog calc treat batteryKWh as usable pack energy"
-    ],
-    "thisPRAudi": "net (10.4 for Q3/A3 13.0 gross sheets; 14.4 for Q5 17.9 gross)",
-    "existingViolationsNotFixed": [
-      {
-        "id": "bmw-x1-phev-xdrive25e-2022",
-        "batteryKWh": 10.0,
-        "note": "IT listino lorda/netta 10/8.82 → stored 10 (gross)"
-      },
-      {
-        "id": "peugeot-3008-phev-2023",
-        "batteryKWh": 14.2,
-        "note": "UK Apr 2023 Battery Capacity MAX 14.2; Usable Battery Capacity 10.4 on same sheet"
-      }
+    "thisPass": [
+      "bmw-x1-phev-xdrive25e-2022 → 8.82 netta (printed)",
+      "peugeot-3008-phev-2023 → 10.4 Usable Battery Capacity (printed)",
+      "peugeot-3008-phev-2022 → battery nil (no verified MY22 net label)"
     ]
   },
   "counts": {
     "completed": 0,
-    "partial": 7,
-    "left_nil": 33,
+    "partial": 6,
+    "left_nil": 34,
     "homolog_reuse": 1
   },
   "non_phev_tech_sha": "6b9038232bc51daabc9e259fc0dab170f787984d4dfb8f597e309fe50155b4dc",
@@ -8182,14 +8159,13 @@
     "tesla-model-3-premium-trazione-posteriore-2026",
     "tesla-model-3-trazione-posteriore-2026"
   ],
-  "sourceDay": "2026-11-12",
+  "sourceDay": "2026-11-13",
   "reviewNotes": [
-    "CORRECTION: catalog batteryKWh convention = net/usable; Audi eTD gross→net (10.4 / 14.4) with explicit net label; CS/EAER/CD dates unchanged.",
-    "Q3 SB 2023 homolog cites TAN E1*2007/46*1900*32 / Va SDGEAF1 / Ve FD6FD6DD002RT51A184BIAHA7EM90B3 / ep 110 + donor eTD 2024-03-14.",
-    "Peugeot 3008 2022: FR tarif 2021-11-02 HYBRID 225 battery 13.2 + EAER 55; CS nil (ponderato).",
-    "Existing convention violations reported only: bmw-x1-2022 gross 10; peugeot-3008-2023 Capacity 14.2 vs Usable 10.4.",
-    "Nil reasons cite concrete OEM/archive URLs — no homepage-only claims.",
-    "Checker: require_year_token now fails when homolog donor-year cite lacks year token; must-fail probe added."
+    "CORR2: Peugeot 3008 2022 FR-2021 fill scrubbed — dating rule requires MY-year date or 2022 archive; UK 2022 archive PDF truncated unreadable; never re-date FR values via UK snapshot.",
+    "CORR2: BMW X1 2022 battery → netta 8.82 from Capacità lorda/netta 10/8.82 on IT listino 2022-01-26.",
+    "CORR2: Peugeot 3008 2023 battery → Usable 10.4 from UK Apr 2023 listino (was Capacity MAX 14.2).",
+    "Nil research: no homepage-only reasons (Peugeot 2023, Volvo XC40, Captur, GLA/GLE consulted URLs retained/updated).",
+    "Checker: require_year_token fail-closed + must-fail probe; best_shared_exact requires TAN+ep/power (missing ep rejected); seed-row homolog uses exact_homolog_ok for power+weighted WLTP."
   ],
   "prKind": "research-correction"
 }

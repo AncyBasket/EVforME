@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Determinism + integrity checks for confidence policy v2 (seed v80).
+"""Determinism + integrity checks for confidence policy v2 (seed v81).
 
 Runs full unit tests + recalc preview in 6 PYTHONHASHSEED child processes on
 temporary copies (no writes to the real seed).
@@ -37,8 +37,8 @@ def run_core() -> dict:
 
     seed = json.loads((REPO / "EVforME?" / "Data" / "vehicles.seed.quality.json").read_text())
     cdn = json.loads((REPO / "EVforME?" / "Data" / "catalog_cdn.json").read_text())
-    if int(cdn.get("seedVersion") or 0) != 80:
-        raise SystemExit(f"seedVersion expected 80, got {cdn.get('seedVersion')}")
+    if int(cdn.get("seedVersion") or 0) != 81:
+        raise SystemExit(f"seedVersion expected 81, got {cdn.get('seedVersion')}")
     if len(seed) != 6977:
         raise SystemExit(f"rows {len(seed)}")
     m3 = [r for r in seed if r["id"].startswith("tesla-model-3") and r.get("year") == 2026]

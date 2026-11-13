@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Must-fail probes + invariants for PHEV wave2 batch1 (seed 80).
+"""Must-fail probes + invariants for PHEV wave2 batch1 (seed 81).
 
 Dating and generic-URL checks run on every real PHEV row with fieldSources.
 Homolog fills do NOT bypass dating: sourceDate/archive year must match the
@@ -558,10 +558,10 @@ def main() -> None:
     man = json.loads(MANIFEST.read_text(encoding="utf-8"))
     inv = json.loads(INVENTORY.read_text(encoding="utf-8"))
 
-    if int(cdn.get("seedVersion") or 0) != 80:
-        raise SystemExit(f"seedVersion want 80 got {cdn.get('seedVersion')}")
-    if int(man.get("seedVersion") or 0) != 80:
-        raise SystemExit(f"manifest seedVersion want 80 got {man.get('seedVersion')}")
+    if int(cdn.get("seedVersion") or 0) != 81:
+        raise SystemExit(f"seedVersion want 81 got {cdn.get('seedVersion')}")
+    if int(man.get("seedVersion") or 0) != 81:
+        raise SystemExit(f"manifest seedVersion want 81 got {man.get('seedVersion')}")
     if len(seed) != 6977:
         raise SystemExit(f"rows {len(seed)}")
     by_id = {r["id"]: r for r in seed}
@@ -761,18 +761,30 @@ def main() -> None:
     if abs(float(q3sb23.get("batteryKWh") or 0) - 10.4) > 1e-9:
         raise SystemExit("Q3 SB 2023 battery expected 10.4 net")
     p22 = by_id["peugeot-3008-phev-2022"]
-    if abs(float(p22.get("batteryKWh") or 0) - 13.2) > 1e-9:
-        raise SystemExit("Peugeot 3008 2022 battery expected 13.2")
-    if int(p22.get("wltpRangeKm") or 0) != 55:
-        raise SystemExit("Peugeot 3008 2022 EAER expected 55")
+    if p22.get("batteryKWh") is not None:
+        raise SystemExit("Peugeot 3008 2022 battery must be nil (no verified MY22 net)")
+    if p22.get("wltpRangeKm") is not None:
+        raise SystemExit("Peugeot 3008 2022 EAER must be nil (no verified MY22 source)")
     if p22.get("fuelConsumptionLPerKm") is not None:
-        raise SystemExit("Peugeot 3008 2022 CS must stay nil (ponderato)")
+        raise SystemExit("Peugeot 3008 2022 CS must stay nil")
+    bmw22 = by_id["bmw-x1-phev-xdrive25e-2022"]
+    if abs(float(bmw22.get("batteryKWh") or 0) - 8.82) > 1e-9:
+        raise SystemExit("BMW X1 2022 battery expected netta 8.82")
+    bat_bmw = (bmw22.get("fieldSources") or {}).get("batteryKWh") or ""
+    if "netta" not in bat_bmw.lower() and "net" not in bat_bmw.lower():
+        raise SystemExit("BMW X1 2022 battery cite must label netta/net")
+    p23 = by_id["peugeot-3008-phev-2023"]
+    if abs(float(p23.get("batteryKWh") or 0) - 10.4) > 1e-9:
+        raise SystemExit("Peugeot 3008 2023 battery expected Usable 10.4")
+    bat_p23 = (p23.get("fieldSources") or {}).get("batteryKWh") or ""
+    if "usable" not in bat_p23.lower() and "net" not in bat_p23.lower():
+        raise SystemExit("Peugeot 3008 2023 battery cite must label usable/net")
     q5 = by_id["audi-q5-phev-50-tfsi-e-2024"]
     if abs(float(q5.get("batteryKWh") or 0) - 14.4) > 1e-9:
         raise SystemExit("Q5 2024 battery expected 14.4 net")
 
     report = {
-        "seedVersion": 80,
+        "seedVersion": 81,
         "rows": len(seed),
         "completed": len(man.get("completed") or []),
         "partial": len(man.get("partial") or []),
