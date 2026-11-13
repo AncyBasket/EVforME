@@ -83,15 +83,15 @@ final class PHEVWave2OfficialSourceTests: XCTestCase {
         XCTAssertTrue(my22.hasIncompleteCatalogData)
     }
 
-    func testBundledManifestIsSeed81() throws {
+    func testBundledManifestIsSeed82() throws {
         let url = try XCTUnwrap(Bundle.main.url(forResource: "catalog_cdn", withExtension: "json"))
         let obj = try XCTUnwrap(
             JSONSerialization.jsonObject(with: Data(contentsOf: url)) as? [String: Any]
         )
         let version = (obj["seedVersion"] as? NSNumber)?.intValue
             ?? (obj["seedVersion"] as? Int)
-        XCTAssertEqual(version, 81)
-        XCTAssertEqual(VehicleCatalogService.bundledSeedVersion, 81)
+        XCTAssertEqual(version, 82)
+        XCTAssertEqual(VehicleCatalogService.bundledSeedVersion, 82)
     }
 
     func testAudiQ3Sportback2024OfficialETDFillNetBattery() throws {
@@ -152,17 +152,29 @@ final class PHEVWave2OfficialSourceTests: XCTestCase {
         let src = try XCTUnwrap(row.fieldSource(for: "batteryKWh"))
         XCTAssertTrue(src.lowercased().contains("netta") || src.lowercased().contains("net"))
         XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "batteryKWh")), "2022-01-26")
+        let sn = row.sourceName ?? ""
+        XCTAssertTrue(
+            sn.contains("Capacità lorda/netta 10/8.82, memorizzato netto 8.82"),
+            "sourceName must state lorda/netta 10/8.82 and memorizzato netto 8.82"
+        )
+        XCTAssertFalse(sn.lowercased().contains("batteria 10 kwh"))
         XCTAssertEqual(row.wltpRangeKm ?? -1, 49)
         XCTAssertNil(row.fuelConsumptionLPerKm)
         XCTAssertTrue(row.hasIncompleteCatalogData)
     }
 
-    func testPeugeot3008_2023BatteryIsUsableNotGrossCapacity() throws {
+    func testPeugeot3008_2023AggregateBatteryNilPrudentRange48() throws {
         let row = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: "peugeot-3008-phev-2023"))
-        XCTAssertEqual(row.batteryKWh ?? -1, 10.4, accuracy: 0.01)
-        let src = try XCTUnwrap(row.fieldSource(for: "batteryKWh"))
-        XCTAssertTrue(src.lowercased().contains("usable") || src.lowercased().contains("net"))
-        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "batteryKWh")), "2023-04-01")
+        // Aggregate IT PHEV (trim PHEV) — not clearly HYBRID 225; Usable 10.4 is 225/300 only.
+        XCTAssertNil(row.batteryKWh)
+        XCTAssertNil(row.fieldSource(for: "batteryKWh"))
+        XCTAssertEqual(row.wltpRangeKm ?? -1, 48)
+        let rangeSrc = try XCTUnwrap(row.fieldSource(for: "wltpRangeKm"))
+        XCTAssertTrue(rangeSrc.contains("HYBRID 180") || rangeSrc.lowercased().contains("29.8"))
+        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "wltpRangeKm")), "2023-04-01")
+        let sn = row.sourceName ?? ""
+        XCTAssertFalse(sn.contains("bat 14.2"))
+        XCTAssertFalse(sn.lowercased().contains("battery 14.2"))
         XCTAssertNil(row.fuelConsumptionLPerKm)
         XCTAssertTrue(row.hasIncompleteCatalogData)
     }

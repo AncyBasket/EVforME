@@ -18,7 +18,7 @@ final class BundledSeedVersionTests: XCTestCase {
     /// Single source of truth: runtime version == seedVersion in bundled catalog_cdn.json.
     func testBundledSeedVersionMatchesCatalogCDNManifest() throws {
         let manifestVersion = try Self.readBundledManifestSeedVersion()
-        XCTAssertEqual(manifestVersion, 81, "Manifest after PHEV wave2 batch1 corr2 is seed 81")
+        XCTAssertEqual(manifestVersion, 82, "Manifest after PHEV wave2 batch1 corr3 is seed 82")
         XCTAssertEqual(
             VehicleCatalogService.bundledSeedVersion,
             manifestVersion,
@@ -45,7 +45,7 @@ final class BundledSeedVersionTests: XCTestCase {
         )
     }
 
-    /// Install with cacheSeedVersion=65 + stale catalog file must re-seed to manifest 81
+    /// Install with cacheSeedVersion=65 + stale catalog file must re-seed to manifest 82
     /// without wiping persisted user input / preferences.
     func testUpgradeFromCachedSeed65ReseedsCatalogButPreservesUserInput() throws {
         let storage = StorageService.shared

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Must-fail probes + invariants for PHEV wave2 batch1 (seed 81).
+"""Must-fail probes + invariants for PHEV wave2 batch1 (seed 82).
 
 Dating and generic-URL checks run on every real PHEV row with fieldSources.
 Homolog fills do NOT bypass dating: sourceDate/archive year must match the
@@ -203,8 +203,19 @@ def best_shared_exact(
     dst_year: int,
     dst_power_kw: float,
     shared: dict,
+    *,
+    tan: str | None = None,
+    va: str | None = None,
+    ve: str | None = None,
 ) -> dict | None:
-    """Identical TAN/Va/Ve/ep only — no ±kW tolerance, no frequency ranking."""
+    """Shared-map homolog fingerprint: TAN + Va + Ve + ep (power).
+
+    Missing ep is rejected. Candidates must carry non-empty TAN/Va/Ve.
+    When tan/va/ve are provided, require an exact match on that fingerprint.
+    When omitted, accept only if all year-pair+ep candidates collapse to one
+    unique (TAN, Va, Ve, ep) — multiple distinct TANs at the same power → None.
+    No ±kW tolerance; no frequency ranking.
+    """
     matches = []
     for sh in shared.get(family) or []:
         years = {int(y) for y in (sh.get("years") or {})}
@@ -212,11 +223,27 @@ def best_shared_exact(
             continue
         if not (sh.get("TAN") or "").strip():
             continue
+        if not (sh.get("Va") or "").strip():
+            continue
+        if not (sh.get("Ve") or "").strip():
+            continue
         ep = sh.get("ep")
         if ep is None or float(ep) != float(dst_power_kw):
             continue
+        if tan is not None and (sh.get("TAN") or "") != tan:
+            continue
+        if va is not None and (sh.get("Va") or "") != va:
+            continue
+        if ve is not None and (sh.get("Ve") or "") != ve:
+            continue
         matches.append(sh)
-    if len(matches) != 1:
+    if not matches:
+        return None
+    keys = {
+        ((m.get("TAN") or ""), (m.get("Va") or ""), (m.get("Ve") or ""), float(m["ep"]))
+        for m in matches
+    }
+    if len(keys) != 1:
         return None
     return matches[0]
 
@@ -305,6 +332,51 @@ def must_fail_probes() -> None:
     else:
         raise SystemExit("probe: best_shared_exact tolerance/ranking still loose")
 
+    # Same power (+ would pass exact_homolog_ok on weighted) but distinct TANs → rejected.
+    twin_tan = {
+        "demo": [
+            {
+                "TAN": "E1*AAA",
+                "Va": "VA",
+                "Ve": "VE1",
+                "ep": 110,
+                "years": {"2023": 1, "2024": 1},
+            },
+            {
+                "TAN": "E1*BBB",
+                "Va": "VA",
+                "Ve": "VE1",
+                "ep": 110,
+                "years": {"2023": 1, "2024": 1},
+            },
+        ]
+    }
+    same_power = {
+        "powerKw": 110.0,
+        "weightedFuelConsumptionLPerKm": 0.01481,
+        "weightedEnergyConsumptionKWhPerKm": 0.179,
+    }
+    if exact_homolog_ok(same_power, same_power) and best_shared_exact(
+        "demo", 2024, 2023, 110.0, twin_tan
+    ) is None:
+        caught += 1
+    else:
+        raise SystemExit(
+            "probe: distinct TAN at same power/weighted not rejected by best_shared_exact"
+        )
+    # Claimed fingerprint disambiguates when TAN/Va/Ve are supplied.
+    if best_shared_exact(
+        "demo",
+        2024,
+        2023,
+        110.0,
+        twin_tan,
+        tan="E1*AAA",
+        va="VA",
+        ve="VE1",
+    ) is None:
+        raise SystemExit("probe: claimed TAN/Va/Ve fingerprint not accepted")
+    caught += 1
     mazda_2025 = (
         "https://media-assets.mazda.eu/raw/upload/mazdade/globalassets/pdfs/brochure/"
         "cx-60/21-07-2025_preisliste_2025_mazda-cx-60.pdf"
@@ -406,7 +478,7 @@ def must_fail_probes() -> None:
             "probe: require_year_token inert — homolog donor-year cite without year token accepted"
         )
 
-    if caught < 19:
+    if caught < 21:
         raise SystemExit(f"probes incomplete caught={caught}")
 
 
@@ -558,10 +630,10 @@ def main() -> None:
     man = json.loads(MANIFEST.read_text(encoding="utf-8"))
     inv = json.loads(INVENTORY.read_text(encoding="utf-8"))
 
-    if int(cdn.get("seedVersion") or 0) != 81:
-        raise SystemExit(f"seedVersion want 81 got {cdn.get('seedVersion')}")
-    if int(man.get("seedVersion") or 0) != 81:
-        raise SystemExit(f"manifest seedVersion want 81 got {man.get('seedVersion')}")
+    if int(cdn.get("seedVersion") or 0) != 82:
+        raise SystemExit(f"seedVersion want 82 got {cdn.get('seedVersion')}")
+    if int(man.get("seedVersion") or 0) != 82:
+        raise SystemExit(f"manifest seedVersion want 82 got {man.get('seedVersion')}")
     if len(seed) != 6977:
         raise SystemExit(f"rows {len(seed)}")
     by_id = {r["id"]: r for r in seed}
@@ -753,7 +825,30 @@ def main() -> None:
     if q3sb23.get("dataDerivedFromSameHomologationYear") != 2024:
         raise SystemExit("Q3 SB 2023 must set homolog year 2024")
     if not exact_homolog_ok(q3sb23, q3sb):
-        raise SystemExit("Q3 SB 2023/2024 homolog pair broken")
+        raise SystemExit("Q3 SB 2023/2024 homolog pair broken (power+weighted)")
+    homolog_map = json.loads(
+        (REPO / "scripts" / "cache" / "eea" / "catalog_phev_homologation_map.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    claimed = {
+        "TAN": "E1*2007/46*1900*32",
+        "Va": "SDGEAF1",
+        "Ve": "FD6FD6DD002RT51A184BIAHA7EM90B3",
+        "ep": 110,
+    }
+    fp = best_shared_exact(
+        "audi-q3-sb",
+        2024,
+        2023,
+        float(q3sb23.get("powerKw") or 0),
+        homolog_map.get("shared") or {},
+        tan=claimed["TAN"],
+        va=claimed["Va"],
+        ve=claimed["Ve"],
+    )
+    if fp is None:
+        raise SystemExit("Q3 SB 2023←2024 must pass best_shared_exact TAN+Va+Ve+ep")
     hcite = (q3sb23.get("fieldSources") or {}).get("batteryKWh") or ""
     for token in ("E1*2007/46*1900*32", "SDGEAF1", "FD6FD6DD002RT51A184BIAHA7EM90B3", "ep 110"):
         if token not in hcite:
@@ -773,18 +868,29 @@ def main() -> None:
     bat_bmw = (bmw22.get("fieldSources") or {}).get("batteryKWh") or ""
     if "netta" not in bat_bmw.lower() and "net" not in bat_bmw.lower():
         raise SystemExit("BMW X1 2022 battery cite must label netta/net")
+    sn_bmw = (bmw22.get("sourceName") or "").lower()
+    if "batteria 10 kwh" in sn_bmw or (
+        "batteria 10" in sn_bmw and "8.82" not in (bmw22.get("sourceName") or "")
+    ):
+        raise SystemExit("BMW X1 2022 sourceName still claims batteria 10 kWh")
+    if "8.82" not in (bmw22.get("sourceName") or "") and "netta" not in sn_bmw:
+        raise SystemExit("BMW X1 2022 sourceName must state netta/netto 8.82")
     p23 = by_id["peugeot-3008-phev-2023"]
-    if abs(float(p23.get("batteryKWh") or 0) - 10.4) > 1e-9:
-        raise SystemExit("Peugeot 3008 2023 battery expected Usable 10.4")
-    bat_p23 = (p23.get("fieldSources") or {}).get("batteryKWh") or ""
-    if "usable" not in bat_p23.lower() and "net" not in bat_p23.lower():
-        raise SystemExit("Peugeot 3008 2023 battery cite must label usable/net")
+    if p23.get("batteryKWh") is not None:
+        raise SystemExit(
+            "Peugeot 3008 2023 battery must be nil (aggregate PHEV — not clearly HYBRID 225)"
+        )
+    if int(p23.get("wltpRangeKm") or 0) != 48:
+        raise SystemExit("Peugeot 3008 2023 EAER expected prudent min 48 (HYBRID 180 column)")
+    sn_p23 = p23.get("sourceName") or ""
+    if "bat 14.2" in sn_p23 or "battery 14.2" in sn_p23.lower():
+        raise SystemExit("Peugeot 3008 2023 sourceName still mentions bat 14.2")
     q5 = by_id["audi-q5-phev-50-tfsi-e-2024"]
     if abs(float(q5.get("batteryKWh") or 0) - 14.4) > 1e-9:
         raise SystemExit("Q5 2024 battery expected 14.4 net")
 
     report = {
-        "seedVersion": 81,
+        "seedVersion": 82,
         "rows": len(seed),
         "completed": len(man.get("completed") or []),
         "partial": len(man.get("partial") or []),
