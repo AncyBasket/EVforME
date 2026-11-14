@@ -1,6 +1,6 @@
 {
-  "seedVersion": 78,
-  "prevSeedVersion": 77,
+  "seedVersion": 83,
+  "prevSeedVersion": 82,
   "ids_before": [
     "alfa-romeo-147-2005",
     "alfa-romeo-147-2006",
@@ -7025,41 +7025,148 @@
   "completed": [],
   "partial": [
     {
-      "id": "jeep-grand-cherokee-4xe-2023",
-      "note": "restore — Stellantis DE januar_2023 / gültig ab 01/2023 listino: EAER 44 (min 44–48) + battery 17.3; CS remains nil (hybrid-suv rejected)",
+      "id": "audi-q3-sportback-phev-45-tfsi-e-2024",
+      "note": "correction: batteryKWh 13.0 gross → 10.4 net/usable; CS/EAER/CD unchanged",
       "filled": {
-        "wltpRangeKm": 44,
-        "batteryKWh": 17.3
+        "fuelConsumptionLPerKm": 0.072,
+        "wltpRangeKm": 52,
+        "batteryKWh": 10.4
+      },
+      "stillMissing": [
+        "energyConsumptionKWhPerKm"
+      ],
+      "sources": {
+        "fuelConsumptionLPerKm": "Audi MediaCenter eTD Q3 Sportback 45 TFSI e S tronic 110/180 kW Program for Germany Date: 03/14/24 — CS discharged battery combined MAX 7.2–6.6 L/100; EAER combined MIN 52–58 km; battery net/usable 10.4 kWh (gross 13.0); electric weighted-only (no pure CD label) https://uploads.audi-mediacenter.com/system/production/car_motorizations/1239/file_en/a558808317b94f42ac509c09439d17b6612fc530/eTD-Audi-Q3-Sportback-45-TFSIe-S_tronic-110kW_180kW_240314.pdf",
+        "wltpRangeKm": "Audi MediaCenter eTD Q3 Sportback 45 TFSI e S tronic 110/180 kW Program for Germany Date: 03/14/24 — CS discharged battery combined MAX 7.2–6.6 L/100; EAER combined MIN 52–58 km; battery net/usable 10.4 kWh (gross 13.0); electric weighted-only (no pure CD label) https://uploads.audi-mediacenter.com/system/production/car_motorizations/1239/file_en/a558808317b94f42ac509c09439d17b6612fc530/eTD-Audi-Q3-Sportback-45-TFSIe-S_tronic-110kW_180kW_240314.pdf",
+        "batteryKWh": "Audi MediaCenter eTD Q3 Sportback 45 TFSI e Program for Germany Date: 03/14/24 — CS discharged MAX 7.2–6.6 L/100; EAER combined MIN 52–58 km; battery net/usable 10.4 kWh (gross 13.0 on sheet); electric weighted-only (no pure CD) https://uploads.audi-mediacenter.com/system/production/car_motorizations/1239/file_en/a558808317b94f42ac509c09439d17b6612fc530/eTD-Audi-Q3-Sportback-45-TFSIe-S_tronic-110kW_180kW_240314.pdf"
+      },
+      "sourceDates": {
+        "fuelConsumptionLPerKm": "2024-03-14",
+        "wltpRangeKm": "2024-03-14",
+        "batteryKWh": "2024-03-14"
+      },
+      "batteryConvention": "net"
+    },
+    {
+      "id": "audi-q3-phev-45-tfsi-e-2024",
+      "note": "correction: batteryKWh 13.0 gross → 10.4 net/usable; CS/EAER/CD unchanged",
+      "filled": {
+        "fuelConsumptionLPerKm": 0.073,
+        "wltpRangeKm": 51,
+        "batteryKWh": 10.4
+      },
+      "stillMissing": [
+        "energyConsumptionKWhPerKm"
+      ],
+      "sources": {
+        "fuelConsumptionLPerKm": "Audi MediaCenter eTD Q3 45 TFSI e S tronic 110/180 kW Program for Germany Date: 03/14/24 — CS discharged MAX 7.3–6.5 L/100; EAER combined MIN 51–59 km; battery net/usable 10.4 kWh (gross 13.0); electric weighted-only https://uploads.audi-mediacenter.com/system/production/car_motorizations/1238/file_en/3207de82c582b9eac73037fd1e233eb7b06f1637/eTD-Audi-Q3-45-TFSIe-S_tronic-110kW_180kW_240314.pdf",
+        "wltpRangeKm": "Audi MediaCenter eTD Q3 45 TFSI e S tronic 110/180 kW Program for Germany Date: 03/14/24 — CS discharged MAX 7.3–6.5 L/100; EAER combined MIN 51–59 km; battery net/usable 10.4 kWh (gross 13.0); electric weighted-only https://uploads.audi-mediacenter.com/system/production/car_motorizations/1238/file_en/3207de82c582b9eac73037fd1e233eb7b06f1637/eTD-Audi-Q3-45-TFSIe-S_tronic-110kW_180kW_240314.pdf",
+        "batteryKWh": "Audi MediaCenter eTD Q3 45 TFSI e Date: 03/14/24 — CS discharged MAX 7.3–6.5; EAER combined MIN 51–59; battery net/usable 10.4 (gross 13.0); no pure CD https://uploads.audi-mediacenter.com/system/production/car_motorizations/1238/file_en/3207de82c582b9eac73037fd1e233eb7b06f1637/eTD-Audi-Q3-45-TFSIe-S_tronic-110kW_180kW_240314.pdf"
+      },
+      "sourceDates": {
+        "fuelConsumptionLPerKm": "2024-03-14",
+        "wltpRangeKm": "2024-03-14",
+        "batteryKWh": "2024-03-14"
+      },
+      "batteryConvention": "net"
+    },
+    {
+      "id": "audi-a3-phev-45-tfsi-e-2024",
+      "note": "correction: batteryKWh 13.0 gross → 10.4 net/usable; CS/EAER/CD unchanged",
+      "filled": {
+        "fuelConsumptionLPerKm": 0.066,
+        "wltpRangeKm": 58,
+        "batteryKWh": 10.4
+      },
+      "stillMissing": [
+        "energyConsumptionKWhPerKm"
+      ],
+      "sources": {
+        "fuelConsumptionLPerKm": "Audi MediaCenter eTD A3 Sportback 45 TFSI e S tronic 180 kW (ICE 110) Program for Germany Date: 03/14/24 — CS discharged MAX 6.6–6.1 L/100; EAER combined MIN 64–58 km → 58; battery net/usable 10.4 kWh (gross 13.0); electric weighted-only https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_240314.pdf",
+        "wltpRangeKm": "Audi MediaCenter eTD A3 Sportback 45 TFSI e S tronic 180 kW (ICE 110) Program for Germany Date: 03/14/24 — CS discharged MAX 6.6–6.1 L/100; EAER combined MIN 64–58 km → 58; battery net/usable 10.4 kWh (gross 13.0); electric weighted-only https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_240314.pdf",
+        "batteryKWh": "Audi MediaCenter eTD A3 Sportback 45 TFSI e Date: 03/14/24 — CS discharged MAX 6.6–6.1; EAER combined MIN 58; battery net/usable 10.4 (gross 13.0); no pure CD https://uploads.audi-mediacenter.com/system/production/car_motorizations/1183/file_en/9c8d39ef4ae84402a0683333ddabb044fa2f2d6b/eTD-Audi-A3-Sportback-45-TFSIe-S_tronic-180kW_240314.pdf"
+      },
+      "sourceDates": {
+        "fuelConsumptionLPerKm": "2024-03-14",
+        "wltpRangeKm": "2024-03-14",
+        "batteryKWh": "2024-03-14"
+      },
+      "batteryConvention": "net"
+    },
+    {
+      "id": "audi-a3-phev-40-tfsi-e-2023",
+      "note": "correction: batteryKWh 13.0 gross → 10.4 net/usable; CS/EAER/CD unchanged",
+      "filled": {
+        "wltpRangeKm": 58,
+        "batteryKWh": 10.4
       },
       "stillMissing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm"
       ],
       "sources": {
-        "wltpRangeKm": "media.stellantis.com 2023 Spezifikationen und Preise Jeep Grand Cherokee 4xe MJ23 gültig ab 01/2023 https://www.media.stellantis.com/uploads/de/model-pricelist/preisliste_grand_cherokee_4xe_januar_20234-6486c171a11d8.pdf",
-        "batteryKWh": "media.stellantis.com 2023 Spezifikationen und Preise Jeep Grand Cherokee 4xe MJ23 gültig ab 01/2023 https://www.media.stellantis.com/uploads/de/model-pricelist/preisliste_grand_cherokee_4xe_januar_20234-6486c171a11d8.pdf"
+        "wltpRangeKm": "Audi MediaCenter eTD A3 Sportback 40 TFSI e S tronic 150 kW Program for Germany Date: 07/18/23 — EAER combined MIN 66–58 km → 58; battery net/usable 10.4 kWh (gross 13.0); fuel/electric labeled 'combined according to WLTP' without discharged/pure marker → CS+CD nil https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-40-TFSI-e-S_tronic-150kW_230718.pdf",
+        "batteryKWh": "Audi MediaCenter eTD A3 Sportback 40 TFSI e Date: 07/18/23 — EAER combined MIN 58; battery net/usable 10.4 (gross 13.0); CS/CD unlabeled combined-only → nil https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-40-TFSI-e-S_tronic-150kW_230718.pdf"
       },
       "sourceDates": {
-        "wltpRangeKm": "2023-01-01",
-        "batteryKWh": "2023-01-01"
-      }
+        "wltpRangeKm": "2023-07-18",
+        "batteryKWh": "2023-07-18"
+      },
+      "batteryConvention": "net"
     },
     {
-      "id": "bmw-330e-phev-2024",
-      "note": "extra vs lotto — BMW press May 2024 usable battery only; EAER/range not claimed; pure CD nil",
+      "id": "audi-q5-phev-50-tfsi-e-2024",
+      "note": "correction: batteryKWh 17.9 gross → 14.4 net/usable; CS/EAER/CD unchanged",
       "filled": {
-        "batteryKWh": 19.5
+        "fuelConsumptionLPerKm": 0.087,
+        "wltpRangeKm": 56,
+        "batteryKWh": 14.4
       },
       "stillMissing": [
-        "energyConsumptionKWhPerKm",
-        "wltpRangeKm"
+        "energyConsumptionKWhPerKm"
       ],
       "sources": {
-        "batteryKWh": "press.bmwgroup.com new BMW 330e: high-voltage battery with 19.5 kWh of usable energy (datePublished 2024-05-29) https://www.press.bmwgroup.com/global/article/attachment/T0442333EN/620071"
+        "fuelConsumptionLPerKm": "Audi MediaCenter eTD Q5 50 TFSI e quattro S tronic 220 kW (ICE 195) Program for Germany Date: 06/04/24 — CS discharged MAX 8.7–8.0 L/100; EAER combined MIN 56–62 km; battery net/usable 14.4 kWh (gross 17.9); electric weighted-only https://uploads.audi-mediacenter.com/system/production/car_motorizations/976/file_en/ba4ac5716025d45aa954ac28860d4b98e579f75b/eTD-Audi-Q5-50-TFSIe-quattro-S_tronic-220kW_240604.pdf",
+        "wltpRangeKm": "Audi MediaCenter eTD Q5 50 TFSI e quattro S tronic 220 kW (ICE 195) Program for Germany Date: 06/04/24 — CS discharged MAX 8.7–8.0 L/100; EAER combined MIN 56–62 km; battery net/usable 14.4 kWh (gross 17.9); electric weighted-only https://uploads.audi-mediacenter.com/system/production/car_motorizations/976/file_en/ba4ac5716025d45aa954ac28860d4b98e579f75b/eTD-Audi-Q5-50-TFSIe-quattro-S_tronic-220kW_240604.pdf",
+        "batteryKWh": "Audi MediaCenter eTD Q5 50 TFSI e Date: 06/04/24 — CS discharged MAX 8.7–8.0; EAER combined MIN 56; battery net/usable 14.4 (gross 17.9); no pure CD https://uploads.audi-mediacenter.com/system/production/car_motorizations/976/file_en/ba4ac5716025d45aa954ac28860d4b98e579f75b/eTD-Audi-Q5-50-TFSIe-quattro-S_tronic-220kW_240604.pdf"
       },
       "sourceDates": {
-        "batteryKWh": "2024-05-29"
-      }
+        "fuelConsumptionLPerKm": "2024-06-04",
+        "wltpRangeKm": "2024-06-04",
+        "batteryKWh": "2024-06-04"
+      },
+      "batteryConvention": "net"
+    },
+    {
+      "id": "audi-q3-sportback-phev-45-tfsi-e-2023",
+      "sourceId": "audi-q3-sportback-phev-45-tfsi-e-2024",
+      "note": "exact homolog 2023←2024; TAN E1*2007/46*1900*32; Va SDGEAF1; Ve FD6FD6DD002RT51A184BIAHA7EM90B3; ep 110; donor eTD 2024-03-14; battery net/usable 10.4; CS/EAER from donor; pure CD nil",
+      "filled": {
+        "fuelConsumptionLPerKm": 0.072,
+        "wltpRangeKm": 52,
+        "batteryKWh": 10.4
+      },
+      "stillMissing": [
+        "energyConsumptionKWhPerKm"
+      ],
+      "sources": {
+        "fuelConsumptionLPerKm": "stessa omologazione EEA TAN E1*2007/46*1900*32; Va SDGEAF1; Ve FD6FD6DD002RT51A184BIAHA7EM90B3; ep 110; seed power+weighted WLTP identical 2023↔2024; donor Audi MediaCenter eTD Q3 Sportback 45 TFSI e Date: 03/14/24 — CS/EAER/battery net 10.4 https://uploads.audi-mediacenter.com/system/production/car_motorizations/1239/file_en/a558808317b94f42ac509c09439d17b6612fc530/eTD-Audi-Q3-Sportback-45-TFSIe-S_tronic-110kW_180kW_240314.pdf",
+        "wltpRangeKm": "stessa omologazione EEA TAN E1*2007/46*1900*32; Va SDGEAF1; Ve FD6FD6DD002RT51A184BIAHA7EM90B3; ep 110; seed power+weighted WLTP identical 2023↔2024; donor Audi MediaCenter eTD Q3 Sportback 45 TFSI e Date: 03/14/24 — CS/EAER/battery net 10.4 https://uploads.audi-mediacenter.com/system/production/car_motorizations/1239/file_en/a558808317b94f42ac509c09439d17b6612fc530/eTD-Audi-Q3-Sportback-45-TFSIe-S_tronic-110kW_180kW_240314.pdf",
+        "batteryKWh": "stessa omologazione EEA TAN E1*2007/46*1900*32; Va SDGEAF1; Ve FD6FD6DD002RT51A184BIAHA7EM90B3; ep 110; seed power+weighted WLTP identical 2023↔2024; donor Audi MediaCenter eTD Q3 Sportback 45 TFSI e Date: 03/14/24 — CS/EAER/battery net 10.4 https://uploads.audi-mediacenter.com/system/production/car_motorizations/1239/file_en/a558808317b94f42ac509c09439d17b6612fc530/eTD-Audi-Q3-Sportback-45-TFSIe-S_tronic-110kW_180kW_240314.pdf"
+      },
+      "sourceDates": {
+        "fuelConsumptionLPerKm": "2024-03-14",
+        "wltpRangeKm": "2024-03-14",
+        "batteryKWh": "2024-03-14"
+      },
+      "homolog": {
+        "TAN": "E1*2007/46*1900*32",
+        "Va": "SDGEAF1",
+        "Ve": "FD6FD6DD002RT51A184BIAHA7EM90B3",
+        "ep": 110,
+        "donorSourceDate": "2024-03-14"
+      },
+      "batteryConvention": "net"
     }
   ],
   "extras": [
@@ -7103,17 +7210,35 @@
   ],
   "homolog_reuse": [
     {
-      "id": "jeep-grand-cherokee-4xe-2024",
-      "sourceId": "jeep-grand-cherokee-4xe-2023",
-      "note": "exact homolog 2024←2023 Stellantis Jan 2023 listino for EAER+battery",
+      "id": "audi-q3-sportback-phev-45-tfsi-e-2023",
+      "sourceId": "audi-q3-sportback-phev-45-tfsi-e-2024",
+      "note": "exact homolog 2023←2024; TAN E1*2007/46*1900*32; Va SDGEAF1; Ve FD6FD6DD002RT51A184BIAHA7EM90B3; ep 110; donor eTD 2024-03-14; battery net/usable 10.4; CS/EAER from donor; pure CD nil",
       "filled": {
-        "wltpRangeKm": 44,
-        "batteryKWh": 17.3
+        "fuelConsumptionLPerKm": 0.072,
+        "wltpRangeKm": 52,
+        "batteryKWh": 10.4
+      },
+      "stillMissing": [
+        "energyConsumptionKWhPerKm"
+      ],
+      "sources": {
+        "fuelConsumptionLPerKm": "stessa omologazione EEA TAN E1*2007/46*1900*32; Va SDGEAF1; Ve FD6FD6DD002RT51A184BIAHA7EM90B3; ep 110; seed power+weighted WLTP identical 2023↔2024; donor Audi MediaCenter eTD Q3 Sportback 45 TFSI e Date: 03/14/24 — CS/EAER/battery net 10.4 https://uploads.audi-mediacenter.com/system/production/car_motorizations/1239/file_en/a558808317b94f42ac509c09439d17b6612fc530/eTD-Audi-Q3-Sportback-45-TFSIe-S_tronic-110kW_180kW_240314.pdf",
+        "wltpRangeKm": "stessa omologazione EEA TAN E1*2007/46*1900*32; Va SDGEAF1; Ve FD6FD6DD002RT51A184BIAHA7EM90B3; ep 110; seed power+weighted WLTP identical 2023↔2024; donor Audi MediaCenter eTD Q3 Sportback 45 TFSI e Date: 03/14/24 — CS/EAER/battery net 10.4 https://uploads.audi-mediacenter.com/system/production/car_motorizations/1239/file_en/a558808317b94f42ac509c09439d17b6612fc530/eTD-Audi-Q3-Sportback-45-TFSIe-S_tronic-110kW_180kW_240314.pdf",
+        "batteryKWh": "stessa omologazione EEA TAN E1*2007/46*1900*32; Va SDGEAF1; Ve FD6FD6DD002RT51A184BIAHA7EM90B3; ep 110; seed power+weighted WLTP identical 2023↔2024; donor Audi MediaCenter eTD Q3 Sportback 45 TFSI e Date: 03/14/24 — CS/EAER/battery net 10.4 https://uploads.audi-mediacenter.com/system/production/car_motorizations/1239/file_en/a558808317b94f42ac509c09439d17b6612fc530/eTD-Audi-Q3-Sportback-45-TFSIe-S_tronic-110kW_180kW_240314.pdf"
       },
       "sourceDates": {
-        "wltpRangeKm": "2023-01-01",
-        "batteryKWh": "2023-01-01"
-      }
+        "fuelConsumptionLPerKm": "2024-03-14",
+        "wltpRangeKm": "2024-03-14",
+        "batteryKWh": "2024-03-14"
+      },
+      "homolog": {
+        "TAN": "E1*2007/46*1900*32",
+        "Va": "SDGEAF1",
+        "Ve": "FD6FD6DD002RT51A184BIAHA7EM90B3",
+        "ep": 110,
+        "donorSourceDate": "2024-03-14"
+      },
+      "batteryConvention": "net"
     }
   ],
   "left_nil": [
@@ -7123,12 +7248,25 @@
       "model": "Compass",
       "year": 2022,
       "market": "IT",
-      "n": 10348,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "CS still nil: jeep.de/hybrid-suv archive rejected as generic range page; 2022↔2024 homolog reuse blocked (weighted WLTP/power not identical)"
+      "reason": "CS/CD still nil: jeep.de/hybrid-suv generic landing rejected; 2022↔2024 exact homolog blocked (weighted WLTP/power not identical)",
+      "consulted": [
+        {
+          "url": "https://www.jeep.de/hybrid-suv",
+          "reject": "generic /hybrid-suv"
+        },
+        {
+          "url": "https://web.archive.org/web/20240620055110/https://www.jeep.de/hybrid-suv",
+          "reject": "archive of generic /hybrid-suv"
+        }
+      ],
+      "alreadyPresent": {
+        "wltpRangeKm": 46,
+        "batteryKWh": 11.4
+      }
     },
     {
       "id": "jeep-renegade-phev-4xe-2022",
@@ -7136,12 +7274,25 @@
       "model": "Renegade",
       "year": 2022,
       "market": "IT",
-      "n": 7514,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "CS still nil: jeep.de/hybrid-suv generic landing rejected; 2022↔2024 donor weighted WLTP not identical"
+      "reason": "CS/CD nil: jeep.de/hybrid-suv rejected; 2022↔2024 weighted WLTP not identical",
+      "consulted": [
+        {
+          "url": "https://www.jeep.de/hybrid-suv",
+          "reject": "generic /hybrid-suv"
+        },
+        {
+          "url": "https://www.media.stellantis.com/fr-fr/download-price-lists/184",
+          "reject": "MY24 FR tarif endpoint — wrong year for MY22"
+        }
+      ],
+      "alreadyPresent": {
+        "wltpRangeKm": 45,
+        "batteryKWh": 11.4
+      }
     },
     {
       "id": "cupra-formentor-phev-e-hybrid-2024",
@@ -7149,13 +7300,22 @@
       "model": "Formentor",
       "year": 2024,
       "market": "IT",
-      "n": 3467,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm"
       ],
-      "reason": "missing CS+CD+EAER combined; no dated CUPRA OEM sheet verified in this restore PR"
+      "reason": "CS+CD+EAER nil: CUPRA IE Jan-2024 Product Guide has battery 12.8 (already) and weighted-only fuel — no discharged CS / pure CD / EAER combined",
+      "consulted": [
+        {
+          "url": "https://www.cupra.com/content/dam/countries/ie/cupra-website/product-guide/formentor/cars-models-info-KM7-product-guide-Jan-2024.pdf",
+          "sourceDate": "2024-01-01",
+          "reject_for": "CS/CD/EAER — battery + weighted fuel only"
+        }
+      ],
+      "alreadyPresent": {
+        "batteryKWh": 12.8
+      }
     },
     {
       "id": "jeep-renegade-phev-4xe-2023",
@@ -7163,12 +7323,22 @@
       "model": "Renegade",
       "year": 2023,
       "market": "IT",
-      "n": 3409,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "CD puro nil; CS was hybrid-suv-only and scrubbed; no dated MY23 pure-electric OEM cite"
+      "reason": "CD puro nil; MY24 FR tarif weighted/pondéré only",
+      "consulted": [
+        {
+          "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicjeeprrenegademy242024c3avril2024-66334a53de22c.pdf",
+          "sourceDate": "2024-04-03",
+          "reject": "MY24; fuel/electric pondéré"
+        }
+      ],
+      "alreadyPresent": {
+        "wltpRangeKm": 48,
+        "batteryKWh": 11.4
+      }
     },
     {
       "id": "mini-countryman-cooper-se-all4-2023",
@@ -7176,14 +7346,19 @@
       "model": "Countryman",
       "year": 2023,
       "market": "IT",
-      "n": 3408,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "CS/CD/range/battery all nil; no dated MINI OEM PHEV sheet attached in this PR"
+      "reason": "CS/CD/range/battery nil: MINI postcard 2023-08-22 labels combined=weighted; no discharged CS / pure CD / EAER combined",
+      "consulted": [
+        {
+          "url": "https://www.press.bmwgroup.com/",
+          "reject": "MINI Countryman SE ALL4 postcard 2023-08-22 — weighted/combined only"
+        }
+      ]
     },
     {
       "id": "volvo-xc40-phev-recharge-2022",
@@ -7191,14 +7366,35 @@
       "model": "XC40",
       "year": 2022,
       "market": "IT",
-      "n": 3323,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "CS/CD/range/battery nil; no MY2022-dated Volvo OEM PHEV document in this restore pass"
+      "reason": "CS/CD/range/battery nil: KR20 WWS spec sheet (media ID 286926, dated 25 Sep 2021) HTTP 503 on fetch; DE press 2021-11-01 lists WLTP electric range 43–45 km combined and Stromverbrauch 16,1–15,2 kWh/100 without gross/net battery split or discharged CS / pure-CD labels clear enough to fill under catalog net convention; live /models/xc40/2023 specifications rejected (shows MY2025)",
+      "consulted": [
+        {
+          "url": "https://www.media.volvocars.com/uk/en-gb/media/documentfile/286926/kr20-wws-spec-sheet-volvo-xc40-recharge-plug-in-hybrid-t5-fwd-r-design-pro",
+          "sourceDate": "2021-09-25",
+          "reject": "HTTP 503 — official KR20 sheet unreachable this pass"
+        },
+        {
+          "url": "https://www.volvocars.com/de/media/press-releases/312D06B48680BD98/",
+          "sourceDate": "2021-11-01",
+          "reject": "press overview: EAER 43–45 combined cited but battery only via secondary summaries (10.7/8.5) not on this dated sheet; fuel/electric figures are WLTP combined without discharged/pure markers → CS/CD nil; battery not filled without clear net label on the opened page"
+        },
+        {
+          "url": "https://www.volvocars.com/uk/cars/xc40/2023/specifications",
+          "reject": "live unversioned specs page — already shows MY2025 content"
+        }
+      ],
+      "fieldReasons": {
+        "batteryKWh": "KR20 PDF 503; DE press page lacks explicit net kWh table",
+        "wltpRangeKm": "DE press has 43–45 combined but battery provenance incomplete this pass",
+        "fuelConsumptionLPerKm": "WLTP combined without discharged-battery label",
+        "energyConsumptionKWhPerKm": "Stromverbrauch without pure-CD / rein-elektrisch label"
+      }
     },
     {
       "id": "cupra-formentor-phev-e-hybrid-2023",
@@ -7206,14 +7402,20 @@
       "model": "Formentor",
       "year": 2023,
       "market": "IT",
-      "n": 3005,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "CS/CD/range/battery nil; no dated CUPRA Formentor MY23 OEM sheet in this PR"
+      "reason": "no MY23-dated CUPRA Formentor e-Hybrid OEM sheet; 2023↔2024 exact homolog blocked (powerKw 110.0 vs 110.6)",
+      "consulted": [
+        {
+          "url": "https://www.cupra.com/content/dam/countries/ie/cupra-website/product-guide/formentor/cars-models-info-KM7-product-guide-Jan-2024.pdf",
+          "sourceDate": "2024-01-01",
+          "reject": "MY24-dated; homolog blocked by power mismatch"
+        }
+      ]
     },
     {
       "id": "volvo-xc40-phev-recharge-2023",
@@ -7221,14 +7423,24 @@
       "model": "XC40",
       "year": 2023,
       "market": "IT",
-      "n": 2589,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "CS/CD/range/battery nil; no MY2023-dated Volvo XC40 PHEV OEM document verified here"
+      "reason": "no MY2023-dated XC40 PHEV OEM sheet with fillable CS/CD/EAER/battery; KR20 sheet is 2021-09-25 (wrong year without exact homolog); live XC40 specifications page rejected (MY2025)",
+      "consulted": [
+        {
+          "url": "https://www.media.volvocars.com/uk/en-gb/media/documentfile/286926/kr20-wws-spec-sheet-volvo-xc40-recharge-plug-in-hybrid-t5-fwd-r-design-pro",
+          "sourceDate": "2021-09-25",
+          "reject": "document year 2021 < MY23; HTTP 503; no exact homolog path"
+        },
+        {
+          "url": "https://www.volvocars.com/uk/cars/xc40/2023/specifications",
+          "reject": "live page already shows MY2025 — invalid for MY23"
+        }
+      ]
     },
     {
       "id": "volvo-xc60-phev-recharge-2024",
@@ -7236,11 +7448,22 @@
       "model": "XC60",
       "year": 2024,
       "market": "IT",
-      "n": 2520,
       "missing": [
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "CD puro nil (CS present from prior wave); no dated pure-electric kWh label for MY24"
+      "reason": "CD puro nil: Volvo press 2024-06-01 Stromverbrauch gewichtet only",
+      "consulted": [
+        {
+          "url": "https://www.volvocars.com/de/media/press-releases/8C5F873BBE0D5162/",
+          "sourceDate": "2024-06-01",
+          "reject": "electric labeled gewichtet/weighted"
+        }
+      ],
+      "alreadyPresent": {
+        "fuelConsumptionLPerKm": 0.082,
+        "wltpRangeKm": 80,
+        "batteryKWh": 18.8
+      }
     },
     {
       "id": "bmw-x1-phev-xdrive25e-2024",
@@ -7248,24 +7471,27 @@
       "model": "X1",
       "year": 2024,
       "market": "IT",
-      "n": 2475,
       "missing": [
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "CD puro nil; weighted-only Strom on EnVKV; no charge-depleting label for MY24"
-    },
-    {
-      "id": "bmw-x1-phev-xdrive25e-2022",
-      "brand": "BMW",
-      "model": "X1",
-      "year": 2022,
-      "market": "IT",
-      "n": 2436,
-      "missing": [
-        "fuelConsumptionLPerKm",
-        "energyConsumptionKWhPerKm"
+      "reason": "CD puro nil: BMW EnVKV / Nov 2023 listino Stromverbrauch gewichtet only",
+      "consulted": [
+        {
+          "url": "https://www.press.bmwgroup.com/deutschland/article/attachment/T0322775DE/609585",
+          "sourceDate": "2023-09-27",
+          "reject": "Stromverbrauch gewichtet — no rein-elektrisch / CD label"
+        },
+        {
+          "url": "https://web.archive.org/web/20240222105900/https://www.press.bmwgroup.com/deutschland/article/detail/T0322775DE/der-bmw-x1-preisliste-fuer-deutschland",
+          "sourceDate": "2024-02-22",
+          "reject_for": "dating hygiene archive only — still no pure CD"
+        }
       ],
-      "reason": "CS+CD nil; no MY2022-dated BMW X1 PHEV OEM sheet verified in this restore PR"
+      "alreadyPresent": {
+        "fuelConsumptionLPerKm": 0.068,
+        "wltpRangeKm": 71,
+        "batteryKWh": 14.2
+      }
     },
     {
       "id": "jeep-renegade-phev-4xe-2024",
@@ -7273,12 +7499,22 @@
       "model": "Renegade",
       "year": 2024,
       "market": "IT",
-      "n": 2092,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "CD puro nil; CS from hybrid-suv scrubbed; no dated MY24 pure-electric OEM cite"
+      "reason": "CD puro nil; MY24 FR tarif pondéré only",
+      "consulted": [
+        {
+          "url": "https://www.media.stellantis.com/uploads/fr/model-pricelist/tarifpublicjeeprrenegademy242024c3avril2024-66334a53de22c.pdf",
+          "sourceDate": "2024-04-03",
+          "reject": "pondéré — no pure CD"
+        }
+      ],
+      "alreadyPresent": {
+        "wltpRangeKm": 48,
+        "batteryKWh": 11.4
+      }
     },
     {
       "id": "alfa-romeo-tonale-phev-2023",
@@ -7286,14 +7522,25 @@
       "model": "Tonale",
       "year": 2023,
       "market": "IT",
-      "n": 1986,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "CS/CD/range/battery nil; no dated Stellantis Tonale MY23 PHEV sheet in this PR"
+      "reason": "CS/CD/range/battery nil: Tonale factsheets price-only; PT press 2023-03-14 cites >80 km urbano (City EAER) rejected",
+      "consulted": [
+        {
+          "url": "https://www.media.stellantis.com/uploads/de/model-pricelist/alfaromeotonalefactsheet202306-64df54f63a076.pdf",
+          "sourceDate": "2023-06-01",
+          "reject": "price/overview — no WLTP CS/CD/EAER/battery table"
+        },
+        {
+          "url": "https://www.media.stellantis.com/pt-pt/alfa-romeo/press/novo-alfa-romeo-tonale-hibrido-plug-in-q4-280cv-chega-a-portugal",
+          "sourceDate": "2023-03-14",
+          "reject": "autonomia >80 km ciclo urbano = EAER City only"
+        }
+      ]
     },
     {
       "id": "ford-kuga-phev-2022",
@@ -7301,14 +7548,19 @@
       "model": "Kuga",
       "year": 2022,
       "market": "IT",
-      "n": 1923,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "no MY2022-dated OEM typenblatt / 2022 archive; continuous Technische_Daten PDF (archive only 2026) invalid for MY22; weightedFuel 0.01007 kept from EEA IT n=1923"
+      "reason": "no MY2022-dated OEM typenblatt; continuous Technische_Daten PDF invalid",
+      "consulted": [
+        {
+          "url": "https://www.ford.de/content/dam/guxeu/de/documents/price-list/cars/new-kuga/Technische_Daten_des_Ford_Kuga.pdf",
+          "reject": "continuous unversioned OEM PDF"
+        }
+      ]
     },
     {
       "id": "mercedes-benz-glc-phev-300-de-2024",
@@ -7316,14 +7568,23 @@
       "model": "GLC",
       "year": 2024,
       "market": "IT",
-      "n": 1863,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "CS/CD/range/battery nil; no dated Mercedes GLC 300 de MY24 OEM sheet here"
+      "reason": "CS/CD/range/battery nil: live overview invalid; press EAER city only",
+      "consulted": [
+        {
+          "url": "https://www.mercedes-benz.de/passengercars/models/suv/glc/overview.html",
+          "reject": "live continuous model page"
+        },
+        {
+          "url": "https://media.mercedes-benz.com/article/795bffa0-830f-4df5-9bb8-bb8dae8f7e40",
+          "reject": "Reichweite E-Fahrt = EAER city only"
+        }
+      ]
     },
     {
       "id": "volvo-xc60-phev-recharge-2023",
@@ -7331,11 +7592,26 @@
       "model": "XC60",
       "year": 2023,
       "market": "IT",
-      "n": 1863,
       "missing": [
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "CD puro nil after provenance scrub of undated live press reuse; no MY23 pure-CD cite"
+      "reason": "CD puro nil: donor 2024-06-01 press gewichtet only; CS/range/battery already present",
+      "consulted": [
+        {
+          "url": "https://www.volvocars.com/de/media/press-releases/8C5F873BBE0D5162/",
+          "sourceDate": "2024-06-01",
+          "reject": "weighted electric only"
+        },
+        {
+          "url": "https://web.archive.org/web/20240615120000/https://www.volvocars.com/de/media/press-releases/8C5F873BBE0D5162/",
+          "reject_for": "dating hygiene archive — still no pure CD"
+        }
+      ],
+      "alreadyPresent": {
+        "fuelConsumptionLPerKm": 0.082,
+        "wltpRangeKm": 80,
+        "batteryKWh": 18.8
+      }
     },
     {
       "id": "toyota-c-hr-phev-2024",
@@ -7343,26 +7619,22 @@
       "model": "C-HR",
       "year": 2024,
       "market": "IT",
-      "n": 1805,
       "missing": [
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "CD puro nil; no dated Toyota C-HR PHEV charge-depleting label verified in this PR"
-    },
-    {
-      "id": "peugeot-3008-phev-2022",
-      "brand": "Peugeot",
-      "model": "3008",
-      "year": 2022,
-      "market": "IT",
-      "n": 1749,
-      "missing": [
-        "fuelConsumptionLPerKm",
-        "energyConsumptionKWhPerKm",
-        "wltpRangeKm",
-        "batteryKWh"
+      "reason": "CD puro nil: Toyota DE PL_07_24 Stromverbrauch gewichtet",
+      "consulted": [
+        {
+          "url": "https://www.toyota.de/content/dam/toyota/nmsc/germany/pdf/preislisten/PL_07_24.pdf",
+          "sourceDate": "2024-07-01",
+          "reject": "Stromverbrauch gewichtet only"
+        }
       ],
-      "reason": "CS/CD/range/battery nil; no MY2022-dated Peugeot 3008 PHEV OEM document here"
+      "alreadyPresent": {
+        "fuelConsumptionLPerKm": 0.049,
+        "wltpRangeKm": 66,
+        "batteryKWh": 13.6
+      }
     },
     {
       "id": "renault-captur-phev-e-tech-phev-2022",
@@ -7370,14 +7642,28 @@
       "model": "Captur",
       "year": 2022,
       "market": "IT",
-      "n": 1661,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "CS/CD/range/battery nil; no MY2022-dated Renault Captur E-Tech OEM sheet here"
+      "reason": "CS/CD/range/battery nil: UK Dec 2021 price list is prices/CO₂/mpg only (PHEV Combined mpg ~201–217 = weighted, no kWh/EAER/CS discharged); E-TECH press kit lists battery 9.8 kWh and Combined 1.5–1.6 L/100 but is launch-era undated relative to MY22 path tokens and fuel is weighted — not used for fills",
+      "consulted": [
+        {
+          "url": "https://www.press.renault.co.uk/assets/documents/original/19950-RenaultUKPriceListDecember2021.pdf",
+          "sourceDate": "2021-12-01",
+          "reject": "official UK price list Dec 2021 — no battery kWh / EAER km / discharged CS; Combined mpg is weighted; path year 2021 without MY22 token fails dating unless archived in 2022 (not relied on for values)"
+        },
+        {
+          "url": "https://www.press.renault.co.uk/assets/documents/original/18124-UKPressKit.pdf",
+          "reject": "UK E-TECH press kit: battery 9.8 + Combined 1.5–1.6 L/100 weighted; no document date / MY22 path token verified this pass"
+        },
+        {
+          "url": "https://www.renault.de/",
+          "reject": "brand homepage — not a dated datasheet"
+        }
+      ]
     },
     {
       "id": "bmw-x1-phev-xdrive25e-2023",
@@ -7385,11 +7671,22 @@
       "model": "X1",
       "year": 2023,
       "market": "IT",
-      "n": 1629,
       "missing": [
         "energyConsumptionKWhPerKm"
       ],
-      "reason": "CD puro nil; no dated pure-electric kWh label for X1 MY23 in this restore PR"
+      "reason": "CD puro nil: Nov 2023 EnVKV Stromverbrauch gewichtet only",
+      "consulted": [
+        {
+          "url": "scripts/cache/oem/bmw_x1_preisliste_nov2023.pdf",
+          "sourceDate": "2023-11-01",
+          "reject": "Stromverbrauch gewichtet"
+        }
+      ],
+      "alreadyPresent": {
+        "fuelConsumptionLPerKm": 0.068,
+        "wltpRangeKm": 71,
+        "batteryKWh": 14.2
+      }
     },
     {
       "id": "mercedes-benz-gle-phev-350-de-2022",
@@ -7397,27 +7694,29 @@
       "model": "GLE",
       "year": 2022,
       "market": "IT",
-      "n": 1606,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "CS/CD/range/battery nil; no MY2022-dated Mercedes GLE 350 de OEM sheet here"
-    },
-    {
-      "id": "peugeot-3008-phev-2023",
-      "brand": "Peugeot",
-      "model": "3008",
-      "year": 2023,
-      "market": "IT",
-      "n": 1604,
-      "missing": [
-        "fuelConsumptionLPerKm",
-        "energyConsumptionKWhPerKm"
-      ],
-      "reason": "CS+CD nil; no dated Peugeot 3008 MY23 PHEV OEM sheet verified in this PR"
+      "reason": "CS/CD/range/battery nil: 2019-09-09 GLE 350 de press is too old for MY22 dating; 2023-03-07 / 2022-07 facelift presses are wrong year or weighted-only without usable net battery + discharged CS / pure CD / EAER combined clearly dated for MY22",
+      "consulted": [
+        {
+          "url": "https://media.mercedes-benz.com/article/58f2f982-3ea4-4f03-8ebd-fcc6da4e7dfd",
+          "sourceDate": "2019-09-09",
+          "reject": "sourceDate 2019 ≠ MY22; battery 31.2 / EAER WLTP 90–99 on old press — wrong year"
+        },
+        {
+          "url": "https://media.mercedes-benz.com/article/5984e50c-ebf9-46ff-bf13-9317059c0f10",
+          "sourceDate": "2023-03-07",
+          "reject": "future year vs MY22; prices + gewichtet figures for facelift"
+        },
+        {
+          "url": "https://media.mercedes-benz.com/article/8d4ac5ae-6684-4c8c-b1ee-383721a634c2",
+          "reject": "facelift press: Kapazität 31,2 + EAER ranges + gewichtet Verbrauch — verify calendar date; treated as post-MY22 facelift wave, not used for MY22 fill"
+        }
+      ]
     },
     {
       "id": "mini-countryman-cooper-se-all4-2022",
@@ -7425,44 +7724,19 @@
       "model": "Countryman",
       "year": 2022,
       "market": "IT",
-      "n": 1492,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "CS/CD/range/battery nil; no MY2022-dated MINI Countryman SE ALL4 OEM sheet here"
-    },
-    {
-      "id": "audi-q3-sportback-phev-45-tfsi-e-2024",
-      "brand": "Audi",
-      "model": "Q3 Sportback",
-      "year": 2024,
-      "market": "IT",
-      "n": 1487,
-      "missing": [
-        "fuelConsumptionLPerKm",
-        "energyConsumptionKWhPerKm",
-        "wltpRangeKm",
-        "batteryKWh"
-      ],
-      "reason": "CS/CD/range/battery nil; no dated Audi Q3 Sportback TFSI e MY24 sheet in this PR"
-    },
-    {
-      "id": "audi-q3-sportback-phev-45-tfsi-e-2023",
-      "brand": "Audi",
-      "model": "Q3 Sportback",
-      "year": 2023,
-      "market": "IT",
-      "n": 1482,
-      "missing": [
-        "fuelConsumptionLPerKm",
-        "energyConsumptionKWhPerKm",
-        "wltpRangeKm",
-        "batteryKWh"
-      ],
-      "reason": "CS/CD/range/battery nil; no dated Audi Q3 Sportback TFSI e MY23 sheet in this PR"
+      "reason": "no MY2022-dated MINI Countryman SE ALL4 OEM postcard/typenblatt verified",
+      "consulted": [
+        {
+          "url": "https://www.press.bmwgroup.com/",
+          "reject": "no MY22-dated MINI PHEV datasheet found this pass"
+        }
+      ]
     },
     {
       "id": "mercedes-benz-gla-phev-250-e-2023",
@@ -7470,14 +7744,25 @@
       "model": "GLA",
       "year": 2023,
       "market": "IT",
-      "n": 1382,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "CS/CD/range/battery nil; no MY2023-dated Mercedes GLA 250 e OEM sheet here"
+      "reason": "CS/CD/range/battery nil: media.mercedes-benz.com 2023-03-16 GLA facelift press labels values vorläufig/provisional and Stromverbrauch gewichtet; dealer Preisliste ab 10.05.2023 (kunzmann) is not OEM media — discarded",
+      "consulted": [
+        {
+          "url": "https://media.mercedes-benz.com/article/df476918-d4c0-4677-bd4c-4c18daffe317",
+          "sourceDate": "2023-03-16",
+          "reject": "vorläufige Werte; Kraftstoff/Strom gewichtet; Nennkapazität Batterie 11,5 without usable/net split; EAER provisional — not filled"
+        },
+        {
+          "url": "https://www.kunzmann.de/tiny/Marken/Mercedes_Benz/Preislisten/GLA/Mercedes-Benz-Preisliste-GLA-SUV-H247_2.pdf",
+          "sourceDate": "2023-05-10",
+          "reject": "dealer/partner PDF — not mercedes-benz.com / media OEM"
+        }
+      ]
     },
     {
       "id": "mercedes-benz-gle-coupe-phev-350-de-2022",
@@ -7485,14 +7770,25 @@
       "model": "GLE Coupé",
       "year": 2022,
       "market": "IT",
-      "n": 1274,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "CS/CD/range/battery nil; no MY2022-dated Mercedes GLE Coupé 350 de OEM sheet here"
+      "reason": "same sources as GLE SUV 2022: 2019 press too old; 2023 facelift presses wrong year / weighted-only — no MY22-dated OEM typenblatt with net battery + CS discharged + EAER",
+      "consulted": [
+        {
+          "url": "https://media.mercedes-benz.com/article/58f2f982-3ea4-4f03-8ebd-fcc6da4e7dfd",
+          "sourceDate": "2019-09-09",
+          "reject": "sourceDate 2019 ≠ MY22"
+        },
+        {
+          "url": "https://media.mercedes-benz.com/article/5984e50c-ebf9-46ff-bf13-9317059c0f10",
+          "sourceDate": "2023-03-07",
+          "reject": "future year vs MY22"
+        }
+      ]
     },
     {
       "id": "mercedes-benz-gla-phev-250-e-2022",
@@ -7500,14 +7796,29 @@
       "model": "GLA",
       "year": 2022,
       "market": "IT",
-      "n": 1270,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "CS/CD/range/battery nil; no MY2022-dated Mercedes GLA 250 e OEM sheet here"
+      "reason": "CS/CD/range/battery nil: dealer Preisliste ab 01.02.2022 (autohaus-juergens) shows elektr. Reichweite 53–60 + Verbrauch/Strom gewichtet but is not OEM media; no MY22-dated media.mercedes-benz.com typenblatt with net battery + discharged CS verified",
+      "consulted": [
+        {
+          "url": "https://www.autohaus-juergens.de/fileadmin/Redaktion/Preislisten/Mercedes-Benz-Preisliste-GLA.pdf",
+          "sourceDate": "2022-02-01",
+          "reject": "dealer PDF (aktualisiert 10.02.2022) — not official Mercedes media; figures are gewichtet; battery kWh not clearly net-labeled"
+        },
+        {
+          "url": "https://media.mercedes-benz.com/article/df476918-d4c0-4677-bd4c-4c18daffe317",
+          "sourceDate": "2023-03-16",
+          "reject": "future year vs MY22; provisional facelift values"
+        },
+        {
+          "url": "https://media.mercedes-benz.com/",
+          "reject": "media hub browsed — no MY22-dated GLA 250 e PDF attachment retrieved"
+        }
+      ]
     },
     {
       "id": "alfa-romeo-tonale-phev-2024",
@@ -7515,14 +7826,24 @@
       "model": "Tonale",
       "year": 2024,
       "market": "IT",
-      "n": 0,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "CS/CD/range/battery nil; no dated Tonale MY24 PHEV OEM sheet in this restore PR"
+      "reason": "DE Jul-2024 Preisliste prices-only; IT listino HTTP 403",
+      "consulted": [
+        {
+          "url": "https://www.media.stellantis.com/uploads/de/model-document/preislistemy24tonalejul_24_-668fc61a7e1ef.pdf",
+          "sourceDate": "2024-07-01",
+          "reject": "price list without CS/EAER/battery table"
+        },
+        {
+          "url": "https://www.media.stellantis.com/uploads/it/model-pricelist/listinoartonalemy24del1luglio2024-6686b7f7dea8f.pdf",
+          "reject": "HTTP 403"
+        }
+      ]
     },
     {
       "id": "audi-a3-phev-40-tfsi-e-2024",
@@ -7530,44 +7851,25 @@
       "model": "A3",
       "year": 2024,
       "market": "IT",
-      "n": 0,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "CS/CD/range/battery nil; no dated Audi A3 40 TFSI e MY24 OEM sheet here"
-    },
-    {
-      "id": "audi-a3-phev-45-tfsi-e-2024",
-      "brand": "Audi",
-      "model": "A3",
-      "year": 2024,
-      "market": "IT",
-      "n": 0,
-      "missing": [
-        "fuelConsumptionLPerKm",
-        "energyConsumptionKWhPerKm",
-        "wltpRangeKm",
-        "batteryKWh"
-      ],
-      "reason": "CS/CD/range/battery nil; no dated Audi A3 45 TFSI e MY24 OEM sheet here"
-    },
-    {
-      "id": "audi-a3-phev-40-tfsi-e-2023",
-      "brand": "Audi",
-      "model": "A3",
-      "year": 2023,
-      "market": "IT",
-      "n": 0,
-      "missing": [
-        "fuelConsumptionLPerKm",
-        "energyConsumptionKWhPerKm",
-        "wltpRangeKm",
-        "batteryKWh"
-      ],
-      "reason": "CS/CD/range/battery nil; no dated Audi A3 40 TFSI e MY23 OEM sheet here"
+      "reason": "Oct-2024 eTD is 25.7 kWh facelift — wrong gen vs seed weightedFuel 0.01192; 2023 eTD wrong year without homolog",
+      "consulted": [
+        {
+          "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-40-TFSIe-S_tronic-110kW_150kW_241014.pdf",
+          "sourceDate": "2024-10-14",
+          "reject": "25.7 kWh facelift ≠ seed weighted 0.01192"
+        },
+        {
+          "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-40-TFSI-e-S_tronic-150kW_230718.pdf",
+          "sourceDate": "2023-07-18",
+          "reject": "MY23 sheet; exact_homolog 2024↔2023 fails"
+        }
+      ]
     },
     {
       "id": "audi-a3-phev-40-tfsi-e-2022",
@@ -7575,14 +7877,25 @@
       "model": "A3",
       "year": 2022,
       "market": "IT",
-      "n": 0,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "CS/CD/range/battery nil; no dated Audi A3 40 TFSI e MY22 OEM sheet here"
+      "reason": "no MY2022-dated A3 40 eTD; 2023/2024 sheets wrong year / wrong gen",
+      "consulted": [
+        {
+          "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-40-TFSI-e-S_tronic-150kW_230718.pdf",
+          "sourceDate": "2023-07-18",
+          "reject": "future year vs MY22"
+        },
+        {
+          "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1125/file_en/745e988131fb9490711f426d4f1d74581b3c34b8/eTD-Audi-A3-Sportback-40-TFSIe-S_tronic-110kW_150kW_241014.pdf",
+          "sourceDate": "2024-10-14",
+          "reject": "future year + 25.7 kWh"
+        }
+      ]
     },
     {
       "id": "audi-a3-e-tron-ultra-phev-2016",
@@ -7590,26 +7903,21 @@
       "model": "A3 PHEV",
       "year": 2016,
       "market": "US/EPA",
-      "n": 0,
       "missing": [
         "batteryKWh"
       ],
-      "reason": "US/EPA shell; battery nil; no EU WLTP pure-CD package — not researched in this PR"
-    },
-    {
-      "id": "audi-q3-phev-45-tfsi-e-2024",
-      "brand": "Audi",
-      "model": "Q3",
-      "year": 2024,
-      "market": "IT",
-      "n": 0,
-      "missing": [
-        "fuelConsumptionLPerKm",
-        "energyConsumptionKWhPerKm",
-        "wltpRangeKm",
-        "batteryKWh"
+      "reason": "US/EPA shell; battery nil; no EU WLTP battery package this pass",
+      "consulted": [
+        {
+          "url": "https://www.fueleconomy.gov/",
+          "reject": "EPA backs CS/CD/range — no official OEM battery kWh"
+        }
       ],
-      "reason": "CS/CD/range/battery nil; no dated Audi Q3 TFSI e MY24 OEM sheet here"
+      "alreadyPresent": {
+        "fuelConsumptionLPerKm": 0.0603,
+        "energyConsumptionKWhPerKm": 0.2361,
+        "wltpRangeKm": 27
+      }
     },
     {
       "id": "audi-q3-phev-45-tfsi-e-2023",
@@ -7617,14 +7925,20 @@
       "model": "Q3",
       "year": 2023,
       "market": "IT",
-      "n": 0,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "CS/CD/range/battery nil; no dated Audi Q3 TFSI e MY23 OEM sheet here"
+      "reason": "2024 eTD future-year vs MY23; exact_homolog fails (weightedFuel 0.01506 vs 0.01415)",
+      "consulted": [
+        {
+          "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1238/file_en/3207de82c582b9eac73037fd1e233eb7b06f1637/eTD-Audi-Q3-45-TFSIe-S_tronic-110kW_180kW_240314.pdf",
+          "sourceDate": "2024-03-14",
+          "reject": "document year 2024 > MY23; weighted WLTP mismatch"
+        }
+      ]
     },
     {
       "id": "audi-q3-phev-45-tfsi-e-2022",
@@ -7632,14 +7946,20 @@
       "model": "Q3",
       "year": 2022,
       "market": "IT",
-      "n": 0,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "CS/CD/range/battery nil; no dated Audi Q3 TFSI e MY22 OEM sheet here"
+      "reason": "no MY2022-dated Q3 45 TFSI e eTD; 2024 eTD future-year invalid",
+      "consulted": [
+        {
+          "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1238/file_en/3207de82c582b9eac73037fd1e233eb7b06f1637/eTD-Audi-Q3-45-TFSIe-S_tronic-110kW_180kW_240314.pdf",
+          "sourceDate": "2024-03-14",
+          "reject": "future-year vs MY22"
+        }
+      ]
     },
     {
       "id": "audi-q3-sportback-phev-45-tfsi-e-2022",
@@ -7647,29 +7967,20 @@
       "model": "Q3 Sportback",
       "year": 2022,
       "market": "IT",
-      "n": 0,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "CS/CD/range/battery nil; no dated Audi Q3 Sportback TFSI e MY22 OEM sheet here"
-    },
-    {
-      "id": "audi-q5-phev-50-tfsi-e-2024",
-      "brand": "Audi",
-      "model": "Q5",
-      "year": 2024,
-      "market": "IT",
-      "n": 0,
-      "missing": [
-        "fuelConsumptionLPerKm",
-        "energyConsumptionKWhPerKm",
-        "wltpRangeKm",
-        "batteryKWh"
-      ],
-      "reason": "CS/CD/range/battery nil; no dated Audi Q5 50 TFSI e MY24 OEM sheet here"
+      "reason": "no MY2022-dated Q3 SB eTD; 2024 eTD future-year; weightedFuel ≠ 2024 donor",
+      "consulted": [
+        {
+          "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1239/file_en/a558808317b94f42ac509c09439d17b6612fc530/eTD-Audi-Q3-Sportback-45-TFSIe-S_tronic-110kW_180kW_240314.pdf",
+          "sourceDate": "2024-03-14",
+          "reject": "future-year vs MY22; weightedFuel 0.01745 ≠ 2024 0.01481"
+        }
+      ]
     },
     {
       "id": "audi-q5-phev-50-tfsi-e-2023",
@@ -7677,16 +7988,136 @@
       "model": "Q5",
       "year": 2023,
       "market": "IT",
-      "n": 0,
       "missing": [
         "fuelConsumptionLPerKm",
         "energyConsumptionKWhPerKm",
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "CS/CD/range/battery nil; no dated Audi Q5 50 TFSI e MY23 OEM sheet here"
+      "reason": "no MY2023-dated Q5 50 eTD; 2024-06-04 future-year; exact_homolog fails (weightedFuel 0.01579 vs 0.01593)",
+      "consulted": [
+        {
+          "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/976/file_en/ba4ac5716025d45aa954ac28860d4b98e579f75b/eTD-Audi-Q5-50-TFSIe-quattro-S_tronic-220kW_240604.pdf",
+          "sourceDate": "2024-06-04",
+          "reject": "future year; weightedFuel not identical"
+        }
+      ]
+    },
+    {
+      "id": "peugeot-3008-phev-2022",
+      "brand": "Peugeot",
+      "model": "3008",
+      "year": 2022,
+      "market": "IT",
+      "missing": [
+        "fuelConsumptionLPerKm",
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm",
+        "batteryKWh"
+      ],
+      "reason": "battery+EAER nil: FR tarif CT-3008 applicable 02/11/2021 is calendar-2021 — fails MY2022 dating (need MY-year document date or archive.org snapshot from 2022). Official UK business.peugeot.co.uk price/spec guide has a 2022-06-28 archive.org capture, but PDF retrieval truncates at 1 MiB without %%EOF so Usable Battery / Electric Range (Combined) values from that snapshot cannot be verified this pass (never use the archive only to re-date FR-2021 figures). Live UK guide rejected (CDX digest differs from 2022 capture; continuous). Dealer mirrors rejected.",
+      "consulted": [
+        {
+          "url": "https://www.peugeot.fr/content/dam/peugeot/france/b2c/documentation/tarifs/novembre-2021/ct-3008-applicable-au-02-novembre-2021.pdf",
+          "sourceDate": "2021-11-02",
+          "reject": "document date 2021 — not valid for MY2022 dating rule"
+        },
+        {
+          "url": "https://web.archive.org/web/20220628030021/https://business.peugeot.co.uk/content/dam/peugeot/uk/b2b/buy/price---spec/pdfs/3008-suv-price-spec-guide.pdf",
+          "sourceDate": "2022-06-28",
+          "reject": "official Peugeot UK guide archived in 2022, but downloaded body truncated at 1048576 bytes (no %%EOF) — cannot honestly read Usable/EAER from snapshot"
+        },
+        {
+          "url": "https://business.peugeot.co.uk/content/dam/peugeot/uk/b2b/buy/price---spec/pdfs/3008-suv-price-spec-guide.pdf",
+          "reject": "live continuous PDF — CDX digest ≠ 20220628 capture; not used for MY22"
+        },
+        {
+          "url": "https://www.guyperry.co.uk/wp-content/uploads/2022/04/3008-suv-price-spec-guide-2.pdf",
+          "reject": "dealer/partner upload — not peugeot.com / media.stellantis OEM"
+        }
+      ],
+      "fieldReasons": {
+        "batteryKWh": "no verified MY2022 official sheet with labeled net/usable kWh (13.2 on FR tarif is unlabeled / likely gross; not stored)",
+        "wltpRangeKm": "no verified MY2022 official combined EAER from a readable 2022 snapshot",
+        "fuelConsumptionLPerKm": "FR mixte ponderato only; no discharged CS on consulted sheets",
+        "energyConsumptionKWhPerKm": "no pure-CD label on consulted sheets"
+      }
+    },
+    {
+      "id": "bmw-x1-phev-xdrive25e-2022",
+      "brand": "BMW",
+      "model": "X1",
+      "year": 2022,
+      "market": "IT",
+      "missing": [
+        "fuelConsumptionLPerKm",
+        "energyConsumptionKWhPerKm"
+      ],
+      "reason": "CS+CD nil: IT listino 2022-01-26 has EAER + Capacità lorda/netta 10/8.82 (memorizzato netto 8.82); no discharged CS / pure CD",
+      "consulted": [
+        {
+          "url": "https://www.press.bmwgroup.com/italy/article/attachment/T0321361IT/520251",
+          "sourceDate": "2022-01-26",
+          "reject_for": "CS/CD",
+          "accepted_for": "batteryKWh netta 8.82; wltpRangeKm alreadyPresent"
+        }
+      ],
+      "fieldReasons": {
+        "fuelConsumptionLPerKm": "no discharged-battery CS",
+        "energyConsumptionKWhPerKm": "no rein-elektrisch / pure-CD label"
+      },
+      "alreadyPresent": {
+        "wltpRangeKm": 49,
+        "batteryKWh": 8.82
+      }
+    },
+    {
+      "id": "peugeot-3008-phev-2023",
+      "brand": "Peugeot",
+      "model": "3008",
+      "year": 2023,
+      "market": "IT",
+      "missing": [
+        "fuelConsumptionLPerKm",
+        "energyConsumptionKWhPerKm",
+        "batteryKWh"
+      ],
+      "reason": "CS+CD nil; battery nil: seed is aggregate IT PHEV (trim PHEV, EEA n=1604) — covers multiple UK Apr 2023 variants, not clearly HYBRID 225. Usable 10.4 is only on HYBRID 225 / HYBRID4 (HYBRID 180=TBC). EAER 47 km = floor(29.8 mi×1.609344) from HYBRID 180 column (prudent min; never round up).",
+      "consulted": [
+        {
+          "url": "https://www.media.stellantis.com/uploads/uk/model-pricelist/peugeot3008pricespecapr23-6455a65377d74.pdf",
+          "sourceDate": "2023-04-01",
+          "reject_for": "battery — Usable 10.4 is HYBRID 225/300 only; seed covers multiple variants",
+          "accepted_for": "wltpRangeKm 47 = floor(HYBRID 180 EAER 29.8 mi)"
+        }
+      ],
+      "fieldReasons": {
+        "batteryKWh": "aggregate / multi-variant seed row — Usable 10.4 printed only on HYBRID 225 / HYBRID4; HYBRID 180 Usable=TBC",
+        "fuelConsumptionLPerKm": "Combined L/100 weighted only",
+        "energyConsumptionKWhPerKm": "electric Combined weighted only"
+      },
+      "alreadyPresent": {
+        "wltpRangeKm": 47
+      }
     }
   ],
+  "changed_fields": [
+    {
+      "id": "peugeot-3008-phev-2023",
+      "field": "wltpRangeKm",
+      "value": 47,
+      "prev": 48,
+      "url": "https://www.media.stellantis.com/uploads/uk/model-pricelist/peugeot3008pricespecapr23-6455a65377d74.pdf",
+      "sourceDate": "2023-04-01",
+      "note": "HYBRID 180 column min 29.8 mi → floor = 47 km"
+    }
+  ],
+  "counts": {
+    "completed": 0,
+    "partial": 6,
+    "left_nil": 34,
+    "homolog_reuse": 1
+  },
   "non_phev_tech_sha": "6b9038232bc51daabc9e259fc0dab170f787984d4dfb8f597e309fe50155b4dc",
   "m3_ids": [
     "tesla-model-3-performance-2026",
@@ -7694,91 +8125,31 @@
     "tesla-model-3-premium-trazione-posteriore-2026",
     "tesla-model-3-trazione-posteriore-2026"
   ],
-  "sourceDay": "2026-11-11",
+  "sourceDay": "2026-11-14",
   "reviewNotes": [
-    "RESTORE/CONTROLS PR — not a researched fill of the 37 remaining lotto rows.",
-    "Reverted ford-kuga-2022 completion (continuous undated Ford PDF / no 2022 archive).",
-    "Reverted Jeep Compass/Renegade 2022 CS from generic /hybrid-suv archive.",
-    "Cleared ford-kuga-2023/2024 CS/battery/range/weighted orphans from continuous typenblatt.",
-    "Restored homolog shared map to main (no unverified 2022 year injection).",
-    "BMW 330e 2024 battery 19.5 kept as extra vs lotto; pure CD nil; wltpRangeKm nil.",
-    "Restored jeep-grand-cherokee-4xe-2023 EAER 44 + battery 17.3 from Stellantis DE januar_2023 / gültig ab 01/2023 (real January doc date).",
-    "jeep-grand-cherokee-4xe-2024 keeps EAER/battery via exact homolog onto 2023 donor (dataDerivedFromSameHomologationYear=2023).",
-    "Scrubbed generic/dating-invalid fieldSources + future-year / rejected URLs from sourceName (Mazda 2025 listino).",
-    "EPA shells: CS/range fieldSources keep year-only sourceDates; confidence 0.7→0.8 is ordinal field-provenance coverage of the pre-existing EPA source."
+    "CORR4: Peugeot 3008 2023 EAER 29.8 mi → floor 47 km (prudent min; was wrongly 48).",
+    "CORR4: battery_convention peugeot-3008-phev-2023 → nil (multi-variant aggregate).",
+    "Checker: miles→km floor probe; battery_convention thisPass must match seed nil/value."
   ],
-  "scrubbed_invalid_provenance": [
-    {
-      "id": "mazda-cx-60-phev-2024",
-      "cleared": [],
-      "sourceNameScrubbed": true
-    },
-    {
-      "id": "jeep-renegade-phev-4xe-2023",
-      "cleared": [],
-      "sourceNameScrubbed": true
-    },
-    {
-      "id": "ford-kuga-phev-2023",
-      "cleared": [],
-      "kugaContinuousOemCleared": true
-    },
-    {
-      "id": "ford-kuga-phev-2024",
-      "cleared": [],
-      "kugaContinuousOemCleared": true
-    }
-  ],
-  "provenance_fixes": [
-    {
-      "id": "audi-a3-e-tron-ultra-phev-2016",
-      "fixes": [
-        "fuelConsumptionLPerKm:epa_year_only",
-        "wltpRangeKm:epa_year_only"
-      ]
-    },
-    {
-      "id": "bmw-i3s-with-range-extender-phev-2021",
-      "fixes": [
-        "fuelConsumptionLPerKm:epa_year_only",
-        "wltpRangeKm:epa_year_only"
-      ]
-    },
-    {
-      "id": "chevrolet-volt-phev-2019",
-      "fixes": [
-        "fuelConsumptionLPerKm:epa_year_only",
-        "wltpRangeKm:epa_year_only"
-      ]
-    },
-    {
-      "id": "ford-c-max-energi-plug-in-hybrid-phev-2016",
-      "fixes": [
-        "fuelConsumptionLPerKm:epa_year_only",
-        "wltpRangeKm:epa_year_only"
-      ]
-    },
-    {
-      "id": "ford-escape-fwd-phev-phev-2026",
-      "fixes": [
-        "fuelConsumptionLPerKm:epa_year_only",
-        "wltpRangeKm:epa_year_only"
-      ]
-    },
-    {
-      "id": "honda-accord-phev-2014",
-      "fixes": [
-        "fuelConsumptionLPerKm:epa_year_only",
-        "wltpRangeKm:epa_year_only"
-      ]
-    },
-    {
-      "id": "hyundai-ioniq-phev-2022",
-      "fixes": [
-        "fuelConsumptionLPerKm:epa_year_only",
-        "wltpRangeKm:epa_year_only"
-      ]
-    }
-  ],
-  "prKind": "restore_controls"
+  "prKind": "research-correction",
+  "battery_convention": {
+    "catalogConvention": "net/usable",
+    "thisPass": [
+      {
+        "id": "bmw-x1-phev-xdrive25e-2022",
+        "batteryKWh": 8.82,
+        "note": "Capacità lorda/netta 10/8.82 printed → store netta 8.82"
+      },
+      {
+        "id": "peugeot-3008-phev-2023",
+        "batteryKWh": null,
+        "note": "nil — seed IT aggregate covers multiple UK Apr 2023 variants (trim PHEV); Usable 10.4 is HYBRID 225/HYBRID4 only"
+      },
+      {
+        "id": "peugeot-3008-phev-2022",
+        "batteryKWh": null,
+        "note": "nil — no verified MY22 net label"
+      }
+    ]
+  }
 }

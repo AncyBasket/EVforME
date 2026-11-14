@@ -2,11 +2,12 @@
   "url": "",
   "publishedUrl": "",
   "rows": 6977,
-  "bytes": 8909938,
+  "bytes": 8920912,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-11-11T10:35:52.169987+00:00",
+  "updatedAt": "2026-11-14T09:56:19.982811+00:00",
   "policy": "offline-first",
-  "seedVersion": 78,
-  "note": "seedVersion 78: PHEV wave2 batch1 restore/controls \u2014 BMW 330e battery extra; invalid Kuga/Jeep fills reverted; continuous Ford typenblatt orphans cleared; confidence policy v2 unchanged; api/static sync deferred at seed 77"
+  "seedVersion": 83,
+  "note": "seedVersion 83: PHEV wave2 batch1 corr4 \u2014 Peugeot 3008 2023 EAER floor(29.8 mi)=47; battery_convention nil for multi-variant aggregate; api/static sync deferred at seed 77",
+  "prevSeedVersion": 82
 }
