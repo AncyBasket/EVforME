@@ -83,15 +83,71 @@ final class PHEVWave2OfficialSourceTests: XCTestCase {
         XCTAssertTrue(my22.hasIncompleteCatalogData)
     }
 
-    func testBundledManifestIsSeed86() throws {
+    func testBundledManifestIsSeed87() throws {
         let url = try XCTUnwrap(Bundle.main.url(forResource: "catalog_cdn", withExtension: "json"))
         let obj = try XCTUnwrap(
             JSONSerialization.jsonObject(with: Data(contentsOf: url)) as? [String: Any]
         )
         let version = (obj["seedVersion"] as? NSNumber)?.intValue
             ?? (obj["seedVersion"] as? Int)
-        XCTAssertEqual(version, 86)
-        XCTAssertEqual(VehicleCatalogService.bundledSeedVersion, 86)
+        XCTAssertEqual(version, 87)
+        XCTAssertEqual(VehicleCatalogService.bundledSeedVersion, 87)
+    }
+
+    // MARK: - Wave2 batch3 research fills
+
+    func testEvoque2023UsableBatteryOfficial() throws {
+        let row = try XCTUnwrap(
+            VehicleCatalogService.shared.vehicle(by: "land-rover-range-rover-evoque-phev-2023")
+        )
+        XCTAssertEqual(row.batteryKWh ?? -1, 12.1, accuracy: 0.01)
+        XCTAssertNil(row.fuelConsumptionLPerKm)
+        XCTAssertNil(row.wltpRangeKm)
+        let batSrc = try XCTUnwrap(row.fieldSource(for: "batteryKWh"))
+        XCTAssertTrue(batSrc.lowercased().contains("usable"))
+        XCTAssertTrue(batSrc.contains("landrover.com"))
+        XCTAssertTrue(batSrc.lowercased().contains("metadati") || batSrc.lowercased().contains("creationdate"))
+        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "batteryKWh")), "2023-06-14")
+        XCTAssertTrue(row.hasIncompleteCatalogData)
+    }
+
+    func testMazdaCX60_2023EAERCombinedOfficial() throws {
+        let row = try XCTUnwrap(
+            VehicleCatalogService.shared.vehicle(by: "mazda-cx-60-phev-2023")
+        )
+        XCTAssertEqual(row.wltpRangeKm ?? -1, 63)
+        XCTAssertNil(row.batteryKWh)
+        XCTAssertNil(row.fuelConsumptionLPerKm)
+        let src = try XCTUnwrap(row.fieldSource(for: "wltpRangeKm"))
+        XCTAssertTrue(src.contains("mazda.eu") || src.contains("mazda"))
+        XCTAssertTrue(src.contains("63"))
+        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "wltpRangeKm")), "2023-07-03")
+        XCTAssertTrue(row.hasIncompleteCatalogData)
+    }
+
+    func testMitsubishiEclipse2023PureCDOfficial() throws {
+        let row = try XCTUnwrap(
+            VehicleCatalogService.shared.vehicle(by: "mitsubishi-eclipse-cross-phev-2023")
+        )
+        XCTAssertEqual(row.usableChargeDepletingEnergyKWhPerKm ?? -1, 0.175, accuracy: 1e-9)
+        XCTAssertNil(row.batteryKWh)
+        XCTAssertNil(row.fuelConsumptionLPerKm)
+        let src = try XCTUnwrap(row.fieldSource(for: "energyConsumptionKWhPerKm"))
+        XCTAssertTrue(src.lowercased().contains("rein elektrisch") || src.lowercased().contains("charge-depleting"))
+        XCTAssertTrue(src.contains("mitsubishi-motors.at"))
+        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "energyConsumptionKWhPerKm")), "2023-04-27")
+        XCTAssertTrue(row.hasIncompleteCatalogData)
+    }
+
+    func testPeugeot308_2022RemainsNilWithoutMY22OEMSheet() throws {
+        let row = try XCTUnwrap(
+            VehicleCatalogService.shared.vehicle(by: "peugeot-308-phev-2022")
+        )
+        XCTAssertNil(row.batteryKWh)
+        XCTAssertNil(row.wltpRangeKm)
+        XCTAssertNil(row.fuelConsumptionLPerKm)
+        XCTAssertNil(row.usableChargeDepletingEnergyKWhPerKm)
+        XCTAssertTrue(row.hasIncompleteCatalogData)
     }
 
     func testDS7_2024AggregateCSMaxAcrossVariants() throws {

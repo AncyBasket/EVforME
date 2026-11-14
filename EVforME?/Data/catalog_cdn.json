@@ -2,12 +2,12 @@
   "url": "",
   "publishedUrl": "",
   "rows": 6977,
-  "bytes": 8931598,
+  "bytes": 8934277,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-11-14T16:12:51.071247+00:00",
+  "updatedAt": "2026-11-14T17:36:14.563264+00:00",
   "policy": "offline-first",
-  "seedVersion": 86,
-  "note": "seedVersion 86: PHEV wave2 batch2 corr2 \u2014 DS7 aggregate CS MAX 0.082 across 225/300/360; BYD Seal U sourceDate from PDF CreationDate 2024-05-23; api/static sync deferred at seed 77",
-  "prevSeedVersion": 85
+  "seedVersion": 87,
+  "note": "seedVersion 87: PHEV wave2 batch3 research — Evoque usable 12.1; Mazda CX-60 EAER 63; Mitsubishi Eclipse pure CD 0.175; Peugeot 308 EAER 59; RAV4 2023 unlabeled battery scrubbed; api/static sync deferred at seed 77",
+  "prevSeedVersion": 86
 }
