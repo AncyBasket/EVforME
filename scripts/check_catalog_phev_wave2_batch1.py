@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Must-fail probes + invariants for PHEV wave2 batch1 (seed 82).
+"""Must-fail probes + invariants for PHEV wave2 batch1 (seed 83).
 
 Dating and generic-URL checks run on every real PHEV row with fieldSources.
 Homolog fills do NOT bypass dating: sourceDate/archive year must match the
@@ -14,10 +14,18 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import re
 import sys
 from pathlib import Path
 from urllib.parse import urlparse
+
+MI_TO_KM = 1.609344
+
+
+def miles_to_km_floor(miles: float) -> int:
+    """Convert printed miles to catalog km with prudent floor (never round up)."""
+    return int(math.floor(float(miles) * MI_TO_KM))
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "scripts"))
@@ -478,8 +486,57 @@ def must_fail_probes() -> None:
             "probe: require_year_token inert — homolog donor-year cite without year token accepted"
         )
 
+    # Mile→km conversions for EAER must floor (prudent min). 29.8 mi → 47.96… → 47, not 48.
+    if miles_to_km_floor(29.8) == 47 and miles_to_km_floor(29.8) != 48:
+        caught += 1
+    else:
+        raise SystemExit(
+            f"probe: miles_to_km_floor(29.8) want 47 got {miles_to_km_floor(29.8)}"
+        )
+    if miles_to_km_floor(35.4) == 56:  # 35.4*1.609344=56.97… → 56, not 57
+        caught += 1
+    else:
+        raise SystemExit(
+            f"probe: miles_to_km_floor(35.4) want 56 got {miles_to_km_floor(35.4)}"
+        )
+
     if caught < 21:
         raise SystemExit(f"probes incomplete caught={caught}")
+
+
+def assert_battery_convention_matches_seed(man: dict, by_id: dict) -> None:
+    """Every structured thisPass entry must match seed batteryKWh (nil vs numeric)."""
+    bc = man.get("battery_convention") or {}
+    entries = bc.get("thisPass") or []
+    if not entries:
+        raise SystemExit("battery_convention.thisPass missing")
+    for entry in entries:
+        if isinstance(entry, str):
+            raise SystemExit(
+                f"battery_convention.thisPass must be structured {{id,batteryKWh,note}}, got string: {entry[:80]}"
+            )
+        rid = entry.get("id")
+        if not rid or rid not in by_id:
+            raise SystemExit(f"battery_convention unknown id: {rid}")
+        claimed = entry.get("batteryKWh")
+        actual = by_id[rid].get("batteryKWh")
+        if claimed is None:
+            if actual is not None:
+                raise SystemExit(
+                    f"battery_convention {rid}: claimed nil but seed has {actual}"
+                )
+        else:
+            if actual is None:
+                raise SystemExit(
+                    f"battery_convention {rid}: claimed {claimed} but seed is nil"
+                )
+            if abs(float(actual) - float(claimed)) > 1e-9:
+                raise SystemExit(
+                    f"battery_convention {rid}: claimed {claimed} != seed {actual}"
+                )
+        note = (entry.get("note") or "").strip()
+        if not note:
+            raise SystemExit(f"battery_convention {rid}: note required")
 
 
 def pure_cd_equals_weighted(pure: float | None, weighted: float | None) -> bool:
@@ -630,10 +687,10 @@ def main() -> None:
     man = json.loads(MANIFEST.read_text(encoding="utf-8"))
     inv = json.loads(INVENTORY.read_text(encoding="utf-8"))
 
-    if int(cdn.get("seedVersion") or 0) != 82:
-        raise SystemExit(f"seedVersion want 82 got {cdn.get('seedVersion')}")
-    if int(man.get("seedVersion") or 0) != 82:
-        raise SystemExit(f"manifest seedVersion want 82 got {man.get('seedVersion')}")
+    if int(cdn.get("seedVersion") or 0) != 83:
+        raise SystemExit(f"seedVersion want 83 got {cdn.get('seedVersion')}")
+    if int(man.get("seedVersion") or 0) != 83:
+        raise SystemExit(f"manifest seedVersion want 83 got {man.get('seedVersion')}")
     if len(seed) != 6977:
         raise SystemExit(f"rows {len(seed)}")
     by_id = {r["id"]: r for r in seed}
@@ -880,17 +937,23 @@ def main() -> None:
         raise SystemExit(
             "Peugeot 3008 2023 battery must be nil (aggregate PHEV — not clearly HYBRID 225)"
         )
-    if int(p23.get("wltpRangeKm") or 0) != 48:
-        raise SystemExit("Peugeot 3008 2023 EAER expected prudent min 48 (HYBRID 180 column)")
+    want_range = miles_to_km_floor(29.8)
+    if want_range != 47:
+        raise SystemExit(f"internal: floor(29.8 mi) want 47 got {want_range}")
+    if int(p23.get("wltpRangeKm") or 0) != want_range:
+        raise SystemExit(
+            f"Peugeot 3008 2023 EAER expected floor(29.8 mi)={want_range} (HYBRID 180 column)"
+        )
     sn_p23 = p23.get("sourceName") or ""
     if "bat 14.2" in sn_p23 or "battery 14.2" in sn_p23.lower():
         raise SystemExit("Peugeot 3008 2023 sourceName still mentions bat 14.2")
+    assert_battery_convention_matches_seed(man, by_id)
     q5 = by_id["audi-q5-phev-50-tfsi-e-2024"]
     if abs(float(q5.get("batteryKWh") or 0) - 14.4) > 1e-9:
         raise SystemExit("Q5 2024 battery expected 14.4 net")
 
     report = {
-        "seedVersion": 82,
+        "seedVersion": 83,
         "rows": len(seed),
         "completed": len(man.get("completed") or []),
         "partial": len(man.get("partial") or []),

@@ -83,15 +83,15 @@ final class PHEVWave2OfficialSourceTests: XCTestCase {
         XCTAssertTrue(my22.hasIncompleteCatalogData)
     }
 
-    func testBundledManifestIsSeed82() throws {
+    func testBundledManifestIsSeed83() throws {
         let url = try XCTUnwrap(Bundle.main.url(forResource: "catalog_cdn", withExtension: "json"))
         let obj = try XCTUnwrap(
             JSONSerialization.jsonObject(with: Data(contentsOf: url)) as? [String: Any]
         )
         let version = (obj["seedVersion"] as? NSNumber)?.intValue
             ?? (obj["seedVersion"] as? Int)
-        XCTAssertEqual(version, 82)
-        XCTAssertEqual(VehicleCatalogService.bundledSeedVersion, 82)
+        XCTAssertEqual(version, 83)
+        XCTAssertEqual(VehicleCatalogService.bundledSeedVersion, 83)
     }
 
     func testAudiQ3Sportback2024OfficialETDFillNetBattery() throws {
@@ -168,9 +168,11 @@ final class PHEVWave2OfficialSourceTests: XCTestCase {
         // Aggregate IT PHEV (trim PHEV) — not clearly HYBRID 225; Usable 10.4 is 225/300 only.
         XCTAssertNil(row.batteryKWh)
         XCTAssertNil(row.fieldSource(for: "batteryKWh"))
-        XCTAssertEqual(row.wltpRangeKm ?? -1, 48)
+        // 29.8 mi × 1.609344 = 47.96… → floor 47 (prudent min; never round up to 48)
+        XCTAssertEqual(row.wltpRangeKm ?? -1, 47)
         let rangeSrc = try XCTUnwrap(row.fieldSource(for: "wltpRangeKm"))
         XCTAssertTrue(rangeSrc.contains("HYBRID 180") || rangeSrc.lowercased().contains("29.8"))
+        XCTAssertTrue(rangeSrc.lowercased().contains("floor") || rangeSrc.contains("47"))
         XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "wltpRangeKm")), "2023-04-01")
         let sn = row.sourceName ?? ""
         XCTAssertFalse(sn.contains("bat 14.2"))

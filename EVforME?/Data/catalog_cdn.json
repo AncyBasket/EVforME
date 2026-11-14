@@ -2,12 +2,12 @@
   "url": "",
   "publishedUrl": "",
   "rows": 6977,
-  "bytes": 8920755,
+  "bytes": 8920912,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-11-13T12:12:43.746989+00:00",
+  "updatedAt": "2026-11-14T09:56:19.982811+00:00",
   "policy": "offline-first",
-  "seedVersion": 82,
-  "note": "seedVersion 82: PHEV wave2 batch1 corr3 \u2014 Peugeot 3008 2023 aggregate battery nil (no mix 10.4@225 with EAER@180); BMW X1 2022 sourceName netta 8.82; best_shared_exact TAN+Va+Ve+ep gate; api/static sync deferred at seed 77",
-  "prevSeedVersion": 81
+  "seedVersion": 83,
+  "note": "seedVersion 83: PHEV wave2 batch1 corr4 \u2014 Peugeot 3008 2023 EAER floor(29.8 mi)=47; battery_convention nil for multi-variant aggregate; api/static sync deferred at seed 77",
+  "prevSeedVersion": 82
 }

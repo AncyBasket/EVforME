@@ -1,6 +1,6 @@
 {
-  "seedVersion": 82,
-  "prevSeedVersion": 81,
+  "seedVersion": 83,
+  "prevSeedVersion": 82,
   "ids_before": [
     "alfa-romeo-147-2005",
     "alfa-romeo-147-2006",
@@ -8044,35 +8044,6 @@
       }
     },
     {
-      "id": "peugeot-3008-phev-2023",
-      "brand": "Peugeot",
-      "model": "3008",
-      "year": 2023,
-      "market": "IT",
-      "missing": [
-        "fuelConsumptionLPerKm",
-        "energyConsumptionKWhPerKm",
-        "batteryKWh"
-      ],
-      "reason": "CS+CD nil; battery nil: seed is aggregate IT PHEV (trim PHEV, EEA n=1604) — not clearly HYBRID 225. UK Apr 2023 Usable 10.4 is only on HYBRID 225 / HYBRID4 columns (HYBRID 180=TBC). EAER kept at 48 km = HYBRID 180 column min 29.8 mi (prudent across variants); never pair 10.4 with 48.",
-      "consulted": [
-        {
-          "url": "https://www.media.stellantis.com/uploads/uk/model-pricelist/peugeot3008pricespecapr23-6455a65377d74.pdf",
-          "sourceDate": "2023-04-01",
-          "reject_for": "battery — Usable 10.4 is HYBRID 225/300 only; row not clearly 225",
-          "accepted_for": "wltpRangeKm 48 from HYBRID 180 EAER column min 29.8 mi"
-        }
-      ],
-      "fieldReasons": {
-        "batteryKWh": "aggregate PHEV — Usable 10.4 printed only on HYBRID 225 / HYBRID4; HYBRID 180 Usable=TBC; do not assign 225 battery to aggregate",
-        "fuelConsumptionLPerKm": "Combined L/100 weighted only",
-        "energyConsumptionKWhPerKm": "electric Combined weighted only"
-      },
-      "alreadyPresent": {
-        "wltpRangeKm": 48
-      }
-    },
-    {
       "id": "bmw-x1-phev-xdrive25e-2022",
       "brand": "BMW",
       "model": "X1",
@@ -8099,32 +8070,46 @@
         "wltpRangeKm": 49,
         "batteryKWh": 8.82
       }
+    },
+    {
+      "id": "peugeot-3008-phev-2023",
+      "brand": "Peugeot",
+      "model": "3008",
+      "year": 2023,
+      "market": "IT",
+      "missing": [
+        "fuelConsumptionLPerKm",
+        "energyConsumptionKWhPerKm",
+        "batteryKWh"
+      ],
+      "reason": "CS+CD nil; battery nil: seed is aggregate IT PHEV (trim PHEV, EEA n=1604) — covers multiple UK Apr 2023 variants, not clearly HYBRID 225. Usable 10.4 is only on HYBRID 225 / HYBRID4 (HYBRID 180=TBC). EAER 47 km = floor(29.8 mi×1.609344) from HYBRID 180 column (prudent min; never round up).",
+      "consulted": [
+        {
+          "url": "https://www.media.stellantis.com/uploads/uk/model-pricelist/peugeot3008pricespecapr23-6455a65377d74.pdf",
+          "sourceDate": "2023-04-01",
+          "reject_for": "battery — Usable 10.4 is HYBRID 225/300 only; seed covers multiple variants",
+          "accepted_for": "wltpRangeKm 47 = floor(HYBRID 180 EAER 29.8 mi)"
+        }
+      ],
+      "fieldReasons": {
+        "batteryKWh": "aggregate / multi-variant seed row — Usable 10.4 printed only on HYBRID 225 / HYBRID4; HYBRID 180 Usable=TBC",
+        "fuelConsumptionLPerKm": "Combined L/100 weighted only",
+        "energyConsumptionKWhPerKm": "electric Combined weighted only"
+      },
+      "alreadyPresent": {
+        "wltpRangeKm": 47
+      }
     }
   ],
   "changed_fields": [
     {
       "id": "peugeot-3008-phev-2023",
-      "field": "batteryKWh",
-      "value": null,
-      "prev": 10.4,
-      "url": "https://www.media.stellantis.com/uploads/uk/model-pricelist/peugeot3008pricespecapr23-6455a65377d74.pdf",
-      "sourceDate": "2023-04-01",
-      "action": "scrub-aggregate-not-225"
-    },
-    {
-      "id": "peugeot-3008-phev-2023",
       "field": "wltpRangeKm",
-      "value": 48,
+      "value": 47,
+      "prev": 48,
       "url": "https://www.media.stellantis.com/uploads/uk/model-pricelist/peugeot3008pricespecapr23-6455a65377d74.pdf",
       "sourceDate": "2023-04-01",
-      "note": "HYBRID 180 column min 29.8 mi → 48 km; not 225 column"
-    },
-    {
-      "id": "bmw-x1-phev-xdrive25e-2022",
-      "field": "sourceName",
-      "value": "Capacità lorda/netta 10/8.82, memorizzato netto 8.82",
-      "url": "https://www.press.bmwgroup.com/italy/article/attachment/T0321361IT/520251",
-      "sourceDate": "2022-01-26"
+      "note": "HYBRID 180 column min 29.8 mi → floor = 47 km"
     }
   ],
   "counts": {
@@ -8140,19 +8125,31 @@
     "tesla-model-3-premium-trazione-posteriore-2026",
     "tesla-model-3-trazione-posteriore-2026"
   ],
-  "sourceDay": "2026-11-13",
+  "sourceDay": "2026-11-14",
   "reviewNotes": [
-    "CORR3: Peugeot 3008 2023 is aggregate IT PHEV — battery nil; EAER 48 from HYBRID 180 column (29.8 mi); Usable 10.4 stays on 225/300 columns only (never mix with 48).",
-    "CORR3: BMW X1 2022 sourceName → Capacità lorda/netta 10/8.82, memorizzato netto 8.82.",
-    "Checker: Q3 SB 2023←2024 must pass exact_homolog_ok AND best_shared_exact(TAN+Va+Ve+ep); must-fail probe when distinct TANs share the same power."
+    "CORR4: Peugeot 3008 2023 EAER 29.8 mi → floor 47 km (prudent min; was wrongly 48).",
+    "CORR4: battery_convention peugeot-3008-phev-2023 → nil (multi-variant aggregate).",
+    "Checker: miles→km floor probe; battery_convention thisPass must match seed nil/value."
   ],
   "prKind": "research-correction",
   "battery_convention": {
     "catalogConvention": "net/usable",
     "thisPass": [
-      "bmw-x1-phev-xdrive25e-2022 → 8.82 netta (printed)",
-      "peugeot-3008-phev-2023 → 10.4 Usable Battery Capacity (printed)",
-      "peugeot-3008-phev-2022 → battery nil (no verified MY22 net label)"
+      {
+        "id": "bmw-x1-phev-xdrive25e-2022",
+        "batteryKWh": 8.82,
+        "note": "Capacità lorda/netta 10/8.82 printed → store netta 8.82"
+      },
+      {
+        "id": "peugeot-3008-phev-2023",
+        "batteryKWh": null,
+        "note": "nil — seed IT aggregate covers multiple UK Apr 2023 variants (trim PHEV); Usable 10.4 is HYBRID 225/HYBRID4 only"
+      },
+      {
+        "id": "peugeot-3008-phev-2022",
+        "batteryKWh": null,
+        "note": "nil — no verified MY22 net label"
+      }
     ]
   }
 }
