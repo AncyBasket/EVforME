@@ -2,12 +2,12 @@
   "url": "",
   "publishedUrl": "",
   "rows": 6977,
-  "bytes": 8924873,
+  "bytes": 8931545,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-11-14T11:14:29.743148+00:00",
+  "updatedAt": "2026-11-14T15:29:46.899012+00:00",
   "policy": "offline-first",
-  "seedVersion": 84,
-  "note": "seedVersion 84: PHEV wave2 batch2 research \u2014 Audi Q5 SB 2024 eTD; BMW X1 30e 2023 / Active Tourer 225e 2023 / X3 30e 2024 nets+EAER; remaining batch2 honest nils; api/static sync deferred at seed 77",
-  "prevSeedVersion": 83
+  "seedVersion": 85,
+  "note": "seedVersion 85: PHEV wave2 batch2 corr1 \u2014 X3 CS 0.079 + press 19.06.2024 dating; X1 U11 re-cite; C5/DS7/Kia/BYD fills; hub-only nils replaced with exact docs; api/static sync deferred at seed 77",
+  "prevSeedVersion": 84
 }

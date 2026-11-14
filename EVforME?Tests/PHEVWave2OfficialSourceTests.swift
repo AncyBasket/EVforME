@@ -83,15 +83,15 @@ final class PHEVWave2OfficialSourceTests: XCTestCase {
         XCTAssertTrue(my22.hasIncompleteCatalogData)
     }
 
-    func testBundledManifestIsSeed84() throws {
+    func testBundledManifestIsSeed85() throws {
         let url = try XCTUnwrap(Bundle.main.url(forResource: "catalog_cdn", withExtension: "json"))
         let obj = try XCTUnwrap(
             JSONSerialization.jsonObject(with: Data(contentsOf: url)) as? [String: Any]
         )
         let version = (obj["seedVersion"] as? NSNumber)?.intValue
             ?? (obj["seedVersion"] as? Int)
-        XCTAssertEqual(version, 84)
-        XCTAssertEqual(VehicleCatalogService.bundledSeedVersion, 84)
+        XCTAssertEqual(version, 85)
+        XCTAssertEqual(VehicleCatalogService.bundledSeedVersion, 85)
     }
 
     // MARK: - Wave2 batch2 research fills
@@ -124,7 +124,8 @@ final class PHEVWave2OfficialSourceTests: XCTestCase {
         XCTAssertNil(row.usableChargeDepletingEnergyKWhPerKm)
         let batSrc = try XCTUnwrap(row.fieldSource(for: "batteryKWh"))
         XCTAssertTrue(batSrc.lowercased().contains("netto") || batSrc.lowercased().contains("net"))
-        XCTAssertTrue(batSrc.contains("press.bmwgroup.com") || batSrc.contains("T0322775"))
+        XCTAssertTrue(batSrc.contains("cdn.mportal.de") || batSrc.contains("U11-11-2023"))
+        XCTAssertFalse(batSrc.contains("T0322775"))
         XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "batteryKWh")), "2023-09-27")
         XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "wltpRangeKm")), "2023-09-27")
         XCTAssertTrue(row.hasIncompleteCatalogData)
@@ -136,12 +137,14 @@ final class PHEVWave2OfficialSourceTests: XCTestCase {
         )
         XCTAssertEqual(row.batteryKWh ?? -1, 19.7, accuracy: 0.01)
         XCTAssertEqual(row.wltpRangeKm ?? -1, 81)
-        XCTAssertNil(row.fuelConsumptionLPerKm)
+        XCTAssertEqual(row.fuelConsumptionLPerKm ?? -1, 0.079, accuracy: 1e-9)
         let batSrc = try XCTUnwrap(row.fieldSource(for: "batteryKWh"))
         XCTAssertTrue(batSrc.lowercased().contains("net"))
-        XCTAssertTrue(batSrc.contains("press.bmwgroup.com") || batSrc.contains("T0443191"))
-        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "batteryKWh")), "2024-06-01")
-        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "wltpRangeKm")), "2024-06-01")
+        XCTAssertTrue(batSrc.contains("T0443191EL"))
+        XCTAssertTrue(batSrc.contains("19.06.2024"))
+        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "batteryKWh")), "2024-06-19")
+        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "wltpRangeKm")), "2024-06-19")
+        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "fuelConsumptionLPerKm")), "2024-06-19")
         XCTAssertTrue(row.hasIncompleteCatalogData)
     }
 

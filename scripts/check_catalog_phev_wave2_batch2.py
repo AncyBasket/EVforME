@@ -100,6 +100,31 @@ def _looks_continuous_unversioned_oem_pdf(url: str) -> bool:
     return False
 
 
+def _is_undated_press_attachment(url: str) -> bool:
+    """Live press.bmwgroup (etc.) /article/attachment/ URLs with no year token in the path.
+
+    These endpoints are rewritten in place (e.g. T0322775 now serves Juli 2026).
+    Accept only when wrapped in a matching-year archive.org snapshot (handled by caller).
+
+    Note: do NOT reuse the loose `_path_has_year_token` `0{yy}` heuristic here — attachment
+    IDs like T0322775 contain digit runs that false-match future years (e.g. 2032 → 032).
+    """
+    u = (url or "").lower().rstrip(";,.)")
+    if "web.archive.org" in u:
+        return False
+    path = _url_path_for_dating(u)
+    if "/article/attachment/" not in path and not re.search(
+        r"/attachment/[a-z0-9_-]+/\d+$", path
+    ):
+        return False
+    # Explicit calendar / MY markers only.
+    if re.search(r"(?<!\d)20\d{2}(?!\d)", path):
+        return False
+    if re.search(r"my\d{2}", path):
+        return False
+    return True
+
+
 def _ok_for_year(
     url: str,
     source_date: str,
@@ -486,6 +511,56 @@ def must_fail_probes() -> None:
             "probe: require_year_token inert — homolog donor-year cite without year token accepted"
         )
 
+    # Undated live press attachment (no year token, no archive) must be flagged.
+    live_attach = (
+        "https://www.press.bmwgroup.com/deutschland/article/attachment/T0322775DE/609585"
+    )
+    if _is_undated_press_attachment(live_attach):
+        caught += 1
+    else:
+        raise SystemExit(
+            "probe: undated press attachment not flagged (year-token / archive required)"
+        )
+    # Archive snapshot of the same attachment for 2023 is NOT undated.
+    archived = (
+        "https://web.archive.org/web/20230927120000/"
+        "https://www.press.bmwgroup.com/deutschland/article/attachment/T0322775DE/609585"
+    )
+    if not _is_undated_press_attachment(archived):
+        caught += 1
+    else:
+        raise SystemExit("probe: archive.org snapshot of attachment wrongly flagged undated")
+    # Dated mportal path with year token remains OK.
+    if source_year_ok(
+        "https://cdn.mportal.de/CDN/pdf/U11-11-2023.PDF", "2023-09-27", 2023, homolog_year=None
+    ):
+        caught += 1
+    else:
+        raise SystemExit("probe: dated mportal U11-11-2023.PDF unexpectedly rejected")
+
+    # left_nil must not cite only generic hub/homepage URLs.
+    bad_nil_man = {
+        "batch2_ids": ["demo-nil-2024"],
+        "completed": [],
+        "partial": [],
+        "homolog_reuse": [],
+        "left_nil": [
+            {
+                "id": "demo-nil-2024",
+                "reason": "placeholder",
+                "consulted": [{"url": "https://www.kia.com/", "reject_for": "hub"}],
+            }
+        ],
+    }
+    try:
+        assert_left_nil_consulted_not_only_generic(bad_nil_man)
+        raise SystemExit("probe: hub-only left_nil not rejected")
+    except SystemExit as e:
+        if "only generic" in str(e) or "hub-only" in str(e) or "generic" in str(e).lower():
+            caught += 1
+        else:
+            raise
+
     # Mile→km conversions for EAER must floor (prudent min). 29.8 mi → 47.96… → 47, not 48.
     if miles_to_km_floor(29.8) == 47 and miles_to_km_floor(29.8) != 48:
         caught += 1
@@ -500,8 +575,21 @@ def must_fail_probes() -> None:
             f"probe: miles_to_km_floor(35.4) want 56 got {miles_to_km_floor(35.4)}"
         )
 
-    if caught < 21:
+    if caught < 24:
         raise SystemExit(f"probes incomplete caught={caught}")
+
+
+def assert_left_nil_consulted_not_only_generic(man: dict) -> None:
+    """Every left_nil entry must cite ≥1 non-generic document URL (no homepage-only)."""
+    for entry in man.get("left_nil") or []:
+        consulted = entry.get("consulted") or []
+        urls = [c.get("url") for c in consulted if isinstance(c, dict) and c.get("url")]
+        if not urls:
+            raise SystemExit(f"left_nil {entry.get('id')} missing consulted URLs")
+        if all(is_generic_url(u) for u in urls):
+            raise SystemExit(
+                f"left_nil {entry.get('id')} consulted only generic hub URLs: {urls}"
+            )
 
 
 def assert_battery_convention_matches_seed(man: dict, by_id: dict) -> None:
@@ -687,10 +775,10 @@ def main() -> None:
     man = json.loads(MANIFEST.read_text(encoding="utf-8"))
     inv = json.loads(INVENTORY.read_text(encoding="utf-8"))
 
-    if int(cdn.get("seedVersion") or 0) != 84:
-        raise SystemExit(f"seedVersion want 84 got {cdn.get('seedVersion')}")
-    if int(man.get("seedVersion") or 0) != 84:
-        raise SystemExit(f"manifest seedVersion want 84 got {man.get('seedVersion')}")
+    if int(cdn.get("seedVersion") or 0) != 85:
+        raise SystemExit(f"seedVersion want 85 got {cdn.get('seedVersion')}")
+    if int(man.get("seedVersion") or 0) != 85:
+        raise SystemExit(f"manifest seedVersion want 85 got {man.get('seedVersion')}")
     if len(seed) != 6977:
         raise SystemExit(f"rows {len(seed)}")
     by_id = {r["id"]: r for r in seed}
@@ -813,6 +901,27 @@ def main() -> None:
                     raise SystemExit(f"generic URL on {r['id']}.{field}: {url}")
                 if _looks_continuous_unversioned_oem_pdf(url):
                     raise SystemExit(f"continuous OEM PDF on {r['id']}.{field}: {url}")
+            # Batch2: undated live press attachments alone are rejected (rewritten in place).
+            # Allowed when the same cite also has a non-attachment URL that dates OK
+            # (e.g. dated press detail + undated PDF attachment).
+            if r["id"] in set(man.get("batch2_ids") or []):
+                undated_atts = [u for u in urls if _is_undated_press_attachment(u)]
+                if undated_atts:
+                    peers = [u for u in urls if u not in undated_atts]
+                    peer_ok = any(
+                        source_year_ok(
+                            u,
+                            date,
+                            int(r.get("year") or 0),
+                            homolog_year=hy,
+                        )
+                        for u in peers
+                    )
+                    if not peer_ok:
+                        raise SystemExit(
+                            f"undated press attachment without dated peer on batch2 "
+                            f"{r['id']}.{field}: {undated_atts}"
+                        )
             # Reject invented New-Year placeholders when the cite encodes a *different*
             # real doc date, or when a URL/filename year is after the vehicle year.
             # Official January listini (januar_YYYY / gültig ab 01/YYYY / valid as of
@@ -846,9 +955,11 @@ def main() -> None:
         if homolog_year is not None:
             # donor must exist and be exact on power + weighted WLTP
             donor_id = None
+            reuse_entry = None
             for c in (man.get("homolog_reuse") or []) + (man.get("completed") or []) + (man.get("partial") or []):
                 if c.get("id") == r["id"] and c.get("sourceId"):
                     donor_id = c["sourceId"]
+                    reuse_entry = c
                     break
             if donor_id:
                 src = by_id[donor_id]
@@ -861,6 +972,42 @@ def main() -> None:
                     )
                 if src.get("dataDerivedFromSameHomologationYear") is not None:
                     raise SystemExit(f"chain derivation {r['id']} <- {donor_id}")
+                # Runtime reuse must also pass best_shared_exact (TAN+Va+Ve+ep), not only
+                # power+weighted equality — mirrors batch1 Q3 SB gate.
+                homolog = (reuse_entry or {}).get("homolog") or {}
+                family = (reuse_entry or {}).get("family") or homolog.get("family")
+                tan = homolog.get("TAN")
+                va = homolog.get("Va")
+                ve = homolog.get("Ve")
+                ep = homolog.get("ep")
+                if family and tan and va and ve and ep is not None:
+                    shared = (
+                        json.loads(
+                            (
+                                REPO
+                                / "scripts"
+                                / "cache"
+                                / "eea"
+                                / "catalog_phev_homologation_map.json"
+                            ).read_text(encoding="utf-8")
+                        ).get("shared")
+                        or {}
+                    )
+                    fp = best_shared_exact(
+                        family,
+                        int(homolog_year),
+                        int(r.get("year") or 0),
+                        float(r.get("powerKw") or ep),
+                        shared,
+                        tan=tan,
+                        va=va,
+                        ve=ve,
+                    )
+                    if fp is None:
+                        raise SystemExit(
+                            f"homolog best_shared_exact failed {r['id']} <- {donor_id} "
+                            f"family={family} TAN={tan} Va={va} Ve={ve} ep={ep}"
+                        )
 
     if len(inv.get("batch2_candidates") or []) != 40:
         raise SystemExit("batch2 candidates != 40")
@@ -890,6 +1037,11 @@ def main() -> None:
         raise SystemExit("X1 30e 2023 EAER expected 71")
     if x130.get("fuelConsumptionLPerKm") is not None:
         raise SystemExit("X1 30e 2023 CS must stay nil (weighted-only sheet)")
+    x1_cite = (x130.get("fieldSources") or {}).get("batteryKWh") or ""
+    if "U11-11-2023" not in x1_cite and "cdn.mportal.de" not in x1_cite:
+        raise SystemExit("X1 30e 2023 cite must use mportal U11-11-2023.PDF")
+    if "T0322775" in x1_cite and "web.archive.org" not in x1_cite:
+        raise SystemExit("X1 30e 2023 must not cite live undated T0322775 attachment")
 
     at23 = by_id["bmw-serie-2-active-tourer-225e-xdrive-2023"]
     if abs(float(at23.get("batteryKWh") or 0) - 14.2) > 1e-9:
@@ -902,6 +1054,23 @@ def main() -> None:
         raise SystemExit("X3 30e 2024 battery expected net 19.7")
     if int(x3.get("wltpRangeKm") or 0) != 81:
         raise SystemExit("X3 30e 2024 EAER expected 81")
+    if abs(float(x3.get("fuelConsumptionLPerKm") or 0) - 0.079) > 1e-9:
+        raise SystemExit("X3 30e 2024 CS expected 0.079 (battery empty MAX 7.9)")
+    if (x3.get("fieldSourceDates") or {}).get("fuelConsumptionLPerKm") != "2024-06-19":
+        raise SystemExit("X3 30e 2024 CS sourceDate must be 2024-06-19 (press day)")
+    x3_cite = (x3.get("fieldSources") or {}).get("fuelConsumptionLPerKm") or ""
+    if "T0443191EL" not in x3_cite:
+        raise SystemExit("X3 30e 2024 cite must mention T0443191EL")
+    if "19.06.2024" not in x3_cite:
+        raise SystemExit("X3 30e 2024 cite must mention press date 19.06.2024")
+
+    kia24 = by_id["kia-sportage-phev-2024"]
+    if abs(float(kia24.get("fuelConsumptionLPerKm") or 0) - 0.06866) > 1e-9:
+        raise SystemExit("Sportage 2024 CS expected 0.06866")
+    if int(kia24.get("wltpRangeKm") or 0) != 70:
+        raise SystemExit("Sportage 2024 EAER expected 70")
+    if kia24.get("batteryKWh") is not None:
+        raise SystemExit("Sportage 2024 battery must stay nil (Energia 13,8 unlabeled)")
 
     # Nil control: Q5 SB 2023 must remain empty (no 2023 eTD / no homolog path)
     q5sb23 = by_id["audi-q5-sportback-phev-50-tfsi-e-2023"]
@@ -915,9 +1084,10 @@ def main() -> None:
         raise SystemExit(f"miles_to_km_floor(29.8) want 47 got {miles_to_km_floor(29.8)}")
 
     assert_battery_convention_matches_seed(man, by_id)
+    assert_left_nil_consulted_not_only_generic(man)
 
     report = {
-        "seedVersion": 84,
+        "seedVersion": 85,
         "rows": len(seed),
         "completed": len(man.get("completed") or []),
         "partial": len(man.get("partial") or []),
