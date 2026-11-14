@@ -232,7 +232,10 @@ def main() -> None:
     )
     set_field(mitsu, "energyConsumptionKWhPerKm", 0.175, cite, "2023-04-27")
     mitsu["energyIsWeighted"] = False
-    append_source(mitsu, f"wave2-batch3 Mitsubishi Eclipse Cross pure CD 0.175 — {MITSU}")
+    append_source(
+        mitsu,
+        f"wave2-batch3 Mitsubishi Eclipse Cross rein elektrisch / charge-depleting 0.175 — {MITSU}",
+    )
     mitsu["sourceUpdatedAt"] = SOURCE_DAY
     finalize(mitsu)
     record_fill(
