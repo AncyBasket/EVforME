@@ -2,12 +2,12 @@
   "url": "",
   "publishedUrl": "",
   "rows": 6977,
-  "bytes": 8931545,
+  "bytes": 8931598,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-11-14T15:29:46.899012+00:00",
+  "updatedAt": "2026-11-14T16:12:51.071247+00:00",
   "policy": "offline-first",
-  "seedVersion": 85,
-  "note": "seedVersion 85: PHEV wave2 batch2 corr1 \u2014 X3 CS 0.079 + press 19.06.2024 dating; X1 U11 re-cite; C5/DS7/Kia/BYD fills; hub-only nils replaced with exact docs; api/static sync deferred at seed 77",
-  "prevSeedVersion": 84
+  "seedVersion": 86,
+  "note": "seedVersion 86: PHEV wave2 batch2 corr2 \u2014 DS7 aggregate CS MAX 0.082 across 225/300/360; BYD Seal U sourceDate from PDF CreationDate 2024-05-23; api/static sync deferred at seed 77",
+  "prevSeedVersion": 85
 }

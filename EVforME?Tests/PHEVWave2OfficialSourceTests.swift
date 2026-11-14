@@ -83,15 +83,37 @@ final class PHEVWave2OfficialSourceTests: XCTestCase {
         XCTAssertTrue(my22.hasIncompleteCatalogData)
     }
 
-    func testBundledManifestIsSeed85() throws {
+    func testBundledManifestIsSeed86() throws {
         let url = try XCTUnwrap(Bundle.main.url(forResource: "catalog_cdn", withExtension: "json"))
         let obj = try XCTUnwrap(
             JSONSerialization.jsonObject(with: Data(contentsOf: url)) as? [String: Any]
         )
         let version = (obj["seedVersion"] as? NSNumber)?.intValue
             ?? (obj["seedVersion"] as? Int)
-        XCTAssertEqual(version, 85)
-        XCTAssertEqual(VehicleCatalogService.bundledSeedVersion, 85)
+        XCTAssertEqual(version, 86)
+        XCTAssertEqual(VehicleCatalogService.bundledSeedVersion, 86)
+    }
+
+    func testDS7_2024AggregateCSMaxAcrossVariants() throws {
+        let row = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: "ds-7-phev-e-tense-2024"))
+        XCTAssertEqual(row.batteryKWh ?? -1, 13.0, accuracy: 0.01)
+        XCTAssertEqual(row.fuelConsumptionLPerKm ?? -1, 0.082, accuracy: 1e-9)
+        XCTAssertNil(row.wltpRangeKm)
+        let cs = try XCTUnwrap(row.fieldSource(for: "fuelConsumptionLPerKm"))
+        XCTAssertTrue(cs.contains("8,2") || cs.contains("0.082"))
+        XCTAssertTrue(cs.lowercased().contains("360") || cs.lowercased().contains("max"))
+        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "fuelConsumptionLPerKm")), "2024-03-25")
+    }
+
+    func testBYDSealU_2024UsesPDFCreationDate() throws {
+        let row = try XCTUnwrap(VehicleCatalogService.shared.vehicle(by: "byd-seal-u-phev-dm-i-2024"))
+        XCTAssertEqual(row.fuelConsumptionLPerKm ?? -1, 0.074, accuracy: 1e-9)
+        XCTAssertEqual(row.wltpRangeKm ?? -1, 70)
+        XCTAssertNil(row.batteryKWh)
+        let src = try XCTUnwrap(row.fieldSource(for: "fuelConsumptionLPerKm"))
+        XCTAssertTrue(src.lowercased().contains("metadati") || src.lowercased().contains("creationdate"))
+        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "fuelConsumptionLPerKm")), "2024-05-23")
+        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "wltpRangeKm")), "2024-05-23")
     }
 
     // MARK: - Wave2 batch2 research fills

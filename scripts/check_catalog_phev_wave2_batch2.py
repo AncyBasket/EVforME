@@ -230,6 +230,67 @@ def exact_homolog_ok(dst: dict, src: dict) -> bool:
     return True
 
 
+def assert_homolog_reuse_best_shared_exact(
+    *,
+    row: dict,
+    donor_id: str,
+    reuse_entry: dict,
+    homolog_year: int,
+    shared: dict | None = None,
+) -> None:
+    """Fail closed: missing family/TAN/Va/Ve/ep OR best_shared_exact miss → SystemExit."""
+    homolog = reuse_entry.get("homolog") or {}
+    family = reuse_entry.get("family") or homolog.get("family")
+    tan = homolog.get("TAN")
+    va = homolog.get("Va")
+    ve = homolog.get("Ve")
+    ep = homolog.get("ep")
+    missing = [
+        name
+        for name, val in (
+            ("family", family),
+            ("TAN", tan),
+            ("Va", va),
+            ("Ve", ve),
+            ("ep", ep),
+        )
+        if val is None or val == ""
+    ]
+    if missing:
+        raise SystemExit(
+            f"homolog missing fingerprint for best_shared_exact {row.get('id')} <- {donor_id}: "
+            f"missing {missing}"
+        )
+    if shared is None:
+        shared = (
+            json.loads(
+                (
+                    REPO
+                    / "scripts"
+                    / "cache"
+                    / "eea"
+                    / "catalog_phev_homologation_map.json"
+                ).read_text(encoding="utf-8")
+            ).get("shared")
+            or {}
+        )
+    fp = best_shared_exact(
+        family,
+        int(homolog_year),
+        int(row.get("year") or 0),
+        float(row.get("powerKw") or ep),
+        shared,
+        tan=tan,
+        va=va,
+        ve=ve,
+    )
+    if fp is None:
+        raise SystemExit(
+            f"homolog best_shared_exact failed {row.get('id')} <- {donor_id} "
+            f"family={family} TAN={tan} Va={va} Ve={ve} ep={ep}"
+        )
+
+
 def best_shared_exact(
     family: str,
     src_year: int,
@@ -561,6 +622,39 @@ def must_fail_probes() -> None:
         else:
             raise
 
+    # Homolog reuse: missing family/fingerprint must fail closed (not skip best_shared_exact).
+    try:
+        assert_homolog_reuse_best_shared_exact(
+            row={"id": "demo-dst-2023", "year": 2023, "powerKw": 110.0},
+            donor_id="demo-src-2024",
+            reuse_entry={"homolog": {"TAN": "E1*X", "Va": "VA", "Ve": "VE", "ep": 110}},
+            homolog_year=2024,
+            shared={},
+        )
+        raise SystemExit("probe: missing family did not fail closed")
+    except SystemExit as e:
+        if "missing fingerprint" in str(e) or "missing ['family']" in str(e):
+            caught += 1
+        else:
+            raise
+    try:
+        assert_homolog_reuse_best_shared_exact(
+            row={"id": "demo-dst-2023", "year": 2023, "powerKw": 110.0},
+            donor_id="demo-src-2024",
+            reuse_entry={
+                "family": "demo",
+                "homolog": {"TAN": "E1*X", "Va": "VA", "Ve": "VE"},  # ep missing
+            },
+            homolog_year=2024,
+            shared={},
+        )
+        raise SystemExit("probe: missing ep did not fail closed")
+    except SystemExit as e:
+        if "missing fingerprint" in str(e) and "ep" in str(e):
+            caught += 1
+        else:
+            raise
+
     # Mile→km conversions for EAER must floor (prudent min). 29.8 mi → 47.96… → 47, not 48.
     if miles_to_km_floor(29.8) == 47 and miles_to_km_floor(29.8) != 48:
         caught += 1
@@ -575,7 +669,7 @@ def must_fail_probes() -> None:
             f"probe: miles_to_km_floor(35.4) want 56 got {miles_to_km_floor(35.4)}"
         )
 
-    if caught < 24:
+    if caught < 26:
         raise SystemExit(f"probes incomplete caught={caught}")
 
 
@@ -775,10 +869,10 @@ def main() -> None:
     man = json.loads(MANIFEST.read_text(encoding="utf-8"))
     inv = json.loads(INVENTORY.read_text(encoding="utf-8"))
 
-    if int(cdn.get("seedVersion") or 0) != 85:
-        raise SystemExit(f"seedVersion want 85 got {cdn.get('seedVersion')}")
-    if int(man.get("seedVersion") or 0) != 85:
-        raise SystemExit(f"manifest seedVersion want 85 got {man.get('seedVersion')}")
+    if int(cdn.get("seedVersion") or 0) != 86:
+        raise SystemExit(f"seedVersion want 86 got {cdn.get('seedVersion')}")
+    if int(man.get("seedVersion") or 0) != 86:
+        raise SystemExit(f"manifest seedVersion want 86 got {man.get('seedVersion')}")
     if len(seed) != 6977:
         raise SystemExit(f"rows {len(seed)}")
     by_id = {r["id"]: r for r in seed}
@@ -973,41 +1067,14 @@ def main() -> None:
                 if src.get("dataDerivedFromSameHomologationYear") is not None:
                     raise SystemExit(f"chain derivation {r['id']} <- {donor_id}")
                 # Runtime reuse must also pass best_shared_exact (TAN+Va+Ve+ep), not only
-                # power+weighted equality — mirrors batch1 Q3 SB gate.
-                homolog = (reuse_entry or {}).get("homolog") or {}
-                family = (reuse_entry or {}).get("family") or homolog.get("family")
-                tan = homolog.get("TAN")
-                va = homolog.get("Va")
-                ve = homolog.get("Ve")
-                ep = homolog.get("ep")
-                if family and tan and va and ve and ep is not None:
-                    shared = (
-                        json.loads(
-                            (
-                                REPO
-                                / "scripts"
-                                / "cache"
-                                / "eea"
-                                / "catalog_phev_homologation_map.json"
-                            ).read_text(encoding="utf-8")
-                        ).get("shared")
-                        or {}
-                    )
-                    fp = best_shared_exact(
-                        family,
-                        int(homolog_year),
-                        int(r.get("year") or 0),
-                        float(r.get("powerKw") or ep),
-                        shared,
-                        tan=tan,
-                        va=va,
-                        ve=ve,
-                    )
-                    if fp is None:
-                        raise SystemExit(
-                            f"homolog best_shared_exact failed {r['id']} <- {donor_id} "
-                            f"family={family} TAN={tan} Va={va} Ve={ve} ep={ep}"
-                        )
+                # power+weighted equality — mirrors batch1 Q3 SB gate. Fail closed when
+                # family / fingerprint fields are missing (do not skip the check).
+                assert_homolog_reuse_best_shared_exact(
+                    row=r,
+                    donor_id=donor_id,
+                    reuse_entry=reuse_entry or {},
+                    homolog_year=int(homolog_year),
+                )
 
     if len(inv.get("batch2_candidates") or []) != 40:
         raise SystemExit("batch2 candidates != 40")
@@ -1072,6 +1139,28 @@ def main() -> None:
     if kia24.get("batteryKWh") is not None:
         raise SystemExit("Sportage 2024 battery must stay nil (Energia 13,8 unlabeled)")
 
+    ds7 = by_id["ds-7-phev-e-tense-2024"]
+    if abs(float(ds7.get("batteryKWh") or 0) - 13.0) > 1e-9:
+        raise SystemExit("DS7 2024 battery expected Netto 13")
+    if abs(float(ds7.get("fuelConsumptionLPerKm") or 0) - 0.082) > 1e-9:
+        raise SystemExit("DS7 2024 CS expected MAX 0.082 across 225/300/360 (not 225-only 0.071)")
+    cs_cite = (ds7.get("fieldSources") or {}).get("fuelConsumptionLPerKm") or ""
+    if "8,2" not in cs_cite and "0.082" not in cs_cite:
+        raise SystemExit("DS7 2024 CS cite must mention 8,2 / MAX across variants")
+    if "225-only" in cs_cite.lower() and "not 225-only" not in cs_cite.lower():
+        raise SystemExit("DS7 2024 CS cite still looks 225-only")
+
+    byd = by_id["byd-seal-u-phev-dm-i-2024"]
+    if abs(float(byd.get("fuelConsumptionLPerKm") or 0) - 0.074) > 1e-9:
+        raise SystemExit("BYD Seal U CS expected 0.074")
+    if int(byd.get("wltpRangeKm") or 0) != 70:
+        raise SystemExit("BYD Seal U EAER expected 70")
+    if (byd.get("fieldSourceDates") or {}).get("fuelConsumptionLPerKm") != "2024-05-23":
+        raise SystemExit("BYD Seal U sourceDate must be PDF CreationDate 2024-05-23")
+    byd_cite = (byd.get("fieldSources") or {}).get("fuelConsumptionLPerKm") or ""
+    if "metadati" not in byd_cite.lower() and "creationdate" not in byd_cite.lower():
+        raise SystemExit("BYD Seal U cite must declare PDF CreationDate / metadati")
+
     # Nil control: Q5 SB 2023 must remain empty (no 2023 eTD / no homolog path)
     q5sb23 = by_id["audi-q5-sportback-phev-50-tfsi-e-2023"]
     if q5sb23.get("batteryKWh") is not None or q5sb23.get("wltpRangeKm") is not None:
@@ -1087,7 +1176,7 @@ def main() -> None:
     assert_left_nil_consulted_not_only_generic(man)
 
     report = {
-        "seedVersion": 85,
+        "seedVersion": 86,
         "rows": len(seed),
         "completed": len(man.get("completed") or []),
         "partial": len(man.get("partial") or []),

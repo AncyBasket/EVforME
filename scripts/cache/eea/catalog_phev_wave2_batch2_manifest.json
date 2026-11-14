@@ -1,6 +1,6 @@
 {
-  "seedVersion": 85,
-  "prevSeedVersion": 84,
+  "seedVersion": 86,
+  "prevSeedVersion": 85,
   "ids_before": [
     "alfa-romeo-147-2005",
     "alfa-romeo-147-2006",
@@ -7088,13 +7088,13 @@
       "id": "ds-7-phev-e-tense-2024",
       "filled": {
         "batteryKWh": 13.0,
-        "fuelConsumptionLPerKm": 0.071
+        "fuelConsumptionLPerKm": 0.082
       },
       "left_nil": [
         "energyConsumptionKWhPerKm",
         "wltpRangeKm"
       ],
-      "note": "no combined EAER MIN on sheet (AER max / City EAER only)"
+      "note": "corr2: CS MAX 0.082 across 225/300/360 discharged columns on aggregate row; net 13 identical; no combined EAER"
     },
     {
       "id": "kia-sportage-phev-2024",
@@ -7130,7 +7130,7 @@
         "energyConsumptionKWhPerKm",
         "batteryKWh"
       ],
-      "note": "battery capacity unlabeled 18.3; pure CD unlabeled"
+      "note": "corr2: sourceDate 2024-05-23 from PDF CreationDate metadata; battery capacity unlabeled 18.3; pure CD unlabeled"
     }
   ],
   "extras": [],
@@ -8066,6 +8066,74 @@
       "url": "https://www.byd.com/material/byd-site/eu/pdfs/seal-u-dm-i/Seal-U-DM-i-0524-BPS-EN-2car-V4-web.pdf",
       "sourceDate": "2024-05-01",
       "variant": "Design MIN"
+    },
+    {
+      "id": "ds-7-phev-e-tense-2024",
+      "field": "fuelConsumptionLPerKm",
+      "value": 0.082,
+      "was": 0.071,
+      "url": "https://www.media.stellantis.com/uploads/de/model-document/preisliste_ds_7_my42_25marz2024-6616563ea3f2c.pdf",
+      "sourceDate": "2024-03-25",
+      "note": "MAX across 225/300/360 discharged columns"
+    },
+    {
+      "id": "ds-7-phev-e-tense-2024",
+      "field": "batteryKWh",
+      "value": 13.0,
+      "url": "https://www.media.stellantis.com/uploads/de/model-document/preisliste_ds_7_my42_25marz2024-6616563ea3f2c.pdf",
+      "sourceDate": "2024-03-25",
+      "note": "Netto 13 identical on all PHEV columns; cite refreshed"
+    },
+    {
+      "id": "byd-seal-u-phev-dm-i-2024",
+      "field": "fuelConsumptionLPerKm",
+      "value": 0.074,
+      "url": "https://www.byd.com/material/byd-site/eu/pdfs/seal-u-dm-i/Seal-U-DM-i-0524-BPS-EN-2car-V4-web.pdf",
+      "sourceDate": "2024-05-23",
+      "note": "date from PDF CreationDate metadata (was invented 2024-05-01)"
+    },
+    {
+      "id": "byd-seal-u-phev-dm-i-2024",
+      "field": "wltpRangeKm",
+      "value": 70,
+      "url": "https://www.byd.com/material/byd-site/eu/pdfs/seal-u-dm-i/Seal-U-DM-i-0524-BPS-EN-2car-V4-web.pdf",
+      "sourceDate": "2024-05-23",
+      "note": "date from PDF CreationDate metadata"
+    }
+  ],
+  "corr2_changed_fields": [
+    {
+      "id": "ds-7-phev-e-tense-2024",
+      "field": "fuelConsumptionLPerKm",
+      "value": 0.082,
+      "was": 0.071,
+      "url": "https://www.media.stellantis.com/uploads/de/model-document/preisliste_ds_7_my42_25marz2024-6616563ea3f2c.pdf",
+      "sourceDate": "2024-03-25",
+      "note": "MAX across 225/300/360 discharged columns"
+    },
+    {
+      "id": "ds-7-phev-e-tense-2024",
+      "field": "batteryKWh",
+      "value": 13.0,
+      "url": "https://www.media.stellantis.com/uploads/de/model-document/preisliste_ds_7_my42_25marz2024-6616563ea3f2c.pdf",
+      "sourceDate": "2024-03-25",
+      "note": "Netto 13 identical on all PHEV columns; cite refreshed"
+    },
+    {
+      "id": "byd-seal-u-phev-dm-i-2024",
+      "field": "fuelConsumptionLPerKm",
+      "value": 0.074,
+      "url": "https://www.byd.com/material/byd-site/eu/pdfs/seal-u-dm-i/Seal-U-DM-i-0524-BPS-EN-2car-V4-web.pdf",
+      "sourceDate": "2024-05-23",
+      "note": "date from PDF CreationDate metadata (was invented 2024-05-01)"
+    },
+    {
+      "id": "byd-seal-u-phev-dm-i-2024",
+      "field": "wltpRangeKm",
+      "value": 70,
+      "url": "https://www.byd.com/material/byd-site/eu/pdfs/seal-u-dm-i/Seal-U-DM-i-0524-BPS-EN-2car-V4-web.pdf",
+      "sourceDate": "2024-05-23",
+      "note": "date from PDF CreationDate metadata"
     }
   ],
   "counts": {
@@ -8132,11 +8200,11 @@
     "batch2_count": 40
   },
   "reviewNotes": [
-    "corr1: X3 CS + 19.06.2024 press dating; X1 → U11-11-2023.PDF",
-    "corr1: fills C5 2022 net, DS7 2024 net+CS, Kia Sportage 23/24 CS+EAER, BYD Seal U CS+EAER",
-    "corr1: left_nil consulted URLs are exact documents (no homepage-only)"
+    "corr2: DS7 CS MAX 0.082 across variants on aggregate row",
+    "corr2: BYD sourceDate 2024-05-23 from PDF CreationDate metadata",
+    "corr2: checker homolog best_shared_exact fail-closed when family/fingerprint missing"
   ],
-  "prKind": "research-corr1",
+  "prKind": "research-corr2",
   "battery_convention": {
     "catalogConvention": "net/usable",
     "thisPass": [
@@ -8168,9 +8236,9 @@
       {
         "id": "ds-7-phev-e-tense-2024",
         "batteryKWh": 13.0,
-        "note": "Kapazität Hochvolt Batterie Netto (Richtwert) 13"
+        "note": "Kapazität Hochvolt Batterie Netto (Richtwert) 13 — all PHEV columns"
       }
     ]
   },
-  "prevManifestSeed": 84
+  "prevManifestSeed": 85
 }
