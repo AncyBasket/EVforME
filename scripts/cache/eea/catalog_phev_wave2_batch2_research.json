@@ -1,0 +1,113 @@
+{
+  "seedVersion_target": 84,
+  "researchDay": "2026-11-14",
+  "notes": [
+    "Batch2 = next 40 incomplete after excluding batch1_candidates (40) + batch1 extras (bmw-330e-2024, jeep-gc-2023).",
+    "Battery convention net/usable; miles floor; same-variant columns; OEM/archive dating only."
+  ],
+  "fills": {
+    "audi-q5-sportback-phev-50-tfsi-e-2024": {
+      "variant": "50 TFSI e quattro S tronic 220 kW",
+      "fields": {
+        "fuelConsumptionLPerKm": {
+          "value": 0.088,
+          "note": "CS discharged MAX 8.8–8.1 L/100 → 0.088",
+          "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1248/file_en/c1fb637963ddfcca84570a97029625208ff83ace/eTD-Audi-Q5-Sportback-50-TFSIe-quattro-S_tronic-220kW_240604.pdf",
+          "sourceDate": "2024-06-04"
+        },
+        "wltpRangeKm": {
+          "value": 57,
+          "note": "EAER combined MIN 57–62 km",
+          "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1248/file_en/c1fb637963ddfcca84570a97029625208ff83ace/eTD-Audi-Q5-Sportback-50-TFSIe-quattro-S_tronic-220kW_240604.pdf",
+          "sourceDate": "2024-06-04"
+        },
+        "batteryKWh": {
+          "value": 14.4,
+          "note": "Gross/net 17.9/14.4 → store net 14.4",
+          "url": "https://uploads.audi-mediacenter.com/system/production/car_motorizations/1248/file_en/c1fb637963ddfcca84570a97029625208ff83ace/eTD-Audi-Q5-Sportback-50-TFSIe-quattro-S_tronic-220kW_240604.pdf",
+          "sourceDate": "2024-06-04"
+        }
+      },
+      "nil_fields": {
+        "energyConsumptionKWhPerKm": "only weighted combined electric kWh on eTD — not pure CD"
+      }
+    },
+    "bmw-x1-phev-xdrive30e-2023": {
+      "variant": "xDrive30e column",
+      "fields": {
+        "batteryKWh": {
+          "value": 14.2,
+          "note": "Netto Batterieinhalt 14,2 (same column as 25e)",
+          "url": "https://www.press.bmwgroup.com/deutschland/article/attachment/T0322775DE/609585",
+          "sourceDate": "2023-09-27"
+        },
+        "wltpRangeKm": {
+          "value": 71,
+          "note": "Elektrische Reichweite kombiniert 71–85 → MIN 71",
+          "url": "https://www.press.bmwgroup.com/deutschland/article/attachment/T0322775DE/609585",
+          "sourceDate": "2023-09-27"
+        }
+      },
+      "nil_fields": {
+        "fuelConsumptionLPerKm": "listino shows Verbrauch kombiniert next to CO2 gewichtet — weighted only",
+        "energyConsumptionKWhPerKm": "Stromverbrauch kombiniert next to gewichtet — not pure CD"
+      }
+    },
+    "bmw-serie-2-active-tourer-225e-xdrive-2023": {
+      "variant": "225e xDrive",
+      "fields": {
+        "batteryKWh": {
+          "value": 14.2,
+          "note": "Netto Batterieinhalt 14,2",
+          "url": "https://cdn.mportal.de/CDN/pdf/U06-11-2023.PDF",
+          "sourceDate": "2023-09-27"
+        },
+        "wltpRangeKm": {
+          "value": 78,
+          "note": "Elektrische Reichweite kombiniert 78–88 → MIN 78",
+          "url": "https://cdn.mportal.de/CDN/pdf/U06-11-2023.PDF",
+          "sourceDate": "2023-09-27"
+        }
+      },
+      "nil_fields": {
+        "fuelConsumptionLPerKm": "Verbrauch kombiniert gewichtet only — no entladener Batterie CS",
+        "energyConsumptionKWhPerKm": "Stromverbrauch next to weighted — not pure CD"
+      }
+    },
+    "bmw-x3-phev-xdrive30e-2024": {
+      "variant": "X3 30e xDrive",
+      "fields": {
+        "batteryKWh": {
+          "value": 19.7,
+          "note": "Energy capacity (net) 19.7 kWh — BMW Media information 06/2024",
+          "url": "https://www.press.bmwgroup.com/greece/article/attachment/T0443191EL/618258",
+          "sourceDate": "2024-06-01"
+        },
+        "wltpRangeKm": {
+          "value": 81,
+          "note": "Electric range (WLTP) 81–90 → MIN 81",
+          "url": "https://www.press.bmwgroup.com/greece/article/attachment/T0443191EL/618258",
+          "sourceDate": "2024-06-01"
+        }
+      },
+      "nil_fields": {
+        "fuelConsumptionLPerKm": "Fuel consump. weighted comb. only — no discharged-battery CS on sheet",
+        "energyConsumptionKWhPerKm": "no pure-CD label"
+      }
+    }
+  },
+  "already_present_energy_only_nil": {
+    "jeep-compass-phev-4xe-2023": {
+      "already": ["batteryKWh", "wltpRangeKm"],
+      "nil": "energyConsumptionKWhPerKm — no OEM pure-CD label found for MY2023 (consulted Stellantis FR tarif my24 dated 2023-12-19 rejected for MY2024 dating and not used as pure CD)"
+    },
+    "jeep-compass-phev-4xe-2024": {
+      "already": ["batteryKWh", "wltpRangeKm"],
+      "nil": "energyConsumptionKWhPerKm — FR tarif 19 déc 2023 is end-of-2023 doc (invalid for MY2024 dating); no pure CD label anyway"
+    },
+    "jeep-grand-cherokee-4xe-2024": {
+      "already": ["batteryKWh", "wltpRangeKm"],
+      "nil": "energyConsumptionKWhPerKm — DE MJ23 listino backs bat/range alreadyPresent; no pure-CD label; weighted EEA energy stays in weighted*"
+    }
+  }
+}

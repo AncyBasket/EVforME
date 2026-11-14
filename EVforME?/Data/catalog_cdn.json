@@ -2,12 +2,12 @@
   "url": "",
   "publishedUrl": "",
   "rows": 6977,
-  "bytes": 8920912,
+  "bytes": 8931598,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-11-14T09:56:19.982811+00:00",
+  "updatedAt": "2026-11-14T16:12:51.071247+00:00",
   "policy": "offline-first",
-  "seedVersion": 83,
-  "note": "seedVersion 83: PHEV wave2 batch1 corr4 \u2014 Peugeot 3008 2023 EAER floor(29.8 mi)=47; battery_convention nil for multi-variant aggregate; api/static sync deferred at seed 77",
-  "prevSeedVersion": 82
+  "seedVersion": 86,
+  "note": "seedVersion 86: PHEV wave2 batch2 corr2 \u2014 DS7 aggregate CS MAX 0.082 across 225/300/360; BYD Seal U sourceDate from PDF CreationDate 2024-05-23; api/static sync deferred at seed 77",
+  "prevSeedVersion": 85
 }
