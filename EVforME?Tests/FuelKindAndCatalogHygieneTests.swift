@@ -779,22 +779,43 @@ final class FuelKindAndCatalogHygieneTests: XCTestCase {
             "No PHEV with stamped placeholder fuel: \(badPlaceholder.map { "\($0.id)=\($0.fuelConsumptionLPerKm ?? -1)" })"
         )
         // Same L/km (or kWh/km) may repeat on years/trims of the same brand+model.
-        // Fail only when the same stamped value appears on *different* brand+model keys.
+        // Fail when the same *unsourced* value appears on different brand+model keys.
+        // Legitimate OEM coincidences (e.g. BMW 330e + X3 30e both CS max 7.9 → 0.079)
+        // are exempt when every colliding row cites fieldSources for that field.
         func modelKey(_ v: VehicleCatalogItem) -> String {
             "\(v.brand.lowercased())|\(v.model.lowercased())"
         }
-        func collisions(for values: [(String, String, Double?)]) -> [String: Set<String>] {
-            var byValue: [String: Set<String>] = [:]
-            for (id, key, raw) in values {
-                guard let raw else { continue }
+        func collisions(
+            for rows: [VehicleCatalogItem],
+            value: (VehicleCatalogItem) -> Double?,
+            sourced: (VehicleCatalogItem) -> Bool
+        ) -> [String: Set<String>] {
+            var byValue: [String: [(key: String, sourced: Bool)]] = [:]
+            for v in rows {
+                guard let raw = value(v) else { continue }
                 let vKey = String(format: "%.5f", raw)
-                byValue[vKey, default: []].insert(key)
-                _ = id
+                byValue[vKey, default: []].append((modelKey(v), sourced(v)))
             }
-            return byValue.filter { $0.value.count > 1 }
+            var bad: [String: Set<String>] = [:]
+            for (vKey, entries) in byValue {
+                let keys = Set(entries.map(\.key))
+                guard keys.count > 1 else { continue }
+                // All rows sharing this value across models must be OEM-sourced.
+                if entries.allSatisfy(\.sourced) { continue }
+                bad[vKey] = keys
+            }
+            return bad
         }
-        let fuelCollisions = collisions(for: phevs.map { ($0.id, modelKey($0), $0.fuelConsumptionLPerKm) })
-        let energyCollisions = collisions(for: phevs.map { ($0.id, modelKey($0), $0.energyConsumptionKWhPerKm) })
+        let fuelCollisions = collisions(
+            for: phevs,
+            value: \.fuelConsumptionLPerKm,
+            sourced: { $0.fieldSource(for: "fuelConsumptionLPerKm") != nil }
+        )
+        let energyCollisions = collisions(
+            for: phevs,
+            value: \.energyConsumptionKWhPerKm,
+            sourced: { $0.fieldSource(for: "energyConsumptionKWhPerKm") != nil }
+        )
         XCTAssertTrue(
             fuelCollisions.isEmpty,
             "PHEV fuel L/km must not be shared across different brand+model: \(fuelCollisions)"
