@@ -2,7 +2,7 @@
 //  PHEVWave2OfficialSourceTests.swift
 //  EVforME?Tests
 //
-//  Regression for PHEV official-source rules (wave2 batch1, review-corrected).
+//  Regression for PHEV official-source rules (wave2 batch1 + batch2).
 //
 
 import XCTest
@@ -83,15 +83,79 @@ final class PHEVWave2OfficialSourceTests: XCTestCase {
         XCTAssertTrue(my22.hasIncompleteCatalogData)
     }
 
-    func testBundledManifestIsSeed83() throws {
+    func testBundledManifestIsSeed84() throws {
         let url = try XCTUnwrap(Bundle.main.url(forResource: "catalog_cdn", withExtension: "json"))
         let obj = try XCTUnwrap(
             JSONSerialization.jsonObject(with: Data(contentsOf: url)) as? [String: Any]
         )
         let version = (obj["seedVersion"] as? NSNumber)?.intValue
             ?? (obj["seedVersion"] as? Int)
-        XCTAssertEqual(version, 83)
-        XCTAssertEqual(VehicleCatalogService.bundledSeedVersion, 83)
+        XCTAssertEqual(version, 84)
+        XCTAssertEqual(VehicleCatalogService.bundledSeedVersion, 84)
+    }
+
+    // MARK: - Wave2 batch2 research fills
+
+    func testAudiQ5Sportback2024OfficialETDFill() throws {
+        let row = try XCTUnwrap(
+            VehicleCatalogService.shared.vehicle(by: "audi-q5-sportback-phev-50-tfsi-e-2024")
+        )
+        XCTAssertEqual(row.fuelConsumptionLPerKm ?? -1, 0.088, accuracy: 1e-9)
+        XCTAssertEqual(row.wltpRangeKm ?? -1, 57)
+        XCTAssertEqual(row.batteryKWh ?? -1, 14.4, accuracy: 0.01)
+        XCTAssertNil(row.usableChargeDepletingEnergyKWhPerKm)
+        let batSrc = try XCTUnwrap(row.fieldSource(for: "batteryKWh"))
+        XCTAssertTrue(batSrc.lowercased().contains("net"))
+        XCTAssertTrue(batSrc.contains("audi-mediacenter.com"))
+        XCTAssertTrue(batSrc.contains("240604") || batSrc.contains("06/04/24"))
+        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "fuelConsumptionLPerKm")), "2024-06-04")
+        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "wltpRangeKm")), "2024-06-04")
+        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "batteryKWh")), "2024-06-04")
+        XCTAssertTrue(row.hasIncompleteCatalogData)
+    }
+
+    func testBMWX1_30e_2023OfficialNettaAndEAER() throws {
+        let row = try XCTUnwrap(
+            VehicleCatalogService.shared.vehicle(by: "bmw-x1-phev-xdrive30e-2023")
+        )
+        XCTAssertEqual(row.batteryKWh ?? -1, 14.2, accuracy: 0.01)
+        XCTAssertEqual(row.wltpRangeKm ?? -1, 71)
+        XCTAssertNil(row.fuelConsumptionLPerKm)
+        XCTAssertNil(row.usableChargeDepletingEnergyKWhPerKm)
+        let batSrc = try XCTUnwrap(row.fieldSource(for: "batteryKWh"))
+        XCTAssertTrue(batSrc.lowercased().contains("netto") || batSrc.lowercased().contains("net"))
+        XCTAssertTrue(batSrc.contains("press.bmwgroup.com") || batSrc.contains("T0322775"))
+        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "batteryKWh")), "2023-09-27")
+        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "wltpRangeKm")), "2023-09-27")
+        XCTAssertTrue(row.hasIncompleteCatalogData)
+    }
+
+    func testBMWX3_30e_2024OfficialNetAndEAER() throws {
+        let row = try XCTUnwrap(
+            VehicleCatalogService.shared.vehicle(by: "bmw-x3-phev-xdrive30e-2024")
+        )
+        XCTAssertEqual(row.batteryKWh ?? -1, 19.7, accuracy: 0.01)
+        XCTAssertEqual(row.wltpRangeKm ?? -1, 81)
+        XCTAssertNil(row.fuelConsumptionLPerKm)
+        let batSrc = try XCTUnwrap(row.fieldSource(for: "batteryKWh"))
+        XCTAssertTrue(batSrc.lowercased().contains("net"))
+        XCTAssertTrue(batSrc.contains("press.bmwgroup.com") || batSrc.contains("T0443191"))
+        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "batteryKWh")), "2024-06-01")
+        XCTAssertEqual(try XCTUnwrap(row.fieldSourceDate(for: "wltpRangeKm")), "2024-06-01")
+        XCTAssertTrue(row.hasIncompleteCatalogData)
+    }
+
+    func testAudiQ5Sportback2023RemainsNilWithoutMY23OEMSheet() throws {
+        let row = try XCTUnwrap(
+            VehicleCatalogService.shared.vehicle(by: "audi-q5-sportback-phev-50-tfsi-e-2023")
+        )
+        XCTAssertNil(row.batteryKWh)
+        XCTAssertNil(row.wltpRangeKm)
+        XCTAssertNil(row.fuelConsumptionLPerKm)
+        XCTAssertNil(row.usableChargeDepletingEnergyKWhPerKm)
+        XCTAssertNil(row.fieldSource(for: "batteryKWh"))
+        XCTAssertNil(row.fieldSource(for: "wltpRangeKm"))
+        XCTAssertTrue(row.hasIncompleteCatalogData)
     }
 
     func testAudiQ3Sportback2024OfficialETDFillNetBattery() throws {

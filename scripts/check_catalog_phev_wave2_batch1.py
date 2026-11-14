@@ -687,8 +687,9 @@ def main() -> None:
     man = json.loads(MANIFEST.read_text(encoding="utf-8"))
     inv = json.loads(INVENTORY.read_text(encoding="utf-8"))
 
-    if int(cdn.get("seedVersion") or 0) != 83:
-        raise SystemExit(f"seedVersion want 83 got {cdn.get('seedVersion')}")
+    # CDN advances with later research passes; batch1 manifest stays pinned at 83.
+    if int(cdn.get("seedVersion") or 0) != 84:
+        raise SystemExit(f"seedVersion want 84 got {cdn.get('seedVersion')}")
     if int(man.get("seedVersion") or 0) != 83:
         raise SystemExit(f"manifest seedVersion want 83 got {man.get('seedVersion')}")
     if len(seed) != 6977:
@@ -953,7 +954,7 @@ def main() -> None:
         raise SystemExit("Q5 2024 battery expected 14.4 net")
 
     report = {
-        "seedVersion": 83,
+        "seedVersion": int(cdn.get("seedVersion") or 0),
         "rows": len(seed),
         "completed": len(man.get("completed") or []),
         "partial": len(man.get("partial") or []),

@@ -2,12 +2,12 @@
   "url": "",
   "publishedUrl": "",
   "rows": 6977,
-  "bytes": 8920912,
+  "bytes": 8924873,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-11-14T09:56:19.982811+00:00",
+  "updatedAt": "2026-11-14T11:14:29.743148+00:00",
   "policy": "offline-first",
-  "seedVersion": 83,
-  "note": "seedVersion 83: PHEV wave2 batch1 corr4 \u2014 Peugeot 3008 2023 EAER floor(29.8 mi)=47; battery_convention nil for multi-variant aggregate; api/static sync deferred at seed 77",
-  "prevSeedVersion": 82
+  "seedVersion": 84,
+  "note": "seedVersion 84: PHEV wave2 batch2 research \u2014 Audi Q5 SB 2024 eTD; BMW X1 30e 2023 / Active Tourer 225e 2023 / X3 30e 2024 nets+EAER; remaining batch2 honest nils; api/static sync deferred at seed 77",
+  "prevSeedVersion": 83
 }
