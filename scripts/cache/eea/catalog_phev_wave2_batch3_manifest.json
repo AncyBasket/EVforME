@@ -1,6 +1,6 @@
 {
-  "seedVersion": 87,
-  "prevSeedVersion": 86,
+  "seedVersion": 88,
+  "prevSeedVersion": 87,
   "ids_before": [
     "alfa-romeo-147-2005",
     "alfa-romeo-147-2006",
@@ -7067,6 +7067,18 @@
         "batteryKWh"
       ],
       "note": "Electric Range Combined MIN across 180/225; battery unlabeled; CS weighted-only"
+    },
+    {
+      "id": "volkswagen-golf-gte-phev-2024",
+      "filled": {
+        "fuelConsumptionLPerKm": 0.054,
+        "batteryKWh": 19.7
+      },
+      "left_nil": [
+        "energyConsumptionKWhPerKm",
+        "wltpRangeKm"
+      ],
+      "note": "CS discharged MAX + net battery from 18398; energy weighted-only; range up-to 131 unused"
     }
   ],
   "extras": [],
@@ -7088,8 +7100,8 @@
       "consulted": [
         {
           "url": "https://www.landrover.de/content/dam/landrover/germany/brochure-pdfs/download-a-brochure/price-lists/L551-Range-Rover-Evoque-MY22-PL-06-21-D1d-Ansicht.pdf",
-          "sourceDate": "2021-06-01",
-          "reject_for": "Juni 2021 calendar year ≠ MY2022; Batteriekapazität unlabeled; fuel not CS"
+          "sourceDate": null,
+          "reject_for": "Juni 2021 calendar year ≠ MY2022; Batteriekapazität unlabeled; fuel not CS; sourceDate null — month-only (no invented day-01)"
         },
         {
           "url": "https://www.landrover.de/content/dam/lrdx/pdfs/de/download-a-brochure/L551%20Range%20Rover%20Evoque%20MY23%20PL%2011-22%20D1c.pdf",
@@ -7507,8 +7519,8 @@
       "consulted": [
         {
           "url": "https://www.media.stellantis.com/uploads/uk/model-pricelist/peugeot308pricespecapr23-6455a56f26ccf.pdf",
-          "sourceDate": "2023-04-01",
-          "reject_for": "2023.25 Model Year — cannot date MY2022"
+          "sourceDate": null,
+          "reject_for": "2023.25 Model Year — cannot date MY2022; sourceDate null — month-only (no invented day-01)"
         }
       ]
     },
@@ -7644,7 +7656,7 @@
         "wltpRangeKm",
         "batteryKWh"
       ],
-      "reason": "MY23 IT scheda (CreationDate 2023-01-03) matches car but Litio Capacità 18.1 unlabeled (scrubbed); WLTP 1.00 weighted; no EAER on sheet. EAER Combined 75 only on 2020 EU PDF.",
+      "reason": "MY23 IT scheda Litio Capacità 18.1 kWh without net/usable label → battery nil (scrubbed); WLTP fuel weighted; no EAER combined on sheet",
       "consulted": [
         {
           "url": "https://newsroom.toyota.it/download/1316286/20230101rav4plug-inhybridmy23schedatecnica.pdf",
@@ -7680,27 +7692,6 @@
       ]
     },
     {
-      "id": "volkswagen-golf-gte-phev-2024",
-      "brand": "Volkswagen",
-      "model": "Golf GTE",
-      "year": 2024,
-      "market": "IT",
-      "missing": [
-        "fuelConsumptionLPerKm",
-        "energyConsumptionKWhPerKm",
-        "wltpRangeKm",
-        "batteryKWh"
-      ],
-      "reason": "VW Newsroom Golf GTE press uses up-to range and weighted energy; no net battery / CS discharged / EAER MIN on a MY2024-dated OEM PDF.",
-      "consulted": [
-        {
-          "url": "https://www.volkswagen-newsroom.com/en/press-releases/dynamic-and-with-a-long-range-golf-gte-and-golf-r-variant",
-          "sourceDate": "2024-05-16",
-          "reject_for": "up-to range; weighted energy; no net kWh / CS discharged on dated sheet"
-        }
-      ]
-    },
-    {
       "id": "volkswagen-tiguan-phev-ehybrid-2024",
       "brand": "Volkswagen",
       "model": "Tiguan",
@@ -7721,8 +7712,8 @@
         },
         {
           "url": "https://www.volkswagen-newsroom.com/de/publikationen/weitere/der-neue-tiguan-2625/download",
-          "sourceDate": "2024-09-01",
-          "reject_for": "Stand Sept 2024 booklet — circa/Prognose range; electricity gewichtet only"
+          "sourceDate": null,
+          "reject_for": "Stand Sept 2024 booklet — circa/Prognose range; electricity gewichtet only; sourceDate null — month-only (no invented day-01)"
         }
       ]
     },
@@ -7742,8 +7733,8 @@
       "consulted": [
         {
           "url": "https://www.volkswagen-newsroom.com/de/publikationen/weitere/der-neue-tiguan-2625/download",
-          "sourceDate": "2024-09-01",
-          "reject_for": "Stand Sept 2024 ≠ MY2023; predecessor 10.6 netto / rund 60 is comparison text not a MY2023 sheet"
+          "sourceDate": null,
+          "reject_for": "Stand Sept 2024 ≠ MY2023; predecessor 10.6 netto / rund 60 is comparison text not a MY2023 sheet; sourceDate null — month-only (no invented day-01)"
         },
         {
           "url": "https://www.volkswagen-newsroom.com/de/pressemitteilungen/ab-sofort-bestellbar-reichweitenstarke-plug-in-hybridantriebe-fuer-den-neuen-tiguan-18101",
@@ -7768,13 +7759,13 @@
       "consulted": [
         {
           "url": "https://www.volkswagen-newsroom.com/de/publikationen/weitere/der-neue-tiguan-2625/download",
-          "sourceDate": "2024-09-01",
-          "reject_for": "2024 booklet ≠ MY2022; predecessor 10.6 netto / rund 60 not a 2022 combined-minimum sheet"
+          "sourceDate": null,
+          "reject_for": "2024 booklet ≠ MY2022; predecessor 10.6 netto / rund 60 not a 2022 combined-minimum sheet; sourceDate null — month-only (no invented day-01)"
         },
         {
           "url": "https://www.volkswagen-newsroom.com/en/publications/more/the-all-new-tiguan-2625/download",
-          "sourceDate": "2024-09-01",
-          "reject_for": "English 2024 booklet — same dating failure for MY2022"
+          "sourceDate": null,
+          "reject_for": "English 2024 booklet — same dating failure for MY2022; sourceDate null — month-only (no invented day-01)"
         }
       ]
     },
@@ -7846,13 +7837,31 @@
       "url": "https://newsroom.toyota.it/download/1316286/20230101rav4plug-inhybridmy23schedatecnica.pdf",
       "sourceDate": "2023-01-03",
       "note": "scrub unlabeled capacity"
+    },
+    {
+      "id": "volkswagen-golf-gte-phev-2024",
+      "field": "fuelConsumptionLPerKm",
+      "value": 0.054,
+      "url": "https://www.volkswagen-newsroom.com/en/press-releases/dynamic-and-with-a-long-range-golf-gte-and-golf-ehybrid-now-available-to-order-18398",
+      "sourceDate": "2024-05-16",
+      "variant": "Golf GTE",
+      "note": "battery discharged combined 5.4-5.3 → MAX 5.4"
+    },
+    {
+      "id": "volkswagen-golf-gte-phev-2024",
+      "field": "batteryKWh",
+      "value": 19.7,
+      "url": "https://www.volkswagen-newsroom.com/en/press-releases/dynamic-and-with-a-long-range-golf-gte-and-golf-ehybrid-now-available-to-order-18398",
+      "sourceDate": "2024-05-16",
+      "variant": "Golf GTE",
+      "note": "19.7 kWh battery (net)"
     }
   ],
   "counts": {
     "completed": 0,
-    "partial": 4,
+    "partial": 5,
     "homolog_reuse": 0,
-    "left_nil": 32
+    "left_nil": 31
   },
   "non_phev_tech_sha": "6b9038232bc51daabc9e259fc0dab170f787984d4dfb8f597e309fe50155b4dc",
   "m3_ids": [
@@ -7861,7 +7870,7 @@
     "tesla-model-3-premium-trazione-posteriore-2026",
     "tesla-model-3-trazione-posteriore-2026"
   ],
-  "sourceDay": "2026-11-14",
+  "sourceDay": "2026-11-15",
   "selection": {
     "order": "same incomplete list as PR #40 inventory (IT/EU diffusion order via n / list order)",
     "exclude": [
@@ -7952,7 +7961,7 @@
     "batch3_count": 36,
     "note": "Only 36 IDs remain in the frozen PR #40 incomplete list after batch1∪extras∪batch2; pool exhausted (not padded)."
   },
-  "prKind": "research",
+  "prKind": "phev-wave2-batch3-corr1",
   "battery_convention": {
     "catalogConvention": "net/usable",
     "thisPass": [
@@ -7965,9 +7974,20 @@
         "id": "toyota-rav4-phev-2023",
         "batteryKWh": null,
         "note": "scrubbed unlabeled Litio Capacità 18.1"
+      },
+      {
+        "id": "volkswagen-golf-gte-phev-2024",
+        "batteryKWh": 19.7,
+        "note": "19.7 kWh battery (net / predecessor: 10.6 kWh) on VW Newsroom 05/16/24"
       }
     ]
   },
-  "prevManifestSeed": 86,
-  "cdn_bytes": 8934277
+  "prevManifestSeed": 87,
+  "cdn_bytes": 8947782,
+  "corr1": {
+    "golf_fill": "https://www.volkswagen-newsroom.com/en/press-releases/dynamic-and-with-a-long-range-golf-gte-and-golf-ehybrid-now-available-to-order-18398",
+    "left_nil_sourceName": "consulted URLs + reject reasons in seed sourceName",
+    "rav4_scrub_sourceName": "removed manus-verified v76 batteryKWh=18.1",
+    "cdn_bytes_aligned": 8947782
+  }
 }

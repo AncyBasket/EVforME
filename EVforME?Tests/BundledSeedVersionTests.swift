@@ -18,7 +18,7 @@ final class BundledSeedVersionTests: XCTestCase {
     /// Single source of truth: runtime version == seedVersion in bundled catalog_cdn.json.
     func testBundledSeedVersionMatchesCatalogCDNManifest() throws {
         let manifestVersion = try Self.readBundledManifestSeedVersion()
-        XCTAssertEqual(manifestVersion, 87, "Manifest after PHEV wave2 batch3 research is seed 87")
+        XCTAssertEqual(manifestVersion, 88, "Manifest after PHEV wave2 batch3 research is seed 88")
         XCTAssertEqual(
             VehicleCatalogService.bundledSeedVersion,
             manifestVersion,

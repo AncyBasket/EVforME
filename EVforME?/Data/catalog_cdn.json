@@ -2,12 +2,12 @@
   "url": "",
   "publishedUrl": "",
   "rows": 6977,
-  "bytes": 8934304,
+  "bytes": 8947782,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-11-14T17:54:33.544370+00:00",
+  "updatedAt": "2026-11-15T09:32:07.023244+00:00",
   "policy": "offline-first",
-  "seedVersion": 87,
-  "note": "seedVersion 87: PHEV wave2 batch3 research — Evoque usable 12.1; Mazda CX-60 EAER 63; Mitsubishi Eclipse pure CD 0.175; Peugeot 308 EAER 59; RAV4 2023 unlabeled battery scrubbed; api/static sync deferred at seed 77",
-  "prevSeedVersion": 86
+  "seedVersion": 88,
+  "note": "seedVersion 88: PHEV wave2 batch3 corr1 — Golf GTE CS 0.054 + net 19.7 from 18398; left_nil sourceName consulted URLs; RAV4 manus-verified scrub; api/static sync deferred at seed 77",
+  "prevSeedVersion": 87
 }

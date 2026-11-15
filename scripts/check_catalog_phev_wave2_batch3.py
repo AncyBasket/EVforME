@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Must-fail probes + invariants for PHEV wave2 batch3 (seed 87).
+"""Must-fail probes + invariants for PHEV wave2 batch3 (seed 88).
 
 Dating and generic-URL checks run on every real PHEV row with fieldSources.
 Homolog fills do NOT bypass dating: sourceDate/archive year must match the
@@ -622,6 +622,66 @@ def must_fail_probes() -> None:
         else:
             raise
 
+    # left_nil consulted URLs must also appear in seed sourceName (not manifest-only).
+    seed_nil_missing = {
+        "left_nil": [
+            {
+                "id": "demo-nil-seed-2024",
+                "reason": "no OEM sheet",
+                "consulted": [
+                    {
+                        "url": "https://www.media.stellantis.com/uploads/uk/model-pricelist/demo.pdf",
+                        "reject_for": "wrong year",
+                    }
+                ],
+            }
+        ]
+    }
+    try:
+        assert_left_nil_seed_sourceName_cites_consulted(
+            seed_nil_missing,
+            {"demo-nil-seed-2024": {"sourceName": "EEA catalogDataIncomplete only"}},
+        )
+        raise SystemExit("probe: seed sourceName missing consulted URL not rejected")
+    except SystemExit as e:
+        if "missing consulted URL" in str(e) or "sourceName" in str(e).lower():
+            caught += 1
+        else:
+            raise
+    try:
+        assert_left_nil_seed_sourceName_cites_consulted(
+            {
+                "left_nil": [
+                    {
+                        "id": "demo-nil-hub-seed-2024",
+                        "reason": "hub",
+                        "consulted": [{"url": "https://www.kia.com/", "reject_for": "hub"}],
+                    }
+                ]
+            },
+            {
+                "demo-nil-hub-seed-2024": {
+                    "sourceName": "wave2-batch3 left_nil: hub | consulted https://www.kia.com/ — hub"
+                }
+            },
+        )
+        raise SystemExit("probe: seed sourceName hub-only consulted not rejected")
+    except SystemExit as e:
+        if "only generic" in str(e).lower() or "generic hub" in str(e).lower():
+            caught += 1
+        else:
+            raise
+
+    # manifest.cdn_bytes must equal seed file size
+    try:
+        assert_manifest_cdn_bytes_match_seed({"cdn_bytes": 1}, SEED)
+        raise SystemExit("probe: cdn_bytes mismatch not rejected")
+    except SystemExit as e:
+        if "cdn_bytes" in str(e) and "seed bytes" in str(e):
+            caught += 1
+        else:
+            raise
+
     # Homolog reuse: missing family/fingerprint must fail closed (not skip best_shared_exact).
     try:
         assert_homolog_reuse_best_shared_exact(
@@ -669,7 +729,7 @@ def must_fail_probes() -> None:
             f"probe: miles_to_km_floor(35.4) want 56 got {miles_to_km_floor(35.4)}"
         )
 
-    if caught < 26:
+    if caught < 29:
         raise SystemExit(f"probes incomplete caught={caught}")
 
 
@@ -684,6 +744,44 @@ def assert_left_nil_consulted_not_only_generic(man: dict) -> None:
             raise SystemExit(
                 f"left_nil {entry.get('id')} consulted only generic hub URLs: {urls}"
             )
+
+
+def assert_left_nil_seed_sourceName_cites_consulted(man: dict, by_id: dict) -> None:
+    """left_nil consulted URLs + reject reason must appear in seed sourceName (not manifest-only)."""
+    for entry in man.get("left_nil") or []:
+        rid = entry.get("id")
+        row = by_id.get(rid) or {}
+        sn = row.get("sourceName") or ""
+        consulted = entry.get("consulted") or []
+        urls = [c.get("url") for c in consulted if isinstance(c, dict) and c.get("url")]
+        if not urls:
+            raise SystemExit(f"left_nil {rid} missing consulted URLs")
+        if all(is_generic_url(u) for u in urls):
+            raise SystemExit(
+                f"left_nil {rid} seed sourceName path: consulted only generic hub URLs: {urls}"
+            )
+        for u in urls:
+            if u not in sn:
+                raise SystemExit(
+                    f"left_nil {rid} seed sourceName missing consulted URL: {u}"
+                )
+        # Require a concrete reject cue (not bare EEA incomplete boilerplate alone).
+        low = sn.lower()
+        if "wave2-batch3 left_nil" not in low and "consulted" not in low:
+            raise SystemExit(
+                f"left_nil {rid} seed sourceName missing left_nil/consulted reject cite"
+            )
+        if not any(not is_generic_url(u) for u in urls_in(sn)):
+            raise SystemExit(
+                f"left_nil {rid} seed sourceName has only generic URLs"
+            )
+
+
+def assert_manifest_cdn_bytes_match_seed(man: dict, seed_path: Path) -> None:
+    want = seed_path.stat().st_size
+    got = man.get("cdn_bytes")
+    if got != want:
+        raise SystemExit(f"manifest.cdn_bytes {got} != seed bytes {want}")
 
 
 def assert_battery_convention_matches_seed(man: dict, by_id: dict) -> None:
@@ -869,10 +967,10 @@ def main() -> None:
     man = json.loads(MANIFEST.read_text(encoding="utf-8"))
     inv = json.loads(INVENTORY.read_text(encoding="utf-8"))
 
-    if int(cdn.get("seedVersion") or 0) != 87:
-        raise SystemExit(f"seedVersion want 87 got {cdn.get('seedVersion')}")
-    if int(man.get("seedVersion") or 0) != 87:
-        raise SystemExit(f"manifest seedVersion want 87 got {man.get('seedVersion')}")
+    if int(cdn.get("seedVersion") or 0) != 88:
+        raise SystemExit(f"seedVersion want 88 got {cdn.get('seedVersion')}")
+    if int(man.get("seedVersion") or 0) != 88:
+        raise SystemExit(f"manifest seedVersion want 88 got {man.get('seedVersion')}")
     if len(seed) != 6977:
         raise SystemExit(f"rows {len(seed)}")
     by_id = {r["id"]: r for r in seed}
@@ -1123,6 +1221,32 @@ def main() -> None:
     rav4 = by_id["toyota-rav4-phev-2023"]
     if rav4.get("batteryKWh") is not None:
         raise SystemExit("RAV4 2023 unlabeled battery must be scrubbed to nil")
+    rav_sn = (rav4.get("sourceName") or "").lower()
+    if "manus-verified v76: batterykwh=18.1" in rav_sn:
+        raise SystemExit("RAV4 2023 sourceName must not retain manus-verified v76 battery claim")
+    if "1316286" not in (rav4.get("sourceName") or "") and "rav4plug-inhybridmy23" not in (
+        rav4.get("sourceName") or ""
+    ).lower():
+        raise SystemExit("RAV4 2023 sourceName must cite MY23 scheda URL")
+
+    golf = by_id["volkswagen-golf-gte-phev-2024"]
+    if abs(float(golf.get("fuelConsumptionLPerKm") or 0) - 0.054) > 1e-9:
+        raise SystemExit("Golf GTE 2024 CS discharged MAX expected 0.054")
+    if abs(float(golf.get("batteryKWh") or 0) - 19.7) > 1e-9:
+        raise SystemExit("Golf GTE 2024 net battery expected 19.7")
+    if golf.get("wltpRangeKm") is not None:
+        raise SystemExit("Golf GTE 2024 range must stay nil (up-to only)")
+    if golf.get("energyConsumptionKWhPerKm") is not None:
+        raise SystemExit("Golf GTE 2024 energy must stay nil (weighted only)")
+    g_sn = golf.get("sourceName") or ""
+    if "18398" not in g_sn:
+        raise SystemExit("Golf GTE 2024 sourceName must cite newsroom 18398")
+    if "golf-r-variant" in g_sn:
+        raise SystemExit("Golf GTE 2024 sourceName must not cite mismatched golf-r-variant URL")
+    if (golf.get("fieldSourceDates") or {}).get("fuelConsumptionLPerKm") != "2024-05-16":
+        raise SystemExit("Golf GTE CS sourceDate must be 2024-05-16")
+    if (golf.get("fieldSourceDates") or {}).get("batteryKWh") != "2024-05-16":
+        raise SystemExit("Golf GTE battery sourceDate must be 2024-05-16")
 
     p308_22 = by_id["peugeot-308-phev-2022"]
     if any(p308_22.get(f) is not None for f in ("fuelConsumptionLPerKm", "energyConsumptionKWhPerKm", "wltpRangeKm", "batteryKWh")):
@@ -1134,14 +1258,25 @@ def main() -> None:
 
     assert_battery_convention_matches_seed(man, by_id)
     assert_left_nil_consulted_not_only_generic(man)
+    assert_left_nil_seed_sourceName_cites_consulted(man, by_id)
+    assert_manifest_cdn_bytes_match_seed(man, SEED)
+    if int(cdn.get("bytes") or 0) != SEED.stat().st_size:
+        raise SystemExit(
+            f"catalog_cdn.bytes {cdn.get('bytes')} != seed bytes {SEED.stat().st_size}"
+        )
+    if len(man.get("left_nil") or []) != 31:
+        raise SystemExit(f"left_nil want 31 got {len(man.get('left_nil') or [])}")
+    if len(man.get("partial") or []) != 5:
+        raise SystemExit(f"partial want 5 got {len(man.get('partial') or [])}")
 
     report = {
-        "seedVersion": 87,
+        "seedVersion": 88,
         "rows": len(seed),
         "completed": len(man.get("completed") or []),
         "partial": len(man.get("partial") or []),
         "left_nil": len(man.get("left_nil") or []),
         "non_phev_tech_sha": sha,
+        "cdn_bytes": SEED.stat().st_size,
     }
     print("OK")
     print(json.dumps(report, sort_keys=True))
