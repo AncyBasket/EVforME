@@ -869,8 +869,8 @@ def main() -> None:
     man = json.loads(MANIFEST.read_text(encoding="utf-8"))
     inv = json.loads(INVENTORY.read_text(encoding="utf-8"))
 
-    if int(cdn.get("seedVersion") or 0) != 86:
-        raise SystemExit(f"seedVersion want 86 got {cdn.get('seedVersion')}")
+    if int(cdn.get("seedVersion") or 0) != 88:
+        raise SystemExit(f"seedVersion want 88 got {cdn.get('seedVersion')}")
     if int(man.get("seedVersion") or 0) != 86:
         raise SystemExit(f"manifest seedVersion want 86 got {man.get('seedVersion')}")
     if len(seed) != 6977:

@@ -2,12 +2,12 @@
   "url": "",
   "publishedUrl": "",
   "rows": 6977,
-  "bytes": 8931598,
+  "bytes": 8947782,
   "source": "vehicles.seed.quality.json",
   "host": "bundled-offline-first",
-  "updatedAt": "2026-11-14T16:12:51.071247+00:00",
+  "updatedAt": "2026-11-15T09:32:07.023244+00:00",
   "policy": "offline-first",
-  "seedVersion": 86,
-  "note": "seedVersion 86: PHEV wave2 batch2 corr2 \u2014 DS7 aggregate CS MAX 0.082 across 225/300/360; BYD Seal U sourceDate from PDF CreationDate 2024-05-23; api/static sync deferred at seed 77",
-  "prevSeedVersion": 85
+  "seedVersion": 88,
+  "note": "seedVersion 88: PHEV wave2 batch3 corr1 — Golf GTE CS 0.054 + net 19.7 from 18398; left_nil sourceName consulted URLs; RAV4 manus-verified scrub; api/static sync deferred at seed 77",
+  "prevSeedVersion": 87
 }

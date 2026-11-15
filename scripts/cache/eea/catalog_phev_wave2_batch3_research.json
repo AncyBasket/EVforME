@@ -1,0 +1,55 @@
+{
+  "seedVersion_target": 87,
+  "batch": 3,
+  "fills": [
+    {
+      "id": "land-rover-range-rover-evoque-phev-2023",
+      "field": "batteryKWh",
+      "value": 12.1,
+      "variant": "P300e",
+      "url": "https://www.landrover.com/content/dam/lrdx/pdfs/xi/wltp/Land-Rover-Range-Rover-Evoque-TD-Insert-1L5512400000XXEN01P.pdf",
+      "sourceDate": "2023-06-14",
+      "date_provenance": "PDF CreationDate D:20230614160233+05'30' (data da metadati PDF); header TECHNICAL SPECIFICATION 2023; Battery capacity Total (Usable) kWh 14,9 (12,1)"
+    },
+    {
+      "id": "mazda-cx-60-phev-2023",
+      "field": "wltpRangeKm",
+      "value": 63,
+      "variant": "e-SKYACTIV PHEV",
+      "url": "https://media-assets.mazda.eu/raw/upload/mazdade/globalassets/pdfs/brochure/cx-60/03-07-2023_preisliste_2022_mazda-cx-60.pdf",
+      "sourceDate": "2023-07-03",
+      "date_provenance": "printed Stand: 03. Juli 2023; WLTP elektrische Reichweite (km) kombiniert 63 (footnote 10 is real-world variance, not bis zu)"
+    },
+    {
+      "id": "mitsubishi-eclipse-cross-phev-2023",
+      "field": "energyConsumptionKWhPerKm",
+      "value": 0.175,
+      "variant": "Eclipse Cross PHEV MY23 2.4 72 kW",
+      "url": "https://www.mitsubishi-motors.at/content/dam/mitsubishi-motors-at/preislisten/eclipse-cross-phev/broschüre/EclipseCrossPHEV_MY23_Broschuere.pdf",
+      "sourceDate": "2023-04-27",
+      "date_provenance": "PDF CreationDate D:20230427174320+02'00' (data da metadati PDF); EV-Betrieb rein elektrisch 17,5 kWh/100km"
+    },
+    {
+      "id": "peugeot-308-phev-2023",
+      "field": "wltpRangeKm",
+      "value": 59,
+      "variant": "aggregate HYBRID 180/225 e-EAT8 (MIN across columns)",
+      "url": "https://www.media.stellantis.com/uploads/uk/model-pricelist/peugeot308pricespecapr23-6455a56f26ccf.pdf",
+      "sourceDate": "2023-04-01",
+      "date_provenance": "cover Effective from 1st April 2023, Version 1.7, 2023.25 Model Year; Electric Range (Combined) MIN 37 mi → floor(37×1.609344)=59; tax-only EAER line rejected"
+    }
+  ],
+  "scrubs": [
+    {
+      "id": "toyota-rav4-phev-2023",
+      "field": "batteryKWh",
+      "was": 18.1,
+      "reason": "Italian MY23 scheda prints Litio Capacità 18.1 kWh without net/usable/netto label; prior seed fill scrubbed under battery_convention=net/usable"
+    }
+  ],
+  "notes": {
+    "mercedes_preislisten": "DE Preisliste tables with nutzbar/EAER/entladener Batterie appear on third-party mirrors (mbpassion.de, kunzmann.de, mercedes-hummel.at) after Mercedes withdrew public hosting — rejected as non-OEM hosts. No media.mercedes-benz.com dated Preisliste PDF retrieved for batch3 rows.",
+    "batch3_count": 36,
+    "pool": "frozen PR #40 incomplete remainder after batch1∪extras∪batch2"
+  }
+}

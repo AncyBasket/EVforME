@@ -37,8 +37,8 @@ def run_core() -> dict:
 
     seed = json.loads((REPO / "EVforME?" / "Data" / "vehicles.seed.quality.json").read_text())
     cdn = json.loads((REPO / "EVforME?" / "Data" / "catalog_cdn.json").read_text())
-    if int(cdn.get("seedVersion") or 0) != 86:
-        raise SystemExit(f"seedVersion expected 86, got {cdn.get('seedVersion')}")
+    if int(cdn.get("seedVersion") or 0) != 88:
+        raise SystemExit(f"seedVersion expected 88, got {cdn.get('seedVersion')}")
     if len(seed) != 6977:
         raise SystemExit(f"rows {len(seed)}")
     m3 = [r for r in seed if r["id"].startswith("tesla-model-3") and r.get("year") == 2026]
