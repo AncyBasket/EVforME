@@ -649,12 +649,19 @@ final class EVforME_UITests: XCTestCase {
             "Continua",
             "Continue",
         ]
-        for label in labels {
-            let btn = app.buttons[label]
-            if btn.waitForExistence(timeout: 1.5) {
-                btn.tap()
-                return
+        // Welcome → QuickStart may need two taps; don't stop after the first.
+        for _ in 0..<4 {
+            var tapped = false
+            for label in labels {
+                let btn = app.buttons[label]
+                if btn.waitForExistence(timeout: 0.8), btn.isHittable {
+                    btn.tap()
+                    tapped = true
+                    break
+                }
             }
+            if !tapped { break }
+            RunLoop.current.run(until: Date().addingTimeInterval(0.35))
         }
     }
 
@@ -797,6 +804,95 @@ final class EVforME_UITests: XCTestCase {
             return
         }
         app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.15)).tap()
+    }
+
+    /// Market DE: honesty banner + empty price fields; verdict after entering prices.
+    @MainActor
+    func testNonItalyMarketRequiresPricesBeforeVerdict() throws {
+        let app = XCUIApplication()
+        app.launchEnvironment["UITEST_PRESET_VEHICLES"] = "1"
+        app.launchEnvironment["UITEST_MARKET"] = "DE"
+        app.launchEnvironment["UITEST_EXPAND_ADVANCED"] = "1"
+        app.launchArguments += ["-UITesting", "-DisableAnimations"]
+        app.launch()
+
+        dismissQuickStartIfNeeded(app)
+
+        let benchReady =
+            app.buttons["Dimmi la verità"].waitForExistence(timeout: 12)
+            || app.buttons["Tell me the truth"].waitForExistence(timeout: 2)
+        XCTAssertTrue(benchReady, "Input bench should load for DE market")
+
+        let bannerById = app.descendants(matching: .any)["non_italy_honesty_banner"]
+        let bannerByLabelIT = app.staticTexts.matching(
+            NSPredicate(format: "label CONTAINS[c] %@", "Fuori Italia")
+        ).firstMatch
+        let bannerByLabelEN = app.staticTexts.matching(
+            NSPredicate(format: "label CONTAINS[c] %@", "Outside Italy")
+        ).firstMatch
+        var bannerVisible = false
+        for _ in 0..<12 {
+            if bannerById.exists || bannerByLabelIT.exists || bannerByLabelEN.exists {
+                bannerVisible = true
+                break
+            }
+            app.swipeUp()
+            RunLoop.current.run(until: Date().addingTimeInterval(0.12))
+        }
+        bannerVisible =
+            bannerVisible
+            || bannerById.waitForExistence(timeout: 4)
+            || bannerByLabelIT.waitForExistence(timeout: 1)
+            || bannerByLabelEN.waitForExistence(timeout: 1)
+        XCTAssertTrue(bannerVisible, "Non-Italy honesty banner should be visible for DE")
+
+        let fuelField = app.textFields["fuel_price_field"]
+        let elecField = app.textFields["electricity_price_field"]
+        let publicField = app.textFields["public_electricity_price_field"]
+        for _ in 0..<10 {
+            if fuelField.exists { break }
+            app.swipeUp()
+            RunLoop.current.run(until: Date().addingTimeInterval(0.12))
+        }
+        XCTAssertTrue(fuelField.waitForExistence(timeout: 5), "Fuel price field should be empty-entry for DE")
+        XCTAssertTrue(elecField.exists, "Electricity price field should exist for DE")
+        XCTAssertTrue(publicField.exists, "Public electricity price field should exist for DE")
+
+        let tellMeEN = app.buttons["Tell me the truth"]
+        let tellMeIT = app.buttons["Dimmi la verità"]
+        XCTAssertTrue(tellMeEN.waitForExistence(timeout: 3) || tellMeIT.waitForExistence(timeout: 1))
+        if tellMeEN.exists { tellMeEN.tap() } else { tellMeIT.tap() }
+
+        // Verdict must not open without prices.
+        let modifyEN = app.buttons["Change inputs"]
+        let modifyIT = app.buttons["Modifica dati"]
+        XCTAssertFalse(
+            modifyEN.waitForExistence(timeout: 3) || modifyIT.waitForExistence(timeout: 1),
+            "Verdict must stay blocked until prices are entered"
+        )
+
+        // Relaunch with explicit DE prices (decimal-pad TextField typing is flaky under UITest).
+        app.terminate()
+        app.launchEnvironment["UITEST_PRESET_VEHICLES"] = "1"
+        app.launchEnvironment["UITEST_MARKET"] = "DE"
+        app.launchEnvironment["UITEST_EXPAND_ADVANCED"] = "1"
+        app.launchEnvironment["UITEST_FUEL_PRICE"] = "1.85"
+        app.launchEnvironment["UITEST_ELECTRICITY_PRICE"] = "0.40"
+        app.launchEnvironment["UITEST_PUBLIC_ELECTRICITY_PRICE"] = "0.70"
+        app.launch()
+        dismissQuickStartIfNeeded(app)
+
+        let tellMeEN2 = app.buttons["Tell me the truth"]
+        let tellMeIT2 = app.buttons["Dimmi la verità"]
+        XCTAssertTrue(tellMeEN2.waitForExistence(timeout: 12) || tellMeIT2.waitForExistence(timeout: 2))
+        if tellMeEN2.exists { tellMeEN2.tap() } else { tellMeIT2.tap() }
+
+        let verdictOpened =
+            modifyEN.waitForExistence(timeout: 15)
+            || modifyIT.waitForExistence(timeout: 2)
+            || app.buttons["Change inputs"].waitForExistence(timeout: 2)
+            || app.buttons["Modifica dati"].waitForExistence(timeout: 2)
+        XCTAssertTrue(verdictOpened, "Verdict should open after entering DE prices")
     }
 
     @MainActor

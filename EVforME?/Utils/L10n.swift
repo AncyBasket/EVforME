@@ -238,6 +238,15 @@ enum L10n {
     static var marketPickerLabel: String { string("market_picker_label") }
     static var marketOtherCountry: String { string("market_other_country") }
     static var nonItalyDataHonestyBanner: String { string("non_italy_data_honesty_banner") }
+    static var nonItalyEnterPricesHint: String { string("non_italy_enter_prices_hint") }
+    static var enterPricePlaceholder: String { string("enter_price_placeholder") }
+    static var publicElectricityPriceLabel: String { string("public_electricity_price_label") }
+    static var publicChargingEnterOwnPriceNote: String { string("public_charging_enter_own_price_note") }
+    static var insuranceExcludedOutsideItalyNote: String { string("insurance_excluded_outside_italy_note") }
+    static var marketMaintenanceEuroEstimateNote: String { string("market_maintenance_euro_estimate_note") }
+    static var validationEnterFuelPriceForMarket: String { string("validation_enter_fuel_price_for_market") }
+    static var validationEnterHomeElectricityPriceForMarket: String { string("validation_enter_home_electricity_price_for_market") }
+    static var validationEnterPublicElectricityPriceForMarket: String { string("validation_enter_public_electricity_price_for_market") }
     static func marketMaintenanceSource(_ market: AppMarket) -> String {
         let rates = MarketMaintenanceRates.rates(for: market)
         return format(

@@ -122,15 +122,16 @@ enum OwnershipCostEstimates {
     /// Media IVASS premio RC auto (2° trim. 2026) — uguale per auto attuale ed EV.
     static let ivassAverageRCEURPerYear: Double = 422
 
-    /// Assicurazione annua: RC flat IVASS (o override utente) + kasko/furto solo se l’utente indica l’importo.
-    /// Nessun proxy % sul valore: se kasko è ON senza importo, la UI deve chiederlo (qui si ignora la kasko).
+    /// Assicurazione annua: RC flat IVASS solo in IT (o override utente) + kasko/furto se indicato.
+    /// Fuori IT senza override → 0 (esclusa, non IVASS in silenzio).
     static func insurancePerYear(
         purchasePrice: Double,
         yearlyKm: Double,
         electrified: Bool,
         annualInsuranceOverrideEUR: Double? = nil,
         includeKaskoTheft: Bool = false,
-        annualKaskoEUR: Double? = nil
+        annualKaskoEUR: Double? = nil,
+        market: AppMarket = .IT
     ) -> Double {
         _ = purchasePrice
         _ = yearlyKm
@@ -138,8 +139,10 @@ enum OwnershipCostEstimates {
         let rc: Double
         if let override = annualInsuranceOverrideEUR, override > 0 {
             rc = override
-        } else {
+        } else if market.usesItalianOfficialEnergyDefaults {
             rc = ivassAverageRCEURPerYear
+        } else {
+            rc = 0
         }
         guard includeKaskoTheft, let kasko = annualKaskoEUR, kasko > 0 else { return rc }
         return rc + kasko
@@ -364,7 +367,8 @@ final class EVSimulator {
             electrified: sourceVehicle.powertrain == .ev || sourceVehicle.powertrain == .phev,
             annualInsuranceOverrideEUR: input.annualInsuranceOverrideEUR,
             includeKaskoTheft: input.includeKaskoTheft,
-            annualKaskoEUR: input.annualKaskoEUR
+            annualKaskoEUR: input.annualKaskoEUR,
+            market: input.market
         )
         let targetInsurance = OwnershipCostEstimates.insurancePerYear(
             purchasePrice: targetValueBasis,
@@ -372,7 +376,8 @@ final class EVSimulator {
             electrified: true,
             annualInsuranceOverrideEUR: input.annualInsuranceOverrideEUR,
             includeKaskoTheft: input.includeKaskoTheft,
-            annualKaskoEUR: input.annualKaskoEUR
+            annualKaskoEUR: input.annualKaskoEUR,
+            market: input.market
         )
 
         let currentYear = Defaults.referenceCalendarYear
@@ -489,7 +494,8 @@ final class EVSimulator {
                 yearlyKm: yearlyKm,
                 energyConsumptionKWhPerKm: kWhPerKm,
                 chargingConfig: input.chargingConfiguration,
-                consumptionIsWallToWheel: wallToWheel
+                consumptionIsWallToWheel: wallToWheel,
+                allowItalianPublicDefaults: input.market.usesItalianOfficialEnergyDefaults
             )
             return annual
                 * area.evConsumptionMultiplier
@@ -525,7 +531,8 @@ final class EVSimulator {
                 yearlyKm: yearlyKm * share,
                 energyConsumptionKWhPerKm: kWhPerKm,
                 chargingConfig: input.chargingConfiguration,
-                consumptionIsWallToWheel: wallToWheel
+                consumptionIsWallToWheel: wallToWheel,
+                allowItalianPublicDefaults: input.market.usesItalianOfficialEnergyDefaults
             )
                 * area.evConsumptionMultiplier
                 * trip.evExtraMultiplier
@@ -671,7 +678,11 @@ final class EVSimulator {
         if targetVehicle.powertrain == .phev {
             reasons.append(L10n.phevBlendReason)
         }
-        reasons.append(L10n.insuranceIncludedReason)
+        if input.insuranceExcludedAsEmptyOutsideItaly {
+            reasons.append(L10n.insuranceExcludedOutsideItalyNote)
+        } else {
+            reasons.append(L10n.insuranceIncludedReason)
+        }
         switch input.comparisonIntent {
         case .alreadyOwned:
             reasons.append(L10n.comparisonIntentOwnedReason)

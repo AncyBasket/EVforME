@@ -92,6 +92,17 @@ struct MainShellView: View {
         }
         .tint(Color.accentDark)
         .onAppear {
+            // Market override can run without vehicle presets (honesty / empty-price UI tests).
+            if let raw = ProcessInfo.processInfo.environment["UITEST_MARKET"],
+               let market = AppMarket(rawValue: raw.uppercased()) {
+                let previous = userInput.market
+                userInput.market = market
+                if market == .IT {
+                    userInput.applyItalianOfficialEnergyPlaceholders()
+                } else if previous == .IT || previous != market {
+                    userInput.clearItalianOfficialEnergyDefaults()
+                }
+            }
             guard ProcessInfo.processInfo.environment["UITEST_PRESET_VEHICLES"] == "1" else { return }
             userInput.sourceVehicleId = Defaults.starterSourceVehicleId
             if ProcessInfo.processInfo.environment["UITEST_PARTIAL_BOLLO"] == "1" {
@@ -116,6 +127,15 @@ struct MainShellView: View {
                 userInput.fuelPrice = price
                 // Evita che applyOfficialCosts / sync sovrascrivano il preset (es. 0,78 GPL).
                 StorageService.shared.markFuelPriceCustomized()
+            }
+            if let raw = ProcessInfo.processInfo.environment["UITEST_ELECTRICITY_PRICE"],
+               let price = Double(raw.replacingOccurrences(of: ",", with: ".")) {
+                userInput.electricityPricePerKWh = price
+                StorageService.shared.markElectricityPriceCustomized()
+            }
+            if let raw = ProcessInfo.processInfo.environment["UITEST_PUBLIC_ELECTRICITY_PRICE"],
+               let price = Double(raw.replacingOccurrences(of: ",", with: ".")) {
+                userInput.chargingConfiguration.customPublicPricePerKWh = price
             }
         }
         .task { await catalogSetup() }

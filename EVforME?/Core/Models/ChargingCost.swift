@@ -127,14 +127,18 @@ struct ChargingConfiguration {
         self.customPublicPricePerKWh = customPublicPricePerKWh
     }
     
-    /// Costo medio ponderato per kWh in base alla configurazione
-    func weightedCostPerKWh() -> Double {
-        let homeCost = customHomePricePerKWh ?? homeChargingType.baseCostPerKWh
-        let publicCost = customPublicPricePerKWh ?? publicChargingType.baseCostPerKWh
-        
+    /// Costo medio ponderato per kWh in base alla configurazione.
+    /// - Parameter allowItalianPublicDefaults: se `false`, non usa Adiconsum in silenzio
+    ///   (richiede prezzi custom; altrimenti contribuisce 0 e la validazione deve bloccare).
+    func weightedCostPerKWh(allowItalianPublicDefaults: Bool = true) -> Double {
+        let homeFallback = allowItalianPublicDefaults ? homeChargingType.baseCostPerKWh : nil
+        let publicFallback = allowItalianPublicDefaults ? publicChargingType.baseCostPerKWh : nil
+        let homeCost = customHomePricePerKWh ?? homeFallback ?? 0
+        let publicCost = customPublicPricePerKWh ?? publicFallback ?? 0
+
         let homeShare = hasHomeCharging ? homeChargingShare : 0.0
         let publicShare = 1.0 - homeShare
-        
+
         return (homeCost * homeShare + publicCost * publicShare)
     }
     
@@ -159,9 +163,12 @@ struct ChargingCostCalculator {
         yearlyKm: Double,
         energyConsumptionKWhPerKm: Double,
         chargingConfig: ChargingConfiguration,
-        consumptionIsWallToWheel: Bool = true
+        consumptionIsWallToWheel: Bool = true,
+        allowItalianPublicDefaults: Bool = true
     ) -> Double {
-        let costPerKWh = chargingConfig.weightedCostPerKWh()
+        let costPerKWh = chargingConfig.weightedCostPerKWh(
+            allowItalianPublicDefaults: allowItalianPublicDefaults
+        )
         let totalKWhNeeded = yearlyKm * energyConsumptionKWhPerKm
         let kWhToPay: Double
         if consumptionIsWallToWheel {
@@ -177,13 +184,15 @@ struct ChargingCostCalculator {
     static func calculateCostPer100Km(
         energyConsumptionKWhPerKm: Double,
         chargingConfig: ChargingConfiguration,
-        consumptionIsWallToWheel: Bool = true
+        consumptionIsWallToWheel: Bool = true,
+        allowItalianPublicDefaults: Bool = true
     ) -> Double {
         calculateAnnualEnergyCost(
             yearlyKm: 100,
             energyConsumptionKWhPerKm: energyConsumptionKWhPerKm,
             chargingConfig: chargingConfig,
-            consumptionIsWallToWheel: consumptionIsWallToWheel
+            consumptionIsWallToWheel: consumptionIsWallToWheel,
+            allowItalianPublicDefaults: allowItalianPublicDefaults
         )
     }
     

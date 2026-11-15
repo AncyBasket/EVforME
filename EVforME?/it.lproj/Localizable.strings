@@ -168,9 +168,18 @@
 
 /* Market / paese */
 "market_section_title" = "Il tuo paese";
-"market_section_subtitle" = "I costi di manutenzione cambiano per mercato. Precompilato dalla regione del dispositivo — puoi cambiarlo. La posizione serve solo dopo per le Colonnine vicine.";
+"market_section_subtitle" = "Scegli il paese. In Italia i prezzi energia partono da fonti ufficiali IT; fuori Italia inserisci i tuoi prezzi — niente stime italiane precompilate. La posizione serve solo dopo per le Colonnine vicine.";
 "market_maintenance_source" = "%@: manutenzione media ~€%d ICE · ~€%d EV /anno (15.000 km)";
-"non_italy_data_honesty_banner" = "Carburante, elettricità, bollo, assicurazione (stima) e incentivi sono stime italiane; per il tuo paese cambia solo la manutenzione. Inserisci i tuoi prezzi.";
+"non_italy_data_honesty_banner" = "Fuori Italia: inserisci carburante ed elettricità (casa/pubblica). Niente prezzi MIMIT/Eurostat/Adiconsum/IVASS precompilati. Assicurazione esclusa dal totale se la lasci vuota. Bollo e incentivi restano solo IT.";
+"validation_enter_public_electricity_price_for_market" = "Inserisci il prezzo della ricarica pubblica (€/kWh).";
+"validation_enter_home_electricity_price_for_market" = "Inserisci il prezzo dell’elettricità domestica (€/kWh).";
+"validation_enter_fuel_price_for_market" = "Inserisci il prezzo del carburante per il tuo paese.";
+"market_maintenance_euro_estimate_note" = "Manutenzione: stima in € (nessuna conversione di cambio). Oppure inserisci i tuoi costi di possesso nei campi prezzo.";
+"insurance_excluded_outside_italy_note" = "Assicurazione esclusa dal calcolo (nessuna media IVASS IT). Compila il campo se vuoi includerla.";
+"public_charging_enter_own_price_note" = "Ricarica pubblica: inserisci il tuo €/kWh (niente default Adiconsum IT).";
+"public_electricity_price_label" = "Elettricità ricarica pubblica (€/kWh)";
+"enter_price_placeholder" = "Inserisci";
+"non_italy_enter_prices_hint" = "Inserisci i prezzi locali: senza di essi il verdetto non si calcola.";
 
 /* Education */
 "fear_vs_reality" = "Paura vs realtà";
@@ -499,7 +508,7 @@
 /* Privacy */
 "privacy_policy_title" = "Privacy";
 "privacy_policy_updated" = "Aggiornata: 20 ottobre 2026";
-"privacy_policy_body" = "EVforME? calcola sul dispositivo se un’auto elettrica o plug-in può avere senso per te.\n\nTitolare: Andrea Ancellotti — andrea.ancellotti@gmail.com.\n\nCosa resta sul telefono: km, prezzi, veicoli scelti, paese selezionato, storico scenari, snapshot widget/Live Activity.\n\nFoto sticker: usate solo on-device per leggere consumi; non vengono caricate per quella funzione.\n\nPosizione (opzionale): Durante l’uso dell’app, solo quando apri Colonnine vicine, per centrare la ricerca Apple MapKit. Il paese per le stime di costo viene dalla regione del dispositivo o dal selettore paese — non dal GPS. Le coordinate non vengono salvate né inviate a un backend EVforME. Niente tracking in background.\n\nRete (opzionale): catalogo veicoli incluso nell’app (fonti EEA/costruttori), prezzi MIMIT + Eurostat, risultati ricerca Apple Mappe, analytics o webhook lead solo se configurati. Nella build tipica analytics/lead restano locali se gli URL sono vuoti.\n\nNon vendiamo dati e non usiamo tracker pubblicitari.\n\nModulo consulente: nome/email/città solo se li invii con consenso.\n\nPuoi revocare foto/posizione in Impostazioni iOS, evitare il form lead, o cancellare l’app per rimuovere i dati locali. Policy completa: pulsante sotto.";
+"privacy_policy_body" = "EVforME? calcola sul dispositivo se un’auto elettrica o plug-in può avere senso per te.\n\nTitolare: Andrea Ancellotti — andrea.ancellotti@gmail.com.\n\nCosa resta sul telefono: km, prezzi, veicoli scelti, paese selezionato, storico scenari, snapshot widget/Live Activity.\n\nFoto sticker: usate solo on-device per leggere consumi; non vengono caricate per quella funzione.\n\nPosizione (opzionale): Durante l’uso dell’app, solo quando apri Colonnine vicine, per centrare la ricerca Apple MapKit. Il paese per le stime di costo viene dalla regione del dispositivo o dal selettore paese — non dal GPS. Le coordinate non vengono salvate né inviate a un backend EVforME. Niente tracking in background.\n\nRete (opzionale): catalogo veicoli incluso nell’app (fonti EEA/costruttori), prezzi MIMIT + Eurostat (default ufficiali solo con paese Italia; fuori Italia inserisci i tuoi prezzi), risultati ricerca Apple Mappe, analytics o webhook lead solo se configurati. Nella build tipica analytics/lead restano locali se gli URL sono vuoti.\n\nNon vendiamo dati e non usiamo tracker pubblicitari.\n\nModulo consulente: nome/email/città solo se li invii con consenso.\n\nPuoi revocare foto/posizione in Impostazioni iOS, evitare il form lead, o cancellare l’app per rimuovere i dati locali. Policy completa: pulsante sotto.";
 "privacy_policy_open_web" = "Apri policy sul web";
 
 /* Reference quality */

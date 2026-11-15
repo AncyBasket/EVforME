@@ -127,15 +127,19 @@ struct InputValidator {
         if case .invalid(let message) = kmResult {
             errors.append(message)
         }
-        
-        let priceResult = validateFuelPrice(input.fuelPrice)
-        if case .invalid(let message) = priceResult {
-            errors.append(message)
-        }
 
-        let electricityResult = validateElectricityPricePerKWh(input.electricityPricePerKWh)
-        if case .invalid(let message) = electricityResult {
-            errors.append(message)
+        if input.usesItalianOfficialEnergyDefaults {
+            let priceResult = validateFuelPrice(input.fuelPrice)
+            if case .invalid(let message) = priceResult {
+                errors.append(message)
+            }
+
+            let electricityResult = validateElectricityPricePerKWh(input.electricityPricePerKWh)
+            if case .invalid(let message) = electricityResult {
+                errors.append(message)
+            }
+        } else {
+            errors.append(contentsOf: missingNonItalyEnergyPriceMessages(for: input))
         }
         
         let yearsResult = validateOwnershipYears(input.ownershipYears)
@@ -197,6 +201,36 @@ struct InputValidator {
             }
         }
         
+        return errors
+    }
+
+    /// Fuori IT: niente MIMIT/Eurostat/Adiconsum — prezzi obbligatori e espliciti.
+    static func missingNonItalyEnergyPriceMessages(for input: UserInput) -> [String] {
+        var errors: [String] = []
+        if input.fuelPrice <= 0 {
+            errors.append(L10n.validationEnterFuelPriceForMarket)
+        } else if case .invalid(let message) = validateFuelPrice(input.fuelPrice) {
+            errors.append(message)
+        }
+
+        let config = input.resolvedChargingConfiguration()
+        let homeShare = config.hasHomeCharging ? config.homeChargingShare : 0
+        let publicShare = 1.0 - homeShare
+        if homeShare > 0.001 {
+            if input.electricityPricePerKWh <= 0 {
+                errors.append(L10n.validationEnterHomeElectricityPriceForMarket)
+            } else if case .invalid(let message) = validateElectricityPricePerKWh(input.electricityPricePerKWh) {
+                errors.append(message)
+            }
+        }
+        if publicShare > 0.001 {
+            let publicPrice = config.customPublicPricePerKWh ?? 0
+            if publicPrice <= 0 {
+                errors.append(L10n.validationEnterPublicElectricityPriceForMarket)
+            } else if case .invalid(let message) = validateElectricityPricePerKWh(publicPrice) {
+                errors.append(message)
+            }
+        }
         return errors
     }
 
