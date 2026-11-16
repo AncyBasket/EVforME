@@ -94,7 +94,8 @@ enum OperatingCostCalculator {
             electrified: electrified,
             annualInsuranceOverrideEUR: input.annualInsuranceOverrideEUR,
             includeKaskoTheft: input.includeKaskoTheft,
-            annualKaskoEUR: input.annualKaskoEUR
+            annualKaskoEUR: input.annualKaskoEUR,
+            market: input.market
         )
         return energy + maintenance + taxes + insurance
     }

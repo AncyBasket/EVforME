@@ -144,11 +144,20 @@
 
 /* Market / country */
 "market_section_title" = "Your country";
-"market_section_subtitle" = "Maintenance costs differ by market. Pre-filled from your device region — change it anytime. Location is only used later for Nearby chargers.";
+"market_section_subtitle" = "Pick your country. In Italy energy prices start from official IT sources; outside Italy enter your own prices — no Italian defaults. Location is only used later for Nearby chargers.";
 "market_picker_label" = "Country";
 "market_other_country" = "Other / rest of world";
 "market_maintenance_source" = "%@: typical maintenance ~€%d ICE · ~€%d EV /year (15,000 km)";
-"non_italy_data_honesty_banner" = "Fuel, electricity, road tax, insurance (estimate) and incentives are Italian estimates; only maintenance changes for your country. Enter your own prices.";
+"non_italy_data_honesty_banner" = "Outside Italy: enter fuel and electricity (home/public). No pre-filled MIMIT/Eurostat/Adiconsum/IVASS prices. Insurance is excluded if left blank. Road tax and incentives stay Italy-only.";
+"validation_enter_public_electricity_price_for_market" = "Enter your public charging price (€/kWh).";
+"validation_enter_home_electricity_price_for_market" = "Enter your home electricity price (€/kWh).";
+"validation_enter_fuel_price_for_market" = "Enter the fuel price for your country.";
+"market_maintenance_euro_estimate_note" = "Maintenance is an € estimate (no FX conversion). Or enter your own ownership costs in the price fields.";
+"insurance_excluded_outside_italy_note" = "Insurance excluded from the total (no Italian IVASS average). Fill the field if you want it included.";
+"public_charging_enter_own_price_note" = "Public charging: enter your €/kWh (no Italian Adiconsum default).";
+"public_electricity_price_label" = "Public charging electricity (€/kWh)";
+"enter_price_placeholder" = "Enter price";
+"non_italy_enter_prices_hint" = "Enter local prices: the verdict will not run without them.";
 
 /* Education */
 "fear_vs_reality" = "Fear vs Reality";
@@ -489,7 +498,7 @@
 /* Privacy */
 "privacy_policy_title" = "Privacy";
 "privacy_policy_updated" = "Updated: 20 October 2026";
-"privacy_policy_body" = "EVforME? estimates on-device whether an electric or plug-in hybrid car may fit you.\n\nController: Andrea Ancellotti — andrea.ancellotti@gmail.com.\n\nKept on your phone: km, prices, chosen vehicles, country selection, scenario history, widget/Live Activity snapshots.\n\nSticker photos: used on-device only to read consumption figures; not uploaded for that feature.\n\nLocation (optional): While Using the App, only when you open Nearby chargers, to center an Apple MapKit search. Country for cost estimates comes from your device region or the country picker — not from GPS. Coordinates are not stored or sent to an EVforME backend. No background tracking.\n\nNetwork (optional): bundled vehicle catalog (EEA/manufacturer sources), public energy prices (MIMIT + Eurostat), Apple Maps search results, analytics or lead webhook only if configured. In a typical build, analytics/leads stay local when those URLs are empty.\n\nWe do not sell data and do not use advertising trackers.\n\nAdvisor form: name/email/city only if you submit them with consent.\n\nYou can revoke photo/location access in iOS Settings, skip the lead form, or delete the app to remove local data. Full policy: open the button below.";
+"privacy_policy_body" = "EVforME? estimates on-device whether an electric or plug-in hybrid car may fit you.\n\nController: Andrea Ancellotti — andrea.ancellotti@gmail.com.\n\nKept on your phone: km, prices, chosen vehicles, country selection, scenario history, widget/Live Activity snapshots.\n\nSticker photos: used on-device only to read consumption figures; not uploaded for that feature.\n\nLocation (optional): While Using the App, only when you open Nearby chargers, to center an Apple MapKit search. Country for cost estimates comes from your device region or the country picker — not from GPS. Coordinates are not stored or sent to an EVforME backend. No background tracking.\n\nNetwork (optional): bundled vehicle catalog (EEA/manufacturer sources), public energy prices (MIMIT + Eurostat; official defaults only when market is Italy; outside Italy enter your own prices), Apple Maps search results, analytics or lead webhook only if configured. In a typical build, analytics/leads stay local when those URLs are empty.\n\nWe do not sell data and do not use advertising trackers.\n\nAdvisor form: name/email/city only if you submit them with consent.\n\nYou can revoke photo/location access in iOS Settings, skip the lead form, or delete the app to remove local data. Full policy: open the button below.";
 "privacy_policy_open_web" = "Open policy on the web";
 
 /* Polish extras */

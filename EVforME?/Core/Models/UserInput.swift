@@ -283,6 +283,14 @@ struct UserInput {
     /// Kit bollo/RC/incentivi IT mostrato solo per mercato Italia.
     var showsItalyCostKit: Bool { market == .IT }
 
+    /// Prezzi energia/carburante italiani applicabili solo con market IT.
+    var usesItalianOfficialEnergyDefaults: Bool { market.usesItalianOfficialEnergyDefaults }
+
+    /// RC IVASS non usata in silenzio fuori IT: assicurazione esclusa se override vuoto.
+    var insuranceExcludedAsEmptyOutsideItaly: Bool {
+        market != .IT && (annualInsuranceOverrideEUR ?? 0) <= 0
+    }
+
     /// Delta di listino netto (EV − ICE − incentivi). Zero se già possedute (sunk cost).
     var netPurchasePremiumEUR: Double {
         guard comparisonIntent == .consideringPurchase else { return 0 }
@@ -302,8 +310,35 @@ struct UserInput {
                 hasHomeCharging: true
             ).homeChargingShare
         }
-        config.customHomePricePerKWh = electricityPricePerKWh
+        // Fuori IT: non propagare 0 come “prezzo casa” se l’utente non ha ancora inserito nulla.
+        if electricityPricePerKWh > 0 {
+            config.customHomePricePerKWh = electricityPricePerKWh
+        } else if !usesItalianOfficialEnergyDefaults {
+            config.customHomePricePerKWh = nil
+        } else {
+            config.customHomePricePerKWh = electricityPricePerKWh
+        }
         return config
+    }
+
+    /// Svuota default italiani (MIMIT/Eurostat/Adiconsum/IVASS) quando si esce da IT.
+    mutating func clearItalianOfficialEnergyDefaults() {
+        fuelPrice = 0
+        electricityPricePerKWh = 0
+        chargingConfiguration.customHomePricePerKWh = nil
+        chargingConfiguration.customPublicPricePerKWh = nil
+        // RC: niente media IVASS — resta esclusa finché l’utente non inserisce un importo.
+        annualInsuranceOverrideEUR = nil
+    }
+
+    /// Applica default IT tipici (poi sovrascritti da MIMIT/Eurostat se disponibili).
+    mutating func applyItalianOfficialEnergyPlaceholders() {
+        if fuelPrice <= 0 {
+            fuelPrice = OfficialEnergyCosts.Fallback.petrolPerLiter
+        }
+        if electricityPricePerKWh <= 0 {
+            electricityPricePerKWh = PublicChargingPriceDefaults.homePerKWh
+        }
     }
 
     mutating func applyTripProfileDefaults() {

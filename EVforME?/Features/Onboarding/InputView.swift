@@ -248,6 +248,23 @@ struct InputView: View {
                     .accessibilityIdentifier("incomplete_catalog_data_card")
                 }
 
+                // Always visible outside Italy — not buried in “advanced”.
+                if userInput.market != .IT {
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text(L10n.nonItalyDataHonestyBanner)
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(Color.ink)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(10)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .background(Color.surfaceElevated.opacity(0.95))
+                            .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                    }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityIdentifier("non_italy_honesty_banner")
+                    .padding(.horizontal, 20)
+                }
+
                 DisclosureGroup(isExpanded: $showAdvancedDetails) {
                     VStack(alignment: .leading, spacing: 22) {
                         InputSectionCard(
@@ -284,55 +301,87 @@ struct InputView: View {
                                 .accessibilityIdentifier("yearly_km_slider")
                             }
 
-                            sliderBlock(
-                                title: fuelPriceSliderTitle,
-                                valueLabel: fuelPriceValueLabel,
-                                accessibilityLabel: L10n.fuelPriceSliderA11y,
-                                accessibilityValue: fuelPriceA11yValue
-                            ) {
-                                Slider(
-                                    value: Binding(
-                                        get: { userInput.fuelPrice },
-                                        set: { newValue in
-                                            userInput.fuelPrice = newValue
-                                            if Int(newValue * 20) % 5 == 0 {
-                                                UISelectionFeedbackGenerator().selectionChanged()
+                            if userInput.usesItalianOfficialEnergyDefaults {
+                                sliderBlock(
+                                    title: fuelPriceSliderTitle,
+                                    valueLabel: fuelPriceValueLabel,
+                                    accessibilityLabel: L10n.fuelPriceSliderA11y,
+                                    accessibilityValue: fuelPriceA11yValue
+                                ) {
+                                    Slider(
+                                        value: Binding(
+                                            get: { userInput.fuelPrice },
+                                            set: { newValue in
+                                                userInput.fuelPrice = newValue
+                                                if Int(newValue * 20) % 5 == 0 {
+                                                    UISelectionFeedbackGenerator().selectionChanged()
+                                                }
                                             }
+                                        ),
+                                        in: fuelPriceSliderRange,
+                                        step: fuelPriceSliderStep
+                                    )
+                                    .tint(.accent)
+                                    .accessibilityIdentifier("fuel_price_slider")
+                                }
+
+                                sliderBlock(
+                                    title: L10n.electricityPriceLabel,
+                                    valueLabel: String(format: "€%.2f/kWh", userInput.electricityPricePerKWh),
+                                    accessibilityLabel: L10n.electricityPriceSliderA11y,
+                                    accessibilityValue: L10n.electricityPriceA11yValue(userInput.electricityPricePerKWh)
+                                ) {
+                                    Slider(
+                                        value: Binding(
+                                            get: { userInput.electricityPricePerKWh },
+                                            set: { newValue in
+                                                userInput.electricityPricePerKWh = newValue
+                                                if Int(newValue * 100) % 5 == 0 {
+                                                    UISelectionFeedbackGenerator().selectionChanged()
+                                                }
+                                            }
+                                        ),
+                                        in: 0.05...2.0,
+                                        step: 0.01
+                                    )
+                                    .tint(.accent)
+                                    .accessibilityIdentifier("electricity_price_slider")
+                                }
+
+                                Text(pricesFreshnessLabel)
+                                    .font(Typography.readingCaption)
+                                    .foregroundColor(.secondaryText)
+                                    .padding(.top, 4)
+                            } else {
+                                marketPriceTextField(
+                                    title: fuelPriceSliderTitle,
+                                    placeholder: L10n.enterPricePlaceholder,
+                                    value: $userInput.fuelPrice,
+                                    accessibilityId: "fuel_price_field"
+                                )
+                                marketPriceTextField(
+                                    title: L10n.electricityPriceLabel,
+                                    placeholder: L10n.enterPricePlaceholder,
+                                    value: $userInput.electricityPricePerKWh,
+                                    accessibilityId: "electricity_price_field"
+                                )
+                                marketPriceTextField(
+                                    title: L10n.publicElectricityPriceLabel,
+                                    placeholder: L10n.enterPricePlaceholder,
+                                    value: Binding(
+                                        get: { userInput.chargingConfiguration.customPublicPricePerKWh ?? 0 },
+                                        set: {
+                                            userInput.chargingConfiguration.customPublicPricePerKWh = $0 > 0 ? $0 : nil
                                         }
                                     ),
-                                    in: fuelPriceSliderRange,
-                                    step: fuelPriceSliderStep
+                                    accessibilityId: "public_electricity_price_field"
                                 )
-                                .tint(.accent)
-                                .accessibilityIdentifier("fuel_price_slider")
+                                Text(L10n.nonItalyEnterPricesHint)
+                                    .font(Typography.readingCaption)
+                                    .foregroundColor(.secondaryText)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .padding(.top, 4)
                             }
-
-                            sliderBlock(
-                                title: L10n.electricityPriceLabel,
-                                valueLabel: String(format: "€%.2f/kWh", userInput.electricityPricePerKWh),
-                                accessibilityLabel: L10n.electricityPriceSliderA11y,
-                                accessibilityValue: L10n.electricityPriceA11yValue(userInput.electricityPricePerKWh)
-                            ) {
-                                Slider(
-                                    value: Binding(
-                                        get: { userInput.electricityPricePerKWh },
-                                        set: { newValue in
-                                            userInput.electricityPricePerKWh = newValue
-                                            if Int(newValue * 100) % 5 == 0 {
-                                                UISelectionFeedbackGenerator().selectionChanged()
-                                            }
-                                        }
-                                    ),
-                                    in: 0.05...2.0,
-                                    step: 0.01
-                                )
-                                .tint(.accent)
-                            }
-
-                            Text(pricesFreshnessLabel)
-                                .font(Typography.readingCaption)
-                                .foregroundColor(.secondaryText)
-                                .padding(.top, 4)
 
                             VStack(alignment: .leading, spacing: 10) {
                                 Text(L10n.ownershipYearsLabel)
@@ -377,19 +426,24 @@ struct InputView: View {
                                     }
                                 }
                                 .pickerStyle(.menu)
+                                .accessibilityIdentifier("market_picker")
+                                .onChange(of: userInput.market) { oldMarket, newMarket in
+                                    handleMarketChange(from: oldMarket, to: newMarket)
+                                }
+                                Text(L10n.marketSectionSubtitle)
+                                    .font(.caption)
+                                    .foregroundStyle(Color.secondaryText)
+                                    .fixedSize(horizontal: false, vertical: true)
                                 Text(L10n.marketMaintenanceSource(userInput.market))
                                     .font(.caption)
                                     .foregroundStyle(Color.secondaryText)
                                     .fixedSize(horizontal: false, vertical: true)
-                                if userInput.market != .IT {
-                                    Text(L10n.nonItalyDataHonestyBanner)
+                                if userInput.market.maintenanceShownAsEuroEstimateOnly {
+                                    Text(L10n.marketMaintenanceEuroEstimateNote)
                                         .font(.caption.weight(.semibold))
-                                        .foregroundStyle(Color.ink)
+                                        .foregroundStyle(Color.secondaryText)
                                         .fixedSize(horizontal: false, vertical: true)
-                                        .padding(10)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .background(Color.surfaceElevated.opacity(0.95))
-                                        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                                        .accessibilityIdentifier("market_maintenance_euro_estimate_note")
                                 }
                             }
 
@@ -464,12 +518,18 @@ struct InputView: View {
                                     userInput.chargingConfiguration.publicChargingType = .publicFast
                                 }
                             }
-                            Text(L10n.publicChargingSourceNote)
-                                .font(Typography.readingCaption)
-                                .foregroundColor(.secondaryText)
+                            if userInput.usesItalianOfficialEnergyDefaults {
+                                Text(L10n.publicChargingSourceNote)
+                                    .font(Typography.readingCaption)
+                                    .foregroundColor(.secondaryText)
 
-                            if let period = OfficialCostService.shared.cachedOrBundledCosts()?.electricityPeriod {
-                                Text(L10n.electricityEurostatPeriod(period))
+                                if let period = OfficialCostService.shared.cachedOrBundledCosts()?.electricityPeriod {
+                                    Text(L10n.electricityEurostatPeriod(period))
+                                        .font(Typography.readingCaption)
+                                        .foregroundColor(.secondaryText)
+                                }
+                            } else {
+                                Text(L10n.publicChargingEnterOwnPriceNote)
                                     .font(Typography.readingCaption)
                                     .foregroundColor(.secondaryText)
                             }
@@ -478,6 +538,13 @@ struct InputView: View {
                                 .font(Typography.readingCaption)
                                 .foregroundColor(.secondaryText)
                                 .padding(.top, 10)
+                            if userInput.insuranceExcludedAsEmptyOutsideItaly {
+                                Text(L10n.insuranceExcludedOutsideItalyNote)
+                                    .font(Typography.readingCaption)
+                                    .foregroundColor(.secondaryText)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .accessibilityIdentifier("insurance_excluded_outside_italy_note")
+                            }
                             TextField(
                                 L10n.insuranceAnnualOptionalPlaceholder,
                                 value: Binding(
@@ -686,6 +753,20 @@ struct InputView: View {
             refreshHistoryState()
             loadCatalog()
 #if DEBUG
+            if let raw = ProcessInfo.processInfo.environment["UITEST_MARKET"],
+               let market = AppMarket(rawValue: raw.uppercased()),
+               userInput.market != market {
+                userInput.market = market
+                if market != .IT {
+                    userInput.clearItalianOfficialEnergyDefaults()
+                }
+            }
+#endif
+            if userInput.market != .IT
+                || ProcessInfo.processInfo.environment["UITEST_MARKET"] != nil {
+                showAdvancedDetails = true
+            }
+#if DEBUG
             if ProcessInfo.processInfo.environment["UITEST_EXPAND_ADVANCED"] == "1"
                 || ProcessInfo.processInfo.environment["UITEST_INCOMPLETE_PHEV"] == "1"
                 || ProcessInfo.processInfo.environment["UITEST_PARTIAL_PHEV_KWH_ONLY"] == "1" {
@@ -713,6 +794,11 @@ struct InputView: View {
                 withAnimation(.spring(response: 0.48, dampingFraction: 0.86)) {
                     appearAnimation = true
                 }
+            }
+        }
+        .onChange(of: userInput.market) { _, newMarket in
+            if newMarket != .IT {
+                showAdvancedDetails = true
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: .evVehicleCatalogDidUpdate)) { _ in
@@ -795,6 +881,9 @@ struct InputView: View {
     }
 
     private var pricesFreshnessLabel: String {
+        guard userInput.usesItalianOfficialEnergyDefaults else {
+            return L10n.nonItalyEnterPricesHint
+        }
         guard let date = OfficialCostService.shared.lastSuccessfulFetchDate else {
             return L10n.pricesFreshBundled
         }
@@ -806,6 +895,55 @@ struct InputView: View {
             return L10n.pricesFreshMinutesAgo(minutes)
         }
         return L10n.pricesFreshCached
+    }
+
+    private func handleMarketChange(from oldMarket: AppMarket, to newMarket: AppMarket) {
+        guard oldMarket != newMarket else { return }
+        if newMarket == .IT {
+            userInput.applyItalianOfficialEnergyPlaceholders()
+            if let costs = OfficialCostService.shared.cachedOrBundledCosts() {
+                _ = StorageService.shared.applyOfficialCostsIfNeeded(costs, to: &userInput)
+            }
+        } else if oldMarket == .IT || userInput.fuelPrice > 0 || userInput.electricityPricePerKWh > 0 {
+            // Leaving IT (or switching away while still holding Italian placeholders): clear silently.
+            if oldMarket == .IT {
+                userInput.clearItalianOfficialEnergyDefaults()
+            }
+        }
+        // Outside Italy the price fields live in advanced — expand so emptiness is obvious.
+        if newMarket != .IT {
+            showAdvancedDetails = true
+        }
+        loadCatalog()
+    }
+
+    private func marketPriceTextField(
+        title: String,
+        placeholder: String,
+        value: Binding<Double>,
+        accessibilityId: String
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(title)
+                .font(Typography.readingCaption)
+                .foregroundColor(.secondaryText)
+            TextField(
+                placeholder,
+                value: Binding(
+                    get: { value.wrappedValue > 0 ? value.wrappedValue : nil },
+                    set: { value.wrappedValue = $0 ?? 0 }
+                ),
+                format: .number.precision(.fractionLength(0...3))
+            )
+            .keyboardType(.decimalPad)
+            .font(Typography.readingBody)
+            .padding(.vertical, 8)
+            .padding(.horizontal, 10)
+            .background(Color.surfaceElevated.opacity(0.9))
+            .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+            .accessibilityIdentifier(accessibilityId)
+        }
+        .padding(.top, 6)
     }
 
     private var dataUpdatedBadgeLabel: String {
@@ -1474,8 +1612,8 @@ struct InputView: View {
     }
 
     private func loadCatalog() {
-        sourceVehicles = VehicleCatalogService.shared.sourceVehicles()
-        targetVehicles = VehicleCatalogService.shared.targetEVVehicles()
+        sourceVehicles = VehicleCatalogService.shared.sourceVehicles(for: userInput.market)
+        targetVehicles = VehicleCatalogService.shared.targetEVVehicles(for: userInput.market)
 
         // Catalogo ancora in load async: non azzerare gli starter ID (altrimenti CTA → fail-closed).
         guard !sourceVehicles.isEmpty, !targetVehicles.isEmpty else { return }

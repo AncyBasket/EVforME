@@ -142,30 +142,46 @@ final class VehicleCatalogService {
         targetEVVehiclesCache = nil
     }
 
-    func sourceVehicles() -> [VehicleCatalogItem] {
+    func sourceVehicles(for market: AppMarket = .IT) -> [VehicleCatalogItem] {
         onMainActor {
-            if let cached = sourceVehiclesCache {
+            // Cache keyed only for IT (hot path); other markets filter live.
+            if market == .IT, let cached = sourceVehiclesCache {
                 return cached
             }
             let result = isolatedVehicles
                 .filter { $0.powertrain.isSourceCandidate }
+                .filter { Self.isVisible($0, in: market) }
                 .sorted { $0.displayName < $1.displayName }
-            sourceVehiclesCache = result
+            if market == .IT {
+                sourceVehiclesCache = result
+            }
             return result
         }
     }
 
-    func targetEVVehicles() -> [VehicleCatalogItem] {
+    func targetEVVehicles(for market: AppMarket = .IT) -> [VehicleCatalogItem] {
         onMainActor {
-            if let cached = targetEVVehiclesCache {
+            if market == .IT, let cached = targetEVVehiclesCache {
                 return cached
             }
             let result = isolatedVehicles
                 .filter { $0.powertrain.isTargetCandidate }
+                .filter { Self.isVisible($0, in: market) }
                 .sorted { $0.displayName < $1.displayName }
-            targetEVVehiclesCache = result
+            if market == .IT {
+                targetEVVehiclesCache = result
+            }
             return result
         }
+    }
+
+    /// US/EPA rows only for US/CA; IT catalog (6970) stays for all other markets.
+    static func isVisible(_ vehicle: VehicleCatalogItem, in market: AppMarket) -> Bool {
+        let tag = (vehicle.market ?? "IT").uppercased()
+        if tag == "US/EPA" {
+            return market.showsUSEPACatalogRows
+        }
+        return true
     }
 
     func vehicle(by id: String) -> VehicleCatalogItem? {

@@ -148,6 +148,9 @@ final class StorageService {
     /// (oppure se non c'era uno storico).
     @discardableResult
     func applyOfficialCostsIfNeeded(_ costs: OfficialEnergyCosts, to input: inout UserInput) -> Bool {
+        // MIMIT/Eurostat geo=IT: mai come default ufficiali fuori Italia.
+        guard input.usesItalianOfficialEnergyDefaults else { return false }
+
         let epsilon = 0.0001
         let prevAutoFuel = defaults.object(forKey: Keys.lastAutoFuelPrice) as? Double
         let prevAutoElec = defaults.object(forKey: Keys.lastAutoElectricityPrice) as? Double
@@ -195,6 +198,7 @@ final class StorageService {
     /// lo reimposta al prezzo ufficiale del nuovo tipo.
     @discardableResult
     func syncFuelPriceForSourceVehicle(in input: inout UserInput) -> Bool {
+        guard input.usesItalianOfficialEnergyDefaults else { return false }
         guard let costs = OfficialCostService.shared.cachedOrBundledCosts() else { return false }
         let kind = VehicleCatalogService.shared.vehicle(by: input.sourceVehicleId)?.resolvedFuelKind ?? .petrol
         let official = costs.pricePerLiter(for: kind)
@@ -243,6 +247,11 @@ final class StorageService {
         defaults.set(true, forKey: Keys.userCustomizedFuelPrice)
         let suite = UserDefaults(suiteName: Defaults.appGroupID) ?? defaults
         suite.set(true, forKey: Keys.userCustomizedFuelPrice)
+    }
+
+    /// Marca il prezzo elettricità come override utente (UI test / input manuale).
+    func markElectricityPriceCustomized() {
+        defaults.set(true, forKey: Keys.userCustomizedElectricityPrice)
     }
 
     /// Importa flag “fuel customized” scritto dal widget via App Group.

@@ -17,7 +17,7 @@ struct QuickStartView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private var sourceList: [VehicleCatalogItem] {
-        VehicleCatalogService.shared.sourceVehicles()
+        VehicleCatalogService.shared.sourceVehicles(for: userInput.market)
     }
 
     private var selectedSourceName: String {
@@ -182,12 +182,13 @@ struct QuickStartView: View {
         ensureDefaults()
         // Suggerisci Model 3 / MG4 / 500e solo se il target è ancora vuoto.
         if userInput.targetVehicleId.isEmpty {
-            if let suggested = VehicleCatalogService.shared.targetEVVehicles().first(where: {
+            let targets = VehicleCatalogService.shared.targetEVVehicles(for: userInput.market)
+            if let suggested = targets.first(where: {
                 $0.id.contains("model-3") || $0.id.contains("mg4") || $0.id.contains("500e")
             }) {
                 userInput.targetVehicleId = suggested.id
             } else {
-                userInput.targetVehicleId = VehicleCatalogService.shared.targetEVVehicles().first?.id
+                userInput.targetVehicleId = targets.first?.id
                     ?? Defaults.starterTargetVehicleId
             }
         }

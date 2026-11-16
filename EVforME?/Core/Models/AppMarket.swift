@@ -72,6 +72,27 @@ enum AppMarket: String, CaseIterable, Identifiable, Codable, Hashable {
     static var pickerCases: [AppMarket] {
         allCases.sorted { $0.localizedName.localizedCaseInsensitiveCompare($1.localizedName) == .orderedAscending }
     }
+
+    /// Solo Italia usa MIMIT / Eurostat / Adiconsum / IVASS come default ufficiali.
+    var usesItalianOfficialEnergyDefaults: Bool { self == .IT }
+
+    /// Manutenzione stimata in €: per mercati non-euro va etichettata esplicitamente (niente cambio).
+    var maintenanceShownAsEuroEstimateOnly: Bool {
+        switch self {
+        case .GB, .US, .CA, .CH, .PL, .SE, .NO, .other:
+            return true
+        case .IT, .DE, .FR, .ES, .PT, .AT, .NL, .BE, .IE:
+            return false
+        }
+    }
+
+    /// Righe catalogo `US/EPA` (EPA FuelEconomy): coerenti solo con flusso US/CA.
+    var showsUSEPACatalogRows: Bool {
+        switch self {
+        case .US, .CA: return true
+        default: return false
+        }
+    }
 }
 
 /// Tariffe manutenzione ordinaria (€/anno) a **15.000 km** e età media (≈4–7 anni).

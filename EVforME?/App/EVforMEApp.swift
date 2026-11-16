@@ -8,23 +8,34 @@ import SwiftUI
 @main
 struct EVforMEApp: App {
     @State private var userInput: UserInput = {
-        let defaultInput = UserInput(
+        let envMarket = ProcessInfo.processInfo.environment["UITEST_MARKET"]
+            .flatMap { AppMarket(rawValue: $0.uppercased()) }
+        let market = envMarket ?? AppMarket.fromDeviceLocale()
+        var defaultInput = UserInput(
             dailyKm: 12000,
             hasHomeCharging: true,
             areaType: .urban,
-            fuelPrice: OfficialEnergyCosts.Fallback.petrolPerLiter,
+            fuelPrice: market.usesItalianOfficialEnergyDefaults
+                ? OfficialEnergyCosts.Fallback.petrolPerLiter
+                : 0,
             ownershipYears: 5,
+            electricityPricePerKWh: market.usesItalianOfficialEnergyDefaults
+                ? PublicChargingPriceDefaults.homePerKWh
+                : 0,
             sourceVehicleId: Defaults.starterSourceVehicleId,
             targetVehicleId: Defaults.starterTargetVehicleId,
-            scenario: .realistic
+            scenario: .realistic,
+            market: market
         )
         // Initialize with suggested charging configuration
-        var configuredInput = defaultInput
-        configuredInput.chargingConfiguration = ChargingCostCalculator.suggestedConfiguration(
+        defaultInput.chargingConfiguration = ChargingCostCalculator.suggestedConfiguration(
             yearlyKm: Double(defaultInput.dailyKm),
             hasHomeCharging: defaultInput.hasHomeCharging
         )
-        return configuredInput
+        if !market.usesItalianOfficialEnergyDefaults {
+            defaultInput.clearItalianOfficialEnergyDefaults()
+        }
+        return defaultInput
     }()
 
     @State private var simulationResult: SimulationResult?
